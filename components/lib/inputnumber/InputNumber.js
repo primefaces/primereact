@@ -40,6 +40,7 @@ export const InputNumber = React.memo(
         const _minusSign = React.useRef(null);
         const _currency = React.useRef(null);
         const _decimal = React.useRef(null);
+        const _decimalSeparator = React.useRef(null);
         const _suffix = React.useRef(null);
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
@@ -75,9 +76,14 @@ export const InputNumber = React.memo(
             _minusSign.current = getMinusSignExpression();
             _currency.current = getCurrencyExpression();
             _decimal.current = getDecimalExpression();
+            _decimalSeparator.current = getDecimalSeparator();
             _suffix.current = getSuffixExpression();
             _prefix.current = getPrefixExpression();
             _index.current = (d) => index.get(d);
+        };
+
+        const getDecimalSeparator = () => {
+            return new Intl.NumberFormat(_locale, { useGrouping: false }).format(1.1).trim().replace(_numeral.current, '');
         };
 
         const escapeRegExp = (text) => {
@@ -536,8 +542,21 @@ export const InputNumber = React.memo(
             return false;
         };
 
+        const isFloat = (val) => {
+            let formatter = new Intl.NumberFormat(_locale, getOptions());
+            let parseVal = parseValue(formatter.format(val));
+
+            if (parseVal === null) return false;
+
+            return parseVal % 1 !== 0;
+        };
+
+        const replaceDecimalSeparator = (val) => {
+            return isDecimalSign(val) ? val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current) : val;
+        };
+
         const isDecimalSign = (char) => {
-            if (_decimal.current.test(char)) {
+            if (_decimal.current.test(char) || isFloat(char)) {
                 _decimal.current.lastIndex = 0;
 
                 return true;
@@ -923,7 +942,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                return decimalCharIndex !== -1 ? replaceDecimalSeparator(val1).split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -986,7 +1005,6 @@ export const InputNumber = React.memo(
 
                 if (isValueChanged(currentValue, props.value)) {
                     let newValue = validateValue(parseValue(currentValue));
-
                     updateInputValue(newValue);
                     updateModel(event, newValue);
                 }
@@ -1002,7 +1020,9 @@ export const InputNumber = React.memo(
         };
 
         const changeValue = () => {
-            updateInputValue(validateValueByLimit(props.value));
+            const val = validateValueByLimit(props.value);
+
+            updateInputValue(props.format ? val : replaceDecimalSeparator(val));
 
             const newValue = validateValue(props.value);
 
