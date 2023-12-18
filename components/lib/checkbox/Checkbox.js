@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -37,35 +37,34 @@ export const Checkbox = React.memo(
                 const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement || event.target instanceof Object;
                 const isInputToggled = event.target === inputRef.current;
                 const isCheckboxToggled = checkboxClicked && event.target.checked !== checked;
+                const value = checked ? props.falseValue : props.trueValue;
+                const eventData = {
+                    originalEvent: event,
+                    value: props.value,
+                    checked: value,
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
+                    target: {
+                        type: 'checkbox',
+                        name: props.name,
+                        id: props.id,
+                        value: props.value,
+                        checked: value
+                    }
+                };
+
+                props.onClick && props.onClick(eventData);
+
+                // do not continue if the user defined click wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
 
                 if (isInputToggled || isCheckboxToggled) {
-                    const value = checked ? props.falseValue : props.trueValue;
-                    const eventData = {
-                        originalEvent: event,
-                        value: props.value,
-                        checked: value,
-                        stopPropagation: () => {
-                            event.stopPropagation();
-                        },
-                        preventDefault: () => {
-                            event.preventDefault();
-                        },
-                        target: {
-                            type: 'checkbox',
-                            name: props.name,
-                            id: props.id,
-                            value: props.value,
-                            checked: value
-                        }
-                    };
-
-                    props.onClick && props.onClick(eventData);
-
-                    // do not continue if the user defined click wants to prevent
-                    if (event.defaultPrevented) {
-                        return;
-                    }
-
                     props.onChange && props.onChange(eventData);
                 }
 
