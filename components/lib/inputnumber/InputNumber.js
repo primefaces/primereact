@@ -72,13 +72,13 @@ export const InputNumber = React.memo(
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
-            _group.current = getGroupingExpression();
-            _minusSign.current = getMinusSignExpression();
-            _currency.current = getCurrencyExpression();
+            _group.current = getGroupingExpression(); // regular expression /[,]/g, /[.]/g
+            _minusSign.current = getMinusSignExpression(); // regular expression /[-]/g
+            _currency.current = getCurrencyExpression(); // regular expression for currency (e.g. /[$]/g, /[€]/g, /[]/g and more)
             _decimal.current = getDecimalExpression(); // regular expression /[,]/g, /[.]/g, /[]/g
             _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
-            _suffix.current = getSuffixExpression();
-            _prefix.current = getPrefixExpression();
+            _suffix.current = getSuffixExpression(); // regular expression for suffix (e.g. /℃/g)
+            _prefix.current = getPrefixExpression(); // regular expression for prefix (e.g. /\ days/g)
             _index.current = (d) => index.get(d);
         };
 
