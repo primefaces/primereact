@@ -75,13 +75,16 @@ export const InputNumber = React.memo(
             _group.current = getGroupingExpression();
             _minusSign.current = getMinusSignExpression();
             _currency.current = getCurrencyExpression();
-            _decimal.current = getDecimalExpression();
-            _decimalSeparator.current = getDecimalSeparator();
+            _decimal.current = getDecimalExpression(); // regular expression /[,]/g, /[.]/g, /[]/g
+            _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
             _suffix.current = getSuffixExpression();
             _prefix.current = getPrefixExpression();
             _index.current = (d) => index.get(d);
         };
 
+        /**
+         * get decimal separator in current locale
+         */
         const getDecimalSeparator = () => {
             return new Intl.NumberFormat(_locale, { useGrouping: false }).format(1.1).trim().replace(_numeral.current, '');
         };
