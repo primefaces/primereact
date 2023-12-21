@@ -235,28 +235,28 @@ export const CascadeSelect = React.memo(
                 const selector = `${attributeSelectorState}_panel`;
                 const innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-items-wrapper > ul {
+    [data-pc-section="panel"][${selector}] [data-pc-section="wrapper"] > ul {
         max-height: ${props.scrollHeight};
         overflow: ${props.scrollHeight ? 'auto' : ''};
     }
 
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist-wrapper {
+    [data-pc-section="panel"][${selector}] [data-pc-section="sublistwrapper"] {
         position:relative;
         left:0;
     }
 
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist {
+    [data-pc-section="panel"][${selector}] [data-pc-section="sublist"] {
         overflow: hidden !important;
     }
 
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active  .p-cascadeselect-sublist {
+    [data-pc-section="panel"][${selector}] [data-pc-section="item"][data-p-active="true"] > [data-pc-section="sublistwrapper"] > [data-pc-section="sublist"] {
         left: 0;
         box-shadow: none;
         border-radius: 0;
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
     }
 
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-group-icon:before {
+    [data-pc-section="panel"][${selector}] [data-pc-section="optiongroupicon"]:before {
         content: "\\e930";
     }
 }
