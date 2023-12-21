@@ -242,7 +242,7 @@ export const CascadeSelect = React.memo(
 
     [data-pc-section="panel"][${selector}] [data-pc-section="sublistwrapper"] {
         position:relative;
-        left:0;
+        left:0 !important;
     }
 
     [data-pc-section="panel"][${selector}] [data-pc-section="sublist"] {

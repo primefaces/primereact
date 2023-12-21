@@ -18,14 +18,14 @@ export const CascadeSelectSub = React.memo((props) => {
     };
 
     const position = () => {
-        const parentItem = elementRef.current.parentElement;
+        const parentItem = elementRef.current.parentElement.parentElement;
         const containerOffset = DomHandler.getOffset(parentItem);
         const viewport = DomHandler.getViewport();
         const sublistWidth = elementRef.current.offsetParent ? elementRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(element);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
 
         if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
-            elementRef.current.style.left = '-100%';
+            elementRef.current.parentElement.style.left = -100 * props.level + '%';
         }
     };
 
@@ -168,9 +168,9 @@ export const CascadeSelectSub = React.memo((props) => {
             activeOption && setActiveOptionState(activeOption);
         }
 
-        // if (!props.root) {
-        //     position();
-        // }
+        if (!props.root) {
+            position();
+        }
     });
 
     useUpdateEffect(() => {
