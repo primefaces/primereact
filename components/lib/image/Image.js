@@ -29,6 +29,9 @@ export const Image = React.memo(
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
 
+        const zoomOutDisabled = scaleState <= 0.5;
+        const zoomInDisabled = scaleState >= 1.5;
+
         useGlobalOnEscapeKey({
             callback: () => {
                 if (props.closeOnEscape) {
@@ -99,12 +102,20 @@ export const Image = React.memo(
         };
 
         const zoomIn = () => {
-            setScaleState((prevScale) => prevScale + 0.1);
+            setScaleState((prevScale) => {
+                if (zoomInDisabled) return prevScale;
+
+                return prevScale + 0.1;
+            });
             previewClick.current = true;
         };
 
         const zoomOut = () => {
-            setScaleState((prevScale) => prevScale - 0.1);
+            setScaleState((prevScale) => {
+                if (zoomOutDisabled) return prevScale;
+
+                return prevScale - 0.1;
+            });
             previewClick.current = true;
         };
 
@@ -152,8 +163,6 @@ export const Image = React.memo(
 
         const createElement = () => {
             const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
-            const zoomOutDisabled = scaleState <= 0.5;
-            const zoomInDisabled = scaleState >= 1.5;
             const downloadIconProps = mergeProps(ptm('downloadIcon'));
             const rotateRightIconProps = mergeProps(ptm('rotateRightIcon'));
             const rotateLeftIconProps = mergeProps(ptm('rotateLeftIcon'));
