@@ -168,9 +168,9 @@ export const CascadeSelectSub = React.memo((props) => {
             activeOption && setActiveOptionState(activeOption);
         }
 
-        if (!props.root) {
-            position();
-        }
+        // if (!props.root) {
+        //     position();
+        // }
     });
 
     useUpdateEffect(() => {
@@ -268,16 +268,34 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const submenu = createMenu();
-    const listProps = mergeProps(
-        {
-            ref: elementRef,
-            className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
-            role: 'listbox',
-            'aria-orientation': 'horizontal'
-        },
-        props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
-    );
+    const createList = () => {
+        const listProps = mergeProps(
+            {
+                ref: elementRef,
+                className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
+                role: 'listbox',
+                'aria-orientation': 'horizontal'
+            },
+            props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
+        );
+        const submenu = createMenu();
 
-    return <ul {...listProps}>{submenu}</ul>;
+        return <ul {...listProps}>{submenu}</ul>;
+    };
+
+    const createElement = () => {
+        const list = createList();
+        const listWrapperProps = mergeProps(
+            {
+                className: cx('sublistWrapper')
+            },
+            getPTOptions('sublistWrapper')
+        );
+
+        return props.level === 0 ? list : <div {...listWrapperProps}>{list}</div>;
+    };
+
+    const element = createElement();
+
+    return element;
 });
