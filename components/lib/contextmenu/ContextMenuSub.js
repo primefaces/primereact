@@ -11,9 +11,13 @@ export const ContextMenuSub = React.memo(
         const active = props.root || !props.resetMenu;
         const { ptm, cx } = props;
 
-        const getPTOptions = (item, key) => {
+        const getPTOptions = (processedItem, key) => {
             return ptm(key, {
-                hostName: props.hostName
+                hostName: props.hostName,
+                active: isItemActive(processedItem),
+                focused: isItemFocused(processedItem),
+                disabled: isItemDisabled(processedItem),
+                index
             });
         };
 
@@ -188,21 +192,21 @@ export const ContextMenuSub = React.memo(
                 {
                     className: cx('icon')
                 },
-                getPTOptions(item, 'icon')
+                getPTOptions(processedItem, 'icon', index)
             );
             const icon = IconUtils.getJSXIcon(getItemProp(processedItem, 'icon'), { ...iconProps }, { props: props.menuProps });
             const submenuIconProps = mergeProps(
                 {
                     className: cx('submenuIcon')
                 },
-                getPTOptions(item, 'submenuIcon')
+                getPTOptions(processedItem, 'submenuIcon', index)
             );
 
             const labelProps = mergeProps(
                 {
                     className: cx('label')
                 },
-                getPTOptions(item, 'label')
+                getPTOptions(processedItem, 'label', index)
             );
 
             const items = getItemProp(processedItem, 'items');
@@ -218,7 +222,7 @@ export const ContextMenuSub = React.memo(
                     className: cx('action', { item }),
                     target: item.target
                 },
-                getPTOptions(item, 'action')
+                getPTOptions(processedItem, 'action', index)
             );
 
             let content = (
@@ -250,7 +254,7 @@ export const ContextMenuSub = React.memo(
                     onMouseEnter: (event) => onItemMouseEnter(event, processedItem),
                     className: cx('content')
                 },
-                getPTOptions(item, 'content')
+                getPTOptions(processedItem, 'content', index)
             );
 
             const menuitemProps = mergeProps(
@@ -272,7 +276,7 @@ export const ContextMenuSub = React.memo(
                     style: item.style,
                     key
                 },
-                getPTOptions(item, 'menuitem')
+                getPTOptions(processedItem, 'menuitem', index)
             );
 
             return (

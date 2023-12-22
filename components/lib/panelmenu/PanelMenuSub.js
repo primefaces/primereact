@@ -164,14 +164,14 @@ export const PanelMenuSub = React.memo(
                 {
                     className: cx('icon', { item })
                 },
-                getPTOptions(item, 'icon', index)
+                getPTOptions(processedItem, 'icon', index)
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
             const labelProps = mergeProps(
                 {
                     className: cx('label')
                 },
-                getPTOptions(item, 'label', index)
+                getPTOptions(processedItem, 'label', index)
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const submenuIconClassName = 'p-panelmenu-icon';
@@ -179,7 +179,7 @@ export const PanelMenuSub = React.memo(
                 {
                     className: cx('submenuicon')
                 },
-                getPTOptions(item, 'submenuicon', index)
+                getPTOptions(processedItem, 'submenuicon', index)
             );
             const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
             const submenu = createSubmenu(processedItem, active);
@@ -192,7 +192,7 @@ export const PanelMenuSub = React.memo(
                     tabIndex: '-1',
                     'aria-hidden': true
                 },
-                getPTOptions(item, 'action', index)
+                getPTOptions(processedItem, 'action', index)
             );
 
             let content = (
@@ -223,7 +223,7 @@ export const PanelMenuSub = React.memo(
                     onClick: (event) => onItemClick(event, processedItem),
                     className: cx('content')
                 },
-                getPTOptions(item, 'content', index)
+                getPTOptions(processedItem, 'content', index)
             );
 
             const menuitemProps = mergeProps(
@@ -241,7 +241,7 @@ export const PanelMenuSub = React.memo(
                     'data-p-focused': itemFocused,
                     'data-p-disabled': disabled
                 },
-                getPTOptions(item, 'menuitem', index)
+                getPTOptions(processedItem, 'menuitem', index)
             );
 
             return (
