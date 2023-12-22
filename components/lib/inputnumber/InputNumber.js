@@ -555,7 +555,7 @@ export const InputNumber = React.memo(
         };
 
         const replaceDecimalSeparator = (val) => {
-            if (isDecimalSign(val) && !_decimal.current.test(val)) {
+            if (isFloat(val)) {
                 return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
             }
 
