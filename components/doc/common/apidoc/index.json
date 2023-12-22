@@ -32383,6 +32383,22 @@
                     "description": "Defines valid properties in Menu component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Used to define a string that labels the component."
+                        },
+                        {
+                            "name": "ariaLabelledBy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
@@ -32429,6 +32445,14 @@
                             "type": "MenuItem[]",
                             "default": "",
                             "description": "An array of menuitems."
+                        },
+                        {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
                         },
                         {
                             "name": "popup",
@@ -32508,6 +32532,32 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a popup menu is shown."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
                         }
                     ]
                 }
@@ -38276,22 +38326,6 @@
                             "description": "A map of keys to represent the expansion state in controlled mode."
                         },
                         {
-                            "name": "onShow",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "Function",
-                            "default": "",
-                            "description": "Callback to invoke when a tab gets expanded."
-                        },
-                        {
-                            "name": "onHide",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "Function",
-                            "description": "Callback to invoke when a tab gets collapsed.",
-                            "default": ""
-                        },
-                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
@@ -38335,7 +38369,50 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onClose",
+                            "parameters": [
+                                {
+                                    "name": "originalEvent",
+                                    "optional": false,
+                                    "readonly": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                },
+                                {
+                                    "name": "item",
+                                    "optional": false,
+                                    "readonly": false,
+                                    "type": "MenuItem",
+                                    "description": "Collapsed item."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a tab gets collapsed."
+                        },
+                        {
+                            "name": "onOpen",
+                            "parameters": [
+                                {
+                                    "name": "originalEvent",
+                                    "optional": false,
+                                    "readonly": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                },
+                                {
+                                    "name": "item",
+                                    "optional": false,
+                                    "readonly": false,
+                                    "type": "MenuItem",
+                                    "description": "Expanded item."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a tab gets expanded."
+                        }
+                    ]
                 }
             }
         },
