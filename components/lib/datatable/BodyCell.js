@@ -564,7 +564,6 @@ export const BodyCell = React.memo((props) => {
         const tabIndex = getTabIndex(cellSelected);
         const selectionMode = getColumnProp('selectionMode');
         const rowReorder = getColumnProp('rowReorder');
-        const rowEditor = getColumnProp('rowEditor');
         const header = getColumnProp('header');
         const body = getColumnProp('body');
         const editor = getColumnProp('editor');
@@ -573,6 +572,7 @@ export const BodyCell = React.memo((props) => {
         const value = resolveFieldData();
         const columnBodyOptions = { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
         const expander = ObjectUtils.getPropValue(getColumnProp('expander'), props.rowData, columnBodyOptions);
+        const rowEditor = ObjectUtils.getPropValue(getColumnProp('rowEditor'), props.rowData, columnBodyOptions);
         const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, columnBodyOptions);
         const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, columnBodyOptions);
         const style = getStyle();
