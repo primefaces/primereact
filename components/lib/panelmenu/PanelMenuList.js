@@ -21,6 +21,7 @@ export const PanelMenuList = React.memo((props) => {
     const getItemProp = (processedItem, name) => {
         return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name]) : undefined;
     };
+
     const getItemLabel = (processedItem) => {
         return getItemProp(processedItem, 'label');
     };
@@ -28,6 +29,7 @@ export const PanelMenuList = React.memo((props) => {
     const isItemVisible = (processedItem) => {
         return getItemProp(processedItem, 'visible') !== false;
     };
+
     const isItemDisabled = (processedItem) => {
         return getItemProp(processedItem, 'disabled');
     };
@@ -47,6 +49,7 @@ export const PanelMenuList = React.memo((props) => {
     const onFocus = (event) => {
         setFocused(true);
         const _focusedItem = focusedItem || (isElementInPanel(event, event.relatedTarget) ? findFirstItem() : findLastItem());
+
         setFocusedItem(_focusedItem);
     };
 
@@ -151,6 +154,7 @@ export const PanelMenuList = React.memo((props) => {
                     onArrowDownKey(event);
                 } else {
                     const _activeItemPath = activeItemPath.filter((p) => p.parentKey !== focusedItem.parentKey);
+
                     _activeItemPath.push(focusedItem);
                     setActiveItemPath(_activeItemPath);
                 }
@@ -192,6 +196,7 @@ export const PanelMenuList = React.memo((props) => {
             props.onToggle && props.onToggle({ originalEvent: event, value: processedItem.item, expanded });
         } else {
             const _activeItemPath = activeItemPath.filter((p) => p.parentKey !== processedItem.parentKey);
+
             expanded && _activeItemPath.push(processedItem);
             setActiveItemPath(_activeItemPath);
         }
@@ -213,12 +218,15 @@ export const PanelMenuList = React.memo((props) => {
     const isVisibleItem = (processedItem) => {
         return !!processedItem && (processedItem.level === 0 || isItemActive(processedItem)) && isItemVisible(processedItem);
     };
+
     const isValidItem = (processedItem) => {
         return !!processedItem && !isItemDisabled(processedItem) && !getItemProp(processedItem, 'separator');
     };
+
     const findFirstItem = () => {
         return visibleItems.find((processedItem) => isValidItem(processedItem));
     };
+
     const findLastItem = () => {
         return ObjectUtils.findLast(visibleItems, (processedItem) => isValidItem(processedItem));
     };
@@ -312,6 +320,7 @@ export const PanelMenuList = React.memo((props) => {
 
         setActiveItemPath(_activeItemPath);
     };
+
     const findProcessedItemByItemKey = (key, processed, level = 0) => {
         const _processedItems = processed || (level === 0 && processedItems);
 
@@ -364,16 +373,19 @@ export const PanelMenuList = React.memo((props) => {
 
     useUpdateEffect(() => {
         const processed = createProcessedItems(props.model);
+
         setProcessedItems(processed);
     }, [props.model]);
 
     useUpdateEffect(() => {
         const _visibleItems = flatItems(processedItems);
+
         setVisibleItems(_visibleItems);
     }, [processedItems, activeItemPath]);
 
     useUpdateEffect(() => {
         const _id = ObjectUtils.isNotEmpty(focusedItem) ? `${props.panelId}_${focusedItem.key}` : null;
+
         setFocusedItemId(_id);
     }, [props.panelId, focusedItem]);
 

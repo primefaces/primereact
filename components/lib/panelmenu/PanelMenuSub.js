@@ -101,7 +101,7 @@ export const PanelMenuSub = React.memo(
             return <li {...separatorProps}></li>;
         };
 
-        const createSubmenu = (processedItem, active, index) => {
+        const createSubmenu = (processedItem, active) => {
             const submenuRef = React.createRef();
 
             const toggleableContentProps = mergeProps(
@@ -121,6 +121,7 @@ export const PanelMenuSub = React.memo(
                     },
                     _ptm('transition')
                 );
+
                 return (
                     <CSSTransition nodeRef={submenuRef} {...transitionProps}>
                         <div ref={submenuRef} {...toggleableContentProps}>
@@ -148,6 +149,7 @@ export const PanelMenuSub = React.memo(
 
         const createMenuItem = (processedItem, index) => {
             const item = processedItem.item;
+
             if (isItemVisible(processedItem) === false) {
                 return null;
             }
@@ -180,7 +182,7 @@ export const PanelMenuSub = React.memo(
                 getPTOptions(item, 'submenuicon', index)
             );
             const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
-            const submenu = createSubmenu(processedItem, active, index);
+            const submenu = createSubmenu(processedItem, active);
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',

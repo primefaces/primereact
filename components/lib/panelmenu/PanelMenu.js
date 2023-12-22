@@ -112,6 +112,7 @@ export const PanelMenu = React.memo(
                     break;
             }
         };
+
         const onHeaderArrowDownKey = (event) => {
             const rootList = DomHandler.getAttribute(event.currentTarget, 'data-p-highlight') === true ? DomHandler.findSingle(event.currentTarget.nextElementSibling, '[data-pc-section="menu"]') : null;
 
@@ -178,12 +179,13 @@ export const PanelMenu = React.memo(
             if (!isItemDisabled(item)) {
                 const active = isItemActive(item);
                 const isOpen = !active;
-
                 const _activeItemState = activeItemState && ObjectUtils.equals(item, activeItemState) ? null : item;
+
                 setActiveItemState(_activeItemState);
 
                 if (props.multiple) {
                     const activeItems = activeItemsState;
+
                     if (
                         activeItemsState.some((subItem) => {
                             return ObjectUtils.equals(item, subItem);
@@ -193,6 +195,7 @@ export const PanelMenu = React.memo(
                     } else {
                         activeItems.push(item);
                     }
+
                     setActiveItemsState(activeItems);
                 }
 
@@ -211,6 +214,7 @@ export const PanelMenu = React.memo(
                 props.onExpandedKeysChange && props.onExpandedKeysChange(_keys);
             }
         };
+
         const changeFocusedHeader = (event, element) => {
             element && DomHandler.focus(element);
         };
