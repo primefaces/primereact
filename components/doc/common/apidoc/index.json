@@ -38268,6 +38268,30 @@
                             "description": "Whether multiple tabs can be activated at the same time or not."
                         },
                         {
+                            "name": "expandedKeys",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuExpandedKeys",
+                            "default": "",
+                            "description": "A map of keys to represent the expansion state in controlled mode."
+                        },
+                        {
+                            "name": "onShow",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": "",
+                            "description": "Callback to invoke when a tab gets expanded."
+                        },
+                        {
+                            "name": "onHide",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "description": "Callback to invoke when a tab gets collapsed.",
+                            "default": ""
+                        },
+                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
@@ -38500,13 +38524,6 @@
                             "readonly": false,
                             "type": "MenuItem[]",
                             "description": "Active item path."
-                        },
-                        {
-                            "name": "animationDisabled",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether the menu is visible or not."
                         }
                     ],
                     "callbacks": []
