@@ -8,15 +8,21 @@ const classes = {
             'p-megamenu-vertical': props.orientation === 'vertical',
             'p-megamenu-mobile-active': mobileActiveState
         }),
+    content: 'p-menuitem-content',
     separator: 'p-menu-separator',
     submenuIcon: 'p-submenu-icon',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
-    submenuItem: 'p-menuitem',
-    submenuHeader: ({ submenu }) =>
-        classNames('p-megamenu-submenu-header', {
-            'p-disabled': submenu.disabled
+    submenuItem: ({ focused, disabled, active }) =>
+        classNames('p-menuitem', {
+            'p-menuitem-active': active,
+            'p-focus': focused,
+            'p-disabled': disabled
         }),
-    submenu: 'p-megamenu-submenu',
+    submenuHeader: ({ disabled }) =>
+        classNames('p-megamenu-submenu-header p-submenu-header', {
+            'p-disabled': disabled
+        }),
+    submenu: 'p-submenu-list p-megamenu-submenu',
     panel: 'p-megamenu-panel',
     grid: 'p-megamenu-grid',
     icon: 'p-menuitem-icon',
@@ -51,7 +57,7 @@ const classes = {
     },
     headerAction: ({ category }) => classNames('p-menuitem-link', { 'p-disabled': category.disabled }),
     menuButton: 'p-megamenu-button',
-    menuitem: ({ category, activeItemState }) => classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }),
+    menuitem: ({ category, activeItemState, focused, disabled }) => classNames('p-menuitem', { 'p-menuitem-active p-highlight': activeItemState && activeItemState.item === category, 'p-focus': focused, 'p-disabled': disabled }),
     menubar: 'p-megamenu-root-list',
     menu: 'p-megamenu-root-list',
     start: 'p-megamenu-start',
@@ -63,17 +69,17 @@ const styles = `
     .p-megamenu {
         display: flex;
     }
-    
+
     .p-megamenu-root-list {
         margin: 0;
         padding: 0;
         list-style: none;
     }
-    
+
     .p-megamenu-root-list > .p-menuitem {
         position: relative;
     }
-    
+
     .p-megamenu .p-menuitem-link {
         cursor: pointer;
         display: flex;
@@ -82,67 +88,67 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     .p-megamenu .p-menuitem-text {
         line-height: 1;
     }
-    
+
     .p-megamenu-panel {
         display: none;
         position: absolute;
         width: auto;
         z-index: 1;
     }
-    
+
     .p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {
         display: block;
     }
-    
+
     .p-megamenu-submenu {
         margin: 0;
         padding: 0;
         list-style: none;
     }
-    
+
     /* Horizontal */
     .p-megamenu-horizontal {
         align-items: center;
     }
-    
+
     .p-megamenu-horizontal .p-megamenu-root-list {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
     }
-    
+
     .p-megamenu-horizontal .p-megamenu-custom,
     .p-megamenu-horizontal .p-megamenu-end {
         margin-left: auto;
         align-self: center;
     }
-    
+
     /* Vertical */
     .p-megamenu-vertical {
         flex-direction: column;
     }
-    
+
     .p-megamenu-vertical .p-megamenu-root-list {
         flex-direction: column;
     }
-    
+
     .p-megamenu-vertical .p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {
         left: 100%;
         top: 0;
     }
-    
+
     .p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
         margin-left: auto;
     }
-    
+
     .p-megamenu-grid {
         display: flex;
     }
-    
+
     .p-megamenu-col-2,
     .p-megamenu-col-3,
     .p-megamenu-col-4,
@@ -151,27 +157,27 @@ const styles = `
         flex: 0 0 auto;
         padding: 0.5rem;
     }
-    
+
     .p-megamenu-col-2 {
         width: 16.6667%;
     }
-    
+
     .p-megamenu-col-3 {
         width: 25%;
     }
-    
+
     .p-megamenu-col-4 {
         width: 33.3333%;
     }
-    
+
     .p-megamenu-col-6 {
         width: 50%;
     }
-    
+
     .p-megamenu-col-12 {
         width: 100%;
     }
-    
+
     .p-megamenu-button {
         display: none;
         cursor: pointer;
@@ -194,6 +200,9 @@ export const MegaMenuBase = ComponentBase.extend({
         scrollHeight: '400px',
         start: null,
         submenuIcon: null,
+        onFocus: null,
+        onBlur: null,
+        tabIndex: 0,
         menuIcon: null,
         end: null,
         children: undefined

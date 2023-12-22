@@ -10,8 +10,8 @@ export function BasicDoc(props) {
             items: [
                 [
                     {
-                        label: 'Video 1',
-                        items: [{ label: 'Video 1.1' }, { label: 'Video 1.2' }]
+                        label: 'Tadic',
+                        items: [{ label: 'Dzeko' }, { label: 'Symanzki' }]
                     },
                     {
                         label: 'Video 2',
