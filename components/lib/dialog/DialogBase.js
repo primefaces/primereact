@@ -196,8 +196,8 @@ const styles = `
         width: 100vw !important;
         height: 100vh !important;
         max-height: 100%;
-        top: 0px;
-        left: 0px;
+        top: 0px !important;
+        left: 0px !important;
     }
     
     .p-dialog-maximized .p-dialog-content {
