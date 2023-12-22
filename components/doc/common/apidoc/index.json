@@ -14994,6 +14994,14 @@
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
                         {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -15031,6 +15039,32 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a popup menu is shown."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
                         }
                     ]
                 }
@@ -21719,7 +21753,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "number",
-                            "default": "",
+                            "default": "0",
                             "description": "Index of the element in tabbing order."
                         },
                         {
@@ -21746,7 +21780,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
+                            "description": "Callback to invoke when dock receives focus."
                         },
                         {
                             "name": "onBlur",
@@ -21759,7 +21793,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
+                            "description": "Callback to invoke when dock loses focus."
                         }
                     ]
                 }
@@ -32482,14 +32516,6 @@
                             "description": "An array of menuitems."
                         },
                         {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "",
-                            "description": "Index of the element in tabbing order."
-                        },
-                        {
                             "name": "popup",
                             "optional": true,
                             "readonly": false,
@@ -32528,6 +32554,14 @@
                             "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
+                        },
+                        {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "Index of the element in tabbing order."
                         },
                         {
                             "name": "unstyled",
