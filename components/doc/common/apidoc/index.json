@@ -21715,6 +21715,14 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -21726,7 +21734,34 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        }
+                    ]
                 }
             }
         },
