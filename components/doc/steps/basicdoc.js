@@ -23,7 +23,7 @@ export function BasicDoc(props) {
 <Steps model={items} />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { Steps } from 'primereact/steps';
 
 export default function BasicDemo() {
@@ -50,7 +50,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { Steps } from 'primereact/steps';
 import { MenuItem } from 'primereact/menuitem';
 
