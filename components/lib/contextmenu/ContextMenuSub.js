@@ -196,7 +196,7 @@ export const ContextMenuSub = React.memo(
                 },
                 getPTOptions(processedItem, 'icon', index)
             );
-            const icon = IconUtils.getJSXIcon(getItemProp(processedItem, 'icon'), { ...iconProps }, { props: props.menuProps });
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
             const submenuIconProps = mergeProps(
                 {
                     className: cx('submenuIcon')
@@ -264,10 +264,10 @@ export const ContextMenuSub = React.memo(
                     id: key,
                     key,
                     role: 'menuitem',
-                    'aria-label': getItemLabel(processedItem),
+                    'aria-label': item.label,
                     'aria-disabled': disabled,
                     'aria-expanded': isGroup ? active : undefined,
-                    'aria-haspopup': isGroup && !getItemProp(item, 'url') ? 'menu' : undefined,
+                    'aria-haspopup': isGroup && !item.url ? 'menu' : undefined,
                     'aria-level': props.level + 1,
                     'aria-setsize': getAriaSetSize(),
                     'aria-posinset': getAriaPosInset(index),
