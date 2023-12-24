@@ -24,9 +24,10 @@ export const MegaMenu = React.memo(
         const [visibleItems, setVisibleItems] = React.useState([]);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
-        const [triggerArrowDown, setTriggerArrowDown] = React.useState(false);
+        const [focusTrigger, setFocusTrigger] = React.useState(false);
         const searchValue = React.useRef('');
         const searchTimeout = React.useRef(null);
+        const reverseTrigger = React.useRef(false);
         const elementRef = React.useRef(null);
         const menubarRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -62,9 +63,8 @@ export const MegaMenu = React.memo(
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
             listener: (event) => {
-                if ((!isMobileMode || mobileActiveState) && isOutsideClicked(event)) {
-                    setActiveItemState(null);
-                    setMobileActiveState(false);
+                if (isOutsideClicked(event)) {
+                    hide();
                 }
             }
         });
@@ -72,12 +72,19 @@ export const MegaMenu = React.memo(
         const [bindDocumentResizeListener, unbindDocumentResizeListener] = useResizeListener({
             type: 'resize',
             listener: () => {
-                if (!isMobileMode || mobileActiveState) {
-                    setActiveItemState(null);
-                    setMobileActiveState(false);
-                }
+                hide();
             }
         });
+
+        const bindListeners = () => {
+            bindDocumentClickListener();
+            bindDocumentResizeListener();
+        };
+
+        const unbindListeners = () => {
+            unbindDocumentClickListener();
+            unbindDocumentResizeListener();
+        };
 
         const onLeafClick = (event) => {
             const { originalEvent, processedItem } = event;
@@ -101,7 +108,6 @@ export const MegaMenu = React.memo(
             }
 
             const grouped = isProccessedItemGroup(processedItem);
-            const root = ObjectUtils.isEmpty(processedItem.parent);
             const selected = isSelected(processedItem);
 
             if (selected) {
@@ -109,19 +115,16 @@ export const MegaMenu = React.memo(
 
                 setActiveItemState(null);
                 setFocusedItemInfo({ index, key, parentKey });
-
-                setDirty(!root);
-                DomHandler.focus(menubarRef.current);
             } else {
                 if (grouped) {
                     onItemChange(event);
                 } else {
-                    const rootProcessedItem = root ? processedItem : activeItemState;
+                    const rootProcessedItemIndex = activeItemState ? activeItemState.index : -1;
+                    const rootProcessedItemKey = activeItemState ? activeItemState.key : '';
 
-                    hide();
-                    changeFocusedItemInfo(originalEvent, rootProcessedItem ? rootProcessedItem.index : -1);
+                    hide(originalEvent);
+                    setFocusedItemInfo({ index: rootProcessedItemIndex, key: rootProcessedItemKey, parentKey: '' });
                     setMobileActiveState(false);
-                    DomHandler.focus(menubarRef.current);
                 }
             }
         };
@@ -141,14 +144,8 @@ export const MegaMenu = React.memo(
             isFocus && DomHandler.focus(menubarRef.current);
         };
 
-        const onCategoryMouseEnter = (event, item) => {
-            if (item.disabled || isMobileMode) {
-                event.preventDefault();
-
-                return;
-            }
-
-            if (!mobileActiveState && !dirty) {
+        const onCategoryMouseEnter = (event) => {
+            if (!mobileActiveState && dirty) {
                 onItemChange(event);
             }
         };
@@ -201,8 +198,6 @@ export const MegaMenu = React.memo(
 
         const show = () => {
             setFocusedItemInfo({ index: findFirstFocusedItemIndex(), level: 0, parentKey: '' });
-
-            DomHandler.focus(menubarRef.current);
         };
 
         const hide = (isFocus) => {
@@ -227,17 +222,25 @@ export const MegaMenu = React.memo(
             event.preventDefault();
 
             if (mobileActiveState) {
-                mobileActiveState(false);
+                setMobileActiveState(false);
                 ZIndexUtils.clear(menubarRef.current);
                 hide();
             } else {
-                mobileActiveState(true);
+                setMobileActiveState(true);
                 ZIndexUtils.set('menu', menubarRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
                 setTimeout(() => {
                     show();
                 }, 1);
             }
         };
+
+        useUpdateEffect(() => {
+            if (mobileActiveState) {
+                bindListeners();
+            } else {
+                unbindListeners();
+            }
+        }, [mobileActiveState]);
 
         const isOutsideClicked = (event) => {
             return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target) || (menuButtonRef.current && menuButtonRef.current.contains(event.target)));
@@ -341,13 +344,14 @@ export const MegaMenu = React.memo(
         };
 
         useUpdateEffect(() => {
-            if (triggerArrowDown) {
-                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
+            if (focusTrigger) {
+                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : reverseTrigger.current ? findLastItemIndex() : findFirstFocusedItemIndex();
 
                 changeFocusedItemInfo(itemIndex);
-                setTriggerArrowDown(false);
+                reverseTrigger.current = false;
+                setFocusTrigger(false);
             }
-        }, [triggerArrowDown]);
+        }, [focusTrigger]);
 
         const onArrowDownKey = (event) => {
             event.preventDefault();
@@ -370,7 +374,7 @@ export const MegaMenu = React.memo(
                     }
                 }
 
-                setTimeout(() => setTriggerArrowDown(true), 0);
+                setTimeout(() => setFocusTrigger(true), 0);
             } else {
                 const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
 
@@ -379,11 +383,11 @@ export const MegaMenu = React.memo(
         };
 
         const onArrowUpKey = (event) => {
+            const processedItem = findVisibleItem(focusedItemInfo.index);
+            const grouped = isProccessedItemGroup(processedItem);
+
             if (event.altKey && horizontal) {
                 if (focusedItemInfo.index !== -1) {
-                    const processedItem = findVisibleItem(focusedItemInfo.index);
-                    const grouped = isProccessedItemGroup(processedItem);
-
                     if (!grouped && ObjectUtils.isNotEmpty(activeItemState)) {
                         if (focusedItemInfo.index === 0) {
                             setFocusedItemInfo({ index: activeItemState.index, key: activeItemState.key, parentKey: activeItemState.parentKey });
@@ -393,14 +397,13 @@ export const MegaMenu = React.memo(
                         }
                     }
                 }
-
-                event.preventDefault();
             } else {
                 const itemIndex = focusedItemInfo.index !== -1 ? findPrevItemIndex(focusedItemInfo.index) : findLastFocusedItemIndex();
 
                 changeFocusedItemInfo(itemIndex);
-                event.preventDefault();
             }
+
+            event.preventDefault();
         };
 
         const onArrowLeftKey = (event) => {
@@ -452,7 +455,7 @@ export const MegaMenu = React.memo(
                     }
                 }
 
-                setTimeout(() => setTriggerArrowDown(true), 0);
+                setTimeout(() => setFocusTrigger(true), 0);
             } else {
                 const columnIndex = processedItem.columnIndex + 1;
                 const itemIndex = visibleItems.findIndex((item) => item.columnIndex === columnIndex);
@@ -474,14 +477,9 @@ export const MegaMenu = React.memo(
         const onEnterKey = (event) => {
             if (focusedItemInfo.index !== -1) {
                 const element = DomHandler.findSingle(menubarRef.current, `li[id="${focusedItemId}"]`);
-                const anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section="headeraction"]');
+                const anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section="action"]');
 
                 anchorElement ? anchorElement.click() : element && element.click();
-
-                const processedItem = visibleItems[focusedItemInfo.index];
-                const grouped = isProccessedItemGroup(processedItem);
-
-                !grouped && changeFocusedItemInfo(findFirstFocusedItemIndex());
             }
 
             event.preventDefault();
@@ -678,15 +676,13 @@ export const MegaMenu = React.memo(
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
             if (activeItemState) {
-                bindDocumentClickListener();
-                bindDocumentResizeListener();
+                bindListeners();
 
                 if (!isMobileMode) {
                     ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
                 }
             } else {
-                unbindDocumentClickListener();
-                unbindDocumentResizeListener();
+                unbindListeners();
             }
 
             if (isMobileMode) {
@@ -694,8 +690,7 @@ export const MegaMenu = React.memo(
             }
 
             return () => {
-                unbindDocumentClickListener();
-                unbindDocumentResizeListener();
+                unbindListeners();
                 ZIndexUtils.clear(currentPanel);
             };
         }, [activeItemState]);
@@ -1130,13 +1125,13 @@ export const MegaMenu = React.memo(
             const headerActionProps = mergeProps(
                 {
                     href: category.url || '#',
-                    className: cx('headerAction', { category }),
+                    className: cx('action', { item: category }),
                     target: category.target,
                     onFocus: (event) => event.stopPropagation(),
                     tabIndex: '-1',
                     'aria-hidden': true
                 },
-                getPTOptions(processedItem, 'headerAction', index)
+                getPTOptions(processedItem, 'action', index)
             );
 
             const key = getItemId(processedItem);
@@ -1167,7 +1162,7 @@ export const MegaMenu = React.memo(
             const contentProps = mergeProps(
                 {
                     onClick: (event) => onCategoryClick({ originalEvent: event, processedItem: processedItem }),
-                    onMouseEnter: (e) => onCategoryMouseEnter(e, category),
+                    onMouseEnter: (e) => onCategoryMouseEnter({ originalEvent: e, processedItem: processedItem }),
                     className: cx('content')
                 },
                 getPTOptions(processedItem, 'content', index)

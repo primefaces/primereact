@@ -136,8 +136,6 @@ export const Menubar = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
             const code = event.code;
 
-            if (code !== 'Tab') event.preventDefault();
-
             switch (code) {
                 case 'ArrowDown':
                     onArrowDownKey(event);
@@ -274,6 +272,8 @@ export const Menubar = React.memo(
 
                 changeFocusedItemIndex(itemIndex);
             }
+
+            event.preventDefault();
         };
 
         const onArrowUpKey = (event) => {
@@ -292,7 +292,7 @@ export const Menubar = React.memo(
             } else {
                 const parentItem = activeItemPath.find((p) => p.key === processedItem.parentKey);
 
-                if (focusedItemInfo.index === 0) {
+                if (focusedItemInfo.index === 0 && parentItem && parentItem.parentKey === '') {
                     setFocusedItemInfo({ index: -1, parentKey: parentItem ? parentItem.parentKey : '' });
                     searchValue.current = '';
                     onArrowLeftKey(event);
@@ -302,6 +302,8 @@ export const Menubar = React.memo(
                     changeFocusedItemIndex(itemIndex);
                 }
             }
+
+            event.preventDefault();
         };
 
         const onArrowLeftKey = (event) => {
@@ -316,6 +318,8 @@ export const Menubar = React.memo(
 
                 changeFocusedItemIndex(itemIndex);
             }
+
+            event.preventDefault();
         };
 
         const onArrowRightKey = (event) => {
@@ -335,14 +339,18 @@ export const Menubar = React.memo(
 
                 changeFocusedItemIndex(itemIndex);
             }
+
+            event.preventDefault();
         };
 
         const onHomeKey = (event) => {
             changeFocusedItemIndex(findFirstItemIndex());
+            event.preventDefault();
         };
 
         const onEndKey = (event) => {
             changeFocusedItemIndex(findLastItemIndex());
+            event.preventDefault();
         };
 
         const onEnterKey = (event) => {
@@ -352,6 +360,8 @@ export const Menubar = React.memo(
 
                 anchorElement ? anchorElement.click() : element && element.click();
             }
+
+            event.preventDefault();
         };
 
         const onSpaceKey = (event) => {

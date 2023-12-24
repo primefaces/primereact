@@ -55,7 +55,6 @@ const classes = {
 
         return columnClass;
     },
-    headerAction: ({ category }) => classNames('p-menuitem-link', { 'p-disabled': category.disabled }),
     menuButton: 'p-megamenu-button',
     menuitem: ({ category, activeItemState, focused, disabled }) => classNames('p-menuitem', { 'p-menuitem-active p-highlight': activeItemState && activeItemState.item === category, 'p-focus': focused, 'p-disabled': disabled }),
     menubar: 'p-megamenu-root-list',
