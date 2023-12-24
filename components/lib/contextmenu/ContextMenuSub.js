@@ -11,7 +11,7 @@ export const ContextMenuSub = React.memo(
         const active = props.root || !props.resetMenu;
         const { ptm, cx } = props;
 
-        const getPTOptions = (processedItem, key) => {
+        const getPTOptions = (processedItem, key, index) => {
             return ptm(key, {
                 hostName: props.hostName,
                 context: {
