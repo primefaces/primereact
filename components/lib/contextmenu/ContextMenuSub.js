@@ -14,10 +14,12 @@ export const ContextMenuSub = React.memo(
         const getPTOptions = (processedItem, key) => {
             return ptm(key, {
                 hostName: props.hostName,
-                active: isItemActive(processedItem),
-                focused: isItemFocused(processedItem),
-                disabled: isItemDisabled(processedItem),
-                index
+                context: {
+                    active: isItemActive(processedItem),
+                    focused: isItemFocused(processedItem),
+                    disabled: isItemDisabled(processedItem),
+                    index
+                }
             });
         };
 

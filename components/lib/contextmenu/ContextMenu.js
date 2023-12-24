@@ -19,7 +19,7 @@ export const ContextMenu = React.memo(
         const [resetMenuState, setResetMenuState] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const [focused, setFocused] = React.useState(false);
-        const [triggerArrowDown, setTriggerArrowDown] = React.useState(false);
+        const [focusTrigger, setFocusTrigger] = React.useState(false);
         const [focusedItemInfo, setFocusedItemInfo] = React.useState({ index: -1, level: 0, parentKey: '' });
         const [activeItemPath, setActiveItemPath] = React.useState('');
         const [processedItems, setProcessedItems] = React.useState([]);
@@ -316,14 +316,14 @@ export const ContextMenu = React.memo(
         }, [activeItemPath, focusedItemInfo]);
 
         useUpdateEffect(() => {
-            if (triggerArrowDown) {
+            if (focusTrigger) {
                 const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
 
                 changeFocusedItemIndex(itemIndex);
                 setActiveItemPath(activeItemPath.filter((p) => p.parentKey !== focusedItemInfo.parentKey));
-                setTriggerArrowDown(false);
+                setFocusTrigger(false);
             }
-        }, [triggerArrowDown]);
+        }, [focusTrigger]);
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(menuRef.current);
@@ -485,7 +485,7 @@ export const ContextMenu = React.memo(
             if (!root) {
                 setFocusedItemInfo({ index: -1, parentKey: parentItem ? parentItem.parentKey : '' });
                 searchValue.current = '';
-                setTimeout(() => setTriggerArrowDown(true), 0);
+                setTimeout(() => setFocusTrigger(true), 0);
             }
 
             event.preventDefault();
@@ -499,7 +499,7 @@ export const ContextMenu = React.memo(
                 onItemChange({ originalEvent: event, processedItem });
                 setFocusedItemInfo({ index: -1, parentKey: processedItem.key });
                 searchValue.current = '';
-                setTimeout(() => setTriggerArrowDown(true), 0);
+                setTimeout(() => setFocusTrigger(true), 0);
             }
 
             event.preventDefault();
