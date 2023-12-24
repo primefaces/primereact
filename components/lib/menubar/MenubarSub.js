@@ -37,7 +37,6 @@ export const MenubarSub = React.memo(
             const item = processedItem.item;
 
             if (isItemDisabled(processedItem)) {
-                console.log('ho');
                 event.preventDefault();
 
                 return;
