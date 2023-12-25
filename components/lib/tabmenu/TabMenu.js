@@ -73,10 +73,23 @@ export const TabMenu = React.memo(
 
         const updateInkBar = () => {
             if (props.model) {
-                const tabHeader = tabsRef.current[`tab_${activeIndex}`];
+                let tabs = navRef.current.children;
+                let inkHighlighted = false;
 
-                inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
-                inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
+                for (let i = 0; i < tabs.length; i++) {
+                    let tab = tabs[i];
+
+                    if (DomHandler.getAttribute(tab, 'data-p-highlight')) {
+                        inkbarRef.current.style.width = DomHandler.getWidth(tab) + 'px';
+                        inkbarRef.current.style.left = DomHandler.getOffset(tab).left - DomHandler.getOffset(navRef.current).left + 'px';
+                        inkHighlighted = true;
+                    }
+                }
+
+                if (!inkHighlighted) {
+                    inkbarRef.current.style.width = '0px';
+                    inkbarRef.current.style.left = '0px';
+                }
             }
         };
 
