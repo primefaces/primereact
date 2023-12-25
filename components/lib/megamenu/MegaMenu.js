@@ -27,7 +27,6 @@ export const MegaMenu = React.memo(
         const [focusTrigger, setFocusTrigger] = React.useState(false);
         const searchValue = React.useRef('');
         const searchTimeout = React.useRef(null);
-        const reverseTrigger = React.useRef(false);
         const elementRef = React.useRef(null);
         const menubarRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -345,10 +344,9 @@ export const MegaMenu = React.memo(
 
         useUpdateEffect(() => {
             if (focusTrigger) {
-                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : reverseTrigger.current ? findLastItemIndex() : findFirstFocusedItemIndex();
+                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
 
                 changeFocusedItemInfo(itemIndex);
-                reverseTrigger.current = false;
                 setFocusTrigger(false);
             }
         }, [focusTrigger]);
