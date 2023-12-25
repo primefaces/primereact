@@ -331,13 +331,6 @@ export const TieredMenu = React.memo(
                 const anchorElement = element && DomHandler.findSingle(element, '[data-pc-section="action"]');
 
                 anchorElement ? anchorElement.click() : element && element.click();
-
-                // if (!props.popup) {
-                //     const processedItem = visibleItems[focusedItemInfo.index];
-                //     const grouped = isProccessedItemGroup(processedItem);
-
-                //     !grouped && setFocusedItemInfo({ ...focusedItemInfo, index: findFirstFocusedItemIndex() });
-                // }
             }
 
             event.preventDefault();
