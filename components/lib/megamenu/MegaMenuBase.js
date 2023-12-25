@@ -9,7 +9,7 @@ const classes = {
             'p-megamenu-mobile-active': mobileActiveState
         }),
     content: 'p-menuitem-content',
-    separator: 'p-menu-separator',
+    separator: 'p-menuitem-separator',
     submenuIcon: 'p-submenu-icon',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     submenuItem: ({ focused, disabled, active }) =>

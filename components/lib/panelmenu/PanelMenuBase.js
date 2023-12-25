@@ -11,7 +11,7 @@ const classes = {
     headerContent: 'p-panelmenu-header-content',
     menuContent: 'p-panelmenu-content',
     root: ({ props }) => classNames('p-panelmenu p-component', props.className),
-    separator: 'p-menu-separator',
+    separator: 'p-menuitem-separator',
     toggleableContent: ({ active }) =>
         classNames('p-toggleable-content', {
             'p-toggleable-content-collapsed': !active

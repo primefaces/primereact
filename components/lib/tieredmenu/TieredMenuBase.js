@@ -13,7 +13,7 @@ const classes = {
             },
             props.className
         ),
-    separator: 'p-menu-separator',
+    separator: 'p-menuitem-separator',
     icon: ({ _icon }) => classNames('p-menuitem-icon', _icon),
     content: 'p-menuitem-content',
     label: 'p-menuitem-text',

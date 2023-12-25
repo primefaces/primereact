@@ -253,7 +253,7 @@ export const PanelMenuSub = React.memo(
         };
 
         const createItem = (item, index) => {
-            return item.separator ? createSeparator(index) : createMenuItem(item, index);
+            return getItemProp(item, 'separator') ? createSeparator(index) : createMenuItem(item, index);
         };
 
         const createMenu = () => {

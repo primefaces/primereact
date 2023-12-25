@@ -9,7 +9,7 @@ const classes = {
         classNames('p-menubar p-component', {
             'p-menubar-mobile-active': mobileActiveState
         }),
-    separator: 'p-menu-separator',
+    separator: 'p-menuitem-separator',
     icon: 'p-menuitem-icon',
     label: 'p-menuitem-text',
     submenuIcon: 'p-submenu-icon',

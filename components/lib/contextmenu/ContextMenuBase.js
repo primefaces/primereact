@@ -65,7 +65,7 @@ const classes = {
     icon: 'p-menuitem-icon',
     submenuIcon: 'p-submenu-icon',
     label: 'p-menuitem-text',
-    separator: 'p-menu-separator',
+    separator: 'p-menuitem-separator',
     transition: 'p-contextmenu',
     submenuTransition: 'p-contextmenusub'
 };
