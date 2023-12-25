@@ -3862,6 +3862,11 @@
     background: #eceff4;
     border: 0 none;
   }
+  .p-scrollpanel .p-scrollpanel-bar:focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #c0d0e0;
+  }
   .p-tabview .p-tabview-nav {
     background: #ffffff;
     border: 2px solid #e5e9f0;

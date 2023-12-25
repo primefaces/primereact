@@ -3860,6 +3860,11 @@
     background: rgba(255, 255, 255, 0.12);
     border: 0 none;
   }
+  .p-scrollpanel .p-scrollpanel-bar:focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: none;
+  }
   .p-tabview .p-tabview-nav {
     background: transparent;
     border: solid rgba(255, 255, 255, 0.12);
