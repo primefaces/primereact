@@ -3,7 +3,7 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     headerIcon: ({ item }) => classNames('p-menuitem-icon', item.icon),
-    headerSubmenuIcon: 'p-panelmenu-icon',
+    headerSubmenuIcon: 'p-submenu-icon',
     headerLabel: 'p-menuitem-text',
     headerAction: 'p-panelmenu-header-link',
     panel: ({ item }) => classNames('p-panelmenu-panel', item.className),
@@ -18,7 +18,7 @@ const classes = {
         }),
     icon: ({ item }) => classNames('p-menuitem-icon', item.icon),
     label: 'p-menuitem-text',
-    submenuicon: 'p-panelmenu-icon',
+    submenuicon: 'p-submenu-icon',
     content: 'p-menuitem-content',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     menuitem: ({ item, focused, disabled }) =>

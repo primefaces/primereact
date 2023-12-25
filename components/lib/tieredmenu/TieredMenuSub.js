@@ -174,7 +174,7 @@ export const TieredMenuSub = React.memo(
             const iconClassName = classNames('p-menuitem-icon', _icon);
             const iconProps = mergeProps(
                 {
-                    className: classNames(item.icon, 'icon')
+                    className: classNames(item.icon, 'p-menuitem-icon', 'icon')
                 },
                 getPTOptions(processedItem, 'icon')
             );
