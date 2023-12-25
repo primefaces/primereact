@@ -263,6 +263,7 @@ export const Splitter = React.memo(
 
             const gutterHandlerProps = mergeProps(
                 {
+                    tabIndex: 0,
                     className: cx('gutterHandler'),
                     'aria-orientation': props.layout,
                     'aria-valuenow': prevSize.current
