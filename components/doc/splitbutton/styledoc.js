@@ -28,7 +28,7 @@ export function StyleDoc() {
                             <td>Dropdown button.</td>
                         </tr>
                         <tr>
-                            <td>p-menu</td>
+                            <td>p-tieredmenu</td>
                             <td>Overlay menu.</td>
                         </tr>
                     </tbody>
