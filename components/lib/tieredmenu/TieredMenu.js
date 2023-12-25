@@ -157,6 +157,7 @@ export const TieredMenu = React.memo(
                     break;
 
                 case 'Escape':
+                    props.popup && DomHandler.focus(targetRef.current);
                     onEscapeKey(event);
                     break;
 
@@ -268,6 +269,10 @@ export const TieredMenu = React.memo(
 
         const onArrowUpKey = (event) => {
             if (event.altKey) {
+                if (props.popup) {
+                    DomHandler.focus(targetRef.current);
+                }
+
                 if (focusedItemInfo.index !== -1) {
                     const processedItem = visibleItems[focusedItemInfo.index];
                     const grouped = isProccessedItemGroup(processedItem);
@@ -330,6 +335,7 @@ export const TieredMenu = React.memo(
                 const element = DomHandler.findSingle(getMenuElement(), `li[id="${`${focusedItemId}`}"]`);
                 const anchorElement = element && DomHandler.findSingle(element, '[data-pc-section="action"]');
 
+                props.popup && DomHandler.focus(targetRef.current);
                 anchorElement ? anchorElement.click() : element && element.click();
             }
 

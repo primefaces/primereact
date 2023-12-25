@@ -139,7 +139,7 @@ export const Menu = React.memo(
                     }
 
                 case 'Tab':
-                    props.popup && visibleState && hide();
+                    props.popup && visibleState && hide(event);
                     break;
 
                 default:
@@ -157,7 +157,7 @@ export const Menu = React.memo(
         const onArrowUpKey = (event) => {
             if (event.altKey && popup) {
                 DomHandler.focus(targetRef.current);
-                hide();
+                hide(event);
                 event.preventDefault();
             } else {
                 const optionIndex = findPrevOptionIndex(focusedOptionIndex);
