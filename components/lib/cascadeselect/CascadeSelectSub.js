@@ -247,8 +247,7 @@ export const CascadeSelectSub = React.memo((props) => {
                 style: option.style,
                 role: 'none',
                 'data-p-item-group': isGroup,
-                'data-p-highlight': isSelected,
-                'data-p-active': isSelected
+                'data-p-highlight': isSelected
             },
             getPTOptions('item', { selected: isSelected, group: isGroup })
         );
