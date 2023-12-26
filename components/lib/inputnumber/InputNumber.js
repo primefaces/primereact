@@ -660,7 +660,6 @@ export const InputNumber = React.memo(
                     }
                 } else {
                     newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
-
                     updateValue(event, newValueStr, text, operation);
                 }
             }
