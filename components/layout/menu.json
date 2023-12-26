@@ -618,9 +618,23 @@
             "href": "https://primeflex.org"
         },
         {
-            "name": "Accessibility",
-            "icon": "pi pi-users",
-            "to": "/accessibility"
+            "name": "Guides",
+            "icon": "pi pi-book",
+            "children": [
+                {
+                    "name": "Accessibility",
+                    "to": "/guides/accessibility"
+                },
+                {
+                    "name": "CSS Layer",
+                    "to": "/guides/csslayer"
+                },
+                {
+                    "name": "PrimeTV",
+                    "icon": "pi pi-youtube",
+                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
+                }
+            ]
         },
         {
             "name": "Support",
@@ -639,11 +653,6 @@
                     "to": "/support"
                 }
             ]
-        },
-        {
-            "name": "PrimeTV",
-            "icon": "pi pi-youtube",
-            "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
         },
         {
             "name": "Discover",
