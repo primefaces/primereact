@@ -665,6 +665,10 @@ export const InputNumber = React.memo(
             }
         };
 
+        const replaceSuffix = (value) => {
+            return value ? value.replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '') : value;
+        };
+
         const insertText = (value, text, start, end) => {
             let textSplit = text === '.' ? text : text.split('.');
 
@@ -673,7 +677,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + value.slice(end) : value || formatValue(text);
+                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + replaceSuffix(value).slice(end) : value || formatValue(text);
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
@@ -683,7 +687,11 @@ export const InputNumber = React.memo(
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
-                return value.slice(0, start) + text + value.slice(end);
+                const selectionValue = value.slice(start, end);
+                // Fix: if the suffix starts with a space, the input will be cleared after pasting
+                const space = /\s$/.test(selectionValue) ? ' ' : '';
+
+                return value.slice(0, start) + text + space + value.slice(end);
             }
         };
 
@@ -949,7 +957,9 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? replaceDecimalSeparator(val1).split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                const newVal1 = replaceDecimalSeparator(val1).split(_decimal.current)[0].replace(_suffix.current, '').trim();
+
+                return decimalCharIndex !== -1 ? newVal1 + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -960,7 +970,7 @@ export const InputNumber = React.memo(
                 const valueSplit = value.split(_decimal.current);
 
                 if (valueSplit.length === 2) {
-                    return valueSplit[1].replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '').length;
+                    return replaceSuffix(valueSplit[1]).length;
                 }
             }
 
