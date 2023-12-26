@@ -25,7 +25,7 @@ export const CascadeSelectSub = React.memo((props) => {
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
 
         if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
-            elementRef.current.parentElement.style.left = -100 * props.level + '%';
+            elementRef.current.parentElement.style.left = '-100%';
         }
     };
 
