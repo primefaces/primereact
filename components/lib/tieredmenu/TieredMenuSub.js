@@ -164,7 +164,6 @@ export const TieredMenuSub = React.memo(
             const _icon = getItemProp(processedItem, 'icon');
             const target = getItemProp(processedItem, 'target');
             const url = getItemProp(processedItem, 'url');
-            const template = getItemProp(processedItem, 'template');
             const key = getItemId(processedItem);
             const focused = isItemFocused(processedItem);
             const active = isItemActive(processedItem);
@@ -216,7 +215,7 @@ export const TieredMenuSub = React.memo(
                 </a>
             );
 
-            if (template) {
+            if (item.template) {
                 const defaultContentOptions = {
                     className: linkClassName,
                     labelClassName: 'p-menuitem-text',
@@ -228,7 +227,7 @@ export const TieredMenuSub = React.memo(
                     disabled: disabled
                 };
 
-                content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
+                content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
             const contentProps = mergeProps(

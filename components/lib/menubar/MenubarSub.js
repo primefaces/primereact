@@ -204,9 +204,7 @@ export const MenubarSub = React.memo(
                 </a>
             );
 
-            let template = getItemProp(processedItem, 'template');
-
-            if (template) {
+            if (item.template) {
                 const defaultContentOptions = {
                     className: linkClassName,
                     labelClassName: 'p-menuitem-text',
@@ -216,7 +214,7 @@ export const MenubarSub = React.memo(
                     props
                 };
 
-                content = ObjectUtils.getJSXElement(processedItem, item, defaultContentOptions);
+                content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
             const contentProps = mergeProps(
