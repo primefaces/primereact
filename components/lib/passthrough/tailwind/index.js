@@ -675,7 +675,7 @@ const Tailwind = {
                     'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
                 },
                 { 'px-4 py-3 text-base': props.size === null, 'text-xs py-2 px-3': props.size === 'small', 'text-xl py-3 px-4': props.size === 'large' },
-                { 'flex-column': props.iconPos == 'top' || props.iconPos == 'bottom' },
+                { 'flex-col': props.iconPos == 'top' || props.iconPos == 'bottom' },
                 { 'opacity-60 pointer-events-none cursor-default': context.disabled }
             )
         }),
