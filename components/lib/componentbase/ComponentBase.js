@@ -1,7 +1,7 @@
 import PrimeReact from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { mergeProps } from '../utils/MergeProps';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 const baseStyle = `
 .p-hidden-accessible {
@@ -519,8 +519,12 @@ export const ComponentBase = {
 
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
-
-                return ObjectUtils.isString(value) ? { className: value } : value;
+                if (Array.isArray(value)) return { className: classNames(...value) };
+                if (ObjectUtils.isString(value)) return { className: value };
+                if (value?.hasOwnProperty('className') && Array.isArray(value.className)) {
+                    return { className: classNames(...value.className) };
+                }
+                return value;
             };
 
             const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, originalkey, params) : _useDefaultPT(getPTClassValue, originalkey, params)) : undefined;
