@@ -519,11 +519,14 @@ export const ComponentBase = {
 
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
+
                 if (Array.isArray(value)) return { className: classNames(...value) };
                 if (ObjectUtils.isString(value)) return { className: value };
+
                 if (value?.hasOwnProperty('className') && Array.isArray(value.className)) {
                     return { className: classNames(...value.className) };
                 }
+
                 return value;
             };
 
