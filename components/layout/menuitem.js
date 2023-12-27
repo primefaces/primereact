@@ -29,8 +29,8 @@ function MenuItem(props) {
                 </StyleClass>
             )}
             {menuItem?.href && (
-                <Link href={menuItem.href} target="_blank" rel="noopener noreferrer">
-                    <a>
+                <Link href={menuItem.href} passHref>
+                    <a target="_blank" rel="noopener noreferrer">
                         {menuItem?.icon && root && (
                             <span className="menu-icon">
                                 <i className={menuItem?.icon}></i>
@@ -42,7 +42,7 @@ function MenuItem(props) {
                 </Link>
             )}
             {menuItem?.to && (
-                <Link href={menuItem?.to}>
+                <Link href={menuItem?.to} passHref>
                     <a className={classNames({ 'router-link-active': menuItem.to === router.pathname })}>
                         {menuItem?.icon && root && (
                             <span className="menu-icon">
