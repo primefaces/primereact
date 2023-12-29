@@ -181,7 +181,6 @@ interface ContentPropsMessage {
     message: string;
 }
 
-
 /**
  * Defines valid properties in Dialog component.
  * @group Properties

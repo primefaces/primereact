@@ -13,7 +13,6 @@ export function EditableDoc(props) {
         { name: 'Paris', code: 'PRS' }
     ];
 
-
     const code = {
         basic: `
 <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
