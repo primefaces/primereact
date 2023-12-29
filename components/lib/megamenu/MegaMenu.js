@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
@@ -16,19 +16,9 @@ export const MegaMenu = React.memo(
 
         const [idState, setIdState] = React.useState(props.id);
         const [activeItemState, setActiveItemState] = React.useState(null);
-        const [focused, setFocused] = React.useState(null);
-        const [focusedItemInfo, setFocusedItemInfo] = React.useState({ index: -1, key: '', parentKey: '' });
-        const [focusedItemId, setFocusedItemId] = React.useState(null);
-        const [dirty, setDirty] = React.useState(false);
-        const [processedItems, setProcessedItems] = React.useState(null);
-        const [visibleItems, setVisibleItems] = React.useState([]);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
-        const [focusTrigger, setFocusTrigger] = React.useState(false);
-        const searchValue = React.useRef('');
-        const searchTimeout = React.useRef(null);
         const elementRef = React.useRef(null);
-        const menubarRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
         const menuButtonRef = React.useRef(null);
         const horizontal = props.orientation === 'horizontal';
@@ -39,7 +29,7 @@ export const MegaMenu = React.memo(
             props,
             state: {
                 id: idState,
-                activeItem: activeItemState && activeItemState.item,
+                activeItem: activeItemState,
                 attributeSelector: attributeSelectorState,
                 mobileActive: mobileActiveState
             }
@@ -47,199 +37,167 @@ export const MegaMenu = React.memo(
 
         useHandleStyle(MegaMenuBase.css.styles, isUnstyled, { name: 'megamenu' });
 
-        const getPTOptions = (processedItem, key, index) => {
+        const getPTOptions = (item, key, index) => {
             return ptm(key, {
                 context: {
-                    active: isItemActive(processedItem),
-                    focused: isItemFocused(processedItem),
-                    disabled: isItemDisabled(processedItem),
-                    item: processedItem,
+                    active: activeItemState === item,
+                    item,
                     index
                 }
             });
         };
 
-        const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        const [bindDocumentClickListener] = useEventListener({
             type: 'click',
             listener: (event) => {
-                if (isOutsideClicked(event)) {
-                    hide();
+                if ((!isMobileMode || mobileActiveState) && isOutsideClicked(event)) {
+                    setActiveItemState(null);
+                    setMobileActiveState(false);
                 }
             }
         });
 
-        const [bindDocumentResizeListener, unbindDocumentResizeListener] = useResizeListener({
-            type: 'resize',
+        const [bindDocumentResizeListener] = useResizeListener({
             listener: () => {
-                hide();
+                if (!isMobileMode || mobileActiveState) {
+                    setActiveItemState(null);
+                    setMobileActiveState(false);
+                }
             }
         });
 
-        const bindListeners = () => {
-            bindDocumentClickListener();
-            bindDocumentResizeListener();
-        };
-
-        const unbindListeners = () => {
-            unbindDocumentClickListener();
-            unbindDocumentResizeListener();
-        };
-
-        const onLeafClick = (event) => {
-            const { originalEvent, processedItem } = event;
-            const item = processedItem.item;
-
+        const onLeafClick = (event, item) => {
             if (item.disabled) {
-                originalEvent.preventDefault();
+                event.preventDefault();
 
                 return;
             }
 
             if (!item.url) {
-                originalEvent.preventDefault();
+                event.preventDefault();
             }
 
             if (item.command) {
                 item.command({
-                    originalEvent: originalEvent,
+                    originalEvent: event,
                     item: item
                 });
             }
 
-            const grouped = isProccessedItemGroup(processedItem);
-            const selected = isSelected(processedItem);
+            setActiveItemState(null);
+            setMobileActiveState(false);
+        };
 
-            if (selected) {
-                const { index, key, parentKey } = processedItem;
+        const onCategoryMouseEnter = (event, item) => {
+            if (item.disabled || isMobileMode) {
+                event.preventDefault();
 
-                setActiveItemState(null);
-                setFocusedItemInfo({ index, key, parentKey });
-            } else {
-                if (grouped) {
-                    onItemChange(event);
-                } else {
-                    const rootProcessedItemIndex = activeItemState ? activeItemState.index : -1;
-                    const rootProcessedItemKey = activeItemState ? activeItemState.key : '';
+                return;
+            }
 
-                    hide(originalEvent);
-                    setFocusedItemInfo({ index: rootProcessedItemIndex, key: rootProcessedItemKey, parentKey: '' });
-                    setMobileActiveState(false);
-                }
+            if (activeItemState) {
+                setActiveItemState(item);
             }
         };
 
-        const onItemChange = (event) => {
-            const { processedItem, isFocus } = event;
-
-            if (ObjectUtils.isEmpty(processedItem)) return;
-
-            const { index, key, parentKey, items } = processedItem;
-            const grouped = ObjectUtils.isNotEmpty(items);
-
-            grouped && setActiveItemState(processedItem);
-            setFocusedItemInfo({ index, key, parentKey });
-
-            grouped && setDirty(true);
-            isFocus && DomHandler.focus(menubarRef.current);
-        };
-
-        const onCategoryMouseEnter = (event) => {
-            if (!mobileActiveState && dirty) {
-                onItemChange(event);
-            }
-        };
-
-        const onCategoryClick = (event) => {
-            const { originalEvent, processedItem } = event;
-            const item = processedItem.item;
-
+        const onCategoryClick = (event, item) => {
             if (item.disabled) {
-                originalEvent.preventDefault();
+                event.preventDefault();
 
                 return;
             }
 
             if (!item.url) {
-                originalEvent.preventDefault();
+                event.preventDefault();
             }
 
             if (item.command) {
                 item.command({
-                    originalEvent: originalEvent,
+                    originalEvent: event,
                     item: props.item
                 });
-                originalEvent.preventDefault();
+                event.preventDefault();
             }
 
-            const grouped = isProccessedItemGroup(processedItem);
-            const root = ObjectUtils.isEmpty(processedItem.parent);
-            const selected = isSelected(processedItem);
-
-            if (selected) {
-                const { index, key, parentKey } = processedItem;
-
-                setActiveItemState(null);
-                setFocusedItemInfo({ index, key, parentKey });
-                setDirty(!root);
-            } else {
-                if (grouped) {
-                    onItemChange(event);
-                } else {
-                    const rootProcessedItem = root ? processedItem : activeItemState;
-
-                    hide();
-                    changeFocusedItemInfo(originalEvent, rootProcessedItem ? rootProcessedItem.index : -1);
-                    setMobileActiveState(false);
-                    DomHandler.focus(menubarRef.current);
-                }
+            if (item.items) {
+                activeItemState && activeItemState === item ? setActiveItemState(null) : setActiveItemState(item);
+                event.preventDefault();
             }
         };
 
-        const show = () => {
-            setFocusedItemInfo({ index: findFirstFocusedItemIndex(), level: 0, parentKey: '' });
+        const onCategoryKeyDown = (event, item) => {
+            const listItem = event.currentTarget.parentElement;
+
+            switch (event.which) {
+                //down
+                case 40:
+                    horizontal ? expandMenu(item) : navigateToNextItem(listItem);
+                    event.preventDefault();
+                    break;
+
+                //up
+                case 38:
+                    vertical ? navigateToPrevItem(listItem) : item.items && item === activeItemState && collapseMenu();
+                    event.preventDefault();
+                    break;
+
+                //right
+                case 39:
+                    horizontal ? navigateToNextItem(listItem) : expandMenu(item);
+                    event.preventDefault();
+                    break;
+
+                //left
+                case 37:
+                    horizontal ? navigateToPrevItem(listItem) : item.items && item === activeItemState && collapseMenu();
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
+            }
         };
 
-        const hide = (isFocus) => {
-            if (mobileActiveState) {
-                setMobileActiveState(false);
-                setTimeout(() => {
-                    DomHandler.focus(menuButtonRef.current);
-                }, 0);
+        const expandMenu = (item) => {
+            if (item.items) {
+                setActiveItemState(item);
             }
+        };
 
+        const collapseMenu = (item) => {
             setActiveItemState(null);
-
-            if (isFocus) {
-                setFocusedItemInfo({ index: -1, key: '', parentKey: '' });
-                DomHandler.focus(menubarRef.current);
-            }
-
-            setDirty(false);
         };
 
         const toggle = (event) => {
             event.preventDefault();
 
-            if (mobileActiveState) {
-                setMobileActiveState(false);
-                ZIndexUtils.clear(menubarRef.current);
-                hide();
-            } else {
-                setMobileActiveState(true);
-                ZIndexUtils.set('menu', menubarRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
-                setTimeout(() => {
-                    show();
-                }, 1);
-            }
+            setMobileActiveState((prevMobileActive) => !prevMobileActive);
+            setActiveItemState(null);
         };
 
-        useUpdateEffect(() => {
-            if (mobileActiveState) {
-                bindListeners();
-            } else {
-                unbindListeners();
-            }
-        }, [mobileActiveState]);
+        const findNextItem = (item) => {
+            const nextItem = item.nextElementSibling;
+
+            return nextItem ? (DomHandler.getAttribute(nextItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(nextItem, '[data-pc-section="menuitem"]') ? findNextItem(nextItem) : nextItem) : null;
+        };
+
+        const findPrevItem = (item) => {
+            const prevItem = item.previousElementSibling;
+
+            return prevItem ? (DomHandler.getAttribute(prevItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(prevItem, '[data-pc-section="menuitem"]') ? findPrevItem(prevItem) : prevItem) : null;
+        };
+
+        const navigateToNextItem = (listItem) => {
+            const nextItem = findNextItem(listItem);
+
+            nextItem && nextItem.children[0].focus();
+        };
+
+        const navigateToPrevItem = (listItem) => {
+            const prevItem = findPrevItem(listItem);
+
+            prevItem && prevItem.children[0].focus();
+        };
 
         const isOutsideClicked = (event) => {
             return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target) || (menuButtonRef.current && menuButtonRef.current.contains(event.target)));
@@ -258,429 +216,16 @@ export const MegaMenu = React.memo(
             if (props.breakpoint) {
                 !attributeSelectorState && setAttributeSelectorState(uniqueId);
             }
+
+            bindDocumentClickListener();
+            bindDocumentResizeListener();
         });
-
-        const onFocus = (event) => {
-            setFocused(true);
-
-            if (focusedItemInfo.index === -1) {
-                const index = findFirstFocusedItemIndex();
-                const processedItem = findVisibleItem(index);
-
-                setFocusedItemInfo({ index, key: processedItem.key, parentKey: processedItem.parentKey });
-            }
-
-            props.onFocus && props.onFocus(event);
-        };
-
-        const onBlur = (event) => {
-            setFocused(false);
-            setFocusedItemInfo({ index: -1, key: '', parentKey: '' });
-            searchValue.current = '';
-            setDirty(false);
-            props.onBlur && props.onBlur(event);
-        };
-
-        const onKeyDown = (event) => {
-            const metaKey = event.metaKey || event.ctrlKey;
-
-            switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event);
-                    break;
-
-                case 'ArrowUp':
-                    onArrowUpKey(event);
-                    break;
-
-                case 'ArrowLeft':
-                    onArrowLeftKey(event);
-                    break;
-
-                case 'ArrowRight':
-                    onArrowRightKey(event);
-                    break;
-
-                case 'Home':
-                    onHomeKey(event);
-                    break;
-
-                case 'End':
-                    onEndKey(event);
-                    break;
-
-                case 'Space':
-                    onSpaceKey(event);
-                    break;
-
-                case 'Enter':
-                    onEnterKey(event);
-                    break;
-
-                case 'Escape':
-                    onEscapeKey(event);
-                    break;
-
-                case 'Tab':
-                    onTabKey(event);
-                    break;
-
-                case 'PageDown':
-                case 'PageUp':
-                case 'Backspace':
-                case 'ShiftLeft':
-                case 'ShiftRight':
-                    //NOOP
-                    break;
-
-                default:
-                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                        searchItems(event, event.key);
-                    }
-
-                    break;
-            }
-        };
-
-        useUpdateEffect(() => {
-            if (focusTrigger) {
-                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
-
-                changeFocusedItemInfo(itemIndex);
-                setFocusTrigger(false);
-            }
-        }, [focusTrigger]);
-
-        const onArrowDownKey = (event) => {
-            event.preventDefault();
-
-            if (horizontal) {
-                const _focusedItemInfo = focusedItemInfo;
-
-                if (ObjectUtils.isNotEmpty(activeItemState) && activeItemState.key === focusedItemInfo.key) {
-                    _focusedItemInfo = { index: -1, key: '', parentKey: activeItemState.key };
-                    setFocusedItemInfo(_focusedItemInfo);
-                } else {
-                    const processedItem = findVisibleItem(focusedItemInfo.index);
-                    const grouped = isProccessedItemGroup(processedItem);
-
-                    if (grouped) {
-                        onItemChange({ originalEvent: event, processedItem });
-                        _focusedItemInfo = { index: -1, key: processedItem.key, parentKey: processedItem.parentKey };
-                        setFocusedItemInfo(_focusedItemInfo);
-                        searchValue.current = '';
-                    }
-                }
-
-                setTimeout(() => setFocusTrigger(true), 0);
-            } else {
-                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
-
-                changeFocusedItemInfo(itemIndex);
-            }
-        };
-
-        const onArrowUpKey = (event) => {
-            const processedItem = findVisibleItem(focusedItemInfo.index);
-            const grouped = isProccessedItemGroup(processedItem);
-
-            if (event.altKey && horizontal) {
-                if (focusedItemInfo.index !== -1) {
-                    if (!grouped && ObjectUtils.isNotEmpty(activeItemState)) {
-                        if (focusedItemInfo.index === 0) {
-                            setFocusedItemInfo({ index: activeItemState.index, key: activeItemState.key, parentKey: activeItemState.parentKey });
-                            setActiveItemState(null);
-                        } else {
-                            changeFocusedItemInfo(findFirstItemIndex());
-                        }
-                    }
-                }
-            } else {
-                const itemIndex = focusedItemInfo.index !== -1 ? findPrevItemIndex(focusedItemInfo.index) : findLastFocusedItemIndex();
-
-                changeFocusedItemInfo(itemIndex);
-            }
-
-            event.preventDefault();
-        };
-
-        const onArrowLeftKey = (event) => {
-            const processedItem = findVisibleItem(focusedItemInfo.index);
-            const grouped = isProccessedItemGroup(processedItem);
-
-            if (grouped) {
-                if (horizontal) {
-                    const itemIndex = focusedItemInfo.index !== -1 ? findPrevItemIndex(focusedItemInfo.index) : findLastFocusedItemIndex();
-
-                    changeFocusedItemInfo(itemIndex);
-                }
-            } else {
-                if (vertical && ObjectUtils.isNotEmpty(activeItemState)) {
-                    if (processedItem.columnIndex === 0) {
-                        setFocusedItemInfo({ index: activeItemState.index, key: activeItemState.key, parentKey: activeItemState.parentKey });
-                        setActiveItemState(null);
-                    }
-                }
-
-                const columnIndex = processedItem.columnIndex - 1;
-                const itemIndex = visibleItems.findIndex((item) => item.columnIndex === columnIndex);
-
-                itemIndex !== -1 && changeFocusedItemInfo(itemIndex);
-            }
-
-            event.preventDefault();
-        };
-
-        const onArrowRightKey = (event) => {
-            event.preventDefault();
-
-            const processedItem = findVisibleItem(focusedItemInfo.index);
-            const grouped = isProccessedItemGroup(processedItem);
-
-            if (grouped) {
-                if (vertical) {
-                    if (ObjectUtils.isNotEmpty(activeItemState) && activeItemState.key === processedItem.key) {
-                        setFocusedItemInfo({ index: -1, key: '', parentKey: activeItemState.key });
-                    } else {
-                        const processedItem = findVisibleItem(focusedItemInfo.index);
-                        const grouped = isProccessedItemGroup(processedItem);
-
-                        if (grouped) {
-                            onItemChange({ originalEvent: event, processedItem });
-                            setFocusedItemInfo({ index: -1, key: processedItem.key, parentKey: processedItem.parentKey });
-                            searchValue.current = '';
-                        }
-                    }
-                }
-
-                setTimeout(() => setFocusTrigger(true), 0);
-            } else {
-                const columnIndex = processedItem.columnIndex + 1;
-                const itemIndex = visibleItems.findIndex((item) => item.columnIndex === columnIndex);
-
-                itemIndex !== -1 && changeFocusedItemInfo(itemIndex);
-            }
-        };
-
-        const onHomeKey = (event) => {
-            changeFocusedItemInfo(findFirstItemIndex());
-            event.preventDefault();
-        };
-
-        const onEndKey = (event) => {
-            changeFocusedItemInfo(findLastItemIndex());
-            event.preventDefault();
-        };
-
-        const onEnterKey = (event) => {
-            if (focusedItemInfo.index !== -1) {
-                const element = DomHandler.findSingle(menubarRef.current, `li[id="${focusedItemId}"]`);
-                const anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section="action"]');
-
-                anchorElement ? anchorElement.click() : element && element.click();
-            }
-
-            event.preventDefault();
-        };
-
-        const onSpaceKey = (event) => {
-            onEnterKey(event);
-        };
-
-        const onEscapeKey = (event) => {
-            if (ObjectUtils.isNotEmpty(activeItemState)) {
-                setFocusedItemInfo({ index: activeItemState.index, key: activeItemState.key });
-                setActiveItemState(null);
-            }
-
-            event.preventDefault();
-        };
-
-        const onTabKey = (event) => {
-            if (focusedItemInfo.index !== -1) {
-                const processedItem = findVisibleItem(focusedItemInfo.index);
-                const grouped = isProccessedItemGroup(processedItem);
-
-                !grouped && onItemChange({ originalEvent: event, processedItem });
-            }
-
-            hide();
-        };
-
-        const isItemMatched = (processedItem) => {
-            const label = getProccessedItemLabel(processedItem);
-
-            return isValidItem(processedItem) && label && label.toLocaleLowerCase().startsWith(searchValue.current.toLocaleLowerCase());
-        };
-
-        const isValidItem = (processedItem) => {
-            return !!processedItem && !isItemDisabled(processedItem.item) && !isItemSeparator(processedItem.item);
-        };
-
-        const isValidSelectedItem = (processedItem) => {
-            return isValidItem(processedItem) && isSelected(processedItem);
-        };
-
-        const isSelected = (processedItem) => {
-            return ObjectUtils.isNotEmpty(activeItemState) ? activeItemState.key === processedItem.key : false;
-        };
-
-        const findFirstItemIndex = () => {
-            return visibleItems.findIndex((processedItem) => isValidItem(processedItem));
-        };
-
-        const findLastItemIndex = () => {
-            return ObjectUtils.findLastIndex(visibleItems, (processedItem) => isValidItem(processedItem));
-        };
-
-        const findNextItemIndex = (index) => {
-            const matchedItemIndex = index < visibleItems.length - 1 ? visibleItems.slice(index + 1).findIndex((processedItem) => isValidItem(processedItem)) : -1;
-
-            return matchedItemIndex > -1 ? matchedItemIndex + index + 1 : index;
-        };
-
-        const findPrevItemIndex = (index) => {
-            const matchedItemIndex = index > 0 ? ObjectUtils.findLastIndex(visibleItems.slice(0, index), (processedItem) => isValidItem(processedItem)) : -1;
-
-            return matchedItemIndex > -1 ? matchedItemIndex : index;
-        };
-
-        const findSelectedItemIndex = () => {
-            return visibleItems && visibleItems.findIndex((processedItem) => isValidSelectedItem(processedItem));
-        };
-
-        const findFirstFocusedItemIndex = () => {
-            const selectedIndex = findSelectedItemIndex();
-
-            return selectedIndex < 0 ? findFirstItemIndex() : selectedIndex;
-        };
-
-        const findLastFocusedItemIndex = () => {
-            const selectedIndex = findSelectedItemIndex();
-
-            return selectedIndex < 0 ? findLastItemIndex() : selectedIndex;
-        };
-
-        const findVisibleItem = (index) => {
-            return ObjectUtils.isNotEmpty(visibleItems) ? visibleItems[index] : null;
-        };
-
-        const getProccessedItemLabel = (processedItem) => {
-            return processedItem && processedItem.item ? getItemLabel(processedItem) : undefined;
-        };
-
-        const searchItems = (event, char) => {
-            searchValue.current = (searchValue.current || '') + char;
-            let itemIndex = -1;
-            let matched = false;
-
-            if (focusedItemInfo.index !== -1) {
-                itemIndex = visibleItems.slice(focusedItemInfo.index).findIndex((processedItem) => isItemMatched(processedItem));
-                itemIndex = itemIndex === -1 ? visibleItems.slice(0, focusedItemInfo.index).findIndex((processedItem) => isItemMatched(processedItem)) : itemIndex + focusedItemInfo.index;
-            } else {
-                itemIndex = visibleItems.findIndex((processedItem) => isItemMatched(processedItem));
-            }
-
-            if (itemIndex !== -1) {
-                matched = true;
-            }
-
-            if (itemIndex === -1 && focusedItemInfo.index === -1) {
-                itemIndex = findFirstFocusedItemIndex();
-            }
-
-            if (itemIndex !== -1) {
-                changeFocusedItemInfo(itemIndex);
-            }
-
-            if (searchTimeout) {
-                clearTimeout(searchTimeout);
-            }
-
-            searchTimeout.current = setTimeout(() => {
-                searchValue.current = '';
-                searchTimeout.current = null;
-            }, 500);
-
-            return matched;
-        };
-
-        const changeFocusedItemInfo = (index) => {
-            const processedItem = findVisibleItem(index);
-            const key = ObjectUtils.isNotEmpty(processedItem) ? processedItem.key : '';
-
-            setFocusedItemInfo({ ...focusedItemInfo, index, key: key });
-            scrollInView();
-        };
-
-        const scrollInView = (index = -1) => {
-            const id = index !== -1 ? `${idState}_${index}` : focusedItemId;
-            const element = DomHandler.findSingle(menubarRef.current, `li[id="${id}"]`);
-
-            if (element) {
-                element.scrollIntoView && element.scrollIntoView({ block: 'nearest', inline: 'start' });
-            }
-        };
-
-        const getItemId = (processedItem) => {
-            return `${idState}_${processedItem.key}`;
-        };
-
-        const getItemProp = (processedItem, name, params) => {
-            return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name], params) : undefined;
-        };
-
-        const getItemLabel = (processedItem) => {
-            return getItemProp(processedItem, 'label');
-        };
-
-        const isItemActive = (processedItem) => {
-            return ObjectUtils.isNotEmpty(activeItemState) ? activeItemState.key === processedItem.key : false;
-        };
-
-        const isItemVisible = (processedItem) => {
-            return getItemProp(processedItem, 'visible') !== false;
-        };
-
-        const isItemDisabled = (processedItem) => {
-            return getItemProp(processedItem, 'disabled');
-        };
-
-        const isItemFocused = (processedItem) => {
-            return focusedItemId === getItemId(processedItem);
-        };
-
-        const isItemGroup = (processedItem) => {
-            return ObjectUtils.isNotEmpty(processedItem.items);
-        };
-
-        const isItemSeparator = (item) => {
-            return getItemProp(item, 'separator');
-        };
-
-        const isProccessedItemGroup = (processedItem) => {
-            return processedItem && ObjectUtils.isNotEmpty(processedItem.items);
-        };
-
-        const getAriaSetSize = () => {
-            return props.model.filter((processedItem) => isItemVisible(processedItem) && !getItemProp(processedItem, 'separator')).length;
-        };
-
-        const getAriaPosInset = (index) => {
-            return index - props.model.slice(0, index).filter((processedItem) => isItemVisible(processedItem) && getItemProp(processedItem, 'separator')).length + 1;
-        };
 
         useUpdateEffect(() => {
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
-            if (activeItemState) {
-                bindListeners();
-
-                if (!isMobileMode) {
-                    ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
-                }
-            } else {
-                unbindListeners();
+            if (activeItemState && !isMobileMode) {
+                ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             if (isMobileMode) {
@@ -688,65 +233,9 @@ export const MegaMenu = React.memo(
             }
 
             return () => {
-                unbindListeners();
                 ZIndexUtils.clear(currentPanel);
             };
         }, [activeItemState]);
-
-        useUpdateEffect(() => {
-            const _focusedItemId = ObjectUtils.isNotEmpty(focusedItemInfo.key) ? `${idState}_${focusedItemInfo.key}` : null;
-
-            setFocusedItemId(_focusedItemId);
-        }, [focusedItemInfo]);
-
-        useUpdateEffect(() => {
-            const itemsToProcess = props.model || [];
-            const processed = createProcessedItems(itemsToProcess, 0, null, '');
-
-            setProcessedItems(processed);
-        }, [props.model]);
-
-        useUpdateEffect(() => {
-            const processedItem = ObjectUtils.isNotEmpty(activeItemState) ? activeItemState : null;
-
-            const _visibleItems =
-                processedItem && processedItem.key === focusedItemInfo.parentKey
-                    ? processedItem.items.reduce((items, col) => {
-                          col.forEach((submenu) => {
-                              submenu.items.forEach((a) => {
-                                  items.push(a);
-                              });
-                          });
-
-                          return items;
-                      }, [])
-                    : processedItems;
-
-            setVisibleItems(_visibleItems);
-        }, [focusedItemInfo, activeItemState, processedItems]);
-
-        const createProcessedItems = (items, level = 0, parent = {}, parentKey = '', columnIndex) => {
-            const _processedItems = [];
-
-            items &&
-                items.forEach((item, index) => {
-                    const key = (parentKey !== '' ? parentKey + '_' : '') + (columnIndex !== undefined ? columnIndex + '_' : '') + index;
-                    const newItem = {
-                        item,
-                        index,
-                        level,
-                        key,
-                        parent,
-                        parentKey,
-                        columnIndex: columnIndex !== undefined ? columnIndex : parent && parent.columnIndex !== undefined ? parent.columnIndex : index
-                    };
-
-                    newItem['items'] = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
-                    _processedItems.push(newItem);
-                });
-
-            return _processedItems;
-        };
 
         const createSeparator = (index) => {
             const key = idState + '_separator__' + index;
@@ -782,9 +271,7 @@ export const MegaMenu = React.memo(
             return null;
         };
 
-        const createSubmenuItem = (processedItem, index) => {
-            const item = processedItem.item;
-
+        const createSubmenuItem = (item, index) => {
             if (item.visible === false) {
                 return null;
             }
@@ -792,7 +279,7 @@ export const MegaMenu = React.memo(
             if (item.separator) {
                 return createSeparator(index);
             } else {
-                const key = getItemId(processedItem);
+                const key = item.id || idState + '_' + index;
                 const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
                 const iconProps = mergeProps(
                     {
@@ -815,44 +302,22 @@ export const MegaMenu = React.memo(
                         href: item.url || '#',
                         className: cx('action', { item }),
                         target: item.target,
-                        tabIndex: '-1',
-                        'aria-hidden': true
+                        onClick: (event) => onLeafClick(event, item),
+                        role: 'menuitem',
+                        'aria-disabled': item.disabled
                     },
-                    getPTOptions(processedItem, 'action', index)
+                    getPTOptions(item, 'action', index)
                 );
-
-                const isFocused = isItemFocused(processedItem);
-                const isDisabled = isItemDisabled(processedItem);
-                const isGroup = isItemGroup(processedItem);
-                const isActive = isItemActive(processedItem);
 
                 const submenuItemProps = mergeProps(
                     {
                         key,
                         id: key,
-                        'aria-label': getItemLabel(processedItem),
-                        'aria-disabled': isDisabled,
-                        'aria-haspopup': isGroup || undefined,
-                        'aria-level': '2',
-                        'aria-expanded': isGroup ? isActive : undefined,
-                        'aria-setsize': getAriaSetSize(),
-                        'aria-posinset': getAriaPosInset(index),
-                        'data-p-highlight': isActive,
-                        'data-p-disabled': isDisabled,
-                        'data-p-focused': isFocused,
-                        className: classNames(item.className, cx('submenuItem', { focused: isFocused, disabled: isDisabled, active: isActive })),
+                        className: classNames(item.className, cx('submenuItem')),
                         style: item.style,
-                        role: 'menuitem'
+                        role: 'none'
                     },
-                    getPTOptions(processedItem, 'submenuItem', index)
-                );
-
-                const contentProps = mergeProps(
-                    {
-                        onClick: (event) => onLeafClick({ originalEvent: event, processedItem: processedItem }),
-                        className: cx('content')
-                    },
-                    getPTOptions(processedItem, 'content', index)
+                    getPTOptions(item, 'submenuItem', index)
                 );
 
                 let content = (
@@ -865,6 +330,7 @@ export const MegaMenu = React.memo(
 
                 if (item.template) {
                     const defaultContentOptions = {
+                        onClick: (event) => onLeafClick(event, item),
                         className: linkClassName,
                         labelClassName: 'p-menuitem-text',
                         iconClassName,
@@ -875,40 +341,33 @@ export const MegaMenu = React.memo(
                     content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
                 }
 
-                return (
-                    <li {...submenuItemProps}>
-                        <div {...contentProps}>{content}</div>
-                    </li>
-                );
+                return <li {...submenuItemProps}>{content}</li>;
             }
         };
 
         const createSubmenu = (submenu, index) => {
-            if (!isItemVisible(submenu)) {
+            if (submenu.visible === false) {
                 return null;
             }
 
             const items = submenu.items.map(createSubmenuItem);
 
             const key = submenu.id || idState + '_sub_' + index;
-            const label = getItemLabel(submenu);
-            const isDisabled = isItemDisabled(submenu);
-
             const submenuHeaderProps = mergeProps(
                 {
                     id: key,
                     key,
-                    className: classNames(submenu.className, cx('submenuHeader', { disabled: isDisabled })),
+                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: submenu.style,
                     role: 'presentation',
-                    'data-p-disabled': isDisabled
+                    'data-p-disabled': submenu.disabled
                 },
                 ptm('submenuHeader')
             );
 
             return (
                 <React.Fragment key={key}>
-                    <li {...submenuHeaderProps}>{label}</li>
+                    <li {...submenuHeaderProps}>{submenu.label}</li>
                     {items}
                 </React.Fragment>
             );
@@ -918,10 +377,9 @@ export const MegaMenu = React.memo(
             return column.map(createSubmenu);
         };
 
-        const createColumn = (processedItem, processedColumn, index) => {
-            const category = processedItem.item;
+        const createColumn = (category, column, index) => {
             const key = category.label + '_column_' + index;
-            const submenus = createSubmenus(processedColumn);
+            const submenus = createSubmenus(column);
 
             const columnProps = mergeProps(
                 {
@@ -931,14 +389,11 @@ export const MegaMenu = React.memo(
                 ptm('column')
             );
 
-            const display = activeItemState && activeItemState.item === category ? 'block' : 'none';
-
             const submenuProps = mergeProps(
                 {
-                    role: 'menu',
-                    tabIndex: props.disabled ? null : props.tabIndex || '0',
                     className: cx('submenu'),
-                    style: { display: display }
+                    style: { display: activeItemState === category ? 'block' : 'none' },
+                    role: 'menu'
                 },
                 ptm('submenu')
             );
@@ -960,11 +415,9 @@ export const MegaMenu = React.memo(
             return null;
         };
 
-        const createCategoryPanel = (processedItem) => {
-            const category = processedItem.item;
-
+        const createCategoryPanel = (category) => {
             if (category.items) {
-                const columns = createColumns(processedItem);
+                const columns = createColumns(category);
 
                 const panelProps = mergeProps(
                     {
@@ -1099,13 +552,12 @@ export const MegaMenu = React.memo(
             };
         }, [attributeSelectorState, props.breakpoint]);
 
-        const createCategory = (processedItem, index) => {
-            const category = processedItem.item;
+        const createCategory = (category, index) => {
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                getPTOptions(processedItem, 'icon', index)
+                getPTOptions(category, 'icon', index)
             );
             const icon = IconUtils.getJSXIcon(category.icon, { ...iconProps }, { props });
 
@@ -1113,70 +565,55 @@ export const MegaMenu = React.memo(
                 {
                     className: cx('label')
                 },
-                getPTOptions(processedItem, 'label', index)
+                getPTOptions(category, 'label', index)
             );
-            const label = category.label && <span {...labelProps}>{category.label}</span>;
-            const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
-            const submenuIcon = createSubmenuIcon(category);
-            const panel = createCategoryPanel(processedItem);
 
             const headerActionProps = mergeProps(
                 {
                     href: category.url || '#',
-                    className: cx('action', { item: category }),
+                    className: cx('headerAction', { category }),
                     target: category.target,
-                    onFocus: (event) => event.stopPropagation(),
-                    tabIndex: '-1',
-                    'aria-hidden': true
+                    onClick: (e) => onCategoryClick(e, category),
+                    onKeyDown: (e) => onCategoryKeyDown(e, category),
+                    role: 'menuitem',
+                    'aria-haspopup': category.items != null,
+                    'data-p-disabled': category.disabled
                 },
-                getPTOptions(processedItem, 'action', index)
+                getPTOptions(category, 'headerAction', index)
             );
 
-            const key = getItemId(processedItem);
-            const isFocused = isItemFocused(processedItem);
-            const isDisabled = isItemDisabled(processedItem);
+            const key = category.id || idState + '_cat_' + index;
             const menuItemProps = mergeProps(
                 {
                     key,
                     id: key,
-                    className: classNames(category.className, cx('menuitem', { category, activeItemState, focused: isFocused, disabled: isDisabled })),
-                    'aria-label': getItemLabel(category),
-                    'aria-level': '1',
-                    'aria-setsize': getAriaSetSize(),
-                    'aria-posinset': getAriaPosInset(index),
-                    'aria-expanded': isItemGroup(processedItem) ? isItemActive(processedItem) : undefined,
-                    'aria-haspopup': isItemGroup(processedItem) || undefined,
-                    'aria-disabled': isItemDisabled(processedItem),
-                    'data-p-highlight': isItemActive(category),
-                    'data-p-disabled': isDisabled,
-                    'data-p-focused': isFocused,
+                    className: classNames(category.className, cx('menuitem', { category, activeItemState })),
                     style: category.style,
-                    role: 'menuitem',
+                    onMouseEnter: (e) => onCategoryMouseEnter(e, category),
+                    role: 'none',
                     'data-p-disabled': category.disabled || false
                 },
-                getPTOptions(processedItem, 'menuitem', index)
+                getPTOptions(category, 'menuitem', index)
             );
 
-            const contentProps = mergeProps(
-                {
-                    onClick: (event) => onCategoryClick({ originalEvent: event, processedItem: processedItem }),
-                    onMouseEnter: (e) => onCategoryMouseEnter({ originalEvent: e, processedItem: processedItem }),
-                    className: cx('content')
-                },
-                getPTOptions(processedItem, 'content', index)
+            const label = category.label && <span {...labelProps}>{category.label}</span>;
+            const submenuIcon = createSubmenuIcon(category);
+            const panel = createCategoryPanel(category);
+            const isTemplate = category.template != null;
+            const itemContent = isTemplate ? (
+                ObjectUtils.getJSXElement(category.template, category, headerActionProps)
+            ) : (
+                <a {...headerActionProps}>
+                    {icon}
+                    {label}
+                    {submenuIcon}
+                    <Ripple />
+                </a>
             );
 
             return (
                 <li {...menuItemProps}>
-                    <div {...contentProps}>
-                        <a {...headerActionProps}>
-                            {icon}
-                            {label}
-                            {itemContent}
-                            {submenuIcon}
-                            <Ripple />
-                        </a>
-                    </div>
+                    {itemContent}
                     {panel}
                 </li>
             );
@@ -1185,26 +622,16 @@ export const MegaMenu = React.memo(
         const createMenu = () => {
             const menuProps = mergeProps(
                 {
-                    ref: menubarRef,
-                    tabIndex: props.disabled ? null : props.tabIndex || '0',
                     className: cx('menu'),
-                    onFocus: onFocus,
-                    onBlur: onBlur,
-                    onKeyDown: onKeyDown,
-                    'aria-label': props.ariaLabel,
-                    'aria-labelledby': props.ariaLabelledBy,
-                    'aria-orientation': vertical ? 'vertical' : 'horizontal',
-                    'aria-activedescendant': focused ? focusedItemId : null,
-                    id: idState + '_list',
                     role: 'menubar'
                 },
                 ptm('menu')
             );
 
-            if (processedItems) {
+            if (props.model) {
                 return (
                     <ul {...menuProps}>
-                        {processedItems.map((item, index) => {
+                        {props.model.map((item, index) => {
                             return createCategory(item, index, true);
                         })}
                     </ul>
@@ -1249,7 +676,7 @@ export const MegaMenu = React.memo(
         };
 
         const createMenuButton = () => {
-            if (vertical || (props.model && props.model.length < 1)) {
+            if (props.orientation === 'vertical' || (props.model && props.model.length < 1)) {
                 return null;
             }
 
@@ -1258,10 +685,6 @@ export const MegaMenu = React.memo(
                     className: cx('menuButton'),
                     href: '#',
                     role: 'button',
-                    'aria-haspopup': props.model && props.model.length > 0 ? true : false,
-                    'aria-expanded': mobileActiveState,
-                    'aria-controls': idState,
-                    'aria-label': ariaLabel('navigation'),
                     tabIndex: 0,
                     onClick: (e) => toggle(e)
                 },
@@ -1286,7 +709,6 @@ export const MegaMenu = React.memo(
         const rootProps = mergeProps(
             {
                 className: classNames(props.className, cx('root', { mobileActiveState })),
-                id: idState,
                 style: props.style
             },
             MegaMenuBase.getOtherProps(props),

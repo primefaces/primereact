@@ -2,6 +2,7 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/toast/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/toast/basicdoc';
+import { HeadlessDoc } from '@/components/doc/toast/headlessdoc';
 import { ImportDoc } from '@/components/doc/toast/importdoc';
 import { MultipleDoc } from '@/components/doc/toast/multipledoc';
 import { PositionDoc } from '@/components/doc/toast/positiondoc';
@@ -50,7 +51,11 @@ const ToastDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-
+        {
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

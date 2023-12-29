@@ -28,7 +28,6 @@ export const Image = React.memo(
         const maskRef = React.useRef(null);
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
-        const previewButton = React.useRef(null);
 
         const zoomOutDisabled = scaleState <= 0.5;
         const zoomInDisabled = scaleState >= 1.5;
@@ -83,38 +82,6 @@ export const Image = React.memo(
 
         const onPreviewImageClick = () => {
             previewClick.current = true;
-        };
-
-        const onMaskClick = (event) => {
-            const isActionbarTarget = [event.target.classList].includes('p-image-action') || event.target.closest('.p-image-action');
-
-            if (isActionbarTarget) {
-                return;
-            }
-
-            if (!previewClick.current) {
-                setPreviewVisibleState(false);
-                rotate = 0;
-                scale = 0;
-            }
-
-            previewClick.current = false;
-        };
-
-        const onMaskKeydown = (event) => {
-            switch (event.code) {
-                case 'Escape':
-                    hide();
-                    setTimeout(() => {
-                        DomHandler.focus(previewButton.current);
-                    }, 200);
-                    event.preventDefault();
-
-                    break;
-
-                default:
-                    break;
-            }
         };
 
         const onDownload = () => {
@@ -179,20 +146,16 @@ export const Image = React.memo(
         });
 
         const createPreview = () => {
-            const ariaLabel = localeOption('aria') ? localeOption('aria').zoomImage : undefined;
             const buttonProps = mergeProps(
                 {
-                    ref: previewButton,
                     className: cx('button'),
-                    onClick: show,
-                    type: 'button',
-                    'aria-label': ariaLabel
+                    onClick: show
                 },
                 ptm('button')
             );
 
             if (props.preview) {
-                return <button {...buttonProps}>{content}</button>;
+                return <div {...buttonProps}>{content}</div>;
             }
 
             return null;
@@ -216,11 +179,8 @@ export const Image = React.memo(
             const maskProps = mergeProps(
                 {
                     ref: maskRef,
-                    role: 'dialog',
                     className: cx('mask'),
-                    'aria-modal': maskVisibleState,
-                    onClick: onMaskClick,
-                    onKeyDown: onMaskKeydown
+                    onPointerUp: hide
                 },
                 ptm('mask')
             );
@@ -244,10 +204,8 @@ export const Image = React.memo(
             const rotateRightButtonProps = mergeProps(
                 {
                     className: cx('rotateRightButton'),
-                    onClick: rotateRight,
-                    type: 'button',
-                    'aria-label': localeOption('aria') ? localeOption('aria').rotateRight : undefined,
-                    'data-pc-group-section': 'action'
+                    onPointerUp: rotateRight,
+                    type: 'button'
                 },
                 ptm('rotateRightButton')
             );
@@ -255,10 +213,8 @@ export const Image = React.memo(
             const rotateLeftButtonProps = mergeProps(
                 {
                     className: cx('rotateLeftButton'),
-                    onClick: rotateLeft,
-                    type: 'button',
-                    'aria-label': localeOption('aria') ? localeOption('aria').rotateLeft : undefined,
-                    'data-pc-group-section': 'action'
+                    onPointerUp: rotateLeft,
+                    type: 'button'
                 },
                 ptm('rotateLeftButton')
             );
@@ -267,11 +223,9 @@ export const Image = React.memo(
                 {
                     className: classNames(cx('zoomOutButton'), { 'p-disabled': zoomOutDisabled }),
                     style: { pointerEvents: 'auto' },
-                    onClick: zoomOut,
+                    onPointerUp: zoomOut,
                     type: 'button',
-                    disabled: zoomOutDisabled,
-                    'aria-label': localeOption('aria') ? localeOption('aria').zoomOut : undefined,
-                    'data-pc-group-section': 'action'
+                    disabled: zoomOutDisabled
                 },
                 ptm('zoomOutButton')
             );
@@ -280,11 +234,9 @@ export const Image = React.memo(
                 {
                     className: classNames(cx('zoomInButton'), { 'p-disabled': zoomInDisabled }),
                     style: { pointerEvents: 'auto' },
-                    onClick: zoomIn,
+                    onPointerUp: zoomIn,
                     type: 'button',
-                    disabled: zoomInDisabled,
-                    'aria-label': localeOption('aria') ? localeOption('aria').zoomIn : undefined,
-                    'data-pc-group-section': 'action'
+                    disabled: zoomInDisabled
                 },
                 ptm('zoomInButton')
             );
@@ -293,10 +245,7 @@ export const Image = React.memo(
                 {
                     className: cx('closeButton'),
                     type: 'button',
-                    onClick: hide,
-                    'aria-label': localeOption('aria') ? localeOption('aria').close : undefined,
-                    autoFocus: true,
-                    'data-pc-group-section': 'action'
+                    'aria-label': localeOption('close')
                 },
                 ptm('closeButton')
             );
@@ -306,7 +255,7 @@ export const Image = React.memo(
                     src: props.zoomSrc || props.src,
                     className: cx('preview'),
                     style: sx('preview', { rotateState, scaleState }),
-                    onClick: onPreviewImageClick,
+                    onPointerUp: onPreviewImageClick,
                     crossOrigin: crossOrigin,
                     referrerPolicy: referrerPolicy,
                     useMap: useMap,

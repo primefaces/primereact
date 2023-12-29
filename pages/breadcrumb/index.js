@@ -8,6 +8,7 @@ import { StyledDoc } from '@/components/doc/breadcrumb/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/breadcrumb/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
+import { RouterDoc } from '@/components/doc/breadcrumb/routerdoc';
 
 const BreadCrumbDemo = () => {
     const docs = [
@@ -26,7 +27,11 @@ const BreadCrumbDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

@@ -9,6 +9,8 @@ import { Wireframe } from '@/components/doc/confirmpopup/pt/wireframe';
 import { StyledDoc } from '@/components/doc/confirmpopup/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/confirmpopup/theming/tailwinddoc';
 import { ConfirmPopup } from '@/components/lib/confirmpopup/ConfirmPopup';
+import { TemplateDoc } from '@/components/doc/confirmpopup/templatedoc';
+import { HeadlessDoc } from '@/components/doc/confirmpopup/headlessdoc';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -27,7 +29,16 @@ const ConfirmPopupDemo = () => {
             label: 'Declarative',
             component: DeclarativeDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

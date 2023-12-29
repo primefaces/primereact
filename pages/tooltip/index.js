@@ -34,6 +34,16 @@ const TooltipDemo = () => {
             component: EventDoc
         },
         {
+            id: 'autohide',
+            label: 'Auto Hide',
+            component: AutoHideDoc
+        },
+        {
+            id: 'delay',
+            label: 'Delay',
+            component: DelayDoc
+        },
+        {
             id: 'target',
             label: 'Target',
             component: TargetDoc
@@ -42,16 +52,6 @@ const TooltipDemo = () => {
             id: 'mousetrack',
             label: 'Mouse Track',
             component: MouseTrackDoc
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
-        },
-        {
-            id: 'autohide',
-            label: 'Auto Hide',
-            component: AutoHideDoc
         },
         {
             id: 'reactive',
@@ -64,11 +64,10 @@ const TooltipDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'delay',
-            label: 'Delay',
-            component: DelayDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

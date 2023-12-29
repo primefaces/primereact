@@ -91,7 +91,6 @@ export const Calendar = React.memo(
         const onInputBlur = (event) => {
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
-            setFocusedState(false);
         };
 
         const onInputKeyDown = (event) => {
@@ -1483,6 +1482,8 @@ export const Calendar = React.memo(
                 setOverlayVisibleState(false);
                 _hideCallback();
             }
+
+            setFocusedState(false);
         };
 
         const onOverlayEnter = () => {
@@ -1520,7 +1521,6 @@ export const Calendar = React.memo(
             bindOverlayListener();
             props.onShow && props.onShow();
             DomHandler.focusFirstElement(overlayRef.current);
-            setFocusedState(false);
         };
 
         const onOverlayExit = () => {
@@ -3587,21 +3587,36 @@ export const Calendar = React.memo(
             const input = createInputElement();
             const button = createButton();
 
-            if (props.iconPos === 'left') {
-                return (
-                    <>
-                        {button}
-                        {input}
-                    </>
-                );
-            }
+            switch (props.iconDisplay) {
+                case 'input':
+                    const icon = ObjectUtils.getJSXElement(props.icon, props.onInputIcon) || <CalendarIcon />;
 
-            return (
-                <>
-                    {input}
-                    {button}
-                </>
-            );
+                    return (
+                        <span className={`p-input-icon-${props.iconPos}`}>
+                            {icon}
+                            {input}
+                        </span>
+                    );
+
+                case 'button':
+                default:
+                    if (props.iconPos === 'left') {
+                        return (
+                            <>
+                                {button}
+                                {input}
+                            </>
+                        );
+                    }
+
+                    return (
+                        <>
+                            {input}
+                            {button}
+                        </>
+                    );
+                    break;
+            }
         };
 
         const createButtonBar = () => {

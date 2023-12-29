@@ -1,36 +1,36 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Avatar } from '@/components/lib/avatar/Avatar';
-import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
+import { Badge } from '@/components/lib/badge/Badge';
 import { TabPanel, TabView } from '@/components/lib/tabview/TabView';
 
 export function TemplateDoc(props) {
     const tab1HeaderTemplate = (options) => {
         return (
-            <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime mr-2" />
-                {options.titleElement}
-            </button>
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Amy Elsner</span>
+            </div>
         );
     };
 
     const tab2HeaderTemplate = (options) => {
         return (
-            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
-                Amy Elsner
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Onyama Limba</span>
             </div>
         );
     };
 
     const tab3HeaderTemplate = (options) => {
-        const items = [
-            { label: 'Update', icon: 'pi pi-refresh' },
-            { label: 'Delete', icon: 'pi pi-times' },
-            { label: 'Upload', icon: 'pi pi-upload' }
-        ];
-
-        return <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>;
+        return (
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                <Badge value="2" />
+            </div>
+        );
     };
 
     const code = {
@@ -67,35 +67,34 @@ import React from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
 
 export default function TemplateDemo() {
     const tab1HeaderTemplate = (options) => {
         return (
-            <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime mr-2" />
-                {options.titleElement}
-            </button>
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Amy Elsner</span>
+            </div>
         );
     };
 
     const tab2HeaderTemplate = (options) => {
         return (
-            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
-                Amy Elsner
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Onyama Limba</span>
             </div>
         )
     };
 
     const tab3HeaderTemplate = (options) => {
-        const items = [
-            { label: 'Update', icon: 'pi pi-refresh' },
-            { label: 'Delete', icon: 'pi pi-times' },
-            { label: 'Upload', icon: 'pi pi-upload' }
-        ];
-
         return (
-            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                <Badge value="2" />
+            </div>
         )
     };
 
@@ -136,35 +135,34 @@ import React from 'react';
 import { TabView, TabPanel, TabPanelHeaderTemplateOptions } from 'primereact/tabview';
 import { SplitButton } from 'primereact/splitbutton';
 import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
 
 export default function TemplateDemo() {
     const tab1HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
-            <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime mr-2" />
-                {options.titleElement}
-            </button>
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Amy Elsner</span>
+            </div>
         );
     };
 
     const tab2HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
         return (
-            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" className="mx-2" />
-                Amy Elsner
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Onyama Limba</span>
             </div>
         )
     };
 
     const tab3HeaderTemplate = (options: TabPanelHeaderTemplateOptions) => {
-        const items = [
-            { label: 'Update', icon: 'pi pi-refresh' },
-            { label: 'Delete', icon: 'pi pi-times' },
-            { label: 'Upload', icon: 'pi pi-upload' }
-        ];
-
         return (
-            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>
+            <div className="flex align-items-center gap-2 p-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                <Badge value="2" />
+            </div>
         )
     };
 

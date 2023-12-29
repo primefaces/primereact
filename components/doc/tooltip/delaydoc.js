@@ -1,32 +1,32 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
-import { InputText } from '@/components/lib/inputtext/InputText';
+import { Button } from '@/components/lib/button/Button';
 
 export function DelayDoc(props) {
     const code = {
         basic: `
-<InputText type="text" placeholder="Delayed" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />
+<Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
         `,
         javascript: `
 import React from 'react'; 
-import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 
 export default function DelayDemo() {
     return (
         <div className="card flex justify-content-center">
-            <InputText type="text" placeholder="Delayed" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />
+            <Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
         </div>
     );
 }
         `,
         typescript: `
 import React from 'react'; 
-import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 
 export default function DelayDemo() {
     return (
         <div className="card flex justify-content-center">
-            <InputText type="text" placeholder="Delayed" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />
+            <Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
         </div>
     );
 }
@@ -41,7 +41,7 @@ export default function DelayDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputText type="text" placeholder="Delayed" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />
+                <Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
             </div>
             <DocSectionCode code={code} />
         </>

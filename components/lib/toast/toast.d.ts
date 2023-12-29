@@ -217,10 +217,39 @@ export interface ToastMessage {
 }
 
 /**
+ * Defines current content values and refs for headless development.
+ * @see {@link ContentProps.message}
+ */
+interface ContentPropsMessage {
+    /**
+     * Summary of the toast.
+     * @readonly
+     */
+    summary: string;
+    /**
+     * Detail of the toast.
+     * @readonly
+     */
+    detail: string;
+}
+
+/**
+ * Defines current content values and refs for headless development.
+ * @see {@link ToastProps.content}
+ */
+interface ContentProps {
+    /**
+     * Toast's props values.
+     */
+    message: ContentPropsMessage;
+}
+
+
+/**
  * Defines valid properties in Toast component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
+export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt' | 'content'> {
     /**
      * Base zIndex value to add to initial layering of PrimeReact components which start from 1000.
      * @defaultValue 0
@@ -273,6 +302,12 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {PassThroughOptions}
      */
     ptOptions?: PassThroughOptions;
+    /**
+     * Specifies a custom content for the toast. For more complex markup, use the "content" slot instead.
+     * @param {ContentProps} props - The values of toast.
+     * @return {React.ReactNode}
+     */
+    content?(props: ContentProps): React.ReactNode;
 }
 
 /**

@@ -615,7 +615,8 @@
         {
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
-            "href": "https://primeflex.org"
+            "href": "https://primeflex.org",
+            "target": "_blank"
         },
         {
             "name": "Guides",

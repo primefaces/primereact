@@ -197,20 +197,6 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     menuIcon?: IconType<MegaMenuProps> | undefined;
     /**
-     * Index of the element in tabbing order.
-     */
-    tabIndex?: number | undefined;
-    /**
-     * Callback to invoke when menu receives focus.
-     * @param {React.SyntheticEvent} event - Browser event.
-     */
-    onFocus?(event: React.SyntheticEvent): void;
-    /**
-     * Callback to invoke when menu loses focus.
-     * @param {React.SyntheticEvent} event - Browser event.
-     */
-    onBlur?(event: React.SyntheticEvent): void;
-    /**
      * The template of trailing element
      */
     end?: React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);

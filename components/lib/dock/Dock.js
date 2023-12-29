@@ -3,14 +3,12 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId, DomHandler } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { DockBase } from './DockBase';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
-        const [focused, setFocused] = React.useState(false);
-        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const context = React.useContext(PrimeReactContext);
         const props = DockBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);
@@ -22,7 +20,6 @@ export const Dock = React.memo(
             }
         });
         const elementRef = React.useRef(null);
-        const listRef = React.useRef(null);
 
         useHandleStyle(DockBase.css.styles, isUnstyled, { name: 'dock' });
 
@@ -51,113 +48,6 @@ export const Dock = React.memo(
             e.preventDefault();
         };
 
-        const onListFocus = (event) => {
-            setFocused(true);
-            changeFocusedOptionIndex(0);
-            props.onFocus && props.onFocus(event);
-        };
-
-        const onListBlur = (event) => {
-            setFocused(false);
-            setFocusedOptionIndex(-1);
-            props.onBlur && props.onBlur(event);
-        };
-
-        const onListKeyDown = (event) => {
-            switch (event.code) {
-                case 'ArrowDown':
-                    if (props.position === 'left' || props.position === 'right') onArrowDownKey();
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowUp':
-                    if (props.position === 'left' || props.position === 'right') onArrowUpKey();
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowRight':
-                    if (props.position === 'top' || props.position === 'bottom') onArrowDownKey();
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowLeft':
-                    if (props.position === 'top' || props.position === 'bottom') onArrowUpKey();
-                    event.preventDefault();
-                    break;
-
-                case 'Home':
-                    onHomeKey();
-                    event.preventDefault();
-                    break;
-
-                case 'End':
-                    onEndKey();
-                    event.preventDefault();
-                    break;
-
-                case 'Enter':
-                case 'Space':
-                    onSpaceKey(event);
-                    event.preventDefault();
-                    break;
-
-                default:
-                    break;
-            }
-        };
-
-        const onArrowDownKey = () => {
-            const optionIndex = findNextOptionIndex(focusedOptionIndex);
-
-            changeFocusedOptionIndex(optionIndex);
-        };
-
-        const onArrowUpKey = () => {
-            const optionIndex = findPrevOptionIndex(focusedOptionIndex);
-
-            changeFocusedOptionIndex(optionIndex);
-        };
-
-        const onHomeKey = () => {
-            changeFocusedOptionIndex(0);
-        };
-
-        const onEndKey = () => {
-            changeFocusedOptionIndex(DomHandler.find(listRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]').length - 1);
-        };
-
-        const onSpaceKey = () => {
-            const element = DomHandler.findSingle(listRef.current, `li[id="${`${focusedOptionIndex}`}"]`);
-            const anchorElement = element && DomHandler.findSingle(element, '[data-pc-section="action"]');
-
-            anchorElement ? anchorElement.click() : element && element.click();
-        };
-
-        const findNextOptionIndex = (index) => {
-            const menuitems = DomHandler.find(listRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]');
-            const matchedOptionIndex = [...menuitems].findIndex((link) => link.id === index);
-
-            return matchedOptionIndex > -1 ? matchedOptionIndex + 1 : 0;
-        };
-
-        const findPrevOptionIndex = (index) => {
-            const menuitems = DomHandler.find(listRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]');
-            const matchedOptionIndex = [...menuitems].findIndex((link) => link.id === index);
-
-            return matchedOptionIndex > -1 ? matchedOptionIndex - 1 : 0;
-        };
-
-        const changeFocusedOptionIndex = (index) => {
-            const menuitems = DomHandler.find(listRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]');
-            let order = index >= menuitems.length ? menuitems.length - 1 : index < 0 ? 0 : index;
-
-            setFocusedOptionIndex(menuitems[order].getAttribute('id'));
-        };
-
-        const isItemActive = (id) => {
-            return id === focusedOptionIndex;
-        };
-
         const createItem = (item, index) => {
             if (item.visible === false) {
                 return null;
@@ -178,10 +68,7 @@ export const Dock = React.memo(
                 {
                     href: url || '#',
                     role: 'menuitem',
-                    onFocus: (event) => event.stopPropagation(),
                     className: cx('action', { disabled }),
-                    'aria-hidden': 'true',
-                    tabIndex: -1,
                     target,
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
@@ -201,8 +88,6 @@ export const Dock = React.memo(
                     onClick: (e) => onItemClick(e, item),
                     className: contentClassName,
                     iconClassName,
-                    'aria-hidden': 'true',
-                    tabIndex: -1,
                     element: content,
                     props,
                     index
@@ -211,35 +96,18 @@ export const Dock = React.memo(
                 content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
             }
 
-            const contentProps = mergeProps(
-                {
-                    className: cx('content')
-                },
-                getPTOptions('content', item, index)
-            );
-
-            const active = isItemActive(key);
-
             const menuitemProps = mergeProps(
                 {
                     id: key,
                     key,
-                    'aria-label': label,
-                    'aria-disabled': disabled,
-                    'data-p-focused': active,
-                    'data-p-disabled': disabled || false,
-                    className: cx('menuitem', { currentIndexState, index, active: isItemActive(key) }),
+                    className: cx('menuitem', { currentIndexState, index }),
                     role: 'none',
                     onMouseEnter: () => onItemMouseEnter(index)
                 },
                 getPTOptions('menuitem', item, index)
             );
 
-            return (
-                <li {...menuitemProps}>
-                    <div {...contentProps}>{content}</div>
-                </li>
-            );
+            return <li {...menuitemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -266,15 +134,8 @@ export const Dock = React.memo(
             const items = createItems();
             const menuProps = mergeProps(
                 {
-                    ref: listRef,
                     className: cx('menu'),
                     role: 'menu',
-                    'aria-orientation': props.position === 'bottom' || props.position === 'top' ? 'horizontal' : 'vertical',
-                    'aria-activedescendant': focused ? (focusedOptionIndex !== -1 ? focusedOptionIndex : null) : undefined,
-                    tabIndex: props.tabIndex || 0,
-                    onFocus: onListFocus,
-                    onBlur: onListBlur,
-                    onKeyDown: onListKeyDown,
                     onMouseLeave: onListMouseLeave
                 },
                 ptm('menu')

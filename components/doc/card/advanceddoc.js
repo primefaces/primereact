@@ -13,7 +13,7 @@ export function AdvancedDoc(props) {
     );
     const code = {
         basic: `
-<Card title="Title" subTitle="Subtitle" footer={footer} header={header} className="md:w-25rem">
+<Card title="Advanced Card" subTitle="Card subtitle" footer={footer} header={header} className="md:w-25rem">
     <p className="m-0">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
         numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
@@ -38,7 +38,7 @@ export default function AdvancedDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Card title="Title" subTitle="Subtitle" footer={footer} header={header} className="md:w-25rem">
+            <Card title="Advanced Card" subTitle="Card subtitle" footer={footer} header={header} className="md:w-25rem">
                 <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
                     numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
@@ -66,7 +66,7 @@ export default function AdvancedDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Card title="Title" subTitle="Subtitle" footer={footer} header={header} className="md:w-25rem">
+            <Card title="Advanced Card" subTitle="Card subtitle" footer={footer} header={header} className="md:w-25rem">
                 <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
                     numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
@@ -86,7 +86,7 @@ export default function AdvancedDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Card title="Title" subTitle="Subtitle" footer={footer} header={header} className="md:w-25rem">
+                <Card title="Advanced Card" subTitle="Card subtitle" footer={footer} header={header} className="md:w-25rem">
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                         quas!

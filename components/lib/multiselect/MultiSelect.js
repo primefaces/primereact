@@ -10,6 +10,7 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -138,7 +139,7 @@ export const MultiSelect = React.memo(
         };
 
         const onClick = (event) => {
-            if (!props.inline && !props.disabled && !isPanelClicked(event) && DomHandler.getAttribute(event.target, 'data-pc-section') !== 'removetokenicon' && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !props.loading && !isPanelClicked(event) && DomHandler.getAttribute(event.target, 'data-pc-section') !== 'removetokenicon' && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -700,7 +701,10 @@ export const MultiSelect = React.memo(
             },
             ptm('trigger')
         );
-        const dropdownIcon = <div {...triggerProps}>{props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { ...triggerIconProps }, { props }) : <ChevronDownIcon {...triggerIconProps} />}</div>;
+
+        const loadingIcon = props.loadingIcon ? IconUtils.getJSXIcon(props.loadingIcon, { ...triggerIconProps }, { props }) : <SpinnerIcon spin {...triggerIconProps} />;
+        const dropdownIcon = props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { ...triggerIconProps }, { props }) : <ChevronDownIcon {...triggerIconProps} />;
+        const triggerIcon = <div {...triggerProps}>{props.loading ? loadingIcon : dropdownIcon}</div>;
 
         const label = !props.inline && createLabel();
         const clearIcon = !props.inline && createClearIcon();
@@ -753,7 +757,7 @@ export const MultiSelect = React.memo(
                         <>
                             {label}
                             {clearIcon}
-                            {dropdownIcon}
+                            {triggerIcon}
                         </>
                     )}
                     <MultiSelectPanel

@@ -1,12 +1,13 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Fieldset } from '@/components/lib/fieldset/Fieldset';
+import { Avatar } from '@/components/lib/avatar/Avatar';
 
 export function TemplateDoc(props) {
     const legendTemplate = (
-        <div className="flex align-items-center text-primary">
-            <span className="pi pi-user mr-2"></span>
-            <span className="font-bold text-lg">User Details</span>
+        <div className="flex align-items-center gap-2 px-2">
+            <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+            <span className="font-bold">Amy Elsner</span>
         </div>
     );
 
@@ -24,12 +25,13 @@ export function TemplateDoc(props) {
         javascript: `
 import React from 'react'; 
 import { Fieldset } from 'primereact/fieldset';
+import { Avatar } from '@/components/lib/avatar/Avatar';
 
 export default function TemplateDemo() {
     const legendTemplate = (
-        <div className="flex align-items-center text-primary">
-            <span className="pi pi-user mr-2"></span>
-            <span className="font-bold text-lg">User Details</span>
+        <div className="flex align-items-center gap-2 px-2">
+            <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+            <span className="font-bold">Amy Elsner</span>
         </div>
     );
 
@@ -50,12 +52,13 @@ export default function TemplateDemo() {
         typescript: `
 import React from 'react'; 
 import { Fieldset } from 'primereact/fieldset';
+import { Avatar } from '@/components/lib/avatar/Avatar';
 
 export default function TemplateDemo() {
     const legendTemplate = (
-        <div className="flex align-items-center text-primary">
-            <span className="pi pi-user mr-2"></span>
-            <span className="font-bold text-lg">User Details</span>
+        <div className="flex align-items-center gap-2 px-2">
+            <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
+            <span className="font-bold">Amy Elsner</span>
         </div>
     );
 

@@ -4,37 +4,46 @@ import { SpeedDial } from '@/components/lib/speeddial/SpeedDial';
 import { Toast } from '@/components/lib/toast/Toast';
 import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
 export function TooltipDoc(props) {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        },
+        {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -52,37 +61,46 @@ export function TooltipDoc(props) {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
+import { useRouter } from 'next/router';
 import { Toast } from 'primereact/toast';
 
 export default function TooltipDemo() {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        },
+        {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -105,37 +123,46 @@ import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
+import { useRouter } from 'next/router';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function TooltipDoc() {
     const toast = useRef<Toast>(null);
+    const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        },
+        {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];

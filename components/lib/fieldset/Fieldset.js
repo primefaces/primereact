@@ -67,13 +67,6 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
         }
     });
 
-    const onKeyDown = (event) => {
-        if (event.code === 'Enter' || event.code === 'Space') {
-            toggle(event);
-            event.preventDefault();
-        }
-    };
-
     const createContent = () => {
         const contentProps = mergeProps(
             {
@@ -86,6 +79,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             {
                 ref: contentRef,
                 id: contentId,
+                'aria-hidden': collapsed,
                 role: 'region',
                 'aria-labelledby': headerId,
                 className: cx('toggleableContent')
@@ -142,13 +136,10 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
         const togglerProps = mergeProps(
             {
                 id: headerId,
-                role: 'button',
                 'aria-expanded': !collapsed,
                 'aria-controls': contentId,
-                onKeyDown,
-                onClick: toggle,
-                'aria-label': props.legend,
-                tabIndex: 0
+                href: '#' + contentId,
+                tabIndex: props.toggleable ? null : -1
             },
             ptm('toggler')
         );
@@ -175,8 +166,10 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const createLegend = () => {
         const legendProps = mergeProps(
             {
-                className: cx('legend')
+                className: cx('legend'),
+                onClick: toggle
             },
+
             ptm('legend')
         );
 

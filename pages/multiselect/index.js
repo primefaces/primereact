@@ -11,6 +11,7 @@ import { HookFormDoc } from '@/components/doc/multiselect/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/multiselect/groupdoc';
 import { ImportDoc } from '@/components/doc/multiselect/importdoc';
 import { InvalidDoc } from '@/components/doc/multiselect/invaliddoc';
+import { LoadingDoc } from '@/components/doc/multiselect/loadingdoc';
 import { PTDoc } from '@/components/doc/multiselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/multiselect/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/multiselect/templatedoc';
@@ -49,6 +50,11 @@ const MultiSelectDemo = () => {
             id: 'filter',
             label: 'Filter',
             component: FilterDoc
+        },
+        {
+            id: 'loadingstate',
+            label: 'Loading State',
+            component: LoadingDoc
         },
         {
             id: 'virtualscroll',

@@ -32,6 +32,11 @@ const TabViewDemo = () => {
             component: ControlledDoc
         },
         {
+            id: 'scrollable',
+            label: 'Scrollable',
+            component: ScrollableDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
@@ -50,11 +55,6 @@ const TabViewDemo = () => {
             id: 'closable',
             label: 'Closable',
             component: ClosableDoc
-        },
-        {
-            id: 'scrollable',
-            label: 'Scrollable',
-            component: ScrollableDoc
         },
 
         {

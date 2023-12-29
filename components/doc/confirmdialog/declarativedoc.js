@@ -20,7 +20,7 @@ export function DeclarativeDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
+<ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
     header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
         `,
@@ -45,7 +45,7 @@ export default function DeclarativeDemo() {
     return (
         <>
             <Toast ref={toast} />
-            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
+            <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
                 header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
             <div className="card flex justify-content-center">
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
@@ -75,7 +75,7 @@ export default function DeclarativeDemo() {
     return (
         <>
             <Toast ref={toast} />
-            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
+            <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" 
                 header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
             <div className="card flex justify-content-center">
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
@@ -94,7 +94,7 @@ export default function DeclarativeDemo() {
                 </p>
             </DocSectionText>
             <Toast ref={toast} />
-            <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+            <ConfirmDialog group="declarative" visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
             <div className="card flex justify-content-center">
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>

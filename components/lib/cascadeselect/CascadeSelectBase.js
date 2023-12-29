@@ -31,7 +31,9 @@ const classes = {
             'p-cascadeselect-item-active p-highlight': isSelected
         }),
     dropdownIcon: 'p-cascadeselect-trigger-icon',
+    loadingIcon: 'p-cascadeselect-trigger-icon',
     dropdownButton: 'p-cascadeselect-trigger',
+    loadingButton: 'p-cascadeselect-trigger',
     wrapper: 'p-cascadeselect-items-wrapper',
     panel: 'p-cascadeselect-panel p-component',
     content: 'p-cascadeselect-item-content',
@@ -143,6 +145,7 @@ export const CascadeSelectBase = ComponentBase.extend({
         dataKey: null,
         disabled: false,
         dropdownIcon: null,
+        loadingIcon: null,
         id: null,
         inputId: null,
         inputRef: null,

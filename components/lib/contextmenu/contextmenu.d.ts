@@ -72,20 +72,6 @@ export interface ContextMenuPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: ContextMenuPassThroughTransitionType;
-    /**
-     * Index of the element in tabbing order.
-     */
-    tabIndex?: number | undefined;
-    /**
-     * Callback to invoke when ContextMenu receives focus.
-     * @param {React.SyntheticEvent} event - Browser event.
-     */
-    onFocus?(event: React.SyntheticEvent): void;
-    /**
-     * Callback to invoke when ContextMenu loses focus.
-     * @param {React.SyntheticEvent} event - Browser event.
-     */
-    onBlur?(event: React.SyntheticEvent): void;
 }
 
 /**

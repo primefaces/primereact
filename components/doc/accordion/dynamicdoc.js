@@ -6,26 +6,16 @@ import { useState } from 'react';
 export function DynamicDoc(props) {
     const [tabs] = useState([
         {
-            header: 'Dynamic I',
-            children: (
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            )
+            header: 'Title I',
+            children: <p className="m-0">Content 1</p>
         },
         {
-            header: 'Dynamic II',
-            children: (
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            )
+            header: 'Title II',
+            children: <p className="m-0">Content 2 </p>
         },
         {
-            header: 'Dynamic III',
-            disabled: true
+            header: 'Title III',
+            children: <p className="m-0">Content 3 </p>
         }
     ]);
 
@@ -50,26 +40,16 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 export default function DynamicDemo() {
     const [tabs] = useState([
         {
-            header: 'Dynamic I',
-            children: (
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            )
+            header: 'Title I',
+            children: <p className="m-0">Content 1</p>
         },
         {
-            header: 'Dynamic II',
-            children: (
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            )
+            header: 'Title II',
+            children: <p className="m-0">Content 2 </p>
         },
         {
-            header: 'Dynamic III',
-            disabled: true
+            header: 'Title III',
+            children: <p className="m-0">Content 3 </p>
         }
     ]);
 
@@ -97,26 +77,16 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 export default function DynamicDemo() {
     const [tabs] = useState([
         {
-            header: 'Dynamic I',
-            children: (
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            )
+            header: 'Title I',
+            children: <p className="m-0">Content 1</p>
         },
         {
-            header: 'Dynamic II',
-            children: (
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            )
+            header: 'Title II',
+            children: <p className="m-0">Content 2 </p>
         },
         {
-            header: 'Dynamic III',
-            disabled: true
+            header: 'Title III',
+            children: <p className="m-0">Content 3 </p>
         }
     ]);
 
@@ -145,7 +115,7 @@ export default function DynamicDemo() {
                 <p>Accordion tabs can be generated dynamically using code.</p>
             </DocSectionText>
             <div className="card">
-                <Accordion>{createDynamicTabs()}</Accordion>
+                <Accordion activeIndex={0}>{createDynamicTabs()}</Accordion>
             </div>
             <DocSectionCode code={code} />
         </>

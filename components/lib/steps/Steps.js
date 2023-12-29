@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
-import { IconUtils, DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
@@ -12,7 +12,6 @@ export const Steps = React.memo(
 
         const [idState, setIdState] = React.useState(props.id);
         const elementRef = React.useRef(null);
-        const listRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = StepsBase.setMetaData({
             props,
@@ -51,109 +50,6 @@ export const Steps = React.memo(
             }
         };
 
-        const onItemKeyDown = (event, item, index) => {
-            if (props.readOnly) {
-                return;
-            }
-
-            switch (event.code) {
-                case 'ArrowRight':
-                    navigateToNextItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowLeft':
-                    navigateToPrevItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'Home':
-                    navigateToFirstItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'End':
-                    navigateToLastItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'Tab':
-                    //no op
-                    break;
-
-                case 'Enter':
-                case 'Space':
-                    itemClick(event, item, index);
-                    event.preventDefault();
-                    break;
-
-                default:
-                    break;
-            }
-        };
-
-        const navigateToNextItem = (target) => {
-            const nextItem = findNextItem(target);
-
-            nextItem && setFocusToMenuitem(target, nextItem);
-        };
-
-        const navigateToPrevItem = (target) => {
-            const prevItem = findPrevItem(target);
-
-            prevItem && setFocusToMenuitem(target, prevItem);
-        };
-
-        const navigateToFirstItem = (target) => {
-            const firstItem = findFirstItem(target);
-
-            firstItem && setFocusToMenuitem(target, firstItem);
-        };
-
-        const navigateToLastItem = (target) => {
-            const lastItem = findLastItem(target);
-
-            lastItem && setFocusToMenuitem(target, lastItem);
-        };
-
-        const findNextItem = (item) => {
-            const nextItem = item.parentElement.nextElementSibling;
-
-            return nextItem ? nextItem.children[0] : null;
-        };
-
-        const findPrevItem = (item) => {
-            const prevItem = item.parentElement.previousElementSibling;
-
-            return prevItem ? prevItem.children[0] : null;
-        };
-
-        const findFirstItem = () => {
-            const firstSibling = DomHandler.findSingle(listRef.current, '[data-pc-section="menuitem"]');
-
-            return firstSibling ? firstSibling.children[0] : null;
-        };
-
-        const findLastItem = () => {
-            const siblings = DomHandler.find(listRef.current, '[data-pc-section="menuitem"]');
-
-            return siblings ? siblings[siblings.length - 1].children[0] : null;
-        };
-
-        const setFocusToMenuitem = (target, focusableItem) => {
-            target.tabIndex = '-1';
-            focusableItem.tabIndex = '0';
-
-            setTimeout(() => focusableItem.focus(), 0);
-        };
-
-        const setFocusToFirstItem = () => {
-            const firstItem = findFirstItem();
-
-            firstItem.tabIndex = '0';
-            firstItem.focus();
-        };
-
         const createItem = (item, index) => {
             if (item.visible === false) {
                 return null;
@@ -162,6 +58,7 @@ export const Steps = React.memo(
             const key = item.id || idState + '_' + index;
             const active = index === props.activeIndex;
             const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
+            const tabIndex = disabled ? -1 : '';
 
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
@@ -193,11 +90,10 @@ export const Steps = React.memo(
                 {
                     href: item.url || '#',
                     className: cx('action'),
-                    tabIndex: '-1',
-                    onFocus: (event) => event.stopPropagation(),
+                    role: 'presentation',
                     target: item.target,
-                    onKeyDown: (event) => onItemKeyDown(event, item, index),
-                    onClick: (event) => itemClick(event, item, index)
+                    onClick: (event) => itemClick(event, item, index),
+                    tabIndex
                 },
                 ptm('action')
             );
@@ -219,6 +115,7 @@ export const Steps = React.memo(
                     iconClassName,
                     element: content,
                     props,
+                    tabIndex,
                     active,
                     disabled
                 };
@@ -231,7 +128,10 @@ export const Steps = React.memo(
                     key,
                     id: key,
                     className: cx('menuitem', { active, disabled, item }),
-                    style: item.style
+                    style: item.style,
+                    role: 'tab',
+                    'aria-selected': active,
+                    'aria-expanded': active
                 },
                 ptm('menuitem')
             );
@@ -242,14 +142,7 @@ export const Steps = React.memo(
         const createItems = () => {
             const menuProps = mergeProps(
                 {
-                    ref: listRef,
-                    tabIndex: props.readOnly ? null : '0',
-                    onFocus: () => {
-                        if (!props.readOnly) {
-                            setFocusToFirstItem();
-                        }
-                    },
-                    onBlur: () => setFocusToFirstItem
+                    role: 'tablist'
                 },
                 ptm('menu')
             );
@@ -257,7 +150,7 @@ export const Steps = React.memo(
             if (props.model) {
                 const items = props.model.map(createItem);
 
-                return <ol {...menuProps}>{items}</ol>;
+                return <ul {...menuProps}>{items}</ul>;
             }
 
             return null;

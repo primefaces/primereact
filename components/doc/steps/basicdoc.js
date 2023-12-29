@@ -5,16 +5,13 @@ import { Steps } from '@/components/lib/steps/Steps';
 export function BasicDoc(props) {
     const items = [
         {
-            label: 'Personal'
+            label: 'Personal Info'
         },
         {
-            label: 'Seat'
+            label: 'Reservation'
         },
         {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
+            label: 'Review'
         }
     ];
 
@@ -23,22 +20,19 @@ export function BasicDoc(props) {
 <Steps model={items} />
 `,
         javascript: `
-import React from 'react';
+import React from 'react'; 
 import { Steps } from 'primereact/steps';
 
 export default function BasicDemo() {
     const items = [
         {
-            label: 'Personal'
+            label: 'Personal Info'
         },
         {
-            label: 'Seat'
+            label: 'Reservation'
         },
         {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
+            label: 'Review'
         }
     ];
 
@@ -50,23 +44,20 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react';
+import React from 'react'; 
 import { Steps } from 'primereact/steps';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
     const items: MenuItem[] = [
         {
-            label: 'Personal'
+            label: 'Personal Info'
         },
         {
-            label: 'Seat'
+            label: 'Reservation'
         },
         {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
+            label: 'Review'
         }
     ];
 

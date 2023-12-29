@@ -30,14 +30,14 @@ const DividerDemo = () => {
             component: TypeDoc
         },
         {
-            id: 'content',
-            label: 'Content',
-            component: ContentDoc
-        },
-        {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
+        },
+        {
+            id: 'content',
+            label: 'Content',
+            component: ContentDoc
         },
         {
             id: 'login',

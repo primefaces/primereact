@@ -2,6 +2,7 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { Sidebar } from '@/components/lib/sidebar/Sidebar';
+import { Avatar } from '@/components/lib/primereact.all';
 import React, { useState } from 'react';
 
 export function TemplateDoc(props) {
@@ -10,18 +11,16 @@ export function TemplateDoc(props) {
     const customIcons = (
         <React.Fragment>
             <button className="p-sidebar-icon p-link mr-2">
-                <span className="pi pi-print" />
-            </button>
-            <button className="p-sidebar-icon p-link mr-2">
                 <span className="pi pi-search" />
             </button>
         </React.Fragment>
     );
 
     const customHeader = (
-        <React.Fragment>
-            <h2 style={{ marginBottom: 0 }}>Sidebar</h2>
-        </React.Fragment>
+        <div className="flex align-items-center gap-2">
+            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <span className="font-bold">Amy Elsner</span>
+        </div>
     );
 
     const code = {
@@ -39,6 +38,7 @@ export function TemplateDoc(props) {
 import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
+import { Avatar } from 'primereact/avatar';
 
 export default function TemplateDemo() {
     const [visible, setVisible] = useState(false);
@@ -46,18 +46,16 @@ export default function TemplateDemo() {
     const customIcons = (
         <React.Fragment>
             <button className="p-sidebar-icon p-link mr-2">
-                <span className="pi pi-print" />
-            </button>
-            <button className="p-sidebar-icon p-link mr-2">
                 <span className="pi pi-search" />
             </button>
         </React.Fragment>
     );
 
     const customHeader = (
-        <React.Fragment>
-            <h2 style={{ marginBottom: 0 }}>Sidebar</h2>
-        </React.Fragment>
+        <div className="flex align-items-center gap-2">
+            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <span className="font-bold">Amy Elsner</span>
+        </div>
     );
     
     return (
@@ -77,6 +75,7 @@ export default function TemplateDemo() {
 import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
+import { Avatar } from 'primereact/avatar';
 
 export default function TemplateDemo() {
     const [visible, setVisible] = useState<boolean>(false);
@@ -84,18 +83,16 @@ export default function TemplateDemo() {
     const customIcons = (
         <React.Fragment>
             <button className="p-sidebar-icon p-link mr-2">
-                <span className="pi pi-print" />
-            </button>
-            <button className="p-sidebar-icon p-link mr-2">
                 <span className="pi pi-search" />
             </button>
         </React.Fragment>
     );
 
     const customHeader = (
-        <React.Fragment>
-            <h2 style={{ marginBottom: 0 }}>Sidebar</h2>
-        </React.Fragment>
+        <div className="flex align-items-center gap-2">
+            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <span className="font-bold">Amy Elsner</span>
+        </div>
     );
 
     return (

@@ -60,7 +60,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         const activeElement = document.activeElement;
         const isActiveElementInDialog = activeElement && sidebarRef && sidebarRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.showCloseIcon) {
+        if (!isActiveElementInDialog && props.showCloseIcon && closeIconRef.current) {
             closeIconRef.current.focus();
         }
     };
@@ -202,71 +202,85 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         return props.icons ? ObjectUtils.getJSXElement(props.icons, props) : null;
     };
 
+    const maskProps = mergeProps(
+        {
+            ref: maskRef,
+            style: sx('mask'),
+            className: cx('mask', { maskVisibleState }),
+            onMouseDown: (e) => onMaskClick(e)
+        },
+        ptm('mask')
+    );
+
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            className: cx('root', { context }),
+            style: props.style,
+            role: 'complementary'
+        },
+        SidebarBase.getOtherProps(props),
+        ptm('root')
+    );
+
+    const headerProps = mergeProps(
+        {
+            className: cx('header')
+        },
+        ptm('header')
+    );
+
+    const contentProps = mergeProps(
+        {
+            className: cx('content')
+        },
+        ptm('content')
+    );
+
+    const iconsProps = mergeProps(
+        {
+            className: cx('icons')
+        },
+        ptm('icons')
+    );
+
+    const transitionTimeout = {
+        enter: props.fullScreen ? 150 : 300,
+        exit: props.fullScreen ? 150 : 300
+    };
+
+    const transitionProps = mergeProps(
+        {
+            classNames: cx('transition'),
+            in: visibleState,
+            timeout: transitionTimeout,
+            options: props.transitionOptions,
+            unmountOnExit: true,
+            onEntered,
+            onExiting,
+            onExited
+        },
+        ptm('transition')
+    );
+
+    const createTemplateElement = () => {
+        const templateElementProps = { sidebarRef, closeIconRef, hide: onClose };
+
+        return (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={sidebarRef} {...transitionProps}>
+                    <div ref={sidebarRef} {...rootProps}>
+                        {ObjectUtils.getJSXElement(inProps.content, templateElementProps)}
+                    </div>
+                </CSSTransition>
+            </div>
+        );
+    };
+
     const createElement = () => {
         const closeIcon = createCloseIcon();
         const icons = createIcons();
         const header = createHeader();
-
-        const transitionTimeout = {
-            enter: props.fullScreen ? 150 : 300,
-            exit: props.fullScreen ? 150 : 300
-        };
-
-        const maskProps = mergeProps(
-            {
-                ref: maskRef,
-                style: sx('mask'),
-                className: cx('mask', { maskVisibleState }),
-                onMouseDown: (e) => onMaskClick(e)
-            },
-            ptm('mask')
-        );
-
-        const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: cx('root', { context }),
-                style: props.style,
-                role: 'complementary'
-            },
-            SidebarBase.getOtherProps(props),
-            ptm('root')
-        );
-
-        const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            ptm('header')
-        );
-
-        const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
-        );
-
-        const iconsProps = mergeProps(
-            {
-                className: cx('icons')
-            },
-            ptm('icons')
-        );
-
-        const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: transitionTimeout,
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEntered,
-                onExiting,
-                onExited
-            },
-            ptm('transition')
-        );
 
         return (
             <div {...maskProps}>
@@ -287,7 +301,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     };
 
     const createSidebar = () => {
-        const element = createElement();
+        const element = inProps?.content ? createTemplateElement() : createElement();
 
         return <Portal element={element} appendTo={props.appendTo} visible />;
     };

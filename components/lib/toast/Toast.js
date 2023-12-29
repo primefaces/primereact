@@ -146,19 +146,23 @@ export const Toast = React.memo(
 
                                 return (
                                     <CSSTransition nodeRef={messageRef} key={messageInfo._pId} {...transitionProps}>
-                                        <ToastMessage
-                                            hostName="Toast"
-                                            ref={messageRef}
-                                            messageInfo={messageInfo}
-                                            index={index}
-                                            onClick={props.onClick}
-                                            onClose={onClose}
-                                            onMouseEnter={props.onMouseEnter}
-                                            onMouseLeave={props.onMouseLeave}
-                                            closeIcon={props.closeIcon}
-                                            ptCallbacks={ptCallbacks}
-                                            metaData={metaData}
-                                        />
+                                        {inProps.content ? (
+                                            ObjectUtils.getJSXElement(inProps.content, { message: messageInfo.message })
+                                        ) : (
+                                            <ToastMessage
+                                                hostName="Toast"
+                                                ref={messageRef}
+                                                messageInfo={messageInfo}
+                                                index={index}
+                                                onClick={props.onClick}
+                                                onClose={onClose}
+                                                onMouseEnter={props.onMouseEnter}
+                                                onMouseLeave={props.onMouseLeave}
+                                                closeIcon={props.closeIcon}
+                                                ptCallbacks={ptCallbacks}
+                                                metaData={metaData}
+                                            />
+                                        )}
                                     </CSSTransition>
                                 );
                             })}

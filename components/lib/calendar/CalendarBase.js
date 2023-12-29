@@ -40,7 +40,7 @@ const styles = `
     }
     
     .p-fluid .p-calendar .p-inputtext {
-        width: 1%;
+        width: 100%;
     }
     
     /* Datepicker */
@@ -178,13 +178,14 @@ const styles = `
 const classes = {
     root: ({ props, focusedState, isFilled }) =>
         classNames('p-calendar p-component p-inputwrapper', {
-            [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
+            [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon && props.iconDisplay !== 'input',
             'p-calendar-disabled': props.disabled,
             'p-calendar-timeonly': props.timeOnly,
             'p-inputwrapper-filled': props.value || isFilled,
             'p-inputwrapper-focus': focusedState
         }),
     dropdownButton: 'p-datepicker-trigger',
+    dropdownIcon: 'p-datepicker-trigger',
     buttonbar: 'p-datepicker-buttonbar',
     todayButton: 'p-button-text',
     clearButton: 'p-button-text',

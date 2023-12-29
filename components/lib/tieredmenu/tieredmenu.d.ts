@@ -163,16 +163,6 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      */
     onHide?(event: React.SyntheticEvent): void;
     /**
-     * Callback to invoke when menu receives focus.
-     * @param {React.SyntheticEvent} event - Browser event.
-     */
-    onFocus?(event: React.SyntheticEvent): void;
-    /**
-     * Callback to invoke when menu loses focus.
-     * @param {React.SyntheticEvent} event - Browser event.
-     */
-    onBlur?(event: React.SyntheticEvent): void;
-    /**
      * Used to get the child elements of the component.
      * @readonly
      */

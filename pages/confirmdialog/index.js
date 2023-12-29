@@ -8,8 +8,10 @@ import { PositionDoc } from '@/components/doc/confirmdialog/positiondoc';
 import { PTDoc } from '@/components/doc/confirmdialog/pt/ptdoc';
 import { Wireframe } from '@/components/doc/confirmdialog/pt/wireframe';
 import { StyledDoc } from '@/components/doc/confirmdialog/theming/styleddoc';
+import { TemplateDoc } from '@/components/doc/confirmdialog/templatedoc';
 import { TailwindDoc } from '@/components/doc/confirmdialog/theming/tailwinddoc';
-import { ConfirmDialog } from '@/components/lib/confirmdialog/ConfirmDialog';
+import { HeadlessDoc } from '@/components/doc/confirmdialog/headlessdoc';
+import { ConfirmDialog } from '@/components/lib/primereact.all';
 
 const ConfirmDialogDemo = () => {
     const docs = [
@@ -33,7 +35,16 @@ const ConfirmDialogDemo = () => {
             label: 'Declarative',
             component: DeclarativeDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

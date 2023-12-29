@@ -2,134 +2,87 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { Menubar } from '@/components/lib/menubar/Menubar';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Badge } from '@/components/lib/badge/Badge';
 
 export function TemplateDoc(props) {
+    const itemRenderer = (item) => (
+        <a className="flex align-items-center p-menuitem-link">
+            <span className={item.icon} />
+            <span className="mx-2">{item.label}</span>
+            {item.badge && <Badge className="ml-auto" value={item.badge} />}
+            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
+        </a>
+    );
     const items = [
         {
-            label: 'File',
-            icon: 'pi pi-fw pi-file',
+            label: 'Home',
+            icon: 'pi pi-home'
+        },
+        {
+            label: 'Features',
+            icon: 'pi pi-star'
+        },
+        {
+            label: 'Projects',
+            icon: 'pi pi-search',
             items: [
                 {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-plus',
-                    items: [
-                        {
-                            label: 'Bookmark',
-                            icon: 'pi pi-fw pi-bookmark'
-                        },
-                        {
-                            label: 'Video',
-                            icon: 'pi pi-fw pi-video'
-                        }
-                    ]
+                    label: 'Core',
+                    icon: 'pi pi-bolt',
+                    shortcut: '⌘+S',
+                    template: itemRenderer
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-trash'
+                    label: 'Blocks',
+                    icon: 'pi pi-server',
+                    shortcut: '⌘+B',
+                    template: itemRenderer
+                },
+                {
+                    label: 'UI Kit',
+                    icon: 'pi pi-pencil',
+                    shortcut: '⌘+U',
+                    template: itemRenderer
                 },
                 {
                     separator: true
                 },
                 {
-                    label: 'Export',
-                    icon: 'pi pi-fw pi-external-link'
-                }
-            ]
-        },
-        {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-                {
-                    label: 'Left',
-                    icon: 'pi pi-fw pi-align-left'
-                },
-                {
-                    label: 'Right',
-                    icon: 'pi pi-fw pi-align-right'
-                },
-                {
-                    label: 'Center',
-                    icon: 'pi pi-fw pi-align-center'
-                },
-                {
-                    label: 'Justify',
-                    icon: 'pi pi-fw pi-align-justify'
-                }
-            ]
-        },
-        {
-            label: 'Users',
-            icon: 'pi pi-fw pi-user',
-            items: [
-                {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-user-plus'
-                },
-                {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus'
-                },
-                {
-                    label: 'Search',
-                    icon: 'pi pi-fw pi-users',
+                    label: 'Templates',
+                    icon: 'pi pi-palette',
                     items: [
                         {
-                            label: 'Filter',
-                            icon: 'pi pi-fw pi-filter',
-                            items: [
-                                {
-                                    label: 'Print',
-                                    icon: 'pi pi-fw pi-print'
-                                }
-                            ]
+                            label: 'Apollo',
+                            icon: 'pi pi-palette',
+                            badge: 2,
+                            template: itemRenderer
                         },
                         {
-                            icon: 'pi pi-fw pi-bars',
-                            label: 'List'
+                            label: 'Ultima',
+                            icon: 'pi pi-palette',
+                            badge: 3,
+                            template: itemRenderer
                         }
                     ]
                 }
             ]
         },
         {
-            label: 'Events',
-            icon: 'pi pi-fw pi-calendar',
-            items: [
-                {
-                    label: 'Edit',
-                    icon: 'pi pi-fw pi-pencil',
-                    items: [
-                        {
-                            label: 'Save',
-                            icon: 'pi pi-fw pi-calendar-plus'
-                        },
-                        {
-                            label: 'Delete',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                },
-                {
-                    label: 'Archive',
-                    icon: 'pi pi-fw pi-calendar-times',
-                    items: [
-                        {
-                            label: 'Remove',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Quit',
-            icon: 'pi pi-fw pi-power-off'
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            badge: 3,
+            template: itemRenderer
         }
     ];
 
     const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" className="w-full" />;
+    const end = (
+        <div className="flex align-items-center gap-2">
+            <InputText placeholder="Search" type="text" classNamer="w-8rem sm:w-auto" />
+            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+        </div>
+    );
 
     const code = {
         basic: `
@@ -139,138 +92,87 @@ export function TemplateDoc(props) {
 import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
+import { Badge } from 'primereact/badge';
+importy { Avatar } from 'primereact/avatar';  
 
 export default function TemplateDemo() {
+    const itemRenderer = (item) => (
+        <a className="flex align-items-center p-menuitem-link">
+            <span className={item.icon} />
+            <span className="mx-2">{item.label}</span>
+            {item.badge && <Badge className="ml-auto" value={item.badge} />}
+            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
+        </a>
+    );
     const items = [
         {
-            label: 'File',
-            icon: 'pi pi-fw pi-file',
+            label: 'Home',
+            icon: 'pi pi-home'
+        },
+        {
+            label: 'Features',
+            icon: 'pi pi-star'
+        },
+        {
+            label: 'Projects',
+            icon: 'pi pi-search',
             items: [
                 {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-plus',
-                    items: [
-                        {
-                            label: 'Bookmark',
-                            icon: 'pi pi-fw pi-bookmark'
-                        },
-                        {
-                            label: 'Video',
-                            icon: 'pi pi-fw pi-video'
-                        },
-
-                    ]
+                    label: 'Core',
+                    icon: 'pi pi-bolt',
+                    shortcut: '⌘+S',
+                    template: itemRenderer
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-trash'
+                    label: 'Blocks',
+                    icon: 'pi pi-server',
+                    shortcut: '⌘+B',
+                    template: itemRenderer
+                },
+                {
+                    label: 'UI Kit',
+                    icon: 'pi pi-pencil',
+                    shortcut: '⌘+U',
+                    template: itemRenderer
                 },
                 {
                     separator: true
                 },
                 {
-                    label: 'Export',
-                    icon: 'pi pi-fw pi-external-link'
-                }
-            ]
-        },
-        {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-                {
-                    label: 'Left',
-                    icon: 'pi pi-fw pi-align-left'
-                },
-                {
-                    label: 'Right',
-                    icon: 'pi pi-fw pi-align-right'
-                },
-                {
-                    label: 'Center',
-                    icon: 'pi pi-fw pi-align-center'
-                },
-                {
-                    label: 'Justify',
-                    icon: 'pi pi-fw pi-align-justify'
-                },
-
-            ]
-        },
-        {
-            label: 'Users',
-            icon: 'pi pi-fw pi-user',
-            items: [
-                {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-user-plus',
-
-                },
-                {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus',
-
-                },
-                {
-                    label: 'Search',
-                    icon: 'pi pi-fw pi-users',
+                    label: 'Templates',
+                    icon: 'pi pi-palette',
                     items: [
                         {
-                            label: 'Filter',
-                            icon: 'pi pi-fw pi-filter',
-                            items: [
-                                {
-                                    label: 'Print',
-                                    icon: 'pi pi-fw pi-print'
-                                }
-                            ]
+                            label: 'Apollo',
+                            icon: 'pi pi-palette',
+                            badge: 2,
+                            template: itemRenderer
                         },
                         {
-                            icon: 'pi pi-fw pi-bars',
-                            label: 'List'
+                            label: 'Ultima',
+                            icon: 'pi pi-palette',
+                            badge: 3,
+                            template: itemRenderer
                         }
                     ]
                 }
             ]
         },
         {
-            label: 'Events',
-            icon: 'pi pi-fw pi-calendar',
-            items: [
-                {
-                    label: 'Edit',
-                    icon: 'pi pi-fw pi-pencil',
-                    items: [
-                        {
-                            label: 'Save',
-                            icon: 'pi pi-fw pi-calendar-plus'
-                        },
-                        {
-                            label: 'Delete',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                },
-                {
-                    label: 'Archive',
-                    icon: 'pi pi-fw pi-calendar-times',
-                    items: [
-                        {
-                            label: 'Remove',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Quit',
-            icon: 'pi pi-fw pi-power-off'
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            badge: 3,
+            template: itemRenderer
         }
     ];
 
     const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" className="w-full" />;
+    const end = (
+        <div className="flex align-items-center gap-2">
+            <InputText placeholder="Search" type="text" classNamer="w-8rem sm:w-auto" />
+            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+        </div>
+    );
 
     return (
         <div className="card">
@@ -284,138 +186,87 @@ import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { MenuItem } from 'primereact/menuitem';
+import { Badge } from 'primereact/badge';
+importy { Avatar } from 'primereact/avatar';  
 
 export default function TemplateDemo() {
+    const itemRenderer = (item) => (
+        <a className="flex align-items-center p-menuitem-link">
+            <span className={item.icon} />
+            <span className="mx-2">{item.label}</span>
+            {item.badge && <Badge className="ml-auto" value={item.badge} />}
+            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
+        </a>
+    );
     const items: MenuItem[] = [
         {
-            label: 'File',
-            icon: 'pi pi-fw pi-file',
+            label: 'Home',
+            icon: 'pi pi-home'
+        },
+        {
+            label: 'Features',
+            icon: 'pi pi-star'
+        },
+        {
+            label: 'Projects',
+            icon: 'pi pi-search',
             items: [
                 {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-plus',
-                    items: [
-                        {
-                            label: 'Bookmark',
-                            icon: 'pi pi-fw pi-bookmark'
-                        },
-                        {
-                            label: 'Video',
-                            icon: 'pi pi-fw pi-video'
-                        },
-
-                    ]
+                    label: 'Core',
+                    icon: 'pi pi-bolt',
+                    shortcut: '⌘+S',
+                    template: itemRenderer
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-trash'
+                    label: 'Blocks',
+                    icon: 'pi pi-server',
+                    shortcut: '⌘+B',
+                    template: itemRenderer
+                },
+                {
+                    label: 'UI Kit',
+                    icon: 'pi pi-pencil',
+                    shortcut: '⌘+U',
+                    template: itemRenderer
                 },
                 {
                     separator: true
                 },
                 {
-                    label: 'Export',
-                    icon: 'pi pi-fw pi-external-link'
-                }
-            ]
-        },
-        {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-                {
-                    label: 'Left',
-                    icon: 'pi pi-fw pi-align-left'
-                },
-                {
-                    label: 'Right',
-                    icon: 'pi pi-fw pi-align-right'
-                },
-                {
-                    label: 'Center',
-                    icon: 'pi pi-fw pi-align-center'
-                },
-                {
-                    label: 'Justify',
-                    icon: 'pi pi-fw pi-align-justify'
-                },
-
-            ]
-        },
-        {
-            label: 'Users',
-            icon: 'pi pi-fw pi-user',
-            items: [
-                {
-                    label: 'New',
-                    icon: 'pi pi-fw pi-user-plus',
-
-                },
-                {
-                    label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus',
-
-                },
-                {
-                    label: 'Search',
-                    icon: 'pi pi-fw pi-users',
+                    label: 'Templates',
+                    icon: 'pi pi-palette',
                     items: [
                         {
-                            label: 'Filter',
-                            icon: 'pi pi-fw pi-filter',
-                            items: [
-                                {
-                                    label: 'Print',
-                                    icon: 'pi pi-fw pi-print'
-                                }
-                            ]
+                            label: 'Apollo',
+                            icon: 'pi pi-palette',
+                            badge: 2,
+                            template: itemRenderer
                         },
                         {
-                            icon: 'pi pi-fw pi-bars',
-                            label: 'List'
+                            label: 'Ultima',
+                            icon: 'pi pi-palette',
+                            badge: 3,
+                            template: itemRenderer
                         }
                     ]
                 }
             ]
         },
         {
-            label: 'Events',
-            icon: 'pi pi-fw pi-calendar',
-            items: [
-                {
-                    label: 'Edit',
-                    icon: 'pi pi-fw pi-pencil',
-                    items: [
-                        {
-                            label: 'Save',
-                            icon: 'pi pi-fw pi-calendar-plus'
-                        },
-                        {
-                            label: 'Delete',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                },
-                {
-                    label: 'Archive',
-                    icon: 'pi pi-fw pi-calendar-times',
-                    items: [
-                        {
-                            label: 'Remove',
-                            icon: 'pi pi-fw pi-calendar-minus'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Quit',
-            icon: 'pi pi-fw pi-power-off'
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            badge: 3,
+            template: itemRenderer
         }
     ];
 
     const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" className="w-full" />;
+    const end = (
+        <div className="flex align-items-center gap-2">
+            <InputText placeholder="Search" type="text" classNamer="w-8rem sm:w-auto" />
+            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+        </div>
+    );
 
     return (
         <div className="card">

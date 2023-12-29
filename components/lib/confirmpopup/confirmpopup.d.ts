@@ -143,6 +143,17 @@ interface ConfirmPopupOptions {
 }
 
 /**
+ * Defines current content values and refs for headless development.
+ * @see {@link ConfirmPopupProps.content}
+ */
+interface ContentProps {
+    acceptBtnRef: React.RefObject<HTMLButtonElement>;
+    rejectBtnRef: React.RefObject<HTMLButtonElement>;
+    message: React.ReactNode | string;
+    hide(): void;
+}
+
+/**
  * Defines valid properties in ConfirmPopup component.
  * @group Properties
  */
@@ -266,6 +277,12 @@ export interface ConfirmPopupProps {
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies a custom content for the dialog. For more complex markup, use the "content" slot instead.
+     * @param {ContentProps} props - The values of dialog.
+     * @return {React.ReactNode}
+     */
+    content?(props: ContentProps): React.ReactNode;
 }
 
 /**

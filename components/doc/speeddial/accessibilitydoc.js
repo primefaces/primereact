@@ -80,12 +80,6 @@ export function AccessibilityDoc() {
                             </tr>
                             <tr>
                                 <td>
-                                    <i>space</i>
-                                </td>
-                                <td>Actives the menuitem, closes the menu and sets focus on the menu button.</td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <i>escape</i>
                                 </td>
                                 <td>Closes the menu and sets focus on the menu button.</td>

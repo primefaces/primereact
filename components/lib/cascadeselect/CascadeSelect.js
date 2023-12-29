@@ -9,6 +9,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -130,7 +131,7 @@ export const CascadeSelect = React.memo(
         };
 
         const onClick = (event) => {
-            if (props.disabled) {
+            if (props.disabled || props.loading) {
                 return;
             }
 
@@ -347,6 +348,27 @@ export const CascadeSelect = React.memo(
             return <span {...labelProps}>{label}</span>;
         };
 
+        const createLoadingIcon = () => {
+            const loadingIconProps = mergeProps(
+                {
+                    className: cx('loadingIcon')
+                },
+                ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+            const loadingButtonProps = mergeProps(
+                {
+                    className: cx('loadingButton'),
+                    role: 'button',
+                    'aria-haspopup': 'listbox'
+                },
+                ptm('dropdownButton')
+            );
+
+            return <div {...loadingButtonProps}>{loadingIcon}</div>;
+        };
+
         const createDropdownIcon = () => {
             const dropdownIconProps = mergeProps(
                 {
@@ -435,7 +457,7 @@ export const CascadeSelect = React.memo(
         const createElement = () => {
             const keyboardHelper = createKeyboardHelper();
             const labelElement = createLabel();
-            const dropdownIcon = createDropdownIcon();
+            const dropdownIcon = props.loading ? createLoadingIcon() : createDropdownIcon();
             const overlay = createOverlay();
             const rootProps = mergeProps(
                 {

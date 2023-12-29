@@ -108,19 +108,24 @@ export const ConfirmPopup = React.memo(
         };
 
         const show = () => {
-            // Remember the focused element before we opened the dialog
-            // so we can return focus to it once we close the dialog.
-            focusElementOnHide.current = document.activeElement;
+            const currentProps = getCurrentProps();
 
-            setVisibleState(true);
             setReshowState(false);
-            isCallbackExecuting.current = false;
 
-            overlayEventListener.current = (e) => {
-                !isOutsideClicked(e.target) && (isPanelClicked.current = true);
-            };
+            if (currentProps.group === props.group) {
+                setVisibleState(true);
+                isCallbackExecuting.current = false;
 
-            OverlayService.on('overlay-click', overlayEventListener.current);
+                overlayEventListener.current = (e) => {
+                    !isOutsideClicked(e.target) && (isPanelClicked.current = true);
+                };
+
+                OverlayService.on('overlay-click', overlayEventListener.current);
+
+                // Remember the focused element before we opened the dialog
+                // so we can return focus to it once we close the dialog.
+                focusElementOnHide.current = document.activeElement;
+            }
         };
 
         const hide = (result) => {
@@ -345,36 +350,53 @@ export const ConfirmPopup = React.memo(
             return content;
         };
 
+        const rootProps = mergeProps(
+            {
+                ref: overlayRef,
+                id: getPropValue('id'),
+                className: cx('root', { context, getPropValue }),
+                style: getPropValue('style'),
+                onClick: onPanelClick
+            },
+            ConfirmPopupBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: visibleState,
+                timeout: { enter: 120, exit: 100 },
+                options: getPropValue('transitionOptions'),
+                unmountOnExit: true,
+                onEnter,
+                onEntered,
+                onExit,
+                onExited
+            },
+            ptm('transition')
+        );
+
+        const createTemplateElement = () => {
+            const currentProps = getCurrentProps();
+            const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
+            const templateElementProps = {
+                message,
+                acceptBtnRef,
+                rejectBtnRef,
+                hide
+            };
+
+            return (
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
+                    <div {...rootProps}>{ObjectUtils.getJSXElement(inProps.content, templateElementProps)}</div>
+                </CSSTransition>
+            );
+        };
+
         const createElement = () => {
             const content = createContent();
             const footer = createFooter();
-
-            const rootProps = mergeProps(
-                {
-                    ref: overlayRef,
-                    id: getPropValue('id'),
-                    className: cx('root', { context, getPropValue }),
-                    style: getPropValue('style'),
-                    onClick: onPanelClick
-                },
-                ConfirmPopupBase.getOtherProps(props),
-                ptm('root')
-            );
-
-            const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: visibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: getPropValue('transitionOptions'),
-                    unmountOnExit: true,
-                    onEnter,
-                    onEntered,
-                    onExit,
-                    onExited
-                },
-                ptm('transition')
-            );
 
             return (
                 <CSSTransition nodeRef={overlayRef} {...transitionProps}>
@@ -386,7 +408,7 @@ export const ConfirmPopup = React.memo(
             );
         };
 
-        const element = createElement();
+        const element = inProps?.content ? createTemplateElement() : createElement();
 
         return <Portal element={element} appendTo={getPropValue('appendTo')} visible={getPropValue('visible')} />;
     })

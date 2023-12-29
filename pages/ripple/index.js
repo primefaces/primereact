@@ -2,6 +2,7 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/ripple/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/ripple/basicdoc';
 import { ConfigurationDoc } from '@/components/doc/ripple/configurationdoc';
+import { CustomDoc } from '@/components/doc/ripple/customdoc';
 import { ImportDoc } from '@/components/doc/ripple/importdoc';
 import { StyledDoc } from '@/components/doc/ripple/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/ripple/theming/tailwinddoc';
@@ -25,7 +26,11 @@ const RippleDemo = () => {
             label: 'Basic',
             component: BasicDoc
         },
-
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

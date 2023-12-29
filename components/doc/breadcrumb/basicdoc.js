@@ -3,7 +3,7 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { BreadCrumb } from '@/components/lib/breadcrumb/BreadCrumb';
 
 export function BasicDoc(props) {
-    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+    const items = [{ label: 'Electronics' }, { label: 'Computer' }, { label: 'Accessories' }, { label: 'Keyboard' }, { label: 'Wireless' }];
     const home = { icon: 'pi pi-home', url: 'https://primereact.org' };
 
     const code = {
@@ -15,7 +15,7 @@ import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function BasicDemo() {
-    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+    const items = [{ label: 'Electronics' }, { label: 'Computer' }, { label: 'Accessories' }, { label: 'Keyboard' }, { label: 'Wireless' }];
     const home = { icon: 'pi pi-home', url: 'https://primereact.org' }
 
     return (
@@ -29,7 +29,7 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
-    const items: MenuItem[] = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+    const items: MenuItem[] = [{ label: 'Electronics' }, { label: 'Computer' }, { label: 'Accessories' }, { label: 'Keyboard' }, { label: 'Wireless' }];
     const home: MenuItem = { icon: 'pi pi-home', url: 'https://primereact.org' }
 
     return (

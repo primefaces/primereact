@@ -90,9 +90,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
                     id: buttonId,
                     'aria-controls': contentId,
                     'aria-expanded': !collapsed,
-                    type: 'button',
-                    role: 'button',
-                    'aria-label': props.header
+                    role: 'tab'
                 },
                 ptm('toggler')
             );
@@ -163,7 +161,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 iconsElement,
                 togglerElement,
                 element: content,
-                id: idState + '_header',
                 props,
                 collapsed
             };
@@ -176,7 +173,37 @@ export const Panel = React.forwardRef((inProps, ref) => {
         return null;
     };
 
+
+    const createFooter = () => {
+        const footer = ObjectUtils.getJSXElement(props.footer, props);
+
+        const footerProps = mergeProps(
+            {
+                className: cx('footer')
+            },
+            ptm('footer')
+        );
+
+        const content = <div {...footerProps}>{footer}</div>;
+
+        if (props.footerTemplate) {
+            const defaultContentOptions = {
+                className: cx('footer'),
+                element: content,
+                props
+            };
+
+            return ObjectUtils.getJSXElement(props.footerTemplate, defaultContentOptions);
+        } else if (props.footer) {
+            return content;
+        }
+
+        return null;
+    };
+
     const createContent = () => {
+        const footer = createFooter();
+
         const toggleableContentProps = mergeProps(
             {
                 ref: contentRef,
@@ -210,36 +237,10 @@ export const Panel = React.forwardRef((inProps, ref) => {
             <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableContentProps}>
                     <div {...contentProps}>{props.children}</div>
+                    {footer}
                 </div>
             </CSSTransition>
         );
-    };
-
-    const createFooter = () => {
-        const footer = ObjectUtils.getJSXElement(props.footer, props);
-
-        const footerProps = mergeProps(
-            {
-                className: cx('footer')
-            },
-            ptm('footer')
-        );
-
-        const content = <div {...footerProps}>{footer}</div>;
-
-        if (props.footerTemplate) {
-            const defaultContentOptions = {
-                className: cx('footer'),
-                element: content,
-                props
-            };
-
-            return ObjectUtils.getJSXElement(props.footerTemplate, defaultContentOptions);
-        } else if (props.footer) {
-            return content;
-        }
-
-        return null;
     };
 
     const rootProps = mergeProps(
@@ -254,13 +255,11 @@ export const Panel = React.forwardRef((inProps, ref) => {
     );
     const header = createHeader();
     const content = createContent();
-    const footer = createFooter();
 
     return (
         <div {...rootProps}>
             {header}
             {content}
-            {footer}
         </div>
     );
 });

@@ -13,6 +13,8 @@ import { ResponsiveDoc } from '@/components/doc/dialog/responsivedoc';
 import { StyledDoc } from '@/components/doc/dialog/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/dialog/theming/tailwinddoc';
 import { WithoutModalDoc } from '@/components/doc/dialog/withoutmodaldoc';
+import { TemplateDoc } from '@/components/doc/dialog/templatedoc';
+import { HeadlessDoc } from '@/components/doc/dialog/headlessdoc';
 
 const DialogDemo = () => {
     const docs = [
@@ -27,9 +29,19 @@ const DialogDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'footer',
-            label: 'Footer',
-            component: FooterDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'position',
+            label: 'Position',
+            component: PositionDoc
+        },
+        {
+            id: 'maximizable',
+            label: 'Maximizable',
+            component: MaximizableDoc
         },
         {
             id: 'longcontent',
@@ -47,16 +59,15 @@ const DialogDemo = () => {
             component: ResponsiveDoc
         },
         {
-            id: 'position',
-            label: 'Position',
-            component: PositionDoc
+            id: 'footer',
+            label: 'Footer',
+            component: FooterDoc
         },
         {
-            id: 'maximizable',
-            label: 'Maximizable',
-            component: MaximizableDoc
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
         },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

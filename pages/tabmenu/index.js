@@ -2,10 +2,13 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/tabmenu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/tabmenu/basicdoc';
+import { CommandDoc } from '@/components/doc/tabmenu/commanddoc';
 import { ControlledDoc } from '@/components/doc/tabmenu/controlleddoc';
 import { ImportDoc } from '@/components/doc/tabmenu/importdoc';
 import { PTDoc } from '@/components/doc/tabmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tabmenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/tabmenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/tabmenu/templatedoc';
 import { StyledDoc } from '@/components/doc/tabmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tabmenu/theming/tailwinddoc';
 
@@ -26,7 +29,21 @@ const TabMenuDemo = () => {
             label: 'Controlled',
             component: ControlledDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

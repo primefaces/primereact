@@ -7,27 +7,12 @@ import { useState } from 'react';
 export function ControlledDoc(props) {
     const [activeIndex, setActiveIndex] = useState(null);
 
-    const onClick = (itemIndex) => {
-        let _activeIndex = activeIndex ? [...activeIndex] : [];
-
-        if (_activeIndex.length === 0) {
-            _activeIndex.push(itemIndex);
-        } else {
-            const index = _activeIndex.indexOf(itemIndex);
-
-            if (index === -1) _activeIndex.push(itemIndex);
-            else _activeIndex.splice(index, 1);
-        }
-
-        setActiveIndex(_activeIndex);
-    };
-
     const code = {
         basic: `
-<div className="flex flex-wrap gap-2 mb-3">
-    <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text" />
-    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text" />
+<div className="flex flex-wrap justify-content-end gap-2 mb-3">
+    <Button outlined={activeIndex !== 0} rounded label="1" onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" />
+    <Button outlined={activeIndex !== 1} rounded label="2" onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" />
+    <Button outlined={activeIndex !== 2} rounded label="3" onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" />
 </div>
 <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <AccordionTab header="Header I">
@@ -64,30 +49,12 @@ import { Button } from 'primereact/button';
 export default function ControlledDoc() {
     const [activeIndex, setActiveIndex] = useState();
 
-    const onClick = (itemIndex) => {
-        let _activeIndex = activeIndex ? [...activeIndex] : [];
-
-        if (_activeIndex.length === 0) {
-            _activeIndex.push(itemIndex);
-        }
-        else {
-            const index = _activeIndex.indexOf(itemIndex);
-            
-            if (index === -1)
-                _activeIndex.push(itemIndex);
-            else
-                _activeIndex.splice(index, 1);
-        }
-
-        setActiveIndex(_activeIndex);
-    }
-
     return (
         <div className="card">
-            <div className="flex flex-wrap gap-2 mb-3">
-                <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-                <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text" />
-                <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text" />
+            <div className="flex flex-wrap justify-content-end gap-2 mb-3">
+                <Button outlined={activeIndex !== 0} rounded label="1" onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" />
+                <Button outlined={activeIndex !== 1} rounded label="2" onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" />
+                <Button outlined={activeIndex !== 2} rounded label="3" onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" />
             </div>
             <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <AccordionTab header="Header I">
@@ -127,30 +94,12 @@ import { Button } from 'primereact/button';
 export default function ControlledDoc() {
     const [activeIndex, setActiveIndex] = useState<number | number[]>();
 
-    const onClick = (itemIndex: number) => {
-        let _activeIndex = activeIndex ? [...activeIndex] : [];
-
-        if (_activeIndex.length === 0) {
-            _activeIndex.push(itemIndex);
-        }
-        else {
-            const index = _activeIndex.indexOf(itemIndex);
-            
-            if (index === -1)
-                _activeIndex.push(itemIndex);
-            else
-                _activeIndex.splice(index, 1);
-        }
-
-        setActiveIndex(_activeIndex);
-    }
-
     return (
         <div className="card">
-            <div className="flex flex-wrap gap-2 mb-3">
-                <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-                <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text" />
-                <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text" />
+            <div className="flex flex-wrap justify-content-end gap-2 mb-3">
+                <Button outlined={activeIndex !== 0} rounded label="1" onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" />
+                <Button outlined={activeIndex !== 1} rounded label="2" onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" />
+                <Button outlined={activeIndex !== 2} rounded label="3" onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" />
             </div>
             <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <AccordionTab header="Header I">
@@ -193,10 +142,10 @@ export default function ControlledDoc() {
             </DocSectionText>
             <div className="accordion-demo">
                 <div className="card">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                        <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-                        <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text" />
-                        <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text" />
+                    <div className="flex flex-wrap justify-content-end gap-2 mb-3">
+                        <Button outlined={activeIndex !== 0} rounded label="1" onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" />
+                        <Button outlined={activeIndex !== 1} rounded label="2" onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" />
+                        <Button outlined={activeIndex !== 2} rounded label="3" onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" />
                     </div>
                     <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                         <AccordionTab header="Header I">

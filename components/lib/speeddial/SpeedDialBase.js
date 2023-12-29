@@ -8,7 +8,7 @@ const styles = `
         display: flex;
         z-index: 1;
     }
-
+    
     .p-speeddial-list {
         margin: 0;
         padding: 0;
@@ -19,14 +19,14 @@ const styles = `
         transition: top 0s linear 0.2s;
         pointer-events: none;
     }
-
+    
     .p-speeddial-item {
         transform: scale(0);
         opacity: 0;
         transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, opacity 0.8s;
         will-change: transform;
     }
-
+    
     .p-speeddial-action {
         display: flex;
         align-items: center;
@@ -36,18 +36,18 @@ const styles = `
         overflow: hidden;
         text-decoration: none;
     }
-
+    
     .p-speeddial-circle .p-speeddial-item,
     .p-speeddial-semi-circle .p-speeddial-item,
     .p-speeddial-quarter-circle .p-speeddial-item {
         position: absolute;
     }
-
+    
     .p-speeddial-rotate {
         transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
         will-change: transform;
     }
-
+    
     .p-speeddial-mask {
         position: absolute;
         left: 0;
@@ -57,22 +57,22 @@ const styles = `
         opacity: 0;
         transition: opacity 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-
+    
     .p-speeddial-mask-visible {
         pointer-events: none;
         opacity: 1;
         transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-
+    
     .p-speeddial-opened .p-speeddial-list {
         pointer-events: auto;
     }
-
+    
     .p-speeddial-opened .p-speeddial-item {
         transform: scale(1);
         opacity: 1;
     }
-
+    
     .p-speeddial-opened .p-speeddial-rotate {
         transform: rotate(45deg);
     }
@@ -97,7 +97,7 @@ const classes = {
     action: ({ disabled }) => classNames('p-speeddial-action', { 'p-disabled': disabled }),
     actionIcon: ({ _icon }) => classNames('p-speeddial-action-icon', _icon),
     menu: 'p-speeddial-list',
-    menuitem: ({ active }) => classNames('p-speeddial-item', { 'p-focus': active })
+    menuitem: 'p-speeddial-item'
 };
 
 const inlineStyles = {
@@ -130,7 +130,6 @@ export const SpeedDialBase = ComponentBase.extend({
         buttonClassName: null,
         buttonTemplate: null,
         'aria-label': null,
-        ariaLabelledby: null,
         maskStyle: null,
         maskClassName: null,
         showIcon: null,

@@ -12,6 +12,8 @@ import { HookFormDoc } from '@/components/doc/dropdown/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/dropdown/groupdoc';
 import { ImportDoc } from '@/components/doc/dropdown/importdoc';
 import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
+import { LazyVirtualScrollDoc } from '@/components/doc/dropdown/lazyvirtualscrolldoc';
+import { LoadingDoc } from '@/components/doc/dropdown/loadingdoc';
 import { PTDoc } from '@/components/doc/dropdown/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dropdown/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/dropdown/templatedoc';
@@ -57,9 +59,19 @@ const DropdownDemo = () => {
             component: ClearIconDoc
         },
         {
+            id: 'loadingstate',
+            label: 'Loading State',
+            component: LoadingDoc
+        },
+        {
             id: 'virtualscroll',
             label: 'Virtual Scroll',
             component: VirtualScrollDoc
+        },
+        {
+            id: 'lazyvirtualscroll',
+            label: 'Lazy Virtual Scroll',
+            component: LazyVirtualScrollDoc
         },
         {
             id: 'floatlabel',

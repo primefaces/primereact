@@ -7,8 +7,7 @@ export const ScrollPanelBase = ComponentBase.extend({
         id: null,
         style: null,
         className: null,
-        children: undefined,
-        step: 5
+        children: undefined
     },
     css: {
         classes: {
@@ -28,7 +27,7 @@ export const ScrollPanelBase = ComponentBase.extend({
                 z-index: 1;
                 float: left;
             }
-
+            
             .p-scrollpanel-content {
                 height: calc(100% + 18px);
                 width: calc(100% + 18px);
@@ -37,7 +36,7 @@ export const ScrollPanelBase = ComponentBase.extend({
                 overflow: auto;
                 box-sizing: border-box;
             }
-
+            
             .p-scrollpanel-bar {
                 position: relative;
                 background: #c1c1c1;
@@ -47,26 +46,26 @@ export const ScrollPanelBase = ComponentBase.extend({
                 opacity: 0;
                 transition: opacity 0.25s linear;
             }
-
+            
             .p-scrollpanel-bar-y {
                 width: 9px;
                 top: 0;
             }
-
+            
             .p-scrollpanel-bar-x {
                 height: 9px;
                 bottom: 0;
             }
-
+            
             .p-scrollpanel-hidden {
                 visibility: hidden;
             }
-
+            
             .p-scrollpanel:hover .p-scrollpanel-bar,
             .p-scrollpanel:active .p-scrollpanel-bar {
                 opacity: 1;
             }
-
+            
             .p-scrollpanel-grabbed {
                 user-select: none;
             }

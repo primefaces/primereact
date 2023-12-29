@@ -10,13 +10,13 @@ const styles = `
         top: -9999px;
         left: -9999px;
     }
-
+    
     .p-menu ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
-
+    
     .p-menu .p-menuitem-link {
         cursor: pointer;
         display: flex;
@@ -25,7 +25,7 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-
+    
     .p-menu .p-menuitem-text {
         line-height: 1;
     }
@@ -40,9 +40,8 @@ const classes = {
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
     menu: 'p-menu-list p-reset',
-    content: 'p-menuitem-content',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
-    menuitem: ({ focused }) => classNames('p-menuitem', { 'p-focus': focused }),
+    menuitem: 'p-menuitem',
     submenuHeader: ({ submenu }) =>
         classNames('p-submenu-header', {
             'p-disabled': submenu.disabled
@@ -62,9 +61,6 @@ export const MenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Menu',
         id: null,
-        ariaLabel: null,
-        ariaLabelledBy: null,
-        tabIndex: 0,
         model: null,
         popup: false,
         popupAlignment: 'left',
@@ -73,8 +69,6 @@ export const MenuBase = ComponentBase.extend({
         autoZIndex: true,
         baseZIndex: 0,
         appendTo: null,
-        onFocus: null,
-        onBlur: null,
         transitionOptions: null,
         onShow: null,
         onHide: null,

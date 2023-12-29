@@ -39,6 +39,7 @@ const styles = `
     
     .p-accordion-header-text {
         line-height: 1;
+        width: 100%;
     }
 }
 `;

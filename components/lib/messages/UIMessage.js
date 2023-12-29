@@ -55,7 +55,8 @@ export const UIMessage = React.memo(
 
                 const buttonIconProps = mergeProps(
                     {
-                        className: cx('uimessage.buttonicon')
+                        className: cx('uimessage.buttonicon'),
+                        'aria-hidden': true
                     },
                     getPTOptions('buttonicon', parentParams),
                     ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
@@ -166,9 +167,6 @@ export const UIMessage = React.memo(
                 ref,
                 className: classNames(_className, cx('uimessage.root', { severity })),
                 style,
-                role: 'alert',
-                'aria-live': 'assertive',
-                'aria-atomic': 'true',
                 onClick
             },
             getPTOptions('root', parentParams),

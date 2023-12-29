@@ -78,23 +78,10 @@ export const TabMenu = React.memo(
 
         const updateInkBar = () => {
             if (props.model) {
-                let tabs = navRef.current.children;
-                let inkHighlighted = false;
+                const tabHeader = tabsRef.current[`tab_${activeIndex}`];
 
-                for (let i = 0; i < tabs.length; i++) {
-                    let tab = tabs[i];
-
-                    if (DomHandler.getAttribute(tab, 'data-p-highlight')) {
-                        inkbarRef.current.style.width = DomHandler.getWidth(tab) + 'px';
-                        inkbarRef.current.style.left = DomHandler.getOffset(tab).left - DomHandler.getOffset(navRef.current).left + 'px';
-                        inkHighlighted = true;
-                    }
-                }
-
-                if (!inkHighlighted) {
-                    inkbarRef.current.style.width = '0px';
-                    inkbarRef.current.style.left = '0px';
-                }
+                inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
+                inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
             }
         };
 
@@ -112,107 +99,6 @@ export const TabMenu = React.memo(
         React.useEffect(() => {
             updateInkBar();
         });
-
-        const onKeyDownItem = (event, item, index) => {
-            switch (event.code) {
-                case 'ArrowRight':
-                    navigateToNextItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowLeft':
-                    navigateToPrevItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'Home':
-                    navigateToFirstItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'End':
-                    navigateToLastItem(event.target);
-                    event.preventDefault();
-                    break;
-
-                case 'Space':
-                case 'Enter':
-                    itemClick(event, item, index);
-                    event.preventDefault();
-                    break;
-
-                case 'Tab':
-                    onTabKey();
-                    break;
-
-                default:
-                    break;
-            }
-        };
-
-        const navigateToNextItem = (target) => {
-            const nextItem = findNextItem(target);
-
-            nextItem && setFocusToMenuitem(target, nextItem);
-        };
-
-        const navigateToPrevItem = (target) => {
-            const prevItem = findPrevItem(target);
-
-            prevItem && setFocusToMenuitem(target, prevItem);
-        };
-
-        const navigateToFirstItem = (target) => {
-            const firstItem = findFirstItem(target);
-
-            firstItem && setFocusToMenuitem(target, firstItem);
-        };
-
-        const navigateToLastItem = (target) => {
-            const lastItem = findLastItem(target);
-
-            lastItem && setFocusToMenuitem(target, lastItem);
-        };
-
-        const findNextItem = (item) => {
-            const nextItem = item.parentElement.nextElementSibling;
-
-            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-p-disabled') === true ? findNextItem(nextItem.children[0]) : nextItem.children[0]) : null;
-        };
-
-        const findPrevItem = (item) => {
-            const prevItem = item.parentElement.previousElementSibling;
-
-            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-p-disabled') === true ? findPrevItem(prevItem.children[0]) : prevItem.children[0]) : null;
-        };
-
-        const findFirstItem = () => {
-            const firstSibling = DomHandler.findSingle(navRef.current, '[data-pc-section="menuitem"][data-p-disabled="false"]');
-
-            return firstSibling ? firstSibling.children[0] : null;
-        };
-
-        const findLastItem = () => {
-            const siblings = DomHandler.find(navRef.current, '[data-pc-section="menuitem"][data-p-disabled="false"]');
-
-            return siblings ? siblings[siblings.length - 1].children[0] : null;
-        };
-
-        const setFocusToMenuitem = (target, focusableItem) => {
-            target.tabIndex = '-1';
-            focusableItem.tabIndex = '0';
-            focusableItem.focus();
-        };
-
-        const onTabKey = () => {
-            const activeItem = DomHandler.findSingle(navRef.current, '[data-pc-section="menuitem"][data-p-disabled="false"][data-p-highlight="true"]');
-            const focusedItem = DomHandler.findSingle(navRef.current, '[data-pc-section="action"][tabindex="0"]');
-
-            if (focusedItem !== activeItem.children[0]) {
-                activeItem && (activeItem.children[0].tabIndex = '0');
-                focusedItem.tabIndex = '-1';
-            }
-        };
 
         const createMenuItem = (item, index) => {
             if (item.visible === false) {
@@ -244,11 +130,10 @@ export const TabMenu = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    role: 'menuitem',
-                    tabIndex: active ? '0' : '-1',
                     className: cx('action'),
                     target: target,
-                    onClick: (event) => itemClick(event, item, index)
+                    onClick: (event) => itemClick(event, item, index),
+                    role: 'presentation'
                 },
                 getPTOptions('action', item, index)
             );
@@ -282,13 +167,11 @@ export const TabMenu = React.memo(
                     ref: tabsRef.current[`tab_${index}`],
                     id: key,
                     key,
-                    onKeyDown: (event) => onKeyDownItem(event, item, index),
                     className: cx('menuitem', { _className, active, disabled }),
                     style: style,
-                    role: 'presentation',
-                    'aria-label': _label,
-                    'data-p-highlight': active,
-                    'data-p-disabled': disabled || false,
+                    role: 'tab',
+                    'aria-selected': active,
+                    'aria-expanded': active,
                     'aria-disabled': disabled
                 },
                 getPTOptions('menuitem', item, index)
@@ -307,7 +190,6 @@ export const TabMenu = React.memo(
             const inkbarProps = mergeProps(
                 {
                     ref: inkbarRef,
-                    role: 'none',
                     className: cx('inkbar')
                 },
                 ptm('inkbar')
@@ -315,10 +197,8 @@ export const TabMenu = React.memo(
             const menuProps = mergeProps(
                 {
                     ref: navRef,
-                    'aria-label': props.ariaLabel,
-                    'aria-labelledby': props.ariaLabelledBy,
                     className: cx('menu'),
-                    role: 'menubar'
+                    role: 'tablist'
                 },
                 ptm('menu')
             );
