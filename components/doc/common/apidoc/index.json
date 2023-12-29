@@ -5987,6 +5987,14 @@
                             "description": "Icon of the calendar button."
                         },
                         {
+                            "name": "iconDisplay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"input\" | \"button\"",
+                            "default": "'button'",
+                            "description": "Icon position of the component. This only applies if the showIcon option is set to true."
+                        },
+                        {
                             "name": "iconPos",
                             "optional": true,
                             "readonly": false,
@@ -7806,6 +7814,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "When enabled, displays a button with icon next to input."
+                        },
+                        {
+                            "name": "iconDisplay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"input\" | \"button\"",
+                            "description": "Icon position of the component. This only applies if the showIcon option is set to true."
                         },
                         {
                             "name": "showMillisec",
@@ -14500,6 +14515,19 @@
                             "description": "Callback to execute when action is confirmed."
                         },
                         {
+                            "name": "content",
+                            "parameters": [
+                                {
+                                    "name": "props",
+                                    "optional": false,
+                                    "type": "ContentProps",
+                                    "description": "The values of dialog."
+                                }
+                            ],
+                            "returnType": "ReactNode",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "onClick",
                             "parameters": [
                                 {
@@ -15136,6 +15164,19 @@
                             "description": "Callback to execute when action is confirmed."
                         },
                         {
+                            "name": "content",
+                            "parameters": [
+                                {
+                                    "name": "props",
+                                    "optional": false,
+                                    "type": "ContentProps",
+                                    "description": "The values of dialog."
+                                }
+                            ],
+                            "returnType": "ReactNode",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "onHide",
                             "parameters": [
                                 {
@@ -15370,6 +15411,37 @@
                             "parameters": [],
                             "returnType": "void",
                             "description": "Callback to execute when action is rejected."
+                        }
+                    ]
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "acceptBtnRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLButtonElement>"
+                        },
+                        {
+                            "name": "rejectBtnRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLButtonElement>"
+                        },
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [],
+                            "returnType": "void"
                         }
                     ]
                 },
@@ -15681,43 +15753,9 @@
                             "readonly": false,
                             "type": "ContextMenuPassThroughTransitionType",
                             "description": "Used to control React Transition API."
-                        },
-                        {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Index of the element in tabbing order."
                         }
                     ],
-                    "callbacks": [
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when ContextMenu receives focus."
-                        },
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when ContextMenu loses focus."
-                        }
-                    ]
+                    "callbacks": []
                 },
                 "ContextMenuState": {
                     "description": "Defines current inline state in ContextMenu component.",
@@ -21746,6 +21784,19 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "content",
+                            "parameters": [
+                                {
+                                    "name": "props",
+                                    "optional": false,
+                                    "type": "ContentProps",
+                                    "description": "The values of dialog."
+                                }
+                            ],
+                            "returnType": "ReactNode",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "onClick",
                             "parameters": [
                                 {
@@ -22056,6 +22107,89 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "headerRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "Allows you to specify the header of the content."
+                        },
+                        {
+                            "name": "contentRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "Allows you to specify the content."
+                        },
+                        {
+                            "name": "footerRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "Allows you to specify the footer of the content."
+                        },
+                        {
+                            "name": "closeRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement | HTMLButtonElement>",
+                            "description": "Allows you to specify the close button of the dialog."
+                        },
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ContentPropsMessage",
+                            "description": "Dialog's props values."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [
+                                {
+                                    "name": "e",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback for hiding the dialog."
+                        }
+                    ]
+                },
+                "ContentPropsMessage": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "message",
+                    "props": [
+                        {
+                            "name": "header",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Header of the dialog."
+                        },
+                        {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Content of the dialog."
+                        },
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Message of the dialog."
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         },
@@ -22293,14 +22427,6 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "",
-                            "description": "Index of the element in tabbing order."
-                        },
-                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -22312,34 +22438,7 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": [
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when dock loses focus."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when dock receives focus."
-                        }
-                    ]
+                    "values": []
                 }
             }
         },
@@ -32174,14 +32273,6 @@
                             "description": "Icon of the submenu."
                         },
                         {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "",
-                            "description": "Index of the element in tabbing order."
-                        },
-                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -32193,34 +32284,7 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": [
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        }
-                    ]
+                    "values": []
                 }
             }
         },
@@ -33140,14 +33204,6 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "",
-                            "description": "Index of the element in tabbing order."
-                        },
-                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
@@ -33168,32 +33224,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
                         {
                             "name": "onHide",
                             "parameters": [
@@ -33383,22 +33413,6 @@
                     "description": "Defines valid properties in Menubar component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
-                            "name": "ariaLabel",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Used to define a string that labels the component."
-                        },
-                        {
-                            "name": "ariaLabelledBy",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
-                        },
-                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -33474,34 +33488,7 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": [
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        }
-                    ]
+                    "values": []
                 }
             }
         },
@@ -39072,34 +39059,7 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": [
-                        {
-                            "name": "onHide",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "PanelMenuHeaderItemClickEvent",
-                                    "description": "custom event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a panel gets collapsed."
-                        },
-                        {
-                            "name": "onShow",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "PanelMenuHeaderItemClickEvent",
-                                    "description": "custom event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a panel gets expanded."
-                        }
-                    ]
+                    "values": []
                 }
             }
         },
@@ -39309,24 +39269,6 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current active state of menuitem as a boolean."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "PanelMenuHeaderItemClickEvent": {
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "originalEvent",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "MouseEvent<HTMLElement, MouseEvent>"
-                        },
-                        {
-                            "name": "item",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "MenuItem"
                         }
                     ],
                     "callbacks": []
@@ -47061,32 +47003,6 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
-                        {
                             "name": "onHide",
                             "parameters": [
                                 {
@@ -47605,6 +47521,19 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "content",
+                            "parameters": [
+                                {
+                                    "name": "props",
+                                    "optional": false,
+                                    "type": "ContentProps",
+                                    "description": "The values of toast."
+                                }
+                            ],
+                            "returnType": "ReactNode",
+                            "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "onClick",
                             "parameters": [
                                 {
@@ -47965,6 +47894,41 @@
                             "readonly": false,
                             "type": "PassThroughOptions",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ContentPropsMessage": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "message",
+                    "props": [
+                        {
+                            "name": "summary",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Summary of the toast."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Detail of the toast."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ContentPropsMessage",
+                            "description": "Toast's props values."
                         }
                     ],
                     "callbacks": []
