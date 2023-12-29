@@ -133,7 +133,7 @@ export const Menu = React.memo(
                     break;
 
                 case 'Escape':
-                    if (popup) {
+                    if (props.popup) {
                         DomHandler.focus(targetRef.current);
                         hide(event);
                     }
@@ -155,7 +155,7 @@ export const Menu = React.memo(
         };
 
         const onArrowUpKey = (event) => {
-            if (event.altKey && popup) {
+            if (event.altKey && props.popup) {
                 DomHandler.focus(targetRef.current);
                 hide(event);
                 event.preventDefault();
@@ -181,7 +181,7 @@ export const Menu = React.memo(
             const element = DomHandler.findSingle(menuRef.current, `li[id="${`${focusedOptionIndex}`}"]`);
             const anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section="action"]');
 
-            popup && DomHandler.focus(targetRef.current);
+            props.popup && DomHandler.focus(targetRef.current);
             anchorElement ? anchorElement.click() : element && element.click();
 
             event.preventDefault();
