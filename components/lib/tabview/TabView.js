@@ -159,24 +159,28 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const onTabArrowRightKey = (event) => {
         const nextHeaderAction = findNextHeaderAction(event.target.parentElement);
+
         nextHeaderAction ? changeFocusedTab(nextHeaderAction) : onTabHomeKey(event);
         event.preventDefault();
     };
 
     const onTabArrowLeftKey = (event) => {
         const prevHeaderAction = findPrevHeaderAction(event.target.parentElement);
+
         prevHeaderAction ? changeFocusedTab(prevHeaderAction) : onTabEndKey(event);
         event.preventDefault();
     };
 
     const onTabHomeKey = (event) => {
         const firstHeaderAction = findFirstHeaderAction();
+
         changeFocusedTab(firstHeaderAction);
         event.preventDefault();
     };
 
     const onTabEndKey = (event) => {
         const lastHeaderAction = findLastHeaderAction();
+
         changeFocusedTab(lastHeaderAction);
         event.preventDefault();
     };
@@ -198,6 +202,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const findNextHeaderAction = (tabElement, selfCheck = false) => {
         const headerElement = selfCheck ? tabElement : tabElement.nextElementSibling;
+
         return headerElement
             ? DomHandler.getAttribute(headerElement, 'data-p-disabled') || DomHandler.getAttribute(headerElement, 'data-pc-section') === 'inkbar'
                 ? findNextHeaderAction(headerElement)
@@ -207,6 +212,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const findPrevHeaderAction = (tabElement, selfCheck = false) => {
         const headerElement = selfCheck ? tabElement : tabElement.previousElementSibling;
+
         return headerElement
             ? DomHandler.getAttribute(headerElement, 'data-p-disabled') || DomHandler.getAttribute(headerElement, 'data-pc-section') === 'inkbar'
                 ? findPrevHeaderAction(headerElement)

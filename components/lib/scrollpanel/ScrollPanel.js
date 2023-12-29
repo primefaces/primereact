@@ -172,7 +172,6 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     };
 
     const onKeyDown = (event) => {
-        console.log('hey?');
         if (orientationState === 'vertical') {
             switch (event.code) {
                 case 'ArrowDown': {
