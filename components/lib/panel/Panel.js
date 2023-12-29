@@ -173,7 +173,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-
     const createFooter = () => {
         const footer = ObjectUtils.getJSXElement(props.footer, props);
 
