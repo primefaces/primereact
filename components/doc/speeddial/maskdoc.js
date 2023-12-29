@@ -13,21 +13,21 @@ export function MaskDoc(props) {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
@@ -65,21 +65,21 @@ export default function MaskDemo() {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
@@ -123,21 +123,21 @@ export default function MaskDemo() {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
