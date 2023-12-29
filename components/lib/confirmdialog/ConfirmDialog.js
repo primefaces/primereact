@@ -33,8 +33,8 @@ export const ConfirmDialog = React.memo(
         const confirmProps = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
         const focusElementOnHide = React.useRef(null);
-        const getCurrentProps = () => confirmProps.current || props;
-        const getPropValue = (key) => (confirmProps.current || props)[key];
+        const getCurrentProps = () => Object.assign(props, confirmProps.current);
+        const getPropValue = (key) => Object.assign(props, confirmProps.current)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
 
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
