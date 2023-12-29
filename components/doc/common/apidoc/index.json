@@ -15538,14 +15538,6 @@
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
                         {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "0",
-                            "description": "Index of the element in tabbing order."
-                        },
-                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -15583,32 +15575,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a popup menu is shown."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
                         }
                     ]
                 }
@@ -15715,9 +15681,43 @@
                             "readonly": false,
                             "type": "ContextMenuPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of the element in tabbing order."
                         }
                     ],
-                    "callbacks": []
+                    "callbacks": [
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when ContextMenu receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when ContextMenu loses focus."
+                        }
+                    ]
                 },
                 "ContextMenuState": {
                     "description": "Defines current inline state in ContextMenu component.",
@@ -22297,7 +22297,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "number",
-                            "default": "0",
+                            "default": "",
                             "description": "Index of the element in tabbing order."
                         },
                         {
@@ -22314,19 +22314,6 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when dock receives focus."
-                        },
-                        {
                             "name": "onBlur",
                             "parameters": [
                                 {
@@ -22338,6 +22325,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when dock loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when dock receives focus."
                         }
                     ]
                 }
@@ -32178,7 +32178,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "number",
-                            "default": "0",
+                            "default": "",
                             "description": "Index of the element in tabbing order."
                         },
                         {
@@ -32195,19 +32195,6 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
-                        {
                             "name": "onBlur",
                             "parameters": [
                                 {
@@ -32219,6 +32206,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
                         }
                     ]
                 }
@@ -33060,22 +33060,6 @@
                     "description": "Defines valid properties in Menu component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
-                            "name": "ariaLabel",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Used to define a string that labels the component."
-                        },
-                        {
-                            "name": "ariaLabelledBy",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
-                        },
-                        {
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
@@ -33156,20 +33140,20 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
                             "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
-                        },
-                        {
-                            "name": "tabIndex",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "0",
-                            "description": "Index of the element in tabbing order."
                         },
                         {
                             "name": "unstyled",
@@ -33184,6 +33168,32 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
                         {
                             "name": "onHide",
                             "parameters": [
@@ -33209,32 +33219,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a popup menu is shown."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
                         }
                     ]
                 }
@@ -33399,6 +33383,22 @@
                     "description": "Defines valid properties in Menubar component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Used to define a string that labels the component."
+                        },
+                        {
+                            "name": "ariaLabelledBy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -33429,22 +33429,6 @@
                             "type": "MenuItem[]",
                             "default": "",
                             "description": "An array of menuitems."
-                        },
-                        {
-                            "name": "ariaLabel",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Used to define a string that labels the component."
-                        },
-                        {
-                            "name": "ariaLabelledBy",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
                             "name": "pt",
@@ -33492,19 +33476,6 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
-                        {
                             "name": "onBlur",
                             "parameters": [
                                 {
@@ -33516,6 +33487,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
                         }
                     ]
                 }
@@ -39045,14 +39029,6 @@
                             "description": "Whether multiple tabs can be activated at the same time or not."
                         },
                         {
-                            "name": "expandedKeys",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "PanelMenuExpandedKeys",
-                            "default": "",
-                            "description": "A map of keys to represent the expansion state in controlled mode."
-                        },
-                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
@@ -39098,46 +39074,30 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onClose",
+                            "name": "onHide",
                             "parameters": [
                                 {
-                                    "name": "originalEvent",
+                                    "name": "event",
                                     "optional": false,
-                                    "readonly": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                },
-                                {
-                                    "name": "item",
-                                    "optional": false,
-                                    "readonly": false,
-                                    "type": "MenuItem",
-                                    "description": "Collapsed item."
+                                    "type": "PanelMenuHeaderItemClickEvent",
+                                    "description": "custom event."
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when a tab gets collapsed."
+                            "description": "Callback to invoke when a panel gets collapsed."
                         },
                         {
-                            "name": "onOpen",
+                            "name": "onShow",
                             "parameters": [
                                 {
-                                    "name": "originalEvent",
+                                    "name": "event",
                                     "optional": false,
-                                    "readonly": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                },
-                                {
-                                    "name": "item",
-                                    "optional": false,
-                                    "readonly": false,
-                                    "type": "MenuItem",
-                                    "description": "Expanded item."
+                                    "type": "PanelMenuHeaderItemClickEvent",
+                                    "description": "custom event."
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when a tab gets expanded."
+                            "description": "Callback to invoke when a panel gets expanded."
                         }
                     ]
                 }
@@ -39328,6 +39288,13 @@
                             "readonly": false,
                             "type": "MenuItem[]",
                             "description": "Active item path."
+                        },
+                        {
+                            "name": "animationDisabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the menu is visible or not."
                         }
                     ],
                     "callbacks": []
@@ -39342,6 +39309,24 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PanelMenuHeaderItemClickEvent": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MouseEvent<HTMLElement, MouseEvent>"
+                        },
+                        {
+                            "name": "item",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuItem"
                         }
                     ],
                     "callbacks": []
@@ -44121,14 +44106,6 @@
                             "description": "Specifies the opening type of actions."
                         },
                         {
-                            "name": "ariaLabelledby",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Identifier of the underlying list element."
-                        },
-                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -47084,6 +47061,32 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
+                        {
                             "name": "onHide",
                             "parameters": [
                                 {
@@ -47108,32 +47111,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a popup menu is shown."
-                        },
-                        {
-                            "name": "onFocus",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu receives focus."
-                        },
-                        {
-                            "name": "onBlur",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when menu loses focus."
                         }
                     ]
                 }
