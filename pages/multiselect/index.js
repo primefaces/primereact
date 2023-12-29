@@ -13,7 +13,6 @@ import { ImportDoc } from '@/components/doc/multiselect/importdoc';
 import { InvalidDoc } from '@/components/doc/multiselect/invaliddoc';
 import { PTDoc } from '@/components/doc/multiselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/multiselect/pt/wireframe';
-import { StyleDoc } from '@/components/doc/multiselect/styledoc';
 import { TemplateDoc } from '@/components/doc/multiselect/templatedoc';
 import { StyledDoc } from '@/components/doc/multiselect/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/multiselect/theming/tailwinddoc';
@@ -88,11 +87,7 @@ const MultiSelectDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

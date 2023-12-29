@@ -341,7 +341,7 @@ export default class ObjectUtils {
     }
 
     static isLetter(char) {
-        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+        return /^[a-zA-Z\u00C0-\u017F]$/.test(char);
     }
 
     /**

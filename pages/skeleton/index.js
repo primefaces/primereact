@@ -8,7 +8,6 @@ import { ListDoc } from '@/components/doc/skeleton/listdoc';
 import { PTDoc } from '@/components/doc/skeleton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/skeleton/pt/wireframe';
 import { ShapesDoc } from '@/components/doc/skeleton/shapesdoc';
-import { StyleDoc } from '@/components/doc/skeleton/styledoc';
 import { StyledDoc } from '@/components/doc/skeleton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/skeleton/theming/tailwinddoc';
 
@@ -39,11 +38,7 @@ const SkeletonDemo = () => {
             label: 'DataTable',
             component: DataTableDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

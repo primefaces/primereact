@@ -6,7 +6,6 @@ import { ImportDoc } from '@/components/doc/datascroller/importdoc';
 import { InlineDataScrollerDoc } from '@/components/doc/datascroller/inlinedoc';
 import { LoaderDataScrollerDoc } from '@/components/doc/datascroller/loaderdoc';
 import { PTDoc } from '@/components/doc/datascroller/pt/ptdoc';
-import { StyleDoc } from '@/components/doc/datascroller/styledoc';
 import { StyledDoc } from '@/components/doc/datascroller/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/datascroller/theming/tailwinddoc';
 import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
@@ -33,11 +32,7 @@ const DataScrollerDemo = () => {
             label: 'Loader',
             component: LoaderDataScrollerDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

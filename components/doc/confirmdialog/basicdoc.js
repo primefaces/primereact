@@ -21,6 +21,7 @@ export function BasicDoc(props) {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -32,6 +33,7 @@ export function BasicDoc(props) {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            defaultFocus: 'reject',
             accept,
             reject
         });
@@ -66,6 +68,7 @@ export default function BasicDemo() {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -76,6 +79,7 @@ export default function BasicDemo() {
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject
@@ -116,6 +120,7 @@ export default function BasicDemo() {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -126,6 +131,7 @@ export default function BasicDemo() {
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject

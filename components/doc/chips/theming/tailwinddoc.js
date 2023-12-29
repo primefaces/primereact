@@ -20,7 +20,7 @@ const Tailwind = {
                 'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        inputtoken: {
+        inputToken: {
             className: classNames('py-1.5 px-0', 'flex flex-1 inline-flex')
         },
         input: {

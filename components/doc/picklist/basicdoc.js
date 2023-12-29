@@ -35,7 +35,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
+<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1280px"
     sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
         `,
         javascript: `
@@ -74,7 +74,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
         </div>
     );
@@ -129,7 +129,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
         </div>
     );
@@ -162,7 +162,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px" sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
+                <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1280px" sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

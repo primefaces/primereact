@@ -8,18 +8,20 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
 import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { DialogProps } from '../dialog';
 import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
-export declare type ConfirmDialogPassThroughType<T> = PassThroughType<T, ConfirmDialogThroughMethodOptions>;
+export declare type ConfirmDialogPassThroughType<T> = PassThroughType<T, ConfirmDialogPassThroughMethodOptions>;
+export declare type ConfirmDialogPassThroughTransitionType = ReactCSSTransitionProps | ((options: ConfirmDialogPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface ConfirmDialogThroughMethodOptions {
+export interface ConfirmDialogPassThroughMethodOptions {
     props: ConfirmDialogProps;
     state: ConfirmDialogState;
 }
@@ -84,6 +86,10 @@ export interface ConfirmDialogPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: ConfirmDialogPassThroughTransitionType;
 }
 
 /**
@@ -131,6 +137,11 @@ interface ConfirmDialogOptions {
      * @defaultValue No
      */
     rejectLabel: string;
+    /**
+     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * @defaultValue accept
+     */
+    defaultFocus: string;
     /**
      * Default element created by the component.
      */
@@ -195,10 +206,15 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
      */
     acceptClassName?: string | undefined;
     /**
+     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * @defaultValue accept
+     */
+    defaultFocus?: string | undefined;
+    /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Style class of the element.
      */

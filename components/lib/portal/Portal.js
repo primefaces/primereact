@@ -2,7 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { PortalBase } from './PortalBase';
 
 export const Portal = React.memo((inProps) => {
@@ -29,7 +29,15 @@ export const Portal = React.memo((inProps) => {
     const element = props.element || props.children;
 
     if (element && mountedState) {
-        const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo || document.body;
+        let appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
+
+        if (ObjectUtils.isFunction(appendTo)) {
+            appendTo = appendTo();
+        }
+
+        if (!appendTo) {
+            appendTo = document.body;
+        }
 
         return appendTo === 'self' ? element : ReactDOM.createPortal(element, appendTo);
     }

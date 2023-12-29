@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
 import { EyeIcon } from '../icons/eye';
 import { RefreshIcon } from '../icons/refresh';
@@ -31,8 +30,22 @@ export const Image = React.memo(
         const previewClick = React.useRef(false);
         const previewButton = React.useRef(null);
 
-        useOnEscapeKey(maskRef, props.closeOnEscape, () => {
-            hide();
+        const zoomOutDisabled = scaleState <= 0.5;
+        const zoomInDisabled = scaleState >= 1.5;
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                if (props.closeOnEscape) {
+                    hide();
+                }
+            },
+            when: maskVisibleState,
+            priority: [
+                ESC_KEY_HANDLING_PRIORITIES.IMAGE,
+                // Assume that there could be only one image mask activated, so it's safe
+                // to provide one and the same priority all the time:
+                0
+            ]
         });
 
         const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
@@ -122,12 +135,20 @@ export const Image = React.memo(
         };
 
         const zoomIn = () => {
-            setScaleState((prevScale) => prevScale + 0.1);
+            setScaleState((prevScale) => {
+                if (zoomInDisabled) return prevScale;
+
+                return prevScale + 0.1;
+            });
             previewClick.current = true;
         };
 
         const zoomOut = () => {
-            setScaleState((prevScale) => prevScale - 0.1);
+            setScaleState((prevScale) => {
+                if (zoomOutDisabled) return prevScale;
+
+                return prevScale - 0.1;
+            });
             previewClick.current = true;
         };
 
@@ -179,8 +200,6 @@ export const Image = React.memo(
 
         const createElement = () => {
             const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
-            const zoomOutDisabled = scaleState <= 0.5;
-            const zoomInDisabled = scaleState >= 1.5;
             const downloadIconProps = mergeProps(ptm('downloadIcon'));
             const rotateRightIconProps = mergeProps(ptm('rotateRightIcon'));
             const rotateLeftIconProps = mergeProps(ptm('rotateLeftIcon'));

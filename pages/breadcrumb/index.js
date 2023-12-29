@@ -3,7 +3,6 @@ import { BasicDoc } from '@/components/doc/breadcrumb/basicdoc';
 import { ImportDoc } from '@/components/doc/breadcrumb/importdoc';
 import { PTDoc } from '@/components/doc/breadcrumb/pt/ptdoc';
 import { Wireframe } from '@/components/doc/breadcrumb/pt/wireframe';
-import { StyleDoc } from '@/components/doc/breadcrumb/styledoc';
 import { TemplateDoc } from '@/components/doc/breadcrumb/templatedoc';
 import { StyledDoc } from '@/components/doc/breadcrumb/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/breadcrumb/theming/tailwinddoc';
@@ -27,11 +26,7 @@ const BreadCrumbDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

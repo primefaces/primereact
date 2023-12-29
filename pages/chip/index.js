@@ -5,7 +5,6 @@ import { ImageDoc } from '@/components/doc/chip/imagedoc';
 import { ImportDoc } from '@/components/doc/chip/importdoc';
 import { PTDoc } from '@/components/doc/chip/pt/ptdoc';
 import { Wireframe } from '@/components/doc/chip/pt/wireframe';
-import { StyleDoc } from '@/components/doc/chip/styledoc';
 import { TemplateDoc } from '@/components/doc/chip/templatedoc';
 import { StyledDoc } from '@/components/doc/chip/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/chip/theming/tailwinddoc';
@@ -39,11 +38,7 @@ const ChipDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

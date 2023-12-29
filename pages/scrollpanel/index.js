@@ -6,7 +6,6 @@ import { CustomDemo } from '@/components/doc/scrollpanel/customdoc';
 import { ImportDoc } from '@/components/doc/scrollpanel/importdoc';
 import { PTDoc } from '@/components/doc/scrollpanel/pt/ptdoc';
 import { Wireframe } from '@/components/doc/scrollpanel/pt/wireframe';
-import { StyleDoc } from '@/components/doc/scrollpanel/styledoc';
 import { StyledDoc } from '@/components/doc/scrollpanel/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/scrollpanel/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const ScrollPanelDemo = () => {
             label: 'Custom',
             component: CustomDemo
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

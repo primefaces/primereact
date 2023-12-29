@@ -87,8 +87,8 @@ export default function StickyDemo() {
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <div className="flex flex-wrap gap-2">
-                    <Button onClick={showSticky} label="Sticky" severity="success" />
-                    <Button onClick={clear} label="Clear" />
+                    <Button onClick={showSticky} label="Sticky" />
+                    <Button onClick={clear} label="Clear" severity="secondary" />
                 </div>
             </div>
             <DocSectionCode code={code} />

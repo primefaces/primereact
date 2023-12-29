@@ -118,7 +118,7 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | null | undefined;
+    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}

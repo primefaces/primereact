@@ -740,7 +740,7 @@ export const Dropdown = React.memo(
                     onBlur: onInputBlur,
                     onKeyDown: onInputKeyDown,
                     disabled: props.disabled,
-                    tabIndex: props.tabIndex,
+                    tabIndex: props.tabIndex || 0,
                     ...ariaProps
                 },
                 ptm('input')
@@ -771,6 +771,7 @@ export const Dropdown = React.memo(
                         onFocus: onEditableInputFocus,
                         onBlur: onInputBlur,
                         'aria-haspopup': 'listbox',
+                        tabIndex: props.tabIndex || 0,
                         ...ariaProps
                     },
                     ptm('input')
@@ -782,7 +783,8 @@ export const Dropdown = React.memo(
                 const inputProps = mergeProps(
                     {
                         ref: inputRef,
-                        className: cx('input', { label })
+                        className: cx('input', { label }),
+                        tabIndex: '-1'
                     },
                     ptm('input')
                 );

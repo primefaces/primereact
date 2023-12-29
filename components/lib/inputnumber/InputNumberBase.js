@@ -171,6 +171,7 @@ export const InputNumberBase = ComponentBase.extend({
         prefix: null,
         readOnly: false,
         required: false,
+        roundingMode: undefined,
         showButtons: false,
         size: null,
         step: 1,

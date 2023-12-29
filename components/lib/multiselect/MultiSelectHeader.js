@@ -116,12 +116,19 @@ export const MultiSelectHeader = React.memo((props) => {
         getPTOptions('headerCheckboxIcon')
     );
 
+    const headerCheckboxContainerProps = mergeProps(
+        {
+            className: cx('headerCheckboxContainer')
+        },
+        getPTOptions('headerCheckboxContainer')
+    );
+
     const checkedIcon = props.itemCheckboxIcon || <CheckIcon {...headerCheckboxIconProps} />;
     const itemCheckboxIcon = IconUtils.getJSXIcon(checkedIcon, { ...headerCheckboxIconProps }, { selected: props.selected });
 
     const checkboxElement = props.showSelectAll && (
-        <div className="p-multiselect-select-all">
-            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} pt={ptm('headercheckbox')} unstyled={isUnstyled()} />
+        <div {...headerCheckboxContainerProps}>
+            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} pt={ptm('headerCheckbox')} unstyled={isUnstyled()} />
             {!props.filter && <label {...headerSelectAllLabelProps}>{props.selectAllLabel}</label>}
         </div>
     );

@@ -8,7 +8,6 @@ import { PTDoc } from '@/components/doc/slider/pt/ptdoc';
 import { Wireframe } from '@/components/doc/slider/pt/wireframe';
 import { RangeDoc } from '@/components/doc/slider/rangedoc';
 import { StepDoc } from '@/components/doc/slider/stepdoc';
-import { StyleDoc } from '@/components/doc/slider/styledoc';
 import { StyledDoc } from '@/components/doc/slider/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/slider/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/slider/verticaldoc';
@@ -45,11 +44,7 @@ const SliderDemo = () => {
             label: 'Vertical',
             component: VerticalDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

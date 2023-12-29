@@ -7,10 +7,13 @@ export function TailwindDoc(props) {
         basic: `
 const TRANSITIONS = {
     overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
+        timeout: 150,
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-100',
+            exitActive: '!opacity-0 transition-opacity duration-150 ease-linear'
+        }
     }
 };
 
@@ -84,15 +87,11 @@ const Tailwind = {
             bodycell: ({ props, context }) => ({
                 className: classNames(
                     'text-left border-0 border-b border-solid border-gray-300',
-                    {
-                        'p-2': context?.size === 'small',
-                        'p-5': context?.size === 'large',
-                        'p-4': !context.size
-                    },
+                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
                     'dark:text-white/80 dark:border-blue-900/40', // Dark Mode
                     {
-                        'sticky bg-inherit': props.frozen || props.frozen === '', // Frozen Columns
-                        'border-x border-y': context?.showGridlines
+                        'sticky bg-inherit': props && (props.frozen || props.frozen === ''), // Frozen Columns
+                        'border-x border-y': context.showGridlines
                     }
                 )
             }),
@@ -101,14 +100,10 @@ const Tailwind = {
                     'text-left border-0 border-b border-solid border-gray-300 font-bold',
                     'bg-slate-50 text-slate-700',
                     'transition duration-200',
-                    {
-                        'p-2': context?.size === 'small',
-                        'p-5': context?.size === 'large',
-                        'p-4': !context.size
-                    },
+                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
                     'dark:text-white/80 dark:bg-gray-900 dark:border-blue-900/40', // Dark Mode
                     {
-                        'border-x border-y': context?.showGridlines
+                        'border-x border-y': context.showGridlines
                     }
                 )
             }),

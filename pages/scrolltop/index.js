@@ -6,7 +6,6 @@ import { ElementDoc } from '@/components/doc/scrolltop/elementdoc';
 import { ImportDoc } from '@/components/doc/scrolltop/importdoc';
 import { PTDoc } from '@/components/doc/scrolltop/pt/ptdoc';
 import { Wireframe } from '@/components/doc/scrolltop/pt/wireframe';
-import { StyleDoc } from '@/components/doc/scrolltop/styledoc';
 import { StyledDoc } from '@/components/doc/scrolltop/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/scrolltop/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const ScrollTopDemo = () => {
             label: 'Element',
             component: ElementDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

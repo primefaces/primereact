@@ -95,6 +95,7 @@ export const InputSwitch = React.memo(
                 role: 'checkbox',
                 'aria-checked': checked
             },
+            otherProps,
             ptm('root')
         );
         const hiddenInputWrapperProps = mergeProps(

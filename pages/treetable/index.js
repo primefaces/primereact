@@ -28,7 +28,6 @@ import { MultipleRowsSelectionDoc } from '@/components/doc/treetable/selection/m
 import { SingleRowSelectionDoc } from '@/components/doc/treetable/selection/singledoc';
 import { MultipleColumnsDoc } from '@/components/doc/treetable/sort/multiplecolumnsdoc';
 import { SingleColumnDoc } from '@/components/doc/treetable/sort/singlecolumndoc';
-import { StyleDoc } from '@/components/doc/treetable/styledoc';
 import { TemplateDoc } from '@/components/doc/treetable/templatedoc';
 import { StyledDoc } from '@/components/doc/treetable/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/treetable/theming/tailwinddoc';
@@ -195,11 +194,7 @@ const TreeTableDemo = () => {
             label: 'Context Menu',
             component: ContextMenuDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',
