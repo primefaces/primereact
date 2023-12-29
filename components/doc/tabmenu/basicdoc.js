@@ -16,7 +16,7 @@ export function BasicDoc(props) {
 <TabMenu model={items} />
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 
 export default function BasicDemo() {
@@ -36,7 +36,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 import { MenuItem } from 'primereact/menuitem';
 

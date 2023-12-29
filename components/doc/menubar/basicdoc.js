@@ -129,10 +129,10 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Menubar model={items} />    
+<Menubar model={items} />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { Menubar } from 'primereact/menubar';
 
 export default function BasicDemo() {
@@ -272,7 +272,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 
@@ -404,7 +404,7 @@ export default function BasicDemo() {
             icon: 'pi pi-fw pi-power-off'
         }
     ];
-    
+
     return (
         <div className="card">
             <Menubar model={items} />

@@ -37,6 +37,7 @@ export interface DockPassThroughOptions {
      * Uses to pass attributes to the container's DOM element.
      */
     container?: DockPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+
     /**
      * Uses to pass attributes to the header's DOM element.
      */
@@ -152,6 +153,20 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {PassThroughOptions}
      */
     ptOptions?: PassThroughOptions;
+    /**
+     * Index of the element in tabbing order.
+     */
+    tabIndex?: number | undefined;
+    /**
+     * Callback to invoke when dock receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when dock loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

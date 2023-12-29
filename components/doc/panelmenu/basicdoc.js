@@ -121,10 +121,10 @@ export function BasicDoc(props) {
     ];
     const code = {
         basic: `
-<PanelMenu model={items} className="w-full md:w-25rem" />   
+<PanelMenu model={items} className="w-full md:w-25rem" />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { PanelMenu } from 'primereact/panelmenu';
 
 export default function BasicDemo() {
@@ -253,7 +253,7 @@ export default function BasicDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { PanelMenu } from 'primereact/panelmenu';
 import { MenuItem } from 'primereact/menuitem';
 

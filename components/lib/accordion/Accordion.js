@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { ariaLabel, PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { ChevronDownIcon } from '../icons/chevrondown';
-import { ChevronRightIcon } from '../icons/chevronright';
-import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const AccordionTab = () => {};
 
@@ -53,6 +53,10 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
 
     const onTabHeaderClick = (event, tab, index) => {
+        changeActiveIndex(event, tab, index);
+    };
+
+    const changeActiveIndex = (event, tab, index) => {
         if (!getTabProp(tab, 'disabled')) {
             const selected = isSelected(index);
             let newActiveIndex = null;
@@ -80,6 +84,95 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         }
 
         event.preventDefault();
+    };
+
+    const onTabHeaderKeyDown = (event, tab, index) => {
+        switch (event.code) {
+            case 'ArrowDown':
+                onTabArrowDownKey(event);
+                break;
+
+            case 'ArrowUp':
+                onTabArrowUpKey(event);
+                break;
+
+            case 'Home':
+                onTabHomeKey(event);
+                break;
+
+            case 'End':
+                onTabEndKey(event);
+                break;
+
+            case 'Enter':
+            case 'Space':
+                onTabEnterKey(event, tab, index);
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    const onTabArrowDownKey = (event) => {
+        const nextHeaderAction = findNextHeaderAction(event.target.parentElement.parentElement);
+
+        nextHeaderAction ? changeFocusedTab(nextHeaderAction) : onTabHomeKey(event);
+        event.preventDefault();
+    };
+
+    const onTabArrowUpKey = (event) => {
+        const prevHeaderAction = findPrevHeaderAction(event.target.parentElement.parentElement);
+
+        prevHeaderAction ? changeFocusedTab(prevHeaderAction) : onTabEndKey(event);
+        event.preventDefault();
+    };
+
+    const onTabHomeKey = (event) => {
+        const firstHeaderAction = findFirstHeaderAction();
+
+        changeFocusedTab(firstHeaderAction);
+        event.preventDefault();
+    };
+
+    const onTabEndKey = (event) => {
+        const lastHeaderAction = findLastHeaderAction();
+
+        changeFocusedTab(lastHeaderAction);
+        event.preventDefault();
+    };
+
+    const onTabEnterKey = (event, tab, index) => {
+        changeActiveIndex(event, tab, index);
+        event.preventDefault();
+    };
+
+    const findNextHeaderAction = (tabElement, selfCheck = false) => {
+        const nextTabElement = selfCheck ? tabElement : tabElement.nextElementSibling;
+        const headerElement = DomHandler.findSingle(nextTabElement, '[data-pc-section="header"]');
+
+        return headerElement ? (DomHandler.getAttribute(headerElement, 'data-p-disabled') ? findNextHeaderAction(headerElement.parentElement) : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')) : null;
+    };
+
+    const findPrevHeaderAction = (tabElement, selfCheck = false) => {
+        const prevTabElement = selfCheck ? tabElement : tabElement.previousElementSibling;
+        const headerElement = DomHandler.findSingle(prevTabElement, '[data-pc-section="header"]');
+
+        return headerElement ? (DomHandler.getAttribute(headerElement, 'data-p-disabled') ? findPrevHeaderAction(headerElement.parentElement) : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')) : null;
+    };
+
+    const findFirstHeaderAction = () => {
+        return findNextHeaderAction(elementRef.current.firstElementChild, true);
+    };
+
+    const findLastHeaderAction = () => {
+        return findPrevHeaderAction(elementRef.current.lastElementChild, true);
+    };
+
+    const changeFocusedTab = (element) => {
+        if (element) {
+            DomHandler.focus(element);
+        }
     };
 
     const isSelected = (index) => {
@@ -116,13 +209,13 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), tabCProps) : <span {...headerTitleProps}>{ObjectUtils.getJSXElement(getTabProp(tab, 'header'), tabCProps)}</span>;
         const headerIconProps = mergeProps(
             {
-                className: cx('accordiontab.headericon')
+                'aria-hidden': 'true',
+                className: cx('tab.headericon')
             },
             getTabPT(tab, 'headericon', index)
         );
         const icon = selected ? props.collapseIcon || <ChevronDownIcon {...headerIconProps} /> : props.expandIcon || <ChevronRightIcon {...headerIconProps} />;
         const toggleIcon = IconUtils.getJSXIcon(icon, { ...headerIconProps }, { props, selected });
-        const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const headerProps = mergeProps(
             {
                 className: classNames(getTabProp(tab, 'headerClassName'), getTabProp(tab, 'className'), cx('accordiontab.header', { selected, getTabProp, tab })),
@@ -137,11 +230,12 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             {
                 id: headerId,
                 href: '#' + ariaControls,
-                className: cx('accordiontab.headeraction'),
-                role: 'tab',
+                className: cx('tab.headeraction'),
+                role: 'button',
                 tabIndex,
                 onClick: (e) => onTabHeaderClick(e, tab, index),
-                'aria-label': label,
+                onKeyDown: (e) => onTabHeaderKeyDown(e, tab, index),
+                'aria-disabled': getTabProp(tab, 'disabled'),
                 'aria-controls': ariaControls,
                 'aria-expanded': selected
             },

@@ -100,6 +100,10 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const onTabHeaderClick = (event, tab, index) => {
+        changeActiveIndex(event, tab, index);
+    };
+
+    const changeActiveIndex = (event, tab, index) => {
         if (event) {
             event.preventDefault();
         }
@@ -114,12 +118,120 @@ export const TabView = React.forwardRef((inProps, ref) => {
             else setActiveIndexState(index);
         }
 
-        updateScrollBar(index);
+        updateScrollBar({ index });
     };
 
     const onKeyDown = (event, tab, index) => {
-        if (event.key === 'Enter') {
-            onTabHeaderClick(event, tab, index);
+        switch (event.code) {
+            case 'ArrowLeft':
+                onTabArrowLeftKey(event);
+                break;
+
+            case 'ArrowRight':
+                onTabArrowRightKey(event);
+                break;
+
+            case 'Home':
+                onTabHomeKey(event);
+                break;
+
+            case 'End':
+                onTabEndKey(event);
+                break;
+
+            case 'PageDown':
+                onPageDownKey(event);
+                break;
+
+            case 'PageUp':
+                onPageUpKey(event);
+                break;
+
+            case 'Enter':
+            case 'Space':
+                onTabEnterKey(event, tab, index);
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    const onTabArrowRightKey = (event) => {
+        const nextHeaderAction = findNextHeaderAction(event.target.parentElement);
+
+        nextHeaderAction ? changeFocusedTab(nextHeaderAction) : onTabHomeKey(event);
+        event.preventDefault();
+    };
+
+    const onTabArrowLeftKey = (event) => {
+        const prevHeaderAction = findPrevHeaderAction(event.target.parentElement);
+
+        prevHeaderAction ? changeFocusedTab(prevHeaderAction) : onTabEndKey(event);
+        event.preventDefault();
+    };
+
+    const onTabHomeKey = (event) => {
+        const firstHeaderAction = findFirstHeaderAction();
+
+        changeFocusedTab(firstHeaderAction);
+        event.preventDefault();
+    };
+
+    const onTabEndKey = (event) => {
+        const lastHeaderAction = findLastHeaderAction();
+
+        changeFocusedTab(lastHeaderAction);
+        event.preventDefault();
+    };
+
+    const onPageDownKey = (event) => {
+        updateScrollBar({ index: React.Children.count(props.children) - 1 });
+        event.preventDefault();
+    };
+
+    const onPageUpKey = (event) => {
+        updateScrollBar({ index: 0 });
+        event.preventDefault();
+    };
+
+    const onTabEnterKey = (event, tab, index) => {
+        changeActiveIndex(event, tab, index);
+        event.preventDefault();
+    };
+
+    const findNextHeaderAction = (tabElement, selfCheck = false) => {
+        const headerElement = selfCheck ? tabElement : tabElement.nextElementSibling;
+
+        return headerElement
+            ? DomHandler.getAttribute(headerElement, 'data-p-disabled') || DomHandler.getAttribute(headerElement, 'data-pc-section') === 'inkbar'
+                ? findNextHeaderAction(headerElement)
+                : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')
+            : null;
+    };
+
+    const findPrevHeaderAction = (tabElement, selfCheck = false) => {
+        const headerElement = selfCheck ? tabElement : tabElement.previousElementSibling;
+
+        return headerElement
+            ? DomHandler.getAttribute(headerElement, 'data-p-disabled') || DomHandler.getAttribute(headerElement, 'data-pc-section') === 'inkbar'
+                ? findPrevHeaderAction(headerElement)
+                : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')
+            : null;
+    };
+
+    const findFirstHeaderAction = () => {
+        return findNextHeaderAction(navRef.current.firstElementChild, true);
+    };
+
+    const findLastHeaderAction = () => {
+        return findPrevHeaderAction(navRef.current.lastElementChild, true);
+    };
+
+    const changeFocusedTab = (element) => {
+        if (element) {
+            DomHandler.focus(element);
+            updateScrollBar({ element });
         }
     };
 
@@ -130,8 +242,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
         inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
     };
 
-    const updateScrollBar = (index) => {
-        let tabHeader = tabsRef.current[`tab_${index}`];
+    const updateScrollBar = ({ index, element }) => {
+        let tabHeader = element || tabsRef.current[`tab_${index}`];
 
         if (tabHeader && tabHeader.scrollIntoView) {
             tabHeader.scrollIntoView({ block: 'nearest' });
@@ -199,7 +311,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (props.activeIndex !== activeIndexState) {
-            updateScrollBar(props.activeIndex);
+            updateScrollBar({ index: props.activeIndex });
         }
     }, [props.activeIndex]);
 
@@ -213,8 +325,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const selected = isSelected(index);
         const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable, closeIcon } = TabPanelBase.getCProps(tab);
         const headerId = idState + '_header_' + index;
-        const ariaControls = idState + '_content_' + index;
-        const tabIndex = disabled ? null : 0;
+        const ariaControls = idState + index + '_content';
+        const tabIndex = disabled || !selected ? -1 : 0;
         const leftIconElement = leftIcon && IconUtils.getJSXIcon(leftIcon, undefined, { props });
         const headerTitleProps = mergeProps(
             {
@@ -236,6 +348,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 tabIndex,
                 'aria-controls': ariaControls,
                 'aria-selected': selected,
+                'aria-disabled': disabled,
                 onClick: (e) => onTabHeaderClick(e, tab, index),
                 onKeyDown: (e) => onKeyDown(e, tab, index)
             },
@@ -321,6 +434,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const inkbarProps = mergeProps(
             {
                 ref: inkbarRef,
+                'aria-hidden': 'true',
+                role: 'presentation',
                 className: cx('inkbar')
             },
             ptm('inkbar')
@@ -347,7 +462,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const contents = React.Children.map(props.children, (tab, index) => {
             if (shouldUseTab(tab) && (!props.renderActiveOnly || isSelected(index))) {
                 const selected = isSelected(index);
-                const contentId = idState + '_content_' + index;
+                const contentId = idState + index + '_content';
                 const ariaLabelledBy = idState + '_header_' + index;
                 const contentProps = mergeProps(
                     {
@@ -355,8 +470,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
                         className: cx('tab.content', { props, selected, getTabProp, tab, isSelected, shouldUseTab, index }),
                         style: sx('tab.content', { props, getTabProp, tab, isSelected, shouldUseTab, index }),
                         role: 'tabpanel',
-                        'aria-labelledby': ariaLabelledBy,
-                        'aria-hidden': !selected
+                        'aria-labelledby': ariaLabelledBy
                     },
                     TabPanelBase.getCOtherProps(tab),
                     getTabPT(tab, 'root', index),
@@ -371,7 +485,12 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const createPrevButton = () => {
-        const prevIconProps = mergeProps(ptm('previcon'));
+        const prevIconProps = mergeProps(
+            {
+                'aria-hidden': 'true'
+            },
+            ptm('previcon')
+        );
         const icon = props.prevButton || <ChevronLeftIcon {...prevIconProps} />;
         const leftIcon = IconUtils.getJSXIcon(icon, { ...prevIconProps }, { props });
         const prevButtonProps = mergeProps(

@@ -28,6 +28,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
             ref: elementRef,
             style: sx('root'),
             className: cx('root', { horizontal, vertical }),
+            'aria-orientation': props.layout,
             role: 'separator'
         },
         DividerBase.getOtherProps(props),

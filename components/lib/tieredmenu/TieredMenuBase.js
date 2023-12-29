@@ -13,20 +13,15 @@ const classes = {
             },
             props.className
         ),
-    separator: 'p-menu-separator',
+    separator: 'p-menuitem-separator',
     icon: ({ _icon }) => classNames('p-menuitem-icon', _icon),
+    content: 'p-menuitem-content',
     label: 'p-menuitem-text',
     submenuIcon: 'p-submenu-icon',
-    action: ({ disabled }) => classNames('p-menuitem-link', { 'p-disabled': disabled }),
-    menuitem: ({ _className, active }) => classNames('p-menuitem', { 'p-menuitem-active': active }, _className),
-    menu: ({ subProps: props }) =>
-        classNames({
-            'p-submenu-list': !props.root
-        }),
-    submenu: ({ subProps: props }) =>
-        classNames({
-            'p-submenu-list': !props.root
-        }),
+    action: 'p-menuitem-link',
+    menuitem: ({ _className, active, focused, disabled }) => classNames('p-menuitem', { 'p-menuitem-active p-highlight': active, 'p-focus': focused, 'p-disabled': disabled }, _className),
+    menu: 'p-tieredmenu-root-list',
+    submenu: 'p-submenu-list',
     transition: 'p-connected-overlay'
 };
 
@@ -41,20 +36,20 @@ const styles = `
     .p-tieredmenu-overlay {
         position: absolute;
     }
-    
+
     .p-tieredmenu ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
-    
+
     .p-tieredmenu .p-submenu-list {
         position: absolute;
         min-width: 100%;
         z-index: 1;
         display: none;
     }
-    
+
     .p-tieredmenu .p-menuitem-link {
         cursor: pointer;
         display: flex;
@@ -63,25 +58,25 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     .p-tieredmenu .p-menuitem-text {
         line-height: 1;
     }
-    
+
     .p-tieredmenu .p-menuitem {
         position: relative;
     }
-    
+
     .p-tieredmenu .p-menuitem-link .p-submenu-icon {
         margin-left: auto;
     }
-    
+
     .p-tieredmenu .p-menuitem-active > .p-submenu-list {
         display: block;
         left: 100%;
         top: 0;
     }
-    
+
     .p-tieredmenu .p-menuitem-active > .p-submenu-list-flipped {
         left: -100%;
     }
@@ -103,6 +98,8 @@ export const TieredMenuBase = ComponentBase.extend({
         appendTo: null,
         transitionOptions: null,
         onShow: null,
+        onFocus: null,
+        onBlur: null,
         onHide: null,
         submenuIcon: null,
         children: undefined

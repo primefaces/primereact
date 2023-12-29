@@ -83,6 +83,12 @@ export function AccessibilityDoc() {
                                 </td>
                                 <td>Moves focus to the last menuitem within the submenu.</td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <i>any printable character </i>
+                                </td>
+                                <td>Moves focus to the menuitem whose label starts with the characters being typed.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -21,6 +21,7 @@ export const Splitter = React.memo(
         const prevPanelElement = React.useRef(null);
         const nextPanelElement = React.useRef(null);
         const prevPanelSize = React.useRef(null);
+        const prevSize = React.useRef(null);
         const prevPanelSizeNew = React.useRef(null);
         const nextPanelSize = React.useRef(null);
         const nextPanelSizeNew = React.useRef(null);
@@ -166,6 +167,7 @@ export const Splitter = React.memo(
                 nextPanelSizeNew.current = newNextPanelSize;
                 prevPanelElement.current.style.flexBasis = 'calc(' + newPrevPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
                 nextPanelElement.current.style.flexBasis = 'calc(' + newNextPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
+                prevSize.current = parseFloat(newPrevPanelSize).toFixed(4);
             }
         };
 
@@ -226,7 +228,9 @@ export const Splitter = React.memo(
         React.useEffect(() => {
             const panelElements = [...elementRef.current.children].filter((child) => DomHandler.getAttribute(child, 'data-pc-section') === 'splitterpanel.root');
 
-            panelElements.map((panelElement) => {
+            panelElements.map((panelElement, i) => {
+                prevSize.current = panelSize(panelSizes, 0);
+
                 if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-name='splitter']") && DomHandler.find(panelElement, "[data-pc-section='root']"))) {
                     !isUnstyled() && DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
                     panelElement.setAttribute('data-p-splitter-panel-nested', true);
@@ -259,7 +263,10 @@ export const Splitter = React.memo(
 
             const gutterHandlerProps = mergeProps(
                 {
-                    className: cx('gutterHandler')
+                    tabIndex: 0,
+                    className: cx('gutterHandler'),
+                    'aria-orientation': props.layout,
+                    'aria-valuenow': prevSize.current
                 },
                 ptm('gutterHandler')
             );

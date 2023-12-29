@@ -26,21 +26,21 @@ const styles = `
     .p-steps {
         position: relative;
     }
-    
-    .p-steps ul {
+
+    .p-steps ol {
         padding: 0;
         margin: 0;
         list-style-type: none;
         display: flex;
     }
-    
+
     .p-steps-item {
         position: relative;
         display: flex;
         justify-content: center;
         flex: 1 1 auto;
     }
-    
+
     .p-steps-item .p-menuitem-link {
         display: inline-flex;
         flex-direction: column;
@@ -48,25 +48,25 @@ const styles = `
         overflow: hidden;
         text-decoration: none;
     }
-    
+
     .p-steps.p-readonly .p-steps-item {
         cursor: auto;
     }
-    
+
     .p-steps-item.p-steps-current .p-menuitem-link {
         cursor: default;
     }
-    
+
     .p-steps-title {
         white-space: nowrap;
     }
-    
+
     .p-steps-number {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .p-steps-title {
         display: block;
     }
