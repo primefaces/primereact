@@ -205,7 +205,7 @@ export const TableBody = React.memo(
             if (prevRowData) {
                 const previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, props.groupRowsBy);
 
-                return currentRowFieldData !== previousRowFieldData;
+                return !ObjectUtils.deepEquals(currentRowFieldData, previousRowFieldData);
             } else {
                 return true;
             }
@@ -221,7 +221,7 @@ export const TableBody = React.memo(
                 if (nextRowData) {
                     const nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, props.groupRowsBy);
 
-                    return currentRowFieldData !== nextRowFieldData;
+                    return !ObjectUtils.deepEquals(currentRowFieldData, nextRowFieldData);
                 } else {
                     return true;
                 }

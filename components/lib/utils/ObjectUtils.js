@@ -1,7 +1,10 @@
 export default class ObjectUtils {
     static equals(obj1, obj2, field) {
-        if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object') return this.resolveFieldData(obj1, field) === this.resolveFieldData(obj2, field);
-        else return this.deepEquals(obj1, obj2);
+        if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object') {
+            return this.deepEquals(this.resolveFieldData(obj1, field), this.resolveFieldData(obj2, field));
+        }
+
+        return this.deepEquals(obj1, obj2);
     }
 
     /**
