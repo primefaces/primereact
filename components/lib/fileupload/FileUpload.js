@@ -292,8 +292,7 @@ export const FileUpload = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.which === 13) {
-                // enter
+            if (event.code === 'Enter') {
                 choose();
             }
         };
@@ -529,7 +528,12 @@ export const FileUpload = React.memo(
 
         const createProgressBarContent = () => {
             if (props.progressBarTemplate) {
-                return ObjectUtils.getJSXElement(props.progressBarTemplate, props);
+                const defaultProgressBarTemplateOptions = {
+                    progress: progressState,
+                    props
+                };
+
+                return ObjectUtils.getJSXElement(props.progressBarTemplate, defaultProgressBarTemplateOptions);
             }
 
             return <ProgressBar value={progressState} showValue={false} pt={ptm('progressbar')} __parentMetadata={{ parent: metaData }} />;
