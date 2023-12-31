@@ -24719,6 +24719,27 @@
                     ],
                     "callbacks": []
                 },
+                "FileUploadProgressBarTemplateOptions": {
+                    "description": "Custom file upload progressbar template options",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "progress",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current progress state as a number."
+                        },
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FileUploadProps",
+                            "description": "The props passed to the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ItemTemplateOptions": {
                     "description": "Custom item template options",
                     "relatedProp": "",
