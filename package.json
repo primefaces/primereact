@@ -33,7 +33,7 @@
         "formik": "^2.4.5",
         "fs-extra": "^11.2.0",
         "jspdf": "2.5.1",
-        "jspdf-autotable": "3.7.1",
+        "jspdf-autotable": "3.8.1",
         "next": "12.3.4",
         "path": "^0.12.7",
         "primeflex": "^3.3.1",
