@@ -126,6 +126,8 @@ export const OrderListControls = React.memo((props) => {
         }
     };
 
+    const isMoveDisabled = ObjectUtils.isEmpty(props.value) || ObjectUtils.isEmpty(props.selection);
+
     const controlsProps = mergeProps(
         {
             className: cx('controls')
@@ -139,6 +141,7 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveUpIcon,
             onClick: moveUp,
+            disabled: isMoveDisabled,
             'aria-label': ariaLabel('moveUp'),
             __parentMetadata: {
                 parent: props.metaData
@@ -153,6 +156,7 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveTopIcon,
             onClick: moveTop,
+            disabled: isMoveDisabled,
             'aria-label': ariaLabel('moveTop'),
             __parentMetadata: {
                 parent: props.metaData
@@ -167,6 +171,7 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveDownIcon,
             onClick: moveDown,
+            disabled: isMoveDisabled,
             'aria-label': ariaLabel('moveDown'),
             __parentMetadata: {
                 parent: props.metaData
@@ -181,6 +186,7 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveBottomIcon,
             onClick: moveBottom,
+            disabled: isMoveDisabled,
             'aria-label': ariaLabel('moveBottom'),
             __parentMetadata: {
                 parent: props.metaData
