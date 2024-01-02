@@ -222,7 +222,13 @@ export default class ObjectUtils {
     static isValidChild(child, type, validTypes) {
         /* eslint-disable */
         if (child) {
-            const childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
+            let childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
+
+            // SSR next.js >= 13 (app router)
+            if (!childType && child?.type?._payload?.value) {
+                childType = child.type._payload.value.find((v) => v === type);
+            }
+
             const isValid = childType === type;
 
             try {

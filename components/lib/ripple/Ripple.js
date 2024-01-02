@@ -6,6 +6,7 @@ import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
     React.forwardRef((inProps, ref) => {
+        const [isMounted, setMounted] = React.useState(false);
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
@@ -77,13 +78,20 @@ export const Ripple = React.memo(
             getTarget: () => targetRef.current
         }));
 
-        useMountEffect(() => {
-            if (inkRef.current) {
+        useUpdateEffect(() => {
+            if (isRippleActive) {
+                // SSR next.js > 13
+                setMounted(true);
+            }
+        }, [isRippleActive]);
+
+        useUpdateEffect(() => {
+            if (isRippleActive && isMounted && inkRef.current) {
                 targetRef.current = getTarget();
                 setDimensions();
                 bindEvents();
             }
-        });
+        }, [isRippleActive, isMounted]);
 
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {
@@ -100,7 +108,7 @@ export const Ripple = React.memo(
             }
         });
 
-        if (!isRippleActive) return null;
+        if (!isRippleActive || !isMounted) return null;
 
         const rootProps = mergeProps(
             {
