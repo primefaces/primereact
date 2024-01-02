@@ -25,12 +25,22 @@ exports[`ScrollPanel ScrollPanel full settings 1`] = `
       </div>
     </div>
     <div
+      aria-controls="scrollpanel_content"
+      aria-orientation="horizontal"
+      aria-valuenow="0"
       class="p-scrollpanel-bar p-scrollpanel-bar-x"
       data-pc-section="barx"
+      role="scrollbar"
+      tabindex="0"
     />
     <div
+      aria-controls="scrollpanel_content"
+      aria-orientation="vertical"
+      aria-valuenow="0"
       class="p-scrollpanel-bar p-scrollpanel-bar-y"
       data-pc-section="bary"
+      role="scrollbar"
+      tabindex="0"
     />
   </div>
 </div>
@@ -61,12 +71,22 @@ exports[`ScrollPanel refresh method 1`] = `
       </div>
     </div>
     <div
+      aria-controls="scrollpanel_content"
+      aria-orientation="horizontal"
+      aria-valuenow="0"
       class="p-scrollpanel-bar p-scrollpanel-bar-x"
       data-pc-section="barx"
+      role="scrollbar"
+      tabindex="0"
     />
     <div
+      aria-controls="scrollpanel_content"
+      aria-orientation="vertical"
+      aria-valuenow="0"
       class="p-scrollpanel-bar p-scrollpanel-bar-y"
       data-pc-section="bary"
+      role="scrollbar"
+      tabindex="0"
     />
   </div>
 </div>
