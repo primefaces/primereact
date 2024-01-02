@@ -241,11 +241,16 @@ export const CascadeSelect = React.memo(
         overflow: ${props.scrollHeight ? 'auto' : ''};
     }
 
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist {
-        position: relative;
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist-wrapper {
+        position:relative;
+        left:0 !important;
     }
 
-    .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active > .p-cascadeselect-sublist {
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-sublist {
+        overflow: hidden !important;
+    }
+
+    .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active  .p-cascadeselect-sublist {
         left: 0;
         box-shadow: none;
         border-radius: 0;

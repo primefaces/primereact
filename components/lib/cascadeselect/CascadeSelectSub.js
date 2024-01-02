@@ -18,14 +18,14 @@ export const CascadeSelectSub = React.memo((props) => {
     };
 
     const position = () => {
-        const parentItem = elementRef.current.parentElement;
+        const parentItem = elementRef.current.parentElement.parentElement;
         const containerOffset = DomHandler.getOffset(parentItem);
         const viewport = DomHandler.getViewport();
         const sublistWidth = elementRef.current.offsetParent ? elementRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(element);
         const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
 
         if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
-            elementRef.current.style.left = '-100%';
+            elementRef.current.parentElement.style.left = '-100%';
         }
     };
 
@@ -268,16 +268,34 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const submenu = createMenu();
-    const listProps = mergeProps(
-        {
-            ref: elementRef,
-            className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
-            role: 'listbox',
-            'aria-orientation': 'horizontal'
-        },
-        props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
-    );
+    const createList = () => {
+        const listProps = mergeProps(
+            {
+                ref: elementRef,
+                className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
+                role: 'listbox',
+                'aria-orientation': 'horizontal'
+            },
+            props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
+        );
+        const submenu = createMenu();
 
-    return <ul {...listProps}>{submenu}</ul>;
+        return <ul {...listProps}>{submenu}</ul>;
+    };
+
+    const createElement = () => {
+        const list = createList();
+        const listWrapperProps = mergeProps(
+            {
+                className: cx('sublistWrapper')
+            },
+            getPTOptions('sublistWrapper')
+        );
+
+        return props.level === 0 ? list : <div {...listWrapperProps}>{list}</div>;
+    };
+
+    const element = createElement();
+
+    return element;
 });
