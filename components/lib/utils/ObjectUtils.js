@@ -224,7 +224,7 @@ export default class ObjectUtils {
         if (child) {
             let childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
 
-            // SSR next.js >= 13 (app router)
+            // for App Router in Next.js ^14,
             if (!childType && child?.type?._payload?.value) {
                 childType = child.type._payload.value.find((v) => v === type);
             }

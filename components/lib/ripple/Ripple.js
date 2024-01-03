@@ -79,7 +79,7 @@ export const Ripple = React.memo(
         }));
 
         useMountEffect(() => {
-            // SSR next.js > 13
+            // for App Router in Next.js ^14
             setMounted(true);
         });
 
