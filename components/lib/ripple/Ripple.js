@@ -106,7 +106,7 @@ export const Ripple = React.memo(
             }
         });
 
-        if (!isRippleActive || !isMounted) return null;
+        if (!isRippleActive) return null;
 
         const rootProps = mergeProps(
             {
