@@ -53,7 +53,8 @@ const Tailwind = {
                     'text-gray-700': !context.focused && !context.selected,
                     'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
                     'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
+                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected,
+                    'opacity-60 select-none pointer-events-none cursor-default': context.disabled
                 }
             )
         }),
