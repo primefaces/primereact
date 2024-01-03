@@ -78,20 +78,18 @@ export const Ripple = React.memo(
             getTarget: () => targetRef.current
         }));
 
-        useUpdateEffect(() => {
-            if (isRippleActive) {
-                // SSR next.js > 13
-                setMounted(true);
-            }
-        }, [isRippleActive]);
+        useMountEffect(() => {
+            // SSR next.js > 13
+            setMounted(true);
+        });
 
         useUpdateEffect(() => {
-            if (isRippleActive && isMounted && inkRef.current) {
+            if (isMounted && inkRef.current) {
                 targetRef.current = getTarget();
                 setDimensions();
                 bindEvents();
             }
-        }, [isRippleActive, isMounted]);
+        }, [isMounted]);
 
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {
