@@ -6,6 +6,7 @@ import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
     React.forwardRef((inProps, ref) => {
+        const [isMounted, setMounted] = React.useState(false);
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
@@ -79,12 +80,17 @@ export const Ripple = React.memo(
         }));
 
         useMountEffect(() => {
-            if (inkRef.current) {
+            // for App Router in Next.js ^14
+            setMounted(true);
+        });
+
+        useUpdateEffect(() => {
+            if (isMounted && inkRef.current) {
                 targetRef.current = getTarget();
                 setDimensions();
                 bindEvents();
             }
-        });
+        }, [isMounted]);
 
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {
