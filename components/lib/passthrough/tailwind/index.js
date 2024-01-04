@@ -341,32 +341,32 @@ const Tailwind = {
                               exitActive: '!opacity-0 !scale-75 translate-x-0 -translate-y-full translate-z-0'
                           }
                         : props.position === 'bottom'
-                        ? {
-                              enter: 'opacity-0 scale-75 translate-y-full',
-                              enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
-                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                              exitActive: '!opacity-0 !scale-75 translate-x-0 translate-y-full translate-z-0'
-                          }
-                        : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
-                        ? {
-                              enter: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
-                              enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
-                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                              exitActive: '!opacity-0 !scale-75 -translate-x-full translate-y-0 translate-z-0'
-                          }
-                        : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
-                        ? {
-                              enter: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
-                              enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
-                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                              exitActive: '!opacity-0 !scale-75 translate-x-full translate-y-0 translate-z-0'
-                          }
-                        : {
-                              enter: 'opacity-0 scale-75',
-                              enterActive: '!opacity-100 !scale-100 transition-all duration-200 ease-out',
-                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                              exitActive: '!opacity-0 !scale-75'
-                          }
+                          ? {
+                                enter: 'opacity-0 scale-75 translate-y-full',
+                                enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
+                                exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                                exitActive: '!opacity-0 !scale-75 translate-x-0 translate-y-full translate-z-0'
+                            }
+                          : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
+                            ? {
+                                  enter: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
+                                  enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                                  exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                                  exitActive: '!opacity-0 !scale-75 -translate-x-full translate-y-0 translate-z-0'
+                              }
+                            : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
+                              ? {
+                                    enter: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
+                                    enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                                    exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                                    exitActive: '!opacity-0 !scale-75 translate-x-full translate-y-0 translate-z-0'
+                                }
+                              : {
+                                    enter: 'opacity-0 scale-75',
+                                    enterActive: '!opacity-100 !scale-100 transition-all duration-200 ease-out',
+                                    exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                                    exitActive: '!opacity-0 !scale-75'
+                                }
             };
         }
     },
@@ -442,34 +442,34 @@ const Tailwind = {
                           exitActive: '!opacity-0'
                       }
                     : props.position === 'top'
-                    ? {
-                          enter: 'translate-x-0 -translate-y-full translate-z-0',
-                          enterActive: '!translate-y-0 transition-transform duration-300',
-                          exit: 'translate-y-0 transition-transform duration-300',
-                          exitActive: 'translate-x-0 !-translate-y-full translate-z-0'
-                      }
-                    : props.position === 'bottom'
-                    ? {
-                          enter: 'translate-x-0 translate-y-full translate-z-0',
-                          enterActive: '!translate-y-0 transition-transform duration-300',
-                          exit: 'translate-y-0 transition-transform duration-300',
-                          exitActive: 'translate-x-0 !translate-y-full translate-z-0'
-                      }
-                    : props.position === 'left'
-                    ? {
-                          enter: '-translate-x-full translate-y-0 translate-z-0',
-                          enterActive: '!translate-x-0 transition-transform duration-300',
-                          exit: 'translate-x-0 transition-transform duration-300',
-                          exitActive: '!-translate-x-full translate-y-0 translate-z-0'
-                      }
-                    : props.position === 'right'
-                    ? {
-                          enter: 'translate-x-full translate-y-0 translate-z-0',
-                          enterActive: '!translate-x-0 transition-transform duration-300',
-                          exit: 'translate-x-0 transition-transform duration-300',
-                          exitActive: '!translate-x-full translate-y-0 translate-z-0'
-                      }
-                    : undefined
+                      ? {
+                            enter: 'translate-x-0 -translate-y-full translate-z-0',
+                            enterActive: '!translate-y-0 transition-transform duration-300',
+                            exit: 'translate-y-0 transition-transform duration-300',
+                            exitActive: 'translate-x-0 !-translate-y-full translate-z-0'
+                        }
+                      : props.position === 'bottom'
+                        ? {
+                              enter: 'translate-x-0 translate-y-full translate-z-0',
+                              enterActive: '!translate-y-0 transition-transform duration-300',
+                              exit: 'translate-y-0 transition-transform duration-300',
+                              exitActive: 'translate-x-0 !translate-y-full translate-z-0'
+                          }
+                        : props.position === 'left'
+                          ? {
+                                enter: '-translate-x-full translate-y-0 translate-z-0',
+                                enterActive: '!translate-x-0 transition-transform duration-300',
+                                exit: 'translate-x-0 transition-transform duration-300',
+                                exitActive: '!-translate-x-full translate-y-0 translate-z-0'
+                            }
+                          : props.position === 'right'
+                            ? {
+                                  enter: 'translate-x-full translate-y-0 translate-z-0',
+                                  enterActive: '!translate-x-0 transition-transform duration-300',
+                                  exit: 'translate-x-0 transition-transform duration-300',
+                                  exitActive: '!translate-x-full translate-y-0 translate-z-0'
+                              }
+                            : undefined
             };
         }
     },
