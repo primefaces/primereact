@@ -57,13 +57,13 @@ export function HookFormDoc(props) {
                             Mushroom
                         </label>
 
-                        <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
-                        <label htmlFor="f6" className="ml-1 mr-3">
+                        <RadioButton inputId="f7" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                        <label htmlFor="f7" className="ml-1 mr-3">
                             Pepper
                         </label>
 
-                        <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
-                        <label htmlFor="f7" className="ml-1 mr-3">
+                        <RadioButton inputId="f8" {...field} value="Onion" checked={field.value === 'Onion'} />
+                        <label htmlFor="f8" className="ml-1 mr-3">
                             Onion
                         </label>
                     </div>
@@ -135,13 +135,13 @@ export default function HookFormDoc() {
                                                 Mushroom
                                             </label>
 
-                                            <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
-                                            <label htmlFor="f6" className="ml-1 mr-3">
+                                            <RadioButton inputId="f7" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                                            <label htmlFor="f7" className="ml-1 mr-3">
                                                 Pepper
                                             </label>
 
-                                            <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
-                                            <label htmlFor="f7" className="ml-1 mr-3">
+                                            <RadioButton inputId="f8" {...field} value="Onion" checked={field.value === 'Onion'} />
+                                            <label htmlFor="f8" className="ml-1 mr-3">
                                                 Onion
                                             </label>
                                         </div>
@@ -219,13 +219,13 @@ export default function HookFormDoc() {
                                                 Mushroom
                                             </label>
 
-                                            <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
-                                            <label htmlFor="f6" className="ml-1 mr-3">
+                                            <RadioButton inputId="f7" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                                            <label htmlFor="f7" className="ml-1 mr-3">
                                                 Pepper
                                             </label>
 
-                                            <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
-                                            <label htmlFor="f7" className="ml-1 mr-3">
+                                            <RadioButton inputId="f8" {...field} value="Onion" checked={field.value === 'Onion'} />
+                                            <label htmlFor="f8" className="ml-1 mr-3">
                                                 Onion
                                             </label>
                                         </div>
@@ -275,13 +275,13 @@ export default function HookFormDoc() {
                                                     Mushroom
                                                 </label>
 
-                                                <RadioButton inputId="f6" {...field} value="Pepper" checked={field.value === 'Pepper'} />
-                                                <label htmlFor="f6" className="ml-1 mr-3">
+                                                <RadioButton inputId="f7" {...field} value="Pepper" checked={field.value === 'Pepper'} />
+                                                <label htmlFor="f7" className="ml-1 mr-3">
                                                     Pepper
                                                 </label>
 
-                                                <RadioButton inputId="f7" {...field} value="Onion" checked={field.value === 'Onion'} />
-                                                <label htmlFor="f7" className="ml-1 mr-3">
+                                                <RadioButton inputId="f8" {...field} value="Onion" checked={field.value === 'Onion'} />
+                                                <label htmlFor="f8" className="ml-1 mr-3">
                                                     Onion
                                                 </label>
                                             </div>
