@@ -713,6 +713,8 @@ export const ContextMenu = React.memo(
                     <div ref={menuRef} {...rootProps}>
                         <ContextMenuSub
                             ref={listRef}
+                            ariaLabel={props.ariaLabel}
+                            ariaLabelledby={props.ariaLabelledby}
                             activeItemPath={activeItemPath}
                             hostName="ContextMenu"
                             id={idState + '_list'}

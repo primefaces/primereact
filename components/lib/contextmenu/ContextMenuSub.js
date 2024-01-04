@@ -162,6 +162,7 @@ export const ContextMenuSub = React.memo(
                         activeItemPath={props.activeItemPath}
                         level={props.level + 1}
                         hostName={props.hostName}
+                        ariaLabelledby={getItemId(item)}
                         menuProps={props.menuProps}
                         model={item.items}
                         resetMenu={!isItemActive(item)}
@@ -305,6 +306,8 @@ export const ContextMenuSub = React.memo(
                 onFocus: props.onFocus,
                 onBlur: props.onBlur,
                 onKeyDown: props.onKeyDown,
+                'aria-label': props.ariaLabel,
+                'aria-labelledby': props.ariaLabelledby,
                 'aria-orientation': 'vertical',
                 'aria-activedescendant': props.ariaActivedescendant,
                 tabIndex: props.tabIndex,

@@ -144,6 +144,14 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     autoZIndex?: boolean | undefined;
     /**
+     * Used to define a string that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledBy?: string | undefined;
+    /**
      * Base zIndex value to use in layering.
      * @defaultValue 0
      */
