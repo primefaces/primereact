@@ -38,7 +38,7 @@ export const RadioButton = React.memo(
                 const radioClicked = event.target instanceof HTMLDivElement;
                 const inputClicked = event.target === inputRef.current;
                 const isInputToggled = inputClicked && event.target.checked !== checked;
-                const isRadioToggled = radioClicked && (DomHandler.hasClass(elementRef.current, 'p-radiobutton-checked') === checked ? !checked : false);
+                const isRadioToggled = radioClicked && (DomHandler.isAttributeEquals(elementRef.current, 'data-p-checked', true) === checked ? !checked : false);
                 const value = !checked;
 
                 const eventData = {
@@ -127,7 +127,8 @@ export const RadioButton = React.memo(
             {
                 className: classNames(props.className, cx('root', { focusedState })),
                 style: props.style,
-                onClick: onClick
+                onClick: onClick,
+                'data-p-checked': props.checked
             },
             RadioButtonBase.getOtherProps(props),
             ptm('root')
