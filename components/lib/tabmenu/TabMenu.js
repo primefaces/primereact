@@ -240,6 +240,7 @@ export const TabMenu = React.memo(
                 {
                     href: url || '#',
                     role: 'menuitem',
+                    'aria-label': _label,
                     tabIndex: active ? '0' : '-1',
                     className: cx('action'),
                     target: target,
@@ -281,7 +282,6 @@ export const TabMenu = React.memo(
                     className: cx('menuitem', { _className, active, disabled }),
                     style: style,
                     role: 'presentation',
-                    'aria-label': _label,
                     'data-p-highlight': active,
                     'data-p-disabled': disabled || false,
                     'aria-disabled': disabled
