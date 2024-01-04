@@ -177,7 +177,6 @@ export const Dock = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    role: 'menuitem',
                     onFocus: (event) => event.stopPropagation(),
                     className: cx('action', { disabled }),
                     'aria-hidden': 'true',
@@ -223,6 +222,7 @@ export const Dock = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id: key,
+                    role: 'menuitem',
                     key,
                     'aria-label': label,
                     'aria-disabled': disabled,
