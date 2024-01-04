@@ -116,24 +116,28 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
     const onTabArrowDownKey = (event) => {
         const nextHeaderAction = findNextHeaderAction(event.target.parentElement.parentElement);
+
         nextHeaderAction ? changeFocusedTab(nextHeaderAction) : onTabHomeKey(event);
         event.preventDefault();
     };
 
     const onTabArrowUpKey = (event) => {
         const prevHeaderAction = findPrevHeaderAction(event.target.parentElement.parentElement);
+
         prevHeaderAction ? changeFocusedTab(prevHeaderAction) : onTabEndKey(event);
         event.preventDefault();
     };
 
     const onTabHomeKey = (event) => {
         const firstHeaderAction = findFirstHeaderAction();
+
         changeFocusedTab(firstHeaderAction);
         event.preventDefault();
     };
 
     const onTabEndKey = (event) => {
         const lastHeaderAction = findLastHeaderAction();
+
         changeFocusedTab(lastHeaderAction);
         event.preventDefault();
     };
@@ -146,12 +150,14 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const findNextHeaderAction = (tabElement, selfCheck = false) => {
         const nextTabElement = selfCheck ? tabElement : tabElement.nextElementSibling;
         const headerElement = DomHandler.findSingle(nextTabElement, '[data-pc-section="header"]');
+
         return headerElement ? (DomHandler.getAttribute(headerElement, 'data-p-disabled') ? findNextHeaderAction(headerElement.parentElement) : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')) : null;
     };
 
     const findPrevHeaderAction = (tabElement, selfCheck = false) => {
         const prevTabElement = selfCheck ? tabElement : tabElement.previousElementSibling;
         const headerElement = DomHandler.findSingle(prevTabElement, '[data-pc-section="header"]');
+
         return headerElement ? (DomHandler.getAttribute(headerElement, 'data-p-disabled') ? findPrevHeaderAction(headerElement.parentElement) : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')) : null;
     };
 
