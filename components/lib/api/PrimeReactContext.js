@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FilterMatchMode } from './FilterMatchMode';
+import PrimeReact from './PrimeReact';
 
 export const PrimeReactContext = React.createContext();
 
@@ -57,6 +58,27 @@ export const PrimeReactProvider = (props) => {
         });
         linkElement.parentNode?.insertBefore(cloneLinkElement, linkElement.nextSibling);
     };
+
+    /**
+     * @deprecated
+     */
+    React.useEffect(() => {
+        PrimeReact.ripple = ripple;
+    }, [ripple]);
+
+    /**
+     * @deprecated
+     */
+    React.useEffect(() => {
+        PrimeReact.inputStyle = inputStyle;
+    }, [inputStyle]);
+
+    /**
+     * @deprecated
+     */
+    React.useEffect(() => {
+        PrimeReact.locale = locale;
+    }, [locale]);
 
     const value = {
         changeTheme,
