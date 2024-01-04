@@ -6,20 +6,20 @@ import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
     React.forwardRef((inProps, ref) => {
-        const [isMounted, setMounted] = React.useState(false);
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
         const props = RippleBase.getProps(inProps, context);
-        const isRippleActive = (context && context.ripple) || PrimeReact.ripple;
+
         const metaData = {
             props
         };
+
+        useStyle(RippleBase.css.styles, { name: 'ripple' });
+
         const { ptm, cx } = RippleBase.setMetaData({
             ...metaData
         });
-
-        useStyle(RippleBase.css.styles, { name: 'ripple', manual: !isRippleActive });
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -79,17 +79,12 @@ export const Ripple = React.memo(
         }));
 
         useMountEffect(() => {
-            // for App Router in Next.js ^14
-            setMounted(true);
-        });
-
-        useUpdateEffect(() => {
-            if (isMounted && inkRef.current) {
+            if (inkRef.current) {
                 targetRef.current = getTarget();
                 setDimensions();
                 bindEvents();
             }
-        }, [isMounted]);
+        });
 
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {
@@ -106,8 +101,6 @@ export const Ripple = React.memo(
             }
         });
 
-        if (!isRippleActive) return null;
-
         const rootProps = mergeProps(
             {
                 'aria-hidden': true,
@@ -117,7 +110,7 @@ export const Ripple = React.memo(
             ptm('root')
         );
 
-        return <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span>;
+        return (context && context.ripple) || PrimeReact.ripple ? <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span> : null;
     })
 );
 

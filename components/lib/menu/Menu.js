@@ -2,11 +2,12 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -31,14 +32,8 @@ export const Menu = React.memo(
         const listRef = React.useRef(null);
         const targetRef = React.useRef(null);
 
-        const popupMenuDisplayOrder = useDisplayOrder('menu', !!(visibleState && props.popup));
-
-        useGlobalOnEscapeKey({
-            callback: (event) => {
-                hide(event);
-            },
-            when: visibleState && props.popup && props.closeOnEscape,
-            priority: [ESC_KEY_HANDLING_PRIORITIES.MENU, popupMenuDisplayOrder]
+        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
+            hide(event);
         });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({

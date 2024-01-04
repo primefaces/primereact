@@ -60,7 +60,6 @@ exports[`Chip image and alt 1`] = `
 exports[`Chip label 1`] = `
 <div>
   <div
-    aria-label="jest"
     class="p-chip p-component"
     data-pc-name="chip"
     data-pc-section="root"
@@ -90,14 +89,13 @@ exports[`Chip when removable is true it returns with remove icon: before remove 
       data-pc-section="removeicon"
       fill="none"
       height="14"
-      role="button"
       tabindex="0"
       viewBox="0 0 14 14"
       width="14"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g
-        clip-path="url(#pr_icon_clip_2)"
+        clip-path="url(#pr_icon_clip_1)"
       >
         <path
           clip-rule="evenodd"
@@ -108,7 +106,7 @@ exports[`Chip when removable is true it returns with remove icon: before remove 
       </g>
       <defs>
         <clippath
-          id="pr_icon_clip_2"
+          id="pr_icon_clip_1"
         >
           <rect
             fill="white"
@@ -137,14 +135,13 @@ exports[`Chip when removable is true the chip is removed when ENTER is pressed: 
       data-pc-section="removeicon"
       fill="none"
       height="14"
-      role="button"
       tabindex="0"
       viewBox="0 0 14 14"
       width="14"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g
-        clip-path="url(#pr_icon_clip_1)"
+        clip-path="url(#pr_icon_clip_2)"
       >
         <path
           clip-rule="evenodd"
@@ -155,7 +152,7 @@ exports[`Chip when removable is true the chip is removed when ENTER is pressed: 
       </g>
       <defs>
         <clippath
-          id="pr_icon_clip_1"
+          id="pr_icon_clip_2"
         >
           <rect
             fill="white"

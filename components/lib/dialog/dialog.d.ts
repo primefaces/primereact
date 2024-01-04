@@ -190,7 +190,7 @@ export interface DialogProps {
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Defines a string that labels the close icon.
      */

@@ -6,7 +6,7 @@ import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
@@ -25,6 +25,7 @@ export const Galleria = React.memo(
         const maskRef = React.useRef(null);
         const activeItemIndex = props.onItemChange ? props.activeIndex : activeIndexState;
         const isVertical = props.thumbnailsPosition === 'left' || props.thumbnailsPosition === 'right';
+        const id = props.id || UniqueComponentId();
 
         const { ptm, cx, sx, isUnstyled } = GalleriaBase.setMetaData({
             props,
@@ -189,7 +190,7 @@ export const Galleria = React.memo(
                 {
                     type: 'button',
                     className: cx('closeButton'),
-                    'aria-label': localeOption('close'),
+                    'aria-label': localeOption('aria') ? localeOption('aria').close : undefined,
                     onClick: hide
                 },
                 ptm('closeButton')
@@ -208,9 +209,10 @@ export const Galleria = React.memo(
             const rootProps = mergeProps(
                 {
                     ref: elementRef,
-                    id: props.id,
+                    id: id,
                     className: classNames(props.className, cx('root', { context, thumbnailsPosClassName, indicatorPosClassName })),
-                    style: props.style
+                    style: props.style,
+                    role: 'region'
                 },
                 GalleriaBase.getOtherProps(props),
                 ptm('root')
@@ -218,7 +220,8 @@ export const Galleria = React.memo(
 
             const contentProps = mergeProps(
                 {
-                    className: cx('content')
+                    className: cx('content'),
+                    'aria-live': props.autoPlay ? 'polite' : 'off'
                 },
                 ptm('content')
             );
@@ -231,6 +234,7 @@ export const Galleria = React.memo(
                         <GalleriaItem
                             hostName="Galleria"
                             ref={previewContentRef}
+                            id={id}
                             value={props.value}
                             activeItemIndex={activeItemIndex}
                             onActiveItemChange={onActiveItemChange}
@@ -255,6 +259,7 @@ export const Galleria = React.memo(
                             <GalleriaThumbnails
                                 hostName="Galleria"
                                 value={props.value}
+                                containerId={id}
                                 activeItemIndex={activeItemIndex}
                                 onActiveItemChange={onActiveItemChange}
                                 itemTemplate={props.thumbnail}
@@ -289,7 +294,9 @@ export const Galleria = React.memo(
             if (props.fullScreen) {
                 const maskProps = mergeProps(
                     {
-                        className: cx('mask', { visibleState })
+                        className: cx('mask', { visibleState }),
+                        role: 'dialog',
+                        'aria-modal': 'true'
                     },
                     ptm('mask')
                 );

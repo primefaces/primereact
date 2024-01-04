@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useDisplayOrder, useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
@@ -49,16 +50,18 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    const displayOrder = useDisplayOrder('dialog', visibleState);
+    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
+        const currentTarget = event.currentTarget;
 
-    useGlobalOnEscapeKey({
-        callback: (event) => {
-            if (props.closable && props.closeOnEscape) {
-                onClose(event);
-            }
-        },
-        when: visibleState,
-        priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
+        if (!currentTarget || !currentTarget.primeDialogParams) {
+            return;
+        }
+
+        const params = currentTarget.primeDialogParams;
+        const paramLength = params.length;
+
+        onClose(event);
+        params.splice(paramLength - 1, 1);
     });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -316,10 +319,12 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
+        updateGlobalDialogsRegistry(true);
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
+        updateGlobalDialogsRegistry(false);
     };
 
     const updateScrollBlocker = () => {
@@ -334,7 +339,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const updateGlobalDialogsRegistry = (isMounted) => {
-        // Update current dialog info in global registry if it is mounted and visible:
+        // Update current dialog info in global registry if it is mounted :
         if (isMounted && visibleState) {
             const newParam = { id: idState, hasBlockScroll: shouldBlockScroll };
 
@@ -351,7 +356,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
             }
         }
-        // Or remove it from global registry if unmounted or invisible:
+        // Or remove it from global registry if unmounted:
         else {
             document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
         }
@@ -383,10 +388,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         unbindDocumentKeyDownListener();
     };
 
-    const destroyStyle = () => {
-        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
-    };
-
     const createStyle = () => {
         styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
@@ -395,8 +396,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         for (let breakpoint in props.breakpoints) {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
-                    [data-pc-name="dialog"][${attributeSelector.current}] {
-                        width: ${props.breakpoints[breakpoint]} !important;
+                    .p-dialog[${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]};
                     }
                 }
             `;
@@ -405,21 +406,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         styleElement.current.innerHTML = innerHTML;
     };
 
-    useUpdateEffect(() => {
-        if (props.breakpoints) {
-            createStyle();
-        }
-
-        return () => {
-            destroyStyle();
-        };
-    }, [props.breakpoints]);
-
     useMountEffect(() => {
-        updateGlobalDialogsRegistry(true);
-
         if (props.visible) {
             setMaskVisibleState(true);
+        }
+
+        if (props.breakpoints) {
+            createStyle();
         }
     });
 
@@ -448,11 +441,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         updateGlobalDialogsRegistry(true);
-    }, [shouldBlockScroll, visibleState]);
+    }, [shouldBlockScroll]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
-        updateGlobalDialogsRegistry(false);
         DomHandler.removeInlineStyle(styleElement.current);
         ZIndexUtils.clear(maskRef.current);
     });
@@ -671,19 +663,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         const footer = createFooter();
         const resizer = createResizer();
 
-        const headerId = idState + '_header';
-        const contentId = idState + '_content';
-
-        const essentialRootProps = {
-            ...rootProps,
-            'aria-labelledby': headerId,
-            'aria-describedby': contentId
-        };
-
         return (
             <div {...maskProps}>
                 <CSSTransition nodeRef={dialogRef} {...transitionProps}>
-                    <div {...essentialRootProps}>
+                    <div {...rootProps}>
                         {header}
                         {content}
                         {footer}
@@ -695,6 +678,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createDialog = () => {
+        const headerId = idState + '_header';
+        const contentId = idState + '_content';
+
         const transitionTimeout = {
             enter: props.position === 'center' ? 150 : 300,
             exit: props.position === 'center' ? 150 : 300
@@ -718,7 +704,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 style: props.style,
                 onClick: props.onClick,
                 role: 'dialog',
-
+                'aria-labelledby': headerId,
+                'aria-describedby': contentId,
                 'aria-modal': props.modal,
                 onPointerDown: onDialogPointerDown
             },
@@ -741,9 +728,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             ptm('transition')
         );
 
-        const isTemplate = inProps?.content;
-
-        if (isTemplate) {
+        if (inProps?.content) {
             const templateElement = createTemplateElement({ maskProps, rootProps, transitionProps });
 
             return <Portal element={templateElement} appendTo={props.appendTo} visible />;

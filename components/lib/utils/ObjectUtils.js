@@ -1,10 +1,7 @@
 export default class ObjectUtils {
     static equals(obj1, obj2, field) {
-        if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object') {
-            return this.deepEquals(this.resolveFieldData(obj1, field), this.resolveFieldData(obj2, field));
-        }
-
-        return this.deepEquals(obj1, obj2);
+        if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object') return this.resolveFieldData(obj1, field) === this.resolveFieldData(obj2, field);
+        else return this.deepEquals(obj1, obj2);
     }
 
     /**
@@ -222,13 +219,7 @@ export default class ObjectUtils {
     static isValidChild(child, type, validTypes) {
         /* eslint-disable */
         if (child) {
-            let childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
-
-            // for App Router in Next.js ^14,
-            if (!childType && child?.type?._payload?.value) {
-                childType = child.type._payload.value.find((v) => v === type);
-            }
-
+            const childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
             const isValid = childType === type;
 
             try {
@@ -350,7 +341,7 @@ export default class ObjectUtils {
     }
 
     static isLetter(char) {
-        return /^[a-zA-Z\u00C0-\u017F]$/.test(char);
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
     }
 
     /**

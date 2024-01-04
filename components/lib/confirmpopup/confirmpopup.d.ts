@@ -123,11 +123,6 @@ interface ConfirmPopupOptions {
      */
     rejectLabel: string;
     /**
-     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
-     * @defaultValue accept
-     */
-    defaultFocus: string;
-    /**
      * Default element created by the component.
      */
     element: React.ReactNode;
@@ -171,11 +166,6 @@ export interface ConfirmPopupProps {
      * @defaultValue false
      */
     visible?: boolean | undefined;
-    /**
-     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
-     * @defaultValue accept
-     */
-    defaultFocus?: string | undefined;
     /**
      * Message of the confirmation.
      */
@@ -222,7 +212,7 @@ export interface ConfirmPopupProps {
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Enables to hide the popup when outside is clicked.
      * @defaultValue true

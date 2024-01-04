@@ -230,8 +230,7 @@ export const Chips = React.memo(
             const iconProps = mergeProps(
                 {
                     className: cx('removeTokenIcon'),
-                    onClick: (event) => removeItem(event, index),
-                    'aria-hidden': 'true'
+                    onClick: (event) => removeItem(event, index)
                 },
                 ptm('removeTokenIcon')
             );

@@ -7,7 +7,7 @@ const classes = {
     headerLabel: 'p-menuitem-text',
     headerAction: 'p-panelmenu-header-link',
     panel: ({ item }) => classNames('p-panelmenu-panel', item.className),
-    header: ({ active, item }) => classNames('p-component p-panelmenu-header', { 'p-highlight': active && !!item.items, 'p-disabled': item.disabled }),
+    header: ({ active, item }) => classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled }),
     headerContent: 'p-panelmenu-header-content',
     menuContent: 'p-panelmenu-content',
     root: ({ props }) => classNames('p-panelmenu p-component', props.className),

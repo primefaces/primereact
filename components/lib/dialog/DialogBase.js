@@ -11,7 +11,7 @@ const classes = {
     headerTitle: 'p-dialog-title',
     headerIcons: 'p-dialog-header-icons',
     content: ({ props }) => classNames('p-dialog-content', props.contentClassName),
-    footer: ({ props }) => classNames('p-dialog-footer', props.footerClassName),
+    footer: 'p-dialog-footer',
     mask: ({ props, maskVisibleState }) => {
         const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
         const pos = positions.find((item) => item === props.position || item.replace('-', '') === props.position);
@@ -263,7 +263,6 @@ export const DialogBase = ComponentBase.extend({
         draggable: true,
         focusOnShow: true,
         footer: null,
-        footerClassName: null,
         header: null,
         headerClassName: null,
         headerStyle: null,

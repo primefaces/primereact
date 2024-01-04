@@ -118,12 +118,16 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | null | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Index of the element in tabbing order.
+     */
+    tabIndex?: number | undefined;
     /**
      * Callback to invoke when a popup menu is shown.
      * @param {React.SyntheticEvent} event - Browser event.
@@ -134,6 +138,16 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @param {React.SyntheticEvent} event - Browser event.
      */
     onHide?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
     /**
      * Used to get the child elements of the component.
      * @readonly

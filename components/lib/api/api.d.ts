@@ -61,7 +61,6 @@ import { OverlayPanelPassThroughOptions } from '../overlaypanel/overlaypanel';
 import { PaginatorPassThroughOptions } from '../paginator/paginator';
 import { PanelPassThroughOptions } from '../panel/panel';
 import { PanelMenuPassThroughOptions } from '../panelmenu/panelmenu';
-import { PassThroughOptions } from '../passthrough';
 import { PasswordPassThroughOptions } from '../password/password';
 import { PickListPassThroughOptions } from '../picklist/picklist';
 import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
@@ -94,6 +93,7 @@ import { TreePassThroughOptions } from '../tree/tree';
 import { TreeSelectPassThroughOptions } from '../treeselect/treeselect';
 import { TreeTablePassThroughOptions } from '../treetable/treetable';
 import { VirtualScrollerPassThroughOptions } from '../virtualscroller/virtualscroller';
+import { PassThroughOptions } from '../passthrough';
 
 // Config
 /**
@@ -129,7 +129,7 @@ export interface ZIndexOptions {
 
 export type InputStyleType = 'outlined' | 'filled';
 
-export type AppendToType = 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+export type AppendToType = 'self' | HTMLElement | undefined | null;
 
 /**
  * Filter match modes for DataTable filter menus.
@@ -832,10 +832,6 @@ export interface LocaleOptions {
      */
     close?: string;
     /**
-     * Completed
-     */
-    completed?: string;
-    /**
      * Pending
      */
     pending?: string;
@@ -864,81 +860,9 @@ export interface LocaleOptions {
      */
     monthNamesShort?: string[];
     /**
-     * Choose Year
-     */
-    chooseYear?: string;
-    /**
-     * Choose Month
-     */
-    chooseMonth?: string;
-    /**
-     *Choose Date
-     */
-    chooseDate?: string;
-    /**
-     * Previous Decade
-     */
-    prevDecade?: string;
-    /**
-     *
-     */
-    nextDecade?: string;
-    /**
-     * Previous Year
-     */
-    prevYear?: string;
-    /**
-     * Next Year
-     */
-    nextYear?: string;
-    /**
-     * Previous Month
-     */
-    prevMonth?: string;
-    /**
-     * Next Month
-     */
-    nextMonth?: string;
-    /**
-     *Previous Hour
-     */
-    prevHour?: string;
-    /**
-     *Next Hour
-     */
-    nextHour?: string;
-    /**
-     *Previous Minute
-     */
-    prevMinute?: string;
-    /**
-     * Next Minute
-     */
-    nextMinute?: string;
-    /**
-     * Previous Second
-     */
-    prevSecond?: string;
-    /**
-     * Next Second
-     */
-    nextSecond?: string;
-    /**
-     * PM
-     */
-    am?: string;
-    /**
-     * AM
-     */
-    pm?: string;
-    /**
      * Today
      */
     today?: string;
-    /**
-     * Now
-     */
-    now?: string;
     /**
      * Wk
      */
@@ -968,29 +892,16 @@ export interface LocaleOptions {
      */
     passwordPrompt?: string;
     /**
-     * No results found
+     * No available options
      */
     emptyFilterMessage?: string;
     /**
-     * {0} results are available
-     */
-    searchMessage?: string;
-    /**
-     * {0} items selected
-     */
-    selectionMessage?: string;
-    /**
-     * No selected item
-     */
-    emptySelectionMessage?: string;
-    /**
      * No results found
      */
-    emptySearchMessage?: string;
-    /**
-     * No available options
-     */
     emptyMessage?: string;
+    /**
+     * True
+     */
     aria?: {
         /**
          * True
@@ -1005,75 +916,7 @@ export interface LocaleOptions {
          */
         nullLabel?: string;
         /**
-         * 1 star
-         */
-        star?: string;
-        /**
-         * {star} stars
-         */
-        stars?: string;
-        /*
-         * All items selected
-         */
-        selectAll?: string;
-        /**
-         * All items unselected
-         */
-        unselectAll?: string;
-        /**
-         * Close
-         */
-        close?: string;
-        /*
-         * Previous
-         */
-        previous?: string;
-        /**
-         * Next
-         */
-        next?: string;
-        /**
-         * Navigation
-         */
-        navigation?: string;
-        /*
-         * Scroll Top
-         */
-        scrollTop?: string;
-        /**
-         * Move Top
-         */
-        moveTop?: string;
-        /**
-         * Move Up
-         */
-        moveUp?: string;
-        /**
-         * Move Down
-         */
-        moveDown?: string;
-        /**
-         * Move Bottom
-         */
-        moveBottom?: string;
-        /**
-         * Move to Target
-         */
-        moveToTarget?: string;
-        /**
-         * Move to Source
-         */
-        moveToSource?: string;
-        /*
-         * Move All to Target
-         */
-        moveAllToTarget?: string;
-        /**
-         * Move All to Source
-         */
-        moveAllToSource?: string;
-        /**
-         * Page {page}
+         * Page
          */
         pageLabel?: string;
         /**
@@ -1093,97 +936,21 @@ export interface LocaleOptions {
          */
         previousPageLabel?: string;
         /**
-         * Rows per page
+         * Select
          */
-        rowsPerPageLabel?: string;
+        selectLabel?: string;
         /**
-         * Jump to Page Dropdown
+         * Unselect
          */
-        jumpToPageDropdownLabel?: string;
+        unselectLabel?: string;
         /**
-         * Jump to Page Input
+         * Expand
          */
-        jumpToPageInputLabel?: string;
+        expandLabel?: string;
         /**
-         * Row Selected
+         * Collapse
          */
-        selectRow?: string;
-        /*
-         * Row Unselected
-         */
-        unselectRow?: string;
-        /**
-         * Row Expanded
-         */
-        expandRow?: string;
-        /**
-         * Row Collapsed
-         */
-        collapseRow?: string;
-        /**
-         * Show Filter Menu
-         */
-        showFilterMenu?: string;
-        /**
-         * Hide Filter Menu
-         */
-        hideFilterMenu?: string;
-        /**
-         * Filter Operator
-         */
-        filterOperator?: string;
-        /**
-         * Filter Constraint
-         */
-        filterConstraint?: string;
-        /**
-         * Edit Row
-         */
-        editRow?: string;
-        /**
-         * Save Edit
-         */
-        saveEdit?: string;
-        /**
-         * Cancel Edit
-         */
-        cancelEdit?: string;
-        /**
-         * List View
-         */
-        listView?: string;
-        /**
-         * Grid View
-         */
-        gridView?: string;
-        /**
-         * Slide
-         */
-        slide?: string;
-        /**
-         * {slideNumber}
-         */
-        slideNumber?: string;
-        /**
-         * Zoom Image
-         */
-        zoomImage?: string;
-        /**
-         * Zoom In
-         */
-        zoomIn?: string;
-        /**
-         * Zoom Out
-         */
-        zoomOut?: string;
-        /**
-         * Rotate Right
-         */
-        rotateRight?: string;
-        /**
-         * Rotate Left
-         */
-        rotateLeft?: string;
+        collapseLabel?: string;
     };
 }
 

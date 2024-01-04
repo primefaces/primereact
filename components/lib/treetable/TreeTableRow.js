@@ -332,11 +332,8 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const isSelected = () => {
-        if (props.selectionMode === 'single' || ((props.selectionMode === 'multiple' || props.selectionMode === 'checkbox') && props.selectionKeys)) {
-            return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
-        }
-
-        return false;
+        if ((props.selectionMode === 'single' || props.selectionMode === 'multiple') && props.selectionKeys) return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
+        else return false;
     };
 
     const isChecked = () => {
@@ -455,10 +452,6 @@ export const TreeTableRow = React.memo((props) => {
 
     const createCell = (column, index) => {
         let toggler, checkbox;
-
-        if (getColumnProp(column, 'hidden')) {
-            return null;
-        }
 
         if (getColumnProp(column, 'expander')) {
             toggler = createToggler(column);

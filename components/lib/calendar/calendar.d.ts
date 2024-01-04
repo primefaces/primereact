@@ -67,8 +67,9 @@ export interface CalendarPassThroughOptions {
     header?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
      */
-    previousButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    previousButton?: ButtonPassThroughOptions;
     /**
      * Uses to pass attributes to the previous icon's DOM element.
      */
@@ -95,8 +96,9 @@ export interface CalendarPassThroughOptions {
     decadeTitleText?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
      */
-    nextButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    nextButton?: ButtonPassThroughOptions;
     /**
      * Uses to pass attributes to the next icon's DOM element.
      */
@@ -523,7 +525,7 @@ interface CalendarBaseProps {
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
@@ -717,11 +719,6 @@ interface CalendarBaseProps {
      * @defaultValue false
      */
     showIcon?: boolean | undefined;
-    /**
-     * Icon position of the component. This only applies if the showIcon option is set to true.
-     * @defaultValue 'button'
-     */
-    iconDisplay?: 'button' | 'input' | undefined;
     /**
      * Whether to show the milliseconds in time picker.
      * @defaultValue false

@@ -219,22 +219,6 @@ interface FileUploadHeaderTemplateOptions {
 }
 
 /**
- * Custom file upload progressbar template options
- */
-interface FileUploadProgressBarTemplateOptions {
-    /**
-     * Current progress state as a number.
-     * @defaultValue 0
-     */
-    progress: number;
-    /**
-     * The props passed to the component.
-     * @type {FileUploadProps}
-     */
-    props: FileUploadProps;
-}
-
-/**
  * Custom item template options
  */
 interface ItemTemplateOptions {
@@ -548,7 +532,7 @@ interface FileUploadProps {
     /**
      * Custom template of progressBar content in the container.
      */
-    progressBarTemplate?: React.ReactNode | ((options: FileUploadProgressBarTemplateOptions) => React.ReactNode);
+    progressBarTemplate?: React.ReactNode | ((props: FileUploadProps) => React.ReactNode);
     /**
      * Callback to invoke before file upload begins to customize the request such as post parameters before the files.
      * @param {FileUploadBeforeUploadEvent} event - Custom beforeUpload.

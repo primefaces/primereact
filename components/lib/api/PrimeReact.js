@@ -1,8 +1,5 @@
 import { FilterMatchMode } from './FilterMatchMode';
 
-/**
- * @deprecated please use PrimeReactContext
- */
 export default class PrimeReact {
     static ripple = false;
 

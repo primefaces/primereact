@@ -16,8 +16,6 @@ import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
 
-export declare type RoundingMode = 'ceil' | 'floor' | 'expand' | 'trunc' | 'halfCeil' | 'halfFloor' | 'halfExpand' | 'halfTrunc' | 'halfEven';
-
 export declare type InputNumberPassThroughType<T> = PassThroughType<T, InputNumberPassThroughMethodOptions>;
 
 /**
@@ -192,11 +190,6 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * the default for currency formatting is the larger of minimumFractionDigits and the number of minor unit digits provided by the [ISO 4217 currency code list](https://www.six-group.com/en/products-services/financial-information/data-standards.html#scrollTo=maintenance-agency) (2 if the list doesn't provide that information).
      */
     maxFractionDigits?: number | undefined;
-    /**
-     * How decimals should be rounded.
-     * The default value is `"halfExpand"`, [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode).
-     */
-    roundingMode?: RoundingMode;
     /**
      * Name of the input element.
      */

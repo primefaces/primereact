@@ -66,21 +66,6 @@ export interface ChipState {
 }
 
 /**
- * Custom remove event
- * @event
- */
-interface ChipRemoveEvent {
-    /**
-     * Browser event
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Removed item value
-     */
-    value: string;
-}
-
-/**
  * Defines valid properties in Chip component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -121,9 +106,9 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     onImageError?(event: React.SyntheticEvent): void;
     /**
      * Callback to invoke when a chip is removed.
-     * @param {ChipRemoveEvent} event - Custom remove event
+     * @param {React.MouseEvent}  event - Browser event.
      */
-    onRemove?(event: ChipRemoveEvent): void;
+    onRemove?(event: React.MouseEvent<HTMLElement>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly

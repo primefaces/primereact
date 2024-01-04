@@ -25,10 +25,10 @@ const classes = {
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
     sublist: 'p-cascadeselect-panel p-cascadeselect-items p-cascadeselect-sublist',
-    item: ({ option, isGroup, isSelected }) =>
+    item: ({ option, isOptionGroup, activeOptionState }) =>
         classNames('p-cascadeselect-item', {
-            'p-cascadeselect-item-group': isGroup,
-            'p-cascadeselect-item-active p-highlight': isSelected
+            'p-cascadeselect-item-group': isOptionGroup(option),
+            'p-cascadeselect-item-active p-highlight': activeOptionState === option
         }),
     dropdownIcon: 'p-cascadeselect-trigger-icon',
     loadingIcon: 'p-cascadeselect-trigger-icon',
@@ -144,8 +144,8 @@ export const CascadeSelectBase = ComponentBase.extend({
         className: null,
         dataKey: null,
         disabled: false,
-        dropdownIcon: null,
         loadingIcon: null,
+        dropdownIcon: null,
         id: null,
         inputId: null,
         inputRef: null,

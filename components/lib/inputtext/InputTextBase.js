@@ -17,16 +17,15 @@ export const InputTextBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputText',
         __parentMetadata: null,
-        children: undefined,
-        className: null,
         keyfilter: null,
+        validateOnly: false,
+        tooltip: null,
+        tooltipOptions: null,
         onBeforeInput: null,
         onInput: null,
         onKeyDown: null,
         onPaste: null,
-        tooltip: null,
-        tooltipOptions: null,
-        validateOnly: false
+        children: undefined
     },
 
     css: {
