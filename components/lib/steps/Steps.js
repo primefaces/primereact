@@ -217,6 +217,7 @@ export const Steps = React.memo(
                     labelClassName: 'p-steps-title',
                     numberClassName: 'p-steps-number',
                     iconClassName,
+                    'aria-current': active,
                     element: content,
                     props,
                     active,
@@ -287,7 +288,7 @@ export const Steps = React.memo(
 
         const items = createItems();
 
-        return <div {...rootProps}>{items}</div>;
+        return <nav {...rootProps}>{items}</nav>;
     })
 );
 
