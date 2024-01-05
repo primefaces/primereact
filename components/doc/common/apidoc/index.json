@@ -13681,6 +13681,14 @@
                             "description": "Specifies if pressing escape key should hide the dialog."
                         },
                         {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "contentClassName",
                             "optional": true,
                             "readonly": false,
@@ -13986,19 +13994,6 @@
                             "parameters": [],
                             "returnType": "void",
                             "description": "Callback to execute when action is confirmed."
-                        },
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of dialog."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
                         },
                         {
                             "name": "onClick",
@@ -14481,6 +14476,14 @@
                             "description": "Specifies if pressing escape key should hide the popup."
                         },
                         {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "dismissable",
                             "optional": true,
                             "readonly": false,
@@ -14610,19 +14613,6 @@
                             "parameters": [],
                             "returnType": "void",
                             "description": "Callback to execute when action is confirmed."
-                        },
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of dialog."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
                         },
                         {
                             "name": "onHide",
@@ -14863,26 +14853,30 @@
                             "name": "acceptBtnRef",
                             "optional": false,
                             "readonly": false,
-                            "type": "RefObject<HTMLButtonElement>"
+                            "type": "RefObject<HTMLButtonElement>",
+                            "description": "Reference for the accept button. Used to focus the element and execute the action."
                         },
                         {
                             "name": "rejectBtnRef",
                             "optional": false,
                             "readonly": false,
-                            "type": "RefObject<HTMLButtonElement>"
+                            "type": "RefObject<HTMLButtonElement>",
+                            "description": "Reference for the reject button. Used to focus the element and execute the action."
                         },
                         {
                             "name": "message",
                             "optional": false,
                             "readonly": false,
-                            "type": "ReactNode"
+                            "type": "ReactNode",
+                            "description": "Message value of confirm popup."
                         }
                     ],
                     "callbacks": [
                         {
                             "name": "hide",
                             "parameters": [],
-                            "returnType": "void"
+                            "returnType": "void",
+                            "description": "Hide action of confirm popup."
                         }
                     ]
                 },
@@ -21022,6 +21016,14 @@
                             "description": "Specifies if pressing escape key should hide the dialog."
                         },
                         {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "contentClassName",
                             "optional": true,
                             "readonly": false,
@@ -21274,19 +21276,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of dialog."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
-                        },
                         {
                             "name": "onClick",
                             "parameters": [
@@ -42405,6 +42394,14 @@
                             "description": "Specifies if pressing escape key should hide the sidebar."
                         },
                         {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the sidebar. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "dismissable",
                             "optional": true,
                             "readonly": false,
@@ -42642,6 +42639,34 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "closeIconRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement | HTMLButtonElement>",
+                            "description": "Allows you to specify the close button of the sidebar."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Used to get the event of the element."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback for hiding the sidebar."
+                        }
+                    ]
                 }
             }
         },
@@ -47147,6 +47172,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "position",
                             "optional": true,
                             "readonly": false,
@@ -47183,19 +47216,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of toast."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead."
-                        },
                         {
                             "name": "onClick",
                             "parameters": [

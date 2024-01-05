@@ -431,7 +431,7 @@ export interface DialogProps {
      * @param {ContentProps} props - The values of dialog.
      * @return {React.ReactNode}
      */
-    content?(props: ContentProps): React.ReactNode;
+    content: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**
