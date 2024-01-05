@@ -4,6 +4,7 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function DynamicColumnsDoc(props) {
     const [products, setProducts] = useState([]);
@@ -14,9 +15,9 @@ export function DynamicColumnsDoc(props) {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -126,13 +127,15 @@ export default function DynamicColumnsDemo() {
             <DocSectionText {...props}>
                 <p>Columns can be created programmatically.</p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
-                    {columns.map((col, i) => (
-                        <Column key={col.field} field={col.field} header={col.header} />
-                    ))}
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
+                        {columns.map((col, i) => (
+                            <Column key={col.field} field={col.field} header={col.header} />
+                        ))}
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

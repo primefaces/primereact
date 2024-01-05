@@ -4,6 +4,7 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function DisabledRowSelectionDoc(props) {
     const [products, setProducts] = useState([]);
@@ -15,9 +16,9 @@ export function DisabledRowSelectionDoc(props) {
 
     const rowClassName = (data) => (isSelectable(data) ? '' : 'p-disabled');
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -132,23 +133,25 @@ export default function DisabledRowSelectionDemo() {
                     Certain rows can be excluded from selection if <i>isDataSelectable</i> returns false.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={products}
-                    selectionMode="single"
-                    selection={selectedProduct}
-                    onSelectionChange={(e) => setSelectedProduct(e.value)}
-                    dataKey="id"
-                    isDataSelectable={isRowSelectable}
-                    rowClassName={rowClassName}
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={products}
+                        selectionMode="single"
+                        selection={selectedProduct}
+                        onSelectionChange={(e) => setSelectedProduct(e.value)}
+                        dataKey="id"
+                        isDataSelectable={isRowSelectable}
+                        rowClassName={rowClassName}
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

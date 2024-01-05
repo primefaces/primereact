@@ -5,12 +5,13 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function FrozenRowsDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [lockedCustomers, setLockedCustomers] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
 
         setLockedCustomers([
@@ -31,7 +32,7 @@ export function FrozenRowsDoc(props) {
                 }
             }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const lockTemplate = (rowData, options) => {
         const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
@@ -258,15 +259,17 @@ export default function FrozenRowsDemo() {
                     Rows can be fixed during scrolling by enabling the <i>frozenValue</i> property.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
-                    <Column field="status" header="Status"></Column>
-                    <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="status" header="Status"></Column>
+                        <Column style={{ flex: '0 0 4rem' }} body={lockTemplate}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

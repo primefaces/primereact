@@ -4,6 +4,7 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function PresortDoc(props) {
     const [products, setProducts] = useState([]);
@@ -16,9 +17,9 @@ export function PresortDoc(props) {
         return formatCurrency(product.price);
     };
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -136,15 +137,17 @@ export default function PresortDemo() {
                     <i>multiSortMeta</i> should be used instead by providing an array of <i>DataTableSortMeta</i> objects.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} sortField="price" sortOrder={-1} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code" sortable style={{ width: '20%' }}></Column>
-                    <Column field="name" header="Name" sortable style={{ width: '20%' }}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ width: '20%' }}></Column>
-                    <Column field="category" header="Category" sortable style={{ width: '20%' }}></Column>
-                    <Column field="quantity" header="Quantity" sortable style={{ width: '20%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} sortField="price" sortOrder={-1} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code" sortable style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" sortable style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ width: '20%' }}></Column>
+                        <Column field="category" header="Category" sortable style={{ width: '20%' }}></Column>
+                        <Column field="quantity" header="Quantity" sortable style={{ width: '20%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

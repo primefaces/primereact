@@ -6,6 +6,7 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Toast } from '@/components/lib/toast/Toast';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ContextMenuDoc(props) {
     const [products, setProducts] = useState([]);
@@ -17,9 +18,9 @@ export function ContextMenuDoc(props) {
         { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct) }
     ];
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const viewProduct = (product) => {
         toast.current.show({ severity: 'info', summary: 'Product Selected', detail: product.name });
@@ -209,17 +210,19 @@ export default function ContextMenuDemo() {
                     <i>contextMenuSelection</i> and <i>onContextMenuSelectionChange</i> properties to control the selection via the menu.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <Toast ref={toast} />
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <Toast ref={toast} />
 
-                <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
-                <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} />
-                </DataTable>
-            </div>
+                    <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
+                    <DataTable value={products} onContextMenu={(e) => cm.current.show(e.originalEvent)} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} />
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
