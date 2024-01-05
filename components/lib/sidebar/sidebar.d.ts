@@ -216,7 +216,7 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @param {ContentProps} props - The values of sidebar.
      * @return {React.ReactNode}
      */
-    content: React.ReactNode | ((props: ContentProps) => React.ReactNode);
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**
