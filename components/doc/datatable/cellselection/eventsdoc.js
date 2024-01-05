@@ -5,6 +5,7 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Toast } from '@/components/lib/toast/Toast';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function CellSelectEventsDoc(props) {
     const [products, setProducts] = useState([]);
@@ -19,9 +20,9 @@ export function CellSelectEventsDoc(props) {
         toast.current.show({ severity: 'warn', summary: 'Cell Unselected', detail: `Name: ${event.value}`, life: 3000 });
     };
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -155,26 +156,28 @@ export default function CellSelectEventsDemo() {
                 </p>
             </DocSectionText>
             <Toast ref={toast} />
-            <div className="card">
-                <DataTable
-                    value={products}
-                    selectionMode="single"
-                    cellSelection
-                    selection={selectedCell}
-                    onSelectionChange={(e) => {
-                        setSelectedCell(e.value);
-                    }}
-                    metaKeySelection={false}
-                    onCellSelect={onCellSelect}
-                    onCellUnselect={onCellUnselect}
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={products}
+                        selectionMode="single"
+                        cellSelection
+                        selection={selectedCell}
+                        onSelectionChange={(e) => {
+                            setSelectedCell(e.value);
+                        }}
+                        metaKeySelection={false}
+                        onCellSelect={onCellSelect}
+                        onCellUnselect={onCellUnselect}
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

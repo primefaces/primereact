@@ -6,6 +6,7 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function PaginatorTemplateDoc(props) {
     const [customers, setCustomers] = useState([]);
@@ -13,9 +14,9 @@ export function PaginatorTemplateDoc(props) {
     const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
     const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -144,24 +145,26 @@ export default function PaginatorTemplateDemo() {
                     more information about the advanced customization options.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={customers}
-                    paginator
-                    rows={5}
-                    rowsPerPageOptions={[5, 10, 25, 50]}
-                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                    paginatorLeft={paginatorLeft}
-                    paginatorRight={paginatorRight}
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
-                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
-                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={customers}
+                        paginator
+                        rows={5}
+                        rowsPerPageOptions={[5, 10, 25, 50]}
+                        paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                        paginatorLeft={paginatorLeft}
+                        paginatorRight={paginatorRight}
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

@@ -5,13 +5,14 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Tag } from '@/components/lib/tag/Tag';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function RowSpanRowGroupDoc(props) {
     const [customers, setCustomers] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const countryBodyTemplate = (rowData) => {
         return (
@@ -262,17 +263,19 @@ export default function RowSpanGroupingDemo() {
                     When <i>rowGroupMode</i> is configured to be <i>rowspan</i>, the grouping column spans multiple rows.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={customers} rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" sortOrder={1} tableStyle={{ minWidth: '50rem' }}>
-                    <Column header="#" headerStyle={{ width: '3rem' }} body={(data, options) => options.rowIndex + 1}></Column>
-                    <Column field="representative.name" header="Representative" body={representativeBodyTemplate} style={{ minWidth: '200px' }}></Column>
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '150px' }}></Column>
-                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '100px' }}></Column>
-                    <Column field="date" header="Date" style={{ minWidth: '100px' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={customers} rowGroupMode="rowspan" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" sortOrder={1} tableStyle={{ minWidth: '50rem' }}>
+                        <Column header="#" headerStyle={{ width: '3rem' }} body={(data, options) => options.rowIndex + 1}></Column>
+                        <Column field="representative.name" header="Representative" body={representativeBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                        <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '150px' }}></Column>
+                        <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                        <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '100px' }}></Column>
+                        <Column field="date" header="Date" style={{ minWidth: '100px' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

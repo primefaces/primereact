@@ -4,13 +4,14 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function VerticalScrollDoc(props) {
     const [customers, setCustomers] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -114,14 +115,16 @@ export default function VerticalScrollDemo() {
                     Adding <i>scrollable</i> property along with a <i>scrollHeight</i> for the data viewport enables vertical scrolling with fixed headers.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={customers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
-                    <Column field="company" header="Company"></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={customers} scrollable scrollHeight="400px" tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="country.name" header="Country"></Column>
+                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="company" header="Company"></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

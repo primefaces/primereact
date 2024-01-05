@@ -3,8 +3,9 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ColumnToggleDoc(props) {
     const columns = [
@@ -15,9 +16,9 @@ export function ColumnToggleDoc(props) {
     const [products, setProducts] = useState([]);
     const [visibleColumns, setVisibleColumns] = useState(columns);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const onColumnToggle = (event) => {
         let selectedColumns = event.value;
@@ -159,14 +160,16 @@ export default function ColumnToggleDemo() {
             <DocSectionText {...props}>
                 <p>Column visibility based on a condition can be implemented with dynamic columns, in this sample a MultiSelect is used to manage the visible columns.</p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code" />
-                    {visibleColumns.map((col) => (
-                        <Column key={col.field} field={col.field} header={col.header} />
-                    ))}
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code" />
+                        {visibleColumns.map((col) => (
+                            <Column key={col.field} field={col.field} header={col.header} />
+                        ))}
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

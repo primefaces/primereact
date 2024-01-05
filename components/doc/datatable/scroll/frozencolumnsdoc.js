@@ -5,14 +5,15 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { ToggleButton } from '@/components/lib/togglebutton/ToggleButton';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function FrozenColumnsDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [balanceFrozen, setBalanceFrozen] = useState(false);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersLarge().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const balanceTemplate = (rowData) => {
         return <span className="font-bold">{formatCurrency(rowData.balance)}</span>;
@@ -166,21 +167,23 @@ export default function FrozenColumnsDemo() {
                     A column can be fixed during horizontal scrolling by enablng the <i>frozen</i> property. The location is defined with the <i>alignFrozen</i> that can be <i>left</i> or <i>right</i>.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
-                <DataTable value={customers} scrollable scrollHeight="400px" className="mt-4">
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }} frozen className="font-bold"></Column>
-                    <Column field="id" header="Id" style={{ minWidth: '100px' }}></Column>
-                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
-                    <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
-                    <Column field="activity" header="Activity" style={{ minWidth: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
-                    <Column field="balance" header="Balance" body={balanceTemplate} style={{ minWidth: '200px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Balance" offLabel="Balance" />
+                    <DataTable value={customers} scrollable scrollHeight="400px" className="mt-4">
+                        <Column field="name" header="Name" style={{ minWidth: '200px' }} frozen className="font-bold"></Column>
+                        <Column field="id" header="Id" style={{ minWidth: '100px' }}></Column>
+                        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                        <Column field="country.name" header="Country" style={{ minWidth: '200px' }}></Column>
+                        <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
+                        <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                        <Column field="status" header="Status" style={{ minWidth: '200px' }}></Column>
+                        <Column field="activity" header="Activity" style={{ minWidth: '200px' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ minWidth: '200px' }}></Column>
+                        <Column field="balance" header="Balance" body={balanceTemplate} style={{ minWidth: '200px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

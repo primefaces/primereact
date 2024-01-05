@@ -4,9 +4,15 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import Link from 'next/link';
 import { CarService } from '../../../../service/CarService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
+import { useState } from 'react';
 
 export function PreloadVirtualScrollDoc(props) {
-    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
+    const [cars, setCars] = useState([]);
+
+    const loadDemoData = () => {
+        setCars(Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1)));
+    };
 
     const code = {
         basic: `
@@ -92,15 +98,17 @@ export default function PreloadVirtualScrollDemo() {
                     In this example, <strong>100000</strong> preloaded records are rendered by the Table.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={cars} scrollable scrollHeight="400px" virtualScrollerOptions={{ itemSize: 46 }} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="id" header="Id" style={{ width: '20%' }}></Column>
-                    <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
-                    <Column field="year" header="Year" style={{ width: '20%' }}></Column>
-                    <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
-                    <Column field="color" header="Color" style={{ width: '20%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={cars} scrollable scrollHeight="400px" virtualScrollerOptions={{ itemSize: 46 }} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="id" header="Id" style={{ width: '20%' }}></Column>
+                        <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
+                        <Column field="year" header="Year" style={{ width: '20%' }}></Column>
+                        <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
+                        <Column field="color" header="Color" style={{ width: '20%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CarService']} />
         </>
     );

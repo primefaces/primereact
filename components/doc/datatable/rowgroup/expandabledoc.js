@@ -5,14 +5,15 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Tag } from '@/components/lib/tag/Tag';
 import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ExpandableRowGroupDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const headerTemplate = (data) => {
         return (
@@ -337,28 +338,30 @@ export default function ExpandableRowGroupDemo() {
                     When <i>expandableRowGroups</i> is present in subheader based row grouping, groups can be expanded and collapsed. State of the expansions are controlled using the <i>expandedRows</i> and <i>onRowToggle</i> properties.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={customers}
-                    rowGroupMode="subheader"
-                    groupRowsBy="representative.name"
-                    sortMode="single"
-                    sortField="representative.name"
-                    sortOrder={1}
-                    expandableRowGroups
-                    expandedRows={expandedRows}
-                    onRowToggle={(e) => setExpandedRows(e.data)}
-                    rowGroupHeaderTemplate={headerTemplate}
-                    rowGroupFooterTemplate={footerTemplate}
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="name" header="Name" style={{ width: '20%' }}></Column>
-                    <Column field="country" header="Country" body={countryBodyTemplate} style={{ width: '20%' }}></Column>
-                    <Column field="company" header="Company" style={{ width: '20%' }}></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} style={{ width: '20%' }}></Column>
-                    <Column field="date" header="Date" style={{ width: '20%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={customers}
+                        rowGroupMode="subheader"
+                        groupRowsBy="representative.name"
+                        sortMode="single"
+                        sortField="representative.name"
+                        sortOrder={1}
+                        expandableRowGroups
+                        expandedRows={expandedRows}
+                        onRowToggle={(e) => setExpandedRows(e.data)}
+                        rowGroupHeaderTemplate={headerTemplate}
+                        rowGroupFooterTemplate={footerTemplate}
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="name" header="Name" style={{ width: '20%' }}></Column>
+                        <Column field="country" header="Country" body={countryBodyTemplate} style={{ width: '20%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '20%' }}></Column>
+                        <Column field="status" header="Status" body={statusBodyTemplate} style={{ width: '20%' }}></Column>
+                        <Column field="date" header="Date" style={{ width: '20%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

@@ -5,15 +5,16 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function RadioButtonRowSelectionDoc(props) {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [rowClick, setRowClick] = useState(true);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -132,19 +133,21 @@ export default function RadioButtonRowSelectionDemo() {
                     of DataTable to <i>radiobutton</i> to only trigger selection using the radio buttons.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                    <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e) => setRowClick(e.value)} />
-                    <label htmlFor="input-rowclick">Row Click</label>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <div className="flex justify-content-center align-items-center mb-4 gap-2">
+                        <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e) => setRowClick(e.value)} />
+                        <label htmlFor="input-rowclick">Row Click</label>
+                    </div>
+                    <DataTable value={products} selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
+                        <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
                 </div>
-                <DataTable value={products} selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
-                    <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
