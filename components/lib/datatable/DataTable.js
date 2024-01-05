@@ -1082,7 +1082,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const filterLocal = (data, filters) => {
         if (!data) return;
 
-        let activeFilters = getActiveFilters(filters) || {};
+        let activeFilters = filters ? getActiveFilters(filters) : {};
 
         let columns = getColumns();
         let filteredValue = [];
