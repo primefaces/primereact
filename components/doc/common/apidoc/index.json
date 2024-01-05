@@ -690,6 +690,13 @@
                             "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
                         },
                         {
+                            "name": "styleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StyleContainerType",
+                            "description": "This option allows  `useStyle`  to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
@@ -786,6 +793,13 @@
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<AppendToType>>",
                             "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setStyleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<StyleContainerType>>",
+                            "description": "Sets the \"styleContainer\" state of the context."
                         },
                         {
                             "name": "setAutoZIndex",
@@ -3317,6 +3331,9 @@
                 },
                 "AppendToType": {
                     "values": "\"self\" | HTMLElement | undefined | null"
+                },
+                "StyleContainerType": {
+                    "values": "ShadowRoot | HTMLElement | undefined | null"
                 }
             }
         }

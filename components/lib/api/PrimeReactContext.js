@@ -11,6 +11,7 @@ export const PrimeReactProvider = (props) => {
     const [inputStyle, setInputStyle] = useState(propsValue.inputStyle || 'outlined');
     const [locale, setLocale] = useState(propsValue.locale || 'en');
     const [appendTo, setAppendTo] = useState(propsValue.appendTo || null);
+    const [styleContainer, setStyleContainer] = useState(propsValue.styleContainer || null);
     const [cssTransition, setCssTransition] = useState(propsValue.cssTransition || true);
     const [autoZIndex, setAutoZIndex] = useState(propsValue.autoZIndex || true);
     const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(propsValue.hideOverlaysOnDocumentScrolling || false);
@@ -90,6 +91,8 @@ export const PrimeReactProvider = (props) => {
         setLocale,
         appendTo,
         setAppendTo,
+        styleContainer,
+        setStyleContainer,
         cssTransition,
         setCssTransition,
         autoZIndex,

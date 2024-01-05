@@ -218,7 +218,7 @@ export const CascadeSelect = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
                 const selector = `${attributeSelectorState}_panel`;
                 const innerHTML = `

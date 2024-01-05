@@ -389,7 +389,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createStyle = () => {
-        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
         let innerHTML = '';
 
