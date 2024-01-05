@@ -28,7 +28,7 @@ const DeferredDemo = ({ options, children, onLoad }) => {
 
         return () => {
             if (!visible && elementRef.current) {
-                observerRef.current.unobserve(elementRef.current);
+                observerRef.current.unobserve(elementRef.current); // eslint-disable-line react-hooks/exhaustive-deps
             }
 
             clearTimeout(timeoutRef.current);
