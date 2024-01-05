@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export function ColumnGroupDoc(props) {
     const [sales, setSales] = useState([]);
-    
+
     const loadDemoData = () => {
         setSales([
             { product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342 },
