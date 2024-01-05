@@ -64,8 +64,6 @@
 	 - Toolbar
 	 - Tooltip
 
-
-
 **Fixed bugs:**
 
 - PrimeReactProvider: Error next14 app router [\#5127](https://github.com/primefaces/primereact/issues/5127)
@@ -163,6 +161,7 @@
 - Animated Text Highlight Problem [\#5480](https://github.com/primefaces/primereact/issues/5480)
 - RowEdit: Programmatic Demo [\#5452](https://github.com/primefaces/primereact/issues/5452)
 - Calendar: lag when navigating between months [\#5202](https://github.com/primefaces/primereact/issues/5202)
+- Datatable: CRUD Filter but [\#5691]( https://github.com/primefaces/primereact/pull/5691)
 
 ## [10.2.1](https://github.com/primefaces/primereact/tree/10.2.1) (2023-11-27)
 
