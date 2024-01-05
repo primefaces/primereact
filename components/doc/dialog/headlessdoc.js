@@ -148,7 +148,7 @@ export default function HeadlessDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Dialog is used as a container and visibility is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback. Dialogs are <i>draggable</i> and <i>resizable</i> by default.
+                    Headless mode is enabled by defining a <i>content</i> prop that lets you implement entire dialog UI instead of the default elements.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

@@ -614,7 +614,7 @@ export default function HeadlessDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Sidebar is used as a container and visibility is controlled with a binding to <i>visible</i> and <i>onHide</i> event callback.
+                    Headless mode is enabled by defining a <i>content</i> prop that lets you implement entire sidebar UI instead of the default elements.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

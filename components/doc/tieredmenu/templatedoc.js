@@ -331,7 +331,7 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    TieredMenu requires a collection of menuitems as its <i>model</i>.
+                    TieredMenu offers item customization with the items <i>template</i> property that receives the item instance and returns an element.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

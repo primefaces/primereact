@@ -227,7 +227,7 @@ export default function HeadlessDemo() {
         <div>
             <DocSectionText {...props}>
                 <p>
-                    A ConfirmDialog component needs to be present on the page that is interacted with the <i>confirmDialog</i> function that takes a configuration object for customization.
+                    Headless mode is enabled by defining a <i>content</i> prop that lets you implement entire confirmation UI instead of the default elements.
                 </p>
             </DocSectionText>
             <Toast ref={toast} />

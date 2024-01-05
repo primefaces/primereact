@@ -19,7 +19,7 @@ export function RouterDoc(props) {
         <>
             <DocSectionText {...props}>
                 <p>
-                    The <i>command</i> property of a menuitem defines the callback to run when an item is activated by click or a key event.
+                    Items with navigation are defined with <i>command</i> property to be able to use a router link component, an external link or programmatic navigation.
                 </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />

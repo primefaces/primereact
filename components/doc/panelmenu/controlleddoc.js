@@ -5,12 +5,11 @@ import { Button } from '@/components/lib/button/Button';
 import { useState } from 'react';
 
 export function ControlledDoc(props) {
-    const [items, setItems] = useState([
+    const items = [
         {
             key: '0',
             label: 'Users',
             icon: 'pi pi-users',
-            expanded: false,
             items: [
                 {
                     key: '0_1',
@@ -18,20 +17,17 @@ export function ControlledDoc(props) {
                     items: [
                         {
                             key: '0_1_0',
-                            label: 'Member',
-                            expanded: false
+                            label: 'Member'
                         },
                         {
                             key: '0_1_1',
-                            label: 'Group',
-                            expanded: false
+                            label: 'Group'
                         }
                     ]
                 },
                 {
                     key: '0_2',
-                    label: 'Search',
-                    expanded: false
+                    label: 'Search'
                 }
             ]
         },
@@ -39,22 +35,18 @@ export function ControlledDoc(props) {
             key: '1',
             label: 'Tasks',
             icon: 'pi pi-server',
-            expanded: false,
             items: [
                 {
                     key: '1_0',
-                    label: 'Add New',
-                    expanded: false
+                    label: 'Add New'
                 },
                 {
                     key: '1_1',
-                    label: 'Pending',
-                    expanded: false
+                    label: 'Pending'
                 },
                 {
                     key: '1_2',
-                    label: 'Overdue',
-                    expanded: false
+                    label: 'Overdue'
                 }
             ]
         },
@@ -62,65 +54,55 @@ export function ControlledDoc(props) {
             key: '2',
             label: 'Calendar',
             icon: 'pi pi-calendar',
-            expanded: false,
 
             items: [
                 {
                     key: '2_0',
-                    label: 'New Event',
-                    expanded: false
+                    label: 'New Event'
                 },
                 {
                     key: '2_1',
-                    label: 'Today',
-                    expanded: false
+                    label: 'Today'
                 },
                 {
                     key: '2_2',
-                    label: 'This Week',
-                    expanded: false
+                    label: 'This Week'
                 }
             ]
         }
-    ]);
+    ];
 
-    const isAllExpanded = (items) => {
-        for (let item of items) {
-            if (!item.expanded) return false;
-            if (item.items && !isAllExpanded(item.items)) return false;
-        }
+    const [expandedKeys, setExpandedKeys] = useState({});
 
-        return true;
+    const collectKeys = (items) => {
+        let keys = [];
+
+        items.forEach((item) => {
+            keys.push(item.key);
+
+            if (item.items) {
+                keys = keys.concat(collectKeys(item.items));
+            }
+        });
+
+        return keys;
     };
 
     const toggleAll = () => {
-        if (isAllExpanded(items)) {
-            changeExpandedStatuses(false);
-        } else {
-            changeExpandedStatuses(true);
-        }
-    };
+        setExpandedKeys((prevExpandedKeys) => {
+            const allKeys = collectKeys(items);
+            const newExpandedKeys = { ...prevExpandedKeys };
 
-    const changeExpandedStatuses = (status) => {
-        const newItems = items.map((item) => {
-            item.expanded = status;
+            allKeys.forEach((key) => {
+                if (newExpandedKeys[key]) {
+                    delete newExpandedKeys[key];
+                } else {
+                    newExpandedKeys[key] = true;
+                }
+            });
 
-            if (item.items) {
-                item.items.map((subitem) => {
-                    subitem.expanded = status;
-
-                    if (subitem.items) {
-                        subitem.items.map((subsubitem) => {
-                            subsubitem.expanded = status;
-                        });
-                    }
-                });
-            }
-
-            return item;
+            return newExpandedKeys;
         });
-
-        setItems(newItems);
     };
 
     const code = {
@@ -141,7 +123,6 @@ export default function ControlledDemo() {
             key: '0',
             label: 'Users',
             icon: 'pi pi-users',
-            expanded: false,
             items: [
                 {
                     key: '0_1',
@@ -150,19 +131,16 @@ export default function ControlledDemo() {
                         {
                             key: '0_1_0',
                             label: 'Member',
-                            expanded: false
                         },
                         {
                             key: '0_1_1',
                             label: 'Group',
-                            expanded: false
                         }
                     ]
                 },
                 {
                     key: '0_2',
                     label: 'Search',
-                    expanded: false
                 }
             ]
         },
@@ -170,22 +148,18 @@ export default function ControlledDemo() {
             key: '1',
             label: 'Tasks',
             icon: 'pi pi-server',
-            expanded: false,
             items: [
                 {
                     key: '1_0',
                     label: 'Add New',
-                    expanded: false
                 },
                 {
                     key: '1_1',
                     label: 'Pending',
-                    expanded: false
                 },
                 {
                     key: '1_2',
                     label: 'Overdue',
-                    expanded: false
                 }
             ]
         },
@@ -193,23 +167,19 @@ export default function ControlledDemo() {
             key: '2',
             label: 'Calendar',
             icon: 'pi pi-calendar',
-            expanded: false,
 
             items: [
                 {
                     key: '2_0',
                     label: 'New Event',
-                    expanded: false
                 },
                 {
                     key: '2_1',
                     label: 'Today',
-                    expanded: false
                 },
                 {
                     key: '2_2',
                     label: 'This Week',
-                    expanded: false
                 }
             ]
         }
@@ -275,7 +245,6 @@ export default function ControlledDemo() {
             key: '0',
             label: 'Users',
             icon: 'pi pi-users',
-            expanded: false,
             items: [
                 {
                     key: '0_1',
@@ -284,19 +253,16 @@ export default function ControlledDemo() {
                         {
                             key: '0_1_0',
                             label: 'Member',
-                            expanded: false
                         },
                         {
                             key: '0_1_1',
                             label: 'Group',
-                            expanded: false
                         }
                     ]
                 },
                 {
                     key: '0_2',
                     label: 'Search',
-                    expanded: false
                 }
             ]
         },
@@ -304,22 +270,18 @@ export default function ControlledDemo() {
             key: '1',
             label: 'Tasks',
             icon: 'pi pi-server',
-            expanded: false,
             items: [
                 {
                     key: '1_0',
                     label: 'Add New',
-                    expanded: false
                 },
                 {
                     key: '1_1',
                     label: 'Pending',
-                    expanded: false
                 },
                 {
                     key: '1_2',
                     label: 'Overdue',
-                    expanded: false
                 }
             ]
         },
@@ -327,23 +289,19 @@ export default function ControlledDemo() {
             key: '2',
             label: 'Calendar',
             icon: 'pi pi-calendar',
-            expanded: false,
 
             items: [
                 {
                     key: '2_0',
                     label: 'New Event',
-                    expanded: false
                 },
                 {
                     key: '2_1',
                     label: 'Today',
-                    expanded: false
                 },
                 {
                     key: '2_2',
                     label: 'This Week',
-                    expanded: false
                 }
             ]
         }
@@ -402,12 +360,13 @@ export default function ControlledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    PanelMenu requires a collection of menuitems as its <i>model</i>.
+                    If the menuitem has a <i>key</i> defined, PanelMenu state can be controlled programmatically with the <i>expandedKeys</i> property that defines the keys that are expanded. This property is a Map instance whose key is the key of a
+                    node and value is a boolean.
                 </p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center gap-3">
                 <Button type="button" label="Toggle All" text onClick={() => toggleAll()} />
-                <PanelMenu model={items} className="w-full md:w-20rem" multiple />
+                <PanelMenu model={items} expandedKeys={expandedKeys} onExpandedKeysChange={setExpandedKeys} className="w-full md:w-20rem" multiple />
             </div>
             <DocSectionCode code={code} />
         </>

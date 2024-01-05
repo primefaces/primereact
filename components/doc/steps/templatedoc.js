@@ -138,7 +138,7 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Steps requires a collection of menuitems as its <i>model</i>.
+                    Steps offers item customization with the items <i>template</i> property that receives the item instance and returns an element.
                 </p>
             </DocSectionText>
             <div className="card">

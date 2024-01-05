@@ -80,7 +80,7 @@ export default function RouterDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Steps requires a collection of menuitems as its <i>model</i>.
+                    Items with navigation are defined with <i>command</i> property to be able to use a router link component, an external link or programmatic navigation.{' '}
                 </p>
             </DocSectionText>
             <div className="card">

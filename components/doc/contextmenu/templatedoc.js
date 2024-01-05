@@ -267,7 +267,9 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ContextMenu offers item customization with the item template that receives the menuitem instance from the model as a parameter.</p>
+                <p>
+                    ContextMenu offers item customization with the items <i>template</i> property that receives the item instance and returns an element.
+                </p>
             </DocSectionText>
             <div className="card flex md:justify-content-center">
                 <ul className="m-0 p-0 list-none border-1 surface-border border-round p-3 flex flex-column gap-2 w-full md:w-30rem">
