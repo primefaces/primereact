@@ -22,47 +22,8 @@
 - Accessibility | Messages [\#5428](https://github.com/primefaces/primereact/issues/5428)
 - Accessibility | Media Section [\#5422](https://github.com/primefaces/primereact/issues/5422)
 - Headless Mode Update
-    - Dialog
-    - ConfirmDialog
-    - ConfirmPopup
-    - Sidebar
-    - Toast      
+    - Dialog, ConfirmDialog, ConfirmPopup, Sidebar, Toast      
 - Showcase Updates 
-	 - Accordion
-	 - Breadcrumb
-	 - Button
-	 - Calendar
-	 - Carousel
-	 - CascadeSelect
-	 - ConfirmDialog
-	 - ConfirmPopup
-	 - ContextMenu
-	 - Dialog
-	 - Dropdown
-	 - Fieldset
-	 - InputMask
-	 - MegaMenu
-	 - Menu
-	 - Menubar
-	 - Message
-	 - Messages
-	 - Multiselect
-	 - Panel
-	 - PanelMenu
-	 - ProgressSpinner
-	 - Ripple
-	 - ScrollPanel
-	 - ScrollTop
-	 - Sidebar
-	 - SpeedDial
-	 - SplitButton
-	 - Steps
-	 - TabMenu
-	 - TabView
-	 - TieredMenu
-	 - Toast
-	 - Toolbar
-	 - Tooltip
 
 **Fixed bugs:**
 
