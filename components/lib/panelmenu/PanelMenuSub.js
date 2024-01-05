@@ -66,7 +66,7 @@ export const PanelMenuSub = React.memo(
             }
 
             getItemProp(processedItem, 'command', { originalEvent: event, item: processedItem.item });
-            props.onItemToggle({ processedItem, expanded: !isItemActive(processedItem) });
+            onItemToggle({ processedItem, expanded: !isItemActive(processedItem) });
         };
 
         const onItemToggle = (event) => {

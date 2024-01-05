@@ -193,7 +193,7 @@ export const PanelMenuList = React.memo((props) => {
         const { processedItem, expanded } = event;
 
         if (props.expandedKeys) {
-            props.onToggle && props.onToggle({ originalEvent: event, value: processedItem.item, expanded });
+            props.onToggle && props.onToggle({ item: processedItem.item, expanded });
         } else {
             const _activeItemPath = activeItemPath.filter((p) => p.parentKey !== processedItem.parentKey);
 
