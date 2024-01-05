@@ -260,7 +260,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     );
 
     const createTemplateElement = () => {
-        const templateElementProps = { sidebarRef, closeIconRef, hide: onClose };
+        const templateElementProps = { closeIconRef, hide: onClose };
 
         return (
             <div {...maskProps}>

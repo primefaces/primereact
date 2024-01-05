@@ -142,9 +142,21 @@ interface ConfirmPopupOptions {
  * @see {@link ConfirmPopupProps.content}
  */
 interface ContentProps {
+    /**
+     * Reference for the accept button. Used to focus the element and execute the action.
+     */
     acceptBtnRef: React.RefObject<HTMLButtonElement>;
+    /**
+     * Reference for the reject button. Used to focus the element and execute the action.
+     */
     rejectBtnRef: React.RefObject<HTMLButtonElement>;
+    /**
+     * Message value of confirm popup.
+     */
     message: React.ReactNode | string;
+    /**
+     * Hide action of confirm popup.
+     */
     hide(): void;
 }
 
@@ -272,7 +284,7 @@ export interface ConfirmPopupProps {
      * @param {ContentProps} props - The values of dialog.
      * @return {React.ReactNode}
      */
-    content?(props: ContentProps): React.ReactNode;
+    content: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

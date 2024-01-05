@@ -81,10 +81,26 @@ export interface SidebarState {
 }
 
 /**
+ * Defines current content values and refs for headless development.
+ * @see {@link SidebarProps.content}
+ */
+interface ContentProps {
+    /**
+     * Allows you to specify the close button of the sidebar.
+     */
+    closeIconRef: React.RefObject<HTMLButtonElement | HTMLElement>;
+    /**
+     * Callback for hiding the sidebar.
+     * @param {React.SyntheticEvent} event - Used to get the event of the element.
+     */
+    hide(event: React.SyntheticEvent): void;
+}
+
+/**
  * Defines valid properties in Sidebar component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content'> {
     /**
      * Inline style of the mask.
      */
@@ -195,6 +211,12 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies a custom content for the sidebar. For more complex markup, use the "content" slot instead.
+     * @param {ContentProps} props - The values of sidebar.
+     * @return {React.ReactNode}
+     */
+    content: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

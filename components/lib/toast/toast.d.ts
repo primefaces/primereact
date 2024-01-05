@@ -306,7 +306,7 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @param {ContentProps} props - The values of toast.
      * @return {React.ReactNode}
      */
-    content?(props: ContentProps): React.ReactNode;
+    content: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**
