@@ -40,6 +40,12 @@ export const BreadCrumb = React.memo(
             }
         };
 
+        const isCurrent = (url) => {
+            const lastPath = typeof window !== 'undefined' ? window.location.pathname : '';
+
+            return url === lastPath ? 'page' : undefined;
+        };
+
         const createHome = (index) => {
             const home = props.home;
 
@@ -61,6 +67,7 @@ export const BreadCrumb = React.memo(
                         href: url || '#',
                         className: cx('action'),
                         'aria-disabled': disabled,
+                        'aria-current': isCurrent(url),
                         target,
                         onClick: (event) => itemClick(event, home)
                     },
@@ -114,7 +121,8 @@ export const BreadCrumb = React.memo(
             const key = idState + '_sep_' + index;
             const separatorIconProps = mergeProps(
                 {
-                    className: cx('separatorIcon')
+                    className: cx('separatorIcon'),
+                    'aria-hidden': 'true'
                 },
                 ptm('separatorIcon')
             );
@@ -150,6 +158,7 @@ export const BreadCrumb = React.memo(
                     href: item.url || '#',
                     className: cx('action'),
                     target: item.target,
+                    'aria-current': isCurrent(item.url),
                     onClick: (event) => itemClick(event, item),
                     'aria-disabled': item.disabled
                 },
@@ -233,8 +242,7 @@ export const BreadCrumb = React.memo(
                 id: props.id,
                 ref: elementRef,
                 className: cx('root'),
-                style: props.style,
-                'aria-label': 'Breadcrumb'
+                style: props.style
             },
             BreadCrumbBase.getOtherProps(props),
             ptm('root')
@@ -242,11 +250,11 @@ export const BreadCrumb = React.memo(
 
         return (
             <nav {...rootProps}>
-                <ul {...menuProps}>
+                <ol {...menuProps}>
                     {home}
                     {separator}
                     {items}
-                </ul>
+                </ol>
             </nav>
         );
     })

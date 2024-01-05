@@ -27,10 +27,11 @@ export const BodyCell = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
-    const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
 
     const getColumnPTOptions = (key) => {
-        const cProps = getColumnProps();
+        const cProps = getColumnProps(props.column);
+
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
@@ -57,16 +58,17 @@ export const BodyCell = React.memo((props) => {
         type: 'click',
         listener: (e) => {
             if (!selfClick.current && isOutsideClicked(e.target)) {
-                // #2666 for overlay components and outside is clicked
-                setTimeout(() => {
-                    switchCellToViewMode(e, true);
-                }, 0);
+                switchCellToViewMode(e, true);
             }
 
             selfClick.current = false;
         },
         options: true
     });
+
+    if (props.editMode === 'row' && props.editing !== editingState) {
+        setEditingState(props.editing);
+    }
 
     const isEditable = () => {
         return getColumnProp('editor');
@@ -185,8 +187,6 @@ export const BodyCell = React.memo((props) => {
             } else {
                 event.preventDefault();
             }
-
-            return newRowData;
         });
     };
 
@@ -227,7 +227,7 @@ export const BodyCell = React.memo((props) => {
         clearTimeout(tabindexTimeout.current);
         tabindexTimeout.current = setTimeout(() => {
             if (editingState) {
-                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
 
                 focusableEl && focusableEl.focus();
             }
@@ -512,12 +512,6 @@ export const BodyCell = React.memo((props) => {
         }
     });
 
-    React.useEffect(() => {
-        if (props.editMode === 'row' && props.editing !== editingState) {
-            setEditingState(props.editing);
-        }
-    }, [props.editMode, props.editing, editingState]);
-
     useUpdateEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             setEditingRowDataState(getEditingRowData());
@@ -564,6 +558,7 @@ export const BodyCell = React.memo((props) => {
         const tabIndex = getTabIndex(cellSelected);
         const selectionMode = getColumnProp('selectionMode');
         const rowReorder = getColumnProp('rowReorder');
+        const rowEditor = getColumnProp('rowEditor');
         const header = getColumnProp('header');
         const body = getColumnProp('body');
         const editor = getColumnProp('editor');
@@ -572,7 +567,6 @@ export const BodyCell = React.memo((props) => {
         const value = resolveFieldData();
         const columnBodyOptions = { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
         const expander = ObjectUtils.getPropValue(getColumnProp('expander'), props.rowData, columnBodyOptions);
-        const rowEditor = ObjectUtils.getPropValue(getColumnProp('rowEditor'), props.rowData, columnBodyOptions);
         const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, columnBodyOptions);
         const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, columnBodyOptions);
         const style = getStyle();

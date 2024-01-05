@@ -143,7 +143,7 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Whether to automatically manage layering.
      * @defaultValue true

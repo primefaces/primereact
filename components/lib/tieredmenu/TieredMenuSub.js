@@ -135,6 +135,7 @@ export const TieredMenuSub = React.memo(
                         menuProps={props.menuProps}
                         model={processedItem.items}
                         menuId={props.menuId}
+                        ariaLabelledby={getItemId(item)}
                         focusedItemId={props.focusedItemId}
                         activeItemPath={props.activeItemPath}
                         level={props.level + 1}
@@ -290,7 +291,9 @@ export const TieredMenuSub = React.memo(
                 className: cx(ptKey, { subProps: props }),
                 style: sx(ptKey, { subProps: props }),
                 role: props.root ? 'menubar' : 'menu',
-                'aria-orientation': 'horizontal',
+                'aria-label': props.ariaLabel,
+                'aria-labelledby': props.ariaLabelledby,
+                'aria-orientation': props.ariaOrientation,
                 'aria-activedescendant': props.focusedItemId
             },
             ptm(ptKey, { hostName: props.hostName })

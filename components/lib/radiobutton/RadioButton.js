@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -39,35 +39,35 @@ export const RadioButton = React.memo(
                 const inputClicked = event.target === inputRef.current;
                 const isInputToggled = inputClicked && event.target.checked !== checked;
                 const isRadioToggled = radioClicked && (DomHandler.isAttributeEquals(elementRef.current, 'data-p-checked', true) === checked ? !checked : false);
-                const value = !checked;
-
-                const eventData = {
-                    originalEvent: event,
-                    value: props.value,
-                    checked: value,
-                    stopPropagation: () => {
-                        event.stopPropagation();
-                    },
-                    preventDefault: () => {
-                        event.preventDefault();
-                    },
-                    target: {
-                        type: 'radio',
-                        name: props.name,
-                        id: props.id,
-                        value: props.value,
-                        checked: value
-                    }
-                };
-
-                props.onClick && props.onClick(eventData);
-
-                // do not continue if the user defined click wants to prevent
-                if (event.defaultPrevented) {
-                    return;
-                }
 
                 if (isInputToggled || isRadioToggled) {
+                    const value = !checked;
+                    const eventData = {
+                        originalEvent: event,
+                        value: props.value,
+                        checked: value,
+                        stopPropagation: () => {
+                            event.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            event.preventDefault();
+                        },
+                        target: {
+                            type: 'radio',
+                            name: props.name,
+                            id: props.id,
+                            value: props.value,
+                            checked: value
+                        }
+                    };
+
+                    props.onClick && props.onClick(eventData);
+
+                    // do not continue if the user defined click wants to prevent
+                    if (event.defaultPrevented) {
+                        return;
+                    }
+
                     props.onChange && props.onChange(eventData);
 
                     if (isRadioToggled) {

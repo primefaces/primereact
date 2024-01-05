@@ -292,12 +292,8 @@ export declare function useClickOutside(ref: React.RefObject<Element>, callback:
  */
 export declare function useMatchMedia(query: string, when?: boolean): boolean;
 /**
- * Custom hook to use detect global escape button click.
+ * Custom hook to use detect escape button click.
+ * @param {React.RefObject<Element>} ref - The ref of the element to detect escape button click.
+ * @param {*} callback - The callback to run when escape button clicked.
  */
-export declare function useGlobalOnEscapeKey(props: { callback: (event: KeyboardEvent) => void; when: boolean; priority: [number, number] }): void;
-/**
- * Custom hook to use display order of component of one and the same group
- * @param {string} group
- * @param {boolean} [isVisible]
- */
-export declare function useDisplayOrder(group: string, isVisible?: boolean): number | undefined;
+export declare function useOnEscapeKey(ref: React.RefObject<Element>, callback: any): void;

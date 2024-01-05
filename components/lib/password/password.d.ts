@@ -215,7 +215,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Template of panel header if "feedback" is enabled.
      */

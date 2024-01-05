@@ -45,7 +45,7 @@ export interface SidebarPassThroughOptions {
     /**
      * Uses to pass attributes to the close icon's DOM element.
      */
-    closeButtonIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    closeIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
@@ -161,7 +161,7 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and self. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | null | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}

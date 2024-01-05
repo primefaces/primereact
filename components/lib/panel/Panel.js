@@ -90,7 +90,9 @@ export const Panel = React.forwardRef((inProps, ref) => {
                     id: buttonId,
                     'aria-controls': contentId,
                     'aria-expanded': !collapsed,
-                    role: 'tab'
+                    type: 'button',
+                    role: 'button',
+                    'aria-label': props.header
                 },
                 ptm('toggler')
             );
@@ -161,6 +163,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 iconsElement,
                 togglerElement,
                 element: content,
+                id: idState + '_header',
                 props,
                 collapsed
             };
@@ -201,8 +204,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
     };
 
     const createContent = () => {
-        const footer = createFooter();
-
         const toggleableContentProps = mergeProps(
             {
                 ref: contentRef,
@@ -236,7 +237,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
             <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableContentProps}>
                     <div {...contentProps}>{props.children}</div>
-                    {footer}
                 </div>
             </CSSTransition>
         );
@@ -254,11 +254,13 @@ export const Panel = React.forwardRef((inProps, ref) => {
     );
     const header = createHeader();
     const content = createContent();
+    const footer = createFooter();
 
     return (
         <div {...rootProps}>
             {header}
             {content}
+            {footer}
         </div>
     );
 });

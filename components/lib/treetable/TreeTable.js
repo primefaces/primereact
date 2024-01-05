@@ -213,7 +213,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const sortNodes = (data) => {
         let value = [...data];
 
-        if (columnSortable.current && columnSortFunction.current) {
+        if (columnSortable.current && columnSortable.current === 'custom' && columnSortFunction.current) {
             value = columnSortFunction.current({
                 data,
                 field: getSortField(),
@@ -369,9 +369,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 if (newColumnWidth > 15 && nextColumnWidth > 15) {
                     if (props.scrollable) {
                         let scrollableView = findParentScrollableView(resizeColumn.current);
-                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablebodytable"]');
-                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollableheadertable"]');
-                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablefootertable"]');
+                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
+                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
+                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
                         let resizeColumnIndex = DomHandler.index(resizeColumn.current);
 
                         resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
@@ -388,9 +388,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             } else if (props.columnResizeMode === 'expand') {
                 if (props.scrollable) {
                     let scrollableView = findParentScrollableView(resizeColumn.current);
-                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablebodytable"]');
-                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollableheadertable"]');
-                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablefootertable"]');
+                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
+                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
+                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
 
                     scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
                     scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
@@ -912,40 +912,39 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return (
             <TreeTableBody
                 hostName="TreeTable"
+                value={value}
+                originalOptions={props.value}
                 checkboxIcon={props.checkboxIcon}
                 columns={columns}
-                contextMenuSelectionKey={props.contextMenuSelectionKey}
-                emptyMessage={props.emptyMessage}
                 expandedKeys={getExpandedKeys()}
-                first={getFirst()}
-                lazy={props.lazy}
-                loading={props.loading}
-                metaData={metaData}
-                metaKeySelection={props.metaKeySelection}
-                onCollapse={props.onCollapse}
-                onContextMenu={props.onContextMenu}
-                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                selectOnEdit={props.selectOnEdit}
+                onToggle={onToggle}
+                togglerTemplate={props.togglerTemplate}
                 onExpand={props.onExpand}
+                onCollapse={props.onCollapse}
+                paginator={props.paginator}
+                first={getFirst()}
+                rows={getRows()}
+                selectionMode={props.selectionMode}
+                selectionKeys={props.selectionKeys}
+                onSelectionChange={props.onSelectionChange}
+                metaKeySelection={props.metaKeySelection}
                 onRowClick={props.onRowClick}
                 onRowMouseEnter={props.onRowMouseEnter}
                 onRowMouseLeave={props.onRowMouseLeave}
                 onSelect={props.onSelect}
-                onSelectionChange={props.onSelectionChange}
-                onToggle={onToggle}
                 onUnselect={props.onUnselect}
-                originalOptions={props.value}
-                paginator={props.paginator}
-                propagateSelectionDown={props.propagateSelectionDown}
                 propagateSelectionUp={props.propagateSelectionUp}
-                ptCallbacks={ptCallbacks}
+                propagateSelectionDown={props.propagateSelectionDown}
+                lazy={props.lazy}
                 rowClassName={props.rowClassName}
-                rows={getRows()}
-                selectOnEdit={props.selectOnEdit}
-                selectionKeys={props.selectionKeys}
-                selectionMode={props.selectionMode}
-                togglerTemplate={props.togglerTemplate}
-                tableProps={props}
-                value={value}
+                emptyMessage={props.emptyMessage}
+                loading={props.loading}
+                contextMenuSelectionKey={props.contextMenuSelectionKey}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onContextMenu={props.onContextMenu}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
             />
         );
     };

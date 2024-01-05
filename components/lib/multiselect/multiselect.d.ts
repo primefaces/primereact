@@ -89,10 +89,6 @@ export interface MultiSelectPassThroughOptions {
      */
     header?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the header checkbox's container DOM element.
-     */
-    headerCheckboxContainer?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the header checkbox's DOM element.
      */
     headerCheckbox?: CheckboxPassThroughOptions;
@@ -421,7 +417,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */

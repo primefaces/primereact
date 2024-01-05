@@ -1,31 +1,16 @@
 import * as React from 'react';
-import { useMountEffect, useUnmountEffect } from './Hooks';
+import { useTimeout } from './useTimeout';
 
 export const useDebounce = (initialValue, delay) => {
     const [inputValue, setInputValue] = React.useState(initialValue);
     const [debouncedValue, setDebouncedValue] = React.useState(initialValue);
-    const mountedRef = React.useRef(false);
-    const timeoutRef = React.useRef(null);
-    const cancelTimer = () => window.clearTimeout(timeoutRef.current);
-
-    useMountEffect(() => {
-        mountedRef.current = true;
-    });
-
-    useUnmountEffect(() => {
-        cancelTimer();
-    });
-
-    React.useEffect(() => {
-        if (!mountedRef.current) {
-            return;
-        }
-
-        cancelTimer();
-        timeoutRef.current = window.setTimeout(() => {
+    const timeout = useTimeout(
+        () => {
             setDebouncedValue(inputValue);
-        }, delay);
-    }, [inputValue, delay]);
+        },
+        delay,
+        inputValue !== debouncedValue
+    );
 
     return [inputValue, debouncedValue, setInputValue];
 };

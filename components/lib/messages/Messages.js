@@ -103,7 +103,7 @@ export const Messages = React.memo(
 
         const transitionProps = mergeProps(
             {
-                classNames: ptCallbacks.cx('uimessage.transition'),
+                classNames: ptCallbacks.cx('transition'),
                 unmountOnExit: true,
                 timeout: { enter: 300, exit: 300 },
                 options: props.transitionOptions

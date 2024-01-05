@@ -9,6 +9,7 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -81,7 +82,7 @@ export const Dropdown = React.memo(
         };
 
         const onClick = (event) => {
-            if (props.disabled) {
+            if (props.disabled || props.loading) {
                 return;
             }
 
@@ -740,7 +741,7 @@ export const Dropdown = React.memo(
                     onBlur: onInputBlur,
                     onKeyDown: onInputKeyDown,
                     disabled: props.disabled,
-                    tabIndex: props.tabIndex || 0,
+                    tabIndex: props.tabIndex,
                     ...ariaProps
                 },
                 ptm('input')
@@ -771,7 +772,6 @@ export const Dropdown = React.memo(
                         onFocus: onEditableInputFocus,
                         onBlur: onInputBlur,
                         'aria-haspopup': 'listbox',
-                        tabIndex: props.tabIndex || 0,
                         ...ariaProps
                     },
                     ptm('input')
@@ -783,8 +783,7 @@ export const Dropdown = React.memo(
                 const inputProps = mergeProps(
                     {
                         ref: inputRef,
-                        className: cx('input', { label }),
-                        tabIndex: '-1'
+                        className: cx('input', { label })
                     },
                     ptm('input')
                 );
@@ -808,6 +807,31 @@ export const Dropdown = React.memo(
             }
 
             return null;
+        };
+
+        const createLoadingIcon = () => {
+            const loadingIconProps = mergeProps(
+                {
+                    className: cx('loadingIcon'),
+                    'data-pr-overlay-visible': overlayVisibleState
+                },
+                ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+            const ariaLabel = props.placeholder || props.ariaLabel;
+            const loadingButtonProps = mergeProps(
+                {
+                    className: cx('trigger'),
+                    role: 'button',
+                    'aria-haspopup': 'listbox',
+                    'aria-expanded': overlayVisibleState,
+                    'aria-label': ariaLabel
+                },
+                ptm('trigger')
+            );
+
+            return <div {...loadingButtonProps}>{loadingIcon}</div>;
         };
 
         const createDropdownIcon = () => {
@@ -845,7 +869,7 @@ export const Dropdown = React.memo(
         const hiddenSelect = createHiddenSelect();
         const keyboardHelper = createKeyboardHelper();
         const labelElement = createLabel();
-        const dropdownIcon = createDropdownIcon();
+        const dropdownIcon = props.loading ? createLoadingIcon() : createDropdownIcon();
         const clearIcon = createClearIcon();
         const rootProps = mergeProps(
             {

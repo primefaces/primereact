@@ -267,7 +267,7 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue self
      */
-    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | null | undefined;
     /**
      * Callback to invoke when an active tab is collapsed by clicking on the header.
      * @param {ToastMessage} message - Clicked message

@@ -7,7 +7,7 @@ exports[`ProgressSpinner animationDuration 1`] = `
     class="p-progress-spinner"
     data-pc-name="progressspinner"
     data-pc-section="root"
-    role="progressbar"
+    role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
@@ -37,7 +37,7 @@ exports[`ProgressSpinner default 1`] = `
     class="p-progress-spinner"
     data-pc-name="progressspinner"
     data-pc-section="root"
-    role="progressbar"
+    role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
@@ -67,7 +67,7 @@ exports[`ProgressSpinner fill 1`] = `
     class="p-progress-spinner"
     data-pc-name="progressspinner"
     data-pc-section="root"
-    role="progressbar"
+    role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
@@ -97,7 +97,7 @@ exports[`ProgressSpinner strokeWidth 1`] = `
     class="p-progress-spinner"
     data-pc-name="progressspinner"
     data-pc-section="root"
-    role="progressbar"
+    role="alert"
   >
     <svg
       class="p-progress-spinner-svg"

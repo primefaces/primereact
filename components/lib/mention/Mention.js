@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
@@ -92,15 +92,13 @@ export const Mention = React.memo(
         };
 
         const alignOverlay = () => {
-            if (triggerState) {
-                const { key, index } = triggerState;
-                const value = inputRef.current.value;
-                const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
+            const { key, index } = triggerState;
+            const value = inputRef.current.value;
+            const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
 
-                overlayRef.current.style.transformOrigin = 'top';
-                overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
-                overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
-            }
+            overlayRef.current.style.transformOrigin = 'top';
+            overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
+            overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
         };
 
         const onPanelClick = (event) => {
@@ -353,6 +351,10 @@ export const Mention = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        useMountEffect(() => {
+            alignOverlay();
+        });
 
         useUpdateEffect(() => {
             if (searchingState) {

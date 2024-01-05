@@ -442,11 +442,11 @@ export const TableBody = React.memo(
 
             if (!allowCellSelection() && props.selectionAutoFocus) {
                 if (isCheckboxSelectionModeInColumn) {
-                    const checkbox = DomHandler.findSingle(target, 'td[data-p-selection-column="true"] [data-pc-section="checkbox"]');
+                    const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
 
                     checkbox && checkbox.focus();
                 } else if (isRadioSelectionModeInColumn) {
-                    const radio = DomHandler.findSingle(target, 'td[data-p-selection-column="true"] input[type="radio"]');
+                    const radio = DomHandler.findSingle(target, 'td.p-selection-column input[type="radio"]');
 
                     radio && radio.focus();
                 }

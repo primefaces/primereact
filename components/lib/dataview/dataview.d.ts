@@ -285,7 +285,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    paginatorDropdownAppendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    paginatorDropdownAppendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * Array of integer values to display inside rows per page dropdown.
      */

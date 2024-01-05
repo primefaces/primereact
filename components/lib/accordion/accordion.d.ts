@@ -28,7 +28,6 @@ export declare type AccordionPassThroughTransitionType = ReactCSSTransitionProps
 export interface AccordionTabPassThroughMethodOptions {
     props: AccordionTabProps;
     parent: AccordionPassThroughMethodOptions;
-    context: AccordionContext;
 }
 
 /**
@@ -76,40 +75,6 @@ export interface AccordionTabPassThroughOptions {
 }
 
 /**
- * Defines current inline context in Accordion component.
- */
-export interface AccordionContext {
-    /**
-     * Opened tab index.
-     */
-    index: number;
-    /**
-     * Total number of tabs
-     */
-    count: number;
-    /**
-     * Is this the first tab?
-     * @defaultValue false
-     */
-    first: boolean;
-    /**
-     * Is this the last tab?
-     * @defaultValue false
-     */
-    last: boolean;
-    /**
-     * Is this tab currently selected.
-     * @defaultValue false
-     */
-    selected: boolean;
-    /**
-     * Is this tab currently disabled.
-     * @defaultValue false
-     */
-    disabled: boolean;
-}
-
-/**
  * Defines valid properties in AccordionTab component.
  * @group Properties
  */
@@ -134,7 +99,7 @@ interface AccordionTabProps {
     /**
      * Used to define the header of the tab.
      */
-    header?: React.ReactNode | ((props: AccordionTabProps) => React.ReactNode) | undefined;
+    header?: React.ReactNode | undefined;
     /**
      * Style class of the tab header.
      */

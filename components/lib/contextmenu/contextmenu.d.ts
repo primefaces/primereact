@@ -72,6 +72,20 @@ export interface ContextMenuPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: ContextMenuPassThroughTransitionType;
+    /**
+     * Index of the element in tabbing order.
+     */
+    tabIndex?: number | undefined;
+    /**
+     * Callback to invoke when ContextMenu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when ContextMenu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
 }
 
 /**
@@ -130,6 +144,14 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     autoZIndex?: boolean | undefined;
     /**
+     * Used to define a string that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledBy?: string | undefined;
+    /**
      * Base zIndex value to use in layering.
      * @defaultValue 0
      */
@@ -147,7 +169,7 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */

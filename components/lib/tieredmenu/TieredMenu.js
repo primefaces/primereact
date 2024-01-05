@@ -91,7 +91,6 @@ export const TieredMenu = React.memo(
 
         const hide = (event, isFocus) => {
             if (props.popup) {
-                targetRef.current = event.currentTarget;
                 setVisibleState(false);
                 props.onHide && props.onHide(event);
             }

@@ -512,7 +512,7 @@ interface ColumnEditorOptions {
     props: any;
     /**
      * Callback function triggered on editor change.
-     * @param {*} value - the new value of the cell
+     * @param {*} value - Browser event
      */
     editorCallback?(value: any): void;
 }

@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InputText when input has className only 1 className is printed 1`] = `
-<div>
-  <input
-    class="jest p-inputtext p-component p-filled"
-    data-pc-name="inputtext"
-    data-pc-section="root"
-  />
-</div>
-`;
-
 exports[`InputText when input is blank it should not have filled state 1`] = `
 <div>
   <input

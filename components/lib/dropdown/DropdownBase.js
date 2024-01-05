@@ -25,6 +25,7 @@ const classes = {
             'p-dropdown-item-empty': !optionGroupLabel || optionGroupLabel.length === 0
         }),
     dropdownIcon: 'p-dropdown-trigger-icon p-clickable',
+    loadingIcon: 'p-dropdown-trigger-icon p-clickable',
     clearIcon: 'p-dropdown-clear-icon p-clickable',
     filterIcon: 'p-dropdown-filter-icon',
     filterContainer: ({ clearIcon }) => classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon }),
