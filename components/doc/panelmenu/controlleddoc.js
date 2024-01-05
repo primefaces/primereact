@@ -74,35 +74,29 @@ export function ControlledDoc(props) {
 
     const [expandedKeys, setExpandedKeys] = useState({});
 
-    const collectKeys = (items) => {
-        let keys = [];
-
-        items.forEach((item) => {
-            keys.push(item.key);
-
-            if (item.items) {
-                keys = keys.concat(collectKeys(item.items));
-            }
-        });
-
-        return keys;
+    const toggleAll = () => {
+        if (Object.keys(expandedKeys).length) {
+            collapseAll();
+        } else {
+            expandAll();
+        }
     };
 
-    const toggleAll = () => {
-        setExpandedKeys((prevExpandedKeys) => {
-            const allKeys = collectKeys(items);
-            const newExpandedKeys = { ...prevExpandedKeys };
+    const expandAll = () => {
+        items.forEach(expandNode);
+        setExpandedKeys({ ...expandedKeys });
+    };
 
-            allKeys.forEach((key) => {
-                if (newExpandedKeys[key]) {
-                    delete newExpandedKeys[key];
-                } else {
-                    newExpandedKeys[key] = true;
-                }
-            });
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
 
-            return newExpandedKeys;
-        });
+    const expandNode = (node) => {
+        if (node.items && node.items.length) {
+            expandedKeys[node.key] = true;
+
+            node.items.forEach(expandNode);
+        }
     };
 
     const code = {
@@ -118,7 +112,7 @@ import { PanelMenu } from 'primereact/panelmenu';
 import { Button } from 'primereact/button';
 
 export default function ControlledDemo() {
-    const [items, setItems] = useState([
+    const items = [
         {
             key: '0',
             label: 'Users',
@@ -183,45 +177,33 @@ export default function ControlledDemo() {
                 }
             ]
         }
-    ]);
+    ];
 
-    const isAllExpanded = (items) => {
-        for (let item of items) {
-            if (!item.expanded) return false;
-            if (item.items && !isAllExpanded(item.items)) return false;
-        }
-
-        return true;
-    };
+    const [expandedKeys, setExpandedKeys] = useState({});
 
     const toggleAll = () => {
-        if (isAllExpanded(items)) {
-            changeExpandedStatuses(false);
+        if (Object.keys(expandedKeys).length) {
+            collapseAll();
         } else {
-            changeExpandedStatuses(true);
+            expandAll();
         }
     };
 
-    const changeExpandedStatuses = (status) => {
-        const newItems = items.map((item) => {
-            item.expanded = status;
+    const expandAll = () => {
+        items.forEach(expandNode);
+        setExpandedKeys({ ...expandedKeys });
+    };
 
-            if (item.items) {
-                item.items.map((subitem) => {
-                    subitem.expanded = status;
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
 
-                    if (subitem.items) {
-                        subitem.items.map((subsubitem) => {
-                            subsubitem.expanded = status;
-                        });
-                    }
-                });
-            }
+    const expandNode = (node) => {
+        if (node.items && node.items.length) {
+            expandedKeys[node.key] = true;
 
-            return item;
-        });
-
-        setItems(newItems);
+            node.items.forEach(expandNode);
+        }
     };
 
     return (
@@ -236,11 +218,10 @@ export default function ControlledDemo() {
         typescript: `
 import React, { useState } from 'react'; 
 import { PanelMenu } from 'primereact/panelmenu';
-import { MenuItem } from 'primereact/menuitem';
 import { Button } from 'primereact/button';
 
 export default function ControlledDemo() {
-    const [items, setItems] = useState<MenuItem[]>([
+    const items = [
         {
             key: '0',
             label: 'Users',
@@ -289,7 +270,6 @@ export default function ControlledDemo() {
             key: '2',
             label: 'Calendar',
             icon: 'pi pi-calendar',
-
             items: [
                 {
                     key: '2_0',
@@ -305,45 +285,33 @@ export default function ControlledDemo() {
                 }
             ]
         }
-    ]);
+    ];
 
-    const isAllExpanded = (items) => {
-        for (let item of items) {
-            if (!item.expanded) return false;
-            if (item.items && !isAllExpanded(item.items)) return false;
-        }
-
-        return true;
-    };
+    const [expandedKeys, setExpandedKeys] = useState<any>({});
 
     const toggleAll = () => {
-        if (isAllExpanded(items)) {
-            changeExpandedStatuses(false);
+        if (Object.keys(expandedKeys).length) {
+            collapseAll();
         } else {
-            changeExpandedStatuses(true);
+            expandAll();
         }
     };
 
-    const changeExpandedStatuses = (status) => {
-        const newItems = items.map((item) => {
-            item.expanded = status;
+    const expandAll = () => {
+        items.forEach(expandNode);
+        setExpandedKeys({ ...expandedKeys });
+    };
 
-            if (item.items) {
-                item.items.map((subitem) => {
-                    subitem.expanded = status;
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
 
-                    if (subitem.items) {
-                        subitem.items.map((subsubitem) => {
-                            subsubitem.expanded = status;
-                        });
-                    }
-                });
-            }
+    const expandNode = (node) => {
+        if (node.items && node.items.length) {
+            expandedKeys[node.key] = true;
 
-            return item;
-        });
-
-        setItems(newItems);
+            node.items.forEach(expandNode);
+        }
     };
 
     return (

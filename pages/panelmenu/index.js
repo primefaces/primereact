@@ -30,11 +30,11 @@ const PanelMenuDemo = () => {
             label: 'Multiple',
             component: MultipleDoc
         },
-        // {
-        //     id: 'controlled',
-        //     label: 'Controlled',
-        //     component: ControlledDoc
-        // },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
         {
             id: 'template',
             label: 'Template',
