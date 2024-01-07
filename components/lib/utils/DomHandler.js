@@ -1067,10 +1067,15 @@ export default class DomHandler {
         return false;
     }
 
-    static createInlineStyle(nonce, styleContainer = document.head) {
+    static createInlineStyle(nonce, styleContainer) {
         let styleElement = document.createElement('style');
 
         DomHandler.addNonce(styleElement, nonce);
+
+        if (!styleContainer) {
+            styleContainer = document.head;
+        }
+
         styleContainer.appendChild(styleElement);
 
         return styleElement;
