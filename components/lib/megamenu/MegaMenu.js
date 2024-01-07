@@ -233,14 +233,6 @@ export const MegaMenu = React.memo(
             }
         };
 
-        useUpdateEffect(() => {
-            if (mobileActiveState) {
-                bindListeners();
-            } else {
-                unbindListeners();
-            }
-        }, [mobileActiveState]);
-
         const isOutsideClicked = (event) => {
             return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target) || (menuButtonRef.current && menuButtonRef.current.contains(event.target)));
         };
@@ -259,6 +251,90 @@ export const MegaMenu = React.memo(
                 !attributeSelectorState && setAttributeSelectorState(uniqueId);
             }
         });
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState && elementRef.current) {
+                elementRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
+
+        useUpdateEffect(() => {
+            if (mobileActiveState) {
+                bindListeners();
+            } else {
+                unbindListeners();
+            }
+        }, [mobileActiveState]);
+
+        useUpdateEffect(() => {
+            if (focusTrigger) {
+                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
+
+                changeFocusedItemInfo(itemIndex);
+                setFocusTrigger(false);
+            }
+        }, [focusTrigger]);
+
+        useUpdateEffect(() => {
+            const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
+
+            if (activeItemState) {
+                bindListeners();
+
+                if (!isMobileMode) {
+                    ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                }
+            } else {
+                unbindListeners();
+            }
+
+            if (isMobileMode) {
+                currentPanel && currentPanel.previousElementSibling.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            }
+
+            return () => {
+                unbindListeners();
+                ZIndexUtils.clear(currentPanel);
+            };
+        }, [activeItemState, isMobileMode]);
+
+        useUpdateEffect(() => {
+            const _focusedItemId = ObjectUtils.isNotEmpty(focusedItemInfo.key) ? `${idState}_${focusedItemInfo.key}` : null;
+
+            setFocusedItemId(_focusedItemId);
+        }, [focusedItemInfo]);
+
+        React.useEffect(() => {
+            const itemsToProcess = props.model || [];
+            const processed = createProcessedItems(itemsToProcess, 0, null, '');
+
+            setProcessedItems(processed);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props.model]);
+
+        useUpdateEffect(() => {
+            const processedItem = ObjectUtils.isNotEmpty(activeItemState) ? activeItemState : null;
+
+            const _visibleItems =
+                processedItem && processedItem.key === focusedItemInfo.parentKey
+                    ? processedItem.items.reduce((items, col) => {
+                          col.forEach((submenu) => {
+                              submenu.items.forEach((a) => {
+                                  items.push(a);
+                              });
+                          });
+
+                          return items;
+                      }, [])
+                    : processedItems;
+
+            setVisibleItems(_visibleItems);
+        }, [focusedItemInfo, activeItemState, processedItems]);
 
         const onFocus = (event) => {
             setFocused(true);
@@ -329,6 +405,7 @@ export const MegaMenu = React.memo(
                 case 'PageUp':
                 case 'Backspace':
                 case 'ShiftLeft':
+                    focusedItemInfo;
                 case 'ShiftRight':
                     //NOOP
                     break;
@@ -341,15 +418,6 @@ export const MegaMenu = React.memo(
                     break;
             }
         };
-
-        useUpdateEffect(() => {
-            if (focusTrigger) {
-                const itemIndex = focusedItemInfo.index !== -1 ? findNextItemIndex(focusedItemInfo.index) : findFirstFocusedItemIndex();
-
-                changeFocusedItemInfo(itemIndex);
-                setFocusTrigger(false);
-            }
-        }, [focusTrigger]);
 
         const onArrowDownKey = (event) => {
             event.preventDefault();
@@ -669,61 +737,6 @@ export const MegaMenu = React.memo(
         const getAriaPosInset = (index) => {
             return index - props.model.slice(0, index).filter((processedItem) => isItemVisible(processedItem) && getItemProp(processedItem, 'separator')).length + 1;
         };
-
-        useUpdateEffect(() => {
-            const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
-
-            if (activeItemState) {
-                bindListeners();
-
-                if (!isMobileMode) {
-                    ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
-                }
-            } else {
-                unbindListeners();
-            }
-
-            if (isMobileMode) {
-                currentPanel && currentPanel.previousElementSibling.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-            }
-
-            return () => {
-                unbindListeners();
-                ZIndexUtils.clear(currentPanel);
-            };
-        }, [activeItemState]);
-
-        useUpdateEffect(() => {
-            const _focusedItemId = ObjectUtils.isNotEmpty(focusedItemInfo.key) ? `${idState}_${focusedItemInfo.key}` : null;
-
-            setFocusedItemId(_focusedItemId);
-        }, [focusedItemInfo]);
-
-        useUpdateEffect(() => {
-            const itemsToProcess = props.model || [];
-            const processed = createProcessedItems(itemsToProcess, 0, null, '');
-
-            setProcessedItems(processed);
-        }, [props.model]);
-
-        useUpdateEffect(() => {
-            const processedItem = ObjectUtils.isNotEmpty(activeItemState) ? activeItemState : null;
-
-            const _visibleItems =
-                processedItem && processedItem.key === focusedItemInfo.parentKey
-                    ? processedItem.items.reduce((items, col) => {
-                          col.forEach((submenu) => {
-                              submenu.items.forEach((a) => {
-                                  items.push(a);
-                              });
-                          });
-
-                          return items;
-                      }, [])
-                    : processedItems;
-
-            setVisibleItems(_visibleItems);
-        }, [focusedItemInfo, activeItemState, processedItems]);
 
         const createProcessedItems = (items, level = 0, parent = {}, parentKey = '', columnIndex) => {
             const _processedItems = [];
@@ -1087,17 +1100,6 @@ export const MegaMenu = React.memo(
         const destroyStyle = () => {
             styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
         };
-
-        useUpdateEffect(() => {
-            if (attributeSelectorState && elementRef.current) {
-                elementRef.current.setAttribute(attributeSelectorState, '');
-                createStyle();
-            }
-
-            return () => {
-                destroyStyle();
-            };
-        }, [attributeSelectorState, props.breakpoint]);
 
         const createCategory = (processedItem, index) => {
             const category = processedItem.item;
