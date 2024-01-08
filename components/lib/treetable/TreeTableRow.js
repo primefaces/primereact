@@ -332,8 +332,11 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const isSelected = () => {
-        if ((props.selectionMode === 'single' || props.selectionMode === 'multiple') && props.selectionKeys) return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
-        else return false;
+        if (props.selectionMode === 'single' || ((props.selectionMode === 'multiple' || props.selectionMode === 'checkbox') && props.selectionKeys)) {
+            return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
+        }
+
+        return false;
     };
 
     const isChecked = () => {
