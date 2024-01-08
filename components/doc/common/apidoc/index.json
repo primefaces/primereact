@@ -13722,6 +13722,14 @@
                             "description": "Style of the content section."
                         },
                         {
+                            "name": "defaultFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "accept",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
+                        },
+                        {
                             "name": "dismissableMask",
                             "optional": true,
                             "readonly": false,
@@ -14346,6 +14354,13 @@
                             "description": "Label of the reject button."
                         },
                         {
+                            "name": "defaultFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
+                        },
+                        {
                             "name": "element",
                             "optional": false,
                             "readonly": false,
@@ -14499,6 +14514,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "accept",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "dismissable",
@@ -14825,6 +14848,13 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Label of the reject button."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "element",
