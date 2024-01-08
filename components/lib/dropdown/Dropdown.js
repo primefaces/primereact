@@ -78,7 +78,7 @@ export const Dropdown = React.memo(
         };
 
         const isClearClicked = (event) => {
-            return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || DomHandler.hasClass(event.target, 'p-dropdown-filter-clear-icon');
+            return DomHandler.isAttributeEquals(event.target, 'data-pc-section', 'clearicon') || DomHandler.isAttributeEquals(event.target.parentElement || event.target, 'data-pc-section', 'filterclearicon');
         };
 
         const onClick = (event) => {
@@ -93,7 +93,7 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            if (DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
+            if (isClearClicked(event) || event.target.tagName === 'INPUT') {
                 return;
             } else if (!overlayRef.current || !(overlayRef.current && overlayRef.current.contains(event.target))) {
                 DomHandler.focus(focusInputRef.current);

@@ -140,11 +140,11 @@ export const DropdownPanel = React.memo(
                 const ariaLabel = localeOption('clear');
                 const clearIconProps = mergeProps(
                     {
-                        className: cx('clearIcon'),
+                        className: cx('filterClearIcon'),
                         'aria-label': ariaLabel,
                         onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
                     },
-                    getPTOptions('clearIcon')
+                    getPTOptions('filterClearIcon')
                 );
                 const icon = props.filterClearIcon || <TimesIcon {...clearIconProps} />;
                 const filterClearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
