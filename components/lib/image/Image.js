@@ -81,8 +81,8 @@ export const Image = React.memo(
 
             if (!previewClick.current) {
                 setPreviewVisibleState(false);
-                rotate = 0;
-                scale = 0;
+                setRotateState(0);
+                setScaleState(0);
             }
 
             previewClick.current = false;
