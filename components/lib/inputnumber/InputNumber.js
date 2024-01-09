@@ -29,7 +29,6 @@ export const InputNumber = React.memo(
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
         const lastValue = React.useRef(null);
-
         const numberFormat = React.useRef(null);
         const groupChar = React.useRef(null);
         const prefixChar = React.useRef(null);
@@ -43,6 +42,7 @@ export const InputNumber = React.memo(
         const _suffix = React.useRef(null);
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
+        const isFocusedByClick = React.useRef(false);
 
         const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
@@ -726,6 +726,10 @@ export const InputNumber = React.memo(
             return index || 0;
         };
 
+        const onInputPointerDown = () => {
+            isFocusedByClick.current = true;
+        };
+
         const onInputClick = () => {
             initCursor();
         };
@@ -959,16 +963,21 @@ export const InputNumber = React.memo(
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
 
-            if ((props.suffix || props.currency || props.prefix) && inputRef.current) {
-                // GitHub #1866 Cursor must be placed before/after symbol or arrow keys don't work
-                const selectionEnd = initCursor();
+            if ((props.suffix || props.currency || props.prefix) && inputRef.current && !isFocusedByClick.current) {
+                // GitHub #1866,#5537
+                let inputValue = inputRef.current.value;
+                let prefixLength = (prefixChar.current || '').length;
+                let suffixLength = (suffixChar.current || '').length;
+                let end = inputValue.length === 0 ? 0 : inputValue.length - suffixLength;
 
-                inputRef.current.setSelectionRange(selectionEnd, selectionEnd);
+                inputRef.current.setSelectionRange(prefixLength, end);
             }
         };
 
         const onInputBlur = (event) => {
             setFocusedState(false);
+
+            isFocusedByClick.current = false;
 
             if (inputRef.current) {
                 let currentValue = inputRef.current.value;
@@ -1066,13 +1075,14 @@ export const InputNumber = React.memo(
                     readOnly={props.readOnly}
                     name={props.name}
                     autoFocus={props.autoFocus}
+                    onBlur={onInputBlur}
+                    onClick={onInputClick}
+                    onFocus={onInputFocus}
+                    onInput={onInput}
                     onKeyDown={onInputKeyDown}
                     onKeyPress={onInputKeyUp}
-                    onInput={onInput}
-                    onClick={onInputClick}
-                    onBlur={onInputBlur}
-                    onFocus={onInputFocus}
                     onPaste={onPaste}
+                    onPointerDown={onInputPointerDown}
                     min={props.min}
                     max={props.max}
                     aria-valuemin={props.min}
