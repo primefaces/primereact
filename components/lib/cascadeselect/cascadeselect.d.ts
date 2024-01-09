@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { APIOptions } from '../api/api';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
