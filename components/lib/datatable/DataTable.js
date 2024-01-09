@@ -798,34 +798,34 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (!responsiveStyleElement.current) {
             responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
-            let tableSelector = `[data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
-            let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > ${tableSelector}`;
-            let gridLinesSelector = `[data-pc-name="datatable"][${attributeSelector.current}][data-showgridlines="true"] > ${tableSelector}`;
+            let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+            let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
+            let gridLinesSelector = `.p-datatable[${attributeSelector.current}].p-datatable-gridlines > ${tableSelector}`;
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
-    ${selector} > [data-pc-section="thead"] > tr > th,
-    ${selector} > [data-pc-section="tfoot"] > tr > td {
+    ${selector} > .p-datatable-thead > tr > th,
+    ${selector} > .p-datatable-tfoot > tr > td {
         display: none;
     }
 
-    ${selector} > [data-pc-section="tbody"] > tr > td {
+    ${selector} > .p-datatable-tbody > tr > td {
         display: flex;
         width: 100%;
         align-items: center;
         justify-content: space-between;
     }
 
-    ${selector} > [data-pc-section="tbody"] > tr > td:not(:last-child) {
+    ${selector} > .p-datatable-tbody > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    ${gridLinesSelector} > [data-pc-section="tbody"] > tr > td:last-child {
+    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    ${selector} > [data-pc-section="tbody"] > tr > td > [data-pc-section="columntitle"] {
+    ${selector} > .p-datatable-tbody > tr > td > .p-column-title {
         display: block;
     }
 }
