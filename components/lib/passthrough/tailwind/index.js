@@ -1254,14 +1254,14 @@ const Tailwind = {
                 'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
             })
         }),
-        itemgroup: {
+        itemGroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
         },
         header: {
             className: classNames('p-3 border-b border-gray-300 text-gray-700 bg-gray-100 mt-0 rounded-tl-lg rounded-tr-lg', 'dark:bg-gray-800 dark:text-white/80 dark:border-blue-900/40')
         },
-        filtercontainer: 'relative',
-        filterinput: {
+        filterContainer: 'relative',
+        filterInput: {
             root: {
                 className: classNames(
                     'pr-7 -mr-7',
@@ -1272,7 +1272,7 @@ const Tailwind = {
                 )
             }
         },
-        filtericon: '-mt-2 absolute top-1/2'
+        filterIcon: '-mt-2 absolute top-1/2'
     },
     mention: {
         root: 'relative',
