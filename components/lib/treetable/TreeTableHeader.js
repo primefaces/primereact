@@ -39,7 +39,8 @@ export const TreeTableHeader = React.memo((props) => {
                 DomHandler.getAttribute(targetNode, 'data-p-sortable-column') === true ||
                 DomHandler.getAttribute(targetNode, 'data-pc-section') === 'headertitle' ||
                 DomHandler.getAttribute(targetNode, 'data-pc-section') === 'sorticon' ||
-                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sorticon'
+                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sorticon' ||
+                (targetNode.closest('[data-p-sortable-column="true"]') && !targetNode.closest('[data-pc-section="filtermenubutton"]'))
             ) {
                 props.onSort({
                     originalEvent: event,
