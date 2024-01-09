@@ -423,6 +423,7 @@ export const CascadeSelect = React.memo(
                                 optionGroupIcon={props.optionGroupIcon}
                                 optionLabel={props.optionLabel}
                                 optionValue={props.optionValue}
+                                parentActive={props.value != null}
                                 level={0}
                                 optionGroupLabel={props.optionGroupLabel}
                                 optionGroupChildren={props.optionGroupChildren}
