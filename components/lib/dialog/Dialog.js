@@ -396,8 +396,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         for (let breakpoint in props.breakpoints) {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
-                    .p-dialog[${attributeSelector.current}] {
-                        width: ${props.breakpoints[breakpoint]};
+                     [data-pc-name="dialog"][${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]} !important;
                     }
                 }
             `;
@@ -406,15 +406,26 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         styleElement.current.innerHTML = innerHTML;
     };
 
+    const destroyStyle = () => {
+        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
+    };
+
     useMountEffect(() => {
         if (props.visible) {
             setMaskVisibleState(true);
         }
+    });
 
+    React.useEffect(() => {
         if (props.breakpoints) {
             createStyle();
         }
-    });
+
+        return () => {
+            destroyStyle();
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.breakpoints]);
 
     useUpdateEffect(() => {
         if (props.visible && !maskVisibleState) {
