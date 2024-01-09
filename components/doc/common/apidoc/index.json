@@ -3386,7 +3386,7 @@
                     "values": "\"outlined\" | \"filled\""
                 },
                 "AppendToType": {
-                    "values": "\"self\" | HTMLElement | undefined | null"
+                    "values": "\"self\" | HTMLElement | undefined | null | Function"
                 },
                 "StyleContainerType": {
                     "values": "ShadowRoot | HTMLElement | undefined | null"
@@ -3475,7 +3475,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -5711,7 +5711,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -7360,7 +7360,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
@@ -8821,7 +8821,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -11103,7 +11103,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -13979,7 +13979,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -14847,7 +14847,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -15375,7 +15375,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -16565,7 +16565,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -19445,7 +19445,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
                         {
@@ -20694,7 +20694,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -21354,7 +21354,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -22617,7 +22617,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -33113,7 +33113,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -34480,7 +34480,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -37138,7 +37138,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -37503,7 +37503,7 @@
                             "name": "dropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -38254,9 +38254,9 @@
                         },
                         {
                             "name": "appendTo",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
-                            "type": "undefined | null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
@@ -39507,7 +39507,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -42792,7 +42792,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and self. The self value is used to render a component where it is located."
                         },
@@ -43371,7 +43371,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -44471,7 +44471,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -47065,7 +47065,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -47657,7 +47657,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "self",
                             "description": "DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -48693,7 +48693,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -49107,7 +49107,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -50858,7 +50858,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -52182,7 +52182,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
