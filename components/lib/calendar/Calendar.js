@@ -1496,19 +1496,27 @@ export const Calendar = React.memo(
                 ZIndexUtils.set(key, overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
             }
 
+            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
+                let inputWidth = DomHandler.getOuterWidth(inputRef.current);
+
+                // #5435 must have reasonable width if input is too small
+                if (inputWidth < 220) {
+                    inputWidth = 220;
+                }
+
+                if (props.view === 'date') {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                } else {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                    overlayRef.current.style.width = inputWidth + 'px';
+                }
+            }
+
             alignOverlay();
         };
 
         const onOverlayEntered = () => {
-            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
-                if (props.view === 'date') {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                } else {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                }
-            }
-
             bindOverlayListener();
             props.onShow && props.onShow();
             DomHandler.focusFirstElement(overlayRef.current);
@@ -2603,7 +2611,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime, props.locale]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
@@ -2674,12 +2682,7 @@ export const Calendar = React.memo(
                 ptm('previousButton')
             );
 
-            return (
-                <button ref={previousButton} {...previousButtonProps}>
-                    {backwardNavigatorIcon}
-                    <Ripple />
-                </button>
-            );
+            return <Button type="button" ref={previousButton} icon={backwardNavigatorIcon} {...previousButtonProps} />;
         };
 
         const createForwardNavigator = (isVisible) => {
@@ -2701,12 +2704,7 @@ export const Calendar = React.memo(
                 ptm('nextButton')
             );
 
-            return (
-                <button ref={nextButton} {...nextButtonProps}>
-                    {forwardNavigatorIcon}
-                    <Ripple />
-                </button>
-            );
+            return <Button type="button" ref={nextButton} icon={forwardNavigatorIcon} {...nextButtonProps} />;
         };
 
         const renderMonthsNavigator = (index) => {
