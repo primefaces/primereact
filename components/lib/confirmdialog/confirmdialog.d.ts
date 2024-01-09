@@ -14,12 +14,13 @@ import { DialogProps } from '../dialog';
 import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
-export declare type ConfirmDialogPassThroughType<T> = PassThroughType<T, ConfirmDialogThroughMethodOptions>;
+export declare type ConfirmDialogPassThroughType<T> = PassThroughType<T, ConfirmDialogPassThroughMethodOptions>;
+export declare type ConfirmDialogPassThroughTransitionType = ReactCSSTransitionProps | ((options: ConfirmDialogPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface ConfirmDialogThroughMethodOptions {
+export interface ConfirmDialogPassThroughMethodOptions {
     props: ConfirmDialogProps;
     state: ConfirmDialogState;
 }
@@ -84,6 +85,10 @@ export interface ConfirmDialogPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: ConfirmDialogPassThroughTransitionType;
 }
 
 /**
