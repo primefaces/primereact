@@ -2597,7 +2597,10 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             if (overlayVisibleState || props.visible) {
-                alignOverlay();
+                // Github #5529
+                setTimeout(() => {
+                    alignOverlay();
+                });
             }
         }, [currentView, overlayVisibleState, props.visible]);
 
