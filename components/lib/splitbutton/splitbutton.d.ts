@@ -185,7 +185,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | null | undefined;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Content of the tooltip.
      */

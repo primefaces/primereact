@@ -61,6 +61,7 @@ import { OverlayPanelPassThroughOptions } from '../overlaypanel/overlaypanel';
 import { PaginatorPassThroughOptions } from '../paginator/paginator';
 import { PanelPassThroughOptions } from '../panel/panel';
 import { PanelMenuPassThroughOptions } from '../panelmenu/panelmenu';
+import { PassThroughOptions } from '../passthrough';
 import { PasswordPassThroughOptions } from '../password/password';
 import { PickListPassThroughOptions } from '../picklist/picklist';
 import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
@@ -93,7 +94,6 @@ import { TreePassThroughOptions } from '../tree/tree';
 import { TreeSelectPassThroughOptions } from '../treeselect/treeselect';
 import { TreeTablePassThroughOptions } from '../treetable/treetable';
 import { VirtualScrollerPassThroughOptions } from '../virtualscroller/virtualscroller';
-import { PassThroughOptions } from '../passthrough';
 
 // Config
 /**
@@ -129,7 +129,7 @@ export interface ZIndexOptions {
 
 export type InputStyleType = 'outlined' | 'filled';
 
-export type AppendToType = 'self' | HTMLElement | undefined | null;
+export type AppendToType = 'self' | HTMLElement | undefined | null | (() => HTMLElement);
 
 export type StyleContainerType = ShadowRoot | HTMLElement | undefined | null;
 

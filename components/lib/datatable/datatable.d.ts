@@ -1222,7 +1222,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    paginatorDropdownAppendTo?: 'self' | HTMLElement | null | undefined;
+    paginatorDropdownAppendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Content for the left side of the paginator.
      */
