@@ -44,7 +44,6 @@ export const InputNumber = React.memo(
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
         const isFocusedByClick = React.useRef(false);
-
         const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
@@ -77,6 +76,7 @@ export const InputNumber = React.memo(
             _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
             _suffix.current = getSuffixExpression(); // regular expression for suffix (e.g. /℃/g)
             _prefix.current = getPrefixExpression(); // regular expression for prefix (e.g. /\ days/g)
+            _index.current = (d) => index.get(d);
         };
 
         const escapeRegExp = (text) => {
@@ -542,6 +542,14 @@ export const InputNumber = React.memo(
             return false;
         };
 
+        const replaceDecimalSeparator = (val) => {
+            if (isFloat(val)) {
+                return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
+            }
+
+            return val;
+        };
+
         const isDecimalSign = (char) => {
             if (_decimal.current.test(char) || isFloat(char)) {
                 _decimal.current.lastIndex = 0;
@@ -563,14 +571,6 @@ export const InputNumber = React.memo(
             if (parseVal === null) return false;
 
             return parseVal % 1 !== 0;
-        };
-
-        const replaceDecimalSeparator = (val) => {
-            if (isFloat(val)) {
-                return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
-            }
-
-            return val;
         };
 
         const getDecimalCharIndexes = (val) => {
@@ -662,6 +662,10 @@ export const InputNumber = React.memo(
             }
         };
 
+        const replaceSuffix = (value) => {
+            return value ? value.replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '') : value;
+        };
+
         const insertText = (value, text, start, end) => {
             let textSplit = text === '.' ? text : text.split('.');
 
@@ -670,7 +674,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + value.slice(end) : value || formatValue(text);
+                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + replaceSuffix(value).slice(end) : value || formatValue(text);
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
@@ -680,7 +684,11 @@ export const InputNumber = React.memo(
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
-                return value.slice(0, start) + text + value.slice(end);
+                const selectionValue = value.slice(start, end);
+                // Fix: if the suffix starts with a space, the input will be cleared after pasting
+                const space = /\s$/.test(selectionValue) ? ' ' : '';
+
+                return value.slice(0, start) + text + space + value.slice(end);
             }
         };
 
@@ -946,7 +954,9 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? replaceDecimalSeparator(val1).split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                const newVal1 = replaceDecimalSeparator(val1).split(_decimal.current)[0].replace(_suffix.current, '').trim();
+
+                return decimalCharIndex !== -1 ? newVal1 + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -957,7 +967,7 @@ export const InputNumber = React.memo(
                 const valueSplit = value.split(_decimal.current);
 
                 if (valueSplit.length === 2) {
-                    return valueSplit[1].replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '').length;
+                    return replaceSuffix(valueSplit[1]).length;
                 }
             }
 
@@ -1102,14 +1112,14 @@ export const InputNumber = React.memo(
                     readOnly={props.readOnly}
                     name={props.name}
                     autoFocus={props.autoFocus}
-                    onBlur={onInputBlur}
-                    onClick={onInputClick}
-                    onFocus={onInputFocus}
-                    onInput={onInput}
                     onKeyDown={onInputKeyDown}
                     onKeyPress={onInputKeyUp}
-                    onPaste={onPaste}
+                    onInput={onInput}
+                    onClick={onInputClick}
                     onPointerDown={onInputPointerDown}
+                    onBlur={onInputBlur}
+                    onFocus={onInputFocus}
+                    onPaste={onPaste}
                     min={props.min}
                     max={props.max}
                     aria-valuemin={props.min}
