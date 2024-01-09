@@ -697,6 +697,14 @@ const Tailwind = {
                 'mt-2 order-2': props.iconPos == 'bottom' && props.label != null
             })
         }),
+        loadingIcon: ({ props }) => ({
+            className: classNames('mx-0', {
+                'mr-2': props.loading && props.iconPos == 'left' && props.label != null,
+                'ml-2 order-1': props.loading && props.iconPos == 'right' && props.label != null,
+                'mb-2': props.loading && props.iconPos == 'top' && props.label != null,
+                'mt-2 order-2': props.loading && props.iconPos == 'bottom' && props.label != null
+            })
+        }),
         badge: ({ props }) => ({
             className: classNames({ 'ml-2 w-4 h-4 leading-none flex items-center justify-center': props.badge })
         })
