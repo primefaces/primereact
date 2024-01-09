@@ -704,9 +704,9 @@ const Tailwind = {
     speeddial: {
         root: 'absolute flex',
         button: {
-            root: ({ parent }) => ({
+            root: ({ state }) => ({
                 className: classNames('w-16 !h-16 !rounded-full justify-center z-10', {
-                    'rotate-45': parent.state.visible
+                    'rotate-45': state.visible
                 })
             }),
             label: {
@@ -780,9 +780,11 @@ const Tailwind = {
     },
     inputnumber: {
         root: 'w-full inline-flex',
-        input: ({ props }) => ({
-            className: classNames({ 'rounded-tr-none rounded-br-none': props.showButtons && props.buttonLayout == 'stacked' })
-        }),
+        input: {
+            root: ({ props }) => ({
+                className: classNames({ 'rounded-tr-none rounded-br-none': props.showButtons && props.buttonLayout == 'stacked' })
+            })
+        },
         buttongroup: ({ props }) => ({
             className: classNames({ 'flex flex-col': props.showButtons && props.buttonLayout == 'stacked' })
         }),
@@ -791,7 +793,6 @@ const Tailwind = {
                 'rounded-br-none rounded-bl-none rounded-bl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
             })
         }),
-        label: 'hidden',
         decrementbutton: ({ props }) => ({
             className: classNames('flex !items-center !justify-center', {
                 'rounded-tr-none rounded-tl-none rounded-tl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
