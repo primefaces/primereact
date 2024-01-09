@@ -93,6 +93,10 @@ export interface MultiSelectPassThroughOptions {
      */
     headerCheckbox?: CheckboxPassThroughOptions;
     /**
+     * Uses to pass attributes to the header checkbox's container DOM element.
+     */
+    headerCheckboxContainer?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the header checkbox icon's DOM element.
      */
     headerCheckboxIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;

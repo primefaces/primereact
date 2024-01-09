@@ -1310,18 +1310,20 @@ const Tailwind = {
         headerCheckboxContainer: {
             className: classNames('inline-flex cursor-pointer select-none align-bottom relative', 'mr-2', 'w-6 h-6')
         },
-        headerCheckbox: ({ context }) => ({
-            className: classNames(
-                'flex items-center justify-center',
-                'border-2 w-6 h-6 text-gray-600 dark:text-white/70 rounded-lg transition-colors duration-200',
-                'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
-                {
-                    'border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900': !context?.selected,
-                    'border-blue-500 bg-blue-500': context?.selected
-                }
-            )
-        }),
-        headercheckboxicon: 'w-4 h-4 transition-all duration-200 text-white text-base',
+        headerCheckbox: {
+            root: ({ props }) => ({
+                className: classNames(
+                    'flex items-center justify-center',
+                    'border-2 w-6 h-6 text-gray-600 dark:text-white/70 rounded-lg transition-colors duration-200',
+                    'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
+                    {
+                        'border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900': !props?.checked,
+                        'border-blue-500 bg-blue-500': props?.checked
+                    }
+                )
+            })
+        },
+        headerCheckboxIcon: 'w-4 h-4 transition-all duration-200 text-white text-base',
         closeButton: {
             className: classNames(
                 'flex items-center justify-center overflow-hidden relative',
@@ -1357,12 +1359,12 @@ const Tailwind = {
                 }
             )
         }),
-        checkboxicon: 'w-4 h-4 transition-all duration-200 text-white text-base',
-        itemgroup: {
+        checkboxIcon: 'w-4 h-4 transition-all duration-200 text-white text-base',
+        itemGroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
         },
-        filtercontainer: 'relative',
-        filterinput: {
+        filterContainer: 'relative',
+        filterInput: {
             className: classNames(
                 'pr-7 -mr-7',
                 'w-full',
@@ -1371,8 +1373,8 @@ const Tailwind = {
                 'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        filtericon: '-mt-2 absolute top-1/2',
-        clearicon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
+        filterIcon: '-mt-2 absolute top-1/2',
+        clearIcon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
         transition: TRANSITIONS.overlay
     },
     multistatecheckbox: {

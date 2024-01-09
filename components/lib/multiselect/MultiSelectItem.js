@@ -4,15 +4,26 @@ import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
+    const [focused, setFocused] = React.useState(false);
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
         return ptm(key, {
             hostName: props.hostName,
             context: {
-                selected: props.selected
+                selected: props.selected,
+                disabled: props.disabled,
+                focused: focused
             }
         });
+    };
+
+    const onFocus = (event) => {
+        setFocused(true);
+    };
+
+    const onBlur = (event) => {
+        setFocused(false);
     };
 
     const onClick = (event) => {
@@ -69,8 +80,10 @@ export const MultiSelectItem = React.memo((props) => {
             className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
             style: props.style,
             onClick: onClick,
-            tabIndex: tabIndex,
             onKeyDown: onKeyDown,
+            onFocus: onFocus,
+            onBlur: onBlur,
+            tabIndex: tabIndex,
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
