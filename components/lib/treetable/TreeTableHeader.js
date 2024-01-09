@@ -284,6 +284,7 @@ export const TreeTableHeader = React.memo((props) => {
             const multipleSorted = multiSortMetaData !== null;
             const sorted = getColumnProp(column, 'sortable') && (singleSorted || multipleSorted);
             const frozen = getColumnProp(column, 'frozen');
+            const align = getColumnProp(column, 'alignHeader');
             let sortOrder = 0;
 
             if (singleSorted) sortOrder = props.sortOrder;
@@ -299,7 +300,7 @@ export const TreeTableHeader = React.memo((props) => {
             const resizer = createResizer(column);
             const headerCellProps = mergeProps(
                 {
-                    className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, frozen, column, options, getColumnProp, sorted })),
+                    className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, frozen, column, options, getColumnProp, sorted, align })),
                     style: getColumnProp(column, 'headerStyle') || getColumnProp(column, 'style'),
                     tabIndex: getColumnProp(column, 'sortable') ? props.tabIndex : null,
                     onClick: (e) => onHeaderClick(e, column),
