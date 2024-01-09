@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputSwitch = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -95,6 +95,7 @@ export const InputSwitch = React.memo(
                 role: 'checkbox',
                 'aria-checked': checked
             },
+            otherProps,
             ptm('root')
         );
         const hiddenInputWrapperProps = mergeProps(
