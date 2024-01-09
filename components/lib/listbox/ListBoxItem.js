@@ -3,7 +3,7 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
-    const [focused, setFocused] = React.useState(false);
+    const [focusedState, setFocusedState] = React.useState(false);
     const {
         ptCallbacks: { ptm, cx }
     } = props;
@@ -14,17 +14,17 @@ export const ListBoxItem = React.memo((props) => {
             context: {
                 selected: props.selected,
                 disabled: props.disabled,
-                focused: focused
+                focused: focusedState
             }
         });
     };
 
     const onFocus = (event) => {
-        setFocused(true);
+        setFocusedState(true);
     };
 
     const onBlur = (event) => {
-        setFocused(false);
+        setFocusedState(false);
     };
 
     const onClick = (event) => {

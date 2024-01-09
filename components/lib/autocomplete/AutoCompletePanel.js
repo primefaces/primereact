@@ -21,7 +21,8 @@ export const AutoCompletePanel = React.memo(
         const getPTOptions = (item, key) => {
             return _ptm(key, {
                 context: {
-                    selected: props.selectedItem.current === item
+                    selected: props.selectedItem.current === item,
+                    disabled: item.disabled
                 }
             });
         };
@@ -107,7 +108,7 @@ export const AutoCompletePanel = React.memo(
                         className: cx('item', { suggestion }),
                         style,
                         onClick: (e) => props.onItemClick(e, suggestion),
-                        'aria-selected': props.selectedItem === suggestion,
+                        'aria-selected': props.selectedItem.current === suggestion,
                         'data-p-disabled': suggestion.disabled
                     },
                     getPTOptions(suggestion, 'item')

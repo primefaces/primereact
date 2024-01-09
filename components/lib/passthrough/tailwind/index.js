@@ -1453,7 +1453,7 @@ const Tailwind = {
                 'focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] hover:border-blue-500 focus:outline-none dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        inputtoken: {
+        inputToken: {
             className: classNames('py-0.375rem px-0', 'flex-1 inline-flex')
         },
         input: ({ props }) => ({
@@ -1488,7 +1488,7 @@ const Tailwind = {
                 'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
             })
         }),
-        itemgroup: {
+        itemGroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
         },
         transition: TRANSITIONS.overlay
@@ -1508,7 +1508,7 @@ const Tailwind = {
             )
         },
 
-        inputtoken: {
+        inputToken: {
             className: classNames('py-1.5 px-0', 'flex flex-1 inline-flex')
         },
         input: {
