@@ -39,6 +39,7 @@ export const InputNumber = React.memo(
         const _minusSign = React.useRef(null);
         const _currency = React.useRef(null);
         const _decimal = React.useRef(null);
+        const _decimalSeparator = React.useRef(null);
         const _suffix = React.useRef(null);
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
@@ -69,17 +70,24 @@ export const InputNumber = React.memo(
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
-            _group.current = getGroupingExpression();
-            _minusSign.current = getMinusSignExpression();
-            _currency.current = getCurrencyExpression();
-            _decimal.current = getDecimalExpression();
-            _suffix.current = getSuffixExpression();
-            _prefix.current = getPrefixExpression();
-            _index.current = (d) => index.get(d);
+            _group.current = getGroupingExpression(); // regular expression /[,]/g, /[.]/g
+            _minusSign.current = getMinusSignExpression(); // regular expression /[-]/g
+            _currency.current = getCurrencyExpression(); // regular expression for currency (e.g. /[$]/g, /[€]/g, /[]/g and more)
+            _decimal.current = getDecimalExpression(); // regular expression /[,]/g, /[.]/g, /[]/g
+            _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
+            _suffix.current = getSuffixExpression(); // regular expression for suffix (e.g. /℃/g)
+            _prefix.current = getPrefixExpression(); // regular expression for prefix (e.g. /\ days/g)
         };
 
         const escapeRegExp = (text) => {
             return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        };
+
+        /**
+         * get decimal separator in current locale
+         */
+        const getDecimalSeparator = () => {
+            return new Intl.NumberFormat(_locale, { useGrouping: false }).format(1.1).trim().replace(_numeral.current, '');
         };
 
         const getDecimalExpression = () => {
@@ -535,7 +543,7 @@ export const InputNumber = React.memo(
         };
 
         const isDecimalSign = (char) => {
-            if (_decimal.current.test(char)) {
+            if (_decimal.current.test(char) || isFloat(char)) {
                 _decimal.current.lastIndex = 0;
 
                 return true;
@@ -546,6 +554,23 @@ export const InputNumber = React.memo(
 
         const isDecimalMode = () => {
             return props.mode === 'decimal';
+        };
+
+        const isFloat = (val) => {
+            let formatter = new Intl.NumberFormat(_locale, getOptions());
+            let parseVal = parseValue(formatter.format(val));
+
+            if (parseVal === null) return false;
+
+            return parseVal % 1 !== 0;
+        };
+
+        const replaceDecimalSeparator = (val) => {
+            if (isFloat(val)) {
+                return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
+            }
+
+            return val;
         };
 
         const getDecimalCharIndexes = (val) => {
@@ -921,7 +946,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                return decimalCharIndex !== -1 ? replaceDecimalSeparator(val1).split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -1000,7 +1025,9 @@ export const InputNumber = React.memo(
         };
 
         const changeValue = () => {
-            updateInputValue(validateValueByLimit(props.value));
+            const val = validateValueByLimit(props.value);
+
+            updateInputValue(props.format ? val : replaceDecimalSeparator(val));
 
             const newValue = validateValue(props.value);
 
