@@ -2,13 +2,13 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { useMountEffect, useOnEscapeKey, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
+import { TieredMenu } from '../tieredmenu/TieredMenu';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SplitButtonBase } from './SplitButtonBase';
-import { TieredMenu } from '../tieredmenu/TieredMenu';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -32,6 +32,7 @@ export const SplitButton = React.memo(
         const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metaData);
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
+        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
 
         const onPanelClick = (event) => {
             OverlayService.emit('overlay-click', {

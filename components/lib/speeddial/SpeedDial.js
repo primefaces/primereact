@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useOnEscapeKey, useUpdateEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
@@ -27,6 +27,7 @@ export const SpeedDial = React.memo(
         const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metaData);
 
         useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
+        useOnEscapeKey(elementRef, visible, () => hide());
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);

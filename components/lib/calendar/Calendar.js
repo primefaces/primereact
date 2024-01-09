@@ -892,7 +892,7 @@ export const Calendar = React.memo(
                 value.setFullYear(viewYear);
             }
 
-            if (props.monthNavigator && props.view !== 'month') {
+            if (renderMonthsNavigator(0)) {
                 let viewMonth = value.getMonth();
                 let viewMonthWithMinMax = parseInt((isInMinYear(value) && Math.max(props.minDate.getMonth(), viewMonth).toString()) || (isInMaxYear(value) && Math.min(props.maxDate.getMonth(), viewMonth).toString()) || viewMonth);
 
@@ -944,7 +944,7 @@ export const Calendar = React.memo(
         const updateViewDate = (event, value) => {
             validateDate(value);
 
-            if (props.onViewDateChange) {
+            if (props.onViewDateChange && event) {
                 props.onViewDateChange({
                     originalEvent: event,
                     value
@@ -1496,19 +1496,27 @@ export const Calendar = React.memo(
                 ZIndexUtils.set(key, overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
             }
 
+            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
+                let inputWidth = DomHandler.getOuterWidth(inputRef.current);
+
+                // #5435 must have reasonable width if input is too small
+                if (inputWidth < 220) {
+                    inputWidth = 220;
+                }
+
+                if (props.view === 'date') {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                } else {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                    overlayRef.current.style.width = inputWidth + 'px';
+                }
+            }
+
             alignOverlay();
         };
 
         const onOverlayEntered = () => {
-            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
-                if (props.view === 'date') {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                } else {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                }
-            }
-
             bindOverlayListener();
             props.onShow && props.onShow();
             DomHandler.focusFirstElement(overlayRef.current);
@@ -2566,7 +2574,17 @@ export const Calendar = React.memo(
             if (!props.onViewDateChange && !viewStateChanged.current) {
                 setValue(props.value);
             }
-        }, [props.onViewDateChange, props.value]);
+
+            if (props.viewDate) {
+                updateViewDate(null, getViewDate(props.viewDate));
+            }
+        }, [props.onViewDateChange, props.value, props.viewDate]);
+
+        useUpdateEffect(() => {
+            if (overlayVisibleState || props.visible) {
+                alignOverlay();
+            }
+        }, [currentView, overlayVisibleState, props.visible]);
 
         useUpdateEffect(() => {
             const newDate = props.value;
@@ -2603,7 +2621,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime, props.locale]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
@@ -2709,10 +2727,14 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleMonthElement = (month) => {
+        const renderMonthsNavigator = (index) => {
+            return props.monthNavigator && props.view !== 'month' && (props.numberOfMonths === 1 || index === 0);
+        };
+
+        const createTitleMonthElement = (month, monthIndex) => {
             const monthNames = localeOption('monthNames', props.locale);
 
-            if (props.monthNavigator && props.view !== 'month') {
+            if (renderMonthsNavigator(monthIndex)) {
                 const viewDate = getViewDate();
                 const viewMonth = viewDate.getMonth();
                 const displayedMonthOptions = monthNames
@@ -2866,8 +2888,8 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const createTitle = (monthMetaData) => {
-            const month = createTitleMonthElement(monthMetaData.month);
+        const createTitle = (monthMetaData, index) => {
+            const month = createTitleMonthElement(monthMetaData.month, index);
             const year = createTitleYearElement(monthMetaData.year);
             const decade = createTitleDecadeElement();
             const titleProps = mergeProps(
@@ -2948,12 +2970,7 @@ export const Calendar = React.memo(
                 })
             );
 
-            return (
-                <span {...dayLabelProps}>
-                    {content}
-                    <Ripple />
-                </span>
-            );
+            return <span {...dayLabelProps}>{content}</span>;
         };
 
         const createWeek = (weekDates, weekNumber, groupIndex) => {
@@ -3063,7 +3080,7 @@ export const Calendar = React.memo(
             const weekDays = createWeekDaysMeta();
             const backwardNavigator = createBackwardNavigator(index === 0);
             const forwardNavigator = createForwardNavigator(props.numberOfMonths === 1 || index === props.numberOfMonths - 1);
-            const title = createTitle(monthMetaData);
+            const title = createTitle(monthMetaData, index);
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;

@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { DomHandler, classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { AccordionBase, AccordionTabBase } from './AccordionBase';
-import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
-import { PrimeReactContext, ariaLabel } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { AccordionBase, AccordionTabBase } from './AccordionBase';
 
 export const AccordionTab = () => {};
 
@@ -47,7 +47,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             }
         };
 
-        return mergeProps(ptm(`accordiontab.${key}`, { accordiontab: tabMetaData }), ptm(`accordiontab.${key}`, tabMetaData), ptmo(tab.props, key, tabMetaData));
+        return mergeProps(ptm(`accordion.${key}`, { tab: tabMetaData }), ptm(`tab.${key}`, { accordiontab: tabMetaData }), ptm(`tab.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
     };
 
     const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
@@ -205,7 +205,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             },
             getTabPT(tab, 'headertitle', index)
         );
-        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span {...headerTitleProps}>{getTabProp(tab, 'header')}</span>;
+        const tabCProps = AccordionTabBase.getCProps(tab);
+        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), tabCProps) : <span {...headerTitleProps}>{ObjectUtils.getJSXElement(getTabProp(tab, 'header'), tabCProps)}</span>;
         const headerIconProps = mergeProps(
             {
                 'aria-hidden': 'true',

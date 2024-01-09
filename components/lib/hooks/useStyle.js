@@ -17,7 +17,7 @@ export const useStyle = (css, options = {}) => {
     };
 
     const load = () => {
-        if (!document) return;
+        if (!document || isLoaded) return;
 
         const styleContainer = context?.styleContainer || document.head;
 
@@ -32,8 +32,6 @@ export const useStyle = (css, options = {}) => {
             styleContainer.appendChild(styleRef.current);
             name && styleRef.current.setAttribute('data-primereact-style-id', name);
         }
-
-        if (isLoaded) return;
 
         styleRef.current.textContent = css;
 
@@ -52,7 +50,7 @@ export const useStyle = (css, options = {}) => {
 
         // return () => {if (!manual) unload()}; /* @todo */
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [manual]);
 
     return {
         id,
