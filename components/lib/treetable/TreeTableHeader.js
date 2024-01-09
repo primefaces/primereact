@@ -327,14 +327,27 @@ export const TreeTableHeader = React.memo((props) => {
                 })
             );
 
+            const headerContentProps = mergeProps(
+                {
+                    className: cx('headerContent')
+                },
+                getColumnPTOptions(column, 'headerContent')
+            );
+
+            const header = (
+                <div {...headerContentProps}>
+                    {title}
+                    {sortIconElement}
+                    {sortBadge}
+                    {filterElement}
+                </div>
+            );
+
             return (
                 <React.Fragment key={column.columnKey || column.field || options.index}>
                     <th ref={headerCellRef} {...headerCellProps}>
                         {resizer}
-                        {title}
-                        {sortIconElement}
-                        {sortBadge}
-                        {filterElement}
+                        {header}
                     </th>
                     {hasTooltip && <Tooltip target={headerCellRef} content={headerTooltip} {...getColumnProp(column, 'headerTooltipOptions')} unstyled={props.unstyled} />}
                 </React.Fragment>
