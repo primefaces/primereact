@@ -67,9 +67,8 @@ export interface CalendarPassThroughOptions {
     header?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    previousButton?: ButtonPassThroughOptions;
+    previousButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the previous icon's DOM element.
      */
@@ -96,9 +95,8 @@ export interface CalendarPassThroughOptions {
     decadeTitleText?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    nextButton?: ButtonPassThroughOptions;
+    nextButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the next icon's DOM element.
      */
