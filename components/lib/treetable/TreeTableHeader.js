@@ -233,6 +233,10 @@ export const TreeTableHeader = React.memo((props) => {
     const createHeaderCell = (column, options) => {
         let filterElement;
 
+        if (getColumnProp(column, 'hidden')) {
+            return null;
+        }
+
         if (getColumnProp(column, 'filter') && options.renderFilter) {
             filterElement = getColumnProp(column, 'filterElement') || (
                 <InputText
