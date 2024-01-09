@@ -15942,7 +15942,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "",
+                            "default": "No results found",
                             "description": "Text to display when there is no data."
                         },
                         {
@@ -51459,8 +51459,8 @@
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "No records found",
+                            "type": "ReactNode | Function",
+                            "default": "No results found",
                             "description": "Text to display when there is no data."
                         },
                         {
