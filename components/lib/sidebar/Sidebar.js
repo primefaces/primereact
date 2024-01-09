@@ -156,6 +156,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     });
 
     const createCloseIcon = () => {
+        const ariaLabel = props.ariaCloseLabel || localeOption('close');
         const closeButtonProps = mergeProps(
             {
                 type: 'button',
@@ -176,7 +177,6 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
         const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
-        const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
         if (props.showCloseIcon) {
             return (
