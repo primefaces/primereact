@@ -1839,11 +1839,7 @@ export const Calendar = React.memo(
                 }
             }
 
-            if (props.disabledDates || props.enabledDates) {
-                validDate = !isDateDisabled(day, month, year);
-            }
-
-            if (props.disabledDays && currentView === 'date') {
+            if (props.disabledDates || props.enabledDates || props.disabledDays) {
                 validDay = !isDayDisabled(day, month, year);
             }
 
@@ -1993,27 +1989,46 @@ export const Calendar = React.memo(
             return today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
         };
 
-        const isDateDisabled = (day, month, year) => {
+        const isDayDisabled = (day, month, year) => {
             if (props.disabledDates) {
-                return props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+                if (props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
+                    return true;
+                }
+            } else if (props.enabledDates) {
+                if (!props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
+                    return true;
+                }
             }
 
-            if (props.enabledDates) {
-                return !props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+            if (props.disabledDays && currentView === 'date') {
+                let weekday = new Date(year, month, day);
+                let weekdayNumber = weekday.getDay();
+
+                if (props.disabledDays.indexOf(weekdayNumber) !== -1) {
+                    return true;
+                }
             }
 
             return false;
         };
 
-        const isDayDisabled = (day, month, year) => {
-            if (props.disabledDays) {
-                let weekday = new Date(year, month, day);
-                let weekdayNumber = weekday.getDay();
+        const isMonthYearDisabled = (month, year) => {
+            const daysCountInAllMonth = month === -1 ? new Array(12).fill(0).map((_, i) => getDaysCountInMonth(i, year)) : [getDaysCountInMonth(month, year)];
 
-                return props.disabledDays.indexOf(weekdayNumber) !== -1;
+            for (let i = 0; i < daysCountInAllMonth.length; i++) {
+                const monthDays = daysCountInAllMonth[i];
+                const _month = month === -1 ? i : month;
+
+                for (let day = 1; day <= monthDays; day++) {
+                    let isDateSelectable = isSelectable(day, _month, year);
+
+                    if (isDateSelectable) {
+                        return false;
+                    }
+                }
             }
 
-            return false;
+            return true;
         };
 
         const updateInputfield = (value) => {
@@ -3654,10 +3669,10 @@ export const Calendar = React.memo(
                         {monthPickerValues().map((m, i) => {
                             const monthProps = mergeProps(
                                 {
-                                    className: cx('month', { isMonthSelected, isSelectable, i, currentYear }),
+                                    className: cx('month', { isMonthSelected, isMonthYearDisabled, i, currentYear }),
                                     onClick: (event) => onMonthSelect(event, i),
                                     onKeyDown: (event) => onMonthCellKeydown(event, i),
-                                    'data-p-disabled': !m.selectable,
+                                    'data-p-disabled': isMonthYearDisabled(i, currentYear),
                                     'data-p-highlight': isMonthSelected(i)
                                 },
                                 ptm('month', {
@@ -3665,7 +3680,7 @@ export const Calendar = React.memo(
                                         month: m,
                                         monthIndex: i,
                                         selected: isMonthSelected(i),
-                                        disabled: !m.selectable
+                                        disabled: isMonthYearDisabled(i, currentYear)
                                     }
                                 })
                             );
@@ -3697,17 +3712,17 @@ export const Calendar = React.memo(
                         {yearPickerValues().map((y, i) => {
                             const yearProps = mergeProps(
                                 {
-                                    className: cx('year', { isYearSelected, isSelectable, y }),
+                                    className: cx('year', { isYearSelected, isMonthYearDisabled, y }),
                                     onClick: (event) => onYearSelect(event, y),
                                     'data-p-highlight': isYearSelected(y),
-                                    'data-p-disabled': !isSelectable(0, -1, y)
+                                    'data-p-disabled': isMonthYearDisabled(-1, y)
                                 },
                                 ptm('year', {
                                     context: {
                                         year: y,
                                         yearIndex: i,
                                         selected: isYearSelected(i),
-                                        disabled: !y.selectable
+                                        disabled: isMonthYearDisabled(-1, y)
                                     }
                                 })
                             );
