@@ -1,0 +1,47 @@
+.atlantis {
+
+    .template {
+        &-hero {
+            &-pattern {
+                width: 98rem;
+                height: 36rem;
+                position: absolute;
+                bottom: -0.75rem;
+                left: 2rem;
+                z-index: 6;
+                mix-blend-mode: overlay;
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width: 1200px) {
+    .atlantis {
+        .template{
+            &-hero {
+                &-pattern {
+                    width: 90rem;
+                    bottom: -5.75rem;
+                    left: 0.5rem;
+                }
+            }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .atlantis {
+        .template{
+            &-hero {
+                &-pattern {
+                    width: 90rem;
+                    bottom: 14.75rem;
+                    left: 0.5rem;
+                }
+            }
+        }
+
+    }
+}
