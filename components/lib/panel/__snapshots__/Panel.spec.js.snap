@@ -136,10 +136,12 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
         <button
           aria-controls="pr_id_4_content"
           aria-expanded="false"
+          aria-label="Expand/Collapse"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
           id="pr_id_4_label"
-          role="tab"
+          role="button"
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -221,10 +223,12 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
         <button
           aria-controls="pr_id_4_content"
           aria-expanded="true"
+          aria-label="Expand/Collapse"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
           id="pr_id_4_label"
-          role="tab"
+          role="button"
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -290,10 +294,12 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
         <button
           aria-controls="pr_id_4_content"
           aria-expanded="true"
+          aria-label="Expand/Collapse"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
           id="pr_id_4_label"
-          role="tab"
+          role="button"
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -360,10 +366,12 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
         <button
           aria-controls="pr_id_3_content"
           aria-expanded="true"
+          aria-label="Toggleable"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
           id="pr_id_3_label"
-          role="tab"
+          role="button"
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -429,10 +437,12 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
         <button
           aria-controls="pr_id_3_content"
           aria-expanded="true"
+          aria-label="Toggleable"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
           id="pr_id_3_label"
-          role="tab"
+          role="button"
+          type="button"
         >
           <svg
             aria-hidden="true"

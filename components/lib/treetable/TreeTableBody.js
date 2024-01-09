@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { DomHandler, mergeProps } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeTableRow } from './TreeTableRow';
 
 export const TreeTableBody = React.memo((props) => {
@@ -230,7 +230,7 @@ export const TreeTableBody = React.memo((props) => {
             return null;
         } else {
             const colSpan = props.columns ? props.columns.length : null;
-            const content = props.emptyMessage || localeOption('emptyMessage');
+            const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps }) || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
                     className: cx('emptyMessage')
