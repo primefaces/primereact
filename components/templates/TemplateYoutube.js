@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Dialog } from '../lib/primereact.all'
+import React, { useState } from 'react';
+import { Dialog } from '../lib/primereact.all';
 
 const PlayIcon = React.memo(() => (
     <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
@@ -61,4 +61,4 @@ const TemplateYoutube = ({
     );
 };
 
-export default TemplateYoutube
+export default TemplateYoutube;

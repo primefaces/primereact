@@ -1,6 +1,6 @@
-import React from 'react'
-import TemplateHeroRectangle from './TemplateHeroRectangle'
-import TemplateHeroLight from './TemplateHeroLight'
+import React from 'react';
+import TemplateHeroRectangle from './TemplateHeroRectangle';
+import TemplateHeroLight from './TemplateHeroLight';
 
 const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2, description, liveHref, docHref }) => {
     return (
@@ -36,4 +36,4 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
     );
 };
 
-export default TemplateHero
+export default TemplateHero;
