@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMountEffect, useOnEscapeKey, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
@@ -15,9 +15,13 @@ export const SpeedDial = React.memo(
         const [idState, setIdState] = React.useState(null);
         const [focused, setFocused] = React.useState(false);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
+        const isItemClicked = React.useRef(false);
+        const elementRef = React.useRef(null);
+        const listRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
         const visible = props.onVisibleChange ? props.visible : visibleState;
+        const speedDialDisplayOrder = useDisplayOrder('speed-dial', visible);
         const metaData = {
             props,
             state: {
@@ -27,10 +31,14 @@ export const SpeedDial = React.memo(
         const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metaData);
 
         useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
-        useOnEscapeKey(elementRef, visible, () => hide());
-        const isItemClicked = React.useRef(false);
-        const elementRef = React.useRef(null);
-        const listRef = React.useRef(null);
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: visible,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.SPEED_DIAL, speedDialDisplayOrder]
+        });
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',

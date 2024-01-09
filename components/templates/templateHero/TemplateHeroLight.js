@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const TemplateHeroLight = () => {
     return (
-        <svg width="490" height="143" viewBox="0 0 490 143" fill="none" xmlns="http://www.w3.org/2000/svg" className='template-hero-light'>
+        <svg width="490" height="143" viewBox="0 0 490 143" fill="none" xmlns="http://www.w3.org/2000/svg" className="template-hero-light">
             <g filter="url(#filter0_f_1970_42395)">
                 <g filter="url(#filter1_f_1970_42395)">
                     <rect x="43" y="43" width="404" height="10" rx="5" fill="var(--primary-100)" />
@@ -58,7 +58,7 @@ const TemplateHeroLight = () => {
                 </filter>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default TemplateHeroLight
+export default TemplateHeroLight;

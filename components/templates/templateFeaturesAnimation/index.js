@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 import useAnimatedFeatures from './useAnimatedFeatures';
 import TemplateFeaturesAnimationInline from './TemplateFeaturesAnimationInline';
 
 const TemplateFeaturesAnimation = ({ featuresData, title, animationSeconds = 5000 }) => {
-    const animationRef = useRef(null)
+    const animationRef = useRef(null);
     const { selectedID, handleClick } = useAnimatedFeatures(animationRef, featuresData.length, animationSeconds);
 
     return (
@@ -44,6 +44,6 @@ const TemplateFeaturesAnimation = ({ featuresData, title, animationSeconds = 500
             </div>
         </div>
     );
-}
+};
 
-export default TemplateFeaturesAnimation
+export default TemplateFeaturesAnimation;

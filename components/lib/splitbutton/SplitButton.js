@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useOnEscapeKey, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { TieredMenu } from '../tieredmenu/TieredMenu';
@@ -21,6 +21,7 @@ export const SplitButton = React.memo(
         const menuRef = React.useRef(null);
         const defaultButtonRef = React.useRef(null);
         const overlayRef = React.useRef(null);
+        const overlayDisplayOrder = useDisplayOrder('split-button-tooltip', overlayVisibleState);
         const metaData = {
             props,
             state: {
@@ -32,7 +33,14 @@ export const SplitButton = React.memo(
         const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metaData);
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
-        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.SPLIT_BUTTON, overlayDisplayOrder]
+        });
 
         const onPanelClick = (event) => {
             OverlayService.emit('overlay-click', {

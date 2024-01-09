@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const TemplateRelated = ({ relatedData }) => {
     return (
@@ -15,6 +15,6 @@ const TemplateRelated = ({ relatedData }) => {
             </div>
         </div>
     );
-}
+};
 
-export default TemplateRelated
+export default TemplateRelated;
