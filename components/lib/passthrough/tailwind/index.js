@@ -845,13 +845,12 @@ const Tailwind = {
         sublist: {
             className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
         },
-        item: {
-            className: classNames(
-                'cursor-pointer font-normal whitespace-nowrap',
-                'm-0 border-0 bg-transparent transition-shadow rounded-none',
-                'text-gray-700 dark:text-white/80 hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80'
-            )
-        },
+        item: ({ state }) => ({
+            className: classNames('cursor-pointer font-normal whitespace-nowrap', 'm-0 border-0 bg-transparent transition-shadow rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:text-white/80 dark:hover:bg-gray-800/80': !state.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': state.selected
+            })
+        }),
         content: {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
