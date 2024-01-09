@@ -160,6 +160,7 @@ export const ConfirmDialog = React.memo(
                     icon: getPropValue('acceptIcon'),
                     className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
                     onClick: accept,
+                    pt: ptm('acceptButton'),
                     unstyled: props.unstyled,
                     __parentMetadata: {
                         parent: metaData

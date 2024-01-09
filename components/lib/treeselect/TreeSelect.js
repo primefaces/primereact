@@ -7,6 +7,7 @@ import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
+import { Tooltip } from '../tooltip/Tooltip';
 import { Tree } from '../tree/Tree';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
@@ -33,6 +34,7 @@ export const TreeSelect = React.memo(
         const hasNoOptions = ObjectUtils.isEmpty(props.options);
         const isSingleSelectionMode = props.selectionMode === 'single';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
+        const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
         const metaData = {
             props,
@@ -744,6 +746,7 @@ export const TreeSelect = React.memo(
                 >
                     {content}
                 </TreeSelectPanel>
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </div>
         );
     })

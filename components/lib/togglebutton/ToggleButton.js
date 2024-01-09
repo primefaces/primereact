@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const [focusedState, setFocusedState] = React.useState(false);
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
         const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
-            props
+            props,
+            state: {
+                focused: focusedState
+            }
         });
 
         useHandleStyle(ToggleButtonBase.css.styles, isUnstyled, { name: 'togglebutton' });
@@ -41,6 +45,16 @@ export const ToggleButton = React.memo(
                     }
                 });
             }
+        };
+
+        const onFocus = (event) => {
+            setFocusedState(true);
+            props.onFocus && props.onFocus(event);
+        };
+
+        const onBlur = (event) => {
+            setFocusedState(false);
+            props.onBlur && props.onBlur(event);
         };
 
         const onKeyDown = (event) => {
@@ -95,8 +109,8 @@ export const ToggleButton = React.memo(
                 className: cx('root', { hasIcon, hasLabel }),
                 style: props.style,
                 onClick: toggle,
-                onFocus: props.onFocus,
-                onBlur: props.onBlur,
+                onFocus: onFocus,
+                onBlur: onBlur,
                 onKeyDown: onKeyDown,
                 tabIndex: tabIndex,
                 role: 'button',

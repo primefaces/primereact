@@ -3,13 +3,13 @@ import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
-import { SpinnerIcon } from '../icons/spinner';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -741,7 +741,7 @@ export const Dropdown = React.memo(
                     onBlur: onInputBlur,
                     onKeyDown: onInputKeyDown,
                     disabled: props.disabled,
-                    tabIndex: props.tabIndex,
+                    tabIndex: props.tabIndex || 0,
                     ...ariaProps
                 },
                 ptm('input')
@@ -771,6 +771,7 @@ export const Dropdown = React.memo(
                         onInput: onEditableInputChange,
                         onFocus: onEditableInputFocus,
                         onBlur: onInputBlur,
+                        tabIndex: props.tabIndex || 0,
                         'aria-haspopup': 'listbox',
                         ...ariaProps
                     },
@@ -783,7 +784,8 @@ export const Dropdown = React.memo(
                 const inputProps = mergeProps(
                     {
                         ref: inputRef,
-                        className: cx('input', { label })
+                        className: cx('input', { label }),
+                        tabIndex: '-1'
                     },
                     ptm('input')
                 );

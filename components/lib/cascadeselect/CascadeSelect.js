@@ -24,11 +24,14 @@ export const CascadeSelect = React.memo(
                 focused: focusedState,
                 overlayVisible: overlayVisibleState,
                 attributeSelector: attributeSelectorState
+            },
+            context: {
+                ...context
             }
         });
 
         useHandleStyle(CascadeSelectBase.css.styles, isUnstyled, { name: 'cascadeselect' });
-        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
+
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(null);
@@ -45,6 +48,8 @@ export const CascadeSelect = React.memo(
             },
             when: overlayVisibleState
         });
+
+        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
 
         const onOptionSelect = (event) => {
             if (props.onChange) {
@@ -330,7 +335,7 @@ export const CascadeSelect = React.memo(
                     ref: labelRef,
                     className: cx('label', { label })
                 },
-                ptm('label')
+                ptm('label', { context: { label, ...context } })
             );
 
             return <span {...labelProps}>{label}</span>;

@@ -27,11 +27,10 @@ export const BodyCell = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
-    const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        const cProps = getColumnProps(props.column);
-
+        const cProps = getColumnProps();
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
@@ -228,7 +227,7 @@ export const BodyCell = React.memo((props) => {
         clearTimeout(tabindexTimeout.current);
         tabindexTimeout.current = setTimeout(() => {
             if (editingState) {
-                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
 
                 focusableEl && focusableEl.focus();
             }
