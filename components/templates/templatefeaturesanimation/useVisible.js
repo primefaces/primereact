@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useVisible = (element, rootMargin = 0.2) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -8,7 +8,7 @@ const useVisible = (element, rootMargin = 0.2) => {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { threshold: rootMargin },
+            { threshold: rootMargin }
         );
 
         if (element.current) {
@@ -17,11 +17,11 @@ const useVisible = (element, rootMargin = 0.2) => {
 
         return () => {
             if (observer && element.current) {
-                observer.unobserve(element.current)
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                observer.unobserve(element.current);
             }
-        }
-
-    }, []);
+        };
+    }, [element, rootMargin]);
 
     return isVisible;
 };
