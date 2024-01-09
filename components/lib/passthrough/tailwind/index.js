@@ -396,6 +396,7 @@ const Tailwind = {
                 'dark:border dark:border-blue-900/40 dark:bg-gray-900  dark:text-white/80'
             )
         },
+        closeButton: 'flex items-center justify-center overflow-hidden absolute top-0 right-0 w-6 h-6',
         content: 'p-5 items-center flex',
         transition: TRANSITIONS.overlay
     },
