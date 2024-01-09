@@ -497,13 +497,13 @@ export const ComponentBase = {
                 obj = obj.pt;
             }
 
+            const originalkey = ObjectUtils.toFlatCase(key);
             const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
-            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
-            const isTransition = key === 'transition' || (/./g.test(key) && !!(key.split('.')[1] === 'transition'));
-
+            const isNestedParam = /./g.test(originalkey) && !!params[originalkey.split('.')[0]];
+            const isTransition = fkey === 'transition' || (/./g.test(originalkey) && !!(originalkey.split('.')[1] === 'transition'));
             const datasetPrefix = 'data-pc-';
-            const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
+            const fkey = isNestedParam ? ObjectUtils.toFlatCase(originalkey.split('.')[1]) : originalkey;
 
             const getHostInstance = (params) => {
                 return params?.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
@@ -523,8 +523,8 @@ export const ComponentBase = {
                 return ObjectUtils.isString(value) ? { className: value } : value;
             };
 
-            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, key, params) : _useDefaultPT(getPTClassValue, key, params)) : undefined;
-            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, key, params, componentName);
+            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, originalkey, params) : _useDefaultPT(getPTClassValue, originalkey, params)) : undefined;
+            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, originalkey, params, componentName);
 
             const datasetProps = !isTransition && {
                 ...(fkey === 'root' && { [`${datasetPrefix}name`]: params.props && params.props.__parentMetadata ? ObjectUtils.toFlatCase(params.props.__TYPE) : componentName }),
