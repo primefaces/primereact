@@ -391,7 +391,7 @@ interface PaginatorRowsPerPageDropdownOptions {
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      */
-    appendTo: 'self' | HTMLElement | null | undefined;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * The current page number.
      */
@@ -610,7 +610,7 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    dropdownAppendTo?: 'self' | HTMLElement | null | undefined;
+    dropdownAppendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Callback to invoke when page changes, the event object contains information about the new state.
      * @param {PaginatorPageChangeEvent} event - Custom page change event.
