@@ -15,6 +15,13 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
         });
     };
 
+    const onKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            props.hide();
+        }
+    };
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
 
@@ -22,6 +29,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
             {
                 className: cx('panel', { panelProps: props, context }),
                 style: props.panelStyle,
+                onKeyDown: onKeyDown,
                 onClick: props.onClick
             },
             getPTOptions('panel')
