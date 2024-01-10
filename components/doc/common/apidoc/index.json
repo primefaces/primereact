@@ -36372,6 +36372,19 @@
                             "description": "The template of each item"
                         },
                         {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
                             "name": "onChange",
                             "parameters": [
                                 {
@@ -36383,6 +36396,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke to when a mouse button is pressed."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
                         }
                     ]
                 }
@@ -40375,6 +40401,19 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
                             "name": "onChange",
                             "parameters": [
                                 {
@@ -40386,6 +40425,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when items are moved from source to target."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
                         },
                         {
                             "name": "onMoveAllToSource",
@@ -49545,6 +49597,22 @@
                 "props": {
                     "description": "Defines valid properties in TreeProps component.",
                     "values": [
+                        {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Defines a string value that labels an interactive element."
+                        },
+                        {
+                            "name": "ariaLabelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Identifier of the underlying menu element."
+                        },
                         {
                             "name": "checkboxIcon",
                             "optional": true,

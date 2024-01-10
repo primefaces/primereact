@@ -574,6 +574,14 @@ export interface TreeProps {
      */
     filterLocale?: string | undefined;
     /**
+     * Defines a string value that labels an interactive element.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Identifier of the underlying menu element.
+     */
+    ariaLabelledby?: string | undefined;
+    /**
      * Template of toggler element.
      */
     togglerTemplate?: React.ReactNode | ((node: TreeNode, options: TreeTogglerTemplateOptions) => React.ReactNode);

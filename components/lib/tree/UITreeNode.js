@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
@@ -9,8 +8,10 @@ import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../u
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
+    const elementRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
     const isLeaf = props.isNodeLeaf(props.node);
+    const label = props.node.label;
     const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
     const { ptm, cx } = props;
 
@@ -26,14 +27,15 @@ export const UITreeNode = React.memo((props) => {
         });
     };
 
-    const expand = (event) => {
+    const expand = (event, navigateFocusToChild = false) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
 
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
             originalEvent: event,
-            value: expandedKeys
+            value: expandedKeys,
+            navigateFocusToChild
         });
 
         invokeToggleEvents(event, true);
@@ -57,7 +59,7 @@ export const UITreeNode = React.memo((props) => {
             return;
         }
 
-        expanded ? collapse(event) : expand(event);
+        expanded ? collapse(event) : expand(event, false);
 
         event.preventDefault();
         event.stopPropagation();
@@ -78,90 +80,6 @@ export const UITreeNode = React.memo((props) => {
                     node: props.node
                 });
             }
-        }
-    };
-
-    const onNodeKeyDown = (event) => {
-        if (props.disabled) {
-            return;
-        }
-
-        const nodeElement = event.target.parentElement;
-
-        if (!DomHandler.hasClass(nodeElement, 'p-treenode')) {
-            return;
-        }
-
-        switch (event.which) {
-            //down arrow
-            case 40:
-                const listElement = nodeElement.children[1];
-
-                if (listElement) {
-                    focusNode(listElement.children[0]);
-                } else {
-                    let nextNodeElement = nodeElement.nextElementSibling;
-
-                    while (nextNodeElement) {
-                        if (!DomHandler.hasClass(nextNodeElement, 'p-treenode-droppoint')) {
-                            break;
-                        }
-
-                        nextNodeElement = nextNodeElement.nextElementSibling;
-                    }
-
-                    if (nextNodeElement) {
-                        focusNode(nextNodeElement);
-                    } else {
-                        const nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
-
-                        nextSiblingAncestor && focusNode(nextSiblingAncestor);
-                    }
-                }
-
-                event.preventDefault();
-                break;
-
-            //up arrow
-            case 38:
-                if (nodeElement.previousElementSibling) {
-                    focusNode(findLastVisibleDescendant(nodeElement.previousElementSibling));
-                } else {
-                    const parentNodeElement = getParentNodeElement(nodeElement);
-
-                    parentNodeElement && focusNode(parentNodeElement);
-                }
-
-                event.preventDefault();
-                break;
-
-            //right arrow
-            case 39:
-                if (!expanded) {
-                    expand(event);
-                }
-
-                event.preventDefault();
-                break;
-
-            //left arrow
-            case 37:
-                if (expanded) {
-                    collapse(event);
-                }
-
-                event.preventDefault();
-                break;
-
-            //enter
-            case 13:
-                onClick(event);
-                event.preventDefault();
-                break;
-
-            default:
-                //no op
-                break;
         }
     };
 
@@ -190,7 +108,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const focusNode = (element) => {
-        element && element.children[0] && element.children[0].focus();
+        element && element.focus();
     };
 
     const onClick = (event) => {
@@ -377,6 +295,178 @@ export const UITreeNode = React.memo((props) => {
         }
     };
 
+    const onKeyDown = (event) => {
+        if (!isSameNode(event)) return;
+
+        switch (event.code) {
+            case 'Tab':
+                onTabKey(event);
+
+                break;
+
+            case 'ArrowDown':
+                onArrowDown(event);
+
+                break;
+
+            case 'ArrowUp':
+                onArrowUp(event);
+
+                break;
+
+            case 'ArrowRight':
+                onArrowRight(event);
+
+                break;
+
+            case 'ArrowLeft':
+                onArrowLeft(event);
+
+                break;
+
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onEnterKey(event);
+
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    const onArrowDown = (event) => {
+        const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
+        const listElement = nodeElement.children[1];
+
+        if (listElement) {
+            focusRowChange(nodeElement, listElement.children[0]);
+        } else {
+            if (nodeElement.nextElementSibling) {
+                focusRowChange(nodeElement, nodeElement.nextElementSibling);
+            } else {
+                let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
+
+                if (nextSiblingAncestor) {
+                    focusRowChange(nodeElement, nextSiblingAncestor);
+                }
+            }
+        }
+
+        event.preventDefault();
+    };
+
+    const onArrowUp = (event) => {
+        const nodeElement = event.target;
+
+        if (nodeElement.previousElementSibling) {
+            focusRowChange(nodeElement, nodeElement.previousElementSibling, findLastVisibleDescendant(nodeElement.previousElementSibling));
+        } else {
+            let parentNodeElement = getParentNodeElement(nodeElement);
+
+            if (parentNodeElement) {
+                focusRowChange(nodeElement, parentNodeElement);
+            }
+        }
+
+        event.preventDefault();
+    };
+
+    const onArrowRight = (event) => {
+        if (isLeaf || expanded) return;
+
+        event.currentTarget.tabIndex = -1;
+
+        expand(event, true);
+    };
+
+    const onArrowLeft = (event) => {
+        const togglerElement = DomHandler.findSingle(event.currentTarget, '[data-pc-section="toggler"]');
+
+        if (props.level === 0 && !expanded) {
+            return false;
+        }
+
+        if (expanded && !isLeaf) {
+            togglerElement.click();
+
+            return false;
+        }
+
+        const target = findBeforeClickableNode(event.currentTarget);
+
+        if (target) {
+            focusRowChange(event.currentTarget, target);
+        }
+    };
+
+    const onEnterKey = (event) => {
+        setTabIndexForSelectionMode(event, nodeTouched.current);
+        onClick(event);
+
+        event.preventDefault();
+    };
+
+    const onTabKey = () => {
+        setAllNodesTabIndexes();
+    };
+
+    const setAllNodesTabIndexes = () => {
+        const nodes = DomHandler.find(contentRef.current.closest('[data-pc-section="container"]'), '[role="treeitem"]');
+
+        const hasSelectedNode = [...nodes].some((node) => node.getAttribute('aria-selected') === 'true' || node.getAttribute('aria-checked') === 'true');
+
+        [...nodes].forEach((node) => {
+            node.tabIndex = -1;
+        });
+
+        if (hasSelectedNode) {
+            const selectedNodes = [...nodes].filter((node) => node.getAttribute('aria-selected') === 'true' || node.getAttribute('aria-checked') === 'true');
+
+            selectedNodes[0].tabIndex = 0;
+
+            return;
+        }
+
+        [...nodes][0].tabIndex = 0;
+    };
+
+    const setTabIndexForSelectionMode = (event, nodeTouched) => {
+        if (props.selectionMode !== null) {
+            const elements = [...DomHandler.find(elementRef.current.parentElement, '[role="treeitem"]')];
+
+            event.currentTarget.tabIndex = nodeTouched === false ? -1 : 0;
+
+            if (elements.every((element) => element.tabIndex === -1)) {
+                elements[0].tabIndex = 0;
+            }
+        }
+    };
+
+    const focusRowChange = (firstFocusableRow, currentFocusedRow, lastVisibleDescendant) => {
+        firstFocusableRow.tabIndex = '-1';
+        currentFocusedRow.tabIndex = '0';
+
+        focusNode(lastVisibleDescendant || currentFocusedRow);
+    };
+
+    const findBeforeClickableNode = (node) => {
+        const parentListElement = node.closest('ul').closest('li');
+
+        if (parentListElement) {
+            const prevNodeButton = DomHandler.findSingle(parentListElement, 'button');
+
+            if (prevNodeButton && prevNodeButton.style.visibility !== 'hidden') {
+                return parentListElement;
+            }
+
+            return findBeforeClickableNode(node.previousElementSibling);
+        }
+
+        return null;
+    };
+
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
@@ -425,6 +515,10 @@ export const UITreeNode = React.memo((props) => {
 
     const isChecked = () => {
         return (props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false) || false;
+    };
+
+    const isSameNode = (event) => {
+        return event.currentTarget && (event.currentTarget.isSameNode(event.target) || event.currentTarget.isSameNode(event.target.closest('[role="treeitem"]')));
     };
 
     const isPartialChecked = () => {
@@ -553,7 +647,7 @@ export const UITreeNode = React.memo((props) => {
             },
             getPTOptions('label')
         );
-        let content = <span {...labelProps}>{props.node.label}</span>;
+        let content = <span {...labelProps}>{label}</span>;
 
         if (props.nodeTemplate) {
             const defaultContentOptions = {
@@ -584,6 +678,7 @@ export const UITreeNode = React.memo((props) => {
             const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
             const checkboxContainerProps = mergeProps(
                 {
+                    'aria-hidden': true,
                     className: cx('checkboxContainer')
                 },
                 getPTOptions('checkboxContainer')
@@ -591,8 +686,7 @@ export const UITreeNode = React.memo((props) => {
             const checkboxProps = mergeProps(
                 {
                     className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
-                    role: 'checkbox',
-                    'aria-checked': checked
+                    role: 'checkbox'
                 },
                 getPTOptions('checkbox')
             );
@@ -625,7 +719,6 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createToggler = () => {
-        const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const togglerIconProps = mergeProps(
             {
                 className: cx('togglerIcon'),
@@ -640,8 +733,8 @@ export const UITreeNode = React.memo((props) => {
                 type: 'button',
                 className: cx('toggler'),
                 tabIndex: -1,
-                onClick: onTogglerClick,
-                'aria-label': label
+                'aria-hidden': true,
+                onClick: onTogglerClick
             },
             getPTOptions('toggler')
         );
@@ -711,7 +804,6 @@ export const UITreeNode = React.memo((props) => {
                 onDragLeave: onDragLeave,
                 onDragStart: onDragStart,
                 onDragEnd: onDragEnd,
-                onKeyDown: onNodeKeyDown,
                 'data-p-highlight': isCheckboxSelectionMode() ? checked : selected
             },
             getPTOptions('content')
@@ -792,7 +884,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createNode = () => {
-        const tabIndex = props.disabled ? undefined : 0;
+        const tabIndex = props.disabled || props.index !== 0 ? -1 : 0;
         const selected = isSelected();
         const checked = isChecked();
 
@@ -801,11 +893,18 @@ export const UITreeNode = React.memo((props) => {
 
         const nodeProps = mergeProps(
             {
+                ref: elementRef,
                 className: classNames(props.node.className, cx('node', { isLeaf })),
                 style: props.node.style,
                 tabIndex,
                 role: 'treeitem',
+                'aria-label': label,
+                'aria-level': props.level,
+                'aria-expanded': expanded,
+                'aria-checked': checked,
+                'aria-setsize': props.node.children ? props.node.children.length : 0,
                 'aria-posinset': props.index + 1,
+                onKeyDown: onKeyDown,
                 'aria-expanded': expanded,
                 'aria-selected': checked || selected
             },

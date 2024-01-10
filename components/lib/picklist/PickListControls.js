@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
@@ -145,10 +146,10 @@ export const PickListControls = React.memo((props) => {
 
     return (
         <div {...controlsProps}>
-            <Button disabled={moveDisabled} type="button" icon={moveUpIcon} onClick={moveUp} pt={ptm('moveUpButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
-            <Button disabled={moveDisabled} type="button" icon={moveTopIcon} onClick={moveTop} pt={ptm('moveTopButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
-            <Button disabled={moveDisabled} type="button" icon={moveDownIcon} onClick={moveDown} pt={ptm('moveDownButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
-            <Button disabled={moveDisabled} type="button" icon={moveBottomIcon} onClick={moveBottom} pt={ptm('moveBottomButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveUpIcon} onClick={moveUp} pt={ptm('moveUpButton')} unstyled={unstyled} aria-label={ariaLabel('moveUp')} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveTopIcon} onClick={moveTop} pt={ptm('moveTopButton')} unstyled={unstyled} aria-label={ariaLabel('moveTop')} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveDownIcon} onClick={moveDown} pt={ptm('moveDownButton')} unstyled={unstyled} aria-label={ariaLabel('moveDown')} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveBottomIcon} onClick={moveBottom} pt={ptm('moveBottomButton')} unstyled={unstyled} aria-label={ariaLabel('moveBottom')} __parentMetadata={{ parent: props.metaData }}></Button>
         </div>
     );
 });

@@ -6,6 +6,7 @@ import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
+import { useUpdateEffect } from '../hooks/useUpdateEffect';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -20,6 +21,7 @@ export const Tree = React.memo(
         const filterChanged = React.useRef(false);
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const childFocusEvent = React.useRef(null);
         const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
             props,
             state: {
@@ -40,12 +42,33 @@ export const Tree = React.memo(
         };
 
         const onToggle = (event) => {
+            const { originalEvent, value, navigateFocusToChild } = event;
+
             if (props.onToggle) {
-                props.onToggle(event);
+                props.onToggle({ originalEvent, value });
             } else {
+                if (navigateFocusToChild) {
+                    childFocusEvent.current = originalEvent;
+                }
+
                 setExpandedKeysState(event.value);
             }
         };
+
+        useUpdateEffect(() => {
+            if (childFocusEvent.current) {
+                const event = childFocusEvent.current;
+                const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
+                const listElement = nodeElement.children[1];
+                const childElement = listElement.children[0];
+
+                nodeElement.tabIndex = '-1';
+                childElement.tabIndex = '0';
+                childElement.focus();
+
+                childFocusEvent.current = null;
+            }
+        }, [expandedKeys]);
 
         const onDragStart = (event) => {
             dragState.current = {
@@ -251,6 +274,8 @@ export const Tree = React.memo(
             _filter();
         };
 
+        const childNodeFocus = (node) => {};
+
         const _filter = () => {
             if (!filterChanged.current) {
                 return;
@@ -341,6 +366,11 @@ export const Tree = React.memo(
                     hostName="Tree"
                     key={node.key || node.label}
                     node={node}
+                    level={props.level + 1}
+                    originalOptions={props.value}
+                    index={index}
+                    last={last}
+                    path={String(index)}
                     checkboxIcon={props.checkboxIcon}
                     collapseIcon={props.collapseIcon}
                     contextMenuSelectionKey={props.contextMenuSelectionKey}
@@ -398,6 +428,8 @@ export const Tree = React.memo(
                     {
                         className: classNames(props.contentClassName, cx('container')),
                         role: 'tree',
+                        'aria-label': props.ariaLabel,
+                        'aria-labelledby': props.ariaLabelledBy,
                         style: props.contentStyle,
                         ...ariaProps
                     },
