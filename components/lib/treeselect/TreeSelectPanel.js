@@ -53,9 +53,11 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={ref} {...transitionProps}>
                 <div ref={ref} {...panelProps}>
+                    {props.firstHiddenFocusableElementOnOverlay}
                     {props.header}
                     <div {...wrapperProps}>{props.children}</div>
                     {props.footer}
+                    {props.lastHiddenFocusableElementOnOverlay}
                 </div>
             </CSSTransition>
         );

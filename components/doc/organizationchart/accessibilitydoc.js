@@ -39,6 +39,12 @@ export function AccessibilityDoc() {
                                 </td>
                                 <td>Toggles the expanded state of a node.</td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <i>numpad enter</i>
+                                </td>
+                                <td>Toggles the expanded state of a node.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
