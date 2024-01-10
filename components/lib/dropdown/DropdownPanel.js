@@ -105,7 +105,8 @@ export const DropdownPanel = React.memo(
                 const itemGroupProps = mergeProps(
                     {
                         className: cx('itemGroup', { optionGroupLabel }),
-                        style
+                        style,
+                        'data-p-highlight': props.selected
                     },
                     getPTOptions('itemGroup')
                 );

@@ -561,7 +561,7 @@ export const Dropdown = React.memo(
         };
 
         const scrollInView = () => {
-            const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+            const highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });

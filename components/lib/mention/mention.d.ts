@@ -86,6 +86,10 @@ export interface MentionState {
      * Current trigger state.
      */
     trigger: any;
+    /**
+     * For item, this is the state of the item.
+     */
+    selected?: boolean;
 }
 
 /**
