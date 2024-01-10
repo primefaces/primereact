@@ -33,8 +33,8 @@ export const ConfirmDialog = React.memo(
         const confirmProps = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
         const focusElementOnHide = React.useRef(null);
-        const getCurrentProps = () => Object.assign(props, confirmProps.current);
-        const getPropValue = (key) => Object.assign(props, confirmProps.current)[key];
+        const getCurrentProps = () => confirmProps.current || props;
+        const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
 
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
@@ -130,6 +130,7 @@ export const ConfirmDialog = React.memo(
         }));
 
         const createFooter = () => {
+            const defaultFocus = getPropValue('defaultFocus');
             const acceptClassName = classNames('p-confirm-dialog-accept', getPropValue('acceptClassName'));
             const rejectClassName = classNames(
                 'p-confirm-dialog-reject',
@@ -141,6 +142,7 @@ export const ConfirmDialog = React.memo(
 
             const rejectButtonProps = {
                 label: rejectLabel,
+                autoFocus: defaultFocus === 'reject',
                 icon: getPropValue('rejectIcon'),
                 className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
                 onClick: reject,
@@ -154,9 +156,11 @@ export const ConfirmDialog = React.memo(
             const acceptButtonProps = mergeProps(
                 {
                     label: acceptLabel,
+                    autoFocus: defaultFocus === undefined || defaultFocus === 'accept',
                     icon: getPropValue('acceptIcon'),
                     className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
                     onClick: accept,
+                    pt: ptm('acceptButton'),
                     unstyled: props.unstyled,
                     __parentMetadata: {
                         parent: metaData
@@ -168,7 +172,7 @@ export const ConfirmDialog = React.memo(
             const content = (
                 <>
                     <Button {...rejectButtonProps} />
-                    <Button {...acceptButtonProps} autoFocus />
+                    <Button {...acceptButtonProps} />
                 </>
             );
 

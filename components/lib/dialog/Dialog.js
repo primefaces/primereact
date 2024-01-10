@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
@@ -37,6 +36,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
     const shouldBlockScroll = visibleState && (props.blockScroll || (props.maximizable && maximized));
+    const displayOrder = useDisplayOrder('dialog', visibleState);
 
     const { ptm, cx, sx, isUnstyled } = DialogBase.setMetaData({
         props,
@@ -50,18 +50,14 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
-        const currentTarget = event.currentTarget;
-
-        if (!currentTarget || !currentTarget.primeDialogParams) {
-            return;
-        }
-
-        const params = currentTarget.primeDialogParams;
-        const paramLength = params.length;
-
-        onClose(event);
-        params.splice(paramLength - 1, 1);
+    useGlobalOnEscapeKey({
+        callback: (event) => {
+            if (props.closable && props.closeOnEscape) {
+                onClose(event);
+            }
+        },
+        when: visibleState,
+        priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -319,12 +315,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
-        updateGlobalDialogsRegistry(true);
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
-        updateGlobalDialogsRegistry(false);
     };
 
     const updateScrollBlocker = () => {
@@ -339,7 +333,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const updateGlobalDialogsRegistry = (isMounted) => {
-        // Update current dialog info in global registry if it is mounted :
+        // Update current dialog info in global registry if it is mounted and visible:
         if (isMounted && visibleState) {
             const newParam = { id: idState, hasBlockScroll: shouldBlockScroll };
 
@@ -356,7 +350,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
             }
         }
-        // Or remove it from global registry if unmounted:
+        // Or remove it from global registry if unmounted or invisible:
         else {
             document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
         }
@@ -389,15 +383,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createStyle = () => {
-        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
         let innerHTML = '';
 
         for (let breakpoint in props.breakpoints) {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
-                    .p-dialog[${attributeSelector.current}] {
-                        width: ${props.breakpoints[breakpoint]};
+                     [data-pc-name="dialog"][${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]} !important;
                     }
                 }
             `;
@@ -406,15 +400,28 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         styleElement.current.innerHTML = innerHTML;
     };
 
+    const destroyStyle = () => {
+        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
+    };
+
     useMountEffect(() => {
+        updateGlobalDialogsRegistry(true);
+
         if (props.visible) {
             setMaskVisibleState(true);
         }
+    });
 
+    React.useEffect(() => {
         if (props.breakpoints) {
             createStyle();
         }
-    });
+
+        return () => {
+            destroyStyle();
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.breakpoints]);
 
     useUpdateEffect(() => {
         if (props.visible && !maskVisibleState) {
@@ -441,10 +448,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         updateGlobalDialogsRegistry(true);
-    }, [shouldBlockScroll]);
+    }, [shouldBlockScroll, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
+        updateGlobalDialogsRegistry(false);
         DomHandler.removeInlineStyle(styleElement.current);
         ZIndexUtils.clear(maskRef.current);
     });

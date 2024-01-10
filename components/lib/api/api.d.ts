@@ -61,6 +61,7 @@ import { OverlayPanelPassThroughOptions } from '../overlaypanel/overlaypanel';
 import { PaginatorPassThroughOptions } from '../paginator/paginator';
 import { PanelPassThroughOptions } from '../panel/panel';
 import { PanelMenuPassThroughOptions } from '../panelmenu/panelmenu';
+import { PassThroughOptions } from '../passthrough';
 import { PasswordPassThroughOptions } from '../password/password';
 import { PickListPassThroughOptions } from '../picklist/picklist';
 import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
@@ -93,7 +94,6 @@ import { TreePassThroughOptions } from '../tree/tree';
 import { TreeSelectPassThroughOptions } from '../treeselect/treeselect';
 import { TreeTablePassThroughOptions } from '../treetable/treetable';
 import { VirtualScrollerPassThroughOptions } from '../virtualscroller/virtualscroller';
-import { PassThroughOptions } from '../passthrough';
 
 // Config
 /**
@@ -129,7 +129,9 @@ export interface ZIndexOptions {
 
 export type InputStyleType = 'outlined' | 'filled';
 
-export type AppendToType = 'self' | HTMLElement | undefined | null;
+export type AppendToType = 'self' | HTMLElement | undefined | null | (() => HTMLElement);
+
+export type StyleContainerType = ShadowRoot | HTMLElement | undefined | null;
 
 /**
  * Filter match modes for DataTable filter menus.
@@ -157,6 +159,11 @@ export interface APIOptions {
      * This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self.
      */
     appendTo?: AppendToType;
+    /**
+     * This option allows `useStyle` to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM.
+     * @defaultValue document.head
+     */
+    styleContainer?: StyleContainerType;
     /**
      * ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself.
      */
@@ -229,6 +236,10 @@ export interface APIOptions {
      * Sets the "appendTo" state of the context.
      */
     setAppendTo?: Dispatch<SetStateAction<AppendToType>>;
+    /**
+     * Sets the "styleContainer" state of the context.
+     */
+    setStyleContainer?: Dispatch<SetStateAction<StyleContainerType>>;
     /**
      * Sets the "autoZIndex" state of the context.
      */

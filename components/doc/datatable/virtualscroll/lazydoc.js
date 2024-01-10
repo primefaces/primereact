@@ -5,12 +5,18 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Skeleton } from '@/components/lib/skeleton/Skeleton';
 import { useState } from 'react';
 import { CarService } from '../../../../service/CarService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function LazyVirtualScrollDoc(props) {
-    const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
     let loadLazyTimeout = null;
+
+    let cars = null;
+
+    const loadDemoData = () => {
+        cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));
+    };
 
     const loadCarsLazy = (event) => {
         !lazyLoading && setLazyLoading(true);
@@ -206,21 +212,23 @@ export default function LazyVirtualScrollDemo() {
                     In sample below, an in-memory list and timeout is used to mimic fetching from a remote datasource. The <i>virtualCars</i> is an empty array that is populated on scroll.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={virtualCars}
-                    scrollable
-                    scrollHeight="400px"
-                    virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="id" header="Id" style={{ width: '20%' }}></Column>
-                    <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
-                    <Column field="year" header="Year" style={{ width: '20%' }}></Column>
-                    <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
-                    <Column field="color" header="Color" style={{ width: '20%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={virtualCars}
+                        scrollable
+                        scrollHeight="400px"
+                        virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="id" header="Id" style={{ width: '20%' }}></Column>
+                        <Column field="vin" header="Vin" style={{ width: '20%' }}></Column>
+                        <Column field="year" header="Year" style={{ width: '20%' }}></Column>
+                        <Column field="brand" header="Brand" style={{ width: '20%' }}></Column>
+                        <Column field="color" header="Color" style={{ width: '20%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CarService']} />
         </>
     );

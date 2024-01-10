@@ -5,15 +5,16 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Rating } from '@/components/lib/rating/Rating';
 import { Tag } from '@/components/lib/tag/Tag';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function TemplateDoc(props) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -255,16 +256,18 @@ export default function TemplateDemo() {
                     Custom content at <i>header</i>, <i>body</i> and <i>footer</i> sections are supported via templating.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
-                    <Column field="name" header="Name"></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate}></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate}></Column>
-                    <Column header="Status" body={statusBodyTemplate}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
+                        <Column field="name" header="Name"></Column>
+                        <Column header="Image" body={imageBodyTemplate}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate}></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="rating" header="Reviews" body={ratingBodyTemplate}></Column>
+                        <Column header="Status" body={statusBodyTemplate}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

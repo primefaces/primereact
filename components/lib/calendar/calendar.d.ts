@@ -67,9 +67,8 @@ export interface CalendarPassThroughOptions {
     header?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    previousButton?: ButtonPassThroughOptions;
+    previousButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the previous icon's DOM element.
      */
@@ -96,9 +95,8 @@ export interface CalendarPassThroughOptions {
     decadeTitleText?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    nextButton?: ButtonPassThroughOptions;
+    nextButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the next icon's DOM element.
      */
@@ -525,7 +523,7 @@ interface CalendarBaseProps {
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false

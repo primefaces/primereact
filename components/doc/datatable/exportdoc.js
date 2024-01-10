@@ -6,6 +6,7 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ExportDoc(props) {
     const [products, setProducts] = useState([]);
@@ -20,9 +21,9 @@ export function ExportDoc(props) {
 
     const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const exportCSV = (selectionOnly) => {
         dt.current.exportCSV({ selectionOnly });
@@ -305,15 +306,17 @@ export default function ExportDemo() {
                     CSV export is a built-in feature, in this sample PDF & XLS export are also available using third party libraries like <i>jsPDF</i> and <i>xlsx</i>.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <Tooltip target=".export-buttons>button" position="bottom" />
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
-                    {cols.map((col, index) => (
-                        <Column key={index} field={col.field} header={col.header} />
-                    ))}
-                </DataTable>
-            </div>
+                    <DataTable ref={dt} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
+                        {cols.map((col, index) => (
+                            <Column key={index} field={col.field} header={col.header} />
+                        ))}
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

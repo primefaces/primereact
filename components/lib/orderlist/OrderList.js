@@ -321,7 +321,7 @@ export const OrderList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {

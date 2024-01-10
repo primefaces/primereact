@@ -2,15 +2,16 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function PTDoc(props) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -215,52 +216,54 @@ export default function PTDemo() {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={products}
-                    sortMode="multiple"
-                    pt={{
-                        table: { style: { minWidth: '50rem' } }
-                    }}
-                >
-                    <Column
-                        field="code"
-                        header="Code"
-                        sortable
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={products}
+                        sortMode="multiple"
                         pt={{
-                            sortBadge: { className: 'bg-primary' },
-                            headerCell: { style: { width: '25%' } }
+                            table: { style: { minWidth: '50rem' } }
                         }}
-                    ></Column>
-                    <Column
-                        field="name"
-                        header="Name"
-                        sortable
-                        pt={{
-                            sortBadge: { className: 'bg-primary' },
-                            headerCell: { style: { width: '25%' } }
-                        }}
-                    ></Column>
-                    <Column
-                        field="category"
-                        header="Category"
-                        sortable
-                        pt={{
-                            sortBadge: { className: 'bg-primary' },
-                            headerCell: { style: { width: '25%' } }
-                        }}
-                    ></Column>
-                    <Column
-                        field="quantity"
-                        header="Quantity"
-                        sortable
-                        pt={{
-                            sortBadge: { className: 'bg-primary' },
-                            headerCell: { style: { width: '25%' } }
-                        }}
-                    ></Column>
-                </DataTable>
-            </div>
+                    >
+                        <Column
+                            field="code"
+                            header="Code"
+                            sortable
+                            pt={{
+                                sortBadge: { className: 'bg-primary' },
+                                headerCell: { style: { width: '25%' } }
+                            }}
+                        ></Column>
+                        <Column
+                            field="name"
+                            header="Name"
+                            sortable
+                            pt={{
+                                sortBadge: { className: 'bg-primary' },
+                                headerCell: { style: { width: '25%' } }
+                            }}
+                        ></Column>
+                        <Column
+                            field="category"
+                            header="Category"
+                            sortable
+                            pt={{
+                                sortBadge: { className: 'bg-primary' },
+                                headerCell: { style: { width: '25%' } }
+                            }}
+                        ></Column>
+                        <Column
+                            field="quantity"
+                            header="Quantity"
+                            sortable
+                            pt={{
+                                sortBadge: { className: 'bg-primary' },
+                                headerCell: { style: { width: '25%' } }
+                            }}
+                        ></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

@@ -219,7 +219,7 @@ export default function CommandDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    PanelMenu requires a collection of menuitems as its <i>model</i>.
+                    The <i>command</i> property defines the callback to run when an item is activated by click or a key event.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

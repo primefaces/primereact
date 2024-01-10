@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useOnEscapeKey } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
@@ -46,10 +46,15 @@ export const Password = React.memo(
 
         useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
 
-        useOnEscapeKey(overlayRef, props.feedback, (event) => {
-            hide();
-        });
+        const passwordDisplayOrder = useDisplayOrder('password', overlayVisibleState);
 
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState && props.feedback,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.PASSWORD, passwordDisplayOrder]
+        });
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
@@ -401,7 +406,7 @@ export const Password = React.memo(
                 ref: inputRef,
                 id: props.inputId,
                 ...inputProps,
-                className: cx('input'),
+                className: classNames(props.inputClassName, cx('input')),
                 onBlur: onBlur,
                 onFocus: onFocus,
                 onInput: onInput,

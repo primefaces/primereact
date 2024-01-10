@@ -1,7 +1,7 @@
 import PrimeReact from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { mergeProps } from '../utils/MergeProps';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 const baseStyle = `
 .p-hidden-accessible {
@@ -265,7 +265,8 @@ svg.p-icon {
     pointer-events: auto;
 }
 
-svg.p-icon g {
+svg.p-icon g,
+.p-disabled svg.p-icon {
     pointer-events: none;
 }
 
@@ -496,13 +497,13 @@ export const ComponentBase = {
                 obj = obj.pt;
             }
 
+            const originalkey = key;
+            const isNestedParam = /./g.test(originalkey) && !!params[originalkey.split('.')[0]];
+            const fkey = isNestedParam ? ObjectUtils.toFlatCase(originalkey.split('.')[1]) : ObjectUtils.toFlatCase(originalkey);
             const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
-            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
-            const isTransition = key === 'transition' || (/./g.test(key) && !!(key.split('.')[1] === 'transition'));
-
+            const isTransition = fkey === 'transition';
             const datasetPrefix = 'data-pc-';
-            const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
             const getHostInstance = (params) => {
                 return params?.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
@@ -519,11 +520,18 @@ export const ComponentBase = {
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
 
-                return ObjectUtils.isString(value) ? { className: value } : value;
+                if (Array.isArray(value)) return { className: classNames(...value) };
+                if (ObjectUtils.isString(value)) return { className: value };
+
+                if (value?.hasOwnProperty('className') && Array.isArray(value.className)) {
+                    return { className: classNames(...value.className) };
+                }
+
+                return value;
             };
 
-            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, key, params) : _useDefaultPT(getPTClassValue, key, params)) : undefined;
-            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, key, params, componentName);
+            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, originalkey, params) : _useDefaultPT(getPTClassValue, originalkey, params)) : undefined;
+            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, originalkey, params, componentName);
 
             const datasetProps = !isTransition && {
                 ...(fkey === 'root' && { [`${datasetPrefix}name`]: params.props && params.props.__parentMetadata ? ObjectUtils.toFlatCase(params.props.__TYPE) : componentName }),

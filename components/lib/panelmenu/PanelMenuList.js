@@ -193,7 +193,7 @@ export const PanelMenuList = React.memo((props) => {
         const { processedItem, expanded } = event;
 
         if (props.expandedKeys) {
-            props.onToggle && props.onToggle({ originalEvent: event, value: processedItem.item, expanded });
+            props.onToggle && props.onToggle({ item: processedItem.item, expanded });
         } else {
             const _activeItemPath = activeItemPath.filter((p) => p.parentKey !== processedItem.parentKey);
 
@@ -322,14 +322,15 @@ export const PanelMenuList = React.memo((props) => {
     };
 
     const findProcessedItemByItemKey = (key, processed, level = 0) => {
-        const _processedItems = processed || (level === 0 && processedItems);
+        const _processedItems = processed ? processed : level === 0 && props.model;
 
         if (!_processedItems) return null;
 
         for (let i = 0; i < _processedItems.length; i++) {
             const processedItem = _processedItems[i];
+            const processedKey = getItemProp(processedItem, 'key') || processedItem.key;
 
-            if (getItemProp(processedItem, 'key') === key) return processedItem;
+            if (processedKey === key) return processedItem;
 
             const matchedItem = findProcessedItemByItemKey(key, processedItem.items, level + 1);
 
@@ -342,7 +343,7 @@ export const PanelMenuList = React.memo((props) => {
 
         items &&
             items.forEach((item, index) => {
-                const key = (parentKey !== '' ? parentKey + '_' : '') + index;
+                const key = item.key ? item.key : (parentKey !== '' ? parentKey + '_' : '') + index;
                 const newItem = {
                     item,
                     index,

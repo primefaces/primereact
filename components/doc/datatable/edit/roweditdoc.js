@@ -6,16 +6,17 @@ import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { Tag } from '@/components/lib/tag/Tag';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function RowEditDoc(props) {
     const [products, setProducts] = useState(null);
     const [statuses] = useState(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const getSeverity = (value) => {
         switch (value) {
@@ -304,15 +305,17 @@ export default function RowEditingDemo() {
                     the state. The column to control the editing state should have <i>rowEditor</i> property applied.
                 </p>
             </DocSectionText>
-            <div className="card p-fluid">
-                <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card p-fluid">
+                    <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

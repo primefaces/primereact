@@ -3,6 +3,7 @@
 exports[`Message content 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
     data-pc-name="message"
@@ -19,6 +20,7 @@ exports[`Message content 1`] = `
 exports[`Message default 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
     data-pc-name="message"
@@ -68,6 +70,7 @@ exports[`Message default 1`] = `
 exports[`Message icon 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
     data-pc-name="message"
@@ -89,6 +92,7 @@ exports[`Message icon 1`] = `
 exports[`Message severity error 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-error"
     data-pc-name="message"
@@ -140,6 +144,7 @@ exports[`Message severity error 1`] = `
 exports[`Message severity info 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info"
     data-pc-name="message"
@@ -191,6 +196,7 @@ exports[`Message severity info 1`] = `
 exports[`Message severity success 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-success"
     data-pc-name="message"
@@ -225,6 +231,7 @@ exports[`Message severity success 1`] = `
 exports[`Message severity warn 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-warn"
     data-pc-name="message"
@@ -282,6 +289,7 @@ exports[`Message severity warn 1`] = `
 exports[`Message templating 1`] = `
 <div>
   <div
+    aria-atomic="true"
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
     data-pc-name="message"

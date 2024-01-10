@@ -29,7 +29,6 @@ export const InputNumber = React.memo(
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
         const lastValue = React.useRef(null);
-
         const numberFormat = React.useRef(null);
         const groupChar = React.useRef(null);
         const prefixChar = React.useRef(null);
@@ -40,10 +39,11 @@ export const InputNumber = React.memo(
         const _minusSign = React.useRef(null);
         const _currency = React.useRef(null);
         const _decimal = React.useRef(null);
+        const _decimalSeparator = React.useRef(null);
         const _suffix = React.useRef(null);
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
-
+        const isFocusedByClick = React.useRef(false);
         const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
@@ -58,7 +58,8 @@ export const InputNumber = React.memo(
                 currencyDisplay: props.currencyDisplay,
                 useGrouping: props.useGrouping,
                 minimumFractionDigits: props.minFractionDigits,
-                maximumFractionDigits: props.maxFractionDigits
+                maximumFractionDigits: props.maxFractionDigits,
+                roundingMode: props.roundingMode
             };
         };
 
@@ -68,17 +69,25 @@ export const InputNumber = React.memo(
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
-            _group.current = getGroupingExpression();
-            _minusSign.current = getMinusSignExpression();
-            _currency.current = getCurrencyExpression();
-            _decimal.current = getDecimalExpression();
-            _suffix.current = getSuffixExpression();
-            _prefix.current = getPrefixExpression();
+            _group.current = getGroupingExpression(); // regular expression /[,]/g, /[.]/g
+            _minusSign.current = getMinusSignExpression(); // regular expression /[-]/g
+            _currency.current = getCurrencyExpression(); // regular expression for currency (e.g. /[$]/g, /[€]/g, /[]/g and more)
+            _decimal.current = getDecimalExpression(); // regular expression /[,]/g, /[.]/g, /[]/g
+            _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
+            _suffix.current = getSuffixExpression(); // regular expression for suffix (e.g. /℃/g)
+            _prefix.current = getPrefixExpression(); // regular expression for prefix (e.g. /\ days/g)
             _index.current = (d) => index.get(d);
         };
 
         const escapeRegExp = (text) => {
             return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        };
+
+        /**
+         * get decimal separator in current locale
+         */
+        const getDecimalSeparator = () => {
+            return new Intl.NumberFormat(_locale, { useGrouping: false }).format(1.1).trim().replace(_numeral.current, '');
         };
 
         const getDecimalExpression = () => {
@@ -108,7 +117,8 @@ export const InputNumber = React.memo(
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
@@ -138,7 +148,8 @@ export const InputNumber = React.memo(
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 suffixChar.current = formatter.format(1).split('1')[1];
@@ -531,8 +542,16 @@ export const InputNumber = React.memo(
             return false;
         };
 
+        const replaceDecimalSeparator = (val) => {
+            if (isFloat(val)) {
+                return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
+            }
+
+            return val;
+        };
+
         const isDecimalSign = (char) => {
-            if (_decimal.current.test(char)) {
+            if (_decimal.current.test(char) || isFloat(char)) {
                 _decimal.current.lastIndex = 0;
 
                 return true;
@@ -543,6 +562,15 @@ export const InputNumber = React.memo(
 
         const isDecimalMode = () => {
             return props.mode === 'decimal';
+        };
+
+        const isFloat = (val) => {
+            let formatter = new Intl.NumberFormat(_locale, getOptions());
+            let parseVal = parseValue(formatter.format(val));
+
+            if (parseVal === null) return false;
+
+            return parseVal % 1 !== 0;
         };
 
         const getDecimalCharIndexes = (val) => {
@@ -634,6 +662,10 @@ export const InputNumber = React.memo(
             }
         };
 
+        const replaceSuffix = (value) => {
+            return value ? value.replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '') : value;
+        };
+
         const insertText = (value, text, start, end) => {
             let textSplit = text === '.' ? text : text.split('.');
 
@@ -642,7 +674,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + value.slice(end) : value || formatValue(text);
+                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + replaceSuffix(value).slice(end) : value || formatValue(text);
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
@@ -652,7 +684,11 @@ export const InputNumber = React.memo(
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
-                return value.slice(0, start) + text + value.slice(end);
+                const selectionValue = value.slice(start, end);
+                // Fix: if the suffix starts with a space, the input will be cleared after pasting
+                const space = /\s$/.test(selectionValue) ? ' ' : '';
+
+                return value.slice(0, start) + text + space + value.slice(end);
             }
         };
 
@@ -721,6 +757,10 @@ export const InputNumber = React.memo(
             }
 
             return index || 0;
+        };
+
+        const onInputPointerDown = () => {
+            isFocusedByClick.current = true;
         };
 
         const onInputClick = () => {
@@ -914,7 +954,9 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                const newVal1 = replaceDecimalSeparator(val1).split(_decimal.current)[0].replace(_suffix.current, '').trim();
+
+                return decimalCharIndex !== -1 ? newVal1 + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -925,7 +967,7 @@ export const InputNumber = React.memo(
                 const valueSplit = value.split(_decimal.current);
 
                 if (valueSplit.length === 2) {
-                    return valueSplit[1].replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '').length;
+                    return replaceSuffix(valueSplit[1]).length;
                 }
             }
 
@@ -956,16 +998,21 @@ export const InputNumber = React.memo(
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
 
-            if ((props.suffix || props.currency || props.prefix) && inputRef.current) {
-                // GitHub #1866 Cursor must be placed before/after symbol or arrow keys don't work
-                const selectionEnd = initCursor();
+            if ((props.suffix || props.currency || props.prefix) && inputRef.current && !isFocusedByClick.current) {
+                // GitHub #1866,#5537
+                let inputValue = inputRef.current.value;
+                let prefixLength = (prefixChar.current || '').length;
+                let suffixLength = (suffixChar.current || '').length;
+                let end = inputValue.length === 0 ? 0 : inputValue.length - suffixLength;
 
-                inputRef.current.setSelectionRange(selectionEnd, selectionEnd);
+                inputRef.current.setSelectionRange(prefixLength, end);
             }
         };
 
         const onInputBlur = (event) => {
             setFocusedState(false);
+
+            isFocusedByClick.current = false;
 
             if (inputRef.current) {
                 let currentValue = inputRef.current.value;
@@ -988,7 +1035,9 @@ export const InputNumber = React.memo(
         };
 
         const changeValue = () => {
-            updateInputValue(validateValueByLimit(props.value));
+            const val = validateValueByLimit(props.value);
+
+            updateInputValue(props.format ? val : replaceDecimalSeparator(val));
 
             const newValue = validateValue(props.value);
 
@@ -1067,6 +1116,7 @@ export const InputNumber = React.memo(
                     onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
+                    onPointerDown={onInputPointerDown}
                     onBlur={onInputBlur}
                     onFocus={onInputFocus}
                     onPaste={onPaste}

@@ -1082,8 +1082,9 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     editingRows?: DataTableValueArray | DataTableEditingRows | undefined;
     /**
      * Text to display when there is no data.
+     * @defaultValue No results found
      */
-    emptyMessage?: React.ReactNode | ((frozen: boolean) => React.ReactNode);
+    emptyMessage?: string | React.ReactNode | ((frozen: boolean) => React.ReactNode) | undefined;
     /**
      * Makes row groups toggleable, default is false.
      * @defaultValue false
@@ -1221,7 +1222,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    paginatorDropdownAppendTo?: 'self' | HTMLElement | null | undefined;
+    paginatorDropdownAppendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Content for the left side of the paginator.
      */
@@ -1537,7 +1538,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     onRowEditCancel?(event: DataTableRowEditEvent): void;
     /**
-     * Callback to invoke when the cancel icon is clicked on row editing mode.
+     * Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows.
      * @param {DataTableRowEditEvent} event - Custom row edit event.
      */
     onRowEditChange?(event: DataTableRowEditEvent): void;

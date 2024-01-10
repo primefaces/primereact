@@ -344,7 +344,7 @@ export const GalleriaThumbnails = React.memo(
 
         const createStyle = () => {
             if (!thumbnailsStyle.current) {
-                thumbnailsStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+                thumbnailsStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
             }
 
             let innerHTML = `

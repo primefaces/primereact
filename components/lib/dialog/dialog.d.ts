@@ -190,7 +190,7 @@ export interface DialogProps {
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Defines a string that labels the close icon.
      */
@@ -431,7 +431,7 @@ export interface DialogProps {
      * @param {ContentProps} props - The values of dialog.
      * @return {React.ReactNode}
      */
-    content?(props: ContentProps): React.ReactNode;
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

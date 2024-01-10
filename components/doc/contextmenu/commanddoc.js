@@ -296,7 +296,7 @@ export default function CommandDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    ContextMenu requires a collection of menuitems as its <i>model</i> and the <i>show</i> method needs to be called explicity using the <i>onContextMenu</i> event of the target to display the menu.
+                    The <i>command</i> property defines the callback to run when an item is activated by click or a key event.{' '}
                 </p>
             </DocSectionText>
             <div className="card flex md:justify-content-center">

@@ -2,15 +2,16 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function GridLinesDoc(props) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -108,14 +109,16 @@ export default function GridLinesDemo() {
                     Enabling <i>showGridlines</i> displays borders between cells.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} showGridlines tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} showGridlines tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

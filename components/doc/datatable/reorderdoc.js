@@ -4,6 +4,7 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ReorderDoc(props) {
     const [products, setProducts] = useState([]);
@@ -14,9 +15,9 @@ export function ReorderDoc(props) {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const dynamicColumns = columns.map((col, i) => {
         return <Column key={col.field} columnKey={col.field} field={col.field} header={col.header} />;
@@ -141,12 +142,14 @@ export default function ReorderDemo() {
                     reorder completes.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
-                    <Column rowReorder style={{ width: '3rem' }} />
-                    {dynamicColumns}
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
+                        <Column rowReorder style={{ width: '3rem' }} />
+                        {dynamicColumns}
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

@@ -197,8 +197,7 @@ export default function HeadlessDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    A ConfirmPopup component needs to be present on the page that is interacted with the <i>confirmPopup</i> function that takes a configuration object for customization. In order to align the popover, <i>target</i> property must be
-                    provided referring to the source element.
+                    Headless mode is enabled by defining a <i>content</i> prop that lets you implement entire confirmation UI instead of the default elements.
                 </p>
             </DocSectionText>
             <Toast ref={toast} />

@@ -216,6 +216,11 @@ export interface AutoCompleteContext {
      * @defaultValue false
      */
     selected: boolean;
+    /**
+     * Current disabled state of the item as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**
@@ -231,7 +236,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false

@@ -55,7 +55,7 @@
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode",
+                            "type": "ReactNode | Function",
                             "default": "",
                             "description": "Used to define the header of the tab."
                         },
@@ -342,6 +342,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "AccordionPassThroughMethodOptions"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "AccordionContext"
                         }
                     ],
                     "callbacks": []
@@ -412,6 +418,55 @@
                             "readonly": false,
                             "type": "AccordionPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "AccordionContext": {
+                    "description": "Defines current inline context in Accordion component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Opened tab index."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total number of tabs"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the first tab?"
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the last tab?"
+                        },
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently selected."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently disabled."
                         }
                     ],
                     "callbacks": []
@@ -690,6 +745,13 @@
                             "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
                         },
                         {
+                            "name": "styleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StyleContainerType",
+                            "description": "This option allows  `useStyle`  to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
@@ -786,6 +848,13 @@
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<AppendToType>>",
                             "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setStyleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<StyleContainerType>>",
+                            "description": "Sets the \"styleContainer\" state of the context."
                         },
                         {
                             "name": "setAutoZIndex",
@@ -897,7 +966,8 @@
                             "returnType": "void",
                             "description": "This method is used to change the theme dynamically."
                         }
-                    ]
+                    ],
+                    "extendedBy": "CascadeSelectContext"
                 },
                 "PrimeReactPTOptions": {
                     "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag globally for all components.",
@@ -3316,7 +3386,10 @@
                     "values": "\"outlined\" | \"filled\""
                 },
                 "AppendToType": {
-                    "values": "\"self\" | HTMLElement | undefined | null"
+                    "values": "\"self\" | HTMLElement | undefined | null | Function"
+                },
+                "StyleContainerType": {
+                    "values": "ShadowRoot | HTMLElement | undefined | null"
                 }
             }
         }
@@ -3402,7 +3475,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -4354,6 +4427,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current selection state of the item as a boolean."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the item as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -5631,7 +5711,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -6762,7 +6842,7 @@
                             "name": "previousButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -6811,7 +6891,7 @@
                             "name": "nextButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -7280,7 +7360,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
@@ -8741,7 +8821,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -9092,6 +9172,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "CascadeSelectState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CascadeSelectContext"
                         }
                     ],
                     "callbacks": []
@@ -9102,27 +9188,284 @@
                     "props": [
                         {
                             "name": "focused",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current focused state as a boolean."
                         },
                         {
                             "name": "overlayVisible",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current overlay visible state as a boolean."
                         },
                         {
                             "name": "attributeSelector",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "string",
                             "description": "Current overlay attributeSelector state as a string."
+                        },
+                        {
+                            "name": "selected",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "For items, this is the state of the item."
+                        },
+                        {
+                            "name": "grouped",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "For items, this is whether it is a group item or not."
                         }
                     ],
                     "callbacks": []
+                },
+                "CascadeSelectContext": {
+                    "description": "Defines current inline context in CascadeSelect component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "appendTo",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AppendToType",
+                            "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
+                        },
+                        {
+                            "name": "styleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StyleContainerType",
+                            "description": "This option allows  `useStyle`  to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM."
+                        },
+                        {
+                            "name": "autoZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                        },
+                        {
+                            "name": "cssTransition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "PrimeReact components utilize \"react-transition-group\" internally to implement animations. Setting \"cssTransition\" to \"false\" disables all animations."
+                        },
+                        {
+                            "name": "filterMatchModeOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FilterMatchModeOptions",
+                            "description": "Default filter modes to display on DataTable filter menus."
+                        },
+                        {
+                            "name": "hideOverlaysOnDocumentScrolling",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Define behavior if the browser window is scrolled while displaying an overlay panel like a Dropdown or Calendar. Depending on your organization's accessibility needs some prefer panels to be closed on scrolling and some prefer the overlay follow the scroll."
+                        },
+                        {
+                            "name": "inputStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputStyleType",
+                            "description": "Input fields have two styles: default (outlined with borders) and filled (background-colored). Applying 'p-input-filled' to an input's ancestor enables the filled style."
+                        },
+                        {
+                            "name": "locale",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The locale configuration sets up the language and region specific preferences."
+                        },
+                        {
+                            "name": "nonce",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The nonce value to use on dynamically generated style elements."
+                        },
+                        {
+                            "name": "nullSortOrder",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Determines how null values are sorted."
+                        },
+                        {
+                            "name": "ripple",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Ripple is an optional animation for the supported components such as buttons."
+                        },
+                        {
+                            "name": "zIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ZIndexOptions",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PrimeReactPTOptions",
+                            "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When enabled, it removes all of components styles in the core."
+                        },
+                        {
+                            "name": "setAppendTo",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<AppendToType>>",
+                            "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setStyleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<StyleContainerType>>",
+                            "description": "Sets the \"styleContainer\" state of the context."
+                        },
+                        {
+                            "name": "setAutoZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"autoZIndex\" state of the context."
+                        },
+                        {
+                            "name": "setCssTransition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"cssTransition\" state of the context."
+                        },
+                        {
+                            "name": "setFilterMatchModeOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<FilterMatchModeOptions>>",
+                            "description": "Sets the \"filterMatchModeOptions\" state of the context."
+                        },
+                        {
+                            "name": "setHideOverlaysOnDocumentScrolling",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"hideOverlaysOnDocumentScrolling\" state of the context."
+                        },
+                        {
+                            "name": "setInputStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<InputStyleType>>",
+                            "description": "Sets the \"inputStyle\" state of the context."
+                        },
+                        {
+                            "name": "setLocale",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<string>>",
+                            "description": "Sets the \"locale\" state of the context."
+                        },
+                        {
+                            "name": "setNonce",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<string>>",
+                            "description": "Sets the \"nonce\" state of the context."
+                        },
+                        {
+                            "name": "setNullSortOrder",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<number>>",
+                            "description": "Sets the \"nullSortOrder\" state of the context."
+                        },
+                        {
+                            "name": "setRipple",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"ripple\" state of the context."
+                        },
+                        {
+                            "name": "setZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<ZIndexOptions>>",
+                            "description": "Sets the \"zIndex\" state of the context."
+                        },
+                        {
+                            "name": "setPt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<PrimeReactPTOptions>>",
+                            "description": "Sets the \"pt\" state of the context."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Label of the currently selected item"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "changeTheme",
+                            "parameters": [
+                                {
+                                    "name": "theme",
+                                    "optional": true,
+                                    "type": "string",
+                                    "description": "The name of the theme to be applied."
+                                },
+                                {
+                                    "name": "newTheme",
+                                    "optional": true,
+                                    "type": "string",
+                                    "description": "The name of the new theme to be applied."
+                                },
+                                {
+                                    "name": "linkElementId",
+                                    "optional": true,
+                                    "type": "string",
+                                    "description": "The id of the link element to be updated."
+                                },
+                                {
+                                    "name": "callback",
+                                    "optional": true,
+                                    "type": "Function",
+                                    "description": "Callback to invoke when the theme change is completed."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "This method is used to change the theme dynamically."
+                        }
+                    ],
+                    "extendedTypes": "APIOptions"
                 },
                 "CascadeSelectPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
@@ -9190,6 +9533,13 @@
                             "readonly": false,
                             "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "sublist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the sub-list's DOM element."
                         },
                         {
                             "name": "content",
@@ -10068,12 +10418,37 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
-                                    "description": "Browser event."
+                                    "type": "ChipRemoveEvent",
+                                    "description": "Custom remove event"
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when a chip is removed."
+                            "description": "Callback to invoke when a chip is removed.\n*"
+                        }
+                    ]
+                }
+            }
+        },
+        "events": {
+            "description": "Defines the custom events used by the component's callbacks.",
+            "values": {
+                "ChipRemoveEvent": {
+                    "description": "Custom remove event",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Removed item value"
                         }
                     ]
                 }
@@ -10728,7 +11103,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -13604,7 +13979,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -13681,6 +14056,14 @@
                             "description": "Specifies if pressing escape key should hide the dialog."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "contentClassName",
                             "optional": true,
                             "readonly": false,
@@ -13695,6 +14078,14 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Style of the content section."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "accept",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "dismissableMask",
@@ -13988,19 +14379,6 @@
                             "description": "Callback to execute when action is confirmed."
                         },
                         {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of dialog."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
-                        },
-                        {
                             "name": "onClick",
                             "parameters": [
                                 {
@@ -14163,7 +14541,7 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
-                "ConfirmDialogThroughMethodOptions": {
+                "ConfirmDialogPassThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
                     "props": [
@@ -14276,6 +14654,13 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -14332,6 +14717,13 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Label of the reject button."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "element",
@@ -14394,7 +14786,10 @@
             "description": "Defines the custom types used by the module.",
             "values": {
                 "ConfirmDialogPassThroughType": {
-                    "values": "PassThroughType<T, ConfirmDialogThroughMethodOptions>"
+                    "values": "PassThroughType<T, ConfirmDialogPassThroughMethodOptions>"
+                },
+                "ConfirmDialogPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -14452,7 +14847,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -14479,6 +14874,22 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Specifies if pressing escape key should hide the popup."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "accept",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "dismissable",
@@ -14610,19 +15021,6 @@
                             "parameters": [],
                             "returnType": "void",
                             "description": "Callback to execute when action is confirmed."
-                        },
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of dialog."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
                         },
                         {
                             "name": "onHide",
@@ -14820,6 +15218,13 @@
                             "description": "Label of the reject button."
                         },
                         {
+                            "name": "defaultFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
+                        },
+                        {
                             "name": "element",
                             "optional": false,
                             "readonly": false,
@@ -14863,26 +15268,30 @@
                             "name": "acceptBtnRef",
                             "optional": false,
                             "readonly": false,
-                            "type": "RefObject<HTMLButtonElement>"
+                            "type": "RefObject<HTMLButtonElement>",
+                            "description": "Reference for the accept button. Used to focus the element and execute the action."
                         },
                         {
                             "name": "rejectBtnRef",
                             "optional": false,
                             "readonly": false,
-                            "type": "RefObject<HTMLButtonElement>"
+                            "type": "RefObject<HTMLButtonElement>",
+                            "description": "Reference for the reject button. Used to focus the element and execute the action."
                         },
                         {
                             "name": "message",
                             "optional": false,
                             "readonly": false,
-                            "type": "ReactNode"
+                            "type": "ReactNode",
+                            "description": "Message value of confirm popup."
                         }
                     ],
                     "callbacks": [
                         {
                             "name": "hide",
                             "parameters": [],
-                            "returnType": "void"
+                            "returnType": "void",
+                            "description": "Hide action of confirm popup."
                         }
                     ]
                 },
@@ -14966,7 +15375,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -15820,7 +16229,7 @@
                             "name": "columnResizeMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"fit\" | \"expand\"",
+                            "type": "\"expand\" | \"fit\"",
                             "default": "fit",
                             "description": "Used to define the resize mode of the columns, valid values are \"fit\" and \"expand\"."
                         },
@@ -15901,7 +16310,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "",
+                            "default": "No results found",
                             "description": "Text to display when there is no data."
                         },
                         {
@@ -16156,7 +16565,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -16862,7 +17271,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when the cancel icon is clicked on row editing mode."
+                            "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows."
                         },
                         {
                             "name": "onRowEditComplete",
@@ -18749,7 +19158,7 @@
                             "name": "columnResizeMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"fit\" | \"expand\"",
+                            "type": "\"expand\" | \"fit\"",
                             "description": "Used to define the resize mode of the columns, valid values are \"fit\" and \"expand\"."
                         },
                         {
@@ -19036,7 +19445,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
                         {
@@ -19805,7 +20214,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when the cancel icon is clicked on row editing mode."
+                            "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows."
                         },
                         {
                             "name": "onRowEditComplete",
@@ -20285,7 +20694,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -20945,7 +21354,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -21020,6 +21429,14 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Specifies if pressing escape key should hide the dialog."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
                         },
                         {
                             "name": "contentClassName",
@@ -21274,19 +21691,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of dialog."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
-                        },
                         {
                             "name": "onClick",
                             "parameters": [
@@ -22213,7 +22617,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
@@ -25967,22 +26371,33 @@
                     "returnType": "boolean",
                     "description": "Custom hook to detect if window size matches or not."
                 },
-                "useOnEscapeKey": {
-                    "name": "useOnEscapeKey",
+                "useGlobalOnEscapeKey": {
+                    "name": "useGlobalOnEscapeKey",
                     "parameters": [
                         {
-                            "name": "ref",
-                            "type": "RefObject<Element>",
-                            "description": "The ref of the element to detect escape button click."
-                        },
-                        {
-                            "name": "callback",
-                            "type": "any",
-                            "description": "The callback to run when escape button clicked."
+                            "name": "props",
+                            "type": "Object"
                         }
                     ],
                     "returnType": "void",
-                    "description": "Custom hook to use detect escape button click."
+                    "description": "Custom hook to use detect global escape button click."
+                },
+                "useDisplayOrder": {
+                    "name": "useDisplayOrder",
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "string",
+                            "description": ""
+                        },
+                        {
+                            "name": "isVisible",
+                            "type": "boolean",
+                            "description": ""
+                        }
+                    ],
+                    "returnType": "number | undefined",
+                    "description": "Custom hook to use display order of component of one and the same group"
                 }
             }
         },
@@ -29630,6 +30045,14 @@
                             "description": "When present, it specifies that the element must be filled out before submitting the form."
                         },
                         {
+                            "name": "roundingMode",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RoundingMode",
+                            "default": "halfExpand",
+                            "description": "How decimals should be rounded. [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode)."
+                        },
+                        {
                             "name": "showButtons",
                             "optional": true,
                             "readonly": false,
@@ -29956,6 +30379,9 @@
         "types": {
             "description": "Defines the custom types used by the module.",
             "values": {
+                "RoundingMode": {
+                    "values": "\"ceil\" | \"floor\" | \"expand\" | \"trunc\" | \"halfCeil\" | \"halfFloor\" | \"halfExpand\" | \"halfTrunc\" | \"halfEven\""
+                },
                 "InputNumberPassThroughType": {
                     "values": "PassThroughType<T, InputNumberPassThroughMethodOptions>"
                 }
@@ -31532,6 +31958,13 @@
                             "description": "Current selection state of the item as a boolean."
                         },
                         {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state of the item as a boolean."
+                        },
+                        {
                             "name": "disabled",
                             "optional": false,
                             "readonly": false,
@@ -32680,7 +33113,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -34047,7 +34480,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -34916,6 +35349,13 @@
                             "readonly": false,
                             "type": "CheckboxPassThroughOptions",
                             "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's container DOM element."
                         },
                         {
                             "name": "headerCheckboxIcon",
@@ -36698,7 +37138,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -37063,7 +37503,7 @@
                             "name": "dropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -37814,9 +38254,9 @@
                         },
                         {
                             "name": "appendTo",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
-                            "type": "undefined | null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
@@ -39067,7 +39507,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -42352,7 +42792,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and self. The self value is used to render a component where it is located."
                         },
@@ -42403,6 +42843,14 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Specifies if pressing escape key should hide the sidebar."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the sidebar. For more complex markup, use the \"content\" slot instead."
                         },
                         {
                             "name": "dismissable",
@@ -42578,10 +43026,10 @@
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
-                            "name": "closeButton",
+                            "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the close button's DOM element."
                         },
                         {
@@ -42642,6 +43090,34 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "closeIconRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement | HTMLButtonElement>",
+                            "description": "Allows you to specify the close button of the sidebar."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Used to get the event of the element."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback for hiding the sidebar."
+                        }
+                    ]
                 }
             }
         },
@@ -42895,7 +43371,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -43995,7 +44471,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -45840,6 +46316,61 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TabViewPassThroughMethodOptions"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabViewContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabViewContext": {
+                    "description": "Defines current inline context in Tabview component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Opened tab index."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total number of tabs"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the first tab?"
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the last tab?"
+                        },
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently selected."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently disabled."
                         }
                     ],
                     "callbacks": []
@@ -46534,7 +47065,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -47126,7 +47657,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "self",
                             "description": "DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -47145,6 +47676,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead."
                         },
                         {
                             "name": "position",
@@ -47183,19 +47722,6 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
-                        {
-                            "name": "content",
-                            "parameters": [
-                                {
-                                    "name": "props",
-                                    "optional": false,
-                                    "type": "ContentProps",
-                                    "description": "The values of toast."
-                                }
-                            ],
-                            "returnType": "ReactNode",
-                            "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead."
-                        },
                         {
                             "name": "onClick",
                             "parameters": [
@@ -48167,7 +48693,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -48450,6 +48976,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TooltipState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TooltipContext"
                         }
                     ],
                     "callbacks": []
@@ -48485,6 +49017,41 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TooltipContext": {
+                    "description": "Defines current inline context in Tooltip component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "right",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "left",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "top",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "bottom",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -48540,7 +49107,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -50291,7 +50858,7 @@
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },
@@ -50598,6 +51165,22 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Template of toggler element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Content of the tooltip."
+                        },
+                        {
+                            "name": "tooltipOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipOptions",
+                            "default": "",
+                            "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
                         },
                         {
                             "name": "transitionOptions",
@@ -51017,6 +51600,13 @@
                             "readonly": false,
                             "type": "TreeSelectPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes to the Tooltip component."
                         }
                     ],
                     "callbacks": []
@@ -51360,7 +51950,7 @@
                             "name": "columnResizeMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"fit\" | \"expand\"",
+                            "type": "\"expand\" | \"fit\"",
                             "default": "fit",
                             "description": "Defines whether the overall table width should change on column resize, valid values are \"fit\" and \"expand\"."
                         },
@@ -51392,8 +51982,8 @@
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "No records found",
+                            "type": "ReactNode | Function",
+                            "default": "No results found",
                             "description": "Text to display when there is no data."
                         },
                         {
@@ -51592,7 +52182,7 @@
                             "name": "paginatorDropdownAppendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | HTMLElement | \"self\"",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
                         },

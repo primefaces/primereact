@@ -123,6 +123,11 @@ interface ConfirmPopupOptions {
      */
     rejectLabel: string;
     /**
+     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * @defaultValue accept
+     */
+    defaultFocus: string;
+    /**
      * Default element created by the component.
      */
     element: React.ReactNode;
@@ -142,9 +147,21 @@ interface ConfirmPopupOptions {
  * @see {@link ConfirmPopupProps.content}
  */
 interface ContentProps {
+    /**
+     * Reference for the accept button. Used to focus the element and execute the action.
+     */
     acceptBtnRef: React.RefObject<HTMLButtonElement>;
+    /**
+     * Reference for the reject button. Used to focus the element and execute the action.
+     */
     rejectBtnRef: React.RefObject<HTMLButtonElement>;
+    /**
+     * Message value of confirm popup.
+     */
     message: React.ReactNode | string;
+    /**
+     * Hide action of confirm popup.
+     */
     hide(): void;
 }
 
@@ -166,6 +183,11 @@ export interface ConfirmPopupProps {
      * @defaultValue false
      */
     visible?: boolean | undefined;
+    /**
+     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * @defaultValue accept
+     */
+    defaultFocus?: string | undefined;
     /**
      * Message of the confirmation.
      */
@@ -212,7 +234,7 @@ export interface ConfirmPopupProps {
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Enables to hide the popup when outside is clicked.
      * @defaultValue true
@@ -272,7 +294,7 @@ export interface ConfirmPopupProps {
      * @param {ContentProps} props - The values of dialog.
      * @return {React.ReactNode}
      */
-    content?(props: ContentProps): React.ReactNode;
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

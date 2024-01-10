@@ -2,14 +2,13 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -34,9 +33,14 @@ export const SlideMenu = React.memo(
         const targetRef = React.useRef(null);
         const backward = React.useRef(null);
         const slideMenuContent = React.useRef(null);
+        const slideMenuDisplayOrder = useDisplayOrder('slide-menu', visibleState);
 
-        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
-            hide(event);
+        useGlobalOnEscapeKey({
+            callback: (event) => {
+                hide(event);
+            },
+            when: visibleState && props.popup && props.closeOnEscape,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.SLIDE_MENU, slideMenuDisplayOrder]
         });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({

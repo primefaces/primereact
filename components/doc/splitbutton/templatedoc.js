@@ -42,7 +42,7 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label="Prime React" icon="pi pi-prime" model={items} />
+<SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -87,7 +87,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Prime React" icon="pi pi-prime" model={items} />
+            <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
         </div>
     )
 }
@@ -136,7 +136,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label="Prime React" icon="pi pi-prime" model={items} />
+            <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
         </div>
     )
 }
@@ -147,12 +147,12 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    SplitButton has a default action button and a collection of additional options defined by the <i>model</i> property based on MenuModel API.
+                    SplitButton has a <i>label</i> and <i>icon</i> properties that allows to define the main button.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <SplitButton label="Prime React" icon="pi pi-prime" model={items} />
+                <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
             </div>
             <DocSectionCode code={code} />
         </>

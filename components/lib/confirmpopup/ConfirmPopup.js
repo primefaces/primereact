@@ -3,12 +3,11 @@ import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -57,9 +56,16 @@ export const ConfirmPopup = React.memo(
 
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
+        const displayOrder = useDisplayOrder('dialog', visibleState);
 
-        useOnEscapeKey(overlayRef, props.dismissable && props.closeOnEscape, (event) => {
-            hide('hide');
+        useGlobalOnEscapeKey({
+            callback: () => {
+                if (props.dismissable && props.closeOnEscape) {
+                    hide('hide');
+                }
+            },
+            when: visibleState,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
         });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
@@ -143,8 +149,14 @@ export const ConfirmPopup = React.memo(
         const onEntered = () => {
             bindOverlayListener();
 
-            if (acceptBtnRef.current) {
-                acceptBtnRef.current.focus();
+            const defaultFocus = getPropValue('defaultFocus');
+
+            if (defaultFocus === undefined || defaultFocus === 'accept') {
+                acceptBtnRef.current && acceptBtnRef.current.focus();
+            }
+
+            if (defaultFocus === 'reject') {
+                rejectBtnRef.current && rejectBtnRef.current.focus();
             }
 
             callbackFromProp('onShow');

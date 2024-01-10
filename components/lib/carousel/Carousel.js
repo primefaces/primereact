@@ -350,7 +350,7 @@ export const Carousel = React.memo(
 
         const createStyle = () => {
             if (!carouselStyle.current) {
-                carouselStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+                carouselStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
             }
 
             let innerHTML = `

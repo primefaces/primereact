@@ -5,6 +5,7 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function SizeDoc(props) {
     const [products, setProducts] = useState([]);
@@ -15,9 +16,9 @@ export function SizeDoc(props) {
     ]);
     const [size, setSize] = useState(sizeOptions[1].value);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -139,17 +140,19 @@ export default function SizeDemo() {
             <DocSectionText {...props}>
                 <p>In addition to a regular table, alternatives with alternative sizes are available.</p>
             </DocSectionText>
-            <div className="card">
-                <div className="flex justify-content-center mb-4">
-                    <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <div className="flex justify-content-center mb-4">
+                        <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
+                    </div>
+                    <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
                 </div>
-                <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

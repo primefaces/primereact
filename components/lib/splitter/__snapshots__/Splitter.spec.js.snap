@@ -25,8 +25,11 @@ exports[`Splitter Nested 1`] = `
       style="width: 4px;"
     >
       <div
+        aria-orientation="horizontal"
+        aria-valuenow="20"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        tabindex="0"
       />
     </div>
     <div
@@ -58,8 +61,11 @@ exports[`Splitter Nested 1`] = `
           style="height: 4px;"
         >
           <div
+            aria-orientation="vertical"
+            aria-valuenow="15"
             class="p-splitter-gutter-handle"
             data-pc-section="gutterhandler"
+            tabindex="0"
           />
         </div>
         <div
@@ -91,8 +97,11 @@ exports[`Splitter Nested 1`] = `
               style="width: 4px;"
             >
               <div
+                aria-orientation="horizontal"
+                aria-valuenow="20"
                 class="p-splitter-gutter-handle"
                 data-pc-section="gutterhandler"
+                tabindex="0"
               />
             </div>
             <div
@@ -137,8 +146,11 @@ exports[`Splitter Single Panel with size 1`] = `
       style="height: 4px;"
     >
       <div
+        aria-orientation="vertical"
+        aria-valuenow="5"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        tabindex="0"
       />
     </div>
   </div>
@@ -170,8 +182,11 @@ exports[`Splitter Single Panel without size 1`] = `
       style="height: 4px;"
     >
       <div
+        aria-orientation="vertical"
+        aria-valuenow="100"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        tabindex="0"
       />
     </div>
   </div>
@@ -203,8 +218,11 @@ exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = 
       style="width: 4px;"
     >
       <div
+        aria-orientation="horizontal"
+        aria-valuenow="50"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        tabindex="0"
       />
     </div>
     <div
@@ -245,8 +263,11 @@ exports[`Splitter Vertical layout 1`] = `
       style="height: 4px;"
     >
       <div
+        aria-orientation="vertical"
+        aria-valuenow="50"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        tabindex="0"
       />
     </div>
     <div

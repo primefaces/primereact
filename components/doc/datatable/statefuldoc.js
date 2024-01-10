@@ -7,8 +7,9 @@ import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
 import { Tag } from '@/components/lib/tag/Tag';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function StatefulDoc(props) {
     const [customers, setCustomers] = useState(null);
@@ -54,9 +55,9 @@ export function StatefulDoc(props) {
         }
     };
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersSmall().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const countryBodyTemplate = (rowData) => {
         return (
@@ -470,40 +471,42 @@ export default function BasicDemo() {
                     the browser is closed. Other alternative is <i>local</i> referring to <i>localStorage</i> for an extended lifetime.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={customers}
-                    paginator
-                    rows={5}
-                    header={header}
-                    filters={filters}
-                    onFilter={(e) => setFilters(e.filters)}
-                    selection={selectedCustomer}
-                    onSelectionChange={(e) => setSelectedCustomer(e.value)}
-                    selectionMode="single"
-                    dataKey="id"
-                    stateStorage="session"
-                    stateKey="dt-state-demo-local"
-                    emptyMessage="No customers found."
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="name" header="Name" sortable filter filterPlaceholder="Search" style={{ width: '25%' }}></Column>
-                    <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search" style={{ width: '25%' }}></Column>
-                    <Column
-                        header="Agent"
-                        body={representativeBodyTemplate}
-                        sortable
-                        sortField="representative.name"
-                        filter
-                        filterField="representative"
-                        showFilterMatchModes={false}
-                        filterElement={representativeFilterTemplate}
-                        filterMenuStyle={{ width: '14rem' }}
-                        style={{ width: '25%' }}
-                    ></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }} style={{ width: '25%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={customers}
+                        paginator
+                        rows={5}
+                        header={header}
+                        filters={filters}
+                        onFilter={(e) => setFilters(e.filters)}
+                        selection={selectedCustomer}
+                        onSelectionChange={(e) => setSelectedCustomer(e.value)}
+                        selectionMode="single"
+                        dataKey="id"
+                        stateStorage="session"
+                        stateKey="dt-state-demo-local"
+                        emptyMessage="No customers found."
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search" style={{ width: '25%' }}></Column>
+                        <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search" style={{ width: '25%' }}></Column>
+                        <Column
+                            header="Agent"
+                            body={representativeBodyTemplate}
+                            sortable
+                            sortField="representative.name"
+                            filter
+                            filterField="representative"
+                            showFilterMatchModes={false}
+                            filterElement={representativeFilterTemplate}
+                            filterMenuStyle={{ width: '14rem' }}
+                            style={{ width: '25%' }}
+                        ></Column>
+                        <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }} style={{ width: '25%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

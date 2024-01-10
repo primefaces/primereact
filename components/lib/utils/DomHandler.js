@@ -1067,11 +1067,16 @@ export default class DomHandler {
         return false;
     }
 
-    static createInlineStyle(nonce) {
+    static createInlineStyle(nonce, styleContainer) {
         let styleElement = document.createElement('style');
 
         DomHandler.addNonce(styleElement, nonce);
-        document.head.appendChild(styleElement);
+
+        if (!styleContainer) {
+            styleContainer = document.head;
+        }
+
+        styleContainer.appendChild(styleElement);
 
         return styleElement;
     }
@@ -1079,7 +1084,7 @@ export default class DomHandler {
     static removeInlineStyle(styleElement) {
         if (this.isExist(styleElement)) {
             try {
-                document.head.removeChild(styleElement);
+                styleElement.parentNode.removeChild(styleElement);
             } catch (error) {
                 // style element may have already been removed in a fast refresh
             }

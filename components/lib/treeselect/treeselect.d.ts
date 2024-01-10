@@ -12,6 +12,8 @@ import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { TreeNodeTemplateOptions, TreePassThroughOptions, TreeTogglerTemplateOptions } from '../tree/tree';
 import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
@@ -123,6 +125,11 @@ export interface TreeSelectPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: TreeSelectPassThroughTransitionType;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**
@@ -351,7 +358,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Used to define a string that labels the component.
      */
@@ -524,6 +531,14 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * Defines the selection mode, valid values "single", "multiple", and "checkbox".
      */
     selectionMode?: 'single' | 'multiple' | 'checkbox' | undefined;
+    /**
+     * Content of the tooltip.
+     */
+    tooltip?: string | undefined;
+    /**
+     * Configuration of the tooltip, refer to the tooltip documentation for more information.
+     */
+    tooltipOptions?: TooltipOptions | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */

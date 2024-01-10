@@ -27,7 +27,10 @@ export const Chip = React.memo(
             setVisibleState(false);
 
             if (props.onRemove) {
-                props.onRemove(event);
+                props.onRemove({
+                    originalEvent: event,
+                    value: props.label || props.image || props.icon
+                });
             }
         };
 
@@ -37,6 +40,7 @@ export const Chip = React.memo(
             const removeIconProps = mergeProps(
                 {
                     key: 'removeIcon',
+                    role: 'button',
                     tabIndex: 0,
                     className: cx('removeIcon'),
                     onClick: close,

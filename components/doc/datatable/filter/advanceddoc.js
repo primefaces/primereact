@@ -16,6 +16,7 @@ import { TriStateCheckbox } from '@/components/lib/tristatecheckbox/TriStateChec
 import { classNames } from '@/components/lib/utils/Utils';
 import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function AdvancedFilterDoc(props) {
     const [customers, setCustomers] = useState(null);
@@ -55,13 +56,13 @@ export function AdvancedFilterDoc(props) {
         }
     };
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
         initFilters();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const getCustomers = (data) => {
         return [...(data || [])].map((d) => {
@@ -824,48 +825,50 @@ export default function AdvancedFilterDemo() {
                     When <i>filterDisplay</i> is set as <i>menu</i>, filtering is done via popups with support for multiple constraints and advanced templating.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable
-                    value={customers}
-                    paginator
-                    showGridlines
-                    rows={10}
-                    loading={loading}
-                    dataKey="id"
-                    filters={filters}
-                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
-                    header={header}
-                    emptyMessage="No customers found."
-                >
-                    <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
-                    <Column
-                        header="Country"
-                        filterField="country.name"
-                        style={{ minWidth: '12rem' }}
-                        body={countryBodyTemplate}
-                        filter
-                        filterPlaceholder="Search by country"
-                        filterClear={filterClearTemplate}
-                        filterApply={filterApplyTemplate}
-                        filterFooter={filterFooterTemplate}
-                    />
-                    <Column
-                        header="Agent"
-                        filterField="representative"
-                        showFilterMatchModes={false}
-                        filterMenuStyle={{ width: '14rem' }}
-                        style={{ minWidth: '14rem' }}
-                        body={representativeBodyTemplate}
-                        filter
-                        filterElement={representativeFilterTemplate}
-                    />
-                    <Column header="Date" filterField="date" dataType="date" style={{ minWidth: '10rem' }} body={dateBodyTemplate} filter filterElement={dateFilterTemplate} />
-                    <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
-                    <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
-                    <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable
+                        value={customers}
+                        paginator
+                        showGridlines
+                        rows={10}
+                        loading={loading}
+                        dataKey="id"
+                        filters={filters}
+                        globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
+                        header={header}
+                        emptyMessage="No customers found."
+                    >
+                        <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
+                        <Column
+                            header="Country"
+                            filterField="country.name"
+                            style={{ minWidth: '12rem' }}
+                            body={countryBodyTemplate}
+                            filter
+                            filterPlaceholder="Search by country"
+                            filterClear={filterClearTemplate}
+                            filterApply={filterApplyTemplate}
+                            filterFooter={filterFooterTemplate}
+                        />
+                        <Column
+                            header="Agent"
+                            filterField="representative"
+                            showFilterMatchModes={false}
+                            filterMenuStyle={{ width: '14rem' }}
+                            style={{ minWidth: '14rem' }}
+                            body={representativeBodyTemplate}
+                            filter
+                            filterElement={representativeFilterTemplate}
+                        />
+                        <Column header="Date" filterField="date" dataType="date" style={{ minWidth: '10rem' }} body={dateBodyTemplate} filter filterElement={dateFilterTemplate} />
+                        <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
+                        <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
+                        <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
+                        <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

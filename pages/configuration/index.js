@@ -1,5 +1,6 @@
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AppendToDoc } from '@/components/doc/configuration/appendtodoc';
+import { StyleContainer } from '@/components/doc/configuration/stylecontainer';
 import { CSSTransitionDoc } from '@/components/doc/configuration/csstransitiondoc';
 import { FilterMatchModeDoc } from '@/components/doc/configuration/filtermatchmodedoc';
 import { HideOverlaysDoc } from '@/components/doc/configuration/hideoverlaysdoc';
@@ -19,6 +20,11 @@ const InstallationPage = () => {
             id: 'appendto',
             label: 'AppendTo',
             component: AppendToDoc
+        },
+        {
+            id: 'stylecontainer',
+            label: 'StyleContainer',
+            component: StyleContainer
         },
         {
             id: 'csstransition',

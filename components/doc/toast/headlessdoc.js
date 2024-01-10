@@ -218,7 +218,7 @@ export default function HeadlessDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Headless mode is enabled by defining a <i>container</i> slot that lets you implement entire toast UI instead of the default elements.
+                    Headless mode is enabled by defining a <i>content</i> prop that lets you implement entire dialog UI instead of the default elements.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
