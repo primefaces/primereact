@@ -32995,6 +32995,13 @@
                             "readonly": false,
                             "type": "any",
                             "description": "Current trigger state."
+                        },
+                        {
+                            "name": "selected",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "For item, this is the state of the item."
                         }
                     ],
                     "callbacks": []
