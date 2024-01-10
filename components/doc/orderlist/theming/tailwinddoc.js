@@ -128,7 +128,7 @@ export default function UnstyledDemo() {
     
     return (
         <div className="card xl:flex xl:justify-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
         </div>
     )
 }

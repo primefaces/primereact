@@ -30,6 +30,7 @@ export function PTDoc(props) {
     const code = {
         basic: `
 <OrderList
+    dataKey="id" 
     value={products}
     onChange={(e) => setProducts(e.value)}
     itemTemplate={itemTemplate}
@@ -74,6 +75,7 @@ export default function PTDemo() {
     return (
         <div className="card xl:flex xl:justify-content-center">
             <OrderList
+                dataKey="id" 
                 value={products}
                 onChange={(e) => setProducts(e.value)}
                 itemTemplate={itemTemplate}
@@ -134,6 +136,7 @@ export default function PTDemo() {
     return (
         <div className="card xl:flex xl:justify-content-center">
             <OrderList
+                dataKey="id" 
                 value={products}
                 onChange={(e) => setProducts(e.value)}
                 itemTemplate={itemTemplate}
@@ -173,6 +176,7 @@ export default function PTDemo() {
             <DocSectionText {...props}></DocSectionText>
             <div className="card xl:flex xl:justify-content-center">
                 <OrderList
+                    dataKey="id"
                     value={products}
                     onChange={(e) => setProducts(e.value)}
                     itemTemplate={itemTemplate}

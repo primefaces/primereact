@@ -29,7 +29,7 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+<OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -61,7 +61,7 @@ export default function FilterDemo() {
     
     return (
         <div className="card xl:flex xl:justify-content-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
         </div>
     )
 }
@@ -109,7 +109,7 @@ export default function FilterDemo() {
     
     return (
         <div className="card xl:flex xl:justify-content-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
         </div>
     )
 }
@@ -141,7 +141,7 @@ export default function FilterDemo() {
                 </p>
             </DocSectionText>
             <div className="card xl:flex xl:justify-content-center">
-                <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+                <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
