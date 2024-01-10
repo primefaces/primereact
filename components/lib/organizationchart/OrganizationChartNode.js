@@ -47,6 +47,13 @@ export const OrganizationChartNode = React.memo((props) => {
         event.preventDefault();
     };
 
+    const onKeyDown = (event, node) => {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
+            toggleNode(event, node);
+            event.preventDefault();
+        }
+    };
+
     const createChildNodes = () => {
         const nodesProps = mergeProps(
             {
@@ -198,6 +205,8 @@ export const OrganizationChartNode = React.memo((props) => {
             const nodeTogglerProps = mergeProps(
                 {
                     className: cx('nodeToggler'),
+                    tabIndex: 0,
+                    onKeyDown: (e) => onKeyDown(e, node),
                     onClick: (e) => toggleNode(e, node),
                     href: '#'
                 },
