@@ -3258,6 +3258,7 @@
     padding: 0.5rem 0;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+    outline: 0 none;
   }
   .p-picklist .p-picklist-list .p-picklist-item {
     padding: 0.5rem 1rem;
@@ -3271,14 +3272,16 @@
     background: #e9ecef;
     color: #495057;
   }
-  .p-picklist .p-picklist-list .p-picklist-item:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: inset 0 0 0 0.15rem #b7e0b8;
+  .p-picklist .p-picklist-list .p-picklist-item.p-focus {
+    color: #495057;
+    background: #dee2e6;
   }
   .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
     color: #495057;
     background: #e8f5e9;
+  }
+  .p-picklist .p-picklist-list .p-picklist-item.p-highlight.p-focus {
+    background: rgba(76, 175, 80, 0.24);
   }
   .p-tree {
     border: 1px solid #dee2e6;
@@ -3289,6 +3292,12 @@
   }
   .p-tree .p-tree-container .p-treenode {
     padding: 0.143rem;
+    outline: 0 none;
+  }
+  .p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: inset 0 0 0 0.15rem #b7e0b8;
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content {
     border-radius: 3px;
@@ -3324,11 +3333,6 @@
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox .p-indeterminate .p-checkbox-icon {
     color: #495057;
-  }
-  .p-tree .p-tree-container .p-treenode .p-treenode-content:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: inset 0 0 0 0.15rem #b7e0b8;
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
     background: #e8f5e9;
@@ -3835,6 +3839,11 @@
   }
   .p-splitter .p-splitter-gutter .p-splitter-gutter-handle {
     background: #dee2e6;
+  }
+  .p-splitter .p-splitter-gutter .p-splitter-gutter-handle:focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #b7e0b8;
   }
   .p-splitter .p-splitter-gutter-resizing {
     background: #dee2e6;

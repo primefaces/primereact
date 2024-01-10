@@ -3267,6 +3267,7 @@
     padding: 0.5rem 0;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+    outline: 0 none;
   }
   .p-picklist .p-picklist-list .p-picklist-item {
     padding: 0.5rem 1.5rem;
@@ -3280,14 +3281,16 @@
     background: #e9ecef;
     color: #212529;
   }
-  .p-picklist .p-picklist-list .p-picklist-item:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: inset 0 0 0 0.15rem rgba(38, 143, 255, 0.5);
+  .p-picklist .p-picklist-list .p-picklist-item.p-focus {
+    color: #212529;
+    background: #dee2e6;
   }
   .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
     color: #ffffff;
     background: #007bff;
+  }
+  .p-picklist .p-picklist-list .p-picklist-item.p-highlight.p-focus {
+    background: #0067d6;
   }
   .p-tree {
     border: 1px solid #dee2e6;
@@ -3298,6 +3301,12 @@
   }
   .p-tree .p-tree-container .p-treenode {
     padding: 0.143rem;
+    outline: 0 none;
+  }
+  .p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: inset 0 0 0 0.15rem rgba(38, 143, 255, 0.5);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content {
     border-radius: 4px;
@@ -3333,11 +3342,6 @@
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox .p-indeterminate .p-checkbox-icon {
     color: #212529;
-  }
-  .p-tree .p-tree-container .p-treenode .p-treenode-content:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: inset 0 0 0 0.15rem rgba(38, 143, 255, 0.5);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
     background: #007bff;
@@ -3844,6 +3848,11 @@
   }
   .p-splitter .p-splitter-gutter .p-splitter-gutter-handle {
     background: #dee2e6;
+  }
+  .p-splitter .p-splitter-gutter .p-splitter-gutter-handle:focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
   }
   .p-splitter .p-splitter-gutter-resizing {
     background: #dee2e6;
