@@ -298,6 +298,7 @@ export const Mention = React.memo(
                             if (nextElement) {
                                 const nextElementIndex = DomHandler.index(nextElement);
                                 const highlightItemIndex = DomHandler.index(highlightItem);
+
                                 setHighlightState((prevState) => {
                                     const newState = [...prevState];
 
@@ -314,6 +315,7 @@ export const Mention = React.memo(
 
                             if (highlightItem) {
                                 const highlightItemIndex = DomHandler.index(highlightItem);
+
                                 setHighlightState((prevState) => {
                                     const newState = [...prevState];
 
@@ -403,11 +405,13 @@ export const Mention = React.memo(
 
         useUpdateEffect(() => {
             const hasSuggestions = props.suggestions && props.suggestions.length;
+
             if (hasSuggestions) {
                 const newState = props.suggestions.map(() => false);
 
                 setHighlightState(newState);
             }
+
             if (searchingState) {
                 hasSuggestions ? show() : hide();
                 overlayVisibleState && alignOverlay();
