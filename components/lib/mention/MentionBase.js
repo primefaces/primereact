@@ -2,7 +2,10 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    item: 'p-mention-item',
+    item: ({ isSelected }) =>
+        classNames('p-mention-item', {
+            'p-highlight': isSelected
+        }),
     items: 'p-mention-items',
     panel: ({ props }) => classNames('p-mention-panel p-component', props.panelClassName),
     input: ({ props }) => classNames('p-mention-input', props.inputClassName),

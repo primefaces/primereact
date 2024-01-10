@@ -28,6 +28,7 @@ const classes = {
     loadingIcon: 'p-dropdown-trigger-icon p-clickable',
     clearIcon: 'p-dropdown-clear-icon p-clickable',
     filterIcon: 'p-dropdown-filter-icon',
+    filterClearIcon: 'p-dropdown-filter-clear-icon',
     filterContainer: ({ clearIcon }) => classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon }),
     filterInput: 'p-dropdown-filter p-inputtext p-component',
     list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? 'p-dropdown-items' : 'p-dropdown-items'),

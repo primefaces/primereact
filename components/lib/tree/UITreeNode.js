@@ -803,7 +803,8 @@ export const UITreeNode = React.memo((props) => {
                 onDragEnter: onDragEnter,
                 onDragLeave: onDragLeave,
                 onDragStart: onDragStart,
-                onDragEnd: onDragEnd
+                onDragEnd: onDragEnd,
+                'data-p-highlight': isCheckboxSelectionMode() ? checked : selected
             },
             getPTOptions('content')
         );

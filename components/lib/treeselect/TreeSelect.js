@@ -95,7 +95,7 @@ export const TreeSelect = React.memo(
         };
 
         const onClick = (event) => {
-            if (!props.disabled && (!overlayRef.current || !overlayRef.current.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-treeselect-close')) {
+            if (!props.disabled && (!overlayRef.current || !overlayRef.current.contains(event.target)) && !DomHandler.isAttributeEquals(event.target, 'data-pc-section', 'closebutton')) {
                 DomHandler.focus(focusInputRef.current);
                 overlayVisibleState ? hide() : show();
             }
@@ -341,7 +341,7 @@ export const TreeSelect = React.memo(
         };
 
         const scrollInView = () => {
-            const highlightItem = DomHandler.findSingle(overlayRef.current, '.p-treenode-content.p-highlight');
+            const highlightItem = DomHandler.findSingle(overlayRef.current, '[data-pc-section="content"][data-p-highlight="true"]');
 
             if (highlightItem && highlightItem.scrollIntoView) {
                 highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });

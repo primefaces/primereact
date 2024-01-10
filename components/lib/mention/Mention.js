@@ -19,6 +19,8 @@ export const Mention = React.memo(
         const [focusedState, setFocusedState] = React.useState(false);
         const [searchingState, setSearchingState] = React.useState(false);
         const [triggerState, setTriggerState] = React.useState(null);
+        const [highlightState, setHighlightState] = React.useState([]);
+
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -37,10 +39,13 @@ export const Mention = React.memo(
 
         useHandleStyle(MentionBase.css.styles, isUnstyled, { name: 'mention' });
 
-        const getPTOptions = (item, suggestion) => {
+        const getPTOptions = (item, suggestion, options) => {
             return ptm(suggestion, {
                 context: {
                     trigger: triggerState ? triggerState.key : ''
+                },
+                state: {
+                    ...options
                 }
             });
         };
@@ -72,7 +77,13 @@ export const Mention = React.memo(
 
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-                DomHandler.addClass(listRef.current.firstChild, 'p-highlight');
+                setHighlightState((prevState) => {
+                    const newState = [...prevState];
+
+                    newState[0] = true;
+
+                    return newState;
+                });
             }
         };
 
@@ -92,13 +103,15 @@ export const Mention = React.memo(
         };
 
         const alignOverlay = () => {
-            const { key, index } = triggerState;
-            const value = inputRef.current.value;
-            const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
+            if (triggerState) {
+                const { key, index } = triggerState;
+                const value = inputRef.current.value;
+                const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
 
-            overlayRef.current.style.transformOrigin = 'top';
-            overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
-            overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
+                overlayRef.current.style.transformOrigin = 'top';
+                overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
+                overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
+            }
         };
 
         const onPanelClick = (event) => {
@@ -245,9 +258,19 @@ export const Mention = React.memo(
 
         const onInput = (event) => {
             props.onInput && props.onInput(event);
+            const isFilled = event.target.value.length > 0;
 
-            if (event.target.value.length > 0) DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled');
-            else DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
+            if (isUnstyled()) {
+                DomHandler.setAttributes(elementRef.current, {
+                    'data-p-inputwrapper-filled': isFilled
+                });
+            } else {
+                if (isFilled) {
+                    DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled');
+                } else {
+                    DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
+                }
+            }
         };
 
         const onKeyUp = (event) => {
@@ -264,7 +287,7 @@ export const Mention = React.memo(
 
         const onKeyDown = (event) => {
             if (overlayVisibleState) {
-                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
                 switch (event.which) {
                     //down
@@ -273,15 +296,33 @@ export const Mention = React.memo(
                             let nextElement = highlightItem.nextElementSibling;
 
                             if (nextElement) {
-                                DomHandler.addClass(nextElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                const nextElementIndex = DomHandler.index(nextElement);
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[nextElementIndex] = true;
+                                    newState[highlightItemIndex] = false;
+
+                                    return newState;
+                                });
+
                                 DomHandler.scrollInView(overlayRef.current, nextElement);
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
 
                             if (highlightItem) {
-                                DomHandler.addClass(highlightItem, 'p-highlight');
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[highlightItemIndex] = true;
+
+                                    return newState;
+                                });
                             }
                         }
 
@@ -294,8 +335,18 @@ export const Mention = React.memo(
                             let previousElement = highlightItem.previousElementSibling;
 
                             if (previousElement) {
-                                DomHandler.addClass(previousElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                const previousElementIndex = DomHandler.index(previousElement);
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[previousElementIndex] = true;
+                                    newState[highlightItemIndex] = false;
+
+                                    return newState;
+                                });
+
                                 DomHandler.scrollInView(overlayRef.current, previousElement);
                             }
                         }
@@ -353,16 +404,31 @@ export const Mention = React.memo(
         }, [inputRef, props.inputRef]);
 
         useUpdateEffect(() => {
+            const hasSuggestions = props.suggestions && props.suggestions.length;
+
+            if (hasSuggestions) {
+                const newState = props.suggestions.map(() => false);
+
+                setHighlightState(newState);
+            }
+
             if (searchingState) {
-                props.suggestions && props.suggestions.length ? show() : hide();
+                hasSuggestions ? show() : hide();
                 overlayVisibleState && alignOverlay();
                 setSearchingState(false);
             }
         }, [props.suggestions]);
 
         useUpdateEffect(() => {
-            if (!isFilled && DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled')) {
-                DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
+            const _isUnstyled = isUnstyled();
+            const isInputWrapperFilled = _isUnstyled ? DomHandler.isAttributeEquals(elementRef.current, 'data-p-inputwrapper-filled', true) : DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled');
+
+            if (!isFilled && isInputWrapperFilled) {
+                _isUnstyled
+                    ? DomHandler.setAttributes(elementRef.current, {
+                          'data-p-inputwrapper-filled': false
+                      })
+                    : DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
             }
         }, [isFilled]);
 
@@ -373,14 +439,16 @@ export const Mention = React.memo(
         const createItem = (suggestion, index) => {
             const key = index + '_item';
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, { trigger: triggerState ? triggerState.key : '', index }) : formatValue(suggestion);
+            const isSelected = highlightState[index];
 
             const itemProps = mergeProps(
                 {
                     key: key,
-                    className: cx('item'),
-                    onClick: (e) => onItemClick(e, suggestion)
+                    className: cx('item', { isSelected }),
+                    onClick: (e) => onItemClick(e, suggestion),
+                    'data-p-highlight': isSelected
                 },
-                getPTOptions(suggestion, 'item')
+                getPTOptions(suggestion, 'item', { selected: isSelected })
             );
 
             return (
