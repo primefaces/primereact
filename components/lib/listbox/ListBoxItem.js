@@ -73,13 +73,13 @@ export const ListBoxItem = React.memo((props) => {
     const findNextItem = (item) => {
         const nextItem = item.nextElementSibling;
 
-        return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-listbox-item-group') ? findNextItem(nextItem) : nextItem) : null;
+        return nextItem ? (DomHandler.isAttributeEquals(nextItem, 'data-p-disabled', true) || DomHandler.isAttributeEquals(nextItem, 'data-pc-section', 'itemgroup') ? findNextItem(nextItem) : nextItem) : null;
     };
 
     const findPrevItem = (item) => {
         const prevItem = item.previousElementSibling;
 
-        return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? findPrevItem(prevItem) : prevItem) : null;
+        return prevItem ? (DomHandler.isAttributeEquals(prevItem, 'data-p-disabled', true) || DomHandler.isAttributeEquals(prevItem, 'data-pc-section', 'itemgroup') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
@@ -96,7 +96,8 @@ export const ListBoxItem = React.memo((props) => {
             key: props.label,
             role: 'option',
             'aria-selected': props.selected,
-            'aria-disabled': props.disabled
+            'aria-disabled': props.disabled,
+            'data-p-disabled': props.disabled
         },
         getPTOptions('item')
     );
