@@ -77,6 +77,16 @@ export interface TreeSelectPassThroughOptions {
      */
     tree?: TreePassThroughOptions;
     /**
+     * Callback to invoke when menu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
+    /**
      * Uses to pass attributes to the empty message's DOM element.
      */
     emptyMessage?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;

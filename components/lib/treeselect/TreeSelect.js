@@ -9,7 +9,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { Tree } from '../tree/Tree';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
@@ -28,6 +28,11 @@ export const TreeSelect = React.memo(
         const focusInputRef = React.useRef(props.inputRef);
         const triggerRef = React.useRef(null);
         const selfChange = React.useRef(null);
+        const treeRef = React.useRef(null);
+        const firstHiddenFocusableElementOnOverlay = React.useRef(null);
+        const lastHiddenFocusableElementOnOverlay = React.useRef(null);
+        const focusToTree = React.useRef(false);
+        const listId = React.useRef('');
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const isValueEmpty = ObjectUtils.isEmpty(props.value);
@@ -74,14 +79,19 @@ export const TreeSelect = React.memo(
 
         const hide = () => {
             setOverlayVisibleState(false);
+            focusInputRef.current && DomHandler.focus(focusInputRef.current);
         };
 
         const onInputFocus = () => {
             setFocusedState(true);
+
+            props.onFocus && props.onFocus();
         };
 
         const onInputBlur = () => {
             setFocusedState(false);
+
+            props.onBlur && props.onBlur();
         };
 
         const onClick = (event) => {
@@ -164,38 +174,42 @@ export const TreeSelect = React.memo(
             });
         };
 
-        const onInputKeyDown = (event) => {
-            switch (event.which) {
-                //down
-                case 40:
-                    if (!overlayVisibleState && event.altKey) {
-                        show();
-                    }
+        const onFirstHiddenFocus = (event) => {
+            const focusableEl = event.relatedTarget === focusInputRef.current ? DomHandler.getFirstFocusableElement(overlayRef.current, ':not([data-p-hidden-focusable="true"])') : focusInputRef.current;
+
+            DomHandler.focus(focusableEl);
+        };
+
+        const onLastHiddenFocus = (event) => {
+            const focusableEl = event.relatedTarget === focusInputRef.current ? DomHandler.getLastFocusableElement(overlayRef.current, ':not([data-p-hidden-focusable="true"])') : focusInputRef.current;
+
+            DomHandler.focus(focusableEl);
+        };
+
+        const onHeaderElementKeyDown = (event, isHideButton) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    event.preventDefault();
+                    setFocusToFocusableFirstNode();
 
                     break;
 
-                //space
-                case 32:
-                    if (!overlayVisibleState) {
-                        show();
-                        event.preventDefault();
-                    }
+                case 'ArrowUp':
+                    event.preventDefault();
+                    focusInputRef.current && DomHandler.focus(focusInputRef.current);
 
                     break;
 
-                //enter and escape
-                case 13:
-                case 27:
-                    if (overlayVisibleState) {
-                        hide();
-                        event.preventDefault();
-                    }
+                case 'Space':
+                case 'Enter':
+                case 'NumpadEnter':
+                    event.preventDefault();
 
+                    if (isHideButton) hide();
                     break;
 
-                //tab
-                case 9:
-                    hide();
+                case 'Escape':
+                    onEscapeKey(event);
                     break;
 
                 default:
@@ -203,11 +217,68 @@ export const TreeSelect = React.memo(
             }
         };
 
-        const onFilterInputKeyDown = (event) => {
-            //enter
-            if (event.which === 13) {
+        const onKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
+
+                case 'Space':
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
+
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
+
+                case 'Tab':
+                    onTabKey(event);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onArrowDownKey = (event) => {
+            if (overlayVisibleState) return;
+            focusToTree.current = true;
+            show();
+
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            if (overlayVisibleState) {
+                hide();
+            } else {
+                onArrowDownKey(event);
+            }
+
+            event.preventDefault();
+        };
+
+        const onEscapeKey = (event) => {
+            if (overlayVisibleState) {
+                hide();
                 event.preventDefault();
             }
+        };
+
+        const onTabKey = (event, pressedInInputText = false) => {
+            if (!pressedInInputText) {
+                if (overlayVisibleState && hasFocusableElements()) {
+                    DomHandler.focus(firstHiddenFocusableElementOnOverlay.current);
+
+                    event.preventDefault();
+                }
+            }
+        };
+
+        const hasFocusableElements = () => {
+            return DomHandler.getFocusableElements(overlayRef.current, ':not([data-p-hidden-focusable="true"])').length > 0;
         };
 
         const onFilterInputChange = (event) => {
@@ -230,6 +301,7 @@ export const TreeSelect = React.memo(
         const onOverlayEnter = () => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
+            setFocusToFocusableFirstNode();
             alignOverlay();
             scrollInView();
         };
@@ -303,6 +375,13 @@ export const TreeSelect = React.memo(
             }
         };
 
+        const setFocusToFocusableFirstNode = () => {
+            const treeNodeEl = DomHandler.find(treeRef.current.getElement(), '[data-pc-section="node"]');
+            const focusedElement = [...treeNodeEl].find((item) => item.getAttribute('tabindex') === '0');
+
+            DomHandler.focus(focusedElement);
+        };
+
         const updateTreeBranchState = (node, path, keys) => {
             if (node) {
                 if (isSelected(node, keys)) {
@@ -363,6 +442,8 @@ export const TreeSelect = React.memo(
         useMountEffect(() => {
             updateTreeState();
 
+            listId.current = UniqueComponentId() + '_list';
+
             if (props.autoFocus) {
                 DomHandler.focus(focusInputRef.current, props.autoFocus);
             }
@@ -379,6 +460,14 @@ export const TreeSelect = React.memo(
         useUpdateEffect(() => {
             updateTreeState();
         }, [props.options]);
+
+        useUpdateEffect(() => {
+            if (focusToTree.current && overlayVisibleState) {
+                focusToTree.current = false;
+
+                setFocusToFocusableFirstNode();
+            }
+        }, [overlayVisibleState]);
 
         useUpdateEffect(() => {
             if (overlayVisibleState && expandedKeysState) {
@@ -415,9 +504,13 @@ export const TreeSelect = React.memo(
                     id: props.inputId,
                     type: 'text',
                     'aria-expanded': overlayVisibleState,
+                    'aria-label': props.ariaLabel,
+                    'aria-labelledby': props.ariaLabelledBy,
+                    'aria-haspopup': 'tree',
+                    'aria-controls': listId.current,
                     onFocus: onInputFocus,
                     onBlur: onInputBlur,
-                    onKeyDown: onInputKeyDown,
+                    onKeyDown,
                     disabled: props.disabled,
                     tabIndex: props.tabIndex,
                     ...ariaProps
@@ -498,7 +591,7 @@ export const TreeSelect = React.memo(
                     ref: triggerRef,
                     className: cx('trigger'),
                     role: 'button',
-                    'aria-haspopup': 'listbox',
+                    'aria-haspopup': 'tree',
                     'aria-expanded': overlayVisibleState
                 },
                 ptm('trigger')
@@ -544,6 +637,8 @@ export const TreeSelect = React.memo(
             return (
                 <>
                     <Tree
+                        ref={treeRef}
+                        id={listId.current}
                         expandedKeys={expandedKeys}
                         filter={props.filter}
                         filterBy={props.filterBy}
@@ -591,7 +686,7 @@ export const TreeSelect = React.memo(
                         autoComplete: 'off',
                         className: cx('filter'),
                         placeholder: props.filterPlaceholder,
-                        onKeyDown: onFilterInputKeyDown,
+                        onKeyDown: (event) => onHeaderElementKeyDown(event, false),
                         onChange: onFilterInputChange,
                         disabled: props.disabled
                     },
@@ -619,7 +714,7 @@ export const TreeSelect = React.memo(
                         className: 'p-treeselect-filter-container',
                         element: filterContent,
                         filterOptions: filterOptions,
-                        filterInputKeyDown: onFilterInputKeyDown,
+                        filterInputKeyDown: (event) => onHeaderElementKeyDown(event, () => {}),
                         filterInputChange: onFilterInputChange,
                         filterIconClassName: 'p-dropdown-filter-icon',
                         props
@@ -648,6 +743,7 @@ export const TreeSelect = React.memo(
                 {
                     type: 'button',
                     className: cx('closeButton'),
+                    onKeyDown: (event) => onHeaderElementKeyDown(event, true),
                     onClick: hide,
                     'aria-label': localeOption('close')
                 },
@@ -700,6 +796,32 @@ export const TreeSelect = React.memo(
 
         const otherProps = TreeSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const firstHiddenFocusableElementOnOverlayProps = mergeProps(
+            {
+                ref: firstHiddenFocusableElementOnOverlay,
+                role: 'presentation',
+                className: 'p-hidden-accessible p-hidden-focusable',
+                tabIndex: 0,
+                onFocus: onFirstHiddenFocus,
+                'aria-hidden': true,
+                'data-p-hidden-accessible': true,
+                'data-p-hidden-focusable': true
+            },
+            ptm('firstHiddenFocusableElementOnOverlay')
+        );
+        const lastHiddenFocusableElementOnOverlayProps = mergeProps(
+            {
+                ref: lastHiddenFocusableElementOnOverlay,
+                role: 'presentation',
+                className: 'p-hidden-accessible p-hidden-focusable',
+                tabIndex: 0,
+                onFocus: onLastHiddenFocus,
+                'aria-hidden': true,
+                'data-p-hidden-accessible': true,
+                'data-p-hidden-focusable': true
+            },
+            ptm('lastHiddenFocusableElementOnOverlay')
+        );
         const rootProps = mergeProps(
             {
                 ref: elementRef,
@@ -735,6 +857,8 @@ export const TreeSelect = React.memo(
                     onClick={onOverlayClick}
                     header={header}
                     footer={footer}
+                    firstHiddenFocusableElementOnOverlay={<span {...firstHiddenFocusableElementOnOverlayProps}></span>}
+                    lastHiddenFocusableElementOnOverlay={<span {...lastHiddenFocusableElementOnOverlayProps}></span>}
                     transitionOptions={props.transitionOptions}
                     in={overlayVisibleState}
                     onEnter={onOverlayEnter}
