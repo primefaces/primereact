@@ -19,25 +19,25 @@ export default function IconDemo() {
 
     return (
         <div className="card flex flex-wrap gap-3 p-fluid">
-            <div class="flex-auto">
-                <label labelFor="buttondisplay" class="font-bold block mb-2">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Button Display
                 </label>
                 <Calendar id="buttondisplay" value={date} onChange={(e) => setDate(e.value)} showIcon />
             </div>
-            <div class="flex-auto">
-                <label labelFor="buttondisplay" class="font-bold block mb-2">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Icon Display
                 </label>
 
-                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon iconDisplay="input" />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon  />
             </div>
-            <div class="flex-auto">
-                <label labelFor="buttondisplay" class="font-bold block mb-2">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Icon Template
                 </label>
 
-                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly iconDisplay="input" icon={() => <i className="pi pi-clock" />} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
             </div>
         </div>
     )
@@ -53,25 +53,25 @@ export default function IconDemo() {
 
     return (
         <div className="card flex flex-wrap gap-3 p-fluid">
-            <div class="flex-auto">
-                <label labelFor="buttondisplay" class="font-bold block mb-2">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Button Display
                 </label>
                 <Calendar id="buttondisplay" value={date} onChange={(e) => setDate(e.value)} showIcon />
             </div>
-            <div class="flex-auto">
-                <label labelFor="buttondisplay" class="font-bold block mb-2">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Icon Display
                 </label>
 
-                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon iconDisplay="input" />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon  />
             </div>
-            <div class="flex-auto">
-                <label labelFor="buttondisplay" class="font-bold block mb-2">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
                     Icon Template
                 </label>
 
-                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly iconDisplay="input" icon={() => <i className="pi pi-clock" />} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
             </div>
         </div>
     )
@@ -87,25 +87,25 @@ export default function IconDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-3 p-fluid">
-                <div class="flex-auto">
-                    <label labelFor="buttondisplay" class="font-bold block mb-2">
+                <div className="flex-auto">
+                    <label htmlFor="buttondisplay" className="font-bold block mb-2">
                         Button Display
                     </label>
                     <Calendar id="buttondisplay" value={date} onChange={(e) => setDate(e.value)} showIcon />
                 </div>
-                <div class="flex-auto">
-                    <label labelFor="buttondisplay" class="font-bold block mb-2">
+                <div className="flex-auto">
+                    <label htmlFor="buttondisplay" className="font-bold block mb-2">
                         Icon Display
                     </label>
 
-                    <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon iconDisplay="input" />
+                    <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
                 </div>
-                <div class="flex-auto">
-                    <label labelFor="buttondisplay" class="font-bold block mb-2">
+                <div className="flex-auto">
+                    <label htmlFor="buttondisplay" className="font-bold block mb-2">
                         Icon Template
                     </label>
 
-                    <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly iconDisplay="input" icon={() => <i className="pi pi-clock" />} />
+                    <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
                 </div>
             </div>
             <DocSectionCode code={code} />

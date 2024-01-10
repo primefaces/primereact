@@ -37,8 +37,8 @@ export function TemplateDoc(props) {
                 </div>
                 <div>
                     <Menu model={items} popup ref={configMenu} id="config_menu" />
-                    <button class="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
-                        <span class="pi pi-cog"></span>
+                    <button className="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
+                        <span className="pi pi-cog"></span>
                     </button>
                     {options.togglerElement}
                 </div>
@@ -107,8 +107,8 @@ export default function TemplateDemo() {
                 </div>
                 <div>
                     <Menu model={items} popup ref={configMenu} id="config_menu" />
-                    <button class="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
-                        <span class="pi pi-cog"></span>
+                    <button className="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
+                        <span className="pi pi-cog"></span>
                     </button>
                     {options.togglerElement}
                 </div>
@@ -178,8 +178,8 @@ export default function TemplateDemo() {
                 </div>
                 <div>
                     <Menu model={items} popup ref={configMenu} id="config_menu" />
-                    <button class="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
-                        <span class="pi pi-cog"></span>
+                    <button className="p-panel-header-icon p-link mr-2" onClick={(e) => configMenu?.current?.toggle(e)}>
+                        <span className="pi pi-cog"></span>
                     </button>
                     {options.togglerElement}
                 </div>

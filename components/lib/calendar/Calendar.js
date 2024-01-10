@@ -2310,8 +2310,14 @@ export const Calendar = React.memo(
             if (isNaN(h) || isNaN(m) || h > 23 || m > 59 || (props.hourFormat === '12' && h > 12) || (props.showSeconds && (isNaN(s) || s > 59)) || (props.showMillisec && (isNaN(s) || s > 1000))) {
                 throw new Error('Invalid time');
             } else {
-                if (props.hourFormat === '12' && h !== 12 && ampm === 'PM') {
-                    h += 12;
+                if (props.hourFormat === '12') {
+                    if (h !== 12 && ampm === 'PM') {
+                        h += 12;
+                    }
+
+                    if (h === 12 && ampm === 'AM') {
+                        h -= 12;
+                    }
                 }
 
                 return { hour: h, minute: m, second: s, millisecond: ms };

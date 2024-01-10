@@ -5,7 +5,7 @@ import { Ripple } from '@/components/lib/ripple/Ripple';
 export function CustomDoc(props) {
     const code = {
         basic: `
-<div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+<div className="p-ripple p-5 border-round border-radius-10 shadow-2">
     Green
     <Ripple
         pt={{
@@ -13,7 +13,7 @@ export function CustomDoc(props) {
         }}
     />
 </div>
-<div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+<div className="p-ripple p-5 border-round border-radius-10 shadow-2">
     Orange
     <Ripple
         pt={{
@@ -21,7 +21,7 @@ export function CustomDoc(props) {
         }}
     />
 </div>
-<div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+<div className="p-ripple p-5 border-round border-radius-10 shadow-2">
     Purple
     <Ripple
         pt={{
@@ -37,7 +37,7 @@ import { Ripple } from 'primereact/ripple';
 export default function CustomDemo() {
     return (
         <div className="card flex justify-content-center align-items-center gap-2">
-            <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+            <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                 Green
                 <Ripple
                     pt={{
@@ -45,7 +45,7 @@ export default function CustomDemo() {
                     }}
                 />
             </div>
-            <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+            <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                 Orange
                 <Ripple
                     pt={{
@@ -53,7 +53,7 @@ export default function CustomDemo() {
                     }}
                 />
             </div>
-            <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+            <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                 Purple
                 <Ripple
                     pt={{
@@ -72,7 +72,7 @@ import { Ripple } from 'primereact/ripple';
 export default function CustomDemo() {
     return (
         <div className="card flex justify-content-center align-items-center gap-2">
-            <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+            <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                 Green
                 <Ripple
                     pt={{
@@ -80,7 +80,7 @@ export default function CustomDemo() {
                     }}
                 />
             </div>
-            <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+            <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                 Orange
                 <Ripple
                     pt={{
@@ -88,7 +88,7 @@ export default function CustomDemo() {
                     }}
                 />
             </div>
-            <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+            <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                 Purple
                 <Ripple
                     pt={{
@@ -110,7 +110,7 @@ export default function CustomDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center align-items-center gap-2">
-                <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+                <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                     Green
                     <Ripple
                         pt={{
@@ -118,7 +118,7 @@ export default function CustomDemo() {
                         }}
                     />
                 </div>
-                <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+                <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                     Orange
                     <Ripple
                         pt={{
@@ -126,7 +126,7 @@ export default function CustomDemo() {
                         }}
                     />
                 </div>
-                <div class="p-ripple p-5 border-round border-radius-10 shadow-2">
+                <div className="p-ripple p-5 border-round border-radius-10 shadow-2">
                     Purple
                     <Ripple
                         pt={{

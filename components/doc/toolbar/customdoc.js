@@ -46,9 +46,9 @@ export function CustomDoc(props) {
 
     const endContent = (
         <React.Fragment>
-            <div class="flex align-items-center gap-2">
+            <div className="flex align-items-center gap-2">
                 <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
-                <span class="font-bold text-bluegray-50">Amy Elsner</span>
+                <span className="font-bold text-bluegray-50">Amy Elsner</span>
             </div>
         </React.Fragment>
     );
@@ -104,9 +104,9 @@ export default function CustomDemo() {
 
     const endContent = (
         <React.Fragment>
-            <div class="flex align-items-center gap-2">
+            <div className="flex align-items-center gap-2">
                 <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
-                <span class="font-bold text-bluegray-50">Amy Elsner</span>
+                <span className="font-bold text-bluegray-50">Amy Elsner</span>
             </div>
         </React.Fragment>
     );
@@ -165,9 +165,9 @@ export default function CustomDemo() {
 
     const endContent = (
         <React.Fragment>
-            <div class="flex align-items-center gap-2">
+            <div className="flex align-items-center gap-2">
                 <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
-                <span class="font-bold text-bluegray-50">Amy Elsner</span>
+                <span className="font-bold text-bluegray-50">Amy Elsner</span>
             </div>
         </React.Fragment>
     );
