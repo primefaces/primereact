@@ -421,7 +421,7 @@ export const Mention = React.memo(
 
         useUpdateEffect(() => {
             const _isUnstyled = isUnstyled();
-            const isInputWrapperFilled = _isUnstyled ? DomHandler.isAttributeEquals(elementRef.current, 'p-inputwrapper-filled', true) : DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled');
+            const isInputWrapperFilled = _isUnstyled ? DomHandler.isAttributeEquals(elementRef.current, 'data-p-inputwrapper-filled', true) : DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled');
 
             if (!isFilled && isInputWrapperFilled) {
                 _isUnstyled
