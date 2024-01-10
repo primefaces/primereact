@@ -189,6 +189,16 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     ariaLabelledBy?: string | undefined;
     /**
+     * Callback to invoke when menu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
+    /**
      * Name of the field that uniquely identifies the a record in the data.
      */
     dataKey?: string | undefined;
