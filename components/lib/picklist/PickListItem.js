@@ -18,7 +18,8 @@ export const PickListItem = React.memo((props) => {
         if (props.onClick) {
             props.onClick({
                 originalEvent: event,
-                value: props.value
+                value: props.value,
+                id: props.id
             });
         }
     };
@@ -32,16 +33,32 @@ export const PickListItem = React.memo((props) => {
         }
     };
 
+    const onMouseDown = (event) => {
+        if (props.onMouseDown) {
+            props.onMouseDown(event);
+        }
+    };
+
+    const onFocus = (event) => {
+        if (props.onFocus) {
+            props.onFocus(event);
+        }
+    };
+
     const content = props.template ? props.template(props.value) : props.value;
 
     const itemProps = mergeProps(
         {
-            className: classNames(props.className, cx('item', { subProps: props })),
+            className: classNames(props.className, cx('item', { selected: props.selected, focused: props.focused })),
+            id: props.id,
             onClick,
             onKeyDown,
-            tabIndex: props.tabIndex,
+            onFocus,
+            onMouseDown,
             role: 'option',
-            'aria-selected': props.selected
+            'aria-selected': props.selected,
+            'data-p-highlight': props.selected,
+            'data-p-focused': props.focused
         },
         getPTOptions('item')
     );
