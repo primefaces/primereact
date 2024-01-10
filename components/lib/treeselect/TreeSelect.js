@@ -234,7 +234,13 @@ export const TreeSelect = React.memo(
                     break;
 
                 case 'Tab':
-                    onTabKey(event);
+                    if (overlayVisibleState) {
+                        event.preventDefault();
+
+                        if (event.shiftKey) setFocusToFocusableFirstNode();
+                        else onTabKey(event);
+                    }
+
                     break;
 
                 default:
@@ -856,6 +862,7 @@ export const TreeSelect = React.memo(
                     scrollHeight={props.scrollHeight}
                     onClick={onOverlayClick}
                     header={header}
+                    hide={hide}
                     footer={footer}
                     firstHiddenFocusableElementOnOverlay={<span {...firstHiddenFocusableElementOnOverlayProps}></span>}
                     lastHiddenFocusableElementOnOverlay={<span {...lastHiddenFocusableElementOnOverlayProps}></span>}

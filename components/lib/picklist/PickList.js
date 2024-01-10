@@ -248,7 +248,7 @@ export const PickList = React.memo(
             props.onBlur && props.onBlur(event);
         };
 
-        const onItemClick = (event, type) => {
+        const onItemClick = (event, type, arrowKeyClick = false) => {
             let originalEvent = event.originalEvent;
             let item = event.value;
             let selectedId = event.id;
@@ -258,10 +258,10 @@ export const PickList = React.memo(
             let selected = index !== -1;
             let metaSelection = props.metaKeySelection;
 
-            setFocusedOptionIndex(selectedId);
+            if (!arrowKeyClick) setFocusedOptionIndex(selectedId);
 
             if (metaSelection) {
-                const metaKey = originalEvent.metaKey || originalEvent.ctrlKey;
+                const metaKey = originalEvent.metaKey || originalEvent.ctrlKey || originalEvent.shiftKey;
 
                 if (selected && metaKey) {
                     selection.splice(index, 1);
@@ -334,11 +334,12 @@ export const PickList = React.memo(
 
         const onArrowDownKey = (event, type) => {
             const optionIndex = findNextOptionIndex(focusedOptionIndex, type);
+            const visibleList = getVisibleList(type === 'source' ? props.source : props.target, type);
 
             changeFocusedOptionIndex(optionIndex, type);
 
-            if (event.shiftKey) {
-                onEnterKey(event, type);
+            if (visibleList && visibleList.length > 0 && event.shiftKey) {
+                onItemClick({ originalEvent: event, value: visibleList[optionIndex] }, type, true);
             }
 
             event.preventDefault();
@@ -346,11 +347,12 @@ export const PickList = React.memo(
 
         const onArrowUpKey = (event, type) => {
             const optionIndex = findPrevOptionIndex(focusedOptionIndex, type);
+            const visibleList = getVisibleList(type === 'source' ? props.source : props.target, type);
 
             changeFocusedOptionIndex(optionIndex, type);
 
-            if (event.shiftKey) {
-                onEnterKey(event, type);
+            if (visibleList && visibleList.length > 0 && event.shiftKey) {
+                onItemClick({ originalEvent: event, value: visibleList[optionIndex] }, type, true);
             }
 
             event.preventDefault();
@@ -358,7 +360,7 @@ export const PickList = React.memo(
 
         const onEnterKey = (event, type) => {
             const listElement = getListElement(type);
-            const visibleList = type === 'source' ? props.source : props.target;
+            const visibleList = getVisibleList(type === 'source' ? props.source : props.target, type);
             const items = DomHandler.find(listElement, '[data-pc-section="item"]');
             const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
             const id = focusedItem && focusedItem.getAttribute('id');
@@ -399,14 +401,13 @@ export const PickList = React.memo(
 
         const onHomeKey = (event, type) => {
             if (event.ctrlKey && event.shiftKey) {
-                const isSource = type === 'sourceList';
+                const isSource = type === 'source';
                 const listItems = isSource ? sourceList : targetList;
                 const listElement = getListElement(type);
                 const items = DomHandler.find(listElement, '[data-pc-section="item"]');
                 const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
                 const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);
-
-                selection = [...listItems].slice(0, matchedOptionIndex + 1);
+                const selection = [...listItems].slice(0, matchedOptionIndex + 1);
 
                 if (isSource) {
                     onSelectionChange({ originalEvent: event, value: selection }, 'sourceSelection', props.onSourceSelectionChange);
@@ -425,7 +426,7 @@ export const PickList = React.memo(
             const items = DomHandler.find(listElement, '[data-pc-section="item"]');
 
             if (event.ctrlKey && event.shiftKey) {
-                const isSource = type === 'sourceList';
+                const isSource = type === 'source';
                 const listItems = isSource ? sourceList : targetList;
                 const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
                 const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);

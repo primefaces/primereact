@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.3.1](https://github.com/primefaces/primereact/tree/10.3.1) (2024-01-10)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.3.0...10.3.1)
+
+**Fixed bugs:**
+
+- Port missing fixes [\#5707](https://github.com/primefaces/primereact/issues/5707)
+- Image: ReferenceError: rotate is not defined image.esm.js (948:0) [\#5704](https://github.com/primefaces/primereact/issues/5704)
+- 'content' property now required for several components [\#5701](https://github.com/primefaces/primereact/issues/5701)
+- MegaMenu: Menu Items not showing without StrictMode (production) only after a stateupdate [\#5699](https://github.com/primefaces/primereact/issues/5699)
+- Confirm Dialog: Demo opening dialog 3 times [\#5697](https://github.com/primefaces/primereact/issues/5697)
+- Primereact in the Shadow DOM has problems with the Dropdown component style [\#5246](https://github.com/primefaces/primereact/issues/5246)
+- TypeScript: 10.3.0 Components complaining content is required [\#5692](https://github.com/primefaces/primereact/issues/5692)
+
 ## [10.3.0](https://github.com/primefaces/primereact/tree/10.3.0) (2024-01-05)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.2.1...10.3.0)
@@ -678,6 +692,7 @@
 - Calendar: `view` typescript missing `year` [\#4163](https://github.com/primefaces/primereact/issues/4163)
 - Ripple: first click on component has incorrect location [\#4160](https://github.com/primefaces/primereact/issues/4160)
 - primereact.min.css Error at background:transparent URL\(\) with base64 image [\#4097](https://github.com/primefaces/primereact/issues/4097)
+- ConfirmDialog: is not loading inside a Shadow DOM [\#4096](https://github.com/primefaces/primereact/issues/4096)
 
 ## [9.2.1](https://github.com/primefaces/primereact/tree/9.2.1) (2023-03-15)
 
