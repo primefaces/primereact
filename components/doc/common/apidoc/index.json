@@ -49598,6 +49598,22 @@
                     "description": "Defines valid properties in TreeProps component.",
                     "values": [
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Defines a string value that labels an interactive element."
+                        },
+                        {
+                            "name": "ariaLabelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Identifier of the underlying menu element."
+                        },
+                        {
                             "name": "checkboxIcon",
                             "optional": true,
                             "readonly": false,
