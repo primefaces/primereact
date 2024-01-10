@@ -6,7 +6,7 @@ export function LinkDoc(props) {
     const code = {
         basic: `
 <Button label="Link" link />
-<a href="https://react.dev" target="_blank" rel="noopener noreferrer" class="p-button font-bold">
+<a href="https://react.dev" target="_blank" rel="noopener noreferrer" className="p-button font-bold">
     Navigate
 </a>
         `,
@@ -18,7 +18,7 @@ export default function LinkDemo() {
     return (
         <div className="card flex justify-content-center">
             <Button label="Link" link />
-            <a href="https://react.dev" target="_blank" rel="noopener noreferrer" class="p-button font-bold">
+            <a href="https://react.dev" target="_blank" rel="noopener noreferrer" className="p-button font-bold">
                 Navigate
             </a>
 
@@ -34,7 +34,7 @@ export default function LinkDemo() {
     return (
         <div className="card flex justify-content-center">
             <Button label="Link" link />
-            <a href="https://react.dev" target="_blank" rel="noopener noreferrer" class="p-button font-bold">
+            <a href="https://react.dev" target="_blank" rel="noopener noreferrer" className="p-button font-bold">
                 Navigate
             </a>
         </div>
@@ -52,7 +52,7 @@ export default function LinkDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Button label="Link" link />
-                <a href="https://react.dev" target="_blank" rel="noopener noreferrer" class="p-button font-bold">
+                <a href="https://react.dev" target="_blank" rel="noopener noreferrer" className="p-button font-bold">
                     Navigate
                 </a>
             </div>
