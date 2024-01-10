@@ -63,24 +63,22 @@ export const PickList = React.memo(
 
         const handleScrollPosition = (listElement, direction) => {
             if (listElement) {
-                let list = DomHandler.findSingle(listElement, '[data-pc-section="list"]');
-
                 switch (direction) {
                     case 'up':
-                        scrollInView(list, -1);
+                        scrollInView(listElement, -1);
                         break;
 
                     case 'top':
-                        list.scrollTop = 0;
+                        listElement.scrollTop = 0;
                         break;
 
                     case 'down':
-                        scrollInView(list, 1);
+                        scrollInView(listElement, 1);
                         break;
 
                     case 'bottom':
                         /* TODO: improve this code block */
-                        setTimeout(() => (list.scrollTop = list.scrollHeight), 100);
+                        setTimeout(() => (listElement.scrollTop = listElement.scrollHeight), 100);
                         break;
 
                     default:
@@ -602,7 +600,7 @@ export const PickList = React.memo(
                     onListBlur={(e) => onListBlur(e, 'source')}
                     onOptionMouseDown={(index) => onOptionMouseDown(index, 'source')}
                     onItemClick={(e) => onItemClick(e, 'source')}
-                    focusedOptionId={focusedOptionId}
+                    focusedOptionId={focused['source'] ? focusedOptionId : null}
                     ariaActivedescendant={focused['source'] ? focusedOptionId : null}
                     itemTemplate={sourceItemTemplate}
                     header={props.sourceHeader}
@@ -656,7 +654,7 @@ export const PickList = React.memo(
                     onListBlur={(e) => onListBlur(e, 'target')}
                     onOptionMouseDown={(index) => onOptionMouseDown(index, 'target')}
                     onItemClick={(e) => onItemClick(e, 'target')}
-                    focusedOptionId={focusedOptionId}
+                    focusedOptionId={focused['target'] ? focusedOptionId : null}
                     ariaActivedescendant={focused['target'] ? focusedOptionId : null}
                     itemTemplate={targetItemTemplate}
                     header={props.targetHeader}
