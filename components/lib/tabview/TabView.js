@@ -293,6 +293,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     React.useEffect(() => {
         updateInkBar();
+        updateButtonState();
     });
 
     useMountEffect(() => {
