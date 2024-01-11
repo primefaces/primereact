@@ -518,8 +518,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const onColumnResize = (event) => {
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
-        elementRef.current.setAttribute('data-p-unselectable-text', true);
-        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+        DomHandler.addStyles(elementRef.current, {
+            userSelect: 'none'
+        });
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
         resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -578,8 +579,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         resizeHelperRef.current.style.display = 'none';
         resizeColumn.current = null;
         resizeColumnElement.current = null;
-        elementRef.current.setAttribute('data-p-unselectable-text', 'true');
-        !ptCallbacks.isUnstyled() && DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
+
+        elementRef.current.style.removeProperty('user-select');
 
         unbindColumnResizeEvents();
     };
