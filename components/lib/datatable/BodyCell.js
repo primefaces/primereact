@@ -178,7 +178,7 @@ export const BodyCell = React.memo((props) => {
 
             if (valid) {
                 if (submit && onCellEditComplete) {
-                    onCellEditComplete(params);
+                    setTimeout(() => onCellEditComplete(params));
                 }
 
                 closeCell(event);
