@@ -36,6 +36,7 @@ export function PTDoc(props) {
     const code = {
         basic: `
 <PickList
+    dataKey="id"
     source={source}
     target={target}
     onChange={onChange}
@@ -94,6 +95,7 @@ export default function PTDemo() {
     return (
         <div className="card">
             <PickList
+                dataKey="id"
                 source={source}
                 target={target}
                 onChange={onChange}
@@ -168,6 +170,7 @@ export default function PTDemo() {
     return (
         <div className="card">
             <PickList
+                dataKey="id"
                 source={source}
                 target={target}
                 onChange={onChange}
@@ -215,6 +218,7 @@ export default function PTDemo() {
             <DocSectionText {...props}></DocSectionText>
             <div className="card">
                 <PickList
+                    dataKey="id"
                     source={source}
                     target={target}
                     onChange={onChange}
