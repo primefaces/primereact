@@ -35,7 +35,7 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
+<PickList dataKey="id" source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
     sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
     sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         `,
@@ -75,7 +75,7 @@ export default function FilterDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
+            <PickList dataKey="id" source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
@@ -131,7 +131,7 @@ export default function FilterDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
+            <PickList dataKey="id" source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
@@ -166,6 +166,7 @@ export default function FilterDemo() {
             </DocSectionText>
             <div className="card">
                 <PickList
+                    dataKey="id"
                     source={source}
                     target={target}
                     onChange={onChange}

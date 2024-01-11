@@ -408,7 +408,7 @@ export interface PickListProps {
     /**
      * Name of the field that uniquely identifies the a record in the data.
      */
-    dataKey?: string | undefined;
+    dataKey: string;
     /**
      * The breakpoint to define the maximum width boundary when responsiveness is enabled.
      * @defaultValue '960px'.
