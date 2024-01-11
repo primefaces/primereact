@@ -36210,7 +36210,7 @@
                         },
                         {
                             "name": "dataKey",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "string",
                             "default": "",
@@ -40060,7 +40060,7 @@
                         },
                         {
                             "name": "dataKey",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "string",
                             "default": "",
