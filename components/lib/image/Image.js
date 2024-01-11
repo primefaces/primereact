@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
 import { EyeIcon } from '../icons/eye';
 import { RefreshIcon } from '../icons/refresh';
@@ -11,11 +11,12 @@ import { SearchPlusIcon } from '../icons/searchplus';
 import { TimesIcon } from '../icons/times';
 import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ImageBase.getProps(inProps, context);
 

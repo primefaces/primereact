@@ -1,7 +1,6 @@
 import PrimeReact from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { mergeProps } from '../utils/MergeProps';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { ObjectUtils, _mergeProps, classNames } from '../utils/Utils';
 
 const baseStyle = `
 .p-hidden-accessible {
@@ -540,7 +539,7 @@ export const ComponentBase = {
 
             return mergeSections || (!mergeSections && self)
                 ? useMergeProps
-                    ? mergeProps(globalPT, self, Object.keys(datasetProps).length ? datasetProps : {})
+                    ? _mergeProps([globalPT, self, Object.keys(datasetProps).length ? datasetProps : {}], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction })
                     : { ...globalPT, ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) }
                 : { ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) };
         };
@@ -563,7 +562,7 @@ export const ComponentBase = {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
 
-                    return mergeProps(base, self);
+                    return _mergeProps([base, self], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction });
                 }
 
                 return undefined;
@@ -613,7 +612,7 @@ const _usePT = (pt, callback, key, params) => {
     const fn = (value) => callback(value, key, params);
 
     if (pt?.hasOwnProperty('_usept')) {
-        const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || ComponentBase.context.ptOptions || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false, classNameMergeFunction } = pt['_usept'] || ComponentBase.context.ptOptions || {};
         const originalValue = fn(pt.originalValue);
         const value = fn(pt.value);
 
@@ -621,7 +620,7 @@ const _usePT = (pt, callback, key, params) => {
         else if (ObjectUtils.isString(value)) return value;
         else if (ObjectUtils.isString(originalValue)) return originalValue;
 
-        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps(originalValue, value) : { ...originalValue, ...value }) : value;
+        return mergeSections || (!mergeSections && value) ? (useMergeProps ? _mergeProps([originalValue, value], { classNameMergeFunction }) : { ...originalValue, ...value }) : value;
     }
 
     return fn(pt);

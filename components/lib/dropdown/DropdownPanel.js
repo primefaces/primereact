@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, cx, sx } = props;
         const context = React.useContext(PrimeReactContext);
         const virtualScrollerRef = React.useRef(null);

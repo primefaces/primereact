@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { TimesIcon } from '../icons/times';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
 
 export const TabPanel = () => {};
 
 export const TabView = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = TabViewBase.getProps(inProps, context);
 

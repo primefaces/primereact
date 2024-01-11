@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 import { JumpToPageInputBase } from './PaginatorBase';
 
 export const JumpToPageInput = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = JumpToPageInputBase.getProps(inProps, context);
     const ariaLabelValue = ariaLabel('jumpToPageInputLabel');

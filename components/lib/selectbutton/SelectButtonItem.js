@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const SelectButtonItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {

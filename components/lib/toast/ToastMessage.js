@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { localeOption } from '../api/Locale';
-import { useTimeout } from '../hooks/Hooks';
+import { useMergeProps, useTimeout } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const ToastMessage = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const {
             messageInfo,
             metaData: parentMetaData,

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
-import { IconUtils, DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = StepsBase.getProps(inProps, context);
 

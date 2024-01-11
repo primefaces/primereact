@@ -2,12 +2,12 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
@@ -16,6 +16,7 @@ import { TableHeader } from './TableHeader';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
+    const mergeProps = useMergeProps();
     const props = DataTableBase.getProps(inProps, context);
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);

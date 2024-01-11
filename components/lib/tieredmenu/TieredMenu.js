@@ -2,15 +2,16 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMatchMedia, useMountEffect, useEventListener, useUnmountEffect, useUpdateEffect, useResizeListener } from '../hooks/Hooks';
+import { useEventListener, useMatchMedia, useMergeProps, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
 
 export const TieredMenu = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = TieredMenuBase.getProps(inProps, context);
 

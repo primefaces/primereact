@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { FirstPageLinkBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const FirstPageLink = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = FirstPageLinkBase.getProps(inProps, context);
     const { ptm, cx } = props;

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = OrderListBase.getProps(inProps, context);
 

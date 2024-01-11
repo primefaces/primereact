@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, classNames } from '../utils/Utils';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const indicatorContent = React.useRef(null);
 
         const { ptm, cx } = props;

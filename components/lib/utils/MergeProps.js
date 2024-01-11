@@ -1,5 +1,6 @@
-export function mergeProps(...props) {
+export function _mergeProps(props, options = {}) {
     if (props) {
+        const { classNameMergeFunction } = options;
         const isFn = (o) => !!(o && o.constructor && o.call && o.apply);
 
         return props.reduce((merged, ps) => {
@@ -9,7 +10,14 @@ export function mergeProps(...props) {
                 if (key === 'style') {
                     merged['style'] = { ...merged['style'], ...ps['style'] };
                 } else if (key === 'className') {
-                    let newClassname = [merged['className'], ps['className']].join(' ').trim();
+                    let newClassname = '';
+
+                    if (classNameMergeFunction && classNameMergeFunction instanceof Function) {
+                        newClassname = classNameMergeFunction(merged['className'], ps['className']);
+                    } else {
+                        newClassname = [merged['className'], ps['className']].join(' ').trim();
+                    }
+
                     const isEmpty = newClassname === null || newClassname === undefined || newClassname === '';
 
                     merged['className'] = isEmpty ? undefined : newClassname;

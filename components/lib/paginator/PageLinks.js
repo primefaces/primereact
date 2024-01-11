@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
 
 export const PageLinks = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = PageLinksBase.getProps(inProps, context);
     const { ptm, cx } = props;

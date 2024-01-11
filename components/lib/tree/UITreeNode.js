@@ -1,15 +1,17 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
     const elementRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
+    const mergeProps = useMergeProps();
     const isLeaf = props.isNodeLeaf(props.node);
     const label = props.node.label;
     const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;

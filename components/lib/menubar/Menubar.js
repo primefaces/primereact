@@ -1,14 +1,15 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useResizeListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
-import { IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps, DomHandler } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MenubarBase.getProps(inProps, context);
 

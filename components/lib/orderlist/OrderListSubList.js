@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const OrderListSubList = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, cx } = props;
 
         const _ptm = (key, options) => {

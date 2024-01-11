@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { AngleDoubleRightIcon } from '../icons/angledoubleright';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { LastPageLinkBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const LastPageLink = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = LastPageLinkBase.getProps(inProps, context);
     const { ptm, cx } = props;

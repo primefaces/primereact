@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
+import { useMergeProps } from '../hooks/Hooks';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const PickListControls = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx, unstyled } = props;
 
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;

@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {

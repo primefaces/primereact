@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useUpdateEffect } from '../hooks/Hooks';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { CurrentPageReport } from './CurrentPageReport';
 import { FirstPageLink } from './FirstPageLink';
 import { JumpToPageInput } from './JumpToPageInput';
@@ -15,6 +15,7 @@ import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = PaginatorBase.getProps(inProps, context);
         const metaData = {

@@ -2,16 +2,17 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MentionBase.getProps(inProps, context);
 

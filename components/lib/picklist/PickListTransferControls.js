@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Locale';
 import { Button } from '../button/Button';
-import { useMatchMedia } from '../hooks/Hooks';
+import { useMatchMedia, useMergeProps } from '../hooks/Hooks';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
 import { AngleDoubleRightIcon } from '../icons/angledoubleright';
@@ -9,10 +10,10 @@ import { AngleDownIcon } from '../icons/angledown';
 import { AngleLeftIcon } from '../icons/angleleft';
 import { AngleRightIcon } from '../icons/angleright';
 import { AngleUpIcon } from '../icons/angleup';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
-import { ariaLabel } from '../api/Locale';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
     const { ptm, cx, unstyled } = props;
 

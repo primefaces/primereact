@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { BanIcon } from '../icons/ban';
 import { StarIcon } from '../icons/star';
 import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
-import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = RatingBase.getProps(inProps, context);
 

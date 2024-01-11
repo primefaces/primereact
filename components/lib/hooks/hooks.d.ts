@@ -301,3 +301,7 @@ export declare function useGlobalOnEscapeKey(props: { callback: (event: Keyboard
  * @param {boolean} [isVisible]
  */
 export declare function useDisplayOrder(group: string, isVisible?: boolean): number | undefined;
+/**
+ * Custom hook to return a function for merging properties.
+ */
+export declare function useMergeProps(): (args: object[], options?: any) => object | undefined;

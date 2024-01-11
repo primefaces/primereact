@@ -2,12 +2,12 @@ import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMergeProps } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { TreeTableBase } from './TreeTableBase';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
@@ -15,6 +15,7 @@ import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = TreeTableBase.getProps(inProps, context);
     const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);

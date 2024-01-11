@@ -2,16 +2,17 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { useUpdateEffect } from '../hooks/useUpdateEffect';
-import { useMountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, ObjectUtils, DomHandler, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { PanelMenuBase } from './PanelMenuBase';
 import { PanelMenuList } from './PanelMenuList';
 
 export const PanelMenu = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = PanelMenuBase.getProps(inProps, context);
 

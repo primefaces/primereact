@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const TieredMenuSub = React.memo(
     React.forwardRef((props, ref) => {
         const elementRef = React.useRef(null);
+        const mergeProps = useMergeProps();
         const { ptm, cx, sx } = props;
 
         const getPTOptions = (item, key) => {

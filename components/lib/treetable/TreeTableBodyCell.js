@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const TreeTableBodyCell = (props) => {
     const [editingState, setEditingState] = React.useState(false);
@@ -11,6 +11,7 @@ export const TreeTableBodyCell = (props) => {
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
     const tabIndexTimeout = React.useRef(null);
+    const mergeProps = useMergeProps();
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = (column) => ColumnBase.getCProps(column);
     const { ptm, ptmo, cx } = props.ptCallbacks;

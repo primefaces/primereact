@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId, DomHandler } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { DockBase } from './DockBase';
 
 export const Dock = React.memo(
@@ -11,6 +11,7 @@ export const Dock = React.memo(
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const [focused, setFocused] = React.useState(false);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = DockBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);

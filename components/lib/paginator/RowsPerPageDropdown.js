@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext, localeOption } from '../api/Api';
 import { Dropdown } from '../dropdown/Dropdown';
+import { useMergeProps } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
 import { RowsPerPageDropdownBase } from './PaginatorBase';
 import { ariaLabel } from '../api/Locale';
 
 export const RowsPerPageDropdown = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = RowsPerPageDropdownBase.getProps(inProps, context);
 

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { RowBase } from './RowBase';
-import { mergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
+import { RowBase } from './RowBase';
 
 export const Row = (inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = RowBase.getProps(inProps, context);
     //@todo Pass Parent MetaData

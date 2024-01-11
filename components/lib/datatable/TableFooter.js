@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
 import { FooterCell } from './FooterCell';
-import { mergeProps } from '../utils/Utils';
 
 export const TableFooter = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
+    const mergeProps = useMergeProps();
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
     const getColumnGroupProps = () => {

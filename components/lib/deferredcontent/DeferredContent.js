@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect } from '../hooks/Hooks';
-import { DeferredContentBase } from './DeferredContentBase';
-import { mergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
+import { useEventListener, useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { DeferredContentBase } from './DeferredContentBase';
 
 export const DeferredContent = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = DeferredContentBase.getProps(inProps, context);
 

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
-import { TimelineBase } from './TimelineBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
+import { TimelineBase } from './TimelineBase';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = TimelineBase.getProps(inProps, context);
         const { ptm, cx, isUnstyled } = TimelineBase.setMetaData({

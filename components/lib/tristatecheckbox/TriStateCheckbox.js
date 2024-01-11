@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = TriStateCheckboxBase.getProps(inProps, context);
 
