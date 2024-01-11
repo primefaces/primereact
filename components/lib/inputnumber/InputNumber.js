@@ -475,6 +475,14 @@ export const InputNumber = React.memo(
 
                     break;
 
+                // End
+                case 35:
+                // Home/Pos1
+                case 36:
+                    setTimeout(() => {
+                        initCursor();
+                    });
+
                 default:
                     break;
             }
