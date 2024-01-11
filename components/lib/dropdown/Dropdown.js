@@ -458,6 +458,10 @@ export const Dropdown = React.memo(
                 });
             }
 
+            if (props.filter) {
+                resetFilter();
+            }
+
             updateEditableLabel();
         };
 
