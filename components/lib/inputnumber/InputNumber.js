@@ -894,7 +894,13 @@ export const InputNumber = React.memo(
                     inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 } else if (newLength === currentLength) {
                     if (operation === 'insert' || operation === 'delete-back-single') {
-                        const newSelectionEnd = selectionEnd + Number(isDecimalSign(value) || isDecimalSign(insertedValueStr));
+                        let newSelectionEnd = selectionEnd;
+
+                        if (insertedValueStr === '0') {
+                            newSelectionEnd = selectionEnd + 1;
+                        } else {
+                            newSelectionEnd = newSelectionEnd + Number(isDecimalSign(value) || isDecimalSign(insertedValueStr));
+                        }
 
                         inputEl.setSelectionRange(newSelectionEnd, newSelectionEnd);
                     } else if (operation === 'delete-single') {
