@@ -193,7 +193,7 @@
                 border-radius: 0.65625rem;
                 overflow: hidden;
 
-                img {
+                img, svg {
                     width: 100%;
                     border-radius: inherit;
                     margin-bottom: -0.2rem;
@@ -293,8 +293,11 @@
                 width: auto;
                 background: var(--surface-100);
                 border-radius: 0.65625rem;
-
-                img {
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                
+                img, svg {
                     border-radius: inherit;
                     width: 100%;
                     height: auto;

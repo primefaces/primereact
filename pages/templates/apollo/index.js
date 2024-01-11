@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContentContext from '@/components/layout/appcontentcontext';
 import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
@@ -7,6 +8,8 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import ApolloLogo from './ApolloLogo';
+
+import Compatible from '../../../public/images/templates/apollo/apollo-features2-compatible.svg';
 
 const apolloRelatedData = [
     {
@@ -20,39 +23,6 @@ const apolloRelatedData = [
     {
         src: '/images/templates/related-diamond.png',
         href: ''
-    }
-];
-
-const apolloFeatures2Data = [
-    {
-        title: 'Fully Responsive',
-        description: 'Apollo is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/apollo/apollo-features2-responsive.png'
-    },
-    {
-        title: 'Lifetime Support',
-        description: 'Apollo has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
-    },
-    {
-        title: 'Top Notch Quality',
-        description: 'Superior standards with 100% compatibility for strict mode and linting tools.',
-        src: '/images/templates/apollo/apollo-features2-quality.png'
-    },
-    {
-        title: 'Cross Browser Compatible',
-        description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
-    },
-    {
-        title: 'Customizable Design',
-        description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
-    },
-    {
-        title: 'Mobile Experience',
-        description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/apollo/apollo-features2-mobile.png'
     }
 ];
 
@@ -194,6 +164,42 @@ const ApolloSeparator = () => {
 };
 
 const ApolloPage = () => {
+    const { darkMode } = useContext(AppContentContext);
+    const imgPathDark = darkMode ? '-dark' : '';
+
+    const apolloFeatures2Data = [
+        {
+            title: 'Fully Responsive',
+            description: 'Apollo is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
+            src: '/images/templates/apollo/apollo-features2-responsive.png'
+        },
+        {
+            title: 'Lifetime Support',
+            description: 'Apollo has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
+            src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        },
+        {
+            title: 'Top Notch Quality',
+            description: 'Superior standards with 100% compatibility for strict mode and linting tools.',
+            src: `/images/templates/apollo/apollo-features2-quality${imgPathDark}.svg`
+        },
+        {
+            title: 'Cross Browser Compatible',
+            description: 'First class support for Firefox, Safari, Chrome and Edge.',
+            template: <Compatible />
+        },
+        {
+            title: 'Customizable Design',
+            description: 'Fully customizable with a mixture of Sass and CSS variables.',
+            src: `/images/templates/apollo/apollo-features2-customizable${imgPathDark}.svg`
+        },
+        {
+            title: 'Mobile Experience',
+            description: 'Touch optimized enhanced mobile experience with responsive design.',
+            src: '/images/templates/apollo/apollo-features2-mobile.png'
+        }
+    ];
+
     const featuresAnimationTitle = (
         <h2>
             Features that the
