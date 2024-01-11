@@ -10,7 +10,7 @@ export function FullScreenDoc(props) {
     const code = {
         basic: `
 <div className="card flex justify-content-center">
-    <Sidebar visible={visible} onHide={() => setVisible(false)}>
+    <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
         <h2>Sidebar</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
