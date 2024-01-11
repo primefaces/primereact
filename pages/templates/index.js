@@ -18,7 +18,7 @@ const TemplatesPage = () => {
                             <a href="https://apollo.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="apollo" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
+                            <a href="https://www.primefaces.org/layouts/apollo-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -48,7 +48,7 @@ const TemplatesPage = () => {
                             <a href="https://diamond.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="diamond" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
+                            <a href="https://www.primefaces.org/layouts/diamond-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -63,7 +63,7 @@ const TemplatesPage = () => {
                             <a href="https://www.primefaces.org/atlantis-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="atlantis" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
+                            <a href="https://www.primefaces.org/layouts/atlantis-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -78,7 +78,7 @@ const TemplatesPage = () => {
                             <a href="https://www.primefaces.org/freya-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="freya" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
+                            <a href="https://www.primefaces.org/layouts/freya-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
@@ -93,7 +93,7 @@ const TemplatesPage = () => {
                             <a href="https://ultima.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
-                            <a href="ultima" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
+                            <a href="https://www.primefaces.org/layouts/ultima-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Learn More</span>
                             </a>
                         </div>
