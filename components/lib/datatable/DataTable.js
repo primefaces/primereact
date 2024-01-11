@@ -67,6 +67,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const dropPosition = React.useRef(null);
     const styleElement = React.useRef(null);
     const responsiveStyleElement = React.useRef(null);
+    const beforeResizeStyleElement = React.useRef(null);
+
     const columnWidthsState = React.useRef(null);
     const tableWidthState = React.useRef(null);
     const resizeColumn = React.useRef(null);
@@ -504,6 +506,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const onColumnResizeStart = (e) => {
+        createBeforeResizeStyleElement();
         const { originalEvent: event, column } = e;
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
@@ -519,7 +522,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
         elementRef.current.setAttribute('data-p-unselectable-text', true);
-        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
         resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -579,8 +582,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         resizeColumn.current = null;
         resizeColumnElement.current = null;
         elementRef.current.setAttribute('data-p-unselectable-text', 'true');
-        !ptCallbacks.isUnstyled() && DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
-
+        destroyBeforeResizeStyleElement();
         unbindColumnResizeEvents();
     };
 
@@ -790,6 +792,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const createBeforeResizeStyleElement = () => {
+        beforeResizeStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
+        let innerHTML = `
+[data-pc-name="datatable"][${attributeSelector.current}] {
+    user-select:none;
+}
+        `;
+
+        beforeResizeStyleElement.current.innerHTML = innerHTML;
+    };
+
     const createStyleElement = () => {
         styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
     };
@@ -841,6 +854,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const destroyStyleElement = () => {
         styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
+    };
+
+    const destroyBeforeResizeStyleElement = () => {
+        beforeResizeStyleElement.current = DomHandler.removeInlineStyle(beforeResizeStyleElement.current);
     };
 
     const onPageChange = (e) => {
@@ -1468,6 +1485,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         unbindColumnResizeEvents();
         destroyStyleElement();
         destroyResponsiveStyle();
+        destroyBeforeResizeStyleElement();
     });
 
     React.useImperativeHandle(ref, () => ({
