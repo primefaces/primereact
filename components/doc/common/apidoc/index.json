@@ -11933,7 +11933,7 @@
                             "name": "rowEditor",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean",
+                            "type": "boolean | Function",
                             "default": "false",
                             "description": "Displays icons to edit row."
                         },
