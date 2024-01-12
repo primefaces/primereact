@@ -173,7 +173,7 @@ export const BodyCell = React.memo((props) => {
 
             let valid = true;
 
-            if (cellEditValidator) {
+            if (!submit && cellEditValidator) {
                 valid = cellEditValidator(params);
             }
 
@@ -361,13 +361,11 @@ export const BodyCell = React.memo((props) => {
 
     const onKeyDown = (event) => {
         if (props.editMode !== 'row') {
-            if (event.which === 13 || event.which === 9) {
-                // tab || enter
+            if (event.code === 'Enter' || event.code === 'Tab') {
                 switchCellToViewMode(event, true);
             }
 
-            if (event.which === 27) {
-                // escape
+            if (event.code === 'Escape') {
                 switchCellToViewMode(event, false);
             }
         }
@@ -375,9 +373,8 @@ export const BodyCell = React.memo((props) => {
         if (props.allowCellSelection) {
             const { target, currentTarget: cell } = event;
 
-            switch (event.which) {
-                //left arrow
-                case 37:
+            switch (event.code) {
+                case 'ArrowLeft':
                     let prevCell = findPrevSelectableCell(cell);
 
                     if (prevCell) {
@@ -388,8 +385,7 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //right arrow
-                case 39:
+                case 'ArrowRight':
                     let nextCell = findNextSelectableCell(cell);
 
                     if (nextCell) {
@@ -400,8 +396,7 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //up arrow
-                case 38:
+                case 'ArrowUp':
                     let upCell = findUpSelectableCell(cell);
 
                     if (upCell) {
@@ -412,8 +407,7 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //down arrow
-                case 40:
+                case 'ArrowDown':
                     let downCell = findDownSelectableCell(cell);
 
                     if (downCell) {
@@ -424,8 +418,8 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //enter
-                case 13:
+                case 'Enter':
+                case 'NumpadEnter':
                     if (event.shiftKey || event.ctrlKey) {
                         // #5192 allow TextArea to add new lines
                     } else if (!DomHandler.isClickable(target)) {
@@ -435,8 +429,7 @@ export const BodyCell = React.memo((props) => {
 
                     break;
 
-                //space
-                case 32:
+                case 'Space':
                     if (!DomHandler.isClickable(target) && !target.readOnly) {
                         onClick(event);
                         event.preventDefault();
