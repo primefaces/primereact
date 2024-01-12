@@ -33,6 +33,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(AccordionBase.css.styles, isUnstyled, { name: 'accordion' });
 
+    const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
+
     const getTabPT = (tab, key, index) => {
         const atProps = AccordionTabBase.getCProps(tab);
         const tabMetaData = {
@@ -48,10 +50,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             }
         };
 
-        return mergeProps(ptm(`accordion.${key}`, { tab: tabMetaData }), ptm(`tab.${key}`, { accordiontab: tabMetaData }), ptm(`tab.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
+        return mergeProps(ptm(`tab.${key}`, { tab: tabMetaData }), ptm(`tab.${key}`, { accordiontab: tabMetaData }), ptm(`tab.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
     };
-
-    const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
 
     const onTabHeaderClick = (event, tab, index) => {
         changeActiveIndex(event, tab, index);
