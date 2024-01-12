@@ -26398,6 +26398,12 @@
                     ],
                     "returnType": "number | undefined",
                     "description": "Custom hook to use display order of component of one and the same group"
+                },
+                "useMergeProps": {
+                    "name": "useMergeProps",
+                    "parameters": [],
+                    "returnType": "Function",
+                    "description": "Custom hook to return a function for merging properties."
                 }
             }
         },
@@ -39485,6 +39491,12 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean"
+                        },
+                        {
+                            "name": "classNameMergeFunction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function"
                         }
                     ],
                     "callbacks": []
@@ -54143,12 +54155,16 @@
                     ],
                     "returnType": "string | undefined"
                 },
-                "mergeProps": {
-                    "name": "mergeProps",
+                "_mergeProps": {
+                    "name": "_mergeProps",
                     "parameters": [
                         {
                             "name": "args",
                             "type": "object[]"
+                        },
+                        {
+                            "name": "options",
+                            "type": "any"
                         }
                     ],
                     "returnType": "object | undefined"
