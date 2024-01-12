@@ -1331,7 +1331,7 @@
                             "description": "Custom passthrough(pt) options for MultiSelect."
                         },
                         {
-                            "name": "multisatecheckbox",
+                            "name": "multistatecheckbox",
                             "optional": true,
                             "readonly": false,
                             "type": "MultiStateCheckboxPassThroughOptions",
