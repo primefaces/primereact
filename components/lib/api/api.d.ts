@@ -497,7 +497,7 @@ export interface PrimeReactPTOptions {
     /**
      * Custom passthrough(pt) options for MultiStateCheckbox.
      */
-    multisatecheckbox?: MultiStateCheckboxPassThroughOptions;
+    multistatecheckbox?: MultiStateCheckboxPassThroughOptions;
     /**
      * Custom passthrough(pt) options for OrderList.
      */
