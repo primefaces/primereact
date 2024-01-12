@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { TerminalService } from '../terminalservice/TerminalService';
-import { DomHandler, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, classNames } from '../utils/Utils';
 import { TerminalBase } from './TerminalBase';
 
 export const Terminal = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = TerminalBase.getProps(inProps, context);
 

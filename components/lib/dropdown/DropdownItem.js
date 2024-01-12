@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const DropdownItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx, selected, disabled, option, label } = props;
 
     const getPTOptions = (key) => {

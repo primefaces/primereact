@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableHeader = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
     const filterTimeout = React.useRef(null);
 

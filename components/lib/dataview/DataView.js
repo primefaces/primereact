@@ -1,15 +1,17 @@
 import * as React from 'react';
 import PrimeReact, { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { SpinnerIcon } from '../icons/spinner';
 import { ThLargeIcon } from '../icons/thlarge';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = DataViewLayoutOptionsBase.getProps(inProps, context);
     const { ptm, cx } = DataViewLayoutOptionsBase.setMetaData({

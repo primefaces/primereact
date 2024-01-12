@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { DomHandler, mergeProps, UniqueComponentId } from '../utils/Utils';
-import { ScrollPanelBase } from './ScrollPanelBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { DomHandler, UniqueComponentId } from '../utils/Utils';
+import { ScrollPanelBase } from './ScrollPanelBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = ScrollPanelBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);

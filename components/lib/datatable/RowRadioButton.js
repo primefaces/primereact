@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { DomHandler, mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
+import { DomHandler } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const inputRef = React.useRef(null);
+    const mergeProps = useMergeProps();
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const { ptm, ptmo, cx } = props.ptCallbacks;
 

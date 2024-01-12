@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, classNames } from '../utils/Utils';
 import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
@@ -9,6 +9,7 @@ export const Ripple = React.memo(
         const [isMounted, setMounted] = React.useState(false);
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = RippleBase.getProps(inProps, context);
         const isRippleActive = (context && context.ripple) || PrimeReact.ripple;

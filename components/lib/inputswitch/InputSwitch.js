@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
 
 export const InputSwitch = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = InputSwitchBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);

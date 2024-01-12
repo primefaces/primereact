@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
@@ -9,12 +9,13 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { Tree } from '../tree/Tree';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = TreeSelectBase.getProps(inProps, context);
 

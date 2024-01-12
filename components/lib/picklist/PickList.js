@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { PickListBase } from './PickListBase';
 import { PickListControls } from './PickListControls';
 import { PickListSubList } from './PickListSubList';
@@ -10,6 +10,7 @@ import { PickListTransferControls } from './PickListTransferControls';
 
 export const PickList = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = PickListBase.getProps(inProps, context);
 

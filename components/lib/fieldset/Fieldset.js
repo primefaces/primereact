@@ -2,14 +2,15 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { FieldsetBase } from './FieldsetBase';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = FieldsetBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);

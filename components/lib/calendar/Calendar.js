@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -11,12 +11,13 @@ import { ChevronUpIcon } from '../icons/chevronup';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = CalendarBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);

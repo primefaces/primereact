@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
 
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ChipBase.getProps(inProps, context);
         const elementRef = React.useRef(null);

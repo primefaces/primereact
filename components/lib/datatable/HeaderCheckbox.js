@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { IconUtils, mergeProps } from '../utils/Utils';
-import { CheckIcon } from '../icons/check';
 import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { IconUtils } from '../utils/Utils';
 
 export const HeaderCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const mergeProps = useMergeProps();
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const { ptm, ptmo, cx } = props.ptCallbacks;
 

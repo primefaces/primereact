@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = BreadCrumbBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);

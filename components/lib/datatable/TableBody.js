@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, ptmo, cx, isUnsyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);

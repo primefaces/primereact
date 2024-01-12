@@ -2,14 +2,15 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMatchMedia, useMergeProps, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ContextMenuBase.getProps(inProps, context);
 

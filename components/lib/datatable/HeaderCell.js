@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { usePrevious } from '../hooks/Hooks';
+import { useMergeProps, usePrevious } from '../hooks/Hooks';
 import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
@@ -13,6 +13,7 @@ export const HeaderCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
+    const mergeProps = useMergeProps();
     const { metaData: parentMetaData, ptCallbacks, index } = props;
     const { ptm, ptmo, cx } = props.ptCallbacks;
 

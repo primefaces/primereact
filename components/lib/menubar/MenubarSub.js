@@ -1,11 +1,13 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, cx } = props;
 
         const getPTOptions = (processedItem, key, index) => {

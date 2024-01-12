@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronUpIcon } from '../icons/chevronup';
-import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const OrganizationChartNode = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const node = props.node;
     const [expandedState, setExpandedState] = React.useState(node.expanded);
     const leaf = node.leaf === false ? false : !(node.children && node.children.length);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -10,11 +10,12 @@ import { PencilIcon } from '../icons/pencil';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
 export const BodyCell = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [editingState, setEditingState] = React.useState(props.editing);
     const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
     const [styleObjectState, setStyleObjectState] = React.useState({});

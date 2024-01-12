@@ -1,19 +1,20 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import { SpinnerIcon } from '../icons/spinner';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MultiSelectBase.getProps(inProps, context);
 

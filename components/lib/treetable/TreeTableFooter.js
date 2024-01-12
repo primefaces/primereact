@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
-import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { ObjectUtils } from '../utils/Utils';
 
 export const TreeTableFooter = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (column, name) => {

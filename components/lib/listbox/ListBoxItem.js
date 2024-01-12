@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const mergeProps = useMergeProps();
     const {
         ptCallbacks: { ptm, cx }
     } = props;

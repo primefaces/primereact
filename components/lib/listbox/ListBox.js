@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
@@ -11,6 +11,7 @@ import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ListBoxBase.getProps(inProps, context);
 

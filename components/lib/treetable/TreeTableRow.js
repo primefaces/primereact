@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 
 export const TreeTableRow = React.memo((props) => {
@@ -14,6 +15,7 @@ export const TreeTableRow = React.memo((props) => {
     const checkboxRef = React.useRef(null);
     const checkboxBoxRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
+    const mergeProps = useMergeProps();
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
 
     const getColumnProp = (column, name) => {

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, cx } = props;
         const elementRef = React.useRef(null);
 

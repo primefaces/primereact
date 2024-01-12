@@ -3,9 +3,9 @@ import { TransitionGroup } from 'react-transition-group';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
@@ -13,6 +13,7 @@ let messageIdx = 0;
 
 export const Toast = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ToastBase.getProps(inProps, context);
 

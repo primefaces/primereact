@@ -4,7 +4,7 @@ import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { FilterIcon } from '../icons/filter';
 import { FilterSlashIcon } from '../icons/filterslash';
 import { PlusIcon } from '../icons/plus';
@@ -13,7 +13,7 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -21,6 +21,7 @@ export const ColumnFilter = React.memo((props) => {
     const iconRef = React.useRef(null);
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
+    const mergeProps = useMergeProps();
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const context = React.useContext(PrimeReactContext);

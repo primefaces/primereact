@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { useEventListener, useMergeProps } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 
 export const SplitterPanel = () => {};
 
 export const Splitter = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = SplitterBase.getProps(inProps, context);
 

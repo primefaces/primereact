@@ -9,7 +9,7 @@ import * as React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 
-export declare function mergeProps(...args: object[]): object | undefined;
+export declare function _mergeProps(args: object[], options?: any): object | undefined;
 
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;

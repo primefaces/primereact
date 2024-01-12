@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
 
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = CheckboxBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);

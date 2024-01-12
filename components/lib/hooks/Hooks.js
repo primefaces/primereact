@@ -8,6 +8,7 @@ import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey } from './useGlobalOn
 import { useIntersectionObserver } from './useIntersectionObserver';
 import { useInterval } from './useInterval';
 import { useMatchMedia } from './useMatchMedia';
+import { useMergeProps } from './useMergeProps';
 import { useMountEffect } from './useMountEffect';
 import { useMouse } from './useMouse';
 import { useMove } from './useMove';
@@ -34,6 +35,7 @@ export {
     useInterval,
     useLocalStorage,
     useMatchMedia,
+    useMergeProps,
     useMountEffect,
     useMouse,
     useMove,

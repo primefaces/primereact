@@ -3,10 +3,10 @@ import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
 
 export const confirmPopup = (props = {}) => {
@@ -26,6 +26,7 @@ export const confirmPopup = (props = {}) => {
 
 export const ConfirmPopup = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ConfirmPopupBase.getProps(inProps, context);
 

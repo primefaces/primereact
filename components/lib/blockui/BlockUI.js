@@ -1,12 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = BlockUIBase.getProps(inProps, context);
 

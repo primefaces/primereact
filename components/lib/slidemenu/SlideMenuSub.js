@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const SlideMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const [renderSubMenu, setRenderSubMenu] = React.useState({});
+    const mergeProps = useMergeProps();
     const { ptm, cx, sx } = props;
 
     const getPTOptions = (item, key) => {

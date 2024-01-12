@@ -1,18 +1,19 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = DropdownBase.getProps(inProps, context);
         const [filterState, setFilterState] = React.useState('');

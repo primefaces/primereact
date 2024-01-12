@@ -2,16 +2,17 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { TieredMenu } from '../tieredmenu/TieredMenu';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { SplitButtonBase } from './SplitButtonBase';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = SplitButtonBase.getProps(inProps, context);
 

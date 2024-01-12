@@ -2,11 +2,11 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
@@ -18,6 +18,7 @@ export const SpeedDial = React.memo(
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
         const visible = props.onVisibleChange ? props.visible : visibleState;

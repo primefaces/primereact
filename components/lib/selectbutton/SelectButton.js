@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
 
 export const SelectButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = SelectButtonBase.getProps(inProps, context);
 

@@ -1,16 +1,17 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMatchMedia, useMergeProps, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
 import { BarsIcon } from '../icons/bars';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MegaMenuBase.getProps(inProps, context);
 

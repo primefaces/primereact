@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { TreeTableRow } from './TreeTableRow';
 
 export const TreeTableBody = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
     const { ptm, cx } = props.ptCallbacks;

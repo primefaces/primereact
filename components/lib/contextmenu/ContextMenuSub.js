@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const ContextMenuSub = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const submenuRef = React.useRef(null);
         const active = props.root || !props.resetMenu;
         const { ptm, cx } = props;
