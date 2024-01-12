@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const DeferredDemo = ({ options, children, onLoad }) => {
     const [visible, setVisible] = useState(false);
@@ -7,7 +7,7 @@ const DeferredDemo = ({ options, children, onLoad }) => {
     const observerRef = useRef(null);
     const elementRef = useRef(null);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const handleIntersection = ([entry]) => {
             clearTimeout(timeoutRef.current);
 
@@ -33,13 +33,13 @@ const DeferredDemo = ({ options, children, onLoad }) => {
 
             clearTimeout(timeoutRef.current);
         };
-    }, [visible, onLoad, options]);
+    }, [visible, onLoad, options]);*/
 
     return (
         <>
             {!visible && (
-                <div ref={elementRef} className="demo-section-loading">
-                    Loading...
+                <div ref={elementRef} class="card">
+                    <div class="deferred-demo-loading"></div>
                 </div>
             )}
             {visible && children}
