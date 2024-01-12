@@ -48,7 +48,8 @@ export const PageLinks = React.memo((inProps) => {
                     onClick: (e) => onPageLinkClick(e, pageLink),
                     className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
                     disabled: props.disabled,
-                    'aria-label': ariaLabel('pageLabel', { page: pageLink })
+                    'aria-label': ariaLabel('pageLabel', { page: pageLink }),
+                    'aria-current': pageLink - 1 === props.page ? 'true' : undefined
                 },
                 getPTOptions(pageLink, 'pageButton')
             );
@@ -71,6 +72,8 @@ export const PageLinks = React.memo((inProps) => {
                     page: pageLink - 1,
                     currentPage: props.page,
                     totalPages: props.pageCount,
+                    ariaLabel: ariaLabel('pageLabel', { page: pageLink }),
+                    ariaCurrent: pageLink - 1 === props.page ? 'true' : undefined,
                     element,
                     props
                 };

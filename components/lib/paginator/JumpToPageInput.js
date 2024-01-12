@@ -7,6 +7,7 @@ import { JumpToPageInputBase } from './PaginatorBase';
 export const JumpToPageInput = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = JumpToPageInputBase.getProps(inProps, context);
+    const ariaLabelValue = ariaLabel('jumpToPageInputLabel');
 
     const onChange = (event) => {
         if (props.onChange) {
@@ -15,7 +16,9 @@ export const JumpToPageInput = React.memo((inProps) => {
     };
 
     const value = props.pageCount > 0 ? props.page + 1 : 0;
-    const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} pt={props.ptm('JTPInput')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} />;
+    const element = (
+        <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} pt={props.ptm('JTPInput')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} aria-label={ariaLabelValue} />
+    );
 
     if (props.template) {
         const defaultOptions = {
@@ -23,6 +26,7 @@ export const JumpToPageInput = React.memo((inProps) => {
             onChange: onChange,
             disabled: props.disabled,
             className: 'p-paginator-page-input',
+            ariaLabel: ariaLabelValue,
             element,
             props
         };
