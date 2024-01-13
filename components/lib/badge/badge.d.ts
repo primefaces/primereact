@@ -48,10 +48,10 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     value?: any | null | undefined;
     /**
-     * Severity type of the badge.
+     * Defines the severity styling, valid values are "secondary", "success", "info", "warn", "error", "danger", "help".
      * @defaultValue null
      */
-    severity?: 'success' | 'info' | 'warning' | 'danger' | null | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warn' | 'error' | 'danger' | 'help' | undefined;
     /**
      * Size of the badge, valid options are "large" and "xlarge".
      * @defaultValue null

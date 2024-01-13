@@ -15,9 +15,10 @@ const Tailwind = {
                     'bg-gray-500 ': props.severity == 'secondary',
                     'bg-green-500 ': props.severity == 'success',
                     'bg-blue-500 ': props.severity == 'info',
-                    'bg-orange-500 ': props.severity == 'warning',
+                    'bg-orange-500 ': props.severity == 'warn',
                     'bg-purple-500 ': props.severity == 'help',
-                    'bg-red-500 ': props.severity == 'danger'
+                    'bg-red-500 ': props.severity == 'danger',
+                    'bg-red-500 ': props.severity == 'error'
                 },
                 {
                     'text-xs min-w-[1.5rem] h-[1.5rem] leading-[1.5rem]': props.size == null,

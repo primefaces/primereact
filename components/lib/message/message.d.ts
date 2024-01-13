@@ -56,6 +56,7 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     text?: React.ReactNode | ((props: MessageProps) => React.ReactNode);
     /**
      * Severity level of the message.
+     * @defaultValue info
      */
     severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
     /**

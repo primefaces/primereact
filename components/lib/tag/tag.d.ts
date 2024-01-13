@@ -55,10 +55,10 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
      */
     value?: React.ReactNode;
     /**
-     * Severity type of the tag.
+     * Defines the severity styling, valid values are "secondary", "success", "info", "warn", "error", "danger", "help".
      * @defaultValue null
      */
-    severity?: 'success' | 'info' | 'warning' | 'danger' | null | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warn' | 'error' | 'danger' | 'help' | undefined;
     /**
      * Whether the corners of the tag are rounded.
      * @defaultValue false

@@ -418,7 +418,7 @@ export const FileUpload = React.memo(
         };
 
         const onRemoveClick = (e, badgeOptions, index) => {
-            if (badgeOptions.severity === 'warning') remove(e, index);
+            if (badgeOptions.severity === 'warn') remove(e, index);
             else removeUploadedFiles(e, index);
         };
 
@@ -505,7 +505,7 @@ export const FileUpload = React.memo(
 
         const createFiles = () => {
             const badgeOptions = {
-                severity: 'warning',
+                severity: 'warn',
                 value: localeOption('pending') || 'Pending'
             };
             const content = filesState.map((file, index) => createFile(file, index, badgeOptions));

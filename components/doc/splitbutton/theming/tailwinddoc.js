@@ -26,15 +26,17 @@ const Tailwind = {
             icon: 'mr-2'
         },
         menu: {
-            className: classNames('outline-none', 'm-0 p-0 list-none')
+            className: classNames('outline-none', 'py-1	px-0 rounded-md	 list-none bg-white	border-none shadow-lg')
         },
-        menulist: 'relative',
-        menubutton: {
+        menuList: 'm-0 p-0 border-none outline-none no-underline list-none',
+        menuButton: {
             root: ({ parent }) => ({
                 className: classNames('rounded-l-none', { 'rounded-r-full': parent.props.rounded })
             }),
             label: 'hidden'
-        }
+        },
+        anchor: 'cursor-pointer flex items-center relative overflow-hidden py-3 px-5 rounded-none transition select-none hover:text-gray-700 hover:bg-gray-200',
+        menuIcon: 'mr-2'
     }
 }
         `

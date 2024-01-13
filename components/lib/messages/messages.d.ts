@@ -74,7 +74,8 @@ export interface MessagesMessage {
      */
     id?: string | undefined;
     /**
-     * Severity of the message.
+     * Severity level of the message.
+     * @defaultValue info
      */
     severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
     /**

@@ -127,9 +127,10 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     outlined?: boolean | undefined;
     /**
-     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger".
+     * Defines the severity styling, valid values are "secondary", "success", "info", "warn", "error", "danger", "help".
+     * @defaultValue null
      */
-    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warn' | 'error' | 'danger' | 'help' | undefined;
     /**
      * Defines the size of the button, valid values are "small" and "large".
      */
