@@ -1,6 +1,5 @@
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AppendToDoc } from '@/components/doc/configuration/appendtodoc';
-import { StyleContainer } from '@/components/doc/configuration/stylecontainer';
 import { CSSTransitionDoc } from '@/components/doc/configuration/csstransitiondoc';
 import { FilterMatchModeDoc } from '@/components/doc/configuration/filtermatchmodedoc';
 import { HideOverlaysDoc } from '@/components/doc/configuration/hideoverlaysdoc';
@@ -9,9 +8,11 @@ import { AddLocaleDoc } from '@/components/doc/configuration/locale/addlocaledoc
 import { ImportDoc } from '@/components/doc/configuration/locale/importdoc';
 import { RepositoryDoc } from '@/components/doc/configuration/locale/repositorydoc';
 import { SetLocaleDoc } from '@/components/doc/configuration/locale/setlocaledoc';
+import { SetupLocaleDoc } from '@/components/doc/configuration/locale/setuplocaledoc';
 import { NonceDoc } from '@/components/doc/configuration/noncedoc';
 import { NullSortOrderDoc } from '@/components/doc/configuration/nullsortorderdoc';
 import { RippleDoc } from '@/components/doc/configuration/rippledoc';
+import { StyleContainer } from '@/components/doc/configuration/stylecontainer';
 import { ZIndexDoc } from '@/components/doc/configuration/zindexdoc';
 
 const InstallationPage = () => {
@@ -70,6 +71,11 @@ const InstallationPage = () => {
             id: 'Locale',
             label: 'Locale',
             children: [
+                {
+                    id: 'setup',
+                    label: 'Setup',
+                    component: SetupLocaleDoc
+                },
                 {
                     id: 'import',
                     label: 'Import',
