@@ -3,14 +3,15 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/confirmdialog/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/confirmdialog/basicdoc';
 import { DeclarativeDoc } from '@/components/doc/confirmdialog/declarativedoc';
+import { HeadlessDoc } from '@/components/doc/confirmdialog/headlessdoc';
 import { ImportDoc } from '@/components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '@/components/doc/confirmdialog/positiondoc';
 import { PTDoc } from '@/components/doc/confirmdialog/pt/ptdoc';
 import { Wireframe } from '@/components/doc/confirmdialog/pt/wireframe';
-import { StyledDoc } from '@/components/doc/confirmdialog/theming/styleddoc';
+import { ResponsiveDoc } from '@/components/doc/confirmdialog/responsivedoc';
 import { TemplateDoc } from '@/components/doc/confirmdialog/templatedoc';
+import { StyledDoc } from '@/components/doc/confirmdialog/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/confirmdialog/theming/tailwinddoc';
-import { HeadlessDoc } from '@/components/doc/confirmdialog/headlessdoc';
 import { ConfirmDialog } from '@/components/lib/primereact.all';
 
 const ConfirmDialogDemo = () => {
@@ -39,6 +40,11 @@ const ConfirmDialogDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
         },
         {
             id: 'headless',
