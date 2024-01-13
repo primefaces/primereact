@@ -32,7 +32,7 @@ export const InputMask = React.memo(
             let inputEl = elementRef.current;
 
             if (!inputEl || !inputEl.offsetParent || inputEl !== document.activeElement) {
-                return;
+                return null;
             }
 
             if (typeof first === 'number') {
@@ -57,9 +57,9 @@ export const InputMask = React.memo(
                     begin = 0 - range.duplicate().moveStart('character', -100000);
                     end = begin + range.text.length;
                 }
-
-                return { begin: begin, end: end };
             }
+
+            return { begin: begin, end: end };
         };
 
         const isCompleted = () => {
@@ -145,6 +145,10 @@ export const InputMask = React.memo(
             let curVal = elementRef.current.value;
             let pos = caret();
 
+            if (!pos) {
+                return;
+            }
+
             if (oldVal.current.length && oldVal.current.length > curVal.length) {
                 // a deletion or backspace happened
                 checkVal(true);
@@ -203,6 +207,11 @@ export const InputMask = React.memo(
             //backspace, delete, and escape get special treatment
             if (k === 8 || k === 46 || (DomHandler.isIOS() && k === 127)) {
                 pos = caret();
+
+                if (!pos) {
+                    return;
+                }
+
                 begin = pos.begin;
                 end = pos.end;
 
@@ -234,8 +243,13 @@ export const InputMask = React.memo(
                 return;
             }
 
+            const pos = caret();
+
+            if (!pos) {
+                return;
+            }
+
             let k = e.which || e.keyCode,
-                pos = caret(),
                 p,
                 c,
                 next,
