@@ -93,7 +93,7 @@ import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { Badge } from 'primereact/badge';
-importy { Avatar } from 'primereact/avatar';  
+import { Avatar } from 'primereact/avatar';  
 
 export default function TemplateDemo() {
     const itemRenderer = (item) => (
