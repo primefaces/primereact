@@ -1,5 +1,5 @@
-import { DomHandler } from '../utils/Utils';
 import { useEffect } from 'react';
+import { DomHandler } from '../utils/Utils';
 
 /**
  * Priorities of different components (bigger number handled first)
@@ -42,13 +42,11 @@ const globalEscKeyHandlingLogic = {
      */
     onGlobalKeyDown(event) {
         // Do nothing if not an "esc" key is pressed:
-        if (event.key !== 'Esc' && event.key !== 'Escape') return;
+        if (event.code !== 'Escape') return;
 
         const escKeyListeners = globalEscKeyHandlingLogic.escKeyListeners;
         const maxPrimaryPriority = Math.max(...escKeyListeners.keys());
-
         const theMostImportantEscHandlersSet = escKeyListeners.get(maxPrimaryPriority);
-
         const maxSecondaryPriority = Math.max(...theMostImportantEscHandlersSet.keys());
         const theMostImportantEscHandler = theMostImportantEscHandlersSet.get(maxSecondaryPriority);
 
@@ -106,5 +104,5 @@ export const useGlobalOnEscapeKey = ({ callback, when, priority }) => {
         if (!when) return;
 
         return globalEscKeyHandlingLogic.addListener(callback, priority);
-    }, [when, callback, priority]);
+    }, [callback, when, priority]);
 };

@@ -34,7 +34,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         callback: (event) => {
             onClose(event);
         },
-        when: visibleState && props.closeOnEscape,
+        when: visibleState && props.closeOnEscape && sidebarDisplayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.SIDEBAR, sidebarDisplayOrder]
     });
 
