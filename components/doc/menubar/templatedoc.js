@@ -187,7 +187,7 @@ import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { MenuItem } from 'primereact/menuitem';
 import { Badge } from 'primereact/badge';
-importy { Avatar } from 'primereact/avatar';  
+import { Avatar } from 'primereact/avatar';  
 
 export default function TemplateDemo() {
     const itemRenderer = (item) => (
