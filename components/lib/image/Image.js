@@ -28,7 +28,6 @@ export const Image = React.memo(
         const imageRef = React.useRef(null);
         const maskRef = React.useRef(null);
         const previewRef = React.useRef(null);
-        const previewClick = React.useRef(false);
         const previewButton = React.useRef(null);
         const zoomOutDisabled = scaleState <= 0.5;
         const zoomInDisabled = scaleState >= 1.5;
@@ -70,18 +69,10 @@ export const Image = React.memo(
         };
 
         const hide = () => {
-            if (!previewClick.current) {
-                setPreviewVisibleState(false);
-                DomHandler.unblockBodyScroll();
-                setRotateState(0);
-                setScaleState(1);
-            }
-
-            previewClick.current = false;
-        };
-
-        const onPreviewImageClick = () => {
-            previewClick.current = true;
+            setPreviewVisibleState(false);
+            DomHandler.unblockBodyScroll();
+            setRotateState(0);
+            setScaleState(1);
         };
 
         const onMaskClick = (event) => {
@@ -91,13 +82,7 @@ export const Image = React.memo(
                 return;
             }
 
-            if (!previewClick.current) {
-                setPreviewVisibleState(false);
-                setRotateState(0);
-                setScaleState(0);
-            }
-
-            previewClick.current = false;
+            hide();
         };
 
         const onMaskKeydown = (event) => {
@@ -120,17 +105,14 @@ export const Image = React.memo(
             const { alt: name, src } = props;
 
             DomHandler.saveAs({ name, src });
-            previewClick.current = true;
         };
 
         const rotateRight = () => {
             setRotateState((prevRotate) => prevRotate + 90);
-            previewClick.current = true;
         };
 
         const rotateLeft = () => {
             setRotateState((prevRotate) => prevRotate - 90);
-            previewClick.current = true;
         };
 
         const zoomIn = () => {
@@ -139,7 +121,6 @@ export const Image = React.memo(
 
                 return prevScale + 0.1;
             });
-            previewClick.current = true;
         };
 
         const zoomOut = () => {
@@ -148,7 +129,6 @@ export const Image = React.memo(
 
                 return prevScale - 0.1;
             });
-            previewClick.current = true;
         };
 
         const onEntering = () => {
@@ -305,7 +285,6 @@ export const Image = React.memo(
                     src: props.zoomSrc || props.src,
                     className: cx('preview'),
                     style: sx('preview', { rotateState, scaleState }),
-                    onClick: onPreviewImageClick,
                     crossOrigin: crossOrigin,
                     referrerPolicy: referrerPolicy,
                     useMap: useMap,
