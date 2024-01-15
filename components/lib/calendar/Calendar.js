@@ -1404,6 +1404,8 @@ export const Calendar = React.memo(
                 setViewDateState(currentDate);
                 setCurrentView('date');
                 props.onMonthChange && props.onMonthChange({ month: month + 1, year: currentYear });
+
+                updateViewDate(event, currentDate);
             }
         };
 
