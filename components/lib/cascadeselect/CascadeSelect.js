@@ -56,7 +56,7 @@ export const CascadeSelect = React.memo(
             callback: () => {
                 hide();
             },
-            when: overlayVisibleState,
+            when: overlayVisibleState && cascadeSelectOverlayDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.CASCADE_SELECT, cascadeSelectOverlayDisplayOrder]
         });
 

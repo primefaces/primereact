@@ -40,7 +40,7 @@ export const SlideMenu = React.memo(
             callback: (event) => {
                 hide(event);
             },
-            when: visibleState && props.popup && props.closeOnEscape,
+            when: visibleState && props.popup && props.closeOnEscape && slideMenuDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.SLIDE_MENU, slideMenuDisplayOrder]
         });
 

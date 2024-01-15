@@ -37,7 +37,7 @@ export const SpeedDial = React.memo(
             callback: () => {
                 hide();
             },
-            when: visible,
+            when: visible && speedDialDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.SPEED_DIAL, speedDialDisplayOrder]
         });
 
