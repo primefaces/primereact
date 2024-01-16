@@ -14,9 +14,9 @@ export function FloatLabelDoc(props) {
 
     const code = {
         basic: `
-<span className="p-float-label">
+<span className="p-float-label w-full md:w-20rem">
     <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
-        className="md:w-20rem w-full"></TreeSelect>
+        className="w-full"></TreeSelect>
     <label htmlFor="treeselect">TreeSelect</label>
 </span>
         `,
@@ -35,9 +35,9 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <span className="p-float-label">
+            <span className="p-float-label w-full md:w-20rem">
                 <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
-                    className="md:w-20rem w-full"></TreeSelect>
+                    className="w-full"></TreeSelect>
                 <label htmlFor="treeselect">TreeSelect</label>
             </span>
         </div>
@@ -60,9 +60,9 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <span className="p-float-label">
+            <span className="p-float-label w-full md:w-20rem">
                 <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
-                    className="md:w-20rem w-full"></TreeSelect>
+                    className="w-full"></TreeSelect>
                 <label htmlFor="treeselect">TreeSelect</label>
             </span>
         </div>
@@ -106,8 +106,8 @@ export default function FloatLabelDemo() {
                 <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <span className=" p-float-label">
-                    <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="md:w-20rem w-full"></TreeSelect>
+                <span className=" p-float-label w-full md:w-20rem">
+                    <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="w-full"></TreeSelect>
                     <label htmlFor="treeselect">TreeSelect</label>
                 </span>
             </div>
