@@ -53,7 +53,7 @@ export const Tree = React.memo(
                     childFocusEvent.current = originalEvent;
                 }
 
-                setExpandedKeysState(event.value);
+                setExpandedKeysState(value);
             }
         };
 
