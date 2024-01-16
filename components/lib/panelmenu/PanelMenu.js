@@ -237,9 +237,7 @@ export const PanelMenu = React.memo(
         }));
 
         useMountEffect(() => {
-            if (!idState) {
-                setIdState(UniqueComponentId());
-            }
+            !idState && setIdState(UniqueComponentId());
         });
 
         useUpdateEffect(() => {
