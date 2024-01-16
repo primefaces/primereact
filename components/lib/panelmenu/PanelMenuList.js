@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ObjectUtils, DomHandler } from '../utils/Utils';
 import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { PanelMenuSub } from './PanelMenuSub';
 ``;
 
@@ -10,7 +10,7 @@ export const PanelMenuList = React.memo((props) => {
     const [focused, setFocused] = React.useState(false);
     const [focusedItem, setFocusedItem] = React.useState(null);
     const [focusedItemId, setFocusedItemId] = React.useState(null);
-    const [activeItemPath, setActiveItemPath] = React.useState(null);
+    const [activeItemPath, setActiveItemPath] = React.useState([]);
     const [processedItems, setProcessedItems] = React.useState(null);
     const [visibleItems, setVisibleItems] = React.useState([]);
 
@@ -35,7 +35,7 @@ export const PanelMenuList = React.memo((props) => {
     };
 
     const isItemActive = (processedItem) => {
-        return activeItemPath.some((path) => path.key === processedItem.parentKey);
+        return activeItemPath && activeItemPath.some((path) => path.key === processedItem.parentKey);
     };
 
     const isItemGroup = (processedItem) => {
@@ -372,27 +372,30 @@ export const PanelMenuList = React.memo((props) => {
         return processedFlattenItems;
     };
 
-    useUpdateEffect(() => {
+    React.useEffect(() => {
         const processed = createProcessedItems(props.model);
 
         setProcessedItems(processed);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.model]);
 
-    useUpdateEffect(() => {
+    React.useEffect(() => {
         const _visibleItems = flatItems(processedItems);
 
         setVisibleItems(_visibleItems);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [processedItems, activeItemPath]);
+
+    React.useEffect(() => {
+        autoUpdateActiveItemPath(props.expandedKeys);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.expandedKeys]);
 
     useUpdateEffect(() => {
         const _id = ObjectUtils.isNotEmpty(focusedItem) ? `${props.panelId}_${focusedItem.key}` : null;
 
         setFocusedItemId(_id);
     }, [props.panelId, focusedItem]);
-
-    useUpdateEffect(() => {
-        autoUpdateActiveItemPath(props.expandedKeys);
-    }, [props.expandedKeys]);
 
     return (
         <PanelMenuSub
