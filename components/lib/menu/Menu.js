@@ -69,8 +69,8 @@ export const Menu = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
+            if (item.url) {
+                return;
             }
 
             if (item.command) {
