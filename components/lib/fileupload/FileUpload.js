@@ -127,9 +127,7 @@ export const FileUpload = React.memo(
                 let file = selectedFiles[i];
 
                 if (!isFileSelected(file) && validate(file)) {
-                    if (isImage(file)) {
-                        file.objectURL = window.URL.createObjectURL(file);
-                    }
+                    file.objectURL = window.URL.createObjectURL(file);
 
                     currentFiles.push(file);
                 }
