@@ -9,7 +9,7 @@ export function RouterDoc(props) {
         { label: 'Form' },
         {
             label: 'InputText',
-            template: () => <Link href="/inputtext">InputText</Link>
+            template: () => <Link href="/inputtext"><a className="text-primary font-semibold">InputText</a></Link>
         }
     ];
     const home = { icon: 'pi pi-home', url: 'https://primereact.org' };
@@ -29,7 +29,7 @@ export default function RouterDemo() {
         { label: 'Form' },
         {
             label: 'InputText',
-            template: () => <Link href="/inputtext">InputText</Link>
+            template: () => <Link href="/inputtext"><a className="text-primary font-semibold">InputText</a></Link>
         }
     ];
     const home = { icon: 'pi pi-home', url: 'https://primereact.org' };
@@ -52,7 +52,7 @@ export default function RouterDemo() {
         { label: 'Form' },
         {
             label: 'InputText',
-            template: () => <Link href="/inputtext">InputText</Link>
+            template: () => <Link href="/inputtext"><a className="text-primary font-semibold">InputText</a></Link>
         }
     ];
     const home: MenuItem = { icon: 'pi pi-home', url: 'https://primereact.org' };
