@@ -1009,90 +1009,83 @@ export const MegaMenu = React.memo(
                 styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
                 const selector = `${attributeSelectorState}`;
+
                 const innerHTML = `
-@media screen and (max-width: ${props.breakpoint}) {
-    .p-megamenu[${selector}] > .p-megamenu-root-list .p-menuitem-active .p-megamenu-panel {
-        position: relative;
-        left: 0;
-        box-shadow: none;
-        border-radius: 0;
-        background: inherit;
-    }
+                    @media screen and (max-width: ${props.breakpoint}) {
+                        .p-megamenu[${selector}] > .p-megamenu-root-list .p-menuitem-active .p-megamenu-panel {
+                            position: relative;
+                            left: 0;
+                            box-shadow: none;
+                            border-radius: 0;
+                            background: inherit;
+                        }
 
-    .p-megamenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
-        transform: rotate(-180deg);
-    }
+                        .p-megamenu[${selector}] {
+                            width: 100%;
+                            position: relative;
+                            padding: 0.5rem;
+                        }
 
-    .p-megamenu[${selector}] .p-megamenu-grid {
-        flex-wrap: wrap;
-    }
+                        .p-megamenu[${selector}] .p-megamenu-grid {
+                            flex-wrap: wrap;
+                        }
 
-    ${
-        horizontal
-            ? `
-.p-megamenu[${selector}] .p-megamenu-button {
-    display: flex;
-}
+                        .p-megamenu[${selector}] .p-megamenu-button {
+                            display: flex;
+                        }
 
-.p-megamenu[${selector}].p-megamenu-horizontal {
-    position: relative;
-}
+                        .p-megamenu[${selector}] .p-megamenu-root-list {
+                            display: none;
+                        }
 
-.p-megamenu[${selector}].p-megamenu-horizontal .p-megamenu-root-list {
-    display: none;
-}
+                        .p-megamenu[${selector}] div[class*="p-megamenu-col-"] {
+                            width: 100%;
+                        }
 
-.p-megamenu-horizontal[${selector}] div[class*="p-megamenu-col-"] {
-    width: auto;
-    flex: 1;
-    padding: 0;
-}
+                        .p-megamenu[${selector}].p-megamenu-mobile-active .p-megamenu-root-list {
+                            left: 0;
+                            top: 100%;
+                            z-index: 1;
+                            width: 100%;
+                            display: flex;
+                            padding: 0.5rem 0;
+                            position: absolute;
+                            flex-direction: column;
+                        }
 
-.p-megamenu[${selector}].p-megamenu-mobile-active .p-megamenu-root-list {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 100%;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-}
-        `
-            : ''
-    }
+                        .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
+                            margin-left: auto;
+                        }
+                        
+                        .p-megamenu[${selector}] .p-submenu-list .p-menuitem-content .p-menuitem-link {
+                            padding-left: 2.25rem;
+                        }
 
-    ${
-        vertical
-            ? `
-.p-megamenu-vertical[${selector}] {
-    width: 100%;
-}
+                        ${
+                            horizontal
+                                ? `
+                                    .p-megamenu[${selector}] .p-menuitem-active  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
+                                        transform: rotate(-180deg);
+                                    }
+                            `
+                                : ''
+                        }
 
-.p-megamenu-vertical[${selector}] .p-megamenu-root-list {
-    max-height: ${props.scrollHeight};
-    overflow: ${props.scrollHeight ? 'auto' : ''};
-}
-.p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] {
-    width: 100%;
-    padding: 0;
-}
+                        ${
+                            vertical
+                                ? `                                                                   
+                                    .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
+                                        transform: rotate(90deg);
+                                    }
 
-.p-megamenu-vertical[${selector}] .p-megamenu-submenu {
-    width: 100%;
-}
-
-.p-megamenu-vertical[${selector}] div[class*="p-megamenu-col-"] .p-megamenu-submenu-header {
-    background: inherit;
-}
-
-.p-megamenu-vertical[${selector}] .p-submenu-icon:before {
-    content: "\\e930";
-}
-        `
-            : ''
-    }
-}
-`;
+                                    .p-megamenu[${selector}] .p-menuitem-active  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
+                                        transform: rotate(-90deg);
+                                    }
+                            `
+                                : ''
+                        }
+                    }
+                `;
 
                 styleElementRef.current.innerHTML = innerHTML;
             }
@@ -1254,7 +1247,7 @@ export const MegaMenu = React.memo(
         };
 
         const createMenuButton = () => {
-            if (vertical || (props.model && props.model.length < 1)) {
+            if (props.model && props.model.length < 1) {
                 return null;
             }
 

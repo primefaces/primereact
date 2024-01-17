@@ -140,7 +140,7 @@ const styles = `
         top: 0;
     }
 
-    .p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
+    .p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-content > .p-menuitem-link  > .p-submenu-icon {
         margin-left: auto;
     }
 
