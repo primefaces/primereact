@@ -1,6 +1,6 @@
 # Changelog
 
-## [10.4.0](https://github.com/primefaces/primereact/tree/10.3.2) (2024-01-10)
+## [10.3.2](https://github.com/primefaces/primereact/tree/10.3.2) (2024-01-17)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.3.1...10.3.2)
 
