@@ -490,7 +490,7 @@ export const Menubar = React.memo(
             }
         };
 
-        const createProcessedItems = (items, level = 0, parent = {}, parentKey = '') => {
+        const createProcessedItems = React.useCallback((items, level = 0, parent = {}, parentKey = '') => {
             const _processedItems = [];
 
             items &&
@@ -510,7 +510,7 @@ export const Menubar = React.memo(
                 });
 
             return _processedItems;
-        };
+        }, []);
 
         useMountEffect(() => {
             if (!idState) {
@@ -530,12 +530,12 @@ export const Menubar = React.memo(
             }
         }, [mobileActiveState]);
 
-        useUpdateEffect(() => {
+        React.useEffect(() => {
             const itemsToProcess = props.model || [];
             const processed = createProcessedItems(itemsToProcess, 0, null, '');
 
             setProcessedItems(processed);
-        }, [props.model]);
+        }, [props.model, createProcessedItems]);
 
         useUpdateEffect(() => {
             const processedItem = activeItemPath.find((p) => p.key === focusedItemInfo.parentKey);

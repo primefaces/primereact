@@ -213,7 +213,7 @@ export const ContextMenu = React.memo(
             }
         };
 
-        const createProcessedItems = (items, level, parent = {}, parentKey = '') => {
+        const createProcessedItems = React.useCallback((items, level, parent = {}, parentKey = '') => {
             const processedItems = [];
 
             items &&
@@ -234,7 +234,7 @@ export const ContextMenu = React.memo(
                 });
 
             return processedItems;
-        };
+        }, []);
 
         const onLeafClick = (event) => {
             setResetMenuState(true);
@@ -296,12 +296,12 @@ export const ContextMenu = React.memo(
             }
         }, [reshowState]);
 
-        useUpdateEffect(() => {
+        React.useEffect(() => {
             const itemsToProcess = props.model || [];
             const processed = createProcessedItems(itemsToProcess, 0, null, '');
 
             setProcessedItems(processed);
-        }, [props.model]);
+        }, [props.model, createProcessedItems]);
 
         useUpdateEffect(() => {
             const _focusedItemId = focusedItemInfo.index !== -1 ? `${idState}${ObjectUtils.isNotEmpty(focusedItemInfo.parentKey) ? '_' + focusedItemInfo.parentKey : ''}_${focusedItemInfo.index}` : null;

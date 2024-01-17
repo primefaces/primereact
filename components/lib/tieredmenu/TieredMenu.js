@@ -497,7 +497,7 @@ export const TieredMenu = React.memo(
             }
         };
 
-        const createProcessedItems = (items, level = 0, parent = {}, parentKey = '') => {
+        const createProcessedItems = React.useCallback((items, level = 0, parent = {}, parentKey = '') => {
             const processedItems = [];
 
             items &&
@@ -517,7 +517,7 @@ export const TieredMenu = React.memo(
                 });
 
             return processedItems;
-        };
+        }, []);
 
         const createStyle = () => {
             if (!styleElementRef.current) {
@@ -613,12 +613,12 @@ export const TieredMenu = React.memo(
             }
         });
 
-        useUpdateEffect(() => {
+        React.useEffect(() => {
             const itemsToProcess = props.model || [];
             const processed = createProcessedItems(itemsToProcess);
 
             setProcessedItems(processed);
-        }, props.model);
+        }, [props.model, createProcessedItems]);
 
         useUpdateEffect(() => {
             const processedItem = activeItemPath.find((p) => p.key === focusedItemInfo.parentKey);
