@@ -69,10 +69,6 @@ export const Menu = React.memo(
                 return;
             }
 
-            if (item.url) {
-                return;
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -88,8 +84,10 @@ export const Menu = React.memo(
                 setFocusedOptionIndex(key);
             }
 
-            event.preventDefault();
-            event.stopPropagation();
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
         const onListFocus = (event) => {
