@@ -50,7 +50,9 @@ export const PanelMenu = React.memo(
                 });
             }
 
-            changeActiveItem(event, item);
+            if (item.items) {
+                changeActiveItem(event, item);
+            }
         };
 
         const getItemProp = (item, name) => {
