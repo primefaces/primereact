@@ -9,6 +9,7 @@ import * as React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 
+// @todo - replace it with mergeProps
 export declare function _mergeProps(args: object[], options?: any): object | undefined;
 
 export declare class DomHandler {
