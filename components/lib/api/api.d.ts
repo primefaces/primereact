@@ -871,9 +871,13 @@ export interface LocaleOptions {
      */
     monthNamesShort?: string[];
     /**
-     * Today
+     * Today (Calendar date only)
      */
     today?: string;
+    /**
+     * Now (Calendar using time)
+     */
+    now?: string;
     /**
      * Wk
      */
