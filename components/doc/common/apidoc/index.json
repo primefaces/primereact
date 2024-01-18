@@ -20827,6 +20827,24 @@
                             "description": "Function that gets the option along with the layout mode and returns the content."
                         },
                         {
+                            "name": "listTemplate",
+                            "parameters": [
+                                {
+                                    "name": "items",
+                                    "optional": false,
+                                    "type": "any[]"
+                                },
+                                {
+                                    "name": "layout",
+                                    "optional": false,
+                                    "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
+                                    "description": "Current layout."
+                                }
+                            ],
+                            "returnType": "ReactNode[]",
+                            "description": "Function that gets the options along with the layout mode and returns the content."
+                        },
+                        {
                             "name": "onPage",
                             "parameters": [
                                 {
