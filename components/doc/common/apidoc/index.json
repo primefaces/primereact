@@ -5716,6 +5716,14 @@
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "ARIA label for screenreader support."
+                        },
+                        {
                             "name": "ariaLabelledBy",
                             "optional": true,
                             "readonly": false,
@@ -7376,6 +7384,13 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "ARIA label for screenreader support."
                         },
                         {
                             "name": "autoZIndex",
