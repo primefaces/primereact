@@ -1880,7 +1880,14 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "Today"
+                            "description": "Today (Calendar date only)"
+                        },
+                        {
+                            "name": "now",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Now (Calendar using time)"
                         },
                         {
                             "name": "weekHeader",
