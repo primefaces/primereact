@@ -11,7 +11,7 @@ export function TemplateDoc(props) {
     const cm = useRef(null);
 
     const itemTemplate = (item) => (
-        <a className="flex align-items-center px-3 py-2 hover:bg-cyan-50 cursor-pointer">
+        <a className="flex align-items-center px-3 py-2 cursor-pointer">
             <span className={item.icon} />
             <span className="ml-2">{item.label}</span>
             <Badge className="ml-auto" value={item.badge} />

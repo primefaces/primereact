@@ -284,7 +284,7 @@ export default function TemplateDemo() {
                     Custom content can be placed inside the menubar using the <i>start</i> and <i>end</i> properties.
                 </p>
             </DocSectionText>
-            <div className="card relative z-2">
+            <div className="card relative">
                 <Menubar model={items} start={start} end={end} />
             </div>
             <DocSectionCode code={code} />
