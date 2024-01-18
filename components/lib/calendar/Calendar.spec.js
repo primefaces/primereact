@@ -29,7 +29,7 @@ describe('Calendar', () => {
         const years = container.querySelectorAll('.p-yearpicker-year');
 
         for (const year of years) {
-            if (year.innerHTML === '2023') {
+            if (year.innerHTML.startsWith('2023')) {
                 expect(year).toHaveAttribute('data-p-disabled', 'true');
                 expect(year).toHaveClass('p-disabled');
             } else {

@@ -534,6 +534,10 @@ interface CalendarBaseProps {
      */
     ariaLabelledBy?: string | undefined;
     /**
+     * ARIA label for screenreader support.
+     */
+    ariaLabel?: string | undefined;
+    /**
      * Whether to automatically manage layering.
      * @defaultValue true
      */
