@@ -534,10 +534,6 @@ interface CalendarBaseProps {
      */
     ariaLabelledBy?: string | undefined;
     /**
-     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
-     */
-    ariaLabelledBy?: string | undefined;
-    /**
      * Whether to automatically manage layering.
      * @defaultValue true
      */
