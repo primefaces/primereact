@@ -563,10 +563,6 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createClearButton = () => {
-        if (!showMenuButton()) {
-            return null;
-        }
-
         const filterClearIconProps = mergeProps(
             {
                 'aria-hidden': true
