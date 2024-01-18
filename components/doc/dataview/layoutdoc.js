@@ -3,6 +3,7 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { DataView, DataViewLayoutOptions } from '@/components/lib/dataview/DataView';
 import { Rating } from '@/components/lib/rating/Rating';
+import { classNames } from '@/components/lib/utils/Utils';
 import { Tag } from '@/components/lib/tag/Tag';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
@@ -31,10 +32,10 @@ export function LayoutDoc(props) {
         }
     };
 
-    const listItem = (product) => {
+    const listItem = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -60,7 +61,7 @@ export function LayoutDoc(props) {
 
     const gridItem = (product) => {
         return (
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                         <div className="flex align-items-center gap-2">
@@ -83,13 +84,17 @@ export function LayoutDoc(props) {
         );
     };
 
-    const itemTemplate = (product, layout) => {
+    const itemTemplate = (product, layout, index) => {
         if (!product) {
             return;
         }
 
-        if (layout === 'list') return listItem(product);
+        if (layout === 'list') return listItem(product, index);
         else if (layout === 'grid') return gridItem(product);
+    };
+
+    const listTemplate = (products, layout) => {
+        return <div className="grid grid-nogutter">{products.map((product, index) => itemTemplate(product, layout, index))}</div>;
     };
 
     const header = () => {
@@ -111,6 +116,7 @@ import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
 
 export default function BasicDemo() {
     const [products, setProducts] = useState([]);
@@ -136,10 +142,10 @@ export default function BasicDemo() {
         }
     };
 
-    const listItem = (product) => {
+    const listItem = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -165,7 +171,7 @@ export default function BasicDemo() {
 
     const gridItem = (product) => {
         return (
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                         <div className="flex align-items-center gap-2">
@@ -188,13 +194,17 @@ export default function BasicDemo() {
         );
     };
 
-    const itemTemplate = (product, layout) => {
+    const itemTemplate = (product, layout, index) => {
         if (!product) {
             return;
         }
 
-        if (layout === 'list') return listItem(product);
+        if (layout === 'list') return listItem(product, index);
         else if (layout === 'grid') return gridItem(product);
+    };
+
+    const listTemplate = (products, layout) => {
+        return <div className="grid grid-nogutter">{products.map((product, index) => itemTemplate(product, layout, index))}</div>;
     };
 
     const header = () => {
@@ -207,7 +217,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} layout={layout} header={header()} />
+            <DataView value={products} listTemplate={listTemplate} layout={layout} header={header()} />
         </div>
     )
 }
@@ -219,6 +229,7 @@ import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
 
 interface Product {
     id: string;
@@ -257,10 +268,10 @@ export default function BasicDemo() {
         }
     };
 
-    const listItem = (product: Product) => {
+    const listItem = (product: Product, index: number) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -286,7 +297,7 @@ export default function BasicDemo() {
 
     const gridItem = (product: Product) => {
         return (
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                         <div className="flex align-items-center gap-2">
@@ -309,13 +320,17 @@ export default function BasicDemo() {
         );
     };
 
-    const itemTemplate = (product: Product, layout: string) => {
+    const itemTemplate = (product: Product, layout: string, index: number) => {
         if (!product) {
             return;
         }
 
-        if (layout === 'list') return listItem(product);
+        if (layout === 'list') return listItem(product: Product, index);
         else if (layout === 'grid') return gridItem(product);
+    };
+
+    const listTemplate = (products: Product[], layout: string) => {
+        return <div className="grid grid-nogutter">{products.map((product, index) => itemTemplate(product, layout, index))}</div>;
     };
 
     const header = () => {
@@ -334,7 +349,7 @@ export default function BasicDemo() {
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -360,7 +375,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} itemTemplate={itemTemplate} layout={layout} header={header()} />
+                <DataView value={products} listTemplate={listTemplate} layout={layout} header={header()} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

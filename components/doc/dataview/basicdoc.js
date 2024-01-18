@@ -4,6 +4,7 @@ import { Button } from '@/components/lib/button/Button';
 import { DataView } from '@/components/lib/dataview/DataView';
 import { Rating } from '@/components/lib/rating/Rating';
 import { Tag } from '@/components/lib/tag/Tag';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 
@@ -30,10 +31,10 @@ export function BasicDoc(props) {
         }
     };
 
-    const itemTemplate = (product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -57,9 +58,19 @@ export function BasicDoc(props) {
         );
     };
 
+    const listTemplate = (items) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     const code = {
         basic: `
-<DataView value={products} itemTemplate={itemTemplate} />
+<DataView value={products} listTemplate={listTemplate} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -67,6 +78,7 @@ import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
 import { ProductService } from './service/ProductService';
 
 export default function BasicDemo() {
@@ -92,10 +104,10 @@ export default function BasicDemo() {
         }
     };
 
-    const itemTemplate = (product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -119,9 +131,19 @@ export default function BasicDemo() {
         );
     };
 
+    const listTemplate = (items) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} />
+            <DataView value={products} listTemplate={listTemplate} />
         </div>
     )
 }
@@ -132,6 +154,7 @@ import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
 import { ProductService } from './service/ProductService';
 
 interface Product {
@@ -170,10 +193,10 @@ export default function BasicDemo() {
         }
     };
 
-    const itemTemplate = (product: Product) => {
+    const itemTemplate = (product: Product, index: number) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -197,15 +220,25 @@ export default function BasicDemo() {
         );
     };
 
+    const listTemplate = (items: Product[]) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} />
+            <DataView value={products} listTemplate={listTemplate} />
         </div>
     )
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -226,12 +259,11 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    DataView requires a <i>value</i> to display along with an <i>itemTemplate</i> that receives an object in the collection to return content. The root element should have the PrimeFlex Grid classes e.g. col-12 to define how items are
-                    displayed.
+                    DataView requires a <i>value</i> to display along with an <i>listTemplate</i> that receives an object in the collection to return content.
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} itemTemplate={itemTemplate} />
+                <DataView value={products} listTemplate={listTemplate} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

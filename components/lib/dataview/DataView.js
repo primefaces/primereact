@@ -77,6 +77,7 @@ export const DataViewItem = React.memo((props) => {
 
 export const DataView = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = DataViewBase.getProps(inProps, context);
         const [firstState, setFirstState] = React.useState(props.first);
@@ -137,6 +138,18 @@ export const DataView = React.memo(
                 setFirstState(event.first);
                 setRowsState(event.rows);
             }
+        };
+
+        const getItems = (value) => {
+            if (props.paginator) {
+                const currentFirst = props.lazy ? 0 : first;
+                const totalRecords = getTotalRecords();
+                const last = Math.min(rows + currentFirst, totalRecords);
+
+                return value.slice(currentFirst, last) || [];
+            }
+
+            return value;
         };
 
         const sort = () => {
@@ -250,22 +263,9 @@ export const DataView = React.memo(
 
         const createItems = (value) => {
             if (ObjectUtils.isNotEmpty(value)) {
-                if (props.paginator) {
-                    const currentFirst = props.lazy ? 0 : first;
-                    const totalRecords = getTotalRecords();
-                    const last = Math.min(rows + currentFirst, totalRecords);
-                    let items = [];
+                let items = getItems(value);
 
-                    for (let i = currentFirst; i < last; i++) {
-                        const val = value[i];
-
-                        val && items.push(<DataViewItem key={getItemRenderKey(value) || i} template={props.itemTemplate} layout={props.layout} item={val} />);
-                    }
-
-                    return items;
-                }
-
-                return value.map((item, index) => {
+                return items.map((item, index) => {
                     return <DataViewItem key={getItemRenderKey(item) || index} template={props.itemTemplate} layout={props.layout} item={item} />;
                 });
             }
@@ -274,27 +274,31 @@ export const DataView = React.memo(
         };
 
         const createContent = (value) => {
-            const items = createItems(value);
-
-            const gridProps = mergeProps(
-                {
-                    className: cx('grid')
-                },
-                ptm('grid')
-            );
-
             const contentProps = mergeProps(
                 {
                     className: cx('content')
                 },
                 ptm('content')
             );
+            let content = null;
 
-            return (
-                <div {...contentProps}>
-                    <div {...gridProps}>{items}</div>
-                </div>
-            );
+            if (props.listTemplate) {
+                const items = getItems(value);
+
+                content = ObjectUtils.getJSXElement(props.listTemplate, items, props.layout);
+            } else {
+                const items = createItems(value);
+                const gridProps = mergeProps(
+                    {
+                        className: cx('grid')
+                    },
+                    ptm('grid')
+                );
+
+                content = <div {...gridProps}>{items}</div>;
+            }
+
+            return <div {...contentProps}>{content}</div>;
         };
 
         const processData = () => {

@@ -4,6 +4,7 @@ import { Button } from '@/components/lib/button/Button';
 import { DataView } from '@/components/lib/dataview/DataView';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { Rating } from '@/components/lib/rating/Rating';
+import { classNames } from '@/components/lib/utils/Utils';
 import { Tag } from '@/components/lib/tag/Tag';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
@@ -56,10 +57,10 @@ export function SortingDoc(props) {
         return <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />;
     };
 
-    const itemTemplate = (product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -83,18 +84,29 @@ export function SortingDoc(props) {
         );
     };
 
+    const listTemplate = (items) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     const code = {
         basic: `
-<DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
+<DataView value={products} listTemplate={listTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
-import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Dropdown } from 'primereact/dropdown';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
+import { ProductService } from './service/ProductService';
 
 export default function SortingDemo() {
     const [products, setProducts] = useState([]);
@@ -144,10 +156,10 @@ export default function SortingDemo() {
         return <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />;
     };
 
-    const itemTemplate = (product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -171,21 +183,32 @@ export default function SortingDemo() {
         );
     };
 
+    const listTemplate = (items) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
+            <DataView value={products} listTemplate={listTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
+import { ProductService } from './service/ProductService';
 
 interface Product {
     id: string;
@@ -253,10 +276,10 @@ export default function SortingDemo() {
         return <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />;
     };
 
-    const itemTemplate = (product: Product) => {
+    const itemTemplate = (product: Product, index: number) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -280,15 +303,25 @@ export default function SortingDemo() {
         );
     };
 
+    const listTemplate = (items: Product[]) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
+            <DataView value={products} listTemplate={listTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
         </div>
     )
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -313,7 +346,7 @@ export default function SortingDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} itemTemplate={itemTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
+                <DataView value={products} listTemplate={listTemplate} header={header()} sortField={sortField} sortOrder={sortOrder} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
