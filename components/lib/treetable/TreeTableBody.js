@@ -176,6 +176,8 @@ export const TreeTableBody = React.memo((props) => {
                 key={`${node.key || JSON.stringify(node.data)}_${index}`}
                 level={0}
                 rowIndex={index}
+                ariaSetSize={props.value.length}
+                ariaPosInSet={index + 1}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
                 originalOptions={props.originalOptions}
@@ -257,6 +259,7 @@ export const TreeTableBody = React.memo((props) => {
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
     const tbodyProps = mergeProps(
         {
+            role: 'rowgroup',
             className: cx('tbody')
         },
         getPTOptions('tbody')

@@ -231,6 +231,7 @@ export const TreeTableBodyCell = (props) => {
     /* eslint-enable */
     const bodyCellProps = mergeProps(
         {
+            role: 'cell',
             className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState, align })),
             style,
             onClick: (e) => onClick(e),
