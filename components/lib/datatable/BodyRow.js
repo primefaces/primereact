@@ -61,6 +61,12 @@ export const BodyRow = React.memo((props) => {
         }
     };
 
+    const findFirstSelectableRow = (row) => {
+        const firstRow = DomHandler.findSingle(row.parentNode, 'tr[data-p-selectable-row]');
+
+        return firstRow ? firstRow : null;
+    };
+
     const findNextSelectableRow = (row) => {
         const nextRow = row.nextElementSibling;
 
@@ -71,6 +77,12 @@ export const BodyRow = React.memo((props) => {
         const prevRow = row.previousElementSibling;
 
         return prevRow ? (DomHandler.getAttribute(prevRow, 'data-p-selectable-row') === true ? prevRow : findPrevSelectableRow(prevRow)) : null;
+    };
+
+    const findLastSelectableRow = (row) => {
+        const lastRow = DomHandler.findSingle(row.parentNode, 'tr[data-p-selectable-row]:last-child');
+
+        return lastRow ? lastRow : null;
     };
 
     const shouldRenderBodyCell = (value, column, i) => {
@@ -152,49 +164,118 @@ export const BodyRow = React.memo((props) => {
             switch (event.which) {
                 //down arrow
                 case 40:
-                    let nextRow = findNextSelectableRow(row);
-
-                    if (nextRow) {
-                        changeTabIndex(row, nextRow);
-                        nextRow.focus();
-                    }
-
-                    event.preventDefault();
+                    onArrowDownKey(row, event);
                     break;
 
                 //up arrow
                 case 38:
-                    let prevRow = findPrevSelectableRow(row);
+                    onArrowUpKey(row, event);
+                    break;
 
-                    if (prevRow) {
-                        changeTabIndex(row, prevRow);
-                        prevRow.focus();
-                    }
+                //home
+                case 36:
+                    onHomeKey(row, event);
+                    break;
 
-                    event.preventDefault();
+                //end
+                case 35:
+                    onEndKey(row, event);
                     break;
 
                 //enter
                 case 13: // @deprecated
-                    if (!DomHandler.isClickable(target)) {
-                        onClick(event);
-                        event.preventDefault();
-                    }
-
+                    onEnterKey(row, event, target);
                     break;
 
                 //space
                 case 32:
-                    if (!DomHandler.isClickable(target) && !target.readOnly) {
-                        onClick(event);
-                        event.preventDefault();
-                    }
+                    onSpaceKey(row, event, target);
+                    break;
 
+                //tab
+                case 9:
+                    onTabKey(row, event);
                     break;
 
                 default:
                     //no op
                     break;
+            }
+        }
+    };
+
+    const onArrowDownKey = (row, event) => {
+        let nextRow = findNextSelectableRow(row);
+
+        if (nextRow) {
+            changeTabIndex(row, nextRow);
+            nextRow.focus();
+        }
+
+        event.preventDefault();
+    };
+
+    const onArrowUpKey = (row, event) => {
+        let prevRow = findPrevSelectableRow(row);
+
+        if (prevRow) {
+            changeTabIndex(row, prevRow);
+            prevRow.focus();
+        }
+
+        event.preventDefault();
+    };
+
+    const onHomeKey = (row, event) => {
+        const firstRow = findFirstSelectableRow(row);
+
+        if (firstRow) {
+            changeTabIndex(row, firstRow);
+            firstRow.focus();
+        }
+
+        event.preventDefault();
+    };
+
+    const onEndKey = (row, event) => {
+        const lastRow = findLastSelectableRow(row);
+
+        if (lastRow) {
+            changeTabIndex(row, lastRow);
+            lastRow.focus();
+        }
+
+        event.preventDefault();
+    };
+
+    const onEnterKey = (row, event, target) => {
+        if (!DomHandler.isClickable(target)) {
+            onClick(event);
+            event.preventDefault();
+        }
+    };
+
+    const onSpaceKey = (row, event, target) => {
+        if (!DomHandler.isClickable(target) && !target.readOnly) {
+            onClick(event);
+            event.preventDefault();
+        }
+    };
+
+    const onTabKey = (row, event) => {
+        const parent = row.parentNode;
+        const rows = DomHandler.find(parent, 'tr[data-p-selectable-row="true"]');
+
+        if (event.which === 9 && rows && rows.length > 0) {
+            const firstSelectedRow = DomHandler.findSingle(parent, 'tr[data-p-highlight="true"]');
+            const focusedItem = DomHandler.findSingle(parent, 'tr[data-p-selectable-row="true"][tabindex="0"]');
+
+            if (firstSelectedRow) {
+                firstSelectedRow.tabIndex = '0';
+                focusedItem && focusedItem !== firstSelectedRow && (focusedItem.tabIndex = '-1');
+            } else {
+                rows[0].tabIndex = '0';
+                focusedItem !== rows[0] && (rows[rowIndex].tabIndex = '-1');
             }
         }
     };
@@ -411,6 +492,7 @@ export const BodyRow = React.memo((props) => {
             onDragLeave: (e) => onDragLeave(e),
             onDragEnd: (e) => onDragEnd(e),
             onDrop: (e) => onDrop(e),
+            'aria-selected': props?.selectionMode ? props.selected : null,
             'data-p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
             'data-p-highlight': props.selected,
             'data-p-highlight-contextmenu': props.contextMenuSelected
