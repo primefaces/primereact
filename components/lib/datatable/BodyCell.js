@@ -696,6 +696,7 @@ export const BodyCell = React.memo((props) => {
                     {
                         type: 'button',
                         name: 'row-save',
+                        'aria-label': ariaLabel('saveEdit'),
                         onClick: rowEditorProps.onSaveClick,
                         className: rowEditorProps.saveClassName,
                         tabIndex: props.tabIndex,
@@ -708,6 +709,7 @@ export const BodyCell = React.memo((props) => {
                     {
                         type: 'button',
                         name: 'row-cancel',
+                        'aria-label': ariaLabel('cancelEdit'),
                         onClick: rowEditorProps.onCancelClick,
                         className: rowEditorProps.cancelClassName,
                         tabIndex: props.tabIndex
@@ -738,6 +740,7 @@ export const BodyCell = React.memo((props) => {
                     {
                         type: 'button',
                         name: 'row-edit',
+                        'aria-label': ariaLabel('editRow'),
                         onClick: rowEditorProps.onInitClick,
                         className: rowEditorProps.initClassName,
                         tabIndex: props.tabIndex,
