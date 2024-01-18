@@ -4011,7 +4011,7 @@ export const Calendar = React.memo(
             if (props.showButtonBar) {
                 const { today, clear, now } = localeOptions(props.locale);
                 const nowDate = new Date();
-                const hidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && props.maxDate < nowDate);
+                const isHidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && props.maxDate < nowDate);
                 const buttonbarProps = mergeProps(
                     {
                         className: cx('buttonbar')
@@ -4028,7 +4028,7 @@ export const Calendar = React.memo(
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                             className={classNames(props.todayButtonClassName, cx('todayButton'))}
                             pt={ptm('todayButton')}
-                            style={hidden ? { visibility: 'hidden' } : undefined}
+                            style={isHidden ? { visibility: 'hidden' } : undefined}
                         />
                         <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={classNames(props.clearButtonClassName, cx('clearButton'))} pt={ptm('clearButton')} />
                     </div>
