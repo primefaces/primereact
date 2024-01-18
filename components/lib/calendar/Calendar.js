@@ -51,6 +51,7 @@ export const Calendar = React.memo(
         const nextButton = React.useRef(false);
         const viewChangedWithKeyDown = React.useRef(false);
         const onChangeRef = React.useRef(null);
+        const isClearClicked = React.useRef(false);
 
         const [currentView, setCurrentView] = React.useState('date');
         const [currentMonth, setCurrentMonth] = React.useState(null);
@@ -495,6 +496,8 @@ export const Calendar = React.memo(
         };
 
         const onClearButtonClick = (event) => {
+            isClearClicked.current = true;
+
             updateModel(event, null);
             updateInputfield(null);
             hide();
@@ -2994,14 +2997,20 @@ export const Calendar = React.memo(
                 prevPropValue = prevPropValue[0];
             }
 
-            if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
-                let viewDate = props.viewDate && isValidDate(props.viewDate) ? props.viewDate : propValue && isValidDate(propValue) ? propValue : new Date();
+            let viewDate = props.viewDate && isValidDate(props.viewDate) ? props.viewDate : propValue && isValidDate(propValue) ? propValue : new Date();
 
-                validateDate(viewDate);
+            if (isClearClicked.current && props.showTime) {
+                viewDate.setHours(0, 0, 0);
 
-                setViewDateState(viewDate);
-                viewStateChanged.current = true;
+                isClearClicked.current = false;
             }
+
+            if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
+                validateDate(viewDate);
+            }
+
+            setViewDateState(viewDate);
+            viewStateChanged.current = true;
         };
 
         const createBackwardNavigator = (isVisible) => {
@@ -4000,7 +4009,9 @@ export const Calendar = React.memo(
 
         const createButtonBar = () => {
             if (props.showButtonBar) {
-                const { today, clear } = localeOptions(props.locale);
+                const { today, clear, now } = localeOptions(props.locale);
+                const nowDate = new Date();
+                const hidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && props.maxDate < nowDate);
                 const buttonbarProps = mergeProps(
                     {
                         className: cx('buttonbar')
@@ -4010,7 +4021,15 @@ export const Calendar = React.memo(
 
                 return (
                     <div {...buttonbarProps}>
-                        <Button type="button" label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={classNames(props.todayButtonClassName, cx('todayButton'))} pt={ptm('todayButton')} />
+                        <Button
+                            type="button"
+                            label={props.showTime ? now : today}
+                            onClick={onTodayButtonClick}
+                            onKeyDown={(e) => onContainerButtonKeydown(e)}
+                            className={classNames(props.todayButtonClassName, cx('todayButton'))}
+                            pt={ptm('todayButton')}
+                            style={hidden ? { visibility: 'hidden' } : undefined}
+                        />
                         <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={classNames(props.clearButtonClassName, cx('clearButton'))} pt={ptm('clearButton')} />
                     </div>
                 );

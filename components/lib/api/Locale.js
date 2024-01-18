@@ -59,6 +59,7 @@ let locales = {
         am: 'am',
         pm: 'pm',
         today: 'Today',
+        now: 'Now',
         weekHeader: 'Wk',
         firstDayOfWeek: 0,
         showMonthAfterYear: false,
