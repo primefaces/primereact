@@ -50,7 +50,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             }
         };
 
-        return mergeProps(ptm(`tab.${key}`, { tab: tabMetaData }), ptm(`tab.${key}`, { accordiontab: tabMetaData }), ptm(`tab.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
+        return mergeProps(ptm(`tab.${key}`, { tab: tabMetaData }), ptm(`tab.${key}`, { tab: tabMetaData }), ptm(`tab.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
     };
 
     const onTabHeaderClick = (event, tab, index) => {
