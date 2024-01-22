@@ -189,7 +189,7 @@ export const Editor = React.memo(
                         </span>
                         <span {...formatsProps}>
                             <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'ordered', 'aria-label': 'Ordered List' }, 'list')}></button>
-                            <button {...getMergeProps({ type: 'button', className: cx('list'), value: 'bullet', 'aria-label': 'Unordered List' }, 'list')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'bullet', 'aria-label': 'Unordered List' }, 'list')}></button>
                             <select {...getMergeProps({ className: 'ql-align' }, 'select')}>
                                 <option {...getMergeProps({ defaultValue: true }, 'option')}></option>
                                 <option {...getMergeProps({ value: 'center' }, 'option')}></option>
