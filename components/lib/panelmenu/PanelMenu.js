@@ -60,7 +60,13 @@ export const PanelMenu = React.memo(
         };
 
         const isItemActive = (item) => {
-            return props.expandedKeys ? props.expandedKeys[getItemProp(item, 'key')] : props.multiple ? activeItemsState.some((subItem) => ObjectUtils.equals(item, subItem)) : ObjectUtils.equals(item, activeItemState);
+            if (props.expandedKeys) {
+                return props.expandedKeys[getItemProp(item, 'key')];
+            } else {
+                const result = props.multiple ? activeItemsState.some((subItem) => ObjectUtils.equals(item, subItem)) : ObjectUtils.equals(item, activeItemState);
+
+                return result || item.expanded;
+            }
         };
 
         const isItemVisible = (item) => {
