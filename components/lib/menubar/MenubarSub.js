@@ -63,6 +63,10 @@ export const MenubarSub = React.memo(
         };
 
         const getItemId = (processedItem) => {
+            if (processedItem.item && processedItem.item.id) {
+                return processedItem.item.id;
+            }
+
             return `${props.id}_${processedItem.key}`;
         };
 
