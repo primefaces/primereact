@@ -162,6 +162,7 @@ export const Chips = React.memo(
 
         const onPaste = (event) => {
             if (props.separator) {
+                let separator = props.separator.replace('\\n', '\n').replace('\\r', '\r').replace('\\t', '\t');
                 let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
 
                 if (props.keyfilter) {
@@ -170,7 +171,7 @@ export const Chips = React.memo(
 
                 if (pastedData) {
                     let values = props.value || [];
-                    let pastedValues = pastedData.split(props.separator);
+                    let pastedValues = pastedData.split(separator);
 
                     pastedValues = pastedValues.filter((val) => (props.allowDuplicate || values.indexOf(val) === -1) && val.trim().length);
                     values = [...values, ...pastedValues];

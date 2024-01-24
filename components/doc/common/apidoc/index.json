@@ -20840,7 +20840,7 @@
                                 },
                                 {
                                     "name": "layout",
-                                    "optional": false,
+                                    "optional": true,
                                     "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                                     "description": "Current layout."
                                 }
@@ -20858,12 +20858,12 @@
                                 },
                                 {
                                     "name": "layout",
-                                    "optional": false,
+                                    "optional": true,
                                     "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                                     "description": "Current layout."
                                 }
                             ],
-                            "returnType": "ReactNode[]",
+                            "returnType": "undefined | ReactNode[]",
                             "description": "Function that gets the options along with the layout mode and returns the content."
                         },
                         {
