@@ -9,59 +9,7 @@ const PrimeReact = {
 
 const app_dependencies = pkg ? pkg.dependencies : {};
 
-const typeScriptDependencies = {
-    '@types/react-dom': '^18.0.0',
-    '@vitejs/plugin-react': '^1.3.0',
-    typescript: '^4.6.3'
-};
-
-const typeScriptFiles = {
-    'tsconfig.json': {
-        content: `{
-  "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "allowJs": true,
-
-    /* Bundler mode */
-    "moduleResolution": "node",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}
-    `
-    },
-    'tsconfig.node.json': {
-        content: `{
-  "compilerOptions": {
-    "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  },
-  "include": ["vite.config.ts"]
-}`
-    }
-};
-
-const getConfiguredDependencies = (isUnstyled, isTypeScript) => {
+const getConfiguredDependencies = (isUnstyled) => {
     const defaultDependencies = {
         '@types/react': '^18.2.38', // For stackblitz
         react: app_dependencies['react'] || 'latest',
@@ -70,8 +18,7 @@ const getConfiguredDependencies = (isUnstyled, isTypeScript) => {
         primereact: PrimeReact.version || 'latest', // latest
         primeicons: app_dependencies['primeicons'] || 'latest',
         vite: 'latest',
-        '@vitejs/plugin-react': 'latest',
-        ...(isTypeScript ? typeScriptDependencies : '')
+        '@vitejs/plugin-react': 'latest'
     };
 
     if (isUnstyled) {
@@ -89,9 +36,7 @@ const getConfiguredDependencies = (isUnstyled, isTypeScript) => {
     }
 };
 
-const getUnstyledFiles = (path, isTypeScript) => {
-    const fileExtension = isTypeScript ? 'tsx' : 'jsx';
-
+const getUnstyledFiles = (path) => {
     const tailwindConfig = {
         content: `/** @type {import('tailwindcss').Config} */
 export default {
@@ -189,7 +134,7 @@ import './index.css';
 import './flags.css';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root')${isTypeScript ? ' as HTMLElement' : ''});
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
@@ -200,12 +145,10 @@ root.render(
 );`
     };
 
-    return { 'tailwind.config.js': tailwindConfig, 'postcss.config.js': postcssConfig, [`${path}main.${fileExtension}`]: mainJsx, [`${path}index.css`]: tailwindCss, [`${path}components/themeSwitcher.${fileExtension}`]: themeSwitcher };
+    return { 'tailwind.config.js': tailwindConfig, 'postcss.config.js': postcssConfig, [`${path}main.jsx`]: mainJsx, [`${path}index.css`]: tailwindCss, [`${path}components/themeSwitcher.jsx`]: themeSwitcher };
 };
 
-const getStyledFiles = (path, isTypeScript) => {
-    const fileExtension = isTypeScript ? 'tsx' : 'jsx';
-
+const getStyledFiles = (path) => {
     const globalCss = {
         content: `html {
     font-size: 14px;
@@ -242,7 +185,7 @@ import './index.css';
 import './flags.css';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root')${isTypeScript ? ' as HTMLElement' : ''});
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <React.StrictMode>
     <PrimeReactProvider>
@@ -252,18 +195,16 @@ root.render(
 );`
     };
 
-    return { [`${path}main.${fileExtension}`]: mainJsx, [`${path}index.css`]: globalCss };
+    return { [`${path}main.jsx`]: mainJsx, [`${path}index.css`]: globalCss };
 };
 
 const getVite = (props = {}, template = 'javascript') => {
     const path = 'src/';
     const isUnstyled = props.embedded;
-    const isTypeScript = template === 'typescript';
-    const fileExtension = isTypeScript ? 'tsx' : 'jsx';
 
     const { code: sources, title = 'primereact_demo', description = '', dependencies: pDependencies = {} } = props;
 
-    const configuredDependencies = getConfiguredDependencies(isUnstyled, isTypeScript);
+    const configuredDependencies = getConfiguredDependencies(isUnstyled);
     const dependencies = { ...configuredDependencies, ...pDependencies, 'react-scripts': '5.0.1' };
 
     const extFiles = {};
@@ -275,8 +216,6 @@ const getVite = (props = {}, template = 'javascript') => {
             };
         });
 
-    const buildType = isTypeScript ? 'tsc && vite build' : 'vite build';
-
     const packageJson = {
         content: {
             name: title.toLowerCase().replaceAll(' ', '_'),
@@ -284,10 +223,10 @@ const getVite = (props = {}, template = 'javascript') => {
             type: 'module',
             scripts: {
                 dev: 'vite',
-                build: buildType,
+                build: 'vite build',
                 preview: 'vite preview'
             },
-            main: `${path}main.${fileExtension}`,
+            main: `${path}main.jsx`,
             keywords: ['primereact', 'react', 'vite', 'starter'],
             dependencies
         }
@@ -322,34 +261,33 @@ export default defineConfig({
     </head>
     <body>
         <div id="root"></div>
-        <script type="module" src="/src/main.${fileExtension}"></script>
+        <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>`
     };
 
-    const configuredFiles = isUnstyled ? getUnstyledFiles(path, isTypeScript) : getStyledFiles(path, isTypeScript);
+    const configuredFiles = isUnstyled ? getUnstyledFiles(path) : getStyledFiles(path);
 
     let files = {
         'package.json': packageJson,
         'vite.config.js': viteConfig,
         'index.html': indexHtml,
         [`${path}flags.css`]: flagsCss,
-        [`${path}App.${fileExtension}`]: {
+        [`${path}App.jsx`]: {
             content: sources[template].replace(/^\n/, '')
         },
-        ...configuredFiles,
-        ...(isTypeScript ? typeScriptFiles : '')
+        ...configuredFiles
     };
 
     if (props.service) {
         props.service.forEach((name) => {
-            files[`${path}service/${name}.${fileExtension}`] = {
+            files[`${path}service/${name}.jsx`] = {
                 content: services[name]
             };
         });
     }
 
-    return { files, dependencies, sourceFileName: `${path}App.${fileExtension}` };
+    return { files, dependencies, sourceFileName: `${path}App.jsx` };
 };
 
 const flagsCss = {
