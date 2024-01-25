@@ -383,6 +383,8 @@ export const Carousel = React.memo(
                     }
                 `;
                 }
+
+                calculatePosition();
             }
 
             carouselStyle.current.innerHTML = innerHTML;
