@@ -108,8 +108,8 @@ export default function MultipleDemo() {
                     with disabling the <i>metaKeySelection</i> property. Note that in touch enabled devices, TreeSelect always ignores metaKey.
                 </p>
                 <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
-                <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
             </DocSectionText>
+            <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} metaKeySelection={false} className="md:w-20rem w-full" selectionMode="multiple" placeholder="Select Items"></TreeSelect>
             </div>

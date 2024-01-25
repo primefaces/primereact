@@ -38,8 +38,8 @@ const DeferredDemo = ({ options, children, onLoad }) => {
     return (
         <>
             {!visible && (
-                <div ref={elementRef} className="demo-section-loading">
-                    Loading...
+                <div ref={elementRef} className="card">
+                    <div className="deferred-demo-loading"></div>
                 </div>
             )}
             {visible && children}

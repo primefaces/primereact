@@ -81,16 +81,20 @@ export const ColumnFilter = React.memo((props) => {
         return filterModel && filterModel.matchMode === matchMode;
     };
 
-    const showMenuButton = () => {
-        return getColumnProp('showFilterMenu') && (props.display === 'row' ? getColumnProp('dataType') !== 'boolean' : true);
-    };
-
     const matchModes = () => {
         return (
             getColumnProp('filterMatchModeOptions') ||
             (context && context.filterMatchModeOptions[findDataType()].map((key) => ({ label: localeOption(key), value: key }))) ||
             PrimeReact.filterMatchModeOptions[findDataType()].map((key) => ({ label: localeOption(key), value: key }))
         );
+    };
+
+    const isShowMenuButton = () => {
+        return getColumnProp('showFilterMenu') && (props.display === 'row' ? getColumnProp('dataType') !== 'boolean' : true);
+    };
+
+    const isShowClearButton = () => {
+        return getColumnProp('showClearButton') && props.display === 'row';
     };
 
     const isShowMatchModes = () => {
@@ -526,7 +530,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createMenuButton = () => {
-        if (!showMenuButton()) {
+        if (!isShowMenuButton()) {
             return null;
         }
 
@@ -567,7 +571,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createClearButton = () => {
-        if (!showMenuButton()) {
+        if (!isShowClearButton()) {
             return null;
         }
 
@@ -579,32 +583,27 @@ export const ColumnFilter = React.memo((props) => {
         );
         const icon = props.filterClearIcon || <FilterSlashIcon {...filterClearIconProps} />;
         const filterClearIcon = IconUtils.getJSXIcon(icon, { ...filterClearIconProps }, { props });
+        const clearLabel = clearButtonLabel();
+        const headerFilterClearButtonProps = mergeProps(
+            {
+                className: cx('headerFilterClearButton', { hasRowFilter }),
+                type: 'button',
+                onClick: (e) => clearFilter(e),
+                'aria-label': clearLabel
+            },
+            getColumnPTOptions('headerFilterClearButton', {
+                context: {
+                    hidden: hasRowFilter()
+                }
+            })
+        );
 
-        if (getColumnProp('showClearButton') && props.display === 'row') {
-            const clearLabel = clearButtonLabel();
-            const headerFilterClearButtonProps = mergeProps(
-                {
-                    className: cx('headerFilterClearButton', { hasRowFilter }),
-                    type: 'button',
-                    onClick: (e) => clearFilter(e),
-                    'aria-label': clearLabel
-                },
-                getColumnPTOptions('headerFilterClearButton', {
-                    context: {
-                        hidden: hasRowFilter()
-                    }
-                })
-            );
-
-            return (
-                <button {...headerFilterClearButtonProps}>
-                    {filterClearIcon}
-                    <Ripple />
-                </button>
-            );
-        }
-
-        return null;
+        return (
+            <button {...headerFilterClearButtonProps}>
+                {filterClearIcon}
+                <Ripple />
+            </button>
+        );
     };
 
     const createRowItems = () => {

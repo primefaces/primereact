@@ -1,5 +1,20 @@
 # Changelog
 
+## [10.3.3](https://github.com/primefaces/primereact/tree/10.3.3) (2024-01-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.3.2...10.3.3)
+
+**Enhancements:**
+
+- Accessibility | Data Components (Part 1) [\#5675](https://github.com/primefaces/primereact/issues/5675)
+- Accessibility | Input Components (Part 1) [\#5720](https://github.com/primefaces/primereact/issues/5720)
+- Calendar: timeOnly Today button should be Now [\#5722](https://github.com/primefaces/primereact/issues/5722)
+- Remove primeflex dependency from DataView [\#5798](https://github.com/primefaces/primereact/issues/5798)
+
+**Fixed bugs:**
+
+- Menu items are not rendered when the page is opened with a router [\#5794](https://github.com/primefaces/primereact/issues/5794)
+
 ## [10.3.2](https://github.com/primefaces/primereact/tree/10.3.2) (2024-01-17)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.3.1...10.3.2)
