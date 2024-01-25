@@ -904,7 +904,7 @@ export const ColumnFilter = React.memo((props) => {
             <Portal>
                 <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div ref={overlayRef} {...filterOverlayProps}>
-                        <FocusTrap autoFocus={true}>
+                        <FocusTrap autoFocus>
                             {filterHeader}
                             {items}
                             {filterFooter}
