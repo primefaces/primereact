@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption, PrimeReactContext } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { useUpdateEffect } from '../hooks/useUpdateEffect';
@@ -408,59 +408,33 @@ export const Tree = React.memo(
             );
         };
 
-        const createEmptyMessageNode = () => {
-            const emptyMessageProps = mergeProps(
-                {
-                    className: classNames(props.contentClassName, cx('emptyMessage'))
-                },
-                ptm('emptyMessage')
-            );
+        const createRootChildren = () => {
+            if (props.filter) {
+                filterChanged.current = true;
+                _filter();
+            }
 
-            return (
-                <li {...emptyMessageProps}>
-                    <span className="p-treenode-content">{localeOption('emptyMessage')}</span>
-                </li>
-            );
-        };
+            const value = getRootNode();
 
-        const createRootChildrenContainer = (children) => {
-            const containerProps = mergeProps(
-                {
-                    className: classNames(props.contentClassName, cx('container')),
-                    role: 'tree',
-                    'aria-label': props.ariaLabel,
-                    'aria-labelledby': props.ariaLabelledBy,
-                    style: props.contentStyle,
-                    ...ariaProps
-                },
-                ptm('container')
-            );
-
-            return <ul {...containerProps}>{children}</ul>;
-        };
-
-        const createRootChildren = (value) => {
             return value.map((node, index) => createRootChild(node, index, index === value.length - 1));
         };
 
         const createModel = () => {
             if (props.value) {
-                if (props.filter) {
-                    filterChanged.current = true;
-                    _filter();
-                }
+                const rootNodes = createRootChildren();
+                const containerProps = mergeProps(
+                    {
+                        className: classNames(props.contentClassName, cx('container')),
+                        role: 'tree',
+                        'aria-label': props.ariaLabel,
+                        'aria-labelledby': props.ariaLabelledBy,
+                        style: props.contentStyle,
+                        ...ariaProps
+                    },
+                    ptm('container')
+                );
 
-                const value = getRootNode();
-
-                if (value.length > 0) {
-                    const rootNodes = createRootChildren(value);
-
-                    return createRootChildrenContainer(rootNodes);
-                } else {
-                    const emptyMessageNode = createEmptyMessageNode();
-
-                    return createRootChildrenContainer(emptyMessageNode);
-                }
+                return <ul {...containerProps}>{rootNodes}</ul>;
             }
 
             return null;
