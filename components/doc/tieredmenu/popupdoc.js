@@ -91,10 +91,6 @@ export default function PopupDemo() {
     const items = [
         {
             label: 'File',
-            icon: 'pi pi-fw pi-file',
-            items: [
-        {
-            label: 'File',
             icon: 'pi pi-file',
             items: [
                 {

@@ -22871,6 +22871,22 @@
                             "description": "The template of items."
                         },
                         {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Displays a loader to indicate data load is in progress."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
+                        },
+                        {
                             "name": "maxLength",
                             "optional": true,
                             "readonly": false,

@@ -68,7 +68,7 @@ export const Calendar = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? !isOverlayClicked.current && !isNavIconClicked(event.target) && hide('outside', reFocusInputField) : hide(null, reFocusInputField);
+                    type === 'outside' ? !isOverlayClicked.current && !isNavIconClicked(event.target) && hide('outside') : hide();
                 }
 
                 isOverlayClicked.current = false;

@@ -264,6 +264,7 @@ export const SidebarBase = ComponentBase.extend({
         id: null,
         style: null,
         className: null,
+        content: null,
         maskStyle: null,
         maskClassName: null,
         visible: false,

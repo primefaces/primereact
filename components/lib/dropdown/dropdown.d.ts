@@ -332,6 +332,15 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     itemTemplate?: React.ReactNode | ((option: any) => React.ReactNode) | undefined;
     /**
+     * Displays a loader to indicate data load is in progress.
+     * @defaultValue false
+     */
+    loading?: boolean | undefined;
+    /**
+     * The icon to show while indicating data load is in progress.
+     */
+    loadingIcon?: IconType<DropdownProps> | undefined;
+    /**
      * Maximum number of characters to be typed on an editable input.
      */
     maxLength?: number | undefined;

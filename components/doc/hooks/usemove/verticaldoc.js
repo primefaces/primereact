@@ -14,7 +14,7 @@ import React from 'react';
 import {useMove } from 'primereact/hooks';
 
 export default function VerticalDemo() {
-    const { ref, y } = useMove({ initialValue: { y: 0.2 } });
+    const { ref, y } = useMove({ initialValue: { y: 0.2 }, mode: 'vertical' });
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-3">
@@ -47,7 +47,7 @@ import React from 'react';
 import {useMove } from 'primereact/hooks';
 
 export default function VerticalDemo() {
-    const { ref, y } = useMove({ initialValue: { y: 0.2 } });
+    const { ref, y } = useMove({ initialValue: { y: 0.2 }, mode: 'vertical' });
 
     return (
         <div className="card flex flex-column justify-content-center align-items-center gap-3">
