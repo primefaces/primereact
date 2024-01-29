@@ -81,7 +81,9 @@ const animationFeaturesData1 = [
         id: 4,
         title: 'Figma File',
         description:
-            'Ultima uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Ultima Figma file as they are available in PrimeOne for Figma only.',
+            <>
+                Ultima uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/ijQrxq13lxacgkb6XHlLxA/Preview-%7C-Ultima-2022?node-id=354%3A7715&t=gjWHprUDE5RJIg78-1' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Ultima Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+            </>,
         src: '/images/templates/ultima/features-animation-figma.png'
     }
 ];

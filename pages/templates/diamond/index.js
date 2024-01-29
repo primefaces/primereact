@@ -81,7 +81,9 @@ const animationFeaturesData1 = [
         id: 4,
         title: 'Figma File',
         description:
-            'Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Diamond Figma file as they are available in PrimeOne for Figma only.',
+            <>
+                Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+            </>,
         src: '/images/templates/diamond/features-animation-figma.png'
     }
 ];

@@ -83,7 +83,7 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description:
             <>
-            Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in PrimeOne for Figma only.
+            Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
             </>,
         src: '/images/templates/apollo/features-animation-figma.png'
     }

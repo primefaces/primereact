@@ -81,7 +81,9 @@ const animationFeaturesData1 = [
         id: 4,
         title: 'Figma File',
         description:
-            'Avalon uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Diamond Figma file as they are available in PrimeOne for Figma only.',
+            <>
+                Avalon uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/two0OGwOwHfq0sdjeK34l0/Preview-%7C-Atlantis-2022?node-id=15%3A1427&t=2lNJ5EzW0xuvQWdm-1' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Avalon Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+            </>,
         src: '/images/templates/avalon/features-animation-figma.png'
     }
 ];

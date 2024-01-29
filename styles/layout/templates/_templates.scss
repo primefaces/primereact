@@ -775,6 +775,13 @@
                         font-weight: 400;
                         line-height: 1.3125rem;
                         margin: 0.38rem 0 0;
+
+                        a{
+                            color: var(--primary-400);
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
                     }
 
                 }
