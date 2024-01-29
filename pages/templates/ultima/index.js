@@ -17,7 +17,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
     },
     {
         title: 'Lifetime Support',
@@ -27,11 +28,12 @@ const apolloFeatures2Data = [
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
-        description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
+        description: 'Everything is ready for you to start and build your app in no time. Landing, login, invoice, help, and error pages are provided as template pages.',
         src: '/images/templates/ultima/ultima-features2-ready.png'
     },
     {
@@ -43,16 +45,16 @@ const apolloFeatures2Data = [
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/serenity-react.jpg',
+        href: 'https://www.primefaces.org/layouts/serenity-react'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/sapphire-react.jpg',
+        href: 'https://www.primefaces.org/layouts/sapphire-react'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/babylon-react.jpg',
+        href: '/templates/babylon'
     }
 ];
 
@@ -80,7 +82,7 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description:
             'Ultima uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Ultima Figma file as they are available in PrimeOne for Figma only.',
-        src: '/images/templates/apollo/features-animation-figma.png'
+        src: '/images/templates/ultima/features-animation-figma.png'
     }
 ];
 
@@ -88,13 +90,13 @@ const animationFeaturesData2 = [
     {
         id: 1,
         title: 'Light and Dark Modes',
-        description: 'The stunning dark and light modes will impress your users.',
+        description: 'Ultima offers you 2 uniquely designed layout modes to choose from; Light and Dark.',
         src: '/images/templates/ultima/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Atlantis offers 16 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
+        description: 'Ultima offers 17 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
         src: '/images/templates/ultima/features-animation-component-themes.png'
     },
     {
@@ -175,6 +177,7 @@ const UltimaPage = () => {
                 rectangle={'/images/templates/ultima/ultima-hero-rectangle1.png'}
                 light={'/images/templates/ultima/ultima-hero-light.png'}
                 logo={<UltimaLogo />}
+                description={'A highly customizable premium application template featuring 4 menu modes, 13 themes, light and dark modes. Based on material design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.'}
                 dashboard1={'/images/templates/ultima/ultima-hero-dashboard1.png'}
                 dashboard2={'/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
@@ -185,7 +188,7 @@ const UltimaPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <UltimaSeperator />
             <TemplateConfiguration
-                title="Vue.js App with No Configuration"
+                title="Next.js App with No Configuration"
                 description="Ultima is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
             />
             <UltimaSeperator />

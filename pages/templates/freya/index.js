@@ -17,7 +17,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
     },
     {
         title: 'Lifetime Support',
@@ -27,7 +28,8 @@ const apolloFeatures2Data = [
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
@@ -43,16 +45,16 @@ const apolloFeatures2Data = [
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/diamond-react.jpg',
+        href: '/templates/diamond'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/babylon-react.jpg',
+        href: '/templates/babylon'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/serenity-react.jpg',
+        href: 'https://www.primefaces.org/layouts/serenity-react'
     }
 ];
 
@@ -80,7 +82,7 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description:
             'Freya uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Freya Figma file as they are available in PrimeOne for Figma only.',
-        src: '/images/templates/apollo/features-animation-figma.png'
+        src: '/images/templates/freya/features-animation-figma.png'
     }
 ];
 
@@ -88,13 +90,13 @@ const animationFeaturesData2 = [
     {
         id: 1,
         title: 'Light and Dark Modes',
-        description: 'The stunning dark and light modes will impress your users.',
+        description: 'Impress your users with the Light and Dark modes.',
         src: '/images/templates/freya/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Atlantis offers 16 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
+        description: 'Freya offers 16 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
         src: '/images/templates/freya/features-animation-component-themes.png'
     },
     {
@@ -145,8 +147,6 @@ const animationFeaturesData2 = [
 
 const templateHeroData = {
     pattern: '/images/templates/freya/freya-hero-pattern.png',
-    rectangle: '/images/templates/freya/freya-hero-rectangle1.png',
-    light: '/images/templates/freya/freya-hero-light.png',
     logo: <FreyaLogo />,
     dashboard1: '/images/templates/freya/freya-hero-dashboard1.png',
     dashboard2: '/images/templates/freya/freya-hero-dashboard2.png',
@@ -184,7 +184,7 @@ const FreyaPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <FreyaSeparator />
             <TemplateConfiguration
-                title="Vue.js App with No Configuration"
+                title="Next.js App with No Configuration"
                 description="Freya is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
             />
             <FreyaSeparator />

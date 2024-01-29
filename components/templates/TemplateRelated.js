@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const TemplateRelated = ({ relatedData }) => {
     return (
@@ -7,7 +7,7 @@ const TemplateRelated = ({ relatedData }) => {
                 <h2 className="template-related-title">Related Layouts</h2>
                 <div className="template-related-slide">
                     {relatedData.map((data, i) => (
-                        <a href={data.href} key={i} className="template-related-slide-card">
+                        <a href={data.href} target='_blank' key={i} className="template-related-slide-card">
                             <img src={data.src} alt={'Related Image ' + i} />
                         </a>
                     ))}
@@ -15,6 +15,6 @@ const TemplateRelated = ({ relatedData }) => {
             </div>
         </div>
     );
-};
+}
 
-export default TemplateRelated;
+export default TemplateRelated

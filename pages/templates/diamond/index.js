@@ -3,10 +3,10 @@ import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import DiamondLogo from './DiamondLogo';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 
 const apolloFeatures2Data = [
     {
@@ -17,7 +17,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
     },
     {
         title: 'Lifetime Support',
@@ -27,7 +28,8 @@ const apolloFeatures2Data = [
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
@@ -43,16 +45,16 @@ const apolloFeatures2Data = [
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/apollo-react.jpg',
+        href: '/templates/apollo'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/avalon-react.jpg',
+        href: '/templates/avalon'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/roma-react.jpg',
+        href: '/templates/roma'
     }
 ];
 
@@ -80,7 +82,7 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description:
             'Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Diamond Figma file as they are available in PrimeOne for Figma only.',
-        src: '/images/templates/apollo/features-animation-figma.png'
+        src: '/images/templates/diamond/features-animation-figma.png'
     }
 ];
 
@@ -88,13 +90,13 @@ const animationFeaturesData2 = [
     {
         id: 1,
         title: 'Light and Dark Modes',
-        description: 'The stunning dark and light modes will impress your users.',
+        description: 'Diamond has 3 display modes to choose from; Light, Dim and Dark.',
         src: '/images/templates/diamond/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Verona offers 20 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
+        description: 'Diamond offers 30 built-in component themes and creating your own theme is a matter of defining couple of sass variables.',
         src: '/images/templates/diamond/features-animation-component-themes.png'
     },
     {
@@ -144,7 +146,7 @@ const animationFeaturesData2 = [
     {
         id: 4,
         title: 'Layout Themes',
-        description: 'Verona offers 23 special layout themes featuring gorgeous gradients.',
+        description: 'Stunning theming options for the main menu in light color scheme.',
         src: '/images/templates/diamond/features-animation-orientations.png'
     }
 ];
@@ -176,7 +178,7 @@ const templateHeroData = {
     pattern: '/images/templates/diamond/diamond-hero-pattern.png',
     dashboard1: '/images/templates/diamond/diamond-hero-dashboard1.png',
     dashboard2: '/images/templates/diamond/diamond-hero-dashboard2.png',
-    description: 'Diamond is a beautiful Vue.js admin template with a modern look and feel optimized for creating Vue apps.',
+    description: 'An amazing application template for React based on the popular NextJS framework. with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 30 PrimeReact themes.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'
 };
@@ -198,7 +200,7 @@ const DiamondPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <DiamondSeperator />
             <TemplateConfiguration
-                title="Vue.js App with No Configuration"
+                title="Next.js App with No Configuration"
                 description="Diamond is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
             />
             <DiamondSeperator />

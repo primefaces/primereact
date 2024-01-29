@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
 const TemplateHeroRectangle = () => {
     return (
         <>
-            <svg width="1152" height="457" viewBox="0 0 1152 457" fill="none" xmlns="http://www.w3.org/2000/svg" className="template-hero-rectangle">
-                <g style={{ mixBlendMode: 'overlay' }} filter="url(#filter0_f_956_37561)">
+            <svg width="1152" height="457" viewBox="0 0 1152 457" fill="none" xmlns="http://www.w3.org/2000/svg" className='template-hero-rectangle'>
+                <g style={{mixBlendMode:"overlay"}} filter="url(#filter0_f_956_37561)">
                     <path d="M264.08 -96H547.881L952 470H-163L264.08 -96Z" fill="url(#paint0_linear_956_37561)" />
                 </g>
                 <defs>
@@ -19,8 +19,9 @@ const TemplateHeroRectangle = () => {
                     </linearGradient>
                 </defs>
             </svg>
-        </>
-    );
-};
 
-export default TemplateHeroRectangle;
+        </>
+    )
+}
+
+export default TemplateHeroRectangle

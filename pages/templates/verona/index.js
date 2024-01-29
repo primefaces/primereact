@@ -17,7 +17,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
     },
     {
         title: 'Lifetime Support',
@@ -27,7 +28,8 @@ const apolloFeatures2Data = [
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
@@ -43,16 +45,16 @@ const apolloFeatures2Data = [
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/freya-react.jpg',
+        href: '/templates/freya'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/apollo-react.jpg',
+        href: '/templates/apollo'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/atlantis-react.jpg',
+        href: '/templates/atlantis'
     }
 ];
 
@@ -79,7 +81,7 @@ const animationFeaturesData1 = [
         id: 4,
         title: 'Figma File',
         description:
-            'Verona uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Verona Figma file as they are available in PrimeOne for Figma only.',
+            <>Verona uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Verona Figma file as they are available in PrimeOne for Figma only.</>,
         src: '/images/templates/apollo/features-animation-figma.png'
     }
 ];
@@ -186,6 +188,7 @@ const VeronaPage = () => {
                 pattern={'/images/templates/verona/verona-hero-pattern.png'}
                 rectangle={'/images/templates/verona/verona-hero-rectangle1.png'}
                 light={'/images/templates/verona/verona-hero-light.png'}
+                description={'Prepare to be amazed by the remastered Verona for PrimeReact featuring a new gorgeous dark mode for the entire layout, 2 menu modes, reusable css widgets, utilities, modern icons and many more.'}
                 logo={<VeronaLogo />}
                 dashboard1={'/images/templates/verona/verona-hero-dashboard1.png'}
                 dashboard2={'/images/templates/verona/verona-hero-dashboard2.png'}
@@ -197,7 +200,7 @@ const VeronaPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={4000} />
             <VeronaSeperator />
             <TemplateConfiguration
-                title="Vue.js App with No Configuration"
+                title="Next.js App with No Configuration"
                 description="Verona is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
             />
             <VeronaSeperator />
