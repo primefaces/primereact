@@ -392,7 +392,7 @@ export const Splitter = React.memo(
                     onTouchMove: (event) => onGutterTouchMove(event),
                     onTouchEnd: (event) => onGutterTouchEnd(event),
                     'data-p-splitter-gutter-resizing': false,
-                    role: 'splitter'
+                    role: 'separator'
                 },
                 ptm('gutter')
             );

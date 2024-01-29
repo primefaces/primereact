@@ -23,7 +23,7 @@ exports[`Splitter Nested 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="splitter"
+      role="separator"
       style="width: 4px;"
     >
       <div
@@ -66,7 +66,7 @@ exports[`Splitter Nested 1`] = `
           class="p-splitter-gutter"
           data-p-splitter-gutter-resizing="false"
           data-pc-section="gutter"
-          role="splitter"
+          role="separator"
           style="height: 4px;"
         >
           <div
@@ -109,7 +109,7 @@ exports[`Splitter Nested 1`] = `
               class="p-splitter-gutter"
               data-p-splitter-gutter-resizing="false"
               data-pc-section="gutter"
-              role="splitter"
+              role="separator"
               style="width: 4px;"
             >
               <div
@@ -165,7 +165,7 @@ exports[`Splitter Single Panel with size 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="splitter"
+      role="separator"
       style="height: 4px;"
     >
       <div
@@ -207,7 +207,7 @@ exports[`Splitter Single Panel without size 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="splitter"
+      role="separator"
       style="height: 4px;"
     >
       <div
@@ -249,7 +249,7 @@ exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = 
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="splitter"
+      role="separator"
       style="width: 4px;"
     >
       <div
@@ -301,7 +301,7 @@ exports[`Splitter Vertical layout 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="splitter"
+      role="separator"
       style="height: 4px;"
     >
       <div
