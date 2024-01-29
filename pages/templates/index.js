@@ -101,36 +101,6 @@ const TemplatesPage = () => {
                 </div>
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
-                        <a href="https://www.primefaces.org/sapphire-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Sapphire" src="https://primefaces.org/cdn/primereact/images/layouts/sapphire-react.jpg" className="w-full" />
-                        </a>
-                        <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/sapphire-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Preview</span>
-                            </a>
-                            <a href="https://www.primefaces.org/layouts/sapphire-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 lg:col-6 xl:col-4">
-                    <div className="card mb-0">
-                        <a href="https://www.primefaces.org/serenity-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Serenity" src="https://primefaces.org/cdn/primereact/images/layouts/serenity-react.jpg" className="w-full" />
-                        </a>
-                        <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/serenity-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Preview</span>
-                            </a>
-                            <a href="https://www.primefaces.org/layouts/serenity-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 lg:col-6 xl:col-4">
-                    <div className="card mb-0">
                         <a href="https://www.primefaces.org/babylon-react" rel="noopener noreferrer" target="_blank">
                             <img alt="Babylon" src="https://primefaces.org/cdn/primereact/images/layouts/babylon-react.jpg" className="w-full" />
                         </a>
