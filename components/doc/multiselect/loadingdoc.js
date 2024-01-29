@@ -3,11 +3,11 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
 
 export function LoadingDoc(props) {
-  const code = {
-    basic: `
+    const code = {
+        basic: `
 <MultiSelect loading placeholder="Loading..." className="w-full md:w-20rem" />
         `,
-    javascript: `
+        javascript: `
 import React from "react";
 import { MultiSelect } from 'primereact/multiselect';
 
@@ -19,7 +19,7 @@ export default function LoadingDemo() {
     );
 }
         `,
-    typescript: `
+        typescript: `
 import React from "react";
 import { MultiSelect } from 'primereact/multiselect';
 
@@ -31,19 +31,19 @@ export default function LoadingDemo() {
     );
 }
         `
-  };
+    };
 
-  return (
-    <>
-      <DocSectionText {...props}>
-        <p>
-          Loading state can be used <i>loading</i> property.
-        </p>
-      </DocSectionText>
-      <div className="card flex justify-content-center">
-        <MultiSelect loading placeholder="Loading..." className="w-full md:w-20rem" />
-      </div>
-      <DocSectionCode code={code} />
-    </>
-  );
+    return (
+        <>
+            <DocSectionText {...props}>
+                <p>
+                    Loading state can be used <i>loading</i> property.
+                </p>
+            </DocSectionText>
+            <div className="card flex justify-content-center">
+                <MultiSelect loading placeholder="Loading..." className="w-full md:w-20rem" />
+            </div>
+            <DocSectionCode code={code} />
+        </>
+    );
 }
