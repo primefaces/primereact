@@ -126,7 +126,7 @@ const animationFeaturesData2 = [
     {
         id: 4,
         title: 'Layout Themes',
-        description: 'Avalon comes with 11 layout themes guaranteeing an enviable design.',
+        description: 'Roma comes with 11 layout themes guaranteeing an enviable design.',
         src: '/images/templates/roma/features-animation-menu-themes.png'
     }
 ];
