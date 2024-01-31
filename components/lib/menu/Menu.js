@@ -97,7 +97,7 @@ export const Menu = React.memo(
                 if (selectedOptionIndex !== -1) {
                     changeFocusedOptionIndex(selectedOptionIndex);
                     setSelectedOptionIndex(-1);
-                } else changeFocusedOptionIndex(0);
+                }
             }
 
             props.onFocus && props.onFocus(event);
