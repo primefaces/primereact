@@ -162,37 +162,30 @@ export const BodyRow = React.memo((props) => {
             const { target, currentTarget: row } = event;
 
             switch (event.code) {
-                //down arrow
                 case 'ArrowDown':
                     onArrowDownKey(row, event);
                     break;
 
-                //up arrow
                 case 'ArrowUp':
                     onArrowUpKey(row, event);
                     break;
 
-                //home
                 case 'Home':
                     onHomeKey(row, event);
                     break;
 
-                //end
                 case 'End':
                     onEndKey(row, event);
                     break;
 
-                //enter
-                case 'Enter': // @deprecated
+                case 'Enter':
                     onEnterKey(row, event, target);
                     break;
 
-                //space
                 case 'Space':
                     onSpaceKey(row, event, target);
                     break;
 
-                //tab
                 case 'Tab':
                     onTabKey(row, event);
                     break;
