@@ -2286,26 +2286,33 @@ export const Calendar = React.memo(
         };
 
         const isDayDisabled = (day, month, year) => {
+            let isDisabled = false;
+
+            // first check for disabled dates
             if (props.disabledDates) {
                 if (props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
-                    return true;
-                }
-            } else if (props.enabledDates) {
-                if (!props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
-                    return true;
+                    isDisabled = true;
                 }
             }
 
-            if (props.disabledDays && currentView === 'date') {
+            // next if not disabled then check for disabled days
+            if (!isDisabled && props.disabledDays && currentView === 'date') {
                 let weekday = new Date(year, month, day);
                 let weekdayNumber = weekday.getDay();
 
                 if (props.disabledDays.indexOf(weekdayNumber) !== -1) {
-                    return true;
+                    isDisabled = true;
                 }
             }
 
-            return false;
+            // last check for enabled dates to force dates enabled
+            if (props.enabledDates) {
+                const isEnabled = props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+
+                isDisabled = isDisabled ? !isEnabled : isEnabled;
+            }
+
+            return isDisabled;
         };
 
         const isMonthYearDisabled = (month, year) => {
