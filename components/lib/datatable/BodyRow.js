@@ -161,39 +161,39 @@ export const BodyRow = React.memo((props) => {
         if (isFocusable() && !props.allowCellSelection) {
             const { target, currentTarget: row } = event;
 
-            switch (event.which) {
+            switch (event.code) {
                 //down arrow
-                case 40:
+                case 'ArrowDown':
                     onArrowDownKey(row, event);
                     break;
 
                 //up arrow
-                case 38:
+                case 'ArrowUp':
                     onArrowUpKey(row, event);
                     break;
 
                 //home
-                case 36:
+                case 'Home':
                     onHomeKey(row, event);
                     break;
 
                 //end
-                case 35:
+                case 'End':
                     onEndKey(row, event);
                     break;
 
                 //enter
-                case 13: // @deprecated
+                case 'Enter': // @deprecated
                     onEnterKey(row, event, target);
                     break;
 
                 //space
-                case 32:
+                case 'Space':
                     onSpaceKey(row, event, target);
                     break;
 
                 //tab
-                case 9:
+                case 'Tab':
                     onTabKey(row, event);
                     break;
 
@@ -266,7 +266,7 @@ export const BodyRow = React.memo((props) => {
         const parent = row.parentNode;
         const rows = DomHandler.find(parent, 'tr[data-p-selectable-row="true"]');
 
-        if (event.which === 9 && rows && rows.length > 0) {
+        if (event.code === 'Tab' && rows && rows.length > 0) {
             const firstSelectedRow = DomHandler.findSingle(parent, 'tr[data-p-highlight="true"]');
             const focusedItem = DomHandler.findSingle(parent, 'tr[data-p-selectable-row="true"][tabindex="0"]');
 
