@@ -8,6 +8,7 @@
 
 - Splitter: missing/incorrect accessibility features [\#5849](https://github.com/primefaces/primereact/issues/5849)
 - New Component | FocusTrap [\#5829](https://github.com/primefaces/primereact/issues/5829)
+- Enhancement: DataTable accessibility [\#5839](https://github.com/primefaces/primereact/issues/5839)
 
 **Fixed bugs:**
 
@@ -27,6 +28,7 @@
 - Threshold not working useIntersectionObserver hook [\#5809](https://github.com/primefaces/primereact/issues/5809)
 - Accordion (Tailwind): Cannot read properties of undefined (reading 'disabled') [\#5804](https://github.com/primefaces/primereact/issues/5804)
 - Datatable Column Filter: Clear Button will not show if filter menu button is hidden [\#5802](https://github.com/primefaces/primereact/issues/5802)
+- className is not passes to TieredMenu items [\#5868](https://github.com/primefaces/primereact/issues/5868)
 
 ## [10.3.3](https://github.com/primefaces/primereact/tree/10.3.3) (2024-01-18)
 
