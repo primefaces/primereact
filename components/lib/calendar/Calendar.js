@@ -2308,6 +2308,7 @@ export const Calendar = React.memo(
             // last check for enabled dates to force dates enabled
             if (props.enabledDates) {
                 const isEnabled = props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+
                 if (isEnabled) {
                     isDisabled = false;
                 } else if (!props.disabledDays && !props.disabledDates) {
