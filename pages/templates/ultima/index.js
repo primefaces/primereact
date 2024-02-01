@@ -45,12 +45,12 @@ const apolloFeatures2Data = [
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/serenity-react.jpg',
-        href: 'https://www.primefaces.org/layouts/serenity-react'
+        src: '/images/templates/diamond-react.jpg',
+        href: '/templates/diamond'
     },
     {
-        src: '/images/templates/sapphire-react.jpg',
-        href: 'https://www.primefaces.org/layouts/sapphire-react'
+        src: '/images/templates/apollo-react.jpg',
+        href: '/templates/apollo'
     },
     {
         src: '/images/templates/babylon-react.jpg',
@@ -190,8 +190,8 @@ const UltimaPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <UltimaSeperator />
             <TemplateConfiguration
-                title="Next.js App with No Configuration"
-                description="Ultima is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React App with No Configuration"
+                description="Ultima is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
             />
             <UltimaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

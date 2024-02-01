@@ -54,8 +54,8 @@ const apolloRelatedData = [
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/serenity-react.jpg',
-        href: 'https://www.primefaces.org/layouts/serenity-react'
+        src: '/images/templates/diamond-react.jpg',
+        href: '/templates/diamond'
     }
 ];
 
@@ -178,17 +178,11 @@ const BabylonPage = () => {
         <div className="babylon template">
             <TemplateHero {...templateHeroData} />
             <BabylonSeparator />
-            <TemplateIntro
-                title="800+ UI Variations"
-                description="Choose from various modern designs crafted by our team or create your own Babylon experience with the ease of customization."
-                imageURL='/images/templates/babylon/babylon-intro.png'
-            />
-            <BabylonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <BabylonSeparator />
             <TemplateConfiguration
-                title="Next.js App with No Configuration"
-                description="Babylon is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React App with No Configuration"
+                description="Babylon is powered by Create-React-App to get started in no time following the best practices. Template is implemented purely in React."
             />
             <BabylonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

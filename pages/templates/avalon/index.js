@@ -199,8 +199,8 @@ const AvalonPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <AvalonSeparator />
             <TemplateConfiguration
-                title="Next.js App with No Configuration"
-                description="Diamond is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React App with No Configuration"
+                description="Avalon is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
             />
             <AvalonSeparator />
             <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />

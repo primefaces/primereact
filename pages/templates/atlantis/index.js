@@ -49,8 +49,8 @@ const apolloRelatedData = [
         href: '/templates/freya'
     },
     {
-        src: '/images/templates/serenity-react.jpg',
-        href: 'https://www.primefaces.org/layouts/serenity-react'
+        src: '/images/templates/ultima-react.jpg',
+        href: '/templates/ultima'
     },
     {
         src: '/images/templates/roma-react.jpg',
@@ -150,8 +150,8 @@ const animationFeaturesData2 = [
 const templateHeroData = {
     logo: <AtlantisLogo />,
     pattern: '/images/templates/atlantis/atlantis-hero-pattern.png',
-    dashboard1: '/images/templates/atlantis/atlantis-hero-dashboard1.jpg',
-    dashboard2: '/images/templates/atlantis/atlantis-hero-dashboard2.jpg',
+    dashboard1: '/images/templates/atlantis/atlantis-hero-dashboard1.png',
+    dashboard2: '/images/templates/atlantis/atlantis-hero-dashboard2.png',
     description: 'Prepare to be amazed by the remastered Atlantis for PrimeReact featuring a new gorgeous dark mode for the entire layout, 5 menu modes, reusable css widgets, utilities, modern icons and many more.',
     liveHref: 'https://www.primefaces.org/atlantis-react/',
     docHref: 'https://www.primefaces.org/atlantis-react/documentation/'
@@ -191,8 +191,8 @@ const AtlantisPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <AtlantisSeperator />
             <TemplateConfiguration
-                title="Next.js App with No Configuration"
-                description="Atlantis is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React based on Next.JS"
+                description="Atlantis is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
             />
             <AtlantisSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

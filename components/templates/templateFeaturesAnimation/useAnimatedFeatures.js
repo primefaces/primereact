@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import useVisible from "./useVisible";
 
-const useAnimatedFeatures = (animationRef, arrayLength, seconds = 5000) => {
+const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const [selectedID, setSelectedID] = useState(1);
     const [intervalIds, setIntervalIds] = useState([]);
     const isVisible = useVisible(animationRef);
@@ -24,7 +24,6 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 5000) => {
     const handleClick = cardId => {
         clearAllIntervals();
         setSelectedID(cardId);
-        createInterval()
     };
 
     useEffect(() => {

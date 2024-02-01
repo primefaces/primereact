@@ -53,8 +53,8 @@ const apolloRelatedData = [
         href: '/templates/babylon'
     },
     {
-        src: '/images/templates/serenity-react.jpg',
-        href: 'https://www.primefaces.org/layouts/serenity-react'
+        src: '/images/templates/ultima-react.jpg',
+        href: '/templates/ultima'
     }
 ];
 
@@ -186,8 +186,8 @@ const FreyaPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <FreyaSeparator />
             <TemplateConfiguration
-                title="Next.js App with No Configuration"
-                description="Freya is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React based on Next.JS"
+                description="Freya is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
             />
             <FreyaSeparator />
             <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />

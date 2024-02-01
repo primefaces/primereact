@@ -84,7 +84,7 @@ const animationFeaturesData1 = [
             <>
                 Verona uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/PgQXX4HXMPeCkT74tGajod/Preview-%7C-Verona-2022?node-id=1303%3A750' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Verona Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
             </>,
-        src: '/images/templates/apollo/features-animation-figma.png'
+        src: '/images/templates/verona/features-animation-figma.png'
     }
 ];
 
@@ -202,8 +202,8 @@ const VeronaPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={4000} />
             <VeronaSeperator />
             <TemplateConfiguration
-                title="Next.js App with No Configuration"
-                description="Verona is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React based on Next.JS"
+                description="Verona is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations."
             />
             <VeronaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

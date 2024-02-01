@@ -7,6 +7,7 @@ import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import ApolloLogo from './ApolloLogo';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloRelatedData = [
     {
@@ -213,11 +214,13 @@ const ApolloPage = () => {
                 <TemplateYoutube imgSrc={'/images/templates/apollo/apollo-youtube-screen.png'} />
                 <ApolloSeparator />
             </div>
+            <TemplateLicense/>
+            <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <ApolloSeparator />
             <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />
             <ApolloSeparator />
-            <TemplateConfiguration title="Apollo with Next.JS" description="Apollo is powered by Next.JS to get started in no time following the best practices like service based component interaction modular design and strict mode support" />
+            <TemplateConfiguration title="React based on Next.JS" description="Apollo is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations." />
             <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <ApolloSeparator />
