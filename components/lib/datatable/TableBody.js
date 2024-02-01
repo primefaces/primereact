@@ -1120,7 +1120,8 @@ export const TableBody = React.memo(
         const tbodyProps = mergeProps(
             {
                 style: props.style,
-                className: cx(ptKey, { className: props.className })
+                className: cx(ptKey, { className: props.className }),
+                role: ' rowgroup'
             },
             ptm(ptKey, { hostName: props.hostName })
         );
