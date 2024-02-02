@@ -1,0 +1,30 @@
+{
+    "folders": [
+        {
+            "name": "primereact",
+            "path": "../../../../GitHub/primereact"
+        }
+    ],
+    "settings": {
+        "workbench.colorCustomizations": {
+            "activityBar.activeBackground": "#007eff",
+            "activityBar.background": "#007eff",
+            "activityBar.foreground": "#e7e7e7",
+            "activityBar.inactiveForeground": "#e7e7e799",
+            "activityBarBadge.background": "#ff9fcf",
+            "activityBarBadge.foreground": "#15202b",
+            "commandCenter.border": "#e7e7e799",
+            "sash.hoverBorder": "#007eff",
+            "statusBar.background": "#0065cc",
+            "statusBar.foreground": "#e7e7e7",
+            "statusBarItem.hoverBackground": "#007eff",
+            "statusBarItem.remoteBackground": "#0065cc",
+            "statusBarItem.remoteForeground": "#e7e7e7",
+            "titleBar.activeBackground": "#0065cc",
+            "titleBar.activeForeground": "#e7e7e7",
+            "titleBar.inactiveBackground": "#0065cc99",
+            "titleBar.inactiveForeground": "#e7e7e799"
+        },
+        "peacock.color": "#0065cc"
+    }
+}
