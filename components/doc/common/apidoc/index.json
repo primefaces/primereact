@@ -45029,6 +45029,22 @@
                     "description": "Defines valid properties in SplitterPanel component.",
                     "values": [
                         {
+                            "name": "aria-label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Splitter handle ARIA label for screenreader support."
+                        },
+                        {
+                            "name": "aria-labelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the splitter and panel label element IDs."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -45043,6 +45059,14 @@
                             "type": "string",
                             "default": "",
                             "description": "ClassName of the component."
+                        },
+                        {
+                            "name": "id",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Returns the value of element's id content attribute. Can be set to change it."
                         },
                         {
                             "name": "minSize",

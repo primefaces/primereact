@@ -273,7 +273,8 @@ export const TableHeader = React.memo((props) => {
     const content = createContent();
     const theadProps = mergeProps(
         {
-            className: cx('thead')
+            className: cx('thead'),
+            role: 'rowgroup'
         },
         getColumnGroupPTOptions('root'),
         ptm('thead', { hostName: props.hostName })

@@ -93,7 +93,8 @@ export const TableFooter = React.memo((props) => {
         const content = createContent();
         const tfootProps = mergeProps(
             {
-                className: cx('tfoot')
+                className: cx('tfoot'),
+                role: 'rowgroup'
             },
             getColumnGroupPTOptions('root'),
             ptm('tfoot', { hostName: props.hostName })
