@@ -3,7 +3,7 @@ import useAnimatedFeatures from './useAnimatedFeatures';
 
 const TemplateFeaturesAnimationInline = ({ inlineFeaturesData, parentHandleClick, parentHandleHover, parentID, inlineSeconds = 1000 }) => {
     const animationInlineRef = useRef(null)
-    const { selectedID, handleClick, handleHover } = useAnimatedFeatures(animationInlineRef, inlineFeaturesData.length, inlineSeconds);
+    const { selectedID, setHoveredID, handleClick, handleHover } = useAnimatedFeatures(animationInlineRef, inlineFeaturesData.length, inlineSeconds);
 
     const handleBtnClick = (id) => {
         handleClick(id)
@@ -11,11 +11,13 @@ const TemplateFeaturesAnimationInline = ({ inlineFeaturesData, parentHandleClick
     }
 
     const enterCardArea = (id) => {
+        setHoveredID(id);
         handleHover(id, 'onMouseEnter');
         parentHandleHover(parentID, 'onMouseEnter');
     }
 
     const leaveCardArea = (id) => {
+        setHoveredID(null);
         handleHover(id, 'onMouseLeave');
         parentHandleHover(parentID, 'onMouseLeave');
     }

@@ -6,6 +6,7 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const [selectedID, setSelectedID] = useState(1);
     const [intervalIds, setIntervalIds] = useState([]);
     const [cancelInterval, setCancelInterval] = useState(false);
+    const [hoveredID, setHoveredID] = useState(null);
     const isVisible = useVisible(animationRef);
 
     const clearAllIntervals = () => {
@@ -49,7 +50,12 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
         }
     }, [animationRef, isVisible]);
 
-    return { selectedID, handleClick, handleHover };
+    useEffect(() => {
+        if (!hoveredID) null;
+        handleHover(hoveredID, "onMouseEnter");
+    }, [selectedID])
+
+    return { selectedID, setHoveredID, handleClick, handleHover };
 };
 
 export default useAnimatedFeatures;

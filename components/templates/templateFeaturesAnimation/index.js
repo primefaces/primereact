@@ -3,14 +3,17 @@ import useAnimatedFeatures from './useAnimatedFeatures';
 import TemplateFeaturesAnimationInline from './TemplateFeaturesAnimationInline';
 
 const TemplateFeaturesAnimation = ({ featuresData, title, animationSeconds = 5000 }) => {
-    const animationRef = useRef(null)
-    const { selectedID, handleClick,handleHover } = useAnimatedFeatures(animationRef, featuresData.length, animationSeconds);
+    const animationRef = useRef(null);
+    // const [hoveredID, setHoveredID] = useState(null);
+    const { selectedID, setHoveredID , handleClick,handleHover } = useAnimatedFeatures(animationRef, featuresData.length, animationSeconds);
 
     const enterCardArea = (id) => {
+        setHoveredID(id)
         handleHover(id, 'onMouseEnter');
     }
 
     const leaveCardArea = (id) => {
+        setHoveredID(null)
         handleHover(id, 'onMouseLeave');
     }
 
