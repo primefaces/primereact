@@ -7,6 +7,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import UltimaLogo from './UltimaLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -147,6 +148,33 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://ultima.primereact.org/documentation/',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const UltimaSeperator = () => {
     return (
         <TemplateSeparator
@@ -184,6 +212,8 @@ const UltimaPage = () => {
                 dashboard2={'/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
             />
+            <UltimaSeperator />
+            <TemplateLicense license={license}/>
             <UltimaSeperator />
             <TemplateYoutube imgSrc={'/images/templates/ultima/ultima-youtube-screen.png'} />
             <UltimaSeperator />

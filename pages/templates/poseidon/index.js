@@ -7,6 +7,7 @@ import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import PoseidonLogo from './PoseidonLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -118,6 +119,33 @@ const animationFeaturesData2 = [
     },
 ];
 
+const license = {
+    documentLink: 'https://primefaces.org/freya-react/#/start/documentation',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const PoseidonSeparator = () => {
     return (
         <TemplateSeparator
@@ -157,6 +185,8 @@ const PoseidonPage = () => {
     return (
         <div className="poseidon template">
             <TemplateHero {...templateHeroData} />
+            <PoseidonSeparator />
+            <TemplateLicense license={license}/>
             <PoseidonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <PoseidonSeparator />

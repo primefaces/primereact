@@ -8,6 +8,7 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import BabylonLogo from './BabylonLogo';
 import TemplateIntro from '@/components/templates/TemplateIntro';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -131,6 +132,34 @@ const animationFeaturesData2 = [
     },
 ];
 
+
+const license = {
+    documentLink: 'https://www.primefaces.org/babylon-react/#/documentation',
+    description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$19',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$190',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const templateHeroData = {
     logo: <BabylonLogo />,
     pattern: '/images/templates/babylon/babylon-hero-pattern.png',
@@ -177,6 +206,8 @@ const BabylonPage = () => {
     return (
         <div className="babylon template">
             <TemplateHero {...templateHeroData} />
+            <BabylonSeparator />
+            <TemplateLicense license={license}/>
             <BabylonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <BabylonSeparator />

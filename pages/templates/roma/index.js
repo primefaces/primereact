@@ -9,6 +9,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import RomaLogo from './RomaLogo';
 import RomaSeparator from './RomaSeparator';
 import TemplateIntro from '@/components/templates/TemplateIntro';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -131,6 +132,32 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://www.primefaces.org/roma-react/#/documentation',
+    description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$19',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$190',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
 
 const templateHeroData = {
     logo: <RomaLogo />,
@@ -153,6 +180,8 @@ const AvalonPage = () => {
     return (
         <div className="roma template">
             <TemplateHero {...templateHeroData} />
+            <RomaSeparator />
+            <TemplateLicense license={license}/>
             <RomaSeparator />
             <TemplateIntro
             title="1000+ Layout Variations"

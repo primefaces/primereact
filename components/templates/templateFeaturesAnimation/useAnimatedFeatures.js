@@ -5,6 +5,7 @@ import useVisible from "./useVisible";
 const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const [selectedID, setSelectedID] = useState(1);
     const [intervalIds, setIntervalIds] = useState([]);
+    const [cancelInterval, setCancelInterval] = useState(false);
     const isVisible = useVisible(animationRef);
 
     const clearAllIntervals = () => {
@@ -24,6 +25,17 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const handleClick = cardId => {
         clearAllIntervals();
         setSelectedID(cardId);
+        setCancelInterval(true)
+    };
+
+    const handleHover = (cardId, type) => {
+        if (cancelInterval || cardId !== selectedID) return;
+        clearAllIntervals();
+
+        if (type === "onMouseLeave") {
+            setSelectedID(cardId);
+            createInterval()
+        }
     };
 
     useEffect(() => {
@@ -37,7 +49,7 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
         }
     }, [animationRef, isVisible]);
 
-    return { selectedID, handleClick };
+    return { selectedID, handleClick, handleHover };
 };
 
 export default useAnimatedFeatures;

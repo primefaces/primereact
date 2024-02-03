@@ -6,6 +6,7 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import AvalonLogo from './AvalonLogo';
 import AvalonSeparator from './AvalonSeparator';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -171,6 +172,32 @@ const apolloFeatures1Data = [
     }
 ];
 
+const license = {
+    documentLink: 'https://avalon.primereact.org/documentation/',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$49',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$490',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
 
 const templateHeroData = {
     logo: <AvalonLogo />,
@@ -195,6 +222,8 @@ const AvalonPage = () => {
     return (
         <div className="avalon template">
             <TemplateHero {...templateHeroData} />
+            <AvalonSeparator />
+            <TemplateLicense license={license}/>
             <AvalonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <AvalonSeparator />

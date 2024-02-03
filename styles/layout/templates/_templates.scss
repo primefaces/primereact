@@ -905,12 +905,11 @@
         &-features-animation {
 
             &-left {
-                width: 40%;
+                flex: 0.4;
             }
 
             &-right {
-                width: 60%;
-
+                flex: 0.6;
                 &-inline {
                     &-image {
                         width: 92%;

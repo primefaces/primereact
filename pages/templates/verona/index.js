@@ -7,6 +7,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import VeronaLogo from './VeronaLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -176,6 +177,33 @@ const VeronaSeperator = () => {
     );
 };
 
+const license = {
+    documentLink: 'https://verona.primereact.org/documentation/',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$49',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$490',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const VeronaPage = () => {
     const featuresAnimationTitle = (
         <h2>
@@ -196,6 +224,8 @@ const VeronaPage = () => {
                 dashboard2={'/images/templates/verona/verona-hero-dashboard2.png'}
                 liveHref={''}
             />
+            <VeronaSeperator />
+            <TemplateLicense license={license}/>
             <VeronaSeperator />
             <TemplateYoutube imgSrc={'/images/templates/verona/verona-youtube-screen.png'} />
             <VeronaSeperator />

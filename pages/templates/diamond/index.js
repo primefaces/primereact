@@ -7,6 +7,7 @@ import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import DiamondLogo from './DiamondLogo';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -153,6 +154,33 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://diamond.primereact.org/documentation/',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const DiamondSeperator = () => {
     return (
         <TemplateSeparator
@@ -196,6 +224,8 @@ const DiamondPage = () => {
     return (
         <div className="diamond template">
             <TemplateHero {...templateHeroData} />
+            <DiamondSeperator />
+            <TemplateLicense license={license}/>
             <DiamondSeperator />
             <TemplateYoutube imgSrc={'/images/templates/diamond/diamond-youtube-screen.png'} />
             <DiamondSeperator />

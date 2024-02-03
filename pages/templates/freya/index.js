@@ -7,6 +7,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import FreyaLogo from './FreyaLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -147,6 +148,33 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://primefaces.org/freya-react/#/start/documentation',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const templateHeroData = {
     pattern: '/images/templates/freya/freya-hero-pattern.png',
     logo: <FreyaLogo />,
@@ -180,6 +208,8 @@ const FreyaPage = () => {
     return (
         <div className="freya template">
             <TemplateHero {...templateHeroData} />
+            <FreyaSeparator />
+            <TemplateLicense license={license}/>
             <FreyaSeparator />
             <TemplateYoutube imgSrc={'/images/templates/freya/freya-youtube-screen.png'} />
             <FreyaSeparator />

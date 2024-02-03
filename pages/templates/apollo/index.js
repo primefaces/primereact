@@ -173,6 +173,32 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://apollo.primereact.org/documentation/',
+    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
 const templateHeroData = {
     logo: <ApolloLogo />,
     pattern: '/images/templates/apollo/apollo-hero-pattern.png',
@@ -214,7 +240,7 @@ const ApolloPage = () => {
                 <TemplateYoutube imgSrc={'/images/templates/apollo/apollo-youtube-screen.png'} />
                 <ApolloSeparator />
             </div>
-            <TemplateLicense/>
+            <TemplateLicense license={license}/>
             <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <ApolloSeparator />

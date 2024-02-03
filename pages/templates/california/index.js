@@ -7,6 +7,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import CaliforniaLogo from './CaliforniaLogo';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateIntro from '@/components/templates/TemplateIntro';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -117,6 +118,32 @@ const apolloFeatures1Data = [
     }
 ];
 
+const license = {
+    documentLink: 'https://www.primefaces.org/babylon-react/#/documentation',
+    description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$19',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$190',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
 
 const templateHeroData = {
     logo: <CaliforniaLogo />,
@@ -185,6 +212,8 @@ const CaliforniaPage = () => {
     return (
         <div className="california template">
             <TemplateHero {...templateHeroData} />
+            <CaliforniaSeparator />
+            <TemplateLicense license={license}/>
             <CaliforniaSeparator />
             <TemplateIntro
             title="Create Your Own California"
