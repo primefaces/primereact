@@ -1499,6 +1499,18 @@
         }
     }
 }
+@media only screen and (max-width: 721px) {
+    .template {
+        &-license {
+            &-card {
+                width: 80%;
+            }
+            &-description{
+                max-width: 32rem;
+            }
+        }
+    }
+}
 
 @media only screen and (max-width: 576px) {
     .template {

@@ -1,32 +1,5 @@
 import React from 'react'
 
-const license = {
-    documentLink: '',
-    description:'',
-    licenseDetails: [
-        {
-            title: 'Basic Plan',
-            price: '$59',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
-        {
-            title: 'Extended License',
-            price: '$590',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
-    ]
-}
-
 const TemplateLicense = ({ license }) => {
     return (
         <div className='template-license-wrapper'>
@@ -45,7 +18,7 @@ const TemplateLicense = ({ license }) => {
                         </div>
                     ))}
                 </div>
-                <p className='template-license-description'>The download package is a Vite-based project containing all source code of the application deployed at the live demo. The project is written in JavaScript. However, a TypeScript version is also being planned.</p>
+                <p className='template-license-description'>{license.description}</p>
                 <p className='template-license-visit'>Visit the <a href={license.documentLink} target='_blank'>official documentation</a> for more information.</p>
             </div>
         </div>
