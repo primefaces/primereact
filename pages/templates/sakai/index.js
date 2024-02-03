@@ -7,6 +7,7 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateIntro from '@/components/templates/TemplateIntro';
 import SakaiLogo from './SakaiLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloFeatures2Data = [
     {
@@ -121,6 +122,33 @@ const apolloFeatures1Data = [
     },
 ];
 
+const license = {
+    documentLink: 'https://www.primefaces.org/roma-react/#/documentation',
+    description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
+    licenseDetails: [
+        {
+            title: 'Basic Plan',
+            price: '$19',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$190',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const templateHeroData = {
     logo: <SakaiLogo />,
     pattern: '/images/templates/sakai/sakai-hero-pattern.png',
@@ -162,6 +190,8 @@ const BabylonPage = () => {
     return (
         <div className="sakai template">
             <TemplateHero {...templateHeroData} />
+            <SakaiSeparator />
+            <TemplateLicense license={license}/>
             <SakaiSeparator />
             <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />
             <SakaiSeparator />
