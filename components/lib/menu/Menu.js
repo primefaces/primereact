@@ -23,7 +23,8 @@ export const Menu = React.memo(
             props,
             state: {
                 id: idState,
-                visible: visibleState
+                visible: visibleState,
+                focused: focused
             }
         });
 
