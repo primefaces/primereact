@@ -781,25 +781,68 @@
   .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
     background: #005b9f;
   }
-  .p-chips .p-chips-multiple-container {
-    padding: 0.2145rem 0.429rem;
-    gap: 0.5rem;
+  .p-chips {
+    display: inline-flex;
   }
-  .p-chips .p-chips-multiple-container:not(.p-disabled):hover {
+  .p-chips-multiple-container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    cursor: text;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .p-chips-token {
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+  .p-chips-input-token {
+    flex: 1 1 auto;
+    display: inline-flex;
+  }
+  .p-chips-token-icon {
+    cursor: pointer;
+  }
+  .p-chips-input-token input {
+    border: 0 none;
+    outline: 0 none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+  }
+  .p-fluid .p-chips {
+    display: flex;
+  }
+  .p-chips:not(.p-disabled):hover .p-chips-multiple-container {
     border-color: #212121;
   }
-  .p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
+  .p-chips:not(.p-disabled).p-focus .p-chips-multiple-container {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #8dcdff;
     border-color: #007ad9;
   }
+  .p-chips .p-chips-multiple-container {
+    padding: 0.2145rem 0.429rem;
+    outline-color: transparent;
+  }
   .p-chips .p-chips-multiple-container .p-chips-token {
     padding: 0.2145rem 0.429rem;
     margin-right: 0.5rem;
-    background: #e02365;
+    background: #c8c8c8;
     color: #333333;
     border-radius: 16px;
+  }
+  .p-chips .p-chips-multiple-container .p-chips-token.p-focus {
+    background: #bababa;
+    color: #333333;
   }
   .p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
     margin-left: 0.5rem;
@@ -1468,24 +1511,7 @@
     background: #005b9f;
   }
   .p-rating {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  .p-rating-item {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  .p-rating.p-readonly .p-rating-item {
-    cursor: default;
-  }
-  .p-rating {
     gap: 0.5rem;
-  }
-  .p-rating .p-rating-item {
-    outline-color: transparent;
-    border-radius: 50%;
   }
   .p-rating .p-rating-item .p-rating-icon {
     color: #333333;
@@ -1499,7 +1525,7 @@
   .p-rating .p-rating-item .p-rating-icon.p-rating-cancel {
     color: #e4018d;
   }
-  .p-rating .p-rating-item.p-focus {
+  .p-rating .p-rating-item:focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #8dcdff;

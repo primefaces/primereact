@@ -803,25 +803,68 @@
   .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
     background: #81a1c1;
   }
-  .p-chips .p-chips-multiple-container {
-    padding: 0.25rem 0.5rem;
-    gap: 0.5rem;
+  .p-chips {
+    display: inline-flex;
   }
-  .p-chips .p-chips-multiple-container:not(.p-disabled):hover {
+  .p-chips-multiple-container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    cursor: text;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .p-chips-token {
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+  .p-chips-input-token {
+    flex: 1 1 auto;
+    display: inline-flex;
+  }
+  .p-chips-token-icon {
+    cursor: pointer;
+  }
+  .p-chips-input-token input {
+    border: 0 none;
+    outline: 0 none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+  }
+  .p-fluid .p-chips {
+    display: flex;
+  }
+  .p-chips:not(.p-disabled):hover .p-chips-multiple-container {
     border-color: #81a1c1;
   }
-  .p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
+  .p-chips:not(.p-disabled).p-focus .p-chips-multiple-container {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #c0d0e0;
     border-color: #81a1c1;
   }
+  .p-chips .p-chips-multiple-container {
+    padding: 0.25rem 0.5rem;
+    outline-color: transparent;
+  }
   .p-chips .p-chips-multiple-container .p-chips-token {
     padding: 0.25rem 0.5rem;
     margin-right: 0.5rem;
-    background: #d8dee9;
+    background: #e5e9f0;
     color: #4c566a;
     border-radius: 16px;
+  }
+  .p-chips .p-chips-multiple-container .p-chips-token.p-focus {
+    background: #d8dee9;
+    color: #4c566a;
   }
   .p-chips .p-chips-multiple-container .p-chips-token .p-chips-token-icon {
     margin-left: 0.5rem;
@@ -1490,24 +1533,7 @@
     background: #81a1c1;
   }
   .p-rating {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  .p-rating-item {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  .p-rating.p-readonly .p-rating-item {
-    cursor: default;
-  }
-  .p-rating {
     gap: 0.5rem;
-  }
-  .p-rating .p-rating-item {
-    outline-color: transparent;
-    border-radius: 50%;
   }
   .p-rating .p-rating-item .p-rating-icon {
     color: #4c566a;
@@ -1521,7 +1547,7 @@
   .p-rating .p-rating-item .p-rating-icon.p-rating-cancel {
     color: #bf616a;
   }
-  .p-rating .p-rating-item.p-focus {
+  .p-rating .p-rating-item:focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #c0d0e0;

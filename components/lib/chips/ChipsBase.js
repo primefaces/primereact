@@ -77,17 +77,18 @@ const styles = `
 const classes = {
     removeTokenIcon: 'p-chips-token-icon',
     label: 'p-chips-token-label',
-    token: 'p-chips-token p-highlight',
-    inputToken: 'p-chips-input-token',
-    container: ({ props, focusedState }) =>
-        classNames('p-inputtext p-chips-multiple-container', {
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
+    token: ({ focusedIndex, index }) =>
+        classNames('p-chips-token', {
+            'p-focus': focusedIndex === index
         }),
-    root: ({ isFilled, focusedState }) =>
+    inputToken: 'p-chips-input-token',
+    container: ({ isFilled }) => classNames('p-inputtext p-chips-multiple-container', { 'p-variant-filled': isFilled }),
+    root: ({ isFilled, focusedState, disabled }) =>
         classNames('p-chips p-component p-inputwrapper', {
             'p-inputwrapper-filled': isFilled,
-            'p-inputwrapper-focus': focusedState
+            'p-inputwrapper-focus': focusedState,
+            'p-disabled': disabled,
+            'p-focus': focusedState
         })
 };
 
