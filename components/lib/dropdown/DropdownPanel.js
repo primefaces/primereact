@@ -78,7 +78,24 @@ export const DropdownPanel = React.memo(
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} cx={cx} />;
+                return (
+                    <DropdownItem
+                        key={optionKey}
+                        index={j}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        setFocusedOptionIndex={props.setFocusedOptionIndex}
+                        label={optionLabel}
+                        option={option}
+                        length={groupChildren.length}
+                        style={style}
+                        template={props.itemTemplate}
+                        selected={props.isSelected(option)}
+                        disabled={disabled}
+                        onClick={props.onOptionClick}
+                        ptm={ptm}
+                        cx={cx}
+                    />
+                );
             });
         };
 
@@ -124,7 +141,24 @@ export const DropdownPanel = React.memo(
                 const optionKey = index + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} cx={cx} />;
+                return (
+                    <DropdownItem
+                        key={optionKey}
+                        label={optionLabel}
+                        index={index}
+                        length={props.visibleOptions.length}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        setFocusedOptionIndex={props.setFocusedOptionIndex}
+                        option={option}
+                        style={style}
+                        template={props.itemTemplate}
+                        selected={props.isSelected(option)}
+                        disabled={disabled}
+                        onClick={props.onOptionClick}
+                        ptm={ptm}
+                        cx={cx}
+                    />
+                );
             }
         };
 

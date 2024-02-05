@@ -880,10 +880,89 @@
     box-shadow: none;
   }
   .p-dropdown {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+  .p-dropdown-clear-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .p-dropdown-label {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    flex: 1 1 auto;
+    width: 1%;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  .p-dropdown-label-empty {
+    overflow: hidden;
+    opacity: 0;
+  }
+  input.p-dropdown-label {
+    cursor: default;
+  }
+  .p-dropdown .p-dropdown-panel {
+    min-width: 100%;
+  }
+  .p-dropdown-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .p-dropdown-items-wrapper {
+    overflow: auto;
+  }
+  .p-dropdown-item {
+    cursor: pointer;
+    font-weight: normal;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .p-dropdown-item-group {
+    cursor: auto;
+  }
+  .p-dropdown-items {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .p-dropdown-filter {
+    width: 100%;
+  }
+  .p-dropdown-filter-container {
+    position: relative;
+  }
+  .p-dropdown-filter-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-fluid .p-dropdown {
+    display: flex;
+  }
+  .p-fluid .p-dropdown .p-dropdown-label {
+    width: 1%;
+  }
+  .p-dropdown {
     background: #ffffff;
     border: 1px solid #ced4da;
     transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
     border-radius: 4px;
+    outline-color: transparent;
   }
   .p-dropdown:not(.p-disabled):hover {
     border-color: #ced4da;
@@ -893,6 +972,18 @@
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
     border-color: #007bff;
+  }
+  .p-dropdown.p-variant-filled {
+    background: #efefef;
+  }
+  .p-dropdown.p-variant-filled:not(.p-disabled):hover {
+    background-color: #efefef;
+  }
+  .p-dropdown.p-variant-filled:not(.p-disabled).p-focus {
+    background-color: #efefef;
+  }
+  .p-dropdown.p-variant-filled:not(.p-disabled).p-focus .p-inputtext {
+    background-color: transparent;
   }
   .p-dropdown.p-dropdown-clearable .p-dropdown-label {
     padding-right: 1.75rem;
@@ -904,7 +995,7 @@
   .p-dropdown .p-dropdown-label.p-placeholder {
     color: #6c757d;
   }
-  .p-dropdown .p-dropdown-label:enabled:focus {
+  .p-dropdown .p-dropdown-label:focus, .p-dropdown .p-dropdown-label:enabled:focus {
     outline: 0 none;
     box-shadow: none;
   }
@@ -946,13 +1037,6 @@
     right: 0.75rem;
     color: #495057;
   }
-  .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter {
-    padding-right: 3.5rem;
-    margin-right: -3.5rem;
-  }
-  .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter-clear-icon {
-    right: 2.5rem;
-  }
   .p-dropdown-panel .p-dropdown-items {
     padding: 0.5rem 0;
   }
@@ -965,13 +1049,27 @@
     transition: box-shadow 0.15s;
     border-radius: 0;
   }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:first-child {
+    margin-top: 0;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:last-child {
+    margin-bottom: 0;
+  }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
     color: #ffffff;
     background: #007bff;
   }
-  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight.p-focus {
+    background: #0067d6;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus {
     color: #212529;
     background: #e9ecef;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item .p-dropdown-check-icon {
+    position: relative;
+    margin-left: -0.5rem;
+    margin-right: 0.5rem;
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group {
     margin: 0;
@@ -984,18 +1082,6 @@
     padding: 0.5rem 1.5rem;
     color: #212529;
     background: transparent;
-  }
-  .p-input-filled .p-dropdown {
-    background: #efefef;
-  }
-  .p-input-filled .p-dropdown:not(.p-disabled):hover {
-    background-color: #efefef;
-  }
-  .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
-    background-color: #efefef;
-  }
-  .p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
-    background-color: transparent;
   }
   .p-inputgroup-addon {
     background: #e9ecef;

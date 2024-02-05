@@ -37,10 +37,11 @@ const classes = {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
-    item: ({ selected, disabled, label }) =>
+    item: ({ selected, disabled, label, index, focusedOptionIndex }) =>
         classNames('p-dropdown-item', {
             'p-highlight': selected,
             'p-disabled': disabled,
+            'p-focus': index === focusedOptionIndex,
             'p-dropdown-item-empty': !label || label.length === 0
         }),
     wrapper: 'p-dropdown-items-wrapper',

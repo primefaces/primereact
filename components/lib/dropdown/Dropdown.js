@@ -18,6 +18,7 @@ export const Dropdown = React.memo(
         const props = DropdownBase.getProps(inProps, context);
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
@@ -154,10 +155,25 @@ export const Dropdown = React.memo(
                     onUpKey(event);
                     break;
 
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    onArrowLeftKey(event, props.editable);
+                    break;
+
+                case 'Home':
+                    onHomeKey(event);
+                    break;
+
+                case 'End':
+                    onEndKey(event);
+                    break;
+
                 case 'Space':
+                    onSpaceKey(event, props.editable);
+                    break;
+
                 case 'Enter':
-                    overlayVisibleState ? hide() : show();
-                    event.preventDefault();
+                    onEnterKey(event);
                     break;
 
                 case 'Escape':
@@ -181,6 +197,11 @@ export const Dropdown = React.memo(
                     onUpKey(event);
                     break;
 
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    onArrowLeftKey(event, true);
+                    break;
+
                 case 'Escape':
                 case 'Enter':
                     hide();
@@ -194,13 +215,13 @@ export const Dropdown = React.memo(
 
         const onUpKey = (event) => {
             if (visibleOptions) {
-                const prevOption = findPrevOption(getSelectedOptionIndex());
+                if (!overlayVisibleState) {
+                    show();
+                    setFocusedOptionIndex(visibleOptions.length - 1);
+                } else {
+                    const target = focusedOptionIndex === null ? visibleOptions.length - 1 : focusedOptionIndex === 0 ? 0 : focusedOptionIndex - 1;
 
-                if (prevOption) {
-                    selectItem({
-                        originalEvent: event,
-                        option: prevOption
-                    });
+                    setFocusedOptionIndex(target);
                 }
             }
 
@@ -209,21 +230,51 @@ export const Dropdown = React.memo(
 
         const onDownKey = (event) => {
             if (visibleOptions) {
-                if (!overlayVisibleState && event.altKey) {
+                if (!overlayVisibleState) {
                     show();
+                    setFocusedOptionIndex(0);
                 } else {
-                    const nextOption = findNextOption(getSelectedOptionIndex());
+                    const targetIndex = focusedOptionIndex === null ? 0 : focusedOptionIndex + 1 > visibleOptions.length - 1 ? visibleOptions.length - 1 : focusedOptionIndex + 1;
 
-                    if (nextOption) {
-                        selectItem({
-                            originalEvent: event,
-                            option: nextOption
-                        });
-                    }
+                    setFocusedOptionIndex(targetIndex);
                 }
             }
 
             event.preventDefault();
+        };
+
+        const onHomeKey = (event) => {
+            !overlayVisibleState && show();
+            setFocusedOptionIndex(0);
+            event.preventDefault();
+        };
+
+        const onEndKey = (event) => {
+            !overlayVisibleState && show();
+            setFocusedOptionIndex(visibleOptions.length - 1);
+            event.preventDefault();
+        };
+
+        const onSpaceKey = (event, pressedInInputText = false) => {
+            !pressedInInputText && onEnterKey(event);
+        };
+
+        const onEnterKey = (event) => {
+            if (overlayVisibleState) {
+                selectItem({
+                    originalEvent: event,
+                    option: visibleOptions[focusedOptionIndex]
+                });
+                hide();
+            } else {
+                show();
+            }
+
+            event.preventDefault();
+        };
+
+        const onArrowLeftKey = (event, pressedInInputText = false) => {
+            pressedInInputText && setFocusedOptionIndex(null);
         };
 
         const findNextOption = (index) => {
@@ -294,7 +345,7 @@ export const Dropdown = React.memo(
 
             const char = event.key;
 
-            if (char.length !== 1) {
+            if (char.length !== 1 || props.editable) {
                 // only single character keys matter for searching
                 return;
             }
@@ -306,39 +357,13 @@ export const Dropdown = React.memo(
 
             if (searchValue.current) {
                 const searchIndex = getSelectedOptionIndex();
-                const newOption = props.optionGroupLabel ? searchOptionInGroup(searchIndex) : searchOption(searchIndex + 1);
 
-                if (newOption) {
-                    selectItem({
-                        originalEvent: event,
-                        option: newOption
-                    });
-                }
+                setFocusedOptionIndex(props.optionGroupLabel ? searchIndex : searchIndex + 1);
             }
 
             searchTimeout.current = setTimeout(() => {
                 searchValue.current = null;
             }, 250);
-        };
-
-        const searchOption = (index) => {
-            if (searchValue.current) {
-                return searchOptionInRange(index, visibleOptions.length) || searchOptionInRange(0, index);
-            }
-
-            return null;
-        };
-
-        const searchOptionInRange = (start, end) => {
-            for (let i = start; i < end; i++) {
-                const opt = visibleOptions[i];
-
-                if (matchesSearchValue(opt)) {
-                    return opt;
-                }
-            }
-
-            return null;
         };
 
         const searchOptionInGroup = (index) => {
@@ -380,6 +405,16 @@ export const Dropdown = React.memo(
         };
 
         const onEditableInputChange = (event) => {
+            !overlayVisibleState && show();
+
+            let searchIndex = null;
+
+            if (event.target.value) {
+                searchIndex = visibleOptions.findIndex((item) => item.name.toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
+            }
+
+            setFocusedOptionIndex(searchIndex);
+
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event.originalEvent,
@@ -530,6 +565,12 @@ export const Dropdown = React.memo(
 
         const hide = () => {
             setOverlayVisibleState(false);
+        };
+
+        const onFocus = () => {
+            if (props.editable) {
+                DomHandler.focus(inputRef.current);
+            }
         };
 
         const onOverlayEnter = (callback) => {
@@ -774,8 +815,9 @@ export const Dropdown = React.memo(
                         maxLength: props.maxLength,
                         onInput: onEditableInputChange,
                         onFocus: onEditableInputFocus,
+                        onKeyDown: onInputKeyDown,
                         onBlur: onInputBlur,
-                        tabIndex: props.tabIndex || 0,
+                        tabIndex: !props.disabled ? props.tabIndex : -1,
                         'aria-haspopup': 'listbox',
                         ...ariaProps
                     },
@@ -886,6 +928,7 @@ export const Dropdown = React.memo(
                 onClick: (e) => onClick(e),
                 onMouseDown: props.onMouseDown,
                 onContextMenu: props.onContextMenu,
+                onFocus: onFocus,
                 'data-p-disabled': props.disabled,
                 'data-p-focus': focusedState
             },
@@ -910,6 +953,8 @@ export const Dropdown = React.memo(
                         appendTo={appendTo}
                         onClick={onPanelClick}
                         onOptionClick={onOptionClick}
+                        focusedOptionIndex={focusedOptionIndex}
+                        setFocusedOptionIndex={setFocusedOptionIndex}
                         filterValue={filterState}
                         hasFilter={hasFilter}
                         onFilterClearIconClick={onFilterClearIconClick}
