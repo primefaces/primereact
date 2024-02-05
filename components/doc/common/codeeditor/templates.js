@@ -337,6 +337,7 @@ export default defineConfig({
         [`${path}App.${fileExtension}`]: {
             content: sources[template].replace(/^\n/, '')
         },
+        ...extFiles,
         ...configuredFiles,
         ...(isTypeScript ? typeScriptFiles : '')
     };

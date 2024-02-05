@@ -274,7 +274,7 @@ export const Splitter = React.memo(
                 }
 
                 case 'Enter': {
-                    if (prevSize.current > 99) {
+                    if (prevSize.current > 100 - (minSize || 5)) {
                         resizePanel(index, minSize, 100);
                     } else {
                         resizePanel(index, 100, minSize);
@@ -312,15 +312,17 @@ export const Splitter = React.memo(
         };
 
         const setTimer = (event, index, step) => {
-            clearTimer();
-            timer.current = setTimeout(() => {
-                repeat(event, index, step);
-            }, 40);
+            if (!timer.current) {
+                timer.current = setInterval(() => {
+                    repeat(event, index, step);
+                }, 40);
+            }
         };
 
         const clearTimer = () => {
             if (timer.current) {
-                clearTimeout(timer.current);
+                clearInterval(timer.current);
+                timer.current = null;
             }
         };
 

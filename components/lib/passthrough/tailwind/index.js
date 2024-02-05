@@ -1827,12 +1827,12 @@ const Tailwind = {
         menu: {
             className: classNames('m-0 p-0 list-none', 'outline-none')
         },
-        content: ({ context }) => ({
+        content: ({ state }) => ({
             className: classNames(
                 'text-gray-700 dark:text-white/80 transition-shadow duration-200 rounded-none',
                 'hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80', // Hover
                 {
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': state.focused
                 }
             )
         }),
