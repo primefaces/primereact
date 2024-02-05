@@ -70,7 +70,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -84,7 +86,7 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description:
             <>
-            Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+                Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
             </>,
         src: '/images/templates/apollo/features-animation-figma.png'
     }
@@ -175,10 +177,10 @@ const animationFeaturesData2 = [
 
 const license = {
     documentLink: 'https://apollo.primereact.org/documentation/',
-    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$59',
             included: [
                 'Non Commercial Usage',
@@ -204,7 +206,7 @@ const templateHeroData = {
     pattern: '/images/templates/apollo/apollo-hero-pattern.png',
     dashboard1: '/images/templates/apollo/apollo-hero-dashboard1.png',
     dashboard2: '/images/templates/apollo/apollo-hero-dashboard2.png',
-    description: 'Application template for React based on the popular NextJS framework. with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 24 PrimeReact themes.',
+    description: 'Application template for React based on the popular NextJS framework with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 24 PrimeReact themes.',
     liveHref: 'https://apollo.primereact.org',
     docHref: 'https://apollo.primereact.org/documentation'
 };
@@ -226,9 +228,7 @@ const ApolloSeparator = () => {
 const ApolloPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the
-            <br />
-            Apollo template gives you
+            Features
         </h2>
     );
 
@@ -240,7 +240,7 @@ const ApolloPage = () => {
                 <TemplateYoutube imgSrc={'/images/templates/apollo/apollo-youtube-screen.png'} />
                 <ApolloSeparator />
             </div>
-            <TemplateLicense license={license}/>
+            <TemplateLicense license={license} />
             <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <ApolloSeparator />

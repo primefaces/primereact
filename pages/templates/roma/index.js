@@ -1,9 +1,7 @@
 import React from 'react';
-import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import RomaLogo from './RomaLogo';
@@ -71,7 +69,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/babylon/features-animation-blocks.png'
     },
     {
@@ -126,7 +126,7 @@ const animationFeaturesData2 = [
     },
     {
         id: 4,
-        title: 'Layout Themes',
+        title: 'Menu Themes',
         description: 'Roma comes with 11 layout themes guaranteeing an enviable design.',
         src: '/images/templates/roma/features-animation-menu-themes.png'
     }
@@ -137,7 +137,7 @@ const license = {
     description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$19',
             included: [
                 'Non Commercial Usage',
@@ -172,8 +172,7 @@ const templateHeroData = {
 const AvalonPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Roma template gives you
+            Features
         </h2>
     );
 

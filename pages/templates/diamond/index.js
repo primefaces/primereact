@@ -69,7 +69,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -92,7 +94,7 @@ const animationFeaturesData1 = [
 const animationFeaturesData2 = [
     {
         id: 1,
-        title: 'Light and Dark Modes',
+        title: 'Light / Dark / Dim Modes',
         description: 'Diamond has 3 display modes to choose from; Light, Dim and Dark.',
         src: '/images/templates/diamond/features-animation-darkmode.png'
     },
@@ -105,7 +107,7 @@ const animationFeaturesData2 = [
     {
         id: 3,
         title: '7 Menu Orientations',
-        description: 'Choose from Static and Slim menu orientations.',
+        description: 'Static, Overlay, Slim, Compact, Horizontal, Reveal and Drawer are the available menu layouts depending on your preference.',
         src: '/images/templates/diamond/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
@@ -148,7 +150,7 @@ const animationFeaturesData2 = [
     },
     {
         id: 4,
-        title: 'Layout Themes',
+        title: 'Menu Themes',
         description: 'Stunning theming options for the main menu in light color scheme.',
         src: '/images/templates/diamond/features-animation-orientations.png'
     }
@@ -156,10 +158,10 @@ const animationFeaturesData2 = [
 
 const license = {
     documentLink: 'https://diamond.primereact.org/documentation/',
-    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$59',
             included: [
                 'Non Commercial Usage',
@@ -208,7 +210,7 @@ const templateHeroData = {
     pattern: '/images/templates/diamond/diamond-hero-pattern.png',
     dashboard1: '/images/templates/diamond/diamond-hero-dashboard1.png',
     dashboard2: '/images/templates/diamond/diamond-hero-dashboard2.png',
-    description: 'An amazing application template for React based on the popular NextJS framework. with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 30 PrimeReact themes.',
+    description: 'An amazing application template for React based on the popular NextJS framework with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 30 PrimeReact themes.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'
 };
@@ -216,8 +218,7 @@ const templateHeroData = {
 const DiamondPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Diamond template gives you
+            Features
         </h2>
     );
 
@@ -225,10 +226,12 @@ const DiamondPage = () => {
         <div className="diamond template">
             <TemplateHero {...templateHeroData} />
             <DiamondSeperator />
-            <TemplateLicense license={license}/>
+            <TemplateLicense license={license} />
             <DiamondSeperator />
-            <TemplateYoutube imgSrc={'/images/templates/diamond/diamond-youtube-screen.png'} />
-            <DiamondSeperator />
+            <div hidden={1}>
+                <TemplateYoutube imgSrc={'/images/templates/diamond/diamond-youtube-screen.png'} />
+                <DiamondSeperator />
+            </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <DiamondSeperator />
             <TemplateConfiguration

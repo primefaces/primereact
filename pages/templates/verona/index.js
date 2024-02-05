@@ -69,7 +69,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -133,7 +135,7 @@ const animationFeaturesData2 = [
     },
     {
         id: 4,
-        title: 'Layout Themes',
+        title: 'Menu Themes',
         description: 'Verona offers 23 special layout themes featuring gorgeous gradients.',
         src: '/images/templates/verona/features-animation-orientations.png'
     }
@@ -179,10 +181,10 @@ const VeronaSeperator = () => {
 
 const license = {
     documentLink: 'https://verona.primereact.org/documentation/',
-    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$49',
             included: [
                 'Non Commercial Usage',
@@ -207,8 +209,7 @@ const license = {
 const VeronaPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Verona template gives you
+            Features
         </h2>
     );
 
@@ -225,10 +226,12 @@ const VeronaPage = () => {
                 liveHref={''}
             />
             <VeronaSeperator />
-            <TemplateLicense license={license}/>
+            <TemplateLicense license={license} />
             <VeronaSeperator />
-            <TemplateYoutube imgSrc={'/images/templates/verona/verona-youtube-screen.png'} />
-            <VeronaSeperator />
+            <div hidden={1}>
+                <TemplateYoutube imgSrc={'/images/templates/verona/verona-youtube-screen.png'} />
+                <VeronaSeperator />
+            </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={4000} />
             <VeronaSeperator />
             <TemplateConfiguration

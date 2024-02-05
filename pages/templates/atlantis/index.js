@@ -69,7 +69,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -150,10 +152,10 @@ const animationFeaturesData2 = [
 
 const license = {
     documentLink: '',
-    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$59',
             included: [
                 'Non Commercial Usage',
@@ -205,8 +207,7 @@ const AtlantisSeperator = () => {
 const AtlantisPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Atlantis template gives you
+            Features
         </h2>
     );
 
@@ -214,10 +215,12 @@ const AtlantisPage = () => {
         <div className="atlantis template">
             <TemplateHero {...templateHeroData} />
             <AtlantisSeperator />
-            <TemplateLicense license={license}/>
+            <TemplateLicense license={license} />
             <AtlantisSeperator />
-            <TemplateYoutube imgSrc={'/images/templates/atlantis/atlantis-youtube-screen.png'} />
-            <AtlantisSeperator />
+            <div hidden={1}>
+                <TemplateYoutube imgSrc={'/images/templates/atlantis/atlantis-youtube-screen.png'} />
+                <AtlantisSeperator />
+            </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <AtlantisSeperator />
             <TemplateConfiguration

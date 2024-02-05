@@ -64,7 +64,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/babylon/features-animation-blocks.png'
     },
     {
@@ -127,7 +129,7 @@ const license = {
     description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$19',
             included: [
                 'Non Commercial Usage',
@@ -182,8 +184,7 @@ const SakaiSeparator = () => {
 const BabylonPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Sakai template gives you
+            Features
         </h2>
     );
 

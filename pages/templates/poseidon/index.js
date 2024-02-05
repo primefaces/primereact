@@ -1,5 +1,4 @@
 import React from 'react';
-import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateRelated from '@/components/templates/TemplateRelated';
@@ -69,7 +68,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/babylon/features-animation-blocks.png'
     },
     {
@@ -124,7 +125,7 @@ const license = {
     description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$59',
             included: [
                 'Non Commercial Usage',
@@ -177,8 +178,7 @@ const templateHeroData = {
 const PoseidonPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Poseidon template gives you
+            Features
         </h2>
     );
 

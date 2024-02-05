@@ -69,7 +69,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -148,7 +150,7 @@ const animationFeaturesData2 = [
     },
     {
         id: 4,
-        title: 'Layout Themes',
+        title: 'Menu Themes',
         description: 'Avalon comes with 11 layout themes guaranteeing an enviable design.',
         src: '/images/templates/avalon/features-animation-menu-themes.png'
     }
@@ -177,7 +179,7 @@ const license = {
     description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
-            title: 'Basic Plan',
+            title: 'Basic License',
             price: '$49',
             included: [
                 'Non Commercial Usage',
@@ -214,8 +216,7 @@ const templateHeroData = {
 const AvalonPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Avalon template gives you
+            Features
         </h2>
     );
 
