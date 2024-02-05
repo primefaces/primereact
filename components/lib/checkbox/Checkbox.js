@@ -132,6 +132,8 @@ export const Checkbox = React.memo(
                 className: classNames(props.className, cx('root', { checked, focusedState })),
                 style: props.style,
                 onClick: (e) => onClick(e),
+                'data-p-highlight': checked,
+                'data-p-disabled': props.disabled,
                 onContextMenu: props.onContextMenu,
                 onMouseDown: props.onMouseDown
             },
