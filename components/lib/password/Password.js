@@ -279,15 +279,15 @@ export const Password = React.memo(
             const showIconProps = mergeProps(ptm('showIcon'));
 
             if (unmaskedState) {
-                icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} />;
+                icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} onClick={toggleMask} />;
             } else {
-                icon = props.showIcon || <EyeIcon {...showIconProps} />;
+                icon = props.showIcon || <EyeIcon {...showIconProps} onClick={toggleMask} />;
             }
 
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
             if (props.toggleMask) {
-                let content = <i onClick={toggleMask}> {eyeIcon} </i>;
+                let content = eyeIcon;
 
                 if (props.icon) {
                     const defaultIconOptions = {
