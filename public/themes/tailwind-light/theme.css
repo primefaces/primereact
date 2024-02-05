@@ -1219,11 +1219,40 @@
     font-size: 1.25rem;
     padding: 0.9375rem 0.9375rem;
   }
+  .p-listbox-list-wrapper {
+    overflow: auto;
+  }
+  .p-listbox-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .p-listbox-item {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .p-listbox-item-group {
+    cursor: auto;
+  }
+  .p-listbox-filter-container {
+    position: relative;
+  }
+  .p-listbox-filter-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-listbox-filter {
+    width: 100%;
+  }
   .p-listbox {
     background: #ffffff;
     color: #3f3f46;
     border: 1px solid #d4d4d8;
     border-radius: 0.375rem;
+    transition: none;
+    outline-color: transparent;
   }
   .p-listbox .p-listbox-header {
     padding: 0.5rem 0.75rem;
@@ -1243,6 +1272,7 @@
   }
   .p-listbox .p-listbox-list {
     padding: 0.25rem 0;
+    outline: 0 none;
   }
   .p-listbox .p-listbox-list .p-listbox-item {
     margin: 0;
@@ -1252,14 +1282,15 @@
     transition: none;
     border-radius: 0;
   }
+  .p-listbox .p-listbox-list .p-listbox-item:first-child {
+    margin-top: 0;
+  }
+  .p-listbox .p-listbox-list .p-listbox-item:last-child {
+    margin-bottom: 0;
+  }
   .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
     color: #312e81;
     background: #eef2ff;
-  }
-  .p-listbox .p-listbox-list .p-listbox-item:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: inset 0 0 0 0.15rem #6366f1;
   }
   .p-listbox .p-listbox-list .p-listbox-item-group {
     margin: 0;
@@ -1273,9 +1304,26 @@
     color: #3f3f46;
     background: transparent;
   }
+  .p-listbox:not(.p-disabled) .p-listbox-item.p-highlight.p-focus {
+    background: #e0e7ff;
+  }
+  .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled).p-focus {
+    color: #18181b;
+    background: #f4f4f5;
+  }
   .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled):hover {
     color: #18181b;
     background: #f4f4f5;
+  }
+  .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled):hover.p-focus {
+    color: #18181b;
+    background: #f4f4f5;
+  }
+  .p-listbox.p-focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #6366f1;
+    border-color: #4f46e5;
   }
   .p-listbox.p-invalid {
     border-color: #f0a9a7;

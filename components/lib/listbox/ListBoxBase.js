@@ -19,6 +19,7 @@ const classes = {
             'p-listbox-item',
             {
                 'p-highlight': props.selected,
+                'p-focus': props.focusedOptionIndex === props.index,
                 'p-disabled': props.disabled
             },
             props.option.className
@@ -90,6 +91,8 @@ export const ListBoxBase = ComponentBase.extend({
         listClassName: null,
         listStyle: null,
         metaKeySelection: false,
+        selectOnFocus: false,
+        autoOptionFocus: true,
         multiple: false,
         onChange: null,
         onFilterValueChange: null,

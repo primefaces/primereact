@@ -5,6 +5,8 @@ import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    
+
     const mergeProps = useMergeProps();
     const {
         ptCallbacks: { ptm, cx }
@@ -16,7 +18,8 @@ export const ListBoxItem = React.memo((props) => {
             context: {
                 selected: props.selected,
                 disabled: props.disabled,
-                focused: focusedState
+                focused: focusedState,
+                focusedOptionIndex: props.focusedOptionIndex
             }
         });
     };
@@ -29,13 +32,15 @@ export const ListBoxItem = React.memo((props) => {
         setFocusedState(false);
     };
 
-    const onClick = (event) => {
+    const onClick = (event, index) => {
         if (props.onClick) {
             props.onClick({
                 originalEvent: event,
                 option: props.option
             });
         }
+
+        props.setFocusedOptionIndex(index);
 
         event.preventDefault();
     };
@@ -49,31 +54,44 @@ export const ListBoxItem = React.memo((props) => {
         }
     };
 
-    const onKeyDown = (event) => {
+    const onKeyDown = (event, index) => {
         const item = event.currentTarget;
 
-        switch (event.which) {
-            //down
-            case 40:
+        switch (event.key) {
+            case 'ArrowDown':
                 const nextItem = findNextItem(item);
+
+                props.setFocusedOptionIndex(index + 1 > props.length - 1 ? props.length - 1 : index + 1);
 
                 nextItem && nextItem.focus();
 
                 event.preventDefault();
                 break;
 
-            //up
-            case 38:
+            case 'ArrowUp':
                 const prevItem = findPrevItem(item);
+
+                props.setFocusedOptionIndex(index - 1 < 0 ? 0 : index - 1);
 
                 prevItem && prevItem.focus();
 
                 event.preventDefault();
                 break;
 
-            //enter
-            case 13:
-                onClick(event);
+            case 'Home':
+                props.setFocusedOptionIndex(0);
+                event.preventDefault();
+                break;
+
+            case 'End':
+                props.setFocusedOptionIndex(props.length - 1);
+                event.preventDefault();
+                break;
+
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onClick(event, props.focusedOptionIndex);
                 event.preventDefault();
                 break;
 
@@ -100,9 +118,9 @@ export const ListBoxItem = React.memo((props) => {
         {
             className: cx('item', { props }),
             style: props.style,
-            onClick: onClick,
+            onClick: (event) => onClick(event, props.index),
             onTouchEnd: onTouchEnd,
-            onKeyDown: onKeyDown,
+            onKeyDown: (event) => onKeyDown(event, props.focusedOptionIndex),
             onFocus: onFocus,
             onBlur: onBlur,
             tabIndex: '-1',

@@ -3,7 +3,7 @@ import { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
@@ -14,10 +14,12 @@ export const ListBox = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ListBoxBase.getProps(inProps, context);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
         const virtualScrollerRef = React.useRef(null);
+        const id = React.useRef(UniqueComponentId());
         const optionTouched = React.useRef(false);
         const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
         const hasFilter = filteredValue && filteredValue.trim().length > 0;
@@ -318,6 +320,7 @@ export const ListBox = React.memo(
 
                 return (
                     <ListBoxItem
+                        id={id.current + '_' + j}
                         hostName="ListBox"
                         key={optionKey}
                         label={optionLabel}
@@ -326,8 +329,11 @@ export const ListBox = React.memo(
                         template={props.itemTemplate}
                         selected={isSelected(option)}
                         onClick={onOptionSelect}
+                        length={visibleOptions.length}
+                        index={j}
+                        focusedOptionIndex={focusedOptionIndex}
+                        setFocusedOptionIndex={setFocusedOptionIndex}
                         onTouchEnd={onOptionTouchEnd}
-                        tabIndex={tabIndex}
                         disabled={disabled}
                         ptCallbacks={ptCallbacks}
                         metaData={metaData}
@@ -367,16 +373,20 @@ export const ListBox = React.memo(
 
                 return (
                     <ListBoxItem
+                        id={id.current + '_' + index}
                         hostName="ListBox"
                         key={optionKey}
                         label={optionLabel}
+                        index={index}
+                        length={visibleOptions.length}
+                        focusedOptionIndex={focusedOptionIndex}
+                        setFocusedOptionIndex={setFocusedOptionIndex}
                         option={option}
                         style={style}
                         template={props.itemTemplate}
                         selected={isSelected(option)}
                         onClick={onOptionSelect}
                         onTouchEnd={onOptionTouchEnd}
-                        tabIndex={tabIndex}
                         disabled={disabled}
                         ptCallbacks={ptCallbacks}
                         metaData={metaData}
