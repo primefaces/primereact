@@ -432,6 +432,12 @@
   .p-calendar.p-invalid.p-component > .p-inputtext {
     border-color: #fca5a5;
   }
+  .p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
+    border-color: #fbbf24;
+  }
   .p-datepicker {
     padding: 0.5rem;
     background: #1f2937;
@@ -640,7 +646,8 @@
     box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
   }
   @media screen and (max-width: 769px) {
-    .p-datepicker table th, .p-datepicker table td {
+    .p-datepicker table th,
+    .p-datepicker table td {
       padding: 0;
     }
   }
@@ -1478,7 +1485,24 @@
     background: #fde68a;
   }
   .p-rating {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .p-rating-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .p-rating.p-readonly .p-rating-item {
+    cursor: default;
+  }
+  .p-rating {
     gap: 0.5rem;
+  }
+  .p-rating .p-rating-item {
+    outline-color: transparent;
+    border-radius: 50%;
   }
   .p-rating .p-rating-item .p-rating-icon {
     color: rgba(255, 255, 255, 0.87);
@@ -1492,7 +1516,7 @@
   .p-rating .p-rating-item .p-rating-icon.p-rating-cancel {
     color: #f48fb1;
   }
-  .p-rating .p-rating-item:focus {
+  .p-rating .p-rating-item.p-focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
@@ -2881,10 +2905,6 @@
     color: rgba(255, 255, 255, 0.87);
     border: 0 none;
     padding: 0;
-  }
-  .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {
-    border: solid #424b57;
-    border-width: 0 0 1px 0;
   }
   .p-dataview .p-dataview-footer {
     background: #1f2937;
