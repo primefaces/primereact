@@ -5,6 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
 
@@ -369,6 +370,7 @@ export const Menu = React.memo(
                     <a {...actionProps}>
                         {icon}
                         {label}
+                        <Ripple />
                     </a>
                 </div>
             );
