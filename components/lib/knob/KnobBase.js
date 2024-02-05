@@ -12,6 +12,7 @@ export const KnobBase = ComponentBase.extend({
         disabled: false,
         readOnly: false,
         showValue: true,
+        tabIndex: 0,
         step: 1,
         min: 0,
         max: 100,
