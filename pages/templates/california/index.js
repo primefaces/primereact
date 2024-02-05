@@ -9,7 +9,7 @@ import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateIntro from '@/components/templates/TemplateIntro';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Diamond is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -43,7 +43,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/babylon-react.jpg',
         href: 'https://www.primefaces.org/layouts/babylon-react'
@@ -99,24 +99,6 @@ const animationFeaturesData2 = [
         title: '3 Different Menu Color ',
         description: 'Choose from Static and Slim menu orientations.',
         src: '/images/templates/california/features-animation-color.png'
-    }
-];
-
-const apolloFeatures1Data = [
-    {
-        src: '/images/templates/avalon/avalon-features1-feature1.png',
-        title: 'Ready to Use Applications',
-        description: 'Mail, File System, Tasks, Calendar, Blog and Chat are the sample applications to get started with ease.'
-    },
-    {
-        src: '/images/templates/avalon/avalon-features1-feature2.png',
-        title: 'E-Commerce Pages',
-        description: 'Avalon offers E-commerce pages to kickstart your e-commerce project powered by PrimeBlocks.'
-    },
-    {
-        src: '/images/templates/avalon/avalon-features1-feature3.png',
-        title: 'Ready to Use Pages',
-        description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.'
     }
 ];
 
@@ -231,9 +213,9 @@ const CaliforniaPage = () => {
             <CaliforniaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <CaliforniaSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <CaliforniaSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

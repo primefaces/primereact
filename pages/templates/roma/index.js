@@ -6,10 +6,9 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import RomaLogo from './RomaLogo';
 import RomaSeparator from './RomaSeparator';
-import TemplateIntro from '@/components/templates/TemplateIntro';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Roma is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -85,8 +84,8 @@ const animationFeaturesData1 = [
 const animationFeaturesData2 = [
     {
         id: 1,
-        title: 'Light and Dark Modes',
-        description: 'Roma offers you 2 uniquely designed layout modes to choose from; Light and Dark.',
+        title: 'Light and Dark Menus',
+        description: 'Roma offers you 2 menu modes to choose from; Light and Dark.',
         src: '/images/templates/roma/features-animation-darkmode.png'
     },
     {
@@ -124,12 +123,6 @@ const animationFeaturesData2 = [
             },
         ]
     },
-    {
-        id: 4,
-        title: 'Menu Themes',
-        description: 'Roma comes with 11 layout themes guaranteeing an enviable design.',
-        src: '/images/templates/roma/features-animation-menu-themes.png'
-    }
 ];
 
 const license = {
@@ -165,8 +158,8 @@ const templateHeroData = {
     dashboard1: '/images/templates/roma/roma-hero-dashboard1.png',
     dashboard2: '/images/templates/roma/roma-hero-dashboard2.png',
     description: 'A minimalist premium application template with a clean and simple design. Fully customizable with SASS variables and optimized for all devices with responsive design.',
-    liveHref: 'https://diamond.primereact.org',
-    docHref: 'https://diamond.primereact.org/documentation'
+    liveHref: 'https://www.primefaces.org/roma-react/',
+    docHref: 'https://www.primefaces.org/roma-react/#/documentation'
 };
 
 const AvalonPage = () => {
@@ -182,12 +175,6 @@ const AvalonPage = () => {
             <RomaSeparator />
             <TemplateLicense license={license}/>
             <RomaSeparator />
-            <TemplateIntro
-            title="1000+ Layout Variations"
-            description="Choose from various modern designs crafted by our team or create your own Roma experience with the ease of customization."
-            imageURL="/images/templates/roma/roma-intro.png"
-            />
-            <RomaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={3000}/>
             <RomaSeparator />
             <TemplateConfiguration
@@ -197,7 +184,7 @@ const AvalonPage = () => {
             <RomaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <RomaSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <RomaSeparator />
             <TemplateRelated relatedData={apolloRelatedData} />
         </div>

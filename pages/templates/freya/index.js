@@ -9,7 +9,7 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import FreyaLogo from './FreyaLogo';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Freya is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -44,7 +44,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/diamond-react.jpg',
         href: '/templates/diamond'
@@ -223,11 +223,11 @@ const FreyaPage = () => {
                 description="Freya is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
             />
             <FreyaSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <FreyaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <FreyaSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

@@ -9,7 +9,7 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import VeronaLogo from './VeronaLogo';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Verona is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -44,7 +44,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/freya-react.jpg',
         href: '/templates/freya'
@@ -241,9 +241,9 @@ const VeronaPage = () => {
             <VeronaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <VeronaSeperator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <VeronaSeperator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

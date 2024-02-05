@@ -1,15 +1,12 @@
 import React from 'react';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
-import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
-import TemplateIntro from '@/components/templates/TemplateIntro';
 import SakaiLogo from './SakaiLogo';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Atlantis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -22,11 +19,6 @@ const apolloFeatures2Data = [
         darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
     },
     {
-        title: 'Lifetime Support',
-        description: 'Atlantis has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
-    },
-    {
         title: 'Full SaSS Support',
         description: 'Sass is utilized for both the application and components to provide simplicity and flexibility.',
         src: '/images/templates/apollo/apollo-features2-customizable.png',
@@ -36,21 +28,6 @@ const apolloFeatures2Data = [
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
         src: '/images/templates/sakai/sakai-features2-mobile.png'
-    }
-];
-
-const apolloRelatedData = [
-    {
-        src: '/images/templates/ultima-react.jpg',
-        href: '/templates/ultima'
-    },
-    {
-        src: '/images/templates/apollo-react.jpg',
-        href: '/templates/apollo'
-    },
-    {
-        src: '/images/templates/serenity-react.jpg',
-        href: 'https://www.primefaces.org/layouts/serenity-react'
     }
 ];
 
@@ -80,20 +57,14 @@ const animationFeaturesData1 = [
 const animationFeaturesData2 = [
     {
         id: 1,
-        title: 'Dark / Light Themes',
-        description: 'California offers a new mega option as an intuitive way to enhance the user experience across different devices.',
+        title: 'Various Free Themes',
+        description: 'Sakai has various free themes to choose from; PrimeOne Design, Bootstrap, Material Design with light and dark options.',
         src: '/images/templates/sakai/features-animation-darkmode.png'
     },
     {
         id: 2,
-        title: '3 Different Menu Color ',
-        description: 'Choose from Static and Slim menu orientations.',
-        src: '/images/templates/sakai/features-animation-component-themes.png'
-    },
-    {
-        id: 3,
-        title: 'Special and Solid Themes',
-        description: 'California Theme is highly customizable, there are 20 built-in themes and creating your own theme is a matter of defining couple of sass variables.',
+        title: '2 Menu Orientations',
+        description: 'Sakai has 2 menu modes; Static and Overlay',
         src: '/images/templates/atlantis/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
@@ -111,11 +82,11 @@ const animationFeaturesData2 = [
     },
 ];
 
-const apolloFeatures1Data = [
+const features1Data = [
     {
         src: '/images/templates/sakai/sakai-github.png',
         title: 'Open Source and Free to Use',
-        description: 'Landing, login and error pages are provided as template pages to get started with building your app in no time.'
+        description: 'Explore Sakai, our versatile, open-source React application template. It\'s free for your every innovation.'
     },
     {
         src: '/images/templates/sakai/sakai-ready.png',
@@ -124,41 +95,17 @@ const apolloFeatures1Data = [
     },
 ];
 
-const license = {
-    documentLink: 'https://www.primefaces.org/roma-react/#/documentation',
-    description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
-    licenseDetails: [
-        {
-            title: 'Basic License',
-            price: '$19',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
-        {
-            title: 'Extended License',
-            price: '$190',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
-    ]
-}
-
 const templateHeroData = {
     logo: <SakaiLogo />,
     pattern: '/images/templates/sakai/sakai-hero-pattern.png',
     dashboard1: '/images/templates/sakai/sakai-hero-dashboard1.png',
     dashboard2: '/images/templates/sakai/sakai-hero-dashboard2.png',
-    description: 'A modern and easy to use premium application template with various color schemes.Based on flat design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.',
-    liveHref: 'https://www.primefaces.org/atlantis-react/',
-    docHref: 'https://www.primefaces.org/atlantis-react/documentation/'
+    description: 'Sakai is a free application template for React based on the popular Next.js framework with new App Router.',
+    liveHref: 'https://sakai.primereact.org/',
+    docHref: 'https://sakai.primereact.org/documentation',
+    free: true,
+    storeHref: 'https://github.com/primefaces/sakai-react',
+    supportHref: 'https://github.com/primefaces/sakai-react/issues'
 };
 
 const SakaiSeparator = () => {
@@ -192,22 +139,18 @@ const BabylonPage = () => {
         <div className="sakai template">
             <TemplateHero {...templateHeroData} />
             <SakaiSeparator />
-            <TemplateLicense license={license}/>
-            <SakaiSeparator />
-            <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />
+            <TemplateFeatures featuresData={features1Data} displayType="horizontal" />
             <SakaiSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={3000} />
             <SakaiSeparator />
             <TemplateConfiguration
-                title="Vue.js App with No Configuration"
-                description="Atlantis is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React based on Next.JS"
+                description="Sakai is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations."
             />
             <SakaiSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <SakaiSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
-            <SakaiSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
         </div>
     );
 };

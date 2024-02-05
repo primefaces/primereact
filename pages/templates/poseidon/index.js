@@ -8,7 +8,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import PoseidonLogo from './PoseidonLogo';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Atlantis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -43,7 +43,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
@@ -197,9 +197,9 @@ const PoseidonPage = () => {
             <PoseidonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <PoseidonSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <PoseidonSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

@@ -9,7 +9,7 @@ import AtlantisLogo from './AtlantisLogo';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Atlantis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -44,7 +44,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/freya-react.jpg',
         href: '/templates/freya'
@@ -230,9 +230,9 @@ const AtlantisPage = () => {
             <AtlantisSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <AtlantisSeperator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <AtlantisSeperator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

@@ -9,7 +9,7 @@ import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import UltimaLogo from './UltimaLogo';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Ultima is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -44,7 +44,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/diamond-react.jpg',
         href: '/templates/diamond'
@@ -205,13 +205,12 @@ const UltimaPage = () => {
         <div className="ultima template">
             <TemplateHero
                 pattern={'/images/templates/ultima/ultima-hero-pattern.png'}
-                rectangle={'/images/templates/ultima/ultima-hero-rectangle1.png'}
-                light={'/images/templates/ultima/ultima-hero-light.png'}
                 logo={<UltimaLogo />}
                 description={'A highly customizable premium application template featuring 4 menu modes, 13 themes, light and dark modes. Based on material design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.'}
                 dashboard1={'/images/templates/ultima/ultima-hero-dashboard1.png'}
                 dashboard2={'/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
+                docHref={'https://ultima.primereact.org/documentation'}
             />
             <UltimaSeperator />
             <TemplateLicense license={license} />
@@ -229,9 +228,9 @@ const UltimaPage = () => {
             <UltimaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <UltimaSeperator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <UltimaSeperator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

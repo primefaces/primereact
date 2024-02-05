@@ -8,7 +8,7 @@ import AvalonLogo from './AvalonLogo';
 import AvalonSeparator from './AvalonSeparator';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Avalon is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -44,7 +44,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/babylon-react.jpg',
         href: '/templates/babylon'
@@ -85,7 +85,7 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description:
             <>
-                Avalon uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/two0OGwOwHfq0sdjeK34l0/Preview-%7C-Atlantis-2022?node-id=15%3A1427&t=2lNJ5EzW0xuvQWdm-1' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Avalon Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+                Avalon uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/LuzEn29BAxr03T2vMQ5A1y/Preview-%7C-Avalon-1.0.0?type=design&mode=design&t=ME7xK2sAYOLoKCrT-1' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Avalon Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
             </>,
         src: '/images/templates/avalon/features-animation-figma.png'
     }
@@ -100,13 +100,13 @@ const animationFeaturesData2 = [
     },
     {
         id: 2,
-        title: 'Component 15 Beautiful Themes',
-        description: 'Avalon offers 15 built-in themes and creating your own theme is a matter of defining couple of SaSS variables.',
+        title: 'Component 10 Beautiful Themes',
+        description: 'Avalon offers 10 built-in themes and creating your own theme is a matter of defining couple of SaSS variables.',
         src: '/images/templates/avalon/features-animation-component-themes.png'
     },
     {
         id: 3,
-        title: '4 Menu Orientations',
+        title: '7 Menu Orientations',
         description: 'Avalon has 7 menu layouts to choose from; Static, Overlay, Slim, Slim+, Reveal, Drawer and Horizontal with Light and Dark options.',
         src: '/images/templates/diamond/features-animation-orientations.png',
         type: 'inline-animation',
@@ -150,13 +150,13 @@ const animationFeaturesData2 = [
     },
     {
         id: 4,
-        title: 'Menu Themes',
-        description: 'Avalon comes with 11 layout themes guaranteeing an enviable design.',
+        title: 'Topbar Themes',
+        description: 'Avalon comes with 11 topbar themes guaranteeing an enviable design.',
         src: '/images/templates/avalon/features-animation-menu-themes.png'
     }
 ];
 
-const apolloFeatures1Data = [
+const features1Data = [
     {
         src: '/images/templates/avalon/avalon-features1-feature1.png',
         title: 'Ready to Use Applications',
@@ -175,7 +175,7 @@ const apolloFeatures1Data = [
 ];
 
 const license = {
-    documentLink: 'https://avalon.primereact.org/documentation/',
+    documentLink: 'https://avalon.primereact.org/documentation',
     description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
@@ -209,8 +209,8 @@ const templateHeroData = {
     dashboard1: '/images/templates/avalon/avalon-hero-dashboard1.png',
     dashboard2: '/images/templates/avalon/avalon-hero-dashboard2.png',
     description: 'A modern and easy to use premium application template with highly customizable layout features. Based on a bootstrap styling, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.',
-    liveHref: 'https://diamond.primereact.org',
-    docHref: 'https://diamond.primereact.org/documentation'
+    liveHref: 'https://avalon.primereact.org/',
+    docHref: 'https://avalon.primereact.org/documentation'
 };
 
 const AvalonPage = () => {
@@ -233,13 +233,13 @@ const AvalonPage = () => {
                 description="Avalon is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
             />
             <AvalonSeparator />
-            <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />
+            <TemplateFeatures featuresData={features1Data} displayType="horizontal" />
             <AvalonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <AvalonSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <AvalonSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

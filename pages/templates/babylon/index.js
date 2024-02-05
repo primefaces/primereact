@@ -8,7 +8,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import BabylonLogo from './BabylonLogo';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Babylon is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -43,7 +43,7 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
         src: '/images/templates/ultima-react.jpg',
         href: '/templates/ultima'
@@ -84,12 +84,6 @@ const animationFeaturesData1 = [
 const animationFeaturesData2 = [
     {
         id: 1,
-        title: 'Colored / Dark / Light',
-        description: 'Each theme color offers accent, dark and light modes as alternatives to choose from.',
-        src: '/images/templates/babylon/features-animation-darkmode.png'
-    },
-    {
-        id: 2,
         title: '4 Menu Orientations, Light and Dark Menus',
         description: 'Babylon has 4 menu modes; Static, Overlay, Horizontal and Slim with Light and Dark color alternatives.',
         src: '/images/templates/atlantis/features-animation-orientations.png',
@@ -118,14 +112,14 @@ const animationFeaturesData2 = [
         ]
     },
     {
-        id: 3,
-        title: '51 Beautiful Themes',
-        description: 'Babylon offers 51 built-in themes and creating your own theme is a matter of defining couple of sass variables.',
+        id: 2,
+        title: '17 Beautiful Themes',
+        description: 'Babylon offers 17 built-in themes and creating your own theme is a matter of defining couple of sass variables.',
         src: '/images/templates/babylon/features-animation-component-themes.png'
     },
 
     {
-        id: 4,
+        id: 3,
         title: '2 Profile Modes',
         description: 'User profile menu can either be placed inside the main menu or topbar.',
         src: '/images/templates/babylon/features-animation-profile.png'
@@ -166,8 +160,8 @@ const templateHeroData = {
     dashboard1: '/images/templates/babylon/babylon-hero-dashboard1.png',
     dashboard2: '/images/templates/babylon/babylon-hero-dashboard2.png',
     description: 'An elegant premium application template with a beautiful design. Fully customizable with SASS variables and optimized for all devices with responsive design.',
-    liveHref: 'https://www.primefaces.org/atlantis-react/',
-    docHref: 'https://www.primefaces.org/atlantis-react/documentation/'
+    liveHref: 'https://www.primefaces.org/babylon-react/',
+    docHref: 'https://www.primefaces.org/babylon-react/#/documentation'
 };
 
 const BabylonSeparator = () => {
@@ -217,9 +211,9 @@ const BabylonPage = () => {
             <BabylonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <BabylonSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <BabylonSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };
