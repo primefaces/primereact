@@ -1846,6 +1846,7 @@ const Tailwind = {
         submenuheader: {
             className: classNames('m-0 p-3 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-bold rounded-tl-none rounded-tr-none')
         },
+        separator: 'border-t border-gray-300 dark:border-blue-900/40 my-1',
         transition: TRANSITIONS.overlay
     },
     menubar: {
