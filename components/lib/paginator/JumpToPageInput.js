@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { ariaLabel } from '../api/Locale';
 import { useMergeProps } from '../hooks/Hooks';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
@@ -28,7 +29,7 @@ export const JumpToPageInput = React.memo((inProps) => {
             onChange: onChange,
             disabled: props.disabled,
             className: 'p-paginator-page-input',
-            ariaLabel: ariaLabelValue,
+            'aria-label': ariaLabelValue,
             element,
             props
         };
