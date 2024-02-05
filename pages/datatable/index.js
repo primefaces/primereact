@@ -18,6 +18,7 @@ import { RowEditDoc } from '@/components/doc/datatable/edit/roweditdoc';
 import { ExportDoc } from '@/components/doc/datatable/exportdoc';
 import { AdvancedFilterDoc } from '@/components/doc/datatable/filter/advanceddoc';
 import { BasicFilterDoc } from '@/components/doc/datatable/filter/basicdoc';
+import { CustomFilterDoc } from '@/components/doc/datatable/filter/customdoc';
 import { GridLinesDoc } from '@/components/doc/datatable/gridlinesdoc';
 import { ImportDoc } from '@/components/doc/datatable/importdoc';
 import { LazyLoadDoc } from '@/components/doc/datatable/lazyloaddoc';
@@ -148,6 +149,11 @@ const DataTableDemo = () => {
                     id: 'advanced_filter',
                     label: 'Advanced',
                     component: AdvancedFilterDoc
+                },
+                {
+                    id: 'custom_filter',
+                    label: 'Custom',
+                    component: CustomFilterDoc
                 }
             ]
         },
