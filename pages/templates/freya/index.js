@@ -151,7 +151,7 @@ const animationFeaturesData2 = [
 ];
 
 const license = {
-    documentLink: 'https://primefaces.org/freya-react/#/start/documentation',
+    documentLink: 'https://freya.primereact.org/documentation',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
@@ -184,7 +184,7 @@ const templateHeroData = {
     dashboard2: '/images/templates/freya/freya-hero-dashboard2.png',
     description: 'Freya is a modern admin template for developers and IT professionals. It comes with a huge collection of reusable UI components and dozens of built-in layouts for various purposes.',
     liveHref: 'https://www.primefaces.org/freya-react/',
-    docHref: 'https://www.primefaces.org/freya-react/documentation/'
+    docHref: 'https://freya.primereact.org/documentation'
 };
 
 const FreyaSeparator = () => {

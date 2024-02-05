@@ -99,7 +99,7 @@ const TemplatesPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 lg:col-6 xl:col-4">
+                <div className="col-12 lg:col-6 xl:col-4" hidden>
                     <div className="card mb-0">
                         <a href="https://www.primefaces.org/sapphire-react" rel="noopener noreferrer" target="_blank">
                             <img alt="Sapphire" src="https://primefaces.org/cdn/primereact/images/layouts/sapphire-react.jpg" className="w-full" />
@@ -114,7 +114,7 @@ const TemplatesPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 lg:col-6 xl:col-4">
+                <div className="col-12 lg:col-6 xl:col-4" hidden>
                     <div className="card mb-0">
                         <a href="https://www.primefaces.org/serenity-react" rel="noopener noreferrer" target="_blank">
                             <img alt="Serenity" src="https://primefaces.org/cdn/primereact/images/layouts/serenity-react.jpg" className="w-full" />
