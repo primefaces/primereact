@@ -1801,10 +1801,13 @@ export const Calendar = React.memo(
 
                 if (props.view === 'date') {
                     overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = inputWidth + 'px';
                 } else {
-                    overlayRef.current.style.minWidth = inputWidth + 'px';
                     overlayRef.current.style.width = inputWidth + 'px';
+                }
+
+                // #5830 Tailwind does not need a min width it breaks the styling
+                if (!isUnstyled()) {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
                 }
             }
 
@@ -1870,7 +1873,7 @@ export const Calendar = React.memo(
                 if (isUnstyled) {
                     destroyMask();
                 } else {
-                    DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
+                    !isUnstyled() && DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
                     touchUIMask.current.addEventListener('animationend', () => {
                         destroyMask();
                     });
