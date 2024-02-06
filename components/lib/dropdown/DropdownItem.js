@@ -5,7 +5,7 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const DropdownItem = React.memo((props) => {
     const mergeProps = useMergeProps();
-    const { ptm, cx, selected, disabled, option, label, index, focusedOptionIndex, setFocusedOptionIndex } = props;
+    const { ptm, cx, selected, disabled, option, label, index, focusedOptionIndex } = props;
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -17,8 +17,6 @@ export const DropdownItem = React.memo((props) => {
     };
 
     const onClick = (event, i) => {
-        setFocusedOptionIndex(i);
-
         if (props.onClick) {
             props.onClick({
                 originalEvent: event,
@@ -38,6 +36,7 @@ export const DropdownItem = React.memo((props) => {
             'aria-label': label,
             'aria-selected': selected,
             'data-p-highlight': selected,
+            'data-p-focused': focusedOptionIndex === index,
             'data-p-disabled': disabled
         },
         getPTOptions('item', { selected, disabled, option, label })

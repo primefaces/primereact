@@ -191,6 +191,8 @@ export const DropdownBase = ComponentBase.extend({
         onShow: null,
         optionDisabled: null,
         optionGroupChildren: 'items',
+        selectOnFocus: false,
+        autoOptionFocus: false,
         optionGroupLabel: null,
         optionGroupTemplate: null,
         optionLabel: null,
