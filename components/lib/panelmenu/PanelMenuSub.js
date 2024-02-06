@@ -3,6 +3,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
+import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo(
@@ -202,6 +203,7 @@ export const PanelMenuSub = React.memo(
                     {submenuIcon}
                     {icon}
                     {label}
+                    <Ripple />
                 </a>
             );
 

@@ -105,7 +105,19 @@ export interface SplitterPassThroughOptions {
  * Defines valid properties in SplitterPanel component.
  * @group Properties
  */
-interface SplitterPanelProps {
+interface SplitterPanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+    /**
+     * Returns the value of element's id content attribute. Can be set to change it.
+     */
+    id?: string;
+    /**
+     * Establishes relationships between the splitter and panel label element IDs.
+     */
+    'aria-labelledby'?: string | undefined;
+    /**
+     * Splitter handle ARIA label for screenreader support.
+     */
+    'aria-label'?: string | undefined;
     /**
      * Size of the element relative to 100%.
      */

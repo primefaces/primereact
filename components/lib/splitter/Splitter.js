@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMergeProps } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { useEventListener, useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 
 export const SplitterPanel = () => {};
@@ -13,6 +13,7 @@ export const Splitter = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SplitterBase.getProps(inProps, context);
 
+        const idState = React.useRef('');
         const elementRef = React.useRef(null);
         const gutterRef = React.useRef();
         const gutterRefs = React.useRef({});
@@ -33,6 +34,7 @@ export const Splitter = React.memo(
         const isStateful = props.stateKey != null;
         const childrenLength = (props.children && props.children.length) || 1;
         const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children && [].concat(props.children)[index].props.size) || 100 / childrenLength);
+        const horizontal = props.layout === 'horizontal';
 
         const metaData = {
             props,
@@ -133,11 +135,10 @@ export const Splitter = React.memo(
         }, [getStorage, props.stateKey]);
 
         const onResizeStart = (event, index, isKeyDown) => {
-            gutterRef.current = gutterRefs.current[index];
-            let pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
-            let pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
-            const horizontal = props.layout === 'horizontal';
+            const pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
+            const pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
 
+            gutterRef.current = gutterRefs.current[index];
             size.current = horizontal ? DomHandler.getWidth(elementRef.current) : DomHandler.getHeight(elementRef.current);
             dragging.current = true;
             startPos.current = horizontal ? pageX : pageY;
@@ -163,9 +164,8 @@ export const Splitter = React.memo(
 
         const onResize = (event, step = 0, isKeyDown = false) => {
             let newPos, newNextPanelSize, newPrevPanelSize;
-            let horizontal = props.layout === 'horizontal';
-            let pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
-            let pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
+            const pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
+            const pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
 
             if (isKeyDown) {
                 if (horizontal) {
@@ -183,13 +183,7 @@ export const Splitter = React.memo(
                 newNextPanelSize = nextPanelSize.current - newPos;
             }
 
-            if (validateResize(newPrevPanelSize, newNextPanelSize)) {
-                prevPanelSizeNew.current = newPrevPanelSize;
-                nextPanelSizeNew.current = newNextPanelSize;
-                prevPanelElement.current.style.flexBasis = 'calc(' + newPrevPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
-                nextPanelElement.current.style.flexBasis = 'calc(' + newNextPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
-                prevSize.current = parseFloat(newPrevPanelSize).toFixed(4);
-            }
+            resizePanel(prevPanelIndex.current, newPrevPanelSize, newNextPanelSize);
         };
 
         const onResizeEnd = (event) => {
@@ -225,9 +219,11 @@ export const Splitter = React.memo(
         };
 
         const onGutterKeyDown = (event, index) => {
+            const minSize = (props.children[index].props && props.children[index].props.minSize) || 0;
+
             switch (event.code) {
                 case 'ArrowLeft': {
-                    if (props.layout === 'horizontal') {
+                    if (horizontal) {
                         setTimer(event, index, props.step * -1);
                     }
 
@@ -236,7 +232,7 @@ export const Splitter = React.memo(
                 }
 
                 case 'ArrowRight': {
-                    if (props.layout === 'horizontal') {
+                    if (horizontal) {
                         setTimer(event, index, props.step);
                     }
 
@@ -245,7 +241,7 @@ export const Splitter = React.memo(
                 }
 
                 case 'ArrowDown': {
-                    if (props.layout === 'vertical') {
+                    if (!horizontal) {
                         setTimer(event, index, props.step * -1);
                     }
 
@@ -254,8 +250,33 @@ export const Splitter = React.memo(
                 }
 
                 case 'ArrowUp': {
-                    if (props.layout === 'vertical') {
+                    if (!horizontal) {
                         setTimer(event, index, props.step);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'Home': {
+                    resizePanel(index, 100, minSize);
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'End': {
+                    resizePanel(index, minSize, 100);
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'Enter': {
+                    if (prevSize.current > 100 - (minSize || 5)) {
+                        resizePanel(index, minSize, 100);
+                    } else {
+                        resizePanel(index, 100, minSize);
                     }
 
                     event.preventDefault();
@@ -268,21 +289,39 @@ export const Splitter = React.memo(
             }
         };
 
+        const resizePanel = (index, newPrevPanelSize, newNextPanelSize) => {
+            prevPanelIndex.current = index;
+            gutterRef.current = gutterRefs.current[index];
+            size.current = horizontal ? DomHandler.getWidth(elementRef.current) : DomHandler.getHeight(elementRef.current);
+            prevPanelElement.current = gutterRef.current.previousElementSibling;
+            nextPanelElement.current = gutterRef.current.nextElementSibling;
+
+            if (validateResize(newPrevPanelSize, newNextPanelSize)) {
+                prevPanelSizeNew.current = newPrevPanelSize;
+                nextPanelSizeNew.current = newNextPanelSize;
+                prevPanelElement.current.style.flexBasis = 'calc(' + newPrevPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
+                nextPanelElement.current.style.flexBasis = 'calc(' + newNextPanelSize + '% - ' + (props.children.length - 1) * props.gutterSize + 'px)';
+                prevSize.current = parseFloat(newPrevPanelSize).toFixed(4);
+            }
+        };
+
         const repeat = (event, index, step) => {
             onResizeStart(event, index, true);
             onResize(event, step, true);
         };
 
         const setTimer = (event, index, step) => {
-            clearTimer();
-            timer.current = setTimeout(() => {
-                repeat(event, index, step);
-            }, 40);
+            if (!timer.current) {
+                timer.current = setInterval(() => {
+                    repeat(event, index, step);
+                }, 40);
+            }
         };
 
         const clearTimer = () => {
             if (timer.current) {
-                clearTimeout(timer.current);
+                clearInterval(timer.current);
+                timer.current = null;
             }
         };
 
@@ -313,6 +352,12 @@ export const Splitter = React.memo(
             getElement: () => elementRef.current
         }));
 
+        useMountEffect(() => {
+            if (elementRef.current) {
+                idState.current = UniqueComponentId();
+            }
+        });
+
         React.useEffect(() => {
             const panelElements = [...elementRef.current.children].filter((child) => DomHandler.getAttribute(child, 'data-pc-section') === 'splitterpanel.root');
 
@@ -333,30 +378,38 @@ export const Splitter = React.memo(
         }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
+            const panelId = getPanelProp(panel, 'id') || `${idState.current}_${index}`;
             const panelClassName = classNames(getPanelProp(panel, 'className'), cx('panel.root'));
 
             const gutterProps = mergeProps(
                 {
                     ref: (el) => (gutterRefs.current[index] = el),
                     className: cx('gutter'),
-                    style: props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
+                    style: horizontal ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
                     onMouseDown: (event) => onGutterMouseDown(event, index),
                     onKeyDown: (event) => onGutterKeyDown(event, index),
                     onKeyUp: onGutterKeyUp,
                     onTouchStart: (event) => onGutterTouchStart(event, index),
                     onTouchMove: (event) => onGutterTouchMove(event),
                     onTouchEnd: (event) => onGutterTouchEnd(event),
-                    'data-p-splitter-gutter-resizing': false
+                    'data-p-splitter-gutter-resizing': false,
+                    role: 'separator'
                 },
                 ptm('gutter')
             );
 
             const gutterHandlerProps = mergeProps(
                 {
-                    tabIndex: 0,
+                    tabIndex: getPanelProp(panel, 'tabIndex') || 0,
                     className: cx('gutterHandler'),
-                    'aria-orientation': props.layout,
-                    'aria-valuenow': prevSize.current
+                    'aria-orientation': horizontal ? 'vertical' : 'horizontal',
+                    'aria-controls': panelId,
+                    'aria-label': getPanelProp(panel, 'aria-label'),
+                    'aria-labelledby': getPanelProp(panel, 'aria-labelledby'),
+                    'aria-valuenow': prevSize.current,
+                    'aria-valuetext': parseFloat(prevSize.current).toFixed(0) + '%',
+                    'aria-valuemin': getPanelProp(panel, 'minSize') || '0',
+                    'aria-valuemax': '100'
                 },
                 ptm('gutterHandler')
             );
@@ -372,7 +425,7 @@ export const Splitter = React.memo(
             const rootProps = mergeProps(
                 {
                     key: index,
-                    id: getPanelProp(panel, 'id'),
+                    id: panelId,
                     className: panelClassName,
                     style: { ...getPanelProp(panel, 'style'), flexBasis },
                     role: 'presentation',
