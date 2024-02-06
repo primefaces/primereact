@@ -5,7 +5,6 @@ import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    
 
     const mergeProps = useMergeProps();
     const {
@@ -57,7 +56,7 @@ export const ListBoxItem = React.memo((props) => {
     const onKeyDown = (event, index) => {
         const item = event.currentTarget;
 
-        switch (event.key) {
+        switch (event.code) {
             case 'ArrowDown':
                 const nextItem = findNextItem(item);
 
