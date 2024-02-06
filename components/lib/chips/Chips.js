@@ -14,6 +14,7 @@ export const Chips = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = ChipsBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const [focusedIndex, setFocusedIndex] = React.useState(null);
 
         const { ptm, cx, isUnstyled } = ChipsBase.setMetaData({
             props,
@@ -93,30 +94,92 @@ export const Chips = React.memo(
             DomHandler.focus(inputRef.current);
         };
 
+        const onContainerKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowLeft':
+                    onArrowLeftKeyOn(event);
+                    break;
+
+                case 'ArrowRight':
+                    onArrowRightKeyOn(event);
+                    break;
+
+                case 'Backspace':
+                    onBackspaceKeyOn(event);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onArrowLeftKeyOn = () => {
+            let focusIndex = focusedIndex;
+
+            if (inputRef.current.value.length === 0 && props.value && props.value.length > 0) {
+                focusIndex = focusIndex === null ? props.value.length - 1 : focusIndex - 1;
+                if (focusIndex < 0) focusIndex = 0;
+            }
+
+            setFocusedIndex(focusIndex);
+        };
+
+        const onArrowRightKeyOn = () => {
+            let focusIndex = focusedIndex;
+
+            if (inputRef.current.value.length === 0 && props.value && props.value.length > 0) {
+                if (focusIndex === props.value.length - 1) {
+                    focusIndex = null;
+                    inputRef.current.focus();
+                } else {
+                    focusIndex++;
+                }
+            }
+
+            setFocusedIndex(focusIndex);
+        };
+
+        const onBackspaceKeyOn = (event) => {
+            if (focusedIndex !== null) {
+                removeItem(event, focusedIndex);
+            }
+        };
+
         const onKeyDown = (event) => {
             const inputValue = event.target.value;
             const values = props.value || [];
 
             props.onKeyDown && props.onKeyDown(event);
 
-            // do not continue if the user defined keydown wants to prevent
             if (event.defaultPrevented) {
                 return;
             }
 
-            switch (event.key) {
+            switch (event.code) {
                 case 'Backspace':
-                    if (inputRef.current.value.length === 0 && values.length > 0) {
+                    if (inputValue.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
                     }
 
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
                     }
 
+                    break;
+
+                case 'ArrowLeft':
+                    if (inputValue.length === 0 && values && values.length > 0) {
+                        DomHandler.focus(listRef.current);
+                    }
+
+                    break;
+
+                case 'ArrowRight':
+                    event.stopPropagation();
                     break;
 
                 default:
@@ -181,8 +244,18 @@ export const Chips = React.memo(
             }
         };
 
+        const onContainerFocus = (event) => {
+            setFocusedState(true);
+        };
+
+        const onContainerBlur = () => {
+            setFocusedIndex(-1);
+            setFocusedState(false);
+        };
+
         const onFocus = (event) => {
             setFocusedState(true);
+            setFocusedIndex(null);
             props.onFocus && props.onFocus(event);
         };
 
@@ -228,6 +301,10 @@ export const Chips = React.memo(
             }
         });
 
+        const focusedOptionId = () => {
+            return focusedIndex !== null ? `${props.inputId}_chips_item_${focusedIndex}` : null;
+        };
+
         const createRemoveIcon = (value, index) => {
             const iconProps = mergeProps(
                 {
@@ -259,9 +336,16 @@ export const Chips = React.memo(
             const icon = createRemoveIcon(value, index);
             const tokenProps = mergeProps(
                 {
-                    key: index,
-                    className: cx('token'),
-                    'data-p-highlight': true
+                    key: `${index}_${value}`,
+                    id: props.inputId + '_chips_item_' + index,
+                    role: 'option',
+                    'aria-label': value,
+                    className: cx('token', { focusedIndex, index }),
+                    'aria-selected': true,
+                    'aria-setsize': props.value.length,
+                    'aria-posinset': index + 1,
+                    'data-p-highlight': true,
+                    'data-p-focused': focusedIndex === index
                 },
                 ptm('token')
             );
@@ -317,10 +401,19 @@ export const Chips = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx('container', { focusedState }),
+                    className: cx('container', { isFilled }),
                     onClick: (e) => onWrapperClick(e),
+                    onKeyDown: (e) => onContainerKeyDown(e),
+                    tabIndex: -1,
+                    role: 'listbox',
+                    'aria-orientation': 'horizontal',
+                    'aria-labelledby': props.ariaLabelledby,
+                    'aria-label': props.ariaLabel,
+                    'aria-activedescendant': focusedState ? focusedOptionId() : undefined,
                     'data-p-disabled': props.disabled,
-                    'data-p-focus': focusedState
+                    'data-p-focus': focusedState,
+                    onFocus: onContainerFocus,
+                    onBlur: onContainerBlur
                 },
                 ptm('container')
             );
@@ -341,7 +434,7 @@ export const Chips = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: classNames(props.className, cx('root', { isFilled, focusedState })),
+                className: classNames(props.className, cx('root', { isFilled, focusedState, disabled: props.disabled })),
                 style: props.style
             },
             ptm('root')

@@ -5,6 +5,7 @@ import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+
     const mergeProps = useMergeProps();
     const {
         ptCallbacks: { ptm, cx }
@@ -16,7 +17,8 @@ export const ListBoxItem = React.memo((props) => {
             context: {
                 selected: props.selected,
                 disabled: props.disabled,
-                focused: focusedState
+                focused: focusedState,
+                focusedOptionIndex: props.focusedOptionIndex
             }
         });
     };
@@ -29,56 +31,12 @@ export const ListBoxItem = React.memo((props) => {
         setFocusedState(false);
     };
 
-    const onClick = (event) => {
-        if (props.onClick) {
-            props.onClick({
-                originalEvent: event,
-                option: props.option
-            });
-        }
-
-        event.preventDefault();
-    };
-
     const onTouchEnd = (event) => {
         if (props.onTouchEnd) {
             props.onTouchEnd({
                 originalEvent: event,
                 option: props.option
             });
-        }
-    };
-
-    const onKeyDown = (event) => {
-        const item = event.currentTarget;
-
-        switch (event.which) {
-            //down
-            case 40:
-                const nextItem = findNextItem(item);
-
-                nextItem && nextItem.focus();
-
-                event.preventDefault();
-                break;
-
-            //up
-            case 38:
-                const prevItem = findPrevItem(item);
-
-                prevItem && prevItem.focus();
-
-                event.preventDefault();
-                break;
-
-            //enter
-            case 13:
-                onClick(event);
-                event.preventDefault();
-                break;
-
-            default:
-                break;
         }
     };
 
@@ -98,11 +56,11 @@ export const ListBoxItem = React.memo((props) => {
 
     const itemProps = mergeProps(
         {
+            id: props.id,
             className: cx('item', { props }),
             style: props.style,
-            onClick: onClick,
+            onClick: (event) => props.onClick(event, props.option, props.index),
             onTouchEnd: onTouchEnd,
-            onKeyDown: onKeyDown,
             onFocus: onFocus,
             onBlur: onBlur,
             tabIndex: '-1',

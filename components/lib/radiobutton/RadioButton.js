@@ -150,6 +150,7 @@ export const RadioButton = React.memo(
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
+                checked: props.checked,
                 disabled: props.disabled,
                 required: props.required,
                 tabIndex: props.tabIndex,

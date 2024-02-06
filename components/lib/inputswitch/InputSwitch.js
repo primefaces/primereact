@@ -94,7 +94,9 @@ export const InputSwitch = React.memo(
                 style: props.style,
                 onClick,
                 role: 'checkbox',
-                'aria-checked': checked
+                'aria-checked': checked,
+                'data-p-highlight': checked,
+                'data-p-disabled': props.disabled
             },
             otherProps,
             ptm('root')

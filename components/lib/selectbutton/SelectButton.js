@@ -12,6 +12,8 @@ export const SelectButton = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SelectButtonBase.getProps(inProps, context);
 
+        const [focusedIndex, setFocusedIndex] = React.useState(0);
+
         const elementRef = React.useRef(null);
 
         const { ptm, cx } = SelectButtonBase.setMetaData({
@@ -94,7 +96,7 @@ export const SelectButton = React.memo(
                 return props.options.map((option, index) => {
                     const isDisabled = props.disabled || isOptionDisabled(option);
                     const optionLabel = getOptionLabel(option);
-                    const tabIndex = isDisabled ? null : 0;
+                    const tabIndex = index === focusedIndex ? '0' : '-1';
                     const selected = isSelected(option);
                     const key = optionLabel + '_' + index;
 
@@ -105,13 +107,16 @@ export const SelectButton = React.memo(
                             label={optionLabel}
                             className={option.className}
                             option={option}
+                            setFocusedIndex={setFocusedIndex}
                             onClick={onOptionClick}
                             template={props.itemTemplate}
                             selected={selected}
                             tabIndex={tabIndex}
+                            index={index}
                             disabled={isDisabled}
                             ptm={ptm}
                             cx={cx}
+                            elementRef={elementRef}
                         />
                     );
                 });

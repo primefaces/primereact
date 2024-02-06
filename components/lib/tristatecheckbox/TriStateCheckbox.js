@@ -67,7 +67,7 @@ export const TriStateCheckbox = React.memo(
         };
 
         const onKeyDown = (e) => {
-            if (e.keyCode === 32) {
+            if (e.code === 'Enter' || e.code === 'Space') {
                 toggle(e);
                 e.preventDefault();
             }
@@ -140,7 +140,8 @@ export const TriStateCheckbox = React.memo(
             {
                 className: classNames(props.className, cx('root')),
                 style: props.style,
-                onClick: onClick
+                onClick: onClick,
+                'data-p-disabled': props.disabled
             },
             TriStateCheckboxBase.getOtherProps(props),
             ptm('root')
