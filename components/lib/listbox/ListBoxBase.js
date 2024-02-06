@@ -4,7 +4,7 @@ import { classNames } from '../utils/Utils';
 const classes = {
     itemGroup: 'p-listbox-item-group',
     emptyMessage: 'p-listbox-empty-message',
-    list: ({ props, options }) => (props.virtualScrollerOptions ? classNames('p-listbox-list', options.className) : 'p-listbox-list'),
+    list: 'p-listbox-list',
     wrapper: ({ props }) => classNames('p-listbox-list-wrapper', props.listClassName),
     root: ({ props }) =>
         classNames(
@@ -87,6 +87,7 @@ export const ListBoxBase = ComponentBase.extend({
         filterPlaceholder: null,
         filterTemplate: null,
         filterValue: null,
+        selectOnFocus: false,
         id: null,
         itemTemplate: null,
         listClassName: null,

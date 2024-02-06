@@ -31,71 +31,12 @@ export const ListBoxItem = React.memo((props) => {
         setFocusedState(false);
     };
 
-    const onClick = (event, index) => {
-        if (props.onClick) {
-            props.onClick({
-                originalEvent: event,
-                option: props.option
-            });
-        }
-
-        props.setFocusedOptionIndex(index);
-
-        event.preventDefault();
-    };
-
     const onTouchEnd = (event) => {
         if (props.onTouchEnd) {
             props.onTouchEnd({
                 originalEvent: event,
                 option: props.option
             });
-        }
-    };
-
-    const onKeyDown = (event, index) => {
-        const item = event.currentTarget;
-
-        switch (event.code) {
-            case 'ArrowDown':
-                const nextItem = findNextItem(item);
-
-                props.setFocusedOptionIndex(index + 1 > props.length - 1 ? props.length - 1 : index + 1);
-
-                nextItem && nextItem.focus();
-
-                event.preventDefault();
-                break;
-
-            case 'ArrowUp':
-                const prevItem = findPrevItem(item);
-
-                props.setFocusedOptionIndex(index - 1 < 0 ? 0 : index - 1);
-
-                prevItem && prevItem.focus();
-
-                event.preventDefault();
-                break;
-
-            case 'Home':
-                props.setFocusedOptionIndex(0);
-                event.preventDefault();
-                break;
-
-            case 'End':
-                props.setFocusedOptionIndex(props.length - 1);
-                event.preventDefault();
-                break;
-
-            case 'Enter':
-            case 'NumpadEnter':
-            case 'Space':
-                onClick(event, props.focusedOptionIndex);
-                event.preventDefault();
-                break;
-
-            default:
-                break;
         }
     };
 
@@ -115,11 +56,11 @@ export const ListBoxItem = React.memo((props) => {
 
     const itemProps = mergeProps(
         {
+            id: props.id,
             className: cx('item', { props }),
             style: props.style,
-            onClick: (event) => onClick(event, props.index),
+            onClick: (event) => props.onClick(event, props.option, props.index),
             onTouchEnd: onTouchEnd,
-            onKeyDown: (event) => onKeyDown(event, props.focusedOptionIndex),
             onFocus: onFocus,
             onBlur: onBlur,
             tabIndex: '-1',
