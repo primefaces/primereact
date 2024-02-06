@@ -31,13 +31,8 @@ export const MultiSelectItem = React.memo((props) => {
     };
 
     const onClick = (event) => {
-        props.setFocusedOptionIndex(props.index);
-
         if (props.onClick) {
-            props.onClick({
-                originalEvent: event,
-                option: props.option
-            });
+            props.onClick(event, props.option);
         }
 
         event.preventDefault();
