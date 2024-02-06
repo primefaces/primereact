@@ -7,8 +7,9 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import UltimaLogo from './UltimaLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Ultima is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -17,7 +18,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
     },
     {
         title: 'Lifetime Support',
@@ -27,11 +29,12 @@ const apolloFeatures2Data = [
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
-        description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
+        description: 'Everything is ready for you to start and build your app in no time. Landing, login, invoice, help, and error pages are provided as template pages.',
         src: '/images/templates/ultima/ultima-features2-ready.png'
     },
     {
@@ -41,18 +44,18 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/diamond-react.jpg',
+        href: '/templates/diamond'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/apollo-react.jpg',
+        href: '/templates/apollo'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/babylon-react.jpg',
+        href: '/templates/babylon'
     }
 ];
 
@@ -66,7 +69,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -79,8 +84,10 @@ const animationFeaturesData1 = [
         id: 4,
         title: 'Figma File',
         description:
-            'Ultima uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Ultima Figma file as they are available in PrimeOne for Figma only.',
-        src: '/images/templates/apollo/features-animation-figma.png'
+            <>
+                Ultima uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/ijQrxq13lxacgkb6XHlLxA/Preview-%7C-Ultima-2022?node-id=354%3A7715&t=gjWHprUDE5RJIg78-1' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Ultima Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+            </>,
+        src: '/images/templates/ultima/features-animation-figma.png'
     }
 ];
 
@@ -88,13 +95,13 @@ const animationFeaturesData2 = [
     {
         id: 1,
         title: 'Light and Dark Modes',
-        description: 'The stunning dark and light modes will impress your users.',
+        description: 'Ultima offers you 2 uniquely designed layout modes to choose from; Light and Dark.',
         src: '/images/templates/ultima/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Atlantis offers 16 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
+        description: 'Ultima offers 17 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
         src: '/images/templates/ultima/features-animation-component-themes.png'
     },
     {
@@ -143,6 +150,33 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://ultima.primereact.org/documentation/',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic License',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
+
 const UltimaSeperator = () => {
     return (
         <TemplateSeparator
@@ -163,8 +197,7 @@ const UltimaSeperator = () => {
 const UltimaPage = () => {
     const featuresAnimationTitle = (
         <h2>
-            Features that the <br />
-            Ultima template gives you
+            Features
         </h2>
     );
 
@@ -172,28 +205,32 @@ const UltimaPage = () => {
         <div className="ultima template">
             <TemplateHero
                 pattern={'/images/templates/ultima/ultima-hero-pattern.png'}
-                rectangle={'/images/templates/ultima/ultima-hero-rectangle1.png'}
-                light={'/images/templates/ultima/ultima-hero-light.png'}
                 logo={<UltimaLogo />}
+                description={'A highly customizable premium application template featuring 4 menu modes, 13 themes, light and dark modes. Based on material design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.'}
                 dashboard1={'/images/templates/ultima/ultima-hero-dashboard1.png'}
                 dashboard2={'/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
+                docHref={'https://ultima.primereact.org/documentation'}
             />
             <UltimaSeperator />
-            <TemplateYoutube imgSrc={'/images/templates/ultima/ultima-youtube-screen.png'} />
+            <TemplateLicense license={license} />
             <UltimaSeperator />
+            <div hidden={1}>
+                <TemplateYoutube imgSrc={'/images/templates/ultima/ultima-youtube-screen.png'} />
+                <UltimaSeperator />
+            </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <UltimaSeperator />
             <TemplateConfiguration
-                title="Vue.js App with No Configuration"
-                description="Ultima is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
+                title="React App with No Configuration"
+                description="Ultima is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <UltimaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <UltimaSeperator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <UltimaSeperator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

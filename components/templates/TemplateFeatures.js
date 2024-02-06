@@ -1,14 +1,18 @@
-import React from 'react';
-import { ObjectUtils } from '../lib/utils/Utils';
+import React, { useContext } from 'react';
+import AppContentContext from '../layout/appcontentcontext';
 
 const TemplateFeatures = ({ featuresData, displayType }) => {
+    const { darkMode } = useContext(AppContentContext);
+
     const renderHorizontalFeatures = () => {
         return (
             <div className="template-features-horizontal-wrapper">
                 <div className="template-features-horizontal">
                     {featuresData.map((data, i) => (
                         <div key={i} className="template-features-horizontal-card">
-                            <div className="template-features-horizontal-card-top">{ObjectUtils.getJSXElement(data.template) || <img src={data.src} alt={data.title} />}</div>
+                            <div className="template-features-horizontal-card-top">
+                                <img src={darkMode ? (data.darkSrc || data.src) : data.src} alt={data.title}></img>
+                            </div>
                             <div className="template-features-horizontal-card-bottom">
                                 <h5 className="template-features-horizontal-card-bottom-title">{data.title}</h5>
                                 <p className="template-features-horizontal-card-bottom-description">{data.description}</p>
@@ -33,7 +37,9 @@ const TemplateFeatures = ({ featuresData, displayType }) => {
                             <div key={i} className="template-features-vertical-col">
                                 {(i === 0 ? firstColumnData : secondColumnData).map((data, j) => (
                                     <div key={j} className={`template-features-vertical-card `}>
-                                        <div className="template-features-vertical-card-image">{ObjectUtils.getJSXElement(data.template) || <img src={data.src} alt={data.title} />}</div>
+                                        <div className="template-features-vertical-card-image">
+                                            <img src={darkMode ? (data.darkSrc || data.src) : data.src} alt={data.title} />
+                                        </div>
                                         <h2>{data.title}</h2>
                                         <p>{data.description}</p>
                                     </div>

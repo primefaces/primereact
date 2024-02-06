@@ -3,13 +3,12 @@
         &-hero {
 
             &-pattern {
-                height: 26rem;
-                width: auto;
+                height: auto;
+                width: 45rem;
                 position: absolute;
-                bottom: 0;
-                left: 0;
+                bottom: -9rem;
+                left: 0rem;
                 z-index: 6;
-                mix-blend-mode: screen;
             }
         }
     }
@@ -22,8 +21,10 @@
             &-hero {
 
                 &-pattern {
-                    width: 70rem;
-                    height: 30rem;
+                    width: 55rem;
+                    height: auto;
+                    bottom: -2rem;
+                    left: 0;
                 }
             }
         }

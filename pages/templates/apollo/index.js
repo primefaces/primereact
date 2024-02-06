@@ -1,28 +1,62 @@
-import React, { useContext } from 'react';
-import AppContentContext from '@/components/layout/appcontentcontext';
+import React from 'react';
 import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import ApolloLogo from './ApolloLogo';
-
-import Compatible from '../../../public/images/templates/apollo/apollo-features2-compatible.svg';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/diamond-react.jpg',
+        href: '/templates/diamond'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/avalon-react.jpg',
+        href: '/templates/avalon'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/babylon-react.jpg',
+        href: '/templates/babylon'
+    }
+];
+
+const apolloFeatures2Data = [
+    {
+        title: 'Fully Responsive',
+        description: 'Apollo is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
+        src: '/images/templates/apollo/apollo-features2-responsive.png'
+    },
+    {
+        title: 'Lifetime Support',
+        description: 'Apollo has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
+        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+    },
+    {
+        title: 'Top Notch Quality',
+        description: 'Superior standards with 100% compatibility for strict mode and linting tools.',
+        src: '/images/templates/apollo/apollo-features2-quality.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-quality-dark.png'
+    },
+    {
+        title: 'Cross Browser Compatible',
+        description: 'First class support for Firefox, Safari, Chrome and Edge.',
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
+    },
+    {
+        title: 'Customizable Design',
+        description: 'Fully customizable with a mixture of Sass and CSS variables.',
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+    },
+    {
+        title: 'Mobile Experience',
+        description: 'Touch optimized enhanced mobile experience with responsive design.',
+        src: '/images/templates/apollo/apollo-features2-mobile.png'
     }
 ];
 
@@ -36,7 +70,9 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: <>
+            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
+        </>,
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -49,7 +85,9 @@ const animationFeaturesData1 = [
         id: 4,
         title: 'Figma File',
         description:
-            'Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in PrimeOne for Figma only.',
+            <>
+                Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
+            </>,
         src: '/images/templates/apollo/features-animation-figma.png'
     }
 ];
@@ -137,14 +175,38 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://apollo.primereact.org/documentation/',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic License',
+            price: '$59',
+            included: [
+                'Non Commercial Usage',
+                'Single End Product, No Multi-Use',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: [
+                'Commercial Usage',
+                'Multiple End Products',
+                'Lifetime Support',
+                'Unlimited Updates',
+            ],
+        },
+    ]
+}
 const templateHeroData = {
     logo: <ApolloLogo />,
     pattern: '/images/templates/apollo/apollo-hero-pattern.png',
-    rectangle: '/images/templates/apollo/apollo-hero-rectangle1.png',
-    light: '/images/templates/apollo/apollo-hero-light.png',
     dashboard1: '/images/templates/apollo/apollo-hero-dashboard1.png',
     dashboard2: '/images/templates/apollo/apollo-hero-dashboard2.png',
-    description: 'Application template for React based on the popular NextJS framework. with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 24 PrimeReact themes.',
+    description: 'Application template for React based on the popular NextJS framework with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 24 PrimeReact themes.',
     liveHref: 'https://apollo.primereact.org',
     docHref: 'https://apollo.primereact.org/documentation'
 };
@@ -164,47 +226,9 @@ const ApolloSeparator = () => {
 };
 
 const ApolloPage = () => {
-    const { darkMode } = useContext(AppContentContext);
-    const imgPathDark = darkMode ? '-dark' : '';
-
-    const apolloFeatures2Data = [
-        {
-            title: 'Fully Responsive',
-            description: 'Apollo is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-            src: '/images/templates/apollo/apollo-features2-responsive.png'
-        },
-        {
-            title: 'Lifetime Support',
-            description: 'Apollo has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-            src: '/images/templates/apollo/apollo-features2-lifetime.png'
-        },
-        {
-            title: 'Top Notch Quality',
-            description: 'Superior standards with 100% compatibility for strict mode and linting tools.',
-            src: `/images/templates/apollo/apollo-features2-quality${imgPathDark}.svg`
-        },
-        {
-            title: 'Cross Browser Compatible',
-            description: 'First class support for Firefox, Safari, Chrome and Edge.',
-            template: <Compatible />
-        },
-        {
-            title: 'Customizable Design',
-            description: 'Fully customizable with a mixture of Sass and CSS variables.',
-            src: `/images/templates/apollo/apollo-features2-customizable${imgPathDark}.svg`
-        },
-        {
-            title: 'Mobile Experience',
-            description: 'Touch optimized enhanced mobile experience with responsive design.',
-            src: '/images/templates/apollo/apollo-features2-mobile.png'
-        }
-    ];
-
     const featuresAnimationTitle = (
         <h2>
-            Features that the
-            <br />
-            Apollo template gives you
+            Features
         </h2>
     );
 
@@ -216,11 +240,13 @@ const ApolloPage = () => {
                 <TemplateYoutube imgSrc={'/images/templates/apollo/apollo-youtube-screen.png'} />
                 <ApolloSeparator />
             </div>
+            <TemplateLicense license={license} />
+            <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <ApolloSeparator />
             <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />
             <ApolloSeparator />
-            <TemplateConfiguration title="Apollo with Next.JS" description="Apollo is powered by Next.JS to get started in no time following the best practices like service based component interaction modular design and strict mode support" />
+            <TemplateConfiguration title="React based on Next.JS" description="Apollo is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript." />
             <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <ApolloSeparator />

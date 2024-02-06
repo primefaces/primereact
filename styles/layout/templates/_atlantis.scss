@@ -1,15 +1,17 @@
 .atlantis {
-
     .template {
         &-hero {
             &-pattern {
-                width: 98rem;
-                height: 36rem;
+                width: 50rem;
+                height: auto;
                 position: absolute;
-                bottom: -0.75rem;
-                left: 2rem;
+                bottom: -7rem;
+                left: -7rem;
                 z-index: 6;
-                mix-blend-mode: overlay;
+            }
+            &-dashboard1,
+            &-dashboard2{
+                border-radius: 1.12rem;
             }
         }
     }
@@ -21,9 +23,9 @@
         .template{
             &-hero {
                 &-pattern {
-                    width: 90rem;
+                    width: 45rem;
                     bottom: -5.75rem;
-                    left: 0.5rem;
+                    left: -9.5rem;
                 }
             }
         }
@@ -36,9 +38,9 @@
         .template{
             &-hero {
                 &-pattern {
-                    width: 90rem;
-                    bottom: 14.75rem;
-                    left: 0.5rem;
+                    width: 50rem;
+                    bottom: 16.75rem;
+                    left: -10.5rem;
                 }
             }
         }

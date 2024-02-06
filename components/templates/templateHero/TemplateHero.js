@@ -1,8 +1,8 @@
-import React from 'react';
-import TemplateHeroRectangle from './TemplateHeroRectangle';
-import TemplateHeroLight from './TemplateHeroLight';
+import React from 'react'
+import TemplateHeroRectangle from './TemplateHeroRectangle'
+import TemplateHeroLight from './TemplateHeroLight'
 
-const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2, description, liveHref, docHref }) => {
+const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2, description, liveHref, docHref, supportHref, storeHref, free }) => {
     return (
         <div className="template-hero">
             {!!pattern && <img className="template-hero-pattern" src={pattern} alt="Template Hero Pattern" />}
@@ -15,14 +15,14 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
                     <a href={liveHref} target="_blank" className="template-hero-card-buttons-btn1 p-button ">
                         Live Demo
                     </a>
-                    <a href="https://www.primefaces.org/store/" target="_blank" className="template-hero-card-buttons-btn2 p-button">
-                        Buy Now
+                    <a href={storeHref ?? 'https://www.primefaces.org/store/'} target="_blank" className="template-hero-card-buttons-btn2 p-button">
+                        {free ? 'Source Code' : 'Buy Now'}
                     </a>
                 </div>
                 <div className="template-hero-card-links ">
-                    <a href="https://github.com/orgs/primefaces/discussions/categories/primereact-templates" target="_blank">
+                    <a href={supportHref ?? 'https://github.com/orgs/primefaces/discussions/categories/primereact-templates'} target="_blank">
                         <i className="pi pi-github " style={{ fontSize: '1rem' }}></i>
-                        <span>Get Support</span>
+                        <span>{free ? 'Open Issues' : 'Get Support'}</span>
                     </a>
                     <a href={docHref} target="_blank">
                         <i className="pi pi-book " style={{ fontSize: '1rem' }}></i>
@@ -36,4 +36,4 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
     );
 };
 
-export default TemplateHero;
+export default TemplateHero

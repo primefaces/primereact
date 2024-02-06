@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 const TemplateSeparator = ({ separatorLogo }) => {
     return (
-        <div className="template-seperator">
-            <span className="template-seperator-icon">{separatorLogo}</span>
+        <div className="template-separator">
+            <span className="template-separator-icon">{separatorLogo}</span>
         </div>
     );
-};
+}
 
-export default TemplateSeparator;
+export default TemplateSeparator
