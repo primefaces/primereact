@@ -34,7 +34,7 @@ export const DropdownItem = React.memo((props) => {
             key: props.label,
             className: classNames(option.className, cx('item', { selected, disabled, label, index, focusedOptionIndex })),
             style: props.style,
-            onClick: (e) => onClick(e),
+            onClick: (e) => onClick(e, index),
             'aria-label': label,
             'aria-selected': selected,
             'data-p-highlight': selected,

@@ -172,6 +172,7 @@ export const Dropdown = React.memo(
                     onSpaceKey(event, props.editable);
                     break;
 
+                case 'NumpadEnter':
                 case 'Enter':
                     onEnterKey(event);
                     break;
