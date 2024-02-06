@@ -56,6 +56,21 @@ const TemplatesPage = () => {
                 </div>
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
+                        <a href="https://www.primefaces.org/verona-react" rel="noopener noreferrer" target="_blank">
+                            <img alt="Verona" src="/images/templates/verona.jpg" className="w-full" />
+                        </a>
+                        <div className="flex gap-3 mt-3">
+                            <a href="https://www.primefaces.org/verona-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
+                                <span className="p-button-label white-space-nowrap">Preview</span>
+                            </a>
+                            <a href="verona" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
+                                <span className="p-button-label white-space-nowrap">Learn More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12 lg:col-6 xl:col-4">
+                    <div className="card mb-0">
                         <a href="https://www.primefaces.org/atlantis-react" rel="noopener noreferrer" target="_blank">
                             <img alt="Atlantis" src="https://primefaces.org/cdn/primereact/images/layouts/atlantis-react.jpg" className="w-full" />
                         </a>
@@ -174,21 +189,7 @@ const TemplatesPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 lg:col-6 xl:col-4">
-                    <div className="card mb-0">
-                        <a href="https://www.primefaces.org/verona-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Verona" src="https://primefaces.org/cdn/primereact/images/layouts/verona-react.jpg" className="w-full" />
-                        </a>
-                        <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/verona-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
-                                <span className="p-button-label white-space-nowrap">Preview</span>
-                            </a>
-                            <a href="verona" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer">
-                                <span className="p-button-label white-space-nowrap">Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     );
