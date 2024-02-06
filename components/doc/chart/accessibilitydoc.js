@@ -1,4 +1,3 @@
-import { DevelopmentSection } from '@/components/doc/common/developmentsection';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
@@ -14,7 +13,7 @@ export function AccessibilityDoc() {
     };
 
     return (
-        <DevelopmentSection>
+        
             <DocSectionText id="accessibility" label="Accessibility">
                 <h3>Screen Reader</h3>
                 <p>
@@ -27,6 +26,6 @@ export function AccessibilityDoc() {
                 </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
-        </DevelopmentSection>
+        
     );
 }
