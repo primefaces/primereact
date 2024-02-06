@@ -48,11 +48,13 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
             clearAllIntervals();
             setSelectedID(1);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [animationRef, isVisible]);
 
     useEffect(() => {
         if (!hoveredID) null;
         handleHover(hoveredID, 'onMouseEnter');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedID]);
 
     return { selectedID, setHoveredID, handleClick, handleHover };

@@ -17,9 +17,11 @@ const useVisible = (element, rootMargin = 0.2) => {
 
         return () => {
             if (observer && element.current) {
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 observer.unobserve(element.current);
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return isVisible;
