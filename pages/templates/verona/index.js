@@ -101,13 +101,13 @@ const animationFeaturesData2 = [
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Verona offers 20 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
+        description: 'Verona offers 10 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
         src: '/images/templates/verona/features-animation-component-themes.png'
     },
     {
         id: 3,
-        title: '7 Menu Orientations',
-        description: 'Choose from Static and Slim menu orientations.',
+        title: '4 Menu Orientations',
+        description: 'Choose from Static, Overlay, Slim and Slim+ menu orientations.',
         src: '/images/templates/verona/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
@@ -136,7 +136,7 @@ const animationFeaturesData2 = [
     {
         id: 4,
         title: 'Menu Themes',
-        description: 'Verona offers 23 special layout themes featuring gorgeous gradients.',
+        description: 'Verona offers 10 special layout themes featuring gorgeous gradients.',
         src: '/images/templates/verona/features-animation-orientations.png'
     }
 ];
@@ -180,7 +180,7 @@ const VeronaSeperator = () => {
 };
 
 const license = {
-    documentLink: 'https://verona.primereact.org/documentation/',
+    documentLink: 'https://verona.primereact.org/documentation',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
@@ -217,13 +217,12 @@ const VeronaPage = () => {
         <div className="verona template">
             <TemplateHero
                 pattern={'/images/templates/verona/verona-hero-pattern.png'}
-                rectangle={'/images/templates/verona/verona-hero-rectangle1.png'}
-                light={'/images/templates/verona/verona-hero-light.png'}
                 description={'Prepare to be amazed by the remastered Verona for PrimeReact featuring a new gorgeous dark mode for the entire layout, 2 menu modes, reusable css widgets, utilities, modern icons and many more.'}
                 logo={<VeronaLogo />}
                 dashboard1={'/images/templates/verona/verona-hero-dashboard1.png'}
                 dashboard2={'/images/templates/verona/verona-hero-dashboard2.png'}
-                liveHref={''}
+                liveHref={'https://verona.primereact.org/'}
+                docHref={'https://verona.primereact.org/documentation'}
             />
             <VeronaSeperator />
             <TemplateLicense license={license} />

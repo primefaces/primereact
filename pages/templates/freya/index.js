@@ -220,7 +220,7 @@ const FreyaPage = () => {
             <FreyaSeparator />
             <TemplateConfiguration
                 title="React based on Next.JS"
-                description="Freya is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
+                description="Freya is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <FreyaSeparator />
             <TemplateFeatures featuresData={features2Data} displayType="vertical" />

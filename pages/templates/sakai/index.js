@@ -145,7 +145,7 @@ const BabylonPage = () => {
             <SakaiSeparator />
             <TemplateConfiguration
                 title="React based on Next.JS"
-                description="Sakai is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations."
+                description="Sakai is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <SakaiSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

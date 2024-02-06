@@ -223,7 +223,7 @@ const UltimaPage = () => {
             <UltimaSeperator />
             <TemplateConfiguration
                 title="React App with No Configuration"
-                description="Ultima is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
+                description="Ultima is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <UltimaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

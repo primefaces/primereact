@@ -236,7 +236,7 @@ const DiamondPage = () => {
             <DiamondSeperator />
             <TemplateConfiguration
                 title="React App with No Configuration"
-                description="Diamond is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
+                description="Diamond is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <DiamondSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />

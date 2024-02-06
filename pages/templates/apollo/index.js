@@ -246,7 +246,7 @@ const ApolloPage = () => {
             <ApolloSeparator />
             <TemplateFeatures featuresData={apolloFeatures1Data} displayType="horizontal" />
             <ApolloSeparator />
-            <TemplateConfiguration title="React based on Next.JS" description="Apollo is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations." />
+            <TemplateConfiguration title="React based on Next.JS" description="Apollo is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript." />
             <ApolloSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <ApolloSeparator />

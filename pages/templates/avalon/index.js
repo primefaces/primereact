@@ -230,7 +230,7 @@ const AvalonPage = () => {
             <AvalonSeparator />
             <TemplateConfiguration
                 title="React App with No Configuration"
-                description="Avalon is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
+                description="Avalon is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <AvalonSeparator />
             <TemplateFeatures featuresData={features1Data} displayType="horizontal" />

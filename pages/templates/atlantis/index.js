@@ -225,7 +225,7 @@ const AtlantisPage = () => {
             <AtlantisSeperator />
             <TemplateConfiguration
                 title="React based on Next.JS"
-                description="Atlantis is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React."
+                description="Atlantis is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
             />
             <AtlantisSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
