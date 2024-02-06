@@ -19,7 +19,7 @@ const features2Data = [
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
         src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
@@ -69,9 +69,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: <>
-            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
-        </>,
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -83,10 +93,19 @@ const animationFeaturesData1 = [
     {
         id: 4,
         title: 'Figma File',
-        description:
+        description: (
             <>
-                Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
-            </>,
+                Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
+                <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531" target="_blank">
+                    preview the Figma file
+                </a>{' '}
+                before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as they are available in{' '}
+                <a href="/uikit" target="_blank">
+                    PrimeOne for Figma
+                </a>{' '}
+                only.
+            </>
+        ),
         src: '/images/templates/diamond/features-animation-figma.png'
     }
 ];
@@ -163,25 +182,15 @@ const license = {
         {
             title: 'Basic License',
             price: '$59',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
         },
         {
             title: 'Extended License',
             price: '$590',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
     ]
-}
+};
 
 const DiamondSeperator = () => {
     return (
@@ -216,11 +225,7 @@ const templateHeroData = {
 };
 
 const DiamondPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="diamond template">
@@ -234,10 +239,7 @@ const DiamondPage = () => {
             </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <DiamondSeperator />
-            <TemplateConfiguration
-                title="React App with No Configuration"
-                description="Diamond is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript."
-            />
+            <TemplateConfiguration title="React App with No Configuration" description="Diamond is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript." />
             <DiamondSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <DiamondSeperator />

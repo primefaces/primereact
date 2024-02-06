@@ -19,7 +19,7 @@ const features2Data = [
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
         src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
@@ -69,9 +69,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: <>
-            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
-        </>,
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -83,10 +93,19 @@ const animationFeaturesData1 = [
     {
         id: 4,
         title: 'Figma File',
-        description:
+        description: (
             <>
-                Verona uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/PgQXX4HXMPeCkT74tGajod/Preview-%7C-Verona-2022?node-id=1303%3A750' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Verona Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
-            </>,
+                Verona uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
+                <a href="https://www.figma.com/file/PgQXX4HXMPeCkT74tGajod/Preview-%7C-Verona-2022?node-id=1303%3A750" target="_blank">
+                    preview the Figma file
+                </a>{' '}
+                before the purchase. Note that PrimeReact UI components are excluded from the Verona Figma file as they are available in{' '}
+                <a href="/uikit" target="_blank">
+                    PrimeOne for Figma
+                </a>{' '}
+                only.
+            </>
+        ),
         src: '/images/templates/verona/features-animation-figma.png'
     }
 ];
@@ -186,32 +205,18 @@ const license = {
         {
             title: 'Basic License',
             price: '$49',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
         },
         {
             title: 'Extended License',
             price: '$490',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
     ]
-}
+};
 
 const VeronaPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="verona template">
@@ -233,10 +238,7 @@ const VeronaPage = () => {
             </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={4000} />
             <VeronaSeperator />
-            <TemplateConfiguration
-                title="React based on Next.JS"
-                description="Verona is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations."
-            />
+            <TemplateConfiguration title="React based on Next.JS" description="Verona is powered by Next.js to get started in no time following the best practices. Both Javascript and Typescript are available as alternative implementations." />
             <VeronaSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <VeronaSeperator />

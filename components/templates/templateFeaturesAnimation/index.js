@@ -1,20 +1,20 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 import useAnimatedFeatures from './useAnimatedFeatures';
 import TemplateFeaturesAnimationInline from './TemplateFeaturesAnimationInline';
 
 const TemplateFeaturesAnimation = ({ featuresData, title, animationSeconds = 5000 }) => {
     const animationRef = useRef(null);
-    const { selectedID, setHoveredID , handleClick,handleHover } = useAnimatedFeatures(animationRef, featuresData.length, animationSeconds);
+    const { selectedID, setHoveredID, handleClick, handleHover } = useAnimatedFeatures(animationRef, featuresData.length, animationSeconds);
 
     const enterCardArea = (id) => {
-        setHoveredID(id)
+        setHoveredID(id);
         handleHover(id, 'onMouseEnter');
-    }
+    };
 
     const leaveCardArea = (id) => {
-        setHoveredID(null)
+        setHoveredID(null);
         handleHover(id, 'onMouseLeave');
-    }
+    };
 
     return (
         <div className="template-features-animation-wrapper">
@@ -25,7 +25,13 @@ const TemplateFeaturesAnimation = ({ featuresData, title, animationSeconds = 500
                         const orderNumber = (i + 1).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
 
                         return (
-                            <div key={i} onMouseEnter={() => enterCardArea(data.id)} onMouseLeave={() => leaveCardArea(data.id)} className={`template-features-animation-left-card ${selectedID === data.id ? 'template-features-animation-left-card-active' : ''}`} onClick={() => handleClick(data.id)}>
+                            <div
+                                key={i}
+                                onMouseEnter={() => enterCardArea(data.id)}
+                                onMouseLeave={() => leaveCardArea(data.id)}
+                                className={`template-features-animation-left-card ${selectedID === data.id ? 'template-features-animation-left-card-active' : ''}`}
+                                onClick={() => handleClick(data.id)}
+                            >
                                 <div className="template-features-animation-left-card-order">
                                     <div>{orderNumber}</div>
                                     <div>{orderNumber}</div>
@@ -55,6 +61,6 @@ const TemplateFeaturesAnimation = ({ featuresData, title, animationSeconds = 500
             </div>
         </div>
     );
-}
+};
 
-export default TemplateFeaturesAnimation
+export default TemplateFeaturesAnimation;

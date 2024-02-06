@@ -8,7 +8,7 @@ const useVisible = (element, rootMargin = 0.2) => {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { threshold: rootMargin },
+            { threshold: rootMargin }
         );
 
         if (element.current) {
@@ -17,10 +17,9 @@ const useVisible = (element, rootMargin = 0.2) => {
 
         return () => {
             if (observer && element.current) {
-                observer.unobserve(element.current)
+                observer.unobserve(element.current);
             }
-        }
-
+        };
     }, []);
 
     return isVisible;

@@ -18,7 +18,7 @@ const features2Data = [
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
         src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
@@ -68,9 +68,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: <>
-            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
-        </>,
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/babylon/features-animation-blocks.png'
     },
     {
@@ -78,7 +88,7 @@ const animationFeaturesData1 = [
         title: 'PrimeIcons',
         description: 'Roma ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
         src: '/images/templates/babylon/features-animation-icons.png'
-    },
+    }
 ];
 
 const animationFeaturesData2 = [
@@ -120,37 +130,27 @@ const animationFeaturesData2 = [
                 id: 4,
                 title: 'Slim',
                 src: '/images/templates/roma/Slim.png'
-            },
+            }
         ]
-    },
+    }
 ];
 
 const license = {
     documentLink: 'https://www.primefaces.org/roma-react/#/documentation',
-    description:'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
+    description: 'Download package is an create-react-app project that contains all the resources including css, scss, images, fonts, login, promotion, error pages and sample demos.',
     licenseDetails: [
         {
             title: 'Basic License',
             price: '$19',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
         },
         {
             title: 'Extended License',
             price: '$190',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
     ]
-}
+};
 
 const templateHeroData = {
     logo: <RomaLogo />,
@@ -163,24 +163,17 @@ const templateHeroData = {
 };
 
 const AvalonPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="roma template">
             <TemplateHero {...templateHeroData} />
             <RomaSeparator />
-            <TemplateLicense license={license}/>
+            <TemplateLicense license={license} />
             <RomaSeparator />
-            <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={3000}/>
+            <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={3000} />
             <RomaSeparator />
-            <TemplateConfiguration
-                title="React App with No Configuration"
-                description="Roma is powered by Create-React-App to get started in no time following the best practices. Template is implemented purely in React."
-            />
+            <TemplateConfiguration title="React App with No Configuration" description="Roma is powered by Create-React-App to get started in no time following the best practices. Template is implemented purely in React." />
             <RomaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <RomaSeparator />

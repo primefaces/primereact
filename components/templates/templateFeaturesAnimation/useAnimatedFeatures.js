@@ -1,6 +1,6 @@
 // useAnimatedFeatures.js
-import React, { useEffect, useState } from "react";
-import useVisible from "./useVisible";
+import React, { useEffect, useState } from 'react';
+import useVisible from './useVisible';
 
 const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const [selectedID, setSelectedID] = useState(1);
@@ -11,31 +11,31 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
 
     const clearAllIntervals = () => {
         if (intervalIds.length <= 0) return;
-        intervalIds.forEach(intervalId => window.clearInterval(intervalId));
+        intervalIds.forEach((intervalId) => window.clearInterval(intervalId));
         setIntervalIds([]);
     };
 
     const createInterval = () => {
         const interval = setInterval(() => {
-            setSelectedID(prev => (prev === arrayLength ? 1 : prev + 1));
+            setSelectedID((prev) => (prev === arrayLength ? 1 : prev + 1));
         }, seconds);
 
-        setIntervalIds(prev => [...prev, interval]);
-    }
+        setIntervalIds((prev) => [...prev, interval]);
+    };
 
-    const handleClick = cardId => {
+    const handleClick = (cardId) => {
         clearAllIntervals();
         setSelectedID(cardId);
-        setCancelInterval(true)
+        setCancelInterval(true);
     };
 
     const handleHover = (cardId, type) => {
         if (cancelInterval || cardId !== selectedID) return;
         clearAllIntervals();
 
-        if (type === "onMouseLeave") {
+        if (type === 'onMouseLeave') {
             setSelectedID(cardId);
-            createInterval()
+            createInterval();
         }
     };
 
@@ -43,17 +43,17 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
         clearAllIntervals();
 
         if (isVisible) {
-            createInterval()
+            createInterval();
         } else {
             clearAllIntervals();
-            setSelectedID(1)
+            setSelectedID(1);
         }
     }, [animationRef, isVisible]);
 
     useEffect(() => {
         if (!hoveredID) null;
-        handleHover(hoveredID, "onMouseEnter");
-    }, [selectedID])
+        handleHover(hoveredID, 'onMouseEnter');
+    }, [selectedID]);
 
     return { selectedID, setHoveredID, handleClick, handleHover };
 };

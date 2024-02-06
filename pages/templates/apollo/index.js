@@ -45,7 +45,7 @@ const apolloFeatures2Data = [
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
         src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Customizable Design',
@@ -70,9 +70,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: <>
-            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
-        </>,
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -84,10 +94,19 @@ const animationFeaturesData1 = [
     {
         id: 4,
         title: 'Figma File',
-        description:
+        description: (
             <>
-                Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can <a href='https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/' target='_blank'>preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in <a href='/uikit' target='_blank'>PrimeOne for Figma</a> only.
-            </>,
+                Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
+                <a href="https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/" target="_blank">
+                    preview the Figma file
+                </a>{' '}
+                before the purchase. Note that PrimeReact UI components are excluded from the Apollo Figma file as they are available in{' '}
+                <a href="/uikit" target="_blank">
+                    PrimeOne for Figma
+                </a>{' '}
+                only.
+            </>
+        ),
         src: '/images/templates/apollo/features-animation-figma.png'
     }
 ];
@@ -182,25 +201,15 @@ const license = {
         {
             title: 'Basic License',
             price: '$59',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
         },
         {
             title: 'Extended License',
             price: '$590',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
     ]
-}
+};
 const templateHeroData = {
     logo: <ApolloLogo />,
     pattern: '/images/templates/apollo/apollo-hero-pattern.png',
@@ -226,11 +235,7 @@ const ApolloSeparator = () => {
 };
 
 const ApolloPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="apollo template">

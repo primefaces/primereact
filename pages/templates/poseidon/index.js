@@ -18,7 +18,7 @@ const features2Data = [
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
         src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
@@ -68,9 +68,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: <>
-            Fully compatible with <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href='https://blocks.primereact.org/' target='_blank'>PrimeBlocks</a> is not included in the template and requires a separate purchase.
-        </>,
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/babylon/features-animation-blocks.png'
     },
     {
@@ -78,7 +88,7 @@ const animationFeaturesData1 = [
         title: 'PrimeIcons',
         description: 'Atlantis ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
         src: '/images/templates/babylon/features-animation-icons.png'
-    },
+    }
 ];
 
 const animationFeaturesData2 = [
@@ -115,44 +125,37 @@ const animationFeaturesData2 = [
                 id: 3,
                 title: 'Horizontal',
                 src: '/images/templates/poseidon/Horizontal.png'
-            },
+            }
         ]
-    },
+    }
 ];
 
 const license = {
     documentLink: 'https://primefaces.org/freya-react/#/start/documentation',
-    description:'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     licenseDetails: [
         {
             title: 'Basic License',
             price: '$59',
-            included: [
-                'Non Commercial Usage',
-                'Single End Product, No Multi-Use',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
         },
         {
             title: 'Extended License',
             price: '$590',
-            included: [
-                'Commercial Usage',
-                'Multiple End Products',
-                'Lifetime Support',
-                'Unlimited Updates',
-            ],
-        },
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
     ]
-}
+};
 
 const PoseidonSeparator = () => {
     return (
         <TemplateSeparator
             separatorLogo={
                 <svg width="24" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.0876 0L13.9043 2.1136L12.6009 3.85069L12.0386 3.42929L12.0363 13.583L16.231 15.1112L19.1018 1.34789L22.1539 4.382L21.3935 6.14085L20.4104 5.71186L17.8451 18.0106L12.0363 15.8953L12.0345 24H10.134L10.1358 15.886L4.30245 18.0106L1.74345 5.71186L0.450113 6.14085L0 4.382L3.05322 1.34691L5.91759 15.1112L10.1358 13.5737L10.1382 3.42619L9.57319 3.85069L8.26983 2.1136L11.0876 0Z" fill="url(#paint0_linear_1894_9038)" />
+                    <path
+                        d="M11.0876 0L13.9043 2.1136L12.6009 3.85069L12.0386 3.42929L12.0363 13.583L16.231 15.1112L19.1018 1.34789L22.1539 4.382L21.3935 6.14085L20.4104 5.71186L17.8451 18.0106L12.0363 15.8953L12.0345 24H10.134L10.1358 15.886L4.30245 18.0106L1.74345 5.71186L0.450113 6.14085L0 4.382L3.05322 1.34691L5.91759 15.1112L10.1358 13.5737L10.1382 3.42619L9.57319 3.85069L8.26983 2.1136L11.0876 0Z"
+                        fill="url(#paint0_linear_1894_9038)"
+                    />
                     <defs>
                         <linearGradient id="paint0_linear_1894_9038" x1="1107.7" y1="0" x2="1107.7" y2="2400" gradientUnits="userSpaceOnUse">
                             <stop stopColor="var(--surface-900)" />
@@ -176,17 +179,13 @@ const templateHeroData = {
 };
 
 const PoseidonPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="poseidon template">
             <TemplateHero {...templateHeroData} />
             <PoseidonSeparator />
-            <TemplateLicense license={license}/>
+            <TemplateLicense license={license} />
             <PoseidonSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <PoseidonSeparator />

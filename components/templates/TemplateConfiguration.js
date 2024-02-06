@@ -1,9 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const TemplateConfiguration = ({
-    title = "",
-    description = "",
-}) => {
+const TemplateConfiguration = ({ title = '', description = '' }) => {
     return (
         <div className="template-configuration-wrapper">
             <div className="template-configuration">
@@ -30,6 +27,6 @@ const TemplateConfiguration = ({
             </div>
         </div>
     );
-}
+};
 
-export default TemplateConfiguration
+export default TemplateConfiguration;
