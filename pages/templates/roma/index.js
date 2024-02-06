@@ -90,7 +90,7 @@ const animationFeaturesData2 = [
     },
     {
         id: 2,
-        title: 'Component 15 Beautiful Themes',
+        title: '15 Beautiful Themes',
         description: 'Roma offers 15 built-in themes and creating your own theme is a matter of defining couple of SaSS variables.',
         src: '/images/templates/roma/features-animation-component-themes.png'
     },
