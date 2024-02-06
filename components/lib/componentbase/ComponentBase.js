@@ -262,6 +262,7 @@ const iconStyles = `
 
 svg.p-icon {
     pointer-events: auto;
+    cursor: pointer;
 }
 
 svg.p-icon g,
