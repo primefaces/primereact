@@ -1,5 +1,28 @@
 # Changelog
 
+## [10.5.0](https://github.com/primefaces/primereact/tree/10.5.0) (2024-02-06)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.4.0...10.5.0)
+
+**Enhancements:**
+
+- TabView/TabPanel: Can't have TabPanels in a JSX fragment [\#5900](https://github.com/primefaces/primereact/issues/5900)
+- Input Accessibility [\#5991](https://github.com/primefaces/primereact/issues/5991)
+
+**Fixed bugs:**
+
+- Menu: No ripple effect [\#5901](https://github.com/primefaces/primereact/issues/5901)
+- FilterMatchMode.CUSTOM & filterFunction broken + custom filter type errors [\#3325](https://github.com/primefaces/primereact/issues/3325)
+- Calendar: Panel width too small with default Tailwind  [\#5830](https://github.com/primefaces/primereact/issues/5830)
+- Menu: separator style missing in default Tailwind [\#5890](https://github.com/primefaces/primereact/issues/5890)
+- Paginator JumpToPageInput not working [\#5893](https://github.com/primefaces/primereact/issues/5893)
+- Primereact Splitter resize [\#5892](https://github.com/primefaces/primereact/issues/5892)
+- Password component hide/show button shouldnt be wrapped with [\#5880](https://github.com/primefaces/primereact/issues/5880)
+- Menu: Unhandled Runtime Error with Nextjs and Tailwind passthrough [\#5885](https://github.com/primefaces/primereact/issues/5885)
+- Dock: Sample code missing DockDemo.css  [\#5882](https://github.com/primefaces/primereact/issues/5882)
+- Prevent multiselect/dropdown box from closing on page scroll [\#5872](https://github.com/primefaces/primereact/issues/5872)
+- Calendar : enabledDates is not evaluated with disabledDays [\#5863](https://github.com/primefaces/primereact/issues/5863)
+
 ## [10.4.0](https://github.com/primefaces/primereact/tree/10.4.0) (2024-02-01)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.3.3...10.4.0)
