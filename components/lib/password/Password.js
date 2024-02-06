@@ -275,13 +275,32 @@ export const Password = React.memo(
         const createIcon = () => {
             let icon;
 
-            const hideIconProps = mergeProps(ptm('hideIcon'));
-            const showIconProps = mergeProps(ptm('showIcon'));
+            const hideIconProps = mergeProps(
+                {
+                    key: 'hideIcon',
+                    role: 'button',
+                    tabIndex: props.tabIndex,
+                    className: cx('hideIcon'),
+                    onClick: toggleMask
+                },
+                ptm('hideIcon')
+            );
+
+            const showIconProps = mergeProps(
+                {
+                    key: 'showIcon',
+                    role: 'button',
+                    tabIndex: props.tabIndex,
+                    className: cx('showIcon'),
+                    onClick: toggleMask
+                },
+                ptm('showIcon')
+            );
 
             if (unmaskedState) {
-                icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} onClick={toggleMask} />;
+                icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} />;
             } else {
-                icon = props.showIcon || <EyeIcon {...showIconProps} onClick={toggleMask} />;
+                icon = props.showIcon || <EyeIcon {...showIconProps} />;
             }
 
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });

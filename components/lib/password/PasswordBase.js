@@ -22,6 +22,8 @@ const classes = {
     meter: 'p-password-meter',
     meterLabel: ({ strength }) => classNames('p-password-strength', strength),
     info: ({ strength }) => classNames('p-password-info', strength),
+    showIcon: 'p-password-show-icon',
+    hideIcon: 'p-password-hide-icon',
     transition: 'p-connected-overlay'
 };
 
@@ -59,6 +61,12 @@ const styles = `
     .p-password-input::-ms-reveal,
     .p-password-input::-ms-clear {
         display: none;
+    }
+
+    .p-password .p-password-show-icon,
+    .p-password .p-password-hide-icon {
+        line-height: 1.5;
+        cursor: pointer;
     }
 }
 `;
