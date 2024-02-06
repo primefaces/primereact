@@ -17,7 +17,7 @@ export const MultiSelect = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MultiSelectBase.getProps(inProps, context);
-
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(props.inline);
@@ -88,45 +88,6 @@ export const MultiSelect = React.memo(
             }
         };
 
-        const onOptionKeyDown = (event) => {
-            const originalEvent = event.originalEvent;
-            const listItem = originalEvent.currentTarget;
-
-            switch (originalEvent.which) {
-                //down
-                case 40:
-                    const nextItem = findNextItem(listItem);
-
-                    nextItem && nextItem.focus();
-                    originalEvent.preventDefault();
-                    break;
-
-                //up
-                case 38:
-                    const prevItem = findPrevItem(listItem);
-
-                    prevItem && prevItem.focus();
-                    originalEvent.preventDefault();
-                    break;
-
-                //enter and space
-                case 13:
-                case 32:
-                    onOptionSelect(event);
-                    originalEvent.preventDefault();
-                    break;
-
-                //escape
-                case 27:
-                    hide();
-                    DomHandler.focus(inputRef.current);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
@@ -147,34 +108,97 @@ export const MultiSelect = React.memo(
             }
         };
 
-        const onKeyDown = (event) => {
-            switch (event.which) {
-                //down
-                case 40:
-                    if (props.inline) break;
+        const onArrowUpKey = (event) => {
+            if (!overlayVisibleState) {
+                show();
+                setFocusedOptionIndex(visibleOptions.length - 1);
+            } else {
+                const target = focusedOptionIndex === null ? visibleOptions.length - 1 : focusedOptionIndex === 0 ? 0 : focusedOptionIndex - 1;
 
-                    if (!overlayVisibleState && event.altKey) {
-                        show();
-                        event.preventDefault();
-                    }
+                setFocusedOptionIndex(target);
+            }
+
+            event.preventDefault();
+        };
+
+        const onArrowDownKey = (event) => {
+            if (!overlayVisibleState) {
+                show();
+                setFocusedOptionIndex(0);
+            } else {
+                const targetIndex = focusedOptionIndex === null ? 0 : focusedOptionIndex + 1 > visibleOptions.length - 1 ? visibleOptions.length - 1 : focusedOptionIndex + 1;
+
+                setFocusedOptionIndex(targetIndex);
+            }
+
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            if (!overlayVisibleState) {
+                show();
+            } else {
+                if (focusedOptionIndex !== null) {
+                    onOptionSelect({
+                        originalEvent: event,
+                        option: visibleOptions[focusedOptionIndex]
+                    });
+                }
+            }
+
+            event.preventDefault();
+        };
+
+        const onHomeKey = (event) => {
+            !overlayVisibleState && show();
+            setFocusedOptionIndex(0);
+            event.preventDefault();
+        };
+
+        const onEndKey = (event) => {
+            !overlayVisibleState && show();
+            setFocusedOptionIndex(visibleOptions.length - 1);
+            event.preventDefault();
+        };
+
+        const onKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowUp':
+                    if (props.inline) break;
+                    onArrowUpKey(event);
+                    break;
+
+                case 'ArrowDown':
+                    if (props.inline) break;
+                    onArrowDownKey(event);
 
                     break;
 
-                //space
-                case 32:
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
                     if (props.inline) break;
-                    overlayVisibleState ? hide() : show();
+                    onEnterKey(event);
+                    break;
+
+                case 'Home':
+                    if (props.inline) break;
+                    onHomeKey(event);
                     event.preventDefault();
                     break;
 
-                //escape
-                case 27:
+                case 'End':
+                    if (props.inline) break;
+                    onEndKey(event);
+                    event.preventDefault();
+                    break;
+
+                case 'Escape':
                     if (props.inline) break;
                     hide();
                     break;
 
-                //tab
-                case 9:
+                case 'Tab':
                     if (overlayVisibleState) {
                         const firstFocusableElement = DomHandler.getFirstFocusableElement(overlayRef.current);
 
@@ -742,7 +766,7 @@ export const MultiSelect = React.memo(
                 role: 'listbox',
                 'aria-expanded': overlayVisibleState,
                 disabled: props.disabled,
-                tabIndex: props.tabIndex,
+                tabIndex: !props.disabled ? props.tabIndex : -1,
                 ...ariaProps
             },
             ptm('input')
@@ -769,6 +793,8 @@ export const MultiSelect = React.memo(
                         onClick={onPanelClick}
                         onOverlayHide={hide}
                         filterValue={filterState}
+                        focusedOptionIndex={focusedOptionIndex}
+                        setFocusedOptionIndex={setFocusedOptionIndex}
                         hasFilter={hasFilter}
                         onFilterInputChange={onFilterInputChange}
                         resetFilter={resetFilter}
@@ -785,7 +811,6 @@ export const MultiSelect = React.memo(
                         isAllSelected={isAllSelected}
                         onOptionSelect={onOptionSelect}
                         allowOptionSelect={allowOptionSelect}
-                        onOptionKeyDown={onOptionKeyDown}
                         in={overlayVisibleState}
                         onEnter={onOverlayEnter}
                         onEntered={onOverlayEntered}

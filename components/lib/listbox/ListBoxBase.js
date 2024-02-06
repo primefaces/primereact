@@ -46,6 +46,7 @@ const styles = `
         cursor: pointer;
         position: relative;
         overflow: hidden;
+        outline: none;
     }
     
     .p-listbox-filter-container {

@@ -15,7 +15,9 @@ export const MultiSelectItem = React.memo((props) => {
             context: {
                 selected: props.selected,
                 disabled: props.disabled,
-                focused: focusedState
+                focused: focusedState,
+                focusedIndex: props.focusedIndex,
+                index: props.index
             }
         });
     };
@@ -29,6 +31,8 @@ export const MultiSelectItem = React.memo((props) => {
     };
 
     const onClick = (event) => {
+        props.setFocusedOptionIndex(props.index);
+
         if (props.onClick) {
             props.onClick({
                 originalEvent: event,
@@ -38,15 +42,6 @@ export const MultiSelectItem = React.memo((props) => {
 
         event.preventDefault();
         event.stopPropagation();
-    };
-
-    const onKeyDown = (event) => {
-        if (props.onKeyDown) {
-            props.onKeyDown({
-                originalEvent: event,
-                option: props.option
-            });
-        }
     };
 
     const checkboxIconProps = mergeProps(
@@ -60,7 +55,7 @@ export const MultiSelectItem = React.memo((props) => {
     const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { selected: props.selected }) : null;
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
-    const tabIndex = props.disabled ? null : props.tabIndex || 0;
+    const tabIndex = props.disabled ? -1 : props.tabIndex;
 
     const checkboxContainerProps = mergeProps(
         {
@@ -82,7 +77,6 @@ export const MultiSelectItem = React.memo((props) => {
             className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
             style: props.style,
             onClick: onClick,
-            onKeyDown: onKeyDown,
             onFocus: onFocus,
             onBlur: onBlur,
             tabIndex: tabIndex,
