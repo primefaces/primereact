@@ -1801,10 +1801,13 @@ export const Calendar = React.memo(
 
                 if (props.view === 'date') {
                     overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = inputWidth + 'px';
                 } else {
-                    overlayRef.current.style.minWidth = inputWidth + 'px';
                     overlayRef.current.style.width = inputWidth + 'px';
+                }
+
+                // #5830 Tailwind does not need a min width it breaks the styling
+                if (!isUnstyled()) {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
                 }
             }
 
@@ -1870,7 +1873,7 @@ export const Calendar = React.memo(
                 if (isUnstyled) {
                     destroyMask();
                 } else {
-                    DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
+                    !isUnstyled() && DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
                     touchUIMask.current.addEventListener('animationend', () => {
                         destroyMask();
                     });
@@ -2286,26 +2289,38 @@ export const Calendar = React.memo(
         };
 
         const isDayDisabled = (day, month, year) => {
+            let isDisabled = false;
+
+            // first check for disabled dates
             if (props.disabledDates) {
                 if (props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
-                    return true;
-                }
-            } else if (props.enabledDates) {
-                if (!props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
-                    return true;
+                    isDisabled = true;
                 }
             }
 
-            if (props.disabledDays && currentView === 'date') {
+            // next if not disabled then check for disabled days
+            if (!isDisabled && props.disabledDays && currentView === 'date') {
                 let weekday = new Date(year, month, day);
                 let weekdayNumber = weekday.getDay();
 
                 if (props.disabledDays.indexOf(weekdayNumber) !== -1) {
-                    return true;
+                    isDisabled = true;
                 }
             }
 
-            return false;
+            // last check for enabled dates to force dates enabled
+            if (props.enabledDates) {
+                const isEnabled = props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+
+                if (isEnabled) {
+                    isDisabled = false;
+                } else if (!props.disabledDays && !props.disabledDates) {
+                    // disable other dates when only enabledDates are present
+                    isDisabled = true;
+                }
+            }
+
+            return isDisabled;
         };
 
         const isMonthYearDisabled = (month, year) => {

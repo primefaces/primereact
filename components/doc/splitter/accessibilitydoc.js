@@ -50,6 +50,24 @@ export function AccessibilityDoc() {
                                 </td>
                                 <td>Moves a vertical splitter to the right.</td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <i>home</i>
+                                </td>
+                                <td>Maximizes the primary panel.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>end</i>
+                                </td>
+                                <td>Minimizes the primary panel.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i>enter</i>
+                                </td>
+                                <td>Toggles the primary panel between minimum and maximum sizes.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

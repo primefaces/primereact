@@ -1,5 +1,35 @@
 # Changelog
 
+## [10.4.0](https://github.com/primefaces/primereact/tree/10.4.0) (2024-02-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.3.3...10.4.0)
+
+**Enhancements:**
+
+- Splitter: missing/incorrect accessibility features [\#5849](https://github.com/primefaces/primereact/issues/5849)
+- New Component | FocusTrap [\#5829](https://github.com/primefaces/primereact/issues/5829)
+- Enhancement: DataTable accessibility [\#5839](https://github.com/primefaces/primereact/issues/5839)
+
+**Fixed bugs:**
+
+- Divider (Tailwind): className not used [\#5862](https://github.com/primefaces/primereact/issues/5862)
+- Calendar : enabledDates is not evaluated with disabledDays [\#5863](https://github.com/primefaces/primereact/issues/5863)
+- Tree : Need "no results found" message if no matches found in the filter [\#5813](https://github.com/primefaces/primereact/issues/5813)
+- Showcase: TypeScript demos are failing in StackBlitz/CodeSandbox [\#5800](https://github.com/primefaces/primereact/issues/5800)
+- Dropdown: items focused when pressing letters in contexts where they shouldn't [\#5855](https://github.com/primefaces/primereact/issues/5855)
+- Unnecessary Javascript-Warning in Galleria onShow and onHide [\#5854](https://github.com/primefaces/primereact/issues/5854)
+- Calendar blur not working [\#5850](https://github.com/primefaces/primereact/issues/5850)
+- Dropdown: Missing property loading in DropdownProps Interface [\#5847](https://github.com/primefaces/primereact/issues/5847)
+- Carousel: Visual bugs when loading carousel with responsiveCarouselOptions [\#5166](https://github.com/primefaces/primereact/issues/5166)
+- Sidebar with content prop gives console warning [\#5834](https://github.com/primefaces/primereact/issues/5834)
+- Menubar: Does not respect the MenuItem id property [\#5827](https://github.com/primefaces/primereact/issues/5827)
+- Chips: Separator by new line doesn't work by pasting value [\#5824](https://github.com/primefaces/primereact/issues/5824)
+- Editor: Editor missing unordered list in the header [\#5818](https://github.com/primefaces/primereact/issues/5818)
+- Threshold not working useIntersectionObserver hook [\#5809](https://github.com/primefaces/primereact/issues/5809)
+- Accordion (Tailwind): Cannot read properties of undefined (reading 'disabled') [\#5804](https://github.com/primefaces/primereact/issues/5804)
+- Datatable Column Filter: Clear Button will not show if filter menu button is hidden [\#5802](https://github.com/primefaces/primereact/issues/5802)
+- className is not passes to TieredMenu items [\#5868](https://github.com/primefaces/primereact/issues/5868)
+
 ## [10.3.3](https://github.com/primefaces/primereact/tree/10.3.3) (2024-01-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.3.2...10.3.3)

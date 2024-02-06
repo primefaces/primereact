@@ -145,27 +145,23 @@ export const Dropdown = React.memo(
         };
 
         const onInputKeyDown = (event) => {
-            switch (event.which) {
-                //down
-                case 40:
+            switch (event.code) {
+                case 'ArrowDown':
                     onDownKey(event);
                     break;
 
-                //up
-                case 38:
+                case 'ArrowUp':
                     onUpKey(event);
                     break;
 
-                //space and enter
-                case 32:
-                case 13:
+                case 'Space':
+                case 'Enter':
                     overlayVisibleState ? hide() : show();
                     event.preventDefault();
                     break;
 
-                //escape and tab
-                case 27:
-                case 9:
+                case 'Escape':
+                case 'Tab':
                     hide();
                     break;
 
@@ -176,20 +172,17 @@ export const Dropdown = React.memo(
         };
 
         const onFilterInputKeyDown = (event) => {
-            switch (event.which) {
-                //down
-                case 40:
+            switch (event.code) {
+                case 'ArrowDown':
                     onDownKey(event);
                     break;
 
-                //up
-                case 38:
+                case 'ArrowUp':
                     onUpKey(event);
                     break;
 
-                //enter and escape
-                case 13:
-                case 27:
+                case 'Escape':
+                case 'Enter':
                     hide();
                     event.preventDefault();
                     break;
@@ -294,9 +287,15 @@ export const Dropdown = React.memo(
                 clearTimeout(searchTimeout.current);
             }
 
+            if (event.ctrlKey || event.metaKey || event.altKey) {
+                // ignore meta combinations like CTRL+F for browser search
+                return;
+            }
+
             const char = event.key;
 
-            if (char === 'Shift' || char === 'Control' || char === 'Alt') {
+            if (char.length !== 1) {
+                // only single character keys matter for searching
                 return;
             }
 
