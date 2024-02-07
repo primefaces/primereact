@@ -1,60 +1,59 @@
-import React from 'react';
-import TemplateYoutube from '@/components/templates/TemplateYoutube';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
+import TemplateYoutube from '@/components/templates/TemplateYoutube';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import VeronaLogo from './VeronaLogo';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Verona is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/verona/verona-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/verona-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Verona has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
         description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
-        src: '/images/templates/verona/verona-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/verona-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/verona/verona-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/verona-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/freya-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/freya-react.jpg',
         href: '/templates/freya'
     },
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/atlantis-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/atlantis-react.jpg',
         href: '/templates/atlantis'
     }
 ];
@@ -64,7 +63,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/apollo/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -82,13 +81,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/apollo/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Verona ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/apollo/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-icons.png'
     },
     {
         id: 4,
@@ -106,7 +105,7 @@ const animationFeaturesData1 = [
                 only.
             </>
         ),
-        src: '/images/templates/verona/features-animation-figma.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/features-animation-figma.png'
     }
 ];
 
@@ -115,40 +114,40 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Light and Dark Modes',
         description: 'The stunning dark and light modes will impress your users.',
-        src: '/images/templates/verona/features-animation-darkmode.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
         description: 'Verona offers 10 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
-        src: '/images/templates/verona/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/features-animation-component-themes.png'
     },
     {
         id: 3,
         title: '4 Menu Orientations',
         description: 'Choose from Static, Overlay, Slim and Slim+ menu orientations.',
-        src: '/images/templates/verona/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/verona/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/verona/Static.png'
             },
             {
                 id: 2,
                 title: 'Slim',
-                src: '/images/templates/verona/Slim.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/verona/Slim.png'
             },
             {
                 id: 3,
                 title: 'Slim+',
-                src: '/images/templates/verona/Slim+.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/verona/Slim+.png'
             },
             {
                 id: 4,
                 title: 'Overlay',
-                src: '/images/templates/verona/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/verona/Overlay.png'
             }
         ]
     },
@@ -156,7 +155,7 @@ const animationFeaturesData2 = [
         id: 4,
         title: 'Menu Themes',
         description: 'Verona offers 10 special layout themes featuring gorgeous gradients.',
-        src: '/images/templates/verona/features-animation-orientations.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/verona/features-animation-orientations.png'
     }
 ];
 
@@ -221,11 +220,11 @@ const VeronaPage = () => {
     return (
         <div className="verona template">
             <TemplateHero
-                pattern={'/images/templates/verona/verona-hero-pattern.png'}
+                pattern={'https://primefaces.org/cdn/primereact/images/templates/verona/verona-hero-pattern.png'}
                 description={'Prepare to be amazed by the remastered Verona for PrimeReact featuring a new gorgeous dark mode for the entire layout, 2 menu modes, reusable css widgets, utilities, modern icons and many more.'}
                 logo={<VeronaLogo />}
-                dashboard1={'/images/templates/verona/verona-hero-dashboard1.png'}
-                dashboard2={'/images/templates/verona/verona-hero-dashboard2.png'}
+                dashboard1={'https://primefaces.org/cdn/primereact/images/templates/verona/verona-hero-dashboard1.png'}
+                dashboard2={'https://primefaces.org/cdn/primereact/images/templates/verona/verona-hero-dashboard2.png'}
                 liveHref={'https://verona.primereact.org/'}
                 docHref={'https://verona.primereact.org/documentation'}
             />
@@ -233,7 +232,7 @@ const VeronaPage = () => {
             <TemplateLicense license={license} />
             <VeronaSeperator />
             <div hidden={1}>
-                <TemplateYoutube imgSrc={'/images/templates/verona/verona-youtube-screen.png'} />
+                <TemplateYoutube imgSrc={'https://primefaces.org/cdn/primereact/images/templates/verona/verona-youtube-screen.png'} />
                 <VeronaSeperator />
             </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} animationSeconds={4000} />

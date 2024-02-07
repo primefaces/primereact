@@ -1,59 +1,58 @@
-import React from 'react';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
-import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import PoseidonLogo from './PoseidonLogo';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Atlantis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/poseidon/poseidon-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/poseidon-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Atlantis has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Full SaSS Support',
         description: 'Sass is utilized for both the application and components to provide simplicity and flexibility.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
         description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
-        src: '/images/templates/poseidon/poseidon-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/poseidon-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/poseidon/poseidon-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/poseidon-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/avalon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon-react.jpg',
         href: '/templates/avalon'
     },
     {
-        src: '/images/templates/roma-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma-react.jpg',
         href: '/templates/roma'
     }
 ];
@@ -63,7 +62,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/babylon/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -81,13 +80,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/babylon/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Atlantis ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/babylon/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-icons.png'
     }
 ];
 
@@ -96,35 +95,35 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Light / Dim / Dark Modes',
         description: 'Poseidon offers you 3 uniquely designed layout modes to choose from; Light, Dim, and Dark.',
-        src: '/images/templates/poseidon/features-animation-darkmode.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
         description: 'Poseidon offers 12 built-in component themes with dark, light and dim options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
-        src: '/images/templates/poseidon/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/features-animation-component-themes.png'
     },
     {
         id: 3,
         title: '3 Menu Orientations',
         description: 'Poseidon has 3 menu layouts to choose from; Static, Overlay and Horizontal',
-        src: '/images/templates/poseidon/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/poseidon/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/Static.png'
             },
             {
                 id: 2,
                 title: 'Overlay',
-                src: '/images/templates/poseidon/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/Overlay.png'
             },
             {
                 id: 3,
                 title: 'Horizontal',
-                src: '/images/templates/poseidon/Horizontal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/Horizontal.png'
             }
         ]
     }
@@ -170,9 +169,9 @@ const PoseidonSeparator = () => {
 
 const templateHeroData = {
     logo: <PoseidonLogo />,
-    pattern: '/images/templates/poseidon/poseidon-hero-pattern.png',
-    dashboard1: '/images/templates/poseidon/poseidon-hero-dashboard1.png',
-    dashboard2: '/images/templates/poseidon/poseidon-hero-dashboard2.png',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/poseidon-hero-pattern.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/poseidon-hero-dashboard1.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/poseidon/poseidon-hero-dashboard2.png',
     description: 'A modern and easy to use premium application template with various color schemes.Based on flat design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'

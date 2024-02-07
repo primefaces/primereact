@@ -1,60 +1,59 @@
-import React from 'react';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import AvalonLogo from './AvalonLogo';
 import AvalonSeparator from './AvalonSeparator';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Avalon is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/avalon/avalon-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Diamond has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Top Notch Quality',
         description: 'Superior standards with 100% compatibility for strict mode and linting tools.',
-        src: '/images/templates/apollo/apollo-features2-quality.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-quality-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-quality.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-quality-dark.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/avalon/avalon-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/babylon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
         href: '/templates/babylon'
     },
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/roma-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma-react.jpg',
         href: '/templates/roma'
     }
 ];
@@ -64,7 +63,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/apollo/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -82,13 +81,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/apollo/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Avalon ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/apollo/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-icons.png'
     },
     {
         id: 4,
@@ -106,7 +105,7 @@ const animationFeaturesData1 = [
                 only.
             </>
         ),
-        src: '/images/templates/avalon/features-animation-figma.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/features-animation-figma.png'
     }
 ];
 
@@ -115,55 +114,55 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Light and Dark Modes',
         description: 'Avalon offers you 2 uniquely designed layout modes to choose from; Light and Dark.',
-        src: '/images/templates/avalon/features-animation-darkmode.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component 10 Beautiful Themes',
         description: 'Avalon offers 10 built-in themes and creating your own theme is a matter of defining couple of SaSS variables.',
-        src: '/images/templates/avalon/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/features-animation-component-themes.png'
     },
     {
         id: 3,
         title: '7 Menu Orientations',
         description: 'Avalon has 7 menu layouts to choose from; Static, Overlay, Slim, Slim+, Reveal, Drawer and Horizontal with Light and Dark options.',
-        src: '/images/templates/diamond/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/avalon/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Static.png'
             },
             {
                 id: 2,
                 title: 'Slim',
-                src: '/images/templates/avalon/Slim.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Slim.png'
             },
             {
                 id: 3,
                 title: 'Reveal',
-                src: '/images/templates/avalon/Reveal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Reveal.png'
             },
             {
                 id: 4,
                 title: 'Horizontal',
-                src: '/images/templates/avalon/Horizontal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Horizontal.png'
             },
             {
                 id: 5,
                 title: 'Overlay',
-                src: '/images/templates/avalon/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Overlay.png'
             },
             {
                 id: 6,
                 title: 'Slim+',
-                src: '/images/templates/avalon/Slim+.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Slim+.png'
             },
             {
                 id: 7,
                 title: 'Drawer',
-                src: '/images/templates/avalon/Drawer.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/Drawer.png'
             }
         ]
     },
@@ -171,23 +170,23 @@ const animationFeaturesData2 = [
         id: 4,
         title: 'Topbar Themes',
         description: 'Avalon comes with 11 topbar themes guaranteeing an enviable design.',
-        src: '/images/templates/avalon/features-animation-menu-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/features-animation-menu-themes.png'
     }
 ];
 
 const features1Data = [
     {
-        src: '/images/templates/avalon/avalon-features1-feature1.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-features1-feature1.png',
         title: 'Ready to Use Applications',
         description: 'Mail, File System, Tasks, Calendar, Blog and Chat are the sample applications to get started with ease.'
     },
     {
-        src: '/images/templates/avalon/avalon-features1-feature2.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-features1-feature2.png',
         title: 'E-Commerce Pages',
         description: 'Avalon offers E-commerce pages to kickstart your e-commerce project powered by PrimeBlocks.'
     },
     {
-        src: '/images/templates/avalon/avalon-features1-feature3.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-features1-feature3.png',
         title: 'Ready to Use Pages',
         description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.'
     }
@@ -212,11 +211,11 @@ const license = {
 
 const templateHeroData = {
     logo: <AvalonLogo />,
-    pattern: '/images/templates/avalon/avalon-hero-pattern.png',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-hero-pattern.png',
     light: true,
     rectangle: true,
-    dashboard1: '/images/templates/avalon/avalon-hero-dashboard1.png',
-    dashboard2: '/images/templates/avalon/avalon-hero-dashboard2.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-hero-dashboard1.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/avalon/avalon-hero-dashboard2.png',
     description: 'A modern and easy to use premium application template with highly customizable layout features. Based on a bootstrap styling, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.',
     liveHref: 'https://avalon.primereact.org/',
     docHref: 'https://avalon.primereact.org/documentation'
