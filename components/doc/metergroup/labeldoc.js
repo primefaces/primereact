@@ -2,7 +2,7 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { MeterGroup } from '@/components/lib/metergroup/MeterGroup';
 
-export function BasicDoc(props) {
+export function LabelDoc(props) {
     const code = {
         basic: `
 <MeterGroup values={values} />
@@ -11,7 +11,7 @@ export function BasicDoc(props) {
 import React, { useEffect, useRef } from 'react';
 import { MeterGroup } from 'primereact/metergroup';
 
-export default function BasicDemo() {
+export default function LabelDemo() {
     const values = [{ label: 'Space used', value: 15 }];
 
     return (
@@ -25,7 +25,7 @@ export default function BasicDemo() {
 import React, { useEffect, useRef } from 'react';
 import { MeterGroup } from 'primereact/metergroup';
 
-export default function BasicDemo() {
+export default function LabelDemo() {
     const values = [{ label: 'Space used', value: 15 }];
 
     return (
@@ -37,17 +37,23 @@ export default function BasicDemo() {
         `
     };
 
-    const values = [{ label: 'Space used', value: 15 }];
+    const values = [
+        { label: 'Apps', color: '#34d399', value: 16 },
+        { label: 'Messages', color: '#fbbf24', value: 8 },
+        { label: 'Media', color: '#60a5fa', value: 24 },
+        { label: 'System', color: '#c084fc', value: 10 }
+    ];
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    MeterGroup requires a <i>value</i> as the data to display where each item in the collection should be a type of <i>MeterItem</i>.
+                    The position of the labels relative to the meters is defined using the <i>labelPosition</i> property. The default orientation of the labels is horizontal, and the vertical alternative is available through the{' '}
+                    <i>labelOrientation</i> option.
                 </p>
             </DocSectionText>
             <div className="card">
-                <MeterGroup values={values} />
+                <MeterGroup values={values} labelPosition="start" labelOrientation="vertical" />
             </div>
             <DocSectionCode code={code} />
         </>
