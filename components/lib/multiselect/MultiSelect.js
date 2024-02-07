@@ -208,8 +208,6 @@ export const MultiSelect = React.memo(
                     if (event.shiftKey) onOptionSelectRange(event, focusedOptionIndex);
                     else onOptionSelect(event, visibleOptions[focusedOptionIndex]);
                 }
-
-                hide();
             }
 
             event.preventDefault();
@@ -535,6 +533,10 @@ export const MultiSelect = React.memo(
             return list.findIndex((item) => value.some((val) => ObjectUtils.equals(val, getOptionValue(item), equalityKey)));
         };
 
+        const isEquals = (value1, value2) => {
+            return ObjectUtils.equals(value1, value2, equalityKey);
+        };
+
         const isSelected = (option) => {
             if (props.value) {
                 const optionValue = getOptionValue(option);
@@ -687,7 +689,16 @@ export const MultiSelect = React.memo(
         };
 
         const findSelectedOptionIndex = () => {
-            return hasSelectedOption ? visibleOptions?.findIndex((option) => isValidSelectedOption(option)) : -1;
+            if (hasSelectedOption()) {
+                for (let index = props.value.length - 1; index >= 0; index--) {
+                    const value = props.value[index];
+                    const matchedOptionIndex = visibleOptions.findIndex((option) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
+
+                    if (matchedOptionIndex > -1) return matchedOptionIndex;
+                }
+            }
+
+            return -1;
         };
 
         const findFirstFocusedOptionIndex = () => {
