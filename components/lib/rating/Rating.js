@@ -15,6 +15,9 @@ export const Rating = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = RatingBase.getProps(inProps, context);
 
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
+        const [isFocusVisibleItem, setFocusVisibleItem] = React.useState(true);
+
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = RatingBase.setMetaData({
@@ -53,6 +56,8 @@ export const Rating = React.memo(
                 });
             }
 
+            setFocusedOptionIndex(i);
+
             event.preventDefault();
         };
 
@@ -79,9 +84,35 @@ export const Rating = React.memo(
         };
 
         const onStarKeyDown = (event, value) => {
-            if (event.key === 'Enter') {
-                rate(event, value);
+            switch (event.key) {
+                case 'Enter':
+                case 'Space':
+                    rate(event, value);
+                    event.preventDefault();
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    event.preventDefault();
+                    rate(event, props.value - 1 < 1 ? props.stars : props.value - 1);
+                    break;
+
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    event.preventDefault();
+                    rate(event, props.value + 1 > props.stars ? 1 : props.value + 1);
+                    break;
+
+                default:
+                    break;
             }
+        };
+
+        const onFocus = (event, value) => {
+            setFocusedOptionIndex(value);
+        };
+
+        const onBlur = (event) => {
+            setFocusedOptionIndex(-1);
         };
 
         const onCancelKeyDown = (event) => {
@@ -111,10 +142,13 @@ export const Rating = React.memo(
                 const itemProps = mergeProps(
                     {
                         key: value,
-                        className: cx('item', { active }),
+                        className: cx('item', { active, focusedOptionIndex, isFocusVisibleItem, value }),
+                        'data-p-focused': value === focusedOptionIndex,
                         tabIndex: tabIndex,
                         onClick: (e) => rate(e, value),
-                        onKeyDown: (e) => onStarKeyDown(e, value)
+                        onKeyDown: (e) => onStarKeyDown(e, value),
+                        onFocus: (e) => onFocus(e, value),
+                        onBlur: (e) => onBlur(e)
                     },
                     getPTOptions(props.value, 'item')
                 );

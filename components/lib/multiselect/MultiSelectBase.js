@@ -48,7 +48,8 @@ const classes = {
     item: ({ itemProps: props }) =>
         classNames('p-multiselect-item', {
             'p-highlight': props.selected,
-            'p-disabled': props.disabled
+            'p-disabled': props.disabled,
+            'p-focus': props.focusedOptionIndex === props.index
         }),
     checkboxContainer: 'p-checkbox p-component',
     checkboxIcon: 'p-checkbox-icon p-c',
@@ -143,6 +144,7 @@ const styles = `
         white-space: nowrap;
         position: relative;
         overflow: hidden;
+        outline: none;
     }
     
     .p-multiselect-header {
@@ -184,6 +186,7 @@ const styles = `
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
+        right: 3rem;
     }
     
     .p-fluid .p-multiselect {
@@ -220,6 +223,8 @@ export const MultiSelectBase = ComponentBase.extend({
         filterBy: null,
         filterInputAutoFocus: true,
         filterLocale: undefined,
+        selectOnFocus: false,
+        autoOptionFocus: false,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterTemplate: null,

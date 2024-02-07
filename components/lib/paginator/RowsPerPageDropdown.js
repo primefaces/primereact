@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PrimeReactContext, localeOption } from '../api/Api';
+import { ariaLabel } from '../api/Locale';
 import { Dropdown } from '../dropdown/Dropdown';
 import { useMergeProps } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
 import { RowsPerPageDropdownBase } from './PaginatorBase';
-import { ariaLabel } from '../api/Locale';
 
 export const RowsPerPageDropdown = React.memo((inProps) => {
     const mergeProps = useMergeProps();
@@ -14,7 +14,7 @@ export const RowsPerPageDropdown = React.memo((inProps) => {
     const hasOptions = props.options && props.options.length > 0;
     const options = hasOptions ? props.options.map((opt) => ({ label: String(opt), value: opt })) : [];
     const placeholderValue = localeOption('choose');
-    const ariaLabelValue = ariaLabel('rowsPerPage');
+    const ariaLabelValue = ariaLabel('jumpToPageDropdownLabel');
     const element = hasOptions ? (
         <>
             <Dropdown

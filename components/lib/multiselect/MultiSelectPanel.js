@@ -107,14 +107,15 @@ export const MultiSelectPanel = React.memo(
                 return (
                     <MultiSelectItem
                         hostName={props.hostName}
+                        index={j}
                         key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
                         style={style}
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
-                        onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -184,13 +185,14 @@ export const MultiSelectPanel = React.memo(
                     <MultiSelectItem
                         hostName={props.hostName}
                         key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
                         style={style}
+                        index={index}
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
-                        onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}

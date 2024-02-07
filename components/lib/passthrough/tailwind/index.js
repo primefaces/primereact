@@ -1147,7 +1147,7 @@ const Tailwind = {
             }
         }),
         panel: ({ props }) => ({
-            className: classNames('bg-white dark:bg-gray-900', 'min-w-[350px]', {
+            className: classNames('bg-white dark:bg-gray-900', 'min-w-full', {
                 'shadow-md border-0 absolute': !props.inline,
                 'inline-block overflow-x-auto border border-gray-300 dark:border-blue-900/40 p-2 rounded-lg': props.inline
             })
@@ -1846,6 +1846,7 @@ const Tailwind = {
         submenuheader: {
             className: classNames('m-0 p-3 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-bold rounded-tl-none rounded-tr-none')
         },
+        separator: 'border-t border-gray-300 dark:border-blue-900/40 my-1',
         transition: TRANSITIONS.overlay
     },
     menubar: {

@@ -3,12 +3,13 @@ import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import AtlantisLogo from './AtlantisLogo';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Atlantis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -17,7 +18,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
@@ -27,7 +29,8 @@ const apolloFeatures2Data = [
     {
         title: 'Full SaSS Support',
         description: 'Sass is utilized for both the application and components to provide simplicity and flexibility.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
@@ -41,18 +44,18 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: '/templates/atlantis'
+        src: '/images/templates/freya-react.jpg',
+        href: '/templates/freya'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/ultima-react.jpg',
+        href: '/templates/ultima'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: '/templates/diamond'
+        src: '/images/templates/roma-react.jpg',
+        href: '/templates/roma'
     }
 ];
 
@@ -66,7 +69,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -78,9 +93,20 @@ const animationFeaturesData1 = [
     {
         id: 4,
         title: 'Figma File',
-        description:
-            'Atlantis uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Atlantis Figma file as they are available in PrimeOne for Figma only.',
-        src: '/images/templates/apollo/features-animation-figma.png'
+        description: (
+            <>
+                Atlantis uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
+                <a href="https://www.figma.com/file/two0OGwOwHfq0sdjeK34l0/Preview-%7C-Atlantis-2022?node-id=15%3A1427&t=2lNJ5EzW0xuvQWdm-1" target="_blank">
+                    preview the Figma file
+                </a>{' '}
+                before the purchase. Note that PrimeReact UI components are excluded from the Atlantis Figma file as they are available in{' '}
+                <a href="/uikit" target="_blank">
+                    PrimeOne for Figma
+                </a>{' '}
+                only.
+            </>
+        ),
+        src: '/images/templates/atlantis/features-animation-figma.png'
     }
 ];
 
@@ -143,14 +169,29 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://atlantis.primereact.org/documentation',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic License',
+            price: '$59',
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
+    ]
+};
+
 const templateHeroData = {
     logo: <AtlantisLogo />,
     pattern: '/images/templates/atlantis/atlantis-hero-pattern.png',
-    rectangle: '/images/templates/atlantis/atlantis-hero-rectangle1.png',
-    light: '/images/templates/atlantis/atlantis-hero-light.png',
     dashboard1: '/images/templates/atlantis/atlantis-hero-dashboard1.png',
     dashboard2: '/images/templates/atlantis/atlantis-hero-dashboard2.png',
-    description: 'Atlantis is a beautiful React.js admin template with a modern look and feel optimized for creating React apps.',
+    description: 'Prepare to be amazed by the remastered Atlantis for PrimeReact featuring a new gorgeous dark mode for the entire layout, 5 menu modes, reusable css widgets, utilities, modern icons and many more.',
     liveHref: 'https://www.primefaces.org/atlantis-react/',
     docHref: 'https://www.primefaces.org/atlantis-react/documentation/'
 };
@@ -173,31 +214,27 @@ const AtlantisSeperator = () => {
 };
 
 const AtlantisPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features that the <br />
-            Atlantis template gives you
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="atlantis template">
             <TemplateHero {...templateHeroData} />
             <AtlantisSeperator />
-            <TemplateYoutube imgSrc={'/images/templates/atlantis/atlantis-youtube-screen.png'} />
+            <TemplateLicense license={license} />
             <AtlantisSeperator />
+            <div hidden={1}>
+                <TemplateYoutube imgSrc={'/images/templates/atlantis/atlantis-youtube-screen.png'} />
+                <AtlantisSeperator />
+            </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <AtlantisSeperator />
-            <TemplateConfiguration
-                title="Vue.js App with No Configuration"
-                description="Atlantis is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
-            />
+            <TemplateConfiguration title="React based on Next.JS" description="Atlantis is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript." />
             <AtlantisSeperator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <AtlantisSeperator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <AtlantisSeperator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

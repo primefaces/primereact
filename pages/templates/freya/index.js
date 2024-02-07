@@ -7,8 +7,9 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import FreyaLogo from './FreyaLogo';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 
-const apolloFeatures2Data = [
+const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Freya is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
@@ -17,7 +18,8 @@ const apolloFeatures2Data = [
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: '/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
@@ -27,7 +29,8 @@ const apolloFeatures2Data = [
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png'
+        src: '/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
@@ -41,18 +44,18 @@ const apolloFeatures2Data = [
     }
 ];
 
-const apolloRelatedData = [
+const relatedData = [
     {
-        src: '/images/templates/related-atlantis.png',
-        href: ''
+        src: '/images/templates/diamond-react.jpg',
+        href: '/templates/diamond'
     },
     {
-        src: '/images/templates/related-avalon.png',
-        href: ''
+        src: '/images/templates/babylon-react.jpg',
+        href: '/templates/babylon'
     },
     {
-        src: '/images/templates/related-diamond.png',
-        href: ''
+        src: '/images/templates/ultima-react.jpg',
+        href: '/templates/ultima'
     }
 ];
 
@@ -66,7 +69,19 @@ const animationFeaturesData1 = [
     {
         id: 2,
         title: 'PrimeBlocks',
-        description: 'Fully compatible with PrimeBlocks, choose from the wide range of blocks and customize the way you like. Note that PrimeBlocks is not included in the template and requires a separate purchase.',
+        description: (
+            <>
+                Fully compatible with{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>
+                , choose from the wide range of blocks and customize the way you like. Note that{' '}
+                <a href="https://blocks.primereact.org/" target="_blank">
+                    PrimeBlocks
+                </a>{' '}
+                is not included in the template and requires a separate purchase.
+            </>
+        ),
         src: '/images/templates/apollo/features-animation-blocks.png'
     },
     {
@@ -78,9 +93,20 @@ const animationFeaturesData1 = [
     {
         id: 4,
         title: 'Figma File',
-        description:
-            'Freya uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can preview the Figma file before the purchase. Note that PrimeVue UI components are excluded from the Freya Figma file as they are available in PrimeOne for Figma only.',
-        src: '/images/templates/apollo/features-animation-figma.png'
+        description: (
+            <>
+                Freya uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
+                <a href="https://www.figma.com/file/eYBoRNff6GPTlrgYZaMStp/Preview-%7C-Freya-2022?node-id=0%3A1&t=MGAABDlOnz4QBcEk-1" target="_blank">
+                    preview the Figma file
+                </a>{' '}
+                before the purchase. Note that PrimeReact UI components are excluded from the Freya Figma file as they are available in{' '}
+                <a href="/uikit" target="_blank">
+                    PrimeOne for Figma
+                </a>{' '}
+                only.
+            </>
+        ),
+        src: '/images/templates/freya/features-animation-figma.png'
     }
 ];
 
@@ -88,13 +114,13 @@ const animationFeaturesData2 = [
     {
         id: 1,
         title: 'Light and Dark Modes',
-        description: 'The stunning dark and light modes will impress your users.',
+        description: 'Impress your users with the Light and Dark modes.',
         src: '/images/templates/freya/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
-        description: 'Atlantis offers 16 built-in component themes with dark and light options. You are also free to create you own theme by defining couple SASS variables.',
+        description: 'Freya offers 16 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
         src: '/images/templates/freya/features-animation-component-themes.png'
     },
     {
@@ -143,16 +169,31 @@ const animationFeaturesData2 = [
     }
 ];
 
+const license = {
+    documentLink: 'https://freya.primereact.org/documentation',
+    description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    licenseDetails: [
+        {
+            title: 'Basic License',
+            price: '$59',
+            included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', 'Lifetime Support', 'Unlimited Updates']
+        },
+        {
+            title: 'Extended License',
+            price: '$590',
+            included: ['Commercial Usage', 'Multiple End Products', 'Lifetime Support', 'Unlimited Updates']
+        }
+    ]
+};
+
 const templateHeroData = {
     pattern: '/images/templates/freya/freya-hero-pattern.png',
-    rectangle: '/images/templates/freya/freya-hero-rectangle1.png',
-    light: '/images/templates/freya/freya-hero-light.png',
     logo: <FreyaLogo />,
     dashboard1: '/images/templates/freya/freya-hero-dashboard1.png',
     dashboard2: '/images/templates/freya/freya-hero-dashboard2.png',
     description: 'Freya is a modern admin template for developers and IT professionals. It comes with a huge collection of reusable UI components and dozens of built-in layouts for various purposes.',
     liveHref: 'https://www.primefaces.org/freya-react/',
-    docHref: 'https://www.primefaces.org/freya-react/documentation/'
+    docHref: 'https://freya.primereact.org/documentation'
 };
 
 const FreyaSeparator = () => {
@@ -168,31 +209,27 @@ const FreyaSeparator = () => {
 };
 
 const FreyaPage = () => {
-    const featuresAnimationTitle = (
-        <h2>
-            Features that the <br />
-            Freya template gives you
-        </h2>
-    );
+    const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
         <div className="freya template">
             <TemplateHero {...templateHeroData} />
             <FreyaSeparator />
-            <TemplateYoutube imgSrc={'/images/templates/freya/freya-youtube-screen.png'} />
+            <TemplateLicense license={license} />
             <FreyaSeparator />
+            <div hidden={1}>
+                <TemplateYoutube imgSrc={'/images/templates/freya/freya-youtube-screen.png'} />
+                <FreyaSeparator />
+            </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <FreyaSeparator />
-            <TemplateConfiguration
-                title="Vue.js App with No Configuration"
-                description="Freya is powered by Angular CLI to get started in no time following the best practices like service based component interaction modular design and strict mode support"
-            />
+            <TemplateConfiguration title="React based on Next.JS" description="Freya is powered by Next.js to get started in no time following the best practices. Template is implemented purely in React with Typescript." />
             <FreyaSeparator />
-            <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
+            <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <FreyaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <FreyaSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
+            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };

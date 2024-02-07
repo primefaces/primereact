@@ -34,6 +34,7 @@ export const Splitter = React.memo(
         const isStateful = props.stateKey != null;
         const childrenLength = (props.children && props.children.length) || 1;
         const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children && [].concat(props.children)[index].props.size) || 100 / childrenLength);
+        const horizontal = props.layout === 'horizontal';
 
         const metaData = {
             props,
@@ -134,11 +135,10 @@ export const Splitter = React.memo(
         }, [getStorage, props.stateKey]);
 
         const onResizeStart = (event, index, isKeyDown) => {
-            gutterRef.current = gutterRefs.current[index];
-            let pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
-            let pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
-            const horizontal = props.layout === 'horizontal';
+            const pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
+            const pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
 
+            gutterRef.current = gutterRefs.current[index];
             size.current = horizontal ? DomHandler.getWidth(elementRef.current) : DomHandler.getHeight(elementRef.current);
             dragging.current = true;
             startPos.current = horizontal ? pageX : pageY;
@@ -164,9 +164,8 @@ export const Splitter = React.memo(
 
         const onResize = (event, step = 0, isKeyDown = false) => {
             let newPos, newNextPanelSize, newPrevPanelSize;
-            let horizontal = props.layout === 'horizontal';
-            let pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
-            let pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
+            const pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
+            const pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
 
             if (isKeyDown) {
                 if (horizontal) {
@@ -224,7 +223,7 @@ export const Splitter = React.memo(
 
             switch (event.code) {
                 case 'ArrowLeft': {
-                    if (props.layout === 'horizontal') {
+                    if (horizontal) {
                         setTimer(event, index, props.step * -1);
                     }
 
@@ -233,7 +232,7 @@ export const Splitter = React.memo(
                 }
 
                 case 'ArrowRight': {
-                    if (props.layout === 'horizontal') {
+                    if (horizontal) {
                         setTimer(event, index, props.step);
                     }
 
@@ -242,7 +241,7 @@ export const Splitter = React.memo(
                 }
 
                 case 'ArrowDown': {
-                    if (props.layout === 'vertical') {
+                    if (!horizontal) {
                         setTimer(event, index, props.step * -1);
                     }
 
@@ -251,7 +250,7 @@ export const Splitter = React.memo(
                 }
 
                 case 'ArrowUp': {
-                    if (props.layout === 'vertical') {
+                    if (!horizontal) {
                         setTimer(event, index, props.step);
                     }
 
@@ -386,7 +385,7 @@ export const Splitter = React.memo(
                 {
                     ref: (el) => (gutterRefs.current[index] = el),
                     className: cx('gutter'),
-                    style: props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
+                    style: horizontal ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
                     onMouseDown: (event) => onGutterMouseDown(event, index),
                     onKeyDown: (event) => onGutterKeyDown(event, index),
                     onKeyUp: onGutterKeyUp,
@@ -403,7 +402,7 @@ export const Splitter = React.memo(
                 {
                     tabIndex: getPanelProp(panel, 'tabIndex') || 0,
                     className: cx('gutterHandler'),
-                    'aria-orientation': props.layout === 'horizontal' ? 'vertical' : 'horizontal',
+                    'aria-orientation': horizontal ? 'vertical' : 'horizontal',
                     'aria-controls': panelId,
                     'aria-label': getPanelProp(panel, 'aria-label'),
                     'aria-labelledby': getPanelProp(panel, 'aria-labelledby'),

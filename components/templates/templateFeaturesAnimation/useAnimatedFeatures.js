@@ -1,10 +1,12 @@
 // useAnimatedFeatures.js
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useVisible from './useVisible';
 
-const useAnimatedFeatures = (animationRef, arrayLength, seconds = 5000) => {
+const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const [selectedID, setSelectedID] = useState(1);
     const [intervalIds, setIntervalIds] = useState([]);
+    const [cancelInterval, setCancelInterval] = useState(false);
+    const [hoveredID, setHoveredID] = useState(null);
     const isVisible = useVisible(animationRef);
 
     const clearAllIntervals = () => {
@@ -24,7 +26,17 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 5000) => {
     const handleClick = (cardId) => {
         clearAllIntervals();
         setSelectedID(cardId);
-        createInterval();
+        setCancelInterval(true);
+    };
+
+    const handleHover = (cardId, type) => {
+        if (cancelInterval || cardId !== selectedID) return;
+        clearAllIntervals();
+
+        if (type === 'onMouseLeave') {
+            setSelectedID(cardId);
+            createInterval();
+        }
     };
 
     useEffect(() => {
@@ -37,9 +49,15 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 5000) => {
             setSelectedID(1);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isVisible]);
+    }, [animationRef, isVisible]);
 
-    return { selectedID, handleClick };
+    useEffect(() => {
+        if (!hoveredID) null;
+        handleHover(hoveredID, 'onMouseEnter');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedID]);
+
+    return { selectedID, setHoveredID, handleClick, handleHover };
 };
 
 export default useAnimatedFeatures;

@@ -15,6 +15,7 @@ export const DropdownPanel = React.memo(
         const { ptm, cx, sx } = props;
         const context = React.useContext(PrimeReactContext);
         const virtualScrollerRef = React.useRef(null);
+
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
         const filterOptions = {
@@ -78,7 +79,22 @@ export const DropdownPanel = React.memo(
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} cx={cx} />;
+                return (
+                    <DropdownItem
+                        key={optionKey}
+                        index={j}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        label={optionLabel}
+                        option={option}
+                        style={style}
+                        template={props.itemTemplate}
+                        selected={props.isSelected(option)}
+                        disabled={disabled}
+                        onClick={props.onOptionClick}
+                        ptm={ptm}
+                        cx={cx}
+                    />
+                );
             });
         };
 
@@ -124,7 +140,22 @@ export const DropdownPanel = React.memo(
                 const optionKey = index + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} cx={cx} />;
+                return (
+                    <DropdownItem
+                        key={optionKey}
+                        label={optionLabel}
+                        index={index}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        option={option}
+                        style={style}
+                        template={props.itemTemplate}
+                        selected={props.isSelected(option)}
+                        disabled={disabled}
+                        onClick={props.onOptionClick}
+                        ptm={ptm}
+                        cx={cx}
+                    />
+                );
             }
         };
 
