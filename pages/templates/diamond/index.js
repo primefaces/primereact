@@ -1,60 +1,59 @@
-import React from 'react';
-import TemplateYoutube from '@/components/templates/TemplateYoutube';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
+import TemplateYoutube from '@/components/templates/TemplateYoutube';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import DiamondLogo from './DiamondLogo';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Diamond is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/diamond/diamond-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Diamond has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
         description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
-        src: '/images/templates/diamond/diamond-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/diamond/diamond-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/avalon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon-react.jpg',
         href: '/templates/avalon'
     },
     {
-        src: '/images/templates/roma-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma-react.jpg',
         href: '/templates/roma'
     }
 ];
@@ -64,7 +63,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/apollo/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -82,13 +81,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/apollo/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Diamond ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/apollo/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-icons.png'
     },
     {
         id: 4,
@@ -106,7 +105,7 @@ const animationFeaturesData1 = [
                 only.
             </>
         ),
-        src: '/images/templates/diamond/features-animation-figma.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-figma.png'
     }
 ];
 
@@ -115,55 +114,55 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Light / Dark / Dim Modes',
         description: 'Diamond has 3 display modes to choose from; Light, Dim and Dark.',
-        src: '/images/templates/diamond/features-animation-darkmode.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
         description: 'Diamond offers 30 built-in component themes and creating your own theme is a matter of defining couple of sass variables.',
-        src: '/images/templates/diamond/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-component-themes.png'
     },
     {
         id: 3,
         title: '7 Menu Orientations',
         description: 'Static, Overlay, Slim, Compact, Horizontal, Reveal and Drawer are the available menu layouts depending on your preference.',
-        src: '/images/templates/diamond/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/diamond/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Static.png'
             },
             {
                 id: 2,
                 title: 'Slim',
-                src: '/images/templates/diamond/Slim.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Slim.png'
             },
             {
                 id: 3,
                 title: 'Horizontal',
-                src: '/images/templates/diamond/Horizontal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Horizontal.png'
             },
             {
                 id: 4,
                 title: 'Drawer',
-                src: '/images/templates/diamond/Drawer.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Drawer.png'
             },
             {
                 id: 5,
                 title: 'Overlay',
-                src: '/images/templates/diamond/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Overlay.png'
             },
             {
                 id: 6,
                 title: 'Compact',
-                src: '/images/templates/diamond/Compact.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Compact.png'
             },
             {
                 id: 7,
                 title: 'Reveal',
-                src: '/images/templates/diamond/Reveal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/Reveal.png'
             }
         ]
     },
@@ -171,7 +170,7 @@ const animationFeaturesData2 = [
         id: 4,
         title: 'Menu Themes',
         description: 'Stunning theming options for the main menu in light color scheme.',
-        src: '/images/templates/diamond/features-animation-orientations.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-orientations.png'
     }
 ];
 
@@ -216,9 +215,9 @@ const DiamondSeperator = () => {
 
 const templateHeroData = {
     logo: <DiamondLogo />,
-    pattern: '/images/templates/diamond/diamond-hero-pattern.png',
-    dashboard1: '/images/templates/diamond/diamond-hero-dashboard1.png',
-    dashboard2: '/images/templates/diamond/diamond-hero-dashboard2.png',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-hero-pattern.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-hero-dashboard1.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-hero-dashboard2.png',
     description: 'An amazing application template for React based on the popular NextJS framework with light-dim-dark modes, four menu layouts, various menu themes, sample apps, ready to use template pages and 30 PrimeReact themes.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'
@@ -234,7 +233,7 @@ const DiamondPage = () => {
             <TemplateLicense license={license} />
             <DiamondSeperator />
             <div hidden={1}>
-                <TemplateYoutube imgSrc={'/images/templates/diamond/diamond-youtube-screen.png'} />
+                <TemplateYoutube imgSrc={'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-youtube-screen.png'} />
                 <DiamondSeperator />
             </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />

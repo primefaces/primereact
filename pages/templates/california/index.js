@@ -1,59 +1,58 @@
-import React from 'react';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
-import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateHero from '@/components/templates/templateHero/TemplateHero';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
-import CaliforniaLogo from './CaliforniaLogo';
-import TemplateSeparator from '@/components/templates/TemplateSeparator';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateIntro from '@/components/templates/TemplateIntro';
 import TemplateLicense from '@/components/templates/TemplateLicense';
+import TemplateRelated from '@/components/templates/TemplateRelated';
+import TemplateSeparator from '@/components/templates/TemplateSeparator';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateHero from '@/components/templates/templateHero/TemplateHero';
+import CaliforniaLogo from './CaliforniaLogo';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Diamond is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/california/california-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/california-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Diamond has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
         description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
-        src: '/images/templates/california/california-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/california-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/california/california-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/california-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/babylon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
         href: 'https://www.primefaces.org/layouts/babylon-react'
     },
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/roma-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma-react.jpg',
         href: 'https://www.primefaces.org/layouts/roma-react'
     }
 ];
@@ -63,7 +62,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/california/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -81,13 +80,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/california/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Diamond ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/california/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/features-animation-icons.png'
     }
 ];
 
@@ -96,19 +95,19 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Mega Menu',
         description: 'California offers a new mega option as an intuitive way to enhance the user experience across different devices.',
-        src: '/images/templates/california/features-animation-mega.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/features-animation-mega.png'
     },
     {
         id: 2,
         title: 'Special and Solid Themes',
         description: 'California Theme is highly customizable, there are 20 built-in themes and creating your own theme is a matter of defining couple of sass variables.',
-        src: '/images/templates/california/features-animation-theme.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/features-animation-theme.png'
     },
     {
         id: 3,
         title: '3 Different Menu Color ',
         description: 'Choose from Static and Slim menu orientations.',
-        src: '/images/templates/california/features-animation-color.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/california/features-animation-color.png'
     }
 ];
 
@@ -131,9 +130,9 @@ const license = {
 
 const templateHeroData = {
     logo: <CaliforniaLogo />,
-    pattern: '/images/templates/california/california-hero-pattern.png',
-    dashboard1: '/images/templates/california/california-hero-dashboard1.png',
-    dashboard2: '/images/templates/california/california-hero-dashboard2.png',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/california/california-hero-pattern.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/california/california-hero-dashboard1.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/california/california-hero-dashboard2.png',
     description: 'A modern and easy to use premium application template with various color schemes.Based on flat design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'
@@ -274,7 +273,11 @@ const CaliforniaPage = () => {
             <CaliforniaSeparator />
             <TemplateLicense license={license} />
             <CaliforniaSeparator />
-            <TemplateIntro title="Create Your Own California" description="Variety of options for the layout color palette are offered to define your own California experience." imageURL="/images/templates/california/california-intro.png" />
+            <TemplateIntro
+                title="Create Your Own California"
+                description="Variety of options for the layout color palette are offered to define your own California experience."
+                imageURL="https://primefaces.org/cdn/primereact/images/templates/california/california-intro.png"
+            />
             <CaliforniaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />
             <CaliforniaSeparator />

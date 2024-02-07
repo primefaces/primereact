@@ -1,59 +1,58 @@
-import React from 'react';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import RomaLogo from './RomaLogo';
 import RomaSeparator from './RomaSeparator';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Roma is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/roma/roma-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma/roma-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Roma has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Applications',
         description: 'Landing, login and error pages are provided as template pages to get started with building your app in no time.',
-        src: '/images/templates/roma/roma-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma/roma-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/roma/roma-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma/roma-features2-mobile.png'
     }
 ];
 
 const apolloRelatedData = [
     {
-        src: '/images/templates/avalon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon-react.jpg',
         href: '/templates/avalon'
     },
     {
-        src: '/images/templates/babylon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
         href: '/templates/babylon'
     },
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     }
 ];
@@ -63,7 +62,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/babylon/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -81,13 +80,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/babylon/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Roma ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/babylon/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-icons.png'
     }
 ];
 
@@ -96,40 +95,40 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Light and Dark Menus',
         description: 'Roma offers you 2 menu modes to choose from; Light and Dark.',
-        src: '/images/templates/roma/features-animation-darkmode.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: '15 Beautiful Themes',
         description: 'Roma offers 15 built-in themes and creating your own theme is a matter of defining couple of SaSS variables.',
-        src: '/images/templates/roma/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/roma/features-animation-component-themes.png'
     },
     {
         id: 3,
         title: '4 Menu Orientations',
         description: 'Roma has 4 menu layouts to choose from; Static, Overlay, Horizontal and Slim with Light and Dark options.',
-        src: '/images/templates/diamond/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/roma/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/roma/Static.png'
             },
             {
                 id: 2,
                 title: 'Overlay',
-                src: '/images/templates/roma/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/roma/Overlay.png'
             },
             {
                 id: 3,
                 title: 'Horizontal',
-                src: '/images/templates/roma/Horizontal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/roma/Horizontal.png'
             },
             {
                 id: 4,
                 title: 'Slim',
-                src: '/images/templates/roma/Slim.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/roma/Slim.png'
             }
         ]
     }
@@ -154,9 +153,9 @@ const license = {
 
 const templateHeroData = {
     logo: <RomaLogo />,
-    pattern: '/images/templates/roma/roma-hero-pattern.png',
-    dashboard1: '/images/templates/roma/roma-hero-dashboard1.png',
-    dashboard2: '/images/templates/roma/roma-hero-dashboard2.png',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/roma/roma-hero-pattern.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/roma/roma-hero-dashboard1.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/roma/roma-hero-dashboard2.png',
     description: 'A minimalist premium application template with a clean and simple design. Fully customizable with SASS variables and optimized for all devices with responsive design.',
     liveHref: 'https://www.primefaces.org/roma-react/',
     docHref: 'https://www.primefaces.org/roma-react/#/documentation'
