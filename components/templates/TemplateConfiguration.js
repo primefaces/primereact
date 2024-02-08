@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TemplateConfiguration = ({ title = '', description = '' }) => {
     return (
         <div className="template-configuration-wrapper">
@@ -19,7 +17,7 @@ const TemplateConfiguration = ({ title = '', description = '' }) => {
                         </p>
                         <br />
                         <br />
-                        <img className="template-configuration-screen-bottom-logo" src={'/images/templates/react-3d-logo.png'} alt="Angular 3D Logo" />
+                        <img className="template-configuration-screen-bottom-logo" src={'https://primefaces.org/cdn/primereact/images/templates/react-3d-logo.png'} alt="Angular 3D Logo" />
                     </div>
                 </div>
                 <h3 className="template-configuration-title">{title}</h3>

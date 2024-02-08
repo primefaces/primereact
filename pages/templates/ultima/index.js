@@ -1,60 +1,59 @@
-import React from 'react';
-import TemplateYoutube from '@/components/templates/TemplateYoutube';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
-import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
+import TemplateYoutube from '@/components/templates/TemplateYoutube';
+import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import UltimaLogo from './UltimaLogo';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Ultima is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/ultima/ultima-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Ultima has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Customizable Design',
         description: 'Fully customizable with a mixture of Sass and CSS variables.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
         description: 'Everything is ready for you to start and build your app in no time. Landing, login, invoice, help, and error pages are provided as template pages.',
-        src: '/images/templates/ultima/ultima-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/ultima/ultima-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/diamond-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond-react.jpg',
         href: '/templates/diamond'
     },
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/babylon-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
         href: '/templates/babylon'
     }
 ];
@@ -64,7 +63,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/apollo/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -82,13 +81,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/apollo/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Ultima ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/apollo/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-icons.png'
     },
     {
         id: 4,
@@ -106,7 +105,7 @@ const animationFeaturesData1 = [
                 only.
             </>
         ),
-        src: '/images/templates/ultima/features-animation-figma.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/features-animation-figma.png'
     }
 ];
 
@@ -115,55 +114,55 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Light and Dark Modes',
         description: 'Ultima offers you 2 uniquely designed layout modes to choose from; Light and Dark.',
-        src: '/images/templates/ultima/features-animation-darkmode.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/features-animation-darkmode.png'
     },
     {
         id: 2,
         title: 'Component Themes',
         description: 'Ultima offers 17 built-in component themes with dark and light options. Also if you wanna create your own theme you can do it by just defining couple SASS variables.',
-        src: '/images/templates/ultima/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/features-animation-component-themes.png'
     },
     {
         id: 3,
         title: '7 Menu Orientations',
         description: 'Static, Overlay, Slim, Slim+, Reveal, Drawer and Horizontal are the available menu layouts depending on your preference.',
-        src: '/images/templates/atlantis/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/ultima/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Static.png'
             },
             {
                 id: 2,
                 title: 'Slim',
-                src: '/images/templates/ultima/Slim.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Slim.png'
             },
             {
                 id: 3,
                 title: 'Reveal',
-                src: '/images/templates/ultima/Reveal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Reveal.png'
             },
             {
                 id: 4,
                 title: 'Horizontal',
-                src: '/images/templates/ultima/Horizontal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Horizontal.png'
             },
             {
                 id: 5,
                 title: 'Overlay',
-                src: '/images/templates/ultima/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Overlay.png'
             },
             {
                 id: 6,
                 title: 'Slim+',
-                src: '/images/templates/ultima/Slim+.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Slim+.png'
             },
             {
                 id: 7,
                 title: 'Drawer',
-                src: '/images/templates/ultima/Drawer.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/ultima/Drawer.png'
             }
         ]
     }
@@ -209,11 +208,11 @@ const UltimaPage = () => {
     return (
         <div className="ultima template">
             <TemplateHero
-                pattern={'/images/templates/ultima/ultima-hero-pattern.png'}
+                pattern={'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-hero-pattern.png'}
                 logo={<UltimaLogo />}
                 description={'A highly customizable premium application template featuring 4 menu modes, 13 themes, light and dark modes. Based on material design language, it is fully responsive, touch optimized, built with SASS, CSS3 and HTML5.'}
-                dashboard1={'/images/templates/ultima/ultima-hero-dashboard1.png'}
-                dashboard2={'/images/templates/ultima/ultima-hero-dashboard2.png'}
+                dashboard1={'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-hero-dashboard1.png'}
+                dashboard2={'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-hero-dashboard2.png'}
                 liveHref={'https://ultima.primereact.org'}
                 docHref={'https://ultima.primereact.org/documentation'}
             />
@@ -221,7 +220,7 @@ const UltimaPage = () => {
             <TemplateLicense license={license} />
             <UltimaSeperator />
             <div hidden={1}>
-                <TemplateYoutube imgSrc={'/images/templates/ultima/ultima-youtube-screen.png'} />
+                <TemplateYoutube imgSrc={'https://primefaces.org/cdn/primereact/images/templates/ultima/ultima-youtube-screen.png'} />
                 <UltimaSeperator />
             </div>
             <TemplateFeaturesAnimation featuresData={animationFeaturesData2} title={featuresAnimationTitle} />

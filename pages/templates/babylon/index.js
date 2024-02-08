@@ -1,59 +1,58 @@
-import React from 'react';
-import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
+import TemplateFeatures from '@/components/templates/TemplateFeatures';
+import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
-import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
+import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import BabylonLogo from './BabylonLogo';
-import TemplateLicense from '@/components/templates/TemplateLicense';
 
 const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Babylon is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/babylon/babylon-features2-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/babylon-features2-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
         description: 'First class support for Firefox, Safari, Chrome and Edge.',
-        src: '/images/templates/apollo/apollo-features2-compatible.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-compatible-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-compatible-dark.png'
     },
     {
         title: 'Lifetime Support',
         description: 'Babylon has a dedicated forum where lifetime support is delivered by engineers at PrimeTek in a timely manner.',
-        src: '/images/templates/apollo/apollo-features2-lifetime.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-lifetime.png'
     },
     {
         title: 'Full SaSS Support',
         description: 'Sass is utilized for both the application and components to provide simplicity and flexibility.',
-        src: '/images/templates/apollo/apollo-features2-customizable.png',
-        darkSrc: '/images/templates/apollo/apollo-features2-customizable-dark.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable.png',
+        darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
         title: 'Ready to Use Pages',
         description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
-        src: '/images/templates/babylon/babylon-features2-ready.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/babylon-features2-ready.png'
     },
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/babylon/babylon-features2-mobile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/babylon-features2-mobile.png'
     }
 ];
 
 const relatedData = [
     {
-        src: '/images/templates/ultima-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima-react.jpg',
         href: '/templates/ultima'
     },
     {
-        src: '/images/templates/apollo-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/apollo-react.jpg',
         href: '/templates/apollo'
     },
     {
-        src: '/images/templates/diamond-react.jpg',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond-react.jpg',
         href: '/templates/diamond'
     }
 ];
@@ -63,7 +62,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'PrimeFlex CSS Utilities',
         description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
-        src: '/images/templates/babylon/features-animation-utilities.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-utilities.png'
     },
     {
         id: 2,
@@ -81,13 +80,13 @@ const animationFeaturesData1 = [
                 is not included in the template and requires a separate purchase.
             </>
         ),
-        src: '/images/templates/babylon/features-animation-blocks.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-blocks.png'
     },
     {
         id: 3,
         title: 'PrimeIcons',
         description: 'Babylon ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
-        src: '/images/templates/babylon/features-animation-icons.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-icons.png'
     }
 ];
 
@@ -96,28 +95,28 @@ const animationFeaturesData2 = [
         id: 1,
         title: '4 Menu Orientations, Light and Dark Menus',
         description: 'Babylon has 4 menu modes; Static, Overlay, Horizontal and Slim with Light and Dark color alternatives.',
-        src: '/images/templates/atlantis/features-animation-orientations.png',
+        src: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/features-animation-orientations.png',
         type: 'inline-animation',
         inlineFeaturesData: [
             {
                 id: 1,
                 title: 'Static',
-                src: '/images/templates/babylon/Static.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/Static.png'
             },
             {
                 id: 2,
                 title: 'Overlay',
-                src: '/images/templates/babylon/Overlay.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/Overlay.png'
             },
             {
                 id: 3,
                 title: 'Horizontal',
-                src: '/images/templates/babylon/Horizontal.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/Horizontal.png'
             },
             {
                 id: 4,
                 title: 'Slim',
-                src: '/images/templates/babylon/Slim.png'
+                src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/Slim.png'
             }
         ]
     },
@@ -125,14 +124,14 @@ const animationFeaturesData2 = [
         id: 2,
         title: '17 Beautiful Themes',
         description: 'Babylon offers 17 built-in themes and creating your own theme is a matter of defining couple of sass variables.',
-        src: '/images/templates/babylon/features-animation-component-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-component-themes.png'
     },
 
     {
         id: 3,
         title: '2 Profile Modes',
         description: 'User profile menu can either be placed inside the main menu or topbar.',
-        src: '/images/templates/babylon/features-animation-profile.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon/features-animation-profile.png'
     }
 ];
 
@@ -155,9 +154,9 @@ const license = {
 
 const templateHeroData = {
     logo: <BabylonLogo />,
-    pattern: '/images/templates/babylon/babylon-hero-pattern.png',
-    dashboard1: '/images/templates/babylon/babylon-hero-dashboard1.png',
-    dashboard2: '/images/templates/babylon/babylon-hero-dashboard2.png',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/babylon/babylon-hero-pattern.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/babylon/babylon-hero-dashboard1.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/babylon/babylon-hero-dashboard2.png',
     description: 'An elegant premium application template with a beautiful design. Fully customizable with SASS variables and optimized for all devices with responsive design.',
     liveHref: 'https://www.primefaces.org/babylon-react/',
     docHref: 'https://www.primefaces.org/babylon-react/#/documentation'
