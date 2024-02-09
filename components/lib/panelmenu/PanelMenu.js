@@ -190,7 +190,7 @@ export const PanelMenu = React.memo(
                 setActiveItemState(_activeItemState);
 
                 if (props.multiple) {
-                    const activeItems = activeItemsState;
+                    let activeItems = activeItemsState;
 
                     if (
                         activeItemsState.some((subItem) => {

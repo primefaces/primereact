@@ -563,12 +563,9 @@ export const TieredMenu = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.absolutePosition(containerRef.current, targetRef.current);
-            const targetWidth = DomHandler.getOuterWidth(targetRef.current);
+            const calculateMinWidth = DomHandler.getOuterWidth(targetRef.current) > DomHandler.getOuterWidth(containerRef.current);
 
-            if (targetWidth > DomHandler.getOuterWidth(containerRef.current)) {
-                containerRef.current.style.minWidth = DomHandler.getOuterWidth(targetRef.current) + 'px';
-            }
+            DomHandler.alignOverlay(containerRef.current, targetRef.current, props.appendTo, calculateMinWidth);
         };
 
         const onEnter = () => {
