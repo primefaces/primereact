@@ -310,12 +310,42 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('transition')
             );
 
+            const firstHiddenElementProps = mergeProps(
+                {
+                    ref: props.firstHiddenFocusableElementOnOverlay,
+                    role: 'presentation',
+                    'aria-hidden': 'true',
+                    className: 'p-hidden-accessible p-hidden-focusable',
+                    tabIndex: '0',
+                    onFocus: props.onFirstHiddenFocus,
+                    'data-p-hidden-accessible': true,
+                    'data-p-hidden-focusable': true
+                },
+                ptm('hiddenFirstFocusableEl')
+            );
+
+            const lastHiddenElementProps = mergeProps(
+                {
+                    ref: props.lastHiddenFocusableElementOnOverlay,
+                    role: 'presentation',
+                    'aria-hidden': 'true',
+                    className: 'p-hidden-accessible p-hidden-focusable',
+                    tabIndex: '0',
+                    onFocus: props.onLastHiddenFocus,
+                    'data-p-hidden-accessible': true,
+                    'data-p-hidden-focusable': true
+                },
+                ptm('hiddenLastFocusableEl')
+            );
+
             return (
                 <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
+                        <span {...firstHiddenElementProps}></span>
                         {header}
                         {content}
                         {footer}
+                        <span {...lastHiddenElementProps}></span>
                     </div>
                 </CSSTransition>
             );
