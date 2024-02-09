@@ -52,7 +52,7 @@ export default function VerticalDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center" style={{ height: '360px' }}>
-                <MeterGroup values={values} orientation="vertical" />
+                <MeterGroup values={values} orientation="vertical" labelOrientation="vertical" />
             </div>
             <DocSectionCode code={code} />
         </>

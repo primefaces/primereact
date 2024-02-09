@@ -26,12 +26,11 @@ const classes = {
 const styles = `
 @layer primereact {
     .p-metergroup {
-        overflow: hidden;
         position: relative;
+        overflow: hidden;
     }
 
     .p-metergroup-vertical.p-metergroup {
-        height: 100%;
         display: flex;
     }
 
@@ -42,10 +41,6 @@ const styles = `
     .p-metergroup-meter-container {
         display: flex;
     }
-
-    .p-metergroup-meter {
-        display: flex;
-     }
 
     .p-metergroup-label-list {
         display: flex;
@@ -58,22 +53,13 @@ const styles = `
         align-items: start;
     }
 
-    .p-metergroup-horizontal .p-metergroup-label-list-vertical {
+    .p-metergroup-label-list-vertical {
         flex-direction: column;
     }
 
-    .p-metergroup-horizontal .p-metergroup-meter {
-        height: 100%;
+    .p-metergroup-label-list-horizontal {
+        flex-direction: row;
     }
-
-    .p-metergroup-vertical .p-metergroup-label-list-horizontal {
-        flex-direction: column;
-    }
-
-    .p-metergroup-vertical .p-metergroup-meter {
-        width: 100%;
-    }
-
 
     .p-metergroup-label-list-item {
         display: inline-flex;
@@ -97,7 +83,11 @@ export const MeterGroupBase = ComponentBase.extend({
         max: 100,
         orientation: 'horizontal',
         labelPosition: 'end',
-        labelOrientation: 'horizontal'
+        labelOrientation: 'horizontal',
+        start: null,
+        end: null,
+        meterRenderer: null,
+        labelListRenderer: null
     },
     css: {
         classes,

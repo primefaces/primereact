@@ -8,7 +8,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 export const MeterGroup = (inProps) => {
     const context = useContext(PrimeReactContext);
     const props = MeterGroupBase.getProps(inProps, context);
-    const { values, min, max, orientation, labelPosition } = props;
+    const { values, min, max, orientation, labelPosition, start, end, meterRenderer, labelListRenderer } = props;
 
     const mergeProps = useMergeProps();
     const { ptm, cx, isUnstyled } = MeterGroupBase.setMetaData({
@@ -22,6 +22,9 @@ export const MeterGroup = (inProps) => {
     useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'progressbar' });
 
     const totalPercent = values.reduce((acc, val) => acc + val.value, 0);
+    const precentages = values.map((item) => {
+        return Math.round((item.value / totalPercent) * 100);
+    });
 
     const calculatePercentage = (meter = 0) => {
         const percentageOfItem = ((meter - min) / (max - min)) * 100;
@@ -41,8 +44,8 @@ export const MeterGroup = (inProps) => {
         const meters = values.map((item, index) => {
             const meterInlineStyles = {
                 backgroundColor: item.color,
-                width: orientation === 'horizontal' && calculatePercentage(item.value) + '%',
-                height: orientation === 'vertical' && calculatePercentage(item.value) + '%'
+                width: orientation === 'horizontal' ? calculatePercentage(item.value) + '%' : 'auto',
+                height: orientation === 'vertical' ? calculatePercentage(item.value) + '%' : 'auto'
             };
 
             const meterProps = mergeProps(
@@ -53,7 +56,20 @@ export const MeterGroup = (inProps) => {
                 ptm('meter')
             );
 
-            return <span key={index} {...meterProps} />;
+            if (meterRenderer || item.meterTemplate) {
+                const meterTemplateProps = mergeProps(
+                    {
+                        className: cx('meter')
+                    },
+                    ptm('meter')
+                )
+
+                return ObjectUtils.getJSXElement(item.meterTemplate || meterRenderer, { ...item, percentage: calculatePercentage(item.value), index, }, meterTemplateProps);
+            }
+            
+            else {
+                return <span key={index} {...meterProps} />
+            }
         });
 
         const meterContainerProps = mergeProps(
@@ -122,11 +138,19 @@ export const MeterGroup = (inProps) => {
         );
     };
 
+    const templateProps = {
+        totalPercent,
+        precentages,
+        values
+    };
+    
     return (
         <div {...rootProps} role="meter" aria-valuemin={min} aria-valuemax={max} aria-valuenow={totalPercent}>
-            {labelPosition === 'start' && createLabelList()}
+            {labelPosition === 'start' && ObjectUtils.getJSXElement(labelListRenderer || createLabelList, {values, totalPercent}) }
+            {start && ObjectUtils.getJSXElement(start, templateProps)}
             {createMeters()}
-            {labelPosition === 'end' && createLabelList()}
+            {end && ObjectUtils.getJSXElement(end, templateProps)}
+            {labelPosition === 'end' && ObjectUtils.getJSXElement(labelListRenderer || createLabelList, {values, totalPercent}) }
         </div>
     );
 };

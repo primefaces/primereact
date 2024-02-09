@@ -7,6 +7,7 @@ import { MultipleDoc } from '@/components/doc/metergroup/multipledoc';
 import { LabelDoc } from '@/components/doc/metergroup/labeldoc';
 import { VerticalDoc } from '@/components/doc/metergroup/verticaldoc';
 import { MinMaxDoc } from '@/components/doc/metergroup/minmaxdoc';
+import { TemplateDoc } from '@/components/doc/metergroup/templatedoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -44,6 +45,11 @@ const MessagesDemo = () => {
             id: 'min-max',
             label: 'Min-Max',
             component: MinMaxDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         }
     ];
 
