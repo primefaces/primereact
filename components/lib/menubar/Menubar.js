@@ -356,7 +356,7 @@ export const Menubar = React.memo(
 
         const onEnterKey = (event) => {
             if (focusedItemInfo.index !== -1) {
-                const element = DomHandler.findSingle(rootMenuRef.current, `li[id="${`${focusedItemId}`}"]`);
+                const element = DomHandler.findSingle(rootMenuRef.current, `li[data-id="${`${focusedItemId}`}"]`);
                 const anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section="action"]');
 
                 anchorElement ? anchorElement.click() : element && element.click();
@@ -483,7 +483,7 @@ export const Menubar = React.memo(
 
         const scrollInView = (index = -1) => {
             const id = index !== -1 ? `${idState}_${index}` : focusedItemId;
-            const element = DomHandler.findSingle(rootMenuRef.current, `li[id="${id}"]`);
+            const element = DomHandler.findSingle(rootMenuRef.current, `li[data-id="${id}"]`);
 
             if (element) {
                 element.scrollIntoView && element.scrollIntoView({ block: 'nearest', inline: 'start' });
