@@ -818,8 +818,8 @@
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions",
-                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                            "type": "Partial<ZIndexOptions>",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically."
                         },
                         {
                             "name": "pt",
@@ -9331,8 +9331,8 @@
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions",
-                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                            "type": "Partial<ZIndexOptions>",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically."
                         },
                         {
                             "name": "pt",
