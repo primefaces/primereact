@@ -558,7 +558,7 @@ export const ListBox = React.memo(
                 DomHandler.focus(firstHiddenFocusableElement.current);
             }
 
-            astHiddenFocusableElement.current.tabIndex = -1;
+            lastHiddenFocusableElement.current.tabIndex = -1;
         };
 
         const getOptionGroupRenderKey = (optionGroup) => {
