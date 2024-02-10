@@ -511,11 +511,15 @@ interface DataTableRowEditEvent extends DataTableRowEvent {
  * @see {@link DataTableProps.onRowEditSave}
  * @extends DataTableRowEditEvent
  */
-interface DataTableRowEditSaveEvent extends DataTableRowEditEvent {
+interface DataTableRowEditSaveEvent<TValue extends DataTableValueArray> extends DataTableRowEditEvent {
     /**
      * Whether the row is valid or not.
      */
     valid: boolean;
+    /**
+     * Editing row data.
+     */
+    newData: DataTableRowData<TValue>;
 }
 
 /**
@@ -732,6 +736,10 @@ interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
      * The props of the datatable.
      */
     props: DataTableProps<TValue>;
+    /**
+     * Index of validated row
+     */
+    rowIndex: number;
 }
 
 /**
@@ -1556,7 +1564,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Callback to invoke when the save icon is clicked on row editing mode.
      * @param {DataTableRowEditSaveEvent} event - Custom row edit save event.
      */
-    onRowEditSave?(event: DataTableRowEditSaveEvent): void;
+    onRowEditSave?(event: DataTableRowEditSaveEvent<TValue>): void;
     /**
      * Callback to invoke when a row is expanded.
      * @param {DataTableRowEvent} event - Custom row event.
