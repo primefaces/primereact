@@ -187,24 +187,18 @@ export const Splitter = React.memo(
         };
 
         const onResizeEnd = (event) => {
-            setPanelSizes((prev) => {
-                const sizes = [];
+            const sizes = [prevPanelSizeNew.current, nextPanelSizeNew.current];
 
-                for (let index = 0; index < props.children.length; index++) sizes[index] = panelSize(prev, index);
-                sizes[prevPanelIndex.current] = prevPanelSizeNew.current;
-                sizes[prevPanelIndex.current + 1] = nextPanelSizeNew.current;
+            if (props.onResizeEnd) {
+                props.onResizeEnd({
+                    originalEvent: event,
+                    sizes
+                });
+            }
 
-                if (props.onResizeEnd) {
-                    props.onResizeEnd({
-                        originalEvent: event,
-                        sizes
-                    });
-                }
+            if (isStateful) saveState(sizes);
 
-                if (isStateful) saveState(sizes);
-
-                return sizes;
-            });
+            setPanelSizes(sizes);
 
             !isUnstyled() && DomHandler.removeClass(gutterRef.current, 'p-splitter-gutter-resizing');
             gutterRefs.current && Object.keys(gutterRefs.current).forEach((key) => gutterRefs.current[key].setAttribute('data-p-splitter-gutter-resizing', false));

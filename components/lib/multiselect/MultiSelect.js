@@ -837,6 +837,12 @@ export const MultiSelect = React.memo(
                     const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
 
                     return value.map((val, i) => {
+                        const context = {
+                            context: {
+                                value: val,
+                                index: i
+                            }
+                        };
                         const label = getLabelByValue(val);
                         const iconProps = mergeProps(
                             {
@@ -844,7 +850,7 @@ export const MultiSelect = React.memo(
                                 className: cx('removeTokenIcon'),
                                 onClick: (e) => removeChip(e, val)
                             },
-                            ptm('removeTokenIcon')
+                            ptm('removeTokenIcon', context)
                         );
                         const icon = !props.disabled && (props.removeIcon ? IconUtils.getJSXIcon(props.removeIcon, { ...iconProps }, { props }) : <TimesCircleIcon {...iconProps} />);
 
@@ -852,7 +858,7 @@ export const MultiSelect = React.memo(
                             {
                                 className: cx('token')
                             },
-                            ptm('token')
+                            ptm('token', context)
                         );
 
                         const tokenLabelProps = mergeProps(
@@ -860,7 +866,7 @@ export const MultiSelect = React.memo(
                                 key: label + i,
                                 className: cx('tokenLabel')
                             },
-                            ptm('tokenLabel')
+                            ptm('tokenLabel', context)
                         );
 
                         return (
@@ -1126,7 +1132,7 @@ export const MultiSelect = React.memo(
                     />
                     <span {...lastHiddenElementProps}></span>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

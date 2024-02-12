@@ -679,7 +679,7 @@ export const ColorPicker = React.memo(
                         {content}
                     </ColorPickerPanel>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
