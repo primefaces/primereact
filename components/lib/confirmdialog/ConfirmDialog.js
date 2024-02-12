@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { Dialog } from '../dialog/Dialog';
 import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -57,7 +58,9 @@ export const ConfirmDialog = React.memo(
                 visible: visibleState
             }
         };
-        const { ptm, cx } = ConfirmDialogBase.setMetaData(metaData);
+        const { ptm, cx, isUnstyled } = ConfirmDialogBase.setMetaData(metaData);
+
+        useHandleStyle(ConfirmDialogBase.css.styles, isUnstyled, { name: 'confirmdialog' });
 
         const accept = () => {
             if (!isCallbackExecuting.current) {

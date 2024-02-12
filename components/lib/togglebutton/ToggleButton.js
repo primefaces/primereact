@@ -129,7 +129,7 @@ export const ToggleButton = React.memo(
                     <span {...labelProps}>{label}</span>
                     <Ripple />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

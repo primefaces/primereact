@@ -443,7 +443,7 @@ export const Chips = React.memo(
         return (
             <>
                 <div {...rootProps}>{list}</div>
-                {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
