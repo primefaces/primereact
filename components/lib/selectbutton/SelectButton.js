@@ -96,7 +96,7 @@ export const SelectButton = React.memo(
                 return props.options.map((option, index) => {
                     const isDisabled = props.disabled || isOptionDisabled(option);
                     const optionLabel = getOptionLabel(option);
-                    const tabIndex = index === focusedIndex ? '0' : '-1';
+                    const tabIndex = props.disabled ? '-1' : index === focusedIndex ? '0' : '-1';
                     const selected = isSelected(option);
                     const key = optionLabel + '_' + index;
 

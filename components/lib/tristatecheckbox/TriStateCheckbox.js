@@ -117,7 +117,7 @@ export const TriStateCheckbox = React.memo(
         const checkboxProps = mergeProps(
             {
                 className: cx('checkbox', { focusedState }),
-                tabIndex: props.tabIndex,
+                tabIndex: props.disabled ? '-1' : props.tabIndex,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
