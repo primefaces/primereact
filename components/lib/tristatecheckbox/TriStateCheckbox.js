@@ -153,7 +153,7 @@ export const TriStateCheckbox = React.memo(
                     <div {...checkboxProps}>{checkIcon}</div>
                     {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

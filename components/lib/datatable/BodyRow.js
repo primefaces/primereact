@@ -358,13 +358,14 @@ export const BodyRow = React.memo((props) => {
 
     const onEditSave = (e) => {
         const { originalEvent: event, newData } = e;
-        const valid = props.rowEditValidator ? props.rowEditValidator(newData, { props: props.tableProps }) : true;
+        const valid = props.rowEditValidator ? props.rowEditValidator(newData, { props: props.tableProps, rowIndex: props.rowIndex }) : true;
 
         if (props.onRowEditSave) {
             props.onRowEditSave({
                 originalEvent: event,
                 data: props.rowData,
                 index: props.rowIndex,
+                newData,
                 valid
             });
         }

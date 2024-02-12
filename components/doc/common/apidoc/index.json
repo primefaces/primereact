@@ -17327,7 +17327,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowEditSaveEvent",
+                                    "type": "DataTableRowEditSaveEvent<TValue>",
                                     "description": "Custom row edit save event."
                                 }
                             ],
@@ -18617,6 +18617,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether the row is valid or not."
+                        },
+                        {
+                            "name": "newData",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableRowData<TValue>",
+                            "description": "Editing row data."
                         }
                     ],
                     "callbacks": [],
@@ -18751,6 +18758,13 @@
                             "readonly": false,
                             "type": "DataTableProps<TValue>",
                             "description": "The props of the datatable."
+                        },
+                        {
+                            "name": "rowIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of validated row"
                         }
                     ],
                     "callbacks": []
@@ -20270,7 +20284,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowEditSaveEvent",
+                                    "type": "DataTableRowEditSaveEvent<TValue>",
                                     "description": "Custom row edit save event."
                                 }
                             ],
