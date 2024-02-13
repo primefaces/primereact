@@ -1028,7 +1028,8 @@ export const MultiSelect = React.memo(
 
         const hiddenInputWrapperProps = mergeProps(
             {
-                className: 'p-hidden-accessible'
+                className: 'p-hidden-accessible',
+                'data-p-hidden-accessible': true
             },
             ptm('hiddenInputWrapper')
         );
@@ -1051,34 +1052,6 @@ export const MultiSelect = React.memo(
             ptm('input')
         );
 
-        const firstHiddenElementProps = mergeProps(
-            {
-                ref: firstHiddenFocusableElementOnOverlay,
-                role: 'presentation',
-                'aria-hidden': true,
-                className: 'p-hidden-accessible p-hidden-focusable',
-                tabIndex: '0',
-                onFocus: onFirstHiddenFocus,
-                'data-p-hidden-accessible': true,
-                'data-p-hidden-focusable': true
-            },
-            ptm('hiddenFirstFocusableEl')
-        );
-
-        const lastHiddenElementProps = mergeProps(
-            {
-                ref: lastHiddenFocusableElementOnOverlay,
-                role: 'presentation',
-                'aria-hidden': true,
-                className: 'p-hidden-accessible p-hidden-focusable',
-                tabIndex: '0',
-                onFocus: onLastHiddenFocus,
-                'data-p-hidden-accessible': true,
-                'data-p-hidden-focusable': true
-            },
-            ptm('hiddenLastFocusableEl')
-        );
-
         return (
             <>
                 <div {...rootProps}>
@@ -1092,7 +1065,7 @@ export const MultiSelect = React.memo(
                             {triggerIcon}
                         </>
                     )}
-                    <span {...firstHiddenElementProps}></span>
+
                     <MultiSelectPanel
                         hostName="MultiSelect"
                         ref={overlayRef}
@@ -1102,6 +1075,10 @@ export const MultiSelect = React.memo(
                         onOverlayHide={hide}
                         filterValue={filterState}
                         focusedOptionIndex={focusedOptionIndex}
+                        onFirstHiddenFocus={onFirstHiddenFocus}
+                        onLastHiddenFocus={onLastHiddenFocus}
+                        firstHiddenFocusableElementOnOverlay={firstHiddenFocusableElementOnOverlay}
+                        lastHiddenFocusableElementOnOverlay={lastHiddenFocusableElementOnOverlay}
                         setFocusedOptionIndex={setFocusedOptionIndex}
                         hasFilter={hasFilter}
                         onFilterInputChange={onFilterInputChange}
@@ -1130,7 +1107,6 @@ export const MultiSelect = React.memo(
                         isUnstyled={isUnstyled}
                         metaData={metaData}
                     />
-                    <span {...lastHiddenElementProps}></span>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
