@@ -25,10 +25,6 @@ export const SlideMenuSub = React.memo((props) => {
             return;
         }
 
-        if (!item.url) {
-            event.preventDefault();
-        }
-
         if (item.command) {
             item.command({
                 originalEvent: event,
@@ -42,6 +38,11 @@ export const SlideMenuSub = React.memo((props) => {
             setRenderSubMenu({ ...renderSubMenu, [key]: true });
             setActiveItemState(item);
             props.onForward();
+        }
+
+        if (!item.url) {
+            event.preventDefault();
+            event.stopPropagation();
         }
     };
 

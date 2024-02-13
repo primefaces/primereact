@@ -39,16 +39,17 @@ export const Steps = React.memo(
                 });
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
                     item,
                     index
                 });
+            }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
             }
         };
 
