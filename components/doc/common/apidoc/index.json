@@ -39188,6 +39188,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "expandedKeys",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuExpandedKeys",
+                            "default": "",
+                            "description": "A map of keys to represent the expansion state in controlled mode."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -39248,6 +39256,19 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
+                        {
+                            "name": "onExpandedKeysChange",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "New value."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to when the expandedKeys changes."
+                        },
                         {
                             "name": "onHide",
                             "parameters": [
@@ -39484,6 +39505,19 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PanelMenuExpandedKeys": {
+                    "description": "Custom expanded keys metadata.",
+                    "relatedProp": "expandedKeys",
+                    "props": [
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
                         }
                     ],
                     "callbacks": []
