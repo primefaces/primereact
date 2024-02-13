@@ -44,10 +44,6 @@ export const MenubarSub = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -56,6 +52,11 @@ export const MenubarSub = React.memo(
             }
 
             onLeafClick({ originalEvent: event, processedItem, isFocus: true });
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
         const onLeafClick = (event) => {
