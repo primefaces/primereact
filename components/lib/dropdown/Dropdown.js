@@ -19,7 +19,7 @@ export const Dropdown = React.memo(
         const [filterState, setFilterState] = React.useState('');
         const [clicked, setClicked] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
-        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
@@ -479,8 +479,8 @@ export const Dropdown = React.memo(
 
         const onTabKey = (event, pressedInInputText = false) => {
             if (!pressedInInputText) {
-                if (overlayVisibleState && hasFocusableElements()) {
-                    DomHandler.focus($refs.firstHiddenFocusableElementOnOverlay);
+                if (overlayVisibleState && !hasFocusableElements()) {
+                    DomHandler.focus(firstHiddenFocusableElementOnOverlay.current);
 
                     event.preventDefault();
                 } else {
@@ -1014,7 +1014,7 @@ export const Dropdown = React.memo(
                     onBlur: onInputBlur,
                     onKeyDown: onInputKeyDown,
                     disabled: props.disabled,
-                    tabIndex: props.tabIndex || 0,
+                    tabIndex: !props.disabled ? props.tabIndex || 0 : -1,
                     ...ariaProps
                 },
                 ptm('input')
@@ -1045,7 +1045,7 @@ export const Dropdown = React.memo(
                         onFocus: onEditableInputFocus,
                         onKeyDown: onInputKeyDown,
                         onBlur: onInputBlur,
-                        tabIndex: !props.disabled ? props.tabIndex : -1,
+                        tabIndex: !props.disabled ? props.tabIndex || 0 : -1,
                         'aria-haspopup': 'listbox',
                         ...ariaProps
                     },
@@ -1200,7 +1200,6 @@ export const Dropdown = React.memo(
                     {labelElement}
                     {clearIcon}
                     {dropdownIcon}
-                    <span {...firstHiddenFocusableElementProps}></span>
                     <DropdownPanel
                         hostName="Dropdown"
                         ref={overlayRef}
@@ -1208,34 +1207,35 @@ export const Dropdown = React.memo(
                         virtualScrollerRef={virtualScrollerRef}
                         {...props}
                         appendTo={appendTo}
-                        onClick={onPanelClick}
-                        onOptionClick={onOptionClick}
-                        focusedOptionIndex={focusedOptionIndex}
-                        setFocusedOptionIndex={setFocusedOptionIndex}
+                        cx={cx}
                         filterValue={filterState}
-                        hasFilter={hasFilter}
-                        onFilterClearIconClick={onFilterClearIconClick}
-                        resetFilter={resetFilter}
-                        onFilterInputKeyDown={onFilterInputKeyDown}
-                        onFilterInputChange={onFilterInputChange}
-                        getOptionLabel={getOptionLabel}
-                        getOptionRenderKey={getOptionRenderKey}
-                        isOptionDisabled={isOptionDisabled}
+                        focusedOptionIndex={focusedOptionIndex}
                         getOptionGroupChildren={getOptionGroupChildren}
                         getOptionGroupLabel={getOptionGroupLabel}
                         getOptionGroupRenderKey={getOptionGroupRenderKey}
-                        isSelected={isSelected}
+                        getOptionLabel={getOptionLabel}
+                        getOptionRenderKey={getOptionRenderKey}
                         getSelectedOptionIndex={getSelectedOptionIndex}
+                        hasFilter={hasFilter}
                         in={overlayVisibleState}
+                        isOptionDisabled={isOptionDisabled}
+                        isSelected={isSelected}
+                        onClick={onPanelClick}
                         onEnter={onOverlayEnter}
                         onEntered={onOverlayEntered}
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
+                        onFilterClearIconClick={onFilterClearIconClick}
+                        onFilterInputChange={onFilterInputChange}
+                        onFilterInputKeyDown={onFilterInputKeyDown}
+                        onOptionClick={onOptionClick}
                         ptm={ptm}
-                        cx={cx}
+                        resetFilter={resetFilter}
+                        setFocusedOptionIndex={setFocusedOptionIndex}
+                        firstFocusableElement={<span {...firstHiddenFocusableElementProps}></span>}
+                        lastFocusableElement={<span {...lastHiddenFocusableElementProps}></span>}
                         sx={sx}
                     />
-                    <span {...lastHiddenFocusableElementProps}></span>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
