@@ -11,7 +11,7 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

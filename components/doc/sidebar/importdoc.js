@@ -11,7 +11,7 @@ import { Sidebar } from 'primereact/sidebar';
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

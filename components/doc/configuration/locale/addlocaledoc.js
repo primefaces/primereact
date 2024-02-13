@@ -25,7 +25,7 @@ addLocale('es', {
                     New locale settings can be added using <i>addLocale</i> method.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

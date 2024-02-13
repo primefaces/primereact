@@ -30,7 +30,7 @@ export default function MyApp({ Component }) {
                     bottom of the list in descending mode.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

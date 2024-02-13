@@ -20,7 +20,7 @@ export function AccessibilityDoc() {
                 The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the button.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Menu Button Keyboard Support</h3>
             <div className="doc-tablewrapper">

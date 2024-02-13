@@ -18,7 +18,7 @@ export function SVGDoc(props) {
             <DocSectionText {...props}>
                 <p>Inline SVGs are embedded inside the DOM.</p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

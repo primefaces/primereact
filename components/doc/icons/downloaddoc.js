@@ -13,7 +13,7 @@ npm install primeicons
             <DocSectionText {...props}>
                 <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

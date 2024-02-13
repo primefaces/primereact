@@ -25,7 +25,7 @@ export function AccessibilityDoc() {
                 <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i> and <i>moveBottomButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>ListBox Keyboard Support</h3>
             <div className="doc-tablewrapper">

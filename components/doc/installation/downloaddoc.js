@@ -19,7 +19,7 @@ yarn add primereact
                     PrimeReact is available for download at <a href="https://www.npmjs.com/package/primereact">npm</a>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

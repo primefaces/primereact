@@ -22,7 +22,7 @@ export function AccessibilityDoc() {
                 roles like <i>region</i>, you may use the <i>role</i> property.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Keyboard Support</h3>
             <p>Component does not include any interactive elements.</p>

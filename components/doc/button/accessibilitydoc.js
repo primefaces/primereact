@@ -23,7 +23,7 @@ export function AccessibilityDoc() {
                 icon only or custom templating is used, it is recommended to use <i>aria-label</i> so that screen readers would be able to read the element properly.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Keyboard Support</h3>
             <div className="doc-tablewrapper">

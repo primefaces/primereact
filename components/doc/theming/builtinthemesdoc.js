@@ -58,7 +58,7 @@ primereact/resources/themes/arya-purple/theme.css
                     at the topbar to switch themes.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz codeClassName="h-20rem overflow-auto" />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz codeClassName="h-20rem overflow-auto" />
         </>
     );
 }

@@ -11,7 +11,7 @@ import { Knob } from 'primereact/knob';
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }
