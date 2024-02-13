@@ -574,6 +574,11 @@ export interface TreeProps {
      */
     filterLocale?: string | undefined;
     /**
+     * Template to display when filtering does not return any results.
+     * @defaultValue No results found
+     */
+    emptyMessage?: React.ReactNode | ((props: TreeProps) => React.ReactNode) | undefined;
+    /**
      * Defines a string value that labels an interactive element.
      */
     ariaLabel?: string | undefined;
