@@ -38,7 +38,7 @@ body {
                     overlay follow the scroll. Default value is false. IMPORTANT: Your <i>document.body</i> must have <i>overflow</i> CSS on this to work properly.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

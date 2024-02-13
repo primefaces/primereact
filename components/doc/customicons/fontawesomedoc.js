@@ -19,7 +19,7 @@ export function FontAwesomeDoc(props) {
                     <a href="https://fontawesome.com/">Font Awesome</a> is a popular icon library with a wide range of icons.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

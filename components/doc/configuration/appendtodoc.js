@@ -30,7 +30,7 @@ export default function MyApp({ Component }) {
                     are appended to document body via Portals.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

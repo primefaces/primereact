@@ -16,7 +16,7 @@ import { locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOptio
                     Configuration is managed by the <Link href="/configuration/#api.API.LocaleOptions">Locale API</Link> imported from <i>primereact/api</i>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

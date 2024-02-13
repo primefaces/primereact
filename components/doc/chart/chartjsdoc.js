@@ -15,7 +15,7 @@ npm install chart.js
                     Chart component uses <a href="https://chartjs.org/">Chart.JS</a> underneath so it needs to be installed as a dependency.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

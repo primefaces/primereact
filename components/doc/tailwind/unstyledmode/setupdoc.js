@@ -143,7 +143,7 @@ export default function MyApp({ Component, pageProps }) {
                         classes utilized in the theme will be removed as well.
                     </span>
                 </p>
-                <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code1} hideToggleCode import hideStackBlitz />
                 <p className="flex align-items-start gap-2">
                     <Badge value="2"></Badge>
                     <span>
@@ -151,14 +151,14 @@ export default function MyApp({ Component, pageProps }) {
                         application at this stage, functionality and accessibility of the components will still work but everything will be transparent as there is no style.
                     </span>
                 </p>
-                <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code2} hideToggleCode import hideStackBlitz />
                 <p className="flex align-items-start gap-2">
                     <Badge value="3"></Badge>
                     <span>
                         <b>Optional:</b> specify the built in <i>Tailwind</i> style of pre-configured Tailwind settings.
                     </span>
                 </p>
-                <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code3} hideToggleCode import hideStackBlitz />
                 <p className="flex align-items-start gap-2">
                     <Badge value="4"></Badge>
                     <span>
@@ -166,7 +166,7 @@ export default function MyApp({ Component, pageProps }) {
                         global pass through from overriding those specified via pass through in your application.
                     </span>
                 </p>
-                <DocSectionCode code={code4} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code4} hideToggleCode import hideStackBlitz />
                 <p className="flex align-items-start gap-2">
                     <Badge value="5"></Badge>
                     <span>
@@ -174,7 +174,7 @@ export default function MyApp({ Component, pageProps }) {
                         you'll able to copy paste instead of starting from scratch. Example below styles, inputtext and panel components;
                     </span>
                 </p>
-                <DocSectionCode code={code5} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code5} hideToggleCode import hideStackBlitz />
                 <p>Voilà 💙, you now have 90+ awesome React UI components styled with Tailwind that will work in harmony with the rest of your application. Time to customize it to bring in your own style with Tailwind.</p>
             </DocSectionText>
         </>

@@ -36,7 +36,7 @@ export function AccessibilityDoc() {
                 Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Closed State Keyboard Support</h3>
             <div className="doc-tablewrapper">

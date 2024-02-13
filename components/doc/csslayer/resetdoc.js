@@ -24,7 +24,7 @@ export function ResetDoc(props) {
                 override the PrimeReact components leading to unexpected results. A common use case for global styles applying to standard HTML elements is CSS reset utilities to remove the default styling of the browsers. In this case, best practice
                 is wrapping your CSS in a layer like <i>reset</i> and make sure <i>primereact</i> comes after your layer since layers defined after has higher precedence. This way, your Reset CSS does not get in the way of PrimeReact components.
             </p>
-            <DocSectionCode code={code} hideToggleCode importCode hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode importCode hideStackBlitz />
         </DocSectionText>
     );
 }

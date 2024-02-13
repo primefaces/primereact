@@ -30,13 +30,13 @@ export default function MyApp({ Component, pageProps }) {
                     Configuration is managed by the <i>PrimeReactProvider</i> and <i>PrimeReactContext</i> imported from <i>primereact/api</i>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
             <div className="doc-section-description">
                 <p>
                     The <i>PrimeReactProvider</i> component is used to wrap the application and the <i>PrimeReactContext</i> is used to access the configuration options.
                 </p>
             </div>
-            <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code2} hideToggleCode import hideStackBlitz />
         </>
     );
 }

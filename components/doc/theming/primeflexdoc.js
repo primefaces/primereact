@@ -29,7 +29,7 @@ export function PrimeFlexDoc(props) {
                 <Button type="button" label="Button 2" className="p-button-secondary mb-3 md:mb-0"></Button>
                 <Button type="button" label="Button 3" className="p-button-help"></Button>
             </div>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

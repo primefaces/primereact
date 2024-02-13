@@ -22,7 +22,7 @@ export function AccessibilityDoc() {
                 between the component design and the WCAG specification.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Keyboard Support</h3>
             <div className="doc-tablewrapper">

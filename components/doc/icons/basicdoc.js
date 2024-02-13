@@ -24,7 +24,7 @@ export function BasicDoc(props) {
                 <span className="pi pi-search"></span>
                 <span className="pi pi-user"></span>
             </div>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

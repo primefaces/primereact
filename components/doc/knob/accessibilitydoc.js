@@ -22,7 +22,7 @@ export function AccessibilityDoc() {
                 <i>aria-labelledby</i> and <i>aria-label</i> props.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Keyboard Support</h3>
             <div className="doc-tablewrapper">

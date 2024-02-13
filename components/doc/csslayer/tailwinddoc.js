@@ -26,7 +26,7 @@ export function TailwindDoc(props) {
                 </a>
                 . If you are using this feature, wrap the base and utilities in separate layers and make sure primereact layer comes after the base.{' '}
             </p>
-            <DocSectionCode code={code} hideToggleCode importCode hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode importCode hideStackBlitz />
         </DocSectionText>
     );
 }

@@ -13,7 +13,7 @@ export function ImageDoc(props) {
             <DocSectionText {...props}>
                 <p>Any time of image can be used as an icon.</p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

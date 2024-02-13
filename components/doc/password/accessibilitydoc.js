@@ -22,7 +22,7 @@ export function AccessibilityDoc() {
                 password using a section that has <i>aria-live</i> while typing.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Keyboard Support</h3>
             <div className="doc-tablewrapper">

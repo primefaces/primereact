@@ -44,11 +44,11 @@ import './assets/theme.css';
                 <p>
                     Once your theme is ready run the following command to compile it. Note that <a href="https://www.npmjs.com/package/sass">sass</a> command should be available in your terminal.
                 </p>
-                <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code1} hideToggleCode import hideStackBlitz />
                 <p>
                     Then copy and import the theme.css file in your application. For example, in <a href="https://nextjs.org/docs/basic-features/built-in-css-support">Next.js</a>, ideal location could be the <i>_app.js</i>.
                 </p>
-                <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code2} hideToggleCode import hideStackBlitz />
 
                 <h3>Build Time Compilation</h3>
                 <p>
