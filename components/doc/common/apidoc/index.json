@@ -49841,6 +49841,14 @@
                             "description": "Unique key to enable dragdrop functionality."
                         },
                         {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "No results found",
+                            "description": "Template to display when filtering does not return any results."
+                        },
+                        {
                             "name": "expandedKeys",
                             "optional": true,
                             "readonly": false,
