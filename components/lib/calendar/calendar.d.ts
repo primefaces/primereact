@@ -588,6 +588,10 @@ interface CalendarBaseProps {
      */
     hideOnDateTimeSelect?: boolean | undefined;
     /**
+     * Whether to hide the overlay on date selection is completed when selectionMode is range.
+     */
+    hideOnRangeSelection?: boolean | undefined;
+    /**
      * Specifies 12 or 24 hour format.
      * @defaultValue 24
      */

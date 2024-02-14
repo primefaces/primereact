@@ -8,7 +8,7 @@ export function RangeDoc(props) {
 
     const code = {
         basic: `
-<Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+<Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput hideOnRangeSelection />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ export default function RangeDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput hideOnRangeSelection />
         </div>
     )
 }
@@ -34,7 +34,7 @@ export default function RangeDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput hideOnRangeSelection />
         </div>
 
     )
@@ -50,7 +50,7 @@ export default function RangeDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+                <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput hideOnRangeSelection />
             </div>
             <DocSectionCode code={code} />
         </>

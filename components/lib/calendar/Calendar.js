@@ -1630,6 +1630,12 @@ export const Calendar = React.memo(
 
                     selectedValues = [startDate, endDate];
                     updateModel(event, selectedValues);
+
+                    if (props.hideOnRangeSelection && endDate !== null) {
+                        setTimeout(() => {
+                            setOverlayVisibleState(false);
+                        }, 150);
+                    }
                 } else {
                     selectedValues = [date, null];
                     updateModel(event, selectedValues);
