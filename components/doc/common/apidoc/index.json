@@ -18238,7 +18238,7 @@
                             "name": "columns",
                             "optional": false,
                             "readonly": false,
-                            "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+                            "type": "Column[]",
                             "description": "Columns array after reorder."
                         }
                     ]
