@@ -142,7 +142,7 @@ export const TreeBase = ComponentBase.extend({
         level: 0,
         loading: false,
         loadingIcon: null,
-        metaKeySelection: true,
+        metaKeySelection: false,
         nodeTemplate: null,
         onCollapse: null,
         onContextMenu: null,

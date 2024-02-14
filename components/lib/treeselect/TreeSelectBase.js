@@ -161,7 +161,7 @@ export const TreeSelectBase = ComponentBase.extend({
         filterValue: null,
         inputId: null,
         inputRef: null,
-        metaKeySelection: true,
+        metaKeySelection: false,
         name: null,
         nodeTemplate: null,
         onChange: null,
