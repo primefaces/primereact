@@ -31,4 +31,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) or [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. This issue will be closed if no activities in 20 days.
+            Please fork the [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. This issue will be closed if no activities in 20 days.

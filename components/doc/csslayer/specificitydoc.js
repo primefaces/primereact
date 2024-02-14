@@ -76,7 +76,7 @@ export function SpecificityDemo() {
                 />
                 <style>{css}</style>
             </div>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode hideStackBlitz />
             <p>
                 Layers also make it possible to use CSS Modules, view the <Link href="/theming/#cssmodules">CSS Modules</Link> guide for examples.
             </p>

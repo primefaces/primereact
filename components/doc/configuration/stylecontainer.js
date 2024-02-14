@@ -33,7 +33,7 @@ ReactDOM.createRoot(mountHere).render(
                     . By default all dynamic styles are appended to <i>document.head</i>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

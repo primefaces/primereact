@@ -31,7 +31,7 @@ export default function MyApp({ Component }) {
             <DocSectionText {...props}>
                 <p>Default filter modes to display on DataTable filter menus.</p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

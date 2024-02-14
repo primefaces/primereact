@@ -39,20 +39,20 @@ changeTheme(currentTheme: string, newTheme: string, linkElementId: string, callb
                     to the <i>changeTheme</i> function.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code1} hideToggleCode import hideStackBlitz />
             <div className="doc-section-description">
                 <p>
                     If you have access to the <i>index.html</i> directly, the link can be placed at head section.
                 </p>
             </div>
-            <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code2} hideToggleCode import hideStackBlitz />
             <div className="doc-section-description">
                 <p>
                     <a href="https://nextjs.org/">Next.js</a> applications can configure the link element using <a href="https://nextjs.org/docs/api-reference/next/head">next/head</a> component or custom{' '}
                     <a href="https://nextjs.org/docs/advanced-features/custom-document">document</a>.
                 </p>
             </div>
-            <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code3} hideToggleCode import hideStackBlitz />
         </>
     );
 }

@@ -22,7 +22,7 @@ export function RouterDoc(props) {
                     Items with navigation are defined with <i>command</i> property to be able to use a router link component, an external link or programmatic navigation.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

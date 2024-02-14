@@ -416,9 +416,11 @@ export const Tree = React.memo(
                 ptm('emptyMessage')
             );
 
+            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
+
             return (
                 <li {...emptyMessageProps}>
-                    <span className="p-treenode-content">{localeOption('emptyMessage')}</span>
+                    <span className="p-treenode-content">{message}</span>
                 </li>
             );
         };

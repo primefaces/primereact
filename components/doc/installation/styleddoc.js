@@ -16,7 +16,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
                     Styled mode is based on pre-skinned components with opinionated themes like Material, Bootstrap or PrimeOne themes. Theme is the required css file to be imported, visit the <Link href="/theming/#themes">Themes</Link> section for
                     the complete list of available themes to choose from.
                 </p>
-                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
             </DocSectionText>
         </>
     );

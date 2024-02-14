@@ -49,10 +49,6 @@ export const TieredMenuSub = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -61,6 +57,11 @@ export const TieredMenuSub = React.memo(
             }
 
             props.onItemClick && props.onItemClick({ originalEvent: event, processedItem });
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
         const getItemId = (processedItem) => {

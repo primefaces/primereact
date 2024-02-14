@@ -49,7 +49,7 @@ export function AccessibilityDoc() {
                 Calendar also includes a hidden section that is only available to screen readers with <i>aria-live</i> as "polite". This element is updated when the selected date changes to instruct the user about the current date selected.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Choose Date Button Keyboard Support</h3>
             <div className="doc-tablewrapper">

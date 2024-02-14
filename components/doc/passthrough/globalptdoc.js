@@ -35,7 +35,7 @@ export default function GlobalPTDemo() {
                     settings can be overriden by a particular component as components <i>pt</i> property has higher precedence over global <i>pt</i>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

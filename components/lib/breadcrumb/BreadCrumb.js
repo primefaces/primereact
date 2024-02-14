@@ -29,15 +29,16 @@ export const BreadCrumb = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
                     item
                 });
+            }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
             }
         };
 

@@ -13,7 +13,7 @@ import 'primeicons/primeicons.css';
             <DocSectionText {...props}>
                 <p>CSS file of the icon library needs to be imported in your application.</p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

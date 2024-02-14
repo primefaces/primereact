@@ -259,7 +259,7 @@ export const TreeTableBase = ComponentBase.extend({
         lazy: false,
         loading: false,
         loadingIcon: null,
-        metaKeySelection: true,
+        metaKeySelection: false,
         multiSortMeta: null,
         onColReorder: null,
         onCollapse: null,

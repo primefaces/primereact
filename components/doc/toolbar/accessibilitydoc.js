@@ -18,7 +18,7 @@ export function AccessibilityDoc() {
                 <i>aria-labelledby</i> and <i>aria-labelled</i> to define the element if required.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Keyboard Support</h3>
             <p>Component does not include any interactive elements. Arbitrary content can be placed with templating and elements like buttons inside should follow the page tab sequence.</p>

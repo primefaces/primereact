@@ -23,7 +23,7 @@ export function AccessibilityDoc() {
                 guide for more information. The canvas element can be customized with <i>canvasProps</i> property to define aria roles and properties, in addition any content inside the component is directly passed as a child of the canvas to be able
                 to provide fallback content like a table.
             </p>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </DocSectionText>
     );
 }

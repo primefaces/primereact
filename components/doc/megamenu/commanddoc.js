@@ -21,7 +21,7 @@ export function CommandDoc(props) {
                     The <i>command</i> property of a menuitem defines the callback to run when an item is activated by click or a key event.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

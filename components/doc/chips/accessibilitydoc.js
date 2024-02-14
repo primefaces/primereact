@@ -22,7 +22,7 @@ export function AccessibilityDoc() {
                 set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.
             </p>
 
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
 
             <h3>Input Field Keyboard Support</h3>
             <div className="doc-tablewrapper">

@@ -142,6 +142,14 @@ export interface PanelMenuContext {
     active: boolean;
 }
 
+/**
+ * Custom expanded keys metadata.
+ * @see {@link PanelMenuProps.expandedKeys}
+ */
+export interface PanelMenuExpandedKeys {
+    [key: string]: any;
+}
+
 interface PanelMenuHeaderItemClickEvent {
     originalEvent: React.MouseEvent<HTMLElement>;
     item: MenuItem;
@@ -156,6 +164,11 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * An array of menuitems.
      */
     model?: MenuItem[] | undefined;
+    /**
+     * A map of keys to represent the expansion state in controlled mode.
+     * @type {PanelMenuExpandedKeys}
+     */
+    expandedKeys?: PanelMenuExpandedKeys;
     /**
      * Whether multiple tabs can be activated at the same time or not.
      * @defaultValue false
@@ -179,6 +192,11 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @param {PanelMenuHeaderItemClickEvent} event - custom event.
      */
     onHide?(event: PanelMenuHeaderItemClickEvent): void;
+    /**
+     * Callback to when the expandedKeys changes.
+     * @param {*} value - New value.
+     */
+    onExpandedKeysChange?(value: any): void;
     /**
      * Used to get the child elements of the component.
      * @readonly

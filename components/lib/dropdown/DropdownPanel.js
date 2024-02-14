@@ -342,9 +342,11 @@ export const DropdownPanel = React.memo(
             return (
                 <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
+                        {props.firstFocusableElement}
                         {filter}
                         {content}
                         {footer}
+                        {props.lastFocusableElement}
                     </div>
                 </CSSTransition>
             );

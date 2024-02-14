@@ -46,7 +46,7 @@ export default function ConstantsDemo() {
             <div className="card flex justify-content-center">
                 <Menu model={items} />
             </div>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }
