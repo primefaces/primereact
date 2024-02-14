@@ -87,7 +87,7 @@ export const PickListBase = ComponentBase.extend({
         targetSelection: null,
         showSourceControls: true,
         showTargetControls: true,
-        metaKeySelection: true,
+        metaKeySelection: false,
         onFocus: null,
         onBlur: null,
         filter: false,
