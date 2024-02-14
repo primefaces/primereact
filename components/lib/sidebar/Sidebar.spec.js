@@ -1,18 +1,15 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { Sidebar } from './sidebar';
+import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
-    test(
-        'can be made visible',
-        () => {
-            const hideOn = jest.fn();
+    test('can be made visible', () => {
+        const hideOn = jest.fn();
 
-            render(<Sidebar visible={true} onHide={hideOn} />);
+        render(<Sidebar visible={true} onHide={hideOn} />);
 
-            const sidebar = screen.queryByRole('complementary');
+        const sidebar = screen.queryByRole('complementary');
 
-            expect(sidebar).toBeVisible();
-        }
-    );
+        expect(sidebar).toBeVisible();
+    });
 });
