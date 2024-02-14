@@ -616,7 +616,7 @@ interface DataTableColReorderEvent {
     /**
      * Columns array after reorder.
      */
-    columns: React.ReactElement;
+    columns: Column[];
 }
 
 /**
