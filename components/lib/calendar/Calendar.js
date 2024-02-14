@@ -1874,9 +1874,14 @@ export const Calendar = React.memo(
                     destroyMask();
                 } else {
                     !isUnstyled() && DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
-                    touchUIMask.current.addEventListener('animationend', () => {
+
+                    if (DomHandler.hasCSSAnimation(touchUIMask.current) > 0) {
+                        touchUIMask.current.addEventListener('animationend', () => {
+                            destroyMask();
+                        });
+                    } else {
                         destroyMask();
-                    });
+                    }
                 }
             }
         };

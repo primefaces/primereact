@@ -140,7 +140,7 @@ export const Image = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExiting = () => {

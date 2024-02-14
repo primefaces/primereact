@@ -84,7 +84,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const onExiting = () => {
         if (props.modal) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
     };
 
