@@ -8,6 +8,11 @@ import { LabelDoc } from '@/components/doc/metergroup/labeldoc';
 import { VerticalDoc } from '@/components/doc/metergroup/verticaldoc';
 import { MinMaxDoc } from '@/components/doc/metergroup/minmaxdoc';
 import { TemplateDoc } from '@/components/doc/metergroup/templatedoc';
+import { AccessibilityDoc } from '@/components/doc/metergroup/accessibilitydoc';
+import { Wireframe } from '@/components/doc/metergroup/pt/wireframe';
+import { PTDoc } from '@/components/doc/metergroup/pt/ptdoc';
+import { StyledDoc } from '@/components/doc/metergroup/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/metergroup/theming/tailwinddoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -50,10 +55,48 @@ const MessagesDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return <DocComponent title="React MeterGroup Component" header="MeterGroup" description="MeterGroup displays scalar measurements within a known range." componentDocs={docs} apiDocs={['MeterGroup']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.metergroup.options',
+            label: 'MeterGroup PT Options',
+            component: DocApiTable
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React MeterGroup Component" header="MeterGroup" description="MeterGroup displays scalar measurements within a known range." componentDocs={docs} apiDocs={['MeterGroup']} themingDocs={themingDocs} ptDocs={ptDocs} />;
 };
 
 export default MessagesDemo;

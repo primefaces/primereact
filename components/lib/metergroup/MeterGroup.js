@@ -21,9 +21,12 @@ export const MeterGroup = (inProps) => {
 
     useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'progressbar' });
 
-    const totalPercent = values.reduce((acc, val) => acc + val.value, 0);
-    const precentages = values.map((item) => {
-        return Math.round((item.value / totalPercent) * 100);
+    let totalPercent = 0;
+    let precentages = [];
+
+    values.map((item) => {
+        totalPercent += item.value;
+        precentages.push(Math.round((item.value / totalPercent) * 100));
     });
 
     const calculatePercentage = (meter = 0) => {
@@ -62,13 +65,11 @@ export const MeterGroup = (inProps) => {
                         className: cx('meter')
                     },
                     ptm('meter')
-                )
+                );
 
-                return ObjectUtils.getJSXElement(item.meterTemplate || meterRenderer, { ...item, percentage: calculatePercentage(item.value), index, }, meterTemplateProps);
-            }
-            
-            else {
-                return <span key={index} {...meterProps} />
+                return ObjectUtils.getJSXElement(item.meterTemplate || meterRenderer, { ...item, percentage: calculatePercentage(item.value), index }, meterTemplateProps);
+            } else {
+                return <span key={index} {...meterProps} />;
             }
         });
 
@@ -129,7 +130,7 @@ export const MeterGroup = (inProps) => {
                         <li key={index} {...labelItemProps}>
                             {labelIcon}
                             <span {...labelProps}>
-                                {item.label} ({item.value}%)
+                                {item?.label} {item?.value && `(${item?.value}%)`}
                             </span>
                         </li>
                     );
@@ -143,14 +144,16 @@ export const MeterGroup = (inProps) => {
         precentages,
         values
     };
-    
+
+    const labelElement = ObjectUtils.getJSXElement(labelListRenderer || createLabelList, { values, totalPercent });
+
     return (
         <div {...rootProps} role="meter" aria-valuemin={min} aria-valuemax={max} aria-valuenow={totalPercent}>
-            {labelPosition === 'start' && ObjectUtils.getJSXElement(labelListRenderer || createLabelList, {values, totalPercent}) }
+            {labelPosition === 'start' && labelElement}
             {start && ObjectUtils.getJSXElement(start, templateProps)}
             {createMeters()}
             {end && ObjectUtils.getJSXElement(end, templateProps)}
-            {labelPosition === 'end' && ObjectUtils.getJSXElement(labelListRenderer || createLabelList, {values, totalPercent}) }
+            {labelPosition === 'end' && labelElement}
         </div>
     );
 };
