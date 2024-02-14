@@ -28,26 +28,27 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     };
 
     const unblock = () => {
-        const callback = () => {
-            setVisibleState(false);
+        !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
 
-            if (props.fullScreen) {
-                DomHandler.unblockBodyScroll();
-                activeElementRef.current && activeElementRef.current.focus();
-            }
-
-            props.onUnblocked && props.onUnblocked();
-        };
-
-        if (maskRef.current) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+        if (DomHandler.hasCSSAnimation(maskRef.current) > 0) {
             maskRef.current.addEventListener('animationend', () => {
-                ZIndexUtils.clear(maskRef.current);
-                callback();
+                removeMask();
             });
         } else {
-            callback();
+            removeMask();
         }
+    };
+
+    const removeMask = () => {
+        ZIndexUtils.clear(maskRef.current);
+        setVisibleState(false);
+
+        if (props.fullScreen) {
+            DomHandler.unblockBodyScroll();
+            activeElementRef.current && activeElementRef.current.focus();
+        }
+
+        props.onUnblocked && props.onUnblocked();
     };
 
     const onPortalMounted = () => {

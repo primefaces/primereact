@@ -16,15 +16,15 @@ exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1
   <div
     class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document"
     data-pc-section="mask"
-    style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3204;"
+    style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3203;"
   />
 </body>
 `;
 
 exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen 1`] = `
 <body
-  class="p-overflow-hidden"
-  style="--scrollbar-width: 1024px;"
+  class=""
+  style=""
 >
   <div>
     <div
@@ -34,11 +34,6 @@ exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen
       data-pc-section="root"
     />
   </div>
-  <div
-    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document p-component-overlay-leave"
-    data-pc-section="mask"
-    style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3204;"
-  />
 </body>
 `;
 
@@ -111,11 +106,6 @@ exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
         </div>
       </div>
     </div>
-    <div
-      class="p-blockui p-component-overlay p-component-overlay-enter p-component-overlay-leave"
-      data-pc-section="mask"
-      style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2103;"
-    />
   </div>
 </div>
 `;
@@ -223,7 +213,7 @@ exports[`BlockUI container style and className 1`] = `
       <div
         class="block-jest p-blockui p-component-overlay p-component-overlay-enter"
         data-pc-section="mask"
-        style="cursor: move; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 4205;"
+        style="cursor: move; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2103;"
       />
     </div>
   </div>
