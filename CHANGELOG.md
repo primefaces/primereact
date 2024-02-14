@@ -1,5 +1,36 @@
 # Changelog
 
+## [10.5.1](https://github.com/primefaces/primereact/tree/10.5.1) (2024-02-14)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.5.0...10.5.1)
+
+**New Features:**
+
+- Icon: BlankIcon [\#5957](https://github.com/primefaces/primereact/issues/5957)
+
+**Enhancements:**
+
+- Tree: Missing emptyMessage prop [\#5950](https://github.com/primefaces/primereact/issues/5950)
+- MultiSelect: no way to change MultiSelect chips appearence [\#5935](https://github.com/primefaces/primereact/issues/5935)
+
+**Fixed bugs:**
+
+- metaKeySelection default type is changed as false [\#5956](https://github.com/primefaces/primereact/issues/5956)
+- Hydration attribute mismatch on Icons [\#5955](https://github.com/primefaces/primereact/issues/5955)
+- Dropdown component is triggering onChange when tabbing over [\#5942](https://github.com/primefaces/primereact/issues/5942)
+- Menu component with routes rerenders all the components on every route [\#5941](https://github.com/primefaces/primereact/issues/5941)
+- Remove CodeSandbox Demos [\#5946](https://github.com/primefaces/primereact/issues/5946)
+- Multi-select / Dropdown will not lose focus [\#5929](https://github.com/primefaces/primereact/issues/5929)
+- Add ID to menubar top level prevents focus [\#5930](https://github.com/primefaces/primereact/issues/5930)
+- Splitter: local storage sync is not working [\#5916](https://github.com/primefaces/primereact/issues/5916)
+- DataTable: onRowEditValidator rowData is old value not newly updated value [\#2424](https://github.com/primefaces/primereact/issues/2424)
+- Tooltip Passthrough Options Not Styling [\#5932](https://github.com/primefaces/primereact/issues/5932)
+- PanelMenu: "activeItems" is read-only [\#5928](https://github.com/primefaces/primereact/issues/5928)
+- SplitButton appendTo="self" placement is wrong [\#5921](https://github.com/primefaces/primereact/issues/5921)
+- MultiSelect: Enter | Space Overlay Closes [\#5914](https://github.com/primefaces/primereact/issues/5914)
+- Calendar: Panel width too small with default Tailwind [\#5830](https://github.com/primefaces/primereact/issues/5830)
+- Password: Hand/Pointer icon not displayed while hovering over the eye icon in password ToggleMask mode [\#5905](https://github.com/primefaces/primereact/issues/5905)
+
 ## [10.5.0](https://github.com/primefaces/primereact/tree/10.5.0) (2024-02-06)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.4.0...10.5.0)
