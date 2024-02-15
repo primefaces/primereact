@@ -1214,4 +1214,26 @@ export default class DomHandler {
         // Seem the same
         return true;
     }
+
+    static hasCSSAnimation(element) {
+        if (element) {
+            const style = getComputedStyle(element);
+            const animationDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+
+            return animationDuration > 0;
+        }
+
+        return false;
+    }
+
+    static hasCSSTransition(element) {
+        if (element) {
+            const style = getComputedStyle(element);
+            const transitionDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+
+            return transitionDuration > 0;
+        }
+
+        return false;
+    }
 }

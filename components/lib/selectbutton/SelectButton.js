@@ -148,7 +148,10 @@ export const SelectButton = React.memo(
 
         return (
             <>
-                <div {...rootProps}>{items}</div>
+                <div {...rootProps}>
+                    {items}
+                    {props.children}
+                </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
