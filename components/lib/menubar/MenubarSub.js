@@ -239,7 +239,7 @@ export const MenubarSub = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id,
-                    key: id,
+                    key: dataId,
                     'data-id': dataId,
                     role: 'menuitem',
                     'aria-label': item.label,
