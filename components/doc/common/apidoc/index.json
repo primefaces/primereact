@@ -38089,6 +38089,41 @@
                             "description": "JSX element to be used as the first page link."
                         },
                         {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
@@ -38143,6 +38178,41 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "JSX element to be used as the prev page link."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
                         },
                         {
                             "name": "props",
@@ -38229,6 +38299,20 @@
                             "description": "The total number of pages."
                         },
                         {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "element",
                             "optional": false,
                             "readonly": false,
@@ -38292,6 +38376,41 @@
                             "description": "JSX element to be used as the next page link."
                         },
                         {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
@@ -38346,6 +38465,41 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "JSX element to be used as the last page link."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
                         },
                         {
                             "name": "props",
