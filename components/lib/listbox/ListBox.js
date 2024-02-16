@@ -22,7 +22,7 @@ export const ListBox = React.memo(
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
         const virtualScrollerRef = React.useRef(null);
-        const id = React.useRef(UniqueComponentId());
+        const id = React.useRef(null);
         const listRef = React.useRef(null);
         const optionTouched = React.useRef(false);
         const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
@@ -261,7 +261,7 @@ export const ListBox = React.memo(
                 setFocusedOptionIndex(index);
                 scrollInView();
 
-                if (props.selectOnFocus && !props.multiple) {
+                if (event && props.selectOnFocus && !props.multiple) {
                     onOptionSelect(event, visibleOptions[index]);
                 }
             }
@@ -391,7 +391,7 @@ export const ListBox = React.memo(
                     break;
 
                 case 'Tab':
-                    //NOOP
+                    // NOOP
                     break;
 
                 case 'ShiftLeft':
@@ -544,6 +544,7 @@ export const ListBox = React.memo(
 
             lastHiddenFocusableElement.current.tabIndex = DomHandler.isElement(firstFocusableEl) ? undefined : -1;
             firstHiddenFocusableElement.current.tabIndex = -1;
+            changeFocusedOptionIndex(null, 0);
         };
 
         const onLastHiddenFocus = (event) => {
@@ -617,6 +618,7 @@ export const ListBox = React.memo(
 
         useMountEffect(() => {
             scrollToSelectedIndex();
+            id.current = UniqueComponentId();
         });
 
         const createHeader = () => {
@@ -644,12 +646,12 @@ export const ListBox = React.memo(
                 const optionLabel = getOptionLabel(option);
                 const optionKey = j + '_' + getOptionRenderKey(option);
                 const disabled = isOptionDisabled(option);
-                const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
                     <ListBoxItem
                         id={id.current + '_' + j}
                         hostName="ListBox"
+                        optionKey={optionKey}
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -695,12 +697,12 @@ export const ListBox = React.memo(
                 const optionLabel = getOptionLabel(option);
                 const optionKey = index + '_' + getOptionRenderKey(option);
                 const disabled = isOptionDisabled(option);
-                const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
                     <ListBoxItem
                         id={id.current + '_' + index}
                         hostName="ListBox"
+                        optionKey={optionKey}
                         key={optionKey}
                         label={optionLabel}
                         index={index}
@@ -753,7 +755,7 @@ export const ListBox = React.memo(
                         contentTemplate: (options) => {
                             const listProps = mergeProps(
                                 {
-                                    ref: options.contentRef,
+                                    ref: listRef,
                                     style: ptCallbacks.sx('list', { options }),
                                     className: ptCallbacks.cx('list', { options }),
                                     role: 'listbox',
@@ -842,7 +844,7 @@ export const ListBox = React.memo(
                 'data-p-hidden-accessible': true,
                 'data-p-hidden-focusable': true
             },
-            ptCallbacks.ptm('hiddenFirstFocusableEl')
+            ptCallbacks.ptm('hiddenLastFocusableEl')
         );
 
         return (
