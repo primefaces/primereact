@@ -10,6 +10,8 @@ export function SeverityDoc(props) {
 <Tag severity="info" value="Info"></Tag>
 <Tag severity="warning" value="Warning"></Tag>
 <Tag severity="danger" value="Danger"></Tag>
+<Tag severity="secondary" value="Secondary"></Tag>
+<Tag severity="contrast" value="Contrast"></Tag>
         `,
         javascript: `
 import React from 'react';
@@ -23,6 +25,8 @@ export default function SeverityDemo() {
             <Tag severity="info" value="Info"></Tag>
             <Tag severity="warning" value="Warning"></Tag>
             <Tag severity="danger" value="Danger"></Tag>
+            <Tag severity="secondary" value="Secondary"></Tag>
+            <Tag severity="contrast" value="Contrast"></Tag>
         </div>
     );
 }
@@ -39,6 +43,8 @@ export default function SeverityDemo() {
             <Tag severity="info" value="Info"></Tag>
             <Tag severity="warning" value="Warning"></Tag>
             <Tag severity="danger" value="Danger"></Tag>
+            <Tag severity="secondary" value="Secondary"></Tag>
+            <Tag severity="contrast" value="Contrast"></Tag>
         </div>
     );
 }
@@ -58,6 +64,8 @@ export default function SeverityDemo() {
                 <Tag severity="info" value="Info"></Tag>
                 <Tag severity="warning" value="Warning"></Tag>
                 <Tag severity="danger" value="Danger"></Tag>
+                <Tag severity="secondary" value="Secondary"></Tag>
+                <Tag severity="contrast" value="Contrast"></Tag>
             </div>
             <DocSectionCode code={code} />
         </>
