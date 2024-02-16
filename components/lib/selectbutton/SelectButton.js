@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
@@ -13,12 +14,13 @@ export const SelectButton = React.memo(
         const props = SelectButtonBase.getProps(inProps, context);
 
         const [focusedIndex, setFocusedIndex] = React.useState(0);
-
         const elementRef = React.useRef(null);
 
-        const { ptm, cx } = SelectButtonBase.setMetaData({
+        const { ptm, cx, isUnstyled } = SelectButtonBase.setMetaData({
             props
         });
+
+        useHandleStyle(SelectButtonBase.css.styles, isUnstyled, { name: 'selectbutton', styled: true });
 
         const onOptionClick = (event) => {
             if (props.disabled || isOptionDisabled(event.option)) {
