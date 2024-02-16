@@ -1043,7 +1043,7 @@ export const MultiSelect = React.memo(
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
-                role: 'listbox',
+                role: 'combobox',
                 'aria-expanded': overlayVisibleState,
                 disabled: props.disabled,
                 tabIndex: !props.disabled ? props.tabIndex : -1,
