@@ -53,7 +53,6 @@ export const ListBoxItem = React.memo((props) => {
     };
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
-
     const itemProps = mergeProps(
         {
             id: props.id,
@@ -65,7 +64,7 @@ export const ListBoxItem = React.memo((props) => {
             onBlur: onBlur,
             tabIndex: '-1',
             'aria-label': props.label,
-            key: props.label,
+            key: props.optionKey,
             role: 'option',
             'aria-selected': props.selected,
             'aria-disabled': props.disabled,
