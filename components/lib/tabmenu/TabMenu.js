@@ -23,7 +23,7 @@ export const TabMenu = React.memo(
             props,
             state: {
                 id: idState,
-                activeIndex: activeIndexState
+                activeIndex: activeIndex
             }
         };
 
