@@ -10,7 +10,7 @@ export const useMergeProps = () => {
 
     return (...props) => {
         const options = {
-            ...(context?.ptOptions?.classNameMergeFunction && { classNameMergeFunction: context.classNameMergeFunction })
+            classNameMergeFunction: context?.ptOptions?.classNameMergeFunction
         };
 
         return _mergeProps(props, options);
