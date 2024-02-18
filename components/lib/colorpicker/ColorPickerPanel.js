@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
 
 export const ColorPickerPanel = React.forwardRef((props, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
