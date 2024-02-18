@@ -39798,13 +39798,15 @@
                             "name": "mergeSections",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Should the passthrough merge sections?"
                         },
                         {
                             "name": "mergeProps",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Should the passthrough merge properties?"
                         },
                         {
                             "name": "classNameMergeFunction",
@@ -54509,19 +54511,22 @@
                     ],
                     "returnType": "string | undefined"
                 },
-                "_mergeProps": {
-                    "name": "_mergeProps",
+                "mergeProps": {
+                    "name": "mergeProps",
                     "parameters": [
                         {
                             "name": "args",
-                            "type": "object[]"
+                            "type": "object[]",
+                            "description": "the array of object properties to merge"
                         },
                         {
                             "name": "options",
-                            "type": "any"
+                            "type": "PassThroughOptions",
+                            "description": "either empty or could contain a custom merge function like TailwindMerge"
                         }
                     ],
-                    "returnType": "object | undefined"
+                    "returnType": "object | undefined",
+                    "description": "Merges properties together taking an Array of props and merging into one single set of\nproperties. The options can contain a \"classNameMergeFunction\" which can be something\nlike Tailwind Merge for properly merging Tailwind classes."
                 },
                 "EventBus": {
                     "name": "EventBus",
