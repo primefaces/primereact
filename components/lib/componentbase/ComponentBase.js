@@ -1,6 +1,6 @@
 import PrimeReact from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { ObjectUtils, _mergeProps, classNames } from '../utils/Utils';
+import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 const baseStyle = `
 .p-hidden-accessible {
@@ -539,7 +539,7 @@ export const ComponentBase = {
 
             return mergeSections || (!mergeSections && self)
                 ? useMergeProps
-                    ? _mergeProps([globalPT, self, Object.keys(datasetProps).length ? datasetProps : {}], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction })
+                    ? mergeProps([globalPT, self, Object.keys(datasetProps).length ? datasetProps : {}], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction })
                     : { ...globalPT, ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) }
                 : { ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) };
         };
@@ -562,7 +562,7 @@ export const ComponentBase = {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
 
-                    return _mergeProps([base, self], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction });
+                    return mergeProps([base, self], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction });
                 }
 
                 return undefined;
@@ -620,7 +620,7 @@ const _usePT = (pt, callback, key, params) => {
         else if (ObjectUtils.isString(value)) return value;
         else if (ObjectUtils.isString(originalValue)) return originalValue;
 
-        return mergeSections || (!mergeSections && value) ? (useMergeProps ? _mergeProps([originalValue, value], { classNameMergeFunction }) : { ...originalValue, ...value }) : value;
+        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps([originalValue, value], { classNameMergeFunction }) : { ...originalValue, ...value }) : value;
     }
 
     return fn(pt);

@@ -667,19 +667,16 @@ export const TreeTableRow = React.memo((props) => {
 
     const cells = props.columns.map(createCell);
     const children = createChildren();
-    let className = cx('row', { isSelected, rowProps: props });
+    let rowClassName = null;
 
     if (props.rowClassName) {
-        let rowClassName = props.rowClassName(props.node);
-
-        className = { ...className, ...rowClassName };
+        rowClassName = props.rowClassName(props.node);
     }
 
-    className = classNames(className, props.node.className);
     const rowProps = mergeProps(
         {
             tabIndex: 0,
-            className,
+            className: classNames(cx('row', { isSelected, rowProps: props })),
             'aria-expanded': expanded,
             'aria-level': props.level + 1,
             'aria-posinset': props.ariaPosInSet,
@@ -695,7 +692,10 @@ export const TreeTableRow = React.memo((props) => {
             onMouseLeave: (e) => onMouseLeave(e),
             'data-p-highlight': isSelected()
         },
-        getRowPTOptions('row')
+        getRowPTOptions('row'),
+        {
+            className: classNames(rowClassName, props.node.className) // #5983 must be last so all unstyled merging takes place first
+        }
     );
 
     return (

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
-import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronUpIcon } from '../icons/chevronup';
-
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
-import { mergeProps } from '../utils/Utils';
+
 const GalleriaThumbnailItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key, options) => {
@@ -165,6 +165,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
 
 export const GalleriaThumbnails = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState(0);
         const itemsContainerRef = React.useRef(null);
