@@ -726,6 +726,7 @@ export const Dropdown = React.memo(
             if (selectedOption !== event.option) {
                 updateEditableLabel(event.option);
                 const optionValue = getOptionValue(event.option);
+                const selectedOptionIndex = findOptionIndexInList(event.option, visibleOptions);
 
                 if (props.onChange) {
                     props.onChange({
@@ -744,6 +745,8 @@ export const Dropdown = React.memo(
                         }
                     });
                 }
+
+                changeFocusedOptionIndex(event.originalEvent, selectedOptionIndex);
             }
         };
 

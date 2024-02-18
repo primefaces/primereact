@@ -22715,6 +22715,14 @@
                             "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
+                            "name": "checkmark",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the selected option will be shown with a check mark."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -22866,6 +22874,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the focusable input element."
+                        },
+                        {
+                            "name": "highlightOnSelect",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the selected option will be add highlight class."
                         },
                         {
                             "name": "id",
@@ -23440,11 +23456,39 @@
                             "description": "Uses to pass attributes to the item group's DOM element."
                         },
                         {
+                            "name": "itemGroupLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the item group label's DOM element."
+                        },
+                        {
                             "name": "item",
                             "optional": true,
                             "readonly": false,
                             "type": "DropdownPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "itemLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the item label's DOM element."
+                        },
+                        {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Used to pass attributes to the check icon's DOM element."
+                        },
+                        {
+                            "name": "blankIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Used to pass attributes to the bank icon's DOM element."
                         },
                         {
                             "name": "emptyMessage",
