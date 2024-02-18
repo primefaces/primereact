@@ -681,6 +681,16 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     tabIndex?: number | undefined;
     /**
+     * When enabled, the focused tab is activated.
+     * @defaultValue false
+     */
+    selectOnFocus?: false;
+    /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
+     */
+    autoOptionFocus?: false;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;
