@@ -1630,6 +1630,12 @@ export const Calendar = React.memo(
 
                     selectedValues = [startDate, endDate];
                     updateModel(event, selectedValues);
+
+                    if (props.hideOnRangeSelection && endDate !== null) {
+                        setTimeout(() => {
+                            setOverlayVisibleState(false);
+                        }, 150);
+                    }
                 } else {
                     selectedValues = [date, null];
                     updateModel(event, selectedValues);
@@ -3166,18 +3172,28 @@ export const Calendar = React.memo(
         };
 
         const createTitleYearElement = (metaYear) => {
+            const viewDate = getViewDate();
+            const viewYear = viewDate.getFullYear();
+
             if (props.yearNavigator) {
                 let yearOptions = [];
-                const years = props.yearRange.split(':');
-                const yearStart = parseInt(years[0], 10);
-                const yearEnd = parseInt(years[1], 10);
 
-                for (let i = yearStart; i <= yearEnd; i++) {
-                    yearOptions.push(i);
+                if (props.yearRange) {
+                    const years = props.yearRange.split(':');
+                    const yearStart = parseInt(years[0], 10);
+                    const yearEnd = parseInt(years[1], 10);
+
+                    for (let i = yearStart; i <= yearEnd; i++) {
+                        yearOptions.push(i);
+                    }
+                } else {
+                    const base = viewYear - (viewYear % 10);
+
+                    for (let i = 0; i < 10; i++) {
+                        yearOptions.push(base + i);
+                    }
                 }
 
-                const viewDate = getViewDate();
-                const viewYear = viewDate.getFullYear();
                 const displayedYearNames = yearOptions.filter((year) => !(props.minDate && props.minDate.getFullYear() > year) && !(props.maxDate && props.maxDate.getFullYear() < year));
                 const selectProps = mergeProps(
                     {

@@ -69,7 +69,7 @@ export const MultiSelectHeader = React.memo((props) => {
                     <InputText
                         ref={props.filterRef}
                         type="text"
-                        role="textbox"
+                        role="searchbox"
                         value={props.filterValue}
                         onChange={onFilter}
                         className="p-multiselect-filter"

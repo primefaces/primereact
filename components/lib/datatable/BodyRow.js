@@ -468,7 +468,7 @@ export const BodyRow = React.memo((props) => {
         {
             role: 'row',
             tabIndex: tabIndex,
-            className: classNames(rowClassName, cx('bodyRow', { rowProps: props })),
+            className: classNames(cx('bodyRow', { rowProps: props })),
             style: style,
             onMouseDown: (e) => onMouseDown(e),
             onMouseUp: (e) => onMouseUp(e),
@@ -491,7 +491,10 @@ export const BodyRow = React.memo((props) => {
             'data-p-highlight': props.selected,
             'data-p-highlight-contextmenu': props.contextMenuSelected
         },
-        getBodyRowPTOptions('bodyRow')
+        getBodyRowPTOptions('bodyRow'),
+        {
+            className: rowClassName // #5983 must be last so all unstyled merging takes place first
+        }
     );
 
     return <tr {...rowProps}>{content}</tr>;

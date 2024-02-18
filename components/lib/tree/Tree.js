@@ -411,7 +411,8 @@ export const Tree = React.memo(
         const createEmptyMessageNode = () => {
             const emptyMessageProps = mergeProps(
                 {
-                    className: classNames(props.contentClassName, cx('emptyMessage'))
+                    className: classNames(props.contentClassName, cx('emptyMessage')),
+                    role: 'treeitem'
                 },
                 ptm('emptyMessage')
             );

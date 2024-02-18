@@ -2,8 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useInterval, useUnmountEffect } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
+import { useInterval, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -14,6 +13,7 @@ import { GalleriaThumbnails } from './GalleriaThumbnails';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = GalleriaBase.getProps(inProps, context);
 

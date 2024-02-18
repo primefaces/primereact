@@ -174,6 +174,26 @@ interface PaginatorFirstPageLinkOptions {
      */
     element: JSX.Element;
     /**
+     * The page number.
+     */
+    page: number;
+    /**
+     * The current page number.
+     */
+    currentPage: number;
+    /**
+     * The total number of pages.
+     */
+    totalPages: number;
+    /**
+     * The total number of records.
+     */
+    totalRecords: number;
+    /**
+     * The number of rows per page.
+     */
+    rows: number;
+    /**
      * The props of Paginator component
      */
     props: PaginatorProps;
@@ -204,6 +224,26 @@ interface PaginatorPrevPageLinkOptions {
      * JSX element to be used as the prev page link.
      */
     element: JSX.Element;
+    /**
+     * The page number.
+     */
+    page: number;
+    /**
+     * The current page number.
+     */
+    currentPage: number;
+    /**
+     * The total number of pages.
+     */
+    totalPages: number;
+    /**
+     * The total number of records.
+     */
+    totalRecords: number;
+    /**
+     * The number of rows per page.
+     */
+    rows: number;
     /**
      * The props of Paginator component
      */
@@ -254,6 +294,14 @@ interface PaginatorPageLinksOptions {
      */
     totalPages: number;
     /**
+     * The total number of records.
+     */
+    totalRecords: number;
+    /**
+     * The number of rows per page.
+     */
+    rows: number;
+    /**
      * JSX element to be used as the page links.
      */
     element: JSX.Element;
@@ -289,6 +337,26 @@ interface PaginatorNextPageLinkOptions {
      */
     element: JSX.Element;
     /**
+     * The page number.
+     */
+    page: number;
+    /**
+     * The current page number.
+     */
+    currentPage: number;
+    /**
+     * The total number of pages.
+     */
+    totalPages: number;
+    /**
+     * The total number of records.
+     */
+    totalRecords: number;
+    /**
+     * The number of rows per page.
+     */
+    rows: number;
+    /**
      * The props of Paginator component
      */
     props: PaginatorProps;
@@ -319,6 +387,26 @@ interface PaginatorLastPageLinkOptions {
      * JSX element to be used as the last page link.
      */
     element: JSX.Element;
+    /**
+     * The page number.
+     */
+    page: number;
+    /**
+     * The current page number.
+     */
+    currentPage: number;
+    /**
+     * The total number of pages.
+     */
+    totalPages: number;
+    /**
+     * The total number of records.
+     */
+    totalRecords: number;
+    /**
+     * The number of rows per page.
+     */
+    rows: number;
     /**
      * The props of Paginator component
      */

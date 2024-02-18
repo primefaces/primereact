@@ -123,6 +123,7 @@ export const ToastBase = ComponentBase.extend({
         __TYPE: 'Toast',
         id: null,
         className: null,
+        content: null,
         style: null,
         baseZIndex: 0,
         position: 'top-right',

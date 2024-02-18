@@ -80,7 +80,7 @@ export const Toast = React.memo(
 
             setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
 
-            props.onRemove && props.onRemove(removeMessage);
+            props.onRemove && props.onRemove(removeMessage.message || removeMessage);
         };
 
         const onClose = (messageInfo) => {
