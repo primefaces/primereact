@@ -45,10 +45,11 @@ export const MeterGroup = (inProps) => {
 
     const createMeters = () => {
         const meters = values.map((item, index) => {
+            const calculatedPercantage = calculatePercentage(item.value);
             const meterInlineStyles = {
                 backgroundColor: item.color,
-                width: orientation === 'horizontal' ? calculatePercentage(item.value) + '%' : 'auto',
-                height: orientation === 'vertical' ? calculatePercentage(item.value) + '%' : 'auto'
+                width: orientation === 'horizontal' ? calculatedPercantage + '%' : 'auto',
+                height: orientation === 'vertical' ? calculatedPercantage + '%' : 'auto'
             };
 
             const meterProps = mergeProps(
@@ -67,7 +68,7 @@ export const MeterGroup = (inProps) => {
                     ptm('meter')
                 );
 
-                return ObjectUtils.getJSXElement(item.meterTemplate || meterRenderer, { ...item, percentage: calculatePercentage(item.value), index }, meterTemplateProps);
+                return ObjectUtils.getJSXElement(item.meterTemplate || meterRenderer, { ...item, percentage: calculatedPercantage, index }, meterTemplateProps);
             } else {
                 return <span key={index} {...meterProps} />;
             }
