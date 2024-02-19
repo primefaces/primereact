@@ -327,7 +327,7 @@ export const TableBody = React.memo(
         };
 
         const selectRange = (event) => {
-            let rangeStart, rangeEnd, selecteSize;
+            let rangeStart, rangeEnd, selectedSize;
 
             const isAllowCellSelection = allowCellSelection();
             const index = ObjectUtils.findIndexInList(event.data, props.value, props.dataKey);
@@ -337,18 +337,18 @@ export const TableBody = React.memo(
                 rangeEnd = rangeRowIndex.current;
 
                 if (!isAllowCellSelection) {
-                    selecteSize = rangeEnd - rangeStart;
+                    selectedSize = rangeEnd - rangeStart;
                     rangeEnd = index;
-                    rangeStart = index - selecteSize;
+                    rangeStart = index - selectedSize;
                 }
             } else if (rangeRowIndex.current < anchorRowIndex.current) {
                 rangeStart = rangeRowIndex.current;
                 rangeEnd = anchorRowIndex.current;
 
                 if (!isAllowCellSelection) {
-                    selecteSize = rangeEnd - rangeStart;
+                    selectedSize = rangeEnd - rangeStart;
                     rangeStart = index;
-                    rangeEnd = index + selecteSize;
+                    rangeEnd = index + selectedSize;
                 }
             } else {
                 rangeStart = rangeEnd = rangeRowIndex.current;
