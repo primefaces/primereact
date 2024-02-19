@@ -42,11 +42,8 @@ export function HookFormDoc(props) {
     name="value"
     control={control}
     rules={{ required: 'The value must be greater than zero.' }}
-    render={({ field }) => (
-        <CascadeSelect id={field.name} name="value" value={field.value} options={countries} optionLabel={'cname'} optionGroupLabel={'name'}
-         optionGroupChildren={['states', 'cities']} style={{ minWidth: '14rem' }} placeholder={'Select a City'}
-         onChange={(e) => field.onChange(e.value)}/>)}
-    />
+    render={({ field }) => <Knob id={field.name} name="value" value={field.value || '0'} onChange={(e) => field.onChange(e.value)} />}
+/>
 <Button type="submit" label="Submit" className="mt-2" />
         `,
         javascript: `
