@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from 'react';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { usePrevious } from './usePrevious';
@@ -11,9 +10,11 @@ export const useEventListener = ({ target = 'document', type, listener, options,
     let prevOptions = usePrevious(options);
 
     const bind = (bindOptions = {}) => {
-        if (ObjectUtils.isNotEmpty(bindOptions.target)) {
+        const { target: bindTarget } = bindOptions;
+
+        if (ObjectUtils.isNotEmpty(bindTarget)) {
             unbind();
-            (bindOptions.when || when) && (targetRef.current = DomHandler.getTargetElement(bindOptions.target));
+            (bindOptions.when || when) && (targetRef.current = DomHandler.getTargetElement(bindTarget));
         }
 
         if (!listenerRef.current && targetRef.current) {
@@ -29,32 +30,44 @@ export const useEventListener = ({ target = 'document', type, listener, options,
         }
     };
 
-    React.useEffect(() => {
+    const dispose = () => {
+        unbind();
+        // Prevent memory leak by releasing
+        prevListener = null;
+        prevOptions = null;
+    };
+
+    const updateTarget = React.useCallback(() => {
         if (when) {
             targetRef.current = DomHandler.getTargetElement(target);
         } else {
             unbind();
             targetRef.current = null;
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [target, when]);
 
     React.useEffect(() => {
-        // to properly compare functions we can implicitly converting the function to it's body's text as a String
-        if (listenerRef.current && ('' + prevListener !== '' + listener || prevOptions !== options)) {
+        updateTarget();
+    }, [updateTarget]);
+
+    React.useEffect(() => {
+        const listenerChanged = `${prevListener}` !== `${listener}`;
+        const optionsChanged = prevOptions !== options;
+        const listenerExists = listenerRef.current;
+
+        if (listenerExists && (listenerChanged || optionsChanged)) {
             unbind();
             when && bind();
+        } else if (!listenerExists) {
+            dispose();
         }
-        return () => {
-            // #5927 prevent memory leak by releasing
-            prevListener = null;
-            prevOptions = null;
-        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [listener, options, when]);
 
     useUnmountEffect(() => {
-        unbind();
+        dispose();
     });
 
     return [bind, unbind];
 };
-/* eslint-enable */
