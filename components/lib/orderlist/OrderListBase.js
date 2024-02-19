@@ -99,6 +99,7 @@ export const OrderListBase = ComponentBase.extend({
         moveDownIcon: null,
         moveBottomIcon: null,
         dataKey: null,
+        autoOptionFocus: false,
         breakpoint: '960px',
         onChange: null,
         itemTemplate: null,
