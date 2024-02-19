@@ -33,13 +33,14 @@ export const Menu = React.memo(
         const menuRef = React.useRef(null);
         const listRef = React.useRef(null);
         const targetRef = React.useRef(null);
-        const popupMenuDisplayOrder = useDisplayOrder('menu', !!(visibleState && props.popup));
+        const isCloseOnEscape = !!(visibleState && props.popup && props.closeOnEscape);
+        const popupMenuDisplayOrder = useDisplayOrder('menu', isCloseOnEscape);
 
         useGlobalOnEscapeKey({
             callback: (event) => {
                 hide(event);
             },
-            when: visibleState && props.popup && props.closeOnEscape && popupMenuDisplayOrder,
+            when: isCloseOnEscape && popupMenuDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.MENU, popupMenuDisplayOrder]
         });
 

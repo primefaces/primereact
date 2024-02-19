@@ -257,6 +257,7 @@ export const DialogBase = ComponentBase.extend({
         closable: true,
         closeIcon: null,
         closeOnEscape: true,
+        content: null,
         contentClassName: null,
         contentStyle: null,
         dismissableMask: false,
