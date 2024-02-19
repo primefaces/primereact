@@ -7,8 +7,8 @@ import { useUnmountEffect } from './useUnmountEffect';
 export const useEventListener = ({ target = 'document', type, listener, options, when = true }) => {
     const targetRef = React.useRef(null);
     const listenerRef = React.useRef(null);
-    const prevListener = usePrevious(listener);
-    const prevOptions = usePrevious(options);
+    let prevListener = usePrevious(listener);
+    let prevOptions = usePrevious(options);
 
     const bind = (bindOptions = {}) => {
         if (ObjectUtils.isNotEmpty(bindOptions.target)) {
@@ -44,6 +44,11 @@ export const useEventListener = ({ target = 'document', type, listener, options,
             unbind();
             when && bind();
         }
+        return () => {
+            // #5927 prevent memory leak by releasing
+            prevListener = null;
+            prevOptions = null;
+        };
     }, [listener, options, when]);
 
     useUnmountEffect(() => {

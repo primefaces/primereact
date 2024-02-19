@@ -9,8 +9,9 @@ export const useOverlayScrollListener = ({ target, listener, options, when = tru
     const targetRef = React.useRef(null);
     const listenerRef = React.useRef(null);
     const scrollableParents = React.useRef([]);
-    const prevOptions = usePrevious(options);
     const context = React.useContext(PrimeReactContext);
+    let prevListener = usePrevious(listener);
+    let prevOptions = usePrevious(options);
 
     const bind = (bindOptions = {}) => {
         if (ObjectUtils.isNotEmpty(bindOptions.target)) {
@@ -46,10 +47,16 @@ export const useOverlayScrollListener = ({ target, listener, options, when = tru
     }, [target, when]);
 
     React.useEffect(() => {
-        if (listenerRef.current && (listenerRef.current !== listener || prevOptions !== options)) {
+        // to properly compare functions we can implicitly converting the function to it's body's text as a String
+        if (listenerRef.current && ('' + prevListener !== '' + listener || prevOptions !== options)) {
             unbind();
             when && bind();
         }
+        return () => {
+            // #5927 prevent memory leak by releasing
+            prevListener = null;
+            prevOptions = null;
+        };
     }, [listener, options]);
 
     useUnmountEffect(() => {
