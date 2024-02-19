@@ -9,21 +9,22 @@ export const useDisplayOrder = (group, isVisible = true) => {
 
     React.useEffect(() => {
         if (isVisible) {
-            if (!(group in groupToDisplayedElements)) {
+            if (!groupToDisplayedElements[group]) {
                 groupToDisplayedElements[group] = [];
             }
 
-            const newDisplayOrder = groupToDisplayedElements[group].length + 1;
+            const newDisplayOrder = groupToDisplayedElements[group].push(uid);
 
-            groupToDisplayedElements[group].push(uid);
             setDisplayOrder(newDisplayOrder);
 
             return () => {
-                delete groupToDisplayedElements[group][newDisplayOrder];
-                const lastOrder = groupToDisplayedElements[group].findLastIndex((el) => el !== undefined);
+                delete groupToDisplayedElements[group][newDisplayOrder - 1];
 
                 // Reduce array length, by removing undefined elements at the end of array:
-                groupToDisplayedElements[group].splice(lastOrder + 1);
+                const lastIndex = groupToDisplayedElements[group].length - 1;
+                const lastOrder = groupToDisplayedElements[group].findLastIndex((el) => el !== undefined);
+
+                if (lastOrder !== lastIndex) groupToDisplayedElements[group].splice(lastOrder + 1);
 
                 setDisplayOrder(undefined);
             };
