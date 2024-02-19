@@ -57,15 +57,14 @@ export const ConfirmPopup = React.memo(
 
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
-        const displayOrder = useDisplayOrder('dialog', visibleState);
+        const isCloseOnEscape = props.dismissable && props.closeOnEscape && visibleState;
+        const displayOrder = useDisplayOrder('dialog', isCloseOnEscape);
 
         useGlobalOnEscapeKey({
             callback: () => {
-                if (props.dismissable && props.closeOnEscape) {
-                    hide('hide');
-                }
+                hide('hide');
             },
-            when: visibleState && displayOrder,
+            when: isCloseOnEscape && displayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
         });
 
