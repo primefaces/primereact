@@ -34,13 +34,14 @@ export const SlideMenu = React.memo(
         const targetRef = React.useRef(null);
         const backward = React.useRef(null);
         const slideMenuContent = React.useRef(null);
-        const slideMenuDisplayOrder = useDisplayOrder('slide-menu', visibleState);
+        const isCloseOnEscape = visibleState && props.popup && props.closeOnEscape;
+        const slideMenuDisplayOrder = useDisplayOrder('slide-menu', isCloseOnEscape);
 
         useGlobalOnEscapeKey({
             callback: (event) => {
                 hide(event);
             },
-            when: visibleState && props.popup && props.closeOnEscape && slideMenuDisplayOrder,
+            when: isCloseOnEscape && slideMenuDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.SLIDE_MENU, slideMenuDisplayOrder]
         });
 
