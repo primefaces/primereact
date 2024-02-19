@@ -327,14 +327,29 @@ export const TableBody = React.memo(
         };
 
         const selectRange = (event) => {
-            let rangeStart, rangeEnd;
+            let rangeStart, rangeEnd, selecteSize;
+
+            const isAllowCellSelection = allowCellSelection();
+            const index = ObjectUtils.findIndexInList(event.data, props.value, props.dataKey);
 
             if (rangeRowIndex.current > anchorRowIndex.current) {
                 rangeStart = anchorRowIndex.current;
                 rangeEnd = rangeRowIndex.current;
+
+                if (!isAllowCellSelection) {
+                    selecteSize = rangeEnd - rangeStart;
+                    rangeEnd = index;
+                    rangeStart = index - selecteSize;
+                }
             } else if (rangeRowIndex.current < anchorRowIndex.current) {
                 rangeStart = rangeRowIndex.current;
                 rangeEnd = anchorRowIndex.current;
+
+                if (!isAllowCellSelection) {
+                    selecteSize = rangeEnd - rangeStart;
+                    rangeStart = index;
+                    rangeEnd = index + selecteSize;
+                }
             } else {
                 rangeStart = rangeEnd = rangeRowIndex.current;
             }
@@ -344,7 +359,7 @@ export const TableBody = React.memo(
                 rangeEnd -= props.first;
             }
 
-            return allowCellSelection() ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
+            return isAllowCellSelection ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
         };
 
         const selectRangeOnRow = (event, rowRangeStart, rowRangeEnd) => {
