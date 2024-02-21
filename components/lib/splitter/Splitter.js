@@ -266,6 +266,8 @@ export const Splitter = React.memo(
                     break;
                 }
 
+                case 'NumpadEnter':
+
                 case 'Enter': {
                     if (prevSize.current > 100 - (minSize || 5)) {
                         resizePanel(index, minSize, 100);

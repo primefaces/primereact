@@ -217,7 +217,7 @@ export const Calendar = React.memo(
         };
 
         const onPickerKeyDown = (event, type, direction) => {
-            if (event.code === 'Enter' || event.code === 'Space') {
+            if (event.key === 'Enter' || event.key === 'Space') {
                 onTimePickerElementMouseDown(event, type, direction);
                 event.preventDefault();
 
@@ -228,7 +228,7 @@ export const Calendar = React.memo(
         };
 
         const onPickerKeyUp = (event) => {
-            if (event.code === 'Enter' || event.code === 'Space') {
+            if (event.key === 'Enter' || event.key === 'Space') {
                 onTimePickerElementMouseUp();
                 event.preventDefault();
 
@@ -1669,7 +1669,7 @@ export const Calendar = React.memo(
         };
 
         const switchToMonthView = (event) => {
-            if (event && event.code && (event.code === 'Enter' || event.code === 'Space')) {
+            if (event && event.code && (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space')) {
                 viewChangedWithKeyDown.current = true;
             }
 
@@ -1678,7 +1678,7 @@ export const Calendar = React.memo(
         };
 
         const switchToYearView = (event) => {
-            if (event && event.code && (event.code === 'Enter' || event.code === 'Space')) {
+            if (event && event.code && (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space')) {
                 viewChangedWithKeyDown.current = true;
             }
 

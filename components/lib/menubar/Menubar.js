@@ -96,7 +96,7 @@ export const Menubar = React.memo(
         };
 
         const menuButtonKeydown = (event) => {
-            (event.code === 'Enter' || event.code === 'Space') && toggle(event);
+            (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') && toggle(event);
         };
 
         const isOutsideClicked = (event) => {
@@ -167,6 +167,7 @@ export const Menubar = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 

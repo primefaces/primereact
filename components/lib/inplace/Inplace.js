@@ -63,7 +63,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const onDisplayKeyDown = (event) => {
-        if (event.code === 'Enter' || event.code === 'Space') {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
             open(event);
             event.preventDefault();
         }

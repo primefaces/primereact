@@ -131,6 +131,7 @@ export const Menu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 

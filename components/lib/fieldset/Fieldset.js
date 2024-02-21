@@ -69,7 +69,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     });
 
     const onKeyDown = (event) => {
-        if (event.code === 'Enter' || event.code === 'Space') {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
             toggle(event);
             event.preventDefault();
         }

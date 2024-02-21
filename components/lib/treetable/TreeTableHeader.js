@@ -64,7 +64,7 @@ export const TreeTableHeader = React.memo((props) => {
     };
 
     const onHeaderKeyDown = (event, column) => {
-        if (event.key === 'Enter' && event.key === 'Space') {
+        if (event.key === 'Enter' || event.code === 'Space') {
             onHeaderClick(event, column);
             event.preventDefault();
         }

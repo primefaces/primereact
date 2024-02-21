@@ -384,6 +384,7 @@ export const ContextMenu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 

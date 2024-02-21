@@ -267,6 +267,7 @@ export const Dropdown = React.memo(
 
                 case 'Escape':
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     event.preventDefault();
                     break;

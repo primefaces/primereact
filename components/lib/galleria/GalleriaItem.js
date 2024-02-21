@@ -88,6 +88,7 @@ export const GalleriaItem = React.memo(
         const onIndicatorKeyDown = (event, index) => {
             switch (event.code) {
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     stopSlideShow();
 

@@ -391,6 +391,7 @@ export const MegaMenu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 
@@ -406,7 +407,6 @@ export const MegaMenu = React.memo(
                 case 'PageUp':
                 case 'Backspace':
                 case 'ShiftLeft':
-                    focusedItemInfo;
                 case 'ShiftRight':
                     //NOOP
                     break;

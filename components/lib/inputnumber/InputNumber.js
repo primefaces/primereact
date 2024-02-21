@@ -380,6 +380,7 @@ export const InputNumber = React.memo(
                 //enter and tab
                 case 'Tab':
                 case 'Enter':
+                case 'NumpadEnter':
                     newValueStr = validateValue(parseValue(inputValue));
                     inputRef.current.value = formatValue(newValueStr);
                     inputRef.current.setAttribute('aria-valuenow', newValueStr);
