@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);

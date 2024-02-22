@@ -76,11 +76,12 @@ export const TreeTableBodyCell = (props) => {
             }
 
             selfClick.current = false;
-        }
+        },
+        when: getColumnProp('editor')
     });
 
     const onClick = (event) => {
-        if (props.editor && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
+        if (getColumnProp('editor') && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
             selfClick.current = true;
 
             const params = getCellCallbackParams(event);
@@ -169,7 +170,7 @@ export const TreeTableBodyCell = (props) => {
     };
 
     React.useEffect(() => {
-        if (elementRef.current && props.editor) {
+        if (elementRef.current && getColumnProp('editor')) {
             clearTimeout(tabIndexTimeout.current);
 
             if (editingState) {
@@ -200,10 +201,11 @@ export const TreeTableBodyCell = (props) => {
 
     const bodyClassName = ObjectUtils.getPropValue(props.bodyClassName, props.node.data, { field: props.field, rowIndex: props.rowIndex, props: props });
     const style = props.bodyStyle || props.style;
+    const columnEditor = getColumnProp('editor');
     let content;
 
     if (editingState) {
-        if (props.editor) content = ObjectUtils.getJSXElement(props.editor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
+        if (columnEditor) content = ObjectUtils.getJSXElement(columnEditor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
         else throw new Error('Editor is not found on column.');
     } else {
         if (props.body) content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
@@ -222,7 +224,7 @@ export const TreeTableBodyCell = (props) => {
 
     const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
     /* eslint-disable */
-    const editorKeyHelper = props.editor && (
+    const editorKeyHelper = columnEditor && (
         <a {...editorKeyHelperProps}>
             <span {...editorKeyHelperLabelProps}></span>
         </a>

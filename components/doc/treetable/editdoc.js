@@ -37,7 +37,7 @@ export function EditDoc(props) {
     };
 
     const inputTextEditor = (options) => {
-        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} />;
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
     };
 
     const sizeEditor = (options) => {
@@ -101,7 +101,7 @@ export default function EditDemo() {
     };
 
     const inputTextEditor = (options) => {
-        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} />;
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
     };
 
     const sizeEditor = (options) => {
@@ -169,7 +169,7 @@ export default function EditDemo() {
     };
 
     const inputTextEditor = (options: ColumnEditorOptions) => {
-        return <InputText type="text" value={options.rowData[options.field]} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onEditorValueChange(options, e.target.value)} />;
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onEditorValueChange(options, e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
     };
 
     const sizeEditor = (options: ColumnEditorOptions) => {
