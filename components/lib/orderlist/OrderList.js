@@ -90,6 +90,8 @@ export const OrderList = React.memo(
 
                 return selectedOptionIndex;
             }
+
+            return -1;
         };
 
         const findFirstSelectedOptionIndex = (listElement, itemList) => {
