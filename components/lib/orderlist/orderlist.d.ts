@@ -173,7 +173,7 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     header?: React.ReactNode | undefined;
     /**
      * Whether to focus on the first visible or selected element.
-     * @defaultValue false
+     * @defaultValue true
      */
     autoOptionFocus?: boolean | undefined;
     /**
