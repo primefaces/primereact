@@ -36325,6 +36325,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "breakpoint",
                             "optional": true,
                             "readonly": false,
@@ -40362,6 +40370,14 @@
                 "props": {
                     "description": "Defines valid properties in PickList component.",
                     "values": [
+                        {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
                         {
                             "name": "breakpoint",
                             "optional": true,
