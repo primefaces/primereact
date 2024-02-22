@@ -164,7 +164,6 @@ export const OrderList = React.memo(
         };
 
         const onOptionMouseDown = (index) => {
-            // setFocused(true);
             setFocusedOptionIndex(index);
         };
 
