@@ -725,6 +725,7 @@ export const Dropdown = React.memo(
         const selectItem = (event) => {
             if (selectedOption !== event.option) {
                 updateEditableLabel(event.option);
+                setFocusedOptionIndex(-1);
                 const optionValue = getOptionValue(event.option);
 
                 if (props.onChange) {
