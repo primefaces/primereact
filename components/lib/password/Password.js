@@ -298,7 +298,7 @@ export const Password = React.memo(
                     tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),
                     onClick: toggleMask,
-                    onKeyDown: onEyeIconKeyPress
+                    onKeyDown: onToggleMaskKeyDown
                 },
                 ptm('showIcon')
             );
