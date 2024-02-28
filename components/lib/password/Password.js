@@ -273,7 +273,7 @@ export const Password = React.memo(
         });
 
         const onEyeIconKeyPress = (e) => {
-            return e.key === 'Enter' ? toggleMask(): ''
+            return e.key === 'Enter' ? toggleMask() : '';
         };
 
         const createIcon = () => {
@@ -283,7 +283,7 @@ export const Password = React.memo(
                 {
                     key: 'hideIcon',
                     role: 'button',
-                    tabIndex: props.tabIndex || "0",
+                    tabIndex: props.tabIndex || '0',
                     className: cx('hideIcon'),
                     onClick: toggleMask,
                     onKeyDown: onEyeIconKeyPress
@@ -295,7 +295,7 @@ export const Password = React.memo(
                 {
                     key: 'showIcon',
                     role: 'button',
-                    tabIndex: props.tabIndex || "0",
+                    tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),
                     onClick: toggleMask,
                     onKeyDown: onEyeIconKeyPress
