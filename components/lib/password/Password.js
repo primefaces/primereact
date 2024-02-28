@@ -272,9 +272,12 @@ export const Password = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
-        const onToggleMaskKeyDown = (e) => {
-            return e.key === 'Enter' ? toggleMask() : '';
-        };
+        const onToggleMaskKeyDown = (event) => {
+            if (event.key === 'Enter' || event.code === 'Space') {
+                     toggleMask();
+                     event.preventDefault();
+            }
+         };
 
         const createIcon = () => {
             let icon;
