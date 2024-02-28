@@ -272,6 +272,10 @@ export const Password = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
+        const onEyeIconKeyPress = (e) => {
+            return e.key === 'Enter' ? toggleMask(): ''
+        };
+
         const createIcon = () => {
             let icon;
 
@@ -279,9 +283,10 @@ export const Password = React.memo(
                 {
                     key: 'hideIcon',
                     role: 'button',
-                    tabIndex: props.tabIndex,
+                    tabIndex: props.tabIndex || "0",
                     className: cx('hideIcon'),
-                    onClick: toggleMask
+                    onClick: toggleMask,
+                    onKeyDown: onEyeIconKeyPress
                 },
                 ptm('hideIcon')
             );
@@ -290,9 +295,10 @@ export const Password = React.memo(
                 {
                     key: 'showIcon',
                     role: 'button',
-                    tabIndex: props.tabIndex,
+                    tabIndex: props.tabIndex || "0",
                     className: cx('showIcon'),
-                    onClick: toggleMask
+                    onClick: toggleMask,
+                    onKeyDown: onEyeIconKeyPress
                 },
                 ptm('showIcon')
             );
