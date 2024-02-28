@@ -62,11 +62,19 @@ export const Tree = React.memo(
                 const event = childFocusEvent.current;
                 const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
                 const listElement = nodeElement.children[1];
-                const childElement = listElement.children[0];
 
-                nodeElement.tabIndex = '-1';
-                childElement.tabIndex = '0';
-                childElement.focus();
+                if (listElement) {
+                    if (nodeElement) {
+                        nodeElement.tabIndex = '-1';
+                    }
+
+                    const childElement = listElement.children[0];
+
+                    if (childElement) {
+                        childElement.tabIndex = '0';
+                        childElement.focus();
+                    }
+                }
 
                 childFocusEvent.current = null;
             }
