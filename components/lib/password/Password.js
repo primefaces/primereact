@@ -274,10 +274,10 @@ export const Password = React.memo(
 
         const onToggleMaskKeyDown = (event) => {
             if (event.key === 'Enter' || event.code === 'Space') {
-                     toggleMask();
-                     event.preventDefault();
+                toggleMask();
+                event.preventDefault();
             }
-         };
+        };
 
         const createIcon = () => {
             let icon;
