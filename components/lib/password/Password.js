@@ -272,7 +272,7 @@ export const Password = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
-        const onEyeIconKeyPress = (e) => {
+        const onToggleMaskKeyDown= (e) => {
             return e.key === 'Enter' ? toggleMask() : '';
         };
 
