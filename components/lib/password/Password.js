@@ -285,7 +285,7 @@ export const Password = React.memo(
             const hideIconProps = mergeProps(
                 {
                     key: 'hideIcon',
-                    role: 'button',
+                    role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('hideIcon'),
                     onClick: toggleMask,
