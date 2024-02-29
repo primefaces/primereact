@@ -299,7 +299,7 @@ export const Password = React.memo(
             const showIconProps = mergeProps(
                 {
                     key: 'showIcon',
-                    role: 'button',
+                    role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),
                     onClick: toggleMask,
