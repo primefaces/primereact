@@ -96,23 +96,22 @@ const buttonStyles = `
 }
 `;
 const checkboxStyles = `
-.p-checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-    position: relative;
-}
+    .p-checkbox {
+        position: relative;
+        display: inline-flex;
+        user-select: none;
+        vertical-align: bottom;
+    }
 
-.p-checkbox.p-checkbox-disabled {
-    cursor: auto;
-}
+    .p-checkbox-input {
+        cursor: pointer;
+    }
 
-.p-checkbox-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .p-checkbox-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 const inputTextStyles = `
 .p-inputtext {

@@ -2,40 +2,17 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    icon: 'p-checkbox-icon p-c',
-    input: ({ props, checked, focusedState }) =>
-        classNames('p-checkbox-box', {
-            'p-highlight': checked,
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
-        }),
+    box: 'p-checkbox-box',
+    input: 'p-checkbox-input',
+    icon: 'p-checkbox-icon',
     root: ({ props, checked, focusedState }) =>
         classNames('p-checkbox p-component', {
-            'p-checkbox-checked': checked,
-            'p-checkbox-disabled': props.disabled,
-            'p-checkbox-focused': focusedState
+            'p-highlight': checked,
+            'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
+            'p-variant-filled': props.variant === 'filled'
         })
 };
-
-const styles = `
-.p-checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-    position: relative;
-}
-
-.p-checkbox.p-checkbox-disabled {
-    cursor: auto;
-}
-
-.p-checkbox-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}        
-`;
 
 export const CheckboxBase = ComponentBase.extend({
     defaultProps: {
@@ -65,7 +42,6 @@ export const CheckboxBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes,
-        styles
+        classes
     }
 });
