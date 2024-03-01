@@ -2,23 +2,46 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    label: 'p-button-label',
+    root: ({ props }) =>
+        classNames(
+            'p-togglebutton p-component',
+            {
+                'p-disabled': props.disabled,
+                'p-highlight': props.checked,
+                'p-invalid': props.invalid
+            },
+            props.className
+        ),
+    input: 'p-togglebutton-input',
+    box: ({ hasIcon, hasLabel }) =>
+        classNames('p-button p-component', {
+            'p-button-icon-only': hasIcon && !hasLabel
+        }),
     icon: ({ props, label }) =>
-        classNames('p-button-icon p-c', {
+        classNames('p-button-icon', {
             'p-button-icon-left': props.iconPos === 'left' && label,
             'p-button-icon-right': props.iconPos === 'right' && label
         }),
-    root: ({ props, hasIcon, hasLabel }) =>
-        classNames(
-            'p-button p-togglebutton p-component',
-            {
-                'p-button-icon-only': hasIcon && !hasLabel,
-                'p-highlight': props.checked,
-                'p-disabled': props.disabled
-            },
-            props.className
-        )
+    label: 'p-button-label'
 };
+
+const styles = `
+@layer primereact {
+    .p-togglebutton {
+        position: relative;
+        display: inline-flex;
+        user-select: none;
+        vertical-align: bottom;
+    }
+    
+    .p-togglebutton-input {
+        cursor: pointer;
+    }
+    
+    .p-togglebutton .p-button {
+        flex: 1 1 auto;
+    }
+}`;
 
 export const ToggleButtonBase = ComponentBase.extend({
     defaultProps: {
@@ -41,6 +64,7 @@ export const ToggleButtonBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes
+        classes,
+        styles
     }
 });
