@@ -96,7 +96,7 @@ const buttonStyles = `
 }
 `;
 const checkboxStyles = `
-    .p-checkbox {
+    p-checkbox {
         position: relative;
         display: inline-flex;
         user-select: none;
@@ -104,6 +104,17 @@ const checkboxStyles = `
     }
 
     .p-checkbox-input {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        z-index: 1;
+        outline: 0 none;
         cursor: pointer;
     }
 
