@@ -42,8 +42,6 @@ export const InputSwitch = React.memo(
             }
         };
 
-        console.log(checked);
-
         const onFocus = (event) => {
             props?.onFocus?.(event);
         };
