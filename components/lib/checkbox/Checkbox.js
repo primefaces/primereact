@@ -30,7 +30,7 @@ export const Checkbox = React.memo(
         };
 
         const onChange = (event) => {
-            if (props.disabled || props.readOnly) {
+            if (props.disabled || props.readonly) {
                 return;
             }
 
@@ -129,6 +129,7 @@ export const Checkbox = React.memo(
                     disabled: props.disabled,
                     readOnly: props.readOnly,
                     required: props.required,
+                    'aria-invalid': props.invalid,
                     checked: isChecked(),
                     ...ariaProps
                 },
