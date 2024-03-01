@@ -43,13 +43,9 @@ export interface RadioButtonPassThroughOptions {
      */
     icon?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the hidden accessible DOM element wrapper.
+     * Uses to pass attributes to the input's DOM element.
      */
-    hiddenInputWrapper?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden accessible DOM element.
-     */
-    hiddenInput?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}

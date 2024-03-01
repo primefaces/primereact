@@ -139,7 +139,7 @@ export const RadioButton = React.memo(
                     className: cx('input'),
                     ...ariaProps
                 },
-                ptm('hiddenInput')
+                ptm('input')
             );
 
             return <input ref={inputRef} {...inputProps} />;
@@ -150,7 +150,7 @@ export const RadioButton = React.memo(
                 {
                     className: cx('box')
                 },
-                ptm('input')
+                ptm('box')
             );
 
             const iconProps = mergeProps(
