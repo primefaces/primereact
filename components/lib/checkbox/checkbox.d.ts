@@ -42,7 +42,7 @@ export interface CheckboxPassThroughOptions {
     /**
      * Used to pass attributes to the box's DOM element.
      */
-    box?: CheckboxPassThroughOptionType;
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */

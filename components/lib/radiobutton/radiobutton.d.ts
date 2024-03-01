@@ -35,10 +35,6 @@ export interface RadioButtonPassThroughOptions {
      */
     root?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the input's DOM element.
-     */
-    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -46,6 +42,10 @@ export interface RadioButtonPassThroughOptions {
      * Uses to pass attributes to the input's DOM element.
      */
     input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the box's DOM element.
+     */
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
