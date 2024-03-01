@@ -43420,6 +43420,13 @@
                             "description": "Uses to pass attributes to the close button's DOM element."
                         },
                         {
+                            "name": "icons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the custom icons content's DOM element."
+                        },
+                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
@@ -43432,13 +43439,6 @@
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
-                        },
-                        {
-                            "name": "icons",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the custom icons content's DOM element."
                         },
                         {
                             "name": "mask",
