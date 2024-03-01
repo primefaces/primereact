@@ -290,7 +290,7 @@ export const Password = React.memo(
                     className: cx('hideIcon'),
                     onClick: toggleMask,
                     onKeyDown: onToggleMaskKeyDown,
-                    'aria-label': ariaLabel('togglePasswordLabel') || 'Toggle Password Mask',
+                    'aria-label': ariaLabel('passwordHide') || 'Hide Password',
                     'aria-checked': 'false'
                 },
                 ptm('hideIcon')
