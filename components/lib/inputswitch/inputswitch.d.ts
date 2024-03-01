@@ -39,13 +39,9 @@ export interface InputSwitchPassThroughOptions {
      */
     slider?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     * Uses to pass attributes to the input's DOM element.
      */
-    hiddenInputWrapper?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input's DOM element.
-     */
-    hiddenInput?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    input?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
