@@ -108,7 +108,7 @@ interface FilterModeOption {
 export default function FilterDemo() {
     const [nodes, setNodes] = useState<TreeNode[]>([]);
     const [globalFilter, setGlobalFilter] = useState<string>('');
-    const [filterMode, setFilterMode] = useState('lenient');
+    const [filterMode, setFilterMode] = useState<'lenient' | 'strict'>('lenient');
     const [filterOptions] = useState<FilterModeOption[]>([
         { label: 'Lenient', value: 'lenient' },
         { label: 'Strict', value: 'strict' }
