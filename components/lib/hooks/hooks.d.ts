@@ -60,6 +60,8 @@ interface StyleOptions {
     isLoaded: boolean;
 }
 
+type AnyFunction = (...args: any[]) => any;
+
 /**
  * Custom MouseDataOptions
  */
@@ -305,3 +307,7 @@ export declare function useDisplayOrder(group: string, isVisible?: boolean): num
  * Custom hook to return a function for merging properties.
  */
 export declare function useMergeProps(): (args: object[], options?: any) => object | undefined;
+/**
+ * Similar to useCallback, with a few subtle differences:
+ */
+export declare function useEvent<TCallback extends AnyFunction>(callback: TCallback): TCallback;

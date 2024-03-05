@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEvent, useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, classNames } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
 
@@ -76,60 +76,64 @@ export const Editor = React.memo(
             }
         });
 
+        const onTextChange = useEvent((delta, oldContents, source) => {
+            let firstChild = contentRef.current.children[0];
+            let html = firstChild ? firstChild.innerHTML : null;
+            let text = quill.current.getText();
+
+            if (html === '<p><br></p>') {
+                html = null;
+            }
+
+            // GitHub #2271 prevent infinite loop on clipboard paste of HTML
+            if (source === 'api') {
+                const htmlValue = contentRef.current.children[0];
+                const editorValue = document.createElement('div');
+
+                editorValue.innerHTML = props.value || '';
+
+                // this is necessary because Quill rearranged style elements
+                if (DomHandler.isEqualElement(htmlValue, editorValue)) {
+                    return;
+                }
+            }
+
+            if (props.maxLength) {
+                const length = quill.current.getLength();
+
+                if (length > props.maxLength) {
+                    quill.current.deleteText(props.maxLength, length);
+                }
+            }
+
+            if (props.onTextChange) {
+                props.onTextChange({
+                    htmlValue: html,
+                    textValue: text,
+                    delta: delta,
+                    source: source
+                });
+            }
+        });
+
+        const onSelectionChange = useEvent((range, oldRange, source) => {
+            if (props.onSelectionChange) {
+                props.onSelectionChange({
+                    range: range,
+                    oldRange: oldRange,
+                    source: source
+                });
+            }
+        });
+
         const initQuill = () => {
             if (props.value) {
                 quill.current.setContents(quill.current.clipboard.convert(props.value));
             }
 
-            quill.current.on('text-change', (delta, oldContents, source) => {
-                let firstChild = contentRef.current.children[0];
-                let html = firstChild ? firstChild.innerHTML : null;
-                let text = quill.current.getText();
+            quill.current.on('text-change', onTextChange);
 
-                if (html === '<p><br></p>') {
-                    html = null;
-                }
-
-                // GitHub #2271 prevent infinite loop on clipboard paste of HTML
-                if (source === 'api') {
-                    const htmlValue = contentRef.current.children[0];
-                    const editorValue = document.createElement('div');
-
-                    editorValue.innerHTML = props.value || '';
-
-                    // this is necessary because Quill rearranged style elements
-                    if (DomHandler.isEqualElement(htmlValue, editorValue)) {
-                        return;
-                    }
-                }
-
-                if (props.maxLength) {
-                    const length = quill.current.getLength();
-
-                    if (length > props.maxLength) {
-                        quill.current.deleteText(props.maxLength, length);
-                    }
-                }
-
-                if (props.onTextChange) {
-                    props.onTextChange({
-                        htmlValue: html,
-                        textValue: text,
-                        delta: delta,
-                        source: source
-                    });
-                }
-            });
-
-            quill.current.on('selection-change', (range, oldRange, source) => {
-                if (props.onSelectionChange) {
-                    props.onSelectionChange({
-                        range: range,
-                        oldRange: oldRange,
-                        source: source
-                    });
-                }
-            });
+            quill.current.on('selection-change', onSelectionChange);
         };
 
         useUpdateEffect(() => {

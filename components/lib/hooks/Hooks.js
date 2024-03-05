@@ -21,6 +21,7 @@ import { useStyle } from './useStyle';
 import { useTimeout } from './useTimeout';
 import { useUnmountEffect } from './useUnmountEffect';
 import { useUpdateEffect } from './useUpdateEffect';
+import { useEvent } from './useEvent';
 
 export {
     ESC_KEY_HANDLING_PRIORITIES,
@@ -48,5 +49,6 @@ export {
     useStyle,
     useTimeout,
     useUnmountEffect,
-    useUpdateEffect
+    useUpdateEffect,
+    useEvent
 };
