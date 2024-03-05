@@ -2,12 +2,13 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, checked }) =>
+    root: ({ props, checked }) =>
         classNames('p-inputswitch p-component', {
-            'p-inputswitch-checked': checked,
+            'p-highlight': checked,
             'p-disabled': props.disabled,
-            'p-focus': focusedState
+            'p-invalid': props.invalid
         }),
+    input: 'p-inputswitch-input',
     slider: 'p-inputswitch-slider'
 };
 
@@ -17,7 +18,22 @@ const styles = `
         position: relative;
         display: inline-block;
     }
-    
+
+    .p-inputswitch-input {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        z-index: 1;
+        outline: 0 none;
+        cursor: pointer;
+    }
+
     .p-inputswitch-slider {
         position: absolute;
         cursor: pointer;
@@ -27,10 +43,10 @@ const styles = `
         bottom: 0;
         border: 1px solid transparent;
     }
-    
+
     .p-inputswitch-slider:before {
         position: absolute;
-        content: "";
+        content: '';
         top: 50%;
     }
 }

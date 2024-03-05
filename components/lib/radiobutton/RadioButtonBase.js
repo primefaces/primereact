@@ -2,36 +2,36 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState }) =>
+    root: ({ props }) =>
         classNames('p-radiobutton p-component', {
-            'p-radiobutton-checked': props.checked,
-            'p-radiobutton-disabled': props.disabled,
-            'p-radiobutton-focused': focusedState
-        }),
-    input: ({ props, focusedState }) =>
-        classNames('p-radiobutton-box', {
             'p-highlight': props.checked,
             'p-disabled': props.disabled,
-            'p-focus': focusedState
+            'p-invalid': props.invalid
         }),
+    box: 'p-radiobutton-box',
+    input: 'p-radiobutton-input',
     icon: 'p-radiobutton-icon'
 };
 
 const styles = `
 @layer primereact {
     .p-radiobutton {
+        position: relative;
         display: inline-flex;
-        cursor: pointer;
         user-select: none;
         vertical-align: bottom;
     }
-    
+
+    .p-radiobutton-input {
+        cursor: pointer;
+    }
+
     .p-radiobutton-box {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    
+
     .p-radiobutton-icon {
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
@@ -39,8 +39,8 @@ const styles = `
         border-radius: 50%;
         visibility: hidden;
     }
-    
-    .p-radiobutton-box.p-highlight .p-radiobutton-icon {
+
+    .p-radiobutton.p-highlight .p-radiobutton-icon {
         transform: translateZ(0) scale(1.0, 1.0);
         visibility: visible;
     }

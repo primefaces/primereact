@@ -96,23 +96,33 @@ const buttonStyles = `
 }
 `;
 const checkboxStyles = `
-.p-checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-    position: relative;
-}
+    p-checkbox {
+        position: relative;
+        display: inline-flex;
+        user-select: none;
+        vertical-align: bottom;
+    }
 
-.p-checkbox.p-checkbox-disabled {
-    cursor: auto;
-}
+    .p-checkbox-input {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        z-index: 1;
+        outline: 0 none;
+        cursor: pointer;
+    }
 
-.p-checkbox-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .p-checkbox-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 const inputTextStyles = `
 .p-inputtext {
@@ -223,32 +233,35 @@ const inputTextStyles = `
 }
 `;
 const radioButtonStyles = `
-.p-radiobutton {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-}
+    .p-radiobutton {
+        position: relative;
+        display: inline-flex;
+        user-select: none;
+        vertical-align: bottom;
+    }
 
-.p-radiobutton-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .p-radiobutton-input {
+        cursor: pointer;
+    }
 
-.p-radiobutton-icon {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0) scale(.1);
-    border-radius: 50%;
-    visibility: hidden;
-}
+    .p-radiobutton-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.p-radiobutton-box.p-highlight .p-radiobutton-icon {
-    transform: translateZ(0) scale(1.0, 1.0);
-    visibility: visible;
-}
+    .p-radiobutton-icon {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0) scale(.1);
+        border-radius: 50%;
+        visibility: hidden;
+    }
 
+    .p-radiobutton.p-highlight .p-radiobutton-icon {
+        transform: translateZ(0) scale(1.0, 1.0);
+        visibility: visible;
+    }
 `;
 const iconStyles = `
 .p-icon {

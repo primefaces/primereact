@@ -2,39 +2,48 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    icon: 'p-checkbox-icon p-c',
-    input: ({ props, checked, focusedState }) =>
-        classNames('p-checkbox-box', {
+    box: 'p-checkbox-box',
+    input: 'p-checkbox-input',
+    icon: 'p-checkbox-icon',
+    root: ({ props, checked }) =>
+        classNames('p-checkbox p-component', {
             'p-highlight': checked,
             'p-disabled': props.disabled,
-            'p-focus': focusedState
-        }),
-    root: ({ props, checked, focusedState }) =>
-        classNames('p-checkbox p-component', {
-            'p-checkbox-checked': checked,
-            'p-checkbox-disabled': props.disabled,
-            'p-checkbox-focused': focusedState
+            'p-invalid': props.invalid,
+            'p-variant-filled': props.variant === 'filled'
         })
 };
 
 const styles = `
-.p-checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-    position: relative;
-}
+@layer primereact {
+    .p-checkbox {
+        position: relative;
+        display: inline-flex;
+        user-select: none;
+        vertical-align: bottom;
+    }
 
-.p-checkbox.p-checkbox-disabled {
-    cursor: auto;
-}
+    .p-checkbox-input {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        z-index: 1;
+        outline: 0 none;
+        cursor: pointer;
+    }
 
-.p-checkbox-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}        
+    .p-checkbox-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 `;
 
 export const CheckboxBase = ComponentBase.extend({
