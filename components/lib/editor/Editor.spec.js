@@ -9,6 +9,7 @@ describe('Editor', () => {
     // https://github.com/primefaces/primereact/issues/6067
     test('onTextChange handler does not reflect updated props', async () => {
         const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
         function BasicDemo() {
             const [state, setState] = useState(1);
 
@@ -40,6 +41,7 @@ describe('Editor', () => {
                         ref={ref}
                         value={text}
                         onTextChange={(e) => {
+                            // eslint-disable-next-line no-console
                             console.log(`Editor. state is:${state}`);
                             setText(e.htmlValue);
                         }}
