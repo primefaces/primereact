@@ -138,7 +138,7 @@ export const MultiSelect = React.memo(
             if (selected) value = props.value.filter((val) => !ObjectUtils.equals(val, getOptionValue(option), equalityKey));
             else value = [...(props.value || []), getOptionValue(option)];
 
-            updateModel(event, value, value);
+            updateModel(event, value, option);
             index !== -1 && setFocusedOptionIndex(index);
         };
 
