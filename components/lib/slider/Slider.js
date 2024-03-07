@@ -176,7 +176,7 @@ export const Slider = React.memo(
                     }
                 }
 
-                return false;
+                return {};
             }
 
             return {
@@ -188,13 +188,11 @@ export const Slider = React.memo(
         const setValue = (event) => {
             let handleValue;
 
-            const finger = trackFinger(event);
+            const { pageX, pageY } = trackFinger(event);
 
-            if (!finger) {
+            if (!pageX || !pageY) {
                 return;
             }
-
-            const { pageX, pageY } = finger;
 
             if (horizontal) handleValue = ((pageX - initX.current) * 100) / barWidth.current;
             else handleValue = ((initY.current + barHeight.current - pageY) * 100) / barHeight.current;
