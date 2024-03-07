@@ -17,6 +17,26 @@ const classes = {
         })
 };
 
+const styles = `
+.p-checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: bottom;
+    position: relative;
+}
+
+.p-checkbox.p-checkbox-disabled {
+    cursor: auto;
+}
+
+.p-checkbox-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}        
+`;
+
 export const CheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Checkbox',
@@ -45,6 +65,7 @@ export const CheckboxBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes
+        classes,
+        styles
     }
 });

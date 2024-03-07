@@ -17,6 +17,36 @@ const classes = {
     icon: 'p-radiobutton-icon'
 };
 
+const styles = `
+@layer primereact {
+    .p-radiobutton {
+        display: inline-flex;
+        cursor: pointer;
+        user-select: none;
+        vertical-align: bottom;
+    }
+    
+    .p-radiobutton-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .p-radiobutton-icon {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0) scale(.1);
+        border-radius: 50%;
+        visibility: hidden;
+    }
+    
+    .p-radiobutton-box.p-highlight .p-radiobutton-icon {
+        transform: translateZ(0) scale(1.0, 1.0);
+        visibility: visible;
+    }
+}
+`;
+
 export const RadioButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'RadioButton',
@@ -39,6 +69,7 @@ export const RadioButtonBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes
+        classes,
+        styles
     }
 });
