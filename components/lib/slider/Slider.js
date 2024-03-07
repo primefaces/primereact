@@ -163,32 +163,19 @@ export const Slider = React.memo(
             barHeight.current = elementRef.current.offsetHeight;
         };
 
-        const trackFinger = (event) => {
-            if (touchId.current !== undefined && ObjectUtils.isNotEmpty(event.changedTouches)) {
-                for (let i = 0; i < event.changedTouches.length; i += 1) {
-                    const touch = event.changedTouches[i];
-
-                    if (touch.identifier === touchId.current) {
-                        return {
-                            pageX: touch.pageX,
-                            pageY: touch.pageY
-                        };
-                    }
-                }
-
-                return {};
-            }
+        const trackTouch = (event) => {
+            const _event = Array.from(event.changedTouches ?? []).find((t) => t.identifier === touchId.current) || event;
 
             return {
-                pageX: event.pageX,
-                pageY: event.pageY
+                pageX: _event.pageX,
+                pageY: _event.pageY
             };
         };
 
         const setValue = (event) => {
             let handleValue;
 
-            const { pageX, pageY } = trackFinger(event);
+            const { pageX, pageY } = trackTouch(event);
 
             if (!pageX || !pageY) {
                 return;
