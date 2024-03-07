@@ -25,24 +25,6 @@ const classes = {
     label: 'p-button-label'
 };
 
-const styles = `
-@layer primereact {
-    .p-togglebutton {
-        position: relative;
-        display: inline-flex;
-        user-select: none;
-        vertical-align: bottom;
-    }
-    
-    .p-togglebutton-input {
-        cursor: pointer;
-    }
-    
-    .p-togglebutton .p-button {
-        flex: 1 1 auto;
-    }
-}`;
-
 export const ToggleButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ToggleButton',
@@ -64,7 +46,6 @@ export const ToggleButtonBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes,
-        styles
+        classes
     }
 });
