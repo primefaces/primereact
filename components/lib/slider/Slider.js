@@ -19,6 +19,7 @@ export const Slider = React.memo(
         const initY = React.useRef(0);
         const barWidth = React.useRef(0);
         const barHeight = React.useRef(0);
+        const touchId = React.useRef();
         const value = props.range ? props.value || [props.min, props.max] : props.value || props.min || 0;
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
@@ -69,6 +70,8 @@ export const Slider = React.memo(
 
                 props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: newValue });
 
+                touchId.current = undefined;
+
                 unbindDocumentMouseMoveListener();
                 unbindDocumentMouseUpListener();
                 unbindDocumentTouchMoveListener();
@@ -83,6 +86,10 @@ export const Slider = React.memo(
         };
 
         const onTouchStart = (event, index) => {
+            if (event.changedTouches && event.changedTouches[0]) {
+                touchId.current = event.changedTouches[0].identifier;
+            }
+
             bindDocumentTouchMoveListener();
             bindDocumentTouchEndListener();
             onDragStart(event, index);
@@ -156,15 +163,38 @@ export const Slider = React.memo(
             barHeight.current = elementRef.current.offsetHeight;
         };
 
+        const trackFinger = (event) => {
+            if (touchId.current !== undefined && ObjectUtils.isNotEmpty(event.changedTouches)) {
+                for (let i = 0; i < event.changedTouches.length; i += 1) {
+                    const touch = event.changedTouches[i];
+
+                    if (touch.identifier === touchId.current) {
+                        return {
+                            pageX: touch.pageX,
+                            pageY: touch.pageY
+                        };
+                    }
+                }
+
+                return false;
+            }
+
+            return {
+                pageX: event.pageX,
+                pageY: event.pageY
+            };
+        };
+
         const setValue = (event) => {
             let handleValue;
 
-            let pageX = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageX : event.pageX;
-            let pageY = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageY : event.pageY;
+            const finger = trackFinger(event);
 
-            if (!pageX || !pageY) {
+            if (!finger) {
                 return;
             }
+
+            const { pageX, pageY } = finger;
 
             if (horizontal) handleValue = ((pageX - initX.current) * 100) / barWidth.current;
             else handleValue = ((initY.current + barHeight.current - pageY) * 100) / barHeight.current;
