@@ -49060,7 +49060,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49084,7 +49084,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49096,7 +49096,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
