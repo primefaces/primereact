@@ -486,8 +486,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 {
                     ref: headerRef,
                     style: props.headerStyle,
-                    className: cx('header'),
-                    onMouseDown: onDragStart
+                    className: cx('header')
                 },
                 ptm('header')
             );

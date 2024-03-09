@@ -168,15 +168,15 @@ interface ResizeEventOptions {
  * Custom draggable event options.
  */
 interface DraggableOptions {
-     /**
+    /**
      * The target element to listen to.
      */
     targetRef: React.Ref<HTMLElement>;
-     /**
+    /**
      * The draggable handle element.
      */
     handleRef: React.Ref<HTMLElement>;
-     /**
+    /**
      * Callback to invoke when dragging dialog.
      * @param {React.DragEvent<HTMLElement>} event - Browser event.
      */
@@ -191,17 +191,17 @@ interface DraggableOptions {
      * @param {React.DragEvent<HTMLElement>} event - Browser event.
      */
     onDragStart?(event: React.DragEvent<HTMLElement>): void;
-   /**
+    /**
      * Enables the draggable feature.
      * @defaultValue true
      */
     enabled: true;
-     /**
+    /**
      * Flag to keep the draggable in the viewport, else let it go outside the bounds.
      * @defaultValue false
      */
     keepInViewport: false;
-   /**
+    /**
      * The reactangular limits if you want to keep draggable to a certain area.
      */
     rectLimits?: DOMRect;
