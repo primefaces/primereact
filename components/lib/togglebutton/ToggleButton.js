@@ -1,13 +1,30 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
+        const [focusedState, setFocusedState] = React.useState(false);
+        const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
+
+        useHandleStyle(ToggleButtonBase.css.styles, isUnstyled, { name: 'togglebutton' });
+
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
-        const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
+        const hasIcon = props.onIcon && props.offIcon;
         const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
@@ -16,8 +33,12 @@ export const ToggleButton = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: !props.checked,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -34,14 +55,26 @@ export const ToggleButton = React.memo(
             }
         };
 
+        const onFocus = (event) => {
+            setFocusedState(true);
+            props.onFocus && props.onFocus(event);
+        };
+
+        const onBlur = (event) => {
+            setFocusedState(false);
+            props.onBlur && props.onBlur(event);
+        };
+
         const createIcon = () => {
             if (hasIcon) {
-                const iconClassName = classNames('p-button-icon p-c', {
-                    'p-button-icon-left': props.iconPos === 'left' && label,
-                    'p-button-icon-right': props.iconPos === 'right' && label
-                });
+                const iconProps = mergeProps(
+                    {
+                        className: cx('icon', { label })
+                    },
+                    ptm('icon')
+                );
 
-                return IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                return IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
             }
 
             return null;
@@ -49,65 +82,58 @@ export const ToggleButton = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
+        });
+
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const tabIndex = props.disabled ? -1 : props.tabIndex;
-        const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
-        const className = classNames(
-            'p-button p-togglebutton p-component',
-            {
-                'p-button-icon-only': hasIcon && !hasLabel,
-                'p-highlight': props.checked,
-                'p-disabled': props.disabled
-            },
-            props.className
-        );
         const iconElement = createIcon();
+
+        const labelProps = mergeProps(
+            {
+                className: cx('label')
+            },
+            ptm('label')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root', { hasIcon, hasLabel }),
+                style: props.style,
+                onClick: toggle,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                tabIndex: tabIndex,
+                role: 'button',
+                'aria-pressed': props.checked,
+                'data-p-highlight': props.checked,
+                'data-p-disabled': props.disabled
+            },
+            ToggleButtonBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
             <>
-                <div
-                    ref={elementRef}
-                    id={props.id}
-                    className={className}
-                    style={props.style}
-                    {...otherProps}
-                    onClick={toggle}
-                    onFocus={props.onFocus}
-                    onBlur={props.onBlur}
-                    onKeyDown={onKeyDown}
-                    tabIndex={tabIndex}
-                    role="button"
-                    aria-pressed={props.checked}
-                >
+                <div {...rootProps}>
                     {iconElement}
-                    <span className="p-button-label">{label}</span>
+                    <span {...labelProps}>{label}</span>
                     <Ripple />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 ToggleButton.displayName = 'ToggleButton';
-ToggleButton.defaultProps = {
-    __TYPE: 'ToggleButton',
-    id: null,
-    onIcon: null,
-    offIcon: null,
-    onLabel: 'Yes',
-    offLabel: 'No',
-    iconPos: 'left',
-    style: null,
-    className: null,
-    checked: false,
-    tabIndex: 0,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null
-};

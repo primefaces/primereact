@@ -9,7 +9,7 @@ export function CodeHighlight(props) {
     }, []);
 
     return (
-        <pre style={props.style}>
+        <pre style={props.style} tabIndex="-1">
             <code ref={codeElement} className={languageClassName}>
                 {props.children}&nbsp;
             </code>

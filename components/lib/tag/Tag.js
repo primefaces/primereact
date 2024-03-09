@@ -1,40 +1,60 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { IconUtils, classNames } from '../utils/Utils';
+import { TagBase } from './TagBase';
 
-export const Tag = React.forwardRef((props, ref) => {
+export const Tag = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = TagBase.getProps(inProps, context);
+    const { ptm, cx, isUnstyled } = TagBase.setMetaData({
+        props
+    });
+
+    useHandleStyle(TagBase.css.styles, isUnstyled, { name: 'tag' });
+
     const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, Tag.defaultProps);
-    const className = classNames(
-        'p-tag p-component',
+
+    const iconProps = mergeProps(
         {
-            [`p-tag-${props.severity}`]: props.severity !== null,
-            'p-tag-rounded': props.rounded
+            className: cx('icon')
         },
-        props.className
+        ptm('icon')
     );
-    const icon = IconUtils.getJSXIcon(props.icon, { className: 'p-tag-icon' }, { props });
+
+    const icon = IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
 
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => elementRef.current
     }));
 
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            className: classNames(props.className, cx('root')),
+            style: props.style
+        },
+        TagBase.getOtherProps(props),
+        ptm('root')
+    );
+
+    const valueProps = mergeProps(
+        {
+            className: cx('value')
+        },
+        ptm('value')
+    );
+
     return (
-        <span ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <span {...rootProps}>
             {icon}
-            <span className="p-tag-value">{props.value}</span>
+            <span {...valueProps}>{props.value}</span>
             <span>{props.children}</span>
         </span>
     );
 });
 
 Tag.displayName = 'Tag';
-Tag.defaultProps = {
-    __TYPE: 'Tag',
-    value: null,
-    severity: null,
-    rounded: false,
-    icon: null,
-    style: null,
-    className: null
-};

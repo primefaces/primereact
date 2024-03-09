@@ -1,10 +1,39 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { BanIcon } from '../icons/ban';
+import { StarIcon } from '../icons/star';
+import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
+import { RatingBase } from './RatingBase';
 
 export const Rating = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = RatingBase.getProps(inProps, context);
+
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
+        const [isFocusVisibleItem, setFocusVisibleItem] = React.useState(true);
+
         const elementRef = React.useRef(null);
+
+        const { ptm, cx, isUnstyled } = RatingBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(RatingBase.css.styles, isUnstyled, { name: 'rating' });
+
+        const getPTOptions = (value, key) => {
+            return ptm(key, {
+                context: {
+                    active: value <= props.value
+                }
+            });
+        };
+
         const enabled = !props.disabled && !props.readOnly;
         const tabIndex = enabled ? 0 : null;
 
@@ -13,8 +42,12 @@ export const Rating = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: i,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -22,6 +55,8 @@ export const Rating = React.memo(
                     }
                 });
             }
+
+            setFocusedOptionIndex(i);
 
             event.preventDefault();
         };
@@ -31,8 +66,12 @@ export const Rating = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: null,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -45,9 +84,35 @@ export const Rating = React.memo(
         };
 
         const onStarKeyDown = (event, value) => {
-            if (event.key === 'Enter') {
-                rate(event, value);
+            switch (event.key) {
+                case 'Enter':
+                case 'Space':
+                    rate(event, value);
+                    event.preventDefault();
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    event.preventDefault();
+                    rate(event, props.value - 1 < 1 ? props.stars : props.value - 1);
+                    break;
+
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    event.preventDefault();
+                    rate(event, props.value + 1 > props.stars ? 1 : props.value + 1);
+                    break;
+
+                default:
+                    break;
             }
+        };
+
+        const onFocus = (event, value) => {
+            setFocusedOptionIndex(value);
+        };
+
+        const onBlur = (event) => {
+            setFocusedOptionIndex(-1);
         };
 
         const onCancelKeyDown = (event) => {
@@ -59,12 +124,37 @@ export const Rating = React.memo(
         const createIcons = () => {
             return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
                 const active = value <= props.value;
-                const className = classNames('p-rating-item', { 'p-rating-item-active': active });
-                const icon = active ? { type: props.onIcon, props: props.onIconProps } : { type: props.offIcon, props: props.offIconProps };
-                const content = IconUtils.getJSXIcon(icon.type, { className: 'p-rating-icon', ...icon.props }, { props });
+                const onIconProps = mergeProps(
+                    {
+                        className: cx('onIcon')
+                    },
+                    getPTOptions(props.value, 'onIcon')
+                );
+                const offIconProps = mergeProps(
+                    {
+                        className: cx('onIcon')
+                    },
+                    getPTOptions(props.value, 'offIcon')
+                );
+                const icon = active ? { type: props.onIcon || <StarFillIcon {...onIconProps} /> } : { type: props.offIcon || <StarIcon {...offIconProps} /> };
+                const content = IconUtils.getJSXIcon(icon.type, active ? { ...onIconProps } : { ...offIconProps }, { props });
+
+                const itemProps = mergeProps(
+                    {
+                        key: value,
+                        className: cx('item', { active, focusedOptionIndex, isFocusVisibleItem, value }),
+                        'data-p-focused': value === focusedOptionIndex,
+                        tabIndex: tabIndex,
+                        onClick: (e) => rate(e, value),
+                        onKeyDown: (e) => onStarKeyDown(e, value),
+                        onFocus: (e) => onFocus(e, value),
+                        onBlur: (e) => onBlur(e)
+                    },
+                    getPTOptions(props.value, 'item')
+                );
 
                 return (
-                    <div key={value} className={className} tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
+                    <div key={value} {...itemProps}>
                         {content}
                     </div>
                 );
@@ -73,13 +163,26 @@ export const Rating = React.memo(
 
         const createCancelIcon = () => {
             if (props.cancel) {
-                const content = IconUtils.getJSXIcon(props.cancelIcon, { className: 'p-rating-icon p-rating-cancel', ...props.cancelIconProps }, { props });
-
-                return (
-                    <div className="p-rating-item p-rating-cancel-item" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
-                        {content}
-                    </div>
+                const cancelIconProps = mergeProps(
+                    {
+                        className: cx('cancelIcon')
+                    },
+                    ptm('cancelIcon')
                 );
+                const icon = props.cancelIcon || <BanIcon {...cancelIconProps} />;
+                const content = IconUtils.getJSXIcon(icon, { ...cancelIconProps, ...props.cancelIconProps }, { props });
+
+                const cancelItemProps = mergeProps(
+                    {
+                        className: cx('cancelItem'),
+                        onClick: clear,
+                        tabIndex: tabIndex,
+                        onKeyDown: onCancelKeyDown
+                    },
+                    ptm('cancelItem')
+                );
+
+                return <div {...cancelItemProps}>{content}</div>;
             }
 
             return null;
@@ -91,48 +194,30 @@ export const Rating = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Rating.defaultProps);
-        const className = classNames(
-            'p-rating',
+        const rootProps = mergeProps(
             {
-                'p-disabled': props.disabled,
-                'p-readonly': props.readOnly
+                ref: elementRef,
+                id: props.id,
+                className: cx('root'),
+                style: props.style
             },
-            props.className
+            RatingBase.getOtherProps(props),
+            ptm('root')
         );
+
         const cancelIcon = createCancelIcon();
         const icons = createIcons();
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     {cancelIcon}
                     {icons}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 Rating.displayName = 'Rating';
-Rating.defaultProps = {
-    __TYPE: 'Rating',
-    id: null,
-    value: null,
-    disabled: false,
-    readOnly: false,
-    stars: 5,
-    cancel: true,
-    style: null,
-    className: null,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onIcon: 'pi pi-star-fill',
-    offIcon: 'pi pi-star',
-    cancelIcon: 'pi pi-ban',
-    cancelIconProps: null,
-    onIconProps: null,
-    offIconProps: null
-};

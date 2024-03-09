@@ -17,18 +17,27 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
      * @param {boolean} options.valid It is controlled by PrimeReact. It is determined whether it is valid or not according to some custom validation.
      */
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        target: 'window',
         type: 'click',
         listener: (event) => {
             listener && listener(event, { type: 'outside', valid: event.which !== 3 && isOutsideClicked(event) });
         }
     });
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
+        target: 'window',
         listener: (event) => {
             listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
         }
     });
+    const [bindWindowOrientationChangeListener, unbindWindowOrientationChangeListener] = useEventListener({
+        target: 'window',
+        type: 'orientationchange',
+        listener: (event) => {
+            listener && listener(event, { type: 'orientationchange', valid: true });
+        }
+    });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
-        target: target,
+        target,
         listener: (event) => {
             listener && listener(event, { type: 'scroll', valid: true });
         }
@@ -41,12 +50,14 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
     const bind = () => {
         bindDocumentClickListener();
         bindWindowResizeListener();
+        bindWindowOrientationChangeListener();
         bindOverlayScrollListener();
     };
 
     const unbind = () => {
         unbindDocumentClickListener();
         unbindWindowResizeListener();
+        unbindWindowOrientationChangeListener();
         unbindOverlayScrollListener();
     };
 

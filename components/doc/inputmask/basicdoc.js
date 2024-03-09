@@ -1,36 +1,40 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
 import { useState } from 'react';
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     const code = {
         basic: `
 <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
-export default function BasicDoc() {
-    const [value, setValue] = useState('');
+export default function BasicDemo() {
+    const [value, setValue] = useState();
 
     return (
-        <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
+import React, { useState } from "react";
+import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
-export default function BasicDoc() {
-    const [value, setValue] = useState<string>('');
+export default function BasicDemo() {
+    const [value, setValue] = useState<string | undefined>();
 
     return (
-        <InputMask value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e: InputMaskChangeEvent) => setValue(e.target.value)} mask="99-999999" placeholder="99-999999"/>
+        </div>
     )
 }
         `
@@ -40,7 +44,7 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties, <i>mask</i> property is required to define the mask of the input.
+                    InputMask is used as a controlled input with <i>value</i> and <i>onChange</i> properties along with the <i>mask</i> property to define the mask.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

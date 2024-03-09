@@ -1,61 +1,671 @@
 {
     "data": [
         {
-            "name": "General",
-            "meta": ["general"],
+            "name": "Getting Started",
+            "icon": "pi pi-home",
             "children": [
                 {
-                    "name": "Get Started",
-                    "to": "/setup",
-                    "meta": ["get started", "browser support", "cdn", "quickstart", "starter"]
+                    "name": "Installation",
+                    "to": "/installation"
                 },
                 {
-                    "name": "Examples",
-                    "href": "https://github.com/primefaces/primereact-examples",
-                    "meta": ["create-react-app", "next.js", "examples", "demo", "quickstart", "starter"]
+                    "name": "Configuration",
+                    "to": "/configuration"
                 },
                 {
-                    "name": "Locale",
-                    "to": "/locale",
-                    "meta": ["i18N", "locale", "translate", "internationalization"]
+                    "name": "Playground",
+                    "to": "/playground"
+                }
+            ]
+        },
+        {
+            "name": "Components",
+            "icon": "pi pi-compass",
+            "children": [
+                {
+                    "name": "Form",
+                    "children": [
+                        {
+                            "name": "AutoComplete",
+                            "to": "/autocomplete"
+                        },
+                        {
+                            "name": "Calendar",
+                            "to": "/calendar"
+                        },
+                        {
+                            "name": "CascadeSelect",
+                            "to": "/cascadeselect"
+                        },
+                        {
+                            "name": "Checkbox",
+                            "to": "/checkbox"
+                        },
+                        {
+                            "name": "Chips",
+                            "to": "/chips"
+                        },
+                        {
+                            "name": "ColorPicker",
+                            "to": "/colorpicker"
+                        },
+                        {
+                            "name": "Dropdown",
+                            "to": "/dropdown"
+                        },
+                        {
+                            "name": "Editor",
+                            "to": "/editor"
+                        },
+                        {
+                            "name": "InputGroup",
+                            "to": "/inputgroup"
+                        },
+                        {
+                            "name": "InputMask",
+                            "to": "/inputmask"
+                        },
+                        {
+                            "name": "InputSwitch",
+                            "to": "/inputswitch"
+                        },
+                        {
+                            "name": "InputNumber",
+                            "to": "/inputnumber"
+                        },
+                        {
+                            "name": "InputText",
+                            "to": "/inputtext"
+                        },
+                        {
+                            "name": "InputTextarea",
+                            "to": "/inputtextarea"
+                        },
+                        {
+                            "name": "KeyFilter",
+                            "to": "/keyfilter"
+                        },
+                        {
+                            "name": "Knob",
+                            "to": "/knob"
+                        },
+                        {
+                            "name": "Listbox",
+                            "to": "/listbox"
+                        },
+                        {
+                            "name": "Mention",
+                            "to": "/mention"
+                        },
+                        {
+                            "name": "MultiSelect",
+                            "to": "/multiselect"
+                        },
+                        {
+                            "name": "MultiStateCheckbox",
+                            "to": "/multistatecheckbox"
+                        },
+                        {
+                            "name": "Password",
+                            "to": "/password"
+                        },
+                        {
+                            "name": "RadioButton",
+                            "to": "/radiobutton"
+                        },
+                        {
+                            "name": "Rating",
+                            "to": "/rating"
+                        },
+                        {
+                            "name": "SelectButton",
+                            "to": "/selectbutton"
+                        },
+                        {
+                            "name": "Slider",
+                            "to": "/slider"
+                        },
+                        {
+                            "name": "TreeSelect",
+                            "to": "/treeselect"
+                        },
+                        {
+                            "name": "TriStateCheckbox",
+                            "to": "/tristatecheckbox"
+                        },
+                        {
+                            "name": "ToggleButton",
+                            "to": "/togglebutton"
+                        }
+                    ]
                 },
                 {
-                    "name": "Roadmap",
-                    "to": "/roadmap",
-                    "meta": ["roadmap", "strategy", "blueprint", "plan", "goal", "objective"],
-                    "badge": "new"
+                    "name": "Button",
+                    "children": [
+                        {
+                            "name": "Button",
+                            "to": "/button"
+                        },
+                        {
+                            "name": "Speed Dial",
+                            "to": "/speeddial"
+                        },
+                        {
+                            "name": "SplitButton",
+                            "to": "/splitbutton"
+                        }
+                    ]
+                },
+                {
+                    "name": "Data",
+                    "children": [
+                        {
+                            "name": "DataTable",
+                            "to": "/datatable"
+                        },
+                        {
+                            "name": "DataView",
+                            "to": "/dataview"
+                        },
+                        {
+                            "name": "DataScroller",
+                            "to": "/datascroller"
+                        },
+                        {
+                            "name": "OrderList",
+                            "to": "/orderlist"
+                        },
+                        {
+                            "name": "Org Chart",
+                            "to": "/organizationchart"
+                        },
+                        {
+                            "name": "Paginator",
+                            "to": "/paginator"
+                        },
+                        {
+                            "name": "PickList",
+                            "to": "/picklist"
+                        },
+                        {
+                            "name": "Tree",
+                            "to": "/tree"
+                        },
+                        {
+                            "name": "TreeTable",
+                            "to": "/treetable"
+                        },
+                        {
+                            "name": "Timeline",
+                            "to": "/timeline"
+                        },
+                        {
+                            "name": "VirtualScroller",
+                            "to": "/virtualscroller"
+                        }
+                    ]
+                },
+                {
+                    "name": "Panel",
+                    "children": [
+                        {
+                            "name": "Accordion",
+                            "to": "/accordion"
+                        },
+                        {
+                            "name": "Card",
+                            "to": "/card"
+                        },
+                        {
+                            "name": "Deferred",
+                            "to": "/deferredcontent"
+                        },
+                        {
+                            "name": "Divider",
+                            "to": "/divider"
+                        },
+                        {
+                            "name": "Fieldset",
+                            "to": "/fieldset"
+                        },
+                        {
+                            "name": "Panel",
+                            "to": "/panel"
+                        },
+                        {
+                            "name": "ScrollPanel",
+                            "to": "/scrollpanel"
+                        },
+                        {
+                            "name": "Splitter",
+                            "to": "/splitter"
+                        },
+                        {
+                            "name": "TabView",
+                            "to": "/tabview"
+                        },
+                        {
+                            "name": "Toolbar",
+                            "to": "/toolbar"
+                        }
+                    ]
+                },
+                {
+                    "name": "Overlay",
+                    "children": [
+                        {
+                            "name": "ConfirmDialog",
+                            "to": "/confirmdialog"
+                        },
+                        {
+                            "name": "ConfirmPopup",
+                            "to": "/confirmpopup"
+                        },
+                        {
+                            "name": "Dialog",
+                            "to": "/dialog"
+                        },
+                        {
+                            "name": "OverlayPanel",
+                            "to": "/overlaypanel"
+                        },
+                        {
+                            "name": "Sidebar",
+                            "to": "/sidebar"
+                        },
+                        {
+                            "name": "Tooltip",
+                            "to": "/tooltip"
+                        }
+                    ]
+                },
+                {
+                    "name": "File",
+                    "children": [
+                        {
+                            "name": "Upload",
+                            "to": "/fileupload"
+                        }
+                    ]
+                },
+                {
+                    "name": "Menu",
+                    "children": [
+                        {
+                            "name": "Breadcrumb",
+                            "to": "/breadcrumb"
+                        },
+                        {
+                            "name": "ContextMenu",
+                            "to": "/contextmenu"
+                        },
+                        {
+                            "name": "Dock",
+                            "to": "/dock"
+                        },
+                        {
+                            "name": "MegaMenu",
+                            "to": "/megamenu"
+                        },
+                        {
+                            "name": "Menu",
+                            "to": "/menu"
+                        },
+                        {
+                            "name": "Menubar",
+                            "to": "/menubar"
+                        },
+                        {
+                            "name": "PanelMenu",
+                            "to": "/panelmenu"
+                        },
+                        {
+                            "name": "Steps",
+                            "to": "/steps"
+                        },
+                        {
+                            "name": "TabMenu",
+                            "to": "/tabmenu"
+                        },
+                        {
+                            "name": "TieredMenu",
+                            "to": "/tieredmenu"
+                        }
+                    ]
+                },
+                {
+                    "name": "Chart",
+                    "children": [
+                        {
+                            "name": "Chart.js",
+                            "to": "/chart"
+                        }
+                    ]
+                },
+                {
+                    "name": "Messages",
+                    "children": [
+                        {
+                            "name": "Message",
+                            "to": "/message"
+                        },
+                        {
+                            "name": "Messages",
+                            "to": "/messages"
+                        },
+                        {
+                            "name": "Toast",
+                            "to": "/toast"
+                        }
+                    ]
+                },
+                {
+                    "name": "Media",
+                    "children": [
+                        {
+                            "name": "Carousel",
+                            "to": "/carousel"
+                        },
+                        {
+                            "name": "Galleria",
+                            "to": "/galleria"
+                        },
+                        {
+                            "name": "Image",
+                            "to": "/image"
+                        }
+                    ]
+                },
+                {
+                    "name": "Misc",
+                    "children": [
+                        {
+                            "name": "Avatar",
+                            "to": "/avatar"
+                        },
+                        {
+                            "name": "Badge",
+                            "to": "/badge"
+                        },
+                        {
+                            "name": "BlockUI",
+                            "to": "/blockui"
+                        },
+                        {
+                            "name": "Chip",
+                            "to": "/chip"
+                        },
+                        {
+                            "name": "Inplace",
+                            "to": "/inplace"
+                        },
+                        {
+                            "name": "ScrollTop",
+                            "to": "/scrolltop"
+                        },
+                        {
+                            "name": "Skeleton",
+                            "to": "/skeleton"
+                        },
+                        {
+                            "name": "ProgressBar",
+                            "to": "/progressbar"
+                        },
+                        {
+                            "name": "ProgressSpinner",
+                            "to": "/progressspinner"
+                        },
+                        {
+                            "name": "Ripple",
+                            "to": "/ripple"
+                        },
+                        {
+                            "name": "StyleClass",
+                            "to": "/styleclass"
+                        },
+                        {
+                            "name": "Tag",
+                            "to": "/tag"
+                        },
+                        {
+                            "name": "Terminal",
+                            "to": "/terminal"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Theming",
+            "icon": "pi pi-palette",
+            "children": [
+                {
+                    "name": "Overview",
+                    "to": "/theming"
+                },
+                {
+                    "name": "Colors",
+                    "to": "/colors"
+                },
+                {
+                    "name": "SASS API",
+                    "href": "https://www.primefaces.org/designer/api/primereact/9.0.0"
+                },
+                {
+                    "name": "Unstyled Mode",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "to": "/unstyled"
+                        },
+                        {
+                            "name": "Bootstrap",
+                            "to": "/bootstrap"
+                        },
+                        {
+                            "name": "Bulma",
+                            "to": "/bulma"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Pass Through",
+            "icon": "pi pi-directions",
+            "to": "/passthrough"
+        },
+        {
+            "name": "Tailwind",
+            "icon": "pi pi-heart",
+            "to": "/tailwind"
+        },
+        {
+            "name": "Figma UI Kit",
+            "icon": "pi pi-pencil",
+            "to": "/uikit"
+        },
+        {
+            "name": "Icons",
+            "icon": "pi pi-eye",
+            "children": [
+                {
+                    "name": "Prime Icons",
+                    "to": "/icons"
+                },
+                {
+                    "name": "Custom Icons",
+                    "to": "/customicons"
+                }
+            ]
+        },
+        {
+            "name": "Hooks",
+            "icon": "pi pi-link",
+            "children": [
+                {
+                    "name": "Lifecycle",
+                    "children": [
+                        {
+                            "name": "useMountEffect",
+                            "to": "/hooks/usemounteffect"
+                        },
+                        {
+                            "name": "useUpdateEffect",
+                            "to": "/hooks/useupdateeffect"
+                        },
+                        {
+                            "name": "useUnmountEffect",
+                            "to": "/hooks/useunmounteffect"
+                        }
+                    ]
+                },
+                {
+                    "name": "Listener",
+                    "children": [
+                        {
+                            "name": "useEventListener",
+                            "to": "/hooks/useeventlistener"
+                        },
+                        {
+                            "name": "useOverlayListener",
+                            "to": "/hooks/useoverlaylistener"
+                        },
+                        {
+                            "name": "useOverlayScrollListener",
+                            "to": "/hooks/useoverlayscrolllistener"
+                        },
+                        {
+                            "name": "useResizeListener",
+                            "to": "/hooks/useresizelistener"
+                        }
+                    ]
+                },
+                {
+                    "name": "Element",
+                    "children": [
+                        {
+                            "name": "useClickOutside",
+                            "to": "/hooks/useclickoutside"
+                        },
+                        {
+                            "name": "useIntersectionObserver",
+                            "to": "/hooks/useintersectionobserver"
+                        },
+                        {
+                            "name": "useMouse",
+                            "to": "/hooks/usemouse"
+                        },
+                        {
+                            "name": "useMove",
+                            "to": "/hooks/usemove"
+                        }
+                    ]
+                },
+                {
+                    "name": "Timer",
+                    "children": [
+                        {
+                            "name": "useInterval",
+                            "to": "/hooks/useinterval"
+                        },
+                        {
+                            "name": "useTimeout",
+                            "to": "/hooks/usetimeout"
+                        }
+                    ]
+                },
+                {
+                    "name": "State",
+                    "children": [
+                        {
+                            "name": "useCounter",
+                            "to": "/hooks/usecounter"
+                        },
+                        {
+                            "name": "useDebounce",
+                            "to": "/hooks/usedebounce"
+                        },
+                        {
+                            "name": "useFavicon",
+                            "to": "/hooks/usefavicon"
+                        },
+                        {
+                            "name": "usePrevious",
+                            "to": "/hooks/useprevious"
+                        },
+                        {
+                            "name": "useStorage",
+                            "to": "/hooks/usestorage"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Templates",
+            "icon": "pi pi-star",
+            "to": "/templates"
+        },
+        {
+            "name": "PrimeBlocks",
+            "icon": "pi pi-server",
+            "href": "https://blocks.primereact.org"
+        },
+        {
+            "name": "PrimeFlex CSS",
+            "icon": "pi pi-table",
+            "href": "https://primeflex.org",
+            "target": "_blank"
+        },
+        {
+            "name": "Guides",
+            "icon": "pi pi-book",
+            "children": [
+                {
+                    "name": "Accessibility",
+                    "to": "/guides/accessibility"
+                },
+                {
+                    "name": "CSS Layer",
+                    "to": "/guides/csslayer"
+                },
+                {
+                    "name": "PrimeTV",
+                    "icon": "pi pi-youtube",
+                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
                 }
             ]
         },
         {
             "name": "Support",
-            "meta": ["support"],
+            "icon": "pi pi-question",
             "children": [
                 {
+                    "name": "Discord",
+                    "href": "https://discord.gg/gzKFYnpmCY"
+                },
+                {
                     "name": "Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57",
-                    "meta": ["forum"]
+                    "href": "https://github.com/orgs/primefaces/discussions"
                 },
                 {
-                    "name": "Discord Chat",
-                    "href": "https://discord.gg/gzKFYnpmCY",
-                    "meta": ["discord"]
-                },
-                {
-                    "name": "PRO Support",
-                    "to": "/support",
-                    "meta": ["pro support"],
-                    "badge": "new"
+                    "name": "PRO",
+                    "to": "/support"
                 }
             ]
         },
         {
-            "name": "Resources",
-            "meta": ["resources"],
+            "name": "Discover",
+            "icon": "pi pi-search",
             "children": [
                 {
-                    "name": "PrimeTV",
-                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
+                    "name": "About Us",
+                    "to": "/team"
+                },
+                {
+                    "name": "Roadmap",
+                    "to": "/roadmap"
                 },
                 {
                     "name": "Source Code",
@@ -67,8 +677,7 @@
                 },
                 {
                     "name": "Store",
-                    "href": "https://www.primefaces.org/store/",
-                    "meta": ["store", "primestore"]
+                    "href": "https://www.primefaces.org/store/"
                 },
                 {
                     "name": "Twitter",
@@ -81,644 +690,6 @@
                 {
                     "name": "PrimeGear",
                     "href": "https://gear.primefaces.org"
-                }
-            ]
-        },
-        {
-            "name": "Theming",
-            "meta": ["theming"],
-            "children": [
-                {
-                    "name": "Overview",
-                    "to": "/theming",
-                    "meta": ["guide"]
-                },
-                {
-                    "name": "Theme Designer",
-                    "href": "https://www.primefaces.org/designer/primereact",
-                    "meta": ["theme designer"]
-                },
-                {
-                    "name": "Visual Editor",
-                    "href": "https://www.primefaces.org/designer-react",
-                    "meta": ["visual editor"]
-                },
-                {
-                    "name": "Colors",
-                    "to": "/colors"
-                },
-                {
-                    "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/7.0.0",
-                    "meta": ["sass api"]
-                }
-            ]
-        },
-        {
-            "name": "UI Kit",
-            "meta": ["uikit"],
-            "children": [
-                {
-                    "name": "Figma",
-                    "to": "/uikit",
-                    "meta": ["figma"],
-                    "badge": "new"
-                }
-            ]
-        },
-        {
-            "name": "Accessibility",
-            "meta": ["accessibility"],
-            "children": [
-                {
-                    "name": "Overview",
-                    "to": "/accessibility",
-                    "meta": ["accessibility"]
-                }
-            ]
-        },
-        {
-            "name": "PrimeBlocks",
-            "meta": ["primeblocks"],
-            "children": [
-                {
-                    "name": "Free Blocks",
-                    "href": "https://www.primefaces.org/primeblocks-react/#/free",
-                    "meta": ["free blocks"]
-                },
-                {
-                    "name": "All Blocks",
-                    "href": "https://www.primefaces.org/primeblocks-react",
-                    "meta": ["primeblocks"]
-                }
-            ]
-        },
-        {
-            "name": "PrimeFlex",
-            "meta": ["primeflex"],
-            "children": [
-                {
-                    "name": "PrimeFlex v3",
-                    "href": "https://www.primefaces.org/primeflex"
-                },
-                {
-                    "name": "PrimeFlex v2",
-                    "href": "https://github.com/primefaces/primeflex/wiki/PrimeFlex-v2"
-                }
-            ]
-        },
-        {
-            "name": "PrimeIcons",
-            "meta": ["primeicons"],
-            "children": [
-                {
-                    "name": "Icons v6",
-                    "to": "/icons",
-                    "meta": ["icons"],
-                    "badge": "new"
-                }
-            ]
-        },
-        {
-            "name": "Form",
-            "meta": ["input"],
-            "children": [
-                {
-                    "name": "AutoComplete",
-                    "to": "/autocomplete",
-                    "meta": ["autocomplete"]
-                },
-                {
-                    "name": "Calendar",
-                    "to": "/calendar",
-                    "meta": ["calendar", "datepicker"]
-                },
-                {
-                    "name": "CascadeSelect",
-                    "to": "/cascadeselect",
-                    "meta": ["cascadeselect"]
-                },
-                {
-                    "name": "Checkbox",
-                    "to": "/checkbox",
-                    "meta": ["checkbox"]
-                },
-                {
-                    "name": "Chips",
-                    "to": "/chips",
-                    "meta": ["chips"]
-                },
-                {
-                    "name": "ColorPicker",
-                    "to": "/colorpicker",
-                    "meta": ["colorpicker"]
-                },
-                {
-                    "name": "Dropdown",
-                    "to": "/dropdown",
-                    "meta": ["dropdown", "selectOneMenu"]
-                },
-                {
-                    "name": "Editor",
-                    "to": "/editor",
-                    "meta": ["editor"]
-                },
-                {
-                    "name": "InputGroup",
-                    "to": "/inputgroup",
-                    "meta": ["inputgroup"]
-                },
-                {
-                    "name": "InputMask",
-                    "to": "/inputmask",
-                    "meta": ["inputmask"]
-                },
-                {
-                    "name": "InputSwitch",
-                    "to": "/inputswitch",
-                    "meta": ["inputswitch"]
-                },
-                {
-                    "name": "InputText",
-                    "to": "/inputtext",
-                    "meta": ["inputtext"]
-                },
-                {
-                    "name": "InputTextarea",
-                    "to": "/inputtextarea",
-                    "meta": ["inputtextarea"]
-                },
-                {
-                    "name": "InputNumber",
-                    "to": "/inputnumber",
-                    "meta": ["inputnumber"]
-                },
-                {
-                    "name": "Knob",
-                    "to": "/knob",
-                    "meta": ["knob"]
-                },
-                {
-                    "name": "KeyFilter",
-                    "to": "/keyfilter",
-                    "meta": ["keyfilter"]
-                },
-                {
-                    "name": "Listbox",
-                    "to": "/listbox",
-                    "meta": ["listbox"]
-                },
-                {
-                    "name": "Mention",
-                    "to": "/mention",
-                    "meta": ["mention"]
-                },
-                {
-                    "name": "MultiSelect",
-                    "to": "/multiselect",
-                    "meta": ["multiselect", "selectCheckboxMenu"]
-                },
-                {
-                    "name": "Password",
-                    "to": "/password",
-                    "meta": ["password"]
-                },
-                {
-                    "name": "RadioButton",
-                    "to": "/radiobutton",
-                    "meta": ["radiobutton"]
-                },
-                {
-                    "name": "Rating",
-                    "to": "/rating",
-                    "meta": ["rating"]
-                },
-                {
-                    "name": "SelectButton",
-                    "to": "/selectbutton",
-                    "meta": ["selectbutton", "selectOneButton", "selectManyButton"]
-                },
-                {
-                    "name": "Slider",
-                    "to": "/slider",
-                    "meta": ["slider"]
-                },
-                {
-                    "name": "TreeSelect",
-                    "to": "/treeselect",
-                    "meta": ["treeselect"]
-                },
-                {
-                    "name": "TriStateCheckbox",
-                    "to": "/tristatecheckbox",
-                    "meta": ["tristateCheckbox"]
-                },
-                {
-                    "name": "MultiStateCheckbox",
-                    "to": "/multistatecheckbox",
-                    "meta": ["multistatecheckbox"]
-                },
-                {
-                    "name": "ToggleButton",
-                    "to": "/togglebutton",
-                    "meta": ["togglebutton"]
-                }
-            ]
-        },
-        {
-            "name": "Button",
-            "meta": ["button"],
-            "children": [
-                {
-                    "name": "Button",
-                    "to": "/button",
-                    "meta": ["button"]
-                },
-                {
-                    "name": "SplitButton",
-                    "to": "/splitbutton",
-                    "meta": ["splitbutton"]
-                },
-                {
-                    "name": "Speed Dial",
-                    "to": "/speeddial",
-                    "meta": ["speeddial"]
-                }
-            ]
-        },
-        {
-            "name": "Integration",
-            "meta": ["integration"],
-            "children": [
-                {
-                    "name": "Form Libraries",
-                    "to": "/formlibraries",
-                    "meta": ["formlibraries"]
-                }
-            ]
-        },
-        {
-            "name": "Data",
-            "meta": ["data"],
-            "children": [
-                {
-                    "name": "DataTable",
-                    "meta": ["datatable"],
-                    "to": "/datatable"
-                },
-                {
-                    "name": "DataView",
-                    "meta": ["dataview"],
-                    "children": [
-                        {
-                            "name": "DataViews",
-                            "to": "/dataview",
-                            "meta": ["dataviews"]
-                        }
-                    ]
-                },
-                {
-                    "name": "DataScroller",
-                    "to": "/datascroller",
-                    "meta": ["datascroller"]
-                },
-                {
-                    "name": "VirtualScroller",
-                    "to": "/virtualscroller",
-                    "meta": ["virtualscroller"]
-                },
-                {
-                    "name": "Google Maps",
-                    "to": "/gmap",
-                    "meta": ["Google Maps", "gmap"]
-                },
-                {
-                    "name": "OrderList",
-                    "to": "/orderlist",
-                    "meta": ["orderlist"]
-                },
-                {
-                    "name": "Org Chart",
-                    "to": "/organizationchart",
-                    "meta": ["Org Chart", "organizationchart"]
-                },
-                {
-                    "name": "Paginator",
-                    "to": "/paginator",
-                    "meta": ["paginator"]
-                },
-                {
-                    "name": "PickList",
-                    "to": "/picklist",
-                    "meta": ["picklist"]
-                },
-                {
-                    "name": "Tree",
-                    "to": "/tree",
-                    "meta": ["tree"]
-                },
-                {
-                    "name": "TreeTable",
-                    "to": "/treetable",
-                    "meta": ["treetable"]
-                },
-                {
-                    "name": "Timeline",
-                    "to": "/timeline",
-                    "meta": ["timeline"]
-                }
-            ]
-        },
-        {
-            "name": "Panel",
-            "meta": ["panel"],
-            "children": [
-                {
-                    "name": "Accordion",
-                    "to": "/accordion",
-                    "meta": ["accordion"]
-                },
-                {
-                    "name": "Card",
-                    "to": "/card",
-                    "meta": ["card"]
-                },
-                {
-                    "name": "Deferred",
-                    "to": "/deferredcontent",
-                    "meta": ["deferredcontent"]
-                },
-                {
-                    "name": "Divider",
-                    "to": "/divider",
-                    "meta": ["divider"]
-                },
-                {
-                    "name": "Fieldset",
-                    "to": "/fieldset",
-                    "meta": ["fieldset"]
-                },
-                {
-                    "name": "Panel",
-                    "to": "/panel",
-                    "meta": ["panel"]
-                },
-                {
-                    "name": "Splitter",
-                    "to": "/splitter",
-                    "meta": ["splitter"]
-                },
-                {
-                    "name": "ScrollPanel",
-                    "to": "/scrollpanel",
-                    "meta": ["scrollpanel"]
-                },
-                {
-                    "name": "TabView",
-                    "to": "/tabview",
-                    "meta": ["tabview"]
-                },
-                {
-                    "name": "Toolbar",
-                    "to": "/toolbar",
-                    "meta": ["toolbar"]
-                }
-            ]
-        },
-        {
-            "name": "Overlay",
-            "meta": ["overlay"],
-            "children": [
-                {
-                    "name": "ConfirmDialog",
-                    "to": "/confirmdialog",
-                    "meta": ["confirmdialog"]
-                },
-                {
-                    "name": "ConfirmPopup",
-                    "to": "/confirmpopup",
-                    "meta": ["confirmpopup"]
-                },
-                {
-                    "name": "Dialog",
-                    "to": "/dialog",
-                    "meta": ["dialog"]
-                },
-                {
-                    "name": "OverlayPanel",
-                    "to": "/overlaypanel",
-                    "meta": ["overlaypanel"]
-                },
-                {
-                    "name": "Sidebar",
-                    "to": "/sidebar",
-                    "meta": ["sidebar"]
-                },
-                {
-                    "name": "Tooltip",
-                    "to": "/tooltip",
-                    "meta": ["tooltip"]
-                }
-            ]
-        },
-        {
-            "name": "File",
-            "meta": ["file"],
-            "children": [
-                {
-                    "name": "Upload",
-                    "to": "/fileupload",
-                    "meta": ["fileupload"]
-                }
-            ]
-        },
-        {
-            "name": "Menu",
-            "meta": ["menu"],
-            "children": [
-                {
-                    "name": "MenuModel",
-                    "to": "/menumodel",
-                    "meta": ["menumodel"]
-                },
-                {
-                    "name": "Menu",
-                    "to": "/menu",
-                    "meta": ["menu"]
-                },
-                {
-                    "name": "TabMenu",
-                    "to": "/tabmenu",
-                    "meta": ["tabmenu"]
-                },
-                {
-                    "name": "Breadcrumb",
-                    "to": "/breadcrumb",
-                    "meta": ["breadcrumb"]
-                },
-                {
-                    "name": "TieredMenu",
-                    "to": "/tieredmenu",
-                    "meta": ["tieredMenu"]
-                },
-                {
-                    "name": "Menubar",
-                    "to": "/menubar",
-                    "meta": ["menubar"]
-                },
-                {
-                    "name": "ContextMenu",
-                    "to": "/contextmenu",
-                    "meta": ["contextmenu"]
-                },
-                {
-                    "name": "PanelMenu",
-                    "to": "/panelmenu",
-                    "meta": ["panelmenu"]
-                },
-                {
-                    "name": "Steps",
-                    "to": "/steps",
-                    "meta": ["steps", "wizard"]
-                },
-                {
-                    "name": "MegaMenu",
-                    "to": "/megamenu",
-                    "meta": ["megamenu"]
-                },
-                {
-                    "name": "SlideMenu",
-                    "to": "/slidemenu",
-                    "meta": ["slidemenu"]
-                },
-                {
-                    "name": "Dock",
-                    "to": "/dock",
-                    "meta": ["dock"]
-                }
-            ]
-        },
-        {
-            "name": "Chart",
-            "meta": ["chart"],
-            "children": [
-                {
-                    "name": "Charts",
-                    "to": "/chart",
-                    "meta": ["chartdemo", "chartmodel"]
-                }
-            ]
-        },
-        {
-            "name": "Messages",
-            "meta": ["message"],
-            "children": [
-                {
-                    "name": "Messages",
-                    "to": "/messages",
-                    "meta": ["messages"]
-                },
-                {
-                    "name": "Toast",
-                    "to": "/toast",
-                    "meta": ["growl", "toast"]
-                }
-            ]
-        },
-        {
-            "name": "Media",
-            "meta": ["media"],
-            "children": [
-                {
-                    "name": "Carousel",
-                    "to": "/carousel",
-                    "meta": ["carousel"]
-                },
-                {
-                    "name": "Galleria",
-                    "to": "/galleria",
-                    "meta": ["galleria"]
-                },
-                {
-                    "name": "Image",
-                    "to": "/image",
-                    "meta": ["image"]
-                }
-            ]
-        },
-        {
-            "name": "Misc",
-            "meta": ["misc"],
-            "children": [
-                {
-                    "name": "Avatar",
-                    "to": "/avatar",
-                    "meta": ["avatar"]
-                },
-                {
-                    "name": "Badge",
-                    "to": "/badge",
-                    "meta": ["badge"]
-                },
-                {
-                    "name": "BlockUI",
-                    "to": "/blockui",
-                    "meta": ["blockui"]
-                },
-                {
-                    "name": "Chip",
-                    "to": "/chip",
-                    "meta": ["chip"]
-                },
-                {
-                    "name": "Inplace",
-                    "to": "/inplace",
-                    "meta": ["inplace"]
-                },
-                {
-                    "name": "ScrollTop",
-                    "to": "/scrolltop",
-                    "meta": ["scrolltop"]
-                },
-                {
-                    "name": "Skeleton",
-                    "to": "/skeleton",
-                    "meta": ["skeleton"]
-                },
-                {
-                    "name": "ProgressBar",
-                    "to": "/progressbar",
-                    "meta": ["progressbar"]
-                },
-                {
-                    "name": "ProgressSpinner",
-                    "to": "/progressspinner",
-                    "meta": ["progressspinner"]
-                },
-                {
-                    "name": "Ripple",
-                    "to": "/ripple",
-                    "meta": ["ripple"]
-                },
-                {
-                    "name": "Captcha",
-                    "to": "/captcha",
-                    "meta": ["captcha", "recaptcha"]
-                },
-                {
-                    "name": "Tag",
-                    "to": "/tag",
-                    "meta": ["tag"]
-                },
-                {
-                    "name": "Terminal",
-                    "to": "/terminal",
-                    "meta": ["terminal"]
-                },
-                {
-                    "name": "StyleClass",
-                    "to": "/styleclass",
-                    "meta": ["styleclass"]
                 }
             ]
         }

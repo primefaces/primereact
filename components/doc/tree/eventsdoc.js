@@ -5,14 +5,13 @@ import { DocSectionCode } from '../../../components/doc/common/docsectioncode';
 import { DocSectionText } from '../../../components/doc/common/docsectiontext';
 import { NodeService } from '../../../service/NodeService';
 
-export function TreeEventsDoc(props) {
+export function EventsDoc(props) {
     const [nodes, setNodes] = useState([]);
-    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState('');
     const toast = useRef(null);
-    const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event) => {
@@ -20,7 +19,7 @@ export function TreeEventsDoc(props) {
     };
 
     const onCollapse = (event) => {
-        toast.current.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
+        toast.current.show({ severity: 'warn', summary: 'Node Collapsed', detail: event.node.label });
     };
 
     const onSelect = (event) => {
@@ -34,31 +33,30 @@ export function TreeEventsDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
-onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+<Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} 
+    onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} className="w-full md:w-30rem" />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-export default function TreeEventsDoc() {
+export default function EventsDemo() {
     const [nodes, setNodes] = useState([]);
-    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState('');
     const toast = useRef(null);
-    const nodeService = new NodeService();
-
+    
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []);
 
     const onExpand = (event) => {
         toast.current.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
     };
 
     const onCollapse = (event) => {
-        toast.current.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
+        toast.current.show({ severity: 'warn', summary: 'Node Collapsed', detail: event.node.label });
     };
 
     const onSelect = (event) => {
@@ -70,63 +68,108 @@ export default function TreeEventsDoc() {
     };
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
-            onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+        <>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} 
+                    onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} className="w-full md:w-30rem" />
+            </div>
+        </>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
-import { Tree } from 'primereact/tree';
+import React, { useState, useEffect, useRef } from 'react';
+import { Tree, TreeNode, TreeEventNodeEvent } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-export default function TreeEventsDoc() {
-    const [nodes, setNodes] = useState([]);
-    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-    const toast = useRef(null);
-    const nodeService = new NodeService();
+export default function EventsDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const [selectedNodeKey, setSelectedNodeKey] = useState<string>('');
+    const toast = useRef<Toast>(null);
+    
+    useEffect(() => {
+        NodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []);
 
-       useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onExpand = (event) => {
+    const onExpand = (event: TreeEventNodeEvent) => {
         toast.current.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
     };
 
-    const onCollapse = (event) => {
-        toast.current.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
+    const onCollapse = (event: TreeEventNodeEvent) => {
+        toast.current.show({ severity: 'warn', summary: 'Node Collapsed', detail: event.node.label });
     };
 
-    const onSelect = (event) => {
+    const onSelect = (event: TreeEventNodeEvent) => {
         toast.current.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
     };
 
-    const onUnselect = (event) => {
+    const onUnselect = (event: TreeEventNodeEvent) => {
         toast.current.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
     };
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
-            onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+        <>
+            <Toast ref={toast} />
+            <div className="card flex justify-content-center">
+                <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} 
+                    onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} className="w-full md:w-30rem" />
+            </div>
+        </>
     )
 }
-        `
+        `,
+        data: `
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+`
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>An event is provided each type of user interaction such as expand, collapse and selection.</p>
+                <p>An event is provided for each type of user interaction such as expand, collapse and selection.</p>
             </DocSectionText>
             <Toast ref={toast} />
-            <div className="card">
-                <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+            <div className="card flex justify-content-center">
+                <Tree
+                    value={nodes}
+                    selectionMode="single"
+                    selectionKeys={selectedNodeKey}
+                    onSelectionChange={(e) => setSelectedNodeKey(e.value)}
+                    onExpand={onExpand}
+                    onCollapse={onCollapse}
+                    onSelect={onSelect}
+                    onUnselect={onUnselect}
+                    className="w-full md:w-30rem"
+                />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

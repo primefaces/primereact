@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { useState } from 'react';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -13,16 +13,13 @@ export function BasicDoc(props) {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e) => {
-        setSelectedCity(e.value);
-    };
-
     const code = {
         basic: `
-<Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+<Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+    placeholder="Select a City" className="w-full md:w-14rem" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
 
 export default function BasicDemo() {
@@ -35,22 +32,26 @@ export default function BasicDemo() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e) => {
-        setSelectedCity(e.value);
-    }
-
     return (
-        <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select a City" className="w-full md:w-14rem" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
+import React, { useState } from "react";
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+
+interface City {
+    name: string;
+    code: string;
+}
 
 export default function BasicDemo() {
-    const [selectedCity, setSelectedCity] = useState<any | null>(null);
-    const cities = [
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -58,12 +59,11 @@ export default function BasicDemo() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e: DropdownChangeParams) => {
-        setSelectedCity(e.value);
-    }
-
     return (
-        <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select a City" className="w-full md:w-14rem" />
+        </div>
     )
 }
         `
@@ -73,13 +73,13 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives of how to define the options property; One way is providing a collection
-                    of <i>SelectItem</i> instances having label-value pairs whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In
-                    addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
+                    Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with an <i>options</i> collection. Label and value of an option are defined with the <i>optionLabel</i> and <i>optionValue</i>{' '}
+                    properties respectively. Default property name for the <i>optionLabel</i> is <i>label</i> and <i>value</i> for the <i>optionValue</i>. If <i>optionValue</i> is omitted and the object has no <i>value</i> property, the object itself
+                    becomes the value of an option. Note that, when options are simple primitive values such as a string array, no <i>optionLabel</i> and <i>optionValue</i> would be necessary.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Dropdown value={selectedCity} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+                <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" placeholder="Select a City" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,14 +1,18 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/toast/importdoc';
-import { SeveritiesDoc } from '../../components/doc/toast/severitiesdoc';
-import { PositionDoc } from '../../components/doc/toast/positiondoc';
-import { OptionsDoc } from '../../components/doc/toast/optionsdoc';
-import { ClearDoc } from '../../components/doc/toast/cleardoc';
-import { CustomDoc } from '../../components/doc/toast/customdoc';
-import { ApiDoc } from '../../components/doc/toast/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/toast/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/toast/basicdoc';
+import { HeadlessDoc } from '@/components/doc/toast/headlessdoc';
+import { ImportDoc } from '@/components/doc/toast/importdoc';
+import { MultipleDoc } from '@/components/doc/toast/multipledoc';
+import { PositionDoc } from '@/components/doc/toast/positiondoc';
+import { PTDoc } from '@/components/doc/toast/pt/ptdoc';
+import { Wireframe } from '@/components/doc/toast/pt/wireframe';
+import { SeverityDoc } from '@/components/doc/toast/severitydoc';
+import { StickyDoc } from '@/components/doc/toast/stickydoc';
+import { TemplateDoc } from '@/components/doc/toast/templatedoc';
+import { StyledDoc } from '@/components/doc/toast/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/toast/theming/tailwinddoc';
 
 const ToastDemo = () => {
     const docs = [
@@ -18,9 +22,14 @@ const ToastDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
         },
         {
             id: 'position',
@@ -28,97 +37,70 @@ const ToastDemo = () => {
             component: PositionDoc
         },
         {
-            id: 'options',
-            label: 'Options',
-            component: OptionsDoc
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
         },
         {
-            id: 'clear',
-            label: 'Clear',
-            component: ClearDoc
+            id: 'stickydoc',
+            label: 'Sticky',
+            component: StickyDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.toast.options',
+            label: 'Toast PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'messageapi',
-                    label: 'Message API'
-                },
-                {
-                    id: 'severitiesapi',
-                    label: 'Severities'
-                },
-                {
-                    id: 'showingmessages',
-                    label: 'Showing Messages'
-                },
-                {
-                    id: 'closable',
-                    label: 'Closable'
-                },
-                {
-                    id: 'sticky',
-                    label: 'Sticky'
-                },
-                {
-                    id: 'positionapi',
-                    label: 'Position'
-                },
-                {
-                    id: 'clearingmessages',
-                    label: 'Clearing Messages'
-                },
-                {
-                    id: 'replacingmessages',
-                    label: 'Replacing Messages'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'event',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Toast Component</title>
-                <meta name="description" content="Toast is used to display messages in an overlay." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Toast</h1>
-                    <p>Toast is used to display messages in an overlay.</p>
-                </div>
-                <DocActions github="toast/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={['Toast']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ToastDemo;

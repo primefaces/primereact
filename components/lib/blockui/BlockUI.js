@@ -1,47 +1,66 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { BlockUIBase } from './BlockUIBase';
 
-export const BlockUI = React.forwardRef((props, ref) => {
+export const BlockUI = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = BlockUIBase.getProps(inProps, context);
+
     const [visibleState, setVisibleState] = React.useState(props.blocked);
     const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
+    const activeElementRef = React.useRef(null);
+
+    const { ptm, cx, isUnstyled } = BlockUIBase.setMetaData({
+        props
+    });
+
+    useHandleStyle(BlockUIBase.css.styles, isUnstyled, { name: 'blockui' });
 
     const block = () => {
         setVisibleState(true);
+        activeElementRef.current = document.activeElement;
     };
 
     const unblock = () => {
-        const callback = () => {
-            setVisibleState(false);
+        !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
 
-            props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            props.onUnblocked && props.onUnblocked();
-        };
-
-        if (maskRef.current) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+        if (DomHandler.hasCSSAnimation(maskRef.current) > 0) {
             maskRef.current.addEventListener('animationend', () => {
-                ZIndexUtils.clear(maskRef.current);
-                callback();
+                removeMask();
             });
         } else {
-            callback();
+            removeMask();
         }
+    };
+
+    const removeMask = () => {
+        ZIndexUtils.clear(maskRef.current);
+        setVisibleState(false);
+
+        if (props.fullScreen) {
+            DomHandler.unblockBodyScroll();
+            activeElementRef.current && activeElementRef.current.focus();
+        }
+
+        props.onUnblocked && props.onUnblocked();
     };
 
     const onPortalMounted = () => {
         if (props.fullScreen) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-            document.activeElement.blur();
+            DomHandler.blockBodyScroll();
+            activeElementRef.current && activeElementRef.current.blur();
         }
 
         if (props.autoZIndex) {
             const key = props.fullScreen ? 'modal' : 'overlay';
 
-            ZIndexUtils.set(key, maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
+            ZIndexUtils.set(key, maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
         }
 
         props.onBlocked && props.onBlocked();
@@ -56,9 +75,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
     }, [props.blocked]);
 
     useUnmountEffect(() => {
-        if (props.fullScreen) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-        }
+        props.fullScreen && DomHandler.unblockBodyScroll();
 
         ZIndexUtils.clear(maskRef.current);
     });
@@ -73,16 +90,23 @@ export const BlockUI = React.forwardRef((props, ref) => {
     const createMask = () => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';
-            const className = classNames(
-                'p-blockui p-component-overlay p-component-overlay-enter',
+            const maskProps = mergeProps(
                 {
-                    'p-blockui-document': props.fullScreen
+                    className: classNames(props.className, cx('mask')),
+                    style: {
+                        ...props.style,
+                        position: props.fullScreen ? 'fixed' : 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%'
+                    }
                 },
-                props.className
+                ptm('mask')
             );
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
             const mask = (
-                <div ref={maskRef} className={className} style={props.style}>
+                <div ref={maskRef} {...maskProps}>
                     {content}
                 </div>
             );
@@ -93,12 +117,22 @@ export const BlockUI = React.forwardRef((props, ref) => {
         return null;
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, BlockUI.defaultProps);
     const mask = createMask();
-    const className = classNames('p-blockui-container', props.containerClassName);
+
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            ref: elementRef,
+            style: props.containerStyle,
+            className: cx('root'),
+            'aria-busy': props.blocked
+        },
+        BlockUIBase.getOtherProps(props),
+        ptm('root')
+    );
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.containerStyle} {...otherProps}>
+        <div {...rootProps}>
             {props.children}
             {mask}
         </div>
@@ -106,18 +140,3 @@ export const BlockUI = React.forwardRef((props, ref) => {
 });
 
 BlockUI.displayName = 'BlockUI';
-BlockUI.defaultProps = {
-    __TYPE: 'BlockUI',
-    autoZIndex: true,
-    baseZIndex: 0,
-    blocked: false,
-    className: null,
-    containerClassName: null,
-    containerStyle: null,
-    fullScreen: false,
-    id: null,
-    onBlocked: null,
-    onUnblocked: null,
-    style: null,
-    template: null
-};

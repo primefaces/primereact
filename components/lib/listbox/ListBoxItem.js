@@ -1,17 +1,34 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
-    const onClick = (event) => {
-        if (props.onClick) {
-            props.onClick({
-                originalEvent: event,
-                option: props.option
-            });
-        }
+    const [focusedState, setFocusedState] = React.useState(false);
 
-        event.preventDefault();
+    const mergeProps = useMergeProps();
+    const {
+        ptCallbacks: { ptm, cx }
+    } = props;
+
+    const getPTOptions = (key) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            context: {
+                selected: props.selected,
+                disabled: props.disabled,
+                focused: focusedState,
+                focusedOptionIndex: props.focusedOptionIndex
+            }
+        });
+    };
+
+    const onFocus = (event) => {
+        setFocusedState(true);
+    };
+
+    const onBlur = (event) => {
+        setFocusedState(false);
     };
 
     const onTouchEnd = (event) => {
@@ -23,75 +40,41 @@ export const ListBoxItem = React.memo((props) => {
         }
     };
 
-    const onKeyDown = (event) => {
-        const item = event.currentTarget;
-
-        switch (event.which) {
-            //down
-            case 40:
-                const nextItem = findNextItem(item);
-
-                nextItem && nextItem.focus();
-
-                event.preventDefault();
-                break;
-
-            //up
-            case 38:
-                const prevItem = findPrevItem(item);
-
-                prevItem && prevItem.focus();
-
-                event.preventDefault();
-                break;
-
-            //enter
-            case 13:
-                onClick(event);
-                event.preventDefault();
-                break;
-
-            default:
-                break;
-        }
-    };
-
     const findNextItem = (item) => {
         const nextItem = item.nextElementSibling;
 
-        return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-listbox-item-group') ? findNextItem(nextItem) : nextItem) : null;
+        return nextItem ? (DomHandler.isAttributeEquals(nextItem, 'data-p-disabled', true) || DomHandler.isAttributeEquals(nextItem, 'data-pc-section', 'itemgroup') ? findNextItem(nextItem) : nextItem) : null;
     };
 
     const findPrevItem = (item) => {
         const prevItem = item.previousElementSibling;
 
-        return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? findPrevItem(prevItem) : prevItem) : null;
+        return prevItem ? (DomHandler.isAttributeEquals(prevItem, 'data-p-disabled', true) || DomHandler.isAttributeEquals(prevItem, 'data-pc-section', 'itemgroup') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
-    const className = classNames(
-        'p-listbox-item',
-        {
-            'p-highlight': props.selected,
-            'p-disabled': props.disabled
-        },
-        props.option.className
-    );
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
+    const itemProps = mergeProps(
+        {
+            id: props.id,
+            className: cx('item', { props }),
+            style: props.style,
+            onClick: (event) => props.onClick(event, props.option, props.index),
+            onTouchEnd: onTouchEnd,
+            onFocus: onFocus,
+            onBlur: onBlur,
+            tabIndex: '-1',
+            'aria-label': props.label,
+            key: props.optionKey,
+            role: 'option',
+            'aria-selected': props.selected,
+            'aria-disabled': props.disabled,
+            'data-p-disabled': props.disabled
+        },
+        getPTOptions('item')
+    );
 
     return (
-        <li
-            className={className}
-            style={props.style}
-            onClick={onClick}
-            onTouchEnd={onTouchEnd}
-            onKeyDown={onKeyDown}
-            tabIndex="-1"
-            aria-label={props.label}
-            key={props.label}
-            role="option"
-            aria-selected={props.selected}
-            aria-disabled={props.disabled}
-        >
+        <li {...itemProps}>
             {content}
             <Ripple />
         </li>

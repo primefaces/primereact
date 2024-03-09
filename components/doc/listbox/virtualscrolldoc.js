@@ -1,7 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ListBox } from '@/components/lib/listbox/ListBox';
+import Link from 'next/link';
 import { useState } from 'react';
-import { ListBox } from '../../lib/listbox/ListBox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualScrollDoc(props) {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -9,31 +10,43 @@ export function VirtualScrollDoc(props) {
 
     const code = {
         basic: `
-<ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+<ListBox value={selectedItem} onChange={(e) => setSelectedItem(e.value)} options={items} 
+    virtualScrollerOptions={{ itemSize: 38 }} className="w-full md:w-14rem" listStyle={{ height: '250px' }} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function VirtualScrollDoc() {
+export default function VirtualScrollDemo() {
     const [selectedItem, setSelectedItem] = useState(null);
     const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     return (
-        <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+        <div className="card flex justify-content-center">
+            <ListBox value={selectedItem} onChange={(e) => setSelectedItem(e.value)} options={items} 
+                virtualScrollerOptions={{ itemSize: 38 }} className="w-full md:w-14rem" listStyle={{ height: '250px' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
+import React, { useState } from "react";
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
-export default function VirtualScrollDoc() {
-    const [selectedItem, setSelectedItem] = useState<any>(null);
-    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+interface Item {
+    label: string;
+    value: number;
+}
+
+export default function VirtualScrollDemo() {
+    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+    const items: Item[] = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     return (
-        <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e: ListBoxChangeParams) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+        <div className="card flex justify-content-center">
+            <ListBox value={selectedItem} onChange={(e: ListBoxChangeEvent) => setSelectedItem(e.value)} options={items} 
+                virtualScrollerOptions={{ itemSize: 38 }} className="w-full md:w-14rem" listStyle={{ height: '250px' }} />
+        </div>
     )
 }
         `
@@ -43,11 +56,12 @@ export default function VirtualScrollDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
+                    VirtualScroller is used to render a long list of options efficiently like 100K records in this demo. The configuration is done with <i>virtualScrollerOptions</i> property, refer to the{' '}
+                    <Link href="/virtualscroller">VirtualScroller</Link> for more information about the available options as it is used internally by ListBox.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }} />
+                <ListBox value={selectedItem} onChange={(e) => setSelectedItem(e.value)} options={items} virtualScrollerOptions={{ itemSize: 38 }} className="w-full md:w-14rem" listStyle={{ height: '250px' }} />
             </div>
             <DocSectionCode code={code} />
         </>

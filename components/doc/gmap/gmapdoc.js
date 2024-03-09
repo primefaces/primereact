@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { Button } from '../../lib/button/Button';
-import { Dialog } from '../../lib/dialog/Dialog';
-import { Toast } from '../../lib/toast/Toast';
-import { GMap } from '../../lib/gmap/GMap';
-import { InputText } from '../../lib/inputtext/InputText';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
+import { Dialog } from '@/components/lib/dialog/Dialog';
+import { GMap } from '@/components/lib/gmap/GMap';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useEffect, useRef, useState } from 'react';
 
 export function GMapDoc(props) {
     const [googleMapsReady, setGoogleMapsReady] = useState(false);

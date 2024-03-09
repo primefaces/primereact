@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
 import { useState } from 'react';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
@@ -11,26 +11,30 @@ export function BasicDoc(props) {
 <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
     )
 }
         `

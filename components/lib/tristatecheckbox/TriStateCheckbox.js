@@ -1,12 +1,30 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { PrimeReactContext, ariaLabel } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { TriStateCheckboxBase } from './TriStateCheckboxBase';
 
 export const TriStateCheckbox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = TriStateCheckboxBase.getProps(inProps, context);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
+
+        const { ptm, cx, isUnstyled } = TriStateCheckboxBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
+
+        useHandleStyle(TriStateCheckboxBase.css.styles, isUnstyled, { name: 'tristatecheckbox' });
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
@@ -25,8 +43,12 @@ export const TriStateCheckbox = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -45,7 +67,7 @@ export const TriStateCheckbox = React.memo(
         };
 
         const onKeyDown = (e) => {
-            if (e.keyCode === 32) {
+            if (e.code === 'Enter' || e.code === 'Space') {
                 toggle(e);
                 e.preventDefault();
             }
@@ -53,54 +75,88 @@ export const TriStateCheckbox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
+        });
+
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
+        const otherProps = TriStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
-        const boxClassName = classNames('p-checkbox-box', {
-            'p-highlight': (props.value || !props.value) && props.value !== null,
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
-        });
-        const iconClassName = classNames('p-checkbox-icon p-c', {
-            'pi pi-check': props.value === true,
-            'pi pi-times': props.value === false
-        });
+        const checkIconProps = mergeProps(
+            {
+                className: cx('checkIcon')
+            },
+            ptm('checkIcon')
+        );
+        const uncheckIconProps = mergeProps(
+            {
+                className: cx('checkIcon')
+            },
+            ptm('uncheckIcon')
+        );
+
+        let icon;
+
+        if (props.value === false) {
+            icon = props.uncheckIcon || <TimesIcon {...uncheckIconProps} />;
+        } else if (props.value === true) {
+            icon = props.checkIcon || <CheckIcon {...checkIconProps} />;
+        }
+
+        const checkIcon = IconUtils.getJSXIcon(icon, { ...checkIconProps }, { props });
+
         const ariaValueLabel = props.value ? ariaLabel('trueLabel') : props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
         const ariaChecked = props.value ? 'true' : 'false';
 
+        const checkboxProps = mergeProps(
+            {
+                className: cx('checkbox', { focusedState }),
+                tabIndex: props.disabled ? '-1' : props.tabIndex,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                role: 'checkbox',
+                'aria-checked': ariaChecked,
+                ...ariaProps
+            },
+            ptm('checkbox')
+        );
+
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only p-hidden-accessible',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
+        const rootProps = mergeProps(
+            {
+                className: classNames(props.className, cx('root')),
+                style: props.style,
+                onClick: onClick,
+                'data-p-disabled': props.disabled
+            },
+            TriStateCheckboxBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
-                        <span className={iconClassName}></span>
-                    </div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                <div id={props.id} ref={elementRef} {...rootProps}>
+                    <div {...checkboxProps}>{checkIcon}</div>
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 TriStateCheckbox.displayName = 'TriStateCheckbox';
-TriStateCheckbox.defaultProps = {
-    __TYPE: 'TriStateCheckbox',
-    id: null,
-    value: null,
-    style: null,
-    className: null,
-    disabled: false,
-    readOnly: false,
-    tabIndex: '0',
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null
-};

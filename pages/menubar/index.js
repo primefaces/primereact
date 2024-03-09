@@ -1,11 +1,15 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/menubar/importdoc';
-import { BasicDoc } from '../../components/doc/menubar/basicdoc';
-import { CustomDoc } from '../../components/doc/menubar/customdoc';
-import { ApiDoc } from '../../components/doc/menubar/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/menubar/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/menubar/basicdoc';
+import { CommandDoc } from '@/components/doc/menubar/commanddoc';
+import { ImportDoc } from '@/components/doc/menubar/importdoc';
+import { PTDoc } from '@/components/doc/menubar/pt/ptdoc';
+import { Wireframe } from '@/components/doc/menubar/pt/wireframe';
+import { RouterDoc } from '@/components/doc/menubar/routerdoc';
+import { TemplateDoc } from '@/components/doc/menubar/templatedoc';
+import { StyledDoc } from '@/components/doc/menubar/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/menubar/theming/tailwinddoc';
 
 const MenubarDemo = () => {
     const docs = [
@@ -20,51 +24,65 @@ const MenubarDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.menubar.options',
+            label: 'Menubar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Navbar Component</title>
-                <meta name="description" content="Menubar is a horizontal menu component." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Menubar</h1>
-                    <p>Menubar also known as Navbar, is a horizontal menu component.</p>
-                </div>
-                <DocActions github="menubar/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Navbar Component" header="Menubar" description="Menubar also known as Navbar, is a horizontal menu component" componentDocs={docs} apiDocs={['Menubar', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default MenubarDemo;

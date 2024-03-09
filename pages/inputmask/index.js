@@ -1,17 +1,21 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inputmask/apidoc';
-import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
-import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
-import { ImportDoc } from '../../components/doc/inputmask/importdoc';
-import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
-import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
-import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
-import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
-import { ValidationDoc } from '../../components/doc/inputmask/validationdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputmask/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/inputmask/basicdoc';
+import { DisabledDoc } from '@/components/doc/inputmask/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/inputmask/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/inputmask/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/inputmask/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/inputmask/importdoc';
+import { InvalidDoc } from '@/components/doc/inputmask/invaliddoc';
+import { MaskDoc } from '@/components/doc/inputmask/maskdoc';
+import { OptionalDoc } from '@/components/doc/inputmask/optionaldoc';
+import { PTDoc } from '@/components/doc/inputmask/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inputmask/pt/wireframe';
+import { SlotCharDoc } from '@/components/doc/inputmask/slotchardoc';
+import { StyledDoc } from '@/components/doc/inputmask/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputmask/theming/tailwinddoc';
+import Link from 'next/link';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -56,54 +60,87 @@ const InputMaskDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.inputmask.options',
+            label: 'InputMask PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
+    const ptDescription = (
+        <span>
+            InputMask does not have a specific API for PassThrough options, but it does support all the pass through options of{' '}
+            <Link href="/inputtext/#pt.inputtext.options" target="_blank">
+                InputText
+            </Link>
+        </span>
+    );
+
     return (
-        <div>
-            <Head>
-                <title>React Mask Component</title>
-                <meta name="description" content="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputMask</h1>
-                    <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Mask Component"
+            header="InputMask"
+            description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone."
+            componentDocs={docs}
+            apiDocs={['InputMask']}
+            ptDocs={ptDocs}
+            ptDescription={ptDescription}
+            themingDocs={themingDocs}
+        />
     );
 };
 

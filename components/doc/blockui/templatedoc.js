@@ -1,34 +1,29 @@
-import React, { useState } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { useState } from 'react';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Panel } from '../../../components/lib/panel/Panel';
-import { Button } from '../../../components/lib/button/Button';
 
 export function TemplateDoc(props) {
-    const [blockedPanel, setBlockedPanel] = useState(false);
-
-    const blockPanel = () => {
-        setBlockedPanel(true);
-    };
-
-    const unblockPanel = () => {
-        setBlockedPanel(false);
-    };
+    const [blocked, setBlocked] = useState(true);
+    const buttonText = blocked ? 'Subscribe' : 'Unsubscribe';
 
     const code = {
         basic: `
-<Button type="button" label="Block" onClick={blockPanel} />
-<Button type="button" label="Unblock" onClick={unblockPanel} />
-<BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-    <Panel header="Template with blocking" style={{ marginTop: '20px' }}>
-        <p>
+<BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }}></i>}>
+    <Panel header="Prime React News">
+        <p className="m-0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
             laborum.
         </p>
     </Panel>
 </BlockUI>
+<div className="mt-3 flex flex-column align-items-center">
+    <h3>Continue reading?</h3>
+    <Button label={buttonText} onClick={() => setBlocked((oldState) => !oldState)}></Button>
+</div>
         `,
         javascript: `
 import React, { useState } from 'react';
@@ -36,32 +31,25 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const TemplateDoc = () => {
-    const [blockedPanel, setBlockedPanel] = useState(false);
-
-    const blockPanel = () => {
-        setBlockedPanel(true);
-    };
-
-    const unblockPanel = () => {
-        setBlockedPanel(false);
-    };
+export default function TemplateDemo() {
+    const [blocked, setBlocked] = useState(false);
+    const buttonText = blocked ? 'Subscribe' : 'Unsubscribe';
 
     return (
-        <div className="card flex flex-column">
-            <div className="flex flex-row flex-wrap mb-2">
-                <Button type="button" label="Block" onClick={blockPanel} />
-                <Button type="button" label="Unblock" onClick={unblockPanel} />
-            </div>
-            <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-                <Panel header="Template with blocking" style={{ marginTop: '20px' }}>
-                    <p>
+       <div className="card">
+            <BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }}></i>}>
+                <Panel header="Prime React News">
+                    <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
                         laborum.
                     </p>
                 </Panel>
             </BlockUI>
+            <div className="mt-3 flex flex-column align-items-center">
+                <h3>Continue reading?</h3>
+                <Button label={buttonText} onClick={() => setBlocked((oldState) => !oldState)}></Button>
+            </div>
         </div>
     );
 }
@@ -72,32 +60,25 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const TemplateDoc = () => {
-    const [blockedPanel, setBlockedPanel] = useState<boolean>(false);
-
-    function blockPanel(): void {
-        setBlockedPanel(true);
-    };
-
-    function unblockPanel(): void {
-        setBlockedPanel(false);
-    };
+export default function TemplateDemo() {
+    const [blocked, setBlocked] = useState<boolean>(false);
+    const buttonText = blocked ? 'Subscribe' : 'Unsubscribe';
 
     return (
-        <div className="card flex flex-column">
-            <div className="flex flex-row flex-wrap mb-2">
-                <Button type="button" label="Block" onClick={blockPanel} />
-                <Button type="button" label="Unblock" onClick={unblockPanel} />
-            </div>
-            <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-                <Panel header="Template with blocking" style={{ marginTop: '20px' }}>
-                    <p>
+       <div className="card">
+            <BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }}></i>}>
+                <Panel header="Prime React News">
+                    <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
                         laborum.
                     </p>
                 </Panel>
             </BlockUI>
+            <div className="mt-3 flex flex-column align-items-center">
+                <h3>Continue reading?</h3>
+                <Button label={buttonText} onClick={() => setBlocked((oldState) => !oldState)}></Button>
+            </div>
         </div>
     );
 }
@@ -107,22 +88,24 @@ export const TemplateDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template Demo Content.</p>
+                <p>
+                    Custom content can be placed inside the modal layer using the <i>template</i> property.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column">
-                <div className="flex flex-row flex-wrap mb-2">
-                    <Button type="button" label="Block" onClick={blockPanel} />
-                    <Button type="button" label="Unblock" onClick={unblockPanel} />
-                </div>
-                <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-                    <Panel header="Template with blocking" style={{ marginTop: '20px' }}>
-                        <p>
+            <div className="card">
+                <BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }}></i>}>
+                    <Panel header="Prime React News">
+                        <p className="m-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
                             laborum.
                         </p>
                     </Panel>
                 </BlockUI>
+                <div className="mt-3 flex flex-column align-items-center">
+                    <h3>Continue reading?</h3>
+                    <Button label={buttonText} onClick={() => setBlocked((oldState) => !oldState)}></Button>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

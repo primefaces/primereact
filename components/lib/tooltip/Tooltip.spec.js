@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { PrimeReactProvider } from '../api/Api';
 import { Button } from '../button/Button';
 import { InputText } from '../inputtext/InputText';
 import { Tooltip } from './Tooltip';
@@ -8,7 +9,11 @@ describe('Tooltip', () => {
     test('when using tooltip with manual zindex should only be assigned from the style', async () => {
         // Arrange
         const tooltipText = /Manual zIndex/i;
-        const { container } = render(<InputText tooltip="Manual zIndex" tooltipOptions={{ autoZIndex: false, style: { zIndex: 6666 } }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="Manual zIndex" tooltipOptions={{ autoZIndex: false, style: { zIndex: 6666 } }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act
@@ -25,7 +30,11 @@ describe('Tooltip', () => {
     test('when using tooltip with auto zindex the zindex should be automatically assigned', async () => {
         // Arrange
         const tooltipText = /Auto zIndex/i;
-        const { container } = render(<InputText tooltip="Auto zIndex" tooltipOptions={{ autoZIndex: true, baseZIndex: 500 }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="Auto zIndex" tooltipOptions={{ autoZIndex: true, baseZIndex: 500 }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act
@@ -42,7 +51,11 @@ describe('Tooltip', () => {
     test('when using tooltip with defaults it is displayed on events mouse enter and leave', async () => {
         // Arrange
         const tooltipText = /Mouse Enter/i;
-        const { container } = render(<InputText tooltip="Mouse Enter" tooltipOptions={{ position: 'right', showDelay: 1 }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="Mouse Enter" tooltipOptions={{ position: 'right', showDelay: 1 }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         expect(screen.queryByText(tooltipText)).toBeNull();
@@ -61,7 +74,11 @@ describe('Tooltip', () => {
     test('when using tooltip with event focus it is displayed on events focus and blur', async () => {
         // Arrange
         const tooltipText = /Focus Blur/i;
-        const { container } = render(<InputText tooltip="Focus Blur" tooltipOptions={{ event: 'focus' }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="Focus Blur" tooltipOptions={{ event: 'focus' }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         expect(screen.queryByText(tooltipText)).toBeNull();
@@ -80,7 +97,11 @@ describe('Tooltip', () => {
     test('when using tooltip event both it is displayed on events focus, blur, mousenter, mouseleave', async () => {
         // Arrange
         const tooltipText = /Both/i;
-        const { container } = render(<InputText tooltip="Both" tooltipOptions={{ event: 'both' }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="Both" tooltipOptions={{ event: 'both' }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act (focus)
@@ -112,7 +133,11 @@ describe('Tooltip', () => {
     test('when using tooltip on disabled element it is not displayed', async () => {
         // Arrange
         const tooltipText = /Disabled/i;
-        const { container } = render(<InputText disabled tooltip="Disabled" />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText disabled tooltip="Disabled" />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-disabled')[0];
 
         expect(screen.queryByText(tooltipText)).toBeNull();
@@ -128,10 +153,12 @@ describe('Tooltip', () => {
         const tooltipText = /Disabled/i;
         const { container } = render(
             <>
-                <Tooltip target=".disabled-button" />
-                <span className="disabled-button" data-pr-tooltip="A Disabled Button">
-                    <Button type="button" label="Save" icon="pi pi-check" disabled />
-                </span>
+                <PrimeReactProvider>
+                    <Tooltip target=".disabled-button" />
+                    <span className="disabled-button" data-pr-tooltip="A Disabled Button">
+                        <Button type="button" label="Save" icon="pi pi-check" disabled />
+                    </span>
+                </PrimeReactProvider>
             </>
         );
         const input = container.getElementsByClassName('disabled-button')[0];
@@ -148,7 +175,11 @@ describe('Tooltip', () => {
     test('when using tooltip with with position right it is displayed on the right', async () => {
         // Arrange
         const tooltipText = /right/i;
-        const { container } = render(<InputText tooltip="right" tooltipOptions={{ position: 'right' }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="right" tooltipOptions={{ position: 'right' }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act
@@ -165,7 +196,11 @@ describe('Tooltip', () => {
     test('when using tooltip with with position left it is displayed on the left', async () => {
         // Arrange
         const tooltipText = /left/i;
-        const { container } = render(<InputText tooltip="left" tooltipOptions={{ position: 'left' }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="left" tooltipOptions={{ position: 'left' }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act
@@ -182,7 +217,11 @@ describe('Tooltip', () => {
     test('when using tooltip with with position top it is displayed on the top', async () => {
         // Arrange
         const tooltipText = /top/i;
-        const { container } = render(<InputText tooltip="top" tooltipOptions={{ position: 'top' }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="top" tooltipOptions={{ position: 'top' }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act
@@ -199,7 +238,11 @@ describe('Tooltip', () => {
     test('when using tooltip with with position bottom it is displayed on the bottom', async () => {
         // Arrange
         const tooltipText = /bottom/i;
-        const { container } = render(<InputText tooltip="bottom" tooltipOptions={{ position: 'bottom' }} />);
+        const { container } = render(
+            <PrimeReactProvider>
+                <InputText tooltip="bottom" tooltipOptions={{ position: 'bottom' }} />
+            </PrimeReactProvider>
+        );
         const input = container.getElementsByClassName('p-inputtext')[0];
 
         // Act
@@ -221,12 +264,12 @@ describe('Tooltip', () => {
         const hideOn = jest.fn();
         const tooltipText = /Events Button/i;
         const { container } = render(
-            <>
+            <PrimeReactProvider>
                 <Tooltip target=".events-button" onBeforeHide={hideBeforeOn} onBeforeShow={showBeforeOn} onShow={showOn} onHide={hideOn} />
                 <span className="events-button" data-pr-tooltip="Events Button">
                     <Button type="button" label="Events" />
                 </span>
-            </>
+            </PrimeReactProvider>
         );
         const input = container.getElementsByClassName('events-button')[0];
 
@@ -262,12 +305,12 @@ describe('Tooltip', () => {
         const showOn = jest.fn();
         const tooltipText = /Show/i;
         const { container } = render(
-            <>
+            <PrimeReactProvider>
                 <Tooltip target=".events-button" onBeforeShow={showBeforeOn} onShow={showOn} />
                 <span className="events-button" data-pr-tooltip="Show">
                     <Button type="button" label="Events" />
                 </span>
-            </>
+            </PrimeReactProvider>
         );
         const input = container.getElementsByClassName('events-button')[0];
 
@@ -287,12 +330,12 @@ describe('Tooltip', () => {
         const hideOn = jest.fn();
         const tooltipText = /Hide/i;
         const { container } = render(
-            <>
+            <PrimeReactProvider>
                 <Tooltip target=".events-button" onBeforeHide={hideBeforeOn} onHide={hideOn} />
                 <span className="events-button" data-pr-tooltip="Hide">
                     <Button type="button" label="Events" />
                 </span>
-            </>
+            </PrimeReactProvider>
         );
         const input = container.getElementsByClassName('events-button')[0];
 

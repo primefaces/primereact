@@ -1,6 +1,6 @@
-import { Splitter, SplitterPanel } from '../../lib/splitter/Splitter';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Splitter, SplitterPanel } from '@/components/lib/splitter/Splitter';
 
 export function VerticalDoc(props) {
     const code = {
@@ -11,10 +11,10 @@ export function VerticalDoc(props) {
 </Splitter>
         `,
         javascript: `
+import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function VerticalDoc() {
-
+export default function VerticalDemo() {
     return (
         <Splitter style={{ height: '300px' }} layout="vertical">
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
@@ -24,10 +24,10 @@ export default function VerticalDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function VerticalDoc() {
-
+export default function VerticalDemo() {
     return (
         <Splitter style={{ height: '300px' }} layout="vertical">
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
@@ -42,7 +42,7 @@ export default function VerticalDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Default orientation is configured with the <i>layout</i> property and default is the "horizontal" whereas other alternative is the "vertical".
+                    Panels are displayed as stacked by setting the <i>layout</i> to <i>vertical</i>.
                 </p>
             </DocSectionText>
             <div className="card">

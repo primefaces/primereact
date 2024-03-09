@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { Captcha } from '../../lib/captcha/Captcha';
-import { Toast } from '../../lib/toast/Toast';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Captcha } from '@/components/lib/captcha/Captcha';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useRef } from 'react';
 
 export function CaptchaDoc(props) {
     const toast = useRef(null);
@@ -19,8 +19,9 @@ export function CaptchaDoc(props) {
         javascript: `
 import React, { useRef } from 'react';
 import { Ripple } from 'primereact/ripple';
+import { Captcha } from 'primereact/captcha';
 
-export const CaptchaDoc = () => {
+export default function CaptchaDoc() {
     const toast = useRef(null);
 
     const showResponse = () => {
@@ -30,7 +31,7 @@ export const CaptchaDoc = () => {
     return (
         <div className="card">
             <Toast ref={toast}></Toast>
-            <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />  
+            <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
         </div>
     );
 }
@@ -38,18 +39,19 @@ export const CaptchaDoc = () => {
         typescript: `
 import React, { useRef } from 'react';
 import { Ripple } from 'primereact/ripple';
+import { Captcha } from 'primereact/captcha';
 
-export const CaptchaDoc = () => {
-    const toast = useRef(null);
+export default function CaptchaDoc() {
+    const toast = useRef<Toast>(null);
 
     const showResponse = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
+        toast.current?.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
     };
 
     return (
         <div className="card">
             <Toast ref={toast}></Toast>
-            <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />  
+            <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
         </div>
     );
 }

@@ -1,49 +1,50 @@
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 
 export function DisabledDoc(props) {
     const code = {
         basic: `
 <Tooltip target=".disabled-button" />
-<span className="disabled-button mr-2" data-pr-tooltip="A Disabled Button">
+<span className="disabled-button" data-pr-tooltip="Disabled">
     <Button type="button" label="Save" icon="pi pi-check" disabled />
-</span
-<Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+</span>
+
+<Button type="button" label="Save" icon="pi pi-check" disabled tooltip="Disabled" tooltipOptions={{ showOnDisabled: true }} />
         `,
         javascript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
-        <div>
+        <div className="card flex flex-wrap justify-content-center gap-2">
             <Tooltip target=".disabled-button" />
-            <span className="disabled-button mr-2" data-pr-tooltip="A Disabled Button">
+            <span className="disabled-button" data-pr-tooltip="Disabled">
                 <Button type="button" label="Save" icon="pi pi-check" disabled />
             </span>
 
-            <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+            <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="Disabled" tooltipOptions={{ showOnDisabled: true }} />
         </div>
     );
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function DisabledDoc() {
-    
+export default function DisabledDemo() {
     return (
-        <div>
+        <div className="card flex flex-wrap justify-content-center gap-2">
             <Tooltip target=".disabled-button" />
-            <span className="disabled-button mr-2" data-pr-tooltip="A Disabled Button">
+            <span className="disabled-button" data-pr-tooltip="Disabled">
                 <Button type="button" label="Save" icon="pi pi-check" disabled />
             </span>
 
-            <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+            <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="Disabled" tooltipOptions={{ showOnDisabled: true }} />
         </div>
     );
 }
@@ -54,17 +55,17 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element. If this
-                    operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.
+                    Disabled elements do not trigger user interactions due to standard behavior. A common workaround for such cases is wrapping the disabled element with another element that has a tooltip attached. If the tooltip is built-in to the
+                    component then enable <i>showOnDisabled</i> option instead.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card flex flex-wrap justify-content-center gap-2">
                 <Tooltip target=".disabled-button" />
-                <span className="disabled-button mr-2" data-pr-tooltip="A Disabled Button">
+                <span className="disabled-button" data-pr-tooltip="Disabled">
                     <Button type="button" label="Save" icon="pi pi-check" disabled />
                 </span>
 
-                <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+                <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="Disabled" tooltipOptions={{ showOnDisabled: true }} />
             </div>
             <DocSectionCode code={code} />
         </>

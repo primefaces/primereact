@@ -1,11 +1,15 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/organizationchart/importdoc';
-import { ApiDoc } from '../../components/doc/organizationchart/apidoc';
-import { AdvancedDoc } from '../../components/doc/organizationchart/advanceddoc';
-import { BasicDoc } from '../../components/doc/organizationchart/basicdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/organizationchart/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/organizationchart/basicdoc';
+import { ColoredDoc } from '@/components/doc/organizationchart/coloreddoc';
+import { ImportDoc } from '@/components/doc/organizationchart/importdoc';
+import { PTDoc } from '@/components/doc/organizationchart/pt/ptdoc';
+import { Wireframe } from '@/components/doc/organizationchart/pt/wireframe';
+import { SelectionDoc } from '@/components/doc/organizationchart/selectiondoc';
+import { TemplateDoc } from '@/components/doc/organizationchart/templatedoc';
+import { StyledDoc } from '@/components/doc/organizationchart/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/organizationchart/theming/tailwinddoc';
 
 const OrganizationChartDemo = () => {
     const docs = [
@@ -20,55 +24,76 @@ const OrganizationChartDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'advanced',
-            label: 'Advanced',
-            component: AdvancedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'selection',
+            label: 'Selection',
+            component: SelectionDoc
+        },
+        {
+            id: 'colored',
+            label: 'Colored',
+            component: ColoredDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.organizationchart.options',
+            label: 'OrganizationChart PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React OrganizationChart Component</title>
-                <meta name="description" content="OrganizationChart visualizes hierarchical organization data." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>OrganizationChart</h1>
-                    <p>OrganizationChart visualizes hierarchical organization data.</p>
-                </div>
-
-                <DocActions github="organizationchart/index.js" />
-            </div>
-
-            <div className="content-section doc organizationchart-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Organization Chart Component"
+            header="OrganizationChart"
+            description="OrganizationChart visualizes hierarchical organization data."
+            componentDocs={docs}
+            apiDocs={['OrganizationChart']}
+            className="organizationchart-demo"
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

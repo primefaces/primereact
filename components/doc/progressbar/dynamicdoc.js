@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
-import { Toast } from '../../lib/toast/Toast';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useEffect, useRef, useState } from 'react';
 
 export function DynamicDoc(props) {
-    const [value1, setValue1] = useState(0);
+    const [value, setValue] = useState(0);
     const toast = useRef(null);
     const interval = useRef(null);
 
     useEffect(() => {
-        let val = value1;
+        let _val = value;
 
         interval.current = setInterval(() => {
-            val += Math.floor(Math.random() * 10) + 1;
+            _val += Math.floor(Math.random() * 10) + 1;
 
-            if (val >= 100) {
-                val = 100;
+            if (_val >= 100) {
+                _val = 100;
                 toast.current.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
                 clearInterval(interval.current);
             }
 
-            setValue1(val);
+            setValue(_val);
         }, 2000);
 
         return () => {
@@ -34,31 +34,31 @@ export function DynamicDoc(props) {
 
     const code = {
         basic: `
-<ProgressBar value={value1}></ProgressBar>
+<ProgressBar value={value}></ProgressBar>
         `,
         javascript: `
 import React, { useState, useEffect, useRef } from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 import { Toast } from 'primereact/toast';
 
-export const DynamicDoc = () => {
-    const [value1, setValue1] = useState(0);
+export default function DynamicDemo() {
+    const [value, setValue] = useState(0);
     const toast = useRef(null);
     const interval = useRef(null);
 
     useEffect(() => {
-        let val = value1;
+        let _val = value;
 
         interval.current = setInterval(() => {
-            val += Math.floor(Math.random() * 10) + 1;
+            _val += Math.floor(Math.random() * 10) + 1;
 
-            if (val >= 100) {
-                val = 100;
+            if (_val >= 100) {
+                _val = 100;
                 toast.current.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
                 clearInterval(interval.current);
             }
 
-            setValue1(val);
+            setValue(_val);
         }, 2000);
 
         return () => {
@@ -72,7 +72,7 @@ export const DynamicDoc = () => {
     return (
         <div className="card">
             <Toast ref={toast}></Toast>
-            <ProgressBar value={value1}></ProgressBar>
+            <ProgressBar value={value}></ProgressBar>
         </div>
     );
 }
@@ -82,24 +82,24 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 import { Toast } from 'primereact/toast';
 
-export const DynamicDoc = () => {
-    const [value1, setValue1] = useState<number>(0);
+export default function DynamicDemo() {
+    const [value, setValue] = useState<number>(0);
     const toast = useRef<Toast | null>(null);
-    const interval = useRef<NodeJS.Timeout | null>(null);
+    const interval = useRef<number | null>(null);
 
     useEffect(() => {
-        let val = value1;
+        let _val = value;
 
         interval.current = setInterval(() => {
-            val += Math.floor(Math.random() * 10) + 1;
+            _val += Math.floor(Math.random() * 10) + 1;
 
-            if (val >= 100) {
-                val = 100;
+            if (_val >= 100) {
+                _val = 100;
                 toast.current.show({ severity: 'info', summary: 'Success', detail: 'Process Completed' });
                 clearInterval(interval.current);
             }
 
-            setValue1(val);
+            setValue(_val);
         }, 2000);
 
         return () => {
@@ -113,7 +113,7 @@ export const DynamicDoc = () => {
     return (
         <div className="card">
             <Toast ref={toast}></Toast>
-            <ProgressBar value={value1}></ProgressBar>
+            <ProgressBar value={value}></ProgressBar>
         </div>
     );
 }
@@ -123,11 +123,11 @@ export const DynamicDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Dynamic Demo Content.</p>
+                <p>Value is reactive so updating it dynamically changes the bar as well.</p>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
-                <ProgressBar value={value1}></ProgressBar>
+                <ProgressBar value={value}></ProgressBar>
             </div>
             <DocSectionCode code={code} />
         </>

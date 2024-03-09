@@ -1,17 +1,4 @@
 .galleria-demo {
-    .custom-indicator-galleria {
-        .indicator-text {
-            color: #e9ecef;
-            cursor: pointer;
-        }
-
-        .p-highlight {
-            .indicator-text {
-                color: var(--primary-color);
-            }
-        }
-    }
-
     .custom-galleria {
         &.fullscreen {
             display: flex;

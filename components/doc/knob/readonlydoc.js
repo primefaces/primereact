@@ -1,36 +1,36 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Knob } from '@/components/lib/knob/Knob';
 import { useState } from 'react';
-import { Knob } from '../../lib/knob/Knob';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function ReadOnlyDoc(props) {
     const [value, setValue] = useState(50);
 
     const code = {
         basic: `
-<Knob value={value} readOnly />
+<Knob value={50} readOnly />
         `,
         javascript: `
-import { useState } from 'react';
+import React from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function ReadOnlyDoc() {
-    const [value, setValue] = useState(50);
-    
+export default function ReadOnlyDemo() {
     return (
-        <Knob value={value} readOnly />
+        <div className="card flex justify-content-center">
+            <Knob value={50} readOnly />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function ReadOnlyDoc() {
-    const [value, setValue] = useState<number>(50);
-
+export default function ReadOnlyDemo() {
     return (
-        <Knob value={value} readOnly />
+        <div className="card flex justify-content-center">
+            <Knob value={50} readOnly />
+        </div>
     )
 }
         `
@@ -39,10 +39,12 @@ export default function ReadOnlyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>When present, it specifies that the component value cannot be edited.</p>
+                <p>
+                    When <i>readOnly</i> present, value cannot be edited.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Knob value={value} readOnly />
+                <Knob value={50} readOnly />
             </div>
             <DocSectionCode code={code} />
         </>

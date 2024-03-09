@@ -1,12 +1,28 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler } from '../utils/Utils';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useMergeProps, useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, classNames } from '../utils/Utils';
+import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
-    React.forwardRef(() => {
+    React.forwardRef((inProps, ref) => {
+        const [isMounted, setMounted] = React.useState(false);
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = RippleBase.getProps(inProps, context);
+        const isRippleActive = (context && context.ripple) || PrimeReact.ripple;
+
+        const metaData = {
+            props
+        };
+
+        useStyle(RippleBase.css.styles, { name: 'ripple', manual: !isRippleActive });
+
+        const { ptm, cx } = RippleBase.setMetaData({
+            ...metaData
+        });
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -14,32 +30,17 @@ export const Ripple = React.memo(
 
         const bindEvents = () => {
             if (targetRef.current) {
-                targetRef.current.addEventListener('mousedown', onMouseDown);
-                DomHandler.isTouchDevice() && targetRef.current.addEventListener('touchstart', onTouchStart);
+                targetRef.current.addEventListener('pointerdown', onPointerDown);
             }
         };
 
         const unbindEvents = () => {
             if (targetRef.current) {
-                targetRef.current.removeEventListener('mousedown', onMouseDown);
-                DomHandler.isTouchDevice() && targetRef.current.removeEventListener('touchstart', onTouchStart);
+                targetRef.current.removeEventListener('pointerdown', onPointerDown);
             }
         };
 
-        const onTouchStart = (event) => {
-            const offset = DomHandler.getOffset(targetRef.current);
-            const offsetX = event.targetTouches[0].pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
-            const offsetY = event.targetTouches[0].pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
-
-            activateRipple(offsetX, offsetY);
-        };
-
-        const onMouseDown = (event) => {
-            if (DomHandler.isTouchDevice()) {
-                // already started ripple with onTouchStart
-                return;
-            }
-
+        const onPointerDown = (event) => {
             const offset = DomHandler.getOffset(targetRef.current);
             const offsetX = event.pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
             const offsetY = event.pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
@@ -54,12 +55,7 @@ export const Ripple = React.memo(
 
             DomHandler.removeClass(inkRef.current, 'p-ink-active');
 
-            if (!DomHandler.getHeight(inkRef.current) && !DomHandler.getWidth(inkRef.current)) {
-                let d = Math.max(DomHandler.getOuterWidth(targetRef.current), DomHandler.getOuterHeight(targetRef.current));
-
-                inkRef.current.style.height = d + 'px';
-                inkRef.current.style.width = d + 'px';
-            }
+            setDimensions();
 
             inkRef.current.style.top = offsetY + 'px';
             inkRef.current.style.left = offsetX + 'px';
@@ -70,16 +66,38 @@ export const Ripple = React.memo(
             DomHandler.removeClass(event.currentTarget, 'p-ink-active');
         };
 
+        const setDimensions = () => {
+            if (inkRef.current && !DomHandler.getHeight(inkRef.current) && !DomHandler.getWidth(inkRef.current)) {
+                let d = Math.max(DomHandler.getOuterWidth(targetRef.current), DomHandler.getOuterHeight(targetRef.current));
+
+                inkRef.current.style.height = d + 'px';
+                inkRef.current.style.width = d + 'px';
+            }
+        };
+
+        React.useImperativeHandle(ref, () => ({
+            props,
+            getInk: () => inkRef.current,
+            getTarget: () => targetRef.current
+        }));
+
         useMountEffect(() => {
-            if (inkRef.current) {
+            // for App Router in Next.js ^14
+            setMounted(true);
+        });
+
+        useUpdateEffect(() => {
+            if (isMounted && inkRef.current) {
                 targetRef.current = getTarget();
+                setDimensions();
                 bindEvents();
             }
-        });
+        }, [isMounted]);
 
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {
                 targetRef.current = getTarget();
+                setDimensions();
                 bindEvents();
             }
         });
@@ -91,11 +109,19 @@ export const Ripple = React.memo(
             }
         });
 
-        return PrimeReact.ripple ? <span role="presentation" ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span> : null;
+        if (!isRippleActive) return null;
+
+        const rootProps = mergeProps(
+            {
+                'aria-hidden': true,
+                className: classNames(cx('root'))
+            },
+            RippleBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        return <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span>;
     })
 );
 
 Ripple.displayName = 'Ripple';
-Ripple.defaultProps = {
-    __TYPE: 'Ripple'
-};

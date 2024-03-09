@@ -1,6 +1,6 @@
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
 
 export function DisabledDoc(props) {
     const code = {
@@ -8,20 +8,26 @@ export function DisabledDoc(props) {
 <Checkbox checked disabled></Checkbox>
         `,
         javascript: `
+import React from 'react'; 
 import { Checkbox } from "primereact/checkbox";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox checked disabled></Checkbox>
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Checkbox } from "primereact/checkbox";
 
 export default function DisabledDemo() {
     return (
-        <Checkbox checked disabled></Checkbox>
+        <div className="card flex justify-content-center">
+            <Checkbox checked disabled></Checkbox>
+        </div>
     )
 }
         `
@@ -31,7 +37,7 @@ export default function DisabledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

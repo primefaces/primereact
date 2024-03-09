@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { Tree } from '../../lib/tree/Tree';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Tree } from '@/components/lib/tree/Tree';
+import { useEffect, useState } from 'react';
 
 export function LazyDoc(props) {
-    const [nodes, setNodes] = useState(null);
+    const [nodes, setNodes] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const createLazyNodes = () => {
@@ -61,14 +61,14 @@ export function LazyDoc(props) {
 
     const code = {
         basic: `
-<Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+<Tree value={nodes} onExpand={loadOnExpand} loading={loading} className="w-full md:w-30rem" />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 
-export default function LazyDoc() {
-    const [nodes, setNodes] = useState(null);
+export default function LazyDemo() {
+    const [nodes, setNodes] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const createLazyNodes = () => {
@@ -121,20 +121,23 @@ export default function LazyDoc() {
             setNodes(createLazyNodes());
             setLoading(false);
         }, 2000);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} onExpand={loadOnExpand} loading={loading} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Tree } from 'primereact/tree';
+import { TreeNode } from 'primereact/treenode';
 
-export default function LazyDoc() {
-    const [nodes, setNodes] = useState(null);
-    const [loading, setLoading] = useState(true);
+export default function LazyDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const createLazyNodes = () => {
         return [
@@ -186,10 +189,12 @@ export default function LazyDoc() {
             setNodes(createLazyNodes());
             setLoading(false);
         }, 2000);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} onExpand={loadOnExpand} loading={loading} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `
@@ -198,11 +203,13 @@ export default function LazyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Lazy loading is useful when dealing with huge datasets.</p>
+                <p>
+                    Lazy loading is useful when dealing with huge datasets, in this example nodes are dynamically loaded on demand using <i>onExpand</i> event.
+                </p>
             </DocSectionText>
 
-            <div className="card">
-                <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+            <div className="card flex justify-content-center">
+                <Tree value={nodes} onExpand={loadOnExpand} loading={loading} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} />
         </>

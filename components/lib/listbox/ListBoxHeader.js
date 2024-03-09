@@ -1,8 +1,22 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
+import { SearchIcon } from '../icons/search';
 import { InputText } from '../inputtext/InputText';
-import { ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxHeader = React.memo((props) => {
+    const mergeProps = useMergeProps();
+    const {
+        ptCallbacks: { ptm, cx }
+    } = props;
+
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const filterOptions = {
         filter: (e) => onFilter(e),
         reset: () => props.resetFilter()
@@ -18,10 +32,45 @@ export const ListBoxHeader = React.memo((props) => {
     };
 
     const createHeader = () => {
+        const filterIconProps = mergeProps(
+            {
+                className: cx('filterIcon')
+            },
+            getPTOptions('filterIcon')
+        );
+
+        const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
+        const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
+
+        const headerProps = mergeProps(
+            {
+                className: cx('header')
+            },
+            getPTOptions('header')
+        );
+
+        const filterContainerProps = mergeProps(
+            {
+                className: cx('filterContainer')
+            },
+            getPTOptions('filterContainer')
+        );
+
         let content = (
-            <div className="p-listbox-filter-container">
-                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} />
-                <span className="p-listbox-filter-icon pi pi-search"></span>
+            <div {...filterContainerProps}>
+                <InputText
+                    type="text"
+                    value={props.filter}
+                    onChange={onFilter}
+                    className={cx('filterInput')}
+                    disabled={props.disabled}
+                    placeholder={props.filterPlaceholder}
+                    {...props.filterInputProps}
+                    pt={ptm('filterInput')}
+                    unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
+                />
+                {filterIcon}
             </div>
         );
 
@@ -31,14 +80,14 @@ export const ListBoxHeader = React.memo((props) => {
                 element: content,
                 filterOptions: filterOptions,
                 filterInputChange: onFilter,
-                filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                filterIconClassName: 'p-dropdown-filter-icon',
                 props
             };
 
             content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
         }
 
-        return <div className="p-listbox-header">{content}</div>;
+        return <div {...headerProps}>{content}</div>;
     };
 
     const content = createHeader();

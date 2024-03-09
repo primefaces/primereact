@@ -1,36 +1,41 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import { useState } from 'react';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [dates, setDates] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+<Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function MultipleDoc() {
-    const [dates, setDates] = useState<Date(null);
+export default function MultipleDemo() {
+    const [dates, setDates] = useState(null);
 
     return (
-        <Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
-export default function MultipleDoc() {
-    const [dates, setDates] = useState<Date | null>(null);
+export default function MultipleDemo() {
+    const [dates, setDates] = useState<Nullable<Date[]>>(null);
 
     return (
-        <Calendar id="multiple" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+        </div>
     )
 }
         `
@@ -40,13 +45,11 @@ export default function MultipleDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple case an array is required. Third
-                    alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value is the end date. Note: Time picker is supported in range mode but not in multiple
-                    mode.
+                    In order to choose multiple dates, set <i>selectionMode</i> as <i>multiple</i>. In this mode, the value binding should be an array.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="multiple" value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
+                <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="multiple" readOnlyInput />
             </div>
             <DocSectionCode code={code} />
         </>

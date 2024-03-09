@@ -1,11 +1,11 @@
-import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputText } from '@/components/lib/inputtext/InputText';
 
 export function IconsDoc(props) {
     const code = {
         basic: `
-<span className="p-input-icon-left mr-3">
+<span className="p-input-icon-left">
     <i className="pi pi-search" />
     <InputText placeholder="Search" />
 </span>
@@ -16,11 +16,12 @@ export function IconsDoc(props) {
 </span>
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function IconsDemo() {
     return (
-        <div className="flex flex-wrap gap-3">
+        <div className="card flex flex-wrap justify-content-center gap-3">
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText placeholder="Search" />
@@ -35,11 +36,12 @@ export default function IconsDemo() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function IconsDemo() {
     return (
-        <div className="flex flex-wrap gap-3">
+        <div className="card flex flex-wrap justify-content-center gap-3">
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText placeholder="Search" />
@@ -62,18 +64,16 @@ export default function IconsDemo() {
                     Icons can be placed inside an input element by wrapping both the input and the icon with an element that has either <i>.p-input-icon-left</i> or <i>p-input-icon-right</i> class.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div className="flex flex-wrap gap-3">
-                    <span className="p-input-icon-left">
-                        <i className="pi pi-search" />
-                        <InputText placeholder="Search" />
-                    </span>
+            <div className="card flex flex-wrap justify-content-center gap-3 ">
+                <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
+                    <InputText placeholder="Search" />
+                </span>
 
-                    <span className="p-input-icon-right">
-                        <i className="pi pi-spin pi-spinner" />
-                        <InputText />
-                    </span>
-                </div>
+                <span className="p-input-icon-right">
+                    <i className="pi pi-spin pi-spinner" />
+                    <InputText />
+                </span>
             </div>
             <DocSectionCode code={code} />
         </>

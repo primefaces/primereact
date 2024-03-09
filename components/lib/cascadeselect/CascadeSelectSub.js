@@ -1,12 +1,22 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { PrimeReactContext } from '../api/Api';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 export const CascadeSelectSub = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [activeOptionState, setActiveOptionState] = React.useState(null);
     const elementRef = React.useRef(null);
+    const context = React.useContext(PrimeReactContext);
+    const { ptm, cx } = props;
+
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            state: { ...options }
+        });
+    };
 
     const position = () => {
         const parentItem = elementRef.current.parentElement;
@@ -165,7 +175,9 @@ export const CascadeSelectSub = React.memo((props) => {
     });
 
     useUpdateEffect(() => {
-        setActiveOptionState(null);
+        if (!props.parentActive) {
+            setActiveOptionState(null);
+        }
     }, [props.parentActive]);
 
     const createSubmenu = (option) => {
@@ -176,8 +188,9 @@ export const CascadeSelectSub = React.memo((props) => {
 
             return (
                 <CascadeSelectSub
+                    hostName={props.hostName}
                     options={options}
-                    className="p-cascadeselect-sublist"
+                    className={cx('sublist')}
                     selectionPath={props.selectionPath}
                     optionLabel={props.optionLabel}
                     optionValue={props.optionValue}
@@ -190,6 +203,8 @@ export const CascadeSelectSub = React.memo((props) => {
                     dirty={props.dirty}
                     template={props.template}
                     onPanelHide={props.onPanelHide}
+                    ptm={ptm}
+                    cx={cx}
                 />
             );
         }
@@ -198,22 +213,49 @@ export const CascadeSelectSub = React.memo((props) => {
     };
 
     const createOption = (option, index) => {
-        const className = classNames(
-            'p-cascadeselect-item',
-            {
-                'p-cascadeselect-item-group': isOptionGroup(option),
-                'p-cascadeselect-item-active p-highlight': activeOptionState === option
-            },
-            option.className
-        );
         const submenu = createSubmenu(option);
-        const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span className="p-cascadeselect-item-text">{getOptionLabelToRender(option)}</span>;
-        const optionGroup = isOptionGroup(option) && <span className="p-cascadeselect-group-icon pi pi-angle-right" />;
+        const textProps = mergeProps(
+            {
+                className: cx('text')
+            },
+            getPTOptions('text')
+        );
+        const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span {...textProps}>{getOptionLabelToRender(option)}</span>;
+        const optionGroupIconProps = mergeProps(
+            {
+                className: cx('optionGroupIcon')
+            },
+            getPTOptions('optionGroupIcon')
+        );
+        const icon = props.optionGroupIcon || <AngleRightIcon {...optionGroupIconProps} />;
+        const optionGroup = isOptionGroup(option) && IconUtils.getJSXIcon(icon, { ...optionGroupIconProps }, { props });
         const key = getOptionLabelToRender(option) + '_' + index;
+        const contentProps = mergeProps(
+            {
+                className: cx('content'),
+                onClick: (event) => onOptionClick(event, option),
+                tabIndex: 0,
+                onKeyDown: (event) => onKeyDown(event, option)
+            },
+            getPTOptions('content')
+        );
+
+        const isSelected = activeOptionState === option;
+        const isGroup = isOptionGroup(option);
+        const itemProps = mergeProps(
+            {
+                className: classNames(option.className, cx('item', { option, isGroup, isSelected })),
+                style: option.style,
+                role: 'none',
+                'data-p-item-group': isGroup,
+                'data-p-highlight': isSelected
+            },
+            getPTOptions('item', { selected: isSelected, group: isGroup })
+        );
 
         return (
-            <li key={key} className={className} style={option.style} role="none">
-                <div className="p-cascadeselect-item-content" onClick={(event) => onOptionClick(event, option)} tabIndex={0} onKeyDown={(event) => onKeyDown(event, option)}>
+            <li key={key} {...itemProps}>
+                <div {...contentProps}>
                     {content}
                     {optionGroup}
                     <Ripple />
@@ -227,15 +269,16 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className, {
-        'p-input-filled': PrimeReact.inputStyle === 'filled',
-        'p-ripple-disabled': PrimeReact.ripple === false
-    });
     const submenu = createMenu();
-
-    return (
-        <ul ref={elementRef} className={className} role="listbox" aria-orientation="horizontal">
-            {submenu}
-        </ul>
+    const listProps = mergeProps(
+        {
+            ref: elementRef,
+            className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
+            role: 'listbox',
+            'aria-orientation': 'horizontal'
+        },
+        props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
     );
+
+    return <ul {...listProps}>{submenu}</ul>;
 });

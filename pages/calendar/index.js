@@ -1,26 +1,31 @@
-import Head from 'next/head';
-import { ApiDoc } from '../../components/doc/calendar/apidoc';
-import { BasicDoc } from '../../components/doc/calendar/basicdoc';
-import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
-import { DateFormatDoc } from '../../components/doc/calendar/dateformatdoc';
-import { DateTemplateDoc } from '../../components/doc/calendar/datetemplatedoc';
-import { DisabledDoc } from '../../components/doc/calendar/disableddoc';
-import { IconDoc } from '../../components/doc/calendar/icondoc';
-import { ImportDoc } from '../../components/doc/calendar/importdoc';
-import { InlineDoc } from '../../components/doc/calendar/inlinedoc';
-import { MinMaxDoc } from '../../components/doc/calendar/minmaxdoc';
-import { MonthPickerDoc } from '../../components/doc/calendar/monthpickerdoc';
-import { MultipleDoc } from '../../components/doc/calendar/multipledoc';
-import { MultipleMonthsDoc } from '../../components/doc/calendar/multiplemonthsdoc';
-import { RangeDoc } from '../../components/doc/calendar/rangedoc';
-import { Time12Doc } from '../../components/doc/calendar/time12doc';
-import { Time24Doc } from '../../components/doc/calendar/time24doc';
-import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
-import { ValidationDoc } from '../../components/doc/calendar/validationdoc';
-import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '@/components/doc/calendar/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/calendar/basicdoc';
+import { ButtonBarDoc } from '@/components/doc/calendar/buttonbardoc';
+import { DateTemplateDoc } from '@/components/doc/calendar/datetemplatedoc';
+import { DisabledDoc } from '@/components/doc/calendar/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/calendar/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/calendar/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/calendar/form/hookfromdoc';
+import { FormatDoc } from '@/components/doc/calendar/formatdoc';
+import { IconDoc } from '@/components/doc/calendar/icondoc';
+import { ImportDoc } from '@/components/doc/calendar/importdoc';
+import { InlineDoc } from '@/components/doc/calendar/inlinedoc';
+import { InvalidDoc } from '@/components/doc/calendar/invaliddoc';
+import { LocaleDoc } from '@/components/doc/calendar/localedoc';
+import { MinMaxDoc } from '@/components/doc/calendar/minmaxdoc';
+import { MonthPickerDoc } from '@/components/doc/calendar/monthpickerdoc';
+import { MultipleDoc } from '@/components/doc/calendar/multipledoc';
+import { MultipleMonthsDoc } from '@/components/doc/calendar/multiplemonthsdoc';
+import { PTDoc } from '@/components/doc/calendar/pt/ptdoc';
+import { Wireframe } from '@/components/doc/calendar/pt/wireframe';
+import { RangeDoc } from '@/components/doc/calendar/rangedoc';
+import { StyledDoc } from '@/components/doc/calendar/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/calendar/theming/tailwinddoc';
+import { TimeDoc } from '@/components/doc/calendar/timedoc';
+import { TouchUIDoc } from '@/components/doc/calendar/touchuidoc';
+import { YearPickerDoc } from '@/components/doc/calendar/yearpickerdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CalendarDemo = () => {
     const docs = [
@@ -35,9 +40,14 @@ const CalendarDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'dateformat',
-            label: 'Date Format',
-            component: DateFormatDoc
+            id: 'format',
+            label: 'Format',
+            component: FormatDoc
+        },
+        {
+            id: 'locale',
+            label: 'Locale',
+            component: LocaleDoc
         },
         {
             id: 'icon',
@@ -48,11 +58,6 @@ const CalendarDemo = () => {
             id: 'minmax',
             label: 'Min / Max',
             component: MinMaxDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'multiple',
@@ -70,14 +75,9 @@ const CalendarDemo = () => {
             component: ButtonBarDoc
         },
         {
-            id: 'time24',
-            label: 'Time / 24h',
-            component: Time24Doc
-        },
-        {
-            id: 'time12',
-            label: 'Time / 12h',
-            component: Time12Doc
+            id: 'time',
+            label: 'Time',
+            component: TimeDoc
         },
         {
             id: 'monthpicker',
@@ -90,8 +90,8 @@ const CalendarDemo = () => {
             component: YearPickerDoc
         },
         {
-            id: 'multiplemonth',
-            label: 'Multiple Month',
+            id: 'multiplemonths',
+            label: 'Multiple Months',
             component: MultipleMonthsDoc
         },
         {
@@ -110,54 +110,92 @@ const CalendarDemo = () => {
             component: InlineDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.calendar.options',
+            label: 'Calendar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Calendar Component</title>
-                <meta name="description" content="Calendar also known as DatePicker, is a form component to work with dates." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Calendar</h1>
-                    <p>Calendar also known as DatePicker, is a form component to work with dates.</p>
-                </div>
-                <DocActions github="calendar/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Calendar Component"
+            header="Calendar"
+            description="Calendar, also known as DatePicker, is a form component to work with dates."
+            componentDocs={docs}
+            apiDocs={['Calendar']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

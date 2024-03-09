@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ValidationDoc(props) {
     const [formData, setFormData] = useState({});
@@ -33,7 +33,7 @@ export function ValidationDoc(props) {
 />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
@@ -77,7 +77,7 @@ export default function ValidationDemo() {
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
@@ -126,7 +126,7 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <a href="https://react-hook-form.com/">React Hook Form</a> is the most popular React library for form validation. The field will be highlighted and receive focus on validation failure.
+                    <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
@@ -152,7 +152,7 @@ export default function InvalidDemo() {
                     </form>
                 </div>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'react-hook-form': '^7.39.4' }} />
         </>
     );
 }

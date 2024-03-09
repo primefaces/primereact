@@ -1,46 +1,47 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
-        const [activeItemState, setActiveItemState] = React.useState(null);
+        const mergeProps = useMergeProps();
+        const { ptm, cx } = props;
 
-        const [bindDocumentClickListener] = useEventListener({
-            type: 'click',
-            listener: (event) => {
-                if (ref && ref.current && !ref.current.contains(event.target)) {
-                    setActiveItemState(null);
+        const getPTOptions = (processedItem, key, index) => {
+            return ptm(key, {
+                props,
+                hostName: props.hostName,
+                context: {
+                    item: processedItem,
+                    index,
+                    active: isItemActive(processedItem),
+                    focused: isItemFocused(processedItem),
+                    disabled: isItemDisabled(processedItem),
+                    level: props.level
                 }
-            }
-        });
-
-        const onItemMouseEnter = (event, item) => {
-            if (item.disabled || props.mobileActive) {
-                event.preventDefault();
-
-                return;
-            }
-
-            if (props.root) {
-                if (activeItemState || props.popup) {
-                    setActiveItemState(item);
-                }
-            } else {
-                setActiveItemState(item);
-            }
+            });
         };
 
-        const onItemClick = (event, item) => {
-            if (item.disabled) {
+        const onItemMouseEnter = (event, item) => {
+            if (isItemDisabled(item) || props.mobileActive) {
                 event.preventDefault();
 
                 return;
             }
 
-            if (!item.url) {
+            props.onItemMouseEnter && props.onItemMouseEnter({ originalEvent: event, processedItem: item });
+        };
+
+        const onItemClick = (event, processedItem) => {
+            const item = processedItem.item;
+
+            if (isItemDisabled(processedItem)) {
                 event.preventDefault();
+
+                return;
             }
 
             if (item.command) {
@@ -50,148 +51,160 @@ export const MenubarSub = React.memo(
                 });
             }
 
-            if (item.items) activeItemState && item === activeItemState ? setActiveItemState(null) : setActiveItemState(item);
-            else onLeafClick();
-        };
+            onLeafClick({ originalEvent: event, processedItem, isFocus: true });
 
-        const onItemKeyDown = (event, item) => {
-            const listItem = event.currentTarget.parentElement;
-
-            switch (event.which) {
-                //down
-                case 40:
-                    if (props.root) item.items && expandSubmenu(item, listItem);
-                    else navigateToNextItem(listItem);
-
-                    event.preventDefault();
-                    break;
-
-                //up
-                case 38:
-                    !props.root && navigateToPrevItem(listItem);
-                    event.preventDefault();
-                    break;
-
-                //right
-                case 39:
-                    if (props.root) {
-                        const nextItem = findNextItem(listItem);
-
-                        nextItem && nextItem.children[0].focus();
-                    } else {
-                        item.items && expandSubmenu(item, listItem);
-                    }
-
-                    event.preventDefault();
-                    break;
-
-                //left
-                case 37:
-                    props.root && navigateToPrevItem(listItem);
-                    event.preventDefault();
-                    break;
-
-                default:
-                    break;
-            }
-
-            props.onKeyDown && props.onKeyDown(event, listItem);
-        };
-
-        const onChildItemKeyDown = (event, childListItem) => {
-            if (props.root) {
-                //up
-                if (event.which === 38 && childListItem.previousElementSibling == null) {
-                    collapseMenu(childListItem);
-                }
-            } else {
-                //left
-                if (event.which === 37) {
-                    collapseMenu(childListItem);
-                }
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
             }
         };
 
-        const expandSubmenu = (item, listItem) => {
-            setActiveItemState(item);
-
-            setTimeout(() => {
-                listItem.children[1].children[0].children[0].focus();
-            }, 50);
+        const onLeafClick = (event) => {
+            props.onLeafClick && props.onLeafClick(event);
         };
 
-        const collapseMenu = (listItem) => {
-            setActiveItemState(null);
-            listItem.parentElement.previousElementSibling.focus();
+        const getItemId = (processedItem) => {
+            return processedItem.item?.id;
         };
 
-        const navigateToNextItem = (listItem) => {
-            const nextItem = findNextItem(listItem);
-
-            nextItem && nextItem.children[0].focus();
+        const getItemDataId = (processedItem) => {
+            return `${props.id}_${processedItem.key}`;
         };
 
-        const navigateToPrevItem = (listItem) => {
-            const prevItem = findPrevItem(listItem);
-
-            prevItem && prevItem.children[0].focus();
+        const getItemProp = (processedItem, name, params) => {
+            return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name], params) : undefined;
         };
 
-        const findNextItem = (item) => {
-            const nextItem = item.nextElementSibling;
-
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
+        const isItemActive = (processedItem) => {
+            return props.activeItemPath.some((path) => path.key === processedItem.key);
         };
 
-        const findPrevItem = (item) => {
-            const prevItem = item.previousElementSibling;
-
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
+        const isItemVisible = (processedItem) => {
+            return getItemProp(processedItem, 'visible') !== false;
         };
 
-        const onLeafClick = () => {
-            setActiveItemState(null);
-            props.onLeafClick && props.onLeafClick();
+        const isItemDisabled = (processedItem) => {
+            return getItemProp(processedItem, 'disabled');
         };
 
-        useMountEffect(() => {
-            bindDocumentClickListener();
-        });
+        const isItemFocused = (processedItem) => {
+            return props.focusedItemId === getItemDataId(processedItem);
+        };
 
-        useUpdateEffect(() => {
-            !props.parentActive && setActiveItemState(null);
-        }, [props.parentActive]);
+        const isItemGroup = (processedItem) => {
+            return ObjectUtils.isNotEmpty(processedItem.items);
+        };
+
+        const getAriaSetSize = () => {
+            return props.model.filter((processedItem) => isItemVisible(processedItem) && !getItemProp(processedItem, 'separator')).length;
+        };
+
+        const getAriaPosInset = (index) => {
+            return index - props.model.slice(0, index).filter((processedItem) => isItemVisible(processedItem) && getItemProp(processedItem, 'separator')).length + 1;
+        };
 
         const createSeparator = (index) => {
-            const key = 'separator_' + index;
+            const key = props.id + '_separator_' + index;
+            const separatorProps = mergeProps(
+                {
+                    key,
+                    'data-id': key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                ptm('separator', { hostName: props.hostName })
+            );
 
-            return <li key={key} className="p-menu-separator" role="separator"></li>;
+            return <li {...separatorProps}></li>;
         };
 
-        const createSubmenu = (item) => {
-            if (item.items) {
-                return <MenubarSub menuProps={props.menuProps} model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />;
+        const createSubmenu = (processedItem) => {
+            const items = processedItem && processedItem.items;
+
+            if (items) {
+                return (
+                    <MenubarSub
+                        id={props.id}
+                        hostName={props.hostName}
+                        menuProps={props.menuProps}
+                        level={props.level + 1}
+                        model={items}
+                        activeItemPath={props.activeItemPath}
+                        focusedItemId={props.focusedItemId}
+                        onLeafClick={onLeafClick}
+                        onItemMouseEnter={props.onItemMouseEnter}
+                        submenuIcon={props.submenuIcon}
+                        ptm={ptm}
+                        style={{ display: isItemActive(processedItem) ? 'block' : 'none' }}
+                        cx={cx}
+                    />
+                );
             }
 
             return null;
         };
 
-        const createMenuitem = (item, index) => {
-            if (item.visible === false) {
+        const createMenuitem = (processedItem, index) => {
+            const item = processedItem.item;
+
+            if (!isItemVisible(processedItem)) {
                 return null;
             }
 
-            const key = item.label + '_' + index;
-            const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
-            const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
-            const iconClassName = classNames('p-menuitem-icon', item.icon);
-            const submenuIconClassName = classNames('p-submenu-icon pi', { 'pi-angle-down': props.root, 'pi-angle-right': !props.root });
-            const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-            const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
-            const submenu = createSubmenu(item);
+            const id = getItemId(processedItem);
+            const dataId = getItemDataId(processedItem);
+            const active = isItemActive(processedItem);
+            const focused = isItemFocused(processedItem);
+            const disabled = isItemDisabled(processedItem) || false;
+            const group = isItemGroup(processedItem);
+
+            const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
+            const iconClassName = classNames('p-menuitem-icon', getItemProp(processedItem, 'icon'));
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                getPTOptions(processedItem, 'icon', index)
+            );
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                getPTOptions(processedItem, 'label', index)
+            );
+            const label = item.label && <span {...labelProps}>{item.label}</span>;
+            const items = getItemProp(processedItem, 'items');
+            const submenuIconClassName = 'p-submenu-icon';
+            const submenuIconProps = mergeProps(
+                {
+                    className: cx('submenuIcon')
+                },
+                getPTOptions(processedItem, 'submenuIcon', index)
+            );
+            const submenuIcon =
+                items &&
+                IconUtils.getJSXIcon(
+                    !props.root ? props.submenuIcon || <AngleRightIcon {...submenuIconProps} /> : props.submenuIcon || <AngleDownIcon {...submenuIconProps} />,
+                    { ...submenuIconProps },
+                    { props: { menuProps: props.menuProps, ...props } }
+                );
+            const submenu = createSubmenu(processedItem);
+            const actionProps = mergeProps(
+                {
+                    href: item.url || '#',
+                    tabIndex: '-1',
+                    'aria-hidden': 'true',
+                    className: cx('action', { disabled }),
+                    onFocus: (event) => event.stopPropagation(),
+                    target: getItemProp(processedItem, 'target'),
+                    'aria-haspopup': items != null
+                },
+                getPTOptions(processedItem, 'action', index)
+            );
+
             let content = (
-                <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>
+                <a {...actionProps}>
                     {icon}
                     {label}
                     {submenuIcon}
@@ -201,8 +214,6 @@ export const MenubarSub = React.memo(
 
             if (item.template) {
                 const defaultContentOptions = {
-                    onClick: (event) => onItemClick(event, item),
-                    onKeyDown: (event) => onItemKeyDown(event, item),
                     className: linkClassName,
                     labelClassName: 'p-menuitem-text',
                     iconClassName,
@@ -214,16 +225,49 @@ export const MenubarSub = React.memo(
                 content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
+            const contentProps = mergeProps(
+                {
+                    onClick: (event) => onItemClick(event, processedItem),
+                    onMouseEnter: (event) => onItemMouseEnter(event, processedItem),
+                    className: cx('content')
+                },
+                getPTOptions(processedItem, 'content', index)
+            );
+
+            const itemClassName = getItemProp(processedItem, 'className');
+
+            const menuitemProps = mergeProps(
+                {
+                    id,
+                    key: dataId,
+                    'data-id': dataId,
+                    role: 'menuitem',
+                    'aria-label': item.label,
+                    'aria-disabled': disabled,
+                    'aria-expanded': group ? active : undefined,
+                    'aria-haspopup': group && !item.url ? 'menu' : undefined,
+                    'aria-level': props.level + 1,
+                    'aria-setsize': getAriaSetSize(),
+                    'aria-posinset': getAriaPosInset(index),
+                    'data-p-highlight': active,
+                    'data-p-focused': focused,
+                    'data-p-disabled': disabled,
+                    className: classNames(itemClassName, cx('menuitem', { active, focused, disabled })),
+                    'data-p-disabled': disabled || false
+                },
+                getPTOptions(processedItem, 'menuitem', index)
+            );
+
             return (
-                <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
-                    {content}
+                <li {...menuitemProps}>
+                    <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>
             );
         };
 
-        const createItem = (item, index) => {
-            return item.separator ? createSeparator(index) : createMenuitem(item, index);
+        const createItem = (processedItem, index) => {
+            return getItemProp(processedItem, 'separator') ? createSeparator(index) : createMenuitem(processedItem, index);
         };
 
         const createMenu = () => {
@@ -231,17 +275,27 @@ export const MenubarSub = React.memo(
         };
 
         const role = props.root ? 'menubar' : 'menu';
-        const className = classNames({
-            'p-submenu-list': !props.root,
-            'p-menubar-root-list': props.root
-        });
+        const ptKey = props.root ? 'menu' : 'submenu';
+        const tabIndex = props.root ? '0' : null;
         const submenu = createMenu();
-
-        return (
-            <ul ref={ref} className={className} role={role}>
-                {submenu}
-            </ul>
+        const menuProps = mergeProps(
+            {
+                ref,
+                className: cx(ptKey),
+                level: props.level,
+                onFocus: props.onFocus,
+                onBlur: props.onBlur,
+                onKeyDown: props.onKeyDown,
+                'data-id': props.id,
+                tabIndex: tabIndex,
+                'aria-activedescendant': props.ariaActivedescendant,
+                style: props.style,
+                role
+            },
+            ptm(ptKey)
         );
+
+        return <ul {...menuProps}>{submenu}</ul>;
     })
 );
 

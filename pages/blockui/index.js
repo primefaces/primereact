@@ -1,14 +1,14 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/blockui/apidoc';
-import { ImportDoc } from '../../components/doc/blockui/importdoc';
-import { BasicDoc } from '../../components/doc/blockui/basicdoc';
-import { PanelDoc } from '../../components/doc/blockui/paneldoc';
-import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
-import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { AccessibilityDoc } from '@/components/doc/blockui/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/blockui/basicdoc';
+import { DocumentDoc } from '@/components/doc/blockui/documentdoc';
+import { ImportDoc } from '@/components/doc/blockui/importdoc';
+import { PTDoc } from '@/components/doc/blockui/pt/ptdoc';
+import { Wireframe } from '@/components/doc/blockui/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/blockui/templatedoc';
+import { StyledDoc } from '@/components/doc/blockui/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/blockui/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const BlockUIDemo = () => {
     const docs = [
@@ -28,61 +28,57 @@ const BlockUIDemo = () => {
             component: DocumentDoc
         },
         {
-            id: 'panel',
-            label: 'Panel',
-            component: PanelDoc
-        },
-        {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
         },
+
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.blockui.options',
+            label: 'BlockUI PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React BlockUI Component</title>
-                <meta name="description" content="BlockUI can either block other components or the whole page." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>BlockUI</h1>
-                    <p>BlockUI can either block other components or the whole page.</p>
-                </div>
-                <DocActions github="blockui/index.js" />
-            </div>
-
-            <div className="content-section doc blockui-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React BlockUI Component" header="BlockUI" description="BlockUI can block certain elements or the whole page." componentDocs={docs} apiDocs={['BlockUI']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default BlockUIDemo;

@@ -1,13 +1,14 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/orderlist/apidoc';
-import { ImportDoc } from '../../components/doc/orderlist/importdoc';
-import { TemplateDoc } from '../../components/doc/orderlist/templatedoc';
-import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
-import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
-import { DragDropDoc } from '../../components/doc/orderlist/dragdropdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/orderlist/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/orderlist/basicdoc';
+import { DragDropDoc } from '@/components/doc/orderlist/dragdropdoc';
+import { FilterDoc } from '@/components/doc/orderlist/filterdoc';
+import { ImportDoc } from '@/components/doc/orderlist/importdoc';
+import { PTDoc } from '@/components/doc/orderlist/pt/ptdoc';
+import { Wireframe } from '@/components/doc/orderlist/pt/wireframe';
+import { StyledDoc } from '@/components/doc/orderlist/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/orderlist/theming/tailwinddoc';
 
 const OrderListDemo = () => {
     const docs = [
@@ -31,63 +32,51 @@ const OrderListDemo = () => {
             label: 'DragDrop',
             component: DragDropDoc
         },
+
         {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'pt.orderlist.options',
+            label: 'OrderList PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Styling'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React OrderList Component</title>
-                <meta name="description" content="OrderList is used to sort a collection." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>OrderList</h1>
-                    <p>OrderList is used to sort a collection.</p>
-                </div>
-
-                <DocActions github="orderlist/index.js" />
-            </div>
-
-            <div className="content-section implementation orderlist-demo">
-                <div className="content-section doc">
-                    <DocSections docs={docs} />
-                    <DocSectionNav docs={docs} />
-                </div>
-            </div>
-        </div>
-    );
+    return <DocComponent title="React OrderList Component" header="OrderList" description="OrderList is used to sort a collection." componentDocs={docs} apiDocs={['OrderList']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default OrderListDemo;

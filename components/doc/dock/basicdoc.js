@@ -1,119 +1,234 @@
-import getConfig from 'next/config';
-import { Dock } from '../../lib/dock/Dock';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dock } from '@/components/lib/dock/Dock';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
+import { useState } from 'react';
 
 export function BasicDoc(props) {
-    const dockBasicItems = [
+    const [position, setPosition] = useState('bottom');
+    const items = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/finder.svg" width="100%" />
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="App Store" src="https://primefaces.org/cdn/primereact/images/dock/appstore.svg" width="100%" />
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Photos" src="https://primefaces.org/cdn/primereact/images/dock/photos.svg" width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="trash" src="https://primefaces.org/cdn/primereact/images/dock/trash.png" width="100%" />
         }
     ];
-    const imgPath = 'images/dock';
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+
+    const positions = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
 
     const code = {
         basic: `
-<Dock model={dockBasicItems} position="bottom" />
-<Dock model={dockBasicItems} position="top" />
-<Dock model={dockBasicItems} position="left" />
-<Dock model={dockBasicItems} position="right" />
+<Dock model={items} position="{position}" />
 `,
         javascript: `
+import { useState } from 'react';
 import { Dock } from 'primereact/dock';
+import { RadioButton } from 'primereact/radiobutton';
+import './DockDemo.css';
 
-export default function BasicDoc() {
-    const dockBasicItems = [
+export default function BasicDemo() {
+    const [position, setPosition] = useState('bottom');    
+    const items = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/finder.svg" width="100%" />,
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="App Store" src="https://primefaces.org/cdn/primereact/images/dock/appstore.svg" width="100%" />,
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Photos" src="https://primefaces.org/cdn/primereact/images/dock/photos.svg" width="100%" />,
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="trash" src="https://primefaces.org/cdn/primereact/images/dock/trash.png" width="100%" />,
         }
     ];
-    const imgPath = 'images/dock';
+
+    const positions = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
 
     return (
-        <div className="dock-window">
-            <Dock model={dockBasicItems} position="bottom" />
-            <Dock model={dockBasicItems} position="top" />
-            <Dock model={dockBasicItems} position="left" />
-            <Dock model={dockBasicItems} position="right" />
+        <div className="card dock-demo">
+            <div className="flex flex-wrap gap-3 mb-5">
+                {positions.map((option) => {
+                    const { value, label } = option;
+
+                    return (
+                        <div className="flex align-items-center" key={label}>
+                            <RadioButton value={label} onChange={() => setPosition(option.value)} checked={position === value} />
+                            <label htmlFor={label} className="ml-2">
+                                {label}
+                            </label>
+                        </div>
+                    );
+                })}
+            </div>
+            <div className="dock-window" style={{ backgroundImage: 'url(https://primefaces.org/cdn/primereact/images/dock/window.jpg)' }}>
+                <Dock model={items} position={position} />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
+import { useState } from 'react';
 import { Dock } from 'primereact/dock';
 import { MenuItem } from 'primereact/menuitem';
+import { RadioButton } from 'primereact/radiobutton';
+import './DockDemo.css';
 
-export default function BasicDoc() {
-    const dockBasicItems: MenuteItem[] = [
+export default function BasicDemo() {
+    const [position, setPosition] = useState<string>('bottom');    
+    const items: MenuItem[] = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={\`\${imgPath}/finder.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/finder.svg" width="100%" />,
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={\`\${imgPath}/appstore.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="App Store" src="https://primefaces.org/cdn/primereact/images/dock/appstore.svg" width="100%" />,
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={\`\${imgPath}/photos.svg\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="Photos" src="https://primefaces.org/cdn/primereact/images/dock/photos.svg" width="100%" />,
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={\`\${imgPath}/trash.png\`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
+            icon: () => <img alt="trash" src="https://primefaces.org/cdn/primereact/images/dock/trash.png" width="100%" />,
         }
     ];
-    const imgPath = 'images/dock';
+
+    const positions: Array<{label: string, value: string}> = [
+        {
+            label: 'Bottom',
+            value: 'bottom'
+        },
+        {
+            label: 'Top',
+            value: 'top'
+        },
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ];
 
     return (
-        <div className="dock-window">
-            <Dock model={dockBasicItems} position="bottom" />
-            <Dock model={dockBasicItems} position="top" />
-            <Dock model={dockBasicItems} position="left" />
-            <Dock model={dockBasicItems} position="right" />
+        <div className="card dock-demo">
+            <div className="flex flex-wrap gap-3 mb-5">
+                {positions.map((option) => {
+                    const { value, label } = option;
+
+                    return (
+                        <div className="flex align-items-center" key={label}>
+                            <RadioButton value={label} onChange={() => setPosition(option.value)} checked={position === value} />
+                            <label htmlFor={label} className="ml-2">
+                                {label}
+                            </label>
+                        </div>
+                    );
+                })}
+            </div>
+            <div className="dock-window" style={{ backgroundImage: 'url(https://primefaces.org/cdn/primereact/images/dock/window.jpg)' }}>
+                <Dock model={items} position={position} />
+            </div>
         </div>
     )
 }
-        `
+        `,
+        extFiles: {
+            'DockDemo.css': `
+/* DockDemo.css */
+.dock-demo .dock-window {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    background-image: url('https://primefaces.org/cdn/primereact/images/dock/window.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.dock-demo .p-dock {
+    z-index: 1000;
+}  
+    `
+        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Dock is a navigation component consisting of menuitems. It has a collection of additional options defined by the model property.</p>
+                <p>
+                    Menu requires a collection of menuitems as its <i>model</i>. Default location is <i>bottom</i> and other sides are also available when defined with the <i>position</i> property.
+                </p>
             </DocSectionText>
-            <div className="card ">
-                <div className="dock-window" style={{ backgroundImage: `url(${contextPath}/images/dock/window.jpg)` }}>
-                    <Dock model={dockBasicItems} position="bottom" />
-                    <Dock model={dockBasicItems} position="top" />
-                    <Dock model={dockBasicItems} position="left" />
-                    <Dock model={dockBasicItems} position="right" />
+            <div className="card">
+                <div className="flex flex-wrap gap-3 mb-5">
+                    {positions.map((option) => {
+                        const { value, label } = option;
+
+                        return (
+                            <div className="flex align-items-center" key={label}>
+                                <RadioButton value={label} onChange={() => setPosition(option.value)} checked={position === value} />
+                                <label htmlFor={label} className="ml-2">
+                                    {label}
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className="dock-window" style={{ backgroundImage: 'url(/images/dock/window.jpg)' }}>
+                    <Dock model={items} position={position} />
                 </div>
             </div>
             <DocSectionCode code={code} />

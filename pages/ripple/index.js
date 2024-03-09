@@ -1,12 +1,13 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/ripple/apidoc';
-import { ImportDoc } from '../../components/doc/ripple/importdoc';
-import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
-import { CustomDoc } from '../../components/doc/ripple/stylingdoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/ripple/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/ripple/basicdoc';
+import { ConfigurationDoc } from '@/components/doc/ripple/configurationdoc';
+import { CustomDoc } from '@/components/doc/ripple/customdoc';
+import { ImportDoc } from '@/components/doc/ripple/importdoc';
+import { StyledDoc } from '@/components/doc/ripple/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/ripple/theming/tailwinddoc';
+import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
+import { useContext, useEffect, useRef } from 'react';
 
 const RippleDemo = () => {
     const docs = [
@@ -16,9 +17,14 @@ const RippleDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'configuration',
+            label: 'ConfigurationDoc',
+            component: ConfigurationDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'custom',
@@ -26,43 +32,46 @@ const RippleDemo = () => {
             component: CustomDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const { ripple, setRipple } = useContext(PrimeReactContext);
+    const userRippleValue = useRef(ripple);
+
+    useEffect(() => {
+        setRipple(true);
+
+        const currentRipple = userRippleValue.current;
+
+        return () => {
+            setRipple(currentRipple);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Ripple Component</title>
-                <meta name="description" content="Ripple component adds ripple effect to the host element." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Ripple</h1>
-                    <p>Ripple component adds ripple effect to the host element.</p>
-                </div>
-                <DocActions github="ripple/index.js" />
-            </div>
-
-            <div className="content-section doc ripple-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={['Ripple']} themingDocs={themingDocs} />;
 };
 
 export default RippleDemo;

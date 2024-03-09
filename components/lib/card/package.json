@@ -2,5 +2,6 @@
     "main": "./card.cjs.js",
     "module": "./card.esm.js",
     "unpkg": "./card.min.js",
-    "types": "./card.d.ts"
+    "types": "./card.d.ts",
+    "sideEffects": false
 }

@@ -1,12 +1,16 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/multistatecheckbox/apidoc';
-import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
-import { DisabledDoc } from '../../components/doc/multistatecheckbox/disableddoc';
-import { ImportDoc } from '../../components/doc/multistatecheckbox/importdoc';
-import { ValidationDoc } from '../../components/doc/multistatecheckbox/validationdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/multistatecheckbox/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/multistatecheckbox/basicdoc';
+import { DisabledDoc } from '@/components/doc/multistatecheckbox/disableddoc';
+import { FormikDoc } from '@/components/doc/multistatecheckbox/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/multistatecheckbox/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/multistatecheckbox/importdoc';
+import { InvalidDoc } from '@/components/doc/multistatecheckbox/invaliddoc';
+import { PTDoc } from '@/components/doc/multistatecheckbox/pt/ptdoc';
+import { Wireframe } from '@/components/doc/multistatecheckbox/pt/wireframe';
+import { StyledDoc } from '@/components/doc/multistatecheckbox/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/multistatecheckbox/theming/tailwinddoc';
 
 const MultiStateCheckboxDemo = () => {
     const docs = [
@@ -21,65 +25,87 @@ const MultiStateCheckboxDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            component: ApiDoc,
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'option',
-                    label: 'Option'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.multistatecheckbox.options',
+            label: 'MultiStateCheckbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React MultiStateCheckbox Component</title>
-                <meta name="description" content="MultiStateCheckbox is used to select a state from given multiple states." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>MultiStateCheckbox</h1>
-                    <p>MultiStateCheckbox is used to select a state from given multiple states.</p>
-                </div>
-
-                <DocActions github="multistatecheckbox/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React MultiStateCheckbox Component"
+            header="MultiStateCheckbox"
+            description="MultiStateCheckbox is used to select a state from given options."
+            componentDocs={docs}
+            apiDocs={['MultiStateCheckbox']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

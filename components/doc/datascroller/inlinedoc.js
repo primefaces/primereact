@@ -1,34 +1,60 @@
-import { useState, useEffect } from 'react';
-import { DataScroller } from '../../lib/datascroller/DataScroller';
-import { Rating } from '../../lib/rating/Rating';
-import { Button } from '../../lib/button/Button';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { DataScroller } from '@/components/lib/datascroller/DataScroller';
+import { Rating } from '@/components/lib/rating/Rating';
+import { Tag } from '@/components/lib/tag/Tag';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function InlineDataScrollerDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then((data) => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
 
     const itemTemplate = (data) => {
         return (
-            <div className="product-item">
-                <img src={`images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
-                <div className="product-detail">
-                    <div className="product-name">{data.name}</div>
-                    <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readOnly cancel={false}></Rating>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{data.category}</span>
-                </div>
-                <div className="product-action">
-                    <span className="product-price">${data.price}</span>
-                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
+            <div className="col-12">
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${data.image}`} alt={data.name} />
+                    <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
+                        <div className="flex flex-column align-items-center lg:align-items-start gap-3">
+                            <div className="flex flex-column gap-1">
+                                <div className="text-2xl font-bold text-900">{data.name}</div>
+                                <div className="text-700">{data.description}</div>
+                            </div>
+                            <div className="flex flex-column gap-2">
+                                <Rating value={data.rating} readOnly cancel={false}></Rating>
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag product-category-icon"></i>
+                                    <span className="font-semibold">{data.category}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
+                            <span className="text-2xl font-semibold">${data.price}</span>
+                            <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Tag value={data.inventoryStatus} severity={getSeverity(data)}></Tag>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -39,82 +65,170 @@ export function InlineDataScrollerDoc(props) {
 <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
-import { ProductService } from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import { Tag } from 'primereact/tag';
+import { ProductService } from './service/ProductService';
 
-export default function InlineDataScrollerDoc() {
+export default function InlineDataScrollerDemo() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const getSeverity = (product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
 
     const itemTemplate = (data) => {
         return (
-            <div className="product-item">
-            <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
-                <div className="product-detail">
-                    <div className="product-name">{data.name}</div>
-                    <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readOnly cancel={false}></Rating>
-                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
-                </div>
-                <div className="product-action">
-                <span className="product-price">\${data.price}</span>
-                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+            <div className="col-12">
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`} alt={data.name} />
+                    <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
+                        <div className="flex flex-column align-items-center lg:align-items-start gap-3">
+                            <div className="flex flex-column gap-1">
+                                <div className="text-2xl font-bold text-900">{data.name}</div>
+                                <div className="text-700">{data.description}</div>
+                            </div>
+                            <div className="flex flex-column gap-2">
+                                <Rating value={data.rating} readOnly cancel={false}></Rating>
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag product-category-icon"></i>
+                                    <span className="font-semibold">{data.category}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
+                            <span className="text-2xl font-semibold">\${data.price}</span>
+                            <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Tag value={data.inventoryStatus} severity={getSeverity(data)}></Tag>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
-    }    
+    };
 
     return (
-        <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        <div className="card">
+            <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
 import { DataScroller } from 'primereact/datascroller';
-import { ProductService } from '../service/ProductService';
+import { Rating } from 'primereact/rating';
+import { Tag } from 'primereact/tag';
+import { ProductService } from './service/ProductService';
 
-export default function InlineDataScrollerDoc() {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+export default function InlineDataScrollerDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        ProductService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const itemTemplate = (data) => {
+    const getSeverity = (product: Product) => {
+        switch (product.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };
+
+    const itemTemplate = (data: Product) => {
         return (
-            <div className="product-item">
-            <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
-                <div className="product-detail">
-                    <div className="product-name">{data.name}</div>
-                    <div className="product-description">{data.description}</div>
-                    <Rating value={data.rating} readOnly cancel={false}></Rating>
-                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
-                </div>
-                <div className="product-action">
-                <span className="product-price">\${data.price}</span>
-                    <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    <span className={\`product-badge status-\${data.inventoryStatus.toLowerCase()}\`}>{data.inventoryStatus}</span>
+            <div className="col-12">
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`} alt={data.name} />
+                    <div className="flex flex-column lg:flex-row justify-content-between align-items-center xl:align-items-start lg:flex-1 gap-4">
+                        <div className="flex flex-column align-items-center lg:align-items-start gap-3">
+                            <div className="flex flex-column gap-1">
+                                <div className="text-2xl font-bold text-900">{data.name}</div>
+                                <div className="text-700">{data.description}</div>
+                            </div>
+                            <div className="flex flex-column gap-2">
+                                <Rating value={data.rating} readOnly cancel={false}></Rating>
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag product-category-icon"></i>
+                                    <span className="font-semibold">{data.category}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
+                            <span className="text-2xl font-semibold">\${data.price}</span>
+                            <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Tag value={data.inventoryStatus} severity={getSeverity(data)}></Tag>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
-    }  
+    };
 
     return (
-        <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        <div className="card">
+            <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+        </div>
     )
 }
+        `,
+
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -126,7 +240,7 @@ export default function InlineDataScrollerDoc() {
             <div className="card">
                 <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

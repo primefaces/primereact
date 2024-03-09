@@ -1,22 +1,36 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/treetable/apidoc';
-import { PaginatorDoc } from '../../components/doc/treetable/paginatordoc';
-import { TemplatingDoc } from '../../components/doc/treetable/templatingdoc';
-import { ImportDoc } from '../../components/doc/treetable/importdoc';
-import { BasicDoc } from '../../components/doc/treetable/basicdoc';
-import { ProgrammaticDoc } from '../../components/doc/treetable/programmaticdoc';
-import { ColGroupDoc } from '../../components/doc/treetable/colgroupdoc';
-import { LazyDoc } from '../../components/doc/treetable/lazydoc';
-import { EditDoc } from '../../components/doc/treetable/editdoc';
-import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
-import { ColToggleDoc } from '../../components/doc/treetable/coltoggledoc';
-import { StyleDoc } from '../../components/doc/treetable/styledoc';
-import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
-import { ResponsiveDoc } from '../../components/doc/treetable/responsivedoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/treetable/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/treetable/basicdoc';
+import { ColumnGroupDoc } from '@/components/doc/treetable/columngroupdoc';
+import { ColumnToggleDoc } from '@/components/doc/treetable/columntoggledoc';
+import { ConditionalStyleDoc } from '@/components/doc/treetable/conditionalstyledoc';
+import { ContextMenuDoc } from '@/components/doc/treetable/contextmenudoc';
+import { ControlledDoc } from '@/components/doc/treetable/controlleddoc';
+import { DynamicColumnsDoc } from '@/components/doc/treetable/dynamiccolumnsdoc';
+import { EditDoc } from '@/components/doc/treetable/editdoc';
+import { FilterDoc } from '@/components/doc/treetable/filterdoc';
+import { ImportDoc } from '@/components/doc/treetable/importdoc';
+import { LazyLoadDoc } from '@/components/doc/treetable/lazyloaddoc';
+import { PaginatorBasicDoc } from '@/components/doc/treetable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '@/components/doc/treetable/paginator/templatedoc';
+import { PTDoc } from '@/components/doc/treetable/pt/ptdoc';
+import { Wireframe } from '@/components/doc/treetable/pt/wireframe';
+import { ReorderDoc } from '@/components/doc/treetable/reorderdoc';
+import { ExpandModeDoc } from '@/components/doc/treetable/resize/expandmodedoc';
+import { FitModeDoc } from '@/components/doc/treetable/resize/fitmodedoc';
+import { FrozenColumnsDoc } from '@/components/doc/treetable/scroll/frozencolumnsdoc';
+import { HorizontalScrollDoc } from '@/components/doc/treetable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '@/components/doc/treetable/scroll/verticaldoc';
+import { CheckboxRowSelectionDoc } from '@/components/doc/treetable/selection/checkboxdoc';
+import { RowSelectionEventsDoc } from '@/components/doc/treetable/selection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '@/components/doc/treetable/selection/multipledoc';
+import { SingleRowSelectionDoc } from '@/components/doc/treetable/selection/singledoc';
+import { MultipleColumnsDoc } from '@/components/doc/treetable/sort/multiplecolumnsdoc';
+import { SingleColumnDoc } from '@/components/doc/treetable/sort/singlecolumndoc';
+import { TemplateDoc } from '@/components/doc/treetable/templatedoc';
+import { StyledDoc } from '@/components/doc/treetable/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/treetable/theming/tailwinddoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -31,37 +45,92 @@ const TreeTableDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'dynamic_columns',
+            label: 'Dynamic Columns',
+            component: DynamicColumnsDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'paginator',
             label: 'Paginator',
-            component: PaginatorDoc
+            children: [
+                {
+                    id: 'paginator_basic',
+                    label: 'Basic',
+                    component: PaginatorBasicDoc
+                },
+                {
+                    id: 'paginator_template',
+                    label: 'Template',
+                    component: PaginatorTemplateDoc
+                }
+            ]
         },
         {
+            id: 'sort',
             label: 'Sort',
-            to: '/treetable/sort'
+            children: [
+                {
+                    id: 'single_sort',
+                    label: 'Single Column',
+                    component: SingleColumnDoc
+                },
+                {
+                    id: 'multiple_sort',
+                    label: 'Multiple Columns',
+                    component: MultipleColumnsDoc
+                }
+            ]
         },
         {
+            id: 'filter',
             label: 'Filter',
-            to: '/treetable/filter'
+            component: FilterDoc
         },
         {
-            id: 'colgroup',
-            label: 'ColGroup',
-            component: ColGroupDoc
+            id: 'selection',
+            label: 'Selection',
+            children: [
+                {
+                    id: 'single_row_selection',
+                    label: 'Single',
+                    component: SingleRowSelectionDoc
+                },
+                {
+                    id: 'multiple_rows_selection',
+                    label: 'Multiple',
+                    component: MultipleRowsSelectionDoc
+                },
+                {
+                    id: 'checkbox_row_selection',
+                    label: 'Checkbox',
+                    component: CheckboxRowSelectionDoc
+                },
+                {
+                    id: 'row_selection_events',
+                    label: 'Events',
+                    component: RowSelectionEventsDoc
+                }
+            ]
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDoc
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
+        },
+        {
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
         },
         {
             id: 'edit',
@@ -69,12 +138,41 @@ const TreeTableDemo = () => {
             component: EditDoc
         },
         {
+            id: 'scroll',
             label: 'Scroll',
-            to: '/treetable/scroll'
+            children: [
+                {
+                    id: 'vertical_scroll',
+                    label: 'Vertical',
+                    component: VerticalScrollDoc
+                },
+                {
+                    id: 'horizontal_scroll',
+                    label: 'Horizontal',
+                    component: HorizontalScrollDoc
+                },
+                {
+                    id: 'frozen_columns',
+                    label: 'Frozen Columns',
+                    component: FrozenColumnsDoc
+                }
+            ]
         },
         {
-            label: 'Resize',
-            to: '/treetable/resize'
+            id: 'column_resize',
+            label: 'Column Resize',
+            children: [
+                {
+                    id: 'resize_fitmode',
+                    label: 'Fit Mode',
+                    component: FitModeDoc
+                },
+                {
+                    id: 'resize_expandmode',
+                    label: 'Expand Mode',
+                    component: ExpandModeDoc
+                }
+            ]
         },
         {
             id: 'reorder',
@@ -82,79 +180,80 @@ const TreeTableDemo = () => {
             component: ReorderDoc
         },
         {
-            id: 'coltoggle',
-            label: 'ColToggle',
-            component: ColToggleDoc
+            id: 'column_toggle',
+            label: 'Column Toggle',
+            component: ColumnToggleDoc
         },
         {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
+            id: 'conditional_style',
+            label: 'Conditional Style',
+            component: ConditionalStyleDoc
         },
         {
             id: 'contextmenu',
-            label: 'ContextMenu',
+            label: 'Context Menu',
             component: ContextMenuDoc
         },
+
         {
-            id: 'responsive',
-            label: 'Responsive',
-            component: ResponsiveDoc
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'pt.treetable.options',
+            label: 'TreeTable PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.column.options',
+            label: 'Column PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'treenodeapi',
-                    label: 'TreeNode API'
-                },
-                {
-                    id: 'columncomponent',
-                    label: 'Column Component'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React TreeTable Component</title>
-                <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>TreeTable</h1>
-                    <p>TreeTable is used to display hierarchical data in tabular format.</p>
-                </div>
-
-                <DocActions github="treetable/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React TreeTable Component"
+            header="TreeTable"
+            description="TreeTable is used to display hierarchical data in tabular format."
+            componentDocs={docs}
+            apiDocs={['TreeTable', 'Column', 'TreeNode']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

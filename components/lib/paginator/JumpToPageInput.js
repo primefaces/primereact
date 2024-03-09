@@ -1,8 +1,17 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { ariaLabel } from '../api/Locale';
+import { useMergeProps } from '../hooks/Hooks';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
+import { JumpToPageInputBase } from './PaginatorBase';
 
-export const JumpToPageInput = React.memo((props) => {
+export const JumpToPageInput = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = JumpToPageInputBase.getProps(inProps, context);
+    const ariaLabelValue = ariaLabel('jumpToPageInputLabel');
+
     const onChange = (event) => {
         if (props.onChange) {
             props.onChange(props.rows * (event.value - 1), props.rows);
@@ -10,7 +19,9 @@ export const JumpToPageInput = React.memo((props) => {
     };
 
     const value = props.pageCount > 0 ? props.page + 1 : 0;
-    const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} />;
+    const element = (
+        <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} pt={props.ptm('JTPInput')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} aria-label={ariaLabelValue} />
+    );
 
     if (props.template) {
         const defaultOptions = {
@@ -18,6 +29,7 @@ export const JumpToPageInput = React.memo((props) => {
             onChange: onChange,
             disabled: props.disabled,
             className: 'p-paginator-page-input',
+            'aria-label': ariaLabelValue,
             element,
             props
         };
@@ -29,12 +41,3 @@ export const JumpToPageInput = React.memo((props) => {
 });
 
 JumpToPageInput.displayName = 'JumpToPageInput';
-JumpToPageInput.defaultProps = {
-    __TYPE: 'JumbToPageInput',
-    page: null,
-    rows: null,
-    pageCount: null,
-    disabled: false,
-    template: null,
-    onChange: null
-};

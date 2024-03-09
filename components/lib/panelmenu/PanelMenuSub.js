@@ -1,162 +1,289 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { Ripple } from '../ripple/Ripple';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
-export const PanelMenuSub = React.memo((props) => {
-    const [activeItemState, setActiveItemState] = React.useState(null);
+export const PanelMenuSub = React.memo(
+    React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
+        const { ptm, cx } = props;
+        const elementRef = React.useRef(null);
 
-    const findActiveItem = () => {
-        if (props.model) {
-            if (props.multiple) {
-                return props.model.filter((item) => item.expanded);
-            } else {
-                let activeItem = null;
-
-                props.model.forEach((item) => {
-                    if (item.expanded) {
-                        if (!activeItem) activeItem = item;
-                        else item.expanded = false;
-                    }
-                });
-
-                return activeItem;
-            }
-        }
-
-        return null;
-    };
-
-    const onItemClick = (event, item) => {
-        if (item.disabled) {
-            event.preventDefault();
-
-            return;
-        }
-
-        if (!item.url) {
-            event.preventDefault();
-        }
-
-        if (item.command) {
-            item.command({
-                originalEvent: event,
-                item
+        const _ptm = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
             });
-        }
+        };
 
-        let activeItem = activeItemState;
-        let active = isItemActive(item);
+        const getPTOptions = (processedItem, key, index) => {
+            return _ptm(key, {
+                context: {
+                    item: processedItem,
+                    index,
+                    active: isItemActive(processedItem),
+                    focused: isItemFocused(processedItem),
+                    disabled: isItemDisabled(processedItem)
+                }
+            });
+        };
 
-        if (active) {
-            item.expanded = false;
-            setActiveItemState(props.multiple ? activeItem.filter((a_item) => a_item !== item) : null);
-        } else {
-            if (!props.multiple && activeItem) {
-                activeItem.expanded = false;
+        const getItemId = (processedItem) => {
+            return `${props.panelId}_${processedItem.key}`;
+        };
+
+        const getItemProp = (processedItem, name, params) => {
+            return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name], params) : undefined;
+        };
+
+        const getItemLabel = (processedItem) => {
+            return getItemProp(processedItem, 'label');
+        };
+
+        const isItemActive = (processedItem) => {
+            return props.activeItemPath && props.activeItemPath.some((path) => path.key === processedItem.key);
+        };
+
+        const isItemVisible = (processedItem) => {
+            return getItemProp(processedItem, 'visible') !== false;
+        };
+
+        const isItemDisabled = (processedItem) => {
+            return getItemProp(processedItem, 'disabled');
+        };
+
+        const isItemFocused = (processedItem) => {
+            return props.focusedItemId === getItemId(processedItem);
+        };
+
+        const isItemGroup = (processedItem) => {
+            return ObjectUtils.isNotEmpty(processedItem.items);
+        };
+
+        const onItemClick = (event, processedItem) => {
+            if (!getItemProp(processedItem, 'url')) {
+                event.preventDefault();
             }
 
-            item.expanded = true;
-            setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
-        }
-    };
+            getItemProp(processedItem, 'command', { originalEvent: event, item: processedItem.item });
+            onItemToggle({ processedItem, expanded: !isItemActive(processedItem) });
+        };
 
-    const isItemActive = (item) => {
-        return activeItemState && (props.multiple ? activeItemState.indexOf(item) > -1 : activeItemState === item);
-    };
+        const onItemToggle = (event) => {
+            props.onItemToggle(event);
+        };
 
-    useMountEffect(() => {
-        setActiveItemState(findActiveItem());
-    });
+        const getAriaSetSize = () => {
+            return props.model.filter((processedItem) => isItemVisible(processedItem) && !getItemProp(processedItem, 'separator')).length;
+        };
 
-    const createSeparator = (index) => {
-        const key = 'separator_' + index;
+        const getAriaPosInset = (index) => {
+            return index - props.model.slice(0, index).filter((processedItem) => isItemVisible(processedItem) && getItemProp(processedItem, 'separator')).length + 1;
+        };
 
-        return <li key={key} className="p-menu-separator"></li>;
-    };
+        React.useImperativeHandle(ref, () => ({
+            getElement: () => elementRef.current
+        }));
 
-    const createSubmenu = (item, active) => {
-        const className = classNames('p-toggleable-content', {
-            'p-toggleable-content-collapsed': !active
-        });
-        const submenuRef = React.createRef();
+        const createSeparator = (index) => {
+            const key = props.id + '_sep_' + index;
 
-        if (item.items) {
-            return (
-                <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
-                    <div ref={submenuRef} className={className}>
-                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} />
-                    </div>
-                </CSSTransition>
+            const separatorProps = mergeProps(
+                {
+                    id: key,
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                _ptm('separator')
             );
-        }
 
-        return null;
-    };
+            return <li {...separatorProps}></li>;
+        };
 
-    const createMenuItem = (item, index) => {
-        if (item.visible === false) {
+        const createSubmenu = (processedItem, active) => {
+            const submenuRef = React.createRef();
+
+            const toggleableContentProps = mergeProps(
+                {
+                    className: cx('toggleableContent', { active })
+                },
+                _ptm('toggleableContent')
+            );
+
+            if (isItemVisible(processedItem) && isItemGroup(processedItem)) {
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        timeout: { enter: 1000, exit: 450 },
+                        in: active,
+                        unmountOnExit: true
+                    },
+                    _ptm('transition')
+                );
+
+                return (
+                    <CSSTransition nodeRef={submenuRef} {...transitionProps}>
+                        <div ref={submenuRef} {...toggleableContentProps}>
+                            <PanelMenuSub
+                                id={getItemId(processedItem) + '_list'}
+                                role="group"
+                                panelId={props.panelId}
+                                level={props.level + 1}
+                                focusedItemId={props.focusedItemId}
+                                activeItemPath={props.activeItemPath}
+                                onItemToggle={onItemToggle}
+                                menuProps={props.menuProps}
+                                model={processedItem.items}
+                                submenuIcon={props.submenuIcon}
+                                ptm={ptm}
+                                cx={cx}
+                            />
+                        </div>
+                    </CSSTransition>
+                );
+            }
+
             return null;
-        }
+        };
 
-        const key = item.label + '_' + index;
-        const active = isItemActive(item);
-        const className = classNames('p-menuitem', item.className);
-        const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
-        const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const submenuIconClassName = classNames('p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active });
-        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
-        const submenu = createSubmenu(item, active);
-        let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>
-                {submenuIcon}
-                {icon}
-                {label}
-            </a>
+        const createMenuItem = (processedItem, index) => {
+            const item = processedItem.item;
+
+            if (isItemVisible(processedItem) === false) {
+                return null;
+            }
+
+            const key = getItemId(processedItem);
+            const active = isItemActive(processedItem);
+            const itemFocused = isItemFocused(processedItem);
+            const disabled = isItemDisabled(item);
+            const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
+            const iconClassName = classNames('p-menuitem-icon', item.icon);
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon', { item })
+                },
+                getPTOptions(processedItem, 'icon', index)
+            );
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                getPTOptions(processedItem, 'label', index)
+            );
+            const label = item.label && <span {...labelProps}>{item.label}</span>;
+            const submenuIconClassName = 'p-panelmenu-icon';
+            const submenuIconProps = mergeProps(
+                {
+                    className: cx('submenuicon')
+                },
+                getPTOptions(processedItem, 'submenuicon', index)
+            );
+            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
+            const submenu = createSubmenu(processedItem, active);
+            const actionProps = mergeProps(
+                {
+                    href: item.url || '#',
+                    className: cx('action', { item }),
+                    target: item.target,
+                    onFocus: (event) => event.stopPropagation(),
+                    tabIndex: '-1',
+                    'aria-hidden': true
+                },
+                getPTOptions(processedItem, 'action', index)
+            );
+
+            let content = (
+                <a {...actionProps}>
+                    {submenuIcon}
+                    {icon}
+                    {label}
+                    <Ripple />
+                </a>
+            );
+
+            if (item.template) {
+                const defaultContentOptions = {
+                    className: linkClassName,
+                    labelClassName: 'p-menuitem-text',
+                    iconClassName,
+                    submenuIconClassName,
+                    element: content,
+                    props,
+                    leaf: !item.items,
+                    active
+                };
+
+                content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+            }
+
+            const contentProps = mergeProps(
+                {
+                    onClick: (event) => onItemClick(event, processedItem),
+                    className: cx('content')
+                },
+                getPTOptions(processedItem, 'content', index)
+            );
+
+            const menuitemProps = mergeProps(
+                {
+                    key,
+                    id: key,
+                    className: cx('menuitem', { item, focused: itemFocused, disabled: disabled }),
+                    style: item.style,
+                    role: 'treeitem',
+                    'aria-label': item.label,
+                    'aria-expanded': isItemGroup(item) ? active : undefined,
+                    'aria-level': props.level + 1,
+                    'aria-setsize': getAriaSetSize(),
+                    'aria-posinset': getAriaPosInset(index),
+                    'data-p-focused': itemFocused,
+                    'data-p-disabled': disabled
+                },
+                getPTOptions(processedItem, 'menuitem', index)
+            );
+
+            return (
+                <li {...menuitemProps}>
+                    <div {...contentProps}>{content}</div>
+                    {submenu}
+                </li>
+            );
+        };
+
+        const createItem = (item, index) => {
+            return getItemProp(item, 'separator') ? createSeparator(index) : createMenuItem(item, index);
+        };
+
+        const createMenu = () => {
+            return props.model ? props.model.map(createItem) : null;
+        };
+
+        const menu = createMenu();
+
+        const ptKey = props.root ? 'menu' : 'submenu';
+        const menuProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                tabIndex: props.tabIndex,
+                onFocus: props.onFocus,
+                onBlur: props.onBlur,
+                onKeyDown: props.onKeyDown,
+                'aria-activedescendant': props.ariaActivedescendant,
+                role: props.role,
+                className: classNames(cx(ptKey), props.className)
+            },
+            ptm(ptKey)
         );
 
-        if (item.template) {
-            const defaultContentOptions = {
-                onClick: (event) => onItemClick(event, item, index),
-                className: linkClassName,
-                labelClassName: 'p-menuitem-text',
-                iconClassName,
-                submenuIconClassName,
-                element: content,
-                props,
-                leaf: !item.items,
-                active
-            };
-
-            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
-        }
-
-        return (
-            <li key={key} id={item.id} className={className} style={item.style} role="none">
-                {content}
-                {submenu}
-            </li>
-        );
-    };
-
-    const createItem = (item, index) => {
-        return item.separator ? createSeparator(index) : createMenuItem(item, index);
-    };
-
-    const createMenu = () => {
-        return props.model ? props.model.map(createItem) : null;
-    };
-
-    const className = classNames('p-submenu-list', props.className);
-    const menu = createMenu();
-
-    return (
-        <ul className={className} role="tree">
-            {menu}
-        </ul>
-    );
-});
+        return <ul {...menuProps}>{menu}</ul>;
+    })
+);
 
 PanelMenuSub.displayName = 'PanelMenuSub';

@@ -1,11 +1,13 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/picklist/apidoc';
-import { ImportDoc } from '../../components/doc/picklist/importdoc';
-import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/picklist/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/picklist/basicdoc';
+import { FilterDoc } from '@/components/doc/picklist/filterdoc';
+import { ImportDoc } from '@/components/doc/picklist/importdoc';
+import { PTDoc } from '@/components/doc/picklist/pt/ptdoc';
+import { Wireframe } from '@/components/doc/picklist/pt/wireframe';
+import { StyledDoc } from '@/components/doc/picklist/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/picklist/theming/tailwinddoc';
 
 const PickListDemo = () => {
     const docs = [
@@ -15,56 +17,61 @@ const PickListDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'picklist',
-            label: 'PickList',
-            component: PickListDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.picklist.options',
+            label: 'PickList PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React PickList Component</title>
-                <meta name="description" content="PickList is used to reorder items between different lists." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>PickList</h1>
-                    <p>PickList is used to reorder items between different lists.</p>
-                </div>
-
-                <DocActions github="picklist/index.js" />
-            </div>
-
-            <div className="content-section doc picklist-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React PickList Component" header="PickList" description="PickList is used to reorder items between different lists.." componentDocs={docs} apiDocs={['PickList']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default PickListDemo;

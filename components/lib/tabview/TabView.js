@@ -1,12 +1,21 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { PrimeReactContext, ariaLabel } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { TimesIcon } from '../icons/times';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { TabPanelBase, TabViewBase } from './TabViewBase';
 
 export const TabPanel = () => {};
 
-export const TabView = React.forwardRef((props, ref) => {
+export const TabView = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = TabViewBase.getProps(inProps, context);
+
     const [idState, setIdState] = React.useState(props.id);
     const [backwardIsDisabledState, setBackwardIsDisabledState] = React.useState(true);
     const [forwardIsDisabledState, setForwardIsDisabledState] = React.useState(false);
@@ -20,44 +29,87 @@ export const TabView = React.forwardRef((props, ref) => {
     const nextBtnRef = React.useRef(null);
     const tabsRef = React.useRef({});
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
+    const count = React.Children.count(props.children);
+
+    const metaData = {
+        props,
+        state: {
+            id: idState,
+            isPrevButtonDisabled: backwardIsDisabledState,
+            isNextButtonDisabled: forwardIsDisabledState,
+            hiddenTabsState: hiddenTabsState,
+            activeIndex: activeIndexState
+        }
+    };
+
+    const { ptm, ptmo, cx, sx, isUnstyled } = TabViewBase.setMetaData({
+        ...metaData
+    });
+
+    useHandleStyle(TabViewBase.css.styles, isUnstyled, { name: 'tabview' });
+
+    const getTabPT = (tab, key, index) => {
+        const tabMetaData = {
+            props: tab.props,
+            parent: metaData,
+            context: {
+                index,
+                count,
+                first: index === 0,
+                last: index === count - 1,
+                active: index == activeIndexState,
+                disabled: getTabProp(tab, 'disabled')
+            }
+        };
+
+        return mergeProps(ptm(`tab.${key}`, { tab: tabMetaData }), ptm(`tabpanel.${key}`, { tabpanel: tabMetaData }), ptm(`tabpanel.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
+    };
 
     const isSelected = (index) => index === activeIndex;
+    const getTabProp = (tab, name) => TabPanelBase.getCProp(tab, name);
 
-    const shouldUseTab = (tab, index) => {
-        return tab && tab.props.__TYPE === 'TabPanel' && hiddenTabsState.every((_i) => _i !== index);
+    const shouldUseTab = (tab) => {
+        return tab && getTabProp(tab, 'visible') && ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== tab.key);
     };
 
     const findVisibleActiveTab = (i) => {
         const tabsInfo = React.Children.map(props.children, (tab, index) => {
-            if (shouldUseTab(tab, index)) {
+            if (shouldUseTab(tab)) {
                 return { tab, index };
             }
         });
 
-        return tabsInfo.find(({ tab, index }) => !tab.props.disabled && index >= i) || tabsInfo.reverse().find(({ tab, index }) => !tab.props.disabled && i > index);
+        return tabsInfo.find(({ tab, index }) => !getTabProp(tab, 'disabled') && index >= i) || tabsInfo.reverse().find(({ tab, index }) => !getTabProp(tab, 'disabled') && i > index);
     };
 
     const onTabHeaderClose = (event, index) => {
         event.preventDefault();
 
+        const { onBeforeTabClose, onTabClose, children } = props;
+        const { key } = children[index];
+
         // give caller a chance to stop the selection
-        if (props.onBeforeTabClose && props.onBeforeTabClose({ originalEvent: event, index }) === false) {
+        if (onBeforeTabClose && onBeforeTabClose({ originalEvent: event, index }) === false) {
             return;
         }
 
-        setHiddenTabsState([...hiddenTabsState, index]);
+        setHiddenTabsState([...hiddenTabsState, key]);
 
-        if (props.onTabClose) {
-            props.onTabClose({ originalEvent: event, index });
+        if (onTabClose) {
+            onTabClose({ originalEvent: event, index });
         }
     };
 
     const onTabHeaderClick = (event, tab, index) => {
+        changeActiveIndex(event, tab, index);
+    };
+
+    const changeActiveIndex = (event, tab, index) => {
         if (event) {
             event.preventDefault();
         }
 
-        if (!tab.props.disabled) {
+        if (!getTabProp(tab, 'disabled')) {
             // give caller a chance to stop the selection
             if (props.onBeforeTabChange && props.onBeforeTabChange({ originalEvent: event, index }) === false) {
                 return;
@@ -67,12 +119,120 @@ export const TabView = React.forwardRef((props, ref) => {
             else setActiveIndexState(index);
         }
 
-        updateScrollBar(index);
+        updateScrollBar({ index });
     };
 
     const onKeyDown = (event, tab, index) => {
-        if (event.code === 'Enter') {
-            onTabHeaderClick(event, tab, index);
+        switch (event.code) {
+            case 'ArrowLeft':
+                onTabArrowLeftKey(event);
+                break;
+
+            case 'ArrowRight':
+                onTabArrowRightKey(event);
+                break;
+
+            case 'Home':
+                onTabHomeKey(event);
+                break;
+
+            case 'End':
+                onTabEndKey(event);
+                break;
+
+            case 'PageDown':
+                onPageDownKey(event);
+                break;
+
+            case 'PageUp':
+                onPageUpKey(event);
+                break;
+
+            case 'Enter':
+            case 'Space':
+                onTabEnterKey(event, tab, index);
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    const onTabArrowRightKey = (event) => {
+        const nextHeaderAction = findNextHeaderAction(event.target.parentElement);
+
+        nextHeaderAction ? changeFocusedTab(nextHeaderAction) : onTabHomeKey(event);
+        event.preventDefault();
+    };
+
+    const onTabArrowLeftKey = (event) => {
+        const prevHeaderAction = findPrevHeaderAction(event.target.parentElement);
+
+        prevHeaderAction ? changeFocusedTab(prevHeaderAction) : onTabEndKey(event);
+        event.preventDefault();
+    };
+
+    const onTabHomeKey = (event) => {
+        const firstHeaderAction = findFirstHeaderAction();
+
+        changeFocusedTab(firstHeaderAction);
+        event.preventDefault();
+    };
+
+    const onTabEndKey = (event) => {
+        const lastHeaderAction = findLastHeaderAction();
+
+        changeFocusedTab(lastHeaderAction);
+        event.preventDefault();
+    };
+
+    const onPageDownKey = (event) => {
+        updateScrollBar({ index: React.Children.count(props.children) - 1 });
+        event.preventDefault();
+    };
+
+    const onPageUpKey = (event) => {
+        updateScrollBar({ index: 0 });
+        event.preventDefault();
+    };
+
+    const onTabEnterKey = (event, tab, index) => {
+        changeActiveIndex(event, tab, index);
+        event.preventDefault();
+    };
+
+    const findNextHeaderAction = (tabElement, selfCheck = false) => {
+        const headerElement = selfCheck ? tabElement : tabElement.nextElementSibling;
+
+        return headerElement
+            ? DomHandler.getAttribute(headerElement, 'data-p-disabled') || DomHandler.getAttribute(headerElement, 'data-pc-section') === 'inkbar'
+                ? findNextHeaderAction(headerElement)
+                : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')
+            : null;
+    };
+
+    const findPrevHeaderAction = (tabElement, selfCheck = false) => {
+        const headerElement = selfCheck ? tabElement : tabElement.previousElementSibling;
+
+        return headerElement
+            ? DomHandler.getAttribute(headerElement, 'data-p-disabled') || DomHandler.getAttribute(headerElement, 'data-pc-section') === 'inkbar'
+                ? findPrevHeaderAction(headerElement)
+                : DomHandler.findSingle(headerElement, '[data-pc-section="headeraction"]')
+            : null;
+    };
+
+    const findFirstHeaderAction = () => {
+        return findNextHeaderAction(navRef.current.firstElementChild, true);
+    };
+
+    const findLastHeaderAction = () => {
+        return findPrevHeaderAction(navRef.current.lastElementChild, true);
+    };
+
+    const changeFocusedTab = (element) => {
+        if (element) {
+            DomHandler.focus(element);
+            updateScrollBar({ element });
         }
     };
 
@@ -83,8 +243,8 @@ export const TabView = React.forwardRef((props, ref) => {
         inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
     };
 
-    const updateScrollBar = (index) => {
-        let tabHeader = tabsRef.current[`tab_${index}`];
+    const updateScrollBar = ({ index, element }) => {
+        let tabHeader = element || tabsRef.current[`tab_${index}`];
 
         if (tabHeader && tabHeader.scrollIntoView) {
             tabHeader.scrollIntoView({ block: 'nearest' });
@@ -134,6 +294,7 @@ export const TabView = React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         updateInkBar();
+        updateButtonState();
     });
 
     useMountEffect(() => {
@@ -151,7 +312,9 @@ export const TabView = React.forwardRef((props, ref) => {
     }, [hiddenTabsState]);
 
     useUpdateEffect(() => {
-        updateScrollBar(props.activeIndex);
+        if (props.activeIndex !== activeIndexState) {
+            updateScrollBar({ index: props.activeIndex });
+        }
     }, [props.activeIndex]);
 
     React.useImperativeHandle(ref, () => ({
@@ -162,20 +325,41 @@ export const TabView = React.forwardRef((props, ref) => {
 
     const createTabHeader = (tab, index) => {
         const selected = isSelected(index);
-        const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable } = tab.props;
-        const style = { ...(headerStyle || {}), ...(_style || {}) };
-        const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className);
+        const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable, closeIcon } = TabPanelBase.getCProps(tab);
         const headerId = idState + '_header_' + index;
-        const ariaControls = idState + '_content_' + index;
-        const tabIndex = disabled ? null : 0;
-        const leftIconElement = leftIcon && <i className={leftIcon}></i>;
-        const titleElement = <span className="p-tabview-title">{header}</span>;
-        const rightIconElement = rightIcon && <i className={rightIcon}></i>;
-        const closableIconElement = closable && <i className="p-tabview-close pi pi-times" onClick={(e) => onTabHeaderClose(e, index)}></i>;
+        const ariaControls = idState + index + '_content';
+        const tabIndex = disabled || !selected ? -1 : 0;
+        const leftIconElement = leftIcon && IconUtils.getJSXIcon(leftIcon, undefined, { props });
+        const headerTitleProps = mergeProps(
+            {
+                className: cx('tab.headertitle')
+            },
+            getTabPT(tab, 'headertitle', index)
+        );
+        const titleElement = <span {...headerTitleProps}>{header}</span>;
+        const rightIconElement = rightIcon && IconUtils.getJSXIcon(rightIcon, undefined, { props });
+        const iconClassName = 'p-tabview-close';
+        const icon = closeIcon || <TimesIcon className={iconClassName} onClick={(e) => onTabHeaderClose(e, index)} />;
+        const closableIconElement = closable ? IconUtils.getJSXIcon(icon, { className: iconClassName, onClick: (e) => onTabHeaderClose(e, index) }, { props }) : null;
+
+        const headerActionProps = mergeProps(
+            {
+                id: headerId,
+                role: 'tab',
+                className: cx('tab.headeraction'),
+                tabIndex,
+                'aria-controls': ariaControls,
+                'aria-selected': selected,
+                'aria-disabled': disabled,
+                onClick: (e) => onTabHeaderClick(e, tab, index),
+                onKeyDown: (e) => onKeyDown(e, tab, index)
+            },
+            getTabPT(tab, 'headeraction', index)
+        );
 
         let content = (
             // eslint-disable /
-            <a role="tab" className="p-tabview-nav-link" onClick={(e) => onTabHeaderClick(e, tab, index)} id={headerId} onKeyDown={(e) => onKeyDown(e, tab, index)} aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
+            <a {...headerActionProps}>
                 {leftIconElement}
                 {titleElement}
                 {rightIconElement}
@@ -204,16 +388,23 @@ export const TabView = React.forwardRef((props, ref) => {
             content = ObjectUtils.getJSXElement(headerTemplate, defaultContentOptions);
         }
 
-        return (
-            <li ref={(el) => (tabsRef.current[`tab_${index}`] = el)} className={className} style={style} role="presentation">
-                {content}
-            </li>
+        const headerProps = mergeProps(
+            {
+                ref: (el) => (tabsRef.current[`tab_${index}`] = el),
+                className: cx('tab.header', { selected, disabled, headerClassName, _className }),
+                style: sx('tab.header', { headerStyle, _style }),
+                role: 'presentation'
+            },
+            getTabPT(tab, 'root', index),
+            getTabPT(tab, 'header', index)
         );
+
+        return <li {...headerProps}>{content}</li>;
     };
 
     const createTabHeaders = () => {
         return React.Children.map(props.children, (tab, index) => {
-            if (shouldUseTab(tab, index)) {
+            if (shouldUseTab(tab)) {
                 return createTabHeader(tab, index);
             }
         });
@@ -222,47 +413,103 @@ export const TabView = React.forwardRef((props, ref) => {
     const createNavigator = () => {
         const headers = createTabHeaders();
 
+        const navContentProps = mergeProps(
+            {
+                id: idState,
+                ref: contentRef,
+                className: cx('navcontent'),
+                style: props.style,
+                onScroll
+            },
+            ptm('navcontent')
+        );
+
+        const navProps = mergeProps(
+            {
+                ref: navRef,
+                className: cx('nav'),
+                role: 'tablist'
+            },
+            ptm('nav')
+        );
+
+        const inkbarProps = mergeProps(
+            {
+                ref: inkbarRef,
+                'aria-hidden': 'true',
+                role: 'presentation',
+                className: cx('inkbar')
+            },
+            ptm('inkbar')
+        );
+
         return (
-            <div ref={contentRef} id={idState} className="p-tabview-nav-content" style={props.style} onScroll={onScroll}>
-                <ul ref={navRef} className="p-tabview-nav" role="tablist">
+            <div {...navContentProps}>
+                <ul {...navProps}>
                     {headers}
-                    <li ref={inkbarRef} className="p-tabview-ink-bar"></li>
+                    <li {...inkbarProps}></li>
                 </ul>
             </div>
         );
     };
 
     const createContent = () => {
-        const className = classNames('p-tabview-panels', props.panelContainerClassName);
+        const panelContainerProps = mergeProps(
+            {
+                className: cx('panelcontainer'),
+                style: props.panelContainerStyle
+            },
+            ptm('panelcontainer')
+        );
         const contents = React.Children.map(props.children, (tab, index) => {
-            if (shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index))) {
+            if (shouldUseTab(tab) && (!props.renderActiveOnly || isSelected(index))) {
                 const selected = isSelected(index);
-                const style = { ...(tab.props.contentStyle || {}), ...(tab.props.style || {}) };
-                const className = classNames(tab.props.contentClassName, tab.props.className, 'p-tabview-panel', { 'p-hidden': !selected });
-                const contentId = idState + '_content_' + index;
+                const contentId = idState + index + '_content';
                 const ariaLabelledBy = idState + '_header_' + index;
-                const otherProps = ObjectUtils.findDiffKeys(tab.props, TabPanel.defaultProps);
-
-                return (
-                    <div {...otherProps} id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
-                        {!props.renderActiveOnly ? tab.props.children : selected && tab.props.children}
-                    </div>
+                const contentProps = mergeProps(
+                    {
+                        id: contentId,
+                        className: cx('tab.content', { props, selected, getTabProp, tab, isSelected, shouldUseTab, index }),
+                        style: sx('tab.content', { props, getTabProp, tab, isSelected, shouldUseTab, index }),
+                        role: 'tabpanel',
+                        'aria-labelledby': ariaLabelledBy
+                    },
+                    TabPanelBase.getCOtherProps(tab),
+                    getTabPT(tab, 'root', index),
+                    getTabPT(tab, 'content', index)
                 );
+
+                return <div {...contentProps}>{!props.renderActiveOnly ? getTabProp(tab, 'children') : selected && getTabProp(tab, 'children')}</div>;
             }
         });
 
-        return (
-            <div className={className} style={props.panelContainerStyle}>
-                {contents}
-            </div>
-        );
+        return <div {...panelContainerProps}>{contents}</div>;
     };
 
     const createPrevButton = () => {
+        const prevIconProps = mergeProps(
+            {
+                'aria-hidden': 'true'
+            },
+            ptm('previcon')
+        );
+        const icon = props.prevButton || <ChevronLeftIcon {...prevIconProps} />;
+        const leftIcon = IconUtils.getJSXIcon(icon, { ...prevIconProps }, { props });
+        const prevButtonProps = mergeProps(
+            {
+                ref: prevBtnRef,
+                type: 'button',
+                className: cx('prevbutton'),
+                'aria-label': ariaLabel('previousPageLabel'),
+                onClick: (e) => navBackward(e)
+            },
+            ptm('prevbutton')
+        );
+
         if (props.scrollable && !backwardIsDisabledState) {
             return (
-                <button ref={prevBtnRef} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={navBackward} type="button" aria-label={ariaLabel('previousPageLabel')}>
-                    <span className="pi pi-chevron-left"></span>
+                <button {...prevButtonProps}>
+                    {leftIcon}
                     <Ripple />
                 </button>
             );
@@ -272,23 +519,51 @@ export const TabView = React.forwardRef((props, ref) => {
     };
 
     const createNextButton = () => {
+        const nextIconProps = mergeProps(
+            {
+                'aria-hidden': 'true'
+            },
+            ptm('nexticon')
+        );
+        const icon = props.nextButton || <ChevronRightIcon {...nextIconProps} />;
+        const rightIcon = IconUtils.getJSXIcon(icon, { ...nextIconProps }, { props });
+        const nextButtonProps = mergeProps(
+            {
+                ref: nextBtnRef,
+                type: 'button',
+                className: cx('nextbutton'),
+                'aria-label': ariaLabel('nextPageLabel'),
+                onClick: (e) => navForward(e)
+            },
+            ptm('nextbutton')
+        );
+
         if (props.scrollable && !forwardIsDisabledState) {
             return (
-                <button ref={nextBtnRef} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={navForward} type="button" aria-label={ariaLabel('nextPageLabel')}>
-                    <span className="pi pi-chevron-right" aria-hidden="true"></span>
+                <button {...nextButtonProps}>
+                    {rightIcon}
                     <Ripple />
                 </button>
             );
         }
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, TabView.defaultProps);
-    const className = classNames(
-        'p-tabview p-component',
+    const rootProps = mergeProps(
         {
-            'p-tabview-scrollable': props.scrollable
+            id: idState,
+            ref: elementRef,
+            style: props.style,
+            className: cx('root')
         },
-        props.className
+        TabViewBase.getOtherProps(props),
+        ptm('root')
+    );
+
+    const navContainerProps = mergeProps(
+        {
+            className: cx('navcontainer')
+        },
+        ptm('navcontainer')
     );
     const navigator = createNavigator();
     const content = createContent();
@@ -296,8 +571,8 @@ export const TabView = React.forwardRef((props, ref) => {
     const nextButton = createNextButton();
 
     return (
-        <div ref={elementRef} className={className} {...otherProps}>
-            <div className="p-tabview-nav-container">
+        <div {...rootProps}>
+            <div {...navContainerProps}>
                 {prevButton}
                 {navigator}
                 {nextButton}
@@ -308,35 +583,5 @@ export const TabView = React.forwardRef((props, ref) => {
 });
 
 TabPanel.displayName = 'TabPanel';
-TabPanel.defaultProps = {
-    __TYPE: 'TabPanel',
-    className: null,
-    closable: false,
-    contentClassName: null,
-    contentStyle: null,
-    disabled: false,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    headerTemplate: null,
-    leftIcon: null,
-    rightIcon: null,
-    style: null
-};
 
 TabView.displayName = 'TabView';
-TabView.defaultProps = {
-    __TYPE: 'TabView',
-    id: null,
-    activeIndex: 0,
-    className: null,
-    onBeforeTabChange: null,
-    onBeforeTabClose: null,
-    onTabChange: null,
-    onTabClose: null,
-    panelContainerClassName: null,
-    panelContainerStyle: null,
-    renderActiveOnly: true,
-    scrollable: false,
-    style: null
-};

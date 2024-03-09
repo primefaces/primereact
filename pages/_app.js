@@ -1,86 +1,66 @@
-import '../styles/layout/layout.scss';
-import '../styles/primereact.css';
-import 'primeicons/primeicons.css';
+import { GTagManager } from '@/components/analytics/analytics';
+import AppContentContext from '@/components/layout/appcontentcontext';
+import Layout from '@/components/layout/layout';
+import { PrimeReactProvider } from '@/components/lib/api/PrimeReactContext';
+import { switchTheme } from '@/components/utils/utils';
+import '@docsearch/css';
 import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+import { useState } from 'react';
 import '../styles/demo/demo.scss';
-import Layout from '../components/layout/layout';
-import { useEffect, useRef, useState } from 'react';
-import fetchNews from '../service/NewsService';
-import { useStorage } from '../components/lib/hooks/useStorage';
+import '../styles/layout/layout.scss';
 
-export default function MyApp({ Component }) {
-    const [dark, setDark] = useState(false);
-    const [theme, setTheme] = useStorage('lara-light-indigo', 'primereact-showcase-theme');
-    const [storedNews, setStoredNews] = useStorage('', 'primereact-news');
-    const [newsActive, setNewsActive] = useState(false);
-    const announcement = useRef(null);
-
-    useEffect(() => {
-        if (process.env.NODE_ENV === 'production') {
-            fetchNews().then((data) => {
-                if (data) {
-                    announcement.current = data;
-
-                    const itemString = localStorage.getItem(storageKey);
-
-                    if (itemString) {
-                        const item = JSON.parse(itemString);
-
-                        if (item.hiddenNews && item.hiddenNews !== data.id) {
-                            setNewsActive(true);
-                        }
-                    } else {
-                        setNewsActive(true);
-                    }
-                }
-            });
-        }
-    }, []);
-
-    const props = {
-        dark: dark,
-        theme: theme,
-        newsActive: newsActive && announcement.current,
-        announcement: announcement.current,
-        onNewsClose: () => {
-            setNewsActive(false);
-
-            const item = {
-                hiddenNews: announcement.current.id
-            };
-
-            setStoredNews(item);
-        },
-        onThemeChange: (newTheme, dark) => {
-            setDark(dark);
-            changeTheme(newTheme);
-        }
-    };
-
-    const changeTheme = (newTheme) => {
-        const elementId = 'theme-link';
-        const linkElement = document.getElementById('theme-link');
-        const cloneLinkElement = linkElement.cloneNode(true);
-        const newThemeUrl = linkElement.getAttribute('href').replace(theme, newTheme);
-
-        cloneLinkElement.setAttribute('id', elementId + '-clone');
-        cloneLinkElement.setAttribute('href', newThemeUrl);
-        cloneLinkElement.addEventListener('load', () => {
-            linkElement.remove();
-            cloneLinkElement.setAttribute('id', elementId);
-        });
-
-        linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
-        setTheme(newTheme);
-    };
-
+function AppContent({ component: Component, pageProps }) {
     if (Component.getLayout) {
-        return Component.getLayout(<Component {...props} />);
+        return Component.getLayout(<Component {...pageProps} />);
     } else {
         return (
-            <Layout {...props}>
-                <Component {...props} />
+            <Layout>
+                <Component {...pageProps} />
             </Layout>
         );
     }
+}
+
+export default function MyApp({ Component, pageProps }) {
+    const isProduction = process.env.NODE_ENV === 'production';
+    const [darkMode, setDarkMode] = useState(false);
+    const [theme, setTheme] = useState('lara-light-cyan');
+    const [newsActive, setNewsActive] = useState(false);
+    const [announcement, setAnnouncement] = useState(null);
+
+    const appState = {
+        darkMode: darkMode,
+        theme: theme,
+        newsActive: newsActive,
+        announcement: announcement,
+        changeTheme: (newTheme, dark) => {
+            if (newTheme !== theme) {
+                switchTheme(theme, newTheme, 'theme-link', () => {
+                    setDarkMode(dark);
+                    setTheme(newTheme);
+                });
+            }
+        },
+        showNews: (message) => {
+            setNewsActive(true);
+            setAnnouncement(message);
+        },
+        hideNews: () => {
+            setNewsActive(false);
+        }
+    };
+
+    const primereactConfig = {
+        ripple: true
+    };
+
+    return (
+        <AppContentContext.Provider value={appState}>
+            <PrimeReactProvider value={primereactConfig}>
+                {isProduction && <GTagManager />}
+                <AppContent component={Component} pageProps={pageProps} />
+            </PrimeReactProvider>
+        </AppContentContext.Provider>
+    );
 }

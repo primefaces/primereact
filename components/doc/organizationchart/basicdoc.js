@@ -1,122 +1,134 @@
-import { OrganizationChart } from '../../lib/organizationchart/OrganizationChart';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { OrganizationChart } from '@/components/lib/organizationchart/OrganizationChart';
+import { useState } from 'react';
 
 export function BasicDoc(props) {
-    const data = [
+    const [data] = useState([
         {
-            label: 'F.C Barcelona',
+            label: 'Argentina',
             expanded: true,
             children: [
                 {
-                    label: 'F.C Barcelona',
+                    label: 'Argentina',
                     expanded: true,
                     children: [
                         {
-                            label: 'Chelsea FC'
+                            label: 'Argentina'
                         },
                         {
-                            label: 'F.C. Barcelona'
+                            label: 'Croatia'
                         }
                     ]
                 },
                 {
-                    label: 'Real Madrid',
+                    label: 'France',
                     expanded: true,
                     children: [
                         {
-                            label: 'Bayern Munich'
+                            label: 'France'
                         },
                         {
-                            label: 'Real Madrid'
+                            label: 'Morocco'
                         }
                     ]
                 }
             ]
         }
-    ];
+    ]);
 
     const code = {
         basic: `
-<OrganizationChart value={data}></OrganizationChart>
+<OrganizationChart value={data} />
         `,
         javascript: `
+import React, { useState } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
 
 export default function BasicDoc() {
-    const data = [{
-        label: 'F.C Barcelona',
-        expanded: true,
-        children: [
-            {
-                label: 'F.C Barcelona',
-                expanded: true,
-                children: [
-                    {
-                        label: 'Chelsea FC'
-                    },
-                    {
-                        label: 'F.C. Barcelona'
-                    }
-                ]
-            },
-            {
-                label: 'Real Madrid',
-                expanded: true,
-                children: [
-                    {
-                        label: 'Bayern Munich'
-                    },
-                    {
-                        label: 'Real Madrid'
-                    }
-                ]
-            }
-        ]
-    }];
+    const [data] = useState([
+        {
+            label: 'Argentina',
+            expanded: true,
+            children: [
+                {
+                    label: 'Argentina',
+                    expanded: true,
+                    children: [
+                        {
+                            label: 'Argentina'
+                        },
+                        {
+                            label: 'Croatia'
+                        }
+                    ]
+                },
+                {
+                    label: 'France',
+                    expanded: true,
+                    children: [
+                        {
+                            label: 'France'
+                        },
+                        {
+                            label: 'Morocco'
+                        }
+                    ]
+                }
+            ]
+        }
+    ]);
 
     return (
-        <OrganizationChart value={data}></OrganizationChart>
+        <div className="card overflow-x-auto">
+            <OrganizationChart value={data} />
+        </div>
     )
 }
         `,
         typescript: `
+import React, { useState } from 'react';
 import { OrganizationChart } from 'primereact/organizationchart';
+import { TreeNode } from 'primereact/treenode';
 
 export default function BasicDoc() {
-    const data = [{
-        label: 'F.C Barcelona',
-        expanded: true,
-        children: [
-            {
-                label: 'F.C Barcelona',
-                expanded: true,
-                children: [
-                    {
-                        label: 'Chelsea FC'
-                    },
-                    {
-                        label: 'F.C. Barcelona'
-                    }
-                ]
-            },
-            {
-                label: 'Real Madrid',
-                expanded: true,
-                children: [
-                    {
-                        label: 'Bayern Munich'
-                    },
-                    {
-                        label: 'Real Madrid'
-                    }
-                ]
-            }
-        ]
-    }];
+    const [data] = useState<TreeNode>([
+        {
+            label: 'Argentina',
+            expanded: true,
+            children: [
+                {
+                    label: 'Argentina',
+                    expanded: true,
+                    children: [
+                        {
+                            label: 'Argentina'
+                        },
+                        {
+                            label: 'Croatia'
+                        }
+                    ]
+                },
+                {
+                    label: 'France',
+                    expanded: true,
+                    children: [
+                        {
+                            label: 'France'
+                        },
+                        {
+                            label: 'Morocco'
+                        }
+                    ]
+                }
+            ]
+        }
+    ]);
 
     return (
-        <OrganizationChart value={data}></OrganizationChart>
+        <div className="card overflow-x-auto">
+            <OrganizationChart value={data} />
+        </div>
     )
 }
         `
@@ -125,10 +137,12 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>OrganizationChart requires a model of TreeNode as its value.</p>
+                <p>
+                    OrganizationChart requires a collection of <i>TreeNode</i> instances as a <i>value</i>.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <OrganizationChart value={data}></OrganizationChart>
+            <div className="card overflow-x-auto">
+                <OrganizationChart value={data} />
             </div>
             <DocSectionCode code={code} />
         </>

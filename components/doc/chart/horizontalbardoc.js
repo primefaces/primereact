@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chart } from '@/components/lib/chart/Chart';
+import { useEffect, useState } from 'react';
 
 export function HorizontalBarDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -12,7 +12,6 @@ export function HorizontalBarDoc(props) {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -24,15 +23,12 @@ export function HorizontalBarDoc(props) {
                 },
                 {
                     label: 'My Second dataset',
-                    backgroundColor: documentStyle.getPropertyValue('--orange-200'),
-                    borderColor: documentStyle.getPropertyValue('--orange-200'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             indexAxis: 'y',
             maintainAspectRatio: false,
@@ -69,6 +65,7 @@ export function HorizontalBarDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -77,10 +74,10 @@ export function HorizontalBarDoc(props) {
 <Chart type="bar" data={chartData} options={chartOptions} />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function HorizontalBarDoc() {
+export default function HorizontalBarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -89,7 +86,6 @@ export default function HorizontalBarDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -101,15 +97,12 @@ export default function HorizontalBarDoc() {
                 },
                 {
                     label: 'My Second dataset',
-                    backgroundColor: documentStyle.getPropertyValue('--orange-200'),
-                    borderColor: documentStyle.getPropertyValue('--orange-200'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             indexAxis: 'y',
             maintainAspectRatio: false,
@@ -146,19 +139,22 @@ export default function HorizontalBarDoc() {
             }
         };
 
+        setChartData(data)
         setChartOptions(options);
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function HorizontalBarDoc() {
+export default function HorizontalBarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -167,7 +163,6 @@ export default function HorizontalBarDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -179,15 +174,12 @@ export default function HorizontalBarDoc() {
                 },
                 {
                     label: 'My Second dataset',
-                    backgroundColor: documentStyle.getPropertyValue('--orange-200'),
-                    borderColor: documentStyle.getPropertyValue('--orange-200'),
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
                     data: [28, 48, 40, 19, 86, 27, 90]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             indexAxis: 'y',
             maintainAspectRatio: false,
@@ -224,11 +216,14 @@ export default function HorizontalBarDoc() {
             }
         };
 
+        setChartData(data)
         setChartOptions(options);
     }, []);
 
     return (
-        <Chart type="bar" data={chartData} options={chartOptions} />
+        <div className="card">
+            <Chart type="bar" data={chartData} options={chartOptions} />
+        </div>
     )
 }
         `
@@ -237,12 +232,14 @@ export default function HorizontalBarDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A bar chart or bar graph is a chart that presents grouped data with rectangular bars with lengths proportional to the values that they represent.</p>
+                <p>
+                    A bar chart is rendered horizontally when <i>indexAxis</i> option is set as <i>y</i>.
+                </p>
             </DocSectionText>
-            <div className="card ">
+            <div className="card">
                 <Chart type="bar" data={chartData} options={chartOptions} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

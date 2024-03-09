@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { useState } from 'react';
-import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
@@ -11,26 +11,30 @@ export function BasicDoc(props) {
 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { InputSwitch, InputSwitchChangeParams } from "primereact/inputswitch";
+import React, { useState } from "react";
+import { InputSwitch, InputSwitchChangeEvent } from "primereact/inputswitch";
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeEvent) => setChecked(e.value)} />
+        </div>
     );
 }
         `

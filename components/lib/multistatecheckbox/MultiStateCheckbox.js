@@ -1,14 +1,29 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
-import { useMountEffect } from '../hooks/Hooks';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { MultiStateCheckboxBase } from './MultiStateCheckboxBase';
 
 export const MultiStateCheckbox = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = MultiStateCheckboxBase.getProps(inProps, context);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const equalityKey = props.optionValue ? null : props.dataKey;
+
+        const { ptm, cx, sx, isUnstyled } = MultiStateCheckboxBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
+
+        useHandleStyle(MultiStateCheckboxBase.css.styles, isUnstyled, { name: 'multistatecheckbox' });
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
@@ -18,6 +33,10 @@ export const MultiStateCheckbox = React.memo(
 
         const getOptionValue = (option) => {
             return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
+        };
+
+        const getOptionIcon = (option) => {
+            return ObjectUtils.resolveFieldData(option, props.optionIcon || 'icon');
         };
 
         const getOptionAriaLabel = (option) => {
@@ -41,8 +60,12 @@ export const MultiStateCheckbox = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -80,6 +103,7 @@ export const MultiStateCheckbox = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
@@ -87,14 +111,25 @@ export const MultiStateCheckbox = React.memo(
             if (!props.empty && props.value === null) {
                 toggle();
             }
+
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
         });
 
         const createIcon = () => {
-            const icon = (selectedOption && selectedOption.icon) || '';
+            const icon = (selectedOption && getOptionIcon(selectedOption)) || '';
             const className = classNames('p-checkbox-icon p-c', {
                 [`${icon}`]: true
             });
-            const content = <span className={className}></span>;
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon', { icon })
+                },
+                ptm('icon')
+            );
+
+            const content = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
             if (props.iconTemplate) {
                 const defaultOptions = {
@@ -113,57 +148,57 @@ export const MultiStateCheckbox = React.memo(
         const { option: selectedOption, index: selectedOptionIndex } = getSelectedOptionMap();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
+        const otherProps = MultiStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
-        const boxClassName = classNames(
-            'p-checkbox-box',
-            {
-                'p-highlight': !!selectedOption,
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
-            },
-            selectedOption && selectedOption.className
-        );
         const icon = createIcon();
         const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
         const ariaChecked = !!selectedOption ? 'true' : 'false';
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root'),
+                style: props.style,
+                onClick: onClick
+            },
+            MultiStateCheckboxBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const checkboxProps = mergeProps(
+            {
+                className: cx('checkbox', { focusedState, selectedOption }),
+                style: sx('checkbox', { selectedOption }),
+                tabIndex: props.tabIndex,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                role: 'checkbox',
+                'aria-checked': ariaChecked,
+                ...ariaProps
+            },
+            ptm('checkbox')
+        );
+
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only p-hidden-accessible',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div className={boxClassName} style={selectedOption && selectedOption.style} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
-                        {icon}
-                    </div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                <div {...rootProps}>
+                    <div {...checkboxProps}>{icon}</div>
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 MultiStateCheckbox.displayName = 'MultiStateCheckbox';
-MultiStateCheckbox.defaultProps = {
-    __TYPE: 'MultiStateCheckbox',
-    id: null,
-    value: null,
-    options: null,
-    optionValue: null,
-    optionLabel: null,
-    iconTemplate: null,
-    dataKey: null,
-    style: null,
-    className: null,
-    disabled: false,
-    readOnly: false,
-    empty: true,
-    tabIndex: '0',
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null
-};

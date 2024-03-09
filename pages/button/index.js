@@ -1,25 +1,27 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/button/importdoc';
-import { BasicDoc } from '../../components/doc/button/basicdoc';
-import { IconsDoc } from '../../components/doc/button/iconsdoc';
-import { LoadingDoc } from '../../components/doc/button/loadingdoc';
-import { SeveritiesDoc } from '../../components/doc/button/severitiesdoc';
-import { RaisedButtonsDoc } from '../../components/doc/button/raisedbuttonsdoc';
-import { RoundedButtonsDoc } from '../../components/doc/button/roundedbuttonsdoc';
-import { TextButtonsDoc } from '../../components/doc/button/textdoc';
-import { RaisedTextButtonsDoc } from '../../components/doc/button/raisedtextdoc';
-import { OutlinedButtonsDoc } from '../../components/doc/button/outlinedbuttonsdoc';
-import { RoundedIconButtonsDoc } from '../../components/doc/button/roundedicondoc';
-import { RoundedTextIconButtonsDoc } from '../../components/doc/button/roundedtextdoc';
-import { RoundedOutlinedButtonsDoc } from '../../components/doc/button/roundedoutlineddoc';
-import { BadgesDoc } from '../../components/doc/button/badgesdoc';
-import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
-import { SizesDoc } from '../../components/doc/button/sizesdoc';
-import { TemplateDoc } from '../../components/doc/button/templatedoc';
-import { ApiDoc } from '../../components/doc/button/apidoc';
+import { AccessibilityDoc } from '@/components/doc/button/accessibilitydoc';
+import { BadgesDoc } from '@/components/doc/button/badgesdoc';
+import { BasicDoc } from '@/components/doc/button/basicdoc';
+import { ButtonSetDoc } from '@/components/doc/button/buttonsetdoc';
+import { DisabledDoc } from '@/components/doc/button/disableddoc';
+import { IconOnlyDoc } from '@/components/doc/button/icononlydoc';
+import { IconsDoc } from '@/components/doc/button/iconsdoc';
+import { ImportDoc } from '@/components/doc/button/importdoc';
+import { LinkDoc } from '@/components/doc/button/linkdoc';
+import { LoadingDoc } from '@/components/doc/button/loadingdoc';
+import { OutlinedDoc } from '@/components/doc/button/outlineddoc';
+import { PTDoc } from '@/components/doc/button/pt/ptdoc';
+import { Wireframe } from '@/components/doc/button/pt/wireframe';
+import { RaisedDoc } from '@/components/doc/button/raiseddoc';
+import { RaisedTextDoc } from '@/components/doc/button/raisedtextdoc';
+import { RoundedDoc } from '@/components/doc/button/roundeddoc';
+import { SeverityDoc } from '@/components/doc/button/severitydoc';
+import { SizesDoc } from '@/components/doc/button/sizesdoc';
+import { TemplateDoc } from '@/components/doc/button/templatedoc';
+import { TextDoc } from '@/components/doc/button/textdoc';
+import { StyledDoc } from '@/components/doc/button/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/button/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const ButtonDemo = () => {
     const docs = [
@@ -34,6 +36,11 @@ const ButtonDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'link',
+            label: 'Link',
+            component: LinkDoc
+        },
+        {
             id: 'icons',
             label: 'Icons',
             component: IconsDoc
@@ -44,49 +51,44 @@ const ButtonDemo = () => {
             component: LoadingDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'raised',
-            label: 'Raised Buttons',
-            component: RaisedButtonsDoc
+            label: 'Raised',
+            component: RaisedDoc
         },
         {
             id: 'rounded',
-            label: 'Rounded Buttons',
-            component: RoundedButtonsDoc
+            label: 'Rounded',
+            component: RoundedDoc
         },
         {
             id: 'text',
-            label: 'Text Buttons',
-            component: TextButtonsDoc
+            label: 'Text',
+            component: TextDoc
         },
         {
             id: 'raisedtext',
-            label: 'Raised Text Buttons',
-            component: RaisedTextButtonsDoc
+            label: 'Raised Text',
+            component: RaisedTextDoc
         },
         {
             id: 'outlined',
-            label: 'Outlined Buttons',
-            component: OutlinedButtonsDoc
+            label: 'Outlined',
+            component: OutlinedDoc
         },
         {
-            id: 'roundedicon',
-            label: 'Rounded Icon Buttons',
-            component: RoundedIconButtonsDoc
-        },
-        {
-            id: 'roundedtexticon',
-            label: 'Rounded Text Icon Buttons',
-            component: RoundedTextIconButtonsDoc
-        },
-        {
-            id: 'roundedoutlined',
-            label: 'Rounded and Outlined Icon Buttons',
-            component: RoundedOutlinedButtonsDoc
+            id: 'icononly',
+            label: 'Icon Only',
+            component: IconOnlyDoc
         },
         {
             id: 'badges',
@@ -108,47 +110,53 @@ const ButtonDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
+
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.button.options',
+            label: 'Button PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Button Component</title>
-                <meta name="description" content="Button is an extension to standard input element with icons and theming." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Button</h1>
-                    <p>Button is an extension to standard input element with icons and theming.</p>
-                </div>
-
-                <DocActions github="button/index.js" />
-            </div>
-            <div className="content-section doc button-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ButtonDemo;

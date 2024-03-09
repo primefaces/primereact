@@ -1,17 +1,9 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { IntegersDoc } from '../../components/doc/keyfilter/integersdoc';
-import { NumbersDoc } from '../../components/doc/keyfilter/numbersdoc';
-import { MoneyDoc } from '../../components/doc/keyfilter/moneydoc';
-import { HexDoc } from '../../components/doc/keyfilter/hexdoc';
-import { AlphabeticDoc } from '../../components/doc/keyfilter/alphabeticdoc';
-import { AlphanumbericDoc } from '../../components/doc/keyfilter/alphanumberdoc';
-import { BlockDoc } from '../../components/doc/keyfilter/blockdoc';
-import { BlockSpaceDoc } from '../../components/doc/keyfilter/blockspacedoc';
-import { ApiDoc } from '../../components/doc/keyfilter/apidoc';
-import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/keyfilter/accessibilitydoc';
+import { ImportDoc } from '@/components/doc/keyfilter/importdoc';
+import { PresetsDoc } from '@/components/doc/keyfilter/presetsdoc';
+import { RegexDoc } from '@/components/doc/keyfilter/regexdoc';
+import { RegexWordDoc } from '@/components/doc/keyfilter/regexworddoc';
 
 const KeyFilterDemo = () => {
     const docs = [
@@ -21,86 +13,28 @@ const KeyFilterDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'integers',
-            label: 'Integers',
-            component: IntegersDoc
+            id: 'presets',
+            label: 'Presets',
+            component: PresetsDoc
         },
         {
-            id: 'numbers',
-            label: 'Numbers',
-            component: NumbersDoc
+            id: 'regex',
+            label: 'Regex (Single Keypress)',
+            component: RegexDoc
         },
         {
-            id: 'money',
-            label: 'Money',
-            component: MoneyDoc
+            id: 'regexword',
+            label: 'Regex (Whole Word)',
+            component: RegexWordDoc
         },
         {
-            id: 'hex',
-            label: 'Hex',
-            component: HexDoc
-        },
-        {
-            id: 'alphabetic',
-            label: 'Alphabetic',
-            component: AlphabeticDoc
-        },
-        {
-            id: 'alphanumberic',
-            label: 'Alphannumeric',
-            component: AlphanumbericDoc
-        },
-        {
-            id: 'block',
-            label: 'Block < > * !',
-            component: BlockDoc
-        },
-        {
-            id: 'blockspace',
-            label: 'Block space key',
-            component: BlockSpaceDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'builtin',
-                    label: 'Built-in Filters'
-                },
-                {
-                    id: 'custom',
-                    label: 'Custom Filter'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React KeyFilter Component</title>
-                <meta name="description" content="KeyFilter feature restricts user input based on a regular expression." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>KeyFilter</h1>
-                    <p>KeyFilter feature restricts user input based on a regular expression.</p>
-                </div>
-                <DocActions github="keyfilter/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React KeyFilter" header="KeyFilter" description="KeyFilter is a built-in feature of InputText to restrict user input based on a regular expression." componentDocs={docs} apiDocs={['KeyFilter']} />;
 };
 
 export default KeyFilterDemo;

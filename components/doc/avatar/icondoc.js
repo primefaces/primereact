@@ -1,89 +1,89 @@
-import { Badge } from '../../lib/badge/Badge';
-import { Avatar } from '../../lib/avatar/Avatar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Badge } from '@/components/lib/badge/Badge';
 
 export function IconDoc(props) {
     const code = {
         basic: `
-<h5>Icon</h5>
-<Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
-<Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-<Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
-<h5>Icon - Circle</h5>
-<Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
-<Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-<Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+<Avatar icon="pi pi-user" size="xlarge" />
+<Avatar icon="pi pi-user" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+<Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
 
-<h5>Icon - Badge</h5>
+<Avatar icon="pi pi-user" size="xlarge" shape="circle" />
+<Avatar icon="pi pi-user" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+<Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+
 <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge">
     <Badge value="4" />
 </Avatar>
         `,
         javascript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
-export default function IconDoc() {
-
+export default function IconDemo() {
     return (
         <div className="card">
-            <div className="grid">
-                <div className="col-12 md:col-4">
+            <div className="flex flex-wrap gap-5">
+                <div className="flex-auto">
                     <h5>Icon</h5>
                     <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
                     <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                    <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                    <Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                 </div>
 
-                <div className="col-12 md:col-4">
-                    <h5>Icon - Circle</h5>
+                <div className="flex-auto">
+                    <h5>Circle</h5>
                     <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
                     <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                    <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                    <Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                 </div>
-                <div className="col-12 md:col-4">
-                    <h5>Icon - Badge</h5>
+
+                <div className="flex-auto">
+                    <h5>Badge</h5>
                     <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge">
                         <Badge value="4" />
                     </Avatar>
                 </div>
             </div>
         </div>
-        )
+    )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 
-export default function IconDoc() {
-
+export default function IconDemo() {
     return (
         <div className="card">
-            <div className="grid">
-                <div className="col-12 md:col-4">
+            <div className="flex flex-wrap gap-5">
+                <div className="flex-auto">
                     <h5>Icon</h5>
                     <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
                     <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                    <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                    <Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                 </div>
 
-                <div className="col-12 md:col-4">
-                    <h5>Icon - Circle</h5>
+                <div className="flex-auto">
+                    <h5>Circle</h5>
                     <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
                     <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                    <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                    <Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                 </div>
-                <div className="col-12 md:col-4">
-                    <h5>Icon - Badge</h5>
+
+                <div className="flex-auto">
+                    <h5>Badge</h5>
                     <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge">
                         <Badge value="4" />
                     </Avatar>
                 </div>
             </div>
         </div>
-        )
+    )
 }
         `
     };
@@ -91,25 +91,28 @@ export default function IconDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Avatar has three built-in display modes; "label", "icon" and "image".</p>
+                <p>
+                    A font icon is displayed as an Avatar with the <i>icon</i> property.
+                </p>
             </DocSectionText>
             <div className="card">
-                <div className="grid">
-                    <div className="col-12 md:col-4">
+                <div className="flex flex-wrap gap-5">
+                    <div className="flex-auto">
                         <h5>Icon</h5>
                         <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
                         <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
 
-                    <div className="col-12 md:col-4">
-                        <h5>Icon - Circle</h5>
+                    <div className="flex-auto">
+                        <h5>Circle</h5>
                         <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
                         <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
-                    <div className="col-12 md:col-4">
-                        <h5>Icon - Badge</h5>
+
+                    <div className="flex-auto">
+                        <h5>Badge</h5>
                         <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge">
                             <Badge value="4" />
                         </Avatar>

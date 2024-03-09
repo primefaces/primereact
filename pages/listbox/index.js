@@ -1,13 +1,21 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/listbox/apidoc';
-import { AdvancedDoc } from '../../components/doc/listbox/advanceddoc';
-import { GroupedDoc } from '../../components/doc/listbox/groupeddoc';
-import { ImportDoc } from '../../components/doc/listbox/importdoc';
-import { SingleDoc } from '../../components/doc/listbox/singledoc';
-import { VirtualScrollDoc } from '../../components/doc/listbox/virtualscrolldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/listbox/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/listbox/basicdoc';
+import { DisabledDoc } from '@/components/doc/listbox/disableddoc';
+import { FilterDoc } from '@/components/doc/listbox/filterdoc';
+import { FormikDoc } from '@/components/doc/listbox/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/listbox/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/listbox/groupdoc';
+import { ImportDoc } from '@/components/doc/listbox/importdoc';
+import { InvalidDoc } from '@/components/doc/listbox/invaliddoc';
+import { MultipleDoc } from '@/components/doc/listbox/multipledoc';
+import { PTDoc } from '@/components/doc/listbox/pt/ptdoc';
+import { Wireframe } from '@/components/doc/listbox/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/listbox/templatedoc';
+import { StyledDoc } from '@/components/doc/listbox/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/listbox/theming/tailwinddoc';
+import { VirtualScrollDoc } from '@/components/doc/listbox/virtualscrolldoc';
 
 const ListBoxDemo = () => {
     const docs = [
@@ -17,72 +25,108 @@ const ListBoxDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'single',
-            label: 'Single',
-            component: SingleDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'grouped',
-            label: 'Grouped',
-            component: GroupedDoc
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
         },
         {
-            id: 'advanced',
-            label: 'Advanced with Templating, Filtering and Multiple Selection',
-            component: AdvancedDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'virtualscroll',
-            label: 'Virtual Scroll (100000 Items)',
+            label: 'Virtual Scroll',
             component: VirtualScrollDoc
         },
         {
-            id: 'ApiDoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.listbox.options',
+            label: 'Listbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ListBox Component</title>
-                <meta name="description" content="ListBox is used to select one or more values from a list of items." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ListBox</h1>
-                    <p>ListBox is used to select one or more values from a list of items.</p>
-                </div>
-
-                <DocActions github="listbox/index.js" />
-            </div>
-
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ListBox Component" header="ListBox" description="ListBox is used to select one or more values from a list of items." componentDocs={docs} apiDocs={['ListBox']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ListBoxDemo;

@@ -1,34 +1,49 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { SidebarBase } from './SidebarBase';
 
-export const Sidebar = React.forwardRef((props, ref) => {
+export const Sidebar = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = SidebarBase.getProps(inProps, context);
+
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
+    const { ptm, cx, sx, isUnstyled } = SidebarBase.setMetaData({
+        props,
+        state: {
+            containerVisible: maskVisibleState
+        }
+    });
+
+    useHandleStyle(SidebarBase.css.styles, isUnstyled, { name: 'sidebar' });
+
     const sidebarRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
+    const isCloseOnEscape = visibleState && props.closeOnEscape;
+    const sidebarDisplayOrder = useDisplayOrder('sidebar', isCloseOnEscape);
 
-    const [bindDocumentEscapeListener, unbindDocumentEscapeListener] = useEventListener({
-        type: 'keydown',
-        listener: (event) => {
-            if (event.which === 27) {
-                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', PrimeReact.autoZIndex)) {
-                    onClose(event);
-                }
-            }
-        }
+    useGlobalOnEscapeKey({
+        callback: (event) => {
+            onClose(event);
+        },
+        when: isCloseOnEscape && sidebarDisplayOrder,
+        priority: [ESC_KEY_HANDLING_PRIORITIES.SIDEBAR, sidebarDisplayOrder]
     });
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (event) => {
-            if (event.which === 2) {
-                // left click
+            if (event.button !== 0) {
+                // ignore anything other than left click
                 return;
             }
 
@@ -42,18 +57,11 @@ export const Sidebar = React.forwardRef((props, ref) => {
         return sidebarRef && sidebarRef.current && !sidebarRef.current.contains(event.target);
     };
 
-    const getPositionClass = () => {
-        const positions = ['left', 'right', 'top', 'bottom'];
-        const pos = positions.find((item) => item === props.position);
-
-        return pos ? `p-sidebar-${pos}` : '';
-    };
-
     const focus = () => {
         const activeElement = document.activeElement;
         const isActiveElementInDialog = activeElement && sidebarRef && sidebarRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.showCloseIcon) {
+        if (!isActiveElementInDialog && props.showCloseIcon && closeIconRef.current) {
             closeIconRef.current.focus();
         }
     };
@@ -77,7 +85,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
     const onExiting = () => {
         if (props.modal) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
     };
 
@@ -88,25 +96,20 @@ export const Sidebar = React.forwardRef((props, ref) => {
     };
 
     const enableDocumentSettings = () => {
-        if (props.closeOnEscape) {
-            bindDocumentEscapeListener();
-        }
-
         if (props.dismissable && !props.modal) {
             bindDocumentClickListener();
         }
 
         if (props.blockScroll) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
+            DomHandler.blockBodyScroll();
         }
     };
 
     const disableDocumentSettings = () => {
-        unbindDocumentEscapeListener();
         unbindDocumentClickListener();
 
         if (props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            DomHandler.unblockBodyScroll();
         }
     };
 
@@ -135,10 +138,21 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
+
+    useUpdateEffect(() => {
+        // #3811 if dismissible state is toggled while open we must unregister and re-regisetr
+        if (visibleState) {
+            unbindDocumentClickListener();
+
+            if (props.dismissable && !props.modal) {
+                bindDocumentClickListener();
+            }
+        }
+    }, [props.dismissable, props.modal, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
@@ -146,12 +160,32 @@ export const Sidebar = React.forwardRef((props, ref) => {
     });
 
     const createCloseIcon = () => {
-        if (props.showCloseIcon) {
-            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const closeButtonProps = mergeProps(
+            {
+                type: 'button',
+                ref: closeIconRef,
+                className: cx('closeButton'),
+                onClick: (e) => onClose(e),
+                'aria-label': ariaLabel
+            },
+            ptm('closeButton')
+        );
 
+        const closeIconProps = mergeProps(
+            {
+                className: cx('closeIcon')
+            },
+            ptm('closeIcon')
+        );
+
+        const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+        const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
+
+        if (props.showCloseIcon) {
             return (
-                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={ariaLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times" aria-hidden="true" />
+                <button {...closeButtonProps}>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
@@ -160,45 +194,106 @@ export const Sidebar = React.forwardRef((props, ref) => {
         return null;
     };
 
+    const createHeader = () => {
+        return props.header ? ObjectUtils.getJSXElement(props.header, props) : null;
+    };
+
     const createIcons = () => {
         return props.icons ? ObjectUtils.getJSXElement(props.icons, props) : null;
     };
 
-    const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Sidebar.defaultProps);
-        const className = classNames('p-sidebar p-component', props.className, {
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
-        });
-        const maskClassName = classNames(
-            'p-sidebar-mask',
-            {
-                'p-component-overlay p-component-overlay-enter': props.modal,
-                'p-sidebar-mask-scrollblocker': props.blockScroll,
-                'p-sidebar-visible': maskVisibleState,
-                'p-sidebar-full': props.fullScreen
-            },
-            getPositionClass(),
-            props.maskClassName
-        );
+    const maskProps = mergeProps(
+        {
+            ref: maskRef,
+            style: sx('mask'),
+            className: cx('mask', { maskVisibleState }),
+            onMouseDown: (e) => onMaskClick(e)
+        },
+        ptm('mask')
+    );
 
-        const closeIcon = createCloseIcon();
-        const icons = createIcons();
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            className: cx('root', { context }),
+            style: props.style,
+            role: 'complementary'
+        },
+        SidebarBase.getOtherProps(props),
+        ptm('root')
+    );
 
-        const transitionTimeout = {
-            enter: props.fullScreen ? 150 : 300,
-            exit: props.fullScreen ? 150 : 300
-        };
+    const headerProps = mergeProps(
+        {
+            className: cx('header')
+        },
+        ptm('header')
+    );
+
+    const contentProps = mergeProps(
+        {
+            className: cx('content')
+        },
+        ptm('content')
+    );
+
+    const iconsProps = mergeProps(
+        {
+            className: cx('icons')
+        },
+        ptm('icons')
+    );
+
+    const transitionTimeout = {
+        enter: props.fullScreen ? 150 : 300,
+        exit: props.fullScreen ? 150 : 300
+    };
+
+    const transitionProps = mergeProps(
+        {
+            classNames: cx('transition'),
+            in: visibleState,
+            timeout: transitionTimeout,
+            options: props.transitionOptions,
+            unmountOnExit: true,
+            onEntered,
+            onExiting,
+            onExited
+        },
+        ptm('transition')
+    );
+
+    const createTemplateElement = () => {
+        const templateElementProps = { closeIconRef, hide: onClose };
 
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
-                <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role="complementary">
-                        <div className="p-sidebar-header">
-                            {icons}
-                            {closeIcon}
+            <div {...maskProps}>
+                <CSSTransition nodeRef={sidebarRef} {...transitionProps}>
+                    <div ref={sidebarRef} {...rootProps}>
+                        {ObjectUtils.getJSXElement(inProps.content, templateElementProps)}
+                    </div>
+                </CSSTransition>
+            </div>
+        );
+    };
+
+    const createElement = () => {
+        const closeIcon = createCloseIcon();
+        const icons = createIcons();
+        const header = createHeader();
+
+        return (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={sidebarRef} {...transitionProps}>
+                    <div ref={sidebarRef} {...rootProps}>
+                        <div {...headerProps}>
+                            {header}
+                            <div {...iconsProps}>
+                                {icons}
+                                {closeIcon}
+                            </div>
                         </div>
-                        <div className="p-sidebar-content">{props.children}</div>
+                        <div {...contentProps}>{props.children}</div>
                     </div>
                 </CSSTransition>
             </div>
@@ -206,7 +301,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     };
 
     const createSidebar = () => {
-        const element = createElement();
+        const element = inProps?.content ? createTemplateElement() : createElement();
 
         return <Portal element={element} appendTo={props.appendTo} visible />;
     };
@@ -215,26 +310,3 @@ export const Sidebar = React.forwardRef((props, ref) => {
 });
 
 Sidebar.displayName = 'Sidebar';
-Sidebar.defaultProps = {
-    __TYPE: 'Sidebar',
-    id: null,
-    style: null,
-    className: null,
-    maskStyle: null,
-    maskClassName: null,
-    visible: false,
-    position: 'left',
-    fullScreen: false,
-    blockScroll: false,
-    baseZIndex: 0,
-    dismissable: true,
-    showCloseIcon: true,
-    ariaCloseLabel: null,
-    closeOnEscape: true,
-    icons: null,
-    modal: true,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

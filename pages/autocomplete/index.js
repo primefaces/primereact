@@ -1,18 +1,24 @@
-import Head from 'next/head';
-import React from 'react';
-import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
-import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
-import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
-import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
-import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
-import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
-import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
-import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
-import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
-import { ValidationDoc } from '../../components/doc/autocomplete/validationdoc';
-import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '@/components/doc/autocomplete/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/autocomplete/basicdoc';
+import { DisabledDoc } from '@/components/doc/autocomplete/disableddoc';
+import { DropdownDoc } from '@/components/doc/autocomplete/dropdowndoc';
+import { FloatLabelDoc } from '@/components/doc/autocomplete/floatlabeldoc';
+import { ForceSelectionDoc } from '@/components/doc/autocomplete/forceselectiondoc';
+import { FormikDoc } from '@/components/doc/autocomplete/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/autocomplete/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/autocomplete/groupdoc';
+import { ImportDoc } from '@/components/doc/autocomplete/importdoc';
+import { InvalidDoc } from '@/components/doc/autocomplete/invaliddoc';
+import { MultipleDoc } from '@/components/doc/autocomplete/multipledoc';
+import { ObjectsDoc } from '@/components/doc/autocomplete/objectsdoc';
+import { PTDoc } from '@/components/doc/autocomplete/pt/ptdoc';
+import { Wireframe } from '@/components/doc/autocomplete/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/autocomplete/templatedoc';
+import { StyledDoc } from '@/components/doc/autocomplete/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/autocomplete/theming/tailwinddoc';
+import { VirtualScrollDoc } from '@/components/doc/autocomplete/virtualscrolldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const AutoCompleteDemo = () => {
     const docs = [
@@ -62,53 +68,91 @@ const AutoCompleteDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.autocomplete.options',
+            label: 'AutoComplete PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React AutoComplete Component</title>
-                <meta name="description" content="AutoComplete is an input component that provides real-time suggestions when being typed." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>AutoComplete</h1>
-                    <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React AutoComplete Component"
+            header="AutoComplete"
+            description="AutoComplete is an input component that provides real-time suggestions while being typed"
+            componentDocs={docs}
+            apiDocs={['AutoComplete']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

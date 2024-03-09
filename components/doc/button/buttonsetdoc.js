@@ -1,35 +1,45 @@
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 
 export function ButtonSetDoc(props) {
     const code = {
         basic: `
-<Button label="Save" icon="pi pi-check" />
-<Button label="Delete" icon="pi pi-trash" />
-<Button label="Cancel" icon="pi pi-times" />
+<span className="p-buttonset">
+    <Button label="Save" icon="pi pi-check" />
+    <Button label="Delete" icon="pi pi-trash" />
+    <Button label="Cancel" icon="pi pi-times" />
+</span>
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function ButtonSetDoc() {
-
+export default function ButtonSetDemo() {
     return (
-        <Button label="Save" icon="pi pi-check" />
-        <Button label="Delete" icon="pi pi-trash" />
-        <Button label="Cancel" icon="pi pi-times" />
+        <div className="card flex justify-content-center">
+            <span className="p-buttonset">
+                <Button label="Save" icon="pi pi-check" />
+                <Button label="Delete" icon="pi pi-trash" />
+                <Button label="Cancel" icon="pi pi-times" />
+            </span>
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function ButtonSetDoc() {
-
+export default function ButtonSetDemo() {
     return (
-        <Button label="Save" icon="pi pi-check" />
-        <Button label="Delete" icon="pi pi-trash" />
-        <Button label="Cancel" icon="pi pi-times" />
+        <div className="card flex justify-content-center">
+            <span className="p-buttonset">
+                <Button label="Save" icon="pi pi-check" />
+                <Button label="Delete" icon="pi pi-trash" />
+                <Button label="Cancel" icon="pi pi-times" />
+            </span>
+        </div>
     )
 }
         `
@@ -38,12 +48,16 @@ export default function ButtonSetDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Button Set</p>
+                <p>
+                    Multiple buttons are grouped when wrapped inside an element with <i>p-buttonset</i> class.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center p-buttonset">
-                <Button label="Save" icon="pi pi-check" />
-                <Button label="Delete" icon="pi pi-trash" />
-                <Button label="Cancel" icon="pi pi-times" />
+            <div className="card flex justify-content-center">
+                <span className="p-buttonset">
+                    <Button label="Save" icon="pi pi-check" />
+                    <Button label="Delete" icon="pi pi-trash" />
+                    <Button label="Cancel" icon="pi pi-times" />
+                </span>
             </div>
             <DocSectionCode code={code} />
         </>

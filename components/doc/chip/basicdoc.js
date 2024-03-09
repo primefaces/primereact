@@ -1,26 +1,25 @@
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Chip } from '../../../components/lib/chip/Chip';
 
 export function BasicDoc(props) {
     const code = {
         basic: `
-<Chip label="Action" className="mr-2" />
-<Chip label="Comedy" className="mr-2" />
-<Chip label="Mystery" className="mr-2" />
+<Chip label="Action" />
+<Chip label="Comedy" />
+<Chip label="Mystery" />
 <Chip label="Thriller" removable />
         `,
         javascript: `
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const BasicDoc = () => {
-
+export default function BasicDemo() {
     return (
         <div className="card flex flex-wrap gap-2">
-            <Chip label="Action" className="mr-2" />
-            <Chip label="Comedy" className="mr-2" />
-            <Chip label="Mystery" className="mr-2" />
+            <Chip label="Action" />
+            <Chip label="Comedy" />
+            <Chip label="Mystery" />
             <Chip label="Thriller" removable />
         </div>
     );
@@ -30,13 +29,12 @@ export const BasicDoc = () => {
 import React from 'react';
 import { Chip } from 'primereact/chip';
 
-export const BasicDoc = () => {
-
+export default function BasicDemo() {
     return (
         <div className="card flex flex-wrap gap-2">
-            <Chip label="Action" className="mr-2" />
-            <Chip label="Comedy" className="mr-2" />
-            <Chip label="Mystery" className="mr-2" />
+            <Chip label="Action" />
+            <Chip label="Comedy" />
+            <Chip label="Mystery" />
             <Chip label="Thriller" removable />
         </div>
     );
@@ -47,12 +45,14 @@ export const BasicDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Basic Demo Content.</p>
+                <p>
+                    A basic chip with a text is created with the <i>label</i> property. In addition when <i>removable</i> is added, a delete icon is displayed to remove a chip.
+                </p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-2">
-                <Chip label="Action" className="mr-2" />
-                <Chip label="Comedy" className="mr-2" />
-                <Chip label="Mystery" className="mr-2" />
+                <Chip label="Action" />
+                <Chip label="Comedy" />
+                <Chip label="Mystery" />
                 <Chip label="Thriller" removable />
             </div>
             <DocSectionCode code={code} />

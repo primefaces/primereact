@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { confirmPopup } from '@/components/lib/confirmpopup/ConfirmPopup';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { ConfirmPopup, confirmPopup } from '../../lib/confirmpopup/ConfirmPopup';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const toast = useRef(null);
@@ -21,6 +21,7 @@ export function BasicDoc(props) {
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -32,6 +33,7 @@ export function BasicDoc(props) {
             message: 'Do you want to delete this record?',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            defaultFocus: 'reject',
             accept,
             reject
         });
@@ -40,16 +42,19 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<ConfirmDialog />
-<Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-<Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+<ConfirmPopup />
+<div className="card flex flex-wrap gap-2 justify-content-center">
+    <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+    <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger"></Button>
+</div>
         `,
         javascript: `
-import { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import React, { useRef } from 'react';
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef(null);
 
     const accept = () => {
@@ -65,6 +70,7 @@ export default function BasicDoc() {
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -75,6 +81,7 @@ export default function BasicDoc() {
             target: event.currentTarget,
             message: 'Do you want to delete this record?',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject
@@ -82,21 +89,24 @@ export default function BasicDoc() {
     };
 
     return (
-        <div>
+        <>
             <Toast ref={toast} />
             <ConfirmPopup />
-            <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-            <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
-        </div>
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger"></Button>
+            </div>
+        </>
     )
 }
         `,
         typescript: `
-import { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import React, { useRef } from 'react';
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef<Toast>(null);
 
     const accept = () => {
@@ -112,6 +122,7 @@ export default function BasicDoc() {
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -122,20 +133,22 @@ export default function BasicDoc() {
             target: event.currentTarget,
             message: 'Do you want to delete this record?',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject
         });
     };
 
-
     return ( 
-        <div>
+        <>
             <Toast ref={toast} />
             <ConfirmPopup />
-            <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-            <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
-        </div>
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger"></Button>
+            </div>
+        </>
     )
 }
         `
@@ -145,15 +158,14 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    There are two ways to display confirm popup. One of them is to use the confirmPopup method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag. These independently create popup element. It supports the same properties in
-                    both. target property is mandatory to align the popup to its caller.
+                    A ConfirmPopup component needs to be present on the page that is interacted with the <i>confirmPopup</i> function that takes a configuration object for customization. In order to align the popover, <i>target</i> property must be
+                    provided referring to the source element.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Toast ref={toast} />
-                <ConfirmPopup />
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
+            <Toast ref={toast} />
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger"></Button>
             </div>
             <DocSectionCode code={code} />
         </>

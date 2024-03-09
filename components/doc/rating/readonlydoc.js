@@ -1,31 +1,33 @@
-import { Rating } from '../../lib/rating/Rating';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Rating } from '@/components/lib/rating/Rating';
 
 export function ReadOnlyDoc(props) {
     const code = {
         basic: `
-<Rating value={5} readOnly stars={10} cancel={false}/>
-
-
+<Rating value={5} readOnly cancel={false} />
         `,
         javascript: `
+import React from 'react'; 
 import { Rating } from "primereact/rating";
 
-export default function ReadOnlyDoc() {
-
+export default function ReadOnlyDemo() {
     return (
-        <Rating value={5} readOnly stars={10} cancel={false} />
+        <div className="card flex justify-content-center">
+            <Rating value={5} readOnly cancel={false} />
+        </div>
     );
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Rating } from "primereact/rating";
 
-export default function ReadOnlyDoc() {
-
+export default function ReadOnlyDemo() {
     return (
-        <Rating value={5} readOnly stars={10} cancel={false} />
+        <div className="card flex justify-content-center">
+            <Rating value={5} readOnly cancel={false} />
+        </div>
     );
 }
         `
@@ -35,11 +37,11 @@ export default function ReadOnlyDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Changing the value is not possible with <i>readonly</i> property.
+                    When <i>readOnly</i> present, value cannot be edited.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Rating value={5} readOnly stars={10} cancel={false} />
+                <Rating value={5} readOnly cancel={false} />
             </div>
             <DocSectionCode code={code} />
         </>

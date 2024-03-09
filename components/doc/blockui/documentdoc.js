@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useEffect, useState } from 'react';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Button } from '../../../components/lib/button/Button';
 
 export function DocumentDoc(props) {
-    const [blockedDocument, setBlockedDocument] = useState(false);
-
-    const blockDocument = () => {
-        setBlockedDocument(true);
-    };
+    const [blocked, setBlocked] = useState(false);
 
     useEffect(() => {
-        if (blockedDocument) {
+        if (blocked) {
             setTimeout(() => {
-                setBlockedDocument(false);
+                setBlocked(false);
             }, 3000);
         }
-    }, [blockedDocument]);
+    }, [blocked]);
 
     const code = {
         basic: `
-<BlockUI blocked={blockedDocument} fullScreen />
-<Button type="button" label="Block" onClick={blockDocument} />
+<BlockUI blocked={blocked} fullScreen />
+<Button label="Block" onClick={() => setBlocked(true)} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -30,17 +26,21 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const DocumentDoc = () => {
-    const [blockedDocument, setBlockedDocument] = useState(false);
+export default function DocumentDemo() {
+    const [blocked, setBlocked] = useState(false);
 
-    const blockDocument = () => {
-        setBlockedDocument(true);
-    };
+    useEffect(() => {
+        if (blocked) {
+            setTimeout(() => {
+                setBlocked(false);
+            }, 3000);
+        }
+    }, [blocked]);
 
     return (
         <div className="card">
-            <BlockUI blocked={blockedDocument} fullScreen />
-            <Button type="button" label="Block" onClick={blockDocument} />
+            <BlockUI blocked={blocked} fullScreen />
+            <Button label="Block" onClick={() => setBlocked(true)} />
         </div>
     );
 }
@@ -51,17 +51,21 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Button } from 'primereact/button';
 
-export const DocumentDoc = () => {
-    const [blockedDocument, setBlockedDocument] = useState<boolean>(false);
+export default function DocumentDemo() {
+    const [blocked, setBlocked] = useState<boolean>(false);
 
-    function blockDocument(): void {
-        setBlockedDocument(true);
-    };
+    useEffect(() => {
+        if (blocked) {
+            setTimeout(() => {
+                setBlocked(false);
+            }, 3000);
+        }
+    }, [blocked]);
 
     return (
         <div className="card">
-            <BlockUI blocked={blockedDocument} fullScreen />
-            <Button type="button" label="Block" onClick={blockDocument} />
+            <BlockUI blocked={blocked} fullScreen />
+            <Button label="Block" onClick={() => setBlocked(true)} />
         </div>
     );
 }
@@ -71,11 +75,13 @@ export const DocumentDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Document Demo Content.</p>
+                <p>
+                    Enabling <i>fullScreen</i> property controls the document.
+                </p>
             </DocSectionText>
             <div className="card">
-                <BlockUI blocked={blockedDocument} fullScreen />
-                <Button type="button" label="Block" onClick={blockDocument} />
+                <BlockUI blocked={blocked} fullScreen />
+                <Button label="Block" onClick={() => setBlocked(true)} />
             </div>
             <DocSectionCode code={code} />
         </>

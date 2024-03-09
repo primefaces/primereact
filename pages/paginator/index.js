@@ -1,12 +1,15 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/paginator/apidoc';
-import { ImportDoc } from '../../components/doc/paginator/importdoc';
-import { BasicDoc } from '../../components/doc/paginator/basicdoc';
-import { CustomDoc } from '../../components/doc/paginator/customdoc';
-import { ContentDoc } from '../../components/doc/paginator/contentdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/paginator/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/paginator/basicdoc';
+import { ImagesDoc } from '@/components/doc/paginator/imagesdoc';
+import { ImportDoc } from '@/components/doc/paginator/importdoc';
+import { LayoutDoc } from '@/components/doc/paginator/layoutdoc';
+import { PTDoc } from '@/components/doc/paginator/pt/ptdoc';
+import { Wireframe } from '@/components/doc/paginator/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/paginator/templatedoc';
+import { StyledDoc } from '@/components/doc/paginator/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/paginator/theming/tailwinddoc';
 
 const PaginatorDemo = () => {
     const docs = [
@@ -21,60 +24,75 @@ const PaginatorDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'custom',
-            label: 'Custom Template',
-            component: CustomDoc
+            id: 'layout',
+            label: 'Layout',
+            component: LayoutDoc
         },
         {
-            id: 'content',
-            label: 'Left and Right Content',
-            component: ContentDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'images',
+            label: 'Images',
+            component: ImagesDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.paginator.options',
+            label: 'Paginator PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Paginator Component</title>
-                <meta name="description" content="Paginator is a generic widget to display content in paged format." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Paginator</h1>
-                    <p>Paginator is a generic widget to display content in paged format.</p>
-                </div>
-
-                <DocActions github="paginator/index.js" />
-            </div>
-
-            <div className="content-section doc paginator-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Paginator Component"
+            header="Paginator"
+            description="Paginator displays data in paged format and provides navigation between pages."
+            componentDocs={docs}
+            apiDocs={['Paginator']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

@@ -1,37 +1,40 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Knob } from '@/components/lib/knob/Knob';
 import { useState } from 'react';
-import { Knob } from '../../lib/knob/Knob';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function StepDoc(props) {
-    const [value, setValue] = useState(40);
+    const [value, setValue] = useState(10);
 
     const code = {
         basic: `
-<Knob value={value} step={40} onChange={(e) => setValue(value)} />
-
+<Knob value={value} step={10} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function StepDoc() {
-    const [value, setValue] = useState(40);
+export default function StepDemo() {
+    const [value, setValue] = useState(10);
 
     return (
-        <Knob value={value} step={40} onChange={(e) => setValue(value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} step={10} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
-import { Knob, KnobChangeParams } from 'primereact/knob';
+import React, { useState } from 'react';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function StepDoc() {
-    const [value, setValue] = useState<number>(40);
+export default function StepDemo() {
+    const [value, setValue] = useState<number>(10);
 
     return (
-        <Knob value={value} step={40} onChange={(e : KnobChangeParams) => setValue(value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} step={10} onChange={(e : KnobChangeEvent) => setValue(e.value)}  />
+        </div>
     )
 }
         `
@@ -40,10 +43,12 @@ export default function StepDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Step factor is 1 by default and can be customized with step option.</p>
+                <p>
+                    Size of each movement is defined with the <i>step</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Knob value={value} step={40} onChange={(e) => setValue(value)} />
+                <Knob value={value} step={10} onChange={(e) => setValue(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

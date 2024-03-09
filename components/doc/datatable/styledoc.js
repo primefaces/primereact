@@ -1,162 +1,106 @@
-import React, { useState, useEffect } from 'react';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
-import { ProductService } from '../../../service/ProductService';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { classNames } from '../../lib/utils/Utils';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import Link from 'next/link';
 
-export function StyleDoc(props) {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-
-    useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const rowClass = (data) => {
-        return {
-            'row-accessories': data.category === 'Accessories'
-        };
-    };
-
-    const stockBodyTemplate = (rowData) => {
-        const stockClassName = classNames({
-            outofstock: rowData.quantity === 0,
-            lowstock: rowData.quantity > 0 && rowData.quantity < 10,
-            instock: rowData.quantity > 10
-        });
-
-        return <div className={stockClassName}>{rowData.quantity}</div>;
-    };
-
-    const code = {
-        basic: `
-<DataTable value={products} header="Stack" responsiveLayout="stack" breakpoint="960px">
-    <Column field="code" header="Code" />
-    <Column field="name" header="Name" />
-    <Column field="category" header="Category" />
-    <Column field="quantity" header="Quantity" />
-    <Column field="inventoryStatus" header="Status" body={statusTemplate} />
-    <Column field="rating" header="Rating" body={ratingTemplate} />
-</DataTable>
-        `,
-        javascript: `
-import React, { useState, useEffect } from 'react';
-import { classNames } from 'primereact/utils';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
-import './DataTableDemo.css';
-
-const StyleDoc = () => {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-
-    useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const rowClass = (data) => {
-        return {
-            'row-accessories': data.category === 'Accessories'
-        }
-    }
-
-    const stockBodyTemplate = (rowData) => {
-        const stockClassName = classNames({
-            'outofstock': rowData.quantity === 0,
-            'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
-            'instock': rowData.quantity > 10
-        });
-
-        return (
-            <div className={stockClassName}>
-                {rowData.quantity}
-            </div>
-        );
-    }
-
-    return (
-        <div className="datatable-style-demo">
-            <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-                </DataTable>
-            </div>
-        </div>
-    );
-}
-        `,
-        typescript: `
-import React, { useState, useEffect } from 'react';
-import { classNames } from 'primereact/utils';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { ProductService } from '../service/ProductService';
-import './DataTableDemo.css';
-
-const StyleDoc = () => {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
-
-    useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const rowClass = (data) => {
-        return {
-            'row-accessories': data.category === 'Accessories'
-        }
-    }
-
-    const stockBodyTemplate = (rowData) => {
-        const stockClassName = classNames({
-            'outofstock': rowData.quantity === 0,
-            'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
-            'instock': rowData.quantity > 10
-        });
-
-        return (
-            <div className={stockClassName}>
-                {rowData.quantity}
-            </div>
-        );
-    }
-
-    return (
-        <div className="datatable-style-demo">
-            <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-                </DataTable>
-            </div>
-        </div>
-    );
-}
-        `
-    };
-
+export function StyleDoc() {
     return (
         <>
-            <DocSectionText {...props}>
-                <p>Particular rows and cells can be styled based on data.</p>
+            <DocSectionText id="style" label="Style">
+                <p>
+                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-                </DataTable>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Element</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>p-datatable</td>
+                            <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-scrollable</td>
+                            <td>Container element when table is scrollable.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-header</td>
+                            <td>Header section.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-footer</td>
+                            <td>Footer section.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-wrapper</td>
+                            <td>Wrapper of table element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-table</td>
+                            <td>Table element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-thead</td>
+                            <td>Table thead element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-tbody</td>
+                            <td>Table tbody element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-tfoot</td>
+                            <td>Table tfoot element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-column-title</td>
+                            <td>Title of a column.</td>
+                        </tr>
+                        <tr>
+                            <td>p-sortable-column</td>
+                            <td>Sortable column header.</td>
+                        </tr>
+                        <tr>
+                            <td>p-frozen-column</td>
+                            <td>Frozen column header.</td>
+                        </tr>
+                        <tr>
+                            <td>p-rowgroup-header</td>
+                            <td>Header of a rowgroup.</td>
+                        </tr>
+                        <tr>
+                            <td>p-rowgroup-footer</td>
+                            <td>Footer of a rowgroup.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-row-expansion</td>
+                            <td>Expanded row content.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-toggler</td>
+                            <td>Toggle element for row expansion.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-emptymessage</td>
+                            <td>Cell containing the empty message.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-editor-init</td>
+                            <td>Pencil button of row editor.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-editor-init</td>
+                            <td>Save button of row editor.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-editor-init</td>
+                            <td>Cancel button of row editor.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <DocSectionCode code={code} />
         </>
     );
 }

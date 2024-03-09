@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chart } from '@/components/lib/chart/Chart';
+import { useEffect, useState } from 'react';
 
 export function PolarAreaDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -11,7 +11,6 @@ export function PolarAreaDoc(props) {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             datasets: [
                 {
@@ -28,9 +27,6 @@ export function PolarAreaDoc(props) {
             ],
             labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue']
         };
-
-        setChartData(data);
-
         const options = {
             plugins: {
                 legend: {
@@ -48,18 +44,19 @@ export function PolarAreaDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     const code = {
         basic: `
-<Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+<Chart type="polarArea" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function PolarAreaDoc() {
+export default function PolarAreaDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -67,7 +64,6 @@ export default function PolarAreaDoc() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             datasets: [
                 {
@@ -84,9 +80,6 @@ export default function PolarAreaDoc() {
             ],
             labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue']
         };
-
-        setChartData(data);
-
         const options = {
             plugins: {
                 legend: {
@@ -104,19 +97,22 @@ export default function PolarAreaDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
-        <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function PolarAreaDoc() {
+export default function PolarAreaDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -124,7 +120,6 @@ export default function PolarAreaDoc() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             datasets: [
                 {
@@ -141,9 +136,6 @@ export default function PolarAreaDoc() {
             ],
             labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue']
         };
-
-        setChartData(data);
-
         const options = {
             plugins: {
                 legend: {
@@ -161,11 +153,14 @@ export default function PolarAreaDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
-        <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="polarArea" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `
@@ -177,9 +172,9 @@ export default function PolarAreaDoc() {
                 <p>Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+                <Chart type="polarArea" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

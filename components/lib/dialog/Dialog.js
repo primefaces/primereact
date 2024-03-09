@@ -1,13 +1,23 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useDraggable, useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useDraggable, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
+import { WindowMaximizeIcon } from '../icons/windowmaximize';
+import { WindowMinimizeIcon } from '../icons/windowminimize';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DialogBase } from './DialogBase';
 
-export const Dialog = React.forwardRef((props, ref) => {
-    const [idState, setIdState] = React.useState(props.id);
+export const Dialog = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = DialogBase.getProps(inProps, context);
+
+    const uniqueId = props.id ? props.id : UniqueComponentId();
+    const [idState, setIdState] = React.useState(uniqueId);
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
     const [maximizedState, setMaximizedState] = React.useState(props.maximized);
@@ -15,6 +25,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const dialogRef = React.useRef(null);
     const headerRef = React.useRef(null);
     const maskRef = React.useRef(null);
+    const pointerRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const footerRef = React.useRef(null);
     const closeRef = React.useRef(null);
@@ -22,8 +33,32 @@ export const Dialog = React.forwardRef((props, ref) => {
     const lastPageX = React.useRef(null);
     const lastPageY = React.useRef(null);
     const styleElement = React.useRef(null);
-    const attributeSelector = React.useRef('');
+    const attributeSelector = React.useRef(uniqueId);
+    const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
+    const shouldBlockScroll = visibleState && (props.blockScroll || (props.maximizable && maximized));
+    const isCloseOnEscape = props.closable && props.closeOnEscape && visibleState;
+    const displayOrder = useDisplayOrder('dialog', isCloseOnEscape);
+
+    const { ptm, cx, sx, isUnstyled } = DialogBase.setMetaData({
+        props,
+        ...props.__parentMetadata,
+        state: {
+            id: idState,
+            maximized: maximized,
+            containerVisible: maskVisibleState
+        }
+    });
+
+    useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
+
+    useGlobalOnEscapeKey({
+        callback: (event) => {
+            onClose(event);
+        },
+        when: isCloseOnEscape && displayOrder,
+        priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
+    });
 
     const draggable = useDraggable({ targetRef: dialogRef, handleRef: headerRef, onDragStart: props.onDragStart, onDrag: props.onDrag, onDragEnd: props.onDragEnd, enabled: draggableState, keepInViewport: props.keepInViewport });
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -39,17 +74,23 @@ export const Dialog = React.forwardRef((props, ref) => {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.closable && props.showHeader) {
+        if (!isActiveElementInDialog && props.closable && props.showHeader && closeRef.current) {
             closeRef.current.focus();
         }
     };
 
-    const onMaskClick = (event) => {
-        if (props.dismissableMask && props.modal && maskRef.current === event.target) {
+    const onDialogPointerDown = (event) => {
+        pointerRef.current = event.target;
+        props.onPointerDown && props.onPointerDown(event);
+    };
+
+    const onMaskPointerUp = (event) => {
+        if (props.dismissableMask && props.modal && maskRef.current === event.target && !pointerRef.current) {
             onClose(event);
         }
 
         props.onMaskClick && props.onMaskClick(event);
+        pointerRef.current = null;
     };
 
     const toggleMaximize = (event) => {
@@ -82,11 +123,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         const dialog = document.getElementById(dialogId);
 
-        if (props.closable && props.closeOnEscape && event.key === 'Escape') {
-            onClose(event);
-            event.stopImmediatePropagation();
-            params.splice(paramLength - 1, 1);
-        } else if (event.key === 'Tab') {
+        if (event.key === 'Tab') {
             event.preventDefault();
             const focusableElements = DomHandler.getFocusableElements(dialog);
 
@@ -182,13 +219,6 @@ export const Dialog = React.forwardRef((props, ref) => {
         dialogRef.current.style.margin = '';
     };
 
-    const getPositionClass = () => {
-        const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
-        const pos = positions.find((item) => item === props.position || item.replace('-', '') === props.position);
-
-        return pos ? `p-dialog-${pos}` : '';
-    };
-
     const onEnter = () => {
         dialogRef.current.setAttribute(attributeSelector.current, '');
         setDraggableState(props.draggable);
@@ -206,11 +236,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
     const onExiting = () => {
         if (props.modal) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
-        }
-
-        if (props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
     };
 
@@ -219,30 +245,57 @@ export const Dialog = React.forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
         setMaskVisibleState(false);
         disableDocumentSettings();
+
+        // return focus to element before dialog was open
+        DomHandler.focus(focusElementOnHide.current);
+        focusElementOnHide.current = null;
     };
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
-
-        if (props.blockScroll || (props.maximizable && maximized)) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-        }
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
+    };
 
-        const isMaximized = props.maximizable && maximized;
+    const updateScrollBlocker = () => {
+        // Scroll should be unblocked if there is at least one dialog that blocks scrolling:
+        const isThereAnyDialogThatBlocksScrolling = document.primeDialogParams && document.primeDialogParams.some((i) => i.hasBlockScroll);
 
-        if (props.modal) {
-            const hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll);
-
-            if (hasBlockScroll || isMaximized) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            }
-        } else if (props.blockScroll || isMaximized) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        if (isThereAnyDialogThatBlocksScrolling) {
+            DomHandler.blockBodyScroll();
+        } else {
+            DomHandler.unblockBodyScroll();
         }
+    };
+
+    const updateGlobalDialogsRegistry = (isMounted) => {
+        // Update current dialog info in global registry if it is mounted and visible:
+        if (isMounted && visibleState) {
+            const newParam = { id: idState, hasBlockScroll: shouldBlockScroll };
+
+            // Create registry if not yet created:
+            if (!document.primeDialogParams) {
+                document.primeDialogParams = [];
+            }
+
+            const currentDialogIndexInRegistry = document.primeDialogParams.findIndex((dialogInRegistry) => dialogInRegistry.id === idState);
+
+            if (currentDialogIndexInRegistry === -1) {
+                document.primeDialogParams = [...document.primeDialogParams, newParam];
+            } else {
+                document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
+            }
+        }
+        // Or remove it from global registry if unmounted or invisible:
+        else {
+            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
+        }
+
+        // Always update scroll blocker after dialog registry - this way we ensure that
+        // p-overflow-hidden class is properly added/removed:
+        updateScrollBlocker();
     };
 
     const bindGlobalListeners = () => {
@@ -252,66 +305,54 @@ export const Dialog = React.forwardRef((props, ref) => {
         }
 
         bindDocumentKeyDownListener();
-        const newParam = { id: idState, hasBlockScroll: props.blockScroll };
-
-        document.primeDialogParams = document.primeDialogParams ? [...document.primeDialogParams, newParam] : [newParam];
     };
 
     const unbindGlobalListeners = () => {
         unbindDocumentResizeListener();
         unbindDocumentResizEndListener();
         unbindDocumentKeyDownListener();
-
-        document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
     };
 
     const createStyle = () => {
-        if (!styleElement.current) {
-            styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
-            let innerHTML = '';
+        let innerHTML = '';
 
-            for (let breakpoint in props.breakpoints) {
-                innerHTML += `
-                    @media screen and (max-width: ${breakpoint}) {
-                        .p-dialog[${attributeSelector.current}] {
-                            width: ${props.breakpoints[breakpoint]} !important;
-                        }
+        for (let breakpoint in props.breakpoints) {
+            innerHTML += `
+                @media screen and (max-width: ${breakpoint}) {
+                     [data-pc-name="dialog"][${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]} !important;
                     }
-                `;
-            }
-
-            styleElement.current.innerHTML = innerHTML;
+                }
+            `;
         }
+
+        styleElement.current.innerHTML = innerHTML;
     };
 
-    const changeScrollOnMaximizable = () => {
-        if (!props.blockScroll) {
-            let funcName = maximized ? 'addClass' : 'removeClass';
-
-            DomHandler[funcName](document.body, 'p-overflow-hidden');
-        }
+    const destroyStyle = () => {
+        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
     };
 
     useMountEffect(() => {
-        const unqiueId = UniqueComponentId();
-
-        if (!idState) {
-            setIdState(unqiueId);
-        }
-
-        if (!attributeSelector.current) {
-            attributeSelector.current = unqiueId;
-        }
+        updateGlobalDialogsRegistry(true);
 
         if (props.visible) {
             setMaskVisibleState(true);
         }
+    });
 
+    React.useEffect(() => {
         if (props.breakpoints) {
             createStyle();
         }
-    });
+
+        return () => {
+            destroyStyle();
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.breakpoints]);
 
     useUpdateEffect(() => {
         if (props.visible && !maskVisibleState) {
@@ -321,21 +362,28 @@ export const Dialog = React.forwardRef((props, ref) => {
         if (props.visible !== visibleState && maskVisibleState) {
             setVisibleState(props.visible);
         }
-    });
+
+        if (props.visible) {
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
+        }
+    }, [props.visible, maskVisibleState]);
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
 
     useUpdateEffect(() => {
-        changeScrollOnMaximizable();
-    }, [props.maximized, maximizedState]);
+        updateGlobalDialogsRegistry(true);
+    }, [shouldBlockScroll, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
+        updateGlobalDialogsRegistry(false);
         DomHandler.removeInlineStyle(styleElement.current);
         ZIndexUtils.clear(maskRef.current);
     });
@@ -355,9 +403,31 @@ export const Dialog = React.forwardRef((props, ref) => {
         if (props.closable) {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
 
+            const closeButtonIconProps = mergeProps(
+                {
+                    className: cx('closeButtonIcon'),
+                    'aria-hidden': true
+                },
+                ptm('closeButtonIcon')
+            );
+
+            const icon = props.closeIcon || <TimesIcon {...closeButtonIconProps} />;
+            const headerCloseIcon = IconUtils.getJSXIcon(icon, { ...closeButtonIconProps }, { props });
+
+            const closeButtonProps = mergeProps(
+                {
+                    ref: closeRef,
+                    type: 'button',
+                    className: cx('closeButton'),
+                    'aria-label': ariaLabel,
+                    onClick: onClose
+                },
+                ptm('closeButton')
+            );
+
             return (
-                <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={ariaLabel} onClick={onClose}>
-                    <span className="p-dialog-header-close-icon pi pi-times" aria-hidden="true"></span>
+                <button {...closeButtonProps}>
+                    {headerCloseIcon}
                     <Ripple />
                 </button>
             );
@@ -367,15 +437,35 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createMaximizeIcon = () => {
-        const iconClassName = classNames('p-dialog-header-maximize-icon pi', {
-            'pi-window-maximize': !maximized,
-            'pi-window-minimize': maximized
-        });
+        let icon;
+        const maximizableIconProps = mergeProps(
+            {
+                className: cx('maximizableIcon')
+            },
+            ptm('maximizableIcon')
+        );
+
+        if (!maximized) {
+            icon = props.maximizeIcon || <WindowMaximizeIcon {...maximizableIconProps} />;
+        } else {
+            icon = props.minimizeIcon || <WindowMinimizeIcon {...maximizableIconProps} />;
+        }
+
+        const toggleIcon = IconUtils.getJSXIcon(icon, maximizableIconProps, { props });
 
         if (props.maximizable) {
+            const maximizableButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: cx('maximizableButton'),
+                    onClick: toggleMaximize
+                },
+                ptm('maximizableButton')
+            );
+
             return (
-                <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={toggleMaximize}>
-                    <span className={iconClassName}></span>
+                <button {...maximizableButtonProps}>
+                    {toggleIcon}
                     <Ripple />
                 </button>
             );
@@ -391,14 +481,36 @@ export const Dialog = React.forwardRef((props, ref) => {
             const icons = ObjectUtils.getJSXElement(props.icons, props);
             const header = ObjectUtils.getJSXElement(props.header, props);
             const headerId = idState + '_header';
-            const headerClassName = classNames('p-dialog-header', props.headerClassName);
+
+            const headerProps = mergeProps(
+                {
+                    ref: headerRef,
+                    style: props.headerStyle,
+                    className: cx('header'),
+                    onMouseDown: onDragStart
+                },
+                ptm('header')
+            );
+
+            const headerTitleProps = mergeProps(
+                {
+                    id: headerId,
+                    className: cx('headerTitle')
+                },
+                ptm('headerTitle')
+            );
+
+            const headerIconsProps = mergeProps(
+                {
+                    className: cx('headerIcons')
+                },
+                ptm('headerIcons')
+            );
 
             return (
-                <div ref={headerRef} style={props.headerStyle} className={headerClassName}>
-                    <div id={headerId} className="p-dialog-title">
-                        {header}
-                    </div>
-                    <div className="p-dialog-header-icons">
+                <div {...headerProps}>
+                    <div {...headerTitleProps}>{header}</div>
+                    <div {...headerIconsProps}>
                         {icons}
                         {maximizeIcon}
                         {closeIcon}
@@ -411,26 +523,33 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createContent = () => {
-        const className = classNames('p-dialog-content', props.contentClassName);
         const contentId = idState + '_content';
 
-        return (
-            <div id={contentId} ref={contentRef} className={className} style={props.contentStyle}>
-                {props.children}
-            </div>
+        const contentProps = mergeProps(
+            {
+                id: contentId,
+                ref: contentRef,
+                style: props.contentStyle,
+                className: cx('content')
+            },
+            ptm('content')
         );
+
+        return <div {...contentProps}>{props.children}</div>;
     };
 
     const createFooter = () => {
         const footer = ObjectUtils.getJSXElement(props.footer, props);
 
-        return (
-            footer && (
-                <div ref={footerRef} className="p-dialog-footer">
-                    {footer}
-                </div>
-            )
+        const footerProps = mergeProps(
+            {
+                ref: footerRef,
+                className: cx('footer')
+            },
+            ptm('footer')
         );
+
+        return footer && <div {...footerProps}>{footer}</div>;
     };
 
     const createResizer = () => {
@@ -441,42 +560,52 @@ export const Dialog = React.forwardRef((props, ref) => {
         return null;
     };
 
-    const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Dialog.defaultProps);
-        const className = classNames('p-dialog p-component', props.className, {
-            'p-dialog-rtl': props.rtl,
-            'p-dialog-maximized': maximized,
-            'p-dialog-default': !maximized,
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
-        });
-        const maskClassName = classNames(
-            'p-dialog-mask',
-            getPositionClass(),
-            {
-                'p-component-overlay p-component-overlay-enter': props.modal,
-                'p-dialog-visible': maskVisibleState,
-                'p-dialog-draggable': props.draggable,
-                'p-dialog-resizable': props.resizable
-            },
-            props.maskClassName
+    const findMessageProperty = (obj) => {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (key === 'message') {
+                    return obj[key];
+                } else if (typeof obj[key] === 'object') {
+                    const result = findMessageProperty(obj[key]);
+
+                    if (result !== undefined) {
+                        return result;
+                    }
+                }
+            }
+        }
+
+        return undefined;
+    };
+
+    const createTemplateElement = ({ maskProps, rootProps, transitionProps }) => {
+        const messageProps = {
+            header: props.header,
+            content: props.message,
+            message: props?.children?.[1]?.props?.children
+        };
+
+        const templateElementProps = { headerRef, contentRef, footerRef, closeRef, hide: onClose, message: messageProps };
+
+        return (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
+                    <div {...rootProps}>{ObjectUtils.getJSXElement(inProps.content, templateElementProps)}</div>
+                </CSSTransition>
+            </div>
         );
+    };
+
+    const createElement = ({ maskProps, rootProps, transitionProps }) => {
         const header = createHeader();
         const content = createContent();
         const footer = createFooter();
         const resizer = createResizer();
 
-        const headerId = idState + '_header';
-        const contentId = idState + '_content';
-        const transitionTimeout = {
-            enter: props.position === 'center' ? 150 : 300,
-            exit: props.position === 'center' ? 150 : 300
-        };
-
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onClick={onMaskClick}>
-                <CSSTransition nodeRef={dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={visibleState} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={dialogRef} id={idState} className={className} style={props.style} onClick={props.onClick} role="dialog" {...otherProps} aria-labelledby={headerId} aria-describedby={contentId} aria-modal={props.modal}>
+            <div {...maskProps}>
+                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
+                    <div {...rootProps}>
                         {header}
                         {content}
                         {footer}
@@ -488,60 +617,68 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     const createDialog = () => {
-        const element = createElement();
+        const headerId = idState + '_header';
+        const contentId = idState + '_content';
 
-        return <Portal element={element} appendTo={props.appendTo} visible />;
+        const transitionTimeout = {
+            enter: props.position === 'center' ? 150 : 300,
+            exit: props.position === 'center' ? 150 : 300
+        };
+
+        const maskProps = mergeProps(
+            {
+                ref: maskRef,
+                style: sx('mask'),
+                className: cx('mask'),
+                onPointerUp: onMaskPointerUp
+            },
+            ptm('mask')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: dialogRef,
+                id: idState,
+                className: cx('root', { props, maximized, context }),
+                style: props.style,
+                onClick: props.onClick,
+                role: 'dialog',
+                'aria-labelledby': headerId,
+                'aria-describedby': contentId,
+                'aria-modal': props.modal,
+                onPointerDown: onDialogPointerDown
+            },
+            DialogBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: transitionTimeout,
+                in: visibleState,
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: onEnter,
+                onEntered: onEntered,
+                onExiting: onExiting,
+                onExited: onExited
+            },
+            ptm('transition')
+        );
+
+        if (inProps?.content) {
+            const templateElement = createTemplateElement({ maskProps, rootProps, transitionProps });
+
+            return <Portal element={templateElement} appendTo={props.appendTo} visible />;
+        } else {
+            const element = createElement({ maskProps, rootProps, transitionProps });
+
+            return <Portal element={element} appendTo={props.appendTo} visible />;
+        }
     };
 
     return maskVisibleState && createDialog();
 });
 
 Dialog.displayName = 'Dialog';
-Dialog.defaultProps = {
-    __TYPE: 'Dialog',
-    appendTo: null,
-    ariaCloseIconLabel: null,
-    baseZIndex: 0,
-    blockScroll: false,
-    breakpoints: null,
-    className: null,
-    closable: true,
-    closeOnEscape: true,
-    contentClassName: null,
-    contentStyle: null,
-    dismissableMask: false,
-    draggable: true,
-    focusOnShow: true,
-    footer: null,
-    header: null,
-    headerClassName: null,
-    headerStyle: null,
-    icons: null,
-    id: null,
-    keepInViewport: true,
-    maskClassName: null,
-    maskStyle: null,
-    maximizable: false,
-    maximized: false,
-    minX: 0,
-    minY: 0,
-    modal: true,
-    onClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragStart: null,
-    onHide: null,
-    onMaskClick: null,
-    onMaximize: null,
-    onResize: null,
-    onResizeEnd: null,
-    onResizeStart: null,
-    onShow: null,
-    position: 'center',
-    resizable: true,
-    rtl: false,
-    showHeader: true,
-    style: null,
-    transitionOptions: null,
-    visible: false
-};

@@ -1,13 +1,35 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const FooterCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
+    const mergeProps = useMergeProps();
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
-    const getColumnProp = (prop) => {
-        return props.column.props[prop];
+    const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps();
+        const columnMetaData = {
+            props: cProps,
+            parent: props.metaData,
+            hostName: props.hostName,
+            state: {
+                styleObject: styleObjectState
+            },
+            context: {
+                index: props.index,
+                size: props.metaData.props.size,
+                showGridlines: props.metaData.props.showGridlines
+            }
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
     };
+
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
 
     const getStyle = () => {
         const footerStyle = getColumnProp('footerStyle');
@@ -57,14 +79,21 @@ export const FooterCell = React.memo((props) => {
     const align = getColumnProp('align');
     const colSpan = getColumnProp('colSpan');
     const rowSpan = getColumnProp('rowSpan');
-    const className = classNames(getColumnProp('footerClassName'), getColumnProp('className'), {
-        'p-frozen-column': getColumnProp('frozen'),
-        [`p-align-${align}`]: !!align
-    });
     const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
+    const footerCellProps = mergeProps(
+        {
+            style,
+            className: classNames(getColumnProp('footerClassName'), getColumnProp('className'), cx('footerCell', { getColumnProp, align })),
+            role: 'cell',
+            colSpan,
+            rowSpan
+        },
+        getColumnPTOptions('root'),
+        getColumnPTOptions('footerCell')
+    );
 
     return (
-        <td ref={elementRef} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>
+        <td ref={elementRef} {...footerCellProps}>
             {content}
         </td>
     );

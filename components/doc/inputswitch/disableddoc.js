@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 
 export function DisabledDoc(props) {
     const code = {
@@ -9,22 +8,26 @@ export function DisabledDoc(props) {
 <InputSwitch disabled />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function DisabledDemo() {
     return (
-        <InputSwitch disabled />
+        <div className="card flex justify-content-center">
+            <InputSwitch disabled />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function DisabledDemo() {
     return (
-        <InputSwitch disabled />
+        <div className="card flex justify-content-center">
+            <InputSwitch disabled />
+        </div>
     );
 }
         `
@@ -34,7 +37,7 @@ export default function DisabledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

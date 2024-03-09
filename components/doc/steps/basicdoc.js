@@ -1,107 +1,70 @@
-import { Steps } from '../../lib/steps/Steps';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Steps } from '@/components/lib/steps/Steps';
 
 export function BasicDoc(props) {
     const items = [
         {
-            label: 'Personal',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
-            }
+            label: 'Personal Info'
         },
         {
-            label: 'Seat',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
-            }
+            label: 'Reservation'
         },
         {
-            label: 'Payment',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
-            }
-        },
-        {
-            label: 'Confirmation',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
-            }
+            label: 'Review'
         }
     ];
+
     const code = {
         basic: `
 <Steps model={items} />
 `,
         javascript: `
+import React from 'react'; 
 import { Steps } from 'primereact/steps';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const items = [
         {
-            label: 'Personal',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
-            }
+            label: 'Personal Info'
         },
         {
-            label: 'Seat',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
-            }
+            label: 'Reservation'
         },
         {
-            label: 'Payment',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
-            }
-        },
-        {
-            label: 'Confirmation',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
-            }
+            label: 'Review'
         }
     ];
 
     return (
-        <Steps model={items} />
+        <div className="card">
+            <Steps model={items} />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Steps } from 'primereact/steps';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function BasicDoc() {
-    const items = [
+export default function BasicDemo() {
+    const items: MenuItem[] = [
         {
-            label: 'Personal',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'First Step', detail: event.item.label });
-            }
+            label: 'Personal Info'
         },
         {
-            label: 'Seat',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Seat Selection', detail: event.item.label });
-            }
+            label: 'Reservation'
         },
         {
-            label: 'Payment',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
-            }
-        },
-        {
-            label: 'Confirmation',
-            command: (event) => {
-                toast.current.show({ severity: 'info', summary: 'Last Step', detail: event.item.label });
-            }
+            label: 'Review'
         }
     ];
 
     return (
-        <Steps model={items} />
+        <div className="card">
+            <Steps model={items} />
+        </div>
     )
 }
         `
@@ -110,9 +73,11 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>TabMenu requires a collection of menuitems as its model.</p>
+                <p>
+                    Steps requires a collection of menuitems as its <i>model</i>.
+                </p>
             </DocSectionText>
-            <div className="card ">
+            <div className="card">
                 <Steps model={items} />
             </div>
             <DocSectionCode code={code} />

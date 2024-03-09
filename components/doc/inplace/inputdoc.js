@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useState } from 'react';
+import { Inplace, InplaceContent, InplaceDisplay } from '../../../components/lib/inplace/Inplace';
 import { InputText } from '../../../components/lib/inputtext/InputText';
 
 export function InputDoc(props) {
@@ -21,7 +21,7 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
-export const InputDoc = () => {
+export default function InputDemo() {
     const [text, setText] = useState('');
 
     return (
@@ -41,7 +41,7 @@ import React, { useState } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
 
-export const InputDoc = () => {
+export default function InputDemo() {
     const [text, setText] = useState<string>('');
 
     return (
@@ -61,7 +61,9 @@ export const InputDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Input Demo Content.</p>
+                <p>
+                    Inplace can be used within a form to display a value as read only before making it editable. The <i>closable</i> property adds a close button next to the content to switch back to read only mode.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Inplace closable>

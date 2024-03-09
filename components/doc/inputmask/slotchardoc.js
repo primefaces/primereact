@@ -1,36 +1,40 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
 import { useState } from 'react';
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function SlotCharDoc(props) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     const code = {
         basic: `
-<InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy />
+<InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     return (
-        <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy/>
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy"/>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
+import React, { useState } from "react";
+import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
-    const [value, setValue] = useState<string>('');
+    const [value, setValue] = useState<string | undefined>();
 
     return (
-        <InputMask value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy/>
+        <div className="card flex justify-content-center">
+            <InputMask value={value} onChange={(e: InputMaskChangeEvent) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy"/>
+        </div>
     )
 }
         `
@@ -40,7 +44,7 @@ export default function SlotCharDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Default placeholder for a mask is underscore and it can be customized using <i>slotChart</i> option.
+                    Default placeholder for a mask is underscore that can be customized using <i>slotChar</i> property.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

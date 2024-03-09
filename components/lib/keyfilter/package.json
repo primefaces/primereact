@@ -2,5 +2,6 @@
     "main": "./keyfilter.cjs.js",
     "module": "./keyfilter.esm.js",
     "unpkg": "./keyfilter.min.js",
-    "types": "./keyfilteroptions.d.ts"
+    "types": "./keyfilteroptions.d.ts",
+    "sideEffects": false
 }

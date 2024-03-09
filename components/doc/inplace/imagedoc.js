@@ -1,23 +1,19 @@
-import React from 'react';
-import getConfig from 'next/config';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Inplace, InplaceContent, InplaceDisplay } from '../../../components/lib/inplace/Inplace';
 
 export function ImageDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const code = {
         basic: `
 <Inplace>
     <InplaceDisplay>
         <span className="inline-flex align-items-center">
-            <span className="pi pi-search"></span>
+            <span className="pi pi-image"></span>
             <span className="ml-2">View Picture</span>
         </span>
     </InplaceDisplay>
     <InplaceContent>
-        <img alt="Nature" src="images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+        <img className="w-full" alt="Nature" src="/images/nature/nature1.jpg" />
     </InplaceContent>
 </Inplace>
         `,
@@ -25,18 +21,17 @@ export function ImageDoc(props) {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export const ImageDoc = () => {
-
+export default function ImageDemo() {
     return (
         <Inplace>
             <InplaceDisplay>
                 <span className="inline-flex align-items-center">
-                    <span className="pi pi-search"></span>
+                    <span className="pi pi-image"></span>
                     <span className="ml-2">View Picture</span>
                 </span>
             </InplaceDisplay>
             <InplaceContent>
-                <img alt="Nature" src="images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                <img className="w-full" alt="Nature" src="https://primefaces.org/cdn/primereact/images/nature/nature1.jpg" />
             </InplaceContent>
         </Inplace>
     );
@@ -46,18 +41,17 @@ export const ImageDoc = () => {
 import React from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 
-export const ImageDoc = () => {
-
+export default function ImageDemo() {
     return (
         <Inplace>
             <InplaceDisplay>
                 <span className="inline-flex align-items-center">
-                    <span className="pi pi-search"></span>
+                    <span className="pi pi-image"></span>
                     <span className="ml-2">View Picture</span>
                 </span>
             </InplaceDisplay>
             <InplaceContent>
-                <img alt="Nature" src="images/nature/nature1.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                <img className="w-full" alt="Nature" src="https://primefaces.org/cdn/primereact/images/nature/nature1.jpg" />
             </InplaceContent>
         </Inplace>
     );
@@ -68,18 +62,18 @@ export const ImageDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Image Demo Content.</p>
+                <p>Any content such as an image can be placed inside an Inplace.</p>
             </DocSectionText>
             <div className="card">
                 <Inplace>
                     <InplaceDisplay>
                         <span className="inline-flex align-items-center">
-                            <span className="pi pi-search"></span>
+                            <span className="pi pi-image"></span>
                             <span className="ml-2">View Picture</span>
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>
-                        <img alt="Nature" src={`${contextPath}/images/nature/nature1.jpg`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} />
+                        <img className="w-full" alt="Nature" src="https://primefaces.org/cdn/primereact/images/nature/nature1.jpg" />
                     </InplaceContent>
                 </Inplace>
             </div>

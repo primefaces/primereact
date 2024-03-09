@@ -1,10 +1,18 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { FieldsetBase } from './FieldsetBase';
 
-export const Fieldset = React.forwardRef((props, ref) => {
+export const Fieldset = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = FieldsetBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
@@ -12,6 +20,16 @@ export const Fieldset = React.forwardRef((props, ref) => {
     const contentRef = React.useRef(null);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
+
+    const { ptm, cx, isUnstyled } = FieldsetBase.setMetaData({
+        props,
+        state: {
+            id: idState,
+            collapsed: collapsed
+        }
+    });
+
+    useHandleStyle(FieldsetBase.css.styles, isUnstyled, { name: 'fieldset' });
 
     const toggle = (event) => {
         if (props.toggleable) {
@@ -50,11 +68,47 @@ export const Fieldset = React.forwardRef((props, ref) => {
         }
     });
 
+    const onKeyDown = (event) => {
+        if (event.code === 'Enter' || event.code === 'Space') {
+            toggle(event);
+            event.preventDefault();
+        }
+    };
+
     const createContent = () => {
+        const contentProps = mergeProps(
+            {
+                className: cx('content')
+            },
+            ptm('content')
+        );
+
+        const toggleableProps = mergeProps(
+            {
+                ref: contentRef,
+                id: contentId,
+                role: 'region',
+                'aria-labelledby': headerId,
+                className: cx('toggleableContent')
+            },
+            ptm('toggleableContent')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: !collapsed,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
-                <div ref={contentRef} id={contentId} className="p-toggleable-content" aria-hidden={collapsed} role="region" aria-labelledby={headerId}>
-                    <div className="p-fieldset-content">{props.children}</div>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
+                <div {...toggleableProps}>
+                    <div {...contentProps}>{props.children}</div>
                 </div>
             </CSSTransition>
         );
@@ -62,46 +116,75 @@ export const Fieldset = React.forwardRef((props, ref) => {
 
     const createToggleIcon = () => {
         if (props.toggleable) {
-            const className = classNames('p-fieldset-toggler pi', {
-                'pi-plus': collapsed,
-                'pi-minus': !collapsed
-            });
+            const togglerIconProps = mergeProps(
+                {
+                    className: cx('togglericon')
+                },
+                ptm('togglericon')
+            );
 
-            return <span className={className}></span>;
+            const icon = collapsed ? props.expandIcon || <PlusIcon {...togglerIconProps} /> : props.collapseIcon || <MinusIcon {...togglerIconProps} />;
+            const toggleIcon = IconUtils.getJSXIcon(icon, togglerIconProps, { props });
+
+            return toggleIcon;
         }
 
         return null;
     };
 
     const createLegendContent = () => {
+        const legendTextProps = mergeProps(
+            {
+                className: cx('legendTitle')
+            },
+            ptm('legendTitle')
+        );
+
+        const togglerProps = mergeProps(
+            {
+                id: headerId,
+                role: 'button',
+                'aria-expanded': !collapsed,
+                'aria-controls': contentId,
+                onKeyDown,
+                onClick: toggle,
+                'aria-label': props.legend,
+                tabIndex: 0
+            },
+            ptm('toggler')
+        );
+
         if (props.toggleable) {
             const toggleIcon = createToggleIcon();
 
             return (
-                <a href={'#' + contentId} aria-controls={contentId} id={headerId} aria-expanded={!collapsed} tabIndex={props.toggleable ? null : -1}>
+                <a {...togglerProps}>
                     {toggleIcon}
-                    <span className="p-fieldset-legend-text">{props.legend}</span>
+                    <span {...legendTextProps}>{props.legend}</span>
                     <Ripple />
                 </a>
             );
         }
 
         return (
-            <span className="p-fieldset-legend-text" id={headerId}>
+            <span {...legendTextProps} id={headerId}>
                 {props.legend}
             </span>
         );
     };
 
     const createLegend = () => {
+        const legendProps = mergeProps(
+            {
+                className: cx('legend')
+            },
+            ptm('legend')
+        );
+
         if (props.legend != null || props.toggleable) {
             const legendContent = createLegendContent();
 
-            return (
-                <legend className="p-fieldset-legend p-unselectable-text" onClick={toggle}>
-                    {legendContent}
-                </legend>
-            );
+            return <legend {...legendProps}>{legendContent}</legend>;
         }
     };
 
@@ -111,19 +194,23 @@ export const Fieldset = React.forwardRef((props, ref) => {
         getContent: () => contentRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Fieldset.defaultProps);
-    const className = classNames(
-        'p-fieldset p-component',
+    const rootProps = mergeProps(
         {
-            'p-fieldset-toggleable': props.toggleable
+            id: idState,
+            ref: elementRef,
+            style: props.style,
+            className: classNames(props.className, cx('root')),
+            onClick: props.onClick
         },
-        props.className
+        FieldsetBase.getOtherProps(props),
+        ptm('root')
     );
+
     const legend = createLegend();
     const content = createContent();
 
     return (
-        <fieldset id={idState} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={props.onClick}>
+        <fieldset {...rootProps}>
             {legend}
             {content}
         </fieldset>
@@ -131,17 +218,3 @@ export const Fieldset = React.forwardRef((props, ref) => {
 });
 
 Fieldset.displayName = 'Fieldset';
-Fieldset.defaultProps = {
-    __TYPE: 'Fieldset',
-    id: null,
-    legend: null,
-    className: null,
-    style: null,
-    toggleable: null,
-    collapsed: null,
-    transitionOptions: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    onClick: null
-};

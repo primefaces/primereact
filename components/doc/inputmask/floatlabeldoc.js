@@ -1,45 +1,49 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
 import { useState } from 'react';
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function FloatLabelDoc(props) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     const code = {
         basic: `
 <span className="p-float-label">
-    <InputMask id="inputmask" value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" />
-    <label htmlFor="inputmask">InputMask</label>
+    <InputMask id="ssn_input" value={value} onChange={(e) => setValue(e.target.value)} mask="999-99-9999" />
+    <label htmlFor="ssn_input">SSN</label>
 </span>
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function FloatLabelDemo() {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     return (
-        <span className="p-float-label">
-            <InputMask id="inputmask" value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" />
-            <label htmlFor="inputmask">InputMask</label>
-        </span>
+        <div className="card flex justify-content-center">
+            <span className="p-float-label">
+                <InputMask id="ssn_input" value={value} onChange={(e) => setValue(e.target.value)} mask="999-99-9999" />
+                <label htmlFor="ssn_input">SSN</label>
+            </span>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
+import React, { useState } from "react";
+import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
 export default function FloatLabelDemo() {
-    const [value, setValue] = useState<string>('');
+    const [value, setValue] = useState<string | undefined>();
 
     return (
-        <span className="p-float-label">
-            <InputMask id="inputmask" value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="99-999999" />
-            <label htmlFor="inputmask">InputMask</label>
-        </span>
+        <div className="card flex justify-content-center">
+            <span className="p-float-label">
+                <InputMask id="ssn_input" value={value} onChange={(e: InputMaskChangeEvent) => setValue(e.target.value)} mask="999-99-9999" />
+                <label htmlFor="ssn_input">SSN</label>
+            </span>
+        </div>
     )
 }
         `
@@ -48,14 +52,12 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
-                </p>
+                <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className="p-float-label">
-                    <InputMask id="inputmask" value={value} onChange={(e) => setValue(e.target.value)} mask="99-999999" />
-                    <label htmlFor="inputmask">InputMask</label>
+                    <InputMask id="ssn_input" value={value} onChange={(e) => setValue(e.target.value)} mask="999-99-9999" />
+                    <label htmlFor="ssn_input">SSN</label>
                 </span>
             </div>
             <DocSectionCode code={code} />

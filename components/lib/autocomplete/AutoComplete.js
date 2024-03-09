@@ -1,19 +1,41 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { SpinnerIcon } from '../icons/spinner';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
 
 export const AutoComplete = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = AutoCompleteBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);
         const [searchingState, setSearchingState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+
+        const metaData = {
+            props,
+            state: {
+                id: idState,
+                searching: searchingState,
+                focused: focusedState,
+                overlayVisible: overlayVisibleState
+            }
+        };
+
+        const { ptm, cx, sx, isUnstyled } = AutoCompleteBase.setMetaData(metaData);
+
+        useHandleStyle(AutoCompleteBase.css.styles, isUnstyled, { name: 'autocomplete' });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -21,7 +43,6 @@ export const AutoComplete = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const timeout = React.useRef(null);
         const selectedItem = React.useRef(null);
-
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
@@ -87,13 +108,11 @@ export const AutoComplete = React.memo(
             if (props.multiple) {
                 inputRef.current.value = '';
 
-                if (!isSelected(option)) {
-                    // allows empty value/selectionlimit and within sectionlimit
-                    if (!props.value || !props.selectionLimit || props.value.length < props.selectionLimit) {
-                        const newValue = props.value ? [...props.value, option] : [option];
+                // allows empty value/selectionlimit and within sectionlimit
+                if (!isSelected(option) && isAllowMoreValues()) {
+                    const newValue = props.value ? [...props.value, option] : [option];
 
-                        updateModel(event, newValue);
-                    }
+                    updateModel(event, newValue);
                 }
             } else {
                 updateInputField(option);
@@ -123,8 +142,12 @@ export const AutoComplete = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: idState,
@@ -133,11 +156,11 @@ export const AutoComplete = React.memo(
                 });
             }
 
-            selectedItem.current = value;
+            selectedItem.current = ObjectUtils.isNotEmpty(value) ? value : null;
         };
 
         const formatValue = (value) => {
-            if (value) {
+            if (ObjectUtils.isNotEmpty(value)) {
                 if (typeof value === 'string') {
                     return value;
                 } else if (props.selectedItemTemplate) {
@@ -170,7 +193,8 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -178,7 +202,10 @@ export const AutoComplete = React.memo(
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
                 const element = getScrollableElement().firstChild.firstChild;
 
-                DomHandler.addClass(element, 'p-highlight');
+                if (element) {
+                    !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
+                    element.setAttribute('data-p-highlight', true);
+                }
             }
         };
 
@@ -200,7 +227,7 @@ export const AutoComplete = React.memo(
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
 
-            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const onPanelClick = (event) => {
@@ -242,7 +269,7 @@ export const AutoComplete = React.memo(
 
         const onInputKeyDown = (event) => {
             if (overlayVisibleState) {
-                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
                 switch (event.which) {
                     //down
@@ -251,19 +278,22 @@ export const AutoComplete = React.memo(
                             let nextElement = findNextItem(highlightItem);
 
                             if (nextElement) {
-                                DomHandler.addClass(nextElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                !isUnstyled() && DomHandler.addClass(nextElement, 'p-highlight');
+                                nextElement.setAttribute('data-p-highlight', true);
+                                !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', false);
                                 DomHandler.scrollInView(getScrollableElement(), nextElement);
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
 
-                            if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
+                            if (DomHandler.getAttribute(highlightItem, 'data-pc-section') === 'itemgroup') {
                                 highlightItem = findNextItem(highlightItem);
                             }
 
                             if (highlightItem) {
-                                DomHandler.addClass(highlightItem, 'p-highlight');
+                                !isUnstyled() && DomHandler.addClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', true);
                             }
                         }
 
@@ -276,8 +306,10 @@ export const AutoComplete = React.memo(
                             let previousElement = findPrevItem(highlightItem);
 
                             if (previousElement) {
-                                DomHandler.addClass(previousElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                !isUnstyled() && DomHandler.addClass(previousElement, 'p-highlight');
+                                previousElement.setAttribute('data-p-highlight', true);
+                                !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', false);
                                 DomHandler.scrollInView(getScrollableElement(), previousElement);
                             }
                         }
@@ -347,20 +379,20 @@ export const AutoComplete = React.memo(
 
                 selectItem(event, getOptionGroupChildren(optionGroup)[item.dataset.index]);
             } else {
-                selectItem(event, props.suggestions[DomHandler.index(item)]);
+                selectItem(event, props.suggestions[item.getAttribute('index')]);
             }
         };
 
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-autocomplete-item-group') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-pc-section') === 'itemgroup' ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             let prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-autocomplete-item-group') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-pc-section') === 'itemgroup' ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onInputFocus = (event) => {
@@ -369,11 +401,17 @@ export const AutoComplete = React.memo(
         };
 
         const forceItemSelection = (event) => {
-            const inputValue = event.target.value.trim();
+            if (props.multiple) {
+                inputRef.current.value = '';
+
+                return;
+            }
+
+            const inputValue = ObjectUtils.trim(event.target.value);
             const item = (props.suggestions || []).find((it) => {
                 const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
 
-                return value && inputValue === value.trim();
+                return value && inputValue === ObjectUtils.trim(value);
             });
 
             if (item) {
@@ -404,12 +442,14 @@ export const AutoComplete = React.memo(
 
         const onMultiInputFocus = (event) => {
             onInputFocus(event);
-            DomHandler.addClass(multiContainerRef.current, 'p-focus');
+            !isUnstyled() && DomHandler.addClass(multiContainerRef.current, 'p-focus');
+            multiContainerRef.current.setAttribute('data-p-focus', true);
         };
 
         const onMultiInputBlur = (event) => {
             onInputBlur(event);
-            DomHandler.removeClass(multiContainerRef.current, 'p-focus');
+            !isUnstyled() && DomHandler.removeClass(multiContainerRef.current, 'p-focus');
+            multiContainerRef.current.setAttribute('data-p-focus', false);
         };
 
         const isSelected = (val) => {
@@ -421,7 +461,7 @@ export const AutoComplete = React.memo(
         };
 
         const getScrollableElement = () => {
-            return virtualScrollerRef.current ? overlayRef.current.firstChild : overlayRef.current;
+            return overlayRef.current.firstChild;
         };
 
         const getOptionGroupLabel = (optionGroup) => {
@@ -430,6 +470,10 @@ export const AutoComplete = React.memo(
 
         const getOptionGroupChildren = (optionGroup) => {
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
+        };
+
+        const isAllowMoreValues = () => {
+            return !props.value || !props.selectionLimit || props.value.length < props.selectionLimit;
         };
 
         React.useEffect(() => {
@@ -444,6 +488,8 @@ export const AutoComplete = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(inputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {
@@ -476,6 +522,7 @@ export const AutoComplete = React.memo(
             search,
             show,
             hide,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
@@ -485,9 +532,6 @@ export const AutoComplete = React.memo(
         const createSimpleAutoComplete = () => {
             const value = formatValue(props.value);
             const ariaControls = overlayVisibleState ? idState + '_list' : null;
-            const className = classNames('p-autocomplete-input', props.inputClassName, {
-                'p-autocomplete-dd-input': props.dropdown
-            });
 
             return (
                 <InputText
@@ -501,10 +545,11 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    className={className}
+                    className={classNames(props.inputClassName, cx('input'))}
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
+                    required={props.required}
                     disabled={props.disabled}
                     placeholder={props.placeholder}
                     size={props.size}
@@ -520,7 +565,9 @@ export const AutoComplete = React.memo(
                     onContextMenu={props.onContextMenu}
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
+                    pt={ptm('input')}
                     {...ariaProps}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
@@ -529,11 +576,32 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
+                    const removeTokenIconProps = mergeProps(
+                        {
+                            className: cx('removeTokenIcon'),
+                            onClick: (e) => removeItem(e, index)
+                        },
+                        ptm('removeTokenIcon')
+                    );
+                    const icon = props.removeTokenIcon || <TimesCircleIcon {...removeTokenIconProps} />;
+                    const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...removeTokenIconProps }, { props });
+                    const tokenProps = mergeProps(
+                        {
+                            className: cx('token')
+                        },
+                        ptm('token')
+                    );
+                    const tokenLabelProps = mergeProps(
+                        {
+                            className: cx('tokenLabel')
+                        },
+                        ptm('tokenLabel')
+                    );
 
                     return (
-                        <li key={key} className="p-autocomplete-token p-highlight">
-                            <span className="p-autocomplete-token-label">{formatValue(val)}</span>
-                            {!props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) }, { props })}
+                        <li key={key} {...tokenProps}>
+                            <span {...tokenLabelProps}>{formatValue(val)}</span>
+                            {removeTokenIcon}
                         </li>
                     );
                 });
@@ -542,50 +610,72 @@ export const AutoComplete = React.memo(
             return null;
         };
 
-        const createMultiInput = () => {
+        const createMultiInput = (allowMoreValues) => {
             const ariaControls = overlayVisibleState ? idState + '_list' : null;
+            const inputTokenProps = mergeProps(
+                {
+                    className: cx('inputToken')
+                },
+                ptm('inputToken')
+            );
+            const inputProps = mergeProps(
+                {
+                    id: props.inputId,
+                    ref: inputRef,
+                    'aria-autocomplete': 'list',
+                    'aria-controls': ariaControls,
+                    'aria-expanded': overlayVisibleState,
+                    'aria-haspopup': 'listbox',
+                    autoComplete: 'off',
+                    className: props.inputClassName,
+                    disabled: props.disabled,
+                    maxLength: props.maxLength,
+                    name: props.name,
+                    onBlur: onMultiInputBlur,
+                    onChange: allowMoreValues ? onInputChange : undefined,
+                    onFocus: onMultiInputFocus,
+                    onKeyDown: allowMoreValues ? onInputKeyDown : undefined,
+                    onKeyPress: props.onKeyPress,
+                    onKeyUp: props.onKeyUp,
+                    placeholder: allowMoreValues ? props.placeholder : undefined,
+                    readOnly: props.readOnly || !allowMoreValues,
+                    required: props.required,
+                    role: 'combobox',
+                    style: props.inputStyle,
+                    tabIndex: props.tabIndex,
+                    type: props.type,
+                    ...ariaProps
+                },
+                ptm('input')
+            );
 
             return (
-                <li className="p-autocomplete-input-token">
-                    <input
-                        ref={inputRef}
-                        type={props.type}
-                        disabled={props.disabled}
-                        placeholder={props.placeholder}
-                        role="combobox"
-                        aria-autocomplete="list"
-                        aria-controls={ariaControls}
-                        aria-haspopup="listbox"
-                        aria-expanded={overlayVisibleState}
-                        autoComplete="off"
-                        readOnly={props.readOnly}
-                        tabIndex={props.tabIndex}
-                        onChange={onInputChange}
-                        id={props.inputId}
-                        name={props.name}
-                        style={props.inputStyle}
-                        className={props.inputClassName}
-                        maxLength={props.maxLength}
-                        onKeyUp={props.onKeyUp}
-                        onKeyDown={onInputKeyDown}
-                        onKeyPress={props.onKeyPress}
-                        onFocus={onMultiInputFocus}
-                        onBlur={onMultiInputBlur}
-                        {...ariaProps}
-                    />
+                <li {...inputTokenProps}>
+                    <input {...inputProps} />
                 </li>
             );
         };
 
         const createMultipleAutoComplete = () => {
-            const className = classNames('p-autocomplete-multiple-container p-component p-inputtext', {
-                'p-disabled': props.disabled
-            });
+            const allowMoreValues = isAllowMoreValues();
             const tokens = createChips();
-            const input = createMultiInput();
+            const input = createMultiInput(allowMoreValues);
+            const containerProps = mergeProps(
+                {
+                    ref: multiContainerRef,
+                    className: cx('container'),
+                    onClick: allowMoreValues ? onMultiContainerClick : undefined,
+                    onContextMenu: props.onContextMenu,
+                    onMouseDown: props.onMouseDown,
+                    onDoubleClick: props.onDblClick,
+                    'data-p-focus': focusedState,
+                    'data-p-disabled': props.disabled
+                },
+                ptm('container')
+            );
 
             return (
-                <ul ref={multiContainerRef} className={className} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown} onClick={onMultiContainerClick} onDoubleClick={props.onDblClick}>
+                <ul {...containerProps}>
                     {tokens}
                     {input}
                 </ul>
@@ -596,7 +686,18 @@ export const AutoComplete = React.memo(
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
-                return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
+                return (
+                    <Button
+                        type="button"
+                        icon={props.dropdownIcon || <ChevronDownIcon />}
+                        className={cx('dropdownButton')}
+                        disabled={props.disabled}
+                        onClick={onDropdownClick}
+                        aria-label={ariaLabel}
+                        pt={ptm('dropdownButton')}
+                        __parentMetadata={{ parent: metaData }}
+                    />
+                );
             }
 
             return null;
@@ -604,7 +705,16 @@ export const AutoComplete = React.memo(
 
         const createLoader = () => {
             if (searchingState) {
-                return <i className="p-autocomplete-loader pi pi-spinner pi-spin"></i>;
+                const loadingIconProps = mergeProps(
+                    {
+                        className: cx('loadingIcon')
+                    },
+                    ptm('loadingIcon')
+                );
+                const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+                const loaderIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+
+                return loaderIcon;
             }
 
             return null;
@@ -616,29 +726,30 @@ export const AutoComplete = React.memo(
 
         const listId = idState + '_list';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
+        const otherProps = AutoCompleteBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-autocomplete p-component p-inputwrapper',
-            {
-                'p-autocomplete-dd': props.dropdown,
-                'p-autocomplete-multiple': props.multiple,
-                'p-inputwrapper-filled': props.value,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        );
         const loader = createLoader();
         const input = createInput();
         const dropdown = createDropdown();
+        const rootProps = mergeProps(
+            {
+                id: idState,
+                ref: elementRef,
+                style: props.style,
+                className: classNames(props.className, cx('root', { focusedState }))
+            },
+            otherProps,
+            ptm('root')
+        );
 
         return (
             <>
-                <span ref={elementRef} id={idState} style={props.style} className={className} {...otherProps}>
+                <span {...rootProps}>
                     {input}
                     {loader}
                     {dropdown}
                     <AutoCompletePanel
+                        hostName="AutoComplete"
                         ref={overlayRef}
                         virtualScrollerRef={virtualScrollerRef}
                         {...props}
@@ -654,77 +765,15 @@ export const AutoComplete = React.memo(
                         onEntered={onOverlayEntered}
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
+                        ptm={ptm}
+                        cx={cx}
+                        sx={sx}
                     />
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 AutoComplete.displayName = 'AutoComplete';
-AutoComplete.defaultProps = {
-    __TYPE: 'AutoComplete',
-    id: null,
-    appendTo: null,
-    autoFocus: false,
-    autoHighlight: false,
-    className: null,
-    completeMethod: null,
-    delay: 300,
-    disabled: false,
-    dropdown: false,
-    dropdownAriaLabel: null,
-    dropdownAutoFocus: true,
-    dropdownIcon: 'pi pi-chevron-down',
-    dropdownMode: 'blank',
-    emptyMessage: null,
-    field: null,
-    forceSelection: false,
-    inputClassName: null,
-    inputId: null,
-    inputRef: null,
-    inputStyle: null,
-    itemTemplate: null,
-    maxLength: null,
-    minLength: 1,
-    multiple: false,
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onClear: null,
-    onClick: null,
-    onContextMenu: null,
-    onDblClick: null,
-    onDropdownClick: null,
-    onFocus: null,
-    onHide: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onMouseDown: null,
-    onSelect: null,
-    onShow: null,
-    onUnselect: null,
-    optionGroupChildren: null,
-    optionGroupLabel: null,
-    optionGroupTemplate: null,
-    panelClassName: null,
-    panelStyle: null,
-    placeholder: null,
-    readOnly: false,
-    removeIcon: 'pi pi-times-circle',
-    scrollHeight: '200px',
-    selectedItemTemplate: null,
-    selectionLimit: null,
-    showEmptyMessage: false,
-    size: null,
-    style: null,
-    suggestions: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    transitionOptions: null,
-    type: 'text',
-    value: null,
-    virtualScrollerOptions: null
-};

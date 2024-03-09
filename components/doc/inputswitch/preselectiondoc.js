@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { useState } from 'react';
-import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function PreselectionDoc(props) {
     const [checked, setChecked] = useState(true);
@@ -11,26 +11,30 @@ export function PreselectionDoc(props) {
 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function PreselectionDemo() {
     const [checked, setChecked] = useState(true);
 
     return (
-        <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { InputSwitch, InputSwitchChangeParams } from "primereact/inputswitch";
+import React, { useState } from "react";
+import { InputSwitch, InputSwitchChangeEvent } from "primereact/inputswitch";
 
 export default function PreselectionDemo() {
     const [checked, setChecked] = useState<boolean>(true);
 
     return (
-        <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeEvent) => setChecked(e.value)} />
+        </div>
     );
 }
         `
@@ -40,7 +44,7 @@ export default function PreselectionDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Enabling <i>checked</i> property displays the component as active.
+                    Enabling <i>checked</i> property displays the component as active initially.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

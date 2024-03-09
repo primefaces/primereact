@@ -1,9 +1,27 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
+import { InfoCircleIcon } from '../icons/infocircle';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { MessageBase } from './MessageBase';
 
 export const Message = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = MessageBase.getProps(inProps, context);
+
         const elementRef = React.useRef(null);
+
+        const { ptm, cx, isUnstyled } = MessageBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(MessageBase.css.styles, isUnstyled, { name: 'message' });
 
         const createContent = () => {
             if (props.content) {
@@ -11,23 +29,48 @@ export const Message = React.memo(
             }
 
             const text = ObjectUtils.getJSXElement(props.text, props);
-            let iconValue = props.icon;
 
-            if (!iconValue) {
-                iconValue = classNames('pi', {
-                    'pi-info-circle': props.severity === 'info',
-                    'pi-exclamation-triangle': props.severity === 'warn',
-                    'pi-times-circle': props.severity === 'error',
-                    'pi-check': props.severity === 'success'
-                });
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            );
+
+            let icon = props.icon;
+
+            if (!icon) {
+                switch (props.severity) {
+                    case 'info':
+                        icon = <InfoCircleIcon {...iconProps} />;
+                        break;
+                    case 'warn':
+                        icon = <ExclamationTriangleIcon {...iconProps} />;
+                        break;
+                    case 'error':
+                        icon = <TimesCircleIcon {...iconProps} />;
+                        break;
+                    case 'success':
+                        icon = <CheckIcon {...iconProps} />;
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            const icon = IconUtils.getJSXIcon(iconValue, { className: 'p-inline-message-icon' }, { props });
+            const messageIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
+            const textProps = mergeProps(
+                {
+                    className: cx('text')
+                },
+                ptm('text')
+            );
 
             return (
                 <>
-                    {icon}
-                    <span className="p-inline-message-text">{text}</span>
+                    {messageIcon}
+                    <span {...textProps}>{text}</span>
                 </>
             );
         };
@@ -37,22 +80,22 @@ export const Message = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Message.defaultProps);
-        const className = classNames(
-            'p-inline-message p-component',
-            {
-                'p-inline-message-info': props.severity === 'info',
-                'p-inline-message-warn': props.severity === 'warn',
-                'p-inline-message-error': props.severity === 'error',
-                'p-inline-message-success': props.severity === 'success',
-                'p-inline-message-icon-only': !props.text
-            },
-            props.className
-        );
         const content = createContent();
 
+        const rootProps = mergeProps(
+            {
+                className: classNames(props.className, cx('root')),
+                style: props.style,
+                role: 'alert',
+                'aria-live': 'polite',
+                'aria-atomic': 'true'
+            },
+            MessageBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
+            <div id={props.id} ref={elementRef} {...rootProps}>
                 {content}
             </div>
         );
@@ -60,13 +103,3 @@ export const Message = React.memo(
 );
 
 Message.displayName = 'Message';
-Message.defaultProps = {
-    __TYPE: 'Message',
-    id: null,
-    className: null,
-    style: null,
-    text: null,
-    icon: null,
-    severity: 'info',
-    content: null
-};

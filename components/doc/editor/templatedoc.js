@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Editor } from '@/components/lib/editor/Editor';
 import { useState } from 'react';
-import { Editor } from '../../lib/editor/Editor';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function TemplateDoc(props) {
     const [text, setText] = useState('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
@@ -20,10 +20,10 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
+<Editor value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 
 export default function TemplateDemo() {
@@ -39,14 +39,18 @@ export default function TemplateDemo() {
         );
     };
 
+    const header = renderHeader();
+
     return (
-        <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} />
+        <div className="card">
+            <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Editor } from "primereact/editor";
+import React, { useState } from "react";
+import { Editor, EditorTextChangeEvent } from "primereact/editor";
 
 export default function TemplateDemo() {
     const [text, setText] = useState<string>('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
@@ -61,8 +65,12 @@ export default function TemplateDemo() {
         );
     };
 
+    const header = renderHeader();
+
     return (
-        <Editor style={{ height: '320px' }} value={text} onTextChange={(e: EditorTextChangeParams) => setText(e.htmlValue)} headerTemplate={header} />
+        <div className="card">
+            <Editor value={text} onTextChange={(e: EditorTextChangeEvent) => setText(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
+        </div>
     )
 }
         `
@@ -72,13 +80,13 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Toolbar of the editor is customized with the <i>headerTemplate</i> property. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.
+                    Toolbar is customized with the <i>headerTemplate</i> property. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.
                 </p>
             </DocSectionText>
             <div className="card">
-                <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} />
+                <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }} />
         </>
     );
 }

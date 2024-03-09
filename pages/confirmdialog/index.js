@@ -1,13 +1,18 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/confirmdialog/apidoc';
-import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
-import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
-import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
-import { UsingConfirmDialogDoc } from '../../components/doc/confirmdialog/usingdoc';
-import { ConfirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/confirmdialog/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/confirmdialog/basicdoc';
+import { DeclarativeDoc } from '@/components/doc/confirmdialog/declarativedoc';
+import { HeadlessDoc } from '@/components/doc/confirmdialog/headlessdoc';
+import { ImportDoc } from '@/components/doc/confirmdialog/importdoc';
+import { PositionDoc } from '@/components/doc/confirmdialog/positiondoc';
+import { PTDoc } from '@/components/doc/confirmdialog/pt/ptdoc';
+import { Wireframe } from '@/components/doc/confirmdialog/pt/wireframe';
+import { ResponsiveDoc } from '@/components/doc/confirmdialog/responsivedoc';
+import { TemplateDoc } from '@/components/doc/confirmdialog/templatedoc';
+import { StyledDoc } from '@/components/doc/confirmdialog/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/confirmdialog/theming/tailwinddoc';
+import { ConfirmDialog } from '@/components/lib/primereact.all';
 
 const ConfirmDialogDemo = () => {
     const docs = [
@@ -27,57 +32,83 @@ const ConfirmDialogDemo = () => {
             component: PositionDoc
         },
         {
-            id: 'using',
-            label: 'Using ConfirmDialog tag',
-            component: UsingConfirmDialogDoc
+            id: 'declarative',
+            label: 'Declarative',
+            component: DeclarativeDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'responsive',
+            label: 'Responsive',
+            component: ResponsiveDoc
+        },
+        {
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.confirmdialog.options',
+            label: 'ConfirmDialog PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Confirmation Dialog Component</title>
-                <meta name="description" content="ConfirmDialog uses a Dialog UI with confirmDialog method or ConfirmDialog tag" />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ConfirmDialog</h1>
-                    <p>
-                        ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.
-                    </p>
-                </div>
-                <DocActions github="confirmdialog/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-                <ConfirmDialog />
-            </div>
-        </div>
+        <>
+            <DocComponent
+                title="React Confirmation Dialog Component"
+                header="ConfirmDialog"
+                description="ConfirmDialog is an easy to use and customizable Confirmation API using a dialog."
+                componentDocs={docs}
+                apiDocs={['ConfirmDialog']}
+                ptDocs={ptDocs}
+                themingDocs={themingDocs}
+            />
+            <ConfirmDialog />
+        </>
     );
 };
 

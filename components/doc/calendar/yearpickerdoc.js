@@ -1,36 +1,41 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import { useState } from 'react';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function YearPickerDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+<Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function YearPickerDoc() {
+export default function YearPickerDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
-export default function YearPickerDoc() {
-    const [date, setDate] = useState<Date | null>(null);
+export default function YearPickerDemo() {
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     return (
-        <Calendar id="yearpicker" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} view="year" dateFormat="yy" />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+        </div>
     )
 }
         `
@@ -39,10 +44,12 @@ export default function YearPickerDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Datepicker element in year view.</p>
+                <p>
+                    Specifying <i>view</i> as <i>year</i> in addition to a suitable <i>dateFormat</i> enables the year picker.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="yearpicker" value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
             </div>
             <DocSectionCode code={code} />
         </>

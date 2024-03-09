@@ -2,5 +2,6 @@
     "main": "./rating.cjs.js",
     "module": "./rating.esm.js",
     "unpkg": "./rating.min.js",
-    "types": "./rating.d.ts"
+    "types": "./rating.d.ts",
+    "sideEffects": false
 }

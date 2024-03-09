@@ -1,103 +1,118 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 import { useState } from 'react';
-import { InputText } from '../../lib/inputtext/InputText';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function CheckboxDoc(props) {
-    const [checked, setChecked] = useState(false);
+    const [checked1, setChecked1] = useState(false);
+    const [checked2, setChecked2] = useState(false);
     const [radioValue, setRadioValue] = useState('');
 
     const code = {
         basic: `
-<span className="p-inputgroup-addon"><Checkbox checked={checked} onChange={(e) => setChecked(!checked)} /></span><InputText placeholder="Username"/>
-<InputText placeholder="Price"/><span className="p-inputgroup-addon"><RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e) => setRadioValue(e.value)} /></span>
-<span className="p-inputgroup-addon"><Checkbox checked={checked} onChange={(e) => setChecked(!checked)} /></span><InputText placeholder="Website"/><span className="p-inputgroup-addon"><RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e) => setRadioValue(e.value)} /></span>
+<div className="p-inputgroup flex-1">
+    <InputText placeholder="Price" />
+    <span className="p-inputgroup-addon">
+        <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e) => setRadioValue(e.value)} />
+    </span>
+</div>
+
+<div className="p-inputgroup flex-1">
+    <span className="p-inputgroup-addon">
+        <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
+    </span>
+    <InputText placeholder="Username" />
+</div>
+
+<div className="p-inputgroup flex-1">
+    <span className="p-inputgroup-addon">
+        <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
+    </span>
+    <InputText placeholder="Website" />
+    <span className="p-inputgroup-addon">
+        <RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e) => setRadioValue(e.value)} />
+    </span>
+</div>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
 
 export default function CheckboxDoc() {
-    const [checked, setChecked] = useState(false);
+    const [checked1, setChecked1] = useState(false);
+    const [checked2, setChecked2] = useState(false);
     const [radioValue, setRadioValue] = useState('');
 
     return (
-        <div className="col-12">
-            <div className="p-inputgroup">
-                <span className="p-inputgroup-addon">
-                    <Checkbox checked={checked} onChange={(e) => setChecked(!checked)} />
-                </span>
-                <InputText placeholder="Username"/>
-            </div>
-        </div>
-
-        <div className="col-12">
-            <div className="p-inputgroup">
-                <InputText placeholder="Price"/>
+        <div className="card flex flex-column md:flex-row gap-3">
+            <div className="p-inputgroup flex-1">
+                <InputText placeholder="Price" />
                 <span className="p-inputgroup-addon">
                     <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e) => setRadioValue(e.value)} />
                 </span>
             </div>
-        </div>
 
-        <div className="col-12">
-            <div className="p-inputgroup">
+            <div className="p-inputgroup flex-1">
                 <span className="p-inputgroup-addon">
-                    <Checkbox checked={checked} onChange={(e) => setChecked(!checked)} />
+                    <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
                 </span>
-                <InputText placeholder="Website"/>
+                <InputText placeholder="Username" />
+            </div>
+
+            <div className="p-inputgroup flex-1">
+                <span className="p-inputgroup-addon">
+                    <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
+                </span>
+                <InputText placeholder="Website" />
                 <span className="p-inputgroup-addon">
                     <RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e) => setRadioValue(e.value)} />
                 </span>
             </div>
-        </div>  
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
 
 export default function CheckboxDoc() {
-    const [checked, setChecked] = useState<boolean>(false);
+    const [checked1, setChecked1] = useState<boolean>(false);
+    const [checked2, setChecked2] = useState<boolean>(false);
     const [radioValue, setRadioValue] = useState<string>('');
 
     return (
-        <div className="col-12">
-            <div className="p-inputgroup">
+        <div className="card flex flex-column md:flex-row gap-3">
+            <div className="p-inputgroup flex-1">
+                <InputText placeholder="Price" />
                 <span className="p-inputgroup-addon">
-                    <Checkbox checked={checked as any} onChange={(e : CheckboxChangeParams) => setChecked(!checked)} />
+                    <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e: RadioButtonChangeEvent) => setRadioValue(e.value)} />
                 </span>
-                <InputText placeholder="Username"/>
+            </div>
+
+            <div className="p-inputgroup flex-1">
+                <span className="p-inputgroup-addon">
+                    <Checkbox checked={checked1} onChange={(e : CheckboxChangeEvent) => setChecked1(!checked1)} />
+                </span>
+                <InputText placeholder="Username" />
+            </div>
+
+            <div className="p-inputgroup flex-1">
+                <span className="p-inputgroup-addon">
+                    <Checkbox checked={checked2} onChange={(e : CheckboxChangeEvent) => setChecked2(!checked2)} />
+                </span>
+                <InputText placeholder="Website" />
+                <span className="p-inputgroup-addon">
+                    <RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e: RadioButtonChangeEvent) => setRadioValue(e.value)} />
+                </span>
             </div>
         </div>
-
-        <div className="col-12">
-            <div className="p-inputgroup">
-                <InputText placeholder="Price"/>
-                <span className="p-inputgroup-addon">
-                    <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e : CheckboxChangeParams) => setRadioValue(e.value)} />
-                </span>
-            </div>
-        </div>
-
-        <div className="col-12">
-            <div className="p-inputgroup">
-                <span className="p-inputgroup-addon">
-                    <Checkbox checked={checked as any} onChange={(e : CheckboxChangeParams) => setChecked(!checked)} />
-                </span>
-                <InputText placeholder="Website"/>
-                <span className="p-inputgroup-addon">
-                    <RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e : CheckboxChangeParams) => setRadioValue(e.value)} />
-                </span>
-            </div>
-        </div>        
     )
 }
         `
@@ -106,39 +121,31 @@ export default function CheckboxDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Checkbox and RadioButton</p>
+                <p>Checkbox and RadioButton components can be combined with an input element under the same group.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div className="grid p-fluid">
-                    <div className="col-12">
-                        <div className="p-inputgroup">
-                            <span className="p-inputgroup-addon">
-                                <Checkbox checked={checked} onChange={(e) => setChecked(!checked)} />
-                            </span>
-                            <InputText placeholder="Username" />
-                        </div>
-                    </div>
+            <div className="card flex flex-column md:flex-row gap-3">
+                <div className="p-inputgroup flex-1">
+                    <InputText placeholder="Price" />
+                    <span className="p-inputgroup-addon">
+                        <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e) => setRadioValue(e.value)} />
+                    </span>
+                </div>
 
-                    <div className="col-12">
-                        <div className="p-inputgroup">
-                            <InputText placeholder="Price" />
-                            <span className="p-inputgroup-addon">
-                                <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e) => setRadioValue(e.value)} />
-                            </span>
-                        </div>
-                    </div>
+                <div className="p-inputgroup flex-1">
+                    <span className="p-inputgroup-addon">
+                        <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
+                    </span>
+                    <InputText placeholder="Username" />
+                </div>
 
-                    <div className="col-12">
-                        <div className="p-inputgroup">
-                            <span className="p-inputgroup-addon">
-                                <Checkbox checked={checked} onChange={(e) => setChecked(!checked)} />
-                            </span>
-                            <InputText placeholder="Website" />
-                            <span className="p-inputgroup-addon">
-                                <RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e) => setRadioValue(e.value)} />
-                            </span>
-                        </div>
-                    </div>
+                <div className="p-inputgroup flex-1">
+                    <span className="p-inputgroup-addon">
+                        <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
+                    </span>
+                    <InputText placeholder="Website" />
+                    <span className="p-inputgroup-addon">
+                        <RadioButton name="rb2" value="rb2" checked={radioValue === 'rb2'} onChange={(e) => setRadioValue(e.value)} />
+                    </span>
                 </div>
             </div>
             <DocSectionCode code={code} />

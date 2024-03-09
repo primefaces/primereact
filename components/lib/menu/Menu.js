@@ -1,22 +1,57 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { MenuBase } from './MenuBase';
 
 export const Menu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = MenuBase.getProps(inProps, context);
+        const [idState, setIdState] = React.useState(props.id);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
+        const [selectedOptionIndex, setSelectedOptionIndex] = React.useState(-1);
+        const [focused, setFocused] = React.useState(false);
+
+        const { ptm, cx, sx, isUnstyled } = MenuBase.setMetaData({
+            props,
+            state: {
+                id: idState,
+                visible: visibleState,
+                focused: focused
+            }
+        });
+
+        useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
+        const listRef = React.useRef(null);
         const targetRef = React.useRef(null);
+        const isCloseOnEscape = !!(visibleState && props.popup && props.closeOnEscape);
+        const popupMenuDisplayOrder = useDisplayOrder('menu', isCloseOnEscape);
+
+        useGlobalOnEscapeKey({
+            callback: (event) => {
+                hide(event);
+            },
+            when: isCloseOnEscape && popupMenuDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.MENU, popupMenuDisplayOrder]
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
             overlay: menuRef,
             listener: (event, { valid }) => {
-                valid && hide(event);
+                if (valid) {
+                    hide(event);
+                    setFocusedOptionIndex(-1);
+                }
             },
             when: visibleState
         });
@@ -30,15 +65,11 @@ export const Menu = React.memo(
             }
         };
 
-        const onItemClick = (event, item) => {
+        const onItemClick = (event, item, key) => {
             if (item.disabled) {
                 event.preventDefault();
 
                 return;
-            }
-
-            if (!item.url) {
-                event.preventDefault();
             }
 
             if (item.command) {
@@ -51,26 +82,70 @@ export const Menu = React.memo(
             if (props.popup) {
                 hide(event);
             }
+
+            if (!props.popup && focusedOptionIndex !== key) {
+                setFocusedOptionIndex(key);
+            }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
-        const onItemKeyDown = (event, item) => {
-            const listItem = event.currentTarget.parentElement;
+        const onListFocus = (event) => {
+            setFocused(true);
 
-            switch (event.which) {
-                //down
-                case 40:
-                    const nextItem = findNextItem(listItem);
+            if (!props.popup) {
+                if (selectedOptionIndex !== -1) {
+                    changeFocusedOptionIndex(selectedOptionIndex);
+                    setSelectedOptionIndex(-1);
+                } else changeFocusedOptionIndex(0);
+            }
 
-                    nextItem && nextItem.children[0].focus();
-                    event.preventDefault();
+            props.onFocus && props.onFocus(event);
+        };
+
+        const onListBlur = (event) => {
+            setFocused(false);
+            setFocusedOptionIndex(-1);
+            props.onBlur && props.onBlur(event);
+        };
+
+        const onListKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    onArrowDownKey(event);
                     break;
 
-                //up
-                case 38:
-                    const prevItem = findPrevItem(listItem);
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-                    prevItem && prevItem.children[0].focus();
-                    event.preventDefault();
+                case 'Home':
+                    onHomeKey(event);
+                    break;
+
+                case 'End':
+                    onEndKey(event);
+                    break;
+
+                case 'Enter':
+                    onEnterKey(event);
+                    break;
+
+                case 'Space':
+                    onSpaceKey(event);
+                    break;
+
+                case 'Escape':
+                    if (props.popup) {
+                        DomHandler.focus(targetRef.current);
+                        hide(event);
+                    }
+
+                case 'Tab':
+                    props.popup && visibleState && hide(event);
                     break;
 
                 default:
@@ -78,16 +153,73 @@ export const Menu = React.memo(
             }
         };
 
-        const findNextItem = (item) => {
-            const nextItem = item.nextElementSibling;
+        const onArrowDownKey = (event) => {
+            const optionIndex = findNextOptionIndex(focusedOptionIndex);
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
+            changeFocusedOptionIndex(optionIndex);
+            event.preventDefault();
         };
 
-        const findPrevItem = (item) => {
-            const prevItem = item.previousElementSibling;
+        const onArrowUpKey = (event) => {
+            if (event.altKey && props.popup) {
+                DomHandler.focus(targetRef.current);
+                hide(event);
+                event.preventDefault();
+            } else {
+                const optionIndex = findPrevOptionIndex(focusedOptionIndex);
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
+                changeFocusedOptionIndex(optionIndex);
+                event.preventDefault();
+            }
+        };
+
+        const onHomeKey = (event) => {
+            changeFocusedOptionIndex(0);
+            event.preventDefault();
+        };
+
+        const onEndKey = (event) => {
+            changeFocusedOptionIndex(DomHandler.find(menuRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]').length - 1);
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            const element = DomHandler.findSingle(menuRef.current, `li[id="${`${focusedOptionIndex}`}"]`);
+            const anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section="action"]');
+
+            props.popup && DomHandler.focus(targetRef.current);
+            anchorElement ? anchorElement.click() : element && element.click();
+
+            event.preventDefault();
+        };
+
+        const onSpaceKey = (event) => {
+            onEnterKey(event);
+        };
+
+        const findNextOptionIndex = (index) => {
+            const links = DomHandler.find(menuRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]');
+            const matchedOptionIndex = [...links].findIndex((link) => link.id === index);
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex + 1 : 0;
+        };
+
+        const findPrevOptionIndex = (index) => {
+            const links = DomHandler.find(menuRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]');
+            const matchedOptionIndex = [...links].findIndex((link) => link.id === index);
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex - 1 : 0;
+        };
+
+        const changeFocusedOptionIndex = (index) => {
+            const links = DomHandler.find(menuRef.current, 'li[data-pc-section="menuitem"][data-p-disabled="false"]');
+            let order = index >= links.length ? links.length - 1 : index < 0 ? 0 : index;
+
+            order > -1 && setFocusedOptionIndex(links[order].getAttribute('id'));
+        };
+
+        const focusedOptionId = () => {
+            return focusedOptionIndex !== -1 ? focusedOptionIndex : null;
         };
 
         const toggle = (event) => {
@@ -109,8 +241,14 @@ export const Menu = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
-            DomHandler.absolutePosition(menuRef.current, targetRef.current);
+            DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
+            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+            DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
+
+            if (props.popup) {
+                DomHandler.focus(listRef.current);
+                changeFocusedOptionIndex(0);
+            }
         };
 
         const onEntered = () => {
@@ -126,6 +264,12 @@ export const Menu = React.memo(
             ZIndexUtils.clear(menuRef.current);
         };
 
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
+
         useUnmountEffect(() => {
             ZIndexUtils.clear(menuRef.current);
         });
@@ -140,66 +284,103 @@ export const Menu = React.memo(
         }));
 
         const createSubmenu = (submenu, index) => {
-            const key = submenu.label + '_' + index;
-            const className = classNames(
-                'p-submenu-header',
+            const key = idState + '_sub_' + index;
+            const items = submenu.items.map((item, index) => createMenuItem(item, index, key));
+            const submenuHeaderProps = mergeProps(
                 {
-                    'p-disabled': submenu.disabled
+                    id: key,
+                    key,
+                    role: 'none',
+                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
+                    style: sx('submenuHeader', { submenu }),
+                    'data-p-disabled': submenu.disabled
                 },
-                submenu.className
+                ptm('submenuHeader')
             );
-            const items = submenu.items.map(createMenuItem);
 
             return (
                 <React.Fragment key={key}>
-                    <li className={className} style={submenu.style} role="presentation">
-                        {submenu.label}
-                    </li>
+                    <li {...submenuHeaderProps}>{submenu.label}</li>
                     {items}
                 </React.Fragment>
             );
         };
 
         const createSeparator = (index) => {
-            const key = 'separator_' + index;
+            const key = idState + '_separator_' + index;
+            const separatorProps = mergeProps(
+                {
+                    id: key,
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                ptm('separator')
+            );
 
-            return <li key={key} className="p-menu-separator" role="separator"></li>;
+            return <li {...separatorProps}></li>;
         };
 
-        const createMenuItem = (item, index) => {
+        const createMenuItem = (item, index, parentId = null) => {
             if (item.visible === false) {
                 return null;
             }
 
-            const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
-            const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
-            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-            const tabIndex = item.disabled ? null : 0;
-            const key = item.label + '_' + index;
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            );
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                ptm('label')
+            );
+            const label = item.label && <span {...labelProps}>{item.label}</span>;
+            const key = item.id || (parentId || idState) + '_' + index;
+            const contentProps = mergeProps(
+                {
+                    onClick: (event) => onItemClick(event, item, key),
+                    className: cx('content')
+                },
+                ptm('content')
+            );
+
+            const actionProps = mergeProps(
+                {
+                    href: item.url || '#',
+                    className: cx('action', { item }),
+                    onFocus: (event) => event.stopPropagation(),
+                    target: item.target,
+                    tabIndex: '-1',
+                    'aria-label': item.label,
+                    'aria-hidden': true,
+                    'aria-disabled': item.disabled,
+                    'data-p-disabled': item.disabled
+                },
+                ptm('action')
+            );
+
             let content = (
-                <a
-                    href={item.url || '#'}
-                    className={linkClassName}
-                    role="menuitem"
-                    target={item.target}
-                    onClick={(event) => onItemClick(event, item)}
-                    onKeyDown={(event) => onItemKeyDown(event, item)}
-                    tabIndex={tabIndex}
-                    aria-disabled={item.disabled}
-                >
-                    {icon}
-                    {label}
-                </a>
+                <div {...contentProps}>
+                    <a {...actionProps}>
+                        {icon}
+                        {label}
+                        <Ripple />
+                    </a>
+                </div>
             );
 
             if (item.template) {
                 const defaultContentOptions = {
-                    onClick: (event) => onItemClick(event, item),
-                    onKeyDown: (event) => onItemKeyDown(event, item),
+                    onClick: (event) => onItemClick(event, item, key),
                     className: linkClassName,
-                    tabIndex,
+                    tabIndex: '-1',
                     labelClassName: 'p-menuitem-text',
                     iconClassName,
                     element: content,
@@ -209,11 +390,22 @@ export const Menu = React.memo(
                 content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
-            return (
-                <li key={key} className={className} style={item.style} role="none">
-                    {content}
-                </li>
+            const menuitemProps = mergeProps(
+                {
+                    id: key,
+                    key,
+                    className: classNames(item.className, cx('menuitem', { focused: focusedOptionIndex === key })),
+                    style: sx('menuitem', { item }),
+                    role: 'menuitem',
+                    'aria-label': item.label,
+                    'aria-disabled': item.disabled,
+                    'data-p-focused': focusedOptionId() === key,
+                    'data-p-disabled': item.disabled || false
+                },
+                ptm('menuitem')
             );
+
+            return <li {...menuitemProps}>{content}</li>;
         };
 
         const createItem = (item, index) => {
@@ -226,35 +418,53 @@ export const Menu = React.memo(
 
         const createElement = () => {
             if (props.model) {
-                const otherProps = ObjectUtils.findDiffKeys(props, Menu.defaultProps);
-                const className = classNames(
-                    'p-menu p-component',
-                    {
-                        'p-menu-overlay': props.popup,
-                        'p-input-filled': PrimeReact.inputStyle === 'filled',
-                        'p-ripple-disabled': PrimeReact.ripple === false
-                    },
-                    props.className
-                );
                 const menuitems = createMenu();
+                const rootProps = mergeProps(
+                    {
+                        className: classNames(props.className, cx('root', { context })),
+                        style: props.style,
+                        onClick: (e) => onPanelClick(e)
+                    },
+                    MenuBase.getOtherProps(props),
+                    ptm('root')
+                );
+
+                const menuProps = mergeProps(
+                    {
+                        ref: listRef,
+                        className: cx('menu'),
+                        id: idState + '_list',
+                        tabIndex: props.tabIndex || '0',
+                        role: 'menu',
+                        'aria-label': props.ariaLabel,
+                        'aria-labelledby': props.ariaLabelledBy,
+                        'aria-activedescendant': focused ? focusedOptionId() : undefined,
+                        onFocus: onListFocus,
+                        onKeyDown: onListKeyDown,
+                        onBlur: onListBlur
+                    },
+                    ptm('menu')
+                );
+
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                );
 
                 return (
-                    <CSSTransition
-                        nodeRef={menuRef}
-                        classNames="p-connected-overlay"
-                        in={visibleState}
-                        timeout={{ enter: 120, exit: 100 }}
-                        options={props.transitionOptions}
-                        unmountOnExit
-                        onEnter={onEnter}
-                        onEntered={onEntered}
-                        onExit={onExit}
-                        onExited={onExited}
-                    >
-                        <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                            <ul className="p-menu-list p-reset" role="menu">
-                                {menuitems}
-                            </ul>
+                    <CSSTransition nodeRef={menuRef} {...transitionProps}>
+                        <div id={props.id} ref={menuRef} {...rootProps}>
+                            <ul {...menuProps}>{menuitems}</ul>
                         </div>
                     </CSSTransition>
                 );
@@ -270,17 +480,3 @@ export const Menu = React.memo(
 );
 
 Menu.displayName = 'Menu';
-Menu.defaultProps = {
-    __TYPE: 'Menu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
-    className: null,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

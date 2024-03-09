@@ -2,5 +2,6 @@
     "main": "./accordion.cjs.js",
     "module": "./accordion.esm.js",
     "unpkg": "./accordion.min.js",
-    "types": "./accordion.d.ts"
+    "types": "./accordion.d.ts",
+    "sideEffects": false
 }

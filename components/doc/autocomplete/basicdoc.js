@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
 import { useState } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');
@@ -16,7 +16,7 @@ export function BasicDoc(props) {
 <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function BasicDemo() {
@@ -28,24 +28,28 @@ export default function BasicDemo() {
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import React, { useState } from "react";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 export default function BasicDemo() {
     const [value, setValue] = useState<string>('');
     const [items, setItems] = useState<string[]>([]);
 
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         setItems([...Array(10).keys()].map(item => event.query + '-' + item));
     }
 
     return (
-        <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setValue(e.value)}  />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `

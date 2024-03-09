@@ -1,14 +1,22 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { EyeIcon } from '../icons/eye';
+import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { PasswordBase } from './PasswordBase';
 
 export const Password = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = PasswordBase.getProps(inProps, context);
+
         const promptLabel = props.promptLabel || localeOption('passwordPrompt');
         const weakLabel = props.weakLabel || localeOption('weak');
         const mediumLabel = props.mediumLabel || localeOption('medium');
@@ -25,7 +33,29 @@ export const Password = React.memo(
         const mediumCheckRegExp = React.useRef(new RegExp(props.mediumRegex));
         const strongCheckRegExp = React.useRef(new RegExp(props.strongRegex));
         const type = unmaskedState ? 'text' : 'password';
+        const metaData = {
+            props,
+            state: {
+                overlayVisible: overlayVisibleState,
+                meter: meterState,
+                infoText: infoTextState,
+                focused: focusedState,
+                unmasked: unmaskedState
+            }
+        };
+        const { ptm, cx, isUnstyled } = PasswordBase.setMetaData(metaData);
 
+        useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
+
+        const passwordDisplayOrder = useDisplayOrder('password', overlayVisibleState);
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState && props.feedback && passwordDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.PASSWORD, passwordDisplayOrder]
+        });
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
@@ -78,7 +108,7 @@ export const Password = React.memo(
             }
         };
 
-        const onMaskToggle = () => {
+        const toggleMask = () => {
             setUnmaskedState((prevUnmasked) => !prevUnmasked);
         };
 
@@ -93,12 +123,13 @@ export const Password = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
             }
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -139,7 +170,7 @@ export const Password = React.memo(
         };
 
         const onKeyup = (e) => {
-            let keyCode = e.keyCode || e.which;
+            const keyCode = e.code;
 
             if (props.feedback) {
                 let value = e.target.value;
@@ -180,7 +211,7 @@ export const Password = React.memo(
                 setMeterState(meter);
                 setInfoTextState(label);
 
-                if (!!keyCode && !overlayVisibleState) {
+                if (!!keyCode && keyCode !== 'Escape' && !overlayVisibleState) {
                     show();
                 }
             }
@@ -208,6 +239,8 @@ export const Password = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            toggleMask,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
@@ -231,19 +264,54 @@ export const Password = React.memo(
             }
         }, [isFilled]);
 
+        useMountEffect(() => {
+            alignOverlay();
+        });
+
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
         });
 
         const createIcon = () => {
+            let icon;
+
+            const hideIconProps = mergeProps(
+                {
+                    key: 'hideIcon',
+                    role: 'button',
+                    tabIndex: props.tabIndex,
+                    className: cx('hideIcon'),
+                    onClick: toggleMask
+                },
+                ptm('hideIcon')
+            );
+
+            const showIconProps = mergeProps(
+                {
+                    key: 'showIcon',
+                    role: 'button',
+                    tabIndex: props.tabIndex,
+                    className: cx('showIcon'),
+                    onClick: toggleMask
+                },
+                ptm('showIcon')
+            );
+
+            if (unmaskedState) {
+                icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} />;
+            } else {
+                icon = props.showIcon || <EyeIcon {...showIconProps} />;
+            }
+
+            const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
+
             if (props.toggleMask) {
-                const iconClassName = unmaskedState ? 'pi pi-eye-slash' : 'pi pi-eye';
-                let content = <i className={iconClassName} onClick={onMaskToggle} />;
+                let content = eyeIcon;
 
                 if (props.icon) {
                     const defaultIconOptions = {
-                        onClick: onMaskToggle,
-                        className: iconClassName,
+                        onClick: toggleMask,
+                        className,
                         element: content,
                         props
                     };
@@ -258,38 +326,67 @@ export const Password = React.memo(
         };
 
         const createPanel = () => {
-            const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
-            });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);
+            const panelProps = mergeProps(
+                {
+                    className: cx('panel', { context }),
+                    style: props.panelStyle,
+                    onClick: onPanelClick
+                },
+                ptm('panel')
+            );
+
+            const meterProps = mergeProps(
+                {
+                    className: cx('meter')
+                },
+                ptm('meter')
+            );
+            const meterLabelProps = mergeProps(
+                {
+                    className: cx('meterLabel', { strength }),
+                    style: { width }
+                },
+                ptm('meterLabel')
+            );
+            const infoProps = mergeProps(
+                {
+                    className: cx('info', { strength })
+                },
+                ptm('info')
+            );
+
             const content = props.content ? (
                 ObjectUtils.getJSXElement(props.content, props)
             ) : (
                 <>
-                    <div className="p-password-meter">
-                        <div className={`p-password-strength ${strength}`} style={{ width }}></div>
+                    <div {...meterProps}>
+                        <div {...meterLabelProps}></div>
                     </div>
-                    <div className={`p-password-info ${strength}`}>{infoTextState}</div>
+                    <div {...infoProps}>{infoTextState}</div>
                 </>
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: overlayVisibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onOverlayEnter,
+                    onEntered: onOverlayEntered,
+                    onExit: onOverlayExit,
+                    onExited: onOverlayExited
+                },
+                ptm('transition')
+            );
+
             const panel = (
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={overlayVisibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onOverlayEnter}
-                    onEntered={onOverlayEntered}
-                    onExit={onOverlayExit}
-                    onExited={onOverlayExited}
-                >
-                    <div ref={overlayRef} className={panelClassName} style={props.panelStyle} onClick={onPanelClick}>
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
+                    <div ref={overlayRef} {...panelProps}>
                         {header}
                         {content}
                         {footer}
@@ -309,27 +406,47 @@ export const Password = React.memo(
             },
             props.className
         );
-        const inputClassName = classNames('p-password-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, Password.defaultProps);
+
+        const inputProps = PasswordBase.getOtherProps(props);
         const icon = createIcon();
         const panel = createPanel();
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root', { isFilled, focusedState }),
+                style: props.style
+            },
+            ptm('root')
+        );
+
+        const inputTextProps = mergeProps(
+            {
+                ref: inputRef,
+                id: props.inputId,
+                ...inputProps,
+                className: classNames(props.inputClassName, cx('input')),
+                onBlur: onBlur,
+                onFocus: onFocus,
+                onInput: onInput,
+                onKeyUp: onKeyup,
+                style: props.inputStyle,
+                tabIndex: props.tabIndex,
+                tooltip: props.tooltip,
+                tooltipOptions: props.tooltipOptions,
+                type: type,
+                value: props.value,
+                __parentMetadata: {
+                    parent: metaData
+                }
+            },
+            ptm('input')
+        );
+
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style}>
-                <InputText
-                    ref={inputRef}
-                    id={props.inputId}
-                    {...inputProps}
-                    type={type}
-                    className={inputClassName}
-                    style={props.inputStyle}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onKeyUp={onKeyup}
-                    onInput={onInput}
-                    tooltip={props.tooltip}
-                    tooltipOptions={props.tooltipOptions}
-                />
+            <div {...rootProps}>
+                <InputText {...inputTextProps} />
                 {icon}
                 {panel}
             </div>
@@ -338,34 +455,3 @@ export const Password = React.memo(
 );
 
 Password.displayName = 'Password';
-Password.defaultProps = {
-    __TYPE: 'Password',
-    id: null,
-    inputId: null,
-    inputRef: null,
-    promptLabel: null,
-    weakLabel: null,
-    mediumLabel: null,
-    strongLabel: null,
-    mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-    strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
-    feedback: true,
-    toggleMask: false,
-    appendTo: null,
-    header: null,
-    content: null,
-    footer: null,
-    icon: null,
-    tooltip: null,
-    tooltipOptions: null,
-    style: null,
-    className: null,
-    inputStyle: null,
-    inputClassName: null,
-    panelStyle: null,
-    panelClassName: null,
-    transitionOptions: null,
-    onInput: null,
-    onShow: null,
-    onHide: null
-};

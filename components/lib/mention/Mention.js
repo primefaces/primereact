@@ -1,24 +1,55 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = MentionBase.getProps(inProps, context);
+
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [searchingState, setSearchingState] = React.useState(false);
         const [triggerState, setTriggerState] = React.useState(null);
+        const [highlightState, setHighlightState] = React.useState([]);
+
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const listRef = React.useRef(null);
         const timeout = React.useRef(null);
+        const metaData = {
+            props,
+            state: {
+                overlayVisible: overlayVisibleState,
+                focused: focusedState,
+                searching: searchingState,
+                trigger: triggerState
+            }
+        };
+        const { ptm, cx, sx, isUnstyled } = MentionBase.setMetaData(metaData);
+
+        useHandleStyle(MentionBase.css.styles, isUnstyled, { name: 'mention' });
+
+        const getPTOptions = (item, suggestion, options) => {
+            return ptm(suggestion, {
+                context: {
+                    trigger: triggerState ? triggerState.key : ''
+                },
+                state: {
+                    ...options
+                }
+            });
+        };
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -40,13 +71,20 @@ export const Mention = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-                DomHandler.addClass(listRef.current.firstChild, 'p-highlight');
+                setHighlightState((prevState) => {
+                    const newState = [...prevState];
+
+                    newState[0] = true;
+
+                    return newState;
+                });
             }
         };
 
@@ -66,13 +104,15 @@ export const Mention = React.memo(
         };
 
         const alignOverlay = () => {
-            const { key, index } = triggerState;
-            const value = inputRef.current.value;
-            const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
+            if (triggerState) {
+                const { key, index } = triggerState;
+                const value = inputRef.current.value;
+                const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
 
-            overlayRef.current.style.transformOrigin = 'top';
-            overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
-            overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
+                overlayRef.current.style.transformOrigin = 'top';
+                overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
+                overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
+            }
         };
 
         const onPanelClick = (event) => {
@@ -175,20 +215,11 @@ export const Mention = React.memo(
             const selectedText = formatValue(suggestion).replace(/\s+/g, '');
 
             if (currentText.trim() !== selectedText) {
-                let diff = 0;
-
-                while (diff < selectedText.length) {
-                    const s_c = selectedText.charAt(diff);
-                    const c_c = currentText.charAt(diff);
-
-                    if (s_c === c_c || c_c === ' ') diff++;
-                    else break;
-                }
-
                 const prevText = value.substring(0, triggerState.index);
-                const nextText = value.substring(triggerState.index + diff);
+                const nextText = value.substring(spaceIndex > -1 ? selectionStart : triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
+                event.target = inputRef.current;
                 props.onChange && props.onChange(event);
             }
 
@@ -228,9 +259,19 @@ export const Mention = React.memo(
 
         const onInput = (event) => {
             props.onInput && props.onInput(event);
+            const isFilled = event.target.value.length > 0;
 
-            if (event.target.value.length > 0) DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled');
-            else DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
+            if (isUnstyled()) {
+                DomHandler.setAttributes(elementRef.current, {
+                    'data-p-inputwrapper-filled': isFilled
+                });
+            } else {
+                if (isFilled) {
+                    DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled');
+                } else {
+                    DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
+                }
+            }
         };
 
         const onKeyUp = (event) => {
@@ -247,7 +288,7 @@ export const Mention = React.memo(
 
         const onKeyDown = (event) => {
             if (overlayVisibleState) {
-                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
                 switch (event.which) {
                     //down
@@ -256,15 +297,33 @@ export const Mention = React.memo(
                             let nextElement = highlightItem.nextElementSibling;
 
                             if (nextElement) {
-                                DomHandler.addClass(nextElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                const nextElementIndex = DomHandler.index(nextElement);
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[nextElementIndex] = true;
+                                    newState[highlightItemIndex] = false;
+
+                                    return newState;
+                                });
+
                                 DomHandler.scrollInView(overlayRef.current, nextElement);
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
 
                             if (highlightItem) {
-                                DomHandler.addClass(highlightItem, 'p-highlight');
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[highlightItemIndex] = true;
+
+                                    return newState;
+                                });
                             }
                         }
 
@@ -277,8 +336,18 @@ export const Mention = React.memo(
                             let previousElement = highlightItem.previousElementSibling;
 
                             if (previousElement) {
-                                DomHandler.addClass(previousElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                const previousElementIndex = DomHandler.index(previousElement);
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[previousElementIndex] = true;
+                                    newState[highlightItemIndex] = false;
+
+                                    return newState;
+                                });
+
                                 DomHandler.scrollInView(overlayRef.current, previousElement);
                             }
                         }
@@ -325,6 +394,7 @@ export const Mention = React.memo(
             props,
             show,
             hide,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
@@ -335,16 +405,31 @@ export const Mention = React.memo(
         }, [inputRef, props.inputRef]);
 
         useUpdateEffect(() => {
+            const hasSuggestions = props.suggestions && props.suggestions.length;
+
+            if (hasSuggestions) {
+                const newState = props.suggestions.map(() => false);
+
+                setHighlightState(newState);
+            }
+
             if (searchingState) {
-                props.suggestions && props.suggestions.length ? show() : hide();
+                hasSuggestions ? show() : hide();
                 overlayVisibleState && alignOverlay();
                 setSearchingState(false);
             }
         }, [props.suggestions]);
 
         useUpdateEffect(() => {
-            if (!isFilled && DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled')) {
-                DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
+            const _isUnstyled = isUnstyled();
+            const isInputWrapperFilled = _isUnstyled ? DomHandler.isAttributeEquals(elementRef.current, 'data-p-inputwrapper-filled', true) : DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled');
+
+            if (!isFilled && isInputWrapperFilled) {
+                _isUnstyled
+                    ? DomHandler.setAttributes(elementRef.current, {
+                          'data-p-inputwrapper-filled': false
+                      })
+                    : DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
             }
         }, [isFilled]);
 
@@ -355,9 +440,20 @@ export const Mention = React.memo(
         const createItem = (suggestion, index) => {
             const key = index + '_item';
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, { trigger: triggerState ? triggerState.key : '', index }) : formatValue(suggestion);
+            const isSelected = highlightState[index];
+
+            const itemProps = mergeProps(
+                {
+                    key: key,
+                    className: cx('item', { isSelected }),
+                    onClick: (e) => onItemClick(e, suggestion),
+                    'data-p-highlight': isSelected
+                },
+                getPTOptions(suggestion, 'item', { selected: isSelected })
+            );
 
             return (
-                <li key={key} className="p-mention-item" onClick={(e) => onItemClick(e, suggestion)}>
+                <li {...itemProps}>
                     {content}
                     <Ripple />
                 </li>
@@ -365,41 +461,60 @@ export const Mention = React.memo(
         };
 
         const createList = () => {
+            const itemsProps = mergeProps(
+                {
+                    ref: listRef,
+                    className: cx('items')
+                },
+                ptm('items')
+            );
+
             if (props.suggestions) {
                 const items = props.suggestions.map(createItem);
 
-                return (
-                    <ul ref={listRef} className="p-mention-items">
-                        {items}
-                    </ul>
-                );
+                return <ul {...itemsProps}>{items}</ul>;
             }
 
             return null;
         };
 
         const createPanel = () => {
-            const panelClassName = classNames('p-mention-panel p-component', props.panelClassName);
-            const panelStyle = { maxHeight: props.scrollHeight, ...props.panelStyle };
             const header = ObjectUtils.getJSXElement(props.headerTemplate, props);
             const footer = ObjectUtils.getJSXElement(props.footerTemplate, props);
             const list = createList();
 
+            const panelProps = mergeProps(
+                {
+                    ref: overlayRef,
+                    className: cx('panel'),
+                    style: {
+                        maxHeight: props.scrollHeight,
+                        ...props.panelStyle
+                    },
+                    onClick: onPanelClick
+                },
+                ptm('panel')
+            );
+
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: overlayVisibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onOverlayEnter,
+                    onEntering: onOverlayEntering,
+                    onEntered: onOverlayEntered,
+                    onExit: onOverlayExit,
+                    onExited: onOverlayExited
+                },
+                ptm('transition')
+            );
+
             const panel = (
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={overlayVisibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onOverlayEnter}
-                    onEntering={onOverlayEntering}
-                    onEntered={onOverlayEntered}
-                    onExit={onOverlayExit}
-                    onExited={onOverlayExited}
-                >
-                    <div ref={overlayRef} className={panelClassName} style={panelStyle} onClick={onPanelClick}>
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
+                    <div {...panelProps}>
                         {header}
                         {list}
                         {footer}
@@ -410,21 +525,43 @@ export const Mention = React.memo(
             return <Portal element={panel} appendTo="self" />;
         };
 
-        const className = classNames(
-            'p-mention p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        );
-        const inputClassName = classNames('p-mention-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, Mention.defaultProps);
+        const inputProps = MentionBase.getOtherProps(props);
         const panel = createPanel();
 
+        const inputMentionProps = mergeProps(
+            {
+                ref: inputRef,
+                id: props.inputId,
+                className: cx('input'),
+                style: props.inputStyle,
+                ...inputProps,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                onInput: onInput,
+                onKeyUp: onKeyUp,
+                onChange: onChange,
+                __parentMetadata: {
+                    parent: metaData
+                }
+            },
+            ptm('input')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root', { focusedState, isFilled }),
+                style: props.style
+            },
+            MentionBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style}>
-                <InputTextarea ref={inputRef} id={props.inputId} className={inputClassName} style={props.inputStyle} {...inputProps} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
+            <div {...rootProps}>
+                <InputTextarea {...inputMentionProps} />
                 {panel}
             </div>
         );
@@ -432,33 +569,3 @@ export const Mention = React.memo(
 );
 
 Mention.displayName = 'Mention';
-Mention.defaultProps = {
-    __TYPE: 'Mention',
-    autoHighlight: true,
-    className: null,
-    delay: 0,
-    field: null,
-    footerTemplate: null,
-    headerTemplate: null,
-    id: null,
-    inputClassName: null,
-    inputId: null,
-    inputRef: null,
-    inputStyle: null,
-    itemTemplate: null,
-    panelClassName: null,
-    panelStyle: null,
-    scrollHeight: '200px',
-    style: null,
-    suggestions: null,
-    transitionOptions: null,
-    trigger: '@',
-    onBlur: null,
-    onChange: null,
-    onFocus: null,
-    onHide: null,
-    onInput: null,
-    onSearch: null,
-    onSelect: null,
-    onShow: null
-};

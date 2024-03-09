@@ -1,3 +1,5 @@
+import { DomHandler } from '../utils/Utils';
+
 export const KeyFilter = {
     /* eslint-disable */
     DEFAULT_MASKS: {
@@ -17,8 +19,18 @@ export const KeyFilter = {
         return KeyFilter.DEFAULT_MASKS[keyfilter] ? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
     },
 
+    onBeforeInput(e, keyfilter, validateOnly) {
+        // android devices must use beforeinput https://stackoverflow.com/questions/36753548/keycode-on-android-is-always-229
+        if (validateOnly || !DomHandler.isAndroid()) {
+            return;
+        }
+
+        this.validateKey(e, e.data, keyfilter);
+    },
+
     onKeyPress(e, keyfilter, validateOnly) {
-        if (validateOnly) {
+        // non android devices use keydown
+        if (validateOnly || DomHandler.isAndroid()) {
             return;
         }
 
@@ -26,17 +38,7 @@ export const KeyFilter = {
             return;
         }
 
-        const isPrintableKey = e.key.length === 1;
-
-        if (!isPrintableKey) {
-            return;
-        }
-
-        const regex = this.getRegex(keyfilter);
-
-        if (!regex.test(e.key)) {
-            e.preventDefault();
-        }
+        this.validateKey(e, e.key, keyfilter);
     },
 
     onPaste(e, keyfilter, validateOnly) {
@@ -55,6 +57,24 @@ export const KeyFilter = {
                 return false;
             }
         });
+    },
+
+    validateKey(e, key, keyfilter) {
+        if (key === null || key === undefined) {
+            return;
+        }
+
+        const isPrintableKey = key.length === 1;
+
+        if (!isPrintableKey) {
+            return;
+        }
+
+        const regex = this.getRegex(keyfilter);
+
+        if (!regex.test(key)) {
+            e.preventDefault();
+        }
     },
 
     validate(e, keyfilter) {

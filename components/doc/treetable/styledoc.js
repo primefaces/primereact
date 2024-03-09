@@ -1,130 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { Column } from '../../lib/column/Column';
-import { NodeService } from '../../../service/NodeService';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import Link from 'next/link';
 
-export function StyleDoc(props) {
-    const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
-    useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const sizeTemplate = (node) => {
-        let size = node.data.size;
-        let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
-
-        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
-    };
-
-    const rowClassName = (node) => {
-        return { 'p-highlight': node.children && node.children.length === 3 };
-    };
-
-    const code = {
-        basic: `
-<TreeTable value={nodes} rowClassName={rowClassName}>
-    <Column field="name" header="Name" expander></Column>
-    <Column field="size" header="Size" body={sizeTemplate}></Column>
-    <Column field="type" header="Type"></Column>
-</TreeTable>
-        `,
-        javascript: `
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
-import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
-
-const StyleDoc = () => {
-    const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
-
-    useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const sizeTemplate = (node) => {
-        let size = node.data.size;
-        let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
-
-        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
-    }
-
-    const rowClassName = (node) => {
-        return { 'p-highlight': (node.children && node.children.length === 3) };
-    }
-
-    return (
-        <div>
-            <div className="card">
-                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-                <TreeTable value={nodes} rowClassName={rowClassName}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size" body={sizeTemplate}></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-            </div>
-        </div>
-    );
-}
-        `,
-        typescript: `
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
-import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
-
-const StyleDoc = () => {
-    const [nodes, setNodes] = useState([]);
-    const nodeservice = new NodeService();
-
-    useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const sizeTemplate = (node) => {
-        let size = node.data.size;
-        let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
-
-        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
-    }
-
-    const rowClassName = (node) => {
-        return { 'p-highlight': (node.children && node.children.length === 3) };
-    }
-
-    return (
-        <div>
-            <div className="card">
-                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-                <TreeTable value={nodes} rowClassName={rowClassName}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size" body={sizeTemplate}></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
-            </div>
-        </div>
-    );
-}
-        `
-    };
-
+export function StyleDoc() {
     return (
         <>
-            <DocSectionText {...props}>
-                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+            <DocSectionText id="style" label="Style">
+                <p>
+                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                </p>
             </DocSectionText>
-            <div className="card">
-                <TreeTable value={nodes} rowClassName={rowClassName}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size" body={sizeTemplate}></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Element</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>p-treetable</td>
+                            <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-header</td>
+                            <td>Header section.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-footer</td>
+                            <td>Footer section.</td>
+                        </tr>
+                        <tr>
+                            <td>p-column-title</td>
+                            <td>Title of a column.</td>
+                        </tr>
+                        <tr>
+                            <td>p-sortable-column</td>
+                            <td>Sortable column header.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-scrollable-header</td>
+                            <td>Container of header in a scrollable table.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-scrollable-body</td>
+                            <td>Container of body in a scrollable table.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-scrollable-footer</td>
+                            <td>Container of footer in a scrollable table.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-emptymessage</td>
+                            <td>Cell containing the empty message.</td>
+                        </tr>
+                        <tr>
+                            <td>p-treetable-toggler</td>
+                            <td>Toggler icon.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <DocSectionCode code={code} />
         </>
     );
 }

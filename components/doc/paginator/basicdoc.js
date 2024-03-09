@@ -1,55 +1,59 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Paginator } from '@/components/lib/paginator/Paginator';
 import { useState } from 'react';
-import { Paginator } from '../../lib/paginator/Paginator';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [basicFirst, setBasicFirst] = useState(0);
-    const [basicRows, setBasicRows] = useState(10);
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
 
-    const onBasicPageChange = (event) => {
-        setBasicFirst(event.first);
-        setBasicRows(event.rows);
+    const onPageChange = (event) => {
+        setFirst(event.first);
+        setRows(event.rows);
     };
 
     const code = {
         basic: `
-<Paginator first={basicFirst} rows={basicRows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
+<Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Paginator } from 'primereact/paginator';
 
-export default function BasicDoc() {
-    const [basicFirst, setBasicFirst] = useState(0);
-    const [basicRows, setBasicRows] = useState(10);
+export default function BasicDemo() {
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
 
-    const onBasicPageChange = (event) => {
-        setBasicFirst(event.first);
-        setBasicRows(event.rows);
+    const onPageChange = (event) => {
+        setFirst(event.first);
+        setRows(event.rows);
     };
 
     return (
-        <Paginator first={basicFirst} rows={basicRows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
-    )
+        <div className="card">
+            <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange} />
+        </div>
+    );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Paginator } from 'primereact/paginator';
+import React, { useState } from "react";
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 
-export default function BasicDoc() {
-    const [basicFirst, setBasicFirst] = useState(0);
-    const [basicRows, setBasicRows] = useState(10);
+export default function BasicDemo() {
+    const [first, setFirst] = useState<number>(0);
+    const [rows, setRows] = useState<number>(10);
 
-    const onBasicPageChange = (event) => {
-        setBasicFirst(event.first);
-        setBasicRows(event.rows);
+    const onPageChange = (event: PaginatorPageChangeEvent) => {
+        setFirst(event.first);
+        setRows(event.rows);
     };
 
     return (
-        <Paginator first={basicFirst} rows={basicRows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
-    )
+        <div className="card">
+            <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange} />
+        </div>
+    );
 }
         `
     };
@@ -57,10 +61,13 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Paginator is a generic widget to display content in paged format.</p>
+                <p>
+                    Paginator is used as a controlled component with <i>first</i>, <i>rows</i> and <i>onPageChange</i> properties to manage the first index and number of records to display per page. Total number of records need to be with{' '}
+                    <i>totalRecords</i> property. Default template includes a dropdown to change the <i>rows</i> so <i>rowsPerPageOptions</i> is also necessary for the dropdown options.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Paginator first={basicFirst} rows={basicRows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
+            <div className="card">
+                <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10, 20, 30]} onPageChange={onPageChange} />
             </div>
             <DocSectionCode code={code} />
         </>

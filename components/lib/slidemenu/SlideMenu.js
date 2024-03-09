@@ -1,20 +1,49 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 
 export const SlideMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = SlideMenuBase.getProps(inProps, context);
+
+        const [idState, setIdState] = React.useState(props.id);
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
+        const { ptm, cx, sx, isUnstyled } = SlideMenuBase.setMetaData({
+            props,
+            state: {
+                id: idState,
+                visible: visibleState,
+                level: levelState
+            }
+        });
+
+        useHandleStyle(SlideMenuBase.css.styles, isUnstyled, { name: 'slidemenu' });
+
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const backward = React.useRef(null);
         const slideMenuContent = React.useRef(null);
+        const isCloseOnEscape = visibleState && props.popup && props.closeOnEscape;
+        const slideMenuDisplayOrder = useDisplayOrder('slide-menu', isCloseOnEscape);
+
+        useGlobalOnEscapeKey({
+            callback: (event) => {
+                hide(event);
+            },
+            when: isCloseOnEscape && slideMenuDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.SLIDE_MENU, slideMenuDisplayOrder]
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
@@ -62,9 +91,10 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
+            DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
         };
 
@@ -81,6 +111,12 @@ export const SlideMenu = React.memo(
             ZIndexUtils.clear(menuRef.current);
             setLevelState(0);
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         useUpdateEffect(() => {
             setLevelState(0);
@@ -106,50 +142,103 @@ export const SlideMenu = React.memo(
         }));
 
         const createBackward = () => {
-            const className = classNames('p-slidemenu-backward', {
-                'p-hidden': levelState === 0
-            });
+            const previousIconProps = mergeProps(
+                {
+                    className: cx('previousIcon')
+                },
+                ptm('previousIcon')
+            );
+            const icon = props.backIcon || <ChevronLeftIcon {...previousIconProps} />;
+            const backIcon = IconUtils.getJSXIcon(icon, { ...previousIconProps }, { props });
+            const previousLabelProps = mergeProps(ptm('previousLabel'));
+            const previousProps = mergeProps(
+                {
+                    ref: backward,
+                    className: cx('previous', { levelState }),
+                    onClick: (e) => navigateBack(e)
+                },
+                ptm('previous')
+            );
 
             return (
-                <div ref={backward} className={className} onClick={navigateBack}>
-                    <span className="p-slidemenu-backward-icon pi pi-fw pi-chevron-left"></span>
-                    <span>{props.backLabel}</span>
+                <div {...previousProps}>
+                    {backIcon}
+                    <span {...previousLabelProps}>{props.backLabel}</span>
                 </div>
             );
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, SlideMenu.defaultProps);
-            const className = classNames(
-                'p-slidemenu p-component',
-                {
-                    'p-slidemenu-overlay': props.popup
-                },
-                props.className
-            );
             const wrapperStyle = { height: props.viewportHeight + 'px' };
             const backward = createBackward();
+            const rootProps = mergeProps(
+                {
+                    ref: menuRef,
+                    id: props.id,
+                    className: cx('root'),
+                    style: props.style,
+                    onClick: (e) => onPanelClick(e)
+                },
+                SlideMenuBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const wrapperProps = mergeProps(
+                {
+                    className: cx('wrapper'),
+                    style: wrapperStyle
+                },
+                ptm('wrapper')
+            );
+
+            const contentProps = mergeProps(
+                {
+                    ref: slideMenuContent,
+                    className: cx('content')
+                },
+                ptm('content')
+            );
+
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: !props.popup || visibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExit,
+                    onExited
+                },
+                ptm('transition')
+            );
 
             return (
-                <CSSTransition
-                    nodeRef={menuRef}
-                    classNames="p-connected-overlay"
-                    in={!props.popup || visibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
-                    <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <div className="p-slidemenu-wrapper" style={wrapperStyle}>
-                            <div className="p-slidemenu-content" ref={slideMenuContent}>
-                                <SlideMenuSub menuProps={props} model={props.model} root index={0} menuWidth={props.menuWidth} effectDuration={props.effectDuration} level={levelState} parentActive={levelState === 0} onForward={navigateForward} />
+                <CSSTransition nodeRef={menuRef} {...transitionProps}>
+                    <div {...rootProps}>
+                        <div {...wrapperProps}>
+                            <div {...contentProps}>
+                                <SlideMenuSub
+                                    id={idState}
+                                    hostName="SlideMenu"
+                                    menuProps={props}
+                                    model={props.model}
+                                    root
+                                    index={0}
+                                    menuWidth={props.menuWidth}
+                                    effectDuration={props.effectDuration}
+                                    level={levelState}
+                                    parentActive={levelState === 0}
+                                    onForward={navigateForward}
+                                    submenuIcon={props.submenuIcon}
+                                    ptm={ptm}
+                                    cx={cx}
+                                    sx={sx}
+                                />
                             </div>
-                            {backward}
                         </div>
+                        {backward}
                     </div>
                 </CSSTransition>
             );
@@ -162,23 +251,3 @@ export const SlideMenu = React.memo(
 );
 
 SlideMenu.displayName = 'SlideMenu';
-SlideMenu.defaultProps = {
-    __TYPE: 'SlideMenu',
-    appendTo: null,
-    autoZIndex: true,
-    backLabel: 'Back',
-    baseZIndex: 0,
-    className: null,
-    easing: 'ease-out',
-    effectDuration: 250,
-    id: null,
-    menuWidth: 190,
-    model: null,
-    onHide: null,
-    onShow: null,
-    onNavigate: null,
-    popup: false,
-    style: null,
-    transitionOptions: null,
-    viewportHeight: 175
-};

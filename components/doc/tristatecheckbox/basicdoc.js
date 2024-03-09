@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TriStateCheckbox } from '@/components/lib/tristatecheckbox/TriStateCheckbox';
 import { useState } from 'react';
-import { TriStateCheckbox } from '../../lib/tristatecheckbox/TriStateCheckbox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState(null);
@@ -9,29 +9,34 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
-
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState(null);
 
     return (
-        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+        <div className="card flex flex-column align-items-center gap-3">
+            <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+            <label>{String(value)}</label>
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { TriStateCheckbox, TriStateCheckboxChangeParams } from 'primereact/tristatecheckbox';
+import React, { useState } from "react";
+import { TriStateCheckbox, TriStateCheckboxChangeEvent } from 'primereact/tristatecheckbox';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState<boolean | undefined | null>(null);
 
     return (
-        <TriStateCheckbox value={value} onChange={(e : TriStateCheckboxChangeParams) => setValue(e.value)} />
+        <div className="card flex flex-column align-items-center gap-3">
+            <TriStateCheckbox value={value} onChange={(e : TriStateCheckboxChangeEvent) => setValue(e.value)} />
+            <label>{String(value)}</label>
+        </div>
     );
 }
         `
@@ -41,13 +46,11 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    TriStateCheckbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                    TriStateCheckbox is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center">
-                <div className="mr-2">
-                    <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
-                </div>
+            <div className="card flex flex-column align-items-center gap-3">
+                <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                 <label>{String(value)}</label>
             </div>
             <DocSectionCode code={code} />

@@ -1,35 +1,32 @@
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 
 export function DelayDoc(props) {
     const code = {
         basic: `
-<InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
+<Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
         `,
         javascript: `
-import { Tooltip } from 'primereact/tooltip';
-import { InputText } from 'primereact/inputtext';
+import React from 'react'; 
+import { Button } from 'primereact/button';
 
-export default function DelayDoc() {
-
+export default function DelayDemo() {
     return (
-        <div>
-            <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
+        <div className="card flex justify-content-center">
+            <Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
         </div>
     );
 }
         `,
         typescript: `
-import { Tooltip } from 'primereact/tooltip';
-import { InputText } from 'primereact/inputtext';
+import React from 'react'; 
+import { Button } from 'primereact/button';
 
-export default function DelayDoc() {
-    
+export default function DelayDemo() {
     return (
-        <div>
-            <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
+        <div className="card flex justify-content-center">
+            <Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
         </div>
     );
 }
@@ -40,11 +37,11 @@ export default function DelayDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.
+                    Adding delays to the show and hide events are defined with <i>showDelay</i> and <i>hideDelay</i> options respectively.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} />
+                <Button tooltip="Confirm to proceed" tooltipOptions={{ showDelay: 1000, hideDelay: 300 }} label="Save" />
             </div>
             <DocSectionCode code={code} />
         </>

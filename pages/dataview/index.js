@@ -1,11 +1,16 @@
-import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { ImportDoc } from '../../components/doc/dataview/importdoc';
-import { BasicDoc } from '../../components/doc/dataview/basicdoc';
-import { ApiDoc } from '../../components/doc/dataview/apidoc';
-import { LazyDataViewDoc } from '../../components/doc/dataview/lazydoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/dataview/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/dataview/basicdoc';
+import { ImportDoc } from '@/components/doc/dataview/importdoc';
+import { LayoutDoc } from '@/components/doc/dataview/layoutdoc';
+import { LoadingDoc } from '@/components/doc/dataview/loadingdoc';
+import { PaginationDoc } from '@/components/doc/dataview/paginationdoc';
+import { PTDoc } from '@/components/doc/dataview/pt/ptdoc';
+import { Wireframe } from '@/components/doc/dataview/pt/wireframe';
+import { SortingDoc } from '@/components/doc/dataview/sortingdoc';
+import { StyledDoc } from '@/components/doc/dataview/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/dataview/theming/tailwinddoc';
 
 const DataViewDemo = () => {
     const docs = [
@@ -20,75 +25,86 @@ const DataViewDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDataViewDoc
+            id: 'pagination',
+            label: 'Pagination',
+            component: PaginationDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'sorting',
+            label: 'Sorting',
+            component: SortingDoc
+        },
+        {
+            id: 'layout',
+            label: 'Layout',
+            component: LayoutDoc
+        },
+        {
+            id: 'loading',
+            label: 'Loading',
+            component: LoadingDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.dataview.options',
+            label: 'DataView PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.dataviewlayoutoptions.options',
+            label: 'DataViewLayoutOptions PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'propertiesofdataviewlayout',
-                    label: 'Properties of DataViewLayoutOptions'
-                },
-                {
-                    id: 'eventsofdataview',
-                    label: 'Events of DataViewLayoutOptions'
-                },
-                {
-                    id: 'paginator',
-                    label: 'Paginator'
-                },
-                {
-                    id: 'sorting',
-                    label: 'Sorting'
-                },
-                {
-                    id: 'lazyloading',
-                    label: 'Lazy Loading'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React DataView Component</title>
-                <meta name="description" content="DataView displays data in grid or list layout with pagination and sorting features." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataView</h1>
-                    <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-                </div>
-
-                <DocActions github="dataview/index.js" />
-            </div>
-
-            <div className="content-section doc dataview-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React DataView Component"
+            header="DataView"
+            description="DataView displays data in grid or list layout with pagination and sorting features."
+            componentDocs={docs}
+            apiDocs={['DataView']}
+            className="dataview-demo"
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

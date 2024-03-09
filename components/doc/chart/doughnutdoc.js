@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chart } from '@/components/lib/chart/Chart';
+import { useEffect, useState } from 'react';
 
 export function DoughnutChartDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -9,121 +9,111 @@ export function DoughnutChartDoc(props) {
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
         const data = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
-                    backgroundColor: [documentStyle.getPropertyValue('--pink-500'), documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--ink-400'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
+                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: textColor
-                    }
-                }
-            }
+            cutout: '60%'
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     const code = {
         basic: `
-<Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+<Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function DoughnutChartDoc() {
+export default function DoughnutChartDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
         const data = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
-                    backgroundColor: [documentStyle.getPropertyValue('--pink-500'), documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--ink-400'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--blue-500'), 
+                        documentStyle.getPropertyValue('--yellow-500'), 
+                        documentStyle.getPropertyValue('--green-500')
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--blue-400'), 
+                        documentStyle.getPropertyValue('--yellow-400'), 
+                        documentStyle.getPropertyValue('--green-400')
+                    ]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: textColor
-                    }
-                }
-            }
+            cutout: '60%'
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
-        <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function DoughnutChartDoc() {
+export default function DoughnutChartDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
         const data = {
             labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
-                    backgroundColor: [documentStyle.getPropertyValue('--pink-500'), documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--ink-400'), documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
+                    backgroundColor: [
+                        documentStyle.getPropertyValue('--blue-500'), 
+                        documentStyle.getPropertyValue('--yellow-500'), 
+                        documentStyle.getPropertyValue('--green-500')
+                    ],
+                    hoverBackgroundColor: [
+                        documentStyle.getPropertyValue('--blue-400'), 
+                        documentStyle.getPropertyValue('--yellow-400'), 
+                        documentStyle.getPropertyValue('--green-400')
+                    ]
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: textColor
-                    }
-                }
-            }
+            cutout: '60%'
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
-        <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+        <div className="card flex justify-content-center">
+            <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `
@@ -135,9 +125,9 @@ export default function DoughnutChartDoc() {
                 <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Chart type="doughnut" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+                <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>
     );
 }

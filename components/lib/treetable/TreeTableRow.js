@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 
 export const TreeTableRow = React.memo((props) => {
@@ -9,7 +15,65 @@ export const TreeTableRow = React.memo((props) => {
     const checkboxRef = React.useRef(null);
     const checkboxBoxRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
+    const mergeProps = useMergeProps();
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
+
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
+    };
+
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const { ptm, ptmo, cx, isUnstyled } = props.ptCallbacks;
+
+    const getColumnPTOptions = (column, key) => {
+        const cProps = getColumnProps(column);
+        const columnMetadata = {
+            props: cProps,
+            parent: props.metaData,
+            hostName: props.hostName,
+            context: {
+                index: props.rowIndex,
+                selectable: props.node.selectable !== false,
+                selected: isSelected(),
+                frozen: getColumnProp(column, 'frozen'),
+                scrollable: props.metaData.props.scrollable
+            }
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+    };
+
+    const getColumnCheckboxPTOptions = (column, key) => {
+        const cProps = getColumnProps(column);
+
+        const columnMetadata = {
+            props: cProps,
+            parent: props.metaData,
+            hostName: props.hostName,
+            context: {
+                checked: isChecked(),
+                partialChecked: isPartialChecked()
+            }
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+    };
+
+    const getRowPTOptions = (key) => {
+        const rowMetadata = {
+            hostName: props.hostName,
+            context: {
+                index: props.index,
+                selected: isSelected(),
+                selectable: props.node.selectable !== false,
+                frozen: getColumnProp('frozen'),
+                scrollable: props.metaData.props.scrollable,
+                showGridlines: props.metaData.props.showGridlines
+            }
+        };
+
+        return ptm(key, rowMetadata);
+    };
 
     const isLeaf = () => {
         return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
@@ -22,14 +86,15 @@ export const TreeTableRow = React.memo((props) => {
         event.stopPropagation();
     };
 
-    const expand = (event) => {
+    const expand = (event, navigateFocusToChild = false) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
 
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
             originalEvent: event,
-            value: expandedKeys
+            value: expandedKeys,
+            navigateFocusToChild
         });
 
         invokeToggleEvents(event, true);
@@ -76,6 +141,18 @@ export const TreeTableRow = React.memo((props) => {
 
     const onTouchEnd = () => {
         nodeTouched.current = true;
+    };
+
+    const onMouseEnter = (event) => {
+        if (props.onRowMouseEnter) {
+            props.onRowMouseEnter({ originalEvent: event, node: props.node, index: props.rowIndex });
+        }
+    };
+
+    const onMouseLeave = (event) => {
+        if (props.onRowMouseLeave) {
+            props.onRowMouseLeave({ originalEvent: event, node: props.node, index: props.rowIndex });
+        }
     };
 
     const onCheckboxChange = (event) => {
@@ -131,35 +208,38 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const onCheckboxFocus = () => {
-        DomHandler.addClass(checkboxBoxRef.current, 'p-focus');
-        DomHandler.addClass(checkboxRef.current, 'p-checkbox-focused');
+        !isUnstyled() && DomHandler.addClass(checkboxBoxRef.current, 'p-focus');
+        !isUnstyled() && DomHandler.addClass(checkboxRef.current, 'p-checkbox-focused');
     };
 
     const onCheckboxBlur = () => {
-        DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
-        DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
+        !isUnstyled() && DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
+        !isUnstyled() && DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
     };
 
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
-        let childPartialSelected = false;
 
         for (let child of props.node.children) {
             if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
-            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked) childPartialSelected = true;
         }
 
-        if (check && checkedChildCount === props.node.children.length) {
-            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
-        } else {
-            if (!check) {
-                delete selectionKeys[props.node.key];
-            }
+        const parentKey = props.node.key;
+        const children = ObjectUtils.findChildrenByKey(props.originalOptions, parentKey);
 
-            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length)) selectionKeys[props.node.key] = { checked: false, partialChecked: true };
-            else selectionKeys[props.node.key] = { checked: false, partialChecked: false };
+        let isParentPartiallyChecked = children.some((ele) => ele.key in selectionKeys);
+        let isCompletelyChecked = children.every((ele) => ele.key in selectionKeys && selectionKeys[ele.key].checked);
+
+        if (isParentPartiallyChecked && !isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: true };
+        } else if (isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: true, partialChecked: false };
+        } else if (check) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: false };
+        } else {
+            delete selectionKeys[parentKey];
         }
 
         if (props.propagateSelectionUp && props.onPropagateUp) {
@@ -196,67 +276,201 @@ export const TreeTableRow = React.memo((props) => {
         }
     };
 
-    const onKeyDown = (event) => {
-        if (event.target === elementRef.current) {
-            const rowElement = event.currentTarget;
+    const onKeyDown = (event, item) => {
+        switch (event.code) {
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-            switch (event.which) {
-                //down arrow
-                case 40:
-                    const nextRow = rowElement.nextElementSibling;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                    if (nextRow) {
-                        nextRow.focus();
-                    }
+            case 'ArrowLeft':
+                onArrowLeftKey(event);
+                break;
 
-                    event.preventDefault();
-                    break;
+            case 'ArrowRight':
+                onArrowRightKey(event);
+                break;
 
-                //up arrow
-                case 38:
-                    const previousRow = rowElement.previousElementSibling;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                    if (previousRow) {
-                        previousRow.focus();
-                    }
+            case 'End':
+                onEndKey(event);
+                break;
 
-                    event.preventDefault();
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                if (!DomHandler.isClickable(event.target)) {
+                    onEnterKey(event, item);
+                }
 
-                //right arrow
-                case 39:
-                    if (!expanded) {
-                        expand(event);
-                    }
+                break;
 
-                    event.preventDefault();
-                    break;
+            case 'Tab':
+                onTabKey(event);
+                break;
 
-                //left arrow
-                case 37:
-                    if (expanded) {
-                        collapse(event);
-                    }
+            default:
+                break;
+        }
+    };
 
-                    event.preventDefault();
-                    break;
+    const onArrowDownKey = (event) => {
+        const nextElementSibling = event.currentTarget.nextElementSibling;
 
-                //enter
-                case 13:
-                    onClick(event);
-                    event.preventDefault();
-                    break;
+        nextElementSibling && focusRowChange(event.currentTarget, nextElementSibling);
 
-                default:
-                    //no op
-                    break;
+        event.preventDefault();
+    };
+
+    const onArrowUpKey = (event) => {
+        const previousElementSibling = event.currentTarget.previousElementSibling;
+
+        previousElementSibling && focusRowChange(event.currentTarget, previousElementSibling);
+
+        event.preventDefault();
+    };
+
+    const onArrowRightKey = (event) => {
+        const ishiddenIcon = DomHandler.findSingle(event.currentTarget, 'button').style.visibility === 'hidden';
+        const togglerElement = DomHandler.findSingle(elementRef.current, '[data-pc-section="rowtoggler"]');
+
+        if (ishiddenIcon) return;
+
+        // !expanded && togglerElement.click();
+        !expanded && expand(event, true);
+
+        // this.$nextTick(() => {
+        //     this.onArrowDownKey(event);
+        // });
+
+        event.preventDefault();
+    };
+
+    const onArrowLeftKey = (event) => {
+        if (props.level === 0 && !expanded) {
+            return;
+        }
+
+        const currentTarget = event.currentTarget;
+        const ishiddenIcon = DomHandler.findSingle(currentTarget, 'button').style.visibility === 'hidden';
+        const togglerElement = DomHandler.findSingle(currentTarget, '[data-pc-section="rowtoggler"]');
+
+        if (expanded && !ishiddenIcon) {
+            // togglerElement.click();
+            collapse(event);
+
+            return;
+        }
+
+        const target = findBeforeClickableNode(currentTarget);
+
+        target && focusRowChange(currentTarget, target);
+    };
+
+    const onHomeKey = (event) => {
+        const findFirstElement = DomHandler.findSingle(event.currentTarget.parentElement, `tr[aria-level="${props.level + 1}"]`);
+
+        findFirstElement && DomHandler.focus(findFirstElement);
+
+        event.preventDefault();
+    };
+
+    const onEndKey = (event) => {
+        const nodes = DomHandler.find(event.currentTarget.parentElement, `tr[aria-level="${props.level + 1}"]`);
+        const findFirstElement = nodes[nodes.length - 1];
+
+        DomHandler.focus(findFirstElement);
+
+        event.preventDefault();
+    };
+
+    const onEnterKey = (event) => {
+        event.preventDefault();
+        setTabIndexForSelectionMode(event, nodeTouched.current);
+
+        if (props.selectionMode === 'checkbox') {
+            // this.toggleCheckbox();
+            onCheckboxChange(event);
+
+            return;
+        }
+
+        // this.$emit('node-click', {
+        //     originalEvent: event,
+        //     nodeTouched: nodeTouched.current,
+        //     node: this.node
+        // });
+
+        props.onRowClick(event, props.node);
+
+        nodeTouched.current = false;
+    };
+
+    const onTabKey = () => {
+        const rows = [...DomHandler.find(elementRef.current.parentElement, 'tr')];
+        const hasSelectedRow = rows.some((row) => DomHandler.getAttribute(row, 'data-p-highlight') || row.getAttribute('aria-checked') === 'true');
+
+        rows.forEach((row) => {
+            row.tabIndex = -1;
+        });
+
+        if (hasSelectedRow) {
+            const selectedNodes = rows.filter((node) => DomHandler.getAttribute(node, 'data-p-highlight') || node.getAttribute('aria-checked') === 'true');
+
+            selectedNodes[0].tabIndex = 0;
+
+            return;
+        }
+
+        rows[0].tabIndex = 0;
+    };
+
+    const focusRowChange = (firstFocusableRow, currentFocusedRow) => {
+        firstFocusableRow.tabIndex = '-1';
+        currentFocusedRow.tabIndex = '0';
+        DomHandler.focus(currentFocusedRow);
+    };
+
+    const findBeforeClickableNode = (node) => {
+        const prevNode = node.previousElementSibling;
+
+        if (prevNode) {
+            const prevNodeButton = prevNode.querySelector('button');
+
+            if (prevNodeButton && prevNodeButton.style.visibility !== 'hidden') {
+                return prevNode;
+            }
+
+            return findBeforeClickableNode(prevNode);
+        }
+
+        return null;
+    };
+
+    const setTabIndexForSelectionMode = (event, nodeTouched) => {
+        if (props.selectionMode !== null) {
+            const elements = [...DomHandler.find(elementRef.current.parentElement, 'tr')];
+
+            event.currentTarget.tabIndex = nodeTouched === false ? -1 : 0;
+
+            if (elements.every((element) => element.tabIndex === -1)) {
+                elements[0].tabIndex = 0;
             }
         }
     };
 
     const isSelected = () => {
-        if ((props.selectionMode === 'single' || props.selectionMode === 'multiple') && props.selectionKeys) return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
-        else return false;
+        if (props.selectionMode === 'single' || ((props.selectionMode === 'multiple' || props.selectionMode === 'checkbox') && props.selectionKeys)) {
+            return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
+        }
+
+        return false;
     };
 
     const isChecked = () => {
@@ -267,33 +481,104 @@ export const TreeTableRow = React.memo((props) => {
         return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].partialChecked : false;
     };
 
-    const createToggler = () => {
+    const createToggler = (column) => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
-        const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
-        const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
+        const rowTogglerIconProps = mergeProps(
+            {
+                className: cx('rowTogglerIcon'),
+                'aria-hidden': true
+            },
+            getColumnPTOptions(column, 'rowTogglerIcon')
+        );
+        const icon = expanded ? <ChevronDownIcon {...rowTogglerIconProps} /> : <ChevronRightIcon {...rowTogglerIconProps} />;
+        const togglerIcon = IconUtils.getJSXIcon(props.togglerIcon || icon, { ...rowTogglerIconProps }, { props });
+        const rowTogglerProps = mergeProps(
+            {
+                type: 'button',
+                className: cx('rowToggler'),
+                onClick: (e) => onTogglerClick(e),
+                tabIndex: -1,
+                style: { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' },
+                'aria-label': label
+            },
+            getColumnPTOptions(column, 'rowToggler')
+        );
 
-        return (
-            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style} aria-label={label}>
-                <i className={iconClassName} aria-hidden="true"></i>
+        let content = (
+            <button {...rowTogglerProps}>
+                {togglerIcon}
                 <Ripple />
             </button>
         );
+
+        if (props.togglerTemplate) {
+            const defaultContentOptions = {
+                onClick: onTogglerClick,
+                containerClassName: 'p-treetable-toggler p-link',
+                iconClassName: 'p-treetable-toggler-icon',
+                element: content,
+                props,
+                expanded,
+                buttonStyle: { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' }
+            };
+
+            content = ObjectUtils.getJSXElement(props.togglerTemplate, props.node, defaultContentOptions);
+        }
+
+        return content;
     };
 
-    const createCheckbox = () => {
+    const createCheckbox = (column) => {
         if (props.selectionMode === 'checkbox' && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked });
-            const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
+            const checboxIconProps = mergeProps(
+                {
+                    className: cx('checkboxIcon')
+                },
+                getColumnCheckboxPTOptions(column, 'checkboxIcon')
+            );
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checboxIconProps} /> : null;
+            const checkIcon = IconUtils.getJSXIcon(icon, { ...checboxIconProps }, { props, checked, partialChecked });
+            const hiddenInputProps = mergeProps(
+                {
+                    type: 'checkbox',
+                    onFocus: (e) => onCheckboxFocus(e),
+                    onBlur: (e) => onCheckboxBlur(e)
+                },
+                getColumnCheckboxPTOptions(column, 'hiddenInput')
+            );
+            const checkboxWrapperProps = mergeProps(
+                {
+                    className: cx('checkboxWrapper'),
+                    onClick: (e) => onCheckboxChange(e),
+                    role: 'checkbox',
+                    'aria-checked': checked
+                },
+                getColumnCheckboxPTOptions(column, 'checkboxWrapper')
+            );
+
+            const hiddenInputWrapperProps = mergeProps(
+                {
+                    className: 'p-hidden-accessible'
+                },
+                getColumnCheckboxPTOptions(column, 'hiddenInputWrapper')
+            );
+
+            const checkboxProps = mergeProps(
+                {
+                    className: cx('checkbox', { checked, partialChecked })
+                },
+                getColumnCheckboxPTOptions(column, 'checkbox')
+            );
 
             return (
-                <div className="p-checkbox p-treetable-checkbox p-component" ref={checkboxRef} onClick={onCheckboxChange} role="checkbox" aria-checked={checked}>
-                    <div className="p-hidden-accessible">
-                        <input type="checkbox" onFocus={onCheckboxFocus} onBlur={onCheckboxBlur} />
+                <div ref={checkboxRef} {...checkboxWrapperProps}>
+                    <div {...hiddenInputWrapperProps}>
+                        <input {...hiddenInputProps} />
                     </div>
-                    <div className={className} ref={checkboxBoxRef}>
-                        <span className={icon}></span>
+                    <div ref={checkboxBoxRef} {...checkboxProps}>
+                        {checkIcon}
                     </div>
                 </div>
             );
@@ -302,16 +587,33 @@ export const TreeTableRow = React.memo((props) => {
         }
     };
 
-    const createCell = (column) => {
+    const createCell = (column, index) => {
         let toggler, checkbox;
 
-        if (column.props.expander) {
-            toggler = createToggler();
-            checkbox = createCheckbox();
+        if (getColumnProp(column, 'hidden')) {
+            return null;
+        }
+
+        if (getColumnProp(column, 'expander')) {
+            toggler = createToggler(column);
+            checkbox = createCheckbox(column);
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey || column.props.field} {...column.props} column={column} selectOnEdit={props.selectOnEdit} selected={isSelected()} node={props.node} rowIndex={props.rowIndex}>
+            <TreeTableBodyCell
+                hostName={props.hostName}
+                key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
+                {...ColumnBase.getCProps(column)}
+                index={index}
+                column={column}
+                selectOnEdit={props.selectOnEdit}
+                selected={isSelected()}
+                node={props.node}
+                rowData={props.node && props.node.data}
+                rowIndex={props.rowIndex}
+                ptCallbacks={props.ptCallbacks}
+                metaData={props.metaData}
+            >
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
@@ -323,14 +625,18 @@ export const TreeTableRow = React.memo((props) => {
             return props.node.children.map((childNode, index) => {
                 return (
                     <TreeTableRow
-                        key={childNode.key || JSON.stringify(childNode.data)}
+                        hostName={props.hostName}
+                        key={`${childNode.key || JSON.stringify(childNode.data)}_${index}`}
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}
                         node={childNode}
+                        originalOptions={props.originalOptions}
+                        checkboxIcon={props.checkboxIcon}
                         columns={props.columns}
                         expandedKeys={props.expandedKeys}
                         selectOnEdit={props.selectOnEdit}
                         onToggle={props.onToggle}
+                        togglerTemplate={props.togglerTemplate}
                         onExpand={props.onExpand}
                         onCollapse={props.onCollapse}
                         selectionMode={props.selectionMode}
@@ -338,6 +644,8 @@ export const TreeTableRow = React.memo((props) => {
                         onSelectionChange={props.onSelectionChange}
                         metaKeySelection={props.metaKeySelection}
                         onRowClick={props.onRowClick}
+                        onRowMouseEnter={props.onRowMouseEnter}
+                        onRowMouseLeave={props.onRowMouseLeave}
                         onSelect={props.onSelect}
                         onUnselect={props.onUnselect}
                         propagateSelectionUp={props.propagateSelectionUp}
@@ -347,6 +655,8 @@ export const TreeTableRow = React.memo((props) => {
                         contextMenuSelectionKey={props.contextMenuSelectionKey}
                         onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                         onContextMenu={props.onContextMenu}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={props.metaData}
                     />
                 );
             });
@@ -357,22 +667,40 @@ export const TreeTableRow = React.memo((props) => {
 
     const cells = props.columns.map(createCell);
     const children = createChildren();
-    let className = {
-        'p-highlight': isSelected(),
-        'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key
-    };
+    let rowClassName = null;
 
     if (props.rowClassName) {
-        let rowClassName = props.rowClassName(props.node);
-
-        className = { ...className, ...rowClassName };
+        rowClassName = props.rowClassName(props.node);
     }
 
-    className = classNames(className, props.node.className);
+    const rowProps = mergeProps(
+        {
+            tabIndex: 0,
+            className: classNames(cx('row', { isSelected, rowProps: props })),
+            'aria-expanded': expanded,
+            'aria-level': props.level + 1,
+            'aria-posinset': props.ariaPosInSet,
+            'aria-setsize': props.ariaSetSize,
+            'aria-checked': isChecked(),
+            'aria-selected': isSelected(),
+            style: props.node.style,
+            onClick: (e) => onClick(e),
+            onTouchEnd: (e) => onTouchEnd(e),
+            onContextMenu: (e) => onRightClick(e),
+            onKeyDown: (e) => onKeyDown(e),
+            onMouseEnter: (e) => onMouseEnter(e),
+            onMouseLeave: (e) => onMouseLeave(e),
+            'data-p-highlight': isSelected()
+        },
+        getRowPTOptions('row'),
+        {
+            className: classNames(rowClassName, props.node.className) // #5983 must be last so all unstyled merging takes place first
+        }
+    );
 
     return (
         <>
-            <tr ref={elementRef} tabIndex={0} className={className} style={props.node.style} onClick={onClick} onTouchEnd={onTouchEnd} onContextMenu={onRightClick} onKeyDown={onKeyDown}>
+            <tr ref={elementRef} {...rowProps}>
                 {cells}
             </tr>
             {children}

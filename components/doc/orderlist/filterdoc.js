@@ -1,113 +1,134 @@
-import { useState, useEffect } from 'react';
-import { OrderList } from '../../lib/orderlist/OrderList';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { OrderList } from '@/components/lib/orderlist/OrderList';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function FilterDoc(props) {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
+        ProductService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                    <img src={`images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
+            <div className="flex flex-wrap p-2 align-items-center gap-3">
+                <img className="w-4rem shadow-2 flex-shrink-0 border-round" src={`https://primefaces.org/cdn/primereact/images/product/${item.image}`} alt={item.name} />
+                <div className="flex-1 flex flex-column gap-2 xl:mr-8">
+                    <span className="font-bold">{item.name}</span>
+                    <div className="flex align-items-center gap-2">
+                        <i className="pi pi-tag text-sm"></i>
+                        <span>{item.category}</span>
+                    </div>
                 </div>
-                <div className="product-list-detail">
-                    <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
-                </div>
-                <div className="product-list-action">
-                    <h6 className="mb-2">${item.price}</h6>
-                    <span className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}>{item.inventoryStatus}</span>
-                </div>
+                <span className="font-bold text-900">${item.price}</span>
             </div>
         );
     };
 
     const code = {
         basic: `
-<OrderList value={products} filter filterBy="name" itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)} />
+<OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
         `,
         javascript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-export default function FilterDoc() {
+export default function FilterDemo() {
     const [products, setProducts] = useState([]);
-    const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsSmall().then((data) => setProducts(data));
+    }, []);
 
     const itemTemplate = (item) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+            <div className="flex flex-wrap p-2 align-items-center gap-3">
+                <img className="w-4rem shadow-2 flex-shrink-0 border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} />
+                <div className="flex-1 flex flex-column gap-2 xl:mr-8">
+                    <span className="font-bold">{item.name}</span>
+                    <div className="flex align-items-center gap-2">
+                        <i className="pi pi-tag text-sm"></i>
+                        <span>{item.category}</span>
+                    </div>
                 </div>
-                <div className="product-list-detail">
-                    <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
-                </div>
-                <div className="product-list-action">
-                <h6 className="mb-2">\${item.price}</h6>
-                    <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
-                </div>
+                <span className="font-bold text-900">\${item.price}</span>
             </div>
         );
     };
     
     return (
-        <OrderList value={products} filter filterBy="name" itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)} />
+        <div className="card xl:flex xl:justify-content-center">
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from './service/ProductService';
 
-export default function FilterDoc() {
-    const [products, setProducts] = useState([]);
-    const productService = new ProductService();
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: 'string',
+    rating: number;
+}
+
+export default function FilterDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        productService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsSmall().then((data) => setProducts(data));
+    }, []);
 
-    const itemTemplate = (item) => {
+    const itemTemplate = (item: Product) => {
         return (
-            <div className="product-item">
-                <div className="image-container">
-                <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+            <div className="flex flex-wrap p-2 align-items-center gap-3">
+                <img className="w-4rem shadow-2 flex-shrink-0 border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} />
+                <div className="flex-1 flex flex-column gap-2 xl:mr-8">
+                    <span className="font-bold">{item.name}</span>
+                    <div className="flex align-items-center gap-2">
+                        <i className="pi pi-tag text-sm"></i>
+                        <span>{item.category}</span>
+                    </div>
                 </div>
-                <div className="product-list-detail">
-                    <h5 className="mb-2">{item.name}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.category}</span>
-                </div>
-                <div className="product-list-action">
-                <h6 className="mb-2">\${item.price}</h6>
-                    <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
-                </div>
+                <span className="font-bold text-900">\${item.price}</span>
             </div>
         );
     };
-
+    
     return (
-        <OrderList value={products} filter filterBy="name" itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)} />
+        <div className="card xl:flex xl:justify-content-center">
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+        </div>
     )
 }
+        `,
+        data: `
+/* ProductService */        
+{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5
+},
+...
         `
     };
 
@@ -115,14 +136,14 @@ export default function FilterDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Items can be filtered using an input field by enabling the <i>filter</i> property. By default filtering is done against label of the items and <i>filterBy</i> property is available to choose one or more properties of the options.
-                    In addition <i>filterMatchMode</i> can be utilized to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+                    Items are filtered using an input field by enabling the <i>filter</i> property. Filter value is checked against the property of an object configured with the <i>filterBy</i> property and the filtering match mode with{' '}
+                    <i>filterMatchMode</i> e.g. <i>contains</i>.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <OrderList value={products} filter filterBy="name" itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)} />
+            <div className="card xl:flex xl:justify-content-center">
+                <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['ProductService']} />
         </>
     );
 }

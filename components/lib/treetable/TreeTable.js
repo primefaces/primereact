@@ -1,14 +1,23 @@
 import * as React from 'react';
-import PrimeReact, { FilterMatchMode, FilterService } from '../api/Api';
-import { useEventListener } from '../hooks/Hooks';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useEventListener, useUpdateEffect, useMergeProps } from '../hooks/Hooks';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { TreeTableBase } from './TreeTableBase';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
 
-export const TreeTable = React.forwardRef((props, ref) => {
+export const TreeTable = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = TreeTableBase.getProps(inProps, context);
     const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
@@ -17,7 +26,27 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const [multiSortMetaState, setMultiSortMetaState] = React.useState(props.multiSortMeta);
     const [filtersState, setFiltersState] = React.useState(props.filters);
     const [columnOrderState, setColumnOrderState] = React.useState([]);
+    const metaData = {
+        props,
+        state: {
+            expandedKeys: expandedKeysState,
+            first: firstState,
+            rows: rowsState,
+            sortField: sortFieldState,
+            sortOrder: sortOrderState,
+            multiSortMeta: multiSortMetaState,
+            filters: filtersState,
+            columnOrder: columnOrderState
+        },
+        context: {
+            scrollable: props.scrollable
+        }
+    };
+    const ptCallbacks = TreeTableBase.setMetaData(metaData);
+
+    useHandleStyle(TreeTableBase.css.styles, ptCallbacks.isUnstyled, { name: 'treetable' });
     const elementRef = React.useRef(null);
+    const tableRef = React.useRef(null);
     const resizerHelperRef = React.useRef(null);
     const reorderIndicatorUpRef = React.useRef(null);
     const reorderIndicatorDownRef = React.useRef(null);
@@ -33,6 +62,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const columnSortable = React.useRef(null);
     const columnSortFunction = React.useRef(null);
     const columnField = React.useRef(null);
+    const childFocusEvent = React.useRef(null);
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
         type: 'mousemove',
@@ -54,10 +84,16 @@ export const TreeTable = React.forwardRef((props, ref) => {
     });
 
     const onToggle = (event) => {
+        const { originalEvent, value, navigateFocusToChild } = event;
+
         if (props.onToggle) {
-            props.onToggle(event);
+            props.onToggle({ originalEvent, value });
         } else {
-            setExpandedKeysState(event.value);
+            if (navigateFocusToChild) {
+                childFocusEvent.current = originalEvent;
+            }
+
+            setExpandedKeysState(value);
         }
     };
 
@@ -67,6 +103,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
         } else {
             setFirstState(event.first);
             setRowsState(event.rows);
+        }
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData());
         }
     };
 
@@ -127,6 +167,16 @@ export const TreeTable = React.forwardRef((props, ref) => {
             setSortOrderState(eventMeta.sortOrder);
             setMultiSortMetaState(eventMeta.multiSortMeta);
         }
+
+        if (props.onValueChange) {
+            props.onValueChange(
+                processedData({
+                    sortField,
+                    sortOrder,
+                    multiSortMeta
+                })
+            );
+        }
     };
 
     const getCalculatedSortOrder = (currentOrder) => {
@@ -171,19 +221,27 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const sortNodes = (data) => {
         let value = [...data];
 
-        if (columnSortable.current && columnSortable.current === 'custom' && columnSortFunction.current) {
+        if (columnSortable.current && columnSortFunction.current) {
             value = columnSortFunction.current({
                 data,
                 field: getSortField(),
                 order: getSortOrder()
             });
         } else {
-            value.sort((node1, node2) => {
-                const sortField = getSortField();
-                const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
-                const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
+            // performance optimization to prevent resolving field data in each loop
+            const lookupMap = new Map();
+            const sortField = getSortField();
+            const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
 
-                return compareValuesOnSort(value1, value2, getSortOrder());
+            for (let node of data) {
+                lookupMap.set(node.data, ObjectUtils.resolveFieldData(node.data, sortField));
+            }
+
+            value.sort((node1, node2) => {
+                const value1 = lookupMap.get(node1.data);
+                const value2 = lookupMap.get(node2.data);
+
+                return compareValuesOnSort(value1, value2, comparator, getSortOrder());
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -206,8 +264,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const sortMultipleNodes = (data, multiSortMeta) => {
         let value = [...data];
 
+        const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
+
         value.sort((node1, node2) => {
-            return multisortField(node1, node2, multiSortMeta, 0);
+            return multisortField(node1, node2, multiSortMeta, 0, comparator);
         });
 
         for (let i = 0; i < value.length; i++) {
@@ -219,20 +279,24 @@ export const TreeTable = React.forwardRef((props, ref) => {
         return value;
     };
 
-    const multisortField = (node1, node2, multiSortMeta, index) => {
+    const multisortField = (node1, node2, multiSortMeta, index, comparator) => {
+        if (!multiSortMeta || !multiSortMeta[index]) {
+            return;
+        }
+
         const value1 = ObjectUtils.resolveFieldData(node1.data, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
-            return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
+        if (ObjectUtils.compare(value1, value2, comparator) === 0) {
+            return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1, comparator) : 0;
         }
 
-        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
+        return compareValuesOnSort(value1, value2, comparator, multiSortMeta[index].order);
     };
 
-    const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
+    const compareValuesOnSort = (value1, value2, comparator, order) => {
+        return ObjectUtils.sort(value1, value2, order, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const filter = (value, field, mode) => {
@@ -257,6 +321,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
         } else {
             setFirstState(0);
             setFiltersState(newFilters);
+        }
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData({ filters }));
         }
     };
 
@@ -287,7 +355,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const onColumnResize = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
 
-        DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizerHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizerHelperRef.current.style.top = 0 + 'px';
         resizerHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -309,9 +377,9 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 if (newColumnWidth > 15 && nextColumnWidth > 15) {
                     if (props.scrollable) {
                         let scrollableView = findParentScrollableView(resizeColumn.current);
-                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
-                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
-                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablebodytable"]');
+                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollableheadertable"]');
+                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablefootertable"]');
                         let resizeColumnIndex = DomHandler.index(resizeColumn.current);
 
                         resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
@@ -328,9 +396,9 @@ export const TreeTable = React.forwardRef((props, ref) => {
             } else if (props.columnResizeMode === 'expand') {
                 if (props.scrollable) {
                     let scrollableView = findParentScrollableView(resizeColumn.current);
-                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
-                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
-                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablebodytable"]');
+                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollableheadertable"]');
+                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablefootertable"]');
 
                     scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
                     scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
@@ -345,7 +413,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
                     resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
                 } else {
-                    table.style.width = table.offsetWidth + delta + 'px';
+                    tableRef.current.style.width = tableRef.current.offsetWidth + delta + 'px';
                     resizeColumn.current.style.width = newColumnWidth + 'px';
                 }
             }
@@ -371,7 +439,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         if (column) {
             let parent = column.parentElement;
 
-            while (parent && !DomHandler.hasClass(parent, 'p-treetable-scrollable-view')) {
+            while (parent && DomHandler.getAttribute(parent, 'data-pc-section') !== 'scrollable') {
                 parent = parent.parentElement;
             }
 
@@ -428,10 +496,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
     };
 
     const onColumnDragOver = (e) => {
-        const event = e.originalEvent;
+        const { originalEvent: event, column } = e;
         const dropHeader = findParentHeader(event.currentTarget);
 
-        if (props.reorderableColumns && draggedColumnEl.current && dropHeader) {
+        if (props.reorderableColumns && draggedColumnEl.current && dropHeader && !getColumnProp(column, 'frozen')) {
             event.preventDefault();
             let containerOffset = DomHandler.getOffset(elementRef.current);
             let dropHeaderOffset = DomHandler.getOffset(dropHeader);
@@ -486,7 +554,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
             if (allowDrop) {
                 let columns = columnOrderState ? getColumns() : React.Children.toArray(props.children);
-                let isSameColumn = (col1, col2) => (col1.props.columnKey || col2.props.columnKey ? ObjectUtils.equals(col1, col2, 'props.columnKey') : ObjectUtils.equals(col1, col2, 'props.field'));
+                let isSameColumn = (col1, col2) => (getColumnProp(col1, 'columnKey') || getColumnProp(col2, 'columnKey') ? ObjectUtils.equals(col1, col2, 'props.columnKey') : ObjectUtils.equals(col1, col2, 'props.field'));
                 let dragColIndex = columns.findIndex((child) => isSameColumn(child, draggedColumn.current));
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
 
@@ -503,7 +571,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 let columnOrder = [];
 
                 for (let column of columns) {
-                    columnOrder.push(column.props.columnKey || column.props.field);
+                    columnOrder.push(getColumnProp(column, 'columnKey') || getColumnProp(column, 'field'));
                 }
 
                 setColumnOrderState(columnOrder);
@@ -540,6 +608,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
     };
 
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
+    };
+
     const getExpandedKeys = () => {
         return props.onToggle ? props.expandedKeys : expandedKeysState;
     };
@@ -573,7 +645,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
             for (let i = 0; i < columns.length; i++) {
                 let child = columns[i];
 
-                if (child.props.columnKey === key || child.props.field === key) {
+                if (getColumnProp(child, 'columnKey') === key || getColumnProp(child, 'field') === key) {
                     return child;
                 }
             }
@@ -631,7 +703,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         let frozenColumns = null;
 
         for (let col of columns) {
-            if (col.props.frozen) {
+            if (getColumnProp(col, 'frozen')) {
                 frozenColumns = frozenColumns || [];
                 frozenColumns.push(col);
             }
@@ -644,7 +716,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         let scrollableColumns = null;
 
         for (let col of columns) {
-            if (!col.props.frozen) {
+            if (!getColumnProp(col, 'frozen')) {
                 scrollableColumns = scrollableColumns || [];
                 scrollableColumns.push(col);
             }
@@ -666,16 +738,16 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
             for (let j = 0; j < columns.length; j++) {
                 let col = columns[j];
-                let filterMeta = filters ? filters[col.props.field] : null;
-                let filterField = col.props.field;
+                let filterMeta = filters ? filters[getColumnProp(col, 'field')] : null;
+                let filterField = getColumnProp(col, 'field');
                 let filterValue, filterConstraint, paramsWithoutNode, options;
 
                 //local
                 if (filterMeta) {
-                    let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode || 'startsWith';
+                    let filterMatchMode = filterMeta.matchMode || getColumnProp(col, 'filterMatchMode') || 'startsWith';
 
                     filterValue = filterMeta.value;
-                    filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterService.filters[filterMatchMode];
+                    filterConstraint = filterMatchMode === 'custom' ? getColumnProp(col, 'filterFunction') : FilterService.filters[filterMatchMode];
                     options = {
                         rowData: node,
                         filters,
@@ -683,7 +755,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                         column: {
                             filterMeta,
                             filterField,
-                            props: col.props
+                            props: ColumnBase.getCProps(col)
                         }
                     };
 
@@ -777,14 +849,14 @@ export const TreeTable = React.forwardRef((props, ref) => {
         return node.leaf === false ? false : !(node.children && node.children.length);
     };
 
-    const processData = () => {
+    const processedData = (localState) => {
         let data = props.value || [];
 
         if (!props.lazy) {
             if (data && data.length) {
-                const filters = getFilters();
-                const sortField = getSortField();
-                const multiSortMeta = getMultiSortMeta();
+                const filters = (localState && localState.filters) || getFilters();
+                const sortField = (localState && localState.sortField) || getSortField();
+                const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
                     data = filterLocal(data, filters);
@@ -800,6 +872,19 @@ export const TreeTable = React.forwardRef((props, ref) => {
         return data;
     };
 
+    useUpdateEffect(() => {
+        if (childFocusEvent.current) {
+            const nodeElement = childFocusEvent.current.target;
+            const nextElementSibling = nodeElement.nextElementSibling;
+
+            if (nextElementSibling) {
+                nodeElement.tabIndex = '-1';
+                nextElementSibling.tabIndex = '0';
+                DomHandler.focus(nextElementSibling);
+            }
+        }
+    }, [expandedKeysState]);
+
     React.useImperativeHandle(ref, () => ({
         props,
         filter,
@@ -814,11 +899,13 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         return (
             <TreeTableHeader
+                hostName="TreeTable"
                 columns={columns}
                 columnGroup={columnGroup}
                 tabIndex={props.tabIndex}
                 onSort={onSort}
                 sortField={sortField}
+                sortIcon={props.sortIcon}
                 sortOrder={sortOrder}
                 multiSortMeta={multiSortMeta}
                 resizableColumns={props.resizableColumns}
@@ -831,43 +918,54 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 onFilter={onFilter}
                 filters={filters}
                 filterDelay={props.filterDelay}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
+                unstyled={props.unstyled}
             />
         );
     };
 
     const createTableFooter = (columns, columnGroup) => {
-        return <TreeTableFooter columns={columns} columnGroup={columnGroup} />;
+        return <TreeTableFooter hostName="TreeTable" columns={columns} columnGroup={columnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
     };
 
     const createTableBody = (value, columns) => {
         return (
             <TreeTableBody
-                value={value}
+                hostName="TreeTable"
+                checkboxIcon={props.checkboxIcon}
                 columns={columns}
-                expandedKeys={getExpandedKeys()}
-                selectOnEdit={props.selectOnEdit}
-                onToggle={onToggle}
-                onExpand={props.onExpand}
-                onCollapse={props.onCollapse}
-                paginator={props.paginator}
-                first={getFirst()}
-                rows={getRows()}
-                selectionMode={props.selectionMode}
-                selectionKeys={props.selectionKeys}
-                onSelectionChange={props.onSelectionChange}
-                metaKeySelection={props.metaKeySelection}
-                onRowClick={props.onRowClick}
-                onSelect={props.onSelect}
-                onUnselect={props.onUnselect}
-                propagateSelectionUp={props.propagateSelectionUp}
-                propagateSelectionDown={props.propagateSelectionDown}
-                lazy={props.lazy}
-                rowClassName={props.rowClassName}
-                emptyMessage={props.emptyMessage}
-                loading={props.loading}
                 contextMenuSelectionKey={props.contextMenuSelectionKey}
-                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                emptyMessage={props.emptyMessage}
+                expandedKeys={getExpandedKeys()}
+                first={getFirst()}
+                lazy={props.lazy}
+                loading={props.loading}
+                metaData={metaData}
+                metaKeySelection={props.metaKeySelection}
+                onCollapse={props.onCollapse}
                 onContextMenu={props.onContextMenu}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onExpand={props.onExpand}
+                onRowClick={props.onRowClick}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
+                onSelect={props.onSelect}
+                onSelectionChange={props.onSelectionChange}
+                onToggle={onToggle}
+                onUnselect={props.onUnselect}
+                originalOptions={props.value}
+                paginator={props.paginator}
+                propagateSelectionDown={props.propagateSelectionDown}
+                propagateSelectionUp={props.propagateSelectionUp}
+                ptCallbacks={ptCallbacks}
+                rowClassName={props.rowClassName}
+                rows={getRows()}
+                selectOnEdit={props.selectOnEdit}
+                selectionKeys={props.selectionKeys}
+                selectionMode={props.selectionMode}
+                togglerTemplate={props.togglerTemplate}
+                value={value}
             />
         );
     };
@@ -890,6 +988,9 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 rightContent={props.paginatorRight}
                 alwaysShow={props.alwaysShowPaginator}
                 dropdownAppendTo={props.paginatorDropdownAppendTo}
+                pt={ptCallbacks.ptm('paginator')}
+                unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     };
@@ -899,7 +1000,9 @@ export const TreeTable = React.forwardRef((props, ref) => {
         const footer = createTableFooter(columns, footerColumnGroup);
         const body = createTableBody(value, columns);
 
-        return <TreeTableScrollableView columns={columns} header={header} body={body} footer={footer} scrollHeight={props.scrollHeight} frozen={frozen} frozenWidth={props.frozenWidth} />;
+        return (
+            <TreeTableScrollableView hostName="TreeTable" columns={columns} header={header} body={body} footer={footer} scrollHeight={props.scrollHeight} frozen={frozen} frozenWidth={props.frozenWidth} ptCallbacks={ptCallbacks} metaData={metaData} />
+        );
     };
 
     const createScrollableTable = (value) => {
@@ -913,9 +1016,15 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         scrollableView = createScrollableView(value, scrollableColumns, false, props.headerColumnGroup, props.footerColumnGroup);
+        const scrollableWrapperProps = mergeProps(
+            {
+                className: ptCallbacks.cx('scrollableWrapper')
+            },
+            ptCallbacks.ptm('scrollableWrapper')
+        );
 
         return (
-            <div className="p-treetable-scrollable-wrapper">
+            <div {...scrollableWrapperProps}>
                 {frozenView}
                 {scrollableView}
             </div>
@@ -928,9 +1037,25 @@ export const TreeTable = React.forwardRef((props, ref) => {
         const footer = createTableFooter(columns, props.footerColumnGroup);
         const body = createTableBody(value, columns);
 
+        const wrapperProps = mergeProps(
+            {
+                className: ptCallbacks.cx('wrapper')
+            },
+            ptCallbacks.ptm('wrapper')
+        );
+
+        const tableProps = mergeProps(
+            {
+                role: 'table',
+                style: props.tableStyle,
+                className: classNames(props.tableClassName, ptCallbacks.cx('table'))
+            },
+            ptCallbacks.ptm('table')
+        );
+
         return (
-            <div className="p-treetable-wrapper">
-                <table style={props.tableStyle} className={props.tableClassName}>
+            <div {...wrapperProps}>
+                <table ref={tableRef} {...tableProps}>
                     {header}
                     {footer}
                     {body}
@@ -945,13 +1070,31 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const createLoader = () => {
         if (props.loading) {
-            const iconClassName = classNames('p-treetable-loading-icon pi-spin', props.loadingIcon);
+            const loadingIconProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('loadingIcon')
+                },
+                ptCallbacks.ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+            const loadingWrapperProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('loadingWrapper')
+                },
+                ptCallbacks.ptm('loadingWrapper')
+            );
+
+            const loadingOverlayProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('loadingOverlay')
+                },
+                ptCallbacks.ptm('loadingOverlay')
+            );
 
             return (
-                <div className="p-treetable-loading">
-                    <div className="p-treetable-loading-overlay p-component-overlay">
-                        <i className={iconClassName}></i>
-                    </div>
+                <div {...loadingWrapperProps}>
+                    <div {...loadingOverlayProps}>{loadingIcon}</div>
                 </div>
             );
         }
@@ -959,35 +1102,73 @@ export const TreeTable = React.forwardRef((props, ref) => {
         return null;
     };
 
-    const data = processData();
+    const data = processedData();
 
-    const otherProps = ObjectUtils.findDiffKeys(props, TreeTable.defaultProps);
-    const className = classNames(
-        'p-treetable p-component',
-        {
-            'p-treetable-hoverable-rows': props.rowHover,
-            'p-treetable-selectable': isRowSelectionMode(),
-            'p-treetable-resizable': props.resizableColumns,
-            'p-treetable-resizable-fit': props.resizableColumns && props.columnResizeMode === 'fit',
-            'p-treetable-auto-layout': props.autoLayout,
-            'p-treetable-striped': props.stripedRows,
-            'p-treetable-gridlines': props.showGridlines
-        },
-        props.className
-    );
     const table = createTable(data);
     const totalRecords = getTotalRecords(data);
-    const headerFacet = props.header && <div className="p-treetable-header">{props.header}</div>;
-    const footerFacet = props.footer && <div className="p-treetable-footer">{props.footer}</div>;
+    const headerProps = mergeProps(
+        {
+            className: ptCallbacks.cx('header')
+        },
+        ptCallbacks.ptm('header')
+    );
+    const footerProps = mergeProps(
+        {
+            className: ptCallbacks.cx('footer')
+        },
+        ptCallbacks.ptm('footer')
+    );
+    const resizeHelperProps = mergeProps(
+        {
+            className: ptCallbacks.cx('resizeHelper'),
+            style: { display: 'none' }
+        },
+        ptCallbacks.ptm('resizeHelper')
+    );
+
+    const headerFacet = props.header && <div {...headerProps}>{props.header}</div>;
+    const footerFacet = props.footer && <div {...footerProps}>{props.footer}</div>;
     const paginatorTop = props.paginator && props.paginatorPosition !== 'bottom' && createPaginator('top', totalRecords);
     const paginatorBottom = props.paginator && props.paginatorPosition !== 'top' && createPaginator('bottom', totalRecords);
     const loader = createLoader();
-    const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
-    const reorderIndicatorUp = props.reorderableColumns && <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{ position: 'absolute', display: 'none' }} />;
-    const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
+    const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} {...resizeHelperProps}></div>;
+    const reorderIndicatorUpProps = mergeProps(
+        {
+            className: ptCallbacks.cx('reorderIndicatorUp'),
+            style: { position: 'absolute', display: 'none' }
+        },
+        ptCallbacks.ptm('reorderIndicatorUp')
+    );
+    const reorderIndicatorUpIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorUpIcon'));
+    const reorderIndicatorUpIcon = props.reorderableColumns && IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon {...reorderIndicatorUpIconProps} />, { ...reorderIndicatorUpIconProps }, { props });
+    const reorderIndicatorUp = props.reorderableColumns && (
+        <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
+            {reorderIndicatorUpIcon}
+        </span>
+    );
+    const reorderIndicatorDownProps = { className: ptCallbacks.sx('reorderIndicatorDown'), style: { position: 'absolute', display: 'none' } };
+    const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
+    const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
+    const reorderIndicatorDown = props.reorderableColumns && (
+        <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
+            {reorderIndicatorDownIcon}
+        </span>
+    );
+
+    const rootProps = mergeProps(
+        {
+            role: 'table',
+            id: props.id,
+            className: classNames(props.className, ptCallbacks.cx('root', { isRowSelectionMode })),
+            style: props.style,
+            'data-scrollselectors': '.p-treetable-wrapper'
+        },
+        ObjectUtils.findDiffKeys(props, TreeTable.defaultProps),
+        ptCallbacks.ptm('root')
+    );
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body" {...otherProps}>
+        <div ref={elementRef} {...rootProps}>
             {loader}
             {headerFacet}
             {paginatorTop}
@@ -1002,82 +1183,3 @@ export const TreeTable = React.forwardRef((props, ref) => {
 });
 
 TreeTable.displayName = 'TreeTable';
-TreeTable.defaultProps = {
-    __TYPE: 'TreeTable',
-    alwaysShowPaginator: true,
-    autoLayout: false,
-    className: null,
-    columnResizeMode: 'fit',
-    contextMenuSelectionKey: null,
-    currentPageReportTemplate: '({currentPage} of {totalPages})',
-    defaultSortOrder: 1,
-    emptyMessage: null,
-    expandedKeys: null,
-    filterDelay: 300,
-    filterLocale: undefined,
-    filterMode: 'lenient',
-    filters: null,
-    first: null,
-    footer: null,
-    footerColumnGroup: null,
-    frozenFooterColumnGroup: null,
-    frozenHeaderColumnGroup: null,
-    frozenWidth: null,
-    globalFilter: null,
-    globalFilterMatchMode: FilterMatchMode.CONTAINS,
-    header: null,
-    headerColumnGroup: null,
-    id: null,
-    lazy: false,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    metaKeySelection: true,
-    multiSortMeta: null,
-    onColReorder: null,
-    onCollapse: null,
-    onColumnResizeEnd: null,
-    onContextMenu: null,
-    onContextMenuSelectionChange: null,
-    onExpand: null,
-    onFilter: null,
-    onPage: null,
-    onRowClick: null,
-    onSelect: null,
-    onSelectionChange: null,
-    onSort: null,
-    onToggle: null,
-    onUnselect: null,
-    pageLinkSize: 5,
-    paginator: false,
-    paginatorClassName: null,
-    paginatorDropdownAppendTo: null,
-    paginatorLeft: null,
-    paginatorPosition: 'bottom',
-    paginatorRight: null,
-    paginatorTemplate: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
-    propagateSelectionDown: true,
-    propagateSelectionUp: true,
-    removableSort: false,
-    reorderableColumns: false,
-    resizableColumns: false,
-    rowClassName: null,
-    rowHover: false,
-    rows: null,
-    rowsPerPageOptions: null,
-    scrollHeight: null,
-    scrollable: false,
-    selectOnEdit: true,
-    selectionKeys: null,
-    selectionMode: null,
-    showGridlines: false,
-    sortField: null,
-    sortMode: 'single',
-    sortOrder: null,
-    stripedRows: false,
-    style: null,
-    tabIndex: 0,
-    tableClassName: null,
-    tableStyle: null,
-    totalRecords: null,
-    value: null
-};

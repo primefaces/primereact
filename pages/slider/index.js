@@ -1,14 +1,16 @@
-import React from 'react';
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/slider/importdoc';
-import { BasicDoc } from '../../components/doc/slider/basicdoc';
-import { InputDoc } from '../../components/doc/slider/inputdoc';
-import { StepDoc } from '../../components/doc/slider/stepdoc';
-import { RangeDoc } from '../../components/doc/slider/rangedoc';
-import { VerticalDoc } from '../../components/doc/slider/verticaldoc';
-import { ApiDoc } from '../../components/doc/slider/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/slider/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/slider/basicdoc';
+import { ImportDoc } from '@/components/doc/slider/importdoc';
+import { InputDoc } from '@/components/doc/slider/inputdoc';
+import { PTDoc } from '@/components/doc/slider/pt/ptdoc';
+import { Wireframe } from '@/components/doc/slider/pt/wireframe';
+import { RangeDoc } from '@/components/doc/slider/rangedoc';
+import { StepDoc } from '@/components/doc/slider/stepdoc';
+import { StyledDoc } from '@/components/doc/slider/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/slider/theming/tailwinddoc';
+import { VerticalDoc } from '@/components/doc/slider/verticaldoc';
 
 const SliderDemo = () => {
     const docs = [
@@ -42,50 +44,52 @@ const SliderDemo = () => {
             label: 'Vertical',
             component: VerticalDoc
         },
+
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.slider.options',
+            label: 'Slider PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Slider Component</title>
-                <meta name="description" content="Slider is a component to provide input with a drag handle." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Slider</h1>
-                    <p>Slider is a component to provide input with a drag handle.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Slider Component" header="Slider" description="Slider is a component to provide input with a drag handle." componentDocs={docs} apiDocs={['Slider']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default SliderDemo;

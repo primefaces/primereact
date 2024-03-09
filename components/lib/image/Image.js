@@ -1,12 +1,25 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
+import { DownloadIcon } from '../icons/download';
+import { EyeIcon } from '../icons/eye';
+import { RefreshIcon } from '../icons/refresh';
+import { SearchMinusIcon } from '../icons/searchminus';
+import { SearchPlusIcon } from '../icons/searchplus';
+import { TimesIcon } from '../icons/times';
+import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = ImageBase.getProps(inProps, context);
+
         const [maskVisibleState, setMaskVisibleState] = React.useState(false);
         const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
         const [rotateState, setRotateState] = React.useState(0);
@@ -15,11 +28,38 @@ export const Image = React.memo(
         const imageRef = React.useRef(null);
         const maskRef = React.useRef(null);
         const previewRef = React.useRef(null);
-        const previewClick = React.useRef(false);
+        const previewButton = React.useRef(null);
+        const zoomOutDisabled = scaleState <= 0.5;
+        const zoomInDisabled = scaleState >= 1.5;
+        const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
+            props,
+            state: {
+                maskVisible: maskVisibleState,
+                previewVisible: previewVisibleState,
+                rotate: rotateState,
+                scale: scaleState
+            }
+        });
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: props.closeOnEscape && maskVisibleState,
+            priority: [
+                ESC_KEY_HANDLING_PRIORITIES.IMAGE,
+                // Assume that there could be only one image mask activated, so it's safe
+                // to provide one and the same priority all the time:
+                0
+            ]
+        });
+
+        useHandleStyle(ImageBase.css.styles, isUnstyled, { name: 'image' });
 
         const show = () => {
             if (props.preview) {
                 setMaskVisibleState(true);
+                DomHandler.blockBodyScroll();
                 setTimeout(() => {
                     setPreviewVisibleState(true);
                 }, 25);
@@ -27,48 +67,70 @@ export const Image = React.memo(
         };
 
         const hide = () => {
-            if (!previewClick.current) {
-                setPreviewVisibleState(false);
-                setRotateState(0);
-                setScaleState(1);
-            }
-
-            previewClick.current = false;
+            setPreviewVisibleState(false);
+            DomHandler.unblockBodyScroll();
+            setRotateState(0);
+            setScaleState(1);
         };
 
-        const onPreviewImageClick = () => {
-            previewClick.current = true;
+        const onMaskClick = (event) => {
+            const isActionbarTarget = [event.target.classList].includes('p-image-action') || event.target.closest('.p-image-action');
+
+            if (isActionbarTarget) {
+                return;
+            }
+
+            hide();
+        };
+
+        const onMaskKeydown = (event) => {
+            switch (event.code) {
+                case 'Escape':
+                    hide();
+                    setTimeout(() => {
+                        DomHandler.focus(previewButton.current);
+                    }, 200);
+                    event.preventDefault();
+
+                    break;
+
+                default:
+                    break;
+            }
         };
 
         const onDownload = () => {
             const { alt: name, src } = props;
 
             DomHandler.saveAs({ name, src });
-            previewClick.current = true;
         };
 
         const rotateRight = () => {
             setRotateState((prevRotate) => prevRotate + 90);
-            previewClick.current = true;
         };
 
         const rotateLeft = () => {
             setRotateState((prevRotate) => prevRotate - 90);
-            previewClick.current = true;
         };
 
         const zoomIn = () => {
-            setScaleState((prevScale) => prevScale + 0.1);
-            previewClick.current = true;
+            setScaleState((prevScale) => {
+                if (zoomInDisabled) return prevScale;
+
+                return prevScale + 0.1;
+            });
         };
 
         const zoomOut = () => {
-            setScaleState((prevScale) => prevScale - 0.1);
-            previewClick.current = true;
+            setScaleState((prevScale) => {
+                if (zoomOutDisabled) return prevScale;
+
+                return prevScale - 0.1;
+            });
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
         };
 
         const onEntered = () => {
@@ -76,7 +138,7 @@ export const Image = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExiting = () => {
@@ -94,61 +156,175 @@ export const Image = React.memo(
         });
 
         const createPreview = () => {
+            const ariaLabel = localeOption('aria') ? localeOption('aria').zoomImage : undefined;
+            const buttonProps = mergeProps(
+                {
+                    ref: previewButton,
+                    className: cx('button'),
+                    onClick: show,
+                    type: 'button',
+                    'aria-label': ariaLabel
+                },
+                ptm('button')
+            );
+
             if (props.preview) {
-                return (
-                    <div className="p-image-preview-indicator" onClick={show}>
-                        {content}
-                    </div>
-                );
+                return <button {...buttonProps}>{content}</button>;
             }
 
             return null;
         };
 
         const createElement = () => {
-            const { downloadable } = props;
-            const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
-            const zoomDisabled = scaleState <= 0.5 || scaleState >= 1.5;
-            // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
+            const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
+            const downloadIconProps = mergeProps(ptm('downloadIcon'));
+            const rotateRightIconProps = mergeProps(ptm('rotateRightIcon'));
+            const rotateLeftIconProps = mergeProps(ptm('rotateLeftIcon'));
+            const zoomOutIconProps = mergeProps(ptm('zoomOutIcon'));
+            const zoomInIconProps = mergeProps(ptm('zoomInIcon'));
+            const closeIconProps = mergeProps(ptm('closeIcon'));
+            const downloadIcon = IconUtils.getJSXIcon(props.downloadIcon || <DownloadIcon />, { ...downloadIconProps }, { props });
+            const rotateRightIcon = IconUtils.getJSXIcon(props.rotateRightIcon || <RefreshIcon />, { ...rotateRightIconProps }, { props });
+            const rotateLeftIcon = IconUtils.getJSXIcon(props.rotateLeftIcon || <UndoIcon />, { ...rotateLeftIconProps }, { props });
+            const zoomOutIcon = IconUtils.getJSXIcon(props.zoomOutIcon || <SearchMinusIcon />, { ...zoomOutIconProps }, { props });
+            const zoomInIcon = IconUtils.getJSXIcon(props.zoomInIcon || <SearchPlusIcon />, { ...zoomInIconProps }, { props });
+            const closeIcon = IconUtils.getJSXIcon(props.closeIcon || <TimesIcon />, { ...closeIconProps }, { props });
+
+            const maskProps = mergeProps(
+                {
+                    ref: maskRef,
+                    role: 'dialog',
+                    className: cx('mask'),
+                    'aria-modal': maskVisibleState,
+                    onClick: onMaskClick,
+                    onKeyDown: onMaskKeydown
+                },
+                ptm('mask')
+            );
+
+            const toolbarProps = mergeProps(
+                {
+                    className: cx('toolbar')
+                },
+                ptm('toolbar')
+            );
+
+            const downloadButtonProps = mergeProps(
+                {
+                    className: cx('downloadButton'),
+                    onPointerUp: onDownload,
+                    type: 'button'
+                },
+                ptm('downloadButton')
+            );
+
+            const rotateRightButtonProps = mergeProps(
+                {
+                    className: cx('rotateRightButton'),
+                    onClick: rotateRight,
+                    type: 'button',
+                    'aria-label': localeOption('aria') ? localeOption('aria').rotateRight : undefined,
+                    'data-pc-group-section': 'action'
+                },
+                ptm('rotateRightButton')
+            );
+
+            const rotateLeftButtonProps = mergeProps(
+                {
+                    className: cx('rotateLeftButton'),
+                    onClick: rotateLeft,
+                    type: 'button',
+                    'aria-label': localeOption('aria') ? localeOption('aria').rotateLeft : undefined,
+                    'data-pc-group-section': 'action'
+                },
+                ptm('rotateLeftButton')
+            );
+
+            const zoomOutButtonProps = mergeProps(
+                {
+                    className: classNames(cx('zoomOutButton'), { 'p-disabled': zoomOutDisabled }),
+                    style: { pointerEvents: 'auto' },
+                    onClick: zoomOut,
+                    type: 'button',
+                    disabled: zoomOutDisabled,
+                    'aria-label': localeOption('aria') ? localeOption('aria').zoomOut : undefined,
+                    'data-pc-group-section': 'action'
+                },
+                ptm('zoomOutButton')
+            );
+
+            const zoomInButtonProps = mergeProps(
+                {
+                    className: classNames(cx('zoomInButton'), { 'p-disabled': zoomInDisabled }),
+                    style: { pointerEvents: 'auto' },
+                    onClick: zoomIn,
+                    type: 'button',
+                    disabled: zoomInDisabled,
+                    'aria-label': localeOption('aria') ? localeOption('aria').zoomIn : undefined,
+                    'data-pc-group-section': 'action'
+                },
+                ptm('zoomInButton')
+            );
+
+            const closeButtonProps = mergeProps(
+                {
+                    className: cx('closeButton'),
+                    type: 'button',
+                    onClick: hide,
+                    'aria-label': localeOption('aria') ? localeOption('aria').close : undefined,
+                    autoFocus: true,
+                    'data-pc-group-section': 'action'
+                },
+                ptm('closeButton')
+            );
+
+            const previewProps = mergeProps(
+                {
+                    src: props.zoomSrc || props.src,
+                    className: cx('preview'),
+                    style: sx('preview', { rotateState, scaleState }),
+                    crossOrigin: crossOrigin,
+                    referrerPolicy: referrerPolicy,
+                    useMap: useMap,
+                    loading: loading
+                },
+                ptm('preview')
+            );
+            const previewContainerProps = mergeProps(
+                {
+                    ref: previewRef
+                },
+                ptm('previewContainer')
+            );
+
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: previewVisibleState,
+                    timeout: { enter: 150, exit: 150 },
+                    unmountOnExit: true,
+                    onEntering: onEntering,
+                    onEntered: onEntered,
+                    onExit: onExit,
+                    onExiting: onExiting,
+                    onExited: onExited
+                },
+                ptm('transition')
+            );
 
             return (
-                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={hide}>
-                    <div className="p-image-toolbar">
-                        {downloadable && (
-                            <button className="p-image-action p-link" onClick={onDownload} type="button">
-                                <i className="pi pi-download"></i>
-                            </button>
-                        )}
-                        <button className="p-image-action p-link" onClick={rotateRight} type="button">
-                            <i className="pi pi-refresh"></i>
-                        </button>
-                        <button className="p-image-action p-link" onClick={rotateLeft} type="button">
-                            <i className="pi pi-undo"></i>
-                        </button>
-                        <button className="p-image-action p-link" onClick={zoomOut} type="button" disabled={zoomDisabled}>
-                            <i className="pi pi-search-minus"></i>
-                        </button>
-                        <button className="p-image-action p-link" onClick={zoomIn} type="button" disabled={zoomDisabled}>
-                            <i className="pi pi-search-plus"></i>
-                        </button>
-                        <button className="p-image-action p-link" type="button" aria-label={localeOption('close')}>
-                            <i className="pi pi-times"></i>
-                        </button>
+                <div {...maskProps}>
+                    <div {...toolbarProps}>
+                        {downloadable && <button {...downloadButtonProps}>{downloadIcon}</button>}
+                        <button {...rotateRightButtonProps}>{rotateRightIcon}</button>
+                        <button {...rotateLeftButtonProps}>{rotateLeftIcon}</button>
+                        <button {...zoomOutButtonProps}>{zoomOutIcon}</button>
+                        <button {...zoomInButtonProps}>{zoomInIcon}</button>
+                        <button {...closeButtonProps}>{closeIcon}</button>
                     </div>
-                    <CSSTransition
-                        nodeRef={previewRef}
-                        classNames="p-image-preview"
-                        in={previewVisibleState}
-                        timeout={{ enter: 150, exit: 150 }}
-                        unmountOnExit
-                        onEntering={onEntering}
-                        onEntered={onEntered}
-                        onExit={onExit}
-                        onExiting={onExiting}
-                        onExited={onExited}
-                    >
-                        <div ref={previewRef}>
-                            <img src={props.zoomSrc || props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
+                    <CSSTransition nodeRef={previewRef} {...transitionProps}>
+                        <div {...previewContainerProps}>
+                            <img alt={alt} {...previewProps} />
                         </div>
                     </CSSTransition>
                 </div>
@@ -163,18 +339,47 @@ export const Image = React.memo(
             getImage: () => imageRef.current
         }));
 
-        const { src, alt, width, height } = props;
-        const otherProps = ObjectUtils.findDiffKeys(props, Image.defaultProps);
-        const containerClassName = classNames('p-image p-component', props.className, {
-            'p-image-preview-container': props.preview
-        });
+        const { src, alt, width, height, crossOrigin, referrerPolicy, useMap, loading } = props;
         const element = createElement();
-        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
+        const iconProp = mergeProps(
+            {
+                className: cx('icon')
+            },
+            ptm('icon')
+        );
+        const icon = props.indicatorIcon || <EyeIcon {...iconProp} />;
+        const indicatorIcon = IconUtils.getJSXIcon(icon, { ...iconProp }, { props });
+        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : indicatorIcon;
         const preview = createPreview();
-        const image = props.src && <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
+        const imageProp = mergeProps(
+            {
+                ref: imageRef,
+                src: src,
+                className: props.imageClassName,
+                width: width,
+                height: height,
+                crossOrigin: crossOrigin,
+                referrerPolicy: referrerPolicy,
+                useMap: useMap,
+                loading: loading,
+                style: props.imageStyle,
+                onError: props.onError
+            },
+            ptm('image')
+        );
+        const image = props.src && <img {...imageProp} alt={alt} />;
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className: cx('root')
+            },
+            ImageBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
-            <span ref={elementRef} className={containerClassName} {...otherProps}>
+            <span {...rootProps}>
                 {image}
                 {preview}
                 {maskVisibleState && <Portal element={element} appendTo={document.body} />}
@@ -184,20 +389,3 @@ export const Image = React.memo(
 );
 
 Image.displayName = 'Image';
-Image.defaultProps = {
-    __TYPE: 'Image',
-    alt: null,
-    className: null,
-    downloadable: false,
-    height: null,
-    imageClassName: null,
-    imageStyle: null,
-    onError: null,
-    onHide: null,
-    onShow: null,
-    preview: false,
-    src: null,
-    template: null,
-    width: null,
-    zoomSrc: null
-};

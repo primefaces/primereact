@@ -1,32 +1,36 @@
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 
 export function BadgesDoc(props) {
     const code = {
         basic: `
 <Button type="button" label="Emails" badge="8" />
-<Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+<Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function BadgesDoc() {
-
+export default function BadgesDemo() {
     return (
-        <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button type="button" label="Emails" badge="8" />
+            <Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function BadgesDoc() {
-
+export default function BadgesDemo() {
     return (
-        <Button type="button" label="Emails" badge="8" />
-        <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button type="button" label="Emails" badge="8" />
+            <Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
+        </div>
     )
 }
         `
@@ -35,11 +39,13 @@ export default function BadgesDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Badges</p>
+                <p>
+                    Buttons have built-in badge support with <i>badge</i> and <i>badgeClassName</i> properties.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
+            <div className="card flex flex-wrap justify-content-center gap-3">
                 <Button type="button" label="Emails" badge="8" />
-                <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning" badge="8" badgeClassName="p-badge-danger" />
+                <Button type="button" label="Messages" icon="pi pi-users" outlined badge="2" badgeClassName="p-badge-danger" />
             </div>
             <DocSectionCode code={code} />
         </>

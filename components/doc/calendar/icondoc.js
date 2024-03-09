@@ -1,36 +1,79 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import { useState } from 'react';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function IconDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+<Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function IconDoc() {
+export default function IconDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+        <div className="card flex flex-wrap gap-3 p-fluid">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                    Button Display
+                </label>
+                <Calendar id="buttondisplay" value={date} onChange={(e) => setDate(e.value)} showIcon />
+            </div>
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                    Icon Display
+                </label>
+
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon  />
+            </div>
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                    Icon Template
+                </label>
+
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
+            </div>
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
-export default function IconDoc() {
-    const [date, setDate] = useState<Date | null>(null);
+export default function IconDemo() {
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     return (
-        <Calendar id="icon" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showIcon />
+        <div className="card flex flex-wrap gap-3 p-fluid">
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                    Button Display
+                </label>
+                <Calendar id="buttondisplay" value={date} onChange={(e) => setDate(e.value)} showIcon />
+            </div>
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                    Icon Display
+                </label>
+
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon  />
+            </div>
+            <div className="flex-auto">
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                    Icon Template
+                </label>
+
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
+            </div>
+        </div>
     )
 }
         `
@@ -40,11 +83,30 @@ export default function IconDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    An additional icon is displayed next to the input field when <i>showIcon</i> is present.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+            <div className="card flex flex-wrap gap-3 p-fluid">
+                <div className="flex-auto">
+                    <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                        Button Display
+                    </label>
+                    <Calendar id="buttondisplay" value={date} onChange={(e) => setDate(e.value)} showIcon />
+                </div>
+                <div className="flex-auto">
+                    <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                        Icon Display
+                    </label>
+
+                    <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
+                </div>
+                <div className="flex-auto">
+                    <label htmlFor="buttondisplay" className="font-bold block mb-2">
+                        Icon Template
+                    </label>
+
+                    <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

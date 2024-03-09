@@ -1,37 +1,72 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames } from '../utils/Utils';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const { ptm, cx } = props;
+
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
+    const onKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            props.hide();
+        }
+    };
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
-        const className = classNames('p-treeselect-panel p-component', props.panelClassName, {
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
-        });
+
+        const panelProps = mergeProps(
+            {
+                className: cx('panel', { panelProps: props, context }),
+                style: props.panelStyle,
+                onKeyDown: onKeyDown,
+                onClick: props.onClick
+            },
+            getPTOptions('panel')
+        );
+
+        const wrapperProps = mergeProps(
+            {
+                className: cx('wrapper'),
+                style: wrapperStyle
+            },
+            getPTOptions('wrapper')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: props.in,
+                timeout: { enter: 120, exit: 100 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: props.onEnter,
+                onEntered: props.onEntered,
+                onExit: props.onExit,
+                onExited: props.onExited
+            },
+            getPTOptions('transition')
+        );
 
         return (
-            <CSSTransition
-                nodeRef={ref}
-                classNames="p-connected-overlay"
-                in={props.in}
-                timeout={{ enter: 120, exit: 100 }}
-                options={props.transitionOptions}
-                unmountOnExit
-                onEnter={props.onEnter}
-                onEntering={props.onEntering}
-                onEntered={props.onEntered}
-                onExit={props.onExit}
-                onExited={props.onExited}
-            >
-                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
+            <CSSTransition nodeRef={ref} {...transitionProps}>
+                <div ref={ref} {...panelProps}>
+                    {props.firstHiddenFocusableElementOnOverlay}
                     {props.header}
-                    <div className="p-treeselect-items-wrapper" style={wrapperStyle}>
-                        {props.children}
-                    </div>
+                    <div {...wrapperProps}>{props.children}</div>
                     {props.footer}
+                    {props.lastHiddenFocusableElementOnOverlay}
                 </div>
             </CSSTransition>
         );

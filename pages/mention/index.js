@@ -1,12 +1,19 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/mention/apidoc';
-import { ImportDoc } from '../../components/doc/mention/importdoc';
-import { BasicDoc } from '../../components/doc/mention/basicdoc';
-import { MultipleDoc } from '../../components/doc/mention/multipledoc';
-import { AutoDoc } from '../../components/doc/mention/autodoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/mention/accessibilitydoc';
+import { AutoResizeDoc } from '@/components/doc/mention/autoresizedoc';
+import { BasicDoc } from '@/components/doc/mention/basicdoc';
+import { DisabledDoc } from '@/components/doc/mention/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/mention/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/mention/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/mention/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/mention/importdoc';
+import { InvalidDoc } from '@/components/doc/mention/invaliddoc';
+import { PTDoc } from '@/components/doc/mention/pt/ptdoc';
+import { Wireframe } from '@/components/doc/mention/pt/wireframe';
+import { StyledDoc } from '@/components/doc/mention/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/mention/theming/tailwinddoc';
+import { TriggersDoc } from '@/components/doc/mention/triggersdoc';
 
 const MentionDemo = () => {
     const docs = [
@@ -21,61 +28,93 @@ const MentionDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'auto',
+            id: 'triggers',
+            label: 'Triggers',
+            component: TriggersDoc
+        },
+        {
+            id: 'autoresize',
             label: 'Auto Resize',
-            component: AutoDoc
+            component: AutoResizeDoc
         },
         {
-            id: 'multiple',
-            label: 'Multiple Trigger',
-            component: MultipleDoc
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.mention.options',
+            label: 'Mention PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Mention Component</title>
-                <meta name="description" content="Mention component is used to refer someone or something." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Mention</h1>
-                    <p>Mention component is used to refer someone or something.</p>
-                </div>
-
-                <DocActions github="mention/index.js" />
-            </div>
-
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={['Mention']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default MentionDemo;

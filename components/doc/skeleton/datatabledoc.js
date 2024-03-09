@@ -1,24 +1,19 @@
-import React from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { Skeleton } from '../../lib/skeleton/Skeleton';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Column } from '../../lib/column/Column';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Skeleton } from '@/components/lib/skeleton/Skeleton';
 
 export function DataTableDoc(props) {
-    const products = Array.from({ length: 5 });
-
-    const bodyTemplate = () => {
-        return <Skeleton></Skeleton>;
-    };
+    const items = Array.from({ length: 5 }, (v, i) => i);
 
     const code = {
         basic: `
-<DataTable value={products} className="p-datatable-striped">
-    <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
-    <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
-    <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
-    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
+<DataTable value={items} className="p-datatable-striped">
+    <Column field="code" header="Code" style={{ width: '25%' }} body={<Skeleton />}></Column>
+    <Column field="name" header="Name" style={{ width: '25%' }} body={<Skeleton />}></Column>
+    <Column field="category" header="Category" style={{ width: '25%' }} body={<Skeleton />}></Column>
+    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={<Skeleton />}></Column>
 </DataTable>
         `,
         javascript: `
@@ -27,20 +22,16 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export const DataTableDoc = () => {
-    const products = Array.from({ length: 5 });
-
-    const bodyTemplate = () => {
-        return <Skeleton></Skeleton>
-    }
+export default function DataTableDemo() {
+    const items = Array.from({ length: 5 }, (v, i) => i);
 
     return (
         <div className="card">
-            <DataTable value={products} className="p-datatable-striped">
-                <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
+            <DataTable value={items} className="p-datatable-striped">
+                <Column field="code" header="Code" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                <Column field="name" header="Name" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                <Column field="category" header="Category" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={<Skeleton />}></Column>
             </DataTable>
         </div>
     );
@@ -52,25 +43,16 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export const DataTableDoc = () => {
-
-    interface Product {
-        length: number
-      }
-
-    const products: Product[] = [{ length: 5 }];
-
-    function bodyTemplate(): JSX.Element {
-        return <Skeleton></Skeleton>
-    }
+export default function DataTableDemo() {
+    const items: number[] = Array.from({ length: 5 }, (v, i) => i);
 
     return (
         <div className="card">
-            <DataTable value={products} className="p-datatable-striped">
-                <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
+            <DataTable value={items} className="p-datatable-striped">
+                <Column field="code" header="Code" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                <Column field="name" header="Name" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                <Column field="category" header="Category" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={<Skeleton />}></Column>
             </DataTable>
         </div>
     );
@@ -81,14 +63,14 @@ export const DataTableDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>DataTable Demo Content.</p>
+                <p>Sample DataTable implementation using different Skeleton components and PrimeFlex CSS utilities.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} className="p-datatable-striped">
-                    <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                    <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                    <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
-                    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                <DataTable value={items} className="p-datatable-striped">
+                    <Column field="code" header="Code" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                    <Column field="category" header="Category" style={{ width: '25%' }} body={<Skeleton />}></Column>
+                    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={<Skeleton />}></Column>
                 </DataTable>
             </div>
             <DocSectionCode code={code} />

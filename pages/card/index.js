@@ -1,11 +1,13 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/card/importdoc';
-import { SimpleDoc } from '../../components/doc/card/simpledoc';
-import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
-import { ApiDoc } from '../../components/doc/card/apidoc';
+import { AccessibilityDoc } from '@/components/doc/card/accessibilitydoc';
+import { AdvancedDoc } from '@/components/doc/card/advanceddoc';
+import { BasicDoc } from '@/components/doc/card/basicdoc';
+import { ImportDoc } from '@/components/doc/card/importdoc';
+import { PTDoc } from '@/components/doc/card/pt/ptdoc';
+import { Wireframe } from '@/components/doc/card/pt/wireframe';
+import { StyledDoc } from '@/components/doc/card/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/card/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CardDemo = () => {
     const docs = [
@@ -15,56 +17,62 @@ const CardDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'simple',
-            label: 'Simple Card',
-            component: SimpleDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'advanced',
-            label: 'Advanced Card',
+            label: 'Advanced',
             component: AdvancedDoc
         },
+
         {
-            id: 'Api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.card.options',
+            label: 'Card PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Card Component</title>
-                <meta name="description" content="Card is a flexible container component." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Card</h1>
-                    <p>Card is a flexible container component.</p>
-                </div>
-                <DocActions github="card/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Card Component" header="Card" description="Card is a flexible container component." componentDocs={docs} apiDocs={['Card']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default CardDemo;

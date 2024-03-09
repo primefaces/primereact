@@ -1,32 +1,29 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/galleria/importdoc';
-import { GaleriaDemo } from '../../components/doc/galleria/galeriademo';
-import { ApiDoc } from '../../components/doc/galleria/apidoc';
-import { ProgrammaticDoc } from '../../components/doc/galleria/programmaticdoc';
-import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
-import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
-import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
-import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
-import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickevent';
-import { HoverEventDoc } from '../../components/doc/galleria/indicator/hoverevent';
-import { InsideContentDoc } from '../../components/doc/galleria/indicator/insidecontent';
-import { PositionTopDoc } from '../../components/doc/galleria/indicator/positiontop';
-import { PositionLeftDoc } from '../../components/doc/galleria/indicator/positionleft';
-import { PositionRightDoc } from '../../components/doc/galleria/indicator/positionright';
-import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/template';
-import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnails';
-import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnails';
-import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/custom';
-import { PositionedRightDoc } from '../../components/doc/galleria/thumbnail/right';
-import { PositionedTopDoc } from '../../components/doc/galleria/thumbnail/top';
-import { PositionedBottomDoc } from '../../components/doc/galleria/thumbnail/bottom';
-import { PositionedLeftDoc } from '../../components/doc/galleria/thumbnail/left';
-import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnails';
-import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnails';
-import { ItemHoverDoc } from '../../components/doc/galleria/navigator/hover';
-import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicators';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/galleria/accessibilitydoc';
+import { AdvancedDoc } from '@/components/doc/galleria/advanceddoc';
+import { AutoPlayDoc } from '@/components/doc/galleria/autoplaydoc';
+import { BasicDoc } from '@/components/doc/galleria/basicdoc';
+import { CaptionDoc } from '@/components/doc/galleria/captiondoc';
+import { ControlledDoc } from '@/components/doc/galleria/controlleddoc';
+import { CustomContentDoc } from '@/components/doc/galleria/fullscreen/customcontentdoc';
+import { WithoutThumbnailsDoc } from '@/components/doc/galleria/fullscreen/withoutthumbnailsdoc';
+import { WithThumbnailsDoc } from '@/components/doc/galleria/fullscreen/withthumbnailsdoc';
+import { ImportDoc } from '@/components/doc/galleria/importdoc';
+import { ClickEventDoc } from '@/components/doc/galleria/indicator/clickeventdoc';
+import { HoverEventDoc } from '@/components/doc/galleria/indicator/hovereventdoc';
+import { PositionDoc } from '@/components/doc/galleria/indicator/positiondoc';
+import { IndicatorTemplateDoc } from '@/components/doc/galleria/indicator/templatedoc';
+import { HoverDoc } from '@/components/doc/galleria/navigator/hoverdoc';
+import { IndicatorsDoc } from '@/components/doc/galleria/navigator/indicatorsdoc';
+import { ItemThumbnailsDoc } from '@/components/doc/galleria/navigator/itemthumbnailsdoc';
+import { ItemWithoutThumbnailsDoc } from '@/components/doc/galleria/navigator/itemwithouthumbnailsdoc';
+import { PTDoc } from '@/components/doc/galleria/pt/ptdoc';
+import { Wireframe } from '@/components/doc/galleria/pt/wireframe';
+import { ResponsiveDoc } from '@/components/doc/galleria/responsivedoc';
+import { StyledDoc } from '@/components/doc/galleria/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/galleria/theming/tailwinddoc';
+import { ThumbnailDoc } from '@/components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
     const docs = [
@@ -36,14 +33,14 @@ const GalleriaDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'galeriademo',
+            id: 'basic',
             label: 'Basic',
-            component: GaleriaDemo
+            component: BasicDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'indicator',
@@ -51,38 +48,23 @@ const GalleriaDemo = () => {
             description: 'Indicators allow quick navigation between the items.',
             children: [
                 {
-                    id: 'indciatorclickevent',
-                    label: 'Indicators with Click Event',
+                    id: 'indciatorbasic',
+                    label: 'Click Event',
                     component: ClickEventDoc
                 },
                 {
                     id: 'indciatorhoverevent',
-                    label: 'Indicators with Hover Event',
+                    label: 'Hover Event',
                     component: HoverEventDoc
                 },
                 {
-                    id: 'indciatorinsidecontent',
-                    label: 'Inside Content',
-                    component: InsideContentDoc
-                },
-                {
-                    id: 'indciatorpositiontop',
-                    label: 'Positioned at Top',
-                    component: PositionTopDoc
-                },
-                {
-                    id: 'indciatorpositionleft',
-                    label: 'Positioned at Left',
-                    component: PositionLeftDoc
-                },
-                {
-                    id: 'indciatorpositionright',
-                    label: 'Positioned at Right',
-                    component: PositionRightDoc
+                    id: 'indicatorposition',
+                    label: 'Position',
+                    component: PositionDoc
                 },
                 {
                     id: 'indciatortemplate',
-                    label: 'Indicator Template',
+                    label: 'Template',
                     component: IndicatorTemplateDoc
                 }
             ]
@@ -90,29 +72,7 @@ const GalleriaDemo = () => {
         {
             id: 'thumbnail',
             label: 'Thumbnail',
-            description: 'Thumbnails represent a smaller version of the actual content.',
-            options: [
-                {
-                    id: 'thumbnailpositionbottom',
-                    label: 'Positioned at Bottom',
-                    component: PositionedBottomDoc
-                },
-                {
-                    id: 'thumbnailpositionleft',
-                    label: 'Positioned at Left',
-                    component: PositionedLeftDoc
-                },
-                {
-                    id: 'thumbnailpositionright',
-                    label: 'Positioned at Right',
-                    component: PositionedRightDoc
-                },
-                {
-                    id: 'thumbnailpositiontop',
-                    label: 'Positioned at Top',
-                    component: PositionedTopDoc
-                }
-            ]
+            component: ThumbnailDoc
         },
         {
             id: 'responsive',
@@ -122,7 +82,7 @@ const GalleriaDemo = () => {
         {
             id: 'fullscreen',
             label: 'Full Screen',
-            description: 'In fullscreen mode content covers the whole page over a mask.',
+            description: 'In fullscreen mode content covers the whole page over a modal layer.',
             children: [
                 {
                     id: 'fullscreenwiththumbnail',
@@ -144,26 +104,26 @@ const GalleriaDemo = () => {
         {
             id: 'navigator',
             label: 'Navigator',
-            description: 'Combining item navigators, thumbnails and indicators provide various UI alternatives.',
+            description: 'Navigators are used to move back and forth between the images.',
             children: [
                 {
                     id: 'itemthumbnails',
-                    label: 'Item Navigators and Thumbnails',
+                    label: 'With Thumbnails',
                     component: ItemThumbnailsDoc
                 },
                 {
                     id: 'itemwithouthumbnails',
-                    label: 'Item Navigators without Thumbnails',
+                    label: 'Without Thumbnails',
                     component: ItemWithoutThumbnailsDoc
                 },
                 {
                     id: 'itemhover',
-                    label: 'Item Navigators on Hover',
-                    component: ItemHoverDoc
+                    label: 'Display on Hover',
+                    component: HoverDoc
                 },
                 {
                     id: 'indicators',
-                    label: 'Item Navigators and Indicators',
+                    label: 'With Indicators',
                     component: IndicatorsDoc
                 }
             ]
@@ -171,7 +131,7 @@ const GalleriaDemo = () => {
         {
             id: 'autoplay',
             label: 'AutoPlay',
-            component: AutoPlayDemoDoc
+            component: AutoPlayDoc
         },
         {
             id: 'caption',
@@ -183,49 +143,52 @@ const GalleriaDemo = () => {
             label: 'Advanced',
             component: AdvancedDoc
         },
+
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.galleria.options',
+            label: 'Galleria PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Gallery Component</title>
-                <meta name="description" content="Galleria is a content gallery component." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Galleria</h1>
-                    <p>Galleria is a content gallery component.</p>
-                </div>
-            </div>
-            <div className="content-section doc galleria-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default GalleriaDemo;

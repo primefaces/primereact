@@ -1,10 +1,17 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { PanelMenuDoc } from '../../components/doc/panelmenu/panelmenu';
-import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
-import { ApiDoc } from '../../components/doc/panelmenu/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/panelmenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/panelmenu/basicdoc';
+import { CommandDoc } from '@/components/doc/panelmenu/commanddoc';
+import { ControlledDoc } from '@/components/doc/panelmenu/controlleddoc';
+import { ImportDoc } from '@/components/doc/panelmenu/importdoc';
+import { MultipleDoc } from '@/components/doc/panelmenu/multipledoc';
+import { PTDoc } from '@/components/doc/panelmenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/panelmenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/panelmenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/panelmenu/templatedoc';
+import { StyledDoc } from '@/components/doc/panelmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/panelmenu/theming/tailwinddoc';
 
 const PanelMenuDemo = () => {
     const docs = [
@@ -14,51 +21,80 @@ const PanelMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'panelmenu',
-            label: 'PanelMenu',
-            component: PanelMenuDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.panelmenu.options',
+            label: 'PanelMenu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React PanelMenu Component</title>
-                <meta name="description" content="PanelMenu is a hybrid of accordion-tree components." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>PanelMenu</h1>
-                    <p>PanelMenu is a hybrid of accordion-tree components.</p>
-                </div>
-                <DocActions github="panelmenu/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React PanelMenu Component" header="PanelMenu" description="PanelMenu is a hybrid of accordion-tree components." componentDocs={docs} apiDocs={['PanelMenu', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default PanelMenuDemo;

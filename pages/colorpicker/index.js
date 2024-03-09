@@ -1,13 +1,17 @@
-import Head from 'next/head';
-import { ApiDoc } from '../../components/doc/colorpicker/apidoc';
-import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
-import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
-import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
-import { OverlayDoc } from '../../components/doc/colorpicker/overlaydoc';
-import { ValidationDoc } from '../../components/doc/colorpicker/validationdoc';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '@/components/doc/colorpicker/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/colorpicker/basicdoc';
+import { DisabledDoc } from '@/components/doc/colorpicker/disableddoc';
+import { FormikDoc } from '@/components/doc/colorpicker/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/colorpicker/form/hookformdoc';
+import { FormatDoc } from '@/components/doc/colorpicker/formatdoc';
+import { ImportDoc } from '@/components/doc/colorpicker/importdoc';
+import { InlineDoc } from '@/components/doc/colorpicker/inlinedoc';
+import { PTDoc } from '@/components/doc/colorpicker/pt/ptdoc';
+import { Wireframe } from '@/components/doc/colorpicker/pt/wireframe';
+import { StyledDoc } from '@/components/doc/colorpicker/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/colorpicker/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const ColorPickerDemo = () => {
     const docs = [
@@ -17,14 +21,14 @@ const ColorPickerDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'inline',
             label: 'Inline',
             component: InlineDoc
-        },
-        {
-            id: 'overlay',
-            label: 'Overlay',
-            component: OverlayDoc
         },
         {
             id: 'format',
@@ -32,54 +36,73 @@ const ColorPickerDemo = () => {
             component: FormatDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.colorpicker.options',
+            label: 'ColorPicker PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ColorPicker Component</title>
-                <meta name="description" content="ColorPicker is an input component to select a color." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ColorPicker</h1>
-                    <p>ColorPicker is an input component to select a color.</p>
-                </div>
-                <DocActions github="colorpicker/index.js" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={['ColorPicker']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ColorPickerDemo;

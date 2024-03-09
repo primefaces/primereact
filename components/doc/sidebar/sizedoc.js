@@ -1,51 +1,65 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Sidebar } from '@/components/lib/sidebar/Sidebar';
 import { useState } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Sidebar } from '../../lib/sidebar/Sidebar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function SizeDoc(props) {
-    const [visibleLeft, setVisibleLeft] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const code = {
         basic: `
-<Sidebar visible={visibleLeft} position="left" style={{ width: '30em' }} onHide={() => setVisibleLeft(false)}>
-    <h3>Sidebar Size</h3>
-</Sidebar>
-<Button icon="pi pi-arrow-left" onClick={() => setVisibleLeft(true)} className="mr-2" />
+<div className="card flex justify-content-center">
+    <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+        <h2>Sidebar</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+    </Sidebar>
+    <Button icon="pi pi-th-large" onClick={() => setVisible(true)} />
+</div>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function SizeDoc() {
-    const [visibleLeft, setVisibleLeft] = useState(false);
+export default function SizeDemo() {
+    const [visible, setVisible] = useState(false);
 
     return (
-        <div>
-            <Sidebar visible={visibleLeft} position="left" style={{ width: '30em' }} onHide={() => setVisibleLeft(false)}>
-                <h3>Sidebar Size</h3>
+        <div className="card flex justify-content-center">
+            <Sidebar visible={visible} onHide={() => setVisible(false)} className="w-full md:w-20rem lg:w-30rem">
+                <h2>Sidebar</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
             </Sidebar>
-            <Button icon="pi pi-arrow-left" onClick={() => setVisibleLeft(true)} className="mr-2" />
+            <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
         </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function SizeDoc() {
-    const [visibleLeft, setVisibleLeft] = useState(false);
+export default function SizeDemo() {
+    const [visible, setVisible] = useState<boolean>(false);
 
     return (
-        <div>
-            <Sidebar visible={visibleLeft} position="left" style={{ width: '30em' }} onHide={() => setVisibleLeft(false)}>
-                <h3>Sidebar Size</h3>
+        <div className="card flex justify-content-center">
+            <Sidebar visible={visible} onHide={() => setVisible(false)} className="w-full md:w-20rem lg:w-30rem">
+                <h2>Sidebar</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
             </Sidebar>
-            <Button icon="pi pi-arrow-left" onClick={() => setVisibleLeft(true)} className="mr-2" />
+            <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
         </div>
     )
 }
@@ -56,14 +70,18 @@ export default function SizeDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Sidebar size can be changed using a fixed style value or using one of the three predefined classes <i>p-sidebar-sm</i>, <i>p-sidebar-md</i>, <i>p-sidebar-lg</i>.
+                    Sidebar dimension can be defined with <i>style</i> or <i>className</i> properties which can also be responsive when used with a CSS utility library like PrimeFlex.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Sidebar visible={visibleLeft} position="left" style={{ width: '30em' }} onHide={() => setVisibleLeft(false)}>
-                    <h3>Sidebar Size</h3>
+                <Sidebar visible={visible} onHide={() => setVisible(false)} className="w-full md:w-20rem lg:w-30rem">
+                    <h2>Sidebar</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </p>
                 </Sidebar>
-                <Button icon="pi pi-arrow-left" onClick={() => setVisibleLeft(true)} className="mr-2" />
+                <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
             </div>
             <DocSectionCode code={code} />
         </>

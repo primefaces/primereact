@@ -1,17 +1,58 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { AvatarBase } from './AvatarBase';
 
-export const Avatar = React.forwardRef((props, ref) => {
+export const Avatar = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = AvatarBase.getProps(inProps, context);
+
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
+    const [nested, setNested] = React.useState(false);
+
+    const { ptm, cx, isUnstyled } = AvatarBase.setMetaData({
+        props,
+        state: {
+            imageFailed: imageFailed,
+            nested
+        }
+    });
+
+    useHandleStyle(AvatarBase.css.styles, isUnstyled, { name: 'avatar' });
 
     const createContent = () => {
-        if (props.image && !imageFailed) {
-            return <img src={props.image} alt={props.imageAlt} onError={onImageError}></img>;
+        if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
+            const imageProps = mergeProps(
+                {
+                    src: props.image,
+                    onError: onImageError
+                },
+                ptm('image')
+            );
+
+            return <img alt={props.imageAlt} {...imageProps}></img>;
         } else if (props.label) {
-            return <span className="p-avatar-text">{props.label}</span>;
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                ptm('label')
+            );
+
+            return <span {...labelProps}>{props.label}</span>;
         } else if (props.icon) {
-            return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            );
+
+            return IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
         }
 
         return null;
@@ -32,28 +73,31 @@ export const Avatar = React.forwardRef((props, ref) => {
         props.onImageError && props.onImageError(event);
     };
 
+    React.useEffect(() => {
+        const nested = DomHandler.isAttributeEquals(elementRef.current.parentElement, 'data-pc-name', 'avatargroup');
+
+        setNested(nested);
+    }, []);
+
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => elementRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
-    const containerClassName = classNames(
-        'p-avatar p-component',
+    const rootProps = mergeProps(
         {
-            'p-avatar-image': props.image !== null && !imageFailed,
-            'p-avatar-circle': props.shape === 'circle',
-            'p-avatar-lg': props.size === 'large',
-            'p-avatar-xl': props.size === 'xlarge',
-            'p-avatar-clickable': !!props.onClick
+            ref: elementRef,
+            style: props.style,
+            className: classNames(props.className, cx('root', { imageFailed }))
         },
-        props.className
+        AvatarBase.getOtherProps(props),
+        ptm('root')
     );
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
     return (
-        <div ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
+        <div {...rootProps}>
             {content}
             {props.children}
         </div>
@@ -61,17 +105,3 @@ export const Avatar = React.forwardRef((props, ref) => {
 });
 
 Avatar.displayName = 'Avatar';
-Avatar.defaultProps = {
-    __TYPE: 'Avatar',
-    className: null,
-    icon: null,
-    image: null,
-    imageAlt: 'avatar',
-    imageFallback: 'default',
-    label: null,
-    onImageError: null,
-    shape: 'square',
-    size: 'normal',
-    style: null,
-    template: null
-};

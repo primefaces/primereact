@@ -1,75 +1,119 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TreeSelect } from '@/components/lib/treeselect/TreeSelect';
+import { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
-import { TreeSelect } from '../../lib/treeselect/TreeSelect';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [nodes, setNodes] = useState(null);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
-    const nodeService = new NodeService();
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const introCode = {
+        basic: `
+{
+    '0-0': true,
+    '0-1-0': true
+}
+        `
+    };
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+<TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} metaKeySelection={false}  
+    className="md:w-20rem w-full" selectionMode="multiple" placeholder="Select Items"></TreeSelect>
         `,
         javascript: `
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-export default function MultipleDoc() {
+export default function MultipleDemo() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
-    const nodeService = new NodeService();
-
+    
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} 
+                metaKeySelection={false} className="md:w-20rem w-full" selectionMode="multiple" placeholder="Select Items"></TreeSelect>
+        </div>    
     );
 }
         `,
         typescript: `
-import { useState, useEffect } from "react";
-import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
-import { NodeService } from '../../../service/NodeService';
+import React, { useState, useEffect } from "react";
+import { TreeSelect, TreeSelectChangeEvent } from 'primereact/treeselect';
+import { TreeNode } from 'primereact/treenode';
+import { NodeService } from './service/NodeService';
 
-export default function MultipleDoc() {
-    const [nodes, setNodes] = useState<any[]>(null);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
-    const nodeService = new NodeService();
-
+export default function MultipleDemo() {
+    const [nodes, setNodes] = useState<TreeNode[] | null>(null);
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState<string[]>(null);
+    
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <div className="card flex justify-content-center">
+            <TreeSelect value={selectedNodeKeys} onChange={(e: TreeSelectChangeEvent) => setSelectedNodeKeys(e.value)} options={nodes} 
+                metaKeySelection={false} className="md:w-20rem w-full" selectionMode="multiple" placeholder="Select Items"></TreeSelect>
+        </div>
     );
 }
-        `
+        `,
+        data: `
+/* NodeService */
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+`
     };
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    TreeSelect supports "single", "multiple" and "checkbox" selection modes. Define <i>selectionMode</i>, <i>value</i> and <i>onChange</i> properties to control the selection. In single mode, selectionKeys should be a single value
-                    whereas in multiple or checkbox modes an object is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
-                    in touch enabled devices, Tree does not require metaKey.
+                    More than one node is selectable by setting <i>selectionMode</i> to <i>multiple</i>. By default in multiple selection mode, metaKey press (e.g. <i>⌘</i>) is necessary to add to existing selections however this can be configured
+                    with disabling the <i>metaKeySelection</i> property. Note that in touch enabled devices, TreeSelect always ignores metaKey.
                 </p>
+                <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
             </DocSectionText>
+            <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+                <TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} metaKeySelection={false} className="md:w-20rem w-full" selectionMode="multiple" placeholder="Select Items"></TreeSelect>
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

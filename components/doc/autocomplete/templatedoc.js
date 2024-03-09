@@ -1,17 +1,13 @@
-import getConfig from 'next/config';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
 import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-    const countryservice = new CountryService();
 
     const search = (event) => {
         // Timeout to emulate a network connection
@@ -33,45 +29,62 @@ export function TemplateDoc(props) {
     const itemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img
-                    alt={item.name}
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${item.code.toLowerCase()} mr-2`}
-                    style={{ width: '18px' }}
-                />
+                <img alt={item.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.name}</div>
             </div>
         );
     };
 
+    const panelFooterTemplate = () => {
+        const isCountrySelected = (filteredCountries || []).some((country) => country['name'] === selectedCountry);
+
+        return (
+            <div className="py-2 px-3">
+                {isCountrySelected ? (
+                    <span>
+                        <b>{selectedCountry}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
         basic: `
-<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries}  
+    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 export default function TemplateDemo() {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
+    const panelFooterTemplate = () => {
+        const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
+           return (
+            <div className="py-2 px-3">
+                {isCountrySelected ? (
+                    <span>
+                        <b>{selectedCountry}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -95,8 +108,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src={\`/images/flag/flag_placeholder.png\`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -106,26 +118,21 @@ export default function TemplateDemo() {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []);
 
     return (
-        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
+                completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import React, { useEffect, useState } from 'react';
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
+import { CountryService } from './service/CountryService';
 
 interface Country {
     name: string;
@@ -136,9 +143,8 @@ export default function TemplateDemo() {
     const [countries, setCountries] = useState<Country[]>([]);
     const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
-
-    const countryservice = new CountryService();
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    
+    const search = (event: AutoCompleteCompleteEvent) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
             let _filteredCountries;
@@ -161,8 +167,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src={\`/images/flag/flag_placeholder.png\`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -170,25 +175,41 @@ export default function TemplateDemo() {
             </div>
         );
     };
+    
+    const panelFooterTemplate = () => {
+        const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
+           return (
+            <div className="py-2 px-3">
+                {isCountrySelected ? (
+                    <span>
+                        <b>{selectedCountry}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []);
 
     return (
-        <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+        <div className="card flex justify-content-center">
+            <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
+                completeMethod={search} onChange={(e: AutoCompleteChangeEvent) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
+        </div>
     )
 }
-        `
+        `,
+        data: `
+ /* CountryService */
+
+{"name": "United Kingdom", "code": "UK"},
+{"name": "United States", "code": "USA"},
+...
+                `
     };
 
     return (
@@ -200,9 +221,9 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

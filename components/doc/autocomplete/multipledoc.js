@@ -1,15 +1,13 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
 import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleDoc(props) {
     const [countries, setCountries] = useState([]);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
-
-    const countryservice = new CountryService();
 
     const search = (event) => {
         // Timeout to emulate a network connection
@@ -29,16 +27,7 @@ export function MultipleDoc(props) {
     };
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with name, code pairs;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const code = {
@@ -46,15 +35,15 @@ export function MultipleDoc(props) {
 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
         `,
         javascript: `
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete } from "primereact/autocomplete";
+import { CountryService } from "./service/CountryService";
 
 export default function MultipleDemo() {
     const [countries, setCountries] = useState([]);
     const [selectedCountries, setSelectedCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
 
-    const countryservice = new CountryService();
     const search = (event) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
@@ -74,26 +63,20 @@ export default function MultipleDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
-                {"name": "United Kingdom", "code": "UK"},
-                {"name": "United States", "code": "USA"},
-                ...
-            ]
-        */
+        CountryService.getCountries().then((data) => setCountries(data));
     }, []);
 
     return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        <div className="card p-fluid">
+            <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useEffect, useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import React, { useEffect, useState } from 'react';
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
+import { CountryService } from "./service/CountryService";
 
 interface Country {
     name: string;
@@ -105,8 +88,7 @@ export default function MultipleDemo() {
     const [selectedCountries, setSelectedCountries] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
 
-    const countryservice = new CountryService();
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
             let _filteredCountries;
@@ -125,23 +107,25 @@ export default function MultipleDemo() {
     }
 
     useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-        /*
-            Countries is an array of objects with a name and a code;
-            [
-                ...
+        CountryService.getCountries().then((data) => setCountries(data));
+    }, []);
+
+    return (
+        <div className="card p-fluid">
+            <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
+        </div>
+    )
+}
+        `,
+        data: `
+        {
+            "data": [
                 {"name": "United Kingdom", "code": "UK"},
                 {"name": "United States", "code": "USA"},
                 ...
             ]
-        */
-    }, []);
-
-    return (
-        <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
-    )
-}
-        `
+        }
+                `
     };
 
     return (
@@ -155,7 +139,7 @@ export default function MultipleDemo() {
             <div className="card p-fluid">
                 <AutoComplete field="name" multiple value={selectedCountries} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountries(e.value)} />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['CountryService']} />
         </>
     );
 }

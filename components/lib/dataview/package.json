@@ -2,5 +2,6 @@
     "main": "./dataview.cjs.js",
     "module": "./dataview.esm.js",
     "unpkg": "./dataview.min.js",
-    "types": "./dataview.d.ts"
+    "types": "./dataview.d.ts",
+    "sideEffects": false
 }

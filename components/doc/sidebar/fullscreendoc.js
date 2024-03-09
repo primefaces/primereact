@@ -1,51 +1,65 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Sidebar } from '@/components/lib/sidebar/Sidebar';
 import { useState } from 'react';
-import { Sidebar } from '../../lib/sidebar/Sidebar';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function FullScreenDoc(props) {
-    const [visibleFullScreen, setVisibleFullScreen] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const code = {
         basic: `
-<Sidebar visible={visibleFullScreen} fullScreen onHide={() => setVisibleFullScreen(false)}>
-    <h3>Full Screen Sidebar</h3>
-</Sidebar>
-<Button icon="pi pi-th-large" onClick={() => setVisibleFullScreen(true)} className="mr-2" />
+<div className="card flex justify-content-center">
+    <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+        <h2>Sidebar</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+    </Sidebar>
+    <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
+</div>
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function FullScreenDoc() {
-    const [visibleFullScreen, setVisibleFullScreen] = useState(false);
+export default function FullScreenDemo() {
+    const [visible, setVisible] = useState(false);
 
     return (
-        <div>
-            <Sidebar visible={visibleFullScreen} fullScreen onHide={() => setVisibleFullScreen(false)}>
-                <h3>Full Screen Sidebar</h3>
+        <div className="card flex justify-content-center">
+            <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+                <h2>Sidebar</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
             </Sidebar>
-            <Button icon="pi pi-th-large" onClick={() => setVisibleFullScreen(true)} className="mr-2" />
+            <Button icon="pi pi-window-maximize" onClick={() => setVisible(true)} />
         </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function FullScreenDoc() {
-    const [visibleFullScreen, setVisibleFullScreen] = useState(false);
+export default function FullScreenDemo() {
+    const [visible, setVisible] = useState<boolean>(false);
 
     return (
-        <div>
-            <Sidebar visible={visibleFullScreen} fullScreen onHide={() => setVisibleFullScreen(false)}>
-                <h3>Full Screen Sidebar</h3>
+        <div className="card flex justify-content-center">
+            <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+                <h2>Sidebar</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
             </Sidebar>
-            <Button icon="pi pi-th-large" onClick={() => setVisibleFullScreen(true)} className="mr-2" />
+            <Button icon="pi pi-window-maximize" onClick={() => setVisible(true)} />
         </div>
     )
 }
@@ -55,13 +69,19 @@ export default function FullScreenDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Full screen mode allows the sidebar to cover whole screen.</p>
+                <p>
+                    Sidebar can cover the whole page when <i>fullScreen</i> property is enabled.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Sidebar visible={visibleFullScreen} fullScreen onHide={() => setVisibleFullScreen(false)}>
-                    <h3>Full Screen Sidebar</h3>
+                <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+                    <h2>Sidebar</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </p>
                 </Sidebar>
-                <Button icon="pi pi-th-large" onClick={() => setVisibleFullScreen(true)} className="mr-2" />
+                <Button icon="pi pi-window-maximize" onClick={() => setVisible(true)} />
             </div>
             <DocSectionCode code={code} />
         </>

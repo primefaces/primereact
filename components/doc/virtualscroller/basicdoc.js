@@ -1,146 +1,81 @@
-import React, { useState } from 'react';
-import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { classNames } from '@/components/lib/utils/Utils';
+import { VirtualScroller } from '@/components/lib/virtualscroller/VirtualScroller';
+import { useState } from 'react';
 
 export function BasicDoc(props) {
-    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
-    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`)));
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
 
-    const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
+    const itemTemplate = (item, options) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
                 {item}
-            </div>
-        );
-    };
-
-    const multiItemTemplate = (items, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
-        });
-
-        return (
-            <div className={className} style={{ height: '50px' }}>
-                {items.map((item, i) => {
-                    return (
-                        <div key={i} style={{ width: '100px' }}>
-                            {item}
-                        </div>
-                    );
-                })}
             </div>
         );
     };
 
     const code = {
         basic: `
-<VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
-<VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
-<VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
+<VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} 
+    className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 
-export default function BasicDoc() {
-    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
-    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
+export default function BasicDemo() {
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
-    const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
+    const itemTemplate = (item, options) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
                 {item}
-            </div>
-        );
-    };
-
-    const multiItemTemplate = (items, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
-        });
-
-        return (
-            <div className={className} style={{ height: '50px' }}>
-                {items.map((item, i) => {
-                    return (
-                        <div key={i} style={{ width: '100px' }}>
-                            {item}
-                        </div>
-                    );
-                })}
             </div>
         );
     };
 
     return ( 
-        <div>
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
-            <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
+        <div className="card flex justify-content-center">
+            <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         </div>
     );
 }
         `,
         typescript: `
-import { useState } 'react';
-import { VirtualScroller } from 'primereact/virtualscroller';
+import React, { useState } from 'react';
+import { VirtualScroller, VirtualScrollerTemplateOptions } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 
-export default function BasicDoc() {
-    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
-    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
+export default function BasicDemo() {
+    const [items] = useState<string[]>(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
-    const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
+    const itemTemplate = (item: string, options: VirtualScrollerTemplateOptions) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
                 {item}
             </div>
         );
     };
 
-    const multiItemTemplate = (items, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
-        });
-
-        return (
-            <div className={className} style={{ height: '50px' }}>
-                {items.map((item, i) => {
-                    return (
-                        <div key={i} style={{ width: '100px' }}>
-                            {item}
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    };
-
-    return (
-        <div>
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
-            <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
+    return ( 
+        <div className="card flex justify-content-center">
+            <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         </div>
-    )
+    );
 }
         `
     };
@@ -149,22 +84,12 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    VirtualScroller is a performant approach to handle huge data efficiently. VirtualScroller is used to display huge data. It periodically adds special elements defined according to the scroll's position to the DOM. The{' '}
-                    <i>itemSize</i> and <i>itemTemplate</i> properties are required on component. In addition, an initial array is required based on the total number of items to display. VirtualScroller automatically calculates how many items will be
-                    displayed in the view according to <i>itemSize</i> using a specified scroll height. Its scroll height can be adjusted with <i>scrollHeight</i> property or height property of CSS.
+                    VirtualScroller requires <i>items</i> as the data to display, <i>itemSize</i> for the dimensions of an item and <i>itemTemplate</i> to define the content per item. Size of the viewport is configured using
+                    <i>scrollWidth</i>, <i>scrollHeight</i> properties directly or with CSS <i>width</i> and <i>height</i> styles.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center flex-wrap">
-                <div className="flex flex-column mr-3 mt-3">
-                    <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
-                </div>
-                <div className="flex flex-column mr-3 mt-3">
-                    <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
-                </div>
-
-                <div className="flex flex-column mr-3 mt-3">
-                    <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
-                </div>
+            <div className="card flex justify-content-center">
+                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
             </div>
             <DocSectionCode code={code} />
         </>

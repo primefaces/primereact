@@ -1,14 +1,17 @@
-import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocActions } from '../../components/doc/common/docactions';
-import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
-import { ImportDoc } from '../../components/doc/sidebar/importdoc';
-import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
-import { CustomDoc } from '../../components/doc/sidebar/customdoc';
-import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
-import { ApiDoc } from '../../components/doc/sidebar/apidoc';
-import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/sidebar/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/sidebar/basicdoc';
+import { FullScreenDoc } from '@/components/doc/sidebar/fullscreendoc';
+import { ImportDoc } from '@/components/doc/sidebar/importdoc';
+import { PositionDoc } from '@/components/doc/sidebar/positiondoc';
+import { PTDoc } from '@/components/doc/sidebar/pt/ptdoc';
+import { Wireframe } from '@/components/doc/sidebar/pt/wireframe';
+import { SizeDoc } from '@/components/doc/sidebar/sizedoc';
+import { TemplateDoc } from '@/components/doc/sidebar/templatedoc';
+import { StyledDoc } from '@/components/doc/sidebar/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/sidebar/theming/tailwinddoc';
+import { HeadlessDoc } from '@/components/doc/sidebar/headlessdoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -38,54 +41,70 @@ const SidebarDemo = () => {
             component: FullScreenDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.sidebar.options',
+            label: 'Sidebar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Sidebar Component</title>
-                <meta name="description" content="Sidebar is a panel component displayed as an overlay." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h3>Sidebar</h3>
-                    <p>Sidebar is a panel component displayed as an overlay.</p>
-                </div>
-                <DocActions github="sidebar/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Sidebar Component"
+            header="Sidebar"
+            description="Sidebar, also known as Drawer, is a container component displayed as an overlay."
+            componentDocs={docs}
+            apiDocs={['Sidebar']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

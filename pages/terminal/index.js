@@ -1,11 +1,12 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/terminal/apidoc';
-import { ImportDoc } from '../../components/doc/terminal/importdoc';
-import { TerminalDoc } from '../../components/doc/terminal/terminaldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/terminal/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/terminal/basicdoc';
+import { ImportDoc } from '@/components/doc/terminal/importdoc';
+import { PTDoc } from '@/components/doc/terminal/pt/ptdoc';
+import { Wireframe } from '@/components/doc/terminal/pt/wireframe';
+import { StyledDoc } from '@/components/doc/terminal/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/terminal/theming/tailwinddoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -15,50 +16,57 @@ const TerminalDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'terminal',
-            label: 'Terminal',
-            component: TerminalDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'pt.terminal.options',
+            label: 'Terminal PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Terminal Component</title>
-                <meta name="description" content="Terminal is a text based user interface." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Terminal</h1>
-                    <p>Terminal is a text based user interface.</p>
-                </div>
-                <DocActions github="terminal/index.js" />
-            </div>
-            <div className="content-section doc terminal-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Terminal Component" header="Terminal" description="Terminal is a text based user interface." componentDocs={docs} apiDocs={['Terminal', 'TerminalService']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TerminalDemo;

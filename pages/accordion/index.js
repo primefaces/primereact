@@ -1,13 +1,17 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/accordion/importdoc';
-import { DefaultDoc } from '../../components/doc/accordion/defaultdoc';
-import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
-import { ProgrammaticDoc } from '../../components/doc/accordion/programmaticdoc';
-import { CustomHeaderDoc } from '../../components/doc/accordion/customheadersdoc';
-import { ApiDoc } from '../../components/doc/accordion/apidoc';
+import { AccessibilityDoc } from '@/components/doc/accordion/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/accordion/basicdoc';
+import { ControlledDoc } from '@/components/doc/accordion/controlleddoc';
+import { DisabledDoc } from '@/components/doc/accordion/disableddoc';
+import { DynamicDoc } from '@/components/doc/accordion/dynamicdoc';
+import { ImportDoc } from '@/components/doc/accordion/importdoc';
+import { MultipleDoc } from '@/components/doc/accordion/multipledoc';
+import { PTDoc } from '@/components/doc/accordion/pt/ptdoc';
+import { Wireframe } from '@/components/doc/accordion/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/accordion/templatedoc';
+import { StyledDoc } from '@/components/doc/accordion/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/accordion/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const AccordionDemo = () => {
     const docs = [
@@ -17,9 +21,14 @@ const AccordionDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'dynamic',
+            label: 'Dynamic',
+            component: DynamicDoc
         },
         {
             id: 'multiple',
@@ -27,62 +36,82 @@ const AccordionDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
-            id: 'customheader',
-            label: 'Custom Header',
-            component: CustomHeaderDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.accordion.options',
+            label: 'Accordion PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.accordiontab.options',
+            label: 'AccordionTab PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'propertiesforaccordiontab',
-                    label: 'Properties For AccordionTab'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Accordion Component</title>
-                <meta name="description" content="Accordion groups a collection of contents in tabs." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Accordion</h1>
-                    <p>Accordion groups a collection of contents in tabs.</p>
-                </div>
-                <DocActions github="accordion/index.js" />
-            </div>
-            <div className="content-section doc accordion-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Accordion Component"
+            header="Accordion"
+            description="Accordion groups a collection of contents in tabs."
+            componentDocs={docs}
+            apiDocs={['Accordion', 'AccordionTab']}
+            ptDocs={ptDocs}
+            ptDescription=""
+            themingDocs={themingDocs}
+        />
     );
 };
 

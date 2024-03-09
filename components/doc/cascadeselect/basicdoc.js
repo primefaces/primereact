@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { CascadeSelect } from '@/components/lib/cascadeselect/CascadeSelect';
 import { useState } from 'react';
-import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function BasicDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -82,13 +82,15 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)}/>
+<CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
+    optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+    className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }}  />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const countries = [
         {
@@ -168,17 +170,37 @@ export default function BasicDoc() {
     ];
 
     return (
-        <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)}/>
+        <div className="card flex justify-content-center">
+            <CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
+                optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }}  />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { CascadeSelect } from 'primereact/cascadeselect';
+import React, { useState } from "react";
+import { CascadeSelect, CascadeSelectChangeEvent } from 'primereact/cascadeselect';
 
-export default function BasicDoc() {
-    const [selectedCity, setSelectedCity] = useState(null);
-    const countries = [
+interface City {
+    cname: string;
+    code: string;
+}
+
+interface CountryState {
+    name: string;
+    cities: City[];
+}
+
+interface Country {
+    name: string;
+    code: string;
+    states: CountryState[];
+}
+
+export default function BasicDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const countries: Country[] = [
         {
             name: 'Australia',
             code: 'AU',
@@ -256,7 +278,11 @@ export default function BasicDoc() {
     ];
 
     return (
-        <CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} placeholder={"Select a City"} onChange={event => setSelectedCity(event.value)}/>
+        <div className="card flex justify-content-center">
+            <CascadeSelect value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
+                optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }}  />
+        </div>
     )
 }
         `
@@ -266,20 +292,22 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    CascadeSelect requires a value to bind and a collection of arbitrary objects with a nested hierarchy. <i>optionGroupLabelis</i> used for the text of a category and <i>optionGroupChildren</i> is to define the children of the
-                    category. Note that order of the <i>optionGroupChildrenmatters</i> and it should correspond to the data hierarchy.
+                    CascadeSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with an <i>options</i> collection. To define the label of a group <i>optionGroupLabel</i> property is needed and also{' '}
+                    <i>optionGroupChildren</i> is required to define the property that refers to the children of a group. Note that order of the <i>optionGroupChildren</i> matters as it should correspond to the data hierarchy.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <CascadeSelect
                     value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
                     options={countries}
-                    optionLabel={'cname'}
-                    optionGroupLabel={'name'}
+                    optionLabel="cname"
+                    optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
+                    className="w-full md:w-14rem"
+                    breakpoint="767px"
+                    placeholder="Select a City"
                     style={{ minWidth: '14rem' }}
-                    placeholder={'Select a City'}
-                    onChange={(event) => setSelectedCity(event.value)}
                 />
             </div>
             <DocSectionCode code={code} />

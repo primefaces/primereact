@@ -1,19 +1,42 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useEventListener, useMergeProps, useMountEffect, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
+import { SpinnerIcon } from '../icons/spinner';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { VirtualScrollerBase } from './VirtualScrollerBase';
 
 export const VirtualScroller = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = VirtualScrollerBase.getProps(inProps, context);
+        const prevProps = usePrevious(inProps) || {};
+
         const vertical = props.orientation === 'vertical';
         const horizontal = props.orientation === 'horizontal';
         const both = props.orientation === 'both';
 
         const [firstState, setFirstState] = React.useState(both ? { rows: 0, cols: 0 } : 0);
         const [lastState, setLastState] = React.useState(both ? { rows: 0, cols: 0 } : 0);
+        const [pageState, setPageState] = React.useState(0);
         const [numItemsInViewportState, setNumItemsInViewportState] = React.useState(both ? { rows: 0, cols: 0 } : 0);
         const [numToleratedItemsState, setNumToleratedItemsState] = React.useState(props.numToleratedItems);
         const [loadingState, setLoadingState] = React.useState(props.loading || false);
         const [loaderArrState, setLoaderArrState] = React.useState([]);
+        const { ptm } = VirtualScrollerBase.setMetaData({
+            props,
+            state: {
+                first: firstState,
+                last: lastState,
+                page: pageState,
+                numItemsInViewport: numItemsInViewportState,
+                numToleratedItems: numToleratedItemsState,
+                loading: loadingState,
+                loaderArr: loaderArrState
+            }
+        });
+
+        useStyle(VirtualScrollerBase.css.styles, { name: 'virtualscroller' });
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
         const spacerRef = React.useRef(null);
@@ -21,16 +44,32 @@ export const VirtualScroller = React.memo(
         const lastScrollPos = React.useRef(both ? { top: 0, left: 0 } : 0);
         const scrollTimeout = React.useRef(null);
         const resizeTimeout = React.useRef(null);
+        const contentStyle = React.useRef({});
+        const spacerStyle = React.useRef({});
         const defaultWidth = React.useRef(null);
         const defaultHeight = React.useRef(null);
-        const prevItems = usePrevious(props.items);
-        const prevLoading = usePrevious(props.loading);
+        const defaultContentWidth = React.useRef(null);
+        const defaultContentHeight = React.useRef(null);
+        const isItemRangeChanged = React.useRef(false);
+        const lazyLoadState = React.useRef(null);
 
-        const [bindWindowResizeListener] = useResizeListener({ listener: (event) => onResize(event) });
-        const [bindOrientationChangeListener] = useEventListener({ target: 'window', type: 'orientationchange', listener: (event) => onResize(event) });
+        const [bindWindowResizeListener] = useResizeListener({ listener: (event) => onResize(event), when: !props.disabled });
+        const [bindOrientationChangeListener] = useEventListener({ target: 'window', type: 'orientationchange', listener: (event) => onResize(event), when: !props.disabled });
 
         const getElementRef = () => {
             return elementRef;
+        };
+
+        const getPageByFirst = (first) => {
+            return Math.floor((first + numToleratedItemsState * 4) / (props.step || 1));
+        };
+
+        const setContentElement = (element) => {
+            contentRef.current = element || contentRef.current || DomHandler.findSingle(elementRef.current, '.p-virtualscroller-content');
+        };
+
+        const isPageChanged = (first) => {
+            return props.step ? pageState !== getPageByFirst(first) : true;
         };
 
         const scrollTo = (options) => {
@@ -40,23 +79,25 @@ export const VirtualScroller = React.memo(
 
         const scrollToIndex = (index, behavior = 'auto') => {
             const { numToleratedItems } = calculateNumItems();
+            const contentPos = getContentPosition();
             const calculateFirst = (_index = 0, _numT) => (_index <= _numT ? 0 : _index);
-            const calculateCoord = (_first, _size) => _first * _size;
+            const calculateCoord = (_first, _size, _cpos) => _first * _size + _cpos;
             const scrollToItem = (left = 0, top = 0) => scrollTo({ left, top, behavior });
+            let newFirst = both ? { rows: 0, cols: 0 } : 0;
+            let isRangeChanged = false;
 
             if (both) {
-                const newFirst = { rows: calculateFirst(index[0], numToleratedItems[0]), cols: calculateFirst(index[1], numToleratedItems[1]) };
-
-                if (newFirst.rows !== firstState.rows || newFirst.cols !== firstState.cols) {
-                    scrollToItem(calculateCoord(newFirst.cols, props.itemSize[1]), calculateCoord(newFirst.rows, props.itemSize[0]));
-                }
+                newFirst = { rows: calculateFirst(index[0], numToleratedItems[0]), cols: calculateFirst(index[1], numToleratedItems[1]) };
+                scrollToItem(calculateCoord(newFirst.cols, props.itemSize[1], contentPos.left), calculateCoord(newFirst.rows, props.itemSize[0], contentPos.top));
+                isRangeChanged = firstState.rows !== newFirst.rows || firstState.cols !== newFirst.cols;
             } else {
-                const newFirst = calculateFirst(index, numToleratedItems);
-
-                if (newFirst !== firstState) {
-                    horizontal ? scrollToItem(calculateCoord(newFirst, props.itemSize), 0) : scrollToItem(0, calculateCoord(newFirst, props.itemSize));
-                }
+                newFirst = calculateFirst(index, numToleratedItems);
+                horizontal ? scrollToItem(calculateCoord(newFirst, props.itemSize, contentPos.left), 0) : scrollToItem(0, calculateCoord(newFirst, props.itemSize, contentPos.top));
+                isRangeChanged = firstState !== newFirst;
             }
+
+            isItemRangeChanged.current = isRangeChanged;
+            setFirstState(newFirst);
         };
 
         const scrollInView = (index, to, behavior = 'auto') => {
@@ -159,7 +200,7 @@ export const VirtualScroller = React.memo(
 
         const calculateOptions = () => {
             const { numItemsInViewport, numToleratedItems } = calculateNumItems();
-            const calculateLast = (_first, _num, _numT, _isCols) => getLast(_first + _num + (_first < _numT ? 2 : 3) * _numT, _isCols);
+            const calculateLast = (_first, _num, _numT, _isCols = false) => getLast(_first + _num + (_first < _numT ? 2 : 3) * _numT, _isCols);
             const last = both
                 ? { rows: calculateLast(firstState.rows, numItemsInViewport.rows, numToleratedItems[0]), cols: calculateLast(firstState.cols, numItemsInViewport.cols, numToleratedItems[1], true) }
                 : calculateLast(firstState, numItemsInViewport, numToleratedItems);
@@ -173,7 +214,14 @@ export const VirtualScroller = React.memo(
             }
 
             if (props.lazy) {
-                props.onLazyLoad && props.onLazyLoad({ first: firstState, last });
+                Promise.resolve().then(() => {
+                    lazyLoadState.current = {
+                        first: props.step ? (both ? { rows: 0, cols: firstState.cols } : 0) : firstState,
+                        last: Math.min(props.step ? props.step : last, (props.items || []).length)
+                    };
+
+                    props.onLazyLoad && props.onLazyLoad(lazyLoadState.current);
+                });
             }
         };
 
@@ -182,28 +230,38 @@ export const VirtualScroller = React.memo(
                 Promise.resolve().then(() => {
                     if (contentRef.current) {
                         contentRef.current.style.minHeight = contentRef.current.style.minWidth = 'auto';
+                        contentRef.current.style.position = 'relative';
+                        elementRef.current.style.contain = 'none';
 
-                        const { offsetWidth, offsetHeight } = contentRef.current;
+                        /*const [contentWidth, contentHeight] = [DomHandler.getWidth(contentRef.current), DomHandler.getHeight(contentRef.current)];
 
-                        (both || horizontal) && (elementRef.current.style.width = (offsetWidth < defaultWidth.current ? offsetWidth : defaultWidth.current) + 'px');
-                        (both || vertical) && (elementRef.current.style.height = (offsetHeight < defaultHeight.current ? offsetHeight : defaultHeight.current) + 'px');
+                        contentWidth !== defaultContentWidth.current && (elementRef.current.style.width = '');
+                        contentHeight !== defaultContentHeight.current && (elementRef.current.style.height = '');*/
+
+                        const [width, height] = [DomHandler.getWidth(elementRef.current), DomHandler.getHeight(elementRef.current)];
+
+                        (both || horizontal) && (elementRef.current.style.width = (width < defaultWidth.current ? width : props.scrollWidth || defaultWidth.current) + 'px');
+                        (both || vertical) && (elementRef.current.style.height = (height < defaultHeight.current ? height : props.scrollHeight || defaultHeight.current) + 'px');
+
                         contentRef.current.style.minHeight = contentRef.current.style.minWidth = '';
+                        contentRef.current.style.position = '';
+                        elementRef.current.style.contain = '';
                     }
                 });
             }
         };
 
         const getLast = (last = 0, isCols) => {
-            return props.items ? Math.min(isCols ? (props.columns || props.items[0]).length : props.items.length, last) : 0;
+            return props.items ? Math.min(isCols ? (props.columns || props.items[0])?.length || 0 : (props.items || []).length, last) : 0;
         };
 
         const getContentPosition = () => {
             if (contentRef.current) {
                 const style = getComputedStyle(contentRef.current);
-                const left = parseInt(style.paddingLeft, 10) + Math.max(parseInt(style.left, 10), 0);
-                const right = parseInt(style.paddingRight, 10) + Math.max(parseInt(style.right, 10), 0);
-                const top = parseInt(style.paddingTop, 10) + Math.max(parseInt(style.top, 10), 0);
-                const bottom = parseInt(style.paddingBottom, 10) + Math.max(parseInt(style.bottom, 10), 0);
+                const left = parseFloat(style.paddingLeft) + Math.max(parseFloat(style.left) || 0, 0);
+                const right = parseFloat(style.paddingRight) + Math.max(parseFloat(style.right) || 0, 0);
+                const top = parseFloat(style.paddingTop) + Math.max(parseFloat(style.top) || 0, 0);
+                const bottom = parseFloat(style.paddingBottom) + Math.max(parseFloat(style.bottom) || 0, 0);
 
                 return { left, right, top, bottom, x: left + right, y: top + bottom };
             }
@@ -230,9 +288,9 @@ export const VirtualScroller = React.memo(
         const setSpacerSize = () => {
             const items = props.items;
 
-            if (spacerRef.current && items) {
+            if (items) {
                 const contentPos = getContentPosition();
-                const setProp = (_name, _value, _size, _cpos = 0) => (spacerRef.current.style[_name] = (_value || []).length * _size + _cpos + 'px');
+                const setProp = (_name, _value, _size, _cpos = 0) => (spacerStyle.current = { ...spacerStyle.current, ...{ [`${_name}`]: (_value || []).length * _size + _cpos + 'px' } });
 
                 if (both) {
                     setProp('height', items, props.itemSize[0], contentPos.y);
@@ -244,13 +302,13 @@ export const VirtualScroller = React.memo(
         };
 
         const setContentPosition = (pos) => {
-            if (contentRef.current) {
+            if (contentRef.current && !props.appendOnly) {
                 const first = pos ? pos.first : firstState;
                 const calculateTranslateVal = (_first, _size) => _first * _size;
 
                 const setTransform = (_x = 0, _y = 0) => {
                     stickyRef.current && (stickyRef.current.style.top = `-${_y}px`);
-                    contentRef.current.style.transform = `translate3d(${_x}px, ${_y}px, 0)`;
+                    contentStyle.current = { ...contentStyle.current, ...{ transform: `translate3d(${_x}px, ${_y}px, 0)` } };
                 };
 
                 if (both) {
@@ -299,33 +357,39 @@ export const VirtualScroller = React.memo(
             if (both) {
                 const isScrollDown = lastScrollPos.current.top <= scrollTop;
                 const isScrollRight = lastScrollPos.current.left <= scrollLeft;
-                const currentIndex = { rows: calculateCurrentIndex(scrollTop, props.itemSize[0]), cols: calculateCurrentIndex(scrollLeft, props.itemSize[1]) };
-                const triggerIndex = {
-                    rows: calculateTriggerIndex(currentIndex.rows, firstState.rows, lastState.rows, numItemsInViewportState.rows, numToleratedItemsState[0], isScrollDown),
-                    cols: calculateTriggerIndex(currentIndex.cols, firstState.cols, lastState.cols, numItemsInViewportState.cols, numToleratedItemsState[1], isScrollRight)
-                };
 
-                newFirst = {
-                    rows: calculateFirst(currentIndex.rows, triggerIndex.rows, firstState.rows, lastState.rows, numItemsInViewportState.rows, numToleratedItemsState[0], isScrollDown),
-                    cols: calculateFirst(currentIndex.cols, triggerIndex.cols, firstState.cols, lastState.cols, numItemsInViewportState.cols, numToleratedItemsState[1], isScrollRight)
-                };
-                newLast = {
-                    rows: calculateLast(currentIndex.rows, newFirst.rows, lastState.rows, numItemsInViewportState.rows, numToleratedItemsState[0]),
-                    cols: calculateLast(currentIndex.cols, newFirst.cols, lastState.cols, numItemsInViewportState.cols, numToleratedItemsState[1], true)
-                };
+                if (!props.appendOnly || (props.appendOnly && (isScrollDown || isScrollRight))) {
+                    const currentIndex = { rows: calculateCurrentIndex(scrollTop, props.itemSize[0]), cols: calculateCurrentIndex(scrollLeft, props.itemSize[1]) };
+                    const triggerIndex = {
+                        rows: calculateTriggerIndex(currentIndex.rows, firstState.rows, lastState.rows, numItemsInViewportState.rows, numToleratedItemsState[0], isScrollDown),
+                        cols: calculateTriggerIndex(currentIndex.cols, firstState.cols, lastState.cols, numItemsInViewportState.cols, numToleratedItemsState[1], isScrollRight)
+                    };
 
-                isRangeChanged = newFirst.rows !== firstState.rows || newLast.rows !== lastState.rows || newFirst.cols !== firstState.cols || newLast.cols !== lastState.cols;
-                newScrollPos = { top: scrollTop, left: scrollLeft };
+                    newFirst = {
+                        rows: calculateFirst(currentIndex.rows, triggerIndex.rows, firstState.rows, lastState.rows, numItemsInViewportState.rows, numToleratedItemsState[0], isScrollDown),
+                        cols: calculateFirst(currentIndex.cols, triggerIndex.cols, firstState.cols, lastState.cols, numItemsInViewportState.cols, numToleratedItemsState[1], isScrollRight)
+                    };
+                    newLast = {
+                        rows: calculateLast(currentIndex.rows, newFirst.rows, lastState.rows, numItemsInViewportState.rows, numToleratedItemsState[0]),
+                        cols: calculateLast(currentIndex.cols, newFirst.cols, lastState.cols, numItemsInViewportState.cols, numToleratedItemsState[1], true)
+                    };
+
+                    isRangeChanged = newFirst.rows !== firstState.rows || newLast.rows !== lastState.rows || newFirst.cols !== firstState.cols || newLast.cols !== lastState.cols || isItemRangeChanged.current;
+                    newScrollPos = { top: scrollTop, left: scrollLeft };
+                }
             } else {
                 const scrollPos = horizontal ? scrollLeft : scrollTop;
                 const isScrollDownOrRight = lastScrollPos.current <= scrollPos;
-                const currentIndex = calculateCurrentIndex(scrollPos, props.itemSize);
-                const triggerIndex = calculateTriggerIndex(currentIndex, firstState, lastState, numItemsInViewportState, numToleratedItemsState, isScrollDownOrRight);
 
-                newFirst = calculateFirst(currentIndex, triggerIndex, firstState, lastState, numItemsInViewportState, numToleratedItemsState, isScrollDownOrRight);
-                newLast = calculateLast(currentIndex, newFirst, lastState, numItemsInViewportState, numToleratedItemsState);
-                isRangeChanged = newFirst !== firstState || newLast !== lastState;
-                newScrollPos = scrollPos;
+                if (!props.appendOnly || (props.appendOnly && isScrollDownOrRight)) {
+                    const currentIndex = calculateCurrentIndex(scrollPos, props.itemSize);
+                    const triggerIndex = calculateTriggerIndex(currentIndex, firstState, lastState, numItemsInViewportState, numToleratedItemsState, isScrollDownOrRight);
+
+                    newFirst = calculateFirst(currentIndex, triggerIndex, firstState, lastState, numItemsInViewportState, numToleratedItemsState, isScrollDownOrRight);
+                    newLast = calculateLast(currentIndex, newFirst, lastState, numItemsInViewportState, numToleratedItemsState);
+                    isRangeChanged = newFirst !== firstState || newLast !== lastState || isItemRangeChanged.current;
+                    newScrollPos = scrollPos;
+                }
             }
 
             return {
@@ -350,8 +414,16 @@ export const VirtualScroller = React.memo(
 
                 props.onScrollIndexChange && props.onScrollIndexChange(newState);
 
-                if (props.lazy) {
-                    props.onLazyLoad && props.onLazyLoad(newState);
+                if (props.lazy && isPageChanged(first)) {
+                    const newLazyLoadState = {
+                        first: props.step ? Math.min(getPageByFirst(first) * props.step, (props.items || []).length - props.step) : first,
+                        last: Math.min(props.step ? (getPageByFirst(first) + 1) * props.step : last, (props.items || []).length)
+                    };
+
+                    const isLazyStateChanged = !lazyLoadState.current || lazyLoadState.current.first !== newLazyLoadState.first || lazyLoadState.current.last !== newLazyLoadState.last;
+
+                    isLazyStateChanged && props.onLazyLoad && props.onLazyLoad(newLazyLoadState);
+                    lazyLoadState.current = newLazyLoadState;
                 }
             }
         };
@@ -364,19 +436,23 @@ export const VirtualScroller = React.memo(
                     clearTimeout(scrollTimeout.current);
                 }
 
-                if (!loadingState && props.showLoader) {
-                    const { isRangeChanged: changed } = onScrollPositionChange(event);
+                if (isPageChanged(firstState)) {
+                    if (!loadingState && props.showLoader) {
+                        const { isRangeChanged } = onScrollPositionChange(event);
+                        const changed = isRangeChanged || (props.step ? isPageChanged(firstState) : false);
 
-                    changed && setLoadingState(true);
-                }
-
-                scrollTimeout.current = setTimeout(() => {
-                    onScrollChange(event);
-
-                    if (loadingState && props.showLoader && (!props.lazy || props.loading === undefined)) {
-                        setLoadingState(false);
+                        changed && setLoadingState(true);
                     }
-                }, props.delay);
+
+                    scrollTimeout.current = setTimeout(() => {
+                        onScrollChange(event);
+
+                        if (loadingState && props.showLoader && (!props.lazy || props.loading === undefined)) {
+                            setLoadingState(false);
+                            setPageState(getPageByFirst(firstState));
+                        }
+                    }, props.delay);
+                }
             } else {
                 onScrollChange(event);
             }
@@ -397,6 +473,8 @@ export const VirtualScroller = React.memo(
                         setNumToleratedItemsState(props.numToleratedItems);
                         defaultWidth.current = width;
                         defaultHeight.current = height;
+                        defaultContentWidth.current = DomHandler.getWidth(contentRef.current);
+                        defaultContentHeight.current = DomHandler.getHeight(contentRef.current);
                     }
                 }
             }, props.resizeDelay);
@@ -418,7 +496,7 @@ export const VirtualScroller = React.memo(
         };
 
         const loaderOptions = (index, extOptions) => {
-            const count = loaderArrState.length;
+            const count = loaderArrState.length || 0;
 
             return {
                 index,
@@ -436,12 +514,26 @@ export const VirtualScroller = React.memo(
             const items = props.items;
 
             if (items && !loadingState) {
-                if (both) return items.slice(firstState.rows, lastState.rows).map((item) => (props.columns ? item : item.slice(firstState.cols, lastState.cols)));
+                if (both) return items.slice(props.appendOnly ? 0 : firstState.rows, lastState.rows).map((item) => (props.columns ? item : item.slice(props.appendOnly ? 0 : firstState.cols, lastState.cols)));
                 else if (horizontal && props.columns) return items;
-                else return items.slice(firstState, lastState);
+                else return items.slice(props.appendOnly ? 0 : firstState, lastState);
             }
 
             return [];
+        };
+
+        const viewInit = () => {
+            if (elementRef.current && DomHandler.isVisible(elementRef.current)) {
+                setContentElement(contentRef.current);
+                init();
+                bindWindowResizeListener();
+                bindOrientationChangeListener();
+
+                defaultWidth.current = DomHandler.getWidth(elementRef.current);
+                defaultHeight.current = DomHandler.getHeight(elementRef.current);
+                defaultContentWidth.current = DomHandler.getWidth(contentRef.current);
+                defaultContentHeight.current = DomHandler.getHeight(contentRef.current);
+            }
         };
 
         const init = () => {
@@ -453,19 +545,12 @@ export const VirtualScroller = React.memo(
         };
 
         useMountEffect(() => {
-            if (!props.disabled) {
-                init();
-                bindWindowResizeListener();
-                bindOrientationChangeListener();
-
-                defaultWidth.current = DomHandler.getWidth(elementRef.current);
-                defaultHeight.current = DomHandler.getHeight(elementRef.current);
-            }
+            viewInit();
         });
 
         useUpdateEffect(() => {
             init();
-        }, [props.itemSize, props.scrollHeight]);
+        }, [props.itemSize, props.scrollHeight, props.scrollWidth]);
 
         useUpdateEffect(() => {
             if (props.numToleratedItems !== numToleratedItemsState) {
@@ -480,13 +565,13 @@ export const VirtualScroller = React.memo(
         }, [numToleratedItemsState]);
 
         useUpdateEffect(() => {
-            if (!prevItems || prevItems.length !== (props.items || []).length) {
+            if (!prevProps.items || prevProps.items.length !== (props.items || []).length) {
                 init();
             }
 
             let loading = loadingState;
 
-            if (props.lazy && prevLoading !== props.loading && props.loading !== loadingState) {
+            if (props.lazy && prevProps.loading !== props.loading && props.loading !== loadingState) {
                 setLoadingState(props.loading);
                 loading = props.loading;
             }
@@ -515,12 +600,22 @@ export const VirtualScroller = React.memo(
         };
 
         const createLoader = () => {
+            const iconClassName = 'p-virtualscroller-loading-icon';
+            const loadingIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+
             if (!props.loaderDisabled && props.showLoader && loadingState) {
                 const className = classNames('p-virtualscroller-loader', {
                     'p-component-overlay': !props.loadingTemplate
                 });
 
-                let content = <i className="p-virtualscroller-loading-icon pi pi-spinner pi-spin"></i>;
+                let content = loadingIcon;
 
                 if (props.loadingTemplate) {
                     content = loaderArrState.map((_, index) => {
@@ -528,7 +623,7 @@ export const VirtualScroller = React.memo(
                     });
                 } else if (props.loaderIconTemplate) {
                     const defaultContentOptions = {
-                        className: 'p-virtualscroller-loading-icon',
+                        iconClassName,
                         element: content,
                         props
                     };
@@ -536,7 +631,14 @@ export const VirtualScroller = React.memo(
                     content = ObjectUtils.getJSXElement(props.loaderIconTemplate, defaultContentOptions);
                 }
 
-                return <div className={className}>{content}</div>;
+                const loaderProps = mergeProps(
+                    {
+                        className
+                    },
+                    ptm('loader')
+                );
+
+                return <div {...loaderProps}>{content}</div>;
             }
 
             return null;
@@ -544,7 +646,16 @@ export const VirtualScroller = React.memo(
 
         const createSpacer = () => {
             if (props.showSpacer) {
-                return <div ref={spacerRef} className="p-virtualscroller-spacer"></div>;
+                const spacerProps = mergeProps(
+                    {
+                        ref: spacerRef,
+                        style: spacerStyle.current,
+                        className: 'p-virtualscroller-spacer'
+                    },
+                    ptm('spacer')
+                );
+
+                return <div {...spacerProps}></div>;
             }
 
             return null;
@@ -566,15 +677,21 @@ export const VirtualScroller = React.memo(
         const createContent = () => {
             const items = createItems();
             const className = classNames('p-virtualscroller-content', { 'p-virtualscroller-loading': loadingState });
-            const content = (
-                <div ref={contentRef} className={className}>
-                    {items}
-                </div>
+            const contentProps = mergeProps(
+                {
+                    ref: contentRef,
+                    style: contentStyle.current,
+                    className
+                },
+                ptm('content')
             );
+            const content = <div {...contentProps}>{items}</div>;
 
             if (props.contentTemplate) {
                 const defaultOptions = {
+                    style: contentStyle.current,
                     className,
+                    spacerStyle: spacerStyle.current,
                     contentRef: (el) => (contentRef.current = ObjectUtils.getRefElement(el)),
                     spacerRef: (el) => (spacerRef.current = ObjectUtils.getRefElement(el)),
                     stickyRef: (el) => (stickyRef.current = ObjectUtils.getRefElement(el)),
@@ -610,12 +727,12 @@ export const VirtualScroller = React.memo(
                 </React.Fragment>
             );
         } else {
-            const otherProps = ObjectUtils.findDiffKeys(props, VirtualScroller.defaultProps);
             const className = classNames(
                 'p-virtualscroller',
                 {
-                    'p-both-scroll': both,
-                    'p-horizontal-scroll': horizontal
+                    'p-virtualscroller-inline': props.inline,
+                    'p-virtualscroller-both p-both-scroll': both,
+                    'p-virtualscroller-horizontal p-horizontal-scroll': horizontal
                 },
                 props.className
             );
@@ -623,9 +740,20 @@ export const VirtualScroller = React.memo(
             const loader = createLoader();
             const content = createContent();
             const spacer = createSpacer();
+            const rootProps = mergeProps(
+                {
+                    ref: elementRef,
+                    className,
+                    tabIndex: props.tabIndex,
+                    style: props.style,
+                    onScroll: (e) => onScroll(e)
+                },
+                VirtualScrollerBase.getOtherProps(props),
+                ptm('root')
+            );
 
             return (
-                <div ref={elementRef} className={className} tabIndex={0} style={props.style} {...otherProps} onScroll={onScroll}>
+                <div {...rootProps}>
                     {content}
                     {spacer}
                     {loader}
@@ -636,32 +764,3 @@ export const VirtualScroller = React.memo(
 );
 
 VirtualScroller.displayName = 'VirtualScroller';
-VirtualScroller.defaultProps = {
-    __TYPE: 'VirtualScroller',
-    id: null,
-    style: null,
-    className: null,
-    items: null,
-    itemSize: 0,
-    scrollHeight: null,
-    scrollWidth: null,
-    orientation: 'vertical',
-    numToleratedItems: null,
-    delay: 0,
-    resizeDelay: 10,
-    lazy: false,
-    disabled: false,
-    loaderDisabled: false,
-    columns: null,
-    loading: undefined,
-    autoSize: false,
-    showSpacer: true,
-    showLoader: false,
-    loadingTemplate: null,
-    loaderIconTemplate: null,
-    itemTemplate: null,
-    contentTemplate: null,
-    onScroll: null,
-    onScrollIndexChange: null,
-    onLazyLoad: null
-};

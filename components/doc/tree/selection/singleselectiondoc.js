@@ -1,105 +1,104 @@
-import { useState, useEffect, useRef } from 'react';
-import { Tree } from '../../../lib/tree/Tree';
-import { Toast } from '../../../lib/toast/Toast';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Tree } from '@/components/lib/tree/Tree';
+import { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
 
 export function SingleSelectionDoc(props) {
-    const [nodes, setNodes] = useState(null);
-    const [selectedKey, setSelectedKey] = useState(null);
-    const toast = useRef(null);
-    const nodeService = new NodeService();
+    const [nodes, setNodes] = useState([]);
+    const [selectedKey, setSelectedKey] = useState('');
 
     useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
+        NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onNodeSelect = (node) => {
-        toast.current.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
-    };
-
-    const onNodeUnselect = (node) => {
-        toast.current.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
-    };
 
     const code = {
         basic: `
-<Toast ref={toast} />
-<Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+<Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} 
+    onSelectionChange={(e) => setSelectedKey(e.value)} className="w-full md:w-30rem" />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { NodeService } from './service/NodeService';
 
-export default function SingleSelectionDoc() {
-    const [nodes, setNodes] = useState(null);
-    const [selectedKey, setSelectedKey] = useState(null);
-    const toast = useRef(null);
-    const nodeService = new NodeService();
-
+export default function SingleSelectionDemo() {
+    const [nodes, setNodes] = useState([]);
+    const [selectedKey, setSelectedKey] = useState('');
+    
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onNodeSelect = (node) => {
-        toast.current.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
-    }
-
-    const onNodeUnselect = (node) => {
-        toast.current.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
-    }
+        NodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
-import { Toast } from 'primereact/toast';
-import { NodeService } from '../service/NodeService';
+import { TreeNode } from 'primereact/treenode';
+import { NodeService } from './service/NodeService';
 
-export default function SingleSelectionDoc() {
-    const [nodes, setNodes] = useState(null);
-    const [selectedKey, setSelectedKey] = useState(null);
-    const toast = useRef(null);
-    const nodeService = new NodeService();
-
+export default function SingleSelectionDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+    const [selectedKey, setSelectedKey] = useState<string>('');
+    
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const onNodeSelect = (node) => {
-        toast.current.show({ severity: 'success', summary: 'Node Selected', detail: node.label, life: 3000 });
-    }
-
-    const onNodeUnselect = (node) => {
-        toast.current.show({ severity: 'success', summary: 'Node Unselected', detail: node.label, life: 3000 });
-    }
+        NodeService.getTreeNodes().then((data) => setNodes(data));
+    }, []);
 
     return (
-        <Toast ref={toast} />
-        <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={e => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} className="w-full md:w-30rem" />
+        </div>
     )
 }
-        `
+        `,
+        data: `
+{
+    key: '0',
+    label: 'Documents',
+    data: 'Documents Folder',
+    icon: 'pi pi-fw pi-inbox',
+    children: [
+        {
+            key: '0-0',
+            label: 'Work',
+            data: 'Work Folder',
+            icon: 'pi pi-fw pi-cog',
+            children: [
+                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+            ]
+        },
+        {
+            key: '0-1',
+            label: 'Home',
+            data: 'Home Folder',
+            icon: 'pi pi-fw pi-home',
+            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+        }
+    ]
+},
+...
+`
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Single Selection</p>
+                <p>
+                    Single node selection is configured by setting <i>selectionMode</i> as <i>single</i> along with <i>selectionKeys</i> and <i>onSelectionChange</i> properties to manage the selection value binding.
+                </p>
             </DocSectionText>
-            <Toast ref={toast} />
-            <div className="card">
-                <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} onSelect={onNodeSelect} onUnselect={onNodeUnselect} />
+            <div className="card flex justify-content-center">
+                <Tree value={nodes} selectionMode="single" selectionKeys={selectedKey} onSelectionChange={(e) => setSelectedKey(e.value)} className="w-full md:w-30rem" />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['NodeService']} />
         </>
     );
 }

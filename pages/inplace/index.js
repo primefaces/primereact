@@ -1,13 +1,15 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inplace/apidoc';
-import { ImportDoc } from '../../components/doc/inplace/importdoc';
-import { InputDoc } from '../../components/doc/inplace/inputdoc';
-import { ImageDoc } from '../../components/doc/inplace/imagedoc';
-import { LazyDoc } from '../../components/doc/inplace/lazydoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inplace/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/inplace/basicdoc';
+import { ImageDoc } from '@/components/doc/inplace/imagedoc';
+import { ImportDoc } from '@/components/doc/inplace/importdoc';
+import { InputDoc } from '@/components/doc/inplace/inputdoc';
+import { LazyDoc } from '@/components/doc/inplace/lazydoc';
+import { PTDoc } from '@/components/doc/inplace/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inplace/pt/wireframe';
+import { StyledDoc } from '@/components/doc/inplace/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inplace/theming/tailwinddoc';
 
 const ChipDemo = () => {
     const docs = [
@@ -19,6 +21,11 @@ const ChipDemo = () => {
         {
             id: 'basic',
             label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'input',
+            label: 'Input',
             component: InputDoc
         },
         {
@@ -31,51 +38,62 @@ const ChipDemo = () => {
             label: 'Lazy',
             component: LazyDoc
         },
+
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.Inplace.options',
+            label: 'Inplace PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Inplace Component</title>
-                <meta name="description" content="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Inplace</h1>
-                    <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
-                </div>
-                <DocActions github="inplace/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Inplace Component"
+            header="Inplace"
+            description="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content."
+            componentDocs={docs}
+            apiDocs={['Inplace', 'InplaceDisplay', 'InplaceContent']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

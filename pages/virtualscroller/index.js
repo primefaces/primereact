@@ -1,14 +1,16 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
-import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
-import { ApiDoc } from '../../components/doc/virtualscroller/apidoc';
-import { ScrollDelayDoc } from '../../components/doc/virtualscroller/scrolldelaydoc';
-import { LoadingDoc } from '../../components/doc/virtualscroller/loadingdoc';
-import { LazyDoc } from '../../components/doc/virtualscroller/lazydoc';
-import { TemplateDoc } from '../../components/doc/virtualscroller/templatedoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/virtualscroller/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/virtualscroller/basicdoc';
+import { DelayDoc } from '@/components/doc/virtualscroller/delaydoc';
+import { GridDoc } from '@/components/doc/virtualscroller/griddoc';
+import { HorizontalDoc } from '@/components/doc/virtualscroller/horizontaldoc';
+import { ImportDoc } from '@/components/doc/virtualscroller/importdoc';
+import { LazyDoc } from '@/components/doc/virtualscroller/lazydoc';
+import { LoadingDoc } from '@/components/doc/virtualscroller/loadingdoc';
+import { PTDoc } from '@/components/doc/virtualscroller/pt/ptdoc';
+import { Wireframe } from '@/components/doc/virtualscroller/pt/wireframe';
+import { StyledDoc } from '@/components/doc/virtualscroller/theming/styleddoc';
 
 const VirtualScrollerDemo = () => {
     const docs = [
@@ -23,9 +25,19 @@ const VirtualScrollerDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'scrolldelay',
-            label: 'Scroll Delay',
-            component: ScrollDelayDoc
+            id: 'horizontal',
+            label: 'Horizontal',
+            component: HorizontalDoc
+        },
+        {
+            id: 'grid',
+            label: 'Grid',
+            component: GridDoc
+        },
+        {
+            id: 'delay',
+            label: 'Delay',
+            component: DelayDoc
         },
         {
             id: 'loading',
@@ -37,60 +49,50 @@ const VirtualScrollerDemo = () => {
             label: 'Lazy',
             component: LazyDoc
         },
+
         {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'pt.virtualscroller.options',
+            label: 'VirtualScroller PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React VirtualScroller Component</title>
-                <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>VirtualScroller</h1>
-                    <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
-                </div>
-
-                <DocActions github="virtualscroller/index.js" />
-            </div>
-
-            <div className="content-section doc virtualscroller-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Virtual Scroller Component"
+            header="VirtualScroller"
+            description="VirtualScroller is a performant approach to render large amounts of data efficiently."
+            componentDocs={docs}
+            apiDocs={['VirtualScroller']}
+            ptDocs={ptDocs}
+            className="virtualscroller-demo"
+            themingDocs={themingDocs}
+        />
     );
 };
 

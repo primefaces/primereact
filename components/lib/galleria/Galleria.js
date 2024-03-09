@@ -1,15 +1,22 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useInterval, useUnmountEffect } from '../hooks/Hooks';
+import { useInterval, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
 
 export const Galleria = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = GalleriaBase.getProps(inProps, context);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [slideShowActiveState, setSlideShowActiveState] = React.useState(false);
@@ -19,6 +26,19 @@ export const Galleria = React.memo(
         const maskRef = React.useRef(null);
         const activeItemIndex = props.onItemChange ? props.activeIndex : activeIndexState;
         const isVertical = props.thumbnailsPosition === 'left' || props.thumbnailsPosition === 'right';
+        const id = props.id || UniqueComponentId();
+
+        const { ptm, cx, sx, isUnstyled } = GalleriaBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                numVisible: numVisibleState,
+                slideShowActive: slideShowActiveState,
+                activeIndex: activeIndexState
+            }
+        });
+
+        useHandleStyle(GalleriaBase.css.styles, isUnstyled, { name: 'galleria' });
 
         useInterval(
             () => {
@@ -29,6 +49,13 @@ export const Galleria = React.memo(
         );
 
         const onActiveItemChange = (event) => {
+            if (event.index >= props.value.length) {
+                // #3973 AutoPlay without circular should stop the slideshow when it reaches the end
+                stopSlideShow();
+
+                return;
+            }
+
             if (props.onItemChange) {
                 props.onItemChange(event);
             } else {
@@ -45,12 +72,12 @@ export const Galleria = React.memo(
         };
 
         const onEnter = () => {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
+            DomHandler.blockBodyScroll();
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
-            DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            !isUnstyled() && DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
         const onEntered = () => {
@@ -58,8 +85,8 @@ export const Galleria = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            DomHandler.unblockBodyScroll();
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExited = () => {
@@ -117,55 +144,98 @@ export const Galleria = React.memo(
         }));
 
         const createHeader = () => {
+            const headerProps = mergeProps(
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            );
+
             if (props.header) {
-                return <div className="p-galleria-header">{props.header}</div>;
+                return <div {...headerProps}>{props.header}</div>;
             }
 
             return null;
         };
 
         const createFooter = () => {
+            const footerProps = mergeProps(
+                {
+                    className: cx('footer')
+                },
+                ptm('footer')
+            );
+
             if (props.footer) {
-                return <div className="p-galleria-footer">{props.footer}</div>;
+                return <div {...footerProps}>{props.footer}</div>;
             }
 
             return null;
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Galleria.defaultProps);
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
-            const galleriaClassName = classNames(
-                'p-galleria p-component',
-                props.className,
+
+            const closeIconProps = mergeProps(
                 {
-                    'p-galleria-fullscreen': props.fullScreen,
-                    'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
-                    'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
-                    'p-input-filled': PrimeReact.inputStyle === 'filled',
-                    'p-ripple-disabled': PrimeReact.ripple === false
+                    className: cx('closeIcon'),
+                    'aria-hidden': true
                 },
-                thumbnailsPosClassName,
-                indicatorPosClassName
+                ptm('closeIcon')
+            );
+            const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
+
+            const closeButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: cx('closeButton'),
+                    'aria-label': localeOption('aria') ? localeOption('aria').close : undefined,
+                    onClick: hide
+                },
+                ptm('closeButton')
             );
 
-            const closeIcon = props.fullScreen && (
-                <button type="button" className="p-galleria-close p-link" aria-label={localeOption('close')} onClick={hide}>
-                    <span className="p-galleria-close-icon pi pi-times" aria-hidden="true"></span>
+            const closeButton = props.fullScreen && (
+                <button {...closeButtonProps}>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
 
             const header = createHeader();
             const footer = createFooter();
+
+            const rootProps = mergeProps(
+                {
+                    ref: elementRef,
+                    id: id,
+                    className: classNames(props.className, cx('root', { context, thumbnailsPosClassName, indicatorPosClassName })),
+                    style: props.style,
+                    role: 'region'
+                },
+                GalleriaBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const contentProps = mergeProps(
+                {
+                    className: cx('content'),
+                    'aria-live': props.autoPlay ? 'polite' : 'off'
+                },
+                ptm('content')
+            );
+
             const element = (
-                <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
-                    {closeIcon}
+                <div {...rootProps}>
+                    {closeButton}
                     {header}
-                    <div className="p-galleria-content">
+                    <div {...contentProps}>
                         <GalleriaItem
+                            hostName="Galleria"
                             ref={previewContentRef}
+                            id={id}
                             value={props.value}
                             activeItemIndex={activeItemIndex}
                             onActiveItemChange={onActiveItemChange}
@@ -173,6 +243,8 @@ export const Galleria = React.memo(
                             circular={props.circular}
                             caption={props.caption}
                             showIndicators={props.showIndicators}
+                            itemPrevIcon={props.itemPrevIcon}
+                            itemNextIcon={props.itemNextIcon}
                             changeItemOnIndicatorHover={props.changeItemOnIndicatorHover}
                             indicator={props.indicator}
                             showItemNavigators={props.showItemNavigators}
@@ -180,15 +252,21 @@ export const Galleria = React.memo(
                             slideShowActive={slideShowActiveState}
                             startSlideShow={startSlideShow}
                             stopSlideShow={stopSlideShow}
+                            ptm={ptm}
+                            cx={cx}
                         />
 
                         {props.showThumbnails && (
                             <GalleriaThumbnails
+                                hostName="Galleria"
                                 value={props.value}
+                                containerId={id}
                                 activeItemIndex={activeItemIndex}
                                 onActiveItemChange={onActiveItemChange}
                                 itemTemplate={props.thumbnail}
                                 numVisible={numVisibleState}
+                                nextThumbnailIcon={props.nextThumbnailIcon}
+                                prevThumbnailIcon={props.prevThumbnailIcon}
                                 responsiveOptions={props.responsiveOptions}
                                 circular={props.circular}
                                 isVertical={isVertical}
@@ -197,6 +275,10 @@ export const Galleria = React.memo(
                                 autoPlay={props.autoPlay}
                                 slideShowActive={slideShowActiveState}
                                 stopSlideShow={stopSlideShow}
+                                isUnstyled={isUnstyled}
+                                ptm={ptm}
+                                cx={cx}
+                                sx={sx}
                             />
                         )}
                     </div>
@@ -211,25 +293,34 @@ export const Galleria = React.memo(
             const element = createElement();
 
             if (props.fullScreen) {
-                const maskClassName = classNames('p-galleria-mask', {
-                    'p-galleria-visible': visibleState
-                });
+                const maskProps = mergeProps(
+                    {
+                        className: cx('mask', { visibleState }),
+                        role: 'dialog',
+                        'aria-modal': 'true'
+                    },
+                    ptm('mask')
+                );
+
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 150, exit: 150 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntering,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                );
 
                 const galleriaWrapper = (
-                    <div ref={maskRef} className={maskClassName}>
-                        <CSSTransition
-                            nodeRef={elementRef}
-                            classNames="p-galleria"
-                            in={visibleState}
-                            timeout={{ enter: 150, exit: 150 }}
-                            options={props.transitionOptions}
-                            unmountOnExit
-                            onEnter={onEnter}
-                            onEntering={onEntering}
-                            onEntered={onEntered}
-                            onExit={onExit}
-                            onExited={onExited}
-                        >
+                    <div ref={maskRef} {...maskProps}>
+                        <CSSTransition nodeRef={elementRef} {...transitionProps}>
                             {element}
                         </CSSTransition>
                     </div>
@@ -246,36 +337,3 @@ export const Galleria = React.memo(
 );
 
 Galleria.displayName = 'Galleria';
-Galleria.defaultProps = {
-    __TYPE: 'Galleria',
-    id: null,
-    value: null,
-    activeIndex: 0,
-    fullScreen: false,
-    item: null,
-    thumbnail: null,
-    indicator: null,
-    caption: null,
-    className: null,
-    style: null,
-    header: null,
-    footer: null,
-    numVisible: 3,
-    responsiveOptions: null,
-    showItemNavigators: false,
-    showThumbnailNavigators: true,
-    showItemNavigatorsOnHover: false,
-    changeItemOnIndicatorHover: false,
-    circular: false,
-    autoPlay: false,
-    transitionInterval: 4000,
-    showThumbnails: true,
-    thumbnailsPosition: 'bottom',
-    verticalThumbnailViewPortHeight: '300px',
-    showIndicators: false,
-    showIndicatorsOnItem: false,
-    indicatorsPosition: 'bottom',
-    baseZIndex: 0,
-    transitionOptions: null,
-    onItemChange: null
-};

@@ -1,25 +1,53 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { TabMenuBase } from './TabMenuBase';
 
 export const TabMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = TabMenuBase.getProps(inProps, context);
+
+        const [idState, setIdState] = React.useState(props.id);
         const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);
         const inkbarRef = React.useRef(null);
         const navRef = React.useRef(null);
         const tabsRef = React.useRef({});
         const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
+        const metaData = {
+            props,
+            state: {
+                id: idState,
+                activeIndex: activeIndex
+            }
+        };
+
+        const { ptm, cx, isUnstyled } = TabMenuBase.setMetaData({
+            ...metaData
+        });
+
+        const getPTOptions = (key, item, index) => {
+            return ptm(key, {
+                parent: metaData,
+                context: {
+                    item,
+                    index
+                }
+            });
+        };
+
+        useHandleStyle(TabMenuBase.css.styles, isUnstyled, { name: 'tabmenu' });
 
         const itemClick = (event, item, index) => {
             if (item.disabled) {
                 event.preventDefault();
 
                 return;
-            }
-
-            if (!item.url) {
-                event.preventDefault();
             }
 
             if (item.command) {
@@ -38,6 +66,11 @@ export const TabMenu = React.memo(
             } else {
                 setActiveIndexState(index);
             }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
         const isSelected = (index) => {
@@ -45,11 +78,32 @@ export const TabMenu = React.memo(
         };
 
         const updateInkBar = () => {
-            const tabHeader = tabsRef.current[`tab_${activeIndex}`];
+            if (props.model) {
+                let tabs = navRef.current.children;
+                let inkHighlighted = false;
 
-            inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
-            inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
+                for (let i = 0; i < tabs.length; i++) {
+                    let tab = tabs[i];
+
+                    if (DomHandler.getAttribute(tab, 'data-p-highlight')) {
+                        inkbarRef.current.style.width = DomHandler.getWidth(tab) + 'px';
+                        inkbarRef.current.style.left = DomHandler.getOffset(tab).left - DomHandler.getOffset(navRef.current).left + 'px';
+                        inkHighlighted = true;
+                    }
+                }
+
+                if (!inkHighlighted) {
+                    inkbarRef.current.style.width = '0px';
+                    inkbarRef.current.style.left = '0px';
+                }
+            }
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         React.useImperativeHandle(ref, () => ({
             props,
@@ -60,27 +114,149 @@ export const TabMenu = React.memo(
             updateInkBar();
         });
 
+        const onKeyDownItem = (event, item, index) => {
+            switch (event.code) {
+                case 'ArrowRight':
+                    navigateToNextItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowLeft':
+                    navigateToPrevItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'Home':
+                    navigateToFirstItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    navigateToLastItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'Space':
+                case 'Enter':
+                    itemClick(event, item, index);
+                    event.preventDefault();
+                    break;
+
+                case 'Tab':
+                    onTabKey();
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const navigateToNextItem = (target) => {
+            const nextItem = findNextItem(target);
+
+            nextItem && setFocusToMenuitem(target, nextItem);
+        };
+
+        const navigateToPrevItem = (target) => {
+            const prevItem = findPrevItem(target);
+
+            prevItem && setFocusToMenuitem(target, prevItem);
+        };
+
+        const navigateToFirstItem = (target) => {
+            const firstItem = findFirstItem(target);
+
+            firstItem && setFocusToMenuitem(target, firstItem);
+        };
+
+        const navigateToLastItem = (target) => {
+            const lastItem = findLastItem(target);
+
+            lastItem && setFocusToMenuitem(target, lastItem);
+        };
+
+        const findNextItem = (item) => {
+            const nextItem = item.parentElement.nextElementSibling;
+
+            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-p-disabled') === true ? findNextItem(nextItem.children[0]) : nextItem.children[0]) : null;
+        };
+
+        const findPrevItem = (item) => {
+            const prevItem = item.parentElement.previousElementSibling;
+
+            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-p-disabled') === true ? findPrevItem(prevItem.children[0]) : prevItem.children[0]) : null;
+        };
+
+        const findFirstItem = () => {
+            const firstSibling = DomHandler.findSingle(navRef.current, '[data-pc-section="menuitem"][data-p-disabled="false"]');
+
+            return firstSibling ? firstSibling.children[0] : null;
+        };
+
+        const findLastItem = () => {
+            const siblings = DomHandler.find(navRef.current, '[data-pc-section="menuitem"][data-p-disabled="false"]');
+
+            return siblings ? siblings[siblings.length - 1].children[0] : null;
+        };
+
+        const setFocusToMenuitem = (target, focusableItem) => {
+            target.tabIndex = '-1';
+            focusableItem.tabIndex = '0';
+            focusableItem.focus();
+        };
+
+        const onTabKey = () => {
+            const activeItem = DomHandler.findSingle(navRef.current, '[data-pc-section="menuitem"][data-p-disabled="false"][data-p-highlight="true"]');
+            const focusedItem = DomHandler.findSingle(navRef.current, '[data-pc-section="action"][tabindex="0"]');
+
+            if (focusedItem !== activeItem.children[0]) {
+                activeItem && (activeItem.children[0].tabIndex = '0');
+                focusedItem.tabIndex = '-1';
+            }
+        };
+
         const createMenuItem = (item, index) => {
             if (item.visible === false) {
                 return null;
             }
 
             const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
-            const key = _label + '_' + index;
+            const key = item.id || idState + '_' + index;
             const active = isSelected(index);
-            const className = classNames(
-                'p-tabmenuitem',
-                {
-                    'p-highlight': active,
-                    'p-disabled': disabled
-                },
-                _className
-            );
             const iconClassName = classNames('p-menuitem-icon', _icon);
-            const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
-            const label = _label && <span className="p-menuitem-text">{_label}</span>;
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon', { _icon })
+                },
+                getPTOptions('icon', item, index)
+            );
+
+            const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
+
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                getPTOptions('label', item, index)
+            );
+
+            const label = _label && <span {...labelProps}>{_label}</span>;
+
+            const actionProps = mergeProps(
+                {
+                    href: url || '#',
+                    role: 'menuitem',
+                    'aria-label': _label,
+                    tabIndex: active ? '0' : '-1',
+                    className: cx('action'),
+                    target: target,
+                    onClick: (event) => itemClick(event, item, index)
+                },
+                getPTOptions('action', item, index)
+            );
+
             let content = (
-                <a href={url || '#'} className="p-menuitem-link" target={target} onClick={(event) => itemClick(event, item, index)} role="presentation">
+                <a {...actionProps}>
                     {icon}
                     {label}
                     <Ripple />
@@ -103,11 +279,23 @@ export const TabMenu = React.memo(
                 content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
             }
 
-            return (
-                <li ref={tabsRef.current[`tab_${index}`]} key={key} className={className} style={style} role="tab" aria-selected={active} aria-expanded={active} aria-disabled={disabled}>
-                    {content}
-                </li>
+            const menuItemProps = mergeProps(
+                {
+                    ref: tabsRef.current[`tab_${index}`],
+                    id: key,
+                    key,
+                    onKeyDown: (event) => onKeyDownItem(event, item, index),
+                    className: cx('menuitem', { _className, active, disabled }),
+                    style: style,
+                    role: 'presentation',
+                    'data-p-highlight': active,
+                    'data-p-disabled': disabled || false,
+                    'aria-disabled': disabled
+                },
+                getPTOptions('menuitem', item, index)
             );
+
+            return <li {...menuItemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -115,15 +303,43 @@ export const TabMenu = React.memo(
         };
 
         if (props.model) {
-            const otherProps = ObjectUtils.findDiffKeys(props, TabMenu.defaultProps);
-            const className = classNames('p-tabmenu p-component', props.className);
             const items = createItems();
 
+            const inkbarProps = mergeProps(
+                {
+                    ref: inkbarRef,
+                    role: 'none',
+                    className: cx('inkbar')
+                },
+                ptm('inkbar')
+            );
+            const menuProps = mergeProps(
+                {
+                    ref: navRef,
+                    'aria-label': props.ariaLabel,
+                    'aria-labelledby': props.ariaLabelledBy,
+                    className: cx('menu'),
+                    role: 'menubar'
+                },
+                ptm('menu')
+            );
+
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: cx('root'),
+                    style: props.style
+                },
+                TabMenuBase.getOtherProps(props),
+                ptm('root')
+            );
+
             return (
-                <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                    <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
+                <div {...rootProps}>
+                    <ul {...menuProps}>
                         {items}
-                        <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>
+                        <li {...inkbarProps}></li>
                     </ul>
                 </div>
             );
@@ -134,12 +350,3 @@ export const TabMenu = React.memo(
 );
 
 TabMenu.displayName = 'TabMenu';
-TabMenu.defaultProps = {
-    __TYPE: 'TabMenu',
-    id: null,
-    model: null,
-    activeIndex: 0,
-    style: null,
-    className: null,
-    onTabChange: null
-};

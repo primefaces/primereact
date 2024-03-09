@@ -1,8 +1,42 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Locale';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { useMatchMedia, useMergeProps } from '../hooks/Hooks';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
+import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
+import { AngleDoubleRightIcon } from '../icons/angledoubleright';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleLeftIcon } from '../icons/angleleft';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleUpIcon } from '../icons/angleup';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
+    const mergeProps = useMergeProps();
+    const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+    const { ptm, cx, unstyled } = props;
+
+    function getIconComponent(iconType) {
+        switch (iconType) {
+            case 'moveToTargetIcon':
+                return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> : props.moveToTargetIcon || <AngleRightIcon />;
+            case 'moveAllToTargetIcon':
+                return props.moveAllToTargetIcon || viewChanged ? props.moveAllToTargetIcon || <AngleDoubleDownIcon /> : props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
+            case 'moveToSourceIcon':
+                return props.moveToSourceIcon || viewChanged ? props.moveToSourceIcon || <AngleUpIcon /> : props.moveToSourceIcon || <AngleLeftIcon />;
+            case 'moveAllToSourceIcon':
+                return props.moveAllToSourceIcon || viewChanged ? props.moveAllToSourceIcon || <AngleDoubleUpIcon /> : props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
+            default:
+                return null;
+        }
+    }
+
+    const moveToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveToTargetIcon'), undefined, { props, viewChanged });
+    const moveAllToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToTargetIcon'), undefined, { props, viewChanged });
+    const moveToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveToSourceIcon'), undefined, { props, viewChanged });
+    const moveAllToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToSourceIcon'), undefined, { props, viewChanged });
+
     const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection) || ObjectUtils.isEmpty(props.visibleSourceList);
     const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection) || ObjectUtils.isEmpty(props.visibleTargetList);
     const moveAllRightDisabled = ObjectUtils.isEmpty(props.visibleSourceList);
@@ -92,14 +126,46 @@ export const PickListTransferControls = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
+    const buttonsProps = mergeProps(
+        {
+            className: classNames(props.className, cx('buttons'))
+        },
+        ptm('buttons', { hostName: props.hostName })
+    );
 
     return (
-        <div className={className}>
-            <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={moveAllLeft}></Button>
+        <div {...buttonsProps}>
+            <Button
+                disabled={moveRightDisabled}
+                type="button"
+                icon={moveToTargetIcon}
+                onClick={moveRight}
+                pt={ptm('moveToTargetButton')}
+                unstyled={unstyled}
+                aria-label={ariaLabel('moveToTarget')}
+                __parentMetadata={{ parent: props.metaData }}
+            ></Button>
+            <Button
+                disabled={moveAllRightDisabled}
+                type="button"
+                icon={moveAllToTargetIcon}
+                onClick={moveAllRight}
+                pt={ptm('moveAllToTargetButton')}
+                unstyled={unstyled}
+                aria-label={ariaLabel('moveAllToTarget')}
+                __parentMetadata={{ parent: props.metaData }}
+            ></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} aria-label={ariaLabel('moveToSource')} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button
+                disabled={moveAllLeftDisabled}
+                type="button"
+                icon={moveAllToSourceIcon}
+                onClick={moveAllLeft}
+                pt={ptm('moveAllToSourceButton')}
+                unstyled={unstyled}
+                aria-label={ariaLabel('moveAllToSource')}
+                __parentMetadata={{ parent: props.metaData }}
+            ></Button>
         </div>
     );
 });

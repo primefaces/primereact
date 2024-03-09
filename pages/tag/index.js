@@ -1,13 +1,16 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/tag/apidoc';
-import { ImportDoc } from '../../components/doc/tag/importdoc';
-import { TagsDoc } from '../../components/doc/tag/tagsdoc';
-import { PillsDoc } from '../../components/doc/tag/pillsdoc';
-import { IconsDoc } from '../../components/doc/tag/iconsdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/tag/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/tag/basicdoc';
+import { IconDoc } from '@/components/doc/tag/icondoc';
+import { ImportDoc } from '@/components/doc/tag/importdoc';
+import { PillDoc } from '@/components/doc/tag/pilldoc';
+import { PTDoc } from '@/components/doc/tag/pt/ptdoc';
+import { Wireframe } from '@/components/doc/tag/pt/wireframe';
+import { SeverityDoc } from '@/components/doc/tag/severitydoc';
+import { TemplateDoc } from '@/components/doc/tag/templatedoc';
+import { StyledDoc } from '@/components/doc/tag/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/tag/theming/tailwinddoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -17,64 +20,77 @@ const TerminalDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'tags',
-            label: 'Tags',
-            component: TagsDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'pills',
-            label: 'Pills',
-            component: PillsDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
+        },
+        {
+            id: 'pill',
+            label: 'Pill',
+            component: PillDoc
         },
         {
             id: 'icons',
-            label: 'Icons',
-            component: IconsDoc
+            label: 'Icon',
+            component: IconDoc
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tag.options',
+            label: 'Tag PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'templating',
-                    label: 'Templating'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Tag Component</title>
-                <meta name="description" content="Tag component is used to categorize content." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Tag</h1>
-                    <p>Tag component is used to categorize content.</p>
-                </div>
-                <DocActions github="tag/index.js" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TerminalDemo;

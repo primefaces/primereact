@@ -1,96 +1,64 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 import { useState } from 'react';
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function LoadingDoc(props) {
-    const [loading1, setLoading1] = useState(false);
-    const [loading2, setLoading2] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const onLoadingClick1 = () => {
-        setLoading1(true);
-
-        setTimeout(() => {
-            setLoading1(false);
-        }, 2000);
-    };
-
-    const onLoadingClick2 = () => {
-        setLoading2(true);
+    const load = () => {
+        setLoading(true);
 
         setTimeout(() => {
-            setLoading2(false);
+            setLoading(false);
         }, 2000);
     };
 
     const code = {
         basic: `
-<Button label="Submit" loading />
-<Button label="Submit" iconPos="right" loading />
-<Button label="Submit" icon="pi pi-check" loading={loading1} onClick={onLoadingClick1} />
-<Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
+<Button label="Submit" icon="pi pi-check" loading={loading} onClick={load} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from 'primereact/button';
 
-export default function LoadingDoc() {
-    const [loading1, setLoading1] = useState(false);
-    const [loading2, setLoading2] = useState(false);
+export default function LoadingDemo() {
+    const [loading, setLoading] = useState(false);
 
-    const onLoadingClick1 = () => {
-        setLoading1(true);
-
-        setTimeout(() => {
-            setLoading1(false);
-        }, 2000);
-    };
-
-    const onLoadingClick2 = () => {
-        setLoading2(true);
+    const load = () => {
+        setLoading(true);
 
         setTimeout(() => {
-            setLoading2(false);
+            setLoading(false);
         }, 2000);
     };
 
     return (
-        <Button label="Submit" loading />
-        <Button label="Submit" iconPos="right" loading />
-        <Button label="Submit" icon="pi pi-check" loading={loading1} onClick={onLoadingClick1} />
-        <Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button label="Submit" icon="pi pi-check" loading={loading} onClick={load} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from 'primereact/button';
 
-export default function LoadingDoc() {
-    const [loading1, setLoading1] = useState<boolean>(false);
-    const [loading2, setLoading2] = useState<boolean>(false);
+export default function LoadingDemo() {
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const onLoadingClick1 = () => {
-        setLoading1(true);
-
-        setTimeout(() => {
-            setLoading1(false);
-        }, 2000);
-    };
-
-    const onLoadingClick2 = () => {
-        setLoading2(true);
+    const load = () => {
+        setLoading(true);
 
         setTimeout(() => {
-            setLoading2(false);
+            setLoading(false);
         }, 2000);
     };
 
     return (
-        <Button label="Submit" loading />
-        <Button label="Submit" iconPos="right" loading />
-        <Button label="Submit" icon="pi pi-check" loading={loading1} onClick={onLoadingClick1} />
-        <Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button label="Submit" icon="pi pi-check" loading={loading} onClick={load} />
+        </div>
     )
 }
         `
@@ -100,14 +68,11 @@ export default function LoadingDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.
+                    Busy state is controlled with the <i>loading</i> property.
                 </p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
-                <Button label="Submit" loading />
-                <Button label="Submit" iconPos="right" loading />
-                <Button label="Submit" icon="pi pi-check" loading={loading1} onClick={onLoadingClick1} />
-                <Button label="Submit" loading={loading2} onClick={onLoadingClick2} />
+            <div className="card flex flex-wrap justify-content-center gap-3">
+                <Button label="Submit" icon="pi pi-check" loading={loading} onClick={load} />
             </div>
             <DocSectionCode code={code} />
         </>

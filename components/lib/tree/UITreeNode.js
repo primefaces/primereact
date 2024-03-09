@@ -1,22 +1,43 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
+    const elementRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
+    const mergeProps = useMergeProps();
     const isLeaf = props.isNodeLeaf(props.node);
+    const label = props.node.label;
     const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
+    const { ptm, cx } = props;
 
-    const expand = (event) => {
+    const getPTOptions = (key) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            context: {
+                selected: !isCheckboxSelectionMode() ? isSelected() : false,
+                expanded: expanded || false,
+                checked: isCheckboxSelectionMode() ? isChecked() : false,
+                isLeaf
+            }
+        });
+    };
+
+    const expand = (event, navigateFocusToChild = false) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
 
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
             originalEvent: event,
-            value: expandedKeys
+            value: expandedKeys,
+            navigateFocusToChild
         });
 
         invokeToggleEvents(event, true);
@@ -40,7 +61,7 @@ export const UITreeNode = React.memo((props) => {
             return;
         }
 
-        expanded ? collapse(event) : expand(event);
+        expanded ? collapse(event) : expand(event, false);
 
         event.preventDefault();
         event.stopPropagation();
@@ -61,90 +82,6 @@ export const UITreeNode = React.memo((props) => {
                     node: props.node
                 });
             }
-        }
-    };
-
-    const onNodeKeyDown = (event) => {
-        if (props.disabled) {
-            return;
-        }
-
-        const nodeElement = event.target.parentElement;
-
-        if (!DomHandler.hasClass(nodeElement, 'p-treenode')) {
-            return;
-        }
-
-        switch (event.which) {
-            //down arrow
-            case 40:
-                const listElement = nodeElement.children[1];
-
-                if (listElement) {
-                    focusNode(listElement.children[0]);
-                } else {
-                    let nextNodeElement = nodeElement.nextElementSibling;
-
-                    while (nextNodeElement) {
-                        if (!DomHandler.hasClass(nextNodeElement, 'p-treenode-droppoint')) {
-                            break;
-                        }
-
-                        nextNodeElement = nextNodeElement.nextElementSibling;
-                    }
-
-                    if (nextNodeElement) {
-                        focusNode(nextNodeElement);
-                    } else {
-                        const nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
-
-                        nextSiblingAncestor && focusNode(nextSiblingAncestor);
-                    }
-                }
-
-                event.preventDefault();
-                break;
-
-            //up arrow
-            case 38:
-                if (nodeElement.previousElementSibling) {
-                    focusNode(findLastVisibleDescendant(nodeElement.previousElementSibling));
-                } else {
-                    const parentNodeElement = getParentNodeElement(nodeElement);
-
-                    parentNodeElement && focusNode(parentNodeElement);
-                }
-
-                event.preventDefault();
-                break;
-
-            //right arrow
-            case 39:
-                if (!expanded) {
-                    expand(event);
-                }
-
-                event.preventDefault();
-                break;
-
-            //left arrow
-            case 37:
-                if (expanded) {
-                    collapse(event);
-                }
-
-                event.preventDefault();
-                break;
-
-            //enter
-            case 13:
-                onClick(event);
-                event.preventDefault();
-                break;
-
-            default:
-                //no op
-                break;
         }
     };
 
@@ -173,7 +110,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const focusNode = (element) => {
-        element && element.children[0] && element.children[0].focus();
+        element && element.focus();
     };
 
     const onClick = (event) => {
@@ -360,26 +297,201 @@ export const UITreeNode = React.memo((props) => {
         }
     };
 
+    const onKeyDown = (event) => {
+        if (!isSameNode(event)) return;
+
+        switch (event.code) {
+            case 'Tab':
+                onTabKey(event);
+
+                break;
+
+            case 'ArrowDown':
+                onArrowDown(event);
+
+                break;
+
+            case 'ArrowUp':
+                onArrowUp(event);
+
+                break;
+
+            case 'ArrowRight':
+                onArrowRight(event);
+
+                break;
+
+            case 'ArrowLeft':
+                onArrowLeft(event);
+
+                break;
+
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onEnterKey(event);
+
+                break;
+
+            default:
+                break;
+        }
+    };
+
+    const onArrowDown = (event) => {
+        const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
+        const listElement = nodeElement.children[1];
+
+        if (listElement) {
+            focusRowChange(nodeElement, listElement.children[0]);
+        } else {
+            if (nodeElement.nextElementSibling) {
+                focusRowChange(nodeElement, nodeElement.nextElementSibling);
+            } else {
+                let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
+
+                if (nextSiblingAncestor) {
+                    focusRowChange(nodeElement, nextSiblingAncestor);
+                }
+            }
+        }
+
+        event.preventDefault();
+    };
+
+    const onArrowUp = (event) => {
+        const nodeElement = event.target;
+
+        if (nodeElement.previousElementSibling) {
+            focusRowChange(nodeElement, nodeElement.previousElementSibling, findLastVisibleDescendant(nodeElement.previousElementSibling));
+        } else {
+            let parentNodeElement = getParentNodeElement(nodeElement);
+
+            if (parentNodeElement) {
+                focusRowChange(nodeElement, parentNodeElement);
+            }
+        }
+
+        event.preventDefault();
+    };
+
+    const onArrowRight = (event) => {
+        if (isLeaf || expanded) return;
+
+        event.currentTarget.tabIndex = -1;
+
+        expand(event, true);
+    };
+
+    const onArrowLeft = (event) => {
+        const togglerElement = DomHandler.findSingle(event.currentTarget, '[data-pc-section="toggler"]');
+
+        if (props.level === 0 && !expanded) {
+            return false;
+        }
+
+        if (expanded && !isLeaf) {
+            togglerElement.click();
+
+            return false;
+        }
+
+        const target = findBeforeClickableNode(event.currentTarget);
+
+        if (target) {
+            focusRowChange(event.currentTarget, target);
+        }
+    };
+
+    const onEnterKey = (event) => {
+        setTabIndexForSelectionMode(event, nodeTouched.current);
+        onClick(event);
+
+        event.preventDefault();
+    };
+
+    const onTabKey = () => {
+        setAllNodesTabIndexes();
+    };
+
+    const setAllNodesTabIndexes = () => {
+        const nodes = DomHandler.find(contentRef.current.closest('[data-pc-section="container"]'), '[role="treeitem"]');
+
+        const hasSelectedNode = [...nodes].some((node) => node.getAttribute('aria-selected') === 'true' || node.getAttribute('aria-checked') === 'true');
+
+        [...nodes].forEach((node) => {
+            node.tabIndex = -1;
+        });
+
+        if (hasSelectedNode) {
+            const selectedNodes = [...nodes].filter((node) => node.getAttribute('aria-selected') === 'true' || node.getAttribute('aria-checked') === 'true');
+
+            selectedNodes[0].tabIndex = 0;
+
+            return;
+        }
+
+        [...nodes][0].tabIndex = 0;
+    };
+
+    const setTabIndexForSelectionMode = (event, nodeTouched) => {
+        if (props.selectionMode !== null) {
+            const elements = [...DomHandler.find(elementRef.current.parentElement, '[role="treeitem"]')];
+
+            event.currentTarget.tabIndex = nodeTouched === false ? -1 : 0;
+
+            if (elements.every((element) => element.tabIndex === -1)) {
+                elements[0].tabIndex = 0;
+            }
+        }
+    };
+
+    const focusRowChange = (firstFocusableRow, currentFocusedRow, lastVisibleDescendant) => {
+        firstFocusableRow.tabIndex = '-1';
+        currentFocusedRow.tabIndex = '0';
+
+        focusNode(lastVisibleDescendant || currentFocusedRow);
+    };
+
+    const findBeforeClickableNode = (node) => {
+        const parentListElement = node.closest('ul').closest('li');
+
+        if (parentListElement) {
+            const prevNodeButton = DomHandler.findSingle(parentListElement, 'button');
+
+            if (prevNodeButton && prevNodeButton.style.visibility !== 'hidden') {
+                return parentListElement;
+            }
+
+            return findBeforeClickableNode(node.previousElementSibling);
+        }
+
+        return null;
+    };
+
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
-        let childPartialSelected = false;
 
         for (let child of props.node.children) {
             if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
-            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked) childPartialSelected = true;
         }
 
-        if (check && checkedChildCount === props.node.children.length) {
-            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
-        } else {
-            if (!check) {
-                delete selectionKeys[props.node.key];
-            }
+        const parentKey = props.node.key;
+        const children = ObjectUtils.findChildrenByKey(props.originalOptions, parentKey);
 
-            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length)) selectionKeys[props.node.key] = { checked: false, partialChecked: true };
-            else delete selectionKeys[props.node.key];
+        let isParentPartiallyChecked = children.some((ele) => ele.key in selectionKeys);
+        let isCompletelyChecked = children.every((ele) => ele.key in selectionKeys && selectionKeys[ele.key].checked);
+
+        if (isParentPartiallyChecked && !isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: true };
+        } else if (isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: true, partialChecked: false };
+        } else if (check) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: false };
+        } else {
+            delete selectionKeys[parentKey];
         }
 
         if (props.propagateSelectionUp && props.onPropagateUp) {
@@ -404,7 +516,11 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const isChecked = () => {
-        return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false;
+        return (props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false) || false;
+    };
+
+    const isSameNode = (event) => {
+        return event.currentTarget && (event.currentTarget.isSameNode(event.target) || event.currentTarget.isSameNode(event.target.closest('[role="treeitem"]')));
     };
 
     const isPartialChecked = () => {
@@ -527,7 +643,13 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createLabel = () => {
-        let content = <span className="p-treenode-label">{props.node.label}</span>;
+        const labelProps = mergeProps(
+            {
+                className: cx('label')
+            },
+            getPTOptions('label')
+        );
+        let content = <span {...labelProps}>{label}</span>;
 
         if (props.nodeTemplate) {
             const defaultContentOptions = {
@@ -548,14 +670,32 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': props.disabled });
-            const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
+            const checkboxIconProps = mergeProps(
+                {
+                    className: cx('checkboxIcon')
+                },
+                getPTOptions('checkboxIcon')
+            );
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
+            const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
+            const checkboxContainerProps = mergeProps(
+                {
+                    'aria-hidden': true,
+                    className: cx('checkboxContainer')
+                },
+                getPTOptions('checkboxContainer')
+            );
+            const checkboxProps = mergeProps(
+                {
+                    className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
+                    role: 'checkbox'
+                },
+                getPTOptions('checkbox')
+            );
 
             return (
-                <div className="p-checkbox p-component">
-                    <div className={className} role="checkbox" aria-checked={checked}>
-                        <span className={icon}></span>
-                    </div>
+                <div {...checkboxContainerProps}>
+                    <div {...checkboxProps}>{checkboxIcon}</div>
                 </div>
             );
         }
@@ -567,20 +707,42 @@ export const UITreeNode = React.memo((props) => {
         const icon = props.node.icon || (expanded ? props.node.expandedIcon : props.node.collapsedIcon);
 
         if (icon) {
-            const className = classNames('p-treenode-icon', icon);
+            const nodeIconProps = mergeProps(
+                {
+                    className: classNames(icon, cx('nodeIcon'))
+                },
+                getPTOptions('nodeIcon')
+            );
 
-            return <span className={className}></span>;
+            return <span {...nodeIconProps}></span>;
         }
 
         return null;
     };
 
     const createToggler = () => {
-        const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
-        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
+        const togglerIconProps = mergeProps(
+            {
+                className: cx('togglerIcon'),
+                'aria-hidden': true
+            },
+            getPTOptions('togglerIcon')
+        );
+        const icon = expanded ? props.collapseIcon || <ChevronDownIcon {...togglerIconProps} /> : props.expandIcon || <ChevronRightIcon {...togglerIconProps} />;
+        const togglerIcon = IconUtils.getJSXIcon(icon, { ...togglerIconProps }, { props, expanded });
+        const togglerProps = mergeProps(
+            {
+                type: 'button',
+                className: cx('toggler'),
+                tabIndex: -1,
+                'aria-hidden': true,
+                onClick: onTogglerClick
+            },
+            getPTOptions('toggler')
+        );
         let content = (
-            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} aria-label={label}>
-                <span className={iconClassName} aria-hidden="true"></span>
+            <button {...togglerProps}>
+                {togglerIcon}
                 <Ripple />
             </button>
         );
@@ -603,7 +765,19 @@ export const UITreeNode = React.memo((props) => {
 
     const createDropPoint = (position) => {
         if (props.dragdropScope) {
-            return <li className="p-treenode-droppoint" onDrop={(event) => onDropPoint(event, position)} onDragOver={onDropPointDragOver} onDragEnter={onDropPointDragEnter} onDragLeave={onDropPointDragLeave}></li>;
+            const droppointProps = mergeProps(
+                {
+                    className: cx('droppoint'),
+                    role: 'treeitem',
+                    onDrop: (event) => onDropPoint(event, position),
+                    onDragOver: onDropPointDragOver,
+                    onDragEnter: onDropPointDragEnter,
+                    onDragLeave: onDropPointDragLeave
+                },
+                getPTOptions('droppoint')
+            );
+
+            return <li {...droppointProps}></li>;
         }
 
         return null;
@@ -612,41 +786,34 @@ export const UITreeNode = React.memo((props) => {
     const createContent = () => {
         const selected = isSelected();
         const checked = isChecked();
-        const className = classNames('p-treenode-content', props.node.className, {
-            'p-treenode-selectable': props.selectionMode && props.node.selectable !== false,
-            'p-highlight': isCheckboxSelectionMode() ? checked : selected,
-            'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
-            'p-disabled': props.disabled
-        });
         const toggler = createToggler();
         const checkbox = createCheckbox();
         const icon = createIcon();
         const label = createLabel();
-        const tabIndex = props.disabled ? undefined : 0;
+
+        const contentProps = mergeProps(
+            {
+                ref: contentRef,
+                className: classNames(props.node.className, cx('content', { checked, selected, nodeProps: props, isCheckboxSelectionMode })),
+                style: props.node.style,
+                onClick: onClick,
+                onDoubleClick: onDoubleClick,
+                onContextMenu: onRightClick,
+                onTouchEnd: onTouchEnd,
+                draggable: props.dragdropScope && props.node.draggable !== false && !props.disabled,
+                onDrop: onDrop,
+                onDragOver: onDragOver,
+                onDragEnter: onDragEnter,
+                onDragLeave: onDragLeave,
+                onDragStart: onDragStart,
+                onDragEnd: onDragEnd,
+                'data-p-highlight': isCheckboxSelectionMode() ? checked : selected
+            },
+            getPTOptions('content')
+        );
 
         return (
-            <div
-                ref={contentRef}
-                className={className}
-                style={props.node.style}
-                onClick={onClick}
-                onDoubleClick={onDoubleClick}
-                onContextMenu={onRightClick}
-                onTouchEnd={onTouchEnd}
-                draggable={props.dragdropScope && props.node.draggable !== false && !props.disabled}
-                onDrop={onDrop}
-                onDragOver={onDragOver}
-                onDragEnter={onDragEnter}
-                onDragLeave={onDragLeave}
-                onDragStart={onDragStart}
-                onDragEnd={onDragEnd}
-                tabIndex={tabIndex}
-                onKeyDown={onNodeKeyDown}
-                role="treeitem"
-                aria-posinset={props.index + 1}
-                aria-expanded={expanded}
-                aria-selected={checked || selected}
-            >
+            <div {...contentProps}>
                 {toggler}
                 {checkbox}
                 {icon}
@@ -656,45 +823,59 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createChildren = () => {
+        const subgroupProps = mergeProps(
+            {
+                className: cx('subgroup'),
+                role: 'group'
+            },
+            getPTOptions('subgroup')
+        );
+
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
-                <ul className="p-treenode-children" role="group">
+                <ul {...subgroupProps}>
                     {props.node.children.map((childNode, index) => {
                         return (
                             <UITreeNode
                                 key={childNode.key || childNode.label}
                                 node={childNode}
-                                parent={props.node}
-                                index={index}
-                                last={index === props.node.children.length - 1}
-                                path={props.path + '-' + index}
-                                disabled={props.disabled}
-                                selectionMode={props.selectionMode}
-                                selectionKeys={props.selectionKeys}
-                                onSelectionChange={props.onSelectionChange}
-                                metaKeySelection={props.metaKeySelection}
-                                propagateSelectionDown={props.propagateSelectionDown}
-                                propagateSelectionUp={props.propagateSelectionUp}
+                                checkboxIcon={props.checkboxIcon}
+                                collapseIcon={props.collapseIcon}
                                 contextMenuSelectionKey={props.contextMenuSelectionKey}
-                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                                onContextMenu={props.onContextMenu}
-                                onExpand={props.onExpand}
-                                onCollapse={props.onCollapse}
-                                onSelect={props.onSelect}
-                                onUnselect={props.onUnselect}
-                                onClick={props.onClick}
-                                onDoubleClick={props.onDoubleClick}
-                                expandedKeys={props.expandedKeys}
-                                onToggle={props.onToggle}
-                                onPropagateUp={propagateUp}
-                                nodeTemplate={props.nodeTemplate}
-                                togglerTemplate={props.togglerTemplate}
-                                isNodeLeaf={props.isNodeLeaf}
+                                cx={cx}
+                                disabled={props.disabled}
                                 dragdropScope={props.dragdropScope}
-                                onDragStart={props.onDragStart}
+                                expandIcon={props.expandIcon}
+                                expandedKeys={props.expandedKeys}
+                                index={index}
+                                isNodeLeaf={props.isNodeLeaf}
+                                last={index === props.node.children.length - 1}
+                                metaKeySelection={props.metaKeySelection}
+                                nodeTemplate={props.nodeTemplate}
+                                onClick={props.onClick}
+                                onCollapse={props.onCollapse}
+                                onContextMenu={props.onContextMenu}
+                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                                onDoubleClick={props.onDoubleClick}
                                 onDragEnd={props.onDragEnd}
+                                onDragStart={props.onDragStart}
                                 onDrop={props.onDrop}
                                 onDropPoint={props.onDropPoint}
+                                onExpand={props.onExpand}
+                                onPropagateUp={propagateUp}
+                                onSelect={props.onSelect}
+                                onSelectionChange={props.onSelectionChange}
+                                onToggle={props.onToggle}
+                                onUnselect={props.onUnselect}
+                                originalOptions={props.originalOptions}
+                                parent={props.node}
+                                path={props.path + '-' + index}
+                                propagateSelectionDown={props.propagateSelectionDown}
+                                propagateSelectionUp={props.propagateSelectionUp}
+                                ptm={ptm}
+                                selectionKeys={props.selectionKeys}
+                                selectionMode={props.selectionMode}
+                                togglerTemplate={props.togglerTemplate}
                             />
                         );
                     })}
@@ -706,18 +887,35 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createNode = () => {
-        const className = classNames(
-            'p-treenode',
-            {
-                'p-treenode-leaf': isLeaf
-            },
-            props.node.className
-        );
+        const tabIndex = props.disabled || props.index !== 0 ? -1 : 0;
+        const selected = isSelected();
+        const checked = isChecked();
+
         const content = createContent();
         const children = createChildren();
 
+        const nodeProps = mergeProps(
+            {
+                ref: elementRef,
+                className: classNames(props.node.className, cx('node', { isLeaf })),
+                style: props.node.style,
+                tabIndex,
+                role: 'treeitem',
+                'aria-label': label,
+                'aria-level': props.level,
+                'aria-expanded': expanded,
+                'aria-checked': checked,
+                'aria-setsize': props.node.children ? props.node.children.length : 0,
+                'aria-posinset': props.index + 1,
+                onKeyDown: onKeyDown,
+                'aria-expanded': expanded,
+                'aria-selected': checked || selected
+            },
+            getPTOptions('node')
+        );
+
         return (
-            <li className={className} style={props.node.style}>
+            <li {...nodeProps}>
                 {content}
                 {children}
             </li>

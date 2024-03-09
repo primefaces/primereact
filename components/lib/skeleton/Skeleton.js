@@ -1,38 +1,43 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
+import { SkeletonBase } from './SkeletonBase';
 
 export const Skeleton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = SkeletonBase.getProps(inProps, context);
+        const { ptm, cx, sx, isUnstyled } = SkeletonBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(SkeletonBase.css.styles, isUnstyled, { name: 'skeleton' });
+
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, Skeleton.defaultProps);
-        const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
-        const className = classNames(
-            'p-skeleton p-component',
-            {
-                'p-skeleton-circle': props.shape === 'circle',
-                'p-skeleton-none': props.animation === 'none'
-            },
-            props.className
-        );
 
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
 
-        return <div ref={elementRef} style={style} className={className} {...otherProps}></div>;
+        const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className: classNames(props.className, cx('root')),
+                style: { ...style, ...sx('root') },
+                'aria-hidden': true
+            },
+            SkeletonBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        return <div {...rootProps}></div>;
     })
 );
 
 Skeleton.displayName = 'Skeleton';
-Skeleton.defaultProps = {
-    __TYPE: 'Skeleton',
-    shape: 'rectangle',
-    size: null,
-    width: '100%',
-    height: '1rem',
-    borderRadius: null,
-    animation: 'wave',
-    style: null,
-    className: null
-};

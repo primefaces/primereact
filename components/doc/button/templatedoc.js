@@ -1,100 +1,37 @@
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 
 export function TemplateDoc(props) {
     const code = {
         basic: `
-<Button className="google p-0" aria-label="Google"><i className="pi pi-google px-2"></i><span className="px-3">Google</span></Button>
-<Button className="youtube p-0" aria-label="Youtube"><i className="pi pi-youtube px-2"></i><span className="px-3">Youtube</span></Button>
-<Button className="vimeo p-0" aria-label="Vimeo"><i className="pi pi-vimeo px-2"></i><span className="px-3">Vimeo</span></Button>
-<Button className="facebook p-0" aria-label="Facebook"><i className="pi pi-facebook px-2"></i><span className="px-3">Facebook</span></Button>
-<Button className="twitter p-0" aria-label="Twitter"><i className="pi pi-twitter px-2"></i><span className="px-3">Twitter</span></Button>
-<Button className="slack p-0" aria-label="Slack"><i className="pi pi-slack px-2"></i><span className="px-3">Slack</span></Button>
-<Button className="amazon p-0" aria-label="Amazon"><i className="pi pi-amazon px-2"></i><span className="px-3">Amazon</span></Button>
-<Button className="discord p-0" aria-label="Discord"><i className="pi pi-discord px-2"></i><span className="px-3">Discord</span></Button>
+<Button className="bg-bluegray-600 hover:bg-bluegray-400 border-bluegray-700">
+    <img alt="logo" src="https://primefaces.org/cdn/primereact/images/primereact-logo-light.svg" className="h-2rem"></img>
+</Button>
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-
+export default function TemplateDemo() {
     return (
-        <div className="template">
-            <Button className="google p-0" aria-label="Google">
-                <i className="pi pi-google px-2"></i>
-                <span className="px-3">Google</span>
-            </Button>
-            <Button className="youtube p-0" aria-label="Youtube">
-                <i className="pi pi-youtube px-2"></i>
-                <span className="px-3">Youtube</span>
-            </Button>
-            <Button className="vimeo p-0" aria-label="Vimeo">
-                <i className="pi pi-vimeo px-2"></i>
-                <span className="px-3">Vimeo</span>
-            </Button>
-            <Button className="facebook p-0" aria-label="Facebook">
-                <i className="pi pi-facebook px-2"></i>
-                <span className="px-3">Facebook</span>
-            </Button>
-            <Button className="twitter p-0" aria-label="Twitter">
-                <i className="pi pi-twitter px-2"></i>
-                <span className="px-3">Twitter</span>
-            </Button>
-            <Button className="slack p-0" aria-label="Slack">
-                <i className="pi pi-slack px-2"></i>
-                <span className="px-3">Slack</span>
-            </Button>
-            <Button className="amazon p-0" aria-label="Amazon">
-                <i className="pi pi-amazon px-2"></i>
-                <span className="px-3">Amazon</span>
-            </Button>
-            <Button className="discord p-0" aria-label="Discord">
-                <i className="pi pi-discord px-2"></i>
-                <span className="px-3">Discord</span>
+        <div className="card flex justify-content-center">
+            <Button className="bg-bluegray-600 hover:bg-bluegray-400 border-bluegray-700">
+                <img alt="logo" src="https://primefaces.org/cdn/primereact/images/primereact-logo-light.svg" className="h-2rem"></img>
             </Button>
         </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-
+export default function TemplateDemo() {
     return (
-        <div className="template">
-            <Button className="google p-0" aria-label="Google">
-                <i className="pi pi-google px-2"></i>
-                <span className="px-3">Google</span>
-            </Button>
-            <Button className="youtube p-0" aria-label="Youtube">
-                <i className="pi pi-youtube px-2"></i>
-                <span className="px-3">Youtube</span>
-            </Button>
-            <Button className="vimeo p-0" aria-label="Vimeo">
-                <i className="pi pi-vimeo px-2"></i>
-                <span className="px-3">Vimeo</span>
-            </Button>
-            <Button className="facebook p-0" aria-label="Facebook">
-                <i className="pi pi-facebook px-2"></i>
-                <span className="px-3">Facebook</span>
-            </Button>
-            <Button className="twitter p-0" aria-label="Twitter">
-                <i className="pi pi-twitter px-2"></i>
-                <span className="px-3">Twitter</span>
-            </Button>
-            <Button className="slack p-0" aria-label="Slack">
-                <i className="pi pi-slack px-2"></i>
-                <span className="px-3">Slack</span>
-            </Button>
-            <Button className="amazon p-0" aria-label="Amazon">
-                <i className="pi pi-amazon px-2"></i>
-                <span className="px-3">Amazon</span>
-            </Button>
-            <Button className="discord p-0" aria-label="Discord">
-                <i className="pi pi-discord px-2"></i>
-                <span className="px-3">Discord</span>
+        <div className="card flex justify-content-center">
+            <Button className="bg-bluegray-600 hover:bg-bluegray-400 border-bluegray-700">
+                <img alt="logo" src="https://primefaces.org/cdn/primereact/images/primereact-logo-light.svg" className="h-2rem"></img>
             </Button>
         </div>
     )
@@ -105,40 +42,11 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template</p>
+                <p>Custom content inside a button is defined as children.</p>
             </DocSectionText>
-            <div className="card template">
-                <Button className="google p-0" aria-label="Google">
-                    <i className="pi pi-google px-2"></i>
-                    <span className="px-3">Google</span>
-                </Button>
-                <Button className="youtube p-0" aria-label="Youtube">
-                    <i className="pi pi-youtube px-2"></i>
-                    <span className="px-3">Youtube</span>
-                </Button>
-                <Button className="vimeo p-0" aria-label="Vimeo">
-                    <i className="pi pi-vimeo px-2"></i>
-                    <span className="px-3">Vimeo</span>
-                </Button>
-                <Button className="facebook p-0" aria-label="Facebook">
-                    <i className="pi pi-facebook px-2"></i>
-                    <span className="px-3">Facebook</span>
-                </Button>
-                <Button className="twitter p-0" aria-label="Twitter">
-                    <i className="pi pi-twitter px-2"></i>
-                    <span className="px-3">Twitter</span>
-                </Button>
-                <Button className="slack p-0" aria-label="Slack">
-                    <i className="pi pi-slack px-2"></i>
-                    <span className="px-3">Slack</span>
-                </Button>
-                <Button className="amazon p-0" aria-label="Amazon">
-                    <i className="pi pi-amazon px-2"></i>
-                    <span className="px-3">Amazon</span>
-                </Button>
-                <Button className="discord p-0" aria-label="Discord">
-                    <i className="pi pi-discord px-2"></i>
-                    <span className="px-3">Discord</span>
+            <div className="card flex justify-content-center">
+                <Button className="bg-bluegray-600 hover:bg-bluegray-400 border-bluegray-700">
+                    <img alt="logo" src="https://primefaces.org/cdn/primereact/images/primereact-logo-light.svg" className="h-2rem"></img>
                 </Button>
             </div>
             <DocSectionCode code={code} />

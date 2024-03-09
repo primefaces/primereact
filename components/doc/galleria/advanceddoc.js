@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Galleria } from '../../lib/galleria/Galleria';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Galleria } from '@/components/lib/galleria/Galleria';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useEffect, useRef, useState } from 'react';
 import { PhotoService } from '../../../service/PhotoService';
-import { classNames } from '../../lib/utils/Utils';
-import getConfig from 'next/config';
 
 export function AdvancedDoc(props) {
     const [images, setImages] = useState(null);
@@ -13,8 +12,6 @@ export function AdvancedDoc(props) {
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
     const responsiveOptions = [
@@ -37,7 +34,7 @@ export function AdvancedDoc(props) {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then((data) => setImages(data));
+        PhotoService.getImages().then((data) => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
@@ -46,10 +43,6 @@ export function AdvancedDoc(props) {
     useEffect(() => {
         setAutoPlayActive(galleria.current.isAutoPlayActive());
     }, [isAutoPlayActive]);
-
-    const onThumbnailChange = (event) => {
-        setActiveIndex(event.index);
-    };
 
     const onItemChange = (event) => {
         setActiveIndex(event.index);
@@ -113,17 +106,17 @@ export function AdvancedDoc(props) {
     const thumbnailTemplate = (item) => {
         return (
             <div className="grid grid-nogutter justify-content-center">
-                <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
+                <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     };
 
     const itemTemplate = (item) => {
         if (isFullScreen) {
-            return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} />;
+            return <img src={item.itemImageSrc} alt={item.alt} />;
         }
 
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const renderFooter = () => {
@@ -180,19 +173,20 @@ export function AdvancedDoc(props) {
     style={{ maxWidth: '640px' }} className={galleriaClassName} />
         `,
         javascript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Galleria } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
+import './GalleriaAdvancedDemo.css';
 
-export default function AdvancedDoc() {
+export default function AdvancedDemo() {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [showThumbnails, setShowThumbnails] = useState(false);
     const [isAutoPlayActive, setAutoPlayActive] = useState(true);
     const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+    
     const galleria = useRef(null)
 
     const responsiveOptions = [
@@ -215,19 +209,15 @@ export default function AdvancedDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[]);
 
     useEffect(() => {
         setAutoPlayActive(galleria.current.isAutoPlayActive())
     },[isAutoPlayActive]);
-
-    const onThumbnailChange = (event) => {
-        setActiveIndex(event.index)
-    }
 
     const onItemChange = (event) => {
         setActiveIndex(event.index)
@@ -294,17 +284,17 @@ export default function AdvancedDoc() {
     const thumbnailTemplate = (item) => {
         return (
             <div className="grid grid-nogutter justify-content-center">
-                <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />
+                <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
 
     const itemTemplate = (item) => {
         if (isFullScreen) {
-            return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} />
+            return <img src={item.itemImageSrc} alt={item.alt} />
         }
 
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
     const renderFooter = () => {
@@ -351,31 +341,34 @@ export default function AdvancedDoc() {
     });
 
     return (
-        <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
-            showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
-            numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
-            item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
-            style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        <div className="card galleria-demo">
+            <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
+                showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
+                item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
+                style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
-import { Galleria } from 'primereact/galleria';
+import { Galleria, GalleriaResponsiveOptions } from 'primereact/galleria';
 import { classNames } from 'primereact/utils';
-import { PhotoService } from '../service/PhotoService';
+import { PhotoService } from './service/PhotoService';
+import './GalleriaAdvancedDemo.css';
 
-export default function AdvancedDoc() {
+export default function AdvancedDemo() {
     const [images, setImages] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [showThumbnails, setShowThumbnails] = useState(false);
-    const [isAutoPlayActive, setAutoPlayActive] = useState(true);
-    const [isFullScreen, setFullScreen] = useState(false);
-    const galleriaService = new PhotoService();
+    const [activeIndex, setActiveIndex] = useState<number>(0);
+    const [showThumbnails, setShowThumbnails] = useState<boolean>(false);
+    const [isAutoPlayActive, setAutoPlayActive] = <boolean>useState(true);
+    const [isFullScreen, setFullScreen] = useState<boolean>(false);
+    
     const galleria = useRef(null)
 
-    const responsiveOptions = [
+    const responsiveOptions: GalleriaResponsiveOptions = [
         {
             breakpoint: '1024px',
             numVisible: 5
@@ -395,19 +388,15 @@ export default function AdvancedDoc() {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        PhotoService.getImages().then(data => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[]);
 
     useEffect(() => {
         setAutoPlayActive(galleria.current.isAutoPlayActive())
     },[isAutoPlayActive]);
-
-    const onThumbnailChange = (event) => {
-        setActiveIndex(event.index)
-    }
 
     const onItemChange = (event) => {
         setActiveIndex(event.index)
@@ -474,17 +463,17 @@ export default function AdvancedDoc() {
     const thumbnailTemplate = (item) => {
         return (
             <div className="grid grid-nogutter justify-content-center">
-                <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />
+                <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
 
     const itemTemplate = (item) => {
         if (isFullScreen) {
-            return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} />
+            return <img src={item.itemImageSrc} alt={item.alt} />
         }
 
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
     const renderFooter = () => {
@@ -531,22 +520,116 @@ export default function AdvancedDoc() {
     });
     
     return (
-        <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
-            showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
-            numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
-            item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
-            style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        <div className="card galleria-demo">
+            <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
+                showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
+                item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
+                style={{ maxWidth: '640px' }} className={galleriaClassName} />
+        </div>
     )
 }
+        `,
+
+        extFiles: {
+            'GalleriaAdvancedDemo.css': `
+/* GalleriaAdvancedDemo.css */
+
+.galleria-demo {
+    .custom-indicator-galleria {
+        .indicator-text {
+            color: #e9ecef;
+            cursor: pointer;
+        }
+
+        .p-highlight {
+            .indicator-text {
+                color: var(--primary-color);
+            }
+        }
+    }
+
+    .custom-galleria {
+        &.fullscreen {
+            display: flex;
+            flex-direction: column;
+
+            .p-galleria-content {
+                flex-grow: 1;
+                justify-content: center;
+            }
+        }
+
+        .p-galleria-content {
+            position: relative;
+        }
+
+        .p-galleria-thumbnail-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .p-galleria-thumbnail-items-container {
+            width: 100%;
+        }
+
+        .custom-galleria-footer {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, .9);
+            color: #ffffff;
+
+            > button {
+                background-color: transparent;
+                color: #ffffff;
+                border: 0 none;
+                border-radius: 0;
+                margin: .2rem 0;
+
+                &.fullscreen-button {
+                    margin-left: auto;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+
+        .title-container {
+            > span {
+                font-size: .9rem;
+                padding-left: .829rem;
+
+                &.title {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+    `
+        },
+        data: `
+/* PhotoService */
+{
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
+    alt: 'Description for Image 1',
+    title: 'Title 1'
+},
+...
         `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Advanced</p>
+                <p>Advanced Galleria implementation with a custom UI.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
+            <div className="card galleria-demo">
                 <Galleria
                     ref={galleria}
                     value={images}
@@ -567,7 +650,7 @@ export default function AdvancedDoc() {
                     className={galleriaClassName}
                 />
             </div>
-            <DocSectionCode code={code} />
+            <DocSectionCode code={code} service={['PhotoService']} />
         </>
     );
 }

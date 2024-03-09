@@ -2,5 +2,6 @@
     "main": "./contextmenu.cjs.js",
     "module": "./contextmenu.esm.js",
     "unpkg": "./contextmenu.min.js",
-    "types": "./contextmenu.d.ts"
+    "types": "./contextmenu.d.ts",
+    "sideEffects": false
 }

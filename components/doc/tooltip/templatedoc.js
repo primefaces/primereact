@@ -1,27 +1,27 @@
-import { Button } from '../../lib/button/Button';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 
 export function TemplateDoc(props) {
     const code = {
         basic: `
 <Tooltip target=".custom-tooltip-btn">
-    <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+    <img alt="logo" src="/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
 </Tooltip>
 
 <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
         `,
         javascript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-
+export default function TemplateDemo() {
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Tooltip target=".custom-tooltip-btn">
-                <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
             </Tooltip>
 
             <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
@@ -30,15 +30,15 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Tooltip } from 'primereact/tooltip';
 import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-
+export default function TemplateDemo() {
     return (
-        <div>
+        <div className="card flex justify-content-center">
             <Tooltip target=".custom-tooltip-btn">
-                <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
             </Tooltip>
 
             <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
@@ -51,11 +51,13 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template</p>
+                <p>
+                    Custom content can be placed as the tooltip value either with <i>content</i> property or nesting the content as children.
+                </p>
             </DocSectionText>
-            <div className="card flex align-items-center justify-content-center">
+            <div className="card flex justify-content-center">
                 <Tooltip target=".custom-tooltip-btn">
-                    <img alt="logo" src="images/logo.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} data-pr-tooltip="PrimeReact-Logo" height="80px" />
+                    <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
                 </Tooltip>
 
                 <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />

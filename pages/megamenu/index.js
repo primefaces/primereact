@@ -1,12 +1,16 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/megamenu/importdoc';
-import { HorizontalDoc } from '../../components/doc/megamenu/horizontaldoc';
-import { VerticalDoc } from '../../components/doc/megamenu/verticaldoc';
-import { TemplatingDoc } from '../../components/doc/megamenu/templatingdoc';
-import { ApiDoc } from '../../components/doc/megamenu/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/megamenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/megamenu/basicdoc';
+import { CommandDoc } from '@/components/doc/megamenu/commanddoc';
+import { ImportDoc } from '@/components/doc/megamenu/importdoc';
+import { PTDoc } from '@/components/doc/megamenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/megamenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/megamenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/megamenu/templatedoc';
+import { StyledDoc } from '@/components/doc/megamenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/megamenu/theming/tailwinddoc';
+import { VerticalDoc } from '@/components/doc/megamenu/verticaldoc';
 
 const MegaMenuDemo = () => {
     const docs = [
@@ -16,9 +20,9 @@ const MegaMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'horizontal',
-            label: 'Horizontal',
-            component: HorizontalDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'Vertical',
@@ -26,50 +30,74 @@ const MegaMenuDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.megamenu.options',
+            label: 'MegaMenu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React MegaMenu Component</title>
-                <meta name="description" content="MegaMenu is navigation component that displays submenus together." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>MegaMenu</h1>
-                    <p>MegaMenu is navigation component that displays submenus together.</p>
-                </div>
-                <DocActions github="megamenu/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React MegaMenu Component"
+            header="MegaMenu"
+            description="MegaMenu is navigation component that displays submenus together."
+            componentDocs={docs}
+            apiDocs={['MegaMenu', 'MenuItem']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

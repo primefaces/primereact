@@ -1,14 +1,18 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/speeddial/importdoc';
-import { LinearDoc } from '../../components/doc/speeddial/lineardoc';
-import { CircleDoc } from '../../components/doc/speeddial/circledoc';
-import { TooltipDoc } from '../../components/doc/speeddial/tooltipdoc';
-import { TransitionDoc } from '../../components/doc/speeddial/transitiondoc';
-import { MaskDoc } from '../../components/doc/speeddial/maskdoc';
-import { ApiDoc } from '../../components/doc/speeddial/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/speeddial/accessibilitydoc';
+import { CircleDoc } from '@/components/doc/speeddial/circledoc';
+import { CustomDoc } from '@/components/doc/speeddial/customdoc';
+import { ImportDoc } from '@/components/doc/speeddial/importdoc';
+import { LinearDoc } from '@/components/doc/speeddial/lineardoc';
+import { MaskDoc } from '@/components/doc/speeddial/maskdoc';
+import { PTDoc } from '@/components/doc/speeddial/pt/ptdoc';
+import { Wireframe } from '@/components/doc/speeddial/pt/wireframe';
+import { QuarterCircleDoc } from '@/components/doc/speeddial/quartercircledoc';
+import { SemiCircleDoc } from '@/components/doc/speeddial/semicircledoc';
+import { StyledDoc } from '@/components/doc/speeddial/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/speeddial/theming/tailwinddoc';
+import { TooltipDoc } from '@/components/doc/speeddial/tooltipdoc';
 
 const SpeedDialDemo = () => {
     const docs = [
@@ -24,8 +28,18 @@ const SpeedDialDemo = () => {
         },
         {
             id: 'circle',
-            label: 'Circle, Semi-Circle and Quarter-Circle',
+            label: 'Circle',
             component: CircleDoc
+        },
+        {
+            id: 'semicircle',
+            label: 'Semi Circle',
+            component: SemiCircleDoc
+        },
+        {
+            id: 'quartercircle',
+            label: 'Quarter Circle',
+            component: QuarterCircleDoc
         },
         {
             id: 'tooltip',
@@ -33,73 +47,62 @@ const SpeedDialDemo = () => {
             component: TooltipDoc
         },
         {
-            id: 'transition',
-            label: 'Transition Duration, Icon and No Rotate Animation',
-            component: TransitionDoc
-        },
-        {
             id: 'mask',
             label: 'Mask',
             component: MaskDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.speeddial.options',
+            label: 'SpeedDial PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'menumodelapi',
-                    label: 'MenuModel API'
-                },
-                {
-                    id: 'type',
-                    label: 'Type'
-                },
-                {
-                    id: 'direction',
-                    label: 'Direction'
-                },
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Speed Dial Component</title>
-                <meta name="description" content="When pressed, a floating action button can display multiple primary actions that can be performed on a page." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Speed Dial</h1>
-                    <p>When pressed, a floating action button can display multiple primary actions that can be performed on a page.</p>
-                </div>
-
-                <DocActions github="speeddial/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Speed Dial Component" header="Speed Dial" description="SpeedDial is a floating button with a popup menu." componentDocs={docs} apiDocs={['SpeedDial']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default SpeedDialDemo;

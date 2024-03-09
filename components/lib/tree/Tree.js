@@ -1,9 +1,20 @@
 import * as React from 'react';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { localeOption, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { SearchIcon } from '../icons/search';
+import { SpinnerIcon } from '../icons/spinner';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
 
 export const Tree = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = TreeBase.getProps(inProps, context);
+
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
         const elementRef = React.useRef(null);
@@ -12,6 +23,17 @@ export const Tree = React.memo(
         const filterChanged = React.useRef(false);
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const childFocusEvent = React.useRef(null);
+        const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
+            props,
+            state: {
+                filterValue: filteredValue,
+                expandedKeys: expandedKeys
+            }
+        });
+
+        useHandleStyle(TreeBase.css.styles, isUnstyled, { name: 'tree' });
+
         const filterOptions = {
             filter: (e) => onFilterInputChange(e),
             reset: () => resetFilter()
@@ -22,12 +44,33 @@ export const Tree = React.memo(
         };
 
         const onToggle = (event) => {
+            const { originalEvent, value, navigateFocusToChild } = event;
+
             if (props.onToggle) {
-                props.onToggle(event);
+                props.onToggle({ originalEvent, value });
             } else {
-                setExpandedKeysState(event.value);
+                if (navigateFocusToChild) {
+                    childFocusEvent.current = originalEvent;
+                }
+
+                setExpandedKeysState(value);
             }
         };
+
+        useUpdateEffect(() => {
+            if (childFocusEvent.current) {
+                const event = childFocusEvent.current;
+                const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
+                const listElement = nodeElement.children[1];
+                const childElement = listElement.children[0];
+
+                nodeElement.tabIndex = '-1';
+                childElement.tabIndex = '0';
+                childElement.focus();
+
+                childFocusEvent.current = null;
+            }
+        }, [expandedKeys]);
 
         const onDragStart = (event) => {
             dragState.current = {
@@ -40,9 +83,32 @@ export const Tree = React.memo(
             dragState.current = null;
         };
 
+        /**
+         * Deep copy a value. If the value has a data property, it will be shallow copied.
+         * Values that are not plain objects or arrays are returned as-is.
+         */
+        const cloneValue = (value) => {
+            if (Array.isArray(value)) {
+                return value.map(cloneValue);
+            } else if (!!value && Object.getPrototypeOf(value) === Object.prototype) {
+                const result = {};
+
+                // Leave data property alone and clone children
+                for (let key in value) {
+                    if (key !== 'data') {
+                        result[key] = cloneValue(value[key]);
+                    } else {
+                        result[key] = value[key];
+                    }
+                }
+
+                return result;
+            } else return value;
+        };
+
         const onDrop = (event) => {
             if (validateDropNode(dragState.current.path, event.path)) {
-                let value = JSON.parse(JSON.stringify(props.value));
+                const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -71,7 +137,7 @@ export const Tree = React.memo(
 
         const onDropPoint = (event) => {
             if (validateDropPoint(event)) {
-                let value = JSON.parse(JSON.stringify(props.value));
+                const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -210,6 +276,8 @@ export const Tree = React.memo(
             _filter();
         };
 
+        const childNodeFocus = (node) => {};
+
         const _filter = () => {
             if (!filterChanged.current) {
                 return;
@@ -297,62 +365,105 @@ export const Tree = React.memo(
         const createRootChild = (node, index, last) => {
             return (
                 <UITreeNode
+                    hostName="Tree"
                     key={node.key || node.label}
                     node={node}
+                    level={props.level + 1}
+                    originalOptions={props.value}
                     index={index}
                     last={last}
                     path={String(index)}
-                    disabled={props.disabled}
-                    selectionMode={props.selectionMode}
-                    selectionKeys={props.selectionKeys}
-                    onSelectionChange={props.onSelectionChange}
-                    metaKeySelection={props.metaKeySelection}
+                    checkboxIcon={props.checkboxIcon}
+                    collapseIcon={props.collapseIcon}
                     contextMenuSelectionKey={props.contextMenuSelectionKey}
-                    onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                    onContextMenu={props.onContextMenu}
-                    propagateSelectionDown={props.propagateSelectionDown}
-                    propagateSelectionUp={props.propagateSelectionUp}
-                    onExpand={props.onExpand}
-                    onCollapse={props.onCollapse}
-                    onSelect={props.onSelect}
-                    onUnselect={props.onUnselect}
-                    expandedKeys={expandedKeys}
-                    onToggle={onToggle}
-                    nodeTemplate={props.nodeTemplate}
-                    togglerTemplate={props.togglerTemplate}
-                    isNodeLeaf={isNodeLeaf}
+                    cx={cx}
+                    disabled={props.disabled}
                     dragdropScope={props.dragdropScope}
-                    onDragStart={onDragStart}
+                    expandIcon={props.expandIcon}
+                    expandedKeys={expandedKeys}
+                    isNodeLeaf={isNodeLeaf}
+                    metaKeySelection={props.metaKeySelection}
+                    nodeTemplate={props.nodeTemplate}
+                    onClick={props.onNodeClick}
+                    onCollapse={props.onCollapse}
+                    onContextMenu={props.onContextMenu}
+                    onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                    onDoubleClick={props.onNodeDoubleClick}
                     onDragEnd={onDragEnd}
+                    onDragStart={onDragStart}
                     onDrop={onDrop}
                     onDropPoint={onDropPoint}
-                    onClick={props.onNodeClick}
-                    onDoubleClick={props.onNodeDoubleClick}
+                    onExpand={props.onExpand}
+                    onSelect={props.onSelect}
+                    onSelectionChange={props.onSelectionChange}
+                    onToggle={onToggle}
+                    onUnselect={props.onUnselect}
+                    propagateSelectionDown={props.propagateSelectionDown}
+                    propagateSelectionUp={props.propagateSelectionUp}
+                    ptm={ptm}
+                    selectionKeys={props.selectionKeys}
+                    selectionMode={props.selectionMode}
+                    togglerTemplate={props.togglerTemplate}
                 />
             );
         };
 
-        const createRootChildren = () => {
-            if (props.filter) {
-                filterChanged.current = true;
-                _filter();
-            }
+        const createEmptyMessageNode = () => {
+            const emptyMessageProps = mergeProps(
+                {
+                    className: classNames(props.contentClassName, cx('emptyMessage')),
+                    role: 'treeitem'
+                },
+                ptm('emptyMessage')
+            );
 
-            const value = getRootNode();
+            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
 
+            return (
+                <li {...emptyMessageProps}>
+                    <span className="p-treenode-content">{message}</span>
+                </li>
+            );
+        };
+
+        const createRootChildrenContainer = (children) => {
+            const containerProps = mergeProps(
+                {
+                    className: classNames(props.contentClassName, cx('container')),
+                    role: 'tree',
+                    'aria-label': props.ariaLabel,
+                    'aria-labelledby': props.ariaLabelledBy,
+                    style: props.contentStyle,
+                    ...ariaProps
+                },
+                ptm('container')
+            );
+
+            return <ul {...containerProps}>{children}</ul>;
+        };
+
+        const createRootChildren = (value) => {
             return value.map((node, index) => createRootChild(node, index, index === value.length - 1));
         };
 
         const createModel = () => {
             if (props.value) {
-                const rootNodes = createRootChildren();
-                const contentClass = classNames('p-tree-container', props.contentClassName);
+                if (props.filter) {
+                    filterChanged.current = true;
+                    _filter();
+                }
 
-                return (
-                    <ul className={contentClass} role="tree" style={props.contentStyle} {...ariaProps}>
-                        {rootNodes}
-                    </ul>
-                );
+                const value = getRootNode();
+
+                if (value.length > 0) {
+                    const rootNodes = createRootChildren(value);
+
+                    return createRootChildrenContainer(rootNodes);
+                } else {
+                    const emptyMessageNode = createEmptyMessageNode();
+
+                    return createRootChildrenContainer(emptyMessageNode);
+                }
             }
 
             return null;
@@ -360,13 +471,23 @@ export const Tree = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
-                const icon = classNames('p-tree-loading-icon pi-spin', props.loadingIcon);
-
-                return (
-                    <div className="p-tree-loading-overlay p-component-overlay">
-                        <i className={icon} />
-                    </div>
+                const loadingIconProps = mergeProps(
+                    {
+                        className: cx('loadingIcon')
+                    },
+                    ptm('loadingIcon')
                 );
+                const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+                const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+
+                const loadingOverlayProps = mergeProps(
+                    {
+                        className: cx('loadingOverlay')
+                    },
+                    ptm('loadingOverlay')
+                );
+
+                return <div {...loadingOverlayProps}>{loadingIcon}</div>;
             }
 
             return null;
@@ -375,19 +496,41 @@ export const Tree = React.memo(
         const createFilter = () => {
             if (props.filter) {
                 const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                const searchIconProps = mergeProps(
+                    {
+                        className: cx('searchIcon')
+                    },
+                    ptm('searchIcon')
+                );
+                const icon = props.filterIcon || <SearchIcon {...searchIconProps} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { ...searchIconProps }, { props });
+
+                const filterContainerProps = mergeProps(
+                    {
+                        className: cx('filterContainer')
+                    },
+                    ptm('filterContainer')
+                );
+
+                const inputProps = mergeProps(
+                    {
+                        type: 'text',
+                        value: value,
+                        autoComplete: 'off',
+                        className: cx('input'),
+                        placeholder: props.filterPlaceholder,
+                        'aria-label': props.filterPlaceholder,
+                        onKeyDown: onFilterInputKeyDown,
+                        onChange: onFilterInputChange,
+                        disabled: props.disabled
+                    },
+                    ptm('input')
+                );
+
                 let content = (
-                    <div className="p-tree-filter-container">
-                        <input
-                            type="text"
-                            value={value}
-                            autoComplete="off"
-                            className="p-tree-filter p-inputtext p-component"
-                            placeholder={props.filterPlaceholder}
-                            onKeyDown={onFilterInputKeyDown}
-                            onChange={onFilterInputChange}
-                            disabled={props.disabled}
-                        />
-                        <span className="p-tree-filter-icon pi pi-search"></span>
+                    <div {...filterContainerProps}>
+                        <input {...inputProps} />
+                        {filterIcon}
                     </div>
                 );
 
@@ -398,7 +541,7 @@ export const Tree = React.memo(
                         filterOptions: filterOptions,
                         filterInputKeyDown: onFilterInputKeyDown,
                         filterInputChange: onFilterInputChange,
-                        filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                        filterIconClassName: 'p-dropdown-filter-icon',
                         props
                     };
 
@@ -419,7 +562,7 @@ export const Tree = React.memo(
                 if (props.header) {
                     const defaultContentOptions = {
                         filterContainerClassName: 'p-tree-filter-container',
-                        filterIconClasssName: 'p-tree-filter-icon pi pi-search',
+                        filterIconClassName: 'p-tree-filter-icon',
                         filterInput: {
                             className: 'p-tree-filter p-inputtext p-component',
                             onKeyDown: onFilterInputKeyDown,
@@ -433,7 +576,14 @@ export const Tree = React.memo(
                     content = ObjectUtils.getJSXElement(props.header, defaultContentOptions);
                 }
 
-                return <div className="p-tree-header">{content}</div>;
+                const headerProps = mergeProps(
+                    {
+                        className: cx('header')
+                    },
+                    ptm('header')
+                );
+
+                return <div {...headerProps}>{content}</div>;
             }
 
             return null;
@@ -442,23 +592,36 @@ export const Tree = React.memo(
         const createFooter = () => {
             const content = ObjectUtils.getJSXElement(props.footer, props);
 
-            return <div className="p-tree-footer">{content}</div>;
+            const footerProps = mergeProps(
+                {
+                    className: cx('footer')
+                },
+                ptm('footer')
+            );
+
+            return <div {...footerProps}>{content}</div>;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);
+        const otherProps = TreeBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-tree p-component', props.className, {
-            'p-tree-selectable': props.selectionMode,
-            'p-tree-loading': props.loading,
-            'p-disabled': props.disabled
-        });
         const loader = createLoader();
         const content = createModel();
         const header = createHeader();
         const footer = createFooter();
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className: classNames(props.className, cx('root')),
+                style: props.style,
+                id: props.id
+            },
+            TreeBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 {loader}
                 {header}
                 {content}
@@ -469,47 +632,3 @@ export const Tree = React.memo(
 );
 
 Tree.displayName = 'Tree';
-Tree.defaultProps = {
-    __TYPE: 'Tree',
-    id: null,
-    value: null,
-    disabled: false,
-    selectionMode: null,
-    selectionKeys: null,
-    onSelectionChange: null,
-    contextMenuSelectionKey: null,
-    onContextMenuSelectionChange: null,
-    expandedKeys: null,
-    style: null,
-    className: null,
-    contentStyle: null,
-    contentClassName: null,
-    metaKeySelection: true,
-    propagateSelectionUp: true,
-    propagateSelectionDown: true,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    dragdropScope: null,
-    header: null,
-    footer: null,
-    showHeader: true,
-    filter: false,
-    filterValue: null,
-    filterBy: 'label',
-    filterMode: 'lenient',
-    filterPlaceholder: null,
-    filterLocale: undefined,
-    filterTemplate: null,
-    nodeTemplate: null,
-    togglerTemplate: null,
-    onSelect: null,
-    onUnselect: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    onDragDrop: null,
-    onContextMenu: null,
-    onFilterValueChange: null,
-    onNodeClick: null,
-    onNodeDoubleClick: null
-};

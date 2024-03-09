@@ -1,13 +1,28 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { ScrollTopBase } from './ScrollTopBase';
 
 export const ScrollTop = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = ScrollTopBase.getProps(inProps, context);
+        const { ptm, cx, isUnstyled } = ScrollTopBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState
+            }
+        });
+
+        useHandleStyle(ScrollTopBase.css.styles, isUnstyled, { name: 'scrolltop' });
+
         const scrollElementRef = React.useRef(null);
         const helperRef = React.useRef(null);
         const isTargetParent = props.target === 'parent';
@@ -23,8 +38,8 @@ export const ScrollTop = React.memo(
         const [bindDocumentScrollListener] = useEventListener({
             target: 'window',
             type: 'scroll',
-            listener: () => {
-                checkVisibility(DomHandler.getWindowScrollTop());
+            listener: (event) => {
+                event && checkVisibility(DomHandler.getWindowScrollTop());
             }
         });
 
@@ -42,7 +57,7 @@ export const ScrollTop = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', scrollElementRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', scrollElementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
         };
 
         const onEntered = () => {
@@ -60,29 +75,56 @@ export const ScrollTop = React.memo(
             getElement: () => elementRef.current
         }));
 
-        useMountEffect(() => {
+        React.useEffect(() => {
             if (props.target === 'window') bindDocumentScrollListener();
             else if (props.target === 'parent') bindParentScrollListener();
-        });
+        }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(scrollElementRef.current);
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, ScrollTop.defaultProps);
-        const className = classNames(
-            'p-scrolltop p-link p-component',
+        const iconProps = mergeProps(
             {
-                'p-scrolltop-sticky': props.target !== 'window'
+                className: cx('icon')
             },
-            props.className
+            ptm('icon')
+        );
+        const icon = props.icon || <ChevronUpIcon {...iconProps} />;
+        const scrollIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+        const scrollTopAriaLabel = localeOption('aria') ? localeOption('aria').scrollTop : undefined;
+        const rootProps = mergeProps(
+            {
+                ref: scrollElementRef,
+                type: 'button',
+                className: classNames(props.className, cx('root')),
+                style: props.style,
+                onClick,
+                'aria-label': scrollTopAriaLabel
+            },
+            ScrollTopBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: visibleState,
+                timeout: { enter: 150, exit: 150 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter,
+                onEntered,
+                onExited
+            },
+            ptm('transition')
         );
 
         return (
             <>
-                <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
-                    <button ref={scrollElementRef} type="button" className={className} style={props.style} {...otherProps} onClick={onClick}>
-                        {IconUtils.getJSXIcon(props.icon, { className: 'p-scrolltop-icon' }, { props })}
+                <CSSTransition nodeRef={scrollElementRef} {...transitionProps}>
+                    <button {...rootProps}>
+                        {scrollIcon}
                         <Ripple />
                     </button>
                 </CSSTransition>
@@ -93,15 +135,3 @@ export const ScrollTop = React.memo(
 );
 
 ScrollTop.displayName = 'ScrollTop';
-ScrollTop.defaultProps = {
-    __TYPE: 'ScrollTop',
-    target: 'window',
-    threshold: 400,
-    icon: 'pi pi-chevron-up',
-    behavior: 'smooth',
-    className: null,
-    style: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

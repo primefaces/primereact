@@ -52,7 +52,7 @@ export default class DomHandler {
 
     static getOuterWidth(el, margin) {
         if (el) {
-            let width = el.offsetWidth || el.getBoundingClientRect().width;
+            let width = el.getBoundingClientRect().width || el.offsetWidth;
 
             if (margin) {
                 let style = getComputedStyle(el);
@@ -68,7 +68,7 @@ export default class DomHandler {
 
     static getOuterHeight(el, margin) {
         if (el) {
-            let height = el.offsetHeight || el.getBoundingClientRect().height;
+            let height = el.getBoundingClientRect().height || el.offsetHeight;
 
             if (margin) {
                 let style = getComputedStyle(el);
@@ -210,6 +210,12 @@ export default class DomHandler {
         return false;
     }
 
+    static addStyles(element, styles = {}) {
+        if (element) {
+            Object.entries(styles).forEach(([key, value]) => (element.style[key] = value));
+        }
+    }
+
     static find(element, selector) {
         return element ? Array.from(element.querySelectorAll(selector)) : [];
     }
@@ -220,6 +226,74 @@ export default class DomHandler {
         }
 
         return null;
+    }
+
+    static setAttributes(element, attributes = {}) {
+        if (element) {
+            const computedStyles = (rule, value) => {
+                const styles = element?.$attrs?.[rule] ? [element?.$attrs?.[rule]] : [];
+
+                return [value].flat().reduce((cv, v) => {
+                    if (v !== null && v !== undefined) {
+                        const type = typeof v;
+
+                        if (type === 'string' || type === 'number') {
+                            cv.push(v);
+                        } else if (type === 'object') {
+                            const _cv = Array.isArray(v)
+                                ? computedStyles(rule, v)
+                                : Object.entries(v).map(([_k, _v]) => (rule === 'style' && (!!_v || _v === 0) ? `${_k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}:${_v}` : !!_v ? _k : undefined));
+
+                            cv = _cv.length ? cv.concat(_cv.filter((c) => !!c)) : cv;
+                        }
+                    }
+
+                    return cv;
+                }, styles);
+            };
+
+            Object.entries(attributes).forEach(([key, value]) => {
+                if (value !== undefined && value !== null) {
+                    const matchedEvent = key.match(/^on(.+)/);
+
+                    if (matchedEvent) {
+                        element.addEventListener(matchedEvent[1].toLowerCase(), value);
+                    } else if (key === 'p-bind') {
+                        this.setAttributes(element, value);
+                    } else {
+                        value = key === 'class' ? [...new Set(computedStyles('class', value))].join(' ').trim() : key === 'style' ? computedStyles('style', value).join(';').trim() : value;
+                        (element.$attrs = element.$attrs || {}) && (element.$attrs[key] = value);
+                        element.setAttribute(key, value);
+                    }
+                }
+            });
+        }
+    }
+
+    static getAttribute(element, name) {
+        if (element) {
+            const value = element.getAttribute(name);
+
+            if (!isNaN(value)) {
+                return +value;
+            }
+
+            if (value === 'true' || value === 'false') {
+                return value === 'true';
+            }
+
+            return value;
+        }
+
+        return undefined;
+    }
+
+    static isAttributeEquals(element, name, value) {
+        return element ? this.getAttribute(element, name) === value : false;
+    }
+
+    static isAttributeNotEquals(element, name, value) {
+        return !this.isAttributeEquals(element, name, value);
     }
 
     static getHeight(el) {
@@ -259,8 +333,8 @@ export default class DomHandler {
         }
     }
 
-    static absolutePosition(element, target) {
-        if (element) {
+    static absolutePosition(element, target, align = 'left') {
+        if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             let elementOuterHeight = elementDimensions.height;
             let elementOuterWidth = elementDimensions.width;
@@ -285,8 +359,11 @@ export default class DomHandler {
                 element.style.transformOrigin = 'top';
             }
 
-            if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth);
-            else left = targetOffset.left + windowScrollLeft;
+            const targetOffsetPx = targetOffset.left;
+            const alignOffset = align === 'left' ? 0 : elementOuterWidth - targetOuterWidth;
+
+            if (targetOffsetPx + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+            else left = targetOffsetPx - alignOffset + windowScrollLeft;
 
             element.style.top = top + 'px';
             element.style.left = left + 'px';
@@ -294,7 +371,7 @@ export default class DomHandler {
     }
 
     static relativePosition(element, target) {
-        if (element) {
+        if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             const targetHeight = target.offsetHeight;
             const targetOffset = target.getBoundingClientRect();
@@ -507,7 +584,7 @@ export default class DomHandler {
         return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
-    static getScrollableParents(element) {
+    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
         let scrollableParents = [];
 
         if (element) {
@@ -522,6 +599,15 @@ export default class DomHandler {
                 );
             };
 
+            const addScrollableParent = (node) => {
+                if (hideOverlaysOnDocumentScrolling) {
+                    // nodeType 9 is for document element
+                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
+                } else {
+                    scrollableParents.push(node);
+                }
+            };
+
             for (let parent of parents) {
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
 
@@ -532,15 +618,21 @@ export default class DomHandler {
                         let el = this.findSingle(parent, selector);
 
                         if (el && overflowCheck(el)) {
-                            scrollableParents.push(el);
+                            addScrollableParent(el);
                         }
                     }
                 }
 
-                if (parent.nodeType !== 9 && overflowCheck(parent)) {
-                    scrollableParents.push(parent);
+                // BODY
+                if (parent.nodeType === 1 && overflowCheck(parent)) {
+                    addScrollableParent(parent);
                 }
             }
+        }
+
+        // we should always at least have the body or window
+        if (!scrollableParents.some((node) => node === document.body || node === window)) {
+            scrollableParents.push(window);
         }
 
         return scrollableParents;
@@ -643,6 +735,14 @@ export default class DomHandler {
         return /(android)/i.test(navigator.userAgent);
     }
 
+    static isChrome() {
+        return /(chrome)/i.test(navigator.userAgent);
+    }
+
+    static isClient() {
+        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+    }
+
     static isTouchDevice() {
         return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
@@ -725,6 +825,10 @@ export default class DomHandler {
         }
     }
 
+    static calculateBodyScrollbarWidth() {
+        return window.innerWidth - document.documentElement.offsetWidth;
+    }
+
     static getBrowser() {
         if (!this.browser) {
             let matched = this.resolveUserAgent();
@@ -756,17 +860,28 @@ export default class DomHandler {
         };
     }
 
+    static blockBodyScroll(className = 'p-overflow-hidden') {
+        /* PR Ref: https://github.com/primefaces/primereact/pull/4976
+         * @todo This method is called several times after this PR. Refactors will be made to prevent this in future releases.
+         */
+        const hasScrollbarWidth = !!document.body.style.getPropertyValue('--scrollbar-width');
+
+        !hasScrollbarWidth && document.body.style.setProperty('--scrollbar-width', this.calculateBodyScrollbarWidth() + 'px');
+        this.addClass(document.body, className);
+    }
+
+    static unblockBodyScroll(className = 'p-overflow-hidden') {
+        document.body.style.removeProperty('--scrollbar-width');
+        this.removeClass(document.body, className);
+    }
+
     static isVisible(element) {
         // https://stackoverflow.com/a/59096915/502366 (in future use IntersectionObserver)
         return element && (element.clientHeight !== 0 || element.getClientRects().length !== 0 || getComputedStyle(element).display !== 'none');
     }
 
     static isExist(element) {
-        return element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode;
-    }
-
-    static hasDOM() {
-        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+        return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
     }
 
     static getFocusableElements(element, selector = '') {
@@ -812,6 +927,22 @@ export default class DomHandler {
         const preventScroll = scrollTo === undefined ? true : !scrollTo;
 
         el && document.activeElement !== el && el.focus({ preventScroll });
+    }
+
+    /**
+     * Focus the first focusable element if it does not already have focus.
+     *
+     * @param {HTMLElement} el a HTML element
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
+     * @return {HTMLElement | undefined} the first focusable HTML element found
+     */
+    static focusFirstElement(el, scrollTo) {
+        if (!el) return;
+        const firstFocusableElement = DomHandler.getFirstFocusableElement(el);
+
+        firstFocusableElement && DomHandler.focus(firstFocusableElement, scrollTo);
+
+        return firstFocusableElement;
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {
@@ -932,9 +1063,35 @@ export default class DomHandler {
         return false;
     }
 
-    static createInlineStyle(nonce) {
+    static createInlineStyle(nonce, styleContainer) {
         let styleElement = document.createElement('style');
 
+        DomHandler.addNonce(styleElement, nonce);
+
+        if (!styleContainer) {
+            styleContainer = document.head;
+        }
+
+        styleContainer.appendChild(styleElement);
+
+        return styleElement;
+    }
+
+    static removeInlineStyle(styleElement) {
+        if (this.isExist(styleElement)) {
+            try {
+                styleElement.parentNode.removeChild(styleElement);
+            } catch (error) {
+                // style element may have already been removed in a fast refresh
+            }
+
+            styleElement = null;
+        }
+
+        return styleElement;
+    }
+
+    static addNonce(styleElement, nonce) {
         try {
             if (!nonce) {
                 nonce = process.env.REACT_APP_CSS_NONCE;
@@ -944,23 +1101,6 @@ export default class DomHandler {
         }
 
         nonce && styleElement.setAttribute('nonce', nonce);
-        document.head.appendChild(styleElement);
-
-        return styleElement;
-    }
-
-    static removeInlineStyle(styleElement) {
-        if (this.isExist(styleElement)) {
-            try {
-                document.head.removeChild(styleElement);
-            } catch (error) {
-                // style element may have already been removed in a fast refresh
-            }
-
-            styleElement = null;
-        }
-
-        return styleElement;
     }
 
     static getTargetElement(target) {
@@ -1069,5 +1209,27 @@ export default class DomHandler {
 
         // Seem the same
         return true;
+    }
+
+    static hasCSSAnimation(element) {
+        if (element) {
+            const style = getComputedStyle(element);
+            const animationDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+
+            return animationDuration > 0;
+        }
+
+        return false;
+    }
+
+    static hasCSSTransition(element) {
+        if (element) {
+            const style = getComputedStyle(element);
+            const transitionDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+
+            return transitionDuration > 0;
+        }
+
+        return false;
     }
 }

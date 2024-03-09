@@ -1,8 +1,32 @@
 import * as React from 'react';
-import { classNames } from '../utils/Utils';
+import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
+import { IconUtils } from '../utils/Utils';
 
 export const RowCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const mergeProps = useMergeProps();
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const { ptm, ptmo, cx } = props.ptCallbacks;
+
+    const getColumnPTOptions = (key) => {
+        const columnMetaData = {
+            props: getColumnProps(),
+            parent: props.metaData,
+            hostName: props.hostName,
+            state: {
+                focused: focusedState
+            },
+            context: {
+                index: props.tabIndex,
+                checked: props.checked,
+                disabled: props.disabled
+            }
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
+    };
 
     const onFocus = () => {
         setFocusedState(true);
@@ -17,26 +41,52 @@ export const RowCheckbox = React.memo((props) => {
             setFocusedState(true);
 
             props.onChange(event);
+            event.preventDefault();
         }
     };
 
     const onKeyDown = (event) => {
-        if (event.code === 'Space') {
+        if (event.code === 'Space' || event.key === ' ') {
+            // event.key is for Android support
             onClick(event);
             event.preventDefault();
         }
     };
 
-    const className = classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState });
-    const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-disabled': props.disabled, 'p-focus': focusedState });
-    const iconClassName = classNames('p-checkbox-icon', { 'pi pi-check': props.checked });
+    const checkboxIconProps = mergeProps(
+        {
+            className: cx('checkboxIcon')
+        },
+        getColumnPTOptions('checkboxIcon')
+    );
+    const icon = props.checked ? props.checkIcon || <CheckIcon {...checkboxIconProps} /> : null;
+    const checkIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { props });
     const tabIndex = props.disabled ? null : '0';
+    const checkboxWrapperProps = mergeProps(
+        {
+            className: cx('checkboxWrapper', { rowProps: props, focusedState }),
+            onClick: (e) => onClick(e)
+        },
+        getColumnPTOptions('checkboxWrapper')
+    );
+
+    const checkboxProps = mergeProps(
+        {
+            className: cx('checkbox', { rowProps: props, focusedState }),
+            role: 'checkbox',
+            'aria-checked': props.checked,
+            tabIndex: tabIndex,
+            onKeyDown: (e) => onKeyDown(e),
+            onFocus: (e) => onFocus(e),
+            onBlur: (e) => onBlur(e),
+            'aria-label': props.ariaLabel
+        },
+        getColumnPTOptions('checkbox')
+    );
 
     return (
-        <div className={className} onClick={onClick}>
-            <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} aria-label={props.ariaLabel}>
-                <span className={iconClassName}></span>
-            </div>
+        <div {...checkboxWrapperProps}>
+            <div {...checkboxProps}>{checkIcon}</div>
         </div>
     );
 });

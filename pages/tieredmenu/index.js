@@ -1,11 +1,16 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/tieredmenu/importdoc';
-import { InlineDoc } from '../../components/doc/tieredmenu/inlinedoc';
-import { OverlayDoc } from '../../components/doc/tieredmenu/overlaydoc';
-import { ApiDoc } from '../../components/doc/tieredmenu/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/tieredmenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/tieredmenu/basicdoc';
+import { CommandDoc } from '@/components/doc/tieredmenu/commanddoc';
+import { ImportDoc } from '@/components/doc/tieredmenu/importdoc';
+import { PopupDoc } from '@/components/doc/tieredmenu/popupdoc';
+import { PTDoc } from '@/components/doc/tieredmenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/tieredmenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/tieredmenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/tieredmenu/templatedoc';
+import { StyledDoc } from '@/components/doc/tieredmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/tieredmenu/theming/tailwinddoc';
 
 const TieredMenuDemo = () => {
     const docs = [
@@ -15,63 +20,75 @@ const TieredMenuDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'inline',
-            label: 'Inline',
-            component: InlineDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'overlay',
-            label: 'Overlay',
-            component: OverlayDoc
+            id: 'popup',
+            label: 'Popup',
+            component: PopupDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tieredmenu.options',
+            label: 'TieredMenu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React TieredMenu Component</title>
-                <meta name="description" content="TieredMenu displays submenus in nested overlays." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>TieredMenu</h1>
-                    <p>TieredMenu displays submenus in nested overlays.</p>
-                </div>
-                <DocActions github="tieredmenu/index.js" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React TieredMenu Component" header="TieredMenu" description="TieredMenu displays submenus in nested overlays." componentDocs={docs} apiDocs={['TieredMenu', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TieredMenuDemo;

@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
 import { useState } from 'react';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 
 export function DynamicDoc(props) {
     const categories = [
@@ -23,19 +23,17 @@ export function DynamicDoc(props) {
 
     const code = {
         basic: `
-<div className="flex flex-column gap-3">
-    {categories.map((category) => {
-        return (
-            <div key={category.key} className="flex align-items-center">
-                <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                <label htmlFor={category.key} className="ml-2">{category.name}</label>
-            </div>
-        );
-    })}
-</div>
+{categories.map((category) => {
+    return (
+        <div key={category.key} className="flex align-items-center">
+            <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
+            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+        </div>
+    );
+})}
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 export default function DynamicDemo() {
@@ -59,21 +57,25 @@ export default function DynamicDemo() {
     };
 
     return (
-        <div className="flex flex-column gap-3">
-            {categories.map((category) => {
-                return (
-                    <div key={category.key} className="flex align-items-center">
-                        <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                        <label htmlFor={category.key} className="ml-2">{category.name}</label>
-                    </div>
-                );
-            })}
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-3">
+                {categories.map((category) => {
+                    return (
+                        <div key={category.key} className="flex align-items-center">
+                            <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
+                            <label htmlFor={category.key} className="ml-2">
+                                {category.name}
+                            </label>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
 interface Category {
@@ -90,7 +92,7 @@ export default function DynamicDemo() {
     ];
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([categories[1]]);
 
-    const onCategoryChange = (e: CheckboxChangeParams) => {
+    const onCategoryChange = (e: CheckboxChangeEvent) => {
         let _selectedCategories = [...selectedCategories];
 
         if (e.checked)
@@ -102,15 +104,19 @@ export default function DynamicDemo() {
     };
 
     return (
-        <div className="flex flex-column gap-3">
-            {categories.map((category) => {
-                return (
-                    <div key={category.key} className="flex align-items-center">
-                        <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                        <label htmlFor={category.key} className="ml-2">{category.name}</label>
-                    </div>
-                );
-            })}
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-3">
+                {categories.map((category) => {
+                    return (
+                        <div key={category.key} className="flex align-items-center">
+                            <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
+                            <label htmlFor={category.key} className="ml-2">
+                                {category.name}
+                            </label>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     )
 }

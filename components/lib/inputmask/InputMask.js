@@ -1,11 +1,15 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { InputMaskBase } from './InputMaskBase';
 
 export const InputMask = React.memo(
-    React.forwardRef((props, ref) => {
-        const elementRef = React.useRef(ref);
+    React.forwardRef((inProps, ref) => {
+        const context = React.useContext(PrimeReactContext);
+        const props = InputMaskBase.getProps(inProps, context);
+        const elementRef = React.useRef(null);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);
         const tests = React.useRef([]);
@@ -19,13 +23,16 @@ export const InputMask = React.memo(
         const defaultBuffer = React.useRef(null);
         const caretTimeoutId = React.useRef(null);
         const androidChrome = React.useRef(false);
+        const metaData = {
+            props
+        };
 
         const caret = (first, last) => {
             let range, begin, end;
             let inputEl = elementRef.current;
 
             if (!inputEl || !inputEl.offsetParent || inputEl !== document.activeElement) {
-                return;
+                return null;
             }
 
             if (typeof first === 'number') {
@@ -50,9 +57,9 @@ export const InputMask = React.memo(
                     begin = 0 - range.duplicate().moveStart('character', -100000);
                     end = begin + range.text.length;
                 }
-
-                return { begin: begin, end: end };
             }
+
+            return { begin: begin, end: end };
         };
 
         const isCompleted = () => {
@@ -138,6 +145,10 @@ export const InputMask = React.memo(
             let curVal = elementRef.current.value;
             let pos = caret();
 
+            if (!pos) {
+                return;
+            }
+
             if (oldVal.current.length && oldVal.current.length > curVal.length) {
                 // a deletion or backspace happened
                 checkVal(true);
@@ -190,13 +201,17 @@ export const InputMask = React.memo(
                 pos,
                 begin,
                 end;
-            let iPhone = /iphone/i.test(DomHandler.getUserAgent());
 
             oldVal.current = elementRef.current.value;
 
             //backspace, delete, and escape get special treatment
-            if (k === 8 || k === 46 || (iPhone && k === 127)) {
+            if (k === 8 || k === 46 || (DomHandler.isIOS() && k === 127)) {
                 pos = caret();
+
+                if (!pos) {
+                    return;
+                }
+
                 begin = pos.begin;
                 end = pos.end;
 
@@ -228,8 +243,13 @@ export const InputMask = React.memo(
                 return;
             }
 
+            const pos = caret();
+
+            if (!pos) {
+                return;
+            }
+
             let k = e.which || e.keyCode,
-                pos = caret(),
                 p,
                 c,
                 next,
@@ -256,7 +276,7 @@ export const InputMask = React.memo(
                         writeBuffer();
                         next = seekNext(p);
 
-                        if (/android/i.test(DomHandler.getUserAgent())) {
+                        if (DomHandler.isAndroid()) {
                             //Path for CSP Violation on FireFox OS 1.1
                             let proxy = () => {
                                 caret(next);
@@ -297,13 +317,15 @@ export const InputMask = React.memo(
         };
 
         const writeBuffer = () => {
-            elementRef.current.value = buffer.current.join('');
+            if (elementRef.current) {
+                elementRef.current.value = buffer.current.join('');
+            }
         };
 
         const checkVal = (allow) => {
             isValueChecked.current = true;
             //try to place characters where they belong
-            let test = elementRef.current.value,
+            let test = elementRef.current && elementRef.current.value,
                 lastMatch = -1,
                 i,
                 c,
@@ -344,7 +366,7 @@ export const InputMask = React.memo(
                 if (props.autoClear || buffer.current.join('') === defaultBuffer.current) {
                     // Invalid value. Remove it and replace it with the
                     // mask, which is the default behavior.
-                    if (elementRef.current.value) elementRef.current.value = '';
+                    if (elementRef.current && elementRef.current.value) elementRef.current.value = '';
                     clearBuffer(0, len.current);
                 } else {
                     // Invalid value, but we opt to show the value to the
@@ -353,7 +375,10 @@ export const InputMask = React.memo(
                 }
             } else {
                 writeBuffer();
-                elementRef.current.value = elementRef.current.value.substring(0, lastMatch + 1);
+
+                if (elementRef.current) {
+                    elementRef.current.value = elementRef.current.value.substring(0, lastMatch + 1);
+                }
             }
 
             return partialPosition.current ? i : firstNonMaskPos.current;
@@ -369,9 +394,13 @@ export const InputMask = React.memo(
             clearTimeout(caretTimeoutId.current);
             let pos;
 
-            focusText.current = elementRef.current.value;
+            if (elementRef.current) {
+                focusText.current = elementRef.current.value;
+            } else {
+                focusText.current = '';
+            }
 
-            pos = checkVal();
+            pos = checkVal() || 0;
 
             caretTimeoutId.current = setTimeout(() => {
                 if (elementRef.current !== document.activeElement) {
@@ -387,7 +416,7 @@ export const InputMask = React.memo(
                 }
 
                 updateFilledState();
-            }, 10);
+            }, 100);
 
             props.onFocus && props.onFocus(e);
         };
@@ -396,14 +425,17 @@ export const InputMask = React.memo(
             androidChrome.current ? handleAndroidInput(event) : handleInputChange(event);
         };
 
-        const handleInputChange = (e) => {
+        const handleInputChange = (e, isOnPaste = false) => {
             if (props.readOnly) {
                 return;
             }
 
-            let pos = checkVal(true);
+            if (!isOnPaste) {
+                let pos = checkVal(true);
 
-            caret(pos);
+                caret(pos);
+            }
+
             updateModel(e);
 
             if (props.onComplete && isCompleted()) {
@@ -435,8 +467,12 @@ export const InputMask = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: defaultBuffer.current !== val ? val : '',
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -494,9 +530,7 @@ export const InputMask = React.memo(
                     '*': '[A-Za-z0-9]'
                 };
 
-                let ua = DomHandler.getUserAgent();
-
-                androidChrome.current = /chrome/i.test(ua) && /android/i.test(ua);
+                androidChrome.current = DomHandler.isChrome() && DomHandler.isAndroid();
 
                 let maskTokens = props.mask.split('');
 
@@ -538,6 +572,7 @@ export const InputMask = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(elementRef.current),
             getElement: () => elementRef.current
         }));
 
@@ -565,12 +600,13 @@ export const InputMask = React.memo(
             }
         }, [isValueUpdated]);
 
-        const otherProps = ObjectUtils.findDiffKeys(props, InputMask.defaultProps);
+        const otherProps = InputMaskBase.getOtherProps(props);
         const className = classNames('p-inputmask', props.className);
 
         return (
             <InputText
                 ref={elementRef}
+                autoFocus={props.autoFocus}
                 id={props.id}
                 type={props.type}
                 name={props.name}
@@ -588,39 +624,16 @@ export const InputMask = React.memo(
                 onKeyDown={onKeyDown}
                 onKeyPress={onKeyPress}
                 onInput={onInput}
-                onPaste={handleInputChange}
+                onPaste={(e) => handleInputChange(e, true)}
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
+                pt={props.pt}
+                unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     })
 );
 
 InputMask.displayName = 'InputMask';
-InputMask.defaultProps = {
-    __TYPE: 'InputMask',
-    id: null,
-    value: null,
-    type: 'text',
-    mask: null,
-    slotChar: '_',
-    autoClear: true,
-    unmask: false,
-    style: null,
-    className: null,
-    placeholder: null,
-    size: null,
-    maxLength: null,
-    tabIndex: null,
-    disabled: false,
-    readOnly: false,
-    name: null,
-    required: false,
-    tooltip: null,
-    tooltipOptions: null,
-    onComplete: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null
-};

@@ -1,11 +1,26 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
 
 export const SelectButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = SelectButtonBase.getProps(inProps, context);
+
+        const [focusedIndex, setFocusedIndex] = React.useState(0);
         const elementRef = React.useRef(null);
+
+        const { ptm, cx, isUnstyled } = SelectButtonBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(SelectButtonBase.css.styles, isUnstyled, { name: 'selectbutton', styled: true });
 
         const onOptionClick = (event) => {
             if (props.disabled || isOptionDisabled(event.option)) {
@@ -14,7 +29,7 @@ export const SelectButton = React.memo(
 
             let selected = isSelected(event.option);
 
-            if (selected && !props.unselectable) {
+            if (selected && !(props.unselectable && props.allowEmpty)) {
                 return;
             }
 
@@ -33,8 +48,12 @@ export const SelectButton = React.memo(
                 props.onChange({
                     originalEvent: event.originalEvent,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.originalEvent.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.originalEvent.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -79,11 +98,29 @@ export const SelectButton = React.memo(
                 return props.options.map((option, index) => {
                     const isDisabled = props.disabled || isOptionDisabled(option);
                     const optionLabel = getOptionLabel(option);
-                    const tabIndex = isDisabled ? null : 0;
+                    const tabIndex = props.disabled || index !== focusedIndex ? '-1' : '0';
                     const selected = isSelected(option);
                     const key = optionLabel + '_' + index;
 
-                    return <SelectButtonItem key={key} label={optionLabel} className={option.className} option={option} onClick={onOptionClick} template={props.itemTemplate} selected={selected} tabIndex={tabIndex} disabled={isDisabled} />;
+                    return (
+                        <SelectButtonItem
+                            hostName="SelectButton"
+                            key={key}
+                            label={optionLabel}
+                            className={option.className}
+                            option={option}
+                            setFocusedIndex={setFocusedIndex}
+                            onClick={onOptionClick}
+                            template={props.itemTemplate}
+                            selected={selected}
+                            tabIndex={tabIndex}
+                            index={index}
+                            disabled={isDisabled}
+                            ptm={ptm}
+                            cx={cx}
+                            elementRef={elementRef}
+                        />
+                    );
                 });
             }
 
@@ -92,43 +129,35 @@ export const SelectButton = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, SelectButton.defaultProps);
-        const className = classNames('p-selectbutton p-buttonset p-component', props.className);
         const items = createItems();
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root'),
+                style: props.style,
+                role: 'group'
+            },
+            SelectButtonBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} role="group">
+                <div {...rootProps}>
                     {items}
+                    {props.children}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 SelectButton.displayName = 'SelectButton';
-SelectButton.defaultProps = {
-    __TYPE: 'SelectButton',
-    id: null,
-    value: null,
-    options: null,
-    optionLabel: null,
-    optionValue: null,
-    optionDisabled: null,
-    tabIndex: null,
-    multiple: false,
-    unselectable: true,
-    disabled: false,
-    style: null,
-    className: null,
-    dataKey: null,
-    tooltip: null,
-    tooltipOptions: null,
-    itemTemplate: null,
-    onChange: null
-};

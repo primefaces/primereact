@@ -1,81 +1,72 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import React, { useState } from 'react';
+import React from 'react';
+import APIDocs from './apidoc/index.json';
 import { DocSectionText } from './docsectiontext';
 
-export function DocSections(props) {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const router = useRouter();
+export function DocSections({ docs }) {
+    const getPTOption = (name) => {
+        const key = name.toLowerCase();
 
-    const onRadioButtonChange = (e) => {
-        setSelectedOption(e.value);
+        let values = APIDocs[key]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+
+        if (!values) {
+            for (const parentKey in APIDocs) {
+                if (APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`]) {
+                    values = APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+                    if (values) break;
+                }
+            }
+        }
+
+        let data = [];
+
+        if (values) {
+            for (const [i, prop] of values.props.entries()) {
+                data.push({
+                    value: i + 1,
+                    label: prop.name,
+                    description: prop.description
+                });
+            }
+        }
+
+        return data;
     };
 
-    return (
-        <div className="doc-main">
-            {props.docs.map((doc) => {
-                const Comp = doc.component;
+    const renderDocChildren = (doc, level = 2) => {
+        return (
+            <React.Fragment key={doc.id + '_' + level}>
+                <DocSectionText {...doc} level={level}>
+                    {doc.description ? <p>{doc.description}</p> : null}
+                </DocSectionText>
+                {doc.children.map((d) => {
+                    const { id, label, component, children } = d;
+                    const Component = component;
 
-                return (
-                    <section key={doc.label}>
-                        {doc.children ? (
-                            <div id={doc.id}>
-                                <h1 className="doc-section-label" id={doc.id}>
-                                    {doc.label}
-                                    <Link href={router.basePath + router.pathname + '#' + doc.id}>
-                                        <a id={doc.id}>#</a>
-                                    </Link>
-                                </h1>
-                                <div className="doc-section-description">{doc.description || 'Section Content'}</div>
-                            </div>
-                        ) : null}
-                        {doc.component && <Comp id={doc.id} label={doc.label} />}
-                        {doc.children && !doc.component && (
-                            <React.Fragment>
-                                {doc.children.map((component) => {
-                                    const id = component.id;
-                                    const label = component.label;
-                                    const Component = component.component;
+                    return component ? <Component id={id} key={id} label={label} level={level + 1} /> : children ? renderDocChildren(d, level + 1) : null;
+                })}
+            </React.Fragment>
+        );
+    };
 
-                                    return <Component id={id} key={label} label={label} />;
-                                })}
-                            </React.Fragment>
-                        )}
-                        {doc.options && !doc.component && (
-                            <>
-                                <DocSectionText id={doc.id} label={doc.label}>
-                                    {doc.description}
-                                </DocSectionText>
-                                <div className="mt-3 flex flex-column justify-content-center">
-                                    <div className="flex flex-row justify-content-center align-items-center flex-wrap">
-                                        <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
-                                            {doc.options.map((option) => {
-                                                const id = option.id;
-                                                const label = option.label;
+    const renderDocs = () => {
+        return docs.map((doc, i) => {
+            const { component: Comp, id, label, children } = doc;
+            const isPT = label.includes('PT');
+            const key = label.split(' ')[0];
 
-                                                return (
-                                                    <div className="mr-4" key={label}>
-                                                        <RadioButton inputId={id} value={label} onChange={onRadioButtonChange} checked={selectedOption === label} />
-                                                        <label htmlFor={id} className="ml-2">
-                                                            {label}
-                                                        </label>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                    {doc.options.map((option) => {
-                                        const Component = option.component;
+            const props = {
+                id,
+                label,
+                ...(isPT && { data: getPTOption(key) })
+            };
 
-                                        return selectedOption === option.label ? <Component key={option.label} id={option.id} label={option.label} /> : null;
-                                    })}
-                                </div>
-                            </>
-                        )}
-                    </section>
-                );
-            })}
-        </div>
-    );
+            return (
+                <section key={`${label}_${i}`} className="py-4">
+                    {children ? renderDocChildren(doc) : Comp ? <Comp {...props} /> : null}
+                </section>
+            );
+        });
+    };
+
+    return renderDocs();
 }

@@ -1,66 +1,61 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/datatable/importdoc';
-import { BasicDoc } from '../../components/doc/datatable/basicdoc';
-import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
-import { DynamicDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
-import { TemplatingDoc } from '../../components/doc/datatable/templatingdoc';
-import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
-import { StripedDoc } from '../../components/doc/datatable/stripeddoc';
-import { ApiDoc } from '../../components/doc/datatable/apidoc';
-import { LazyDoc } from '../../components/doc/datatable/lazydoc';
-import { FlexScrollDoc } from '../../components/doc/datatable/flexscrolldoc';
-import { ColGroupDoc } from '../../components/doc/datatable/colgroupdoc';
-import { RowExpandDoc } from '../../components/doc/datatable/rowexpanddoc';
-import { StyleDoc } from '../../components/doc/datatable/styledoc';
-import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
-import { ColToggleDoc } from '../../components/doc/datatable/coltoggledoc';
-import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
-import { CrudDoc } from '../../components/doc/datatable/cruddoc';
-import { SmallTableDoc } from '../../components/doc/datatable/size/smalltabledoc';
-import { NormalTableDoc } from '../../components/doc/datatable/size/normaltabledoc';
-import { LargeTableDoc } from '../../components/doc/datatable/size/largetabledoc';
-import { CustomPaginatorTemplateDoc } from '../../components/doc/datatable/paginator/custompaginatortemplatedoc';
-import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
-import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
-import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
-import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
-import { SortableDisabledDoc } from '../../components/doc/datatable/sort/sortabledisableddoc';
-import { FilterMenuDoc } from '../../components/doc/datatable/filter/filtermenudoc';
-import { FilterRowDoc } from '../../components/doc/datatable/filter/filterrowdoc';
-import { SingleDoc } from '../../components/doc/datatable/selection/singledoc';
-import { MultipleDoc } from '../../components/doc/datatable/selection/multipledoc';
-import { EventsDoc } from '../../components/doc/datatable/selection/eventsdoc';
-import { RadioButtonDoc } from '../../components/doc/datatable/selection/radiobuttondoc';
-import { CheckboxDoc } from '../../components/doc/datatable/selection/checkboxdoc';
-import { ControlledSelectionDoc } from '../../components/doc/datatable/selection/controlledselectiondoc';
-import { CellEditingDoc } from '../../components/doc/datatable/edit/celleditingdoc';
-import { RowEditingDoc } from '../../components/doc/datatable/edit/roweditingdoc';
-import { ProgrammaticDoc } from '../../components/doc/datatable/edit/programmaticdoc';
-import { CellEditWithSortAndFilterDoc } from '../../components/doc/datatable/edit/celleditwithsortandfilterdoc';
-import { ScrollVerticalDoc } from '../../components/doc/datatable/scroll/verticaldoc';
-import { ScrollFlexibleDoc } from '../../components/doc/datatable/scroll/flexibledoc';
-import { ScrollHorizontalAndVerticalWithFooterDoc } from '../../components/doc/datatable/scroll/horizontalandverticalwithfooterdoc';
-import { ScrollFrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
-import { ScrollFrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
-import { ScrollSubHeaderGroupingDoc } from '../../components/doc/datatable/scroll/subheadergroupingdoc';
-import { PreloadedDataDoc } from '../../components/doc/datatable/virtualscroll/preloadeddatadoc';
-import { LazyLoadingFromRemoteDataSourceDoc } from '../../components/doc/datatable/virtualscroll/lazyloadfromremotedatadoc';
-import { SubHeaderGroupingDoc } from '../../components/doc/datatable/rowgroup/subheadergroupingdoc';
-import { ExpandableRowGroupsDoc } from '../../components/doc/datatable/rowgroup/expandablerowgroupsdoc';
-import { RowSpanGroupingDoc } from '../../components/doc/datatable/rowgroup/rowspangroupingdoc';
-import { ScrollDoc } from '../../components/doc/datatable/responsive/scrolldoc';
-import { StackDoc } from '../../components/doc/datatable/responsive/stackdoc';
-import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
-import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
-import { ChooseResizableColumnsDoc } from '../../components/doc/datatable/colresize/chooseresizablecolumnsdoc';
-import { ExportImportDoc } from '../../components/doc/datatable/export/importdoc';
-import { ExportDoc } from '../../components/doc/datatable/export/exportdoc';
-import { SessionStorageDoc } from '../../components/doc/datatable/state/sessionstoragedoc';
-import { LocalStorageDoc } from '../../components/doc/datatable/state/localdoc';
-import { CustomStorageDoc } from '../../components/doc/datatable/state/customstoragedoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/datatable/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/datatable/basicdoc';
+import { DisabledCellSelectionDoc } from '@/components/doc/datatable/cellselection/disableddoc';
+import { CellSelectEventsDoc } from '@/components/doc/datatable/cellselection/eventsdoc';
+import { MultipleCellsSelectionDoc } from '@/components/doc/datatable/cellselection/multipledoc';
+import { SingleCellSelectionDoc } from '@/components/doc/datatable/cellselection/singledoc';
+import { ExpandModeDoc } from '@/components/doc/datatable/colresize/expandmodedoc';
+import { FitModeDoc } from '@/components/doc/datatable/colresize/fitmodedoc';
+import { ColumnGroupDoc } from '@/components/doc/datatable/columngroupdoc';
+import { ColumnToggleDoc } from '@/components/doc/datatable/columntoggledoc';
+import { ConditionalStyleDoc } from '@/components/doc/datatable/conditionalstyledoc';
+import { ContextMenuDoc } from '@/components/doc/datatable/contextmenudoc';
+import { DynamicColumnsDoc } from '@/components/doc/datatable/dynamiccolumnsdoc';
+import { CellEditDoc } from '@/components/doc/datatable/edit/celleditdoc';
+import { RowEditDoc } from '@/components/doc/datatable/edit/roweditdoc';
+import { ExportDoc } from '@/components/doc/datatable/exportdoc';
+import { AdvancedFilterDoc } from '@/components/doc/datatable/filter/advanceddoc';
+import { BasicFilterDoc } from '@/components/doc/datatable/filter/basicdoc';
+import { CustomFilterDoc } from '@/components/doc/datatable/filter/customdoc';
+import { GridLinesDoc } from '@/components/doc/datatable/gridlinesdoc';
+import { ImportDoc } from '@/components/doc/datatable/importdoc';
+import { LazyLoadDoc } from '@/components/doc/datatable/lazyloaddoc';
+import { PaginatorBasicDoc } from '@/components/doc/datatable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '@/components/doc/datatable/paginator/templatedoc';
+import { PTDoc } from '@/components/doc/datatable/pt/ptdoc';
+import { Wireframe } from '@/components/doc/datatable/pt/wireframe';
+import { ReorderDoc } from '@/components/doc/datatable/reorderdoc';
+import { RowExpansionDoc } from '@/components/doc/datatable/rowexpansiondoc';
+import { ExpandableRowGroupDoc } from '@/components/doc/datatable/rowgroup/expandabledoc';
+import { RowSpanRowGroupDoc } from '@/components/doc/datatable/rowgroup/rowspandoc';
+import { SubHeaderRowGroupDoc } from '@/components/doc/datatable/rowgroup/subheaderdoc';
+import { CheckboxRowSelectionDoc } from '@/components/doc/datatable/rowselection/checkboxdoc';
+import { DisabledRowSelectionDoc } from '@/components/doc/datatable/rowselection/disableddoc';
+import { RowSelectEventsDoc } from '@/components/doc/datatable/rowselection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '@/components/doc/datatable/rowselection/multipledoc';
+import { RadioButtonRowSelectionDoc } from '@/components/doc/datatable/rowselection/radiobuttondoc';
+import { SingleRowSelectionDoc } from '@/components/doc/datatable/rowselection/singledoc';
+import { CustomersDoc } from '@/components/doc/datatable/samples/customersdoc';
+import { ProductsDoc } from '@/components/doc/datatable/samples/productsdoc';
+import { FlexibleScrollDoc } from '@/components/doc/datatable/scroll/flexibledoc';
+import { FrozenColumnsDoc } from '@/components/doc/datatable/scroll/frozencolumnsdoc';
+import { FrozenRowsDoc } from '@/components/doc/datatable/scroll/frozenrowsdoc';
+import { HorizontalScrollDoc } from '@/components/doc/datatable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '@/components/doc/datatable/scroll/verticaldoc';
+import { SizeDoc } from '@/components/doc/datatable/sizedoc';
+import { MultipleColumnsDoc } from '@/components/doc/datatable/sort/multiplecolumnsdoc';
+import { PresortDoc } from '@/components/doc/datatable/sort/presortdoc';
+import { RemovableSortDoc } from '@/components/doc/datatable/sort/removablesortdoc';
+import { SingleColumnDoc } from '@/components/doc/datatable/sort/singlecolumndoc';
+import { StatefulDoc } from '@/components/doc/datatable/statefuldoc';
+import { StripedRowsDoc } from '@/components/doc/datatable/stripedrowsdoc';
+import { TemplateDoc } from '@/components/doc/datatable/templatedoc';
+import { StyledDoc } from '@/components/doc/datatable/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/datatable/theming/tailwinddoc';
+import { LazyVirtualScrollDoc } from '@/components/doc/datatable/virtualscroll/lazydoc';
+import { PreloadVirtualScrollDoc } from '@/components/doc/datatable/virtualscroll/preloaddoc';
 
 const DataTableDemo = () => {
     const docs = [
@@ -75,316 +70,272 @@ const DataTableDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'dynamiccolsdoc',
+            id: 'dynamic_columns',
             label: 'Dynamic Columns',
-            component: DynamicDoc
+            component: DynamicColumnsDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'size',
             label: 'Size',
-            description: 'In addition to a regular table, alternatives with alternative sizes are available.',
-            options: [
-                {
-                    id: 'smalltable',
-                    label: 'Small Table',
-                    component: SmallTableDoc
-                },
-                {
-                    id: 'normaltable',
-                    label: 'Normal Table',
-                    component: NormalTableDoc
-                },
-                {
-                    id: 'largetable',
-                    label: 'Large Table',
-                    component: LargeTableDoc
-                }
-            ]
+            component: SizeDoc
         },
         {
             id: 'gridlines',
-            label: 'GridLines',
+            label: 'Grid Lines',
             component: GridLinesDoc
         },
         {
             id: 'striped',
-            label: 'Striped',
-            component: StripedDoc
+            label: 'Striped Rows',
+            component: StripedRowsDoc
         },
         {
             id: 'paginator',
             label: 'Paginator',
-            description: 'Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display.',
             children: [
                 {
-                    id: 'singlecolumn',
-                    label: 'Single Column',
-                    component: SingleColumnDoc
-                },
-                {
-                    id: 'multiplecolumns',
-                    label: 'Multiple Columns',
-                    component: MultipleColumnsDoc
-                },
-                {
-                    id: 'presort',
-                    label: 'Presort',
-                    component: PresortDoc
-                },
-                {
-                    id: 'removablesort',
-                    label: 'Removable Sort',
-                    component: RemovableSortDoc
-                },
-                {
-                    id: 'sortabledisabled',
-                    label: 'Sortable Disabled',
-                    component: SortableDisabledDoc
-                }
-            ]
-        },
-        {
-            id: 'Sort',
-            label: 'Sort',
-            description: 'Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.',
-            children: [
-                {
-                    id: 'sortbasic',
+                    id: 'paginator_basic',
                     label: 'Basic',
                     component: PaginatorBasicDoc
                 },
                 {
-                    id: 'custompaginatortemplate',
-                    label: 'Custom Paginator Template',
-                    component: CustomPaginatorTemplateDoc
+                    id: 'paginator_template',
+                    label: 'Template',
+                    component: PaginatorTemplateDoc
+                }
+            ]
+        },
+        {
+            id: 'sort',
+            label: 'Sort',
+            children: [
+                {
+                    id: 'single_sort',
+                    label: 'Single Column',
+                    component: SingleColumnDoc
+                },
+                {
+                    id: 'multiple_sort',
+                    label: 'Multiple Columns',
+                    component: MultipleColumnsDoc
+                },
+                {
+                    id: 'pre_sort',
+                    label: 'Presort',
+                    component: PresortDoc
+                },
+                {
+                    id: 'removable_sort',
+                    label: 'Removable',
+                    component: RemovableSortDoc
                 }
             ]
         },
         {
             id: 'filter',
             label: 'Filter',
-            description: 'Filtering feature provides advanced and flexible options to query the data.',
             children: [
                 {
-                    id: 'filtermenu',
-                    label: 'Filter Menu',
-                    component: FilterMenuDoc
+                    id: 'basic_filter',
+                    label: 'Basic',
+                    component: BasicFilterDoc
                 },
                 {
-                    id: 'filterrow',
-                    label: 'Filter Row',
-                    component: FilterRowDoc
+                    id: 'advanced_filter',
+                    label: 'Advanced',
+                    component: AdvancedFilterDoc
+                },
+                {
+                    id: 'custom_filter',
+                    label: 'Custom',
+                    component: CustomFilterDoc
                 }
             ]
         },
         {
-            id: 'selection',
-            label: 'Selection',
-            description:
-                'DataTable provides single, multiple, radiobutton and checkbox selection modes. Selected rows or cells are bound to the selection property and onRowSelect-onRowUnselect/onCellSelect-onCellUnselect events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.',
+            id: 'row_selection',
+            label: 'Row Selection',
             children: [
                 {
-                    id: 'singleselection',
+                    id: 'single_row_selection',
                     label: 'Single',
-                    component: SingleDoc
+                    component: SingleRowSelectionDoc
                 },
                 {
-                    id: 'multipleselection',
+                    id: 'multiple_rows_selection',
                     label: 'Multiple',
-                    component: MultipleDoc
+                    component: MultipleRowsSelectionDoc
                 },
                 {
-                    id: 'eventsselection',
-                    label: 'Events',
-                    component: EventsDoc
-                },
-                {
-                    id: 'radiobuttonselection',
+                    id: 'radiobutton_row_selection',
                     label: 'RadioButton',
-                    component: RadioButtonDoc
+                    component: RadioButtonRowSelectionDoc
                 },
                 {
-                    id: 'checkboxselection',
+                    id: 'checkbox_row_selection',
                     label: 'Checkbox',
-                    component: CheckboxDoc
+                    component: CheckboxRowSelectionDoc
                 },
                 {
-                    id: 'controlledselectiondoc',
-                    label: 'Controlled Selection',
-                    component: ControlledSelectionDoc
+                    id: 'row_selection_events',
+                    label: 'Events',
+                    component: RowSelectEventsDoc
+                },
+                {
+                    id: 'disabled_row_selection',
+                    label: 'Disabled',
+                    component: DisabledRowSelectionDoc
                 }
             ]
+        },
+        {
+            id: 'cell_selection',
+            label: 'Cell Selection',
+            children: [
+                {
+                    id: 'single_cell_selection',
+                    label: 'Single',
+                    component: SingleCellSelectionDoc
+                },
+                {
+                    id: 'multiple_cells_selection',
+                    label: 'Multiple',
+                    component: MultipleCellsSelectionDoc
+                },
+                {
+                    id: 'cell_selection_events',
+                    label: 'Events',
+                    component: CellSelectEventsDoc
+                },
+                {
+                    id: 'disabled_cells_selection',
+                    label: 'Disabled',
+                    component: DisabledCellSelectionDoc
+                }
+            ]
+        },
+        {
+            id: 'row_expansion',
+            label: 'Row Expansion',
+            component: RowExpansionDoc
         },
         {
             id: 'edit',
             label: 'Edit',
-            description: 'Cell and Row editing provides a rapid and user friendly way to manipulate data.',
             children: [
                 {
-                    id: 'cellediting',
-                    label: 'Cell Editing',
-                    component: CellEditingDoc
+                    id: 'cell_edit',
+                    label: 'Cell',
+                    component: CellEditDoc
                 },
                 {
-                    id: 'rowediting',
-                    label: 'Row Editing',
-                    component: RowEditingDoc
-                },
-                {
-                    id: 'rowediting',
-                    label: 'Programmatic',
-                    component: ProgrammaticDoc
-                },
-                {
-                    id: 'celleditwithsortandfilterDoc',
-                    label: 'Cell Editing with Sorting and Filter',
-                    component: CellEditWithSortAndFilterDoc
+                    id: 'row_edit',
+                    label: 'Row',
+                    component: RowEditDoc
                 }
             ]
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDoc
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
         },
         {
             id: 'scroll',
             label: 'Scroll',
-            description: 'Data scrolling with fixed header is available horizontally, vertically or both. Certain columns and rows can be frozen as well.',
             children: [
                 {
-                    id: 'vertical',
+                    id: 'vertical_scroll',
                     label: 'Vertical',
-                    component: ScrollVerticalDoc
+                    component: VerticalScrollDoc
                 },
                 {
-                    id: 'scrollflexible',
+                    id: 'flex_scroll',
                     label: 'Flexible',
-                    component: ScrollFlexibleDoc
+                    component: FlexibleScrollDoc
                 },
                 {
-                    id: 'scrollhorizontalandverticalwithfooter',
-                    label: 'Horizontal and Vertical with Footer',
-                    component: ScrollHorizontalAndVerticalWithFooterDoc
+                    id: 'horizontal_scroll',
+                    label: 'Horizontal',
+                    component: HorizontalScrollDoc
                 },
                 {
-                    id: 'scrollfrozenrows',
+                    id: 'frozen_rows',
                     label: 'Frozen Rows',
-                    component: ScrollFrozenRowsDoc
+                    component: FrozenRowsDoc
                 },
                 {
-                    id: 'scrollfrozencolumns',
+                    id: 'frozen_columns',
                     label: 'Frozen Columns',
-                    component: ScrollFrozenColumnsDoc
-                },
-                {
-                    id: 'scrollsubheadergrouping',
-                    label: 'SubHeader Grouping',
-                    component: ScrollSubHeaderGroupingDoc
+                    component: FrozenColumnsDoc
                 }
             ]
-        },
-        {
-            id: 'flexscroll',
-            label: 'Flex Scroll',
-            component: FlexScrollDoc
         },
         {
             id: 'virtualscroll',
             label: 'Virtual Scroll',
-            description: 'VirtualScroller is a performant approach to handle huge data efficiently.',
             children: [
                 {
-                    id: 'preload',
-                    label: 'Preloaded Data (100000 Rows)',
-                    component: PreloadedDataDoc
+                    id: 'preload_virtualscroll',
+                    label: 'Preload',
+                    component: PreloadVirtualScrollDoc
                 },
                 {
-                    id: 'lazyloading',
-                    label: 'Lazy Loading from a Remote Datasource (100000 Rows)',
-                    component: LazyLoadingFromRemoteDataSourceDoc
+                    id: 'lazy_virtualscroll',
+                    label: 'Lazy',
+                    component: LazyVirtualScrollDoc
                 }
             ]
         },
         {
-            id: 'colgroup',
-            label: 'ColGroup',
-            component: ColGroupDoc
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
         },
         {
-            id: 'rowgroup',
-            label: 'RowGroup',
-            description: 'Rows can either be grouped by a separate grouping row or using rowspan.',
+            id: 'row_group',
+            label: 'Row Group',
             children: [
                 {
-                    id: 'subheadergrouping',
-                    label: 'Subheader Grouping',
-                    component: SubHeaderGroupingDoc
+                    id: 'rowgroup_subheader',
+                    label: 'Subheader',
+                    component: SubHeaderRowGroupDoc
                 },
                 {
-                    id: 'expandablerowgroups',
-                    label: 'Expandable Row Groups',
-                    component: ExpandableRowGroupsDoc
+                    id: 'rowgroup_expandable',
+                    label: 'Expandable',
+                    component: ExpandableRowGroupDoc
                 },
                 {
-                    id: 'rowspangrouping',
-                    label: 'RowSpan Grouping',
-                    component: RowSpanGroupingDoc
+                    id: 'rowgroup_rowspan',
+                    label: 'RowSpan',
+                    component: RowSpanRowGroupDoc
                 }
             ]
         },
         {
-            id: 'rowexpand',
-            label: 'Expand',
-            component: RowExpandDoc
+            id: 'conditional_style',
+            label: 'Conditional Style',
+            component: ConditionalStyleDoc
         },
         {
-            id: 'responsive',
-            label: 'Responsive',
-            description: 'DataTable responsive layout can be achieved in two ways; first approach is displaying a horizontal scrollbar for smaller screens and second one is defining a breakpoint to display the cells of a row as stacked.',
-            options: [
-                {
-                    id: 'scroll',
-                    label: 'Scroll',
-                    component: ScrollDoc
-                },
-                {
-                    id: 'stack',
-                    label: 'Stack',
-                    component: StackDoc
-                }
-            ]
-        },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
-        {
-            id: 'colresize',
-            label: 'ColResize',
-            description:
-                'Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized. In "expand" mode, table width also changes along with the column width. onColumnResize is a callback that passes the resized column header as a parameter.',
+            id: 'column_resize',
+            label: 'Column Resize',
             children: [
                 {
-                    id: 'fitmode',
+                    id: 'resize_fitmode',
                     label: 'Fit Mode',
                     component: FitModeDoc
                 },
                 {
-                    id: 'expandmode',
+                    id: 'resize_expandmode',
                     label: 'Expand Mode',
                     component: ExpandModeDoc
-                },
-                {
-                    id: 'chooseresizablecolumns',
-                    label: 'Choose Resizable Columns',
-                    component: ChooseResizableColumnsDoc
                 }
             ]
         },
@@ -394,26 +345,14 @@ const DataTableDemo = () => {
             component: ReorderDoc
         },
         {
-            id: 'coltoggle',
-            label: 'ColToggle',
-            component: ColToggleDoc
+            id: 'column_toggle',
+            label: 'Column Toggle',
+            component: ColumnToggleDoc
         },
         {
             id: 'export',
-            label: 'Import/Export',
-            description: 'DataTable can export its data to various formats',
-            children: [
-                {
-                    id: 'import',
-                    label: 'Import',
-                    component: ExportImportDoc
-                },
-                {
-                    id: 'export',
-                    label: 'Export',
-                    component: ExportDoc
-                }
-            ]
+            label: 'Export',
+            component: ExportDoc
         },
         {
             id: 'contextmenu',
@@ -421,81 +360,88 @@ const DataTableDemo = () => {
             component: ContextMenuDoc
         },
         {
-            id: 'state',
-            label: 'State',
-            description: 'Stateful table allows keeping the state such as page, sort and filtering either at local storage or session storage so that when the page is visited again, table would render the data using its last settings.',
+            id: 'stateful',
+            label: 'Stateful',
+            component: StatefulDoc
+        },
+        {
+            id: 'samples',
+            label: 'Samples',
             children: [
                 {
-                    id: 'sessionstorage',
-                    label: 'Session Storage',
-                    component: SessionStorageDoc
+                    id: 'customers',
+                    label: 'Customers',
+                    component: CustomersDoc
                 },
                 {
-                    id: 'localstorage',
-                    label: 'Local Storage',
-                    component: LocalStorageDoc
-                },
-                {
-                    id: 'customstorage',
-                    label: 'Custom Storage',
-                    component: CustomStorageDoc
+                    id: 'dtproducts',
+                    label: 'Products',
+                    component: ProductsDoc
                 }
             ]
         },
+
         {
-            id: 'crud',
-            label: 'Crud',
-            component: CrudDoc
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'pt.datatable.options',
+            label: 'DataTable PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.column.options',
+            label: 'Column PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.columngroup.options',
+            label: 'ColumnGroup PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.row.options',
+            label: 'Row PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Table Component</title>
-                <meta name="description" content="DataTable displays data in tabular format" />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataTable</h1>
-                    <p>DataTable displays data in tabular format.</p>
-                </div>
-
-                <DocActions github="datatable/index.js" />
-            </div>
-
-            <div className="content-section doc datatable-doc-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} ptDocs={ptDocs} themingDocs={themingDocs} />
     );
 };
 

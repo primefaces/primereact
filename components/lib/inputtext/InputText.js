@@ -1,10 +1,27 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { InputTextBase } from './InputTextBase';
 
 export const InputText = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = InputTextBase.getProps(inProps, context);
+
+        const { ptm, cx, isUnstyled } = InputTextBase.setMetaData({
+            props,
+            ...props.__parentMetadata,
+            context: {
+                disabled: props.disabled
+            }
+        });
+
+        useHandleStyle(InputTextBase.css.styles, isUnstyled, { name: 'inputtext', styled: true });
         const elementRef = React.useRef(ref);
 
         const onKeyDown = (event) => {
@@ -15,7 +32,16 @@ export const InputText = React.memo(
             }
         };
 
+        const onBeforeInput = (event) => {
+            props.onBeforeInput && props.onBeforeInput(event);
+
+            if (props.keyfilter) {
+                KeyFilter.onBeforeInput(event, props.keyfilter, props.validateOnly);
+            }
+        };
+
         const onInput = (event) => {
+            const target = event.target;
             let validatePattern = true;
 
             if (props.keyfilter && props.validateOnly) {
@@ -24,11 +50,8 @@ export const InputText = React.memo(
 
             props.onInput && props.onInput(event, validatePattern);
 
-            if (!props.onChange) {
-                const target = event.target;
-
-                ObjectUtils.isNotEmpty(target.value) ? DomHandler.addClass(target, 'p-filled') : DomHandler.removeClass(target, 'p-filled');
-            }
+            // for uncontrolled changes
+            ObjectUtils.isNotEmpty(target.value) ? DomHandler.addClass(target, 'p-filled') : DomHandler.removeClass(target, 'p-filled');
         };
 
         const onPaste = (event) => {
@@ -39,41 +62,32 @@ export const InputText = React.memo(
             }
         };
 
-        const currentValue = elementRef.current && elementRef.current.value;
-        const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || ObjectUtils.isNotEmpty(currentValue), [props.value, props.defaultValue, currentValue]);
-
         React.useEffect(() => {
             ObjectUtils.combinedRefs(elementRef, ref);
         }, [elementRef, ref]);
 
+        const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
-        const className = classNames(
-            'p-inputtext p-component',
+
+        const rootProps = mergeProps(
             {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled
+                className: classNames(props.className, cx('root', { isFilled })),
+                onBeforeInput: onBeforeInput,
+                onInput: onInput,
+                onKeyDown: onKeyDown,
+                onPaste: onPaste
             },
-            props.className
+            InputTextBase.getOtherProps(props),
+            ptm('root')
         );
 
         return (
             <>
-                <input ref={elementRef} {...otherProps} className={className} onInput={onInput} onKeyDown={onKeyDown} onPaste={onPaste} />
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                <input ref={elementRef} {...rootProps} />
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 InputText.displayName = 'InputText';
-InputText.defaultProps = {
-    __TYPE: 'InputText',
-    keyfilter: null,
-    validateOnly: false,
-    tooltip: null,
-    tooltipOptions: null,
-    onInput: null,
-    onKeyDown: null,
-    onPaste: null
-};

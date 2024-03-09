@@ -2,5 +2,6 @@
     "main": "./dropdown.cjs.js",
     "module": "./dropdown.esm.js",
     "unpkg": "./dropdown.min.js",
-    "types": "./dropdown.d.ts"
+    "types": "./dropdown.d.ts",
+    "sideEffects": false
 }

@@ -1,5 +1,3 @@
-$linkColor: #2196f3;
-
 html {
     font-size: 14px;
 }
@@ -10,16 +8,24 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: var(--surface-ground);
-    font-family: var(--font-family);
     font-weight: normal;
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+.layout-wrapper {
+    background-color: var(--surface-ground);
+}
+
 a {
     text-decoration: none;
 }
+
+::selection {
+    background-color: var(--highlight-bg);
+    color: var(--highlight-text-color);
+} 
 
 h1, h2, h3, h4, h5, h6 {
     margin: 1.5rem 0 1rem 0;
@@ -34,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.25rem;
+    font-size: 2rem;
 }
 
 h2 {
@@ -58,7 +64,7 @@ h6 {
 }
 
 p {
-    line-height: 1.5;
+    line-height: 1.75;
     margin: 0 0 1rem 0;
 }
 
@@ -72,62 +78,30 @@ input[type="number"] {
     }
 }
 
-@keyframes pulse {
-    0% {
-        background-color: rgba(165, 165, 165, 0.1)
-    }
-    50% {
-        background-color: rgba(165, 165, 165, 0.3)
-    }
-    100% {
-        background-color: rgba(165, 165, 165, 0.1)
-    }
-}
-
 .p-toast.p-toast-top-right,
 .p-toast.p-toast-top-left {
-    top: 100px;
-    z-index: 999999 !important;
+    top: 7rem;
 }
 
-.action-button {
-    font-weight: bold;
-    text-align: center;
-    color: #ffffff !important;
-    background-color: #fe8702;
-    padding: 10px 24px 9px 24px;
-    border-radius: 3px;
-    transition: background-color .2s;
+.px-link {
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    text-align: left;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: none;
+    cursor: pointer;
+    user-select: none;
 
-    &:hover {
-        background-color: #e47901;
-        color: #ffffff;
-    }
+    @include focus-visible();
 }
 
-.liveEditorSplitButton {
-    .p-splitbutton-defaultbutton {
-        .p-button-label {
-            display: none;
-        }
-    }
+.px-link:disabled {
+	cursor: default;
 }
 
-.liveEditorHelperText {
-    font-size: .875rem;
-    padding-bottom: .2rem;
-    margin-bottom: .25rem;
-    color: var(--text-color-secondary);
-}
-
-.liveEditorPanel {
-    .p-menuitem-link {
-        height: 38px;
-
-        img {
-            margin-left: -4px;
-            width: 20px;
-            height: 20px;
-        }
-    }
+button {
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings);
 }

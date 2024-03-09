@@ -1,6 +1,6 @@
-import { Splitter, SplitterPanel } from '../../lib/splitter/Splitter';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Splitter, SplitterPanel } from '@/components/lib/splitter/Splitter';
 
 export function NestedDoc(props) {
     const code = {
@@ -29,10 +29,10 @@ export function NestedDoc(props) {
 </Splitter>
         `,
         javascript: `
+import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function NestedDoc() {
-
+export default function NestedDemo() {
     return (
         <Splitter style={{ height: '300px' }}>
             <SplitterPanel className="flex align-items-center justify-content-center" size={20} minSize={10}>
@@ -60,10 +60,10 @@ export default function NestedDoc() {
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function NestedDoc() {
-
+export default function NestedDemo() {
     return (
         <Splitter style={{ height: '300px' }}>
             <SplitterPanel className="flex align-items-center justify-content-center" size={20} minSize={10}>

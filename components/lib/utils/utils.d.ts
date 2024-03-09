@@ -1,17 +1,25 @@
-import React from 'react';
+/**
+ *
+ * @todo Write the documentation.
+ *
+ * @module utils
+ *
+ */
+import * as React from 'react';
+import { PassThroughOptions } from '../passthrough';
 
 export declare function classNames(...args: any[]): string | undefined;
 
 /**
- * Use 'useOverlayScrollListener' hook instead
- * @deprecated since version 8.0.0
+ * Merges properties together taking an Array of props and merging into one single set of
+ * properties. The options can contain a "classNameMergeFunction" which can be something
+ * like Tailwind Merge for properly merging Tailwind classes.
+ *
+ * @param {object[]} args the array of object properties to merge
+ * @param {PassThroughOptions} options either empty or could contain a custom merge function like TailwindMerge
+ * @returns the single properties value after merging
  */
-export declare class ConnectedOverlayScrollHandler {
-    constructor(element: any, listener?: () => void);
-    bindScrollListener(): void;
-    unbindScrollListener(): void;
-    destroy(): void;
-}
+export declare function mergeProps(args: object[], options?: PassThroughOptions): object | undefined;
 
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
@@ -19,10 +27,10 @@ export declare class DomHandler {
     static getBrowserLanguage(): string;
     static getWindowScrollTop(): number;
     static getWindowScrollLeft(): number;
-    static getOuterWidth(el: HTMLElement, margin: boolean): number;
-    static getOuterHeight(el: HTMLElement, margin: boolean): number;
-    static getClientHeight(el: HTMLElement, margin: boolean): number;
-    static getClientWidth(el: HTMLElement, margin: boolean): number;
+    static getOuterWidth(el?: HTMLElement | null, margin?: boolean): number;
+    static getOuterHeight(el?: HTMLElement | null, margin?: boolean): number;
+    static getClientHeight(el?: HTMLElement | null, margin?: boolean): number;
+    static getClientWidth(el?: HTMLElement | null, margin?: boolean): number;
     static getViewport(): { width: number; height: number };
     static getOffset(el: HTMLElement): { top: any; left: any };
     static index(el: HTMLElement): number;
@@ -30,9 +38,15 @@ export declare class DomHandler {
     static removeMultipleClasses(el: HTMLElement, className: string): void;
     static addClass(el: HTMLElement, className: string): void;
     static removeClass(el: HTMLElement, className: string): void;
+    static addStyles(el: HTMLElement, styles: object): void;
     static hasClass(el: HTMLElement, className: string): boolean;
     static find(el: HTMLElement, selector: string): any[];
     static findSingle(el: HTMLElement, selector: string): any;
+    static createElement(type: string, attributes: object, ...children: any): HTMLElement;
+    static setAttributes(el: HTMLElement, attributes: object): void;
+    static getAttribute(el: HTMLElement, name: string): any;
+    static isAttributeEquals(el: HTMLElement, name: string, value: any): boolean;
+    static isAttributeNotEquals(el: HTMLElement, name: string, value: any): boolean;
     static getHeight(el: HTMLElement): number;
     static getWidth(el: HTMLElement): number;
     static alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string, calculateMinWidth?: boolean): void;
@@ -41,7 +55,7 @@ export declare class DomHandler {
     static flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
     static findCollisionPosition(position: string): void;
     static getParents(el: HTMLElement, parents?: any[]): any[];
-    static getScrollableParents(el: HTMLElement): any[];
+    static getScrollableParents(el: HTMLElement, hideOverlaysOnDocumentScrolling?: boolean): any[];
     static getHiddenElementOuterHeight(el: HTMLElement): number;
     static getHiddenElementOuterWidth(el: HTMLElement): number;
     static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number };
@@ -50,6 +64,7 @@ export declare class DomHandler {
     static getUserAgent(): string;
     static isIOS(): boolean;
     static isAndroid(): boolean;
+    static isClient(): boolean;
     static isTouchDevice(): boolean;
     static isFunction(obj: any): boolean;
     static appendChild(el: HTMLElement, target: HTMLElement): void;
@@ -58,11 +73,13 @@ export declare class DomHandler {
     static scrollInView(container: HTMLElement, item: HTMLElement): void;
     static clearSelection(): void;
     static calculateScrollbarWidth(el: HTMLElement): number;
+    static calculateBodyScrollbarWidth(): number;
     static getBrowser(): object;
+    static blockBodyScroll(className?: string): void;
+    static unblockBodyScroll(className?: string): void;
     static resolveUserAgent(): { browser: string; version: string };
     static isVisible(el: HTMLElement): boolean;
     static isExist(el: HTMLElement): boolean;
-    static hasDOM(): boolean;
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
@@ -73,8 +90,8 @@ export declare class DomHandler {
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
     static saveAs(file: { name: string; url: any }): boolean;
-    static createInlineStyle(nonce: string): HTMLElement;
-    static removeInlineStyle(styleElement: HTMLElement): HTMLElement | null;
+    static createInlineStyle(nonce?: string, styleContainer?: ShadowRoot | HTMLElement): HTMLStyleElement;
+    static removeInlineStyle(styleElement: HTMLStyleElement): HTMLStyleElement | null;
     static getTargetElement(target: any): HTMLElement | null;
 }
 
@@ -99,26 +116,57 @@ export declare class ObjectUtils {
     static equals(obj1: any, obj2: any, field: string): boolean;
     static deepEquals(a: any, b: any): boolean;
     static resolveFieldData(data: any, field: string): any;
-    static isFunction(obj: any): boolean;
+    static mutateFieldData(data: object, field: string, value: any): void;
     static findDiffKeys(obj1: any, obj2: any): object;
     static reorderArray(value: any, from: number, to: number): void;
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
     static getJSXElement(obj: any, ...params: any[]): any;
+    static getItemValue(obj: any, ...params: any[]): any;
+    static getProp(props: object, prop: string, defaultProps?: object): any;
+    static getPropCaseInsensitive(props: object, prop: string, defaultProps?: object): any;
+    static getMergedProps(props: object, defaultProps: object): object;
+    static getDiffProps(props: object, defaultProps: object): object;
     static getPropValue(obj: any, ...params: any[]): any;
+    static isValidChild(child: any, type: string): boolean;
+    static getComponentProp(component: any, prop: string, defaultProps?: object): any;
+    static getComponentProps(component: any, defaultProps?: object): object | undefined;
+    static getComponentDiffProps(component: any, defaultProps?: object): object | undefined;
     static getRefElement(ref: any): any;
     static combinedRefs(innerRef: any, forwardRef: any): void;
     static removeAccents(str: any): string;
+    static toFlatCase(str: string): string;
+    static toCapitalCase(str: string): string;
+    static trim(value: any): any;
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
+    static isFunction(value: any): boolean;
+    static isObject(value: any): boolean;
+    static isDate(value: any): boolean;
+    static isArray(value: any): boolean;
+    static isString(value: any): boolean;
+    static isPrintableCharacter(char: string): boolean;
+    static isLetter(char: string): boolean;
+    static findLast(value: any[], callback: () => any): any;
+    static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
 }
 
+/**
+ * Icon utilities for managing icon tasks.
+ */
 export declare class IconUtils {
     static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, options: any): any;
 }
 
+/**
+ * Generate a unique id for components for a page.
+ * @param prefix the optional string prefix of the id
+ */
 export declare function UniqueComponentId(prefix?: string): string;
 
+/**
+ * ZIndex utilities for managing zindex states of different types.
+ */
 export declare namespace ZIndexUtils {
     export function get(el?: HTMLElement): number;
     export function set(key: string, el: HTMLElement, autoZIndex?: boolean, baseZIndex?: number): void;
@@ -127,13 +175,36 @@ export declare namespace ZIndexUtils {
     export function getCurrent(key: string): number;
 }
 
-export interface IconOptions<ParentProps> {
-    iconProps: React.HTMLProps<HTMLElement>;
+/**
+ * Icon options passed to any icon.
+ * ComponentProps are props from the owning component.
+ * AdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example.
+ */
+export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
+    /**
+     * Icon specific properties.
+     */
+    iconProps: React.HTMLProps<any> | React.SVGProps<any>;
+    /**
+     * The element representing the icon.
+     */
     element: React.ReactNode;
-    props?: ParentProps;
+    /**
+     * Properties of the owning component.
+     */
+    props?: ComponentProps;
     [key: string]: any;
-}
+};
 
-export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
+export type IconType<ComponentProps, AdditionalProps = NonNullable<unknown>> = React.ReactNode | ((options: IconOptions<ComponentProps, AdditionalProps>) => React.ReactNode);
 
-export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);
+export type TemplateType<ComponentProps> = React.ReactNode | ((props: ComponentProps) => React.ReactNode);
+
+export type PassThroughType<T, O> =
+    | T
+    | ((options?: O) => T | void)
+    | null
+    | undefined
+    | {
+          [key: string]: any;
+      };

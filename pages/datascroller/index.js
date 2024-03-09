@@ -1,12 +1,14 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/datascroller/apidoc';
-import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
-import { ImportDoc } from '../../components/doc/datascroller/importdoc';
-import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlinedoc';
-import { LoaderDataScrollerDoc } from '../../components/doc/datascroller/loaderdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/datascroller/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/datascroller/basicdoc';
+import { ImportDoc } from '@/components/doc/datascroller/importdoc';
+import { InlineDataScrollerDoc } from '@/components/doc/datascroller/inlinedoc';
+import { LoaderDataScrollerDoc } from '@/components/doc/datascroller/loaderdoc';
+import { PTDoc } from '@/components/doc/datascroller/pt/ptdoc';
+import { StyledDoc } from '@/components/doc/datascroller/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/datascroller/theming/tailwinddoc';
+import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
 
 const DataScrollerDemo = () => {
     const docs = [
@@ -30,51 +32,61 @@ const DataScrollerDemo = () => {
             label: 'Loader',
             component: LoaderDataScrollerDoc
         },
+
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.datascroller.options',
+            label: 'DataScroller PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React DataScroller Component</title>
-                <meta name="description" content="DataScroller displays data with on demand loading using scroll." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataScroller</h1>
-                    <p>DataScroller displays data with on demand loading using scroll.</p>
-                </div>
-
-                <DocActions github="datascroller/index.js" />
-            </div>
-
-            <div className="content-section doc datascroller-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React DataScroller Component"
+            header="DataScroller"
+            description="DataScroller displays data with on demand loading using scroll."
+            componentDocs={docs}
+            apiDocs={['DataScroller']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

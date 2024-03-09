@@ -2,5 +2,6 @@
     "main": "./csstransition.cjs.js",
     "module": "./csstransition.esm.js",
     "unpkg": "./csstransition.min.js",
-    "types": "./csstransition.d.ts"
+    "types": "./csstransition.d.ts",
+    "sideEffects": false
 }

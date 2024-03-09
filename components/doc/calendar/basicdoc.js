@@ -1,36 +1,41 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import { useState } from 'react';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
 export default function BasicDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
 export default function BasicDemo() {
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     return (
-        <Calendar id="basic" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} />
+        </div>
     )
 }
         `
@@ -44,7 +49,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="basic" value={date} onChange={(e) => setDate(e.value)} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,7 +1,6 @@
-import React from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
 
 export function IndeterminateDoc(props) {
     const code = {
@@ -12,8 +11,7 @@ export function IndeterminateDoc(props) {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const IndeterminateDoc = () => {
-
+export default function IndeterminateDemo() {
     return (
         <div className="card">
             <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
@@ -25,8 +23,7 @@ export const IndeterminateDoc = () => {
 import React from 'react';
 import { ProgressBar } from 'primereact/progressbar';
 
-export const IndeterminateDoc = () => {
-
+export default function IndeterminateDemo() {
     return (
         <div className="card">
             <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
@@ -39,7 +36,9 @@ export const IndeterminateDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Indeterminate Demo Content.</p>
+                <p>
+                    For progresses with no value to track, set the <i>mode</i> property to <i>indeterminate</i>.
+                </p>
             </DocSectionText>
             <div className="card">
                 <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>

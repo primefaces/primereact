@@ -1,14 +1,16 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/carousel/importdoc';
-import { BasicDoc } from '../../components/doc/carousel/basicdoc';
-import { ApiDoc } from '../../components/doc/carousel/apidoc';
-import { CircularDoc } from '../../components/doc/carousel/circulardoc';
-import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
-import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
-import { ResponsiveOptionsDoc } from '../../components/doc/carousel/responsivedoc';
+import { AccessibilityDoc } from '@/components/doc/carousel/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/carousel/basicdoc';
+import { CircularDoc } from '@/components/doc/carousel/circulardoc';
+import { ImportDoc } from '@/components/doc/carousel/importdoc';
+import { NumScrollDoc } from '@/components/doc/carousel/numscrolldoc';
+import { PTDoc } from '@/components/doc/carousel/pt/ptdoc';
+import { Wireframe } from '@/components/doc/carousel/pt/wireframe';
+import { ResponsiveDoc } from '@/components/doc/carousel/responsivedoc';
+import { StyledDoc } from '@/components/doc/carousel/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/carousel/theming/tailwinddoc';
+import { VerticalDoc } from '@/components/doc/carousel/verticaldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CarouselDemo = () => {
     const docs = [
@@ -28,64 +30,76 @@ const CarouselDemo = () => {
             component: CircularDoc
         },
         {
-            id: 'vertical',
-            label: 'Vertical',
-            component: VerticalDoc
-        },
-        {
             id: 'numscroll',
-            label: 'NumScroll',
+            label: 'Num Scroll',
             component: NumScrollDoc
         },
         {
             id: 'responsive',
-            label: 'ResponsiveOptions',
-            component: ResponsiveOptionsDoc
+            label: 'Responsive',
+            component: ResponsiveDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'vertical',
+            label: 'Vertical',
+            component: VerticalDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.carousel.options',
+            label: 'Carousel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Carousel Component</title>
-                <meta name="description" content="Carousel is a content slider featuring various customization options." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Carousel</h1>
-                    <p>Carousel is a content slider featuring various customization options.</p>
-                </div>
-                <DocActions github="carousel/index.js" />
-            </div>
-
-            <div className="content-section doc carousel-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Carousel Component"
+            header="Carousel"
+            description="Carousel is a content slider featuring various customization options."
+            className="carousel-demo"
+            componentDocs={docs}
+            apiDocs={['Carousel']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
     );
 };
 

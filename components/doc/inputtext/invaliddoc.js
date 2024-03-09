@@ -1,50 +1,32 @@
-import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputText } from '@/components/lib/inputtext/InputText';
 
 export function InvalidDoc(props) {
     const code = {
         basic: `
-<div className="flex flex-column gap-2">
-    <label htmlFor="username">
-        Username
-    </label>
-    <InputText id="username" aria-describedby="username-help" className="p-invalid" />
-    <small id="username-help" className="p-error">
-        Username is not available.
-    </small>
-</div>
+<InputText className="p-invalid" />
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function InvalidDemo() {
     return (
-        <div className="flex flex-column gap-2">
-            <label htmlFor="username">
-                Username
-            </label>
-            <InputText id="username" aria-describedby="username-help" className="p-invalid" />
-            <small id="username-help" className="p-error">
-                Username is not available.
-            </small>
+        <div className="card flex justify-content-center">
+            <InputText className="p-invalid" />
         </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function InvalidDemo() {
     return (
-        <div className="flex flex-column gap-2">
-            <label htmlFor="username">
-                Username
-            </label>
-            <InputText id="username" aria-describedby="username-help" className="p-invalid" />
-            <small id="username-help" className="p-error">
-                Username is not available.
-            </small>
+        <div className="card flex justify-content-center">
+            <InputText className="p-invalid" />
         </div>
     )
 }
@@ -55,17 +37,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div className="flex flex-column gap-2">
-                    <label htmlFor="username">Username</label>
-                    <InputText id="username" aria-describedby="username-help" className="p-invalid" />
-                    <small id="username-help" className="p-error">
-                        Username is not available.
-                    </small>
-                </div>
+                <InputText className="p-invalid" />
             </div>
             <DocSectionCode code={code} />
         </>

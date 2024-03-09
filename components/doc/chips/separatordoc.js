@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chips } from '@/components/lib/chips/Chips';
 import { useState } from 'react';
-import { Chips } from '../../lib/chips/Chips';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function SeparatorDoc(props) {
     const [value, setValue] = useState([]);
@@ -11,26 +11,30 @@ export function SeparatorDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} separator="," />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function SeparatorDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} separator="," />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} separator="," />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Chips, ChipsChangeParams } from "primereact/chips";
+import React, { useState } from "react";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 export default function SeparatorDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} separator="," />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} separator="," />
+        </div>
     )
 }
         `

@@ -1,11 +1,23 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { DataScrollerBase } from './DataScrollerBase';
 
 export const DataScroller = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = DataScrollerBase.getProps(inProps, context);
+
         const [dataToRenderState, setDataToRenderState] = React.useState([]);
+        const { ptm, cx, sx, isUnstyled } = DataScrollerBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(DataScrollerBase.css.styles, isUnstyled, { name: 'datascroller' });
+
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
         const value = React.useRef(props.value);
@@ -150,54 +162,95 @@ export const DataScroller = React.memo(
         }));
 
         const createHeader = () => {
+            const headerProps = mergeProps(
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            );
+
             if (props.header) {
-                return <div className="p-datascroller-header">{props.header}</div>;
+                return <div {...headerProps}>{props.header}</div>;
             }
 
             return null;
         };
 
         const createFooter = () => {
+            const footerProps = mergeProps(
+                {
+                    className: cx('footer')
+                },
+                ptm('footer')
+            );
+
             if (props.footer) {
-                return <div className="p-datascroller-footer">{props.footer}</div>;
+                return <div {...footerProps}>{props.footer}</div>;
             }
 
             return null;
         };
 
         const createItem = (_value, index) => {
+            const itemProps = mergeProps(
+                {
+                    key: index + '_datascrollitem'
+                },
+                ptm('item')
+            );
             const content = props.itemTemplate ? props.itemTemplate(_value) : _value;
 
-            return <li key={index + '_datascrollitem'}>{content}</li>;
+            return <li {...itemProps}>{content}</li>;
         };
 
         const createEmptyMessage = () => {
+            const emptyMessageProps = mergeProps(ptm('emptyMessage'));
+
             const content = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
 
-            return <li>{content}</li>;
+            return <li {...emptyMessageProps}>{content}</li>;
         };
 
         const createContent = () => {
+            const contentProps = mergeProps(
+                {
+                    ref: contentRef,
+                    className: cx('content'),
+                    style: sx('content')
+                },
+                ptm('content')
+            );
+            const listProps = mergeProps(
+                {
+                    className: cx('list')
+                },
+                ptm('list')
+            );
             const content = ObjectUtils.isNotEmpty(dataToRenderState) ? dataToRenderState.map(createItem) : createEmptyMessage();
 
             return (
-                <div ref={contentRef} className="p-datascroller-content" style={{ maxHeight: props.scrollHeight }}>
-                    <ul className="p-datascroller-list">{content}</ul>
+                <div {...contentProps}>
+                    <ul {...listProps}>{content}</ul>
                 </div>
             );
         };
-
-        const otherProps = ObjectUtils.findDiffKeys(props, DataScroller.defaultProps);
-        const className = classNames('p-datascroller p-component', props.className, {
-            'p-datascroller-inline': props.inline
-        });
 
         const header = createHeader();
         const footer = createFooter();
         const content = createContent();
 
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className: classNames(props.className, cx('root'))
+            },
+            DataScrollerBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} className={className} {...otherProps}>
+            <div {...rootProps}>
                 {header}
                 {content}
                 {footer}
@@ -207,21 +260,3 @@ export const DataScroller = React.memo(
 );
 
 DataScroller.displayName = 'DataScroller';
-DataScroller.defaultProps = {
-    __TYPE: 'DataScroller',
-    id: null,
-    value: null,
-    rows: 0,
-    inline: false,
-    scrollHeight: null,
-    loader: false,
-    buffer: 0.9,
-    style: null,
-    className: null,
-    onLazyLoad: null,
-    emptyMessage: null,
-    itemTemplate: null,
-    header: null,
-    footer: null,
-    lazy: false
-};

@@ -2,5 +2,6 @@
     "main": "./slidemenu.cjs.js",
     "module": "./slidemenu.esm.js",
     "unpkg": "./slidemenu.min.js",
-    "types": "./slidemenu.d.ts"
+    "types": "./slidemenu.d.ts",
+    "sideEffects": false
 }

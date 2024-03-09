@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
 import Link from 'next/link';
 import { useState } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function VirtualScrollDoc(props) {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -31,13 +31,13 @@ export function VirtualScrollDoc(props) {
     virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
 export default function VirtualScrollerDemo() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [filteredItems, setFilteredItems] = useState(null);
-    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \\\`Item #\${i}\\\`, value: i }));
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     const searchItems = (event) => {
         //in a real application, make a request to a remote url with the query and return filtered results, for demo purposes we filter at client side
@@ -61,8 +61,8 @@ export default function VirtualScrollerDemo() {
 }
         `,
         typescript: `
-import { useState } from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import React, { useState } from "react";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 interface Item {
     label: string;
@@ -72,9 +72,9 @@ interface Item {
 export default function VirtualScrollerDemo() {
     const [selectedItem, setSelectedItem] = useState<Item>(null);
     const [filteredItems, setFilteredItems] = useState<Item[]>(null);
-    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \\\`Item #\${i}\\\`, value: i }));
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
-    const searchItems = (event: AutoCompleteCompleteMethodParams) => {
+    const searchItems = (event: AutoCompleteCompleteEvent) => {
         //in a real application, make a request to a remote url with the query and return filtered results, for demo purposes we filter at client side
         let query = event.query;
         let _filteredItems = [];
@@ -91,7 +91,7 @@ export default function VirtualScrollerDemo() {
 
     return (
         <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems}
-            virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e: AutoCompleteChangeParams) => setSelectedItem(e.value)} />
+            virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e: AutoCompleteChangeEvent) => setSelectedItem(e.value)} />
     )
 }
         `

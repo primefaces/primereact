@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { MultiStateCheckbox } from '@/components/lib/multistatecheckbox/MultiStateCheckbox';
 import { useState } from 'react';
-import { MultiStateCheckbox } from '../../lib/multistatecheckbox/MultiStateCheckbox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('public');
@@ -13,13 +13,13 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+<MultiStateCheckbox value={value} onChange={(e) => setValue(e.value)} options={options} optionValue="value" />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [value, setValue] = useState('public');
     const options = [
         { value: 'public', icon: 'pi pi-globe' },
@@ -28,24 +28,35 @@ export default function BasicDoc() {
     ];
 
     return (
-        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+        <div className="card flex flex-column align-items-center gap-3">
+            <MultiStateCheckbox value={value} onChange={(e) => setValue(e.value)} options={options} optionValue="value" />
+            <span>{value || 'no value'}</span>
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { MultiStateCheckbox, MultiStateCheckboxChangeParams } from 'primereact/multistatecheckbox';
+import React, { useState } from "react";
+import { MultiStateCheckbox, MultiStateCheckboxChangeEvent } from 'primereact/multistatecheckbox';
 
-export default function BasicDoc() {
+interface Item {
+    value: string;
+    icon: string;
+}
+
+export default function BasicDemo() {
     const [value, setValue] = useState<string>('public');
-    const options = [
+    const options: Item[] = [
         { value: 'public', icon: 'pi pi-globe' },
         { value: 'protected', icon: 'pi pi-lock-open' },
         { value: 'private', icon: 'pi pi-lock' }
     ];
 
     return (
-        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e : MultiStateCheckboxChangeParams) => setValue(e.value)} />
+        <div className="card flex flex-column align-items-center gap-3">
+            <MultiStateCheckbox value={value} onChange={(e: MultiStateCheckboxChangeEvent) => setValue(e.value)} options={options} optionValue="value" />
+            <span>{value || 'no value'}</span>
+        </div>
     );
 }
         `
@@ -55,14 +66,13 @@ export default function BasicDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties. The <i>optionValue</i> field refers to the value of each option.
+                    MultiStateCheckbox is used as a controlled input with <i>value</i> and <i>onChange</i> properties along with the <i>option</i> collection. The <i>optionValue</i> field refers to the value of each option, if ommitted the object
+                    itself becomes the value of an option. The icon to display is retrieved from the <i>optionIcon</i> property that defaults to <i>icon</i> property name.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <div style={{ marginRight: '0.5rem', lineHeight: '1' }}>
-                    <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
-                </div>
-                <label>{value}</label>
+            <div className="card flex flex-column align-items-center gap-3">
+                <MultiStateCheckbox value={value} onChange={(e) => setValue(e.value)} options={options} optionValue="value" />
+                <span>{value || 'no value'}</span>
             </div>
             <DocSectionCode code={code} />
         </>

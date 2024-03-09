@@ -1,14 +1,16 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/timeline/apidoc';
-import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
-import { AlignmentDoc } from '../../components/doc/timeline/aligndoc';
-import { OppositeContentDoc } from '../../components/doc/timeline/oppositecontentdoc';
-import { CustomizedDoc } from '../../components/doc/timeline/customizeddoc';
-import { ImportDoc } from '../../components/doc/timeline/importdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/timeline/accessibilitydoc';
+import { AlignmentDoc } from '@/components/doc/timeline/alignmentdoc';
+import { BasicDoc } from '@/components/doc/timeline/basicdoc';
+import { HorizontalDoc } from '@/components/doc/timeline/horizontaldoc';
+import { ImportDoc } from '@/components/doc/timeline/importdoc';
+import { OppositeDoc } from '@/components/doc/timeline/oppositedoc';
+import { PTDoc } from '@/components/doc/timeline/pt/ptdoc';
+import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/timeline/templatedoc';
+import { StyledDoc } from '@/components/doc/timeline/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/timeline/theming/tailwinddoc';
 
 const TimelineDemo = () => {
     const docs = [
@@ -18,68 +20,76 @@ const TimelineDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'alignment',
             label: 'Alignment',
             component: AlignmentDoc
         },
         {
-            id: 'oppositecontent',
-            label: 'Opposite Content',
-            component: OppositeContentDoc
+            id: 'opposite',
+            label: 'Opposite',
+            component: OppositeDoc
         },
         {
-            id: 'customized',
-            label: 'Customized',
-            component: CustomizedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'horizontal',
             label: 'Horizontal',
             component: HorizontalDoc
         },
+
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.timeline.options',
+            label: 'Timeline PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Timeline Component</title>
-                <meta name="description" content="Timeline visualizes a series of chained events." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Timeline</h1>
-                    <p>Timeline visualizes a series of chained events.</p>
-                </div>
-
-                <DocActions github="timeline/index.js" />
-            </div>
-
-            <div className="content-section doc timeline-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={['Timeline']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TimelineDemo;

@@ -1,6 +1,6 @@
-import { Chips } from '../../lib/chips/Chips';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chips } from '@/components/lib/chips/Chips';
 
 export function DisabledDoc(props) {
     const code = {
@@ -8,20 +8,26 @@ export function DisabledDoc(props) {
 <Chips disabled placeholder="Disabled" />
         `,
         javascript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function DisabledDemo() {
     return (
-        <Chips disabled placeholder="Disabled" />
+        <div className="card p-fluid">
+            <Chips disabled placeholder="Disabled" />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Chips } from "primereact/chips";
 
 export default function DisabledDemo() {
     return (
-        <Chips disabled placeholder="Disabled" />
+        <div className="card p-fluid">
+            <Chips disabled placeholder="Disabled" />
+        </div>
     )
 }
         `
@@ -31,7 +37,7 @@ export default function DisabledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card p-fluid">

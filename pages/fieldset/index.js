@@ -1,11 +1,14 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/fieldset/importdoc';
-import { ApiDoc } from '../../components/doc/fieldset/apidoc';
-import { RegularDoc } from '../../components/doc/fieldset/regulardoc';
-import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/fieldset/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/fieldset/basicdoc';
+import { ImportDoc } from '@/components/doc/fieldset/importdoc';
+import { PTDoc } from '@/components/doc/fieldset/pt/ptdoc';
+import { Wireframe } from '@/components/doc/fieldset/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/fieldset/templatedoc';
+import { StyledDoc } from '@/components/doc/fieldset/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/fieldset/theming/tailwinddoc';
+import { ToggleableDoc } from '@/components/doc/fieldset/toggleabledoc';
 
 const FieldsetDemo = () => {
     const docs = [
@@ -15,9 +18,9 @@ const FieldsetDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'regular',
-            label: 'Regular',
-            component: RegularDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'toggleable',
@@ -25,50 +28,57 @@ const FieldsetDemo = () => {
             component: ToggleableDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.fieldset.options',
+            label: 'Fieldset PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Fieldset Component</title>
-                <meta name="description" content="Fieldset is a grouping component with a content toggle feature." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Fieldset</h1>
-                    <p>Fieldset is a grouping component with a content toggle feature.</p>
-                </div>
-                <DocActions github="fieldset/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Fieldset Component" header="Fieldset" description="Fieldset is a grouping component with a content toggle feature." componentDocs={docs} apiDocs={['Fieldset']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default FieldsetDemo;

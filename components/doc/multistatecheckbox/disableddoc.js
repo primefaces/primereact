@@ -1,53 +1,35 @@
-import { useState } from 'react';
-import { MultiStateCheckbox } from '../../lib/multistatecheckbox/MultiStateCheckbox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { MultiStateCheckbox } from '@/components/lib/multistatecheckbox/MultiStateCheckbox';
 
 export function DisabledDoc(props) {
-    const [value, setValue] = useState('public');
-    const options = [
-        { value: 'public', icon: 'pi pi-globe' },
-        { value: 'protected', icon: 'pi pi-lock-open' },
-        { value: 'private', icon: 'pi pi-lock' }
-    ];
-
     const code = {
         basic: `
-<MultiStateCheckbox disabled value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+<MultiStateCheckbox disabled />
         `,
         javascript: `
-import { useState } from "react";
+import React from "react";
 import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 
-export default function DisabledDoc() {
-    const [value, setValue] = useState('public');
-    const options = [
-        { value: 'public', icon: 'pi pi-globe' },
-        { value: 'protected', icon: 'pi pi-lock-open' },
-        { value: 'private', icon: 'pi pi-lock' }
-    ];
-
+export default function InvalidDemo() {
     return (
-        <MultiStateCheckbox disabled value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <MultiStateCheckbox disabled />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { MultiStateCheckbox, MultiStateCheckboxChangeParams } from 'primereact/multistatecheckbox';
-
-export default function DisabledDoc() {
-    const [value, setValue] = useState<string>('public');
-    const options = [
-        { value: 'public', icon: 'pi pi-globe' },
-        { value: 'protected', icon: 'pi pi-lock-open' },
-        { value: 'private', icon: 'pi pi-lock' }
-    ];
-
-    return (
-        <MultiStateCheckbox disabled value={value} options={options} optionValue="value" onChange={(e : MultiStateCheckboxChangeParams) => setValue(e.value)} />
-    );
-}
+    import React from "react";
+        import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
+        
+        export default function InvalidDemo() {
+            return (
+                <div className="card flex justify-content-center">
+                    <MultiStateCheckbox disabled />
+                </div>
+            );
+        }
         `
     };
 
@@ -55,14 +37,11 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    With <i>disabled</i> it specifies that the element value cannot be altered.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <div style={{ marginRight: '0.5rem', lineHeight: '1' }}>
-                    <MultiStateCheckbox disabled value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
-                </div>
-                <label>{value}</label>
+                <MultiStateCheckbox disabled />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -2,5 +2,6 @@
     "main": "./chips.cjs.js",
     "module": "./chips.esm.js",
     "unpkg": "./chips.min.js",
-    "types": "./chips.d.ts"
+    "types": "./chips.d.ts",
+    "sideEffects": false
 }

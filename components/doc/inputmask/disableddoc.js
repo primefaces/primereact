@@ -1,27 +1,33 @@
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
 
 export function DisabledDoc(props) {
     const code = {
         basic: `
-<InputMask mask="99-999999" placeholder="99-999999" disabled/>
+<InputMask mask="99-999999" placeholder="99-999999" disabled />
         `,
         javascript: `
+import React from 'react'; 
 import { InputMask } from "primereact/inputmask";
 
 export default function DisabledDemo() {
     return (
-        <InputMask mask="99-999999" placeholder="99-999999" disabled/>
+        <div className="card flex justify-content-center">
+            <InputMask mask="99-999999" placeholder="99-999999" disabled />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputMask } from "primereact/inputmask";
 
 export default function DisabledDemo() {
     return (
-        <InputMask mask="99-999999" placeholder="99-999999" disabled />
+        <div className="card flex justify-content-center">
+            <InputMask mask="99-999999" placeholder="99-999999" disabled />
+        </div>
     )
 }
         `
@@ -31,7 +37,7 @@ export default function DisabledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

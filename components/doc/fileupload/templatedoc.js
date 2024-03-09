@@ -1,27 +1,25 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { FileUpload } from '@/components/lib/fileupload/FileUpload';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
+import { Tag } from '@/components/lib/tag/Tag';
+import { Toast } from '@/components/lib/toast/Toast';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 import { useRef, useState } from 'react';
-import { FileUpload } from '../../lib/fileupload/FileUpload';
-import { Toast } from '../../lib/toast/Toast';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { Tag } from '../../lib/tag/Tag';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function TemplateDoc(props) {
     const [totalSize, setTotalSize] = useState(0);
     const toast = useRef(null);
     const fileUploadRef = useRef(null);
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
         let files = e.files;
 
-        Object.keys(files).forEach((key) => {
-            _totalSize += files[key].size || 0;
-        });
+        for (let i = 0; i < e.files.length; i++) {
+            _totalSize += files[i].size || 0;
+        }
 
         setTotalSize(_totalSize);
     };
@@ -56,7 +54,10 @@ export function TemplateDoc(props) {
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => `${formatedValue} / 1 MB`} style={{ width: '300px', height: '20px', marginLeft: 'auto' }}></ProgressBar>
+                <div className="flex align-items-center gap-3 ml-auto">
+                    <span>{formatedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                </div>
             </div>
         );
     };
@@ -100,14 +101,13 @@ export function TemplateDoc(props) {
 <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
 <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-<FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
-onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
-
+<FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+    onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+    headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+    chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         `,
         javascript: `
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
@@ -115,7 +115,7 @@ import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const toast = useRef(null);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef(null);
@@ -161,7 +161,10 @@ export default function TemplateDoc() {
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => \`\${formatedValue} / 1 MB\`} style={{width: '300px', height: '20px', marginLeft: 'auto'}}></ProgressBar>
+                <div className="flex align-items-center gap-3 ml-auto">
+                    <span>{formatedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                </div>
             </div>
         );
     };
@@ -205,40 +208,40 @@ export default function TemplateDoc() {
             <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
             <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
-            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+                chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         </div>
     )
 }
         `,
         typescript: `
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
-import { FileUpload } from 'primereact/fileupload';
+import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 
-export default function TemplateDoc() {
-    const toast = useRef(null);
+export default function TemplateDemo() {
+    const toast = useRef<Toast>(null);
     const [totalSize, setTotalSize] = useState(0);
-    const fileUploadRef = useRef(null);
+    const fileUploadRef = useRef<FileUpload>(null);
 
-    const onTemplateSelect = (e) => {
+    const onTemplateSelect = (e: FileUploadUploadEvent) => {
         let _totalSize = totalSize;
         let files = e.files;
 
-        Object.keys(files).forEach((key) => {
-            _totalSize += files[key].size || 0;
-        });
+        for (let i = 0; i < files.length; i++) {
+            _totalSize += files[i].size || 0;
+        }
 
         setTotalSize(_totalSize);
     };
 
-    const onTemplateUpload = (e) => {
+    const onTemplateUpload = (e: FileUploadUploadEvent) => {
         let _totalSize = 0;
 
         e.files.forEach((file) => {
@@ -246,10 +249,10 @@ export default function TemplateDoc() {
         });
 
         setTotalSize(_totalSize);
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        toast.current?.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
 
-    const onTemplateRemove = (file, callback) => {
+    const onTemplateRemove = (file: File, callback: Function) => {
         setTotalSize(totalSize - file.size);
         callback();
     };
@@ -258,7 +261,7 @@ export default function TemplateDoc() {
         setTotalSize(0);
     };
 
-    const headerTemplate = (options) => {
+    const headerTemplate = (options: FileUploadHeaderTemplateOptions) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
         const value = totalSize / 10000;
         const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
@@ -268,15 +271,20 @@ export default function TemplateDoc() {
                 {chooseButton}
                 {uploadButton}
                 {cancelButton}
-                <ProgressBar value={value} displayValueTemplate={() => \`\${formatedValue} / 1 MB\`} style={{width: '300px', height: '20px', marginLeft: 'auto'}}></ProgressBar>
+                <div className="flex align-items-center gap-3 ml-auto">
+                    <span>{formatedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                </div>
             </div>
         );
     };
 
-    const itemTemplate = (file, props) => {
+    const itemTemplate = (inFile: object, props: ItemTemplateOptions) => {
+        const file = inFile as File;
         return (
             <div className="flex align-items-center flex-wrap">
                 <div className="flex align-items-center" style={{ width: '40%' }}>
+                    // @ts-ignore
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
                     <span className="flex flex-column text-left ml-3">
                         {file.name}
@@ -312,20 +320,27 @@ export default function TemplateDoc() {
             <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
             <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
-            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-            headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+                chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
         </div>
     )
 }
-        `
+        `,
+        php: `
+/* public/upload.php */
+
+<?php
+header ("Access-Control-Allow-Origin: *");
+echo '<p>Fake Upload Process</p>'; ?>
+    `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Used to create custom item elements in the container.</p>
+                <p>Uploader UI can be customized with templating.</p>
             </DocSectionText>
             <div className="card">
                 <Toast ref={toast}></Toast>
@@ -337,7 +352,7 @@ export default function TemplateDoc() {
                 <FileUpload
                     ref={fileUploadRef}
                     name="demo[]"
-                    url={uploadPath}
+                    url="/api/upload"
                     multiple
                     accept="image/*"
                     maxFileSize={1000000}

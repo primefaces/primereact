@@ -1,9 +1,25 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { PageLinksBase } from './PaginatorBase';
 
-export const PageLinks = React.memo((props) => {
+export const PageLinks = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = PageLinksBase.getProps(inProps, context);
+    const { ptm, cx } = props;
+
+    const getPTOptions = (pageLink, key) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            context: {
+                active: pageLink - 1 === props.page
+            }
+        });
+    };
+
     const onPageLinkClick = (event, pageLink) => {
         if (props.onClick) {
             props.onClick({
@@ -28,8 +44,20 @@ export const PageLinks = React.memo((props) => {
                 'p-highlight': pageLink - 1 === props.page
             });
 
+            const pageButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    onClick: (e) => onPageLinkClick(e, pageLink),
+                    className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
+                    disabled: props.disabled,
+                    'aria-label': ariaLabel('pageLabel', { page: pageLink }),
+                    'aria-current': pageLink - 1 === props.page ? 'true' : undefined
+                },
+                getPTOptions(pageLink, 'pageButton')
+            );
+
             let element = (
-                <button type="button" className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
+                <button {...pageButtonProps}>
                     {pageLink}
                     <Ripple />
                 </button>
@@ -46,6 +74,8 @@ export const PageLinks = React.memo((props) => {
                     page: pageLink - 1,
                     currentPage: props.page,
                     totalPages: props.pageCount,
+                    ariaLabel: ariaLabel('pageLabel', { page: pageLink }),
+                    ariaCurrent: pageLink - 1 === props.page ? 'true' : undefined,
                     element,
                     props
                 };
@@ -57,16 +87,14 @@ export const PageLinks = React.memo((props) => {
         });
     }
 
-    return <span className="p-paginator-pages">{elements}</span>;
+    const pagesProps = mergeProps(
+        {
+            className: cx('pages')
+        },
+        ptm('pages', { hostName: props.hostName })
+    );
+
+    return <span {...pagesProps}>{elements}</span>;
 });
 
 PageLinks.displayName = 'PageLinks';
-PageLinks.defaultProps = {
-    __TYPE: 'PageLinks',
-    value: null,
-    page: null,
-    rows: null,
-    pageCount: null,
-    links: null,
-    template: null
-};

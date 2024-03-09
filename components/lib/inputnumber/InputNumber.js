@@ -1,18 +1,35 @@
 import * as React from 'react';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { InputNumberBase } from './InputNumberBase';
 
 export const InputNumber = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const metaData = {
+            props,
+            ...props.__parentMetadata,
+            state: {
+                focused: focusedState
+            }
+        };
+        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData(metaData);
+
+        useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
         const lastValue = React.useRef(null);
-
         const numberFormat = React.useRef(null);
         const groupChar = React.useRef(null);
         const prefixChar = React.useRef(null);
@@ -23,10 +40,12 @@ export const InputNumber = React.memo(
         const _minusSign = React.useRef(null);
         const _currency = React.useRef(null);
         const _decimal = React.useRef(null);
+        const _decimalSeparator = React.useRef(null);
         const _suffix = React.useRef(null);
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
-
+        const isFocusedByClick = React.useRef(false);
+        const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
         const vertical = props.showButtons && props.buttonLayout === 'vertical';
@@ -40,22 +59,24 @@ export const InputNumber = React.memo(
                 currencyDisplay: props.currencyDisplay,
                 useGrouping: props.useGrouping,
                 minimumFractionDigits: props.minFractionDigits,
-                maximumFractionDigits: props.maxFractionDigits
+                maximumFractionDigits: props.maxFractionDigits,
+                roundingMode: props.roundingMode
             };
         };
 
         const constructParser = () => {
-            numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
-            const numerals = [...new Intl.NumberFormat(props.locale, { useGrouping: false }).format(9876543210)].reverse();
+            numberFormat.current = new Intl.NumberFormat(_locale, getOptions());
+            const numerals = [...new Intl.NumberFormat(_locale, { useGrouping: false }).format(9876543210)].reverse();
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
-            _group.current = getGroupingExpression();
-            _minusSign.current = getMinusSignExpression();
-            _currency.current = getCurrencyExpression();
-            _decimal.current = getDecimalExpression();
-            _suffix.current = getSuffixExpression();
-            _prefix.current = getPrefixExpression();
+            _group.current = getGroupingExpression(); // regular expression /[,]/g, /[.]/g
+            _minusSign.current = getMinusSignExpression(); // regular expression /[-]/g
+            _currency.current = getCurrencyExpression(); // regular expression for currency (e.g. /[$]/g, /[€]/g, /[]/g and more)
+            _decimal.current = getDecimalExpression(); // regular expression /[,]/g, /[.]/g, /[]/g
+            _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
+            _suffix.current = getSuffixExpression(); // regular expression for suffix (e.g. /℃/g)
+            _prefix.current = getPrefixExpression(); // regular expression for prefix (e.g. /\ days/g)
             _index.current = (d) => index.get(d);
         };
 
@@ -63,14 +84,21 @@ export const InputNumber = React.memo(
             return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
         };
 
+        /**
+         * get decimal separator in current locale
+         */
+        const getDecimalSeparator = () => {
+            return new Intl.NumberFormat(_locale, { useGrouping: false }).format(1.1).trim().replace(_numeral.current, '');
+        };
+
         const getDecimalExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { ...getOptions(), useGrouping: false });
 
             return new RegExp(`[${formatter.format(1.1).replace(_currency.current, '').trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getGroupingExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: true });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: true });
 
             groupChar.current = formatter.format(1000000).trim().replace(_numeral.current, '').charAt(0);
 
@@ -78,19 +106,20 @@ export const InputNumber = React.memo(
         };
 
         const getMinusSignExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: false });
 
             return new RegExp(`[${formatter.format(-1).trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getCurrencyExpression = () => {
             if (props.currency) {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: 'currency',
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
@@ -103,7 +132,7 @@ export const InputNumber = React.memo(
             if (props.prefix) {
                 prefixChar.current = props.prefix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
+                const formatter = new Intl.NumberFormat(_locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
 
                 prefixChar.current = formatter.format(1).split('1')[0];
             }
@@ -115,12 +144,13 @@ export const InputNumber = React.memo(
             if (props.suffix) {
                 suffixChar.current = props.suffix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: props.mode,
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 suffixChar.current = formatter.format(1).split('1')[1];
@@ -137,7 +167,7 @@ export const InputNumber = React.memo(
                 }
 
                 if (props.format) {
-                    let formatter = new Intl.NumberFormat(props.locale, getOptions());
+                    let formatter = new Intl.NumberFormat(_locale, getOptions());
                     let _formattedValue = formatter.format(value);
 
                     if (props.prefix) {
@@ -203,32 +233,19 @@ export const InputNumber = React.memo(
                     return;
                 }
 
+                // #3913 onChange should be called before onValueChange
+                handleOnChange(event, currentValue, newValue);
                 // touch devices trigger the keyboard to display because of setSelectionRange
                 !DomHandler.isTouchDevice() && updateInput(newValue, null, 'spin');
                 updateModel(event, newValue);
-
-                handleOnChange(event, currentValue, newValue);
-            }
-        };
-
-        const onUpButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
+                DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
                 event.preventDefault();
-            }
-        };
-
-        const onUpButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
             }
         };
 
@@ -256,24 +273,10 @@ export const InputNumber = React.memo(
             }
         };
 
-        const onDownButtonTouchStart = (event) => {
-            if (!props.disabled && !props.readOnly) {
-                repeat(event, null, -1);
-                event.preventDefault();
-            }
-        };
-
-        const onDownButtonTouchEnd = () => {
-            if (!props.disabled && !props.readOnly) {
-                clearTimer();
-            }
-        };
-
         const onDownButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
+                DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, -1);
-
                 event.preventDefault();
             }
         };
@@ -319,6 +322,15 @@ export const InputNumber = React.memo(
                 return;
             }
 
+            if (props.onKeyDown) {
+                props.onKeyDown(event);
+
+                // do not continue if the user defined event wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
+            }
+
             lastValue.current = event.target.value;
 
             if (event.shiftKey || event.altKey) {
@@ -336,21 +348,21 @@ export const InputNumber = React.memo(
                 event.preventDefault();
             }
 
-            switch (event.which) {
+            switch (event.code) {
                 //up
-                case 38:
+                case 'ArrowUp':
                     spin(event, 1);
                     event.preventDefault();
                     break;
 
                 //down
-                case 40:
+                case 'ArrowDown':
                     spin(event, -1);
                     event.preventDefault();
                     break;
 
                 //left
-                case 37:
+                case 'ArrowLeft':
                     if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                         event.preventDefault();
                     }
@@ -358,7 +370,7 @@ export const InputNumber = React.memo(
                     break;
 
                 //right
-                case 39:
+                case 'ArrowRight':
                     if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                         event.preventDefault();
                     }
@@ -366,8 +378,8 @@ export const InputNumber = React.memo(
                     break;
 
                 //enter and tab
-                case 13:
-                case 9:
+                case 'Tab':
+                case 'Enter':
                     newValueStr = validateValue(parseValue(inputValue));
                     inputRef.current.value = formatValue(newValueStr);
                     inputRef.current.setAttribute('aria-valuenow', newValueStr);
@@ -375,14 +387,14 @@ export const InputNumber = React.memo(
                     break;
 
                 //backspace
-                case 8:
+                case 'Backspace':
                     event.preventDefault();
 
                     if (selectionStart === selectionEnd) {
                         const deleteChar = inputValue.charAt(selectionStart - 1);
-                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
                         if (isNumeralChar(deleteChar)) {
+                            const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
                             const decimalLength = getDecimalLength(inputValue);
 
                             if (_group.current.test(deleteChar)) {
@@ -406,6 +418,12 @@ export const InputNumber = React.memo(
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                             }
+                        } else if (_currency.current.test(deleteChar)) {
+                            const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
+
+                            if (minusCharIndex === currencyCharIndex - 1) {
+                                newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
+                            }
                         }
 
                         updateValue(event, newValueStr, null, 'delete-single');
@@ -417,7 +435,7 @@ export const InputNumber = React.memo(
                     break;
 
                 // del
-                case 46:
+                case 'Delete':
                     event.preventDefault();
 
                     if (selectionStart === selectionEnd) {
@@ -458,18 +476,40 @@ export const InputNumber = React.memo(
 
                     break;
 
+                case 'End':
+                    event.preventDefault();
+
+                    if (!ObjectUtils.isEmpty(props.max)) {
+                        updateModel(event, props.max);
+                    }
+
+                    break;
+                case 'Home':
+                    event.preventDefault();
+
+                    if (!ObjectUtils.isEmpty(props.min)) {
+                        updateModel(event, props.min);
+                    }
+
+                    break;
+
                 default:
                     break;
             }
-
-            if (props.onKeyDown) {
-                props.onKeyDown(event);
-            }
         };
 
-        const onInputKeyPress = (event) => {
+        const onInputKeyUp = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
+            }
+
+            if (props.onKeyUp) {
+                props.onKeyUp(event);
+
+                // do not continue if the user defined event wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
             }
 
             const code = event.which || event.keyCode;
@@ -507,7 +547,7 @@ export const InputNumber = React.memo(
         };
 
         const allowMinusSign = () => {
-            return props.min === null || props.min < 0;
+            return ObjectUtils.isEmpty(props.min) || props.min < 0;
         };
 
         const isMinusSign = (char) => {
@@ -520,8 +560,16 @@ export const InputNumber = React.memo(
             return false;
         };
 
+        const replaceDecimalSeparator = (val) => {
+            if (isFloat(val)) {
+                return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
+            }
+
+            return val;
+        };
+
         const isDecimalSign = (char) => {
-            if (_decimal.current.test(char)) {
+            if (_decimal.current.test(char) || isFloat(char)) {
                 _decimal.current.lastIndex = 0;
 
                 return true;
@@ -532,6 +580,15 @@ export const InputNumber = React.memo(
 
         const isDecimalMode = () => {
             return props.mode === 'decimal';
+        };
+
+        const isFloat = (val) => {
+            let formatter = new Intl.NumberFormat(_locale, getOptions());
+            let parseVal = parseValue(formatter.format(val));
+
+            if (parseVal === null) return false;
+
+            return parseVal % 1 !== 0;
         };
 
         const getDecimalCharIndexes = (val) => {
@@ -557,7 +614,11 @@ export const InputNumber = React.memo(
             const suffixCharIndex = val.search(_suffix.current);
 
             _suffix.current.lastIndex = 0;
-            const currencyCharIndex = val.search(_currency.current);
+            let currencyCharIndex = val.search(_currency.current);
+
+            if (currencyCharIndex === 0 && prefixChar.current && prefixChar.current.length > 1) {
+                currencyCharIndex = prefixChar.current.trim().length;
+            }
 
             _currency.current.lastIndex = 0;
 
@@ -580,10 +641,12 @@ export const InputNumber = React.memo(
             let newValueStr;
 
             if (sign.isMinusSign) {
-                if (selectionStart === 0) {
+                const isNewMinusSign = minusCharIndex === -1;
+
+                if (isNewMinusSign && (selectionStart === 0 || selectionStart === currencyCharIndex + 1)) {
                     newValueStr = inputValue;
 
-                    if (minusCharIndex === -1 || selectionEnd !== 0) {
+                    if (isNewMinusSign || selectionEnd !== 0) {
                         newValueStr = insertText(inputValue, text, 0, selectionEnd);
                     }
 
@@ -617,6 +680,10 @@ export const InputNumber = React.memo(
             }
         };
 
+        const replaceSuffix = (value) => {
+            return value ? value.replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '') : value;
+        };
+
         const insertText = (value, text, start, end) => {
             let textSplit = text === '.' ? text : text.split('.');
 
@@ -625,7 +692,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + value.slice(end) : value || formatValue(text);
+                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + replaceSuffix(value).slice(end) : value || formatValue(text);
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
@@ -635,7 +702,11 @@ export const InputNumber = React.memo(
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
-                return value.slice(0, start) + text + value.slice(end);
+                const selectionValue = value.slice(start, end);
+                // Fix: if the suffix starts with a space, the input will be cleared after pasting
+                const space = /\s$/.test(selectionValue) ? ' ' : '';
+
+                return value.slice(0, start) + text + space + value.slice(end);
             }
         };
 
@@ -704,6 +775,10 @@ export const InputNumber = React.memo(
             }
 
             return index || 0;
+        };
+
+        const onInputPointerDown = () => {
+            isFocusedByClick.current = true;
         };
 
         const onInputClick = () => {
@@ -836,9 +911,21 @@ export const InputNumber = React.memo(
                     selectionEnd = sRegex.lastIndex + tRegex.lastIndex;
                     inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 } else if (newLength === currentLength) {
-                    if (operation === 'insert' || operation === 'delete-back-single') inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
-                    else if (operation === 'delete-single') inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
-                    else if (operation === 'delete-range' || operation === 'spin') inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    if (operation === 'insert' || operation === 'delete-back-single') {
+                        let newSelectionEnd = selectionEnd;
+
+                        if (insertedValueStr === '0') {
+                            newSelectionEnd = selectionEnd + 1;
+                        } else {
+                            newSelectionEnd = newSelectionEnd + Number(isDecimalSign(value) || isDecimalSign(insertedValueStr));
+                        }
+
+                        inputEl.setSelectionRange(newSelectionEnd, newSelectionEnd);
+                    } else if (operation === 'delete-single') {
+                        inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
+                    } else if (operation === 'delete-range' || operation === 'spin') {
+                        inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    }
                 } else if (operation === 'delete-back-single') {
                     let prevChar = inputValue.charAt(selectionEnd - 1);
                     let nextChar = inputValue.charAt(selectionEnd);
@@ -891,7 +978,9 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                const newVal1 = replaceDecimalSeparator(val1).split(_decimal.current)[0].replace(_suffix.current, '').trim();
+
+                return decimalCharIndex !== -1 ? newVal1 + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -902,7 +991,7 @@ export const InputNumber = React.memo(
                 const valueSplit = value.split(_decimal.current);
 
                 if (valueSplit.length === 2) {
-                    return valueSplit[1].replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '').length;
+                    return replaceSuffix(valueSplit[1]).length;
                 }
             }
 
@@ -914,8 +1003,12 @@ export const InputNumber = React.memo(
                 props.onValueChange({
                     originalEvent: event,
                     value: value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -929,16 +1022,21 @@ export const InputNumber = React.memo(
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
 
-            if ((props.suffix || props.currency || props.prefix) && inputRef.current) {
-                // GitHub #1866 Cursor must be placed before/after symbol or arrow keys don't work
-                const selectionEnd = initCursor();
+            if ((props.suffix || props.currency || props.prefix) && inputRef.current && !isFocusedByClick.current) {
+                // GitHub #1866,#5537
+                let inputValue = inputRef.current.value;
+                let prefixLength = (prefixChar.current || '').length;
+                let suffixLength = (suffixChar.current || '').length;
+                let end = inputValue.length === 0 ? 0 : inputValue.length - suffixLength;
 
-                inputRef.current.setSelectionRange(selectionEnd, selectionEnd);
+                inputRef.current.setSelectionRange(prefixLength, end);
             }
         };
 
         const onInputBlur = (event) => {
             setFocusedState(false);
+
+            isFocusedByClick.current = false;
 
             if (inputRef.current) {
                 let currentValue = inputRef.current.value;
@@ -961,7 +1059,9 @@ export const InputNumber = React.memo(
         };
 
         const changeValue = () => {
-            updateInputValue(validateValueByLimit(props.value));
+            const val = validateValueByLimit(props.value);
+
+            updateInputValue(props.format ? val : replaceDecimalSeparator(val));
 
             const newValue = validateValue(props.value);
 
@@ -976,6 +1076,7 @@ export const InputNumber = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getFormatter,
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
@@ -1004,6 +1105,13 @@ export const InputNumber = React.memo(
             changeValue();
         }, [props.value]);
 
+        useUpdateEffect(() => {
+            // #5245 prevent infinite loop
+            if (props.disabled) {
+                clearTimer();
+            }
+        }, [props.disabled]);
+
         const createInputElement = () => {
             const className = classNames('p-inputnumber-input', props.inputClassName);
             const valueToRender = formattedValue(props.value);
@@ -1029,9 +1137,10 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyPress={onInputKeyPress}
+                    onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
+                    onPointerDown={onInputPointerDown}
                     onBlur={onInputBlur}
                     onFocus={onInputFocus}
                     onPaste={onPaste}
@@ -1042,65 +1151,73 @@ export const InputNumber = React.memo(
                     aria-valuenow={props.value}
                     {...ariaProps}
                     {...dataProps}
+                    pt={ptm('input')}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
 
         const createUpButton = () => {
-            const className = classNames(
-                'p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component',
+            const incrementIconProps = mergeProps(
                 {
-                    'p-disabled': props.disabled
+                    className: cx('incrementIcon')
                 },
-                props.incrementButtonClassName
+                ptm('incrementIcon')
             );
-            const icon = classNames('p-button-icon', props.incrementButtonIcon);
+            const icon = props.incrementButtonIcon || <AngleUpIcon {...incrementIconProps} />;
+            const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
+            const incrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
+                    onPointerLeave: onUpButtonMouseLeave,
+                    onPointerDown: (e) => onUpButtonMouseDown(e),
+                    onPointerUp: onUpButtonMouseUp,
+                    onKeyDown: (e) => onUpButtonKeyDown(e),
+                    onKeyUp: onUpButtonKeyUp,
+                    disabled: props.disabled,
+                    tabIndex: -1,
+                    'aria-hidden': true
+                },
+                ptm('incrementButton')
+            );
 
             return (
-                <button
-                    type="button"
-                    className={className}
-                    onMouseLeave={onUpButtonMouseLeave}
-                    onMouseDown={onUpButtonMouseDown}
-                    onMouseUp={onUpButtonMouseUp}
-                    onKeyDown={onUpButtonKeyDown}
-                    onKeyUp={onUpButtonKeyUp}
-                    onTouchStart={onUpButtonTouchStart}
-                    onTouchEnd={onUpButtonTouchEnd}
-                    disabled={props.disabled}
-                    tabIndex={-1}
-                >
-                    <span className={icon}></span>
+                <button {...incrementButtonProps}>
+                    {upButton}
                     <Ripple />
                 </button>
             );
         };
 
         const createDownButton = () => {
-            const className = classNames(
-                'p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component',
+            const decrementIconProps = mergeProps(
                 {
-                    'p-disabled': props.disabled
+                    className: cx('decrementIcon')
                 },
-                props.decrementButtonClassName
+                ptm('decrementIcon')
             );
-            const icon = classNames('p-button-icon', props.decrementButtonIcon);
+            const icon = props.decrementButtonIcon || <AngleDownIcon {...decrementIconProps} />;
+            const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
+            const decrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
+                    onPointerLeave: onDownButtonMouseLeave,
+                    onPointerDown: (e) => onDownButtonMouseDown(e),
+                    onPointerUp: onDownButtonMouseUp,
+                    onKeyDown: (e) => onDownButtonKeyDown(e),
+                    onKeyUp: onDownButtonKeyUp,
+                    disabled: props.disabled,
+                    tabIndex: -1,
+                    'aria-hidden': true
+                },
+                ptm('decrementButton')
+            );
 
             return (
-                <button
-                    type="button"
-                    className={className}
-                    onMouseLeave={onDownButtonMouseLeave}
-                    onMouseDown={onDownButtonMouseDown}
-                    onMouseUp={onDownButtonMouseUp}
-                    onKeyDown={onDownButtonKeyDown}
-                    onKeyUp={onDownButtonKeyUp}
-                    onTouchStart={onDownButtonTouchStart}
-                    onTouchEnd={onDownButtonTouchEnd}
-                    disabled={props.disabled}
-                    tabIndex={-1}
-                >
-                    <span className={icon}></span>
+                <button {...decrementButtonProps}>
+                    {downButton}
                     <Ripple />
                 </button>
             );
@@ -1109,10 +1226,16 @@ export const InputNumber = React.memo(
         const createButtonGroup = () => {
             const upButton = props.showButtons && createUpButton();
             const downButton = props.showButtons && createDownButton();
+            const buttonGroupProps = mergeProps(
+                {
+                    className: cx('buttonGroup')
+                },
+                ptm('buttonGroup')
+            );
 
             if (stacked) {
                 return (
-                    <span className="p-inputnumber-button-group">
+                    <span {...buttonGroupProps}>
                         {upButton}
                         {downButton}
                     </span>
@@ -1128,85 +1251,31 @@ export const InputNumber = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
+        const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-inputnumber p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
-                'p-inputwrapper-focus': focusedState,
-                'p-inputnumber-buttons-stacked': stacked,
-                'p-inputnumber-buttons-horizontal': horizontal,
-                'p-inputnumber-buttons-vertical': vertical
-            },
-            props.className
-        );
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
+                style: props.style
+            },
+            otherProps,
+            ptm('root')
+        );
 
         return (
             <>
-                <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <span ref={elementRef} {...rootProps}>
                     {inputElement}
                     {buttonGroup}
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })
 );
 
 InputNumber.displayName = 'InputNumber';
-InputNumber.defaultProps = {
-    __TYPE: 'InputNumber',
-    allowEmpty: true,
-    ariaLabelledBy: null,
-    autoFocus: false,
-    buttonLayout: 'stacked',
-    className: null,
-    currency: undefined,
-    currencyDisplay: undefined,
-    decrementButtonClassName: null,
-    decrementButtonIcon: 'pi pi-angle-down',
-    disabled: false,
-    format: true,
-    id: null,
-    incrementButtonClassName: null,
-    incrementButtonIcon: 'pi pi-angle-up',
-    inputClassName: null,
-    inputId: null,
-    inputMode: null,
-    inputRef: null,
-    inputStyle: null,
-    locale: undefined,
-    localeMatcher: undefined,
-    max: null,
-    maxFractionDigits: undefined,
-    maxLength: null,
-    min: null,
-    minFractionDigits: undefined,
-    mode: 'decimal',
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onFocus: null,
-    onKeyDown: null,
-    onValueChange: null,
-    pattern: null,
-    placeholder: null,
-    prefix: null,
-    readOnly: false,
-    required: false,
-    showButtons: false,
-    size: null,
-    step: 1,
-    style: null,
-    suffix: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    type: 'text',
-    useGrouping: true,
-    value: null
-};

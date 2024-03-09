@@ -1,16 +1,45 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
+        const [idState, setIdState] = React.useState(null);
+        const [focused, setFocused] = React.useState(false);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = SpeedDialBase.getProps(inProps, context);
         const visible = props.onVisibleChange ? props.visible : visibleState;
+        const speedDialDisplayOrder = useDisplayOrder('speed-dial', visible);
+        const metaData = {
+            props,
+            state: {
+                visible
+            }
+        };
+        const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metaData);
+
+        useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: visible && speedDialDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.SPEED_DIAL, speedDialDisplayOrder]
+        });
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -27,6 +56,15 @@ export const SpeedDial = React.memo(
         const show = () => {
             props.onVisibleChange ? props.onVisibleChange(true) : setVisibleState(true);
             props.onShow && props.onShow();
+        };
+
+        const onFocus = () => {
+            setFocused(true);
+        };
+
+        const onBlur = () => {
+            setFocused(false);
+            setFocusedOptionIndex(-1);
         };
 
         const hide = () => {
@@ -49,8 +87,233 @@ export const SpeedDial = React.memo(
             e.preventDefault();
         };
 
+        const onKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    onArrowDown(event);
+                    break;
+
+                case 'ArrowUp':
+                    onArrowUp(event);
+                    break;
+
+                case 'ArrowLeft':
+                    onArrowLeft(event);
+                    break;
+
+                case 'ArrowRight':
+                    onArrowRight(event);
+                    break;
+
+                case 'Enter':
+                case 'Space':
+                    onEnterKey(event);
+                    break;
+
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
+
+                case 'Home':
+                    onHomeKey(event);
+                    break;
+
+                case 'End':
+                    onEndKey(event);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onTogglerKeydown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                case 'ArrowLeft':
+                    onTogglerArrowDown(event);
+
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowRight':
+                    onTogglerArrowUp(event);
+
+                    break;
+
+                case 'Escape':
+                    onEscapeKey();
+
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onTogglerArrowUp = (event) => {
+            setFocused(true);
+            DomHandler.focus(listRef.current);
+
+            show();
+            navigatePrevItem(event);
+
+            event.preventDefault();
+        };
+
+        const onTogglerArrowDown = (event) => {
+            setFocused(true);
+            DomHandler.focus(listRef.current);
+
+            show();
+            navigateNextItem(event);
+
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const itemIndex = [...items].findIndex((item) => item.id === focusedOptionIndex);
+
+            onItemClick(event, props.model[itemIndex]);
+            onBlur(event);
+
+            const buttonEl = DomHandler.findSingle(elementRef.current, 'button');
+
+            buttonEl && DomHandler.focus(buttonEl);
+        };
+
+        const onEscapeKey = () => {
+            hide();
+
+            const buttonEl = DomHandler.findSingle(elementRef.current, 'button');
+
+            buttonEl && DomHandler.focus(buttonEl);
+        };
+
+        const onArrowUp = (event) => {
+            let direction = props.direction;
+
+            if (direction === 'up') {
+                navigateNextItem(event);
+            } else if (direction === 'down') {
+                navigatePrevItem(event);
+            } else {
+                navigateNextItem(event);
+            }
+        };
+
+        const onArrowDown = (event) => {
+            let direction = props.direction;
+
+            if (direction === 'up') {
+                navigatePrevItem(event);
+            } else if (direction === 'down') {
+                navigateNextItem(event);
+            } else {
+                navigatePrevItem(event);
+            }
+        };
+
+        const onArrowLeft = (event) => {
+            let direction = props.direction;
+            const leftValidDirections = ['left', 'up-right', 'down-left'];
+            const rightValidDirections = ['right', 'up-left', 'down-right'];
+
+            if (leftValidDirections.includes(direction)) {
+                navigateNextItem(event);
+            } else if (rightValidDirections.includes(direction)) {
+                navigatePrevItem(event);
+            } else {
+                navigatePrevItem(event);
+            }
+        };
+
+        const onArrowRight = (event) => {
+            let direction = props.direction;
+            const leftValidDirections = ['left', 'up-right', 'down-left'];
+            const rightValidDirections = ['right', 'up-left', 'down-right'];
+
+            if (leftValidDirections.includes(direction)) {
+                navigatePrevItem(event);
+            } else if (rightValidDirections.includes(direction)) {
+                navigateNextItem(event);
+            } else {
+                navigateNextItem(event);
+            }
+        };
+
+        const onEndKey = (event) => {
+            event.preventDefault();
+
+            setFocusedOptionIndex(-1);
+            navigatePrevItem(event, -1);
+        };
+
+        const onHomeKey = (event) => {
+            event.preventDefault();
+
+            setFocusedOptionIndex(-1);
+            navigateNextItem(event, -1);
+        };
+
+        const navigateNextItem = (event, index = null) => {
+            const optionIndex = findNextOptionIndex(index || focusedOptionIndex);
+
+            changeFocusedOptionIndex(optionIndex);
+
+            event.preventDefault();
+        };
+
+        const navigatePrevItem = (event, index = null) => {
+            const optionIndex = findPrevOptionIndex(index || focusedOptionIndex);
+
+            changeFocusedOptionIndex(optionIndex);
+
+            event.preventDefault();
+        };
+
+        const changeFocusedOptionIndex = (index) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
+
+            if (filteredItems[index]) {
+                setFocusedOptionIndex(filteredItems[index].getAttribute('id'));
+            }
+        };
+
+        const findPrevOptionIndex = (index) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
+            const newIndex = index === -1 ? filteredItems[filteredItems.length - 1].id : index;
+            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute('id') === newIndex);
+
+            matchedOptionIndex = index === -1 ? filteredItems.length - 1 : matchedOptionIndex - 1;
+
+            return matchedOptionIndex;
+        };
+
+        const findNextOptionIndex = (index) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
+            const newIndex = index === -1 ? filteredItems[0].id : index;
+            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute('id') === newIndex);
+
+            matchedOptionIndex = index === -1 ? 0 : matchedOptionIndex + 1;
+
+            return matchedOptionIndex;
+        };
+
         const isOutsideClicked = (event) => {
             return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target));
+        };
+
+        const isItemActive = (id) => {
+            return focusedOptionIndex === id;
+        };
+
+        const focusedOptionId = () => {
+            return focusedOptionIndex !== -1 ? focusedOptionIndex : null;
         };
 
         const calculateTransitionDelay = (index) => {
@@ -156,13 +419,32 @@ export const SpeedDial = React.memo(
                 return null;
             }
 
-            const style = getItemStyle(index);
-            const { disabled, icon: _icon, label, template, url, target } = item;
+            const { disabled, icon: _icon, label, template, url, target, className: _itemClassName, style: _itemStyle } = item;
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-speeddial-action-icon', _icon);
-            const icon = IconUtils.getJSXIcon(_icon, { className: 'p-speeddial-action-icon' }, { props });
+            const actionIconProps = mergeProps(
+                {
+                    className: cx('actionIcon')
+                },
+                ptm('actionIcon')
+            );
+            const actionProps = mergeProps(
+                {
+                    href: url || '#',
+                    role: 'menuitem',
+                    className: classNames(_itemClassName, cx('action', { disabled })),
+                    'aria-label': item.label,
+                    style: _itemStyle,
+                    target: target,
+                    tabIndex: '-1',
+                    'data-pr-tooltip': label,
+                    onClick: (e) => onItemClick(e, item)
+                },
+                ptm('action')
+            );
+            const icon = IconUtils.getJSXIcon(_icon, { ...actionIconProps }, { props });
             let content = (
-                <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
+                <a {...actionProps}>
                     {icon}
                     <Ripple />
                 </a>
@@ -181,11 +463,19 @@ export const SpeedDial = React.memo(
                 content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
             }
 
-            return (
-                <li key={index} className="p-speeddial-item" style={style} role="none">
-                    {content}
-                </li>
+            const menuItemProps = mergeProps(
+                {
+                    key: index,
+                    id: `${idState}_${index}`,
+                    className: cx('menuitem', { active: isItemActive(`${idState}_${index}`) }),
+                    style: getItemStyle(index),
+                    'aria-controls': idState + '_item',
+                    role: 'menuitem'
+                },
+                ptm('menuitem')
             );
+
+            return <li {...menuItemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -194,12 +484,22 @@ export const SpeedDial = React.memo(
 
         const createList = () => {
             const items = createItems();
-
-            return (
-                <ul ref={listRef} className="p-speeddial-list" role="menu">
-                    {items}
-                </ul>
+            const menuProps = mergeProps(
+                {
+                    ref: listRef,
+                    className: cx('menu'),
+                    style: sx('menu'),
+                    role: 'menu',
+                    tabIndex: '-1',
+                    onFocus,
+                    onKeyDown,
+                    onBlur,
+                    'aria-activedescendant': focused ? focusedOptionId() : undefined
+                },
+                ptm('menu')
             );
+
+            return <ul {...menuProps}>{items}</ul>;
         };
 
         const createButton = () => {
@@ -216,8 +516,28 @@ export const SpeedDial = React.memo(
                 [`${props.showIcon}`]: (!visible && !!props.showIcon) || !props.hideIcon,
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
-            const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : hideIconVisible ? props.hideIcon : null, undefined, { props });
-            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
+            const icon = showIconVisible ? props.showIcon || <PlusIcon /> : hideIconVisible ? props.hideIcon || <MinusIcon /> : null;
+            const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, visible });
+            const buttonProps = mergeProps({
+                type: 'button',
+                style: props.buttonStyle,
+                className: classNames(props.buttonClassName, cx('button')),
+                icon: toggleIcon,
+                onClick: (e) => onClick(e),
+                disabled: props.disabled,
+                onKeyDown: onTogglerKeydown,
+                'aria-label': props['aria-label'],
+                'aria-expanded': visible,
+                'aria-haspopup': true,
+                'aria-controls': idState + '_list',
+                'aria-labelledby': props.ariaLabelledby,
+                pt: ptm('button'),
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
+            });
+            const content = <Button {...buttonProps} />;
 
             if (props.buttonTemplate) {
                 const defaultContentOptions = {
@@ -237,37 +557,40 @@ export const SpeedDial = React.memo(
 
         const createMask = () => {
             if (props.mask) {
-                const className = classNames(
-                    'p-speeddial-mask',
+                const maskProps = mergeProps(
                     {
-                        'p-speeddial-mask-visible': visible
+                        className: classNames(props.maskClassName, cx('mask', { visible })),
+                        style: props.maskStyle
                     },
-                    props.maskClassName
+                    ptm('mask')
                 );
 
-                return <div className={className} style={props.maskStyle}></div>;
+                return <div {...maskProps}></div>;
             }
 
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, SpeedDial.defaultProps);
-        const className = classNames(
-            `p-speeddial p-component p-speeddial-${props.type}`,
-            {
-                [`p-speeddial-direction-${props.direction}`]: props.type !== 'circle',
-                'p-speeddial-opened': visible,
-                'p-disabled': props.disabled
-            },
-            props.className
-        );
+        React.useEffect(() => {
+            setIdState(props.id || UniqueComponentId());
+        }, [props.id]);
+
         const button = createButton();
         const list = createList();
         const mask = createMask();
+        const rootProps = mergeProps(
+            {
+                className: classNames(props.className, cx('root', { visible })),
+                style: { ...props.style, ...sx('root') },
+                id: idState
+            },
+            SpeedDialBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
             <React.Fragment>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <div ref={elementRef} {...rootProps}>
                     {button}
                     {list}
                 </div>
@@ -278,31 +601,3 @@ export const SpeedDial = React.memo(
 );
 
 SpeedDial.displayName = 'SpeedDial';
-SpeedDial.defaultProps = {
-    __TYPE: 'SpeedDial',
-    id: null,
-    model: null,
-    visible: false,
-    style: null,
-    className: null,
-    direction: 'up',
-    transitionDelay: 30,
-    type: 'linear',
-    radius: 0,
-    mask: false,
-    disabled: false,
-    hideOnClickOutside: true,
-    buttonStyle: null,
-    buttonClassName: null,
-    buttonTemplate: null,
-    'aria-label': null,
-    maskStyle: null,
-    maskClassName: null,
-    showIcon: 'pi pi-plus',
-    hideIcon: null,
-    rotateAnimation: true,
-    onVisibleChange: null,
-    onClick: null,
-    onShow: null,
-    onHide: null
-};

@@ -1,54 +1,62 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
 
 export const Messages = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = MessagesBase.getProps(inProps, context);
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
-
-        const show = (value) => {
-            if (value) {
-                let messages = assignIdentifiers(value, true);
-
-                if (Array.isArray(value)) {
-                    for (let i = 0; i < value.length; i++) {
-                        value[i].id = messageIdx++;
-                        messages = [...messagesState, ...value];
-                    }
-                } else {
-                    value.id = messageIdx++;
-                    messages = messagesState ? [...messagesState, value] : [value];
-                }
-
-                setMessagesState(messages);
+        const metaData = {
+            props,
+            ...props.__parentMetadata,
+            state: {
+                messages: messagesState
             }
         };
 
-        const assignIdentifiers = (value, copy) => {
+        const ptCallbacks = MessagesBase.setMetaData(metaData);
+
+        useHandleStyle(MessagesBase.css.styles, ptCallbacks.isUnstyled, { name: 'messages' });
+
+        const show = (messageInfo) => {
+            if (messageInfo) {
+                setMessagesState((prev) => assignIdentifiers(prev, messageInfo, true));
+            }
+        };
+
+        const assignIdentifiers = (currentState, messageInfo, copy) => {
             let messages;
 
-            if (Array.isArray(value)) {
-                for (let i = 0; i < value.length; i++) {
-                    value[i].id = messageIdx++;
+            if (Array.isArray(messageInfo)) {
+                const multipleMessages = messageInfo.reduce((acc, message) => {
+                    acc.push({ _pId: messageIdx++, message });
 
-                    if (copy) {
-                        messages = [...messagesState, ...value];
-                    } else {
-                        messages = value;
-                    }
-                }
-            } else {
-                value.id = messageIdx++;
+                    return acc;
+                }, []);
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, value] : [value];
+                    messages = currentState ? [...currentState, ...multipleMessages] : multipleMessages;
                 } else {
-                    messages = [value];
+                    messages = multipleMessages;
+                }
+            } else {
+                const message = { _pId: messageIdx++, message: messageInfo };
+
+                if (copy) {
+                    messages = currentState ? [...currentState, message] : [message];
+                } else {
+                    messages = [message];
                 }
             }
 
@@ -59,37 +67,62 @@ export const Messages = React.memo(
             setMessagesState([]);
         };
 
-        const replace = (value) => {
-            const replaced = assignIdentifiers(value, false);
-
-            setMessagesState(replaced);
+        const replace = (messageInfo) => {
+            setMessagesState((prev) => assignIdentifiers(prev, messageInfo, false));
         };
 
-        const onClose = (message) => {
-            setMessagesState(messagesState.filter((msg) => msg.id !== message.id));
-            props.onRemove && props.onRemove(message);
+        const remove = (messageInfo) => {
+            // allow removal by ID or by message equality
+            const removeMessage = messageInfo._pId ? messageInfo.message : messageInfo;
+
+            setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
+
+            props.onRemove && props.onRemove(removeMessage.message || removeMessage);
+        };
+
+        const onClose = (messageInfo) => {
+            remove(messageInfo);
         };
 
         React.useImperativeHandle(ref, () => ({
             props,
             show,
             replace,
+            remove,
             clear,
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                className: props.className,
+                style: props.style
+            },
+            MessagesBase.getOtherProps(props),
+            ptCallbacks.ptm('root')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: ptCallbacks.cx('uimessage.transition'),
+                unmountOnExit: true,
+                timeout: { enter: 300, exit: 300 },
+                options: props.transitionOptions
+            },
+            ptCallbacks.ptm('transition')
+        );
 
         return (
-            <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
+            <div ref={elementRef} {...rootProps}>
                 <TransitionGroup>
                     {messagesState &&
-                        messagesState.map((message) => {
+                        messagesState.map((message, index) => {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                                <CSSTransition nodeRef={messageRef} key={message._pId} {...transitionProps}>
+                                    <UIMessage hostName="Messages" ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptCallbacks={ptCallbacks} metaData={metaData} index={index} />
                                 </CSSTransition>
                             );
                         })}
@@ -100,12 +133,3 @@ export const Messages = React.memo(
 );
 
 Messages.displayName = 'Messages';
-Messages.defaultProps = {
-    __TYPE: 'Messages',
-    id: null,
-    className: null,
-    style: null,
-    transitionOptions: null,
-    onRemove: null,
-    onClick: null
-};

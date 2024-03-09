@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     flatten = require('gulp-flatten');
 
+/** @deprecated */
 gulp.task('build-css', function () {
     return gulp
         .src([process.env.INPUT_DIR + 'common/Common.css', process.env.INPUT_DIR + '**/*.css'])
@@ -16,25 +17,20 @@ gulp.task('build-css', function () {
         .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources'));
 });
 
+gulp.task('build-primereactcss', function () {
+    return gulp.src(['./styles/primereact.css']).pipe(concat('primereact.css')).pipe(gulp.dest('dist/resources')).pipe(rename('primereact.min.css')).pipe(gulp.dest('dist/resources'));
+});
+
 gulp.task('build-themes', function () {
     return (
         gulp
-            .src([
-                'public/themes/**/*',
-                '!public/themes/soho-*',
-                '!public/themes/soho-*/**/*',
-                '!public/themes/viva-*',
-                '!public/themes/viva-*/**/*',
-                '!public/themes/mira',
-                '!public/themes/mira/**/*',
-                '!public/themes/nano',
-                '!public/themes/nano/**/*'
-            ])
+            .src(['public/themes/**/*'])
             //.pipe(uglifycss({"uglyComments": true}))
             .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources/themes'))
     );
 });
 
+/** @deprecated */
 gulp.task('images', function () {
     return gulp
         .src([process.env.INPUT_DIR + '**/images/*.png', process.env.INPUT_DIR + '**/images/*.gif'])
@@ -47,18 +43,10 @@ gulp.task('build-exports', function () {
 });
 
 gulp.task('build-meta', function () {
-    return gulp
-        .src(['README.md', 'LICENSE.md', 'package-build.json'])
-        .pipe(
-            rename(function (path) {
-                if (path.basename === 'package-build') {
-                    path.basename = path.basename.replace('package-build', 'package');
-                }
-            })
-        )
-        .pipe(gulp.dest(process.env.OUTPUT_DIR));
+    return gulp.src(['README.md', 'LICENSE.md']).pipe(gulp.dest(process.env.OUTPUT_DIR));
 });
 
+/** @deprecated */
 gulp.task('copy-css', function () {
     return gulp
         .src([process.env.INPUT_DIR + '**/Common.css', process.env.INPUT_DIR + '**/*.css'])
@@ -88,5 +76,5 @@ gulp.task('copy-package.json', function () {
 });
 
 //Building project with run sequence
-gulp.task('copy-files', gulp.series('copy-css', 'copy-d.ts', 'copy-package.json'));
-gulp.task('build-resources', gulp.series('build-css', 'images', 'build-themes', 'build-meta', 'copy-files'));
+gulp.task('copy-files', gulp.series('copy-d.ts', 'copy-package.json'));
+gulp.task('build-resources', gulp.series('build-primereactcss', 'images', 'build-themes', 'build-meta', 'copy-files'));

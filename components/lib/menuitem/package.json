@@ -1,3 +1,4 @@
 {
-    "types": "./menuitem.d.ts"
+    "types": "./menuitem.d.ts",
+    "sideEffects": false
 }

@@ -1,7 +1,6 @@
-import React from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { ProgressSpinner } from '../../lib/progressspinner/ProgressSpinner';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ProgressSpinner } from '@/components/lib/progressspinner/ProgressSpinner';
 
 export function BasicDoc(props) {
     const code = {
@@ -12,10 +11,9 @@ export function BasicDoc(props) {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const BasicDoc = () => {
-
+export default function BasicDemo() {
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <ProgressSpinner />
         </div>
     );
@@ -25,10 +23,9 @@ export const BasicDoc = () => {
 import React from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
-export const BasicDoc = () => {
-
+export default function BasicDemo() {
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <ProgressSpinner />
         </div>
     );
@@ -39,9 +36,9 @@ export const BasicDoc = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Basic Demo Content.</p>
+                <p>An infinite spin animation is displayed by default.</p>
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <ProgressSpinner />
             </div>
             <DocSectionCode code={code} />

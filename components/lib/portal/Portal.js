@@ -1,14 +1,18 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { PortalBase } from './PortalBase';
 
-export const Portal = React.memo((props) => {
-    const [mountedState, setMountedState] = React.useState(props.visible && DomHandler.hasDOM());
+export const Portal = React.memo((inProps) => {
+    const props = PortalBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+
+    const [mountedState, setMountedState] = React.useState(props.visible && DomHandler.isClient());
 
     useMountEffect(() => {
-        if (DomHandler.hasDOM() && !mountedState) {
+        if (DomHandler.isClient() && !mountedState) {
             setMountedState(true);
             props.onMounted && props.onMounted();
         }
@@ -25,7 +29,15 @@ export const Portal = React.memo((props) => {
     const element = props.element || props.children;
 
     if (element && mountedState) {
-        const appendTo = props.appendTo || PrimeReact.appendTo || document.body;
+        let appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
+
+        if (ObjectUtils.isFunction(appendTo)) {
+            appendTo = appendTo();
+        }
+
+        if (!appendTo) {
+            appendTo = document.body;
+        }
 
         return appendTo === 'self' ? element : ReactDOM.createPortal(element, appendTo);
     }
@@ -34,11 +46,3 @@ export const Portal = React.memo((props) => {
 });
 
 Portal.displayName = 'Portal';
-Portal.defaultProps = {
-    __TYPE: 'Portal',
-    element: null,
-    appendTo: null,
-    visible: false,
-    onMounted: null,
-    onUnmounted: null
-};

@@ -23,23 +23,13 @@ export const useStorage = (initialValue, key, storage = 'local') => {
         listener: (event) => {
             const area = storage === 'local' ? window.localStorage : window.sessionStorage;
             if (event.storageArea === area && event.key === key) {
-                setStoredValue(event.newValue || undefined);
+                const newValue = event.newValue ? JSON.parse(event.newValue) : undefined;
+                setStoredValue(newValue);
             }
         }
     });
 
-    const [storedValue, setStoredValue] = React.useState(() => {
-        if (!storageAvailable) {
-            return initialValue;
-        }
-        try {
-            const item = storage === 'local' ? window.localStorage.getItem(key) : window.sessionStorage.getItem(key);
-            return item ? JSON.parse(item) : initialValue;
-        } catch (error) {
-            // If error also return initialValue
-            return initialValue;
-        }
-    });
+    const [storedValue, setStoredValue] = React.useState(initialValue);
 
     const setValue = (value) => {
         try {
@@ -56,6 +46,17 @@ export const useStorage = (initialValue, key, storage = 'local') => {
     };
 
     React.useEffect(() => {
+        if (!storageAvailable) {
+            setStoredValue(initialValue);
+        }
+        try {
+            const item = storage === 'local' ? window.localStorage.getItem(key) : window.sessionStorage.getItem(key);
+            setStoredValue(item ? JSON.parse(item) : initialValue);
+        } catch (error) {
+            // If error also return initialValue
+            setStoredValue(initialValue);
+        }
+
         bindWindowStorageListener();
         return () => unbindWindowStorageListener();
     }, []);

@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
-import { Skeleton } from '../../lib/skeleton/Skeleton';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Skeleton } from '@/components/lib/skeleton/Skeleton';
+import { classNames } from '@/components/lib/utils/Utils';
+import { VirtualScroller } from '@/components/lib/virtualscroller/VirtualScroller';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export function LoadingDoc(props) {
-    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
 
-    const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
-            odd: options.odd
+    const itemTemplate = (item, options) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
         return (
-            <div className={className} style={style}>
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
                 {item}
             </div>
         );
     };
 
-    const basicLoadingTemplate = (options) => {
-        const className = classNames('scroll-item p-2', {
+    const loadingTemplate = (options) => {
+        const className = classNames('flex align-items-center p-2', {
             odd: options.odd
         });
 
@@ -35,30 +35,33 @@ export function LoadingDoc(props) {
 
     const code = {
         basic: `
-<VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
-<VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+<VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+<VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
         `,
         javascript: `
-import { useState } 'react';
+import React, { useState } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
 
-export default function LoadingDoc() {
-    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
+export default function LoadingDemo() {
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
-    const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+    const itemTemplate = (item, options) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
-        return <div className={className} style={style}>{item}</div>;
-    }
+        return (
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+                {item}
+            </div>
+        );
+    };
 
-    const basicLoadingTemplate = (options) => {
-        const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+    const loadingTemplate = (options) => {
+        const className = classNames('flex align-items-center p-2', {
+            odd: options.odd
         });
 
         return (
@@ -66,37 +69,46 @@ export default function LoadingDoc() {
                 <Skeleton width={options.even ? '60%' : '50%'} height="1.3rem" />
             </div>
         );
-    }
+    };
 
     return ( 
-        <div>
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+        <div className="card flex flex-wrap justify-content-center gap-5">
+            <div>
+                <span className="font-bold block mb-2">Modal</span>
+                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+            </div>
+            <div>
+                <span className="font-bold block mb-2">Skeleton</span>
+                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+            </div>
         </div>
     );
 }
         `,
         typescript: `
-import { useState } 'react';
-import { VirtualScroller } from 'primereact/virtualscroller';
+import React, { useState } from 'react';
+import { VirtualScroller, VirtualScrollerTemplateOptions } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import { classNames } from 'primereact/utils';
 
-export default function LoadingDoc() {
-    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
+export default function LoadingDemo() {
+    const [items] = useState<string[]>(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
 
-    const basicItemTemplate = (item, options) => {
-        const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+    const itemTemplate = (item: string, options: VirtualScrollerTemplateOptions) => {
+        const className = classNames('flex align-items-center p-2', {
+            'surface-hover': options.odd
         });
-        const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
-        return <div className={className} style={style}>{item}</div>;
-    }
+        return (
+            <div className={className} style={{ height: options.props.itemSize + 'px' }}>
+                {item}
+            </div>
+        );
+    };
 
-    const basicLoadingTemplate = (options) => {
-        const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+    const loadingTemplate = (options: VirtualScrollerTemplateOptions) => {
+        const className = classNames('flex align-items-center p-2', {
+            odd: options.odd
         });
 
         return (
@@ -104,14 +116,20 @@ export default function LoadingDoc() {
                 <Skeleton width={options.even ? '60%' : '50%'} height="1.3rem" />
             </div>
         );
-    }
+    };
 
-    return (
-        <div>
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250}/>
-            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+    return ( 
+        <div className="card flex flex-wrap justify-content-center gap-5">
+            <div>
+                <span className="font-bold block mb-2">Modal</span>
+                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+            </div>
+            <div>
+                <span className="font-bold block mb-2">Skeleton</span>
+                <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
+            </div>
         </div>
-    )
+    );
 }
         `
     };
@@ -120,15 +138,17 @@ export default function LoadingDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    VirtualScroller has a special loader. It can be activated with the <i>showLoader</i> property. In addition, <i>loadingTemplate</i> can be used to add custom loaders to item elements.
+                    Busy state is enabled by adding <i>showLoader</i> property which blocks the UI with a modal by default. Alternatively, <i>loadingTemplate</i> can be used to customize items e.g. with <Link href="/skeleton">Skeleton</Link>.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center flex-wrap">
-                <div className="flex flex-column mr-3 mt-3">
-                    <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} />
+            <div className="card flex flex-wrap justify-content-center gap-5">
+                <div>
+                    <span className="font-bold block mb-2">Modal</span>
+                    <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
                 </div>
-                <div className="flex flex-column mr-3 mt-3">
-                    <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+                <div>
+                    <span className="font-bold block mb-2">Skeleton</span>
+                    <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} className="border-1 surface-border border-round" style={{ width: '200px', height: '200px' }} />
                 </div>
             </div>
             <DocSectionCode code={code} />

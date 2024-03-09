@@ -1,6 +1,6 @@
 name: Bug report
-description: Create a report to help PrimeReact improve
-title: 'Component: Title'
+description: Create a report to help PrimeReact improve.
+title: 'Replace_With_Component_Name: Brief_Bug_Description'
 labels: ['Status: Needs Triage']
 body:
     - type: markdown
@@ -20,9 +20,9 @@ body:
       id: reproducer
       attributes:
           label: Reproducer
-          placeholder: https://codesandbox.io/s/primereact-test-forked-bbns8k
+          placeholder: https://stackblitz.com/edit/vitejs-vite-daiajq
           description: |
-              Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) or [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-2nu9uq?file=package.json,src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
+              Please fork [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
       validations:
           required: false
     - type: input

@@ -1,19 +1,23 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { BasicDoc } from '../../components/doc/knob/basicdoc';
-import { ReadOnlyDoc } from '../../components/doc/knob/readonlydoc';
-import { DisabledDoc } from '../../components/doc/knob/disableddoc';
-import { MinMaxDoc } from '../../components/doc/knob/minmaxdoc';
-import { StepDoc } from '../../components/doc/knob/stepdoc';
-import { TemplateDoc } from '../../components/doc/knob/templatedoc';
-import { ImportDoc } from '../../components/doc/knob/importdoc';
-import { StrokeDoc } from '../../components/doc/knob/strokedoc';
-import { SizeDoc } from '../../components/doc/knob/sizedoc';
-import { ColorDoc } from '../../components/doc/knob/colordoc';
-import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
-import { ApiDoc } from '../../components/doc/knob/apidoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/knob/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/knob/basicdoc';
+import { ColorDoc } from '@/components/doc/knob/colordoc';
+import { DisabledDoc } from '@/components/doc/knob/disableddoc';
+import { FormikDoc } from '@/components/doc/knob/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/knob/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/knob/importdoc';
+import { MinMaxDoc } from '@/components/doc/knob/minmaxdoc';
+import { PTDoc } from '@/components/doc/knob/pt/ptdoc';
+import { Wireframe } from '@/components/doc/knob/pt/wireframe';
+import { ReactiveDoc } from '@/components/doc/knob/reactivedoc';
+import { ReadOnlyDoc } from '@/components/doc/knob/readonlydoc';
+import { SizeDoc } from '@/components/doc/knob/sizedoc';
+import { StepDoc } from '@/components/doc/knob/stepdoc';
+import { StrokeDoc } from '@/components/doc/knob/strokedoc';
+import { TemplateDoc } from '@/components/doc/knob/templatedoc';
+import { StyledDoc } from '@/components/doc/knob/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/knob/theming/tailwinddoc';
 
 const KnobDemo = () => {
     const docs = [
@@ -26,16 +30,6 @@ const KnobDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'readonly',
-            label: 'Readonly',
-            component: ReadOnlyDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'minmax',
@@ -68,108 +62,83 @@ const KnobDemo = () => {
             component: ColorDoc
         },
         {
-            id: 'reactive',
-            label: 'Reactive Knob',
+            id: 'reactivec',
+            label: 'Reactive',
             component: ReactiveDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'readonly',
+            label: 'ReadOnly',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.knob.options',
+            label: 'Knob PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Knob Component</title>
-                <meta name="description" content="Knob is a form component to define number inputs with a dial." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Knob</h1>
-                    <p>Knob is a form component to define number inputs with a dial.</p>
-                </div>
-
-                <DocActions github="konb/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-
-            {/* <div className="content-section implementation">
-                <div className="card">
-                    <div className="grid formgrid text-center">
-                        <div className="field col-12 md:col-4">
-                            <h5>Basic</h5>
-                            <Knob value={value1} onChange={(e) => setValue1(e.value)} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5>Readonly</h5>
-                            <Knob value={value2} readOnly />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5>Disabled</h5>
-                            <Knob value={value3} disabled />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5 className="mt-3">Min/Max</h5>
-                            <Knob value={value4} min={-50} max={50} onChange={(e) => setValue4(e.value)} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5 className="mt-3">Step</h5>
-                            <Knob value={value5} step={10} onChange={(e) => setValue5(e.value)} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5 className="mt-3">Template</h5>
-                            <Knob value={value6} valueTemplate={'{value}%'} onChange={(e) => setValue6(e.value)} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5 className="mt-3">Stroke</h5>
-                            <Knob value={value7} strokeWidth={5} onChange={(e) => setValue7(e.value)} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5 className="mt-3">Size</h5>
-                            <Knob value={value8} size={200} onChange={(e) => setValue8(e.value)} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <h5 className="mt-3">Color</h5>
-                            <Knob value={value9} valueColor={'SlateGray'} rangeColor={'MediumTurquoise'} onChange={(e) => setValue9(e.value)} />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="card text-center">
-                    <h5>Reactive Knob</h5>
-                    <Knob value={value10} size={150} readOnly />
-                    <Button label="Increment" onClick={increment} className="mr-2" disabled={disabledIncrementBtn} />
-                    <Button label="Decrement" onClick={decrement} disabled={disabledDecrementBtn} />
-                </div>
-            </div>
-
-            <KnobDoc /> */}
-        </div>
-    );
+    return <DocComponent title="React Knob Component" header="Knob" description="Knob is a form component to define number inputs with a dial." componentDocs={docs} apiDocs={['Knob']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default KnobDemo;

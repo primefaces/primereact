@@ -1,13 +1,36 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { PrimeReactContext, localeOption } from '../api/Api';
+import { ariaLabel } from '../api/Locale';
 import { Dropdown } from '../dropdown/Dropdown';
+import { useMergeProps } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { RowsPerPageDropdownBase } from './PaginatorBase';
 
-export const RowsPerPageDropdown = React.memo((props) => {
+export const RowsPerPageDropdown = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
+    const context = React.useContext(PrimeReactContext);
+    const props = RowsPerPageDropdownBase.getProps(inProps, context);
+
     const hasOptions = props.options && props.options.length > 0;
     const options = hasOptions ? props.options.map((opt) => ({ label: String(opt), value: opt })) : [];
-    const ariaLabel = localeOption('choose');
-    const element = hasOptions ? <Dropdown value={props.value} options={options} onChange={props.onChange} appendTo={props.appendTo} disabled={props.disabled} placeholder={ariaLabel} aria-label={ariaLabel} /> : null;
+    const placeholderValue = localeOption('choose');
+    const ariaLabelValue = ariaLabel('jumpToPageDropdownLabel');
+    const element = hasOptions ? (
+        <>
+            <Dropdown
+                value={props.value}
+                options={options}
+                onChange={props.onChange}
+                appendTo={props.appendTo}
+                disabled={props.disabled}
+                placeholder={placeholderValue}
+                aria-label={ariaLabelValue}
+                pt={props.ptm('RPPDropdown')}
+                unstyled={props.unstyled}
+                __parentMetadata={{ parent: props.metaData }}
+            />
+        </>
+    ) : null;
 
     if (props.template) {
         const defaultOptions = {
@@ -19,6 +42,7 @@ export const RowsPerPageDropdown = React.memo((props) => {
             totalPages: props.pageCount,
             totalRecords: props.totalRecords,
             disabled: props.disabled,
+            ariaLabel: ariaLabelValue,
             element,
             props
         };
@@ -30,15 +54,3 @@ export const RowsPerPageDropdown = React.memo((props) => {
 });
 
 RowsPerPageDropdown.displayName = 'RowsPerPageDropdown';
-RowsPerPageDropdown.defaultProps = {
-    __TYPE: 'RowsPerPageDropdown',
-    options: null,
-    value: null,
-    page: null,
-    pageCount: null,
-    totalRecords: 0,
-    appendTo: null,
-    onChange: null,
-    template: null,
-    disabled: false
-};

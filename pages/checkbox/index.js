@@ -1,14 +1,18 @@
-import Head from 'next/head';
-import React from 'react';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
-import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
-import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
-import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
-import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
-import { ImportDoc } from '../../components/doc/checkbox/importdoc';
-import { ValidationDoc } from '../../components/doc/checkbox/validationdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { AccessibilityDoc } from '@/components/doc/checkbox/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/checkbox/basicdoc';
+import { DisabledDoc } from '@/components/doc/checkbox/disableddoc';
+import { DynamicDoc } from '@/components/doc/checkbox/dynamicdoc';
+import { FormikDoc } from '@/components/doc/checkbox/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/checkbox/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/checkbox/groupdoc';
+import { ImportDoc } from '@/components/doc/checkbox/importdoc';
+import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
+import { PTDoc } from '@/components/doc/checkbox/pt/ptdoc';
+import { Wireframe } from '@/components/doc/checkbox/pt/wireframe';
+import { StyledDoc } from '@/components/doc/checkbox/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/checkbox/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CheckboxDemo = () => {
     const docs = [
@@ -33,60 +37,79 @@ const CheckboxDemo = () => {
             component: DynamicDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            component: ValidationDoc
-        },
-        {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc,
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.checkbox.options',
+            label: 'Checkbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
                 {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
                 }
             ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Checkbox Component</title>
-                <meta name="description" content="Checkbox is an extension to standard checkbox element with theming." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Checkbox</h1>
-                    <p>Checkbox is an extension to standard checkbox element with theming.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default CheckboxDemo;

@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { useEventListener } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useEventListener, useMergeProps } from '../hooks/Hooks';
+import { KnobBase } from './KnobBase';
 
 const radius = 40;
 const midX = 50;
@@ -9,7 +11,16 @@ const minRadians = (4 * Math.PI) / 3;
 const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
+        const context = React.useContext(PrimeReactContext);
+        const props = KnobBase.getProps(inProps, context);
+
+        const { ptm, cx, isUnstyled } = KnobBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(KnobBase.css.styles, isUnstyled, { name: 'knob' });
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
 
@@ -116,6 +127,20 @@ export const Knob = React.memo(
             }
         };
 
+        const updateModelValue = (newValue) => {
+            let currentValue;
+
+            if (newValue > props.max) currentValue = props.max;
+            else if (newValue < props.min) currentValue = props.min;
+            else currentValue = newValue;
+
+            if (props.onChange) {
+                props.onChange({
+                    value: currentValue
+                });
+            }
+        };
+
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
                 updateValue(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
@@ -143,30 +168,126 @@ export const Knob = React.memo(
             unbindWindowTouchEndListener();
         };
 
+        const onKeyDown = (event) => {
+            if (!props.disabled && !props.readonly) {
+                switch (event.code) {
+                    case 'ArrowRight':
+                    case 'ArrowUp':
+                        event.preventDefault();
+                        updateModelValue(props.value + 1);
+                        break;
+
+                    case 'ArrowLeft':
+
+                    case 'ArrowDown': {
+                        event.preventDefault();
+                        updateModelValue(props.value - 1);
+                        break;
+                    }
+
+                    case 'Home': {
+                        event.preventDefault();
+                        updateModelValue(props.min);
+                        break;
+                    }
+
+                    case 'End': {
+                        event.preventDefault();
+                        updateModelValue(props.max);
+                        break;
+                    }
+
+                    case 'PageUp': {
+                        event.preventDefault();
+                        updateModelValue(props.value + 10);
+                        break;
+                    }
+
+                    case 'PageDown': {
+                        event.preventDefault();
+                        updateModelValue(props.value - 10);
+                        break;
+                    }
+                }
+            }
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Knob.defaultProps);
-        const className = classNames(
-            'p-knob p-component',
+        const labelProps = mergeProps(
             {
-                'p-disabled': props.disabled
+                x: 50,
+                y: 57,
+                textAnchor: 'middle',
+                fill: props.textColor,
+                className: cx('label'),
+                name: props.name
             },
-            props.className
+            ptm('label')
         );
-        const text = props.showValue && (
-            <text x={50} y={57} textAnchor={'middle'} fill={props.textColor} className={'p-knob-text'} name={props.name}>
-                {valueToDisplay()}
-            </text>
+
+        const text = props.showValue && <text {...labelProps}>{valueToDisplay()}</text>;
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root'),
+                style: props.style
+            },
+            ptm('root')
+        );
+
+        const svgProps = mergeProps(
+            {
+                viewBox: '0 0 100 100',
+                width: props.size,
+                height: props.size,
+                'aria-valuemin': props.min,
+                'aria-valuemax': props.max,
+                'aria-valuenow': props.value,
+                'aria-labelledby': props.ariaLabelledby,
+                'aria-label': props.ariaLabel,
+                role: 'slider',
+                tabIndex: props.readonly || props.disabled ? -1 : props.tabIndex,
+                onClick: (e) => onClick(e),
+                onMouseDown: (e) => onMouseDown(e),
+                onMouseUp: (e) => onMouseUp(e),
+                onTouchStart: (e) => onTouchStart(e),
+                onTouchEnd: (e) => onTouchEnd(e),
+                onKeyDown: (e) => onKeyDown(e)
+            },
+            ptm('svg')
+        );
+
+        const rangeProps = mergeProps(
+            {
+                d: rangePath,
+                strokeWidth: props.strokeWidth,
+                stroke: props.rangeColor,
+                className: cx('range')
+            },
+            ptm('range')
+        );
+
+        const valueProps = mergeProps(
+            {
+                d: valuePath,
+                strokeWidth: props.strokeWidth,
+                stroke: props.valueColor,
+                className: cx('value')
+            },
+            ptm('value')
         );
 
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-                <svg viewBox="0 0 100 100" width={props.size} height={props.size} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-                    <path d={rangePath} strokeWidth={props.strokeWidth} stroke={props.rangeColor} className={'p-knob-range'}></path>
-                    <path d={valuePath} strokeWidth={props.strokeWidth} stroke={props.valueColor} className={'p-knob-value'}></path>
+            <div {...rootProps}>
+                <svg {...svgProps}>
+                    <path {...rangeProps}></path>
+                    <path {...valueProps}></path>
                     {text}
                 </svg>
             </div>
@@ -175,24 +296,3 @@ export const Knob = React.memo(
 );
 
 Knob.displayName = 'Knob';
-Knob.defaultProps = {
-    __TYPE: 'Knob',
-    id: null,
-    style: null,
-    className: null,
-    value: null,
-    size: 100,
-    disabled: false,
-    readOnly: false,
-    showValue: true,
-    step: 1,
-    min: 0,
-    max: 100,
-    strokeWidth: 14,
-    name: null,
-    valueColor: 'var(--primary-color, Black)',
-    rangeColor: 'var(--surface-border, LightGray)',
-    textColor: 'var(--text-color-secondary, Black)',
-    valueTemplate: '{value}',
-    onChange: null
-};

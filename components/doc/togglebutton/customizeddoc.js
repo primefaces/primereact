@@ -1,38 +1,43 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ToggleButton } from '@/components/lib/togglebutton/ToggleButton';
 import { useState } from 'react';
-import { ToggleButton } from '../../lib/togglebutton/ToggleButton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function CustomizedDoc(props) {
     const [checked, setChecked] = useState(false);
 
     const code = {
         basic: `
-<ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked} onChange={(e) => setChecked(e.value)} />
-
-
+<ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" 
+    checked={checked} onChange={(e) => setChecked(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { ToggleButton } from 'primereact/togglebutton';
 
-export default function BasicDemo() {
+export default function CustomizedDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" 
+                checked={checked} onChange={(e) => setChecked(e.value)} className="w-9rem" />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { ToggleButton, ToggleButtonChangeParams } from 'primereact/togglebutton';
+import React, { useState } from "react";
+import { ToggleButton, ToggleButtonChangeEvent } from 'primereact/togglebutton';
 
-export default function BasicDemo() {
+export default function CustomizedDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked} onChange={(e :  ToggleButtonChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" 
+                checked={checked} onChange={(e:  ToggleButtonChangeEvent) => setChecked(e.value)} className="w-9rem" />
+        </div>
     );
     `
     };
@@ -45,7 +50,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked} onChange={(e) => setChecked(e.value)} />
+                <ToggleButton onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" checked={checked} onChange={(e) => setChecked(e.value)} className="w-9rem" />
             </div>
             <DocSectionCode code={code} />
         </>

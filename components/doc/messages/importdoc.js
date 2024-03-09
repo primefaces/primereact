@@ -1,18 +1,17 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function ImportDoc(props) {
     const code = {
         basic: `
 import { Messages } from 'primereact/messages';
-import { Message } from 'primereact/message';
         `
     };
 
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <DocSectionCode code={code} hideToggleCode hideCodeSandbox />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

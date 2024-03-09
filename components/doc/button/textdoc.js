@@ -1,50 +1,51 @@
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 
-export function TextButtonsDoc(props) {
+export function TextDoc(props) {
     const code = {
         basic: `
-<Button label="Primary" className="p-button-text" />
-<Button label="Secondary" className="p-button-secondary p-button-text" />
-<Button label="Success" className="p-button-success p-button-text" />
-<Button label="Info" className="p-button-info p-button-text" />
-<Button label="Warning" className="p-button-warning p-button-text" />
-<Button label="Help" className="p-button-help p-button-text" />
-<Button label="Danger" className="p-button-danger p-button-text" />
-<Button label="Plain" className="p-button-text p-button-plain" />
+<Button label="Primary" text />
+<Button label="Secondary" severity="secondary" text />
+<Button label="Success" severity="success" text />
+<Button label="Info" severity="info" text />
+<Button label="Warning" severity="warning" text />
+<Button label="Help" severity="help" text />
+<Button label="Danger" severity="danger" text />
         `,
         javascript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function TextButtonsDoc() {
-
+export default function TextDemo() {
     return (
-        <Button label="Primary" className="p-button-text" />
-        <Button label="Secondary" className="p-button-secondary p-button-text" />
-        <Button label="Success" className="p-button-success p-button-text" />
-        <Button label="Info" className="p-button-info p-button-text" />
-        <Button label="Warning" className="p-button-warning p-button-text" />
-        <Button label="Help" className="p-button-help p-button-text" />
-        <Button label="Danger" className="p-button-danger p-button-text" />
-        <Button label="Plain" className="p-button-text p-button-plain" />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button label="Primary" text />
+            <Button label="Secondary" severity="secondary" text />
+            <Button label="Success" severity="success" text />
+            <Button label="Info" severity="info" text />
+            <Button label="Warning" severity="warning" text />
+            <Button label="Help" severity="help" text />
+            <Button label="Danger" severity="danger" text />
+        </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { Button } from 'primereact/button';
 
-export default function TextButtonsDoc() {
-
+export default function TextDemo() {
     return (
-        <Button label="Primary" className="p-button-text" />
-        <Button label="Secondary" className="p-button-secondary p-button-text" />
-        <Button label="Success" className="p-button-success p-button-text" />
-        <Button label="Info" className="p-button-info p-button-text" />
-        <Button label="Warning" className="p-button-warning p-button-text" />
-        <Button label="Help" className="p-button-help p-button-text" />
-        <Button label="Danger" className="p-button-danger p-button-text" />
-        <Button label="Plain" className="p-button-text p-button-plain" />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button label="Primary" text />
+            <Button label="Secondary" severity="secondary" text />
+            <Button label="Success" severity="success" text />
+            <Button label="Info" severity="info" text />
+            <Button label="Warning" severity="warning" text />
+            <Button label="Help" severity="help" text />
+            <Button label="Danger" severity="danger" text />
+        </div>
     )
 }
         `
@@ -53,17 +54,17 @@ export default function TextButtonsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Text Button</p>
+                <p>Text buttons are displayed as textual elements.</p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
-                <Button label="Primary" className="p-button-text" />
-                <Button label="Secondary" className="p-button-secondary p-button-text" />
-                <Button label="Success" className="p-button-success p-button-text" />
-                <Button label="Info" className="p-button-info p-button-text" />
-                <Button label="Warning" className="p-button-warning p-button-text" />
-                <Button label="Help" className="p-button-help p-button-text" />
-                <Button label="Danger" className="p-button-danger p-button-text" />
-                <Button label="Plain" className="p-button-text p-button-plain" />
+            <div className="card flex flex-wrap justify-content-center gap-3">
+                <Button label="Primary" text />
+                <Button label="Secondary" severity="secondary" text />
+                <Button label="Success" severity="success" text />
+                <Button label="Info" severity="info" text />
+                <Button label="Warning" severity="warning" text />
+                <Button label="Help" severity="help" text />
+                <Button label="Danger" severity="danger" text />
+                <Button label="Plain" plain text />
             </div>
             <DocSectionCode code={code} />
         </>
