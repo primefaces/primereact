@@ -116,13 +116,13 @@ const DocApiTable = (props) => {
                                                             );
                                                         })
                                                     ) : k === 'default' ? (
-                                                        <div className={classNames('doc-option-default', { 'doc-option-dark': appContentContext.darkTheme, 'doc-option-light': !appContentContext.darkTheme })}>
+                                                        <div className={classNames('doc-option-default', { 'doc-option-dark': appContentContext.darkMode, 'doc-option-light': !appContentContext.darkMode })}>
                                                             {ObjectUtils.isEmpty(v) ? 'null' : createContent(v, k === 'name', d['deprecated'])}
                                                         </div>
                                                     ) : k === 'type' ? (
                                                         <span className="doc-option-type">{createContent(v, k === 'name', d['deprecated'])}</span>
                                                     ) : k === 'returnType' ? (
-                                                        <div className={classNames('doc-option-returnType', { 'doc-option-dark': appContentContext.darkTheme, 'doc-option-light': !appContentContext.darkTheme })}>
+                                                        <div className={classNames('doc-option-returnType', { 'doc-option-dark': appContentContext.darkMode, 'doc-option-light': !appContentContext.darkMode })}>
                                                             {createContent(v, k === 'name', d['deprecated'])}
                                                         </div>
                                                     ) : k === 'description' || k === 'values' ? (
