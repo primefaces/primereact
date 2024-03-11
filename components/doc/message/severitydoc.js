@@ -9,6 +9,8 @@ export function SeverityDoc(props) {
 <Message severity="success" text="Success Message" />
 <Message severity="warn" text="Warning Message" />
 <Message severity="error" text="Error Message" />
+<Message severity="secondary" text="Secondary Message" />
+<Message severity="contrast" text="Contrast Message" />
         `,
         javascript: `
 import React from 'react'; 
@@ -21,6 +23,8 @@ export default function SeverityDemo() {
             <Message severity="info" text="Info Message" />
             <Message severity="warn" text="Warning Message" />
             <Message severity="error" text="Error Message" />
+            <Message severity="secondary" text="Secondary Message" />
+            <Message severity="contrast" text="Contrast Message" />
         </div>
     )
 }
@@ -36,6 +40,8 @@ export default function SeverityDemo() {
             <Message severity="info" text="Info Message" />
             <Message severity="warn" text="Warning Message" />
             <Message severity="error" text="Error Message" />
+            <Message severity="secondary" text="Secondary Message" />
+            <Message severity="contrast" text="Contrast Message" />
         </div>
     )
 }
@@ -54,6 +60,8 @@ export default function SeverityDemo() {
                 <Message severity="info" text="Info Message" />
                 <Message severity="warn" text="Warning Message" />
                 <Message severity="error" text="Error Message" />
+                <Message severity="secondary" text="Secondary Message" />
+                <Message severity="contrast" text="Contrast Message" />
             </div>
             <DocSectionCode code={code} />
         </>

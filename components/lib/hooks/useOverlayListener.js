@@ -6,7 +6,7 @@ import { useOverlayScrollListener } from './useOverlayScrollListener';
 import { useResizeListener } from './useResizeListener';
 import { useUnmountEffect } from './useUnmountEffect';
 
-export const useOverlayListener = ({ target, overlay, listener, when = true }) => {
+export const useOverlayListener = ({ target, overlay, listener, when = true, type = 'click' }) => {
     const targetRef = React.useRef(null);
     const overlayRef = React.useRef(null);
 
@@ -18,7 +18,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
      */
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         target: 'window',
-        type: 'click',
+        type: type,
         listener: (event) => {
             listener && listener(event, { type: 'outside', valid: event.which !== 3 && isOutsideClicked(event) });
         }

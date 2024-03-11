@@ -34151,7 +34151,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -34469,7 +34469,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -45026,9 +45026,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
                         },
                         {
                             "name": "size",
@@ -48297,7 +48297,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {
@@ -49060,7 +49060,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49084,7 +49084,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49096,7 +49096,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],

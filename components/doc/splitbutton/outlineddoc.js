@@ -53,6 +53,7 @@ export function OutlinedDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" outlined />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -108,6 +109,7 @@ export default function OutlinedDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" outlined />
         </div>
     )
 }
@@ -167,6 +169,7 @@ export default function OutlinedDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" outlined />
         </div>
     )
 }
@@ -187,6 +190,7 @@ export default function OutlinedDemo() {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" outlined />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" outlined />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" outlined />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" outlined />
             </div>
             <DocSectionCode code={code} />
         </>
