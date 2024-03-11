@@ -34151,7 +34151,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -34469,7 +34469,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -48297,7 +48297,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {
