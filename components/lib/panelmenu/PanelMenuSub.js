@@ -44,7 +44,7 @@ export const PanelMenuSub = React.memo(
         };
 
         const isItemActive = (processedItem) => {
-            return props.activeItemPath && props.activeItemPath.some((path) => path.key === processedItem.key);
+            return (props.activeItemPath && props.activeItemPath.some((path) => path.key === processedItem.key)) || !!processedItem.item?.expanded;
         };
 
         const isItemVisible = (processedItem) => {
