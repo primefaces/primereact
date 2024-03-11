@@ -8,7 +8,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 export const MeterGroup = (inProps) => {
     const context = useContext(PrimeReactContext);
     const props = MeterGroupBase.getProps(inProps, context);
-    const { values, min, max, orientation, labelPosition, start, end, meterRenderer, labelListRenderer } = props;
+    const { values, min, max, orientation, labelPosition, start, end, meter, labelList } = props;
 
     const mergeProps = useMergeProps();
     const { ptm, cx, isUnstyled } = MeterGroupBase.setMetaData({
@@ -29,8 +29,8 @@ export const MeterGroup = (inProps) => {
         precentages.push(Math.round((item.value / totalPercent) * 100));
     });
 
-    const calculatePercentage = (meter = 0) => {
-        const percentageOfItem = ((meter - min) / (max - min)) * 100;
+    const calculatePercentage = (meterValue = 0) => {
+        const percentageOfItem = ((meterValue - min) / (max - min)) * 100;
 
         return Math.round(Math.max(0, Math.min(100, percentageOfItem)));
     };
@@ -60,7 +60,7 @@ export const MeterGroup = (inProps) => {
                 ptm('meter')
             );
 
-            if (meterRenderer || item.meterTemplate) {
+            if (meter || item.meterTemplate) {
                 const meterTemplateProps = mergeProps(
                     {
                         className: cx('meter')
@@ -68,7 +68,7 @@ export const MeterGroup = (inProps) => {
                     ptm('meter')
                 );
 
-                return ObjectUtils.getJSXElement(item.meterTemplate || meterRenderer, { ...item, percentage: calculatedPercantage, index }, meterTemplateProps);
+                return ObjectUtils.getJSXElement(item.meterTemplate || meter, { ...item, percentage: calculatedPercantage, index }, meterTemplateProps);
             } else {
                 return <span key={index} {...meterProps} />;
             }
@@ -146,7 +146,7 @@ export const MeterGroup = (inProps) => {
         values
     };
 
-    const labelElement = ObjectUtils.getJSXElement(labelListRenderer || createLabelList, { values, totalPercent });
+    const labelElement = ObjectUtils.getJSXElement(labelList || createLabelList, { values, totalPercent });
 
     return (
         <div {...rootProps} role="meter" aria-valuemin={min} aria-valuemax={max} aria-valuenow={totalPercent}>

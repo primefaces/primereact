@@ -134,7 +134,16 @@ interface MeterGroupProps {
      * @defaultValue 'horizontal'
      */
     labelOrientation?: 'horizontal' | 'vertical';
-
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MeterGroupPassThroughOptions}
+     */
+    pt?: MeterGroupPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * A function to render custom start label.
      * @param {CustomRenderProps} prop - Custom Render Props
@@ -151,13 +160,13 @@ interface MeterGroupProps {
      * A function to render a custom meter.
      * @param {CustomRenderProps} prop - Custom Render Props
      */
-    meterRenderer?: (props: CustomRenderProps) => ReactNode;
+    meter?: (props: CustomRenderProps) => ReactNode;
 
     /**
      * A function to render a custom label list.
      * @param {CustomRenderProps} prop - Custom Render Props
      */
-    labelListRenderer?: (props: CustomRenderProps) => ReactNode;
+    labelList?: (props: CustomRenderProps) => ReactNode;
 }
 
 /**

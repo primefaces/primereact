@@ -86,8 +86,8 @@ export const MeterGroupBase = ComponentBase.extend({
         labelOrientation: 'horizontal',
         start: null,
         end: null,
-        meterRenderer: null,
-        labelListRenderer: null
+        meter: null,
+        labelList: null
     },
     css: {
         classes,
