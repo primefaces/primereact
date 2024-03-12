@@ -109,7 +109,7 @@ export default function MultipleDemo() {
                 </p>
                 <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
             </DocSectionText>
-            <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card flex justify-content-center">
                 <TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} metaKeySelection={false} className="md:w-20rem w-full" selectionMode="multiple" placeholder="Select Items"></TreeSelect>
             </div>

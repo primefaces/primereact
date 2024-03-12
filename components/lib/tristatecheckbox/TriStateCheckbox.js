@@ -67,7 +67,7 @@ export const TriStateCheckbox = React.memo(
         };
 
         const onKeyDown = (e) => {
-            if (e.keyCode === 32) {
+            if (e.code === 'Enter' || e.code === 'Space') {
                 toggle(e);
                 e.preventDefault();
             }
@@ -117,7 +117,7 @@ export const TriStateCheckbox = React.memo(
         const checkboxProps = mergeProps(
             {
                 className: cx('checkbox', { focusedState }),
-                tabIndex: props.tabIndex,
+                tabIndex: props.disabled ? '-1' : props.tabIndex,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
@@ -140,7 +140,8 @@ export const TriStateCheckbox = React.memo(
             {
                 className: classNames(props.className, cx('root')),
                 style: props.style,
-                onClick: onClick
+                onClick: onClick,
+                'data-p-disabled': props.disabled
             },
             TriStateCheckboxBase.getOtherProps(props),
             ptm('root')
@@ -152,7 +153,7 @@ export const TriStateCheckbox = React.memo(
                     <div {...checkboxProps}>{checkIcon}</div>
                     {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

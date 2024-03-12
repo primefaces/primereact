@@ -49,10 +49,6 @@ export const TieredMenuSub = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -61,6 +57,11 @@ export const TieredMenuSub = React.memo(
             }
 
             props.onItemClick && props.onItemClick({ originalEvent: event, processedItem });
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
         const getItemId = (processedItem) => {
@@ -163,6 +164,7 @@ export const TieredMenuSub = React.memo(
 
             const item = processedItem.item;
             const style = getItemProp(processedItem, 'style');
+            const itemClassName = getItemProp(processedItem, 'className');
             const _icon = getItemProp(processedItem, 'icon');
             const target = getItemProp(processedItem, 'target');
             const url = getItemProp(processedItem, 'url');
@@ -255,7 +257,7 @@ export const TieredMenuSub = React.memo(
                     'data-p-highlight': active,
                     'data-p-disabled': disabled,
                     'data-p-visited': focused,
-                    className: cx('menuitem', { className: item.className, active, focused, disabled }),
+                    className: cx('menuitem', { itemClassName, active, focused, disabled }),
                     style: style,
                     onMouseEnter: (event) => onItemMouseEnter(event, item),
                     role: 'menuitem'

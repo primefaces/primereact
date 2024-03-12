@@ -53,6 +53,7 @@ export function RoundedDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" rounded />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -108,6 +109,7 @@ export default function RoundedDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" rounded />
         </div>
     )
 }
@@ -167,6 +169,7 @@ export default function RoundedDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" rounded />
         </div>
     )
 }
@@ -187,6 +190,7 @@ export default function RoundedDemo() {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" rounded />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" rounded />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" rounded />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" rounded />
             </div>
             <DocSectionCode code={code} />
         </>

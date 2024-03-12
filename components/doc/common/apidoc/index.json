@@ -818,8 +818,8 @@
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions",
-                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                            "type": "Partial<ZIndexOptions>",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically."
                         },
                         {
                             "name": "pt",
@@ -5843,6 +5843,14 @@
                             "description": "Whether to hide the overlay on date selection when showTime is enabled."
                         },
                         {
+                            "name": "hideOnRangeSelection",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether to hide the overlay on date selection is completed when selectionMode is range."
+                        },
+                        {
                             "name": "hourFormat",
                             "optional": true,
                             "readonly": false,
@@ -7475,6 +7483,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether to hide the overlay on date selection when showTime is enabled."
+                        },
+                        {
+                            "name": "hideOnRangeSelection",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether to hide the overlay on date selection is completed when selectionMode is range."
                         },
                         {
                             "name": "hourFormat",
@@ -9331,8 +9346,8 @@
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions",
-                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                            "type": "Partial<ZIndexOptions>",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically."
                         },
                         {
                             "name": "pt",
@@ -17327,7 +17342,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowEditSaveEvent",
+                                    "type": "DataTableRowEditSaveEvent<TValue>",
                                     "description": "Custom row edit save event."
                                 }
                             ],
@@ -18238,7 +18253,7 @@
                             "name": "columns",
                             "optional": false,
                             "readonly": false,
-                            "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+                            "type": "Column[]",
                             "description": "Columns array after reorder."
                         }
                     ]
@@ -18617,6 +18632,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether the row is valid or not."
+                        },
+                        {
+                            "name": "newData",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableRowData<TValue>",
+                            "description": "Editing row data."
                         }
                     ],
                     "callbacks": [],
@@ -18751,6 +18773,13 @@
                             "readonly": false,
                             "type": "DataTableProps<TValue>",
                             "description": "The props of the datatable."
+                        },
+                        {
+                            "name": "rowIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of validated row"
                         }
                     ],
                     "callbacks": []
@@ -20270,7 +20299,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowEditSaveEvent",
+                                    "type": "DataTableRowEditSaveEvent<TValue>",
                                     "description": "Custom row edit save event."
                                 }
                             ],
@@ -26816,7 +26845,7 @@
                         }
                     ],
                     "callbacks": [],
-                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
+                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,BlankIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
                     "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
                 }
             }
@@ -27283,6 +27312,47 @@
                 },
                 "props": {
                     "description": "Defines valid properties in BarsIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icons/blank": {
+        "components": {
+            "BlankIcon": {
+                "description": "**PrimeReact - BlankIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in BlankIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
                     "values": [
                         {
                             "name": "className",
@@ -34081,7 +34151,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -34399,7 +34469,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -38283,6 +38353,41 @@
                             "description": "JSX element to be used as the first page link."
                         },
                         {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
@@ -38337,6 +38442,41 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "JSX element to be used as the prev page link."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
                         },
                         {
                             "name": "props",
@@ -38423,6 +38563,20 @@
                             "description": "The total number of pages."
                         },
                         {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "element",
                             "optional": false,
                             "readonly": false,
@@ -38486,6 +38640,41 @@
                             "description": "JSX element to be used as the next page link."
                         },
                         {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
@@ -38540,6 +38729,41 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "JSX element to be used as the last page link."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
                         },
                         {
                             "name": "props",
@@ -39438,6 +39662,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "expandedKeys",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuExpandedKeys",
+                            "default": "",
+                            "description": "A map of keys to represent the expansion state in controlled mode."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -39498,6 +39730,19 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
+                        {
+                            "name": "onExpandedKeysChange",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "New value."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to when the expandedKeys changes."
+                        },
                         {
                             "name": "onHide",
                             "parameters": [
@@ -39738,6 +39983,19 @@
                     ],
                     "callbacks": []
                 },
+                "PanelMenuExpandedKeys": {
+                    "description": "Custom expanded keys metadata.",
+                    "relatedProp": "expandedKeys",
+                    "props": [
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "PanelMenuHeaderItemClickEvent": {
                     "relatedProp": "",
                     "props": [
@@ -39804,13 +40062,15 @@
                             "name": "mergeSections",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Should the passthrough merge sections?"
                         },
                         {
                             "name": "mergeProps",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Should the passthrough merge properties?"
                         },
                         {
                             "name": "classNameMergeFunction",
@@ -45030,9 +45290,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
                         },
                         {
                             "name": "size",
@@ -45293,6 +45553,22 @@
                     "description": "Defines valid properties in SplitterPanel component.",
                     "values": [
                         {
+                            "name": "aria-label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Splitter handle ARIA label for screenreader support."
+                        },
+                        {
+                            "name": "aria-labelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the splitter and panel label element IDs."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -45307,6 +45583,14 @@
                             "type": "string",
                             "default": "",
                             "description": "ClassName of the component."
+                        },
+                        {
+                            "name": "id",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Returns the value of element's id content attribute. Can be set to change it."
                         },
                         {
                             "name": "minSize",
@@ -45881,6 +46165,15 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
+                            "description": "Style class to add when item begins to get displayed.",
+                            "deprecated": "since 10.5.2 Use 'enterFromClassName' option instead."
+                        },
+                        {
+                            "name": "enterFromClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
                             "description": "Style class to add when item begins to get displayed."
                         },
                         {
@@ -45909,6 +46202,15 @@
                         },
                         {
                             "name": "leaveClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Style class to add when item begins to get hidden.",
+                            "deprecated": "since 10.5.2 Use 'leaveFromClassName' option instead."
+                        },
+                        {
+                            "name": "leaveFromClassName",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
@@ -46377,6 +46679,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "visible",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When set as false, hides the tab panel."
                         }
                     ]
                 },
@@ -48269,7 +48579,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {
@@ -49032,7 +49342,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49056,7 +49366,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49068,7 +49378,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -50023,6 +50333,14 @@
                             "type": "string",
                             "default": "false",
                             "description": "Unique key to enable dragdrop functionality."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "No results found",
+                            "description": "Template to display when filtering does not return any results."
                         },
                         {
                             "name": "expandedKeys",
@@ -54475,19 +54793,22 @@
                     ],
                     "returnType": "string | undefined"
                 },
-                "_mergeProps": {
-                    "name": "_mergeProps",
+                "mergeProps": {
+                    "name": "mergeProps",
                     "parameters": [
                         {
                             "name": "args",
-                            "type": "object[]"
+                            "type": "object[]",
+                            "description": "the array of object properties to merge"
                         },
                         {
                             "name": "options",
-                            "type": "any"
+                            "type": "PassThroughOptions",
+                            "description": "either empty or could contain a custom merge function like TailwindMerge"
                         }
                     ],
-                    "returnType": "object | undefined"
+                    "returnType": "object | undefined",
+                    "description": "Merges properties together taking an Array of props and merging into one single set of\nproperties. The options can contain a \"classNameMergeFunction\" which can be something\nlike Tailwind Merge for properly merging Tailwind classes."
                 },
                 "EventBus": {
                     "name": "EventBus",

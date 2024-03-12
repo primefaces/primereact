@@ -3,7 +3,7 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     onIcon: 'p-rating-icon',
-    item: ({ active }) => classNames('p-rating-item', { 'p-rating-item-active': active }),
+    item: ({ active, value, isFocusVisibleItem, focusedOptionIndex }) => classNames('p-rating-item', { 'p-rating-item-active': active }, { 'p-focus': value === focusedOptionIndex && isFocusVisibleItem }),
     cancelIcon: 'p-rating-icon p-rating-cancel',
     cancelItem: 'p-rating-item p-rating-cancel-item',
     root: ({ props }) =>

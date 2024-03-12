@@ -29,7 +29,7 @@ export default function MyApp({ Component }) {
                     To establish the default locale for your entire application, you can utilize the <i>PrimeReactProvider</i>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

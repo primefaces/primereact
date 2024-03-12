@@ -18,7 +18,7 @@ html {
                     document. Code below sets the scale of the components based on <i>16px</i>. If you reqire bigger or smaller components, just change this variable and components will scale accordingly.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

@@ -73,7 +73,8 @@ export const Calendar = React.memo(
 
                 isOverlayClicked.current = false;
             },
-            when: !(props.touchUI || props.inline) && visible
+            when: !(props.touchUI || props.inline) && visible,
+            type: 'mousedown'
         });
 
         const getDateFormat = () => {
@@ -1630,6 +1631,12 @@ export const Calendar = React.memo(
 
                     selectedValues = [startDate, endDate];
                     updateModel(event, selectedValues);
+
+                    if (props.hideOnRangeSelection && endDate !== null) {
+                        setTimeout(() => {
+                            setOverlayVisibleState(false);
+                        }, 150);
+                    }
                 } else {
                     selectedValues = [date, null];
                     updateModel(event, selectedValues);
@@ -1801,10 +1808,13 @@ export const Calendar = React.memo(
 
                 if (props.view === 'date') {
                     overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = inputWidth + 'px';
                 } else {
-                    overlayRef.current.style.minWidth = inputWidth + 'px';
                     overlayRef.current.style.width = inputWidth + 'px';
+                }
+
+                // #5830 Tailwind does not need a min width it breaks the styling
+                if (!isUnstyled()) {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
                 }
             }
 
@@ -1870,10 +1880,15 @@ export const Calendar = React.memo(
                 if (isUnstyled) {
                     destroyMask();
                 } else {
-                    DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
-                    touchUIMask.current.addEventListener('animationend', () => {
+                    !isUnstyled() && DomHandler.addClass(touchUIMask.current, 'p-component-overlay-leave');
+
+                    if (DomHandler.hasCSSAnimation(touchUIMask.current) > 0) {
+                        touchUIMask.current.addEventListener('animationend', () => {
+                            destroyMask();
+                        });
+                    } else {
                         destroyMask();
-                    });
+                    }
                 }
             }
         };
@@ -2286,26 +2301,38 @@ export const Calendar = React.memo(
         };
 
         const isDayDisabled = (day, month, year) => {
+            let isDisabled = false;
+
+            // first check for disabled dates
             if (props.disabledDates) {
                 if (props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
-                    return true;
-                }
-            } else if (props.enabledDates) {
-                if (!props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
-                    return true;
+                    isDisabled = true;
                 }
             }
 
-            if (props.disabledDays && currentView === 'date') {
+            // next if not disabled then check for disabled days
+            if (!isDisabled && props.disabledDays && currentView === 'date') {
                 let weekday = new Date(year, month, day);
                 let weekdayNumber = weekday.getDay();
 
                 if (props.disabledDays.indexOf(weekdayNumber) !== -1) {
-                    return true;
+                    isDisabled = true;
                 }
             }
 
-            return false;
+            // last check for enabled dates to force dates enabled
+            if (props.enabledDates) {
+                const isEnabled = props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+
+                if (isEnabled) {
+                    isDisabled = false;
+                } else if (!props.disabledDays && !props.disabledDates) {
+                    // disable other dates when only enabledDates are present
+                    isDisabled = true;
+                }
+            }
+
+            return isDisabled;
         };
 
         const isMonthYearDisabled = (month, year) => {
@@ -3146,18 +3173,28 @@ export const Calendar = React.memo(
         };
 
         const createTitleYearElement = (metaYear) => {
+            const viewDate = getViewDate();
+            const viewYear = viewDate.getFullYear();
+
             if (props.yearNavigator) {
                 let yearOptions = [];
-                const years = props.yearRange.split(':');
-                const yearStart = parseInt(years[0], 10);
-                const yearEnd = parseInt(years[1], 10);
 
-                for (let i = yearStart; i <= yearEnd; i++) {
-                    yearOptions.push(i);
+                if (props.yearRange) {
+                    const years = props.yearRange.split(':');
+                    const yearStart = parseInt(years[0], 10);
+                    const yearEnd = parseInt(years[1], 10);
+
+                    for (let i = yearStart; i <= yearEnd; i++) {
+                        yearOptions.push(i);
+                    }
+                } else {
+                    const base = viewYear - (viewYear % 10);
+
+                    for (let i = 0; i < 10; i++) {
+                        yearOptions.push(base + i);
+                    }
                 }
 
-                const viewDate = getViewDate();
-                const viewYear = viewDate.getFullYear();
                 const displayedYearNames = yearOptions.filter((year) => !(props.minDate && props.minDate.getFullYear() > year) && !(props.maxDate && props.maxDate.getFullYear() < year));
                 const selectProps = mergeProps(
                     {

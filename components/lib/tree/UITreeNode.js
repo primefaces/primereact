@@ -768,6 +768,7 @@ export const UITreeNode = React.memo((props) => {
             const droppointProps = mergeProps(
                 {
                     className: cx('droppoint'),
+                    role: 'treeitem',
                     onDrop: (event) => onDropPoint(event, position),
                     onDragOver: onDropPointDragOver,
                     onDragEnter: onDropPointDragEnter,

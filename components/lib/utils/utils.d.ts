@@ -6,11 +6,20 @@
  *
  */
 import * as React from 'react';
+import { PassThroughOptions } from '../passthrough';
 
 export declare function classNames(...args: any[]): string | undefined;
 
-// @todo - replace it with mergeProps
-export declare function _mergeProps(args: object[], options?: any): object | undefined;
+/**
+ * Merges properties together taking an Array of props and merging into one single set of
+ * properties. The options can contain a "classNameMergeFunction" which can be something
+ * like Tailwind Merge for properly merging Tailwind classes.
+ *
+ * @param {object[]} args the array of object properties to merge
+ * @param {PassThroughOptions} options either empty or could contain a custom merge function like TailwindMerge
+ * @returns the single properties value after merging
+ */
+export declare function mergeProps(args: object[], options?: PassThroughOptions): object | undefined;
 
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;

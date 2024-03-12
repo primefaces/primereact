@@ -3,6 +3,7 @@ import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { IconUtils } from '../utils/Utils';
+import { ariaLabel } from '../api/Locale';
 
 export const HeaderCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -78,6 +79,7 @@ export const HeaderCheckbox = React.memo((props) => {
             className: cx('headerCheckbox', { headerProps: props, focusedState }),
             role: 'checkbox',
             'aria-checked': props.checked,
+            'aria-label': props.checked ? ariaLabel('selectAll') : ariaLabel('unselectAll'),
             tabIndex: tabIndex,
             onFocus: (e) => onFocus(e),
             onBlur: (e) => onBlur(e),

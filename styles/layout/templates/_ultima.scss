@@ -3,12 +3,18 @@
         &-hero {
 
             &-pattern {
-                width: 60rem;
+                width: 80rem;
                 height: auto;
                 position: absolute;
-                bottom: 0;
-                left: 0;
+                bottom: -26rem;
+                left: -22.5rem;
                 z-index: 6;
+                mix-blend-mode: overlay;
+            }
+
+            &-dashboard1,
+            &-dashboard2{
+                border-radius: 0.42857rem;
             }
 
         }
@@ -22,8 +28,9 @@
             &-hero {
 
                 &-pattern {
-                    width: 80rem;
-                    left: -5rem;
+                    width: 90rem;
+                    left: -25rem;
+                    bottom: -10rem;
                 }
             }
         }

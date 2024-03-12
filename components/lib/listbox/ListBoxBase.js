@@ -4,7 +4,7 @@ import { classNames } from '../utils/Utils';
 const classes = {
     itemGroup: 'p-listbox-item-group',
     emptyMessage: 'p-listbox-empty-message',
-    list: ({ props, options }) => (props.virtualScrollerOptions ? classNames('p-listbox-list', options.className) : 'p-listbox-list'),
+    list: 'p-listbox-list',
     wrapper: ({ props }) => classNames('p-listbox-list-wrapper', props.listClassName),
     root: ({ props }) =>
         classNames(
@@ -19,6 +19,7 @@ const classes = {
             'p-listbox-item',
             {
                 'p-highlight': props.selected,
+                'p-focus': props.focusedOptionIndex === props.index,
                 'p-disabled': props.disabled
             },
             props.option.className
@@ -45,6 +46,7 @@ const styles = `
         cursor: pointer;
         position: relative;
         overflow: hidden;
+        outline: none;
     }
     
     .p-listbox-filter-container {
@@ -85,11 +87,14 @@ export const ListBoxBase = ComponentBase.extend({
         filterPlaceholder: null,
         filterTemplate: null,
         filterValue: null,
+        selectOnFocus: false,
         id: null,
         itemTemplate: null,
         listClassName: null,
         listStyle: null,
         metaKeySelection: false,
+        selectOnFocus: false,
+        autoOptionFocus: true,
         multiple: false,
         onChange: null,
         onFilterValueChange: null,

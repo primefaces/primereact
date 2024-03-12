@@ -44,10 +44,6 @@ export const MenubarSub = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -56,6 +52,11 @@ export const MenubarSub = React.memo(
             }
 
             onLeafClick({ originalEvent: event, processedItem, isFocus: true });
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
         };
 
         const onLeafClick = (event) => {
@@ -63,10 +64,10 @@ export const MenubarSub = React.memo(
         };
 
         const getItemId = (processedItem) => {
-            if (processedItem.item && processedItem.item.id) {
-                return processedItem.item.id;
-            }
+            return processedItem.item?.id;
+        };
 
+        const getItemDataId = (processedItem) => {
             return `${props.id}_${processedItem.key}`;
         };
 
@@ -87,7 +88,7 @@ export const MenubarSub = React.memo(
         };
 
         const isItemFocused = (processedItem) => {
-            return props.focusedItemId === getItemId(processedItem);
+            return props.focusedItemId === getItemDataId(processedItem);
         };
 
         const isItemGroup = (processedItem) => {
@@ -106,8 +107,8 @@ export const MenubarSub = React.memo(
             const key = props.id + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
-                    id: key,
                     key,
+                    'data-id': key,
                     className: cx('separator'),
                     role: 'separator'
                 },
@@ -150,7 +151,8 @@ export const MenubarSub = React.memo(
                 return null;
             }
 
-            const key = getItemId(processedItem);
+            const id = getItemId(processedItem);
+            const dataId = getItemDataId(processedItem);
             const active = isItemActive(processedItem);
             const focused = isItemFocused(processedItem);
             const disabled = isItemDisabled(processedItem) || false;
@@ -236,8 +238,9 @@ export const MenubarSub = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    id: key,
-                    key,
+                    id,
+                    key: dataId,
+                    'data-id': dataId,
                     role: 'menuitem',
                     'aria-label': item.label,
                     'aria-disabled': disabled,
@@ -283,7 +286,7 @@ export const MenubarSub = React.memo(
                 onFocus: props.onFocus,
                 onBlur: props.onBlur,
                 onKeyDown: props.onKeyDown,
-                id: props.id,
+                'data-id': props.id,
                 tabIndex: tabIndex,
                 'aria-activedescendant': props.ariaActivedescendant,
                 style: props.style,

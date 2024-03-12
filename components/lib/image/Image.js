@@ -43,11 +43,9 @@ export const Image = React.memo(
 
         useGlobalOnEscapeKey({
             callback: () => {
-                if (props.closeOnEscape) {
-                    hide();
-                }
+                hide();
             },
-            when: maskVisibleState,
+            when: props.closeOnEscape && maskVisibleState,
             priority: [
                 ESC_KEY_HANDLING_PRIORITIES.IMAGE,
                 // Assume that there could be only one image mask activated, so it's safe
@@ -140,7 +138,7 @@ export const Image = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExiting = () => {

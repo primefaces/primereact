@@ -96,10 +96,39 @@ export const Slider = React.memo(
             handleIndex.current = index;
             const key = event.key;
 
-            if (key === 'ArrowRight' || key === 'ArrowUp') {
-                spin(event, 1);
-            } else if (key === 'ArrowLeft' || key === 'ArrowDown') {
-                spin(event, -1);
+            switch (key) {
+                case 'ArrowRight':
+                case 'ArrowUp':
+                    spin(event, 1);
+                    break;
+
+                case 'ArrowLeft':
+                case 'ArrowDown':
+                    spin(event, -1);
+                    break;
+
+                case 'PageUp':
+                    spin(event, 10);
+                    event.preventDefault();
+                    break;
+
+                case 'PageDown':
+                    spin(event, -10);
+                    event.preventDefault();
+                    break;
+
+                case 'Home':
+                    spin(event, -value);
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    spin(event, props.max);
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
             }
         };
 

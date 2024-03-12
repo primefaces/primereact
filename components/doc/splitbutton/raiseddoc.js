@@ -53,6 +53,7 @@ export function RaisedDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" raised />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -108,6 +109,7 @@ export default function RaisedDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" raised />
         </div>
     )
 }
@@ -167,6 +169,7 @@ export default function RaisedDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" raised />
         </div>
     )
 }
@@ -187,6 +190,7 @@ export default function RaisedDemo() {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" raised />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" raised />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" raised />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" raised />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -5,6 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
 
@@ -23,7 +24,8 @@ export const Menu = React.memo(
             props,
             state: {
                 id: idState,
-                visible: visibleState
+                visible: visibleState,
+                focused: focused
             }
         });
 
@@ -31,13 +33,14 @@ export const Menu = React.memo(
         const menuRef = React.useRef(null);
         const listRef = React.useRef(null);
         const targetRef = React.useRef(null);
-        const popupMenuDisplayOrder = useDisplayOrder('menu', !!(visibleState && props.popup));
+        const isCloseOnEscape = !!(visibleState && props.popup && props.closeOnEscape);
+        const popupMenuDisplayOrder = useDisplayOrder('menu', isCloseOnEscape);
 
         useGlobalOnEscapeKey({
             callback: (event) => {
                 hide(event);
             },
-            when: visibleState && props.popup && props.closeOnEscape && popupMenuDisplayOrder,
+            when: isCloseOnEscape && popupMenuDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.MENU, popupMenuDisplayOrder]
         });
 
@@ -368,6 +371,7 @@ export const Menu = React.memo(
                     <a {...actionProps}>
                         {icon}
                         {label}
+                        <Ripple />
                     </a>
                 </div>
             );

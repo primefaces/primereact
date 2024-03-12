@@ -206,10 +206,10 @@ export interface APIOptions {
      */
     ripple?: boolean;
     /**
-     * ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself.
+     * ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically.
      * @defaultValue { modal: 1100, overlay: 1000, menu: 1000, tooltip: 1100, toast: 1200}
      */
-    zIndex?: ZIndexOptions;
+    zIndex?: Partial<ZIndexOptions>;
     /**
      * This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag.
      */
@@ -1216,7 +1216,9 @@ export declare enum MessageSeverity {
     SUCCESS = 'success',
     INFO = 'info',
     WARN = 'warn',
-    ERROR = 'error'
+    ERROR = 'error',
+    SECONDARY = 'secondary',
+    CONTRAST = 'contrast'
 }
 
 // Filter

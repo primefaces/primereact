@@ -27,7 +27,7 @@ export default function MyApp({ Component }) {
             <DocSectionText {...props}>
                 <p>Ripple is an optional animation for the supported components such as buttons. It is disabled by default.</p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

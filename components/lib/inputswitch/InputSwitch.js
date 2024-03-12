@@ -94,7 +94,9 @@ export const InputSwitch = React.memo(
                 style: props.style,
                 onClick,
                 role: 'checkbox',
-                'aria-checked': checked
+                'aria-checked': checked,
+                'data-p-highlight': checked,
+                'data-p-disabled': props.disabled
             },
             otherProps,
             ptm('root')
@@ -139,7 +141,7 @@ export const InputSwitch = React.memo(
                     </div>
                     <span {...sliderProps}></span>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

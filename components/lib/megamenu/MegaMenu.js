@@ -160,16 +160,16 @@ export const MegaMenu = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                originalEvent.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: originalEvent,
                     item: props.item
                 });
+            }
+
+            if (!item.url) {
                 originalEvent.preventDefault();
+                originalEvent.stopPropagation();
             }
 
             const grouped = isProccessedItemGroup(processedItem);

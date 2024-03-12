@@ -348,21 +348,21 @@ export const InputNumber = React.memo(
                 event.preventDefault();
             }
 
-            switch (event.which) {
+            switch (event.code) {
                 //up
-                case 38:
+                case 'ArrowUp':
                     spin(event, 1);
                     event.preventDefault();
                     break;
 
                 //down
-                case 40:
+                case 'ArrowDown':
                     spin(event, -1);
                     event.preventDefault();
                     break;
 
                 //left
-                case 37:
+                case 'ArrowLeft':
                     if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                         event.preventDefault();
                     }
@@ -370,7 +370,7 @@ export const InputNumber = React.memo(
                     break;
 
                 //right
-                case 39:
+                case 'ArrowRight':
                     if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                         event.preventDefault();
                     }
@@ -378,8 +378,8 @@ export const InputNumber = React.memo(
                     break;
 
                 //enter and tab
-                case 13:
-                case 9:
+                case 'Tab':
+                case 'Enter':
                     newValueStr = validateValue(parseValue(inputValue));
                     inputRef.current.value = formatValue(newValueStr);
                     inputRef.current.setAttribute('aria-valuenow', newValueStr);
@@ -387,7 +387,7 @@ export const InputNumber = React.memo(
                     break;
 
                 //backspace
-                case 8:
+                case 'Backspace':
                     event.preventDefault();
 
                     if (selectionStart === selectionEnd) {
@@ -435,7 +435,7 @@ export const InputNumber = React.memo(
                     break;
 
                 // del
-                case 46:
+                case 'Delete':
                     event.preventDefault();
 
                     if (selectionStart === selectionEnd) {
@@ -476,13 +476,22 @@ export const InputNumber = React.memo(
 
                     break;
 
-                // End
-                case 35:
-                // Home/Pos1
-                case 36:
-                    setTimeout(() => {
-                        initCursor();
-                    });
+                case 'End':
+                    event.preventDefault();
+
+                    if (!ObjectUtils.isEmpty(props.max)) {
+                        updateModel(event, props.max);
+                    }
+
+                    break;
+                case 'Home':
+                    event.preventDefault();
+
+                    if (!ObjectUtils.isEmpty(props.min)) {
+                        updateModel(event, props.min);
+                    }
+
+                    break;
 
                 default:
                     break;
@@ -1263,7 +1272,7 @@ export const InputNumber = React.memo(
                     {inputElement}
                     {buttonGroup}
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

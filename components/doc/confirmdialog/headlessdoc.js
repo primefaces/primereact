@@ -19,7 +19,6 @@ export function HeadlessDoc(props) {
     const confirm1 = () => {
         confirmDialog({
             group: 'headless',
-            mahmut: 'mahmut',
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
@@ -91,7 +90,6 @@ export default function HeadlessDemo() {
     const confirm1 = () => {
         confirmDialog({
             group: 'headless',
-            mahmut: 'mahmut',
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
@@ -166,7 +164,6 @@ export default function HeadlessDemo() {
     const confirm1 = () => {
         confirmDialog({
             group: 'headless',
-            mahmut: 'mahmut',
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',

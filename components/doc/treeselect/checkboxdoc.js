@@ -113,7 +113,7 @@ export default function CheckboxDemo() {
                     indicate selection.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card flex justify-content-center">
                 <TreeSelect
                     value={selectedNodeKeys}

@@ -11,7 +11,7 @@ export const CurrentPageReport = React.memo((inProps) => {
 
     const report = {
         currentPage: props.page + 1,
-        totalPages: props.pageCount,
+        totalPages: props.totalPages,
         first: Math.min(props.first + 1, props.totalRecords),
         last: Math.min(props.first + props.rows, props.totalRecords),
         rows: props.rows,

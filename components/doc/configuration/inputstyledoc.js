@@ -32,7 +32,7 @@ export default function MyApp({ Component }) {
                     inputStyle to <i>filled</i> at PrimeReact configuration as well.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

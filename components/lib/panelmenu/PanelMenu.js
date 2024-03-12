@@ -38,10 +38,6 @@ export const PanelMenu = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -51,6 +47,11 @@ export const PanelMenu = React.memo(
 
             if (item.items) {
                 changeActiveItem(event, item);
+            }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
             }
         };
 
@@ -190,7 +191,7 @@ export const PanelMenu = React.memo(
                 setActiveItemState(_activeItemState);
 
                 if (props.multiple) {
-                    const activeItems = activeItemsState;
+                    let activeItems = activeItemsState;
 
                     if (
                         activeItemsState.some((subItem) => {

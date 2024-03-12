@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
@@ -12,11 +13,14 @@ export const SelectButton = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SelectButtonBase.getProps(inProps, context);
 
+        const [focusedIndex, setFocusedIndex] = React.useState(0);
         const elementRef = React.useRef(null);
 
-        const { ptm, cx } = SelectButtonBase.setMetaData({
+        const { ptm, cx, isUnstyled } = SelectButtonBase.setMetaData({
             props
         });
+
+        useHandleStyle(SelectButtonBase.css.styles, isUnstyled, { name: 'selectbutton', styled: true });
 
         const onOptionClick = (event) => {
             if (props.disabled || isOptionDisabled(event.option)) {
@@ -94,7 +98,7 @@ export const SelectButton = React.memo(
                 return props.options.map((option, index) => {
                     const isDisabled = props.disabled || isOptionDisabled(option);
                     const optionLabel = getOptionLabel(option);
-                    const tabIndex = isDisabled ? null : 0;
+                    const tabIndex = props.disabled || index !== focusedIndex ? '-1' : '0';
                     const selected = isSelected(option);
                     const key = optionLabel + '_' + index;
 
@@ -105,13 +109,16 @@ export const SelectButton = React.memo(
                             label={optionLabel}
                             className={option.className}
                             option={option}
+                            setFocusedIndex={setFocusedIndex}
                             onClick={onOptionClick}
                             template={props.itemTemplate}
                             selected={selected}
                             tabIndex={tabIndex}
+                            index={index}
                             disabled={isDisabled}
                             ptm={ptm}
                             cx={cx}
+                            elementRef={elementRef}
                         />
                     );
                 });
@@ -143,8 +150,11 @@ export const SelectButton = React.memo(
 
         return (
             <>
-                <div {...rootProps}>{items}</div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                <div {...rootProps}>
+                    {items}
+                    {props.children}
+                </div>
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

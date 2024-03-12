@@ -9,11 +9,11 @@ import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const [focusedState, setFocusedState] = React.useState(false);
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
+        const [focusedState, setFocusedState] = React.useState(false);
         const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
             props,
             state: {
@@ -48,6 +48,13 @@ export const ToggleButton = React.memo(
             }
         };
 
+        const onKeyDown = (event) => {
+            if (event.keyCode === 32) {
+                toggle(event);
+                event.preventDefault();
+            }
+        };
+
         const onFocus = (event) => {
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
@@ -56,13 +63,6 @@ export const ToggleButton = React.memo(
         const onBlur = (event) => {
             setFocusedState(false);
             props.onBlur && props.onBlur(event);
-        };
-
-        const onKeyDown = (event) => {
-            if (event.keyCode === 32) {
-                toggle(event);
-                event.preventDefault();
-            }
         };
 
         const createIcon = () => {
@@ -115,7 +115,9 @@ export const ToggleButton = React.memo(
                 onKeyDown: onKeyDown,
                 tabIndex: tabIndex,
                 role: 'button',
-                'aria-pressed': props.checked
+                'aria-pressed': props.checked,
+                'data-p-highlight': props.checked,
+                'data-p-disabled': props.disabled
             },
             ToggleButtonBase.getOtherProps(props),
             ptm('root')
@@ -128,7 +130,7 @@ export const ToggleButton = React.memo(
                     <span {...labelProps}>{label}</span>
                     <Ripple />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

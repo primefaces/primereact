@@ -37,7 +37,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
     const shouldBlockScroll = visibleState && (props.blockScroll || (props.maximizable && maximized));
-    const displayOrder = useDisplayOrder('dialog', visibleState);
+    const isCloseOnEscape = props.closable && props.closeOnEscape && visibleState;
+    const displayOrder = useDisplayOrder('dialog', isCloseOnEscape);
 
     const { ptm, cx, sx, isUnstyled } = DialogBase.setMetaData({
         props,
@@ -53,11 +54,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useGlobalOnEscapeKey({
         callback: (event) => {
-            if (props.closable && props.closeOnEscape) {
-                onClose(event);
-            }
+            onClose(event);
         },
-        when: visibleState && displayOrder,
+        when: isCloseOnEscape && displayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
@@ -299,7 +298,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const onExiting = () => {
         if (props.modal) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
     };
 

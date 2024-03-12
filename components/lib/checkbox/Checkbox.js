@@ -132,6 +132,8 @@ export const Checkbox = React.memo(
                 className: classNames(props.className, cx('root', { checked, focusedState })),
                 style: props.style,
                 onClick: (e) => onClick(e),
+                'data-p-highlight': checked,
+                'data-p-disabled': props.disabled,
                 onContextMenu: props.onContextMenu,
                 onMouseDown: props.onMouseDown
             },
@@ -182,7 +184,7 @@ export const Checkbox = React.memo(
                     </div>
                     <div {...inputProps}>{checkboxIcon}</div>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

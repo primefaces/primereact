@@ -23,7 +23,7 @@ export const TabMenu = React.memo(
             props,
             state: {
                 id: idState,
-                activeIndex: activeIndexState
+                activeIndex: activeIndex
             }
         };
 
@@ -50,10 +50,6 @@ export const TabMenu = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -69,6 +65,11 @@ export const TabMenu = React.memo(
                 });
             } else {
                 setActiveIndexState(index);
+            }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
             }
         };
 

@@ -107,14 +107,15 @@ export const MultiSelectPanel = React.memo(
                 return (
                     <MultiSelectItem
                         hostName={props.hostName}
+                        index={j}
                         key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
                         style={style}
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
-                        onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -184,13 +185,14 @@ export const MultiSelectPanel = React.memo(
                     <MultiSelectItem
                         hostName={props.hostName}
                         key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
                         style={style}
+                        index={index}
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
-                        onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -308,12 +310,42 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('transition')
             );
 
+            const firstHiddenElementProps = mergeProps(
+                {
+                    ref: props.firstHiddenFocusableElementOnOverlay,
+                    role: 'presentation',
+                    'aria-hidden': 'true',
+                    className: 'p-hidden-accessible p-hidden-focusable',
+                    tabIndex: '0',
+                    onFocus: props.onFirstHiddenFocus,
+                    'data-p-hidden-accessible': true,
+                    'data-p-hidden-focusable': true
+                },
+                ptm('hiddenFirstFocusableEl')
+            );
+
+            const lastHiddenElementProps = mergeProps(
+                {
+                    ref: props.lastHiddenFocusableElementOnOverlay,
+                    role: 'presentation',
+                    'aria-hidden': 'true',
+                    className: 'p-hidden-accessible p-hidden-focusable',
+                    tabIndex: '0',
+                    onFocus: props.onLastHiddenFocus,
+                    'data-p-hidden-accessible': true,
+                    'data-p-hidden-focusable': true
+                },
+                ptm('hiddenLastFocusableEl')
+            );
+
             return (
                 <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
+                        <span {...firstHiddenElementProps}></span>
                         {header}
                         {content}
                         {footer}
+                        <span {...lastHiddenElementProps}></span>
                     </div>
                 </CSSTransition>
             );

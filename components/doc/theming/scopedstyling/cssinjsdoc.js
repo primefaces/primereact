@@ -57,7 +57,7 @@ export default function PanelDemo() {
                     </p>
                 </Panel>
             </div>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

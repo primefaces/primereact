@@ -485,7 +485,7 @@ export const DataTableBase = ComponentBase.extend({
         lazy: false,
         loading: false,
         loadingIcon: null,
-        metaKeySelection: true,
+        metaKeySelection: false,
         multiSortMeta: null,
         onAllRowsSelect: null,
         onAllRowsUnselect: null,

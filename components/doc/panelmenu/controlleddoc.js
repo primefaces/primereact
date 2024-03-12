@@ -1,7 +1,7 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
-import { PanelMenu } from '@/components/lib/panelmenu/PanelMenu';
 import { Button } from '@/components/lib/button/Button';
+import { PanelMenu } from '@/components/lib/panelmenu/PanelMenu';
 import { useState } from 'react';
 
 export function ControlledDoc(props) {
@@ -103,7 +103,7 @@ export function ControlledDoc(props) {
         basic: `
 <div className="card flex flex-column align-items-center gap-3">
     <Button type="button" label="Toggle All" text onClick={() => toggleAll()} />
-    <PanelMenu model={items} className="w-full md:w-20rem" multiple />
+    <PanelMenu model={items} expandedKeys={expandedKeys} onExpandedKeysChange={setExpandedKeys} className="w-full md:w-20rem" multiple />
 </div>  
 `,
         javascript: `
@@ -209,7 +209,7 @@ export default function ControlledDemo() {
     return (
         <div className="card flex flex-column align-items-center gap-3">
             <Button type="button" label="Toggle All" text onClick={() => toggleAll()} />
-            <PanelMenu model={items} className="w-full md:w-20rem" multiple />
+            <PanelMenu model={items} expandedKeys={expandedKeys} onExpandedKeysChange={setExpandedKeys} className="w-full md:w-20rem" multiple />
         </div>
 
     )
@@ -317,8 +317,8 @@ export default function ControlledDemo() {
     return (
         <div className="card flex flex-column align-items-center gap-3">
             <Button type="button" label="Toggle All" text onClick={() => toggleAll()} />
-            <PanelMenu model={items} className="w-full md:w-20rem" multiple />
-        </div>
+            <PanelMenu model={items} expandedKeys={expandedKeys} onExpandedKeysChange={setExpandedKeys} className="w-full md:w-20rem" multiple />
+            </div>
     )
 }
         `

@@ -19,7 +19,7 @@ const classes = {
     label: 'p-menuitem-text',
     submenuIcon: 'p-submenu-icon',
     action: 'p-menuitem-link',
-    menuitem: ({ _className, active, focused, disabled }) => classNames('p-menuitem', { 'p-menuitem-active p-highlight': active, 'p-focus': focused, 'p-disabled': disabled }, _className),
+    menuitem: ({ itemClassName, active, focused, disabled }) => classNames('p-menuitem', { 'p-menuitem-active p-highlight': active, 'p-focus': focused, 'p-disabled': disabled }, itemClassName),
     menu: 'p-tieredmenu-root-list',
     submenu: 'p-submenu-list',
     transition: 'p-connected-overlay'

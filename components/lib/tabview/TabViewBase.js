@@ -140,8 +140,10 @@ export const TabViewBase = ComponentBase.extend({
 export const TabPanelBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TabPanel',
+        children: undefined,
         className: null,
         closable: false,
+        closeIcon: null,
         contentClassName: null,
         contentStyle: null,
         disabled: false,
@@ -150,12 +152,11 @@ export const TabPanelBase = ComponentBase.extend({
         headerStyle: null,
         headerTemplate: null,
         leftIcon: null,
-        rightIcon: null,
-        prevButton: null,
         nextButton: null,
-        closeIcon: null,
+        prevButton: null,
+        rightIcon: null,
         style: null,
-        children: undefined
+        visible: true
     },
     getCProp: (tab, name) => ObjectUtils.getComponentProp(tab, name, TabPanelBase.defaultProps),
     getCProps: (tab) => ObjectUtils.getComponentProps(tab, TabPanelBase.defaultProps),

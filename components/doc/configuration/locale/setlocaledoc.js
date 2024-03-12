@@ -15,7 +15,7 @@ locale('en');
                     An available locale can be set with <i>locale</i> method at anytime.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

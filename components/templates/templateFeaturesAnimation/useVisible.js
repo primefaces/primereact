@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const useVisible = (element, rootMargin = 0.2) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -21,7 +21,8 @@ const useVisible = (element, rootMargin = 0.2) => {
                 observer.unobserve(element.current);
             }
         };
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return isVisible;
 };

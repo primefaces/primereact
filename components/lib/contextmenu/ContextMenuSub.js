@@ -43,10 +43,6 @@ export const ContextMenuSub = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -58,6 +54,11 @@ export const ContextMenuSub = React.memo(
 
             if (!item.items) {
                 props.onLeafClick(event);
+            }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
             }
         };
 

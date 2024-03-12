@@ -1,5 +1,89 @@
 # Changelog
 
+## [10.5.1](https://github.com/primefaces/primereact/tree/10.5.1) (2024-02-14)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.5.0...10.5.1)
+
+**New Features:**
+
+- Icon: BlankIcon [\#5957](https://github.com/primefaces/primereact/issues/5957)
+
+**Enhancements:**
+
+- Tree: Missing emptyMessage prop [\#5950](https://github.com/primefaces/primereact/issues/5950)
+- MultiSelect: no way to change MultiSelect chips appearence [\#5935](https://github.com/primefaces/primereact/issues/5935)
+
+**Fixed bugs:**
+
+- metaKeySelection default type is changed as false [\#5956](https://github.com/primefaces/primereact/issues/5956)
+- Hydration attribute mismatch on Icons [\#5955](https://github.com/primefaces/primereact/issues/5955)
+- Dropdown component is triggering onChange when tabbing over [\#5942](https://github.com/primefaces/primereact/issues/5942)
+- Menu component with routes rerenders all the components on every route [\#5941](https://github.com/primefaces/primereact/issues/5941)
+- Remove CodeSandbox Demos [\#5946](https://github.com/primefaces/primereact/issues/5946)
+- Multi-select / Dropdown will not lose focus [\#5929](https://github.com/primefaces/primereact/issues/5929)
+- Add ID to menubar top level prevents focus [\#5930](https://github.com/primefaces/primereact/issues/5930)
+- Splitter: local storage sync is not working [\#5916](https://github.com/primefaces/primereact/issues/5916)
+- DataTable: onRowEditValidator rowData is old value not newly updated value [\#2424](https://github.com/primefaces/primereact/issues/2424)
+- Tooltip Passthrough Options Not Styling [\#5932](https://github.com/primefaces/primereact/issues/5932)
+- PanelMenu: "activeItems" is read-only [\#5928](https://github.com/primefaces/primereact/issues/5928)
+- SplitButton appendTo="self" placement is wrong [\#5921](https://github.com/primefaces/primereact/issues/5921)
+- MultiSelect: Enter | Space Overlay Closes [\#5914](https://github.com/primefaces/primereact/issues/5914)
+- Calendar: Panel width too small with default Tailwind [\#5830](https://github.com/primefaces/primereact/issues/5830)
+- Password: Hand/Pointer icon not displayed while hovering over the eye icon in password ToggleMask mode [\#5905](https://github.com/primefaces/primereact/issues/5905)
+
+## [10.5.0](https://github.com/primefaces/primereact/tree/10.5.0) (2024-02-06)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.4.0...10.5.0)
+
+**Enhancements:**
+
+- TabView/TabPanel: Can't have TabPanels in a JSX fragment [\#5900](https://github.com/primefaces/primereact/issues/5900)
+- Input Accessibility [\#5991](https://github.com/primefaces/primereact/issues/5991)
+
+**Fixed bugs:**
+
+- Menu: No ripple effect [\#5901](https://github.com/primefaces/primereact/issues/5901)
+- FilterMatchMode.CUSTOM & filterFunction broken + custom filter type errors [\#3325](https://github.com/primefaces/primereact/issues/3325)
+- Calendar: Panel width too small with default Tailwind  [\#5830](https://github.com/primefaces/primereact/issues/5830)
+- Menu: separator style missing in default Tailwind [\#5890](https://github.com/primefaces/primereact/issues/5890)
+- Paginator JumpToPageInput not working [\#5893](https://github.com/primefaces/primereact/issues/5893)
+- Primereact Splitter resize [\#5892](https://github.com/primefaces/primereact/issues/5892)
+- Password component hide/show button shouldnt be wrapped with [\#5880](https://github.com/primefaces/primereact/issues/5880)
+- Menu: Unhandled Runtime Error with Nextjs and Tailwind passthrough [\#5885](https://github.com/primefaces/primereact/issues/5885)
+- Dock: Sample code missing DockDemo.css  [\#5882](https://github.com/primefaces/primereact/issues/5882)
+- Prevent multiselect/dropdown box from closing on page scroll [\#5872](https://github.com/primefaces/primereact/issues/5872)
+- Calendar : enabledDates is not evaluated with disabledDays [\#5863](https://github.com/primefaces/primereact/issues/5863)
+
+## [10.4.0](https://github.com/primefaces/primereact/tree/10.4.0) (2024-02-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.3.3...10.4.0)
+
+**Enhancements:**
+
+- Splitter: missing/incorrect accessibility features [\#5849](https://github.com/primefaces/primereact/issues/5849)
+- New Component | FocusTrap [\#5829](https://github.com/primefaces/primereact/issues/5829)
+- Enhancement: DataTable accessibility [\#5839](https://github.com/primefaces/primereact/issues/5839)
+
+**Fixed bugs:**
+
+- Divider (Tailwind): className not used [\#5862](https://github.com/primefaces/primereact/issues/5862)
+- Calendar : enabledDates is not evaluated with disabledDays [\#5863](https://github.com/primefaces/primereact/issues/5863)
+- Tree : Need "no results found" message if no matches found in the filter [\#5813](https://github.com/primefaces/primereact/issues/5813)
+- Showcase: TypeScript demos are failing in StackBlitz/CodeSandbox [\#5800](https://github.com/primefaces/primereact/issues/5800)
+- Dropdown: items focused when pressing letters in contexts where they shouldn't [\#5855](https://github.com/primefaces/primereact/issues/5855)
+- Unnecessary Javascript-Warning in Galleria onShow and onHide [\#5854](https://github.com/primefaces/primereact/issues/5854)
+- Calendar blur not working [\#5850](https://github.com/primefaces/primereact/issues/5850)
+- Dropdown: Missing property loading in DropdownProps Interface [\#5847](https://github.com/primefaces/primereact/issues/5847)
+- Carousel: Visual bugs when loading carousel with responsiveCarouselOptions [\#5166](https://github.com/primefaces/primereact/issues/5166)
+- Sidebar with content prop gives console warning [\#5834](https://github.com/primefaces/primereact/issues/5834)
+- Menubar: Does not respect the MenuItem id property [\#5827](https://github.com/primefaces/primereact/issues/5827)
+- Chips: Separator by new line doesn't work by pasting value [\#5824](https://github.com/primefaces/primereact/issues/5824)
+- Editor: Editor missing unordered list in the header [\#5818](https://github.com/primefaces/primereact/issues/5818)
+- Threshold not working useIntersectionObserver hook [\#5809](https://github.com/primefaces/primereact/issues/5809)
+- Accordion (Tailwind): Cannot read properties of undefined (reading 'disabled') [\#5804](https://github.com/primefaces/primereact/issues/5804)
+- Datatable Column Filter: Clear Button will not show if filter menu button is hidden [\#5802](https://github.com/primefaces/primereact/issues/5802)
+- className is not passes to TieredMenu items [\#5868](https://github.com/primefaces/primereact/issues/5868)
+
 ## [10.3.3](https://github.com/primefaces/primereact/tree/10.3.3) (2024-01-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.3.2...10.3.3)

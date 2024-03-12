@@ -54,6 +54,10 @@ export const BodyCell = React.memo((props) => {
     const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
+    const isEditable = () => {
+        return getColumnProp('editor');
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
@@ -66,12 +70,9 @@ export const BodyCell = React.memo((props) => {
 
             selfClick.current = false;
         },
-        options: true
+        options: true,
+        when: isEditable()
     });
-
-    const isEditable = () => {
-        return getColumnProp('editor');
-    };
 
     const isSelected = () => {
         return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false;
@@ -546,7 +547,9 @@ export const BodyCell = React.memo((props) => {
             field: field
         });
         const content = ObjectUtils.getJSXElement(getVirtualScrollerOption('loadingTemplate'), options);
-        const bodyCellProps = mergeProps(getColumnPTOptions('bodyCell'));
+        const bodyCellProps = mergeProps(getColumnPTOptions('bodyCell'), {
+            role: 'cell'
+        });
 
         return <td {...bodyCellProps}>{content}</td>;
     };
@@ -700,6 +703,7 @@ export const BodyCell = React.memo((props) => {
                         onClick: rowEditorProps.onSaveClick,
                         className: rowEditorProps.saveClassName,
                         tabIndex: props.tabIndex,
+                        'aria-label': ariaLabel('saveEdit'),
                         'data-p-row-editor-save': true
                     },
                     getColumnPTOptions('rowEditorSaveButton')
@@ -712,7 +716,8 @@ export const BodyCell = React.memo((props) => {
                         'aria-label': ariaLabel('cancelEdit'),
                         onClick: rowEditorProps.onCancelClick,
                         className: rowEditorProps.cancelClassName,
-                        tabIndex: props.tabIndex
+                        tabIndex: props.tabIndex,
+                        'aria-label': ariaLabel('cancelEdit')
                     },
                     getColumnPTOptions('rowEditorCancelButton')
                 );
@@ -744,6 +749,7 @@ export const BodyCell = React.memo((props) => {
                         onClick: rowEditorProps.onInitClick,
                         className: rowEditorProps.initClassName,
                         tabIndex: props.tabIndex,
+                        'aria-label': ariaLabel('editRow'),
                         'data-p-row-editor-init': true
                     },
                     getColumnPTOptions('rowEditorInitButton')
