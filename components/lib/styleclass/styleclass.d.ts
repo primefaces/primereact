@@ -24,8 +24,13 @@ export interface StyleClassProps {
     selector?: '@next' | '@prev' | '@parent' | '@grandparent' | string | undefined;
     /**
      * Style class to add when item begins to get displayed.
+     * @deprecated since 10.5.2 Use 'enterFromClassName' option instead.
      */
     enterClassName?: string | undefined;
+    /**
+     * Style class to add when item begins to get displayed.
+     */
+    enterFromClassName?: string | undefined;
     /**
      * Style class to add during enter animation.
      */
@@ -36,8 +41,13 @@ export interface StyleClassProps {
     enterToClassName?: string | undefined;
     /**
      * Style class to add when item begins to get hidden.
+     * @deprecated since 10.5.2 Use 'leaveFromClassName' option instead.
      */
     leaveClassName?: string | undefined;
+    /**
+     * Style class to add when item begins to get hidden.
+     */
+    leaveFromClassName?: string | undefined;
     /**
      * Style class to add during leave animation.
      */

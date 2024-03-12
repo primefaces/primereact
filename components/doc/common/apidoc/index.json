@@ -34151,7 +34151,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -34469,7 +34469,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -45026,9 +45026,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
                         },
                         {
                             "name": "size",
@@ -45901,6 +45901,15 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
+                            "description": "Style class to add when item begins to get displayed.",
+                            "deprecated": "since 10.5.2 Use 'enterFromClassName' option instead."
+                        },
+                        {
+                            "name": "enterFromClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
                             "description": "Style class to add when item begins to get displayed."
                         },
                         {
@@ -45929,6 +45938,15 @@
                         },
                         {
                             "name": "leaveClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Style class to add when item begins to get hidden.",
+                            "deprecated": "since 10.5.2 Use 'leaveFromClassName' option instead."
+                        },
+                        {
+                            "name": "leaveFromClassName",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
@@ -48297,7 +48315,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {

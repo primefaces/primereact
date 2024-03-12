@@ -42,7 +42,7 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
+<SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} severity="contrast" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -87,7 +87,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
+            <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} severity="contrast" />
         </div>
     )
 }
@@ -136,7 +136,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
+            <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} severity="contrast" />
         </div>
     )
 }
@@ -152,7 +152,7 @@ export default function TemplateDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} />
+                <SplitButton label={<span>Prime React</span>} icon="pi pi-prime" model={items} severity="contrast" />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -23,13 +23,23 @@ export function SeverityDoc(props) {
         toast.current.show({ severity: 'error', summary: 'Error', detail: 'Message Content', life: 3000 });
     };
 
+    const showSecondary = () => {
+        toast.current.show({ severity: 'secondary', summary: 'Secondary', detail: 'Message Content', life: 3000 });
+    };
+
+    const showContrast = () => {
+        toast.current.show({ severity: 'contrast', summary: 'Contrast', detail: 'Message Content', life: 3000 });
+    };
+
     const code = {
         basic: `
 <Toast ref={toast} />
-<Button label="Success" className="p-button-success" onClick={showSuccess} />
-<Button label="Info" className="p-button-info" onClick={showInfo} />
-<Button label="Warn" className="p-button-warning" onClick={showWarn} />
-<Button label="Error" className="p-button-danger" onClick={showError} />
+<Button label="Success" severity="success" onClick={showSuccess} />
+<Button label="Info" severity="info" onClick={showInfo} />
+<Button label="Warn" severity="warning" onClick={showWarn} />
+<Button label="Error" severity="danger" onClick={showError} />
+<Button label="Secondary" severity="secondary" onClick={showSecondary} />
+<Button label="Contrast" severity="contrast" onClick={showContrast} />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -55,14 +65,24 @@ export default function SeverityDemo() {
         toast.current.show({severity:'error', summary: 'Error', detail:'Message Content', life: 3000});
     }
 
+    const showSecondary = () => {
+        toast.current.show({ severity: 'secondary', summary: 'Secondary', detail: 'Message Content', life: 3000 });
+    };
+
+    const showContrast = () => {
+        toast.current.show({ severity: 'contrast', summary: 'Contrast', detail: 'Message Content', life: 3000 });
+    };
+
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <div className="flex flex-wrap gap-2">
-                <Button label="Success" className="p-button-success" onClick={showSuccess} />
-                <Button label="Info" className="p-button-info" onClick={showInfo} />
-                <Button label="Warn" className="p-button-warning" onClick={showWarn} />
-                <Button label="Error" className="p-button-danger" onClick={showError} />
+                <Button label="Success" severity="success" onClick={showSuccess} />
+                <Button label="Info" severity="info" onClick={showInfo} />
+                <Button label="Warn" severity="warning" onClick={showWarn} />
+                <Button label="Error" severity="danger" onClick={showError} />
+                <Button label="Secondary" severity="secondary" onClick={showSecondary} />
+                <Button label="Contrast" severity="contrast" onClick={showContrast} />
             </div>
         </div>
     )
@@ -92,14 +112,25 @@ export default function SeverityDemo() {
         toast.current?.show({severity:'error', summary: 'Error', detail:'Message Content', life: 3000});
     }
 
+    const showSecondary = () => {
+        toast.current?.show({ severity: 'secondary', summary: 'Secondary', detail: 'Message Content', life: 3000 });
+    };
+
+    const showContrast = () => {
+        toast.current?.show({ severity: 'contrast', summary: 'Contrast', detail: 'Message Content', life: 3000 });
+    };
+
+
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <div className="flex flex-wrap gap-2">
-                <Button label="Success" className="p-button-success" onClick={showSuccess} />
-                <Button label="Info" className="p-button-info" onClick={showInfo} />
-                <Button label="Warn" className="p-button-warning" onClick={showWarn} />
-                <Button label="Error" className="p-button-danger" onClick={showError} />
+                <Button label="Success" severity="success" onClick={showSuccess} />
+                <Button label="Info" severity="info" onClick={showInfo} />
+                <Button label="Warn" severity="warning" onClick={showWarn} />
+                <Button label="Error" severity="danger" onClick={showError} />
+                <Button label="Secondary" severity="secondary" onClick={showSecondary} />
+                <Button label="Contrast" severity="contrast" onClick={showContrast} />
             </div>
         </div>
     )
@@ -117,10 +148,12 @@ export default function SeverityDemo() {
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <div className="flex flex-wrap gap-2">
-                    <Button label="Success" className="p-button-success" onClick={showSuccess} />
-                    <Button label="Info" className="p-button-info" onClick={showInfo} />
-                    <Button label="Warn" className="p-button-warning" onClick={showWarn} />
-                    <Button label="Error" className="p-button-danger" onClick={showError} />
+                    <Button label="Success" severity="success" onClick={showSuccess} />
+                    <Button label="Info" severity="info" onClick={showInfo} />
+                    <Button label="Warn" severity="warning" onClick={showWarn} />
+                    <Button label="Error" severity="danger" onClick={showError} />
+                    <Button label="Secondary" severity="secondary" onClick={showSecondary} />
+                    <Button label="Contrast" severity="contrast" onClick={showContrast} />
                 </div>
             </div>
             <DocSectionCode code={code} />

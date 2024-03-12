@@ -95,6 +95,7 @@ export default function UnstyledDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" className="mb-2" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" className="mb-2" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" className="mb-2" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" className="mb-2" />
         </div>
     )
 }
