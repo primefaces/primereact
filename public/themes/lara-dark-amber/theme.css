@@ -739,8 +739,37 @@
     background-color: #424b57;
   }
   .p-checkbox {
+    position: relative;
+    display: inline-flex;
+    user-select: none;
+    vertical-align: bottom;
+  }
+  .p-checkbox-input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    outline: 0 none;
+    cursor: pointer;
+  }
+  .p-checkbox-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .p-checkbox {
     width: 22px;
     height: 22px;
+  }
+  .p-checkbox .p-checkbox-input {
+    border: 2px solid #424b57;
+    border-radius: 6px;
   }
   .p-checkbox .p-checkbox-box {
     border: 2px solid #424b57;
@@ -750,6 +779,7 @@
     color: rgba(255, 255, 255, 0.87);
     border-radius: 6px;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline-color: transparent;
   }
   .p-checkbox .p-checkbox-box .p-checkbox-icon {
     transition-duration: 0.2s;
@@ -760,42 +790,94 @@
     width: 14px;
     height: 14px;
   }
-  .p-checkbox .p-checkbox-box.p-highlight {
+  .p-checkbox .p-checkbox-box {
+    border: 2px solid #424b57;
+    background: #111827;
+    width: 22px;
+    height: 22px;
+    color: rgba(255, 255, 255, 0.87);
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline-color: transparent;
+  }
+  .p-checkbox .p-checkbox-box .p-checkbox-icon {
+    transition-duration: 0.2s;
+    color: #030712;
+    font-size: 14px;
+  }
+  .p-checkbox .p-checkbox-box .p-checkbox-icon.p-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .p-checkbox.p-highlight .p-checkbox-box {
     border-color: #fbbf24;
     background: #fbbf24;
   }
-  .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
+  .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {
+    border-color: #fbbf24;
+  }
+  .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover).p-highlight .p-checkbox-box {
     border-color: #fde68a;
     background: #fde68a;
     color: #030712;
   }
-  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
-    border-color: #fbbf24;
-  }
-  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  .p-checkbox:not(.p-disabled):has(.p-checkbox-input:focus-visible) .p-checkbox-box {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
     border-color: #fbbf24;
   }
-  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-    border-color: #fde68a;
-    background: #fde68a;
-    color: #030712;
-  }
   .p-checkbox.p-invalid > .p-checkbox-box {
     border-color: #fca5a5;
+  }
+  .p-checkbox.p-variant-filled .p-checkbox-box {
+    background-color: #424b57;
+  }
+  .p-checkbox.p-variant-filled.p-highlight .p-checkbox-box {
+    background: #fbbf24;
+  }
+  .p-checkbox.p-variant-filled:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {
+    background-color: #424b57;
+  }
+  .p-checkbox.p-variant-filled:not(.p-disabled):has(.p-checkbox-input:hover).p-highlight .p-checkbox-box {
+    background: #fde68a;
   }
   .p-input-filled .p-checkbox .p-checkbox-box {
     background-color: #424b57;
   }
-  .p-input-filled .p-checkbox .p-checkbox-box.p-highlight {
+  .p-input-filled .p-checkbox.p-highlight .p-checkbox-box {
     background: #fbbf24;
   }
-  .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  .p-input-filled .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {
     background-color: #424b57;
   }
-  .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  .p-input-filled .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover).p-highlight .p-checkbox-box {
+    background: #fde68a;
+  }
+  .p-checkbox {
+    position: relative;
+    display: inline-flex;
+    user-select: none;
+    vertical-align: bottom;
+  }
+  .p-checkbox-input {
+    cursor: pointer;
+  }
+  .p-checkbox-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .p-tristatecheckbox.p-variant-filled .p-checkbox-box {
+    background-color: #424b57;
+  }
+  .p-tristatecheckbox.p-variant-filled.p-highlight .p-checkbox-box {
+    background: #fbbf24;
+  }
+  .p-tristatecheckbox.p-variant-filled:not(.p-disabled):has(.p-checkbox-input:hover) .p-checkbox-box {
+    background-color: #424b57;
+  }
+  .p-tristatecheckbox.p-variant-filled:not(.p-disabled):has(.p-checkbox-input:hover).p-highlight .p-checkbox-box {
     background: #fde68a;
   }
   .p-chips {
@@ -1164,13 +1246,49 @@
     border-color: #fca5a5;
   }
   .p-inputswitch {
+    position: relative;
+    display: inline-block;
+  }
+  .p-inputswitch-input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    outline: 0 none;
+    cursor: pointer;
+  }
+  .p-inputswitch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid transparent;
+  }
+  .p-inputswitch-slider:before {
+    position: absolute;
+    content: "";
+    top: 50%;
+  }
+  .p-inputswitch {
     width: 3rem;
     height: 1.75rem;
+  }
+  .p-inputswitch .p-inputswitch-input {
+    border-radius: 30px;
   }
   .p-inputswitch .p-inputswitch-slider {
     background: #6b7280;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 30px;
+    outline-color: transparent;
   }
   .p-inputswitch .p-inputswitch-slider:before {
     background: rgba(255, 255, 255, 0.6);
@@ -1181,27 +1299,25 @@
     border-radius: 50%;
     transition-duration: 0.2s;
   }
-  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
+  .p-inputswitch.p-highlight .p-inputswitch-slider {
+    background: #fbbf24;
+  }
+  .p-inputswitch.p-highlight .p-inputswitch-slider:before {
+    background: #030712;
     transform: translateX(1.25rem);
   }
-  .p-inputswitch.p-focus .p-inputswitch-slider {
+  .p-inputswitch:not(.p-disabled):has(.p-inputswitch-input:hover) .p-inputswitch-slider {
+    background: #424b57;
+  }
+  .p-inputswitch:not(.p-disabled):has(.p-inputswitch-input:hover).p-highlight .p-inputswitch-slider {
+    background: #fcd34d;
+  }
+  .p-inputswitch:not(.p-disabled):has(.p-inputswitch-input:focus-visible) .p-inputswitch-slider {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
   }
-  .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider {
-    background: #424b57;
-  }
-  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-    background: #fbbf24;
-  }
-  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
-    background: #030712;
-  }
-  .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
-    background: #fcd34d;
-  }
-  .p-inputswitch.p-invalid .p-inputswitch-slider {
+  .p-inputswitch.p-invalid > .p-inputswitch-slider {
     border-color: #fca5a5;
   }
   .p-inputtext {
@@ -1688,8 +1804,48 @@
     background: #93deac;
   }
   .p-radiobutton {
+    position: relative;
+    display: inline-flex;
+    user-select: none;
+    vertical-align: bottom;
+  }
+  .p-radiobutton-input {
+    cursor: pointer;
+  }
+  .p-radiobutton-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .p-radiobutton-icon {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0) scale(0.1);
+    border-radius: 50%;
+    visibility: hidden;
+  }
+  .p-radiobutton.p-highlight .p-radiobutton-icon {
+    transform: translateZ(0) scale(1, 1);
+    visibility: visible;
+  }
+  .p-radiobutton {
     width: 22px;
     height: 22px;
+  }
+  .p-radiobutton .p-radiobutton-input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    outline: 0 none;
+    border: 2px solid #424b57;
+    border-radius: 50%;
   }
   .p-radiobutton .p-radiobutton-box {
     border: 2px solid #424b57;
@@ -1699,15 +1855,7 @@
     color: rgba(255, 255, 255, 0.87);
     border-radius: 50%;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-  }
-  .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
-    border-color: #fbbf24;
-  }
-  .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
-    border-color: #fbbf24;
+    outline-color: transparent;
   }
   .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
     width: 12px;
@@ -1715,31 +1863,51 @@
     transition-duration: 0.2s;
     background-color: #030712;
   }
-  .p-radiobutton .p-radiobutton-box.p-highlight {
+  .p-radiobutton.p-highlight .p-radiobutton-box {
     border-color: #fbbf24;
     background: #fbbf24;
   }
-  .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover) .p-radiobutton-box {
+    border-color: #fbbf24;
+  }
+  .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover).p-highlight .p-radiobutton-box {
     border-color: #fde68a;
     background: #fde68a;
-    color: #030712;
+  }
+  .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover).p-highlight .p-radiobutton-box .p-radiobutton-icon {
+    background-color: #030712;
+  }
+  .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:focus-visible) .p-radiobutton-box {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
+    border-color: #fbbf24;
   }
   .p-radiobutton.p-invalid > .p-radiobutton-box {
     border-color: #fca5a5;
   }
-  .p-radiobutton:focus {
-    outline: 0 none;
+  .p-radiobutton.p-variant-filled .p-radiobutton-box {
+    background-color: #424b57;
+  }
+  .p-radiobutton.p-variant-filled.p-highlight .p-radiobutton-box {
+    background: #fbbf24;
+  }
+  .p-radiobutton.p-variant-filled:not(.p-disabled):has(.p-radiobutton-input:hover) .p-radiobutton-box {
+    background-color: #424b57;
+  }
+  .p-radiobutton.p-variant-filled:not(.p-disabled):has(.p-radiobutton-input:hover).p-highlight .p-radiobutton-box {
+    background: #fde68a;
   }
   .p-input-filled .p-radiobutton .p-radiobutton-box {
     background-color: #424b57;
   }
-  .p-input-filled .p-radiobutton .p-radiobutton-box:not(.p-disabled):hover {
-    background-color: #424b57;
-  }
-  .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight {
+  .p-input-filled .p-radiobutton.p-highlight .p-radiobutton-box {
     background: #fbbf24;
   }
-  .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  .p-input-filled .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover) .p-radiobutton-box {
+    background-color: #424b57;
+  }
+  .p-input-filled .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover).p-highlight .p-radiobutton-box {
     background: #fde68a;
   }
   .p-rating {
@@ -1984,44 +2152,78 @@
   .p-input-filled .p-treeselect:not(.p-disabled).p-focus {
     background-color: #424b57;
   }
-  .p-togglebutton.p-button {
+  .p-togglebutton {
+    position: relative;
+    display: inline-flex;
+    user-select: none;
+    vertical-align: bottom;
+  }
+  .p-togglebutton-input {
+    cursor: pointer;
+  }
+  .p-togglebutton .p-button {
+    flex: 1 1 auto;
+  }
+  .p-togglebutton .p-togglebutton-input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    outline: 0 none;
+    border: 1px solid #424b57;
+    border-radius: 6px;
+  }
+  .p-togglebutton .p-button {
     background: #1f2937;
     border: 1px solid #424b57;
     color: rgba(255, 255, 255, 0.87);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline-color: transparent;
   }
-  .p-togglebutton.p-button .p-button-icon-left,
-  .p-togglebutton.p-button .p-button-icon-right {
+  .p-togglebutton .p-button .p-button-icon-left,
+  .p-togglebutton .p-button .p-button-icon-right {
     color: rgba(255, 255, 255, 0.6);
   }
-  .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: #424b57;
-    color: rgba(255, 255, 255, 0.87);
-  }
-  .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover .p-button-icon-left,
-  .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover .p-button-icon-right {
-    color: rgba(255, 255, 255, 0.6);
-  }
-  .p-togglebutton.p-button.p-highlight {
+  .p-togglebutton.p-highlight .p-button {
     background: #fbbf24;
     border-color: #fbbf24;
     color: #030712;
   }
-  .p-togglebutton.p-button.p-highlight .p-button-icon-left,
-  .p-togglebutton.p-button.p-highlight .p-button-icon-right {
+  .p-togglebutton.p-highlight .p-button .p-button-icon-left,
+  .p-togglebutton.p-highlight .p-button .p-button-icon-right {
     color: #030712;
   }
-  .p-togglebutton.p-button.p-highlight:hover {
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover):not(.p-highlight) .p-button {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: #424b57;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover):not(.p-highlight) .p-button .p-button-icon-left,
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover):not(.p-highlight) .p-button .p-button-icon-right {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover).p-highlight .p-button {
     background: #fcd34d;
     border-color: #fcd34d;
     color: #030712;
   }
-  .p-togglebutton.p-button.p-highlight:hover .p-button-icon-left,
-  .p-togglebutton.p-button.p-highlight:hover .p-button-icon-right {
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover).p-highlight .p-button .p-button-icon-left,
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover).p-highlight .p-button .p-button-icon-right {
     color: #030712;
   }
-  .p-togglebutton.p-button.p-invalid > .p-button {
+  .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:focus-visible) .p-button {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.2);
+    border-color: #fbbf24;
+  }
+  .p-togglebutton.p-invalid > .p-button {
     border-color: #fca5a5;
   }
   .p-button {
