@@ -22,7 +22,6 @@ export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButt
  */
 export interface RadioButtonPassThroughMethodOptions {
     props: RadioButtonProps;
-    state: RadioButtonState;
 }
 
 /**
@@ -56,17 +55,6 @@ export interface RadioButtonPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in RadioButton component.
- */
-export interface RadioButtonState {
-    /**
-     * Current focused state as a boolean.
-     * @defaultValue false
-     */
-    focused: boolean;
 }
 
 /**

@@ -22,7 +22,6 @@ export declare type TriStateCheckboxPassThroughType<T> = PassThroughType<T, TriS
  */
 export interface TriStateCheckboxPassThroughMethodOptions {
     props: TriStateCheckboxProps;
-    state: TriStateCheckboxState;
 }
 
 /**
@@ -64,16 +63,6 @@ export interface TriStateCheckboxPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in TriStateCheckbox component.
- */
-export interface TriStateCheckboxState {
-    /**
-     * Focused state as a boolean.
-     */
-    focused: boolean;
 }
 
 /**

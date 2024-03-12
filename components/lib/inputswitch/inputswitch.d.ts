@@ -22,7 +22,6 @@ export declare type InputSwitchPassThroughType<T> = PassThroughType<T, InputSwit
  */
 export interface InputSwitchPassThroughMethodOptions {
     props: InputSwitchProps;
-    state: InputSwitchState;
 }
 
 /**
@@ -52,17 +51,6 @@ export interface InputSwitchPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in InputSwitch component.
- */
-export interface InputSwitchState {
-    /**
-     * Current focus state as a boolean.
-     * @defaultValue false
-     */
-    focused: boolean;
 }
 
 /**
