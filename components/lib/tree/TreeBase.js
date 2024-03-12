@@ -6,6 +6,7 @@ const classes = {
     loadingIcon: 'p-tree-loading-icon',
     loadingOverlay: 'p-tree-loading-overlay p-component-overlay',
     searchIcon: 'p-tree-filter-icon',
+    emptyMessage: 'p-treenode p-tree-empty-message',
     filterContainer: 'p-tree-filter-container',
     input: 'p-tree-filter p-inputtext p-component',
     header: 'p-tree-header',
