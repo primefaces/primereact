@@ -34594,7 +34594,7 @@
                             "default": ""
                         },
                         {
-                            "name": "labelListRenderer",
+                            "name": "labelList",
                             "optional": true,
                             "readonly": false,
                             "type": "Function",
@@ -34625,7 +34625,7 @@
                             "description": "The maximum value for the MeterGroup."
                         },
                         {
-                            "name": "meterRenderer",
+                            "name": "meter",
                             "optional": true,
                             "readonly": false,
                             "type": "Function",
@@ -34646,6 +34646,22 @@
                             "type": "\"horizontal\" | \"vertical\"",
                             "default": "'horizontal'",
                             "description": "The orientation of the MeterGroup. Can be either 'horizontal' or 'vertical'."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "start",
@@ -34708,7 +34724,7 @@
                 },
                 "MeterGroupPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "MeterGroupProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
