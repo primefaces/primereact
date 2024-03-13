@@ -73,7 +73,8 @@ export const Calendar = React.memo(
 
                 isOverlayClicked.current = false;
             },
-            when: !(props.touchUI || props.inline) && visible
+            when: !(props.touchUI || props.inline) && visible,
+            type: 'mousedown'
         });
 
         const getDateFormat = () => {

@@ -34151,7 +34151,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -34469,7 +34469,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -34561,6 +34561,286 @@
                     "values": "PassThroughType<T, MessagesPassThroughMethodOptions>"
                 },
                 "MessagesPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
+                }
+            }
+        }
+    },
+    "metergroup": {
+        "description": "MeterGroup displays scalar measurements within a known range.\n\n[Live Demo](https://www.primereact.org/metergroup/)",
+        "components": {
+            "MeterGroup": {
+                "description": "MeterGroup is an extension to standard input element with theming and keyfiltering.",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in MeterGroup component. In addition to these, all properties of HTMLDivElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Additional CSS classes to apply to the MeterGroup."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "labelList",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "labelOrientation",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"horizontal\" | \"vertical\"",
+                            "default": "'horizontal'",
+                            "description": "The orientation of the label. Can be either 'horizontal' or 'vertical'."
+                        },
+                        {
+                            "name": "labelPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"end\" | \"start\"",
+                            "default": "'end'",
+                            "description": "The position of the label. Can be either 'start' or 'end'."
+                        },
+                        {
+                            "name": "max",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "100",
+                            "description": "The maximum value for the MeterGroup."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "min",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "The minimum value for the MeterGroup."
+                        },
+                        {
+                            "name": "orientation",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"horizontal\" | \"vertical\"",
+                            "default": "'horizontal'",
+                            "description": "The orientation of the MeterGroup. Can be either 'horizontal' or 'vertical'."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "values",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupValue[]",
+                            "default": "",
+                            "description": "An array of values to be represented by the MeterGroup."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MeterGroupContext": {
+                    "description": "Defines current options in MeterGroup component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the component as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MeterGroupPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MeterGroupProps"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MeterGroupContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MeterGroupPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "labellist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLOListElement>>",
+                            "description": "Used to pass attributes to the label list's DOM element."
+                        },
+                        {
+                            "name": "labellistitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Used to pass attributes to the label list item's DOM element."
+                        },
+                        {
+                            "name": "labellisttype",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<any>>",
+                            "description": "Used to pass attributes to the label list type's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "metercontainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the meter container's DOM element."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the meter's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MeterGroupValue": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number"
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | HTMLElement"
+                        },
+                        {
+                            "name": "color",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CustomRenderProps": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "totaLPercent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number"
+                        },
+                        {
+                            "name": "percentages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number[]"
+                        },
+                        {
+                            "name": "values",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MeterGroupValue[]"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MeterGroupPassThroughType": {
+                    "values": "PassThroughType<T, MeterGroupPassThroughMethodOptions>"
+                },
+                "MeterGroupPassThroughTransitionType": {
                     "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
@@ -45026,9 +45306,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
                         },
                         {
                             "name": "size",
@@ -45901,6 +46181,15 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
+                            "description": "Style class to add when item begins to get displayed.",
+                            "deprecated": "since 10.5.2 Use 'enterFromClassName' option instead."
+                        },
+                        {
+                            "name": "enterFromClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
                             "description": "Style class to add when item begins to get displayed."
                         },
                         {
@@ -45929,6 +46218,15 @@
                         },
                         {
                             "name": "leaveClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Style class to add when item begins to get hidden.",
+                            "deprecated": "since 10.5.2 Use 'leaveFromClassName' option instead."
+                        },
+                        {
+                            "name": "leaveFromClassName",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
@@ -48297,7 +48595,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {
