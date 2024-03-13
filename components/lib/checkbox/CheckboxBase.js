@@ -14,7 +14,6 @@ const classes = {
         })
 };
 
-
 export const CheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Checkbox',
