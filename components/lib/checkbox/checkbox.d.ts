@@ -74,7 +74,6 @@ export interface CheckboxContext {
     disabled: boolean;
 }
 
-
 /**
  * Custom change event.
  * @see {@link CheckboxProps.onChange}

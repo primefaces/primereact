@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CheckboxPassThroughType } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -53,7 +54,7 @@ export interface ToggleButtonPassThroughOptions {
     /**
      * Uses to pass attributes to the input's DOM element.
      */
-    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    input?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the box's DOM element.
      */
