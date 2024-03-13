@@ -9,8 +9,7 @@ const classes = {
             {
                 'p-inputwrapper-filled': isFilled,
                 'p-inputwrapper-focus': focusedState,
-                'p-input-icon-right': props.toggleMask,
-                'p-invalid': props.invalid
+                'p-input-icon-right': props.toggleMask
             },
             props.className
         ),
