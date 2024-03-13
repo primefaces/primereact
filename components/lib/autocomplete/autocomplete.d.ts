@@ -257,6 +257,11 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     delay?: number | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */

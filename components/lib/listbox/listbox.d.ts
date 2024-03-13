@@ -330,6 +330,11 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     listStyle?: React.CSSProperties | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
      */

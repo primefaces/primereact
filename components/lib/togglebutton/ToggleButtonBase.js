@@ -14,7 +14,8 @@ const classes = {
             {
                 'p-button-icon-only': hasIcon && !hasLabel,
                 'p-highlight': props.checked,
-                'p-disabled': props.disabled
+                'p-disabled': props.disabled,
+                'p-invalid': props.invalid
             },
             props.className
         )
@@ -29,6 +30,7 @@ export const ToggleButtonBase = ComponentBase.extend({
         onLabel: 'Yes',
         offLabel: 'No',
         iconPos: 'left',
+        invalid: false,
         style: null,
         className: null,
         checked: false,

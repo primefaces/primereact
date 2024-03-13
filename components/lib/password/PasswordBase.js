@@ -9,7 +9,8 @@ const classes = {
             {
                 'p-inputwrapper-filled': isFilled,
                 'p-inputwrapper-focus': focusedState,
-                'p-input-icon-right': props.toggleMask
+                'p-input-icon-right': props.toggleMask,
+                'p-invalid': props.invalid
             },
             props.className
         ),
@@ -98,6 +99,7 @@ export const PasswordBase = ComponentBase.extend({
         className: null,
         inputStyle: null,
         inputClassName: null,
+        invalid: false,
         panelStyle: null,
         panelClassName: null,
         transitionOptions: null,

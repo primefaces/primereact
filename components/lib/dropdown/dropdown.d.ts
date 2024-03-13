@@ -247,6 +247,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     dataKey?: string | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */

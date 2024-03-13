@@ -8,6 +8,7 @@ const classes = {
         classNames('p-checkbox-box', {
             'p-highlight': ObjectUtils.isNotEmpty(props.value),
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-focus': focusedState
         })
 };
@@ -20,6 +21,7 @@ export const TriStateCheckboxBase = ComponentBase.extend({
         className: null,
         disabled: false,
         id: null,
+        invalid: false,
         onChange: null,
         readOnly: false,
         style: null,

@@ -118,6 +118,11 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
      */
     iconPos?: 'left' | 'right' | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Icon for the off state.
      */
     offIcon?: IconType<ToggleButtonProps> | undefined;

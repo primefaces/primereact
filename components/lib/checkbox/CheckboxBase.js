@@ -7,6 +7,7 @@ const classes = {
         classNames('p-checkbox-box', {
             'p-highlight': checked,
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-focus': focusedState
         }),
     root: ({ props, checked, focusedState }) =>
@@ -49,6 +50,7 @@ export const CheckboxBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         name: null,
         onChange: null,
         onClick: null,

@@ -6,6 +6,7 @@ const classes = {
         classNames('p-inputswitch p-component', {
             'p-inputswitch-checked': checked,
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-focus': focusedState
         }),
     slider: 'p-inputswitch-slider'
@@ -47,6 +48,7 @@ export const InputSwitchBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         name: null,
         onBlur: null,
         onChange: null,

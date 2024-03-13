@@ -6,7 +6,8 @@ const classes = {
         classNames('p-radiobutton p-component', {
             'p-radiobutton-checked': props.checked,
             'p-radiobutton-disabled': props.disabled,
-            'p-radiobutton-focused': focusedState
+            'p-radiobutton-focused': focusedState,
+            'p-invalid': props.invalid
         }),
     input: ({ props, focusedState }) =>
         classNames('p-radiobutton-box', {
@@ -57,6 +58,7 @@ export const RadioButtonBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         name: null,
         onChange: null,
         onClick: null,

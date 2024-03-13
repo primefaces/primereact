@@ -95,6 +95,11 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      */
     value?: boolean | undefined | null;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When present, it specifies that the element value cannot be altered.
      * @defaultValue false
      */

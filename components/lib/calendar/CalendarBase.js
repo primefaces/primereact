@@ -180,6 +180,7 @@ const classes = {
         classNames('p-calendar p-component p-inputwrapper', {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-calendar-timeonly': props.timeOnly,
             'p-inputwrapper-filled': props.value || isFilled,
             'p-inputwrapper-focus': focusedState,
@@ -261,6 +262,7 @@ export const CalendarBase = ComponentBase.extend({
         inputMode: 'none',
         inputRef: null,
         inputStyle: null,
+        invalid: false,
         keepInvalid: false,
         locale: null,
         mask: null,

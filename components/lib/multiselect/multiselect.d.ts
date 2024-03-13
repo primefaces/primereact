@@ -612,6 +612,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     placeholder?: string | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {MultiSelectPassThroughOptions}
      */
