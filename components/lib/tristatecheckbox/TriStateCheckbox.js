@@ -14,7 +14,6 @@ export const TriStateCheckbox = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TriStateCheckboxBase.getProps(inProps, context);
 
-        const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = TriStateCheckboxBase.setMetaData({

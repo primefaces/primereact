@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CheckboxPassThroughType } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -22,7 +23,6 @@ export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButt
  */
 export interface RadioButtonPassThroughMethodOptions {
     props: RadioButtonProps;
-    state: RadioButtonState;
 }
 
 /**
@@ -56,17 +56,6 @@ export interface RadioButtonPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in RadioButton component.
- */
-export interface RadioButtonState {
-    /**
-     * Current focused state as a boolean.
-     * @defaultValue false
-     */
-    focused: boolean;
 }
 
 /**

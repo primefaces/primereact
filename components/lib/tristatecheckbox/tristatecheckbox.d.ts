@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CheckboxPassThroughType } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -22,7 +23,6 @@ export declare type TriStateCheckboxPassThroughType<T> = PassThroughType<T, TriS
  */
 export interface TriStateCheckboxPassThroughMethodOptions {
     props: TriStateCheckboxProps;
-    state: TriStateCheckboxState;
 }
 
 /**
@@ -64,16 +64,6 @@ export interface TriStateCheckboxPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in TriStateCheckbox component.
- */
-export interface TriStateCheckboxState {
-    /**
-     * Focused state as a boolean.
-     */
-    focused: boolean;
 }
 
 /**

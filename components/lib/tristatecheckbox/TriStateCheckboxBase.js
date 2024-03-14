@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props }) =>
@@ -13,26 +13,6 @@ const classes = {
     box: 'p-checkbox-box',
     input: 'p-checkbox-input'
 };
-
-const styles = `
-@layer primereact {
-    .p-checkbox {
-        position: relative;
-        display: inline-flex;
-        user-select: none;
-        vertical-align: bottom;
-    }
-
-    .p-checkbox-input {
-        cursor: pointer;
-    }
-
-    .p-checkbox-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}`;
 
 export const TriStateCheckboxBase = ComponentBase.extend({
     defaultProps: {
@@ -53,7 +33,6 @@ export const TriStateCheckboxBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes,
-        styles
+        classes
     }
 });

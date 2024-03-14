@@ -1157,11 +1157,11 @@ const Tailwind = {
                 })
             })
         },
-        dropdownButton: ({ props }) => ({
-            root: {
-                className: classNames({ 'rounded-l-none': props.showIcon })
-            }
-        }),
+        dropdownButton: {
+            root: ({ props }) => ({
+                className: classNames({ 'rounded-l-none': props.icon })
+            })
+        },
         panel: ({ props }) => ({
             className: classNames('bg-white dark:bg-gray-900', 'min-w-full', {
                 'shadow-md border-0 absolute': !props.inline,
@@ -1171,7 +1171,7 @@ const Tailwind = {
         header: {
             className: classNames('flex items-center justify-between', 'p-2 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-semibold m-0 border-b border-gray-300 dark:border-blue-900/40 rounded-t-lg')
         },
-        previousbutton: {
+        previousButton: {
             className: classNames(
                 'flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
@@ -1185,7 +1185,7 @@ const Tailwind = {
         yearTitle: {
             className: classNames('text-gray-700 dark:text-white/80 transition duration-200 font-semibold p-2', 'hover:text-blue-500')
         },
-        nextbutton: {
+        nextButton: {
             className: classNames(
                 'flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
@@ -1195,10 +1195,10 @@ const Tailwind = {
         table: {
             className: classNames('border-collapse w-full', 'my-2')
         },
-        tableheadercell: 'p-2',
+        tableHeaderCell: 'p-2',
         weekday: 'text-gray-600 dark:text-white/70',
         day: 'p-2',
-        daylabel: ({ context }) => ({
+        dayLabel: ({ context }) => ({
             className: classNames(
                 'w-10 h-10 rounded-full transition-shadow duration-200 border-transparent border',
                 'flex items-center justify-center mx-auto overflow-hidden relative',
@@ -1213,7 +1213,7 @@ const Tailwind = {
                 }
             )
         }),
-        monthpicker: 'my-2',
+        monthPicker: 'my-2',
         month: ({ context }) => ({
             className: classNames(
                 'w-1/3 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
@@ -1222,7 +1222,7 @@ const Tailwind = {
                 { 'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
             )
         }),
-        yearpicker: {
+        yearPicker: {
             className: classNames('my-2')
         },
         year: ({ context }) => ({
@@ -1236,29 +1236,29 @@ const Tailwind = {
                 }
             )
         }),
-        timepicker: {
+        timePicker: {
             className: classNames('flex justify-center items-center', 'border-t-1 border-solid border-gray-300 p-2')
         },
-        separatorcontainer: 'flex items-center flex-col px-2',
+        separatorContainer: 'flex items-center flex-col px-2',
         separator: 'text-xl',
-        hourpicker: 'flex items-center flex-col px-2',
-        minutepicker: 'flex items-center flex-col px-2',
-        ampmpicker: 'flex items-center flex-col px-2',
-        incrementbutton: {
+        hourPicker: 'flex items-center flex-col px-2',
+        minutePicker: 'flex items-center flex-col px-2',
+        ampmPicker: 'flex items-center flex-col px-2',
+        incrementButton: {
             className: classNames(
                 'flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
                 'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
             )
         },
-        decrementbutton: {
+        decrementButton: {
             className: classNames(
                 'flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
                 'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
             )
         },
-        groupcontainer: 'flex',
+        groupContainer: 'flex',
         group: {
             className: classNames('flex-1', 'border-l border-gray-300 pr-0.5 pl-0.5 pt-0 pb-0', 'first:pl-0 first:border-l-0')
         },
@@ -2157,6 +2157,103 @@ const Tailwind = {
             className: classNames('py-1 bg-white dark:bg-gray-900 border-0 shadow-md min-w-full', 'absolute z-10', 'left-full top-0')
         },
         transition: TRANSITIONS.overlay
+    },
+    metergroup: {
+        root: ({ props }) => ({
+            class: [
+                // Flexbox
+                'flex gap-4',
+
+                { 'flex-col': props.orientation == 'horizontal', 'flex-row': props.orientation == 'vertical' }
+            ]
+        }),
+        metercontainer: ({ props }) => ({
+            class: [
+                // Flexbox
+                'flex',
+
+                { 'flex-col': props.orientation === 'vertical' },
+
+                // Sizing
+                { 'w-2 h-full': props.orientation === 'vertical' },
+                { 'h-2': props.orientation === 'horizontal' },
+
+                // Colors
+                'bg-gray-200 dark:bg-gray-700',
+
+                // Border Radius
+                'rounded-lg'
+            ]
+        }),
+        meter: ({ props }) => ({
+            class: [
+                // Shape
+                'border-0',
+
+                // Rounded Corners - Horizontal
+                {
+                    'first:rounded-l-lg last:rounded-r-lg': props.orientation === 'horizontal'
+                },
+
+                // Rounded Corners - Vertical
+                {
+                    'first:rounded-t-lg last:rounded-b-lg': props.orientation === 'vertical'
+                },
+
+                // Colors
+                'bg-primary-500 dark:bg-primary-400'
+            ]
+        }),
+        labellist: ({ props }) => ({
+            class: [
+                // Display & Flexbox
+                'flex flex-wrap',
+
+                { 'gap-4': props.labelOrientation === 'horizontal' },
+
+                { 'gap-2': props.labelOrientation === 'vertical' },
+
+                { 'flex-col': props.labelOrientation === 'vertical' },
+
+                // Conditional Alignment - Horizontal
+                {
+                    'align-end': props.labelOrientation === 'horizontal' && props.labelPosition === 'end',
+                    'align-start': props.labelOrientation === 'horizontal' && props.labelPosition === 'start'
+                },
+
+                // Conditional Alignment - Vertical
+                {
+                    'justify-end': props.labelOrientation === 'vertical' && props.labelPosition === 'end',
+                    'justify-start': props.labelOrientation === 'vertical' && props.labelPosition === 'start'
+                },
+
+                // List Styling
+                'm-0 p-0 list-none'
+            ]
+        }),
+        labellistitem: {
+            class: [
+                // Flexbox
+                'inline-flex',
+                'items-center',
+                'gap-2'
+            ]
+        },
+        labellisttype: {
+            class: [
+                // Display
+                'inline-flex',
+
+                // Background Color
+                'bg-primary-500 dark:bg-primary-400',
+
+                // Size
+                'w-2 h-2',
+
+                // Rounded Shape
+                'rounded-full'
+            ]
+        }
     },
     //MEDIA
     image: {

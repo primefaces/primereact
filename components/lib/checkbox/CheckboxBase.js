@@ -14,38 +14,6 @@ const classes = {
         })
 };
 
-const styles = `
-@layer primereact {
-    .p-checkbox {
-        position: relative;
-        display: inline-flex;
-        user-select: none;
-        vertical-align: bottom;
-    }
-
-    .p-checkbox-input {
-        appearance: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        opacity: 0;
-        z-index: 1;
-        outline: 0 none;
-        cursor: pointer;
-    }
-
-    .p-checkbox-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-`;
-
 export const CheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Checkbox',
@@ -74,7 +42,6 @@ export const CheckboxBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes,
-        styles
+        classes
     }
 });
