@@ -238,6 +238,7 @@ export const MultiSelectBase = ComponentBase.extend({
         itemClassName: null,
         itemTemplate: null,
         loading: false,
+        loadingIcon: null,
         maxSelectedLabels: null,
         name: null,
         onBlur: null,
