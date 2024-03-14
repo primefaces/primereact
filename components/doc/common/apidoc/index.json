@@ -35039,6 +35039,22 @@
                             "description": "Function that gets the option and returns the content for it."
                         },
                         {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Displays a loader to indicate data load is in progress."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
+                        },
+                        {
                             "name": "maxSelectedLabels",
                             "optional": true,
                             "readonly": false,
@@ -45490,14 +45506,6 @@
                             "description": "Size of the element relative to 100%."
                         },
                         {
-                            "name": "step",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "5",
-                            "description": "Step factor to increment/decrement the size of the panels while pressing the arrow keys."
-                        },
-                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -45583,6 +45591,14 @@
                             "type": "\"local\" | \"session\"",
                             "default": "session",
                             "description": "Defines where a stateful splitter keeps its state, valid values are \"session\" for sessionStorage and \"local\" for localStorage."
+                        },
+                        {
+                            "name": "step",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "5",
+                            "description": "Step factor to increment/decrement the size of the panels while pressing the arrow keys."
                         },
                         {
                             "name": "unstyled",
@@ -49494,6 +49510,14 @@
                             "description": "Target element on global tooltip option."
                         },
                         {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
                             "name": "updateDelay",
                             "optional": true,
                             "readonly": false,
@@ -49882,6 +49906,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
