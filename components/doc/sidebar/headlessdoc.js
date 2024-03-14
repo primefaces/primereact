@@ -1,11 +1,11 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
-import { Button } from '@/components/lib/button/Button';
-import { Sidebar } from '@/components/lib/sidebar/Sidebar';
 import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Button } from '@/components/lib/button/Button';
 import { Ripple } from '@/components/lib/ripple/Ripple';
-import { useState, useRef } from 'react';
+import { Sidebar } from '@/components/lib/sidebar/Sidebar';
 import { StyleClass } from '@/components/lib/styleclass/StyleClass';
+import { useRef, useState } from 'react';
 
 export function HeadlessDoc(props) {
     const [visible, setVisible] = useState(false);
@@ -207,7 +207,6 @@ export default function HeadlessDemo() {
     const btnRef2 = useRef(null);
     const btnRef3 = useRef(null);
     const btnRef4 = useRef(null);
-    const [visible, setVisible] = useState(false);
 
     return (
         <div className="card flex justify-content-center">

@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CheckboxPassThroughType } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -22,7 +23,6 @@ export declare type TriStateCheckboxPassThroughType<T> = PassThroughType<T, TriS
  */
 export interface TriStateCheckboxPassThroughMethodOptions {
     props: TriStateCheckboxProps;
-    state: TriStateCheckboxState;
 }
 
 /**
@@ -35,9 +35,13 @@ export interface TriStateCheckboxPassThroughOptions {
      */
     root?: TriStateCheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the checkbox box's DOM element.
+     * Uses to pass attributes to the input's DOM element.
      */
-    checkbox?: TriStateCheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    input?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the box's DOM element.
+     */
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
@@ -60,16 +64,6 @@ export interface TriStateCheckboxPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in TriStateCheckbox component.
- */
-export interface TriStateCheckboxState {
-    /**
-     * Focused state as a boolean.
-     */
-    focused: boolean;
 }
 
 /**
