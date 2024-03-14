@@ -21,7 +21,7 @@ export const Checkbox = React.memo(
         });
 
         useHandleStyle(CheckboxBase.css.styles, isUnstyled, { name: 'checkbox' });
-        
+
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 

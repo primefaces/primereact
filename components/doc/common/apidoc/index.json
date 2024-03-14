@@ -10087,19 +10087,6 @@
                             "description": "Callback to invoke on value change"
                         },
                         {
-                            "name": "onClick",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "CheckboxClickEvent",
-                                    "description": "Custom click event"
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke on value change. Mark the event with preventDefault to prevent the option from changing."
-                        },
-                        {
                             "name": "onContextMenu",
                             "parameters": [
                                 {
@@ -10161,36 +10148,6 @@
                             "type": "FormTarget<any>"
                         }
                     ]
-                },
-                "CheckboxClickEvent": {
-                    "description": "Custom click event.",
-                    "relatedProp": "onClick",
-                    "props": [
-                        {
-                            "name": "originalEvent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SyntheticEvent<Element, Event>"
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
-                        },
-                        {
-                            "name": "checked",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
-                        },
-                        {
-                            "name": "target",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "FormTarget<any>"
-                        }
-                    ]
                 }
             }
         },
@@ -10206,12 +10163,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "CheckboxProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "CheckboxState"
                         },
                         {
                             "name": "context",
@@ -10241,6 +10192,13 @@
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
+                            "name": "box",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
+                        },
+                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -10253,20 +10211,6 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
-                        },
-                        {
-                            "name": "hiddenInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInput",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the hidden input's DOM element."
                         },
                         {
                             "name": "hooks",
@@ -10295,20 +10239,6 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current disabled state of the item as a boolean."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "CheckboxState": {
-                    "description": "Defines current inline state in Checkbox component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Current focus state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -30790,12 +30720,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "InputSwitchProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "InputSwitchState"
                         }
                     ],
                     "callbacks": []
@@ -30819,18 +30743,11 @@
                             "description": "Uses to pass attributes to the slider's DOM element."
                         },
                         {
-                            "name": "hiddenInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "InputSwitchPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInput",
+                            "name": "input",
                             "optional": true,
                             "readonly": false,
                             "type": "InputSwitchPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the hidden input's DOM element."
+                            "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -30845,20 +30762,6 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "InputSwitchState": {
-                    "description": "Defines current inline state in InputSwitch component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Current focus state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -35134,6 +35037,22 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Function that gets the option and returns the content for it."
+                        },
+                        {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Displays a loader to indicate data load is in progress."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
                         },
                         {
                             "name": "maxSelectedLabels",
@@ -41937,7 +41856,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "When present, it specifies that the element value cannot be altered."
+                            "description": "When present, it specifies that the component should be disabled."
                         },
                         {
                             "name": "inputId",
@@ -41954,6 +41873,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "name",
@@ -41978,6 +41905,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "readonly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies that an input field is read-only."
                         },
                         {
                             "name": "required",
@@ -42036,19 +41971,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke on value change"
-                        },
-                        {
-                            "name": "onClick",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "RadioButtonClickEvent",
-                                    "description": "Custom click event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke on click.  Mark the event with preventDefault to prevent the option from changing."
                         }
                     ]
                 }
@@ -42060,36 +41982,6 @@
                 "RadioButtonChangeEvent": {
                     "description": "Custom change event.",
                     "relatedProp": "onChange",
-                    "props": [
-                        {
-                            "name": "originalEvent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SyntheticEvent<Element, Event>"
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
-                        },
-                        {
-                            "name": "checked",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
-                        },
-                        {
-                            "name": "target",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "FormTarget<any>"
-                        }
-                    ]
-                },
-                "RadioButtonClickEvent": {
-                    "description": "Custom click event.",
-                    "relatedProp": "onClick",
                     "props": [
                         {
                             "name": "originalEvent",
@@ -42131,12 +42023,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "RadioButtonProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "RadioButtonState"
                         }
                     ],
                     "callbacks": []
@@ -42153,13 +42039,6 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "input",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "RadioButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the input's DOM element."
-                        },
-                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -42167,18 +42046,18 @@
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
-                            "name": "hiddenInputWrapper",
+                            "name": "input",
                             "optional": true,
                             "readonly": false,
                             "type": "RadioButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden accessible DOM element wrapper."
+                            "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
-                            "name": "hiddenInput",
+                            "name": "box",
                             "optional": true,
                             "readonly": false,
-                            "type": "RadioButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden accessible DOM element."
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -42193,20 +42072,6 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "RadioButtonState": {
-                    "description": "Defines current inline state in RadioButton component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Current focused state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -45641,14 +45506,6 @@
                             "description": "Size of the element relative to 100%."
                         },
                         {
-                            "name": "step",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "default": "5",
-                            "description": "Step factor to increment/decrement the size of the panels while pressing the arrow keys."
-                        },
-                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -45734,6 +45591,14 @@
                             "type": "\"local\" | \"session\"",
                             "default": "session",
                             "description": "Defines where a stateful splitter keeps its state, valid values are \"session\" for sessionStorage and \"local\" for localStorage."
+                        },
+                        {
+                            "name": "step",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "5",
+                            "description": "Step factor to increment/decrement the size of the panels while pressing the arrow keys."
                         },
                         {
                             "name": "unstyled",
@@ -48895,12 +48760,28 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the element should be disabled."
+                        },
+                        {
                             "name": "iconPos",
                             "optional": true,
                             "readonly": false,
                             "type": "\"left\" | \"right\"",
                             "default": "left",
                             "description": "Position of the icon, valid values are \"left\" and \"right\"."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "offIcon",
@@ -48949,6 +48830,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "readonly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies that an input field is read-only."
                         },
                         {
                             "name": "tooltip",
@@ -49108,6 +48997,20 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "box",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -49607,6 +49510,14 @@
                             "description": "Target element on global tooltip option."
                         },
                         {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
                             "name": "updateDelay",
                             "optional": true,
                             "readonly": false,
@@ -49995,6 +49906,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -54526,12 +54445,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TriStateCheckboxProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "TriStateCheckboxState"
                         }
                     ],
                     "callbacks": []
@@ -54548,11 +54461,18 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "checkbox",
+                            "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox box's DOM element."
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "box",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -54588,20 +54508,6 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "TriStateCheckboxState": {
-                    "description": "Defines current inline state in TriStateCheckbox component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Focused state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -54733,7 +54639,7 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,CheckboxClickEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
+                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
                 },
                 "FormBooleanEvent": {
                     "relatedProp": "",

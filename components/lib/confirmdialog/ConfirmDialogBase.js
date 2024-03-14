@@ -23,6 +23,7 @@ export const ConfirmDialogBase = ComponentBase.extend({
         breakpoints: null,
         children: undefined,
         className: null,
+        content: null,
         defaultFocus: 'accept',
         footer: null,
         icon: null,

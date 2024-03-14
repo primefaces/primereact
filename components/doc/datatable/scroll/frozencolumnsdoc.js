@@ -164,7 +164,7 @@ export default function FrozenColumnsDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    A column can be fixed during horizontal scrolling by enablng the <i>frozen</i> property. The location is defined with the <i>alignFrozen</i> that can be <i>left</i> or <i>right</i>.
+                    A column can be fixed during horizontal scrolling by enabling the <i>frozen</i> property. The location is defined with the <i>alignFrozen</i> that can be <i>left</i> or <i>right</i>.
                 </p>
             </DocSectionText>
             <DeferredDemo onLoad={loadDemoData}>
