@@ -107,7 +107,7 @@ export const Tree = React.memo(
         };
 
         const onDrop = (event) => {
-            if (validateDropNode(dragState.current.path, event.path)) {
+            if (validateDropNode(dragState.current?.path, event.path)) {
                 const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
@@ -210,7 +210,7 @@ export const Tree = React.memo(
         };
 
         const validateDropPoint = (event) => {
-            let _validateDrop = validateDrop(dragState.current.path, event.path);
+            let _validateDrop = validateDrop(dragState.current?.path, event.path);
 
             if (_validateDrop) {
                 //child dropped to next sibling's drop point
