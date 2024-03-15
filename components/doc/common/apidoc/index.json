@@ -22645,6 +22645,14 @@
                             "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -22988,6 +22996,14 @@
                             "type": "string",
                             "default": "200px",
                             "description": "Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "showClear",
@@ -31499,6 +31515,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -31713,6 +31737,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "tooltip",
@@ -34815,6 +34847,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "checkboxIcon",
                             "optional": true,
                             "readonly": false,
@@ -35253,6 +35293,14 @@
                             "type": "number",
                             "default": "",
                             "description": "Number of maximum options that can be selected."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "showClear",
