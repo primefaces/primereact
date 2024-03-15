@@ -729,9 +729,9 @@ const Tailwind = {
     speeddial: {
         root: 'absolute flex',
         button: {
-            root: ({ state }) => ({
+            root: ({ parent }) => ({
                 className: classNames('w-16 !h-16 !rounded-full justify-center z-10', {
-                    'rotate-45': state.visible
+                    'rotate-45': parent.state.visible
                 })
             }),
             label: {

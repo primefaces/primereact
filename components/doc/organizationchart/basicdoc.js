@@ -92,7 +92,7 @@ import { OrganizationChart } from 'primereact/organizationchart';
 import { TreeNode } from 'primereact/treenode';
 
 export default function BasicDoc() {
-    const [data] = useState<TreeNode>([
+    const [data] = useState<TreeNode[]>([
         {
             label: 'Argentina',
             expanded: true,

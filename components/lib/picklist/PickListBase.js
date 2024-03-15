@@ -114,6 +114,7 @@ export const PickListBase = ComponentBase.extend({
         targetFilterTemplate: null,
         tabIndex: 0,
         dataKey: null,
+        autoOptionFocus: true,
         breakpoint: '960px',
         itemTemplate: null,
         sourceItemTemplate: null,

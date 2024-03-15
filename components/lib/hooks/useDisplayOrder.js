@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UniqueComponentId } from '../utils/Utils';
+import { ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 const groupToDisplayedElements = {};
 
@@ -22,7 +22,7 @@ export const useDisplayOrder = (group, isVisible = true) => {
 
                 // Reduce array length, by removing undefined elements at the end of array:
                 const lastIndex = groupToDisplayedElements[group].length - 1;
-                const lastOrder = groupToDisplayedElements[group].findLastIndex((el) => el !== undefined);
+                const lastOrder = ObjectUtils.findLastIndex(groupToDisplayedElements[group], (el) => el !== undefined);
 
                 if (lastOrder !== lastIndex) groupToDisplayedElements[group].splice(lastOrder + 1);
 
