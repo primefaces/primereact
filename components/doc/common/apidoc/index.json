@@ -22645,20 +22645,20 @@
                             "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
-                            "name": "checkmark",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "Whether the selected option will be shown with a check mark."
-                        },
-                        {
                             "name": "autoOptionFocus",
                             "optional": true,
                             "readonly": false,
                             "type": "false",
                             "default": "false",
                             "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
+                            "name": "checkmark",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the selected option will be shown with a check mark."
                         },
                         {
                             "name": "children",
