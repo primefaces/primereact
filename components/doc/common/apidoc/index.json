@@ -22645,6 +22645,22 @@
                             "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
+                            "name": "checkmark",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the selected option will be shown with a check mark."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -22796,6 +22812,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the focusable input element."
+                        },
+                        {
+                            "name": "highlightOnSelect",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the selected option will be add highlight class."
                         },
                         {
                             "name": "id",
@@ -22988,6 +23012,14 @@
                             "type": "string",
                             "default": "200px",
                             "description": "Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "showClear",
@@ -23370,11 +23402,39 @@
                             "description": "Uses to pass attributes to the item group's DOM element."
                         },
                         {
+                            "name": "itemGroupLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the item group label's DOM element."
+                        },
+                        {
                             "name": "item",
                             "optional": true,
                             "readonly": false,
                             "type": "DropdownPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "itemLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the item label's DOM element."
+                        },
+                        {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Used to pass attributes to the check icon's DOM element."
+                        },
+                        {
+                            "name": "blankIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Used to pass attributes to the bank icon's DOM element."
                         },
                         {
                             "name": "emptyMessage",
@@ -31499,6 +31559,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -31713,6 +31781,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "tooltip",
@@ -34815,6 +34891,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "checkboxIcon",
                             "optional": true,
                             "readonly": false,
@@ -35253,6 +35337,14 @@
                             "type": "number",
                             "default": "",
                             "description": "Number of maximum options that can be selected."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "showClear",
@@ -36522,6 +36614,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to focus on the first visible or selected element."
                         },
                         {
                             "name": "breakpoint",
@@ -40561,6 +40661,14 @@
                 "props": {
                     "description": "Defines valid properties in PickList component.",
                     "values": [
+                        {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
                         {
                             "name": "breakpoint",
                             "optional": true,
