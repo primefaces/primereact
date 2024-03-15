@@ -35,7 +35,7 @@ export default function CheckmarkDemo() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
-                placeholder="Select a City" className="w-full md:w-14rem" checkmark={true} />
+                placeholder="Select a City" className="w-full md:w-14rem" checkmark={true} highlightOnSelect={false} />
         </div>
     )
 }
@@ -62,7 +62,7 @@ export default function CheckmarkDemo() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" 
-                placeholder="Select a City" className="w-full md:w-14rem" checkmark={true} />
+                placeholder="Select a City" className="w-full md:w-14rem" checkmark={true} highlightOnSelect={false} />
         </div>
     )
 }
@@ -75,7 +75,7 @@ export default function CheckmarkDemo() {
                 <p>An alternative way to highlight the selected option is displaying a checkmark instead. </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" placeholder="Select a City" className="w-full md:w-14rem" checkmark={true} />
+                <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" placeholder="Select a City" className="w-full md:w-14rem" checkmark={true} highlightOnSelect={false} />
             </div>
             <DocSectionCode code={code} />
         </>
