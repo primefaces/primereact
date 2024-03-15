@@ -54,6 +54,10 @@ export const BodyCell = React.memo((props) => {
     const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
+    const isEditable = () => {
+        return getColumnProp('editor');
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
@@ -66,12 +70,9 @@ export const BodyCell = React.memo((props) => {
 
             selfClick.current = false;
         },
-        options: true
+        options: true,
+        when: isEditable()
     });
-
-    const isEditable = () => {
-        return getColumnProp('editor');
-    };
 
     const isSelected = () => {
         return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false;

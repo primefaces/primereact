@@ -136,6 +136,11 @@ export interface TooltipOptions {
      */
     ptOptions?: PassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Callback to invoke before the tooltip is shown.
      * @param {TooltipEvent} event - Browser event
      */

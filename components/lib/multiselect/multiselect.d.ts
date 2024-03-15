@@ -464,7 +464,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     /**
      * Icon class of the dropdown icon.
      */
-    dropdownIcon?: IconType<MultiSelectProps>;
+    dropdownIcon?: IconType<MultiSelectProps> | undefined;
     /**
      * Template to display when filtering does not return any results.
      * @defaultValue No records found
@@ -550,6 +550,15 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Function that gets the option and returns the content for it.
      */
     itemTemplate?: React.ReactNode | ((option: any) => React.ReactNode);
+    /**
+     * Displays a loader to indicate data load is in progress.
+     * @defaultValue false
+     */
+    loading?: boolean | undefined;
+    /**
+     * The icon to show while indicating data load is in progress.
+     */
+    loadingIcon?: IconType<MultiSelectProps> | undefined;
     /**
      * Decides how many selected item labels to show at most.
      */
@@ -680,6 +689,16 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Index of the element in tabbing order.
      */
     tabIndex?: number | undefined;
+    /**
+     * When enabled, the focused tab is activated.
+     * @defaultValue false
+     */
+    selectOnFocus?: false;
+    /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
+     */
+    autoOptionFocus?: false;
     /**
      * Content of the tooltip.
      */

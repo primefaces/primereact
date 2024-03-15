@@ -22,7 +22,6 @@ export declare type InputSwitchPassThroughType<T> = PassThroughType<T, InputSwit
  */
 export interface InputSwitchPassThroughMethodOptions {
     props: InputSwitchProps;
-    state: InputSwitchState;
 }
 
 /**
@@ -39,13 +38,9 @@ export interface InputSwitchPassThroughOptions {
      */
     slider?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     * Uses to pass attributes to the input's DOM element.
      */
-    hiddenInputWrapper?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input's DOM element.
-     */
-    hiddenInput?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    input?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
@@ -56,17 +51,6 @@ export interface InputSwitchPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
-}
-
-/**
- * Defines current inline state in InputSwitch component.
- */
-export interface InputSwitchState {
-    /**
-     * Current focus state as a boolean.
-     * @defaultValue false
-     */
-    focused: boolean;
 }
 
 /**

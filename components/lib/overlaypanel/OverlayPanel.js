@@ -54,13 +54,14 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         when: visibleState
     });
 
-    const overlayPanelDisplayOrder = useDisplayOrder('overlay-panel', visibleState);
+    const isCloseOnEscape = visibleState && props.closeOnEscape;
+    const overlayPanelDisplayOrder = useDisplayOrder('overlay-panel', isCloseOnEscape);
 
     useGlobalOnEscapeKey({
         callback: () => {
             hide();
         },
-        when: visibleState && props.closeOnEscape && overlayPanelDisplayOrder,
+        when: isCloseOnEscape && overlayPanelDisplayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayPanelDisplayOrder]
     });
 

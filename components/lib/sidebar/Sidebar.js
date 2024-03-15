@@ -28,13 +28,14 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const sidebarRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
-    const sidebarDisplayOrder = useDisplayOrder('sidebar', visibleState);
+    const isCloseOnEscape = visibleState && props.closeOnEscape;
+    const sidebarDisplayOrder = useDisplayOrder('sidebar', isCloseOnEscape);
 
     useGlobalOnEscapeKey({
         callback: (event) => {
             onClose(event);
         },
-        when: visibleState && props.closeOnEscape && sidebarDisplayOrder,
+        when: isCloseOnEscape && sidebarDisplayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.SIDEBAR, sidebarDisplayOrder]
     });
 

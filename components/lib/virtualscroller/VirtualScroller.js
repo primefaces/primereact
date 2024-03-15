@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils, IconUtils, mergeProps } from '../utils/Utils';
-import { VirtualScrollerBase } from './VirtualScrollerBase';
-import { SpinnerIcon } from '../icons/spinner';
 import { PrimeReactContext } from '../api/Api';
+import { useEventListener, useMergeProps, useMountEffect, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
+import { SpinnerIcon } from '../icons/spinner';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { VirtualScrollerBase } from './VirtualScrollerBase';
 
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = VirtualScrollerBase.getProps(inProps, context);
         const prevProps = usePrevious(inProps) || {};
@@ -216,7 +217,7 @@ export const VirtualScroller = React.memo(
                 Promise.resolve().then(() => {
                     lazyLoadState.current = {
                         first: props.step ? (both ? { rows: 0, cols: firstState.cols } : 0) : firstState,
-                        last: Math.min(props.step ? props.step : last, props.items.length)
+                        last: Math.min(props.step ? props.step : last, (props.items || []).length)
                     };
 
                     props.onLazyLoad && props.onLazyLoad(lazyLoadState.current);
@@ -251,7 +252,7 @@ export const VirtualScroller = React.memo(
         };
 
         const getLast = (last = 0, isCols) => {
-            return props.items ? Math.min(isCols ? (props.columns || props.items[0]).length : props.items.length, last) : 0;
+            return props.items ? Math.min(isCols ? (props.columns || props.items[0])?.length || 0 : (props.items || []).length, last) : 0;
         };
 
         const getContentPosition = () => {
@@ -415,8 +416,8 @@ export const VirtualScroller = React.memo(
 
                 if (props.lazy && isPageChanged(first)) {
                     const newLazyLoadState = {
-                        first: props.step ? Math.min(getPageByFirst(first) * props.step, props.items.length - props.step) : first,
-                        last: Math.min(props.step ? (getPageByFirst(first) + 1) * props.step : last, props.items.length)
+                        first: props.step ? Math.min(getPageByFirst(first) * props.step, (props.items || []).length - props.step) : first,
+                        last: Math.min(props.step ? (getPageByFirst(first) + 1) * props.step : last, (props.items || []).length)
                     };
 
                     const isLazyStateChanged = !lazyLoadState.current || lazyLoadState.current.first !== newLazyLoadState.first || lazyLoadState.current.last !== newLazyLoadState.last;
@@ -495,7 +496,7 @@ export const VirtualScroller = React.memo(
         };
 
         const loaderOptions = (index, extOptions) => {
-            const count = loaderArrState.length;
+            const count = loaderArrState.length || 0;
 
             return {
                 index,

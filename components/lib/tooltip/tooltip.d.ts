@@ -145,17 +145,17 @@ export declare class Tooltip extends React.Component<TooltipProps, any> {
      * Used to reload target events. In some cases, the target element can be hidden initially. Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.
      * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public updateTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
+    public updateTargetEvents(target?: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to load target events.
      * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public loadTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
+    public loadTargetEvents(target?: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to unload target events.
      * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public unloadTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
+    public unloadTargetEvents(target?: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to get container element.
      * @return {HTMLElement} Container element

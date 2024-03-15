@@ -346,6 +346,16 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     id?: string | undefined;
     /**
+     * When enabled, the focused tab is activated.
+     * @defaultValue false
+     */
+    selectOnFocus?: false;
+    /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
+     */
+    autoOptionFocus?: false;
+    /**
      * Identifier of the focusable input.
      */
     inputId?: string | undefined;

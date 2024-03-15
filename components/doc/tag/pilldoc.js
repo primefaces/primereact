@@ -10,6 +10,8 @@ export function PillDoc(props) {
 <Tag severity="info" value="Info" rounded></Tag>
 <Tag severity="warning" value="Warning" rounded></Tag>
 <Tag severity="danger" value="Danger" rounded></Tag>
+<Tag severity="secondary" value="Secondary" rounded></Tag>
+<Tag severity="contrast" value="Contrast" rounded></Tag>
         `,
         javascript: `
 import React from 'react';
@@ -23,6 +25,8 @@ export default function PillDemo() {
             <Tag severity="info" value="Info" rounded></Tag>
             <Tag severity="warning" value="Warning" rounded></Tag>
             <Tag severity="danger" value="Danger" rounded></Tag>
+            <Tag severity="secondary" value="Secondary" rounded></Tag>
+            <Tag severity="contrast" value="Contrast" rounded></Tag>
         </div>
     );
 }
@@ -39,6 +43,8 @@ export default function PillDemo() {
             <Tag severity="info" value="Info" rounded></Tag>
             <Tag severity="warning" value="Warning" rounded></Tag>
             <Tag severity="danger" value="Danger" rounded></Tag>
+            <Tag severity="secondary" value="Secondary" rounded></Tag>
+            <Tag severity="contrast" value="Contrast" rounded></Tag>
         </div>
     );
 }
@@ -58,6 +64,8 @@ export default function PillDemo() {
                 <Tag severity="info" value="Info" rounded></Tag>
                 <Tag severity="warning" value="Warning" rounded></Tag>
                 <Tag severity="danger" value="Danger" rounded></Tag>
+                <Tag severity="secondary" value="Secondary" rounded></Tag>
+                <Tag severity="contrast" value="Contrast" rounded></Tag>
             </div>
             <DocSectionCode code={code} />
         </>

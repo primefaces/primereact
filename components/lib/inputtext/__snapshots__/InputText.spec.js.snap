@@ -3,7 +3,7 @@
 exports[`InputText when input has className only 1 className is printed 1`] = `
 <div>
   <input
-    class="jest p-inputtext p-component p-filled"
+    class="p-inputtext p-component jest p-filled"
     data-pc-name="inputtext"
     data-pc-section="root"
   />

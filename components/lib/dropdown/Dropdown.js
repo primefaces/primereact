@@ -632,7 +632,7 @@ export const Dropdown = React.memo(
             let searchIndex = null;
 
             if (event.target.value) {
-                searchIndex = visibleOptions.findIndex((item) => item.name.toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
+                searchIndex = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
             }
 
             setFocusedOptionIndex(searchIndex);
