@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UniqueComponentId } from '../utils/Utils';
+import { ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 const groupToDisplayedElements = {};
 
