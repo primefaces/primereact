@@ -1,9 +1,11 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, PrimeReactContext, localeOption } from '../api/Api';
+import { ariaLabel } from '../api/Locale';
 import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
+import FocusTrap from '../focustrap/FocusTrap';
 import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { FilterIcon } from '../icons/filter';
 import { FilterSlashIcon } from '../icons/filterslash';
@@ -14,13 +16,11 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { ariaLabel } from '../api/Locale';
-import FocusTrap from '../focustrap/FocusTrap';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
     const overlayRef = React.useRef(null);
-    const overlayId = React.useRef(UniqueComponentId());
+    const overlayId = React.useRef(() => UniqueComponentId());
     const iconRef = React.useRef(null);
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);

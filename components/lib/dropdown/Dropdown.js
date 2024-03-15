@@ -632,7 +632,7 @@ export const Dropdown = React.memo(
             let searchIndex = null;
 
             if (event.target.value) {
-                searchIndex = visibleOptions.findIndex((item) => item.name.toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
+                searchIndex = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
             }
 
             setFocusedOptionIndex(searchIndex);
@@ -726,6 +726,7 @@ export const Dropdown = React.memo(
             if (selectedOption !== event.option) {
                 updateEditableLabel(event.option);
                 const optionValue = getOptionValue(event.option);
+                const selectedOptionIndex = findOptionIndexInList(event.option, visibleOptions);
 
                 if (props.onChange) {
                     props.onChange({
@@ -744,6 +745,8 @@ export const Dropdown = React.memo(
                         }
                     });
                 }
+
+                changeFocusedOptionIndex(event.originalEvent, selectedOptionIndex);
             }
         };
 

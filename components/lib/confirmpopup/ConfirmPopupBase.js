@@ -82,6 +82,7 @@ export const ConfirmPopupBase = ComponentBase.extend({
         children: undefined,
         className: null,
         closeOnEscape: true,
+        content: null,
         defaultFocus: 'accept',
         dismissable: true,
         footer: null,
