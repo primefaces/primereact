@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
+import { Checkbox } from '../checkbox/Checkbox';
 import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const mergeProps = useMergeProps();
-    const { ptm, cx } = props;
+    const { ptm, cx, isUnstyled } = props;
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -59,14 +60,6 @@ export const MultiSelectItem = React.memo((props) => {
         getPTOptions('checkboxContainer')
     );
 
-    const checkboxProps = mergeProps(
-        {
-            className: cx('checkbox', { itemProps: props }),
-            'data-p-highlight': props.selected
-        },
-        getPTOptions('checkbox')
-    );
-
     const itemProps = mergeProps(
         {
             className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
@@ -86,7 +79,7 @@ export const MultiSelectItem = React.memo((props) => {
     return (
         <li {...itemProps}>
             <div {...checkboxContainerProps}>
-                <div {...checkboxProps}>{checkboxIcon}</div>
+                <Checkbox checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
             </div>
             <span>{content}</span>
             <Ripple />
