@@ -21,6 +21,7 @@ const classes = {
         header: ({ selected, disabled, headerClassName, _className }) => classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className),
         headertitle: 'p-tabview-title',
         headeraction: 'p-tabview-nav-link',
+        closeIcon: 'p-tabview-close',
         content: ({ props, selected, getTabProp, tab, isSelected, shouldUseTab, index }) =>
             shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index)) ? classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), 'p-tabview-panel', { 'p-hidden': !selected }) : undefined
     }

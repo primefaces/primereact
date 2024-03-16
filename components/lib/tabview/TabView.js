@@ -338,9 +338,15 @@ export const TabView = React.forwardRef((inProps, ref) => {
         );
         const titleElement = <span {...headerTitleProps}>{header}</span>;
         const rightIconElement = rightIcon && IconUtils.getJSXIcon(rightIcon, undefined, { props });
-        const iconClassName = 'p-tabview-close';
-        const icon = closeIcon || <TimesIcon className={iconClassName} onClick={(e) => onTabHeaderClose(e, index)} />;
-        const closableIconElement = closable ? IconUtils.getJSXIcon(icon, { className: iconClassName, onClick: (e) => onTabHeaderClose(e, index) }, { props }) : null;
+        const closeIconProps = mergeProps(
+            {
+                className: cx('tab.closeIcon'),
+                onClick: (e) => onTabHeaderClose(e, index)
+            },
+            getTabPT(tab, 'closeIcon', index)
+        );
+        const icon = closeIcon || <TimesIcon {...closeIconProps} />;
+        const closableIconElement = closable ? IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props }) : null;
 
         const headerActionProps = mergeProps(
             {
