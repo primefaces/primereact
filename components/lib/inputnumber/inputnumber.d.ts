@@ -313,11 +313,6 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
     /**
-     * Callback to invoke when the key released.
-     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
-     */
-    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
-    /**
      * Used to get the child elements of the component.
      * @readonly
      */
