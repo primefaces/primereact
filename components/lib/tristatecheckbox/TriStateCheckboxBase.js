@@ -22,6 +22,7 @@ export const TriStateCheckboxBase = ComponentBase.extend({
         className: null,
         disabled: false,
         id: null,
+        invalid: false,
         onChange: null,
         readOnly: false,
         style: null,

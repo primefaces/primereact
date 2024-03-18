@@ -23,6 +23,7 @@ export const InputSwitchBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         name: null,
         onBlur: null,
         onChange: null,

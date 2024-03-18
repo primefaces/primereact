@@ -51,6 +51,11 @@ export interface PasswordPassThroughOptions {
      */
     showIcon?: PasswordPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Uses to pass attributes to the panel's DOM element.
      */
     panel?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
