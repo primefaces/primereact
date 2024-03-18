@@ -1,18 +1,21 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, cx, sx } = props;
         const context = React.useContext(PrimeReactContext);
         const virtualScrollerRef = React.useRef(null);
+
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
         const filterOptions = {
@@ -76,7 +79,24 @@ export const DropdownPanel = React.memo(
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} cx={cx} />;
+                return (
+                    <DropdownItem
+                        key={optionKey}
+                        index={j}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        label={optionLabel}
+                        option={option}
+                        style={style}
+                        template={props.itemTemplate}
+                        selected={props.isSelected(option)}
+                        highlightOnSelect={props.highlightOnSelect}
+                        disabled={disabled}
+                        onClick={props.onOptionClick}
+                        ptm={ptm}
+                        cx={cx}
+                        checkmark={props.checkmark}
+                    />
+                );
             });
         };
 
@@ -105,14 +125,23 @@ export const DropdownPanel = React.memo(
                 const itemGroupProps = mergeProps(
                     {
                         className: cx('itemGroup', { optionGroupLabel }),
-                        style
+                        style,
+                        'data-p-highlight': props.selected
                     },
                     getPTOptions('itemGroup')
+                );
+                const itemGroupLabelProps = mergeProps(
+                    {
+                        className: cx('itemGroupLabel')
+                    },
+                    getPTOptions('itemGroupLabel')
                 );
 
                 return (
                     <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{groupContent}</li>
+                        <li {...itemGroupProps}>
+                            <span {...itemGroupLabelProps}>{groupContent}</span>
+                        </li>
                         {groupChildrenContent}
                     </React.Fragment>
                 );
@@ -121,7 +150,24 @@ export const DropdownPanel = React.memo(
                 const optionKey = index + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} cx={cx} />;
+                return (
+                    <DropdownItem
+                        key={optionKey}
+                        label={optionLabel}
+                        index={index}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        option={option}
+                        style={style}
+                        template={props.itemTemplate}
+                        selected={props.isSelected(option)}
+                        highlightOnSelect={props.highlightOnSelect}
+                        disabled={disabled}
+                        onClick={props.onOptionClick}
+                        ptm={ptm}
+                        cx={cx}
+                        checkmark={props.checkmark}
+                    />
+                );
             }
         };
 
@@ -140,11 +186,11 @@ export const DropdownPanel = React.memo(
                 const ariaLabel = localeOption('clear');
                 const clearIconProps = mergeProps(
                     {
-                        className: cx('clearIcon'),
+                        className: cx('filterClearIcon'),
                         'aria-label': ariaLabel,
                         onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
                     },
-                    getPTOptions('clearIcon')
+                    getPTOptions('filterClearIcon')
                 );
                 const icon = props.filterClearIcon || <TimesIcon {...clearIconProps} />;
                 const filterClearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
@@ -308,9 +354,11 @@ export const DropdownPanel = React.memo(
             return (
                 <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
+                        {props.firstFocusableElement}
                         {filter}
                         {content}
                         {footer}
+                        {props.lastFocusableElement}
                     </div>
                 </CSSTransition>
             );

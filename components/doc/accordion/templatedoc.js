@@ -1,6 +1,8 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Accordion, AccordionTab } from '@/components/lib/accordion/Accordion';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Badge } from '@/components/lib/badge/Badge';
 
 export function TemplateDoc(props) {
     const code = {
@@ -8,10 +10,11 @@ export function TemplateDoc(props) {
 <Accordion activeIndex={0}>
     <AccordionTab
         header={
-            <div className="flex align-items-center">
-                <i className="pi pi-calendar mr-2"></i>
-                <span className="vertical-align-middle">Header I</span>
-            </div>
+            <span className="flex align-items-center gap-2 w-full">
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Amy Elsner</span>
+                <Badge value="3" className="ml-auto" />
+            </span>
         }
     >
         <p className="m-0">
@@ -23,10 +26,11 @@ export function TemplateDoc(props) {
     </AccordionTab>
     <AccordionTab
         header={
-            <div className="flex align-items-center">
-                <i className="pi pi-user mr-2"></i>
-                <span className="vertical-align-middle">Header II</span>
-            </div>
+            <span className="flex align-items-center gap-2 w-full">
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Onyama Limba</span>
+                <Badge value="4" className="ml-auto" />
+            </span>
         }
     >
         <p className="m-0">
@@ -38,11 +42,11 @@ export function TemplateDoc(props) {
     </AccordionTab>
     <AccordionTab
         header={
-            <div className="flex align-items-center">
-                <i className="pi pi-search mr-2"></i>
-                <span className="vertical-align-middle">Header III</span>
-                <i className="pi pi-cog ml-2 ml-2"></i>
-            </div>
+            <span className="flex align-items-center gap-2 w-full">
+                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                <Badge value="2" className="ml-auto" />
+            </span>
         }
     >
         <p className="m-0">
@@ -57,6 +61,8 @@ export function TemplateDoc(props) {
         javascript: `
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Avatar } from 'primereact/accordion';
+import { Badge } from 'primereact/accordion';
 
 export default function TemplateDemo() {
     return (
@@ -64,10 +70,11 @@ export default function TemplateDemo() {
             <Accordion activeIndex={0}>
                 <AccordionTab
                     header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-calendar mr-2"></i>
-                            <span className="vertical-align-middle">Header I</span>
-                        </div>
+                        <span className="flex align-items-center gap-2 w-full">
+                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                            <span className="font-bold white-space-nowrap">Amy Elsner</span>
+                            <Badge value="3" className="ml-auto" />
+                        </span>
                     }
                 >
                     <p className="m-0">
@@ -79,10 +86,11 @@ export default function TemplateDemo() {
                 </AccordionTab>
                 <AccordionTab
                     header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-user mr-2"></i>
-                            <span className="vertical-align-middle">Header II</span>
-                        </div>
+                        <span className="flex align-items-center gap-2 w-full">
+                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                            <span className="font-bold white-space-nowrap">Onyama Limba</span>
+                            <Badge value="4" className="ml-auto" />
+                        </span>
                     }
                 >
                     <p className="m-0">
@@ -94,11 +102,11 @@ export default function TemplateDemo() {
                 </AccordionTab>
                 <AccordionTab
                     header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-search mr-2"></i>
-                            <span className="vertical-align-middle">Header III</span>
-                            <i className="pi pi-cog ml-2 ml-2"></i>
-                        </div>
+                        <span className="flex align-items-center gap-2 w-full">
+                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                            <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                            <Badge value="2" className="ml-auto" />
+                        </span>
                     }
                 >
                     <p className="m-0">
@@ -116,6 +124,8 @@ export default function TemplateDemo() {
         typescript: `
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Avatar } from 'primereact/accordion';
+import { Badge } from 'primereact/accordion';
 
 export default function TemplateDemo() {
     return (
@@ -123,10 +133,11 @@ export default function TemplateDemo() {
             <Accordion activeIndex={0}>
                 <AccordionTab
                     header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-calendar mr-2"></i>
-                            <span className="vertical-align-middle">Header I</span>
-                        </div>
+                        <span className="flex align-items-center gap-2 w-full">
+                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                            <span className="font-bold white-space-nowrap">Amy Elsner</span>
+                            <Badge value="3" className="ml-auto" />
+                        </span>
                     }
                 >
                     <p className="m-0">
@@ -138,10 +149,11 @@ export default function TemplateDemo() {
                 </AccordionTab>
                 <AccordionTab
                     header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-user mr-2"></i>
-                            <span className="vertical-align-middle">Header II</span>
-                        </div>
+                        <span className="flex align-items-center gap-2 w-full">
+                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                            <span className="font-bold white-space-nowrap">Onyama Limba</span>
+                            <Badge value="4" className="ml-auto" />
+                        </span>
                     }
                 >
                     <p className="m-0">
@@ -153,11 +165,11 @@ export default function TemplateDemo() {
                 </AccordionTab>
                 <AccordionTab
                     header={
-                        <div className="flex align-items-center">
-                            <i className="pi pi-search mr-2"></i>
-                            <span className="vertical-align-middle">Header III</span>
-                            <i className="pi pi-cog ml-2 ml-2"></i>
-                        </div>
+                        <span className="flex align-items-center gap-2 w-full">
+                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                            <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                            <Badge value="2" className="ml-auto" />
+                        </span>
                     }
                 >
                     <p className="m-0">
@@ -185,10 +197,11 @@ export default function TemplateDemo() {
                 <Accordion activeIndex={0}>
                     <AccordionTab
                         header={
-                            <div className="flex align-items-center">
-                                <i className="pi pi-calendar mr-2"></i>
-                                <span className="vertical-align-middle">Header I</span>
-                            </div>
+                            <span className="flex align-items-center gap-2 w-full">
+                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                                <span className="font-bold white-space-nowrap">Amy Elsner</span>
+                                <Badge value="3" className="ml-auto" />
+                            </span>
                         }
                     >
                         <p className="m-0">
@@ -199,10 +212,11 @@ export default function TemplateDemo() {
                     </AccordionTab>
                     <AccordionTab
                         header={
-                            <div className="flex align-items-center">
-                                <i className="pi pi-user mr-2"></i>
-                                <span className="vertical-align-middle">Header II</span>
-                            </div>
+                            <span className="flex align-items-center gap-2 w-full">
+                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                                <span className="font-bold white-space-nowrap">Onyama Limba</span>
+                                <Badge value="4" className="ml-auto" />
+                            </span>
                         }
                     >
                         <p className="m-0">
@@ -212,11 +226,11 @@ export default function TemplateDemo() {
                     </AccordionTab>
                     <AccordionTab
                         header={
-                            <div className="flex align-items-center">
-                                <i className="pi pi-search mr-2"></i>
-                                <span className="vertical-align-middle">Header III</span>
-                                <i className="pi pi-cog ml-2 ml-2"></i>
-                            </div>
+                            <span className="flex align-items-center gap-2 w-full">
+                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                                <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
+                                <Badge value="2" className="ml-auto" />
+                            </span>
                         }
                     >
                         <p className="m-0">

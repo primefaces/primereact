@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { IconUtils, mergeProps } from '../utils/Utils';
+import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { ColumnBase } from '../column/ColumnBase';
+import { Ripple } from '../ripple/Ripple';
+import { IconUtils } from '../utils/Utils';
 
 export const RowTogglerButton = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const onClick = (event) => {

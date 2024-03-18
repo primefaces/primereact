@@ -20,7 +20,7 @@ export function StyledDoc(props) {
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>p-panel-titlebar</td>
+                            <td>p-panel-header</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
@@ -28,7 +28,7 @@ export function StyledDoc(props) {
                             <td>Title text of panel.</td>
                         </tr>
                         <tr>
-                            <td>p-panel-titlebar-toggler</td>
+                            <td>p-panel-toggler</td>
                             <td>Toggle icon.</td>
                         </tr>
                         <tr>

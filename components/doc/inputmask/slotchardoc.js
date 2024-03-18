@@ -4,7 +4,7 @@ import { InputMask } from '@/components/lib/inputmask/InputMask';
 import { useState } from 'react';
 
 export function SlotCharDoc(props) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     const code = {
         basic: `
@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { InputMask } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState();
 
     return (
         <div className="card flex justify-content-center">
@@ -29,7 +29,7 @@ import React, { useState } from "react";
 import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
-    const [value, setValue] = useState<string>('');
+    const [value, setValue] = useState<string | undefined>();
 
     return (
         <div className="card flex justify-content-center">

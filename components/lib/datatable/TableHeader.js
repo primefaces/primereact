@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
-import { classNames, mergeProps } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
@@ -11,6 +11,7 @@ import { HeaderCheckbox } from './HeaderCheckbox';
 export const TableHeader = React.memo((props) => {
     const [sortableDisabledFieldsState, setSortableDisabledFieldsState] = React.useState([]);
     const [allSortableDisabledState, setAllSortableDisabledState] = React.useState(false);
+    const mergeProps = useMergeProps();
     const isSingleSort = props.sortMode === 'single';
     const isMultipleSort = props.sortMode === 'multiple';
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
@@ -272,7 +273,8 @@ export const TableHeader = React.memo((props) => {
     const content = createContent();
     const theadProps = mergeProps(
         {
-            className: cx('thead')
+            className: cx('thead'),
+            role: 'rowgroup'
         },
         getColumnGroupPTOptions('root'),
         ptm('thead', { hostName: props.hostName })

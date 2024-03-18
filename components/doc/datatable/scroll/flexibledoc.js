@@ -6,14 +6,15 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dialog } from '@/components/lib/dialog/Dialog';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function FlexibleScrollDoc(props) {
     const [customers, setCustomers] = useState([]);
     const [dialogVisible, setDialogVisible] = useState(false);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const dialogFooterTemplate = () => {
         return <Button label="Ok" icon="pi pi-check" onClick={() => setDialogVisible(false)} />;
@@ -148,17 +149,19 @@ export default function FlexibleScrollDemo() {
                     viewport adjusts itself according to the size changes.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
-                <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
-                    <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
-                        <Column field="company" header="Company"></Column>
-                    </DataTable>
-                </Dialog>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card flex justify-content-center">
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
+                    <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '75vw' }} maximizable modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
+                        <DataTable value={customers} scrollable scrollHeight="flex" tableStyle={{ minWidth: '50rem' }}>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="country.name" header="Country"></Column>
+                            <Column field="representative.name" header="Representative"></Column>
+                            <Column field="company" header="Company"></Column>
+                        </DataTable>
+                    </Dialog>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['CustomerService']} />
         </>
     );

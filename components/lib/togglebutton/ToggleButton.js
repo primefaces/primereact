@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
@@ -24,7 +25,7 @@ export const ToggleButton = React.memo(
         const icon = props.checked ? props.onIcon : props.offIcon;
 
         const toggle = (e) => {
-            if (!props.disabled && props.onChange) {
+            if (!props.disabled && props.onChange && !props.readonly) {
                 props.onChange({
                     originalEvent: e,
                     value: !props.checked,
@@ -48,6 +49,14 @@ export const ToggleButton = React.memo(
                 toggle(event);
                 event.preventDefault();
             }
+        };
+
+        const onFocus = (event) => {
+            props?.onFocus?.(event);
+        };
+
+        const onBlur = (event) => {
+            props?.onBlur?.(event);
         };
 
         const createIcon = () => {
@@ -93,27 +102,53 @@ export const ToggleButton = React.memo(
                 ref: elementRef,
                 id: props.id,
                 className: cx('root', { hasIcon, hasLabel }),
-                style: props.style,
-                onClick: toggle,
-                onFocus: props.onFocus,
-                onBlur: props.onBlur,
-                onKeyDown: onKeyDown,
-                tabIndex: tabIndex,
-                role: 'button',
-                'aria-pressed': props.checked
+                'data-p-highlight': props.checked,
+                'data-p-disabled': props.disabled
             },
             ToggleButtonBase.getOtherProps(props),
             ptm('root')
         );
 
+        const inputProps = mergeProps(
+            {
+                id: props.inputId,
+                className: cx('input'),
+                style: props.style,
+                onChange: toggle,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                tabIndex: tabIndex,
+                role: 'switch',
+                type: 'checkbox',
+                'aria-pressed': props.checked,
+                'aria-invalid': props.invalid,
+                disabled: props.disabled,
+                readonly: props.readonly,
+                value: props.checked,
+                checked: props.checked
+            },
+            ptm('input')
+        );
+
+        const boxProps = mergeProps(
+            {
+                className: cx('box', { hasIcon, hasLabel })
+            },
+            ptm('box')
+        );
+
         return (
             <>
                 <div {...rootProps}>
-                    {iconElement}
-                    <span {...labelProps}>{label}</span>
-                    <Ripple />
+                    <input {...inputProps} />
+                    <div {...boxProps}>
+                        {iconElement}
+                        <span {...labelProps}>{label}</span>
+                        <Ripple />
+                    </div>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

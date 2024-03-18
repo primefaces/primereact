@@ -193,8 +193,8 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     maxFractionDigits?: number | undefined;
     /**
-     * How decimals should be rounded.
-     * The default value is `"halfExpand"`, [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode).
+     * How decimals should be rounded. [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode).
+     * @defaultValue halfExpand
      */
     roundingMode?: RoundingMode;
     /**
@@ -228,6 +228,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * Maximum value length.
      */
     maxLength?: number | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
     /**
      * When present, it specifies that the element should be disabled.
      */
@@ -312,11 +317,6 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
      */
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
-    /**
-     * Callback to invoke when the key released.
-     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
-     */
-    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly

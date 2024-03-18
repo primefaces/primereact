@@ -1,24 +1,28 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, classNames } from '../utils/Utils';
 import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
     React.forwardRef((inProps, ref) => {
+        const [isMounted, setMounted] = React.useState(false);
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = RippleBase.getProps(inProps, context);
         const isRippleActive = (context && context.ripple) || PrimeReact.ripple;
+
         const metaData = {
             props
         };
+
+        useStyle(RippleBase.css.styles, { name: 'ripple', manual: !isRippleActive });
+
         const { ptm, cx } = RippleBase.setMetaData({
             ...metaData
         });
-
-        useStyle(RippleBase.css.styles, { name: 'ripple', manual: !isRippleActive });
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -78,12 +82,17 @@ export const Ripple = React.memo(
         }));
 
         useMountEffect(() => {
-            if (inkRef.current) {
+            // for App Router in Next.js ^14
+            setMounted(true);
+        });
+
+        useUpdateEffect(() => {
+            if (isMounted && inkRef.current) {
                 targetRef.current = getTarget();
                 setDimensions();
                 bindEvents();
             }
-        });
+        }, [isMounted]);
 
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {

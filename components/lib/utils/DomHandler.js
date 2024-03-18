@@ -599,7 +599,7 @@ export default class DomHandler {
                 let styleDeclaration = node ? getComputedStyle(node) : null;
 
                 return (
-                    styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY')))
+                    styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflow-x')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflow-y')))
                 );
             };
 
@@ -772,9 +772,9 @@ export default class DomHandler {
     }
 
     static scrollInView(container, item) {
-        let borderTopValue = getComputedStyle(container).getPropertyValue('borderTopWidth');
+        let borderTopValue = getComputedStyle(container).getPropertyValue('border-top-width');
         let borderTop = borderTopValue ? parseFloat(borderTopValue) : 0;
-        let paddingTopValue = getComputedStyle(container).getPropertyValue('paddingTop');
+        let paddingTopValue = getComputedStyle(container).getPropertyValue('padding-top');
         let paddingTop = paddingTopValue ? parseFloat(paddingTopValue) : 0;
         let containerRect = container.getBoundingClientRect();
         let itemRect = item.getBoundingClientRect();
@@ -1067,11 +1067,16 @@ export default class DomHandler {
         return false;
     }
 
-    static createInlineStyle(nonce) {
+    static createInlineStyle(nonce, styleContainer) {
         let styleElement = document.createElement('style');
 
         DomHandler.addNonce(styleElement, nonce);
-        document.head.appendChild(styleElement);
+
+        if (!styleContainer) {
+            styleContainer = document.head;
+        }
+
+        styleContainer.appendChild(styleElement);
 
         return styleElement;
     }
@@ -1079,7 +1084,7 @@ export default class DomHandler {
     static removeInlineStyle(styleElement) {
         if (this.isExist(styleElement)) {
             try {
-                document.head.removeChild(styleElement);
+                styleElement.parentNode.removeChild(styleElement);
             } catch (error) {
                 // style element may have already been removed in a fast refresh
             }
@@ -1208,5 +1213,27 @@ export default class DomHandler {
 
         // Seem the same
         return true;
+    }
+
+    static hasCSSAnimation(element) {
+        if (element) {
+            const style = getComputedStyle(element);
+            const animationDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+
+            return animationDuration > 0;
+        }
+
+        return false;
+    }
+
+    static hasCSSTransition(element) {
+        if (element) {
+            const style = getComputedStyle(element);
+            const transitionDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+
+            return transitionDuration > 0;
+        }
+
+        return false;
     }
 }

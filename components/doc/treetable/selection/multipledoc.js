@@ -75,7 +75,7 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { NodeService } from './service/NodeService';
 
 export default function MultipleRowsSelectionDemo() {
-    const [nodes, setNodes] = useState<TreeNode>([]);
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<TreeTableSelectionKeysType | null>(null);
     const [metaKey, setMetaKey] = useState<boolean>(true);
 
@@ -137,7 +137,7 @@ export default function MultipleRowsSelectionDemo() {
                 </p>
                 <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
             </DocSectionText>
-            <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card">
                 <div className="flex justify-content-center align-items-center mb-4 gap-2">
                     <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />

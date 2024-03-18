@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useEventListener } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
-import { KnobBase } from './KnobBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useEventListener, useMergeProps } from '../hooks/Hooks';
+import { KnobBase } from './KnobBase';
 
 const radius = 40;
 const midX = 50;
@@ -13,6 +12,7 @@ const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = KnobBase.getProps(inProps, context);
 
@@ -127,6 +127,20 @@ export const Knob = React.memo(
             }
         };
 
+        const updateModelValue = (newValue) => {
+            let currentValue;
+
+            if (newValue > props.max) currentValue = props.max;
+            else if (newValue < props.min) currentValue = props.min;
+            else currentValue = newValue;
+
+            if (props.onChange) {
+                props.onChange({
+                    value: currentValue
+                });
+            }
+        };
+
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
                 updateValue(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
@@ -152,6 +166,50 @@ export const Knob = React.memo(
         const onTouchEnd = () => {
             unbindWindowTouchMoveListener();
             unbindWindowTouchEndListener();
+        };
+
+        const onKeyDown = (event) => {
+            if (!props.disabled && !props.readonly) {
+                switch (event.code) {
+                    case 'ArrowRight':
+                    case 'ArrowUp':
+                        event.preventDefault();
+                        updateModelValue(props.value + 1);
+                        break;
+
+                    case 'ArrowLeft':
+
+                    case 'ArrowDown': {
+                        event.preventDefault();
+                        updateModelValue(props.value - 1);
+                        break;
+                    }
+
+                    case 'Home': {
+                        event.preventDefault();
+                        updateModelValue(props.min);
+                        break;
+                    }
+
+                    case 'End': {
+                        event.preventDefault();
+                        updateModelValue(props.max);
+                        break;
+                    }
+
+                    case 'PageUp': {
+                        event.preventDefault();
+                        updateModelValue(props.value + 10);
+                        break;
+                    }
+
+                    case 'PageDown': {
+                        event.preventDefault();
+                        updateModelValue(props.value - 10);
+                        break;
+                    }
+                }
+            }
         };
 
         React.useImperativeHandle(ref, () => ({
@@ -188,11 +246,19 @@ export const Knob = React.memo(
                 viewBox: '0 0 100 100',
                 width: props.size,
                 height: props.size,
+                'aria-valuemin': props.min,
+                'aria-valuemax': props.max,
+                'aria-valuenow': props.value,
+                'aria-labelledby': props.ariaLabelledby,
+                'aria-label': props.ariaLabel,
+                role: 'slider',
+                tabIndex: props.readonly || props.disabled ? -1 : props.tabIndex,
                 onClick: (e) => onClick(e),
                 onMouseDown: (e) => onMouseDown(e),
                 onMouseUp: (e) => onMouseUp(e),
                 onTouchStart: (e) => onTouchStart(e),
-                onTouchEnd: (e) => onTouchEnd(e)
+                onTouchEnd: (e) => onTouchEnd(e),
+                onKeyDown: (e) => onKeyDown(e)
             },
             ptm('svg')
         );

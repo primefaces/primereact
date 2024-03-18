@@ -20,13 +20,23 @@ export function PTDoc(props) {
     onChange={(e) => setSelectedCities(e.value)}
     showClear={true}
     options={cities}
+    display="chip"
     optionLabel="name"
     placeholder="Select Cities"
     maxSelectedLabels={3}
     inputId="multiselect"
     pt={{
-        root: { className: 'w-full md:w-14rem' },
-        item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+        root: { className: 'w-full md:w-20rem' },
+        item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined }),
+        token: ({ context }) => {
+            switch (context.value.code) {
+                case 'NY':
+                    return 'bg-red-300';
+                case 'RM':
+                    return 'bg-green-300';
+            }
+            return 'bg-gray-100';
+        }
     }}
 />
         `,
@@ -51,13 +61,23 @@ export default function PTDemo() {
                 onChange={(e) => setSelectedCities(e.value)}
                 showClear={true}
                 options={cities}
+                display="chip"
                 optionLabel="name"
                 placeholder="Select Cities"
                 maxSelectedLabels={3}
                 inputId="multiselect"
                 pt={{
-                    root: { className: 'w-full md:w-14rem' },
-                    item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+                    root: { className: 'w-full md:w-20rem' },
+                    item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined }),
+                    token: ({ context }) => {
+                        switch (context.value.code) {
+                            case 'NY':
+                                return 'bg-red-300';
+                            case 'RM':
+                                return 'bg-green-300';
+                        }
+                        return 'bg-gray-100';
+                    }
                 }}
             />
         </div>
@@ -90,13 +110,23 @@ export default function PTDemo() {
                 onChange={(e: MultiSelectChangeEvent) => setSelectedCities(e.value)}
                 showClear={true}
                 options={cities}
+                display="chip"
                 optionLabel="name"
                 placeholder="Select Cities"
                 maxSelectedLabels={3}
                 inputId="multiselect"
                 pt={{
-                    root: { className: 'w-full md:w-14rem' },
-                    item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+                    root: { className: 'w-full md:w-20rem' },
+                    item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined }),
+                    token: ({ context }) => {
+                        switch (context.value.code) {
+                            case 'NY':
+                                return 'bg-red-300';
+                            case 'RM':
+                                return 'bg-green-300';
+                        }
+                        return 'bg-gray-100';
+                    }
                 }}
             />
         </div>
@@ -114,13 +144,24 @@ export default function PTDemo() {
                     onChange={(e) => setSelectedCities(e.value)}
                     showClear={true}
                     options={cities}
+                    display="chip"
                     optionLabel="name"
                     placeholder="Select Cities"
                     maxSelectedLabels={3}
                     inputId="multiselect"
                     pt={{
-                        root: { className: 'w-full md:w-14rem' },
-                        item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+                        root: { className: 'w-full md:w-20rem' },
+                        item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined }),
+                        token: ({ context }) => {
+                            switch (context.value.code) {
+                                case 'NY':
+                                    return 'bg-red-300';
+                                case 'RM':
+                                    return 'bg-green-300';
+                            }
+
+                            return 'bg-gray-100';
+                        }
                     }}
                 />
             </div>

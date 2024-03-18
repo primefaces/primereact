@@ -3,11 +3,10 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
 import { Toolbar } from '@/components/lib/toolbar/Toolbar';
-import { useRouter } from 'next/router';
+import { InputText } from '@/components/lib/inputtext/InputText';
 import React from 'react';
 
 export function BasicDoc(props) {
-    const router = useRouter();
     const items = [
         {
             label: 'Update',
@@ -16,52 +15,42 @@ export function BasicDoc(props) {
         {
             label: 'Delete',
             icon: 'pi pi-times'
-        },
-        {
-            label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://reactjs.org/';
-            }
-        },
-        {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                router.push('/fileupload');
-            }
         }
     ];
 
     const startContent = (
         <React.Fragment>
-            <Button label="New" icon="pi pi-plus" className="mr-2" />
-            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-            <i className="pi pi-bars p-toolbar-separator mr-2" />
-            <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
+            <Button icon="pi pi-plus" className="mr-2" />
+            <Button icon="pi pi-print" className="mr-2" />
+            <Button icon="pi pi-upload" />
         </React.Fragment>
+    );
+
+    const centerContent = (
+        <span classclassName="p-input-icon-left">
+            <i classclassName="pi pi-search" />
+            <InputText placeholder="Search" />
+        </span>
     );
 
     const endContent = (
         <React.Fragment>
-            <Button icon="pi pi-search" className="mr-2" />
-            <Button icon="pi pi-calendar" className="p-button-success mr-2" />
-            <Button icon="pi pi-times" className="p-button-danger" />
+            <SplitButton label="Save" model={items} icon="pi pi-check"></SplitButton>
         </React.Fragment>
     );
+
     const code = {
         basic: `
 <Toolbar start={startContent} end={endContent} />
         `,
         javascript: `
 import React from 'react';
-//import { useRouter } from 'next/router';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { SplitButton } from 'primereact/splitbutton';
+import { InputText } from 'primereact/inputtext';
 
 export default function BasicDemo() {
-    //const router = useRouter();
     const items = [
         {
             label: 'Update',
@@ -70,56 +59,46 @@ export default function BasicDemo() {
         {
             label: 'Delete',
             icon: 'pi pi-times'
-        },
-        {
-            label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://reactjs.org/'
-            }
-        },
-        {   label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                //router.push('/fileupload');
-            }
         }
     ];
 
     const startContent = (
         <React.Fragment>
-            <Button label="New" icon="pi pi-plus" className="mr-2" />
-            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-            <i className="pi pi-bars p-toolbar-separator mr-2" />
-            <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
+            <Button icon="pi pi-plus" className="mr-2" />
+            <Button icon="pi pi-print" className="mr-2" />
+            <Button icon="pi pi-upload" />
         </React.Fragment>
+    );
+
+    const centerContent = (
+        <span classclassName="p-input-icon-left">
+            <i classclassName="pi pi-search" />
+            <InputText placeholder="Search" />
+        </span>
     );
 
     const endContent = (
         <React.Fragment>
-            <Button icon="pi pi-search" className="mr-2" />
-            <Button icon="pi pi-calendar" className="p-button-success mr-2" />
-            <Button icon="pi pi-times" className="p-button-danger" />
+            <SplitButton label="Save" model={items} icon="pi pi-check"></SplitButton>
         </React.Fragment>
     );
 
     return (
         <div className="card">
-            <Toolbar start={startContent} end={endContent} />
+            <Toolbar start={startContent} center={centerContent} end={endContent} />
         </div>
     );
 }
         `,
         typescript: `
 import React from 'react';
-//import { useRouter } from 'next/router';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
+import { InputText } from 'primereact/inputtext';
 
 export default function BasicDemo() {
-    //const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Update',
@@ -128,42 +107,33 @@ export default function BasicDemo() {
         {
             label: 'Delete',
             icon: 'pi pi-times'
-        },
-        {
-            label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://reactjs.org/'
-            }
-        },
-        {   label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                //router.push('/fileupload');
-            }
         }
     ];
 
     const startContent = (
         <React.Fragment>
-            <Button label="New" icon="pi pi-plus" className="mr-2" />
-            <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-            <i className="pi pi-bars p-toolbar-separator mr-2" />
-            <SplitButton label="Save" icon="pi pi-check" model={items} className="p-button-warning"></SplitButton>
+            <Button icon="pi pi-plus" className="mr-2" />
+            <Button icon="pi pi-print" className="mr-2" />
+            <Button icon="pi pi-upload" />
         </React.Fragment>
+    );
+
+    const centerContent = (
+        <span classclassName="p-input-icon-left">
+            <i classclassName="pi pi-search" />
+            <InputText placeholder="Search" />
+        </span>
     );
 
     const endContent = (
         <React.Fragment>
-            <Button icon="pi pi-search" className="mr-2" />
-            <Button icon="pi pi-calendar" className="p-button-success mr-2" />
-            <Button icon="pi pi-times" className="p-button-danger" />
+            <SplitButton label="Save" model={items} icon="pi pi-check"></SplitButton>
         </React.Fragment>
     );
 
     return (
         <div className="card">
-            <Toolbar start={startContent} end={endContent} />
+            <Toolbar start={startContent} center={centerContent} end={endContent} />
         </div>
     );
 }
@@ -178,7 +148,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <Toolbar start={startContent} end={endContent} />
+                <Toolbar start={startContent} center={centerContent} end={endContent} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -6,6 +6,7 @@ const classes = {
     loadingIcon: 'p-tree-loading-icon',
     loadingOverlay: 'p-tree-loading-overlay p-component-overlay',
     searchIcon: 'p-tree-filter-icon',
+    emptyMessage: 'p-treenode p-tree-empty-message',
     filterContainer: 'p-tree-filter-container',
     input: 'p-tree-filter p-inputtext p-component',
     header: 'p-tree-header',
@@ -46,18 +47,18 @@ const styles = `
         list-style-type: none;
         overflow: auto;
     }
-    
+
     .p-treenode-children {
         margin: 0;
         padding: 0;
         list-style-type: none;
     }
-    
+
     .p-treenode-selectable {
         cursor: pointer;
         user-select: none;
     }
-    
+
     .p-tree-toggler {
         cursor: pointer;
         user-select: none;
@@ -68,37 +69,37 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     .p-treenode-leaf > .p-treenode-content .p-tree-toggler {
         visibility: hidden;
     }
-    
+
     .p-treenode-content {
         display: flex;
         align-items: center;
     }
-    
+
     .p-tree-filter {
         width: 100%;
     }
-    
+
     .p-tree-filter-container {
         position: relative;
         display: block;
         width: 100%;
     }
-    
+
     .p-tree-filter-icon {
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
     }
-    
+
     .p-tree-loading {
         position: relative;
         min-height: 4rem;
     }
-    
+
     .p-tree .p-tree-loading-overlay {
         position: absolute;
         z-index: 1;
@@ -115,49 +116,53 @@ export const TreeBase = ComponentBase.extend({
         __parentMetadata: null,
         id: null,
         value: null,
+        ariaLabel: null,
+        ariaLabelledBy: null,
         checkboxIcon: null,
-        disabled: false,
-        selectionMode: null,
-        selectionKeys: null,
-        onSelectionChange: null,
-        contextMenuSelectionKey: null,
-        onContextMenuSelectionChange: null,
-        expandedKeys: null,
-        style: null,
         className: null,
-        contentStyle: null,
-        contentClassName: null,
-        metaKeySelection: true,
-        propagateSelectionUp: true,
-        propagateSelectionDown: true,
-        loading: false,
-        loadingIcon: null,
-        expandIcon: null,
         collapseIcon: null,
+        contentClassName: null,
+        contentStyle: null,
+        contextMenuSelectionKey: null,
+        disabled: false,
         dragdropScope: null,
-        header: null,
-        footer: null,
-        showHeader: true,
+        emptyMessage: null,
+        expandIcon: null,
+        expandedKeys: null,
         filter: false,
-        filterIcon: null,
-        filterValue: null,
         filterBy: 'label',
+        filterIcon: null,
+        filterLocale: undefined,
         filterMode: 'lenient',
         filterPlaceholder: null,
-        filterLocale: undefined,
         filterTemplate: null,
+        filterValue: null,
+        footer: null,
+        header: null,
+        level: 0,
+        loading: false,
+        loadingIcon: null,
+        metaKeySelection: false,
         nodeTemplate: null,
-        togglerTemplate: null,
-        onSelect: null,
-        onUnselect: null,
-        onExpand: null,
         onCollapse: null,
-        onToggle: null,
-        onDragDrop: null,
         onContextMenu: null,
+        onContextMenuSelectionChange: null,
+        onDragDrop: null,
+        onExpand: null,
         onFilterValueChange: null,
         onNodeClick: null,
         onNodeDoubleClick: null,
+        onSelect: null,
+        onSelectionChange: null,
+        onToggle: null,
+        onUnselect: null,
+        propagateSelectionDown: true,
+        propagateSelectionUp: true,
+        selectionKeys: null,
+        selectionMode: null,
+        showHeader: true,
+        style: null,
+        togglerTemplate: null,
         children: undefined
     },
     css: {

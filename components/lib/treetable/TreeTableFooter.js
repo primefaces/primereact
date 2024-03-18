@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
-import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { ObjectUtils } from '../utils/Utils';
 
 export const TreeTableFooter = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (column, name) => {
@@ -46,7 +48,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
-        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
+        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName, role: 'row' }));
 
         return (
             <tr {...footerRowProps} key={index}>
@@ -81,6 +83,7 @@ export const TreeTableFooter = React.memo((props) => {
     if (hasFooter()) {
         const tfootProps = mergeProps(
             {
+                role: 'rowgroup',
                 className: cx('tfoot')
             },
             ptm('tfoot', { hostName: props.hostName })

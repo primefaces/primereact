@@ -85,38 +85,6 @@ export interface TabPanelPassThroughMethodOptions {
 }
 
 /**
- * Custom passthrough(pt) options.
- * @see {@link TabPanelProps.pt}
- */
-export interface TabPanelPassThroughOptions {
-    /**
-     * Uses to pass attributes to the root's DOM element.
-     */
-    root?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the header's DOM element.
-     */
-    header?: TabPanelPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Uses to pass attributes to the header action's DOM element.
-     */
-    headerAction?: TabPanelPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
-    /**
-     * Uses to pass attributes to the title's DOM element.
-     */
-    headerTitle?: TabPanelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Uses to pass attributes to the list's DOM element.
-     */
-    content?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-}
-
-/**
  * Defines current inline context in Tabview component.
  */
 export interface TabViewContext {
@@ -151,10 +119,64 @@ export interface TabViewContext {
 }
 
 /**
+ * Custom passthrough(pt) options.
+ * @see {@link TabPanelProps.pt}
+ */
+export interface TabPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: TabPanelPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the header action's DOM element.
+     */
+    headerAction?: TabPanelPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the title's DOM element.
+     */
+    headerTitle?: TabPanelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    content?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
  * Defines valid properties in TabPanel component.
  * @group Properties
  */
 export interface TabPanelProps {
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
+     * Defines if tab can be removed.
+     * @defaultValue false
+     */
+    closable?: boolean | undefined;
+    /**
+     * Style class of the tab header and content.
+     */
+    className?: string | undefined;
+    /**
+     * Inline style of the tab content.
+     */
+    contentStyle?: React.CSSProperties | undefined;
+    /**
+     * Style class of the tab content.
+     */
+    contentClassName?: string | undefined;
     /**
      * Orientation of tab headers.
      */
@@ -163,6 +185,14 @@ export interface TabPanelProps {
      * Header template of the tab to customize more.
      */
     headerTemplate?: React.ReactNode | ((options: TabPanelHeaderTemplateOptions) => React.ReactNode);
+    /**
+     * Inline style of the tab header.
+     */
+    headerStyle?: React.CSSProperties | undefined;
+    /**
+     * Style class of the tab header.
+     */
+    headerClassName?: string | undefined;
     /**
      * Icons can be placed at left of a header.
      */
@@ -189,40 +219,6 @@ export interface TabPanelProps {
      */
     disabled?: boolean | undefined;
     /**
-     * Defines if tab can be removed.
-     * @defaultValue false
-     */
-    closable?: boolean | undefined;
-    /**
-     * Inline style of the tab header and content.
-     */
-    style?: React.CSSProperties | undefined;
-    /**
-     * Style class of the tab header and content.
-     */
-    className?: string | undefined;
-    /**
-     * Inline style of the tab header.
-     */
-    headerStyle?: React.CSSProperties | undefined;
-    /**
-     * Style class of the tab header.
-     */
-    headerClassName?: string | undefined;
-    /**
-     * Inline style of the tab content.
-     */
-    contentStyle?: React.CSSProperties | undefined;
-    /**
-     * Style class of the tab content.
-     */
-    contentClassName?: string | undefined;
-    /**
-     * Used to get the child elements of the component.
-     * @readonly
-     */
-    children?: React.ReactNode | undefined;
-    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {TabPanelPassThroughOptions}
      */
@@ -233,10 +229,19 @@ export interface TabPanelProps {
      */
     ptOptions?: PassThroughOptions;
     /**
+     * Inline style of the tab header and content.
+     */
+    style?: React.CSSProperties | undefined;
+    /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * When set as false, hides the tab panel.
+     * @defaultValue true
+     */
+    visible?: boolean | undefined;
 }
 
 /**

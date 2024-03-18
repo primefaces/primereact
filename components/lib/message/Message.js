@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MessageBase.getProps(inProps, context);
 
@@ -85,7 +87,8 @@ export const Message = React.memo(
                 className: classNames(props.className, cx('root')),
                 style: props.style,
                 role: 'alert',
-                'aria-live': 'polite'
+                'aria-live': 'polite',
+                'aria-atomic': 'true'
             },
             MessageBase.getOtherProps(props),
             ptm('root')

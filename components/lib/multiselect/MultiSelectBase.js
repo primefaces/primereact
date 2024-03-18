@@ -7,6 +7,7 @@ const classes = {
         classNames('p-multiselect p-component p-inputwrapper', {
             'p-multiselect-chip': props.display === 'chip',
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-multiselect-clearable': props.showClear && !props.disabled,
             'p-focus': focusedState,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
@@ -48,14 +49,11 @@ const classes = {
     item: ({ itemProps: props }) =>
         classNames('p-multiselect-item', {
             'p-highlight': props.selected,
-            'p-disabled': props.disabled
+            'p-disabled': props.disabled,
+            'p-focus': props.focusedOptionIndex === props.index
         }),
     checkboxContainer: 'p-checkbox p-component',
     checkboxIcon: 'p-checkbox-icon p-c',
-    checkbox: ({ itemProps: props }) =>
-        classNames('p-checkbox-box', {
-            'p-highlight': props.selected
-        }),
     transition: 'p-connected-overlay'
 };
 
@@ -143,6 +141,7 @@ const styles = `
         white-space: nowrap;
         position: relative;
         overflow: hidden;
+        outline: none;
     }
     
     .p-multiselect-header {
@@ -184,6 +183,7 @@ const styles = `
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
+        right: 3rem;
     }
     
     .p-fluid .p-multiselect {
@@ -214,12 +214,14 @@ export const MultiSelectBase = ComponentBase.extend({
         disabled: false,
         display: 'comma',
         dropdownIcon: null,
-        emptyMessage: null,
         emptyFilterMessage: null,
+        emptyMessage: null,
         filter: false,
         filterBy: null,
         filterInputAutoFocus: true,
         filterLocale: undefined,
+        selectOnFocus: false,
+        autoOptionFocus: false,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterTemplate: null,
@@ -229,9 +231,12 @@ export const MultiSelectBase = ComponentBase.extend({
         inline: false,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemCheckboxIcon: null,
         itemClassName: null,
         itemTemplate: null,
+        loading: false,
+        loadingIcon: null,
         maxSelectedLabels: null,
         name: null,
         onBlur: null,

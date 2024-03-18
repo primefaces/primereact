@@ -27,10 +27,10 @@ export default function MyApp({ Component }) {
             <DocSectionText {...props}>
                 <p>
                     For components with an overlay like a dropdown, popups can be mounted either into the component or DOM element instance using this option. Valid values are any DOM Element like document body and <i>self</i>. By default all popups
-                    are append to document body via Portals.
+                    are appended to document body via Portals.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

@@ -1,16 +1,22 @@
 import * as React from 'react';
+import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
 
 export const CalendarPanel = React.forwardRef((props, ref) => {
     const cx = props.cx;
+    const mergeProps = useMergeProps();
 
     const createElement = () => {
         const panelProps = mergeProps(
             {
                 className: cx('panel', { panelClassName: props.className }),
                 style: props.style,
+                role: props.inline ? null : 'dialog',
+                id: props.id,
+                'aria-label': localeOption('chooseDate', props.locale),
+                'aria-modal': props.inline ? null : 'true',
                 onClick: props.onClick,
                 onMouseUp: props.onMouseUp
             },

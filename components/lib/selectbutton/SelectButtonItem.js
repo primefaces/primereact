@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const SelectButtonItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
@@ -17,7 +19,9 @@ export const SelectButtonItem = React.memo((props) => {
         });
     };
 
-    const onClick = (event) => {
+    const onClick = (event, index) => {
+        props.setFocusedIndex(index);
+
         if (props.onClick) {
             props.onClick({
                 originalEvent: event,
@@ -34,13 +38,52 @@ export const SelectButtonItem = React.memo((props) => {
         setFocusedState(false);
     };
 
-    const onKeyDown = (event) => {
-        const keyCode = event.which;
+    const onKeyDown = (event, index) => {
+        switch (event.code) {
+            case 'Space': {
+                onClick(event, index);
+                event.preventDefault();
+                break;
+            }
 
-        if (keyCode === 32) {
-            onClick(event);
-            event.preventDefault();
+            case 'ArrowDown':
+
+            case 'ArrowRight': {
+                changeTabIndexes(event, 'next');
+                event.preventDefault();
+                break;
+            }
+
+            case 'ArrowUp':
+
+            case 'ArrowLeft': {
+                changeTabIndexes(event, 'prev');
+                event.preventDefault();
+                break;
+            }
+
+            default:
+                break;
         }
+    };
+
+    const changeTabIndexes = (event, direction) => {
+        let firstTabableChild, index;
+
+        for (let i = 0; i <= props.elementRef.current.children.length - 1; i++) {
+            if (props.elementRef.current.children[i].getAttribute('tabindex') === '0') firstTabableChild = { elem: props.elementRef.current.children[i], index: i };
+        }
+
+        if (direction === 'prev') {
+            if (firstTabableChild.index === 0) index = props.elementRef.current.children.length - 1;
+            else index = firstTabableChild.index - 1;
+        } else {
+            if (firstTabableChild.index === props.elementRef.current.children.length - 1) index = 0;
+            else index = firstTabableChild.index + 1;
+        }
+
+        props.setFocusedIndex(index);
+        props.elementRef.current.children[index].focus();
     };
 
     const createContent = () => {
@@ -62,9 +105,10 @@ export const SelectButtonItem = React.memo((props) => {
             role: 'button',
             'aria-label': props.label,
             'aria-pressed': props.selected,
-            onClick: onClick,
-            onKeyDown: onKeyDown,
+            onClick: (event) => onClick(event, props.index),
+            onKeyDown: (event) => onKeyDown(event, props.index),
             tabIndex: props.tabIndex,
+            'aria-disabled': props.disabled,
             onFocus: onFocus,
             onBlur: onBlur
         },

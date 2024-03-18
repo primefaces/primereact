@@ -7,7 +7,8 @@ const classes = {
             'p-inputtext p-component',
             {
                 'p-disabled': props.disabled,
-                'p-filled': isFilled
+                'p-filled': isFilled,
+                'p-invalid': props.invalid
             },
             props.className
         )
@@ -19,6 +20,7 @@ export const InputTextBase = ComponentBase.extend({
         __parentMetadata: null,
         children: undefined,
         className: null,
+        invalid: false,
         keyfilter: null,
         onBeforeInput: null,
         onInput: null,

@@ -29,7 +29,7 @@ export function DragDropDoc(props) {
 
     const code = {
         basic: `
-<OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} 
+<OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} 
     header="Products" dragdrop></OrderList>
         `,
         javascript: `
@@ -62,7 +62,7 @@ export default function BasicDemo() {
     
     return (
         <div className="card xl:flex xl:justify-content-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" dragdrop></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" dragdrop></OrderList>
         </div>
     )
 }
@@ -110,7 +110,7 @@ export default function BasicDemo() {
     
     return (
         <div className="card xl:flex xl:justify-content-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" dragdrop></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" dragdrop></OrderList>
         </div>
     )
 }
@@ -141,7 +141,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card xl:flex xl:justify-content-center">
-                <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" dragdrop></OrderList>
+                <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" dragdrop></OrderList>
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

@@ -3,7 +3,7 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
     root: 'p-accordion p-component',
-    accordiontab: {
+    tab: {
         root: ({ selected }) =>
             classNames('p-accordion-tab', {
                 'p-accordion-tab-active': selected
@@ -39,6 +39,7 @@ const styles = `
     
     .p-accordion-header-text {
         line-height: 1;
+        width: 100%;
     }
 }
 `;

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { TreeTableRow } from './TreeTableRow';
 
 export const TreeTableBody = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
     const { ptm, cx } = props.ptCallbacks;
@@ -174,6 +176,8 @@ export const TreeTableBody = React.memo((props) => {
                 key={`${node.key || JSON.stringify(node.data)}_${index}`}
                 level={0}
                 rowIndex={index}
+                ariaSetSize={props.value.length}
+                ariaPosInSet={index + 1}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
                 originalOptions={props.originalOptions}
@@ -255,6 +259,7 @@ export const TreeTableBody = React.memo((props) => {
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
     const tbodyProps = mergeProps(
         {
+            role: 'rowgroup',
             className: cx('tbody')
         },
         getPTOptions('tbody')

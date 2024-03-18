@@ -1,10 +1,12 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, PrimeReactContext, localeOption } from '../api/Api';
+import { ariaLabel } from '../api/Locale';
 import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import FocusTrap from '../focustrap/FocusTrap';
+import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { FilterIcon } from '../icons/filter';
 import { FilterSlashIcon } from '../icons/filterslash';
 import { PlusIcon } from '../icons/plus';
@@ -13,14 +15,16 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
     const overlayRef = React.useRef(null);
+    const overlayId = React.useRef(() => UniqueComponentId());
     const iconRef = React.useRef(null);
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
+    const mergeProps = useMergeProps();
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const context = React.useContext(PrimeReactContext);
@@ -77,16 +81,20 @@ export const ColumnFilter = React.memo((props) => {
         return filterModel && filterModel.matchMode === matchMode;
     };
 
-    const showMenuButton = () => {
-        return getColumnProp('showFilterMenu') && (props.display === 'row' ? getColumnProp('dataType') !== 'boolean' : true);
-    };
-
     const matchModes = () => {
         return (
             getColumnProp('filterMatchModeOptions') ||
             (context && context.filterMatchModeOptions[findDataType()].map((key) => ({ label: localeOption(key), value: key }))) ||
             PrimeReact.filterMatchModeOptions[findDataType()].map((key) => ({ label: localeOption(key), value: key }))
         );
+    };
+
+    const isShowMenuButton = () => {
+        return getColumnProp('showFilterMenu') && (props.display === 'row' ? getColumnProp('dataType') !== 'boolean' : true);
+    };
+
+    const isShowClearButton = () => {
+        return getColumnProp('showClearButton') && props.display === 'row';
     };
 
     const isShowMatchModes = () => {
@@ -522,7 +530,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createMenuButton = () => {
-        if (!showMenuButton()) {
+        if (!isShowMenuButton()) {
             return null;
         }
 
@@ -535,16 +543,17 @@ export const ColumnFilter = React.memo((props) => {
         const icon = props.filterIcon || <FilterIcon {...filterIconProps} />;
         const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
-        const label = filterLabel();
+        const label = overlayVisibleState ? ariaLabel('hideFilterMenu') : ariaLabel('showFilterMenu');
         const filterMenuButtonProps = mergeProps(
             {
                 type: 'button',
                 className: cx('filterMenuButton', { overlayVisibleState, hasFilter }),
                 'aria-haspopup': true,
                 'aria-expanded': overlayVisibleState,
+                'aria-label': label,
+                'aria-controls': overlayId.current,
                 onClick: (e) => toggleMenu(e),
-                onKeyDown: (e) => onToggleButtonKeyDown(e),
-                'aria-label': label
+                onKeyDown: (e) => onToggleButtonKeyDown(e)
             },
             getColumnPTOptions('filterMenuButton', {
                 context: {
@@ -562,7 +571,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createClearButton = () => {
-        if (!showMenuButton()) {
+        if (!isShowClearButton()) {
             return null;
         }
 
@@ -574,32 +583,27 @@ export const ColumnFilter = React.memo((props) => {
         );
         const icon = props.filterClearIcon || <FilterSlashIcon {...filterClearIconProps} />;
         const filterClearIcon = IconUtils.getJSXIcon(icon, { ...filterClearIconProps }, { props });
+        const clearLabel = clearButtonLabel();
+        const headerFilterClearButtonProps = mergeProps(
+            {
+                className: cx('headerFilterClearButton', { hasRowFilter }),
+                type: 'button',
+                onClick: (e) => clearFilter(e),
+                'aria-label': clearLabel
+            },
+            getColumnPTOptions('headerFilterClearButton', {
+                context: {
+                    hidden: hasRowFilter()
+                }
+            })
+        );
 
-        if (getColumnProp('showClearButton') && props.display === 'row') {
-            const clearLabel = clearButtonLabel();
-            const headerFilterClearButtonProps = mergeProps(
-                {
-                    className: cx('headerFilterClearButton', { hasRowFilter }),
-                    type: 'button',
-                    onClick: (e) => clearFilter(e),
-                    'aria-label': clearLabel
-                },
-                getColumnPTOptions('headerFilterClearButton', {
-                    context: {
-                        hidden: hasRowFilter()
-                    }
-                })
-            );
-
-            return (
-                <button {...headerFilterClearButtonProps}>
-                    {filterClearIcon}
-                    <Ripple />
-                </button>
-            );
-        }
-
-        return null;
+        return (
+            <button {...headerFilterClearButtonProps}>
+                {filterClearIcon}
+                <Ripple />
+            </button>
+        );
     };
 
     const createRowItems = () => {
@@ -685,6 +689,7 @@ export const ColumnFilter = React.memo((props) => {
                         pt={getColumnPTOptions('filterOperatorDropdown')}
                         unstyled={props.unstyled}
                         __parentMetadata={{ parent: props.metaData }}
+                        aria-label={ariaLabel('filterOperator')}
                     />
                 </div>
             );
@@ -706,6 +711,7 @@ export const ColumnFilter = React.memo((props) => {
                     pt={getColumnPTOptions('filterMatchModeDropdown')}
                     unstyled={props.unstyled}
                     __parentMetadata={{ parent: props.metaData }}
+                    aria-label={ariaLabel('filterConstraint')}
                 />
             );
         }
@@ -872,7 +878,10 @@ export const ColumnFilter = React.memo((props) => {
                 className: cx('filterOverlay', { columnFilterProps: props, context, getColumnProp }),
                 onKeyDown: (e) => onContentKeyDown(e),
                 onClick: (e) => onContentClick(e),
-                onMouseDown: (e) => onContentMouseDown(e)
+                onMouseDown: (e) => onContentMouseDown(e),
+                id: overlayId.current,
+                'aria-modal': overlayVisibleState,
+                role: 'dialog'
             },
             getColumnPTOptions('filterOverlay')
         );
@@ -895,9 +904,11 @@ export const ColumnFilter = React.memo((props) => {
             <Portal>
                 <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div ref={overlayRef} {...filterOverlayProps}>
-                        {filterHeader}
-                        {items}
-                        {filterFooter}
+                        <FocusTrap autoFocus>
+                            {filterHeader}
+                            {items}
+                            {filterFooter}
+                        </FocusTrap>
                     </div>
                 </CSSTransition>
             </Portal>

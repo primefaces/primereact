@@ -278,7 +278,7 @@ export declare function useFavicon(newIcon: string, rel: string): void;
  * @param {IntersectionObserver} options The options of the intersection observer.
  * @return {boolean} Whether the element is intersecting or not.
  */
-export declare function useIntersectionObserver(ref: React.RefObject<Element>, options?: IntersectionObserver): boolean;
+export declare function useIntersectionObserver(ref: React.RefObject<Element>, options?: IntersectionObserverInit): boolean;
 /**
  * Custom hook to use detect click outside.
  * @param {React.RefObject<Element>} ref - The ref of the element to detect click outside.
@@ -301,3 +301,7 @@ export declare function useGlobalOnEscapeKey(props: { callback: (event: Keyboard
  * @param {boolean} [isVisible]
  */
 export declare function useDisplayOrder(group: string, isVisible?: boolean): number | undefined;
+/**
+ * Custom hook to return a function for merging properties.
+ */
+export declare function useMergeProps(): (args: object[], options?: any) => object | undefined;

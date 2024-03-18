@@ -5,16 +5,13 @@ import { Steps } from '@/components/lib/steps/Steps';
 export function BasicDoc(props) {
     const items = [
         {
-            label: 'Personal'
+            label: 'Personal Info'
         },
         {
-            label: 'Seat'
+            label: 'Reservation'
         },
         {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
+            label: 'Review'
         }
     ];
 
@@ -29,16 +26,13 @@ import { Steps } from 'primereact/steps';
 export default function BasicDemo() {
     const items = [
         {
-            label: 'Personal'
+            label: 'Personal Info'
         },
         {
-            label: 'Seat'
+            label: 'Reservation'
         },
         {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
+            label: 'Review'
         }
     ];
 
@@ -57,16 +51,13 @@ import { MenuItem } from 'primereact/menuitem';
 export default function BasicDemo() {
     const items: MenuItem[] = [
         {
-            label: 'Personal'
+            label: 'Personal Info'
         },
         {
-            label: 'Seat'
+            label: 'Reservation'
         },
         {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
+            label: 'Review'
         }
     ];
 

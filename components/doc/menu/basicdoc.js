@@ -4,8 +4,8 @@ import { Menu } from '@/components/lib/menu/Menu';
 
 export function BasicDoc(props) {
     let items = [
-        { label: 'New', icon: 'pi pi-fw pi-plus' },
-        { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+        { label: 'New', icon: 'pi pi-plus' },
+        { label: 'Search', icon: 'pi pi-search' }
     ];
 
     const code = {
@@ -18,8 +18,8 @@ import { Menu } from 'primereact/menu';
 
 export default function BasicDemo() {
     let items = [
-        {label: 'New', icon: 'pi pi-fw pi-plus'},
-        {label: 'Delete', icon: 'pi pi-fw pi-trash'}
+        { label: 'New', icon: 'pi pi-plus' },
+        { label: 'Search', icon: 'pi pi-search' }
     ];
 
     return (
@@ -34,8 +34,8 @@ import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
     let items: MenuItem[] = [
-        {label: 'New', icon: 'pi pi-fw pi-plus'},
-        {label: 'Delete', icon: 'pi pi-fw pi-trash'}
+        { label: 'New', icon: 'pi pi-plus' },
+        { label: 'Search', icon: 'pi pi-search' }
     ];
 
     return (

@@ -2,14 +2,15 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { FieldsetBase } from './FieldsetBase';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = FieldsetBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
@@ -67,6 +68,13 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
         }
     });
 
+    const onKeyDown = (event) => {
+        if (event.code === 'Enter' || event.code === 'Space') {
+            toggle(event);
+            event.preventDefault();
+        }
+    };
+
     const createContent = () => {
         const contentProps = mergeProps(
             {
@@ -79,7 +87,6 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             {
                 ref: contentRef,
                 id: contentId,
-                'aria-hidden': collapsed,
                 role: 'region',
                 'aria-labelledby': headerId,
                 className: cx('toggleableContent')
@@ -136,10 +143,13 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
         const togglerProps = mergeProps(
             {
                 id: headerId,
+                role: 'button',
                 'aria-expanded': !collapsed,
                 'aria-controls': contentId,
-                href: '#' + contentId,
-                tabIndex: props.toggleable ? null : -1
+                onKeyDown,
+                onClick: toggle,
+                'aria-label': props.legend,
+                tabIndex: 0
             },
             ptm('toggler')
         );
@@ -166,10 +176,8 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const createLegend = () => {
         const legendProps = mergeProps(
             {
-                className: cx('legend'),
-                onClick: toggle
+                className: cx('legend')
             },
-
             ptm('legend')
         );
 

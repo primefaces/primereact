@@ -9,10 +9,10 @@ export function ControlledDoc(props) {
 
     const code = {
         basic: `
-<div className="flex flex-wrap gap-2 mb-3">
-    <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-    <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-    <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
+<div className="flex mb-2 gap-2 justify-content-end">
+    <Button onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 0} label="1" />
+    <Button onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 1} label="2" />
+    <Button onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 2} label="3" />
 </div>
 <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel header="Header I">
@@ -51,10 +51,10 @@ export default function ControlledDemo() {
 
     return (
         <div className="card">
-            <div className="flex flex-wrap gap-2 mb-3">
-                <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
+            <div className="flex mb-2 gap-2 justify-content-end">
+                <Button onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 0} label="1" />
+                <Button onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 1} label="2" />
+                <Button onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 2} label="3" />
             </div>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <TabPanel header="Header I">
@@ -96,10 +96,10 @@ export default function ControlledDemo() {
 
     return (
         <div className="card">
-            <div className="flex flex-wrap gap-2 mb-3">
-                <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
+            <div className="flex mb-2 gap-2 justify-content-end">
+                <Button onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 0} label="1" />
+                <Button onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 1} label="2" />
+                <Button onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 2} label="3" />
             </div>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 <TabPanel header="Header I">
@@ -141,10 +141,10 @@ export default function ControlledDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <div className="flex flex-wrap gap-2 mb-3">
-                    <Button onClick={() => setActiveIndex(0)} className="p-button-text" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex(1)} className="p-button-text" label="Activate 2nd" />
-                    <Button onClick={() => setActiveIndex(2)} className="p-button-text" label="Activate 3rd" />
+                <div className="flex mb-2 gap-2 justify-content-end">
+                    <Button onClick={() => setActiveIndex(0)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 0} label="1" />
+                    <Button onClick={() => setActiveIndex(1)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 1} label="2" />
+                    <Button onClick={() => setActiveIndex(2)} className="w-2rem h-2rem p-0" rounded outlined={activeIndex !== 2} label="3" />
                 </div>
                 <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                     <TabPanel header="Header I">

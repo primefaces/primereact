@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { DomHandler, mergeProps } from '../utils/Utils';
-import { ScrollPanelBase } from './ScrollPanelBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { DomHandler, UniqueComponentId } from '../utils/Utils';
+import { ScrollPanelBase } from './ScrollPanelBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = ScrollPanelBase.getProps(inProps, context);
+    const [idState, setIdState] = React.useState(props.id);
+    const [orientationState, setOrientationState] = React.useState('vertical');
 
     const { ptm, cx, isUnstyled } = ScrollPanelBase.setMetaData({
         props
@@ -19,6 +22,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const contentRef = React.useRef(null);
     const xBarRef = React.useRef(null);
     const yBarRef = React.useRef(null);
+    const [lastScrollLeft, setLastScrollLeft] = React.useState(0);
+    const [lastScrollTop, setLastScrollTop] = React.useState(0);
     const isXBarClicked = React.useRef(false);
     const isYBarClicked = React.useRef(false);
     const lastPageX = React.useRef(null);
@@ -27,6 +32,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const scrollYRatio = React.useRef(null);
     const frame = React.useRef(null);
     const initialized = React.useRef(false);
+    const timer = React.useRef(null);
+    const contentId = idState + '_content';
 
     const calculateContainerHeight = () => {
         const containerStyles = getComputedStyle(containerRef.current);
@@ -73,6 +80,32 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                 yBarRef.current.style.cssText = 'height:' + Math.max(scrollYRatio.current * 100, 10) + '%; top: calc(' + (contentRef.current.scrollTop / totalHeight) * 100 + '% - ' + xBarRef.current.clientHeight + 'px);right:' + right + 'px;';
             }
         });
+    };
+
+    const onFocus = (event) => {
+        if (xBarRef.current.isSameNode(event.target)) {
+            setOrientationState('horizontal');
+        } else if (yBarRef.current.isSameNode(event.target)) {
+            setOrientationState('vertical');
+        }
+    };
+
+    const onBlur = () => {
+        if (orientationState === 'horizontal') {
+            setOrientationState('vertical');
+        }
+    };
+
+    const onScroll = (event) => {
+        if (lastScrollLeft !== event.target.scrollLeft) {
+            setLastScrollLeft(event.target.scrollLeft);
+            setOrientationState('horizontal');
+        } else if (lastScrollTop !== event.target.scrollTop) {
+            setLastScrollTop(event.target.scrollTop);
+            setOrientationState('vertical');
+        }
+
+        moveBar();
     };
 
     const onYBarMouseDown = (event) => {
@@ -139,11 +172,91 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
         isYBarClicked.current = false;
     };
 
+    const onKeyDown = (event) => {
+        if (orientationState === 'vertical') {
+            switch (event.code) {
+                case 'ArrowDown': {
+                    setTimer('scrollTop', props.step);
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowUp': {
+                    setTimer('scrollTop', props.step * -1);
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowLeft':
+
+                case 'ArrowRight': {
+                    event.preventDefault();
+                    break;
+                }
+
+                default:
+                    //no op
+                    break;
+            }
+        } else if (orientationState === 'horizontal') {
+            switch (event.code) {
+                case 'ArrowRight': {
+                    setTimer('scrollLeft', props.step);
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowLeft': {
+                    setTimer('scrollLeft', props.step * -1);
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowDown':
+
+                case 'ArrowUp': {
+                    event.preventDefault();
+                    break;
+                }
+
+                default:
+                    //no op
+                    break;
+            }
+        }
+    };
+
+    const onKeyUp = () => {
+        clearTimer();
+    };
+
+    const repeat = (bar, step) => {
+        contentRef.current[bar] += step;
+        moveBar();
+    };
+
+    const setTimer = (bar, step) => {
+        clearTimer();
+        timer.current = setTimeout(() => {
+            repeat(bar, step);
+        }, 40);
+    };
+
+    const clearTimer = () => {
+        if (timer.current) {
+            clearTimeout(timer.current);
+        }
+    };
+
     const refresh = () => {
         moveBar();
     };
 
     useMountEffect(() => {
+        if (!props.id) {
+            setIdState(UniqueComponentId());
+        }
+
         moveBar();
         window.addEventListener('resize', moveBar);
         calculateContainerHeight();
@@ -190,7 +303,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const contentProps = mergeProps(
         {
             className: cx('content'),
-            onScroll: moveBar,
+            onScroll: onScroll,
             onMouseEnter: moveBar
         },
         ptm('content')
@@ -199,7 +312,16 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const barXProps = mergeProps(
         {
             ref: xBarRef,
+            role: 'scrollbar',
             className: cx('barx'),
+            tabIndex: 0,
+            'aria-valuenow': lastScrollTop,
+            'aria-controls': contentId,
+            'aria-orientation': 'horizontal',
+            onFocus: onFocus,
+            onBlur: onBlur,
+            onKeyDown: onKeyDown,
+            onKeyUp: onKeyUp,
             onMouseDown: onXBarMouseDown
         },
         ptm('barx')
@@ -208,7 +330,16 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const barYProps = mergeProps(
         {
             ref: yBarRef,
+            role: 'scrollbar',
             className: cx('bary'),
+            tabIndex: 0,
+            'aria-valuenow': lastScrollLeft,
+            'aria-controls': contentId,
+            'aria-orientation': 'vertical',
+            onFocus: onFocus,
+            onBlur: onBlur,
+            onKeyDown: onKeyDown,
+            onKeyUp: onKeyUp,
             onMouseDown: onYBarMouseDown
         },
         ptm('bary')

@@ -140,14 +140,12 @@ const styles = `
         text-align: left;
         justify-content: flex-start;
     }
-
     .p-treetable .p-treetable-thead > tr > th.p-align-right > .p-column-header-content,
     .p-treetable .p-treetable-tbody > tr > td.p-align-right,
     .p-treetable .p-treetable-tfoot > tr > td.p-align-right {
         text-align: right;
         justify-content: flex-end;
     }
-
     .p-treetable .p-treetable-thead > tr > th.p-align-center > .p-column-header-content,
     .p-treetable .p-treetable-tbody > tr > td.p-align-center,
     .p-treetable .p-treetable-tfoot > tr > td.p-align-center {
@@ -261,7 +259,7 @@ export const TreeTableBase = ComponentBase.extend({
         lazy: false,
         loading: false,
         loadingIcon: null,
-        metaKeySelection: true,
+        metaKeySelection: false,
         multiSortMeta: null,
         onColReorder: null,
         onCollapse: null,

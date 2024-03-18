@@ -26,14 +26,14 @@ const AccordionDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'multiple',
-            label: 'Multiple',
-            component: MultipleDoc
-        },
-        {
             id: 'dynamic',
             label: 'Dynamic',
             component: DynamicDoc
+        },
+        {
+            id: 'multiple',
+            label: 'Multiple',
+            component: MultipleDoc
         },
         {
             id: 'disabled',

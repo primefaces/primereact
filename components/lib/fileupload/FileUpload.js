@@ -3,17 +3,19 @@ import { localeOption, PrimeReactContext } from '../api/Api';
 import { Badge } from '../badge/Badge';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { PlusIcon } from '../icons/plus';
 import { TimesIcon } from '../icons/times';
 import { UploadIcon } from '../icons/upload';
 import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = FileUploadBase.getProps(inProps, context);
         const [uploadedFilesState, setUploadedFilesState] = React.useState([]);
@@ -125,9 +127,7 @@ export const FileUpload = React.memo(
                 let file = selectedFiles[i];
 
                 if (!isFileSelected(file) && validate(file)) {
-                    if (isImage(file)) {
-                        file.objectURL = window.URL.createObjectURL(file);
-                    }
+                    file.objectURL = window.URL.createObjectURL(file);
 
                     currentFiles.push(file);
                 }
@@ -292,8 +292,7 @@ export const FileUpload = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.which === 13) {
-                // enter
+            if (event.code === 'Enter') {
                 choose();
             }
         };
@@ -386,7 +385,8 @@ export const FileUpload = React.memo(
             const input = <input {...inputProps} />;
             const chooseIconProps = mergeProps(
                 {
-                    className: cx('chooseIcon', { iconOnly })
+                    className: cx('chooseIcon', { iconOnly }),
+                    'aria-hidden': 'true'
                 },
                 ptm('chooseIcon')
             );
@@ -529,7 +529,12 @@ export const FileUpload = React.memo(
 
         const createProgressBarContent = () => {
             if (props.progressBarTemplate) {
-                return ObjectUtils.getJSXElement(props.progressBarTemplate, props);
+                const defaultProgressBarTemplateOptions = {
+                    progress: progressState,
+                    props
+                };
+
+                return ObjectUtils.getJSXElement(props.progressBarTemplate, defaultProgressBarTemplateOptions);
             }
 
             return <ProgressBar value={progressState} showValue={false} pt={ptm('progressbar')} __parentMetadata={{ parent: metaData }} />;
@@ -547,14 +552,16 @@ export const FileUpload = React.memo(
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
                 const uploadIconProps = mergeProps(
                     {
-                        className: cx('uploadIcon', { iconOnly: uploadOptions.iconOnly })
+                        className: cx('uploadIcon', { iconOnly: uploadOptions.iconOnly }),
+                        'aria-hidden': 'true'
                     },
                     ptm('uploadIcon')
                 );
                 const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon {...uploadIconProps} />, { ...uploadIconProps }, { props });
                 const cancelIconProps = mergeProps(
                     {
-                        className: cx('cancelIcon', { iconOnly: cancelOptions.iconOnly })
+                        className: cx('cancelIcon', { iconOnly: cancelOptions.iconOnly }),
+                        'aria-hidden': 'true'
                     },
                     ptm('cancelIcon')
                 );
@@ -564,6 +571,7 @@ export const FileUpload = React.memo(
                     <Button
                         type="button"
                         label={uploadLabel}
+                        aria-hidden="true"
                         icon={uploadIcon}
                         onClick={upload}
                         disabled={uploadDisabled}
@@ -577,6 +585,7 @@ export const FileUpload = React.memo(
                     <Button
                         type="button"
                         label={cancelLabel}
+                        aria-hidden="true"
                         icon={cancelIcon}
                         onClick={clear}
                         disabled={cancelDisabled}

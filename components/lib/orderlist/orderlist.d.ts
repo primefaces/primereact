@@ -172,6 +172,11 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     header?: React.ReactNode | undefined;
     /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue true
+     */
+    autoOptionFocus?: boolean | undefined;
+    /**
      * Inline style of the list element.
      */
     listStyle?: React.CSSProperties | undefined;
@@ -181,9 +186,27 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     dragdrop?: boolean | undefined;
     /**
+     * Used to define a string that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledBy?: string | undefined;
+    /**
+     * Callback to invoke when menu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
+    /**
      * Name of the field that uniquely identifies the a record in the data.
      */
-    dataKey?: string | undefined;
+    dataKey: string;
     /**
      * The breakpoint to define the maximum width boundary when responsiveness is enabled.
      * @defaultValue '960px'.

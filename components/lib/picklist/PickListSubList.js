@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
 
 export const PickListSubList = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const listElementRef = React.useRef(null);
         const { ptm, cx } = props;
 
@@ -13,83 +15,6 @@ export const PickListSubList = React.memo(
                 hostName: props.hostName,
                 ...options
             });
-        };
-
-        const onItemClick = (event) => {
-            let originalEvent = event.originalEvent;
-            let item = event.value;
-            let selection = [...props.selection];
-            let index = ObjectUtils.findIndexInList(item, selection, props.dataKey);
-            let selected = index !== -1;
-            let metaSelection = props.metaKeySelection;
-
-            if (metaSelection) {
-                const metaKey = originalEvent.metaKey || originalEvent.ctrlKey;
-
-                if (selected && metaKey) {
-                    selection.splice(index, 1);
-                } else {
-                    if (!metaKey) {
-                        selection.length = 0;
-                    }
-
-                    selection.push(item);
-                }
-            } else {
-                if (selected) selection.splice(index, 1);
-                else selection.push(item);
-            }
-
-            if (props.onSelectionChange) {
-                props.onSelectionChange({
-                    event: originalEvent,
-                    value: selection
-                });
-            }
-        };
-
-        const onItemKeyDown = (event) => {
-            const originalEvent = event.originalEvent;
-            const listItem = originalEvent.currentTarget;
-
-            switch (originalEvent.which) {
-                //down
-                case 40:
-                    const nextItem = findNextItem(listItem);
-
-                    nextItem && nextItem.focus();
-                    originalEvent.preventDefault();
-                    break;
-
-                //up
-                case 38:
-                    const prevItem = findPrevItem(listItem);
-
-                    prevItem && prevItem.focus();
-                    originalEvent.preventDefault();
-                    break;
-
-                //enter
-                case 13:
-                    onItemClick(event);
-                    originalEvent.preventDefault();
-                    break;
-
-                default:
-                    break;
-            }
-        };
-
-        const findNextItem = (item) => {
-            const nextItem = item.nextElementSibling;
-
-            return nextItem ? (!DomHandler.hasClass(nextItem, 'p-picklist-item') ? findNextItem(nextItem) : nextItem) : null;
-        };
-
-        const findPrevItem = (item) => {
-            const prevItem = item.previousElementSibling;
-
-            return prevItem ? (!DomHandler.hasClass(prevItem, 'p-picklist-item') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const isSelected = (item) => {
@@ -114,7 +39,7 @@ export const PickListSubList = React.memo(
         };
 
         React.useImperativeHandle(ref, () => ({
-            listElementRef
+            getElement: () => listElementRef.current
         }));
 
         const createHeader = () => {
@@ -134,11 +59,27 @@ export const PickListSubList = React.memo(
 
         const createItems = () => {
             if (props.list) {
-                return props.list.map((item) => {
-                    const key = JSON.stringify(item);
+                return props.list.map((item, index) => {
+                    const key = props.parentId + '_' + index;
                     const selected = isSelected(item);
 
-                    return <PickListItem hostName={props.hostName} key={key} value={item} template={props.itemTemplate} selected={selected} onClick={onItemClick} onKeyDown={onItemKeyDown} tabIndex={props.tabIndex} ptm={ptm} cx={cx} />;
+                    return (
+                        <PickListItem
+                            hostName={props.hostName}
+                            key={key}
+                            id={key}
+                            index={index}
+                            focused={key === props.focusedOptionId}
+                            value={item}
+                            template={props.itemTemplate}
+                            selected={selected}
+                            onClick={props.onItemClick}
+                            onKeyDown={props.onItemKeyDown}
+                            onMouseDown={(event) => props.onOptionMouseDown({ ...event, index, type: props.type })}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
                 });
             }
 
@@ -217,9 +158,18 @@ export const PickListSubList = React.memo(
 
             const listProps = mergeProps(
                 {
+                    ref: listElementRef,
                     className: classNames(props.listClassName, cx('list')),
                     role: 'listbox',
+                    id: props.parentId + '_' + props.type + '_list',
                     'aria-multiselectable': true,
+                    'aria-activedescendant': props.ariaActivedescendant,
+                    tabIndex: props.list && props.list.length > 0 ? props.tabIndex : -1,
+                    onKeyDown: props.onListKeyDown,
+                    onFocus: (event) => {
+                        props.onListFocus(event, props.type);
+                    },
+                    onBlur: props.onListBlur,
                     style: props.style
                 },
                 getPTOptions('list')
@@ -234,8 +184,7 @@ export const PickListSubList = React.memo(
 
         const listWrapperProps = mergeProps(
             {
-                className: classNames(props.className, cx('listWrapper')),
-                ref: listElementRef
+                className: classNames(props.className, cx('listWrapper'))
             },
             getPTOptions('listWrapper')
         );

@@ -2,11 +2,13 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/menu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/menu/basicdoc';
+import { CommandDoc } from '@/components/doc/menu/commanddoc';
 import { GroupDoc } from '@/components/doc/menu/groupdoc';
 import { ImportDoc } from '@/components/doc/menu/importdoc';
 import { PopupDoc } from '@/components/doc/menu/popupdoc';
 import { PTDoc } from '@/components/doc/menu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/menu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/menu/routerdoc';
 import { TemplateDoc } from '@/components/doc/menu/templatedoc';
 import { StyledDoc } from '@/components/doc/menu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/menu/theming/tailwinddoc';
@@ -38,7 +40,16 @@ const MenuDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

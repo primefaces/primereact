@@ -10,7 +10,7 @@ export function FullScreenDoc(props) {
     const code = {
         basic: `
 <div className="card flex justify-content-center">
-    <Sidebar visible={visible} onHide={() => setVisible(false)}>
+    <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
         <h2>Sidebar</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -37,7 +37,7 @@ export default function FullScreenDemo() {
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
             </Sidebar>
-            <Button icon="pi pi-th-large" onClick={() => setVisible(true)} />
+            <Button icon="pi pi-window-maximize" onClick={() => setVisible(true)} />
         </div>
     )
 }
@@ -59,7 +59,7 @@ export default function FullScreenDemo() {
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
             </Sidebar>
-            <Button icon="pi pi-th-large" onClick={() => setVisible(true)} />
+            <Button icon="pi pi-window-maximize" onClick={() => setVisible(true)} />
         </div>
     )
 }
@@ -81,7 +81,7 @@ export default function FullScreenDemo() {
                         consequat.
                     </p>
                 </Sidebar>
-                <Button icon="pi pi-th-large" onClick={() => setVisible(true)} />
+                <Button icon="pi pi-window-maximize" onClick={() => setVisible(true)} />
             </div>
             <DocSectionCode code={code} />
         </>

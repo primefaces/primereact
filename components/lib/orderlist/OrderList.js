@@ -1,24 +1,29 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = OrderListBase.getProps(inProps, context);
 
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+        const [focused, setFocused] = React.useState(false);
+        const [focusedOptionId, setFocusedOptionId] = React.useState(null);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const hasFilter = ObjectUtils.isNotEmpty(filterValueState);
         const elementRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
+        const listElementRef = React.useRef(null);
         const metaData = {
             props,
             state: {
@@ -31,47 +36,265 @@ export const OrderList = React.memo(
 
         useHandleStyle(OrderListBase.css.styles, isUnstyled, { name: 'orderlist' });
 
+        const getVisibleList = () => {
+            if (hasFilter) {
+                const filterValue = filterValueState.trim().toLocaleLowerCase(props.filterLocale);
+                const searchFields = props.filterBy ? props.filterBy.split(',') : [];
+
+                return FilterService.filter(props.value, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+            }
+
+            return props.value;
+        };
+
+        const visibleList = getVisibleList();
+
+        const getListElement = () => {
+            return listElementRef.current && listElementRef.current.getElement();
+        };
+
         const onItemClick = (event) => {
-            const metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
-            const index = ObjectUtils.findIndexInList(event.value, selectionState, props.dataKey);
-            const selected = index !== -1;
+            const { originalEvent, value, index } = event;
+            const selectedIndex = ObjectUtils.findIndexInList(value, selectionState);
+            const listElement = getListElement();
+            const selectedId = DomHandler.find(listElement, '[data-pc-section="item"]')[index].getAttribute('id');
+
+            setFocusedOptionIndex(selectedId);
+
+            const metaKey = originalEvent.metaKey || originalEvent.ctrlKey;
+            const selected = selectedIndex !== -1;
             let newSelection;
 
-            if (selected) newSelection = metaKey ? selectionState.filter((_, i) => i !== index) : [event.value];
-            else newSelection = metaKey ? [...selectionState, event.value] : [event.value];
+            if (selected) newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
+            else newSelection = metaKey ? [...selectionState, value] : [value];
 
             setSelectionState(newSelection);
         };
 
-        const onItemKeyDown = (event) => {
-            const originalEvent = event.originalEvent;
-            const listItem = originalEvent.currentTarget;
+        const setSelectionStateWithIndex = (index) => {
+            const item = visibleList[index];
+            const selected = ObjectUtils.findIndexInList(item, selectionState) !== -1;
 
-            switch (originalEvent.which) {
-                //down
-                case 40:
-                    const nextItem = findNextItem(listItem);
+            if (selected) setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
+            else setSelectionState([...selectionState, item]);
+        };
 
-                    nextItem && nextItem.focus();
-                    originalEvent.preventDefault();
+        const findCurrentFocusedIndex = (listElement) => {
+            if (focusedOptionIndex === -1) {
+                const itemList = listElement && listElement.children ? [...listElement.children] : [];
+                let selectedOptionIndex = findFirstSelectedOptionIndex(listElement, itemList);
+
+                if (props.autoOptionFocus && selectedOptionIndex === -1) {
+                    selectedOptionIndex = findFirstFocusedOptionIndex(listElement, itemList);
+                }
+
+                return selectedOptionIndex;
+            }
+
+            return -1;
+        };
+
+        const findFirstSelectedOptionIndex = (listElement, itemList) => {
+            if (selectionState.length) {
+                const selectedFirstItem = DomHandler.findSingle(listElement, '[data-p-highlight="true"]');
+
+                return ObjectUtils.findIndexInList(selectedFirstItem, itemList);
+            }
+
+            return -1;
+        };
+
+        const findFirstFocusedOptionIndex = (listElement, itemList) => {
+            const firstFocusableItem = DomHandler.findSingle(listElement, '[data-pc-section="item"]');
+
+            return ObjectUtils.findIndexInList(firstFocusableItem, itemList);
+        };
+
+        const onListFocus = (event) => {
+            setFocused(true);
+
+            const listElement = getListElement();
+            const currentFocusedIndex = findCurrentFocusedIndex(listElement);
+
+            changeFocusedOptionIndex(currentFocusedIndex);
+
+            props.onFocus && props.onFocus(event);
+        };
+
+        const onListBlur = (event) => {
+            setFocused(false);
+            setFocusedOptionIndex(-1);
+            props.onBlur && props.onBlur(event);
+        };
+
+        const onListKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    onArrowDownKey(event);
                     break;
 
-                //up
-                case 38:
-                    const prevItem = findPrevItem(listItem);
-
-                    prevItem && prevItem.focus();
-                    originalEvent.preventDefault();
+                case 'ArrowUp':
+                    onArrowUpKey(event);
                     break;
 
-                //enter
-                case 13:
-                    onItemClick(event);
-                    originalEvent.preventDefault();
+                case 'Home':
+                    onHomeKey(event);
                     break;
+
+                case 'End':
+                    onEndKey(event);
+                    break;
+
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
+
+                case 'Space':
+                    onSpaceKey(event);
+                    break;
+
+                case 'KeyA':
+                    if (event.ctrlKey) {
+                        setSelectionState(visibleList);
+                        event.preventDefault();
+                    }
 
                 default:
                     break;
+            }
+        };
+
+        const onOptionMouseDown = (index) => {
+            setFocusedOptionIndex(index);
+        };
+
+        const onArrowDownKey = (event) => {
+            const optionIndex = findNextOptionIndex(focusedOptionIndex);
+
+            changeFocusedOptionIndex(optionIndex);
+
+            if (event.shiftKey) {
+                setSelectionStateWithIndex(optionIndex);
+            }
+
+            event.preventDefault();
+        };
+
+        const onArrowUpKey = (event) => {
+            const optionIndex = findPrevOptionIndex(focusedOptionIndex);
+
+            changeFocusedOptionIndex(optionIndex);
+
+            if (event.shiftKey) {
+                setSelectionStateWithIndex(optionIndex);
+            }
+
+            event.preventDefault();
+        };
+
+        const onHomeKey = (event) => {
+            if (event.ctrlKey && event.shiftKey) {
+                const listElement = getListElement();
+                const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+                const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
+                const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);
+
+                setSelectionState([...visibleList].slice(0, matchedOptionIndex + 1));
+            } else {
+                changeFocusedOptionIndex(0);
+            }
+
+            event.preventDefault();
+        };
+
+        const onEndKey = (event) => {
+            const listElement = getListElement();
+
+            if (event.ctrlKey && event.shiftKey) {
+                const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+                const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
+                const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);
+
+                setSelectionState([...visibleList].slice(matchedOptionIndex, items.length));
+            } else {
+                changeFocusedOptionIndex(DomHandler.find(listElement, '[data-pc-section="item"]').length - 1);
+            }
+
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            const listElement = getListElement();
+            const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+            const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
+            const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);
+
+            onItemClick({ originalEvent: event, value: visibleList[matchedOptionIndex], index: matchedOptionIndex });
+
+            event.preventDefault();
+        };
+
+        const onSpaceKey = (event) => {
+            event.preventDefault();
+
+            const listElement = getListElement();
+
+            if (event.shiftKey && selectionState && selectionState.length > 0) {
+                const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+                const selectedItemIndex = ObjectUtils.findIndexInList(selectionState[0], [...visibleList]);
+                const focusedItem = DomHandler.findSingle(listElement, `[data-pc-section="item"][id=${focusedOptionIndex}]`);
+                const matchedOptionIndex = [...items].findIndex((item) => item === focusedItem);
+
+                setSelectionState([...visibleList].slice(Math.min(selectedItemIndex, matchedOptionIndex), Math.max(selectedItemIndex, matchedOptionIndex) + 1));
+            } else {
+                onEnterKey(event);
+            }
+        };
+
+        const findNextOptionIndex = (index) => {
+            const listElement = getListElement();
+            const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+            const matchedOptionIndex = [...items].findIndex((link) => link.id === index);
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex + 1 : 0;
+        };
+
+        const findPrevOptionIndex = (index) => {
+            const listElement = getListElement();
+            const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+            const matchedOptionIndex = [...items].findIndex((link) => link.id === index);
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex - 1 : 0;
+        };
+
+        const changeFocusedOptionIndex = (index) => {
+            const listElement = getListElement();
+            const items = DomHandler.find(listElement, '[data-pc-section="item"]');
+
+            let order;
+
+            if (index >= items.length) {
+                order = items.length - 1;
+            } else if (index < 0) {
+                return;
+            } else {
+                order = index;
+            }
+
+            const _focusedOptionIndex = items[order] ? items[order].getAttribute('id') : -1;
+
+            setFocusedOptionIndex(_focusedOptionIndex);
+
+            scrollInView(_focusedOptionIndex);
+        };
+
+        const scrollInView = (id) => {
+            const listElement = getListElement();
+            const element = DomHandler.findSingle(listElement, `[data-pc-section="item"][id="${id}"]`);
+
+            if (element) {
+                element.scrollIntoView && element.scrollIntoView({ block: 'nearest', inline: 'start' });
             }
         };
 
@@ -106,17 +329,6 @@ export const OrderList = React.memo(
             }
         };
 
-        const getVisibleList = () => {
-            if (hasFilter) {
-                const filterValue = filterValueState.trim().toLocaleLowerCase(props.filterLocale);
-                const searchFields = props.filterBy ? props.filterBy.split(',') : [];
-
-                return FilterService.filter(props.value, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
-            }
-
-            return props.value;
-        };
-
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
@@ -140,38 +352,9 @@ export const OrderList = React.memo(
             reorderDirection.current = event.direction;
         };
 
-        const updateListScroll = () => {
-            const list = DomHandler.findSingle(elementRef.current, '.p-orderlist-list');
-            const listItems = DomHandler.find(list, '.p-orderlist-item.p-highlight');
-
-            if (listItems && listItems.length) {
-                switch (reorderDirection.current) {
-                    case 'up':
-                        DomHandler.scrollInView(list, listItems[0]);
-                        break;
-
-                    case 'top':
-                        list.scrollTop = 0;
-                        break;
-
-                    case 'down':
-                        DomHandler.scrollInView(list, listItems[listItems.length - 1]);
-                        break;
-
-                    case 'bottom':
-                        /* TODO: improve this code block */
-                        setTimeout(() => (list.scrollTop = list.scrollHeight), 100);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        };
-
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
@@ -224,13 +407,16 @@ export const OrderList = React.memo(
         }, [attributeSelectorState, props.breakpoint]);
 
         useUpdateEffect(() => {
+            const _focusedOptionId = focusedOptionIndex !== -1 ? focusedOptionIndex : null;
+
+            setFocusedOptionId(_focusedOptionId);
+        }, [focusedOptionIndex]);
+
+        useUpdateEffect(() => {
             if (reorderDirection.current) {
-                updateListScroll();
                 reorderDirection.current = null;
             }
         });
-
-        const visibleList = getVisibleList();
 
         const rootProps = mergeProps(
             {
@@ -261,11 +447,19 @@ export const OrderList = React.memo(
                     metaData={metaData}
                 />
                 <OrderListSubList
+                    ref={listElementRef}
                     hostName="OrderList"
+                    focused={focused}
+                    ariaLabel={props.ariaLabel}
+                    ariaLabelledBy={props.ariaLabelledBy}
                     value={visibleList}
                     selection={selectionState}
                     onItemClick={onItemClick}
-                    onItemKeyDown={onItemKeyDown}
+                    onOptionMouseDown={onOptionMouseDown}
+                    focusedOptionId={focusedOptionId}
+                    onListKeyDown={onListKeyDown}
+                    onListFocus={onListFocus}
+                    onListBlur={onListBlur}
                     onFilterInputChange={onFilterInputChange}
                     itemTemplate={props.itemTemplate}
                     filter={props.filter}
@@ -273,6 +467,7 @@ export const OrderList = React.memo(
                     resetFilter={resetFilter}
                     filterTemplate={props.filterTemplate}
                     header={props.header}
+                    parentId={attributeSelectorState}
                     listStyle={props.listStyle}
                     dataKey={props.dataKey}
                     dragdrop={props.dragdrop}

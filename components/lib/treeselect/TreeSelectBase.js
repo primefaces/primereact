@@ -10,6 +10,7 @@ const classes = {
                 'p-treeselect-chip': props.display === 'chip',
                 'p-treeselect-clearable': props.showClear && !props.disabled,
                 'p-disabled': props.disabled,
+                'p-invalid': props.invalid,
                 'p-focus': focusedState,
                 'p-inputwrapper-filled': !isValueEmpty,
                 'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -51,20 +52,20 @@ const styles = `
         position: relative;
         user-select: none;
     }
-    
+
     .p-treeselect-trigger {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
     }
-    
+
     .p-treeselect-label-container {
         overflow: hidden;
         flex: 1 1 auto;
         cursor: pointer;
     }
-    
+
     .p-treeselect-label  {
         display: block;
         white-space: nowrap;
@@ -72,48 +73,48 @@ const styles = `
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    
+
     .p-treeselect-label-empty {
         overflow: hidden;
         visibility: hidden;
     }
-    
+
     .p-treeselect-token {
         cursor: default;
         display: inline-flex;
         align-items: center;
         flex: 0 0 auto;
     }
-    
+
     .p-treeselect .p-treeselect-panel {
         min-width: 100%;
     }
-    
+
     .p-treeselect-items-wrapper {
         overflow: auto;
     }
-    
+
     .p-treeselect-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    
+
     .p-treeselect-filter-container {
         position: relative;
         flex: 1 1 auto;
     }
-    
+
     .p-treeselect-filter-icon {
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
     }
-    
+
     .p-treeselect-filter-container .p-inputtext {
         width: 100%;
     }
-    
+
     .p-treeselect-close {
         display: flex;
         align-items: center;
@@ -123,13 +124,13 @@ const styles = `
         position: relative;
         margin-left: auto;
     }
-    
+
     .p-treeselect-clear-icon {
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
     }
-    
+
     .p-fluid .p-treeselect {
         display: flex;
 }
@@ -161,10 +162,13 @@ export const TreeSelectBase = ComponentBase.extend({
         filterValue: null,
         inputId: null,
         inputRef: null,
-        metaKeySelection: true,
+        invalid: false,
+        metaKeySelection: false,
         name: null,
         nodeTemplate: null,
         onChange: null,
+        onFocus: null,
+        onBlur: null,
         onFilterValueChange: null,
         onHide: null,
         onNodeCollapse: null,

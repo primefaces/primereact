@@ -2,10 +2,12 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/steps/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/steps/basicdoc';
+import { ControlledDoc } from '@/components/doc/steps/controlleddoc';
 import { ImportDoc } from '@/components/doc/steps/importdoc';
 import { InteractiveDoc } from '@/components/doc/steps/interactivedoc';
 import { PTDoc } from '@/components/doc/steps/pt/ptdoc';
 import { Wireframe } from '@/components/doc/steps/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/steps/templatedoc';
 import { StyledDoc } from '@/components/doc/steps/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/steps/theming/tailwinddoc';
 
@@ -22,11 +24,20 @@ const StepsDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
             id: 'interactive',
             label: 'Interactive',
             component: InteractiveDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

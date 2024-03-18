@@ -19,7 +19,7 @@ const TRANSITIONS = {
 const Tailwind = {  
     accordion: {
         root: 'mb-1',
-        accordiontab: {
+        tab: {
             root: 'mb-1',
             header: ({ props }) => ({
                 className: classNames(
@@ -34,7 +34,7 @@ const Tailwind = {
                     'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80 dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Dark mode
                     'hover:border-gray-300 hover:bg-gray-200 hover:text-gray-800', // Hover
                     'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)]', // Focus
-                    { 'rounded-br-md rounded-bl-md': !context.active, 'rounded-br-0 rounded-bl-0 text-gray-800': context.active } // Condition
+                    { 'rounded-br-md rounded-bl-md': !context.selected, 'rounded-br-0 rounded-bl-0 text-gray-800': context.selected } // Condition
                 )
             }),
             headerIcon: 'inline-block mr-2',
@@ -99,7 +99,7 @@ export default function UnstyledDemo() {
                     PrimeReact offers a built-in Tailwind theme to get you started quickly. The default values related to the component are displayed below. The component can easily be styled with your own design based on Tailwind utilities, see the{' '}
                     <Link href="/tailwind">Tailwind Customization</Link> section for an example.
                 </p>
-                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
                 <p>A playground sample with the pre-built Tailwind theme.</p>
                 <DocSectionCode code={code2} embedded />
             </DocSectionText>

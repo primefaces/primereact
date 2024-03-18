@@ -745,6 +745,13 @@
                             "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
                         },
                         {
+                            "name": "styleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StyleContainerType",
+                            "description": "This option allows  `useStyle`  to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
@@ -811,8 +818,8 @@
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions",
-                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                            "type": "Partial<ZIndexOptions>",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically."
                         },
                         {
                             "name": "pt",
@@ -841,6 +848,13 @@
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<AppendToType>>",
                             "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setStyleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<StyleContainerType>>",
+                            "description": "Sets the \"styleContainer\" state of the context."
                         },
                         {
                             "name": "setAutoZIndex",
@@ -1317,7 +1331,7 @@
                             "description": "Custom passthrough(pt) options for MultiSelect."
                         },
                         {
-                            "name": "multisatecheckbox",
+                            "name": "multistatecheckbox",
                             "optional": true,
                             "readonly": false,
                             "type": "MultiStateCheckboxPassThroughOptions",
@@ -1813,13 +1827,6 @@
                             "description": "Close"
                         },
                         {
-                            "name": "completed",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Completed"
-                        },
-                        {
                             "name": "pending",
                             "optional": true,
                             "readonly": false,
@@ -1901,7 +1908,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": ""
+                            "description": "Next Decade"
                         },
                         {
                             "name": "prevYear",
@@ -1978,28 +1985,28 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "PM"
+                            "description": "AM"
                         },
                         {
                             "name": "pm",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "AM"
+                            "description": "PM"
                         },
                         {
                             "name": "today",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "Today"
+                            "description": "Today (Calendar date only)"
                         },
                         {
                             "name": "now",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "Now"
+                            "description": "Now (Calendar using time)"
                         },
                         {
                             "name": "weekHeader",
@@ -2055,48 +2062,21 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "No results found"
-                        },
-                        {
-                            "name": "searchMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "{0} results are available"
-                        },
-                        {
-                            "name": "selectionMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "{0} items selected"
-                        },
-                        {
-                            "name": "emptySelectionMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "No selected item"
-                        },
-                        {
-                            "name": "emptySearchMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "No results found"
+                            "description": "No available options"
                         },
                         {
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "No available options"
+                            "description": "No results found"
                         },
                         {
                             "name": "aria",
                             "optional": true,
                             "readonly": false,
-                            "type": "Object"
+                            "type": "Object",
+                            "description": "ARIA labels"
                         }
                     ],
                     "callbacks": []
@@ -3533,6 +3513,9 @@
                 },
                 "AppendToType": {
                     "values": "\"self\" | HTMLElement | undefined | null | Function"
+                },
+                "StyleContainerType": {
+                    "values": "ShadowRoot | HTMLElement | undefined | null"
                 }
             }
         }
@@ -3773,6 +3756,14 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the input field."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemTemplate",
@@ -5859,6 +5850,14 @@
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "ARIA label for screenreader support."
+                        },
+                        {
                             "name": "ariaLabelledBy",
                             "optional": true,
                             "readonly": false,
@@ -5971,6 +5970,14 @@
                             "description": "Whether to hide the overlay on date selection when showTime is enabled."
                         },
                         {
+                            "name": "hideOnRangeSelection",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether to hide the overlay on date selection is completed when selectionMode is range."
+                        },
+                        {
                             "name": "hourFormat",
                             "optional": true,
                             "readonly": false,
@@ -6049,6 +6056,14 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the input field."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keepInvalid",
@@ -7521,6 +7536,13 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "ARIA label for screenreader support."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
@@ -7563,6 +7585,13 @@
                             "description": "Icon to show in each of the decrement buttons."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
@@ -7596,6 +7625,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether to hide the overlay on date selection when showTime is enabled."
+                        },
+                        {
+                            "name": "hideOnRangeSelection",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether to hide the overlay on date selection is completed when selectionMode is range."
                         },
                         {
                             "name": "hourFormat",
@@ -9057,6 +9093,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
@@ -9379,6 +9423,13 @@
                             "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
                         },
                         {
+                            "name": "styleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StyleContainerType",
+                            "description": "This option allows  `useStyle`  to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
@@ -9445,8 +9496,8 @@
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions",
-                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                            "type": "Partial<ZIndexOptions>",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically."
                         },
                         {
                             "name": "pt",
@@ -9475,6 +9526,13 @@
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<AppendToType>>",
                             "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setStyleContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<StyleContainerType>>",
+                            "description": "Sets the \"styleContainer\" state of the context."
                         },
                         {
                             "name": "setAutoZIndex",
@@ -9657,18 +9715,18 @@
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
-                            "name": "sublist",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLUListElement>>",
-                            "description": "Uses to pass attributes to the sub-list's DOM element."
-                        },
-                        {
                             "name": "item",
                             "optional": true,
                             "readonly": false,
                             "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "sublist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the sub-list's DOM element."
                         },
                         {
                             "name": "content",
@@ -10065,6 +10123,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -10179,19 +10245,6 @@
                             "description": "Callback to invoke on value change"
                         },
                         {
-                            "name": "onClick",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "CheckboxClickEvent",
-                                    "description": "Custom click event"
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke on value change. Mark the event with preventDefault to prevent the option from changing."
-                        },
-                        {
                             "name": "onContextMenu",
                             "parameters": [
                                 {
@@ -10253,36 +10306,6 @@
                             "type": "FormTarget<any>"
                         }
                     ]
-                },
-                "CheckboxClickEvent": {
-                    "description": "Custom click event.",
-                    "relatedProp": "onClick",
-                    "props": [
-                        {
-                            "name": "originalEvent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SyntheticEvent<Element, Event>"
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
-                        },
-                        {
-                            "name": "checked",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
-                        },
-                        {
-                            "name": "target",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "FormTarget<any>"
-                        }
-                    ]
                 }
             }
         },
@@ -10298,12 +10321,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "CheckboxProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "CheckboxState"
                         },
                         {
                             "name": "context",
@@ -10333,6 +10350,13 @@
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
+                            "name": "box",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
+                        },
+                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -10345,20 +10369,6 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
-                        },
-                        {
-                            "name": "hiddenInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInput",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the hidden input's DOM element."
                         },
                         {
                             "name": "hooks",
@@ -10387,20 +10397,6 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current disabled state of the item as a boolean."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "CheckboxState": {
-                    "description": "Defines current inline state in Checkbox component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Current focus state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -10552,7 +10548,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when a chip is removed."
+                            "description": "Callback to invoke when a chip is removed.\n*"
                         }
                     ]
                 }
@@ -10773,6 +10769,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keyfilter",
@@ -12062,7 +12066,7 @@
                             "name": "rowEditor",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean",
+                            "type": "boolean | Function",
                             "default": "false",
                             "description": "Displays icons to edit row."
                         },
@@ -14185,6 +14189,14 @@
                             "description": "Specifies if pressing escape key should hide the dialog."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "contentClassName",
                             "optional": true,
                             "readonly": false,
@@ -14997,6 +15009,14 @@
                             "description": "Specifies if pressing escape key should hide the popup."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "defaultFocus",
                             "optional": true,
                             "readonly": false,
@@ -15373,6 +15393,41 @@
                         }
                     ]
                 },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "acceptBtnRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLButtonElement>",
+                            "description": "Reference for the accept button. Used to focus the element and execute the action."
+                        },
+                        {
+                            "name": "rejectBtnRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLButtonElement>",
+                            "description": "Reference for the reject button. Used to focus the element and execute the action."
+                        },
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "description": "Message value of confirm popup."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Hide action of confirm popup."
+                        }
+                    ]
+                },
                 "ConfirmPopupReturn": {
                     "description": "Object returned by the  confirmPopup  method.",
                     "relatedProp": "",
@@ -15456,6 +15511,22 @@
                             "type": "null | HTMLElement | \"self\" | Function",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located."
+                        },
+                        {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Used to define a string that labels the component."
+                        },
+                        {
+                            "name": "ariaLabelledBy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
                             "name": "autoZIndex",
@@ -15681,9 +15752,43 @@
                             "readonly": false,
                             "type": "ContextMenuPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of the element in tabbing order."
                         }
                     ],
-                    "callbacks": []
+                    "callbacks": [
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when ContextMenu receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when ContextMenu loses focus."
+                        }
+                    ]
                 },
                 "ContextMenuState": {
                     "description": "Defines current inline state in ContextMenu component.",
@@ -17312,7 +17417,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event."
+                            "description": "Callback to invoke when row edit is completed."
                         },
                         {
                             "name": "onRowEditInit",
@@ -17333,7 +17438,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowEditSaveEvent",
+                                    "type": "DataTableRowEditSaveEvent<TValue>",
                                     "description": "Custom row edit save event."
                                 }
                             ],
@@ -18244,7 +18349,7 @@
                             "name": "columns",
                             "optional": false,
                             "readonly": false,
-                            "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+                            "type": "Column[]",
                             "description": "Columns array after reorder."
                         }
                     ]
@@ -18623,6 +18728,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Whether the row is valid or not."
+                        },
+                        {
+                            "name": "newData",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableRowData<TValue>",
+                            "description": "Editing row data."
                         }
                     ],
                     "callbacks": [],
@@ -18757,6 +18869,13 @@
                             "readonly": false,
                             "type": "DataTableProps<TValue>",
                             "description": "The props of the datatable."
+                        },
+                        {
+                            "name": "rowIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of validated row"
                         }
                     ],
                     "callbacks": []
@@ -20255,7 +20374,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event."
+                            "description": "Callback to invoke when row edit is completed."
                         },
                         {
                             "name": "onRowEditInit",
@@ -20276,7 +20395,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableRowEditSaveEvent",
+                                    "type": "DataTableRowEditSaveEvent<TValue>",
                                     "description": "Custom row edit save event."
                                 }
                             ],
@@ -20846,13 +20965,31 @@
                                 },
                                 {
                                     "name": "layout",
-                                    "optional": false,
+                                    "optional": true,
                                     "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
                                     "description": "Current layout."
                                 }
                             ],
                             "returnType": "ReactNode",
                             "description": "Function that gets the option along with the layout mode and returns the content."
+                        },
+                        {
+                            "name": "listTemplate",
+                            "parameters": [
+                                {
+                                    "name": "items",
+                                    "optional": false,
+                                    "type": "any[]"
+                                },
+                                {
+                                    "name": "layout",
+                                    "optional": true,
+                                    "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
+                                    "description": "Current layout."
+                                }
+                            ],
+                            "returnType": "undefined | ReactNode[]",
+                            "description": "Function that gets the options along with the layout mode and returns the content."
                         },
                         {
                             "name": "onPage",
@@ -21459,6 +21596,14 @@
                             "description": "Specifies if pressing escape key should hide the dialog."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the dialog. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "contentClassName",
                             "optional": true,
                             "readonly": false,
@@ -22022,6 +22167,89 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "headerRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "Allows you to specify the header of the content."
+                        },
+                        {
+                            "name": "contentRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "Allows you to specify the content."
+                        },
+                        {
+                            "name": "footerRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement>",
+                            "description": "Allows you to specify the footer of the content."
+                        },
+                        {
+                            "name": "closeRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement | HTMLButtonElement>",
+                            "description": "Allows you to specify the close button of the dialog."
+                        },
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ContentPropsMessage",
+                            "description": "Dialog's props values."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [
+                                {
+                                    "name": "e",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback for hiding the dialog."
+                        }
+                    ]
+                },
+                "ContentPropsMessage": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "message",
+                    "props": [
+                        {
+                            "name": "header",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Header of the dialog."
+                        },
+                        {
+                            "name": "content",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Content of the dialog."
+                        },
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Message of the dialog."
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         },
@@ -22259,6 +22487,14 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -22270,7 +22506,34 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when dock loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when dock receives focus."
+                        }
+                    ]
                 }
             }
         },
@@ -22548,6 +22811,22 @@
                             "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
+                            "name": "checkmark",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the selected option will be shown with a check mark."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -22701,6 +22980,14 @@
                             "description": "Reference of the focusable input element."
                         },
                         {
+                            "name": "highlightOnSelect",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the selected option will be add highlight class."
+                        },
+                        {
                             "name": "id",
                             "optional": true,
                             "readonly": false,
@@ -22725,12 +23012,36 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of items."
+                        },
+                        {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Displays a loader to indicate data load is in progress."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
                         },
                         {
                             "name": "maxLength",
@@ -22875,6 +23186,14 @@
                             "type": "string",
                             "default": "200px",
                             "description": "Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "showClear",
@@ -23257,11 +23576,39 @@
                             "description": "Uses to pass attributes to the item group's DOM element."
                         },
                         {
+                            "name": "itemGroupLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the item group label's DOM element."
+                        },
+                        {
                             "name": "item",
                             "optional": true,
                             "readonly": false,
                             "type": "DropdownPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "itemLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the item label's DOM element."
+                        },
+                        {
+                            "name": "checkIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Used to pass attributes to the check icon's DOM element."
+                        },
+                        {
+                            "name": "blankIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Used to pass attributes to the bank icon's DOM element."
                         },
                         {
                             "name": "emptyMessage",
@@ -25079,6 +25426,27 @@
                     ],
                     "callbacks": []
                 },
+                "FileUploadProgressBarTemplateOptions": {
+                    "description": "Custom file upload progressbar template options",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "progress",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current progress state as a number."
+                        },
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FileUploadProps",
+                            "description": "The props passed to the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ItemTemplateOptions": {
                     "description": "Custom item template options",
                     "relatedProp": "",
@@ -26211,7 +26579,7 @@
                         },
                         {
                             "name": "options",
-                            "type": "IntersectionObserver",
+                            "type": "IntersectionObserverInit",
                             "description": "The options of the intersection observer."
                         }
                     ],
@@ -26279,6 +26647,12 @@
                     ],
                     "returnType": "number | undefined",
                     "description": "Custom hook to use display order of component of one and the same group"
+                },
+                "useMergeProps": {
+                    "name": "useMergeProps",
+                    "parameters": [],
+                    "returnType": "Function",
+                    "description": "Custom hook to return a function for merging properties."
                 }
             }
         },
@@ -26635,7 +27009,7 @@
                         }
                     ],
                     "callbacks": [],
-                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
+                    "extendedBy": "AngleDoubleDownIconProps,AngleDoubleLeftIconProps,AngleDoubleRightIconProps,AngleDoubleUpIconProps,AngleDownIconProps,AngleLeftIconProps,AngleRightIconProps,AngleUpIconProps,ArrowDownIconProps,ArrowUpIconProps,BanIconProps,BarsIconProps,BlankIconProps,CalendarIconProps,CheckIconProps,ChevronDownIconProps,ChevronLeftIconProps,ChevronRightIconProps,ChevronUpIconProps,DownloadIconProps,ExclamationTriangleIconProps,EyeIconProps,EyeSlashIconProps,FilterIconProps,FilterSlashIconProps,InfoCircleIconProps,MinusIconProps,PencilIconProps,PlusIconProps,RefreshIconProps,SearchIconProps,SearchMinusIconProps,SearchPlusIconProps,SortAltIconProps,SortAmountDownIconProps,SortAmountUpAltIconProps,SpinnerIconProps,StarIconProps,StarFillIconProps,ThLargeIconProps,TimesIconProps,TimesCircleIconProps,TrashIconProps,UndoIconProps,UploadIconProps,WindowMaximizeIconProps,WindowMinimizeIconProps",
                     "extendedTypes": "Omit<React.SVGProps<SVGSVGElement>, \"ref\">"
                 }
             }
@@ -27102,6 +27476,47 @@
                 },
                 "props": {
                     "description": "Defines valid properties in BarsIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "spin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": ""
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        }
+    },
+    "icons/blank": {
+        "components": {
+            "BlankIcon": {
+                "description": "**PrimeReact - BlankIcon**\n\n[Live Demo](https://www.primereact.org/icons/)\n--- ---\n![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in BlankIcon component. In addition to these, all properties of SVGSVGElement can be used in this component.",
                     "values": [
                         {
                             "name": "className",
@@ -29377,6 +29792,14 @@
                             "description": "When present, it specifies that the element value cannot be altered."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -29798,6 +30221,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "locale",
                             "optional": true,
                             "readonly": false,
@@ -29930,8 +30361,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "RoundingMode",
-                            "default": "",
-                            "description": "How decimals should be rounded.\nThe default value is  `\"halfExpand\"` , [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode)."
+                            "default": "halfExpand",
+                            "description": "How decimals should be rounded. [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode)."
                         },
                         {
                             "name": "showButtons",
@@ -30077,19 +30508,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when the key pressed down."
-                        },
-                        {
-                            "name": "onKeyUp",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "KeyboardEvent<HTMLInputElement>",
-                                    "description": "Browser event"
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when the key released."
                         },
                         {
                             "name": "onValueChange",
@@ -30373,6 +30791,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -30539,12 +30965,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "InputSwitchProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "InputSwitchState"
                         }
                     ],
                     "callbacks": []
@@ -30568,18 +30988,11 @@
                             "description": "Uses to pass attributes to the slider's DOM element."
                         },
                         {
-                            "name": "hiddenInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "InputSwitchPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInput",
+                            "name": "input",
                             "optional": true,
                             "readonly": false,
                             "type": "InputSwitchPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the hidden input's DOM element."
+                            "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -30594,20 +31007,6 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "InputSwitchState": {
-                    "description": "Defines current inline state in InputSwitch component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Current focus state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -30641,6 +31040,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keyfilter",
@@ -30850,6 +31257,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keyfilter",
@@ -31345,6 +31760,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -31447,6 +31870,14 @@
                             "type": "string",
                             "default": "",
                             "description": "When specified, filter displays with this value."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemTemplate",
@@ -31559,6 +31990,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "tooltip",
@@ -32105,6 +32544,14 @@
                             "description": "Icon of the submenu."
                         },
                         {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -32116,7 +32563,34 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        }
+                    ]
                 }
             }
         },
@@ -32841,6 +33315,13 @@
                             "readonly": false,
                             "type": "any",
                             "description": "Current trigger state."
+                        },
+                        {
+                            "name": "selected",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "For item, this is the state of the item."
                         }
                     ],
                     "callbacks": []
@@ -33036,6 +33517,14 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
+                            "name": "tabIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
@@ -33056,6 +33545,32 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
                         {
                             "name": "onHide",
                             "parameters": [
@@ -33245,6 +33760,22 @@
                     "description": "Defines valid properties in Menubar component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Used to define a string that labels the component."
+                        },
+                        {
+                            "name": "ariaLabelledBy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -33320,7 +33851,34 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        }
+                    ]
                 }
             }
         },
@@ -33781,7 +34339,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -34099,7 +34657,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -34196,6 +34754,286 @@
             }
         }
     },
+    "metergroup": {
+        "description": "MeterGroup displays scalar measurements within a known range.\n\n[Live Demo](https://www.primereact.org/metergroup/)",
+        "components": {
+            "MeterGroup": {
+                "description": "MeterGroup is an extension to standard input element with theming and keyfiltering.",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in MeterGroup component. In addition to these, all properties of HTMLDivElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Additional CSS classes to apply to the MeterGroup."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "labelList",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "labelOrientation",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"horizontal\" | \"vertical\"",
+                            "default": "'horizontal'",
+                            "description": "The orientation of the label. Can be either 'horizontal' or 'vertical'."
+                        },
+                        {
+                            "name": "labelPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"end\" | \"start\"",
+                            "default": "'end'",
+                            "description": "The position of the label. Can be either 'start' or 'end'."
+                        },
+                        {
+                            "name": "max",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "100",
+                            "description": "The maximum value for the MeterGroup."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "min",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "The minimum value for the MeterGroup."
+                        },
+                        {
+                            "name": "orientation",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"horizontal\" | \"vertical\"",
+                            "default": "'horizontal'",
+                            "description": "The orientation of the MeterGroup. Can be either 'horizontal' or 'vertical'."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function",
+                            "default": ""
+                        },
+                        {
+                            "name": "values",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupValue[]",
+                            "default": "",
+                            "description": "An array of values to be represented by the MeterGroup."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MeterGroupContext": {
+                    "description": "Defines current options in MeterGroup component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the component as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MeterGroupPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MeterGroupProps"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MeterGroupContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MeterGroupPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "labellist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLOListElement>>",
+                            "description": "Used to pass attributes to the label list's DOM element."
+                        },
+                        {
+                            "name": "labellistitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Used to pass attributes to the label list item's DOM element."
+                        },
+                        {
+                            "name": "labellisttype",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<any>>",
+                            "description": "Used to pass attributes to the label list type's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Used to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "metercontainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the meter container's DOM element."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the meter's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MeterGroupValue": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number"
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | HTMLElement"
+                        },
+                        {
+                            "name": "color",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CustomRenderProps": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "totaLPercent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number"
+                        },
+                        {
+                            "name": "percentages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number[]"
+                        },
+                        {
+                            "name": "values",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MeterGroupValue[]"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MeterGroupPassThroughType": {
+                    "values": "PassThroughType<T, MeterGroupPassThroughMethodOptions>"
+                },
+                "MeterGroupPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
+                }
+            }
+        }
+    },
     "multiselect": {
         "description": "MultiSelect is used to select multiple items from a collection.\n\n[Live Demo](https://www.primereact.org/multiselect/)",
         "components": {
@@ -34260,6 +35098,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "Whether to focus on the first visible or selected element."
                         },
                         {
                             "name": "checkboxIcon",
@@ -34462,6 +35308,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemCheckboxIcon",
                             "optional": true,
                             "readonly": false,
@@ -34484,6 +35338,22 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Function that gets the option and returns the content for it."
+                        },
+                        {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Displays a loader to indicate data load is in progress."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "The icon to show while indicating data load is in progress."
                         },
                         {
                             "name": "maxSelectedLabels",
@@ -34684,6 +35554,14 @@
                             "type": "number",
                             "default": "",
                             "description": "Number of maximum options that can be selected."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "false",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "showClear",
@@ -35113,18 +35991,18 @@
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
-                            "name": "headerCheckboxContainer",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the header checkbox's container DOM element."
-                        },
-                        {
                             "name": "headerCheckbox",
                             "optional": true,
                             "readonly": false,
                             "type": "CheckboxPassThroughOptions",
                             "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's container DOM element."
                         },
                         {
                             "name": "headerCheckboxIcon",
@@ -35939,6 +36817,30 @@
                     "description": "Defines valid properties in OrderList component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Used to define a string that labels the component."
+                        },
+                        {
+                            "name": "ariaLabelledBy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "breakpoint",
                             "optional": true,
                             "readonly": false,
@@ -35956,7 +36858,7 @@
                         },
                         {
                             "name": "dataKey",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "string",
                             "default": "",
@@ -36125,6 +37027,19 @@
                             "description": "The template of each item"
                         },
                         {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
                             "name": "onChange",
                             "parameters": [
                                 {
@@ -36136,6 +37051,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke to when a mouse button is pressed."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
                         }
                     ]
                 }
@@ -37677,6 +38605,41 @@
                             "description": "JSX element to be used as the first page link."
                         },
                         {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
@@ -37731,6 +38694,41 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "JSX element to be used as the prev page link."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
                         },
                         {
                             "name": "props",
@@ -37817,6 +38815,20 @@
                             "description": "The total number of pages."
                         },
                         {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "element",
                             "optional": false,
                             "readonly": false,
@@ -37880,6 +38892,41 @@
                             "description": "JSX element to be used as the next page link."
                         },
                         {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
+                        },
+                        {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
@@ -37934,6 +38981,41 @@
                             "readonly": false,
                             "type": "Element",
                             "description": "JSX element to be used as the last page link."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The page number."
+                        },
+                        {
+                            "name": "currentPage",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The current page number."
+                        },
+                        {
+                            "name": "totalPages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of pages."
+                        },
+                        {
+                            "name": "totalRecords",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The total number of records."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "The number of rows per page."
                         },
                         {
                             "name": "props",
@@ -38007,9 +39089,9 @@
                         },
                         {
                             "name": "appendTo",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
-                            "type": "undefined | null | HTMLElement | \"self\" | Function",
+                            "type": "null | HTMLElement | \"self\" | Function",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
                         },
                         {
@@ -38832,6 +39914,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "expandedKeys",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuExpandedKeys",
+                            "default": "",
+                            "description": "A map of keys to represent the expansion state in controlled mode."
+                        },
+                        {
                             "name": "model",
                             "optional": true,
                             "readonly": false,
@@ -38891,7 +39981,47 @@
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "onExpandedKeysChange",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": false,
+                                    "type": "any",
+                                    "description": "New value."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to when the expandedKeys changes."
+                        },
+                        {
+                            "name": "onHide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "PanelMenuHeaderItemClickEvent",
+                                    "description": "custom event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a panel gets collapsed."
+                        },
+                        {
+                            "name": "onShow",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "PanelMenuHeaderItemClickEvent",
+                                    "description": "custom event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a panel gets expanded."
+                        }
+                    ]
                 }
             }
         },
@@ -39104,6 +40234,37 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "PanelMenuExpandedKeys": {
+                    "description": "Custom expanded keys metadata.",
+                    "relatedProp": "expandedKeys",
+                    "props": [
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PanelMenuHeaderItemClickEvent": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MouseEvent<HTMLElement, MouseEvent>"
+                        },
+                        {
+                            "name": "item",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuItem"
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         },
@@ -39153,13 +40314,21 @@
                             "name": "mergeSections",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Should the passthrough merge sections?"
                         },
                         {
                             "name": "mergeProps",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Should the passthrough merge properties?"
+                        },
+                        {
+                            "name": "classNameMergeFunction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function"
                         }
                     ],
                     "callbacks": []
@@ -39570,6 +40739,13 @@
                             "description": "Uses to pass attributes to the show icon's DOM element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
@@ -39710,6 +40886,14 @@
                     "description": "Defines valid properties in PickList component.",
                     "values": [
                         {
+                            "name": "autoOptionFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to focus on the first visible or selected element."
+                        },
+                        {
                             "name": "breakpoint",
                             "optional": true,
                             "readonly": false,
@@ -39735,7 +40919,7 @@
                         },
                         {
                             "name": "dataKey",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "string",
                             "default": "",
@@ -40083,6 +41267,19 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
                             "name": "onChange",
                             "parameters": [
                                 {
@@ -40094,6 +41291,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when items are moved from source to target."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
                         },
                         {
                             "name": "onMoveAllToSource",
@@ -40978,7 +42188,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "When present, it specifies that the element value cannot be altered."
+                            "description": "When present, it specifies that the component should be disabled."
                         },
                         {
                             "name": "inputId",
@@ -40995,6 +42205,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "name",
@@ -41019,6 +42237,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "readonly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies that an input field is read-only."
                         },
                         {
                             "name": "required",
@@ -41077,19 +42303,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke on value change"
-                        },
-                        {
-                            "name": "onClick",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "RadioButtonClickEvent",
-                                    "description": "Custom click event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke on click.  Mark the event with preventDefault to prevent the option from changing."
                         }
                     ]
                 }
@@ -41101,36 +42314,6 @@
                 "RadioButtonChangeEvent": {
                     "description": "Custom change event.",
                     "relatedProp": "onChange",
-                    "props": [
-                        {
-                            "name": "originalEvent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SyntheticEvent<Element, Event>"
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
-                        },
-                        {
-                            "name": "checked",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
-                        },
-                        {
-                            "name": "target",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "FormTarget<any>"
-                        }
-                    ]
-                },
-                "RadioButtonClickEvent": {
-                    "description": "Custom click event.",
-                    "relatedProp": "onClick",
                     "props": [
                         {
                             "name": "originalEvent",
@@ -41172,12 +42355,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "RadioButtonProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "RadioButtonState"
                         }
                     ],
                     "callbacks": []
@@ -41194,13 +42371,6 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "input",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "RadioButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the input's DOM element."
-                        },
-                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -41208,18 +42378,18 @@
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
-                            "name": "hiddenInputWrapper",
+                            "name": "input",
                             "optional": true,
                             "readonly": false,
                             "type": "RadioButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden accessible DOM element wrapper."
+                            "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
-                            "name": "hiddenInput",
+                            "name": "box",
                             "optional": true,
                             "readonly": false,
-                            "type": "RadioButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden accessible DOM element."
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -41234,20 +42404,6 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "RadioButtonState": {
-                    "description": "Defines current inline state in RadioButton component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Current focused state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -42176,6 +43332,14 @@
                             "description": "When present, it specifies that the element should be disabled."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "multiple",
                             "optional": true,
                             "readonly": false,
@@ -42553,6 +43717,14 @@
                             "description": "Specifies if pressing escape key should hide the sidebar."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the sidebar. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "dismissable",
                             "optional": true,
                             "readonly": false,
@@ -42726,14 +43898,21 @@
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
-                            "name": "closeButton",
+                            "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the close button's DOM element."
                         },
                         {
-                            "name": "closeButtonIcon",
+                            "name": "icons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the custom icons content's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
@@ -42745,13 +43924,6 @@
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
-                        },
-                        {
-                            "name": "icons",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the custom icons content's DOM element."
                         },
                         {
                             "name": "mask",
@@ -42790,6 +43962,34 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "closeIconRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLElement | HTMLButtonElement>",
+                            "description": "Allows you to specify the close button of the sidebar."
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "hide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Used to get the event of the element."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback for hiding the sidebar."
+                        }
+                    ]
                 }
             }
         },
@@ -44311,9 +45511,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
                         },
                         {
                             "name": "size",
@@ -44433,18 +45633,18 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "button",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ButtonPassThroughOptions",
-                            "description": "Uses to pass attributes to the Button component."
-                        },
-                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
                             "type": "SplitButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
                         },
                         {
                             "name": "menuButton",
@@ -44574,6 +45774,22 @@
                     "description": "Defines valid properties in SplitterPanel component.",
                     "values": [
                         {
+                            "name": "aria-label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Splitter handle ARIA label for screenreader support."
+                        },
+                        {
+                            "name": "aria-labelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the splitter and panel label element IDs."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -44588,6 +45804,14 @@
                             "type": "string",
                             "default": "",
                             "description": "ClassName of the component."
+                        },
+                        {
+                            "name": "id",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Returns the value of element's id content attribute. Can be set to change it."
                         },
                         {
                             "name": "minSize",
@@ -44707,6 +45931,14 @@
                             "type": "\"local\" | \"session\"",
                             "default": "session",
                             "description": "Defines where a stateful splitter keeps its state, valid values are \"session\" for sessionStorage and \"local\" for localStorage."
+                        },
+                        {
+                            "name": "step",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "5",
+                            "description": "Step factor to increment/decrement the size of the panels while pressing the arrow keys."
                         },
                         {
                             "name": "unstyled",
@@ -45154,6 +46386,15 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
+                            "description": "Style class to add when item begins to get displayed.",
+                            "deprecated": "since 10.5.2 Use 'enterFromClassName' option instead."
+                        },
+                        {
+                            "name": "enterFromClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
                             "description": "Style class to add when item begins to get displayed."
                         },
                         {
@@ -45182,6 +46423,15 @@
                         },
                         {
                             "name": "leaveClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Style class to add when item begins to get hidden.",
+                            "deprecated": "since 10.5.2 Use 'leaveFromClassName' option instead."
+                        },
+                        {
+                            "name": "leaveFromClassName",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
@@ -45650,6 +46900,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "visible",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When set as false, hides the tab panel."
                         }
                     ]
                 },
@@ -45990,55 +47248,6 @@
                     ],
                     "callbacks": []
                 },
-                "TabPanelPassThroughOptions": {
-                    "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "pt",
-                    "props": [
-                        {
-                            "name": "root",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the root's DOM element."
-                        },
-                        {
-                            "name": "header",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLLIElement>>",
-                            "description": "Uses to pass attributes to the header's DOM element."
-                        },
-                        {
-                            "name": "headerAction",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
-                            "description": "Uses to pass attributes to the header action's DOM element."
-                        },
-                        {
-                            "name": "headerTitle",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLSpanElement>>",
-                            "description": "Uses to pass attributes to the title's DOM element."
-                        },
-                        {
-                            "name": "content",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the list's DOM element."
-                        },
-                        {
-                            "name": "hooks",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ComponentHooks",
-                            "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
                 "TabViewContext": {
                     "description": "Defines current inline context in Tabview component.",
                     "relatedProp": "",
@@ -46084,6 +47293,55 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Is this tab currently disabled."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabPanelPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerAction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the header action's DOM element."
+                        },
+                        {
+                            "name": "headerTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the title's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -46835,6 +48093,32 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
+                        {
                             "name": "onHide",
                             "parameters": [
                                 {
@@ -47316,6 +48600,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Specifies a custom content for the toast. For more complex markup, use the \"content\" slot instead."
+                        },
+                        {
                             "name": "position",
                             "optional": true,
                             "readonly": false,
@@ -47508,7 +48800,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
                             "description": "Severity level of the message."
                         },
                         {
@@ -47716,6 +49008,41 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "ContentPropsMessage": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "message",
+                    "props": [
+                        {
+                            "name": "summary",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Summary of the toast."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": false,
+                            "readonly": true,
+                            "type": "string",
+                            "description": "Detail of the toast."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ContentProps": {
+                    "description": "Defines current content values and refs for headless development.",
+                    "relatedProp": "content",
+                    "props": [
+                        {
+                            "name": "message",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ContentPropsMessage",
+                            "description": "Toast's props values."
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         },
@@ -47773,12 +49100,28 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the element should be disabled."
+                        },
+                        {
                             "name": "iconPos",
                             "optional": true,
                             "readonly": false,
                             "type": "\"left\" | \"right\"",
                             "default": "left",
                             "description": "Position of the icon, valid values are \"left\" and \"right\"."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "offIcon",
@@ -47827,6 +49170,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "readonly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies that an input field is read-only."
                         },
                         {
                             "name": "tooltip",
@@ -47986,6 +49337,20 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "box",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -48236,7 +49601,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -48260,7 +49625,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -48272,7 +49637,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
+                                    "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -48483,6 +49848,14 @@
                             "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                             "default": "",
                             "description": "Target element on global tooltip option."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         },
                         {
                             "name": "updateDelay",
@@ -48873,6 +50246,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -49141,6 +50522,22 @@
                     "description": "Defines valid properties in TreeProps component.",
                     "values": [
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Defines a string value that labels an interactive element."
+                        },
+                        {
+                            "name": "ariaLabelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Identifier of the underlying menu element."
+                        },
+                        {
                             "name": "checkboxIcon",
                             "optional": true,
                             "readonly": false,
@@ -49211,6 +50608,14 @@
                             "type": "string",
                             "default": "false",
                             "description": "Unique key to enable dragdrop functionality."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "No results found",
+                            "description": "Template to display when filtering does not return any results."
                         },
                         {
                             "name": "expandedKeys",
@@ -50634,6 +52039,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "metaKeySelection",
                             "optional": true,
                             "readonly": false,
@@ -50760,6 +52173,22 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Template of toggler element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Content of the tooltip."
+                        },
+                        {
+                            "name": "tooltipOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipOptions",
+                            "default": "",
+                            "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
                         },
                         {
                             "name": "transitionOptions",
@@ -51179,9 +52608,43 @@
                             "readonly": false,
                             "type": "TreeSelectPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes to the Tooltip component."
                         }
                     ],
-                    "callbacks": []
+                    "callbacks": [
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when menu loses focus."
+                        }
+                    ]
                 },
                 "TreeSelectState": {
                     "description": "Defines current inline state in TreeSelect component.",
@@ -53198,6 +54661,14 @@
                             "description": "When present, it specifies that the element value cannot be altered."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
@@ -53330,12 +54801,6 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TriStateCheckboxProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "TriStateCheckboxState"
                         }
                     ],
                     "callbacks": []
@@ -53352,11 +54817,18 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "checkbox",
+                            "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox box's DOM element."
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "box",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Used to pass attributes to the box's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -53392,20 +54864,6 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "TriStateCheckboxState": {
-                    "description": "Defines current inline state in TriStateCheckbox component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "focused",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Focused state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -53537,7 +54995,7 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,CheckboxClickEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
+                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
                 },
                 "FormBooleanEvent": {
                     "relatedProp": "",
@@ -53618,10 +55076,17 @@
                     "parameters": [
                         {
                             "name": "args",
-                            "type": "object[]"
+                            "type": "object[]",
+                            "description": "the array of object properties to merge"
+                        },
+                        {
+                            "name": "options",
+                            "type": "PassThroughOptions",
+                            "description": "either empty or could contain a custom merge function like TailwindMerge"
                         }
                     ],
-                    "returnType": "object | undefined"
+                    "returnType": "object | undefined",
+                    "description": "Merges properties together taking an Array of props and merging into one single set of\nproperties. The options can contain a \"classNameMergeFunction\" which can be something\nlike Tailwind Merge for properly merging Tailwind classes."
                 },
                 "EventBus": {
                     "name": "EventBus",

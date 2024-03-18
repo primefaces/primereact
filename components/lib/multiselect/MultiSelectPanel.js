@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
@@ -11,6 +12,7 @@ export const MultiSelectPanel = React.memo(
     React.forwardRef((props, ref) => {
         const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const { ptm, cx, sx, isUnstyled } = props;
 
@@ -105,18 +107,20 @@ export const MultiSelectPanel = React.memo(
                 return (
                     <MultiSelectItem
                         hostName={props.hostName}
+                        index={j}
                         key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
                         style={style}
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
-                        onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
                         checkboxIcon={props.checkboxIcon}
+                        isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
                     />
@@ -182,17 +186,19 @@ export const MultiSelectPanel = React.memo(
                     <MultiSelectItem
                         hostName={props.hostName}
                         key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
                         style={style}
+                        index={index}
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
-                        onKeyDown={props.onOptionKeyDown}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
                         checkboxIcon={props.checkboxIcon}
+                        isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
                     />
@@ -306,12 +312,42 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('transition')
             );
 
+            const firstHiddenElementProps = mergeProps(
+                {
+                    ref: props.firstHiddenFocusableElementOnOverlay,
+                    role: 'presentation',
+                    'aria-hidden': 'true',
+                    className: 'p-hidden-accessible p-hidden-focusable',
+                    tabIndex: '0',
+                    onFocus: props.onFirstHiddenFocus,
+                    'data-p-hidden-accessible': true,
+                    'data-p-hidden-focusable': true
+                },
+                ptm('hiddenFirstFocusableEl')
+            );
+
+            const lastHiddenElementProps = mergeProps(
+                {
+                    ref: props.lastHiddenFocusableElementOnOverlay,
+                    role: 'presentation',
+                    'aria-hidden': 'true',
+                    className: 'p-hidden-accessible p-hidden-focusable',
+                    tabIndex: '0',
+                    onFocus: props.onLastHiddenFocus,
+                    'data-p-hidden-accessible': true,
+                    'data-p-hidden-focusable': true
+                },
+                ptm('hiddenLastFocusableEl')
+            );
+
             return (
                 <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
+                        <span {...firstHiddenElementProps}></span>
                         {header}
                         {content}
                         {footer}
+                        <span {...lastHiddenElementProps}></span>
                     </div>
                 </CSSTransition>
             );

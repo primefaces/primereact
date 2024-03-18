@@ -2,15 +2,16 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = OverlayPanelBase.getProps(inProps, context);
     const [visibleState, setVisibleState] = React.useState(false);
@@ -53,13 +54,14 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         when: visibleState
     });
 
-    const overlayPanelDisplayOrder = useDisplayOrder('overlay-panel', visibleState);
+    const isCloseOnEscape = visibleState && props.closeOnEscape;
+    const overlayPanelDisplayOrder = useDisplayOrder('overlay-panel', isCloseOnEscape);
 
     useGlobalOnEscapeKey({
         callback: () => {
             hide();
         },
-        when: visibleState && props.closeOnEscape,
+        when: isCloseOnEscape && overlayPanelDisplayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayPanelDisplayOrder]
     });
 
@@ -178,7 +180,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const createStyle = () => {
         if (!styleElement.current) {
-            styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+            styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
             let innerHTML = '';
 

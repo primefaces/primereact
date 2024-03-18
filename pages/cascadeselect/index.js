@@ -6,6 +6,7 @@ import { FormikDoc } from '@/components/doc/cascadeselect/form/formikdoc';
 import { HookFormDoc } from '@/components/doc/cascadeselect/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/cascadeselect/importdoc';
 import { InvalidDoc } from '@/components/doc/cascadeselect/invaliddoc';
+import { LoadingDoc } from '@/components/doc/cascadeselect/loadingdoc';
 import { PTDoc } from '@/components/doc/cascadeselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/cascadeselect/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/cascadeselect/templatedoc';
@@ -25,6 +26,11 @@ const CascadeSelectDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'loadingstate',
+            label: 'Loading State',
+            component: LoadingDoc
         },
         {
             id: 'template',

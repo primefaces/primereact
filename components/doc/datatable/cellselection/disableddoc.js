@@ -5,6 +5,7 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function DisabledCellSelectionDoc(props) {
     const [products, setProducts] = useState([]);
@@ -15,9 +16,9 @@ export function DisabledCellSelectionDoc(props) {
 
     const cellClassName = (data) => (data === 'Fitness' ? 'p-disabled' : '');
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -149,30 +150,32 @@ export default function DisabledCellSelectionDemo() {
                     Certain cells can be excluded from selection if <i>isDataSelectable</i> returns false.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                    <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
-                    <label htmlFor="input-metakey">MetaKey</label>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <div className="flex justify-content-center align-items-center mb-4 gap-2">
+                        <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />
+                        <label htmlFor="input-metakey">MetaKey</label>
+                    </div>
+                    <DataTable
+                        value={products}
+                        selectionMode="single"
+                        cellSelection
+                        selection={selectedCell}
+                        onSelectionChange={(e) => {
+                            setSelectedCell(e.value);
+                        }}
+                        metaKeySelection={metaKey}
+                        isDataSelectable={isCellSelectable}
+                        cellClassName={cellClassName}
+                        tableStyle={{ minWidth: '50rem' }}
+                    >
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
                 </div>
-                <DataTable
-                    value={products}
-                    selectionMode="single"
-                    cellSelection
-                    selection={selectedCell}
-                    onSelectionChange={(e) => {
-                        setSelectedCell(e.value);
-                    }}
-                    metaKeySelection={metaKey}
-                    isDataSelectable={isCellSelectable}
-                    cellClassName={cellClassName}
-                    tableStyle={{ minWidth: '50rem' }}
-                >
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

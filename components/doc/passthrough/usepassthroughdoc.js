@@ -109,16 +109,20 @@ const CustomTailwind = usePassThrough(
                     An existing pass through configuration is customized with the <i>usePassThrough</i> utility. The first parameter is the object to customize, the second parameter is the customizations and the final parameter is the behavior of
                     merging. One of the example use cases is customizing existing unstyled themes like Tailwind.
                 </p>
-                <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code1} hideToggleCode import hideStackBlitz />
                 <p>
                     The <i>mergeSections</i> defines whether the sections from the main configuration gets added and the <i>mergeProps</i> controls whether to override or merge the defined props. Defaults are <i>true</i> for <i>mergeSections</i> and
                     <i>false</i> for <i>mergeProps</i>.
                 </p>
+                <p>
+                    Some CSS libraries, such as <i>Tailwind</i>, require that class names be merged in a non-conflicting manner. In order to support them a <i>classNameMergeFunction</i> may be passed as part of the <i>ptOptions</i> object to manually
+                    define how class names will be merged.
+                </p>
             </DocSectionText>
-            <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
-            <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
-            <DocSectionCode code={code4} hideToggleCode import hideCodeSandbox hideStackBlitz />
-            <DocSectionCode code={code5} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code2} hideToggleCode import hideStackBlitz />
+            <DocSectionCode code={code3} hideToggleCode import hideStackBlitz />
+            <DocSectionCode code={code4} hideToggleCode import hideStackBlitz />
+            <DocSectionCode code={code5} hideToggleCode import hideStackBlitz />
         </>
     );
 }

@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronUpIcon } from '../icons/chevronup';
-import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const OrganizationChartNode = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const node = props.node;
     const [expandedState, setExpandedState] = React.useState(node.expanded);
     const leaf = node.leaf === false ? false : !(node.children && node.children.length);
@@ -45,6 +47,13 @@ export const OrganizationChartNode = React.memo((props) => {
     const toggleNode = (event, node) => {
         setExpandedState((prevExpanded) => !prevExpanded);
         event.preventDefault();
+    };
+
+    const onKeyDown = (event, node) => {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
+            toggleNode(event, node);
+            event.preventDefault();
+        }
     };
 
     const createChildNodes = () => {
@@ -198,6 +207,8 @@ export const OrganizationChartNode = React.memo((props) => {
             const nodeTogglerProps = mergeProps(
                 {
                     className: cx('nodeToggler'),
+                    tabIndex: 0,
+                    onKeyDown: (e) => onKeyDown(e, node),
                     onClick: (e) => toggleNode(e, node),
                     href: '#'
                 },

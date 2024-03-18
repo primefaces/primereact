@@ -112,8 +112,8 @@ export default function CheckboxDemo() {
                     In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node obje to
                     indicate selection.
                 </p>
-                <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
             </DocSectionText>
+            <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card flex justify-content-center">
                 <TreeSelect
                     value={selectedNodeKeys}

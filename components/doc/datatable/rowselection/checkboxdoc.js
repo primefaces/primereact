@@ -5,15 +5,16 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function CheckboxRowSelectionDoc(props) {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [rowClick, setRowClick] = useState(true);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -135,19 +136,21 @@ export default function CheckboxRowSelectionDemo() {
                     The header checkbox toggles the selection state of the whole dataset by default, when paginator is enabled you may add <i>selectionPageOnly</i> to only control the selection of visible rows.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                    <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e) => setRowClick(e.value)} />
-                    <label htmlFor="input-rowclick">Row Click</label>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <div className="flex justify-content-center align-items-center mb-4 gap-2">
+                        <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e) => setRowClick(e.value)} />
+                        <label htmlFor="input-rowclick">Row Click</label>
+                    </div>
+                    <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
+                        <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
                 </div>
-                <DataTable value={products} selectionMode={rowClick ? null : 'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
-                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
-            </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

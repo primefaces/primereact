@@ -2,9 +2,11 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/megamenu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/megamenu/basicdoc';
+import { CommandDoc } from '@/components/doc/megamenu/commanddoc';
 import { ImportDoc } from '@/components/doc/megamenu/importdoc';
 import { PTDoc } from '@/components/doc/megamenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/megamenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/megamenu/routerdoc';
 import { TemplateDoc } from '@/components/doc/megamenu/templatedoc';
 import { StyledDoc } from '@/components/doc/megamenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/megamenu/theming/tailwinddoc';
@@ -32,7 +34,16 @@ const MegaMenuDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

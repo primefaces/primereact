@@ -2,14 +2,15 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = SidebarBase.getProps(inProps, context);
 
@@ -27,14 +28,14 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const sidebarRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
-
-    const sidebarDisplayOrder = useDisplayOrder('sidebar', visibleState);
+    const isCloseOnEscape = visibleState && props.closeOnEscape;
+    const sidebarDisplayOrder = useDisplayOrder('sidebar', isCloseOnEscape);
 
     useGlobalOnEscapeKey({
         callback: (event) => {
             onClose(event);
         },
-        when: visibleState && props.closeOnEscape,
+        when: isCloseOnEscape && sidebarDisplayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.SIDEBAR, sidebarDisplayOrder]
     });
 
@@ -60,7 +61,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         const activeElement = document.activeElement;
         const isActiveElementInDialog = activeElement && sidebarRef && sidebarRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.showCloseIcon) {
+        if (!isActiveElementInDialog && props.showCloseIcon && closeIconRef.current) {
             closeIconRef.current.focus();
         }
     };
@@ -84,7 +85,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const onExiting = () => {
         if (props.modal) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
     };
 
@@ -159,6 +160,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     });
 
     const createCloseIcon = () => {
+        const ariaLabel = props.ariaCloseLabel || localeOption('close');
         const closeButtonProps = mergeProps(
             {
                 type: 'button',
@@ -179,7 +181,6 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
         const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
-        const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
         if (props.showCloseIcon) {
             return (
@@ -201,71 +202,85 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         return props.icons ? ObjectUtils.getJSXElement(props.icons, props) : null;
     };
 
+    const maskProps = mergeProps(
+        {
+            ref: maskRef,
+            style: sx('mask'),
+            className: cx('mask', { maskVisibleState }),
+            onMouseDown: (e) => onMaskClick(e)
+        },
+        ptm('mask')
+    );
+
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            className: cx('root', { context }),
+            style: props.style,
+            role: 'complementary'
+        },
+        SidebarBase.getOtherProps(props),
+        ptm('root')
+    );
+
+    const headerProps = mergeProps(
+        {
+            className: cx('header')
+        },
+        ptm('header')
+    );
+
+    const contentProps = mergeProps(
+        {
+            className: cx('content')
+        },
+        ptm('content')
+    );
+
+    const iconsProps = mergeProps(
+        {
+            className: cx('icons')
+        },
+        ptm('icons')
+    );
+
+    const transitionTimeout = {
+        enter: props.fullScreen ? 150 : 300,
+        exit: props.fullScreen ? 150 : 300
+    };
+
+    const transitionProps = mergeProps(
+        {
+            classNames: cx('transition'),
+            in: visibleState,
+            timeout: transitionTimeout,
+            options: props.transitionOptions,
+            unmountOnExit: true,
+            onEntered,
+            onExiting,
+            onExited
+        },
+        ptm('transition')
+    );
+
+    const createTemplateElement = () => {
+        const templateElementProps = { closeIconRef, hide: onClose };
+
+        return (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={sidebarRef} {...transitionProps}>
+                    <div ref={sidebarRef} {...rootProps}>
+                        {ObjectUtils.getJSXElement(inProps.content, templateElementProps)}
+                    </div>
+                </CSSTransition>
+            </div>
+        );
+    };
+
     const createElement = () => {
         const closeIcon = createCloseIcon();
         const icons = createIcons();
         const header = createHeader();
-
-        const transitionTimeout = {
-            enter: props.fullScreen ? 150 : 300,
-            exit: props.fullScreen ? 150 : 300
-        };
-
-        const maskProps = mergeProps(
-            {
-                ref: maskRef,
-                style: sx('mask'),
-                className: cx('mask', { maskVisibleState }),
-                onMouseDown: (e) => onMaskClick(e)
-            },
-            ptm('mask')
-        );
-
-        const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: cx('root', { context }),
-                style: props.style,
-                role: 'complementary'
-            },
-            SidebarBase.getOtherProps(props),
-            ptm('root')
-        );
-
-        const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            ptm('header')
-        );
-
-        const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
-        );
-
-        const iconsProps = mergeProps(
-            {
-                className: cx('icons')
-            },
-            ptm('icons')
-        );
-
-        const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: transitionTimeout,
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEntered,
-                onExiting,
-                onExited
-            },
-            ptm('transition')
-        );
 
         return (
             <div {...maskProps}>
@@ -286,7 +301,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     };
 
     const createSidebar = () => {
-        const element = createElement();
+        const element = inProps?.content ? createTemplateElement() : createElement();
 
         return <Portal element={element} appendTo={props.appendTo} visible />;
     };

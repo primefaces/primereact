@@ -48,8 +48,8 @@ export default function PanelDemo() {
                     </p>
                 </Panel>
             </div>
-            <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
-            <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code1} hideToggleCode import hideStackBlitz />
+            <DocSectionCode code={code2} hideToggleCode import hideStackBlitz />
         </>
     );
 }

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, ptmo, cx, isUnsyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
@@ -205,7 +206,7 @@ export const TableBody = React.memo(
             if (prevRowData) {
                 const previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, props.groupRowsBy);
 
-                return currentRowFieldData !== previousRowFieldData;
+                return !ObjectUtils.deepEquals(currentRowFieldData, previousRowFieldData);
             } else {
                 return true;
             }
@@ -221,7 +222,7 @@ export const TableBody = React.memo(
                 if (nextRowData) {
                     const nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, props.groupRowsBy);
 
-                    return currentRowFieldData !== nextRowFieldData;
+                    return !ObjectUtils.deepEquals(currentRowFieldData, nextRowFieldData);
                 } else {
                     return true;
                 }
@@ -295,8 +296,6 @@ export const TableBody = React.memo(
                 onSelect({ originalEvent, data, type });
             }
 
-            focusOnElement(originalEvent, true);
-
             if (props.onSelectionChange && selection !== props.selection) {
                 props.onSelectionChange({
                     originalEvent,
@@ -321,19 +320,32 @@ export const TableBody = React.memo(
 
             anchorRowIndex.current = rangeRowIndex.current;
             anchorCellIndex.current = event.cellIndex;
-
-            focusOnElement(event.originalEvent, false);
         };
 
         const selectRange = (event) => {
-            let rangeStart, rangeEnd;
+            let rangeStart, rangeEnd, selectedSize;
+
+            const isAllowCellSelection = allowCellSelection();
+            const index = ObjectUtils.findIndexInList(event.data, props.value, props.dataKey);
 
             if (rangeRowIndex.current > anchorRowIndex.current) {
                 rangeStart = anchorRowIndex.current;
                 rangeEnd = rangeRowIndex.current;
+
+                if (!isAllowCellSelection) {
+                    selectedSize = rangeEnd - rangeStart;
+                    rangeEnd = index;
+                    rangeStart = index - selectedSize;
+                }
             } else if (rangeRowIndex.current < anchorRowIndex.current) {
                 rangeStart = rangeRowIndex.current;
                 rangeEnd = anchorRowIndex.current;
+
+                if (!isAllowCellSelection) {
+                    selectedSize = rangeEnd - rangeStart;
+                    rangeStart = index;
+                    rangeEnd = index + selectedSize;
+                }
             } else {
                 rangeStart = rangeEnd = rangeRowIndex.current;
             }
@@ -343,7 +355,7 @@ export const TableBody = React.memo(
                 rangeEnd -= props.first;
             }
 
-            return allowCellSelection() ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
+            return isAllowCellSelection ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
         };
 
         const selectRangeOnRow = (event, rowRangeStart, rowRangeEnd) => {
@@ -1119,7 +1131,8 @@ export const TableBody = React.memo(
         const tbodyProps = mergeProps(
             {
                 style: props.style,
-                className: cx(ptKey, { className: props.className })
+                className: cx(ptKey, { className: props.className }),
+                role: ' rowgroup'
             },
             ptm(ptKey, { hostName: props.hostName })
         );

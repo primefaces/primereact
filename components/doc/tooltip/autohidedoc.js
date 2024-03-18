@@ -1,69 +1,37 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
-import { Button } from '@/components/lib/button/Button';
-import { Tooltip } from '@/components/lib/tooltip/Tooltip';
-import { useState } from 'react';
+import { InputText } from '@/components/lib/inputtext/InputText';
 
 export function AutoHideDoc(props) {
-    const [count, setCount] = useState(0);
-
     const code = {
         basic: `
-<Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
-
-<Tooltip target=".tooltip-button" autoHide={false}>
-    <div className="flex align-items-center">
-        <span style={{ minWidth: '5rem' }}>Count: {count}</span>
-        <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success ml-2"></Button>
-        <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
-    </div>
-</Tooltip>
-<Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
+<InputText type="text" placeholder="autoHide: false" tooltip="Enter your username" tooltipOptions={{ autoHide: false }} />
+<InputText type="text" placeholder="autoHide: true" tooltip="Enter your username" />
         `,
         javascript: `
-import React, { useState } from 'react';
-import { Tooltip } from 'primereact/tooltip';
-import { Button } from 'primereact/button';
+import React from 'react';
+import { InputText } from 'primereact/inputtext';
 
 export default function AutoHideDemo() {
-    const [count, setCount] = useState(0);
 
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
-            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
-
-            <Tooltip target=".tooltip-button" autoHide={false}>
-                <div className="flex align-items-center">
-                    <span style={{ minWidth: '5rem' }}>Count: {count}</span>
-                    <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success ml-2"></Button>
-                    <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
-                </div>
-            </Tooltip>
-            <Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
+            <InputText type="text" placeholder="autoHide: false" tooltip="Enter your username" tooltipOptions={{ autoHide: false }} />
+            <InputText type="text" placeholder="autoHide: true" tooltip="Enter your username" />
         </div>
     );
 }
         `,
         typescript: `
-import React, { useState } from 'react';
-import { Tooltip } from 'primereact/tooltip';
-import { Button } from 'primereact/button';
+import React from 'react';
+import { InputText } from 'primereact/inputtext';
 
 export default function AutoHideDemo() {
-    const [count, setCount] = useState<number>(0);
 
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
-            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
-
-            <Tooltip target=".tooltip-button" autoHide={false}>
-                <div className="flex align-items-center">
-                    <span style={{ minWidth: '5rem' }}>Count: {count}</span>
-                    <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success ml-2"></Button>
-                    <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
-                </div>
-            </Tooltip>
-            <Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
+            <InputText type="text" placeholder="autoHide: false" tooltip="Enter your username" tooltipOptions={{ autoHide: false }} />
+            <InputText type="text" placeholder="autoHide: true" tooltip="Enter your username" />
         </div>
     );
 }
@@ -78,16 +46,8 @@ export default function AutoHideDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
-                <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
-
-                <Tooltip target=".tooltip-button" autoHide={false}>
-                    <div className="flex align-items-center">
-                        <span style={{ minWidth: '5rem' }}>Count: {count}</span>
-                        <Button type="button" icon="pi pi-plus" onClick={() => setCount(count + 1)} className="p-button-rounded p-button-success ml-2"></Button>
-                        <Button type="button" icon="pi pi-minus" onClick={() => setCount(count - 1)} className="p-button-rounded p-button-danger ml-2"></Button>
-                    </div>
-                </Tooltip>
-                <Button className="tooltip-button" type="button" label="Number" icon="pi pi-plus" />
+                <InputText type="text" placeholder="autoHide: false" tooltip="Enter your username" tooltipOptions={{ autoHide: false }} />
+                <InputText type="text" placeholder="autoHide: true" tooltip="Enter your username" />
             </div>
             <DocSectionCode code={code} />
         </>

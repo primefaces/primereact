@@ -1,12 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = BlockUIBase.getProps(inProps, context);
 
@@ -27,26 +28,27 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     };
 
     const unblock = () => {
-        const callback = () => {
-            setVisibleState(false);
+        !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
 
-            if (props.fullScreen) {
-                DomHandler.unblockBodyScroll();
-                activeElementRef.current && activeElementRef.current.focus();
-            }
-
-            props.onUnblocked && props.onUnblocked();
-        };
-
-        if (maskRef.current) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+        if (DomHandler.hasCSSAnimation(maskRef.current) > 0) {
             maskRef.current.addEventListener('animationend', () => {
-                ZIndexUtils.clear(maskRef.current);
-                callback();
+                removeMask();
             });
         } else {
-            callback();
+            removeMask();
         }
+    };
+
+    const removeMask = () => {
+        ZIndexUtils.clear(maskRef.current);
+        setVisibleState(false);
+
+        if (props.fullScreen) {
+            DomHandler.unblockBodyScroll();
+            activeElementRef.current && activeElementRef.current.focus();
+        }
+
+        props.onUnblocked && props.onUnblocked();
     };
 
     const onPortalMounted = () => {

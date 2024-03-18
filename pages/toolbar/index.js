@@ -6,6 +6,7 @@ import { ImportDoc } from '@/components/doc/toolbar/importdoc';
 import { PTDoc } from '@/components/doc/toolbar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/toolbar/pt/wireframe';
 import { StyledDoc } from '@/components/doc/toolbar/theming/styleddoc';
+import { CustomDoc } from '@/components/doc/toolbar/customdoc';
 import { TailwindDoc } from '@/components/doc/toolbar/theming/tailwinddoc';
 
 const ToolbarDemo = () => {
@@ -20,7 +21,11 @@ const ToolbarDemo = () => {
             label: 'Basic',
             component: BasicDoc
         },
-
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

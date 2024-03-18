@@ -1049,7 +1049,7 @@ export interface ColumnProps {
      * Displays icons to edit row.
      * @defaultValue false
      */
-    rowEditor?: boolean | undefined;
+    rowEditor?: boolean | ((data: any, options: ColumnBodyOptions) => boolean);
     /**
      * Whether this column displays an icon to reorder the rows.
      * @defaultValue false

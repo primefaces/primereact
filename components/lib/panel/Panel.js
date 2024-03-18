@@ -2,14 +2,15 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = PanelBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
@@ -90,7 +91,9 @@ export const Panel = React.forwardRef((inProps, ref) => {
                     id: buttonId,
                     'aria-controls': contentId,
                     'aria-expanded': !collapsed,
-                    role: 'tab'
+                    type: 'button',
+                    role: 'button',
+                    'aria-label': props.header
                 },
                 ptm('toggler')
             );
@@ -161,12 +164,40 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 iconsElement,
                 togglerElement,
                 element: content,
+                id: idState + '_header',
                 props,
                 collapsed
             };
 
             return ObjectUtils.getJSXElement(props.headerTemplate, defaultContentOptions);
         } else if (props.header || props.toggleable) {
+            return content;
+        }
+
+        return null;
+    };
+
+    const createFooter = () => {
+        const footer = ObjectUtils.getJSXElement(props.footer, props);
+
+        const footerProps = mergeProps(
+            {
+                className: cx('footer')
+            },
+            ptm('footer')
+        );
+
+        const content = <div {...footerProps}>{footer}</div>;
+
+        if (props.footerTemplate) {
+            const defaultContentOptions = {
+                className: cx('footer'),
+                element: content,
+                props
+            };
+
+            return ObjectUtils.getJSXElement(props.footerTemplate, defaultContentOptions);
+        } else if (props.footer) {
             return content;
         }
 
@@ -210,33 +241,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 </div>
             </CSSTransition>
         );
-    };
-
-    const createFooter = () => {
-        const footer = ObjectUtils.getJSXElement(props.footer, props);
-
-        const footerProps = mergeProps(
-            {
-                className: cx('footer')
-            },
-            ptm('footer')
-        );
-
-        const content = <div {...footerProps}>{footer}</div>;
-
-        if (props.footerTemplate) {
-            const defaultContentOptions = {
-                className: cx('footer'),
-                element: content,
-                props
-            };
-
-            return ObjectUtils.getJSXElement(props.footerTemplate, defaultContentOptions);
-        } else if (props.footer) {
-            return content;
-        }
-
-        return null;
     };
 
     const rootProps = mergeProps(

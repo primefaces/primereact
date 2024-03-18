@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Checkbox } from '../checkbox/Checkbox';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx, isUnstyled } = props;
     const filterOptions = {
         filter: (e) => onFilter(e),
@@ -67,7 +69,7 @@ export const MultiSelectHeader = React.memo((props) => {
                     <InputText
                         ref={props.filterRef}
                         type="text"
-                        role="textbox"
+                        role="searchbox"
                         value={props.filterValue}
                         onChange={onFilter}
                         className="p-multiselect-filter"

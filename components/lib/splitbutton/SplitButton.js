@@ -2,25 +2,27 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
+import { TieredMenu } from '../tieredmenu/TieredMenu';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { SplitButtonBase } from './SplitButtonBase';
-import { SplitButtonItem } from './SplitButtonItem';
-import { SplitButtonPanel } from './SplitButtonPanel';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = SplitButtonBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
+        const menuRef = React.useRef(null);
         const defaultButtonRef = React.useRef(null);
         const overlayRef = React.useRef(null);
+        const overlayDisplayOrder = useDisplayOrder('split-button-tooltip', overlayVisibleState);
         const metaData = {
             props,
             state: {
@@ -33,23 +35,12 @@ export const SplitButton = React.memo(
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
 
-        const overlayDisplayOrder = useDisplayOrder('split-button-tooltip', overlayVisibleState);
-
         useGlobalOnEscapeKey({
             callback: () => {
                 hide();
             },
-            when: overlayVisibleState,
+            when: overlayVisibleState && overlayDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.SPLIT_BUTTON, overlayDisplayOrder]
-        });
-
-        const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
-            target: elementRef,
-            overlay: overlayRef,
-            listener: (event, { valid }) => {
-                valid && hide();
-            },
-            when: overlayVisibleState
         });
 
         const onPanelClick = (event) => {
@@ -59,41 +50,33 @@ export const SplitButton = React.memo(
             });
         };
 
-        const onDropdownButtonClick = () => {
-            overlayVisibleState ? hide() : show();
+        const onMenuButtonKeyDown = (event) => {
+            if (event.code === 'ArrowDown' || event.code === 'ArrowUp') {
+                onDropdownButtonClick(event);
+                event.preventDefault();
+            }
         };
 
-        const onItemClick = () => {
-            hide();
+        const onDropdownButtonClick = (event) => {
+            overlayVisibleState ? hide(event) : show(event);
         };
 
-        const show = () => {
+        const show = (event) => {
             setOverlayVisibleState(true);
+            menuRef.current && menuRef.current.show(event);
         };
 
-        const hide = () => {
+        const hide = (event) => {
             setOverlayVisibleState(false);
+            menuRef.current && menuRef.current.hide(event);
         };
 
-        const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
-            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
-            alignOverlay();
-        };
-
-        const onOverlayEntered = () => {
-            bindOverlayListener();
-
+        const onMenuShow = () => {
             props.onShow && props.onShow();
         };
 
-        const onOverlayExit = () => {
-            unbindOverlayListener();
-        };
-
-        const onOverlayExited = () => {
-            ZIndexUtils.clear(overlayRef.current);
-
+        const onMenuHide = () => {
+            setOverlayVisibleState(false);
             props.onHide && props.onHide();
         };
 
@@ -120,16 +103,6 @@ export const SplitButton = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const createItems = () => {
-            if (props.model) {
-                return props.model.map((menuitem, index) => {
-                    return <SplitButtonItem hostName="SplitButton" splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} ptm={ptm} cx={cx} />;
-                });
-            }
-
-            return null;
-        };
-
         if (props.visible === false) {
             return null;
         }
@@ -141,8 +114,7 @@ export const SplitButton = React.memo(
         };
         const size = sizeMapping[props.size];
         const buttonContent = props.buttonTemplate ? ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;
-        const items = createItems();
-        const menuId = idState + '_menu';
+        const menuId = idState + '_overlay';
 
         const dropdownIcon = () => {
             const iconProps = mergeProps(
@@ -181,6 +153,7 @@ export const SplitButton = React.memo(
                         loadingIcon={props.loadingIcon}
                         severity={props.severity}
                         label={props.label}
+                        aria-label={props.label}
                         raised={props.raised}
                         onClick={props.onClick}
                         disabled={props.disabled}
@@ -205,7 +178,7 @@ export const SplitButton = React.memo(
                         disabled={props.disabled}
                         aria-expanded={overlayVisibleState}
                         aria-haspopup="true"
-                        aria-controls={overlayVisibleState ? menuId : null}
+                        aria-controls={menuId}
                         {...props.menuButtonProps}
                         size={props.size}
                         severity={props.severity}
@@ -216,29 +189,27 @@ export const SplitButton = React.memo(
                         __parentMetadata={{
                             parent: metaData
                         }}
+                        onKeyDown={onMenuButtonKeyDown}
                         unstyled={props.unstyled}
                     />
-                    <SplitButtonPanel
-                        hostName="SplitButton"
-                        ref={overlayRef}
+                    <TieredMenu
+                        ref={menuRef}
+                        popup={true}
+                        unstyled={props.unstyled}
+                        model={props.model}
                         appendTo={props.appendTo}
-                        menuId={menuId}
-                        menuStyle={props.menuStyle}
-                        menuClassName={props.menuClassName}
+                        id={menuId}
+                        style={props.menuStyle}
+                        autoZIndex={props.autoZIndex}
+                        baseZIndex={props.baseZIndex}
+                        className={props.menuClassName}
                         onClick={onPanelClick}
-                        in={overlayVisibleState}
-                        onEnter={onOverlayEnter}
-                        onEntered={onOverlayEntered}
-                        onExit={onOverlayExit}
-                        onExited={onOverlayExited}
-                        transitionOptions={props.transitionOptions}
-                        ptm={ptm}
-                        cx={cx}
-                    >
-                        {items}
-                    </SplitButtonPanel>
+                        onShow={onMenuShow}
+                        onHide={onMenuHide}
+                        pt={ptm('menu')}
+                    />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

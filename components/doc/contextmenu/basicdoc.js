@@ -6,8 +6,8 @@ import { useRef } from 'react';
 export function BasicDoc(props) {
     const cm = useRef(null);
     const items = [
-        { label: 'View', icon: 'pi pi-fw pi-search' },
-        { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+        { label: 'Copy', icon: 'pi pi-copy' },
+        { label: 'Rename', icon: 'pi pi-file-edit' }
     ];
 
     const code = {
@@ -22,8 +22,8 @@ import { ContextMenu } from 'primereact/contextmenu';
 export default function BasicDemo() {
     const cm = useRef(null);
     const items = [
-        { label: 'View', icon: 'pi pi-fw pi-search' },
-        { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+        { label: 'Copy', icon: 'pi pi-copy' },
+        { label: 'Rename', icon: 'pi pi-file-edit' }
     ];
 
     return (
@@ -42,8 +42,8 @@ import { MenuItem } from 'primereact/menuitem';
 export default function BasicDemo() {
     const cm = useRef<ContextMenu>(null);
     const items: MenuItem[] = [
-        { label: 'View', icon: 'pi pi-fw pi-search' },
-        { label: 'Delete', icon: 'pi pi-fw pi-trash' }
+        { label: 'Copy', icon: 'pi pi-copy' },
+        { label: 'Rename', icon: 'pi pi-file-edit' }
     ];
 
     return (

@@ -12,6 +12,8 @@ import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { TreeNodeTemplateOptions, TreePassThroughOptions, TreeTogglerTemplateOptions } from '../tree/tree';
 import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
@@ -75,6 +77,16 @@ export interface TreeSelectPassThroughOptions {
      */
     tree?: TreePassThroughOptions;
     /**
+     * Callback to invoke when menu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
+    /**
      * Uses to pass attributes to the empty message's DOM element.
      */
     emptyMessage?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -123,6 +135,11 @@ export interface TreeSelectPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: TreeSelectPassThroughTransitionType;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**
@@ -488,6 +505,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     placeholder?: string | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Clears the filter value when hiding the dropdown.
      * @defaultValue false
      */
@@ -524,6 +546,14 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * Defines the selection mode, valid values "single", "multiple", and "checkbox".
      */
     selectionMode?: 'single' | 'multiple' | 'checkbox' | undefined;
+    /**
+     * Content of the tooltip.
+     */
+    tooltip?: string | undefined;
+    /**
+     * Configuration of the tooltip, refer to the tooltip documentation for more information.
+     */
+    tooltipOptions?: TooltipOptions | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */

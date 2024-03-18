@@ -1,22 +1,28 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
     const key = props.className && props.className === 'p-carousel-item-cloned' ? 'itemCloned' : 'item';
     const content = props.template(props.item);
+
     const itemClonedProps = mergeProps(
         {
             className: cx(key, { itemProps: props }),
+            role: props.role,
+            'aria-roledescription': props.ariaRoledescription,
+            'aria-label': props.ariaLabel,
+            'aria-hidden': props.ariaHidden,
             'data-p-carousel-item-active': props.active,
             'data-p-carousel-item-start': props.start,
             'data-p-carousel-item-end': props.end
@@ -29,6 +35,7 @@ const CarouselItem = React.memo((props) => {
 
 export const Carousel = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = CarouselBase.getProps(inProps, context);
 
@@ -56,6 +63,7 @@ export const Carousel = React.memo(
         const startPos = React.useRef(null);
         const interval = React.useRef(null);
         const carouselStyle = React.useRef(null);
+        const indicatorContent = React.useRef(null);
         const isRemainingItemsAdded = React.useRef(false);
         const responsiveOptions = React.useRef(null);
         const prevNumScroll = usePrevious(numScrollState);
@@ -181,7 +189,7 @@ export const Carousel = React.memo(
             }
         };
 
-        const onDotClick = (e, page) => {
+        const onIndicatorClick = (e, page) => {
             if (page > currentPage) {
                 navForward(e, page);
             } else if (page < currentPage) {
@@ -237,6 +245,93 @@ export const Carousel = React.memo(
             }
         };
 
+        const onIndicatorKeydown = (event) => {
+            switch (event.code) {
+                case 'ArrowRight':
+                    onRightKey();
+                    break;
+
+                case 'ArrowLeft':
+                    onLeftKey();
+                    break;
+
+                case 'Home':
+                    onHomeKey();
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    onEndKey();
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    event.preventDefault();
+                    break;
+
+                case 'Tab':
+                    onTabKey();
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onRightKey = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, activeIndex + 1 === indicators.length ? indicators.length - 1 : activeIndex + 1);
+        };
+
+        const onLeftKey = () => {
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, activeIndex - 1 <= 0 ? 0 : activeIndex - 1);
+        };
+
+        const onHomeKey = () => {
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, 0);
+        };
+
+        const onEndKey = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]r')];
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, indicators.length - 1);
+        };
+
+        const onTabKey = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const highlightedIndex = indicators.findIndex((ind) => DomHandler.getAttribute(ind, 'data-p-highlight') === true);
+
+            const activeIndicator = DomHandler.findSingle(indicatorContent.current, '[data-pc-section="indicator"] > button[tabindex="0"]');
+
+            const activeIndex = indicators.findIndex((ind) => ind === activeIndicator.parentElement);
+
+            indicators[activeIndex].children[0].tabIndex = '-1';
+            indicators[highlightedIndex].children[0].tabIndex = '0';
+        };
+
+        const findFocusedIndicatorIndex = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const activeIndicator = DomHandler.findSingle(indicatorContent.current, '[data-pc-section="indicator"] > button[tabindex="0"]');
+
+            return indicators.findIndex((ind) => ind === activeIndicator.parentElement);
+        };
+
+        const changedFocusedIndicator = (prevInd, nextInd) => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+
+            indicators[prevInd].children[0].tabIndex = '-1';
+            indicators[nextInd].children[0].tabIndex = '0';
+            indicators[nextInd].children[0].focus();
+        };
+
         const startAutoplay = () => {
             if (props.autoplayInterval > 0) {
                 interval.current = setInterval(() => {
@@ -257,7 +352,7 @@ export const Carousel = React.memo(
 
         const createStyle = () => {
             if (!carouselStyle.current) {
-                carouselStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+                carouselStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
             }
 
             let innerHTML = `
@@ -288,6 +383,8 @@ export const Carousel = React.memo(
                     }
                 `;
                 }
+
+                calculatePosition();
             }
 
             carouselStyle.current.innerHTML = innerHTML;
@@ -410,6 +507,10 @@ export const Carousel = React.memo(
             };
         });
 
+        const ariaSlideNumber = (value) => {
+            return localeOption('aria') ? localeOption('aria').slideNumber.replace(/{slideNumber}/g, value) : undefined;
+        };
+
         const createItems = () => {
             if (props.value && props.value.length) {
                 let clonedItemsForStarting = null;
@@ -445,8 +546,26 @@ export const Carousel = React.memo(
                     const isActive = firstIndex <= index && lastIndex >= index;
                     const start = firstIndex === index;
                     const end = lastIndex === index;
+                    const ariaHidden = firstIndex > index || lastIndex < index ? true : undefined;
+                    const ariaLabel = ariaSlideNumber(index);
+                    const ariaRoledescription = localeOption('aria') ? localeOption('aria').slide : undefined;
 
-                    return <CarouselItem key={index} template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} cx={cx} />;
+                    return (
+                        <CarouselItem
+                            key={index}
+                            template={props.itemTemplate}
+                            item={item}
+                            active={isActive}
+                            start={start}
+                            ariaHidden={ariaHidden}
+                            ariaLabel={ariaLabel}
+                            ariaRoledescription={ariaRoledescription}
+                            role="group"
+                            end={end}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
                 });
 
                 return (
@@ -507,7 +626,8 @@ export const Carousel = React.memo(
 
             const containerProps = mergeProps(
                 {
-                    className: classNames(props.containerClassName, cx('container'))
+                    className: classNames(props.containerClassName, cx('container')),
+                    'aria-live': allowAutoplay.current ? 'polite' : 'off'
                 },
                 ptm('container')
             );
@@ -550,7 +670,8 @@ export const Carousel = React.memo(
                         className: cx('previousButton', { isDisabled }),
                         onClick: (e) => navBackward(e),
                         disabled: isDisabled,
-                        'aria-label': ariaLabel('previousPageLabel')
+                        'aria-label': localeOption('aria') ? localeOption('aria').previousPageLabel : undefined,
+                        'data-pc-group-section': 'navigator'
                     },
                     ptm('previousButton')
                 );
@@ -583,7 +704,8 @@ export const Carousel = React.memo(
                         className: cx('nextButton', { isDisabled }),
                         onClick: (e) => navForward(e),
                         disabled: isDisabled,
-                        'aria-label': ariaLabel('nextPageLabel')
+                        'aria-label': localeOption('aria') ? localeOption('aria').nextPageLabel : undefined,
+                        'data-pc-group-section': 'navigator'
                     },
                     ptm('nextButton')
                 );
@@ -597,6 +719,10 @@ export const Carousel = React.memo(
             }
 
             return null;
+        };
+
+        const ariaPageLabel = (value) => {
+            return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
         };
 
         const createIndicator = (index) => {
@@ -623,8 +749,10 @@ export const Carousel = React.memo(
                 {
                     type: 'button',
                     className: cx('indicatorButton'),
-                    onClick: (e) => onDotClick(e, index),
-                    'aria-label': `${ariaLabel('pageLabel')} ${index + 1}`
+                    tabIndex: currentPage === index ? '0' : '-1',
+                    onClick: (e) => onIndicatorClick(e, index),
+                    'aria-label': ariaPageLabel(index + 1),
+                    'aria-current': currentPage === index ? 'page' : undefined
                 },
                 getPTOptions('indicatorButton')
             );
@@ -648,7 +776,9 @@ export const Carousel = React.memo(
 
                 const indicatorsProps = mergeProps(
                     {
-                        className: classNames(props.indicatorsContentClassName, cx('indicators'))
+                        ref: indicatorContent,
+                        className: classNames(props.indicatorsContentClassName, cx('indicators')),
+                        onKeyDown: onIndicatorKeydown
                     },
                     ptm('indicators')
                 );
@@ -668,7 +798,8 @@ export const Carousel = React.memo(
                 id: props.id,
                 ref: elementRef,
                 className: classNames(props.className, cx('root', { isVertical })),
-                style: props.style
+                style: props.style,
+                role: 'region'
             },
             CarouselBase.getOtherProps(props),
             ptm('root')

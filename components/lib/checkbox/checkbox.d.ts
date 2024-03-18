@@ -22,7 +22,6 @@ export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPass
  */
 export interface CheckboxPassThroughMethodOptions {
     props: CheckboxProps;
-    state: CheckboxState;
     context: CheckboxContext;
 }
 
@@ -40,6 +39,10 @@ export interface CheckboxPassThroughOptions {
      */
     input?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Used to pass attributes to the box's DOM element.
+     */
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: CheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
@@ -48,14 +51,6 @@ export interface CheckboxPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
-     */
-    hiddenInputWrapper?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input's DOM element.
-     */
-    hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
@@ -80,17 +75,6 @@ export interface CheckboxContext {
 }
 
 /**
- * Defines current inline state in Checkbox component.
- */
-export interface CheckboxState {
-    /**
-     * Current focus state as a boolean.
-     * @defaultValue false
-     */
-    focused: boolean;
-}
-
-/**
  * Custom change event.
  * @see {@link CheckboxProps.onChange}
  * @extends {FormEvent }
@@ -99,18 +83,10 @@ export interface CheckboxState {
 interface CheckboxChangeEvent extends FormEvent {}
 
 /**
- * Custom click event.
- * @see {@link CheckboxProps.onClick}
- * @extends {FormEvent }
- * @event
- */
-interface CheckboxClickEvent extends FormEvent {}
-
-/**
  * Defines valid properties in Checkbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
+export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     /**
      * Unique identifier of the element.
      */
@@ -160,6 +136,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     className?: string | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When present, it specifies that the element value cannot be altered.
      * @defaultValue false
      */
@@ -197,11 +178,6 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @param {CheckboxChangeEvent} event - Custom change event
      */
     onChange?(event: CheckboxChangeEvent): void;
-    /**
-     * Callback to invoke on value change. Mark the event with preventDefault to prevent the option from changing.
-     * @param {CheckboxClickEvent} event - Custom click event
-     */
-    onClick?(event: CheckboxClickEvent): void;
     /**
      * Callback to invoke to when a mouse button is pressed.
      * @param {React.MouseEvent<HTMLElement>} event - Browser event

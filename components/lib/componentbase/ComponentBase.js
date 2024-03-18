@@ -1,7 +1,6 @@
 import PrimeReact from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { mergeProps } from '../utils/MergeProps';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 const baseStyle = `
 .p-hidden-accessible {
@@ -94,25 +93,6 @@ const buttonStyles = `
 .p-buttonset .p-button:focus {
     position: relative;
     z-index: 1;
-}
-`;
-const checkboxStyles = `
-.p-checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-    position: relative;
-}
-
-.p-checkbox.p-checkbox-disabled {
-    cursor: auto;
-}
-
-.p-checkbox-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 `;
 const inputTextStyles = `
@@ -222,34 +202,6 @@ const inputTextStyles = `
     display: block;
     width: 100%;
 }
-`;
-const radioButtonStyles = `
-.p-radiobutton {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-}
-
-.p-radiobutton-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.p-radiobutton-icon {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0) scale(.1);
-    border-radius: 50%;
-    visibility: hidden;
-}
-
-.p-radiobutton-box.p-highlight .p-radiobutton-icon {
-    transform: translateZ(0) scale(1.0, 1.0);
-    visibility: visible;
-}
-
 `;
 const iconStyles = `
 .p-icon {
@@ -460,9 +412,7 @@ const commonStyle = `
 @layer primereact {
     ${commonStyles}
     ${buttonStyles}
-    ${checkboxStyles}
     ${inputTextStyles}
-    ${radioButtonStyles}
     ${iconStyles}
 }
 `;
@@ -523,7 +473,14 @@ export const ComponentBase = {
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
 
-                return ObjectUtils.isString(value) ? { className: value } : value;
+                if (Array.isArray(value)) return { className: classNames(...value) };
+                if (ObjectUtils.isString(value)) return { className: value };
+
+                if (value?.hasOwnProperty('className') && Array.isArray(value.className)) {
+                    return { className: classNames(...value.className) };
+                }
+
+                return value;
             };
 
             const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, originalkey, params) : _useDefaultPT(getPTClassValue, originalkey, params)) : undefined;
@@ -536,7 +493,7 @@ export const ComponentBase = {
 
             return mergeSections || (!mergeSections && self)
                 ? useMergeProps
-                    ? mergeProps(globalPT, self, Object.keys(datasetProps).length ? datasetProps : {})
+                    ? mergeProps([globalPT, self, Object.keys(datasetProps).length ? datasetProps : {}], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction })
                     : { ...globalPT, ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) }
                 : { ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) };
         };
@@ -559,7 +516,7 @@ export const ComponentBase = {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
 
-                    return mergeProps(base, self);
+                    return mergeProps([base, self], { classNameMergeFunction: ComponentBase.context.ptOptions?.classNameMergeFunction });
                 }
 
                 return undefined;
@@ -609,7 +566,7 @@ const _usePT = (pt, callback, key, params) => {
     const fn = (value) => callback(value, key, params);
 
     if (pt?.hasOwnProperty('_usept')) {
-        const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || ComponentBase.context.ptOptions || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false, classNameMergeFunction } = pt['_usept'] || ComponentBase.context.ptOptions || {};
         const originalValue = fn(pt.originalValue);
         const value = fn(pt.value);
 
@@ -617,7 +574,7 @@ const _usePT = (pt, callback, key, params) => {
         else if (ObjectUtils.isString(value)) return value;
         else if (ObjectUtils.isString(originalValue)) return originalValue;
 
-        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps(originalValue, value) : { ...originalValue, ...value }) : value;
+        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps([originalValue, value], { classNameMergeFunction }) : { ...originalValue, ...value }) : value;
     }
 
     return fn(pt);

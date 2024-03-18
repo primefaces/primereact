@@ -41,19 +41,19 @@ export interface SidebarPassThroughOptions {
     /**
      * Uses to pass attributes to the close button's DOM element.
      */
-    closeButton?: SidebarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
-    /**
-     * Uses to pass attributes to the close icon's DOM element.
-     */
     closeButtonIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Uses to pass attributes to the content's DOM element.
-     */
-    content?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the custom icons content's DOM element.
      */
     icons?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the mask's DOM element.
      */
@@ -81,10 +81,26 @@ export interface SidebarState {
 }
 
 /**
+ * Defines current content values and refs for headless development.
+ * @see {@link SidebarProps.content}
+ */
+interface ContentProps {
+    /**
+     * Allows you to specify the close button of the sidebar.
+     */
+    closeIconRef: React.RefObject<HTMLButtonElement | HTMLElement>;
+    /**
+     * Callback for hiding the sidebar.
+     * @param {React.SyntheticEvent} event - Used to get the event of the element.
+     */
+    hide(event: React.SyntheticEvent): void;
+}
+
+/**
  * Defines valid properties in Sidebar component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content'> {
     /**
      * Inline style of the mask.
      */
@@ -161,7 +177,7 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and self. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}
@@ -195,6 +211,12 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies a custom content for the sidebar. For more complex markup, use the "content" slot instead.
+     * @param {ContentProps} props - The values of sidebar.
+     * @return {React.ReactNode}
+     */
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

@@ -129,6 +129,59 @@ interface DialogMaximizeEvent {
 }
 
 /**
+ * Defines current content values and refs for headless development.
+ * @see {@link DialogProps.content}
+ */
+interface ContentProps {
+    /**
+     * Allows you to specify the header of the content.
+     */
+    headerRef: React.RefObject<HTMLElement>;
+    /**
+     * Allows you to specify the content.
+     */
+    contentRef: React.RefObject<HTMLElement>;
+    /**
+     * Allows you to specify the footer of the content.
+     */
+    footerRef: React.RefObject<HTMLElement>;
+    /**
+     * Allows you to specify the close button of the dialog.
+     */
+    closeRef: React.RefObject<HTMLButtonElement | HTMLElement>;
+    /**
+     * Callback for hiding the dialog.
+     */
+    hide(e: React.SyntheticEvent): void;
+    /**
+     * Dialog's props values.
+     */
+    message: ContentPropsMessage;
+}
+
+/**
+ * Defines current content values and refs for headless development.
+ * @see {@link ContentProps.message}
+ */
+interface ContentPropsMessage {
+    /**
+     * Header of the dialog.
+     * @readonly
+     */
+    header: string;
+    /**
+     * Content of the dialog.
+     * @readonly
+     */
+    content: string;
+    /**
+     * Message of the dialog.
+     * @readonly
+     */
+    message: string;
+}
+
+/**
  * Defines valid properties in Dialog component.
  * @group Properties
  */
@@ -373,6 +426,12 @@ export interface DialogProps {
      * Callback to invoke when dialog is showed.
      */
     onShow?(): void;
+    /**
+     * Specifies a custom content for the dialog. For more complex markup, use the "content" slot instead.
+     * @param {ContentProps} props - The values of dialog.
+     * @return {React.ReactNode}
+     */
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

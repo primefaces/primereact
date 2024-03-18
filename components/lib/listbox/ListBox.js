@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
@@ -11,12 +11,19 @@ import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ListBoxBase.getProps(inProps, context);
-
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
+        const searchTimeout = React.useRef(null);
+        const firstHiddenFocusableElement = React.useRef(null);
+        const lastHiddenFocusableElement = React.useRef(null);
+        const [startRangeIndex, setStartRangeIndex] = React.useState(-1);
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
         const virtualScrollerRef = React.useRef(null);
+        const id = React.useRef(null);
+        const listRef = React.useRef(null);
         const optionTouched = React.useRef(false);
         const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
         const hasFilter = filteredValue && filteredValue.trim().length > 0;
@@ -32,15 +39,14 @@ export const ListBox = React.memo(
 
         useHandleStyle(ListBoxBase.css.styles, ptCallbacks.isUnstyled, { name: 'listbox' });
 
-        const onOptionSelect = (event) => {
-            const option = event.option;
-
+        const onOptionSelect = (event, option, index = -1) => {
             if (props.disabled || isOptionDisabled(option)) {
                 return;
             }
 
             props.multiple ? onOptionSelectMultiple(event.originalEvent, option) : onOptionSelectSingle(event.originalEvent, option);
             optionTouched.current = false;
+            index !== -1 && setFocusedOptionIndex(index);
         };
 
         const onOptionTouchEnd = () => {
@@ -122,6 +128,307 @@ export const ListBox = React.memo(
                     }
                 });
             }
+        };
+
+        const hasSelectedOption = () => {
+            return ObjectUtils.isNotEmpty(props.value);
+        };
+
+        const isOptionGroup = (option) => {
+            return props.optionGroupLabel && option.optionGroup && option.group;
+        };
+
+        const isValidOption = (option) => {
+            return ObjectUtils.isNotEmpty(option) && !(isOptionDisabled(option) || isOptionGroup(option));
+        };
+
+        const isValidSelectedOption = (option) => {
+            return isValidOption(option) && isSelected(option);
+        };
+
+        const findFirstOptionIndex = () => {
+            return visibleOptions.findIndex((option) => isValidOption(option));
+        };
+
+        const findLastOptionIndex = () => {
+            return ObjectUtils.findLastIndex(visibleOptions, (option) => isValidOption(option));
+        };
+
+        const findNextOptionIndex = (index) => {
+            const matchedOptionIndex = index < visibleOptions.length - 1 ? visibleOptions.slice(index + 1).findIndex((option) => isValidOption(option)) : -1;
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : index;
+        };
+
+        const findPrevOptionIndex = (index) => {
+            const matchedOptionIndex = index > 0 ? ObjectUtils.findLastIndex(visibleOptions.slice(0, index), (option) => isValidOption(option)) : -1;
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex : index;
+        };
+
+        const focusedOptionId = () => {
+            return focusedOptionIndex !== -1 ? `${id.current}_${focusedOptionIndex}` : null;
+        };
+
+        const findNearestSelectedOptionIndex = (index, firstCheckUp = false) => {
+            let matchedOptionIndex = -1;
+
+            if (hasSelectedOption) {
+                if (firstCheckUp) {
+                    matchedOptionIndex = findPrevSelectedOptionIndex(index);
+                    matchedOptionIndex = matchedOptionIndex === -1 ? findNextSelectedOptionIndex(index) : matchedOptionIndex;
+                } else {
+                    matchedOptionIndex = findNextSelectedOptionIndex(index);
+                    matchedOptionIndex = matchedOptionIndex === -1 ? findPrevSelectedOptionIndex(index) : matchedOptionIndex;
+                }
+            }
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex : index;
+        };
+
+        const isOptionMatched = (option) => {
+            return isValidOption(option) && getOptionLabel(option)?.toLocaleLowerCase(props.filterLocale).startsWith(searchValue.toLocaleLowerCase(props.filterLocale));
+        };
+
+        const searchOptions = (event, char) => {
+            searchValue = (searchValue || '') + char;
+
+            let optionIndex = -1;
+
+            if (ObjectUtils.isNotEmpty(searchValue)) {
+                if (focusedOptionIndex !== -1) {
+                    optionIndex = visibleOptions.slice(focusedOptionIndex).findIndex((option) => isOptionMatched(option));
+                    optionIndex = optionIndex === -1 ? visibleOptions.slice(0, focusedOptionIndex).findIndex((option) => isOptionMatched(option)) : optionIndex + focusedOptionIndex;
+                } else {
+                    optionIndex = visibleOptions.findIndex((option) => isOptionMatched(option));
+                }
+
+                if (optionIndex === -1 && focusedOptionIndex === -1) {
+                    optionIndex = findFirstFocusedOptionIndex();
+                }
+
+                if (optionIndex !== -1) {
+                    changeFocusedOptionIndex(event, optionIndex);
+                }
+            }
+
+            if (searchTimeout.current) {
+                clearTimeout(searchTimeout.current);
+            }
+
+            searchTimeout.current = setTimeout(() => {
+                searchValue = '';
+                searchTimeout.current = null;
+            }, 500);
+        };
+
+        const findNextSelectedOptionIndex = (index) => {
+            const matchedOptionIndex = hasSelectedOption && index < visibleOptions.length - 1 ? visibleOptions.slice(index + 1).findIndex((option) => isValidSelectedOption(option)) : -1;
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : -1;
+        };
+
+        const findPrevSelectedOptionIndex = (index) => {
+            const matchedOptionIndex = hasSelectedOption && index > 0 ? ObjectUtils.findLastIndex(visibleOptions.slice(0, index), (option) => isValidSelectedOption(option)) : -1;
+
+            return matchedOptionIndex > -1 ? matchedOptionIndex : -1;
+        };
+
+        const onOptionSelectRange = (event, start = -1, end = -1) => {
+            start === -1 && (start = findNearestSelectedOptionIndex(end, true));
+            end === -1 && (end = findNearestSelectedOptionIndex(start));
+
+            if (start !== -1 && end !== -1) {
+                const rangeStart = Math.min(start, end);
+                const rangeEnd = Math.max(start, end);
+                const value = visibleOptions
+                    .slice(rangeStart, rangeEnd + 1)
+                    .filter((option) => isValidOption(option))
+                    .map((option) => getOptionValue(option));
+
+                updateModel(event, value);
+            }
+        };
+
+        const findFirstFocusedOptionIndex = () => {
+            const selectedIndex = findFirstSelectedOptionIndex();
+
+            return selectedIndex < 0 ? findFirstOptionIndex() : selectedIndex;
+        };
+
+        const changeFocusedOptionIndex = (event, index) => {
+            if (focusedOptionIndex !== index) {
+                setFocusedOptionIndex(index);
+                scrollInView();
+
+                if (event && props.selectOnFocus && !props.multiple) {
+                    onOptionSelect(event, visibleOptions[index]);
+                }
+            }
+        };
+
+        const onArrowDownKey = (event) => {
+            const optionIndex = focusedOptionIndex !== -1 ? findNextOptionIndex(focusedOptionIndex) : findFirstFocusedOptionIndex();
+
+            if (props.multiple && event.shiftKey) {
+                onOptionSelectRange(event, startRangeIndex, optionIndex);
+            }
+
+            changeFocusedOptionIndex(event, optionIndex);
+            event.preventDefault();
+        };
+
+        const onArrowUpKey = (event) => {
+            const optionIndex = focusedOptionIndex !== -1 ? findPrevOptionIndex(focusedOptionIndex) : findLastFocusedOptionIndex();
+
+            if (props.multiple && event.shiftKey) {
+                onOptionSelectRange(event, optionIndex, startRangeIndex);
+            }
+
+            changeFocusedOptionIndex(event, optionIndex);
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            if (focusedOptionIndex !== -1) {
+                if (props.multiple && event.shiftKey) onOptionSelectRange(event, focusedOptionIndex);
+                else onOptionSelect(event, visibleOptions[focusedOptionIndex]);
+            }
+
+            event.preventDefault();
+        };
+
+        const onSpaceKey = (event) => {
+            onEnterKey(event);
+        };
+
+        const onShiftKey = () => {
+            setStartRangeIndex(focusedOptionIndex);
+        };
+
+        const onHomeKey = (event, pressedInInputText = false) => {
+            if (pressedInInputText) {
+                event.currentTarget.setSelectionRange(0, 0);
+                setFocusedOptionIndex(-1);
+            } else {
+                let metaKey = event.metaKey || event.ctrlKey;
+                let optionIndex = findFirstOptionIndex();
+
+                if (props.multiple && event.shiftKey && metaKey) {
+                    onOptionSelectRange(event, optionIndex, startRangeIndex);
+                }
+
+                changeFocusedOptionIndex(event, optionIndex);
+            }
+
+            event.preventDefault();
+        };
+
+        const onEndKey = (event, pressedInInputText = false) => {
+            if (pressedInInputText) {
+                const target = event.currentTarget;
+                const len = target.value.length;
+
+                target.setSelectionRange(len, len);
+                focusedOptionIndex = -1;
+            } else {
+                let metaKey = event.metaKey || event.ctrlKey;
+                let optionIndex = findLastOptionIndex();
+
+                if (props.multiple && event.shiftKey && metaKey) {
+                    onOptionSelectRange(event, startRangeIndex, optionIndex);
+                }
+
+                changeFocusedOptionIndex(event, optionIndex);
+            }
+
+            event.preventDefault();
+        };
+
+        const onPageUpKey = (event) => {
+            scrollInView(0);
+            event.preventDefault();
+        };
+
+        const onPageDownKey = (event) => {
+            scrollInView(visibleOptions.length - 1);
+            event.preventDefault();
+        };
+
+        const onKeyDown = (event) => {
+            const metaKey = event.metaKey || event.ctrlKey;
+
+            switch (event.code) {
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
+
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
+
+                case 'Home':
+                    onHomeKey(event);
+                    break;
+
+                case 'End':
+                    onEndKey(event);
+                    break;
+
+                case 'PageDown':
+                    onPageDownKey(event);
+                    break;
+
+                case 'PageUp':
+                    onPageUpKey(event);
+                    break;
+
+                case 'Enter':
+                case 'NumpadEnter':
+                case 'Space':
+                    onSpaceKey(event);
+                    event.preventDefault();
+                    break;
+
+                case 'Tab':
+                    // NOOP
+                    break;
+
+                case 'ShiftLeft':
+                case 'ShiftRight':
+                    onShiftKey(event);
+                    break;
+
+                default:
+                    if (props.multiple && event.code === 'KeyA' && metaKey) {
+                        const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
+
+                        updateModel(event, value);
+
+                        event.preventDefault();
+                        break;
+                    }
+
+                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                        searchOptions(event, event.key);
+                        event.preventDefault();
+                    }
+
+                    break;
+            }
+        };
+
+        const scrollInView = (index = -1) => {
+            setTimeout(() => {
+                const idx = index !== -1 ? `${id.current}_${index}` : focusedOptionId();
+                const element = listRef.current.querySelector(`li[id="${idx}"]`);
+
+                if (element) {
+                    element.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+                } else if (props.virtualScrollerOptions) {
+                    virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(index !== -1 ? index : props.focusedOptionIndex);
+                }
+            }, 0);
         };
 
         const onFilter = (event) => {
@@ -230,6 +537,31 @@ export const ListBox = React.memo(
             return option && option['disabled'] !== undefined ? option['disabled'] : false;
         };
 
+        const onFirstHiddenFocus = () => {
+            DomHandler.focus(listRef.current);
+
+            const firstFocusableEl = DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-p-hidden-focusable="true"])');
+
+            lastHiddenFocusableElement.current.tabIndex = DomHandler.isElement(firstFocusableEl) ? undefined : -1;
+            firstHiddenFocusableElement.current.tabIndex = -1;
+            changeFocusedOptionIndex(null, 0);
+        };
+
+        const onLastHiddenFocus = (event) => {
+            const relatedTarget = event.relatedTarget;
+
+            if (relatedTarget === listRef.current) {
+                const firstFocusableEl = DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-p-hidden-focusable="true"])');
+
+                DomHandler.focus(firstFocusableEl);
+                firstHiddenFocusableElement.current.tabIndex = undefined;
+            } else {
+                DomHandler.focus(firstHiddenFocusableElement.current);
+            }
+
+            lastHiddenFocusableElement.current.tabIndex = -1;
+        };
+
         const getOptionGroupRenderKey = (optionGroup) => {
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
         };
@@ -286,6 +618,7 @@ export const ListBox = React.memo(
 
         useMountEffect(() => {
             scrollToSelectedIndex();
+            id.current = UniqueComponentId();
         });
 
         const createHeader = () => {
@@ -313,11 +646,12 @@ export const ListBox = React.memo(
                 const optionLabel = getOptionLabel(option);
                 const optionKey = j + '_' + getOptionRenderKey(option);
                 const disabled = isOptionDisabled(option);
-                const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
                     <ListBoxItem
+                        id={id.current + '_' + j}
                         hostName="ListBox"
+                        optionKey={optionKey}
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -325,8 +659,9 @@ export const ListBox = React.memo(
                         template={props.itemTemplate}
                         selected={isSelected(option)}
                         onClick={onOptionSelect}
+                        index={j}
+                        focusedOptionIndex={focusedOptionIndex}
                         onTouchEnd={onOptionTouchEnd}
-                        tabIndex={tabIndex}
                         disabled={disabled}
                         ptCallbacks={ptCallbacks}
                         metaData={metaData}
@@ -362,20 +697,22 @@ export const ListBox = React.memo(
                 const optionLabel = getOptionLabel(option);
                 const optionKey = index + '_' + getOptionRenderKey(option);
                 const disabled = isOptionDisabled(option);
-                const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
                     <ListBoxItem
+                        id={id.current + '_' + index}
                         hostName="ListBox"
+                        optionKey={optionKey}
                         key={optionKey}
                         label={optionLabel}
+                        index={index}
+                        focusedOptionIndex={focusedOptionIndex}
                         option={option}
                         style={style}
                         template={props.itemTemplate}
                         selected={isSelected(option)}
                         onClick={onOptionSelect}
                         onTouchEnd={onOptionTouchEnd}
-                        tabIndex={tabIndex}
                         disabled={disabled}
                         ptCallbacks={ptCallbacks}
                         metaData={metaData}
@@ -418,10 +755,11 @@ export const ListBox = React.memo(
                         contentTemplate: (options) => {
                             const listProps = mergeProps(
                                 {
-                                    ref: options.contentRef,
+                                    ref: listRef,
                                     style: ptCallbacks.sx('list', { options }),
                                     className: ptCallbacks.cx('list', { options }),
                                     role: 'listbox',
+                                    tabIndex: '-1',
                                     'aria-multiselectable': props.multiple,
                                     ...ariaProps
                                 },
@@ -439,9 +777,12 @@ export const ListBox = React.memo(
 
                 const listProps = mergeProps(
                     {
+                        ref: listRef,
                         className: ptCallbacks.cx('list'),
                         role: 'listbox',
                         'aria-multiselectable': props.multiple,
+                        tabIndex: '-1',
+                        onKeyDown: onKeyDown,
                         ...ariaProps
                     },
                     ptCallbacks.ptm('list')
@@ -478,13 +819,43 @@ export const ListBox = React.memo(
             ptCallbacks.ptm('root')
         );
 
+        const hiddenFirstElement = mergeProps(
+            {
+                ref: firstHiddenFocusableElement,
+                role: 'presentation',
+                'aria-hidden': 'true',
+                className: 'p-hidden-accessible p-hidden-focusable',
+                tabIndex: !props.disabled ? props.tabIndex : -1,
+                onFocus: onFirstHiddenFocus,
+                'data-p-hidden-accessible': true,
+                'data-p-hidden-focusable': true
+            },
+            ptCallbacks.ptm('hiddenFirstFocusableEl')
+        );
+
+        const hiddenLastElement = mergeProps(
+            {
+                ref: lastHiddenFocusableElement,
+                role: 'presentation',
+                'aria-hidden': 'true',
+                className: 'p-hidden-accessible p-hidden-focusable',
+                tabIndex: !props.disabled ? props.tabIndex : -1,
+                onFocus: onLastHiddenFocus,
+                'data-p-hidden-accessible': true,
+                'data-p-hidden-focusable': true
+            },
+            ptCallbacks.ptm('hiddenLastFocusableEl')
+        );
+
         return (
             <>
                 <div {...rootProps}>
+                    <span {...hiddenFirstElement}></span>
                     {header}
                     <div {...wrapperProps}>{list}</div>
+                    <span {...hiddenLastElement}></span>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptCallbacks.ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptCallbacks.ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

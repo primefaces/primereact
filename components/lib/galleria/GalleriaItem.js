@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { useMountEffect } from '../hooks/Hooks';
+import { localeOption } from '../api/Api';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, classNames } from '../utils/Utils';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
+        const indicatorContent = React.useRef(null);
+
         const { ptm, cx } = props;
 
         const getPTOptions = (key, options) => {
@@ -14,6 +18,14 @@ export const GalleriaItem = React.memo(
                 hostName: props.hostName,
                 ...options
             });
+        };
+
+        const ariaSlideNumber = (value) => {
+            return localeOption('aria') ? localeOption('aria').slideNumber.replace(/{slideNumber}/g, value) : undefined;
+        };
+
+        const ariaPageLabel = (value) => {
+            return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
         };
 
         const next = () => {
@@ -74,13 +86,101 @@ export const GalleriaItem = React.memo(
         };
 
         const onIndicatorKeyDown = (event, index) => {
-            if (event.which === 13) {
-                stopSlideShow();
+            switch (event.code) {
+                case 'Enter':
+                case 'Space':
+                    stopSlideShow();
 
-                props.onActiveItemChange({
-                    index
-                });
+                    props.onActiveItemChange({
+                        index
+                    });
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowRight':
+                    onRightKey();
+                    break;
+
+                case 'ArrowLeft':
+                    onLeftKey();
+                    break;
+
+                case 'Home':
+                    onHomeKey();
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    onEndKey();
+                    event.preventDefault();
+                    break;
+
+                case 'Tab':
+                    onTabKey();
+                    break;
+
+                case 'ArrowDown':
+                case 'ArrowUp':
+                case 'PageUp':
+                case 'PageDown':
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
             }
+        };
+
+        const onRightKey = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, activeIndex + 1 === indicators.length ? indicators.length - 1 : activeIndex + 1);
+        };
+
+        const onLeftKey = () => {
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, activeIndex - 1 <= 0 ? 0 : activeIndex - 1);
+        };
+
+        const onHomeKey = () => {
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, 0);
+        };
+
+        const onEndKey = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const activeIndex = findFocusedIndicatorIndex();
+
+            changedFocusedIndicator(activeIndex, indicators.length - 1);
+        };
+
+        const onTabKey = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const highlightedIndex = indicators.findIndex((ind) => DomHandler.getAttribute(ind, 'data-p-highlight') === true);
+
+            const activeIndicator = DomHandler.findSingle(indicatorContent.current, '[data-pc-section="indicator"] > button[tabindex="0"]');
+            const activeIndex = indicators.findIndex((ind) => ind === activeIndicator.parentElement);
+
+            indicators[activeIndex].children[0].tabIndex = '-1';
+            indicators[highlightedIndex].children[0].tabIndex = '0';
+        };
+
+        const findFocusedIndicatorIndex = () => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+            const activeIndicator = DomHandler.findSingle(indicatorContent.current, '[data-pc-section="indicator"] > button[tabindex="0"]');
+
+            return indicators.findIndex((ind) => ind === activeIndicator.parentElement);
+        };
+
+        const changedFocusedIndicator = (prevInd, nextInd) => {
+            const indicators = [...DomHandler.find(indicatorContent.current, '[data-pc-section="indicator"]')];
+
+            indicators[prevInd].children[0].tabIndex = '-1';
+            indicators[nextInd].children[0].tabIndex = '0';
+            indicators[nextInd].children[0].focus();
         };
 
         useMountEffect(() => {
@@ -108,7 +208,8 @@ export const GalleriaItem = React.memo(
                         className: cx('previousItemButton', { isDisabled }),
                         onClick: navBackward,
                         disabled: isDisabled,
-                        'data-p-disabled': isDisabled
+                        'data-p-disabled': isDisabled,
+                        'data-pc-group-section': 'itemnavigator'
                     },
                     getPTOptions('previousItemButton')
                 );
@@ -143,7 +244,8 @@ export const GalleriaItem = React.memo(
                         className: cx('nextItemButton', { isDisabled }),
                         onClick: navForward,
                         disabled: isDisabled,
-                        'data-p-disabled': isDisabled
+                        'data-p-disabled': isDisabled,
+                        'data-pc-group-section': 'itemnavigator'
                     },
                     getPTOptions('nextItemButton')
                 );
@@ -186,17 +288,20 @@ export const GalleriaItem = React.memo(
                     className: cx('indicator', { isActive }),
                     key: key,
                     tabIndex: 0,
+                    'aria-label': ariaPageLabel(index + 1),
+                    'aria-selected': props.activeIndex === index,
+                    'aria-controls': props.id + '_item_' + index,
+                    'data-p-highlight': isActive,
                     onClick: () => onIndicatorClick(index),
                     onMouseEnter: () => onIndicatorMouseEnter(index),
-                    onKeyDown: (e) => onIndicatorKeyDown(e, index),
-                    'data-p-highlight': isActive
+                    onKeyDown: (e) => onIndicatorKeyDown(e, index)
                 },
                 getPTOptions('indicator')
             );
 
             if (!indicator) {
                 indicator = (
-                    <button type="button" tabIndex={-1} className="p-link">
+                    <button tabIndex={props.activeIndex === index ? '0' : '-1'} type="button" className="p-link">
                         <Ripple />
                     </button>
                 );
@@ -219,7 +324,11 @@ export const GalleriaItem = React.memo(
                     indicators.push(createIndicator(i));
                 }
 
-                return <ul {...indicatorsProps}>{indicators}</ul>;
+                return (
+                    <ul ref={indicatorContent} {...indicatorsProps}>
+                        {indicators}
+                    </ul>
+                );
             }
 
             return null;
@@ -248,7 +357,11 @@ export const GalleriaItem = React.memo(
 
         const itemProps = mergeProps(
             {
-                className: cx('item')
+                className: cx('item'),
+                id: props.id + '_item_' + props.activeItemIndex,
+                role: 'group',
+                'aria-label': ariaSlideNumber(props.activeItemIndex + 1),
+                'aria-roledescription': localeOption('aria') ? localeOption('aria').slide : undefined
             },
             getPTOptions('item')
         );

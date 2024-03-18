@@ -6,16 +6,17 @@ import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { Tag } from '@/components/lib/tag/Tag';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function RowEditDoc(props) {
     const [products, setProducts] = useState(null);
     const [statuses] = useState(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const getSeverity = (value) => {
         switch (value) {
@@ -72,6 +73,10 @@ export function RowEditDoc(props) {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
     };
 
+    const allowEdit = (rowData) => {
+        return rowData.name !== 'Blue Band';
+    };
+
     const code = {
         basic: `
 <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
@@ -79,7 +84,7 @@ export function RowEditDoc(props) {
     <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
     <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
-    <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+    <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
 </DataTable>
         `,
         javascript: `
@@ -155,6 +160,10 @@ export default function RowEditingDemo() {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
     };
 
+    const allowEdit = (rowData) => {
+        return rowData.name !== 'Blue Band';
+    };
+
     return (
         <div className="card p-fluid">
             <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
@@ -162,7 +171,7 @@ export default function RowEditingDemo() {
                 <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
-                <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
             </DataTable>
         </div>
     );
@@ -171,9 +180,9 @@ export default function RowEditingDemo() {
         typescript: `
 import React, { useEffect, useState } from 'react';
 import { DataTable, DataTableRowEditCompleteEvent } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { Column, ColumnEditorOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber, InputNumberChangeEvent } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { Tag } from 'primereact/tag';
 import { ProductService } from './service/ProductService';
@@ -192,7 +201,7 @@ interface Product {
 }
 
 export default function RowEditingDemo() {
-    const [products, setProducts] = useState<Product[] | null>(null);
+    const [products, setProducts] = useState<Product[]>();
     const [statuses] = useState<string[]>(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
 
     useEffect(() => {
@@ -219,21 +228,21 @@ export default function RowEditingDemo() {
         let _products = [...products];
         let { newData, index } = e;
 
-        _products[index] = newData;
+        _products[index] = newData as Product;
 
         setProducts(_products);
     };
 
-    const textEditor = (options) => {
-        return <InputText type="text" value={options.value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => options.editorCallback(e.target.value)} />;
+    const textEditor = (options: ColumnEditorOptions) => {
+        return <InputText type="text" value={options.value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => options.editorCallback!(e.target.value)} />;
     };
 
-    const statusEditor = (options) => {
+    const statusEditor = (options: ColumnEditorOptions) => {
         return (
             <Dropdown
                 value={options.value}
                 options={statuses}
-                onChange={(e: DropdownChangeEvent) => options.editorCallback(e.value)}
+                onChange={(e: DropdownChangeEvent) => options.editorCallback!(e.value)}
                 placeholder="Select a Status"
                 itemTemplate={(option) => {
                     return <Tag value={option} severity={getSeverity(option)}></Tag>;
@@ -242,16 +251,20 @@ export default function RowEditingDemo() {
         );
     };
 
-    const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e: InputNumberChangeEvent) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
+    const priceEditor = (options: ColumnEditorOptions) => {
+        return <InputNumber value={options.value}  onValueChange={(e: InputNumberValueChangeEvent) => options.editorCallback!(e.value)} mode="currency" currency="USD" locale="en-US" />;
     };
 
-    const statusBodyTemplate = (rowData) => {
+    const statusBodyTemplate = (rowData: Product) => {
         return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData.inventoryStatus)}></Tag>;
     };
 
-    const priceBodyTemplate = (rowData) => {
+    const priceBodyTemplate = (rowData: Product) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
+    };
+
+    const allowEdit = (rowData: Product) => {
+        return rowData.name !== 'Blue Band';
     };
 
     return (
@@ -261,7 +274,7 @@ export default function RowEditingDemo() {
                 <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
                 <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
-                <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
             </DataTable>
         </div>
     );
@@ -292,15 +305,17 @@ export default function RowEditingDemo() {
                     the state. The column to control the editing state should have <i>rowEditor</i> property applied.
                 </p>
             </DocSectionText>
-            <div className="card p-fluid">
-                <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
-                    <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card p-fluid">
+                    <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

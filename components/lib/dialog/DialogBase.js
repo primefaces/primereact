@@ -11,7 +11,7 @@ const classes = {
     headerTitle: 'p-dialog-title',
     headerIcons: 'p-dialog-header-icons',
     content: ({ props }) => classNames('p-dialog-content', props.contentClassName),
-    footer: 'p-dialog-footer',
+    footer: ({ props }) => classNames('p-dialog-footer', props.footerClassName),
     mask: ({ props, maskVisibleState }) => {
         const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
         const pos = positions.find((item) => item === props.position || item.replace('-', '') === props.position);
@@ -196,8 +196,8 @@ const styles = `
         width: 100vw !important;
         height: 100vh !important;
         max-height: 100%;
-        top: 0px;
-        left: 0px;
+        top: 0px !important;
+        left: 0px !important;
     }
     
     .p-dialog-maximized .p-dialog-content {
@@ -257,12 +257,14 @@ export const DialogBase = ComponentBase.extend({
         closable: true,
         closeIcon: null,
         closeOnEscape: true,
+        content: null,
         contentClassName: null,
         contentStyle: null,
         dismissableMask: false,
         draggable: true,
         focusOnShow: true,
         footer: null,
+        footerClassName: null,
         header: null,
         headerClassName: null,
         headerStyle: null,

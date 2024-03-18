@@ -10,38 +10,28 @@ export function GroupDoc(props) {
     const router = useRouter();
     const items = [
         {
-            label: 'Options',
+            label: 'Documents',
             items: [
                 {
-                    label: 'Update',
-                    icon: 'pi pi-refresh',
-                    command: () => {
-                        toast.current.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
-                    }
+                    label: 'New',
+                    icon: 'pi pi-plus'
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-times',
-                    command: () => {
-                        toast.current.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
-                    }
+                    label: 'Search',
+                    icon: 'pi pi-search'
                 }
             ]
         },
         {
-            label: 'Links',
+            label: 'Profile',
             items: [
                 {
-                    label: 'React Website',
-                    icon: 'pi pi-external-link',
-                    url: 'https://reactjs.org/'
+                    label: 'Settings',
+                    icon: 'pi pi-cog'
                 },
                 {
-                    label: 'Upload',
-                    icon: 'pi pi-upload',
-                    command: () => {
-                        router.push('/fileupload');
-                    }
+                    label: 'Logout',
+                    icon: 'pi pi-sign-out'
                 }
             ]
         }
@@ -63,38 +53,28 @@ export default function GroupDemo() {
     const router = useRouter();
     const items = [
         {
-            label: 'Options',
+            label: 'Documents',
             items: [
                 {
-                    label: 'Update',
-                    icon: 'pi pi-refresh',
-                    command: () => {
-                        toast.current.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
-                    }
+                    label: 'New',
+                    icon: 'pi pi-plus'
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-times',
-                    command: () => {
-                        toast.current.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
-                    }
+                    label: 'Search',
+                    icon: 'pi pi-search'
                 }
             ]
         },
         {
-            label: 'Links',
+            label: 'Profile',
             items: [
                 {
-                    label: 'React Website',
-                    icon: 'pi pi-external-link',
-                    url: 'https://reactjs.org/'
+                    label: 'Settings',
+                    icon: 'pi pi-cog'
                 },
                 {
-                    label: 'Upload',
-                    icon: 'pi pi-upload',
-                    command: () => {
-                        router.push('/fileupload');
-                    }
+                    label: 'Logout',
+                    icon: 'pi pi-sign-out'
                 }
             ]
         }
@@ -120,38 +100,28 @@ export default function GroupDemo() {
     const router = useRouter();
     const items: MenuItem[] = [
         {
-            label: 'Options',
+            label: 'Documents',
             items: [
                 {
-                    label: 'Update',
-                    icon: 'pi pi-refresh',
-                    command: () => {
-                        toast.current.show({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
-                    }
+                    label: 'New',
+                    icon: 'pi pi-plus'
                 },
                 {
-                    label: 'Delete',
-                    icon: 'pi pi-times',
-                    command: () => {
-                        toast.current.show({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
-                    }
+                    label: 'Search',
+                    icon: 'pi pi-search'
                 }
             ]
         },
         {
-            label: 'Links',
+            label: 'Profile',
             items: [
                 {
-                    label: 'React Website',
-                    icon: 'pi pi-external-link',
-                    url: 'https://reactjs.org/'
+                    label: 'Settings',
+                    icon: 'pi pi-cog'
                 },
                 {
-                    label: 'Upload',
-                    icon: 'pi pi-upload',
-                    command: () => {
-                        router.push('/fileupload');
-                    }
+                    label: 'Logout',
+                    icon: 'pi pi-sign-out'
                 }
             ]
         }

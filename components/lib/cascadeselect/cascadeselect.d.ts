@@ -65,7 +65,6 @@ export interface CascadeSelectContext extends APIOptions {
      */
     label?: string;
 }
-
 /**
  * Custom passthrough(pt) options.
  * @see {@link CascadeSelectProps.pt}
@@ -104,13 +103,13 @@ export interface CascadeSelectPassThroughOptions {
      */
     list?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
-     * Uses to pass attributes to the sub-list's DOM element.
-     */
-    sublist?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
-    /**
      * Uses to pass attributes to the item's DOM element.
      */
     item?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the sub-list's DOM element.
+     */
+    sublist?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
@@ -228,6 +227,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * The template of items.
      */
     itemTemplate?: React.ReactNode | ((option: any) => React.ReactNode) | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
     /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false

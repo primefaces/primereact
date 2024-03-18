@@ -121,7 +121,7 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     onImageError?(event: React.SyntheticEvent): void;
     /**
      * Callback to invoke when a chip is removed.
-     * @param {ChipRemoveEvent} event - Custom remove event
+     * * @param {ChipRemoveEvent} event - Custom remove event
      */
     onRemove?(event: ChipRemoveEvent): void;
     /**

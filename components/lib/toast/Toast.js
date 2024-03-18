@@ -3,9 +3,9 @@ import { TransitionGroup } from 'react-transition-group';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
@@ -13,6 +13,7 @@ let messageIdx = 0;
 
 export const Toast = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ToastBase.getProps(inProps, context);
 
@@ -79,7 +80,7 @@ export const Toast = React.memo(
 
             setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
 
-            props.onRemove && props.onRemove(removeMessage);
+            props.onRemove && props.onRemove(removeMessage.message || removeMessage);
         };
 
         const onClose = (messageInfo) => {
@@ -146,19 +147,23 @@ export const Toast = React.memo(
 
                                 return (
                                     <CSSTransition nodeRef={messageRef} key={messageInfo._pId} {...transitionProps}>
-                                        <ToastMessage
-                                            hostName="Toast"
-                                            ref={messageRef}
-                                            messageInfo={messageInfo}
-                                            index={index}
-                                            onClick={props.onClick}
-                                            onClose={onClose}
-                                            onMouseEnter={props.onMouseEnter}
-                                            onMouseLeave={props.onMouseLeave}
-                                            closeIcon={props.closeIcon}
-                                            ptCallbacks={ptCallbacks}
-                                            metaData={metaData}
-                                        />
+                                        {inProps.content ? (
+                                            ObjectUtils.getJSXElement(inProps.content, { message: messageInfo.message })
+                                        ) : (
+                                            <ToastMessage
+                                                hostName="Toast"
+                                                ref={messageRef}
+                                                messageInfo={messageInfo}
+                                                index={index}
+                                                onClick={props.onClick}
+                                                onClose={onClose}
+                                                onMouseEnter={props.onMouseEnter}
+                                                onMouseLeave={props.onMouseLeave}
+                                                closeIcon={props.closeIcon}
+                                                ptCallbacks={ptCallbacks}
+                                                metaData={metaData}
+                                            />
+                                        )}
                                     </CSSTransition>
                                 );
                             })}

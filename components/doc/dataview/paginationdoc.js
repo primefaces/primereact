@@ -4,6 +4,7 @@ import { Button } from '@/components/lib/button/Button';
 import { DataView } from '@/components/lib/dataview/DataView';
 import { Rating } from '@/components/lib/rating/Rating';
 import { Tag } from '@/components/lib/tag/Tag';
+import { classNames } from '@/components/lib/utils/Utils';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
@@ -31,10 +32,10 @@ export function PaginationDoc(props) {
         }
     };
 
-    const itemTemplate = (product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -58,17 +59,28 @@ export function PaginationDoc(props) {
         );
     };
 
+    const listTemplate = (items) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     const code = {
         basic: `
-<DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
+<DataView value={products} itemTemplate={listTemplate} paginator rows={5} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
-import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
+import { ProductService } from './service/ProductService';
 
 export default function PaginationDemo() {
     const [products, setProducts] = useState([]);
@@ -93,10 +105,10 @@ export default function PaginationDemo() {
         }
     };
 
-    const itemTemplate = (product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -120,20 +132,31 @@ export default function PaginationDemo() {
         );
     };
 
+    const listTemplate = (items) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
+            <DataView value={products} listTemplate={listTemplate} paginator rows={5} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import { classNames } from 'primereact/utils';
+import { ProductService } from './service/ProductService';
 
 interface Product {
     id: string;
@@ -171,10 +194,10 @@ export default function PaginationDemo() {
         }
     };
 
-    const itemTemplate = (product: Product) => {
+    const itemTemplate = (product, index) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <div className="col-12" key={product.id}>
+                <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -198,15 +221,25 @@ export default function PaginationDemo() {
         );
     };
 
+    const listTemplate = (items: Product) => {
+        if (!items || items.length === 0) return null;
+
+        let list = items.map((product, index) => {
+            return itemTemplate(product, index);
+        });
+
+        return <div className="grid grid-nogutter">{list}</div>;
+    };
+
     return (
         <div className="card">
-            <DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
+        <DataView value={products} listTemplate={listTemplate} paginator rows={5} />
         </div>
     )
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -231,7 +264,7 @@ export default function PaginationDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <DataView value={products} itemTemplate={itemTemplate} paginator rows={5} />
+                <DataView value={products} listTemplate={listTemplate} paginator rows={5} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

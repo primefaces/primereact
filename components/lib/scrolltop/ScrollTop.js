@@ -2,15 +2,16 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ScrollTopBase.getProps(inProps, context);
         const { ptm, cx, isUnstyled } = ScrollTopBase.setMetaData({

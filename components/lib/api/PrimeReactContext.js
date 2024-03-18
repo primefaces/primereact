@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FilterMatchMode } from './FilterMatchMode';
+import PrimeReact from './PrimeReact';
 
 export const PrimeReactContext = React.createContext();
 
@@ -10,6 +11,7 @@ export const PrimeReactProvider = (props) => {
     const [inputStyle, setInputStyle] = useState(propsValue.inputStyle || 'outlined');
     const [locale, setLocale] = useState(propsValue.locale || 'en');
     const [appendTo, setAppendTo] = useState(propsValue.appendTo || null);
+    const [styleContainer, setStyleContainer] = useState(propsValue.styleContainer || null);
     const [cssTransition, setCssTransition] = useState(propsValue.cssTransition || true);
     const [autoZIndex, setAutoZIndex] = useState(propsValue.autoZIndex || true);
     const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(propsValue.hideOverlaysOnDocumentScrolling || false);
@@ -58,6 +60,27 @@ export const PrimeReactProvider = (props) => {
         linkElement.parentNode?.insertBefore(cloneLinkElement, linkElement.nextSibling);
     };
 
+    /**
+     * @deprecated
+     */
+    React.useEffect(() => {
+        PrimeReact.ripple = ripple;
+    }, [ripple]);
+
+    /**
+     * @deprecated
+     */
+    React.useEffect(() => {
+        PrimeReact.inputStyle = inputStyle;
+    }, [inputStyle]);
+
+    /**
+     * @deprecated
+     */
+    React.useEffect(() => {
+        PrimeReact.locale = locale;
+    }, [locale]);
+
     const value = {
         changeTheme,
         ripple,
@@ -68,6 +91,8 @@ export const PrimeReactProvider = (props) => {
         setLocale,
         appendTo,
         setAppendTo,
+        styleContainer,
+        setStyleContainer,
         cssTransition,
         setCssTransition,
         autoZIndex,

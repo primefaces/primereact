@@ -1,18 +1,19 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useMountEffect, useOverlayListener, useUnmountEffect, useDisplayOrder, useGlobalOnEscapeKey } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = PasswordBase.getProps(inProps, context);
 
@@ -52,10 +53,9 @@ export const Password = React.memo(
             callback: () => {
                 hide();
             },
-            when: overlayVisibleState && props.feedback,
+            when: overlayVisibleState && props.feedback && passwordDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.PASSWORD, passwordDisplayOrder]
         });
-
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
@@ -97,6 +97,51 @@ export const Password = React.memo(
                     setInfoTextState(promptLabel);
                 }
             }
+        };
+
+        const updateFeedback = (value) => {
+            if (!props.feedback) {
+                return false;
+            }
+
+            let label = null;
+            let meter = null;
+
+            switch (testStrength(value)) {
+                case 1:
+                    label = weakLabel;
+                    meter = {
+                        strength: 'weak',
+                        width: '33.33%'
+                    };
+                    break;
+
+                case 2:
+                    label = mediumLabel;
+                    meter = {
+                        strength: 'medium',
+                        width: '66.66%'
+                    };
+                    break;
+
+                case 3:
+                    label = strongLabel;
+                    meter = {
+                        strength: 'strong',
+                        width: '100%'
+                    };
+                    break;
+
+                default:
+                    label = promptLabel;
+                    meter = null;
+                    break;
+            }
+
+            setMeterState(meter);
+            setInfoTextState(label);
+
+            return true;
         };
 
         const onPanelClick = (event) => {
@@ -173,44 +218,6 @@ export const Password = React.memo(
             const keyCode = e.code;
 
             if (props.feedback) {
-                let value = e.target.value;
-                let label = null;
-                let meter = null;
-
-                switch (testStrength(value)) {
-                    case 1:
-                        label = weakLabel;
-                        meter = {
-                            strength: 'weak',
-                            width: '33.33%'
-                        };
-                        break;
-
-                    case 2:
-                        label = mediumLabel;
-                        meter = {
-                            strength: 'medium',
-                            width: '66.66%'
-                        };
-                        break;
-
-                    case 3:
-                        label = strongLabel;
-                        meter = {
-                            strength: 'strong',
-                            width: '100%'
-                        };
-                        break;
-
-                    default:
-                        label = promptLabel;
-                        meter = null;
-                        break;
-                }
-
-                setMeterState(meter);
-                setInfoTextState(label);
-
                 if (!!keyCode && keyCode !== 'Escape' && !overlayVisibleState) {
                     show();
                 }
@@ -230,9 +237,17 @@ export const Password = React.memo(
         };
 
         const testStrength = (str) => {
-            if (strongCheckRegExp.current.test(str)) return 3;
-            else if (mediumCheckRegExp.current.test(str)) return 2;
-            else if (str.length) return 1;
+            if (!str || str.length === 0) {
+                return 0;
+            }
+
+            if (strongCheckRegExp.current.test(str)) {
+                return 3;
+            } else if (mediumCheckRegExp.current.test(str)) {
+                return 2;
+            } else if (str.length > 0) {
+                return 1;
+            }
 
             return 0;
         };
@@ -264,6 +279,10 @@ export const Password = React.memo(
             }
         }, [isFilled]);
 
+        useUpdateEffect(() => {
+            updateFeedback(props.value);
+        }, [props.value]);
+
         useMountEffect(() => {
             alignOverlay();
         });
@@ -272,11 +291,43 @@ export const Password = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
+        const onToggleMaskKeyDown = (event) => {
+            if (event.key === 'Enter' || event.code === 'Space') {
+                toggleMask();
+                event.preventDefault();
+            }
+        };
+
         const createIcon = () => {
             let icon;
 
-            const hideIconProps = mergeProps(ptm('hideIcon'));
-            const showIconProps = mergeProps(ptm('showIcon'));
+            const hideIconProps = mergeProps(
+                {
+                    key: 'hideIcon',
+                    role: 'switch',
+                    tabIndex: props.tabIndex || '0',
+                    className: cx('hideIcon'),
+                    onClick: toggleMask,
+                    onKeyDown: onToggleMaskKeyDown,
+                    'aria-label': ariaLabel('passwordHide') || 'Hide Password',
+                    'aria-checked': 'false'
+                },
+                ptm('hideIcon')
+            );
+
+            const showIconProps = mergeProps(
+                {
+                    key: 'showIcon',
+                    role: 'switch',
+                    tabIndex: props.tabIndex || '0',
+                    className: cx('showIcon'),
+                    onClick: toggleMask,
+                    onKeyDown: onToggleMaskKeyDown,
+                    'aria-label': ariaLabel('passwordShow') || 'Show Password',
+                    'aria-checked': 'true'
+                },
+                ptm('showIcon')
+            );
 
             if (unmaskedState) {
                 icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} />;
@@ -287,7 +338,7 @@ export const Password = React.memo(
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
             if (props.toggleMask) {
-                let content = <i onClick={toggleMask}> {eyeIcon} </i>;
+                let content = eyeIcon;
 
                 if (props.icon) {
                     const defaultIconOptions = {
@@ -412,6 +463,7 @@ export const Password = React.memo(
                 onFocus: onFocus,
                 onInput: onInput,
                 onKeyUp: onKeyup,
+                invalid: props.invalid,
                 style: props.inputStyle,
                 tabIndex: props.tabIndex,
                 tooltip: props.tooltip,

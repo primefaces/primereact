@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { mergeProps } from '../utils/Utils';
-import { DividerBase } from './DividerBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
+import { DividerBase } from './DividerBase';
 
 export const Divider = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = DividerBase.getProps(inProps, context);
 
@@ -27,7 +29,8 @@ export const Divider = React.forwardRef((inProps, ref) => {
         {
             ref: elementRef,
             style: sx('root'),
-            className: cx('root', { horizontal, vertical }),
+            className: classNames(props.className, cx('root', { horizontal, vertical })),
+            'aria-orientation': props.layout,
             role: 'separator'
         },
         DividerBase.getOtherProps(props),

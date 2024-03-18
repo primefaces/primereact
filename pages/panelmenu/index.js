@@ -2,10 +2,14 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/panelmenu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/panelmenu/basicdoc';
+import { CommandDoc } from '@/components/doc/panelmenu/commanddoc';
+import { ControlledDoc } from '@/components/doc/panelmenu/controlleddoc';
 import { ImportDoc } from '@/components/doc/panelmenu/importdoc';
 import { MultipleDoc } from '@/components/doc/panelmenu/multipledoc';
 import { PTDoc } from '@/components/doc/panelmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/panelmenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/panelmenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/panelmenu/templatedoc';
 import { StyledDoc } from '@/components/doc/panelmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/panelmenu/theming/tailwinddoc';
 
@@ -26,7 +30,26 @@ const PanelMenuDemo = () => {
             label: 'Multiple',
             component: MultipleDoc
         },
-
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

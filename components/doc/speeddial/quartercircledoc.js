@@ -2,10 +2,12 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { SpeedDial } from '@/components/lib/speeddial/SpeedDial';
 import { Toast } from '@/components/lib/toast/Toast';
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
 export function QuarterCircleDoc(props) {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Add',
@@ -29,10 +31,17 @@ export function QuarterCircleDoc(props) {
             }
         },
         {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
+            }
+        },
+        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -40,18 +49,20 @@ export function QuarterCircleDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} buttonClassName="p-button-help" />
-<SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} buttonClassName="p-button-help" />
-<SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} buttonClassName="p-button-help" />
-<SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} buttonClassName="p-button-help" />
+<SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
+<SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} />
+<SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} />
+<SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
+import { useRouter } from 'next/router';
 import { Toast } from 'primereact/toast';
 
 export default function QuarterCircleDemo() {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Add',
@@ -75,10 +86,17 @@ export default function QuarterCircleDemo() {
             }
         },
         {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
+            }
+        },
+        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -87,10 +105,10 @@ export default function QuarterCircleDemo() {
         <div className="card">
             <div style={{ position: 'relative', height: '500px' }}>
                 <Toast ref={toast} />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} buttonClassName="p-button-help" />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} buttonClassName="p-button-help" />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} buttonClassName="p-button-help" />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} buttonClassName="p-button-help" />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} />
             </div>
         </div>
     )
@@ -100,10 +118,12 @@ export default function QuarterCircleDemo() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import { useRouter } from 'next/router';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function QuarterCircleDemo() {
     const toast = useRef<Toast>(null);
+    const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Add',
@@ -127,10 +147,17 @@ export default function QuarterCircleDemo() {
             }
         },
         {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
+            }
+        },
+        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -139,15 +166,14 @@ export default function QuarterCircleDemo() {
         <div className="card">
             <div style={{ position: 'relative', height: '500px' }}>
                 <Toast ref={toast} />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} buttonClassName="p-button-help" />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} buttonClassName="p-button-help" />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} buttonClassName="p-button-help" />
-                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} buttonClassName="p-button-help" />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} />
+                <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} />
             </div>
         </div>
     )
-}
-        `
+}`
     };
 
     return (
@@ -160,10 +186,10 @@ export default function QuarterCircleDemo() {
             <div className="card">
                 <div style={{ position: 'relative', height: '500px' }}>
                     <Toast ref={toast} />
-                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} buttonClassName="p-button-help" />
-                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} buttonClassName="p-button-help" />
-                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} buttonClassName="p-button-help" />
-                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} buttonClassName="p-button-help" />
+                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
+                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="up-right" style={{ left: 0, bottom: 0 }} />
+                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-left" style={{ right: 0, top: 0 }} />
+                    <SpeedDial model={items} radius={120} type="quarter-circle" direction="down-right" style={{ left: 0, top: 0 }} />
                 </div>
             </div>
             <DocSectionCode code={code} />

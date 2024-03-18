@@ -534,6 +534,10 @@ interface CalendarBaseProps {
      */
     ariaLabelledBy?: string | undefined;
     /**
+     * ARIA label for screenreader support.
+     */
+    ariaLabel?: string | undefined;
+    /**
      * Whether to automatically manage layering.
      * @defaultValue true
      */
@@ -562,6 +566,11 @@ interface CalendarBaseProps {
      */
     decrementIcon?: IconType<CalendarProps> | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When specified, disables the component.
      * @defaultValue false
      */
@@ -583,6 +592,10 @@ interface CalendarBaseProps {
      * @defaultValue false
      */
     hideOnDateTimeSelect?: boolean | undefined;
+    /**
+     * Whether to hide the overlay on date selection is completed when selectionMode is range.
+     */
+    hideOnRangeSelection?: boolean | undefined;
     /**
      * Specifies 12 or 24 hour format.
      * @defaultValue 24

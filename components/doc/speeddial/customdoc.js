@@ -2,10 +2,12 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { SpeedDial } from '@/components/lib/speeddial/SpeedDial';
 import { Toast } from '@/components/lib/toast/Toast';
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
 export function CustomDoc(props) {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Add',
@@ -29,10 +31,17 @@ export function CustomDoc(props) {
             }
         },
         {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
+            }
+        },
+        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -45,10 +54,12 @@ export function CustomDoc(props) {
         javascript: `
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
+import { useRouter } from 'next/router';
 import { Toast } from 'primereact/toast';
 
 export default function CustomDemo() {
     const toast = useRef(null);
+    const router = useRouter();
     const items = [
         {
             label: 'Add',
@@ -72,10 +83,17 @@ export default function CustomDemo() {
             }
         },
         {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
+            }
+        },
+        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];
@@ -94,10 +112,12 @@ export default function CustomDemo() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import { useRouter } from 'next/router';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function CustomDemo() {
     const toast = useRef<Toast>(null);
+    const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Add',
@@ -121,10 +141,17 @@ export default function CustomDemo() {
             }
         },
         {
+            label: 'Upload',
+            icon: 'pi pi-upload',
+            command: () => {
+                router.push('/fileupload');
+            }
+        },
+        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
+                window.location.href = 'https://react.dev/';
             }
         }
     ];

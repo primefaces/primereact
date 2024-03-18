@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { CSSTransition } from '../csstransition/CSSTransition';
-import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMergeProps } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
@@ -15,6 +16,13 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
         });
     };
 
+    const onKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            props.hide();
+        }
+    };
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
 
@@ -22,6 +30,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
             {
                 className: cx('panel', { panelProps: props, context }),
                 style: props.panelStyle,
+                onKeyDown: onKeyDown,
                 onClick: props.onClick
             },
             getPTOptions('panel')
@@ -53,9 +62,11 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={ref} {...transitionProps}>
                 <div ref={ref} {...panelProps}>
+                    {props.firstHiddenFocusableElementOnOverlay}
                     {props.header}
                     <div {...wrapperProps}>{props.children}</div>
                     {props.footer}
+                    {props.lastHiddenFocusableElementOnOverlay}
                 </div>
             </CSSTransition>
         );

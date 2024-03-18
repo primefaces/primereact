@@ -124,7 +124,7 @@ export default function MultipleSelectionDemo() {
                 </p>
                 <p>In multiple selection mode, value binding should be a key-value pair where key is the node key and value is a boolean to indicate selection.</p>
             </DocSectionText>
-            <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={introCode} hideToggleCode import hideStackBlitz />
             <div className="card flex flex-column align-items-center justify-content-center">
                 <div className="flex align-items-center mb-4 gap-2">
                     <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e) => setMetaKey(e.value)} />

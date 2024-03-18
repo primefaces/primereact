@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useUpdateEffect } from '../hooks/Hooks';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { CurrentPageReport } from './CurrentPageReport';
 import { FirstPageLink } from './FirstPageLink';
 import { JumpToPageInput } from './JumpToPageInput';
@@ -15,6 +15,7 @@ import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = PaginatorBase.getProps(inProps, context);
         const metaData = {
@@ -26,13 +27,13 @@ export const Paginator = React.memo(
         useHandleStyle(PaginatorBase.css.styles, isUnstyled, { name: 'paginator' });
         const elementRef = React.useRef(null);
         const page = Math.floor(props.first / props.rows);
-        const pageCount = Math.ceil(props.totalRecords / props.rows);
+        const totalPages = Math.ceil(props.totalRecords / props.rows);
         const isFirstPage = page === 0;
-        const isLastPage = page === pageCount - 1;
-        const isEmpty = pageCount === 0;
+        const isLastPage = page === totalPages - 1;
+        const isEmpty = totalPages === 0;
 
         const calculatePageLinkBoundaries = () => {
-            let numberOfPages = pageCount;
+            let numberOfPages = totalPages;
             let visiblePages = Math.min(props.pageLinkSize, numberOfPages);
 
             //calculate range, keep current in middle if necessary
@@ -61,7 +62,7 @@ export const Paginator = React.memo(
         };
 
         const changePage = (first, rows) => {
-            let pc = pageCount;
+            let pc = totalPages;
             let p = Math.floor(first / rows);
 
             if (p >= 0 && p < pc) {
@@ -69,7 +70,7 @@ export const Paginator = React.memo(
                     first: first,
                     rows: rows,
                     page: p,
-                    pageCount: pc
+                    totalPages: pc
                 };
 
                 if (props.onPageChange) {
@@ -98,7 +99,7 @@ export const Paginator = React.memo(
         };
 
         const changePageToLast = (event) => {
-            changePage((pageCount - 1) * props.rows, props.rows);
+            changePage((totalPages - 1) * props.rows, props.rows);
             event.preventDefault();
         };
 
@@ -115,7 +116,7 @@ export const Paginator = React.memo(
 
         useUpdateEffect(() => {
             if (page > 0 && props.first >= props.totalRecords) {
-                changePage((pageCount - 1) * props.rows, props.rows);
+                changePage((totalPages - 1) * props.rows, props.rows);
             }
         }, [props.totalRecords]);
 
@@ -124,23 +125,85 @@ export const Paginator = React.memo(
 
             switch (key) {
                 case 'FirstPageLink':
-                    element = <FirstPageLink hostName="Paginator" key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = (
+                        <FirstPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToFirst}
+                            disabled={isFirstPage || isEmpty}
+                            template={template}
+                            firstPageLinkIcon={props.firstPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
                     break;
 
                 case 'PrevPageLink':
-                    element = <PrevPageLink hostName="Paginator" key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = (
+                        <PrevPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToPrev}
+                            disabled={isFirstPage || isEmpty}
+                            template={template}
+                            prevPageLinkIcon={props.prevPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
                     break;
 
                 case 'NextPageLink':
-                    element = <NextPageLink hostName="Paginator" key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = (
+                        <NextPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToNext}
+                            disabled={isLastPage || isEmpty}
+                            template={template}
+                            nextPageLinkIcon={props.nextPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
                     break;
 
                 case 'LastPageLink':
-                    element = <LastPageLink hostName="Paginator" key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = (
+                        <LastPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToLast}
+                            disabled={isLastPage || isEmpty}
+                            template={template}
+                            lastPageLinkIcon={props.lastPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
                     break;
 
                 case 'PageLinks':
-                    element = <PageLinks hostName="Paginator" key={key} value={updatePageLinks()} page={page} rows={props.rows} pageCount={pageCount} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />;
+                    element = (
+                        <PageLinks hostName="Paginator" key={key} page={page} totalPages={totalPages} totalRecords={props.totalRecords} rows={props.rows} value={updatePageLinks()} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />
+                    );
                     break;
 
                 case 'RowsPerPageDropdown':
@@ -150,7 +213,7 @@ export const Paginator = React.memo(
                             key={key}
                             value={props.rows}
                             page={page}
-                            pageCount={pageCount}
+                            totalPages={totalPages}
                             totalRecords={props.totalRecords}
                             options={props.rowsPerPageOptions}
                             onChange={onRowsChange}
@@ -172,17 +235,19 @@ export const Paginator = React.memo(
                             reportTemplate={props.currentPageReportTemplate}
                             key={key}
                             page={page}
-                            pageCount={pageCount}
-                            first={props.first}
-                            rows={props.rows}
+                            totalPages={totalPages}
                             totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            first={props.first}
                             template={template}
                             ptm={ptm}
                         />
                     );
                     break;
                 case 'JumpToPageInput':
-                    element = <JumpToPageInput hostName="Paginator" key={key} rows={props.rows} page={page} pageCount={pageCount} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />;
+                    element = (
+                        <JumpToPageInput hostName="Paginator" key={key} rows={props.rows} page={page} totalPages={totalPages} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />
+                    );
                     break;
 
                 default:
@@ -217,7 +282,7 @@ export const Paginator = React.memo(
             return null;
         };
 
-        if (!props.alwaysShow && pageCount <= 1) {
+        if (!props.alwaysShow && totalPages <= 1) {
             return null;
         } else {
             const leftContent = ObjectUtils.getJSXElement(props.leftContent, props);

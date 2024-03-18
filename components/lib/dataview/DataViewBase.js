@@ -4,7 +4,7 @@ import { classNames } from '../utils/Utils';
 const classes = {
     loadingIcon: 'p-dataview-loading-icon',
     loadingOverlay: 'p-dataview-loading-overlay p-component-overlay',
-    emptyMessage: 'p-col-12 col-12 p-dataview-emptymessage',
+    emptyMessage: 'p-dataview-emptymessage',
     header: 'p-dataview-header',
     footer: 'p-dataview-footer',
     content: 'p-dataview-content',
@@ -25,7 +25,7 @@ const styles = `
         position: relative;
         min-height: 4rem;
     }
-    
+
     .p-dataview .p-dataview-loading-overlay {
         position: absolute;
         z-index: 1;
@@ -69,6 +69,7 @@ export const DataViewBase = ComponentBase.extend({
         loadingIcon: null,
         gutter: false,
         itemTemplate: null,
+        listTemplate: null,
         onPage: null,
         children: undefined
     },
@@ -92,7 +93,7 @@ export const DataViewLayoutOptionsBase = ComponentBase.extend({
     },
     css: {
         classes: {
-            root: 'p-dataview-layout-options p-selectbutton p-buttonset',
+            root: 'p-dataview p-component p-dataview-layout-options p-selectbutton p-buttonset',
             listButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' }),
             gridButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' })
         }

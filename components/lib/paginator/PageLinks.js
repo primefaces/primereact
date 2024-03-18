@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
 
 export const PageLinks = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = PageLinksBase.getProps(inProps, context);
     const { ptm, cx } = props;
@@ -48,7 +50,8 @@ export const PageLinks = React.memo((inProps) => {
                     onClick: (e) => onPageLinkClick(e, pageLink),
                     className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
                     disabled: props.disabled,
-                    'aria-label': ariaLabel('pageLabel', { page: pageLink })
+                    'aria-label': ariaLabel('pageLabel', { page: pageLink }),
+                    'aria-current': pageLink - 1 === props.page ? 'true' : undefined
                 },
                 getPTOptions(pageLink, 'pageButton')
             );
@@ -71,6 +74,8 @@ export const PageLinks = React.memo((inProps) => {
                     page: pageLink - 1,
                     currentPage: props.page,
                     totalPages: props.pageCount,
+                    ariaLabel: ariaLabel('pageLabel', { page: pageLink }),
+                    ariaCurrent: pageLink - 1 === props.page ? 'true' : undefined,
                     element,
                     props
                 };

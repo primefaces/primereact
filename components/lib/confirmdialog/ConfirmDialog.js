@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { Dialog } from '../dialog/Dialog';
-import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
@@ -25,6 +26,7 @@ export const confirmDialog = (props = {}) => {
 
 export const ConfirmDialog = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ConfirmDialogBase.getProps(inProps, context);
 
@@ -33,8 +35,18 @@ export const ConfirmDialog = React.memo(
         const confirmProps = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
         const focusElementOnHide = React.useRef(null);
-        const getCurrentProps = () => confirmProps.current || props;
-        const getPropValue = (key) => (confirmProps.current || props)[key];
+
+        const getCurrentProps = () => {
+            let group = props.group;
+
+            if (confirmProps.current) {
+                group = confirmProps.current.group;
+            }
+
+            return Object.assign({}, props, confirmProps.current, { group });
+        };
+
+        const getPropValue = (key) => getCurrentProps()[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
 
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
@@ -46,7 +58,9 @@ export const ConfirmDialog = React.memo(
                 visible: visibleState
             }
         };
-        const { ptm, cx } = ConfirmDialogBase.setMetaData(metaData);
+        const { ptm, cx, isUnstyled } = ConfirmDialogBase.setMetaData(metaData);
+
+        useHandleStyle(ConfirmDialogBase.css.styles, isUnstyled, { name: 'confirmdialog' });
 
         const accept = () => {
             if (!isCallbackExecuting.current) {
@@ -65,12 +79,16 @@ export const ConfirmDialog = React.memo(
         };
 
         const show = () => {
-            setVisibleState(true);
-            isCallbackExecuting.current = false;
+            const currentProps = getCurrentProps();
 
-            // Remember the focused element before we opened the dialog
-            // so we can return focus to it once we close the dialog.
-            focusElementOnHide.current = document.activeElement;
+            if (currentProps.group === props.group) {
+                setVisibleState(true);
+                isCallbackExecuting.current = false;
+
+                // Remember the focused element before we opened the dialog
+                // so we can return focus to it once we close the dialog.
+                focusElementOnHide.current = document.activeElement;
+            }
         };
 
         const hide = (result = 'cancel') => {
@@ -156,6 +174,7 @@ export const ConfirmDialog = React.memo(
                     icon: getPropValue('acceptIcon'),
                     className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
                     onClick: accept,
+                    pt: ptm('acceptButton'),
                     unstyled: props.unstyled,
                     __parentMetadata: {
                         parent: metaData
@@ -228,7 +247,7 @@ export const ConfirmDialog = React.memo(
             );
 
             return (
-                <Dialog {...rootProps}>
+                <Dialog {...rootProps} content={inProps?.content}>
                     {icon}
                     <span {...messageProps}>{message}</span>
                 </Dialog>

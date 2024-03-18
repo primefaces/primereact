@@ -128,6 +128,24 @@ export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     menuIcon?: IconType<MenubarProps> | undefined;
     /**
+     * Used to define a string that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledBy?: string | undefined;
+    /**
+     * Callback to invoke when menu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when menu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
+    /**
      * The template of trailing element.
      */
     end?: React.ReactNode | ((props: MenubarProps) => React.ReactNode);

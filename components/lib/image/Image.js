@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
 import { EyeIcon } from '../icons/eye';
 import { RefreshIcon } from '../icons/refresh';
@@ -11,11 +11,12 @@ import { SearchPlusIcon } from '../icons/searchplus';
 import { TimesIcon } from '../icons/times';
 import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ImageBase.getProps(inProps, context);
 
@@ -27,23 +28,9 @@ export const Image = React.memo(
         const imageRef = React.useRef(null);
         const maskRef = React.useRef(null);
         const previewRef = React.useRef(null);
-        const previewClick = React.useRef(false);
-
-        useGlobalOnEscapeKey({
-            callback: () => {
-                if (props.closeOnEscape) {
-                    hide();
-                }
-            },
-            when: maskVisibleState,
-            priority: [
-                ESC_KEY_HANDLING_PRIORITIES.IMAGE,
-                // Assume that there could be only one image mask activated, so it's safe
-                // to provide one and the same priority all the time:
-                0
-            ]
-        });
-
+        const previewButton = React.useRef(null);
+        const zoomOutDisabled = scaleState <= 0.5;
+        const zoomInDisabled = scaleState >= 1.5;
         const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
             props,
             state: {
@@ -52,6 +39,19 @@ export const Image = React.memo(
                 rotate: rotateState,
                 scale: scaleState
             }
+        });
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: props.closeOnEscape && maskVisibleState,
+            priority: [
+                ESC_KEY_HANDLING_PRIORITIES.IMAGE,
+                // Assume that there could be only one image mask activated, so it's safe
+                // to provide one and the same priority all the time:
+                0
+            ]
         });
 
         useHandleStyle(ImageBase.css.styles, isUnstyled, { name: 'image' });
@@ -67,45 +67,74 @@ export const Image = React.memo(
         };
 
         const hide = () => {
-            if (!previewClick.current) {
-                setPreviewVisibleState(false);
-                DomHandler.unblockBodyScroll();
-                setRotateState(0);
-                setScaleState(1);
-            }
-
-            previewClick.current = false;
+            setPreviewVisibleState(false);
+            DomHandler.unblockBodyScroll();
+            setRotateState(0);
+            setScaleState(1);
         };
 
-        const onPreviewImageClick = () => {
-            previewClick.current = true;
+        const onMaskClick = (event) => {
+            const isActionbarTarget = [event.target.classList].includes('p-image-action') || event.target.closest('.p-image-action');
+
+            if (isActionbarTarget) {
+                return;
+            }
+
+            hide();
+        };
+
+        const onMaskKeydown = (event) => {
+            switch (event.code) {
+                case 'Escape':
+                    hide();
+                    setTimeout(() => {
+                        DomHandler.focus(previewButton.current);
+                    }, 200);
+                    event.preventDefault();
+
+                    break;
+
+                default:
+                    break;
+            }
         };
 
         const onDownload = () => {
             const { alt: name, src } = props;
 
             DomHandler.saveAs({ name, src });
-            previewClick.current = true;
         };
 
-        const rotateRight = () => {
+        const rotateRight = (event) => {
+            event.stopPropagation();
+
             setRotateState((prevRotate) => prevRotate + 90);
-            previewClick.current = true;
         };
 
-        const rotateLeft = () => {
+        const rotateLeft = (event) => {
+            event.stopPropagation();
+
             setRotateState((prevRotate) => prevRotate - 90);
-            previewClick.current = true;
         };
 
-        const zoomIn = () => {
-            setScaleState((prevScale) => prevScale + 0.1);
-            previewClick.current = true;
+        const zoomIn = (event) => {
+            event.stopPropagation();
+
+            setScaleState((prevScale) => {
+                if (zoomInDisabled) return prevScale;
+
+                return prevScale + 0.1;
+            });
         };
 
-        const zoomOut = () => {
-            setScaleState((prevScale) => prevScale - 0.1);
-            previewClick.current = true;
+        const zoomOut = (event) => {
+            event.stopPropagation();
+
+            setScaleState((prevScale) => {
+                if (zoomOutDisabled) return prevScale;
+
+                return prevScale - 0.1;
+            });
         };
 
         const onEntering = () => {
@@ -117,7 +146,7 @@ export const Image = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExiting = () => {
@@ -135,16 +164,20 @@ export const Image = React.memo(
         });
 
         const createPreview = () => {
+            const ariaLabel = localeOption('aria') ? localeOption('aria').zoomImage : undefined;
             const buttonProps = mergeProps(
                 {
+                    ref: previewButton,
                     className: cx('button'),
-                    onClick: show
+                    onClick: show,
+                    type: 'button',
+                    'aria-label': ariaLabel
                 },
                 ptm('button')
             );
 
             if (props.preview) {
-                return <div {...buttonProps}>{content}</div>;
+                return <button {...buttonProps}>{content}</button>;
             }
 
             return null;
@@ -152,8 +185,6 @@ export const Image = React.memo(
 
         const createElement = () => {
             const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
-            const zoomOutDisabled = scaleState <= 0.5;
-            const zoomInDisabled = scaleState >= 1.5;
             const downloadIconProps = mergeProps(ptm('downloadIcon'));
             const rotateRightIconProps = mergeProps(ptm('rotateRightIcon'));
             const rotateLeftIconProps = mergeProps(ptm('rotateLeftIcon'));
@@ -170,8 +201,11 @@ export const Image = React.memo(
             const maskProps = mergeProps(
                 {
                     ref: maskRef,
+                    role: 'dialog',
                     className: cx('mask'),
-                    onPointerUp: hide
+                    'aria-modal': maskVisibleState,
+                    onClick: onMaskClick,
+                    onKeyDown: onMaskKeydown
                 },
                 ptm('mask')
             );
@@ -195,8 +229,10 @@ export const Image = React.memo(
             const rotateRightButtonProps = mergeProps(
                 {
                     className: cx('rotateRightButton'),
-                    onPointerUp: rotateRight,
-                    type: 'button'
+                    onClick: rotateRight,
+                    type: 'button',
+                    'aria-label': localeOption('aria') ? localeOption('aria').rotateRight : undefined,
+                    'data-pc-group-section': 'action'
                 },
                 ptm('rotateRightButton')
             );
@@ -204,8 +240,10 @@ export const Image = React.memo(
             const rotateLeftButtonProps = mergeProps(
                 {
                     className: cx('rotateLeftButton'),
-                    onPointerUp: rotateLeft,
-                    type: 'button'
+                    onClick: rotateLeft,
+                    type: 'button',
+                    'aria-label': localeOption('aria') ? localeOption('aria').rotateLeft : undefined,
+                    'data-pc-group-section': 'action'
                 },
                 ptm('rotateLeftButton')
             );
@@ -214,9 +252,11 @@ export const Image = React.memo(
                 {
                     className: classNames(cx('zoomOutButton'), { 'p-disabled': zoomOutDisabled }),
                     style: { pointerEvents: 'auto' },
-                    onPointerUp: zoomOut,
+                    onClick: zoomOut,
                     type: 'button',
-                    disabled: zoomOutDisabled
+                    disabled: zoomOutDisabled,
+                    'aria-label': localeOption('aria') ? localeOption('aria').zoomOut : undefined,
+                    'data-pc-group-section': 'action'
                 },
                 ptm('zoomOutButton')
             );
@@ -225,9 +265,11 @@ export const Image = React.memo(
                 {
                     className: classNames(cx('zoomInButton'), { 'p-disabled': zoomInDisabled }),
                     style: { pointerEvents: 'auto' },
-                    onPointerUp: zoomIn,
+                    onClick: zoomIn,
                     type: 'button',
-                    disabled: zoomInDisabled
+                    disabled: zoomInDisabled,
+                    'aria-label': localeOption('aria') ? localeOption('aria').zoomIn : undefined,
+                    'data-pc-group-section': 'action'
                 },
                 ptm('zoomInButton')
             );
@@ -236,7 +278,10 @@ export const Image = React.memo(
                 {
                     className: cx('closeButton'),
                     type: 'button',
-                    'aria-label': localeOption('close')
+                    onClick: hide,
+                    'aria-label': localeOption('aria') ? localeOption('aria').close : undefined,
+                    autoFocus: true,
+                    'data-pc-group-section': 'action'
                 },
                 ptm('closeButton')
             );
@@ -246,7 +291,6 @@ export const Image = React.memo(
                     src: props.zoomSrc || props.src,
                     className: cx('preview'),
                     style: sx('preview', { rotateState, scaleState }),
-                    onPointerUp: onPreviewImageClick,
                     crossOrigin: crossOrigin,
                     referrerPolicy: referrerPolicy,
                     useMap: useMap,

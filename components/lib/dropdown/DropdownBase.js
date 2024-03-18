@@ -6,6 +6,7 @@ const classes = {
     root: ({ props, focusedState, overlayVisibleState }) =>
         classNames('p-dropdown p-component p-inputwrapper', {
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-focus': focusedState,
             'p-dropdown-clearable': props.showClear && !props.disabled,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
@@ -24,9 +25,12 @@ const classes = {
         classNames('p-dropdown-item-group', {
             'p-dropdown-item-empty': !optionGroupLabel || optionGroupLabel.length === 0
         }),
+    itemGroupLabel: 'p-dropdown-item-group-label',
     dropdownIcon: 'p-dropdown-trigger-icon p-clickable',
+    loadingIcon: 'p-dropdown-trigger-icon p-clickable',
     clearIcon: 'p-dropdown-clear-icon p-clickable',
     filterIcon: 'p-dropdown-filter-icon',
+    filterClearIcon: 'p-dropdown-filter-clear-icon',
     filterContainer: ({ clearIcon }) => classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon }),
     filterInput: 'p-dropdown-filter p-inputtext p-component',
     list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? 'p-dropdown-items' : 'p-dropdown-items'),
@@ -35,12 +39,16 @@ const classes = {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
-    item: ({ selected, disabled, label }) =>
+    item: ({ selected, disabled, label, index, focusedOptionIndex, highlightOnSelect }) =>
         classNames('p-dropdown-item', {
-            'p-highlight': selected,
+            'p-highlight': selected && highlightOnSelect,
             'p-disabled': disabled,
+            'p-focus': index === focusedOptionIndex,
             'p-dropdown-item-empty': !label || label.length === 0
         }),
+    itemLabel: 'p-dropdown-item-label',
+    checkIcon: 'p-dropdown-check-icon',
+    blankIcon: 'p-dropdown-blank-icon',
     wrapper: 'p-dropdown-items-wrapper',
     header: 'p-dropdown-header',
     footer: 'p-dropdown-footer',
@@ -159,6 +167,8 @@ export const DropdownBase = ComponentBase.extend({
         dropdownIcon: null,
         editable: false,
         emptyFilterMessage: null,
+        highlightOnSelect: true,
+        checkmark: false,
         emptyMessage: null,
         filter: false,
         filterBy: null,
@@ -173,7 +183,10 @@ export const DropdownBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemTemplate: null,
+        loading: false,
+        loadingIcon: null,
         maxLength: null,
         name: null,
         onBlur: null,
@@ -186,6 +199,8 @@ export const DropdownBase = ComponentBase.extend({
         onShow: null,
         optionDisabled: null,
         optionGroupChildren: 'items',
+        selectOnFocus: false,
+        autoOptionFocus: false,
         optionGroupLabel: null,
         optionGroupTemplate: null,
         optionLabel: null,

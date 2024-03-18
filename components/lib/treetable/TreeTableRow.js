@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 
 export const TreeTableRow = React.memo((props) => {
@@ -14,6 +15,7 @@ export const TreeTableRow = React.memo((props) => {
     const checkboxRef = React.useRef(null);
     const checkboxBoxRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
+    const mergeProps = useMergeProps();
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
 
     const getColumnProp = (column, name) => {
@@ -84,14 +86,15 @@ export const TreeTableRow = React.memo((props) => {
         event.stopPropagation();
     };
 
-    const expand = (event) => {
+    const expand = (event, navigateFocusToChild = false) => {
         let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
 
         expandedKeys[props.node.key] = true;
 
         props.onToggle({
             originalEvent: event,
-            value: expandedKeys
+            value: expandedKeys,
+            navigateFocusToChild
         });
 
         invokeToggleEvents(event, true);
@@ -273,60 +276,191 @@ export const TreeTableRow = React.memo((props) => {
         }
     };
 
-    const onKeyDown = (event) => {
-        if (event.target === elementRef.current) {
-            const rowElement = event.currentTarget;
+    const onKeyDown = (event, item) => {
+        switch (event.code) {
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-            switch (event.which) {
-                //down arrow
-                case 40:
-                    const nextRow = rowElement.nextElementSibling;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                    if (nextRow) {
-                        nextRow.focus();
-                    }
+            case 'ArrowLeft':
+                onArrowLeftKey(event);
+                break;
 
-                    event.preventDefault();
-                    break;
+            case 'ArrowRight':
+                onArrowRightKey(event);
+                break;
 
-                //up arrow
-                case 38:
-                    const previousRow = rowElement.previousElementSibling;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                    if (previousRow) {
-                        previousRow.focus();
-                    }
+            case 'End':
+                onEndKey(event);
+                break;
 
-                    event.preventDefault();
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                if (!DomHandler.isClickable(event.target)) {
+                    onEnterKey(event, item);
+                }
 
-                //right arrow
-                case 39:
-                    if (!expanded) {
-                        expand(event);
-                    }
+                break;
 
-                    event.preventDefault();
-                    break;
+            case 'Tab':
+                onTabKey(event);
+                break;
 
-                //left arrow
-                case 37:
-                    if (expanded) {
-                        collapse(event);
-                    }
+            default:
+                break;
+        }
+    };
 
-                    event.preventDefault();
-                    break;
+    const onArrowDownKey = (event) => {
+        const nextElementSibling = event.currentTarget.nextElementSibling;
 
-                //enter
-                case 13:
-                    onClick(event);
-                    event.preventDefault();
-                    break;
+        nextElementSibling && focusRowChange(event.currentTarget, nextElementSibling);
 
-                default:
-                    //no op
-                    break;
+        event.preventDefault();
+    };
+
+    const onArrowUpKey = (event) => {
+        const previousElementSibling = event.currentTarget.previousElementSibling;
+
+        previousElementSibling && focusRowChange(event.currentTarget, previousElementSibling);
+
+        event.preventDefault();
+    };
+
+    const onArrowRightKey = (event) => {
+        const ishiddenIcon = DomHandler.findSingle(event.currentTarget, 'button').style.visibility === 'hidden';
+        const togglerElement = DomHandler.findSingle(elementRef.current, '[data-pc-section="rowtoggler"]');
+
+        if (ishiddenIcon) return;
+
+        // !expanded && togglerElement.click();
+        !expanded && expand(event, true);
+
+        // this.$nextTick(() => {
+        //     this.onArrowDownKey(event);
+        // });
+
+        event.preventDefault();
+    };
+
+    const onArrowLeftKey = (event) => {
+        if (props.level === 0 && !expanded) {
+            return;
+        }
+
+        const currentTarget = event.currentTarget;
+        const ishiddenIcon = DomHandler.findSingle(currentTarget, 'button').style.visibility === 'hidden';
+        const togglerElement = DomHandler.findSingle(currentTarget, '[data-pc-section="rowtoggler"]');
+
+        if (expanded && !ishiddenIcon) {
+            // togglerElement.click();
+            collapse(event);
+
+            return;
+        }
+
+        const target = findBeforeClickableNode(currentTarget);
+
+        target && focusRowChange(currentTarget, target);
+    };
+
+    const onHomeKey = (event) => {
+        const findFirstElement = DomHandler.findSingle(event.currentTarget.parentElement, `tr[aria-level="${props.level + 1}"]`);
+
+        findFirstElement && DomHandler.focus(findFirstElement);
+
+        event.preventDefault();
+    };
+
+    const onEndKey = (event) => {
+        const nodes = DomHandler.find(event.currentTarget.parentElement, `tr[aria-level="${props.level + 1}"]`);
+        const findFirstElement = nodes[nodes.length - 1];
+
+        DomHandler.focus(findFirstElement);
+
+        event.preventDefault();
+    };
+
+    const onEnterKey = (event) => {
+        event.preventDefault();
+        setTabIndexForSelectionMode(event, nodeTouched.current);
+
+        if (props.selectionMode === 'checkbox') {
+            // this.toggleCheckbox();
+            onCheckboxChange(event);
+
+            return;
+        }
+
+        // this.$emit('node-click', {
+        //     originalEvent: event,
+        //     nodeTouched: nodeTouched.current,
+        //     node: this.node
+        // });
+
+        props.onRowClick(event, props.node);
+
+        nodeTouched.current = false;
+    };
+
+    const onTabKey = () => {
+        const rows = [...DomHandler.find(elementRef.current.parentElement, 'tr')];
+        const hasSelectedRow = rows.some((row) => DomHandler.getAttribute(row, 'data-p-highlight') || row.getAttribute('aria-checked') === 'true');
+
+        rows.forEach((row) => {
+            row.tabIndex = -1;
+        });
+
+        if (hasSelectedRow) {
+            const selectedNodes = rows.filter((node) => DomHandler.getAttribute(node, 'data-p-highlight') || node.getAttribute('aria-checked') === 'true');
+
+            selectedNodes[0].tabIndex = 0;
+
+            return;
+        }
+
+        rows[0].tabIndex = 0;
+    };
+
+    const focusRowChange = (firstFocusableRow, currentFocusedRow) => {
+        firstFocusableRow.tabIndex = '-1';
+        currentFocusedRow.tabIndex = '0';
+        DomHandler.focus(currentFocusedRow);
+    };
+
+    const findBeforeClickableNode = (node) => {
+        const prevNode = node.previousElementSibling;
+
+        if (prevNode) {
+            const prevNodeButton = prevNode.querySelector('button');
+
+            if (prevNodeButton && prevNodeButton.style.visibility !== 'hidden') {
+                return prevNode;
+            }
+
+            return findBeforeClickableNode(prevNode);
+        }
+
+        return null;
+    };
+
+    const setTabIndexForSelectionMode = (event, nodeTouched) => {
+        if (props.selectionMode !== null) {
+            const elements = [...DomHandler.find(elementRef.current.parentElement, 'tr')];
+
+            event.currentTarget.tabIndex = nodeTouched === false ? -1 : 0;
+
+            if (elements.every((element) => element.tabIndex === -1)) {
+                elements[0].tabIndex = 0;
             }
         }
     };
@@ -533,19 +667,22 @@ export const TreeTableRow = React.memo((props) => {
 
     const cells = props.columns.map(createCell);
     const children = createChildren();
-    let className = cx('row', { isSelected, rowProps: props });
+    let rowClassName = null;
 
     if (props.rowClassName) {
-        let rowClassName = props.rowClassName(props.node);
-
-        className = { ...className, ...rowClassName };
+        rowClassName = props.rowClassName(props.node);
     }
 
-    className = classNames(className, props.node.className);
     const rowProps = mergeProps(
         {
             tabIndex: 0,
-            className,
+            className: classNames(cx('row', { isSelected, rowProps: props })),
+            'aria-expanded': expanded,
+            'aria-level': props.level + 1,
+            'aria-posinset': props.ariaPosInSet,
+            'aria-setsize': props.ariaSetSize,
+            'aria-checked': isChecked(),
+            'aria-selected': isSelected(),
             style: props.node.style,
             onClick: (e) => onClick(e),
             onTouchEnd: (e) => onTouchEnd(e),
@@ -555,7 +692,10 @@ export const TreeTableRow = React.memo((props) => {
             onMouseLeave: (e) => onMouseLeave(e),
             'data-p-highlight': isSelected()
         },
-        getRowPTOptions('row')
+        getRowPTOptions('row'),
+        {
+            className: classNames(rowClassName, props.node.className) // #5983 must be last so all unstyled merging takes place first
+        }
     );
 
     return (

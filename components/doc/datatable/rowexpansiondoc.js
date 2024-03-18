@@ -6,17 +6,18 @@ import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Rating } from '@/components/lib/rating/Rating';
 import { Tag } from '@/components/lib/tag/Tag';
 import { Toast } from '@/components/lib/toast/Toast';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function RowExpansionDoc(props) {
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsWithOrdersSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const onRowExpand = (event) => {
         toast.current.show({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
@@ -501,28 +502,30 @@ export default function RowExpansionDemo() {
                     <i>&#123;'1004': true&#125;</i>. The <i>dataKey</i> alternative is more performant for large amounts of data.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <Toast ref={toast} />
-                <DataTable
-                    value={products}
-                    expandedRows={expandedRows}
-                    onRowToggle={(e) => setExpandedRows(e.data)}
-                    onRowExpand={onRowExpand}
-                    onRowCollapse={onRowCollapse}
-                    rowExpansionTemplate={rowExpansionTemplate}
-                    dataKey="id"
-                    header={header}
-                    tableStyle={{ minWidth: '60rem' }}
-                >
-                    <Column expander={allowExpansion} style={{ width: '5rem' }} />
-                    <Column field="name" header="Name" sortable />
-                    <Column header="Image" body={imageBodyTemplate} />
-                    <Column field="price" header="Price" sortable body={priceBodyTemplate} />
-                    <Column field="category" header="Category" sortable />
-                    <Column field="rating" header="Reviews" sortable body={ratingBodyTemplate} />
-                    <Column field="inventoryStatus" header="Status" sortable body={statusBodyTemplate} />
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <Toast ref={toast} />
+                    <DataTable
+                        value={products}
+                        expandedRows={expandedRows}
+                        onRowToggle={(e) => setExpandedRows(e.data)}
+                        onRowExpand={onRowExpand}
+                        onRowCollapse={onRowCollapse}
+                        rowExpansionTemplate={rowExpansionTemplate}
+                        dataKey="id"
+                        header={header}
+                        tableStyle={{ minWidth: '60rem' }}
+                    >
+                        <Column expander={allowExpansion} style={{ width: '5rem' }} />
+                        <Column field="name" header="Name" sortable />
+                        <Column header="Image" body={imageBodyTemplate} />
+                        <Column field="price" header="Price" sortable body={priceBodyTemplate} />
+                        <Column field="category" header="Category" sortable />
+                        <Column field="rating" header="Reviews" sortable body={ratingBodyTemplate} />
+                        <Column field="inventoryStatus" header="Status" sortable body={statusBodyTemplate} />
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

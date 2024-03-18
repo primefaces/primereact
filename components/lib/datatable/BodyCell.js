@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -10,11 +10,12 @@ import { PencilIcon } from '../icons/pencil';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
 export const BodyCell = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [editingState, setEditingState] = React.useState(props.editing);
     const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
     const [styleObjectState, setStyleObjectState] = React.useState({});
@@ -53,6 +54,10 @@ export const BodyCell = React.memo((props) => {
     const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
+    const isEditable = () => {
+        return getColumnProp('editor');
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
@@ -65,12 +70,9 @@ export const BodyCell = React.memo((props) => {
 
             selfClick.current = false;
         },
-        options: true
+        options: true,
+        when: isEditable()
     });
-
-    const isEditable = () => {
-        return getColumnProp('editor');
-    };
 
     const isSelected = () => {
         return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false;
@@ -172,13 +174,13 @@ export const BodyCell = React.memo((props) => {
 
             let valid = true;
 
-            if (cellEditValidator) {
+            if (!submit && cellEditValidator) {
                 valid = cellEditValidator(params);
             }
 
             if (valid) {
                 if (submit && onCellEditComplete) {
-                    onCellEditComplete(params);
+                    setTimeout(() => onCellEditComplete(params));
                 }
 
                 closeCell(event);
@@ -360,13 +362,11 @@ export const BodyCell = React.memo((props) => {
 
     const onKeyDown = (event) => {
         if (props.editMode !== 'row') {
-            if (event.which === 13 || event.which === 9) {
-                // tab || enter
+            if (event.code === 'Enter' || event.code === 'Tab') {
                 switchCellToViewMode(event, true);
             }
 
-            if (event.which === 27) {
-                // escape
+            if (event.code === 'Escape') {
                 switchCellToViewMode(event, false);
             }
         }
@@ -374,9 +374,8 @@ export const BodyCell = React.memo((props) => {
         if (props.allowCellSelection) {
             const { target, currentTarget: cell } = event;
 
-            switch (event.which) {
-                //left arrow
-                case 37:
+            switch (event.code) {
+                case 'ArrowLeft':
                     let prevCell = findPrevSelectableCell(cell);
 
                     if (prevCell) {
@@ -387,8 +386,7 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //right arrow
-                case 39:
+                case 'ArrowRight':
                     let nextCell = findNextSelectableCell(cell);
 
                     if (nextCell) {
@@ -399,8 +397,7 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //up arrow
-                case 38:
+                case 'ArrowUp':
                     let upCell = findUpSelectableCell(cell);
 
                     if (upCell) {
@@ -411,8 +408,7 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //down arrow
-                case 40:
+                case 'ArrowDown':
                     let downCell = findDownSelectableCell(cell);
 
                     if (downCell) {
@@ -423,8 +419,8 @@ export const BodyCell = React.memo((props) => {
                     event.preventDefault();
                     break;
 
-                //enter
-                case 13:
+                case 'Enter':
+                case 'NumpadEnter':
                     if (event.shiftKey || event.ctrlKey) {
                         // #5192 allow TextArea to add new lines
                     } else if (!DomHandler.isClickable(target)) {
@@ -434,8 +430,7 @@ export const BodyCell = React.memo((props) => {
 
                     break;
 
-                //space
-                case 32:
+                case 'Space':
                     if (!DomHandler.isClickable(target) && !target.readOnly) {
                         onClick(event);
                         event.preventDefault();
@@ -552,7 +547,9 @@ export const BodyCell = React.memo((props) => {
             field: field
         });
         const content = ObjectUtils.getJSXElement(getVirtualScrollerOption('loadingTemplate'), options);
-        const bodyCellProps = mergeProps(getColumnPTOptions('bodyCell'));
+        const bodyCellProps = mergeProps(getColumnPTOptions('bodyCell'), {
+            role: 'cell'
+        });
 
         return <td {...bodyCellProps}>{content}</td>;
     };
@@ -564,7 +561,6 @@ export const BodyCell = React.memo((props) => {
         const tabIndex = getTabIndex(cellSelected);
         const selectionMode = getColumnProp('selectionMode');
         const rowReorder = getColumnProp('rowReorder');
-        const rowEditor = getColumnProp('rowEditor');
         const header = getColumnProp('header');
         const body = getColumnProp('body');
         const editor = getColumnProp('editor');
@@ -572,6 +568,7 @@ export const BodyCell = React.memo((props) => {
         const align = getColumnProp('align');
         const value = resolveFieldData();
         const columnBodyOptions = { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
+        const rowEditor = ObjectUtils.getPropValue(getColumnProp('rowEditor'), props.rowData, columnBodyOptions);
         const expander = ObjectUtils.getPropValue(getColumnProp('expander'), props.rowData, columnBodyOptions);
         const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, columnBodyOptions);
         const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, columnBodyOptions);
@@ -702,6 +699,7 @@ export const BodyCell = React.memo((props) => {
                     {
                         type: 'button',
                         name: 'row-save',
+                        'aria-label': ariaLabel('saveEdit'),
                         onClick: rowEditorProps.onSaveClick,
                         className: rowEditorProps.saveClassName,
                         tabIndex: props.tabIndex,
@@ -714,9 +712,10 @@ export const BodyCell = React.memo((props) => {
                     {
                         type: 'button',
                         name: 'row-cancel',
+                        'aria-label': ariaLabel('cancelEdit'),
                         onClick: rowEditorProps.onCancelClick,
                         className: rowEditorProps.cancelClassName,
-                        tabIndex: props.tabIndex
+                        tabIndex: props.tabIndex,
                     },
                     getColumnPTOptions('rowEditorCancelButton')
                 );
@@ -744,6 +743,7 @@ export const BodyCell = React.memo((props) => {
                     {
                         type: 'button',
                         name: 'row-edit',
+                        'aria-label': ariaLabel('editRow'),
                         onClick: rowEditorProps.onInitClick,
                         className: rowEditorProps.initClassName,
                         tabIndex: props.tabIndex,

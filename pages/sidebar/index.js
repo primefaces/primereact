@@ -11,6 +11,7 @@ import { SizeDoc } from '@/components/doc/sidebar/sizedoc';
 import { TemplateDoc } from '@/components/doc/sidebar/templatedoc';
 import { StyledDoc } from '@/components/doc/sidebar/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/sidebar/theming/tailwinddoc';
+import { HeadlessDoc } from '@/components/doc/sidebar/headlessdoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -44,7 +45,11 @@ const SidebarDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-
+        {
+            id: 'headless',
+            label: 'Headless',
+            component: HeadlessDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

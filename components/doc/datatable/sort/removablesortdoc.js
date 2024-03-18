@@ -4,13 +4,14 @@ import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function RemovableSortDoc(props) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsMini().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const code = {
         basic: `
@@ -108,14 +109,16 @@ export default function RemovableSortDemo() {
                     When <i>removableSort</i> is present, the third click removes the sorting from the column.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
-                    <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
-                    <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
-                    <Column field="quantity" header="Quantity" sortable style={{ width: '25%' }}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} removableSort tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
+                        <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
+                        <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
+                        <Column field="quantity" header="Quantity" sortable style={{ width: '25%' }}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

@@ -33,7 +33,7 @@ export default function AnimationsDoc() {
     const closeBtnRef = useRef(null);
 
     return (
-        <div className="card flex flex-column align-items-center h-16rem">
+        <div className="card flex flex-column align-items-center">
             <div>
                 <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="fadein">
                     <Button ref={openBtnRef} label="Show" className="mr-2" />
@@ -62,7 +62,7 @@ export default function AnimationsDoc() {
     const closeBtnRef = useRef<Button>(null);
 
     return (
-        <div className="card flex flex-column align-items-center h-16rem">
+        <div className="card flex flex-column align-items-center">
             <div>
                 <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="fadein">
                     <Button ref={openBtnRef} label="Show" className="mr-2" />
@@ -90,7 +90,7 @@ export default function AnimationsDoc() {
                     properties. In addition in case the target is an overlay, <i>hideOnOutsideClick</i> would be handy to hide the target if outside of the popup is clicked.
                 </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center h-16rem">
+            <div className="card flex flex-column align-items-center">
                 <div>
                     <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="fadein">
                         <Button ref={openBtnRef} label="Show" className="mr-2" />

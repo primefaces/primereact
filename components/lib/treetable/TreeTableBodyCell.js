@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const TreeTableBodyCell = (props) => {
     const [editingState, setEditingState] = React.useState(false);
@@ -11,6 +11,7 @@ export const TreeTableBodyCell = (props) => {
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
     const tabIndexTimeout = React.useRef(null);
+    const mergeProps = useMergeProps();
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = (column) => ColumnBase.getCProps(column);
     const { ptm, ptmo, cx } = props.ptCallbacks;
@@ -75,11 +76,12 @@ export const TreeTableBodyCell = (props) => {
             }
 
             selfClick.current = false;
-        }
+        },
+        when: getColumnProp('editor')
     });
 
     const onClick = (event) => {
-        if (props.editor && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
+        if (getColumnProp('editor') && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
             selfClick.current = true;
 
             const params = getCellCallbackParams(event);
@@ -168,7 +170,7 @@ export const TreeTableBodyCell = (props) => {
     };
 
     React.useEffect(() => {
-        if (elementRef.current && props.editor) {
+        if (elementRef.current && getColumnProp('editor')) {
             clearTimeout(tabIndexTimeout.current);
 
             if (editingState) {
@@ -199,10 +201,11 @@ export const TreeTableBodyCell = (props) => {
 
     const bodyClassName = ObjectUtils.getPropValue(props.bodyClassName, props.node.data, { field: props.field, rowIndex: props.rowIndex, props: props });
     const style = props.bodyStyle || props.style;
+    const columnEditor = getColumnProp('editor');
     let content;
 
     if (editingState) {
-        if (props.editor) content = ObjectUtils.getJSXElement(props.editor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
+        if (columnEditor) content = ObjectUtils.getJSXElement(columnEditor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
         else throw new Error('Editor is not found on column.');
     } else {
         if (props.body) content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
@@ -221,7 +224,7 @@ export const TreeTableBodyCell = (props) => {
 
     const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
     /* eslint-disable */
-    const editorKeyHelper = props.editor && (
+    const editorKeyHelper = columnEditor && (
         <a {...editorKeyHelperProps}>
             <span {...editorKeyHelperLabelProps}></span>
         </a>
@@ -230,6 +233,7 @@ export const TreeTableBodyCell = (props) => {
     /* eslint-enable */
     const bodyCellProps = mergeProps(
         {
+            role: 'cell',
             className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState, align })),
             style,
             onClick: (e) => onClick(e),

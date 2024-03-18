@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = BreadCrumbBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);
@@ -28,16 +29,23 @@ export const BreadCrumb = React.memo(
                 return;
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
                     item
                 });
             }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        };
+
+        const isCurrent = (url) => {
+            const lastPath = typeof window !== 'undefined' ? window.location.pathname : '';
+
+            return url === lastPath ? 'page' : undefined;
         };
 
         const createHome = (index) => {
@@ -61,6 +69,7 @@ export const BreadCrumb = React.memo(
                         href: url || '#',
                         className: cx('action'),
                         'aria-disabled': disabled,
+                        'aria-current': isCurrent(url),
                         target,
                         onClick: (event) => itemClick(event, home)
                     },
@@ -114,7 +123,8 @@ export const BreadCrumb = React.memo(
             const key = idState + '_sep_' + index;
             const separatorIconProps = mergeProps(
                 {
-                    className: cx('separatorIcon')
+                    className: cx('separatorIcon'),
+                    'aria-hidden': 'true'
                 },
                 ptm('separatorIcon')
             );
@@ -150,6 +160,7 @@ export const BreadCrumb = React.memo(
                     href: item.url || '#',
                     className: cx('action'),
                     target: item.target,
+                    'aria-current': isCurrent(item.url),
                     onClick: (event) => itemClick(event, item),
                     'aria-disabled': item.disabled
                 },
@@ -233,8 +244,7 @@ export const BreadCrumb = React.memo(
                 id: props.id,
                 ref: elementRef,
                 className: cx('root'),
-                style: props.style,
-                'aria-label': 'Breadcrumb'
+                style: props.style
             },
             BreadCrumbBase.getOtherProps(props),
             ptm('root')
@@ -242,11 +252,11 @@ export const BreadCrumb = React.memo(
 
         return (
             <nav {...rootProps}>
-                <ul {...menuProps}>
+                <ol {...menuProps}>
                     {home}
                     {separator}
                     {items}
-                </ul>
+                </ol>
             </nav>
         );
     })

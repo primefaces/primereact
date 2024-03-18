@@ -2,12 +2,12 @@ import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener } from '../hooks/Hooks';
+import { useEventListener, useUpdateEffect, useMergeProps } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { TreeTableBase } from './TreeTableBase';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
@@ -15,6 +15,7 @@ import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = TreeTableBase.getProps(inProps, context);
     const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
@@ -61,6 +62,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const columnSortable = React.useRef(null);
     const columnSortFunction = React.useRef(null);
     const columnField = React.useRef(null);
+    const childFocusEvent = React.useRef(null);
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
         type: 'mousemove',
@@ -82,10 +84,16 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     });
 
     const onToggle = (event) => {
+        const { originalEvent, value, navigateFocusToChild } = event;
+
         if (props.onToggle) {
-            props.onToggle(event);
+            props.onToggle({ originalEvent, value });
         } else {
-            setExpandedKeysState(event.value);
+            if (navigateFocusToChild) {
+                childFocusEvent.current = originalEvent;
+            }
+
+            setExpandedKeysState(value);
         }
     };
 
@@ -864,6 +872,19 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return data;
     };
 
+    useUpdateEffect(() => {
+        if (childFocusEvent.current) {
+            const nodeElement = childFocusEvent.current.target;
+            const nextElementSibling = nodeElement.nextElementSibling;
+
+            if (nextElementSibling) {
+                nodeElement.tabIndex = '-1';
+                nextElementSibling.tabIndex = '0';
+                DomHandler.focus(nextElementSibling);
+            }
+        }
+    }, [expandedKeysState]);
+
     React.useImperativeHandle(ref, () => ({
         props,
         filter,
@@ -944,7 +965,6 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 selectionKeys={props.selectionKeys}
                 selectionMode={props.selectionMode}
                 togglerTemplate={props.togglerTemplate}
-                tableProps={props}
                 value={value}
             />
         );
@@ -1026,6 +1046,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
         const tableProps = mergeProps(
             {
+                role: 'table',
                 style: props.tableStyle,
                 className: classNames(props.tableClassName, ptCallbacks.cx('table'))
             },
@@ -1136,6 +1157,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
     const rootProps = mergeProps(
         {
+            role: 'table',
             id: props.id,
             className: classNames(props.className, ptCallbacks.cx('root', { isRowSelectionMode })),
             style: props.style,

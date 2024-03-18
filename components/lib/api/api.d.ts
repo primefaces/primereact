@@ -131,6 +131,8 @@ export type InputStyleType = 'outlined' | 'filled';
 
 export type AppendToType = 'self' | HTMLElement | undefined | null | (() => HTMLElement);
 
+export type StyleContainerType = ShadowRoot | HTMLElement | undefined | null;
+
 /**
  * Filter match modes for DataTable filter menus.
  */
@@ -157,6 +159,11 @@ export interface APIOptions {
      * This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self.
      */
     appendTo?: AppendToType;
+    /**
+     * This option allows `useStyle` to insert dynamic CSS styles into a specific container. This is useful when styles need to be scoped such as in a Shadow DOM.
+     * @defaultValue document.head
+     */
+    styleContainer?: StyleContainerType;
     /**
      * ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself.
      */
@@ -199,10 +206,10 @@ export interface APIOptions {
      */
     ripple?: boolean;
     /**
-     * ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself.
+     * ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself. Each property is optional, so when autoZIndex is enabled you can set the z-index for any component type, and the rest will be calculated automatically.
      * @defaultValue { modal: 1100, overlay: 1000, menu: 1000, tooltip: 1100, toast: 1200}
      */
-    zIndex?: ZIndexOptions;
+    zIndex?: Partial<ZIndexOptions>;
     /**
      * This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag.
      */
@@ -229,6 +236,10 @@ export interface APIOptions {
      * Sets the "appendTo" state of the context.
      */
     setAppendTo?: Dispatch<SetStateAction<AppendToType>>;
+    /**
+     * Sets the "styleContainer" state of the context.
+     */
+    setStyleContainer?: Dispatch<SetStateAction<StyleContainerType>>;
     /**
      * Sets the "autoZIndex" state of the context.
      */
@@ -486,7 +497,7 @@ export interface PrimeReactPTOptions {
     /**
      * Custom passthrough(pt) options for MultiStateCheckbox.
      */
-    multisatecheckbox?: MultiStateCheckboxPassThroughOptions;
+    multistatecheckbox?: MultiStateCheckboxPassThroughOptions;
     /**
      * Custom passthrough(pt) options for OrderList.
      */
@@ -832,10 +843,6 @@ export interface LocaleOptions {
      */
     close?: string;
     /**
-     * Completed
-     */
-    completed?: string;
-    /**
      * Pending
      */
     pending?: string;
@@ -872,7 +879,7 @@ export interface LocaleOptions {
      */
     chooseMonth?: string;
     /**
-     *Choose Date
+     * Choose Date
      */
     chooseDate?: string;
     /**
@@ -880,7 +887,7 @@ export interface LocaleOptions {
      */
     prevDecade?: string;
     /**
-     *
+     * Next Decade
      */
     nextDecade?: string;
     /**
@@ -900,15 +907,15 @@ export interface LocaleOptions {
      */
     nextMonth?: string;
     /**
-     *Previous Hour
+     * Previous Hour
      */
     prevHour?: string;
     /**
-     *Next Hour
+     * Next Hour
      */
     nextHour?: string;
     /**
-     *Previous Minute
+     * Previous Minute
      */
     prevMinute?: string;
     /**
@@ -924,19 +931,19 @@ export interface LocaleOptions {
      */
     nextSecond?: string;
     /**
-     * PM
+     * AM
      */
     am?: string;
     /**
-     * AM
+     * PM
      */
     pm?: string;
     /**
-     * Today
+     * Today (Calendar date only)
      */
     today?: string;
     /**
-     * Now
+     * Now (Calendar using time)
      */
     now?: string;
     /**
@@ -968,29 +975,16 @@ export interface LocaleOptions {
      */
     passwordPrompt?: string;
     /**
-     * No results found
+     * No available options
      */
     emptyFilterMessage?: string;
     /**
-     * {0} results are available
-     */
-    searchMessage?: string;
-    /**
-     * {0} items selected
-     */
-    selectionMessage?: string;
-    /**
-     * No selected item
-     */
-    emptySelectionMessage?: string;
-    /**
      * No results found
      */
-    emptySearchMessage?: string;
-    /**
-     * No available options
-     */
     emptyMessage?: string;
+    /**
+     * ARIA labels
+     */
     aria?: {
         /**
          * True
@@ -1012,8 +1006,8 @@ export interface LocaleOptions {
          * {star} stars
          */
         stars?: string;
-        /*
-         * All items selected
+        /**
+         *  All items selected
          */
         selectAll?: string;
         /**
@@ -1024,7 +1018,7 @@ export interface LocaleOptions {
          * Close
          */
         close?: string;
-        /*
+        /**
          * Previous
          */
         previous?: string;
@@ -1036,7 +1030,7 @@ export interface LocaleOptions {
          * Navigation
          */
         navigation?: string;
-        /*
+        /**
          * Scroll Top
          */
         scrollTop?: string;
@@ -1064,7 +1058,7 @@ export interface LocaleOptions {
          * Move to Source
          */
         moveToSource?: string;
-        /*
+        /**
          * Move All to Target
          */
         moveAllToTarget?: string;
@@ -1076,6 +1070,10 @@ export interface LocaleOptions {
          * Page {page}
          */
         pageLabel?: string;
+        /**
+         * Please enter one time password character {0}
+         */
+        otpLabel?: string;
         /**
          * First Page
          */
@@ -1097,18 +1095,18 @@ export interface LocaleOptions {
          */
         rowsPerPageLabel?: string;
         /**
-         * Jump to Page Dropdown
+         *  Jump to Page Dropdown
          */
         jumpToPageDropdownLabel?: string;
         /**
-         * Jump to Page Input
+         *  Jump to Page Input
          */
         jumpToPageInputLabel?: string;
         /**
-         * Row Selected
+         *  Row Selected
          */
         selectRow?: string;
-        /*
+        /**
          * Row Unselected
          */
         unselectRow?: string;
@@ -1137,7 +1135,7 @@ export interface LocaleOptions {
          */
         filterConstraint?: string;
         /**
-         * Edit Row
+         *  Edit Row
          */
         editRow?: string;
         /**
@@ -1434,7 +1432,9 @@ export declare enum MessageSeverity {
     SUCCESS = 'success',
     INFO = 'info',
     WARN = 'warn',
-    ERROR = 'error'
+    ERROR = 'error',
+    SECONDARY = 'secondary',
+    CONTRAST = 'contrast'
 }
 
 // Filter

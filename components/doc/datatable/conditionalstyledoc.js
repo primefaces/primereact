@@ -3,15 +3,16 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { classNames } from '@/components/lib/utils/Utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
+import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ConditionalStyleDoc(props) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
+    const loadDemoData = () => {
         ProductService.getProductsSmall().then((data) => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
 
     const rowClass = (data) => {
         return {
@@ -155,14 +156,16 @@ export default function ConditionalStyleDemo() {
                     Particular rows and cells can be styled based on conditions. The <i>rowClassName</i> receives a row data as a parameter to return a style class for a row whereas cells are customized using the <i>body</i> template.
                 </p>
             </DocSectionText>
-            <div className="card">
-                <DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
-                </DataTable>
-            </div>
+            <DeferredDemo onLoad={loadDemoData}>
+                <div className="card">
+                    <DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
+                    </DataTable>
+                </div>
+            </DeferredDemo>
             <DocSectionCode code={code} service={['ProductService']} />
         </>
     );

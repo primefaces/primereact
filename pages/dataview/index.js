@@ -6,7 +6,6 @@ import { ImportDoc } from '@/components/doc/dataview/importdoc';
 import { LayoutDoc } from '@/components/doc/dataview/layoutdoc';
 import { LoadingDoc } from '@/components/doc/dataview/loadingdoc';
 import { PaginationDoc } from '@/components/doc/dataview/paginationdoc';
-import { PrimeFlexDoc } from '@/components/doc/dataview/primeflexdoc';
 import { PTDoc } from '@/components/doc/dataview/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dataview/pt/wireframe';
 import { SortingDoc } from '@/components/doc/dataview/sortingdoc';
@@ -19,11 +18,6 @@ const DataViewDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
-        },
-        {
-            id: 'primeflex',
-            label: 'PrimeFlex',
-            component: PrimeFlexDoc
         },
         {
             id: 'basic',

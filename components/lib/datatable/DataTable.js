@@ -2,12 +2,12 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
@@ -16,6 +16,7 @@ import { TableHeader } from './TableHeader';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
+    const mergeProps = useMergeProps();
     const props = DataTableBase.getProps(inProps, context);
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
@@ -67,6 +68,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const dropPosition = React.useRef(null);
     const styleElement = React.useRef(null);
     const responsiveStyleElement = React.useRef(null);
+    const beforeResizeStyleElement = React.useRef(null);
+
     const columnWidthsState = React.useRef(null);
     const tableWidthState = React.useRef(null);
     const resizeColumn = React.useRef(null);
@@ -504,6 +507,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const onColumnResizeStart = (e) => {
+        createBeforeResizeStyleElement();
         const { originalEvent: event, column } = e;
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
@@ -519,7 +523,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
         elementRef.current.setAttribute('data-p-unselectable-text', true);
-        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
         resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -579,8 +583,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         resizeColumn.current = null;
         resizeColumnElement.current = null;
         elementRef.current.setAttribute('data-p-unselectable-text', 'true');
-        !ptCallbacks.isUnstyled() && DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
-
+        destroyBeforeResizeStyleElement();
         unbindColumnResizeEvents();
     };
 
@@ -602,7 +605,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
             innerHTML += `
-                ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
+                 ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
                     ${style}
@@ -747,7 +750,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let headers = DomHandler.find(tableRef.current, '[data-pc-section="thead"] > tr > th');
 
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
-
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
                 const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
@@ -791,43 +793,53 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const createBeforeResizeStyleElement = () => {
+        beforeResizeStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
+        let innerHTML = `
+[data-pc-name="datatable"][${attributeSelector.current}] {
+    user-select:none;
+}
+        `;
+
+        beforeResizeStyleElement.current.innerHTML = innerHTML;
+    };
+
     const createStyleElement = () => {
-        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
     };
 
     const createResponsiveStyle = () => {
         if (!responsiveStyleElement.current) {
-            responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+            responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
-            let tableSelector = `[data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
-            let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > ${tableSelector}`;
-            let gridLinesSelector = `[data-pc-name="datatable"][${attributeSelector.current}][data-showgridlines="true"] > ${tableSelector}`;
-
+            let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+            let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
+            let gridLinesSelector = `.p-datatable[${attributeSelector.current}].p-datatable-gridlines > ${tableSelector}`;
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
-    ${selector} > [data-pc-section="thead"] > tr > th,
-    ${selector} > [data-pc-section="tfoot"] > tr > td {
+    ${selector} > .p-datatable-thead > tr > th,
+    ${selector} > .p-datatable-tfoot > tr > td {
         display: none;
     }
 
-    ${selector} > [data-pc-section="tbody"] > tr > td {
+    ${selector} > .p-datatable-tbody > tr > td {
         display: flex;
         width: 100%;
         align-items: center;
         justify-content: space-between;
     }
 
-    ${selector} > [data-pc-section="tbody"] > tr > td:not(:last-child) {
+    ${selector} > .p-datatable-tbody > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    ${gridLinesSelector} > [data-pc-section="tbody"] > tr > td:last-child {
+    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    ${selector} > [data-pc-section="tbody"] > tr > td > [data-pc-section="columntitle"] {
+    ${selector} > .p-datatable-tbody > tr > td > .p-column-title {
         display: block;
     }
 }
@@ -843,6 +855,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const destroyStyleElement = () => {
         styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
+    };
+
+    const destroyBeforeResizeStyleElement = () => {
+        beforeResizeStyleElement.current = DomHandler.removeInlineStyle(beforeResizeStyleElement.current);
     };
 
     const onPageChange = (e) => {
@@ -1084,7 +1100,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const filterLocal = (data, filters) => {
         if (!data) return;
 
-        let activeFilters = getActiveFilters(filters) || {};
+        let activeFilters = filters ? getActiveFilters(filters) : {};
 
         let columns = getColumns();
         let filteredValue = [];
@@ -1470,6 +1486,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         unbindColumnResizeEvents();
         destroyStyleElement();
         destroyResponsiveStyle();
+        destroyBeforeResizeStyleElement();
     });
 
     React.useImperativeHandle(ref, () => ({

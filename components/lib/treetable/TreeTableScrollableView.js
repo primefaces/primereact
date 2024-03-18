@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useMountEffect } from '../hooks/Hooks';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableScrollableView = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -10,6 +10,7 @@ export const TreeTableScrollableView = React.memo((props) => {
     const scrollTableRef = React.useRef(null);
     const scrollFooterRef = React.useRef(null);
     const scrollFooterBoxRef = React.useRef(null);
+    const mergeProps = useMergeProps();
     const { ptm, cx, sx } = props.ptCallbacks;
 
     const getPTOptions = (key, options) => {
@@ -85,6 +86,8 @@ export const TreeTableScrollableView = React.memo((props) => {
         const scrollBarWidth = DomHandler.calculateScrollbarWidth(el);
 
         if (!props.frozen) {
+            const scrollBarWidth = DomHandler.calculateScrollbarWidth();
+
             scrollHeaderBoxRef.current.style.marginRight = scrollBarWidth + 'px';
 
             if (scrollFooterBoxRef.current) {

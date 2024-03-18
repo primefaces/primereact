@@ -69,6 +69,8 @@ export const SplitButtonBase = ComponentBase.extend({
         id: null,
         label: null,
         icon: null,
+        autoZIndex: true,
+        baseZIndex: 0,
         loading: false,
         loadingIcon: null,
         model: null,

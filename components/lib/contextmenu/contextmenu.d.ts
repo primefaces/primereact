@@ -72,6 +72,20 @@ export interface ContextMenuPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: ContextMenuPassThroughTransitionType;
+    /**
+     * Index of the element in tabbing order.
+     */
+    tabIndex?: number | undefined;
+    /**
+     * Callback to invoke when ContextMenu receives focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onFocus?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke when ContextMenu loses focus.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onBlur?(event: React.SyntheticEvent): void;
 }
 
 /**
@@ -129,6 +143,14 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @defaultValue true
      */
     autoZIndex?: boolean | undefined;
+    /**
+     * Used to define a string that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledBy?: string | undefined;
     /**
      * Base zIndex value to use in layering.
      * @defaultValue 0

@@ -7,7 +7,11 @@ import { ImportDoc } from '@/components/doc/contextmenu/importdoc';
 import { PTDoc } from '@/components/doc/contextmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/contextmenu/pt/wireframe';
 import { StyledDoc } from '@/components/doc/contextmenu/theming/styleddoc';
+import { TemplateDoc } from '@/components/doc/contextmenu/templatedoc';
 import { TailwindDoc } from '@/components/doc/contextmenu/theming/tailwinddoc';
+import { CommandDoc } from '@/components/doc/contextmenu/commanddoc';
+import { DataTableDoc } from '@/components/doc/contextmenu/datatabledoc';
+import { RouterDoc } from '@/components/doc/contextmenu/routerdoc';
 
 const ContextMenuDemo = () => {
     const docs = [
@@ -26,7 +30,26 @@ const ContextMenuDemo = () => {
             label: 'Document',
             component: DocumentDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
+        {
+            id: 'datatable',
+            label: 'DataTable',
+            component: DataTableDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

@@ -2,10 +2,13 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/tieredmenu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/tieredmenu/basicdoc';
+import { CommandDoc } from '@/components/doc/tieredmenu/commanddoc';
 import { ImportDoc } from '@/components/doc/tieredmenu/importdoc';
 import { PopupDoc } from '@/components/doc/tieredmenu/popupdoc';
 import { PTDoc } from '@/components/doc/tieredmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tieredmenu/pt/wireframe';
+import { RouterDoc } from '@/components/doc/tieredmenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/tieredmenu/templatedoc';
 import { StyledDoc } from '@/components/doc/tieredmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tieredmenu/theming/tailwinddoc';
 
@@ -26,7 +29,21 @@ const TieredMenuDemo = () => {
             label: 'Popup',
             component: PopupDoc
         },
-
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'command',
+            label: 'Command',
+            component: CommandDoc
+        },
+        {
+            id: 'router',
+            label: 'Router',
+            component: RouterDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

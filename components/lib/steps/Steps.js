@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
-import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = StepsBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
         const elementRef = React.useRef(null);
+        const listRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = StepsBase.setMetaData({
             props,
@@ -37,10 +39,6 @@ export const Steps = React.memo(
                 });
             }
 
-            if (!item.url) {
-                event.preventDefault();
-            }
-
             if (item.command) {
                 item.command({
                     originalEvent: event,
@@ -48,6 +46,114 @@ export const Steps = React.memo(
                     index
                 });
             }
+
+            if (!item.url) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        };
+
+        const onItemKeyDown = (event, item, index) => {
+            if (props.readOnly) {
+                return;
+            }
+
+            switch (event.code) {
+                case 'ArrowRight':
+                    navigateToNextItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowLeft':
+                    navigateToPrevItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'Home':
+                    navigateToFirstItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    navigateToLastItem(event.target);
+                    event.preventDefault();
+                    break;
+
+                case 'Tab':
+                    //no op
+                    break;
+
+                case 'Enter':
+                case 'Space':
+                    itemClick(event, item, index);
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const navigateToNextItem = (target) => {
+            const nextItem = findNextItem(target);
+
+            nextItem && setFocusToMenuitem(target, nextItem);
+        };
+
+        const navigateToPrevItem = (target) => {
+            const prevItem = findPrevItem(target);
+
+            prevItem && setFocusToMenuitem(target, prevItem);
+        };
+
+        const navigateToFirstItem = (target) => {
+            const firstItem = findFirstItem(target);
+
+            firstItem && setFocusToMenuitem(target, firstItem);
+        };
+
+        const navigateToLastItem = (target) => {
+            const lastItem = findLastItem(target);
+
+            lastItem && setFocusToMenuitem(target, lastItem);
+        };
+
+        const findNextItem = (item) => {
+            const nextItem = item.parentElement.nextElementSibling;
+
+            return nextItem ? nextItem.children[0] : null;
+        };
+
+        const findPrevItem = (item) => {
+            const prevItem = item.parentElement.previousElementSibling;
+
+            return prevItem ? prevItem.children[0] : null;
+        };
+
+        const findFirstItem = () => {
+            const firstSibling = DomHandler.findSingle(listRef.current, '[data-pc-section="menuitem"]');
+
+            return firstSibling ? firstSibling.children[0] : null;
+        };
+
+        const findLastItem = () => {
+            const siblings = DomHandler.find(listRef.current, '[data-pc-section="menuitem"]');
+
+            return siblings ? siblings[siblings.length - 1].children[0] : null;
+        };
+
+        const setFocusToMenuitem = (target, focusableItem) => {
+            target.tabIndex = '-1';
+            focusableItem.tabIndex = '0';
+
+            setTimeout(() => focusableItem.focus(), 0);
+        };
+
+        const setFocusToFirstItem = () => {
+            const firstItem = findFirstItem();
+
+            firstItem.tabIndex = '0';
+            firstItem.focus();
         };
 
         const createItem = (item, index) => {
@@ -58,7 +164,6 @@ export const Steps = React.memo(
             const key = item.id || idState + '_' + index;
             const active = index === props.activeIndex;
             const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
-            const tabIndex = disabled ? -1 : '';
 
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
@@ -90,10 +195,11 @@ export const Steps = React.memo(
                 {
                     href: item.url || '#',
                     className: cx('action'),
-                    role: 'presentation',
+                    tabIndex: '-1',
+                    onFocus: (event) => event.stopPropagation(),
                     target: item.target,
-                    onClick: (event) => itemClick(event, item, index),
-                    tabIndex
+                    onKeyDown: (event) => onItemKeyDown(event, item, index),
+                    onClick: (event) => itemClick(event, item, index)
                 },
                 ptm('action')
             );
@@ -113,9 +219,9 @@ export const Steps = React.memo(
                     labelClassName: 'p-steps-title',
                     numberClassName: 'p-steps-number',
                     iconClassName,
+                    'aria-current': active,
                     element: content,
                     props,
-                    tabIndex,
                     active,
                     disabled
                 };
@@ -128,10 +234,7 @@ export const Steps = React.memo(
                     key,
                     id: key,
                     className: cx('menuitem', { active, disabled, item }),
-                    style: item.style,
-                    role: 'tab',
-                    'aria-selected': active,
-                    'aria-expanded': active
+                    style: item.style
                 },
                 ptm('menuitem')
             );
@@ -142,7 +245,14 @@ export const Steps = React.memo(
         const createItems = () => {
             const menuProps = mergeProps(
                 {
-                    role: 'tablist'
+                    ref: listRef,
+                    tabIndex: props.readOnly ? null : '0',
+                    onFocus: () => {
+                        if (!props.readOnly) {
+                            setFocusToFirstItem();
+                        }
+                    },
+                    onBlur: () => setFocusToFirstItem
                 },
                 ptm('menu')
             );
@@ -150,7 +260,7 @@ export const Steps = React.memo(
             if (props.model) {
                 const items = props.model.map(createItem);
 
-                return <ul {...menuProps}>{items}</ul>;
+                return <ol {...menuProps}>{items}</ol>;
             }
 
             return null;
@@ -180,7 +290,7 @@ export const Steps = React.memo(
 
         const items = createItems();
 
-        return <div {...rootProps}>{items}</div>;
+        return <nav {...rootProps}>{items}</nav>;
     })
 );
 

@@ -2,6 +2,7 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/dropdown/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/dropdown/basicdoc';
+import { CheckmarkDoc } from '@/components/doc/dropdown/checkmarkdoc';
 import { ClearIconDoc } from '@/components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '@/components/doc/dropdown/disableddoc';
 import { EditableDoc } from '@/components/doc/dropdown/editabledoc';
@@ -12,6 +13,8 @@ import { HookFormDoc } from '@/components/doc/dropdown/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/dropdown/groupdoc';
 import { ImportDoc } from '@/components/doc/dropdown/importdoc';
 import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
+import { LazyVirtualScrollDoc } from '@/components/doc/dropdown/lazyvirtualscrolldoc';
+import { LoadingDoc } from '@/components/doc/dropdown/loadingdoc';
 import { PTDoc } from '@/components/doc/dropdown/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dropdown/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/dropdown/templatedoc';
@@ -30,6 +33,11 @@ const DropdownDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'checkmark',
+            label: 'Checkmark',
+            component: CheckmarkDoc
         },
         {
             id: 'editable',
@@ -57,9 +65,19 @@ const DropdownDemo = () => {
             component: ClearIconDoc
         },
         {
+            id: 'loadingstate',
+            label: 'Loading State',
+            component: LoadingDoc
+        },
+        {
             id: 'virtualscroll',
             label: 'Virtual Scroll',
             component: VirtualScrollDoc
+        },
+        {
+            id: 'lazyvirtualscroll',
+            label: 'Lazy Virtual Scroll',
+            component: LazyVirtualScrollDoc
         },
         {
             id: 'floatlabel',

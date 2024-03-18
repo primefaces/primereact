@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
 
@@ -69,7 +71,7 @@ export const InputText = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root', { isFilled })),
+                className: cx('root', { isFilled }),
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onKeyDown: onKeyDown,
@@ -82,7 +84,7 @@ export const InputText = React.memo(
         return (
             <>
                 <input ref={elementRef} {...rootProps} />
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

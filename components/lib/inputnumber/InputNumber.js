@@ -1,17 +1,18 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -29,7 +30,6 @@ export const InputNumber = React.memo(
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
         const lastValue = React.useRef(null);
-
         const numberFormat = React.useRef(null);
         const groupChar = React.useRef(null);
         const prefixChar = React.useRef(null);
@@ -40,12 +40,11 @@ export const InputNumber = React.memo(
         const _minusSign = React.useRef(null);
         const _currency = React.useRef(null);
         const _decimal = React.useRef(null);
+        const _decimalSeparator = React.useRef(null);
         const _suffix = React.useRef(null);
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
-
         const isFocusedByClick = React.useRef(false);
-
         const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
@@ -71,17 +70,25 @@ export const InputNumber = React.memo(
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
-            _group.current = getGroupingExpression();
-            _minusSign.current = getMinusSignExpression();
-            _currency.current = getCurrencyExpression();
-            _decimal.current = getDecimalExpression();
-            _suffix.current = getSuffixExpression();
-            _prefix.current = getPrefixExpression();
+            _group.current = getGroupingExpression(); // regular expression /[,]/g, /[.]/g
+            _minusSign.current = getMinusSignExpression(); // regular expression /[-]/g
+            _currency.current = getCurrencyExpression(); // regular expression for currency (e.g. /[$]/g, /[€]/g, /[]/g and more)
+            _decimal.current = getDecimalExpression(); // regular expression /[,]/g, /[.]/g, /[]/g
+            _decimalSeparator.current = getDecimalSeparator(); // current decimal separator  '.', ','
+            _suffix.current = getSuffixExpression(); // regular expression for suffix (e.g. /℃/g)
+            _prefix.current = getPrefixExpression(); // regular expression for prefix (e.g. /\ days/g)
             _index.current = (d) => index.get(d);
         };
 
         const escapeRegExp = (text) => {
             return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        };
+
+        /**
+         * get decimal separator in current locale
+         */
+        const getDecimalSeparator = () => {
+            return new Intl.NumberFormat(_locale, { useGrouping: false }).format(1.1).trim().replace(_numeral.current, '');
         };
 
         const getDecimalExpression = () => {
@@ -315,6 +322,12 @@ export const InputNumber = React.memo(
                 return;
             }
 
+            if (event.shiftKey || event.altKey) {
+                isSpecialChar.current = true;
+
+                return;
+            }
+
             if (props.onKeyDown) {
                 props.onKeyDown(event);
 
@@ -326,36 +339,26 @@ export const InputNumber = React.memo(
 
             lastValue.current = event.target.value;
 
-            if (event.shiftKey || event.altKey) {
-                isSpecialChar.current = true;
-
-                return;
-            }
-
             let selectionStart = event.target.selectionStart;
             let selectionEnd = event.target.selectionEnd;
             let inputValue = event.target.value;
             let newValueStr = null;
 
-            if (event.altKey) {
-                event.preventDefault();
-            }
-
-            switch (event.which) {
+            switch (event.code) {
                 //up
-                case 38:
+                case 'ArrowUp':
                     spin(event, 1);
                     event.preventDefault();
                     break;
 
                 //down
-                case 40:
+                case 'ArrowDown':
                     spin(event, -1);
                     event.preventDefault();
                     break;
 
                 //left
-                case 37:
+                case 'ArrowLeft':
                     if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                         event.preventDefault();
                     }
@@ -363,7 +366,7 @@ export const InputNumber = React.memo(
                     break;
 
                 //right
-                case 39:
+                case 'ArrowRight':
                     if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                         event.preventDefault();
                     }
@@ -371,8 +374,9 @@ export const InputNumber = React.memo(
                     break;
 
                 //enter and tab
-                case 13:
-                case 9:
+                case 'Tab':
+                case 'NumpadEnter':
+                case 'Enter':
                     newValueStr = validateValue(parseValue(inputValue));
                     inputRef.current.value = formatValue(newValueStr);
                     inputRef.current.setAttribute('aria-valuenow', newValueStr);
@@ -380,7 +384,7 @@ export const InputNumber = React.memo(
                     break;
 
                 //backspace
-                case 8:
+                case 'Backspace':
                     event.preventDefault();
 
                     if (selectionStart === selectionEnd) {
@@ -428,7 +432,7 @@ export const InputNumber = React.memo(
                     break;
 
                 // del
-                case 46:
+                case 'Delete':
                     event.preventDefault();
 
                     if (selectionStart === selectionEnd) {
@@ -469,38 +473,35 @@ export const InputNumber = React.memo(
 
                     break;
 
-                default:
+                case 'End':
+                    event.preventDefault();
+
+                    if (!ObjectUtils.isEmpty(props.max)) {
+                        updateModel(event, props.max);
+                    }
+
                     break;
-            }
-        };
+                case 'Home':
+                    event.preventDefault();
 
-        const onInputKeyUp = (event) => {
-            if (props.disabled || props.readOnly) {
-                return;
-            }
+                    if (!ObjectUtils.isEmpty(props.min)) {
+                        updateModel(event, props.min);
+                    }
 
-            if (props.onKeyUp) {
-                props.onKeyUp(event);
+                    break;
 
-                // do not continue if the user defined event wants to prevent
-                if (event.defaultPrevented) {
-                    return;
-                }
-            }
+                default:
+                    event.preventDefault();
 
-            const code = event.which || event.keyCode;
+                    let char = event.key;
+                    const _isDecimalSign = isDecimalSign(char);
+                    const _isMinusSign = isMinusSign(char);
 
-            if (code !== 13) {
-                // to submit a form
-                event.preventDefault();
-            }
+                    if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                        insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                    }
 
-            const char = String.fromCharCode(code);
-            const _isDecimalSign = isDecimalSign(char);
-            const _isMinusSign = isMinusSign(char);
-
-            if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
-                insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                    break;
             }
         };
 
@@ -536,8 +537,16 @@ export const InputNumber = React.memo(
             return false;
         };
 
+        const replaceDecimalSeparator = (val) => {
+            if (isFloat(val)) {
+                return val.toString().replace(/\.(?=[^.]*$)/, _decimalSeparator.current);
+            }
+
+            return val;
+        };
+
         const isDecimalSign = (char) => {
-            if (_decimal.current.test(char)) {
+            if (_decimal.current.test(char) || isFloat(char)) {
                 _decimal.current.lastIndex = 0;
 
                 return true;
@@ -548,6 +557,15 @@ export const InputNumber = React.memo(
 
         const isDecimalMode = () => {
             return props.mode === 'decimal';
+        };
+
+        const isFloat = (val) => {
+            let formatter = new Intl.NumberFormat(_locale, getOptions());
+            let parseVal = parseValue(formatter.format(val));
+
+            if (parseVal === null) return false;
+
+            return parseVal % 1 !== 0;
         };
 
         const getDecimalCharIndexes = (val) => {
@@ -639,6 +657,10 @@ export const InputNumber = React.memo(
             }
         };
 
+        const replaceSuffix = (value) => {
+            return value ? value.replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '') : value;
+        };
+
         const insertText = (value, text, start, end) => {
             let textSplit = text === '.' ? text : text.split('.');
 
@@ -647,7 +669,7 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + value.slice(end) : value || formatValue(text);
+                return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + replaceSuffix(value).slice(end) : value || formatValue(text);
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
@@ -657,7 +679,11 @@ export const InputNumber = React.memo(
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
             } else {
-                return value.slice(0, start) + text + value.slice(end);
+                const selectionValue = value.slice(start, end);
+                // Fix: if the suffix starts with a space, the input will be cleared after pasting
+                const space = /\s$/.test(selectionValue) ? ' ' : '';
+
+                return value.slice(0, start) + text + space + value.slice(end);
             }
         };
 
@@ -863,7 +889,13 @@ export const InputNumber = React.memo(
                     inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 } else if (newLength === currentLength) {
                     if (operation === 'insert' || operation === 'delete-back-single') {
-                        const newSelectionEnd = selectionEnd + Number(isDecimalSign(value) || isDecimalSign(insertedValueStr));
+                        let newSelectionEnd = selectionEnd;
+
+                        if (insertedValueStr === '0') {
+                            newSelectionEnd = selectionEnd + 1;
+                        } else {
+                            newSelectionEnd = newSelectionEnd + Number(isDecimalSign(value) || isDecimalSign(insertedValueStr));
+                        }
 
                         inputEl.setSelectionRange(newSelectionEnd, newSelectionEnd);
                     } else if (operation === 'delete-single') {
@@ -923,7 +955,9 @@ export const InputNumber = React.memo(
 
                 _decimal.current.lastIndex = 0;
 
-                return decimalCharIndex !== -1 ? val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex) : val1;
+                const newVal1 = replaceDecimalSeparator(val1).split(_decimal.current)[0].replace(_suffix.current, '').trim();
+
+                return decimalCharIndex !== -1 ? newVal1 + val2.slice(decimalCharIndex) : val1;
             }
 
             return val1;
@@ -934,7 +968,7 @@ export const InputNumber = React.memo(
                 const valueSplit = value.split(_decimal.current);
 
                 if (valueSplit.length === 2) {
-                    return valueSplit[1].replace(_suffix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '').length;
+                    return replaceSuffix(valueSplit[1]).length;
                 }
             }
 
@@ -1002,7 +1036,9 @@ export const InputNumber = React.memo(
         };
 
         const changeValue = () => {
-            updateInputValue(validateValueByLimit(props.value));
+            const val = validateValueByLimit(props.value);
+
+            updateInputValue(props.format ? val : replaceDecimalSeparator(val));
 
             const newValue = validateValue(props.value);
 
@@ -1078,7 +1114,6 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
                     onPointerDown={onInputPointerDown}
@@ -1213,7 +1248,7 @@ export const InputNumber = React.memo(
                     {inputElement}
                     {buttonGroup}
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

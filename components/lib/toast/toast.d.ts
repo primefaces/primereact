@@ -85,7 +85,7 @@ export interface ToastMessageOptions {
      * Severity level of the message.
      * @defaultValue info
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
+    severity?: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast' | undefined;
     /**
      * Summary content of the message.
      */
@@ -217,10 +217,38 @@ export interface ToastMessage {
 }
 
 /**
+ * Defines current content values and refs for headless development.
+ * @see {@link ContentProps.message}
+ */
+interface ContentPropsMessage {
+    /**
+     * Summary of the toast.
+     * @readonly
+     */
+    summary: string;
+    /**
+     * Detail of the toast.
+     * @readonly
+     */
+    detail: string;
+}
+
+/**
+ * Defines current content values and refs for headless development.
+ * @see {@link ToastProps.content}
+ */
+interface ContentProps {
+    /**
+     * Toast's props values.
+     */
+    message: ContentPropsMessage;
+}
+
+/**
  * Defines valid properties in Toast component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
+export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt' | 'content'> {
     /**
      * Base zIndex value to add to initial layering of PrimeReact components which start from 1000.
      * @defaultValue 0
@@ -239,7 +267,7 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue self
      */
-    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Callback to invoke when an active tab is collapsed by clicking on the header.
      * @param {ToastMessage} message - Clicked message
@@ -273,6 +301,12 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {PassThroughOptions}
      */
     ptOptions?: PassThroughOptions;
+    /**
+     * Specifies a custom content for the toast. For more complex markup, use the "content" slot instead.
+     * @param {ContentProps} props - The values of toast.
+     * @return {React.ReactNode}
+     */
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
 }
 
 /**

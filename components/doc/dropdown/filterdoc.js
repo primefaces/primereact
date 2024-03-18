@@ -165,6 +165,7 @@ export default function FilterDemo() {
                     optionLabel="name"
                     placeholder="Select a Country"
                     filter
+                    showClear
                     valueTemplate={selectedCountryTemplate}
                     itemTemplate={countryOptionTemplate}
                     className="w-full md:w-14rem"

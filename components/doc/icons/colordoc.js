@@ -24,7 +24,7 @@ export function ColorDoc(props) {
                 <i className="pi pi-search" style={{ color: 'var(--primary-color)' }}></i>
                 <i className="pi pi-user" style={{ color: '#708090' }}></i>
             </div>
-            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );
 }

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { useEventListener, useMergeProps } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { SliderBase } from './SliderBase';
 
 export const Slider = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = SliderBase.getProps(inProps, context);
 
@@ -18,6 +19,7 @@ export const Slider = React.memo(
         const initY = React.useRef(0);
         const barWidth = React.useRef(0);
         const barHeight = React.useRef(0);
+        const touchId = React.useRef();
         const value = props.range ? props.value || [props.min, props.max] : props.value || props.min || 0;
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
@@ -68,6 +70,8 @@ export const Slider = React.memo(
 
                 props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: newValue });
 
+                touchId.current = undefined;
+
                 unbindDocumentMouseMoveListener();
                 unbindDocumentMouseUpListener();
                 unbindDocumentTouchMoveListener();
@@ -82,6 +86,10 @@ export const Slider = React.memo(
         };
 
         const onTouchStart = (event, index) => {
+            if (event.changedTouches && event.changedTouches[0]) {
+                touchId.current = event.changedTouches[0].identifier;
+            }
+
             bindDocumentTouchMoveListener();
             bindDocumentTouchEndListener();
             onDragStart(event, index);
@@ -95,10 +103,39 @@ export const Slider = React.memo(
             handleIndex.current = index;
             const key = event.key;
 
-            if (key === 'ArrowRight' || key === 'ArrowUp') {
-                spin(event, 1);
-            } else if (key === 'ArrowLeft' || key === 'ArrowDown') {
-                spin(event, -1);
+            switch (key) {
+                case 'ArrowRight':
+                case 'ArrowUp':
+                    spin(event, 1);
+                    break;
+
+                case 'ArrowLeft':
+                case 'ArrowDown':
+                    spin(event, -1);
+                    break;
+
+                case 'PageUp':
+                    spin(event, 10);
+                    event.preventDefault();
+                    break;
+
+                case 'PageDown':
+                    spin(event, -10);
+                    event.preventDefault();
+                    break;
+
+                case 'Home':
+                    spin(event, -value);
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    spin(event, props.max);
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
             }
         };
 
@@ -126,11 +163,19 @@ export const Slider = React.memo(
             barHeight.current = elementRef.current.offsetHeight;
         };
 
+        const trackTouch = (event) => {
+            const _event = Array.from(event.changedTouches ?? []).find((t) => t.identifier === touchId.current) || event;
+
+            return {
+                pageX: _event.pageX,
+                pageY: _event.pageY
+            };
+        };
+
         const setValue = (event) => {
             let handleValue;
 
-            let pageX = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageX : event.pageX;
-            let pageY = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageY : event.pageY;
+            const { pageX, pageY } = trackTouch(event);
 
             if (!pageX || !pageY) {
                 return;

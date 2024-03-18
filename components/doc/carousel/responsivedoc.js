@@ -10,17 +10,22 @@ export function ResponsiveDoc(props) {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1199px',
-            numVisible: 1,
-            numScroll: 1
-        },
-        {
-            breakpoint: '991px',
+            breakpoint: '1400px',
             numVisible: 2,
             numScroll: 1
         },
         {
+            breakpoint: '1199px',
+            numVisible: 3,
+            numScroll: 1
+        },
+        {
             breakpoint: '767px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '575px',
             numVisible: 1,
             numScroll: 1
         }
@@ -80,17 +85,22 @@ export default function ResponsiveDemo() {
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
-            breakpoint: '1199px',
-            numVisible: 1,
-            numScroll: 1
-        },
-        {
-            breakpoint: '991px',
+            breakpoint: '1400px',
             numVisible: 2,
             numScroll: 1
         },
         {
+            breakpoint: '1199px',
+            numVisible: 3,
+            numScroll: 1
+        },
+        {
             breakpoint: '767px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '575px',
             numVisible: 1,
             numScroll: 1
         }
@@ -166,17 +176,22 @@ export default function ResponsiveDemo() {
     const [products, setProducts] = useState<Product[]>([]);
     const responsiveOptions: CarouselResponsiveOption[] = [
         {
-            breakpoint: '1199px',
-            numVisible: 1,
-            numScroll: 1
-        },
-        {
-            breakpoint: '991px',
+            breakpoint: '1400px',
             numVisible: 2,
             numScroll: 1
         },
         {
+            breakpoint: '1199px',
+            numVisible: 3,
+            numScroll: 1
+        },
+        {
             breakpoint: '767px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '575px',
             numVisible: 1,
             numScroll: 1
         }

@@ -8,70 +8,70 @@ const styles = `
         display: inline-flex;
         max-width: 100%;
     }
-    
+
     .p-calendar .p-inputtext {
         flex: 1 1 auto;
         width: 1%;
     }
-    
+
     .p-calendar-w-btn-right .p-inputtext {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
-    
+
     .p-calendar-w-btn-right .p-datepicker-trigger {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    
+
     .p-calendar-w-btn-left .p-inputtext {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    
+
     .p-calendar-w-btn-left .p-datepicker-trigger {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
-    
+
     /* Fluid */
     .p-fluid .p-calendar {
         display: flex;
     }
-    
+
     .p-fluid .p-calendar .p-inputtext {
         width: 1%;
     }
-    
+
     /* Datepicker */
     .p-calendar .p-datepicker {
         min-width: 100%;
     }
-    
+
     .p-datepicker {
         width: auto;
         position: absolute;
         top: 0;
         left: 0;
     }
-    
+
     .p-datepicker-inline {
         display: inline-block;
         position: static;
         overflow-x: auto;
     }
-    
+
     /* Header */
     .p-datepicker-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    
+
     .p-datepicker-header .p-datepicker-title {
         margin: 0 auto;
     }
-    
+
     .p-datepicker-prev,
     .p-datepicker-next {
         cursor: pointer;
@@ -81,27 +81,27 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     /* Multiple Month DatePicker */
     .p-datepicker-multiple-month .p-datepicker-group-container {
         display: flex;
     }
-    
+
     .p-datepicker-multiple-month .p-datepicker-group-container .p-datepicker-group {
         flex: 1 1 auto;
     }
-    
+
     /* Multiple Month DatePicker */
     .p-datepicker-multiple-month .p-datepicker-group-container {
         display: flex;
     }
-    
+
     /* DatePicker Table */
     .p-datepicker table {
         width: 100%;
         border-collapse: collapse;
     }
-    
+
     .p-datepicker td > span {
         display: flex;
         justify-content: center;
@@ -111,7 +111,7 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     /* Month Picker */
     .p-monthpicker-month {
         width: 33.3%;
@@ -122,21 +122,21 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     /*  Button Bar */
     .p-datepicker-buttonbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    
+
     /* Time Picker */
     .p-timepicker {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    
+
     .p-timepicker button {
         display: flex;
         align-items: center;
@@ -145,13 +145,13 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     .p-timepicker > div {
         display: flex;
         align-items: center;
         flex-direction: column;
     }
-    
+
     /* Touch UI */
     .p-datepicker-touch-ui,
     .p-calendar .p-datepicker-touch-ui {
@@ -161,7 +161,7 @@ const styles = `
         min-width: 80vw;
         transform: translate(-50%, -50%);
     }
-    
+
     /* Year Picker */
     .p-yearpicker-year {
         width: 50%;
@@ -176,13 +176,15 @@ const styles = `
 `;
 
 const classes = {
-    root: ({ props, focusedState, isFilled }) =>
+    root: ({ props, focusedState, isFilled, panelVisible }) =>
         classNames('p-calendar p-component p-inputwrapper', {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-calendar-timeonly': props.timeOnly,
             'p-inputwrapper-filled': props.value || isFilled,
-            'p-inputwrapper-focus': focusedState
+            'p-inputwrapper-focus': focusedState,
+            'p-focus': focusedState || panelVisible
         }),
     dropdownButton: 'p-datepicker-trigger',
     buttonbar: 'p-datepicker-buttonbar',
@@ -230,6 +232,7 @@ export const CalendarBase = ComponentBase.extend({
         __TYPE: 'Calendar',
         appendTo: null,
         ariaLabelledBy: null,
+        ariaLabel: null,
         autoZIndex: true,
         autoFocus: false,
         baseZIndex: 0,
@@ -247,6 +250,7 @@ export const CalendarBase = ComponentBase.extend({
         formatDateTime: null,
         headerTemplate: null,
         hideOnDateTimeSelect: false,
+        hideOnRangeSelection: false,
         hourFormat: '24',
         icon: null,
         iconPos: 'right',
@@ -258,6 +262,7 @@ export const CalendarBase = ComponentBase.extend({
         inputMode: 'none',
         inputRef: null,
         inputStyle: null,
+        invalid: false,
         keepInvalid: false,
         locale: null,
         mask: null,

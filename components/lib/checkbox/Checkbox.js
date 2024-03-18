@@ -1,96 +1,78 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = CheckboxBase.getProps(inProps, context);
-        const [focusedState, setFocusedState] = React.useState(false);
         const { ptm, cx, isUnstyled } = CheckboxBase.setMetaData({
             props,
-            state: {
-                focused: focusedState
-            },
             context: {
                 checked: props.checked === props.trueValue,
                 disabled: props.disabled
             }
         });
 
-        useHandleStyle(CheckboxBase.css.styles, isUnstyled, { name: 'checkbox', styled: true });
+        useHandleStyle(CheckboxBase.css.styles, isUnstyled, { name: 'checkbox' });
+
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
-        const onClick = (event) => {
-            if (props.disabled || props.readOnly) {
+        const isChecked = () => {
+            return props.checked === props.trueValue;
+        };
+
+        const onChange = (event) => {
+            if (props.disabled || props.readonly) {
                 return;
             }
 
-            if (props.onChange || props.onClick) {
+            if (props.onChange) {
                 const checked = isChecked();
-                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement || event.target instanceof Object;
-                const isInputToggled = event.target === inputRef.current;
-                const isCheckboxToggled = checkboxClicked && event.target.checked !== checked;
-
-                if (isInputToggled || isCheckboxToggled) {
-                    const value = checked ? props.falseValue : props.trueValue;
-                    const eventData = {
-                        originalEvent: event,
+                const value = checked ? props.falseValue : props.trueValue;
+                const eventData = {
+                    originalEvent: event,
+                    value: props.value,
+                    checked: value,
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
+                    target: {
+                        type: 'checkbox',
+                        name: props.name,
+                        id: props.id,
                         value: props.value,
-                        checked: value,
-                        stopPropagation: () => {
-                            event.stopPropagation();
-                        },
-                        preventDefault: () => {
-                            event.preventDefault();
-                        },
-                        target: {
-                            type: 'checkbox',
-                            name: props.name,
-                            id: props.id,
-                            value: props.value,
-                            checked: value
-                        }
-                    };
-
-                    props.onClick && props.onClick(eventData);
-
-                    // do not continue if the user defined click wants to prevent
-                    if (event.defaultPrevented) {
-                        return;
+                        checked: value
                     }
+                };
 
-                    props.onChange && props.onChange(eventData);
+                props.onChange && props.onChange(eventData);
+
+                // do not continue if the user defined click wants to prevent
+                if (event.defaultPrevented) {
+                    return;
                 }
 
                 DomHandler.focus(inputRef.current);
-                event.preventDefault();
             }
         };
 
         const onFocus = () => {
-            setFocusedState(true);
+            props?.onFocus?.();
         };
 
         const onBlur = () => {
-            setFocusedState(false);
-        };
-
-        const onKeyDown = (event) => {
-            if (event.code === 'Space' || event.key === ' ') {
-                // event.key is for Android support
-                onClick(event);
-            }
-        };
-
-        const isChecked = () => {
-            return props.checked === props.trueValue;
+            props?.onBlur?.();
         };
 
         React.useImperativeHandle(ref, () => ({
@@ -117,21 +99,13 @@ export const Checkbox = React.memo(
         const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = CheckboxBase.getOtherProps(props);
-        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            ptm('icon')
-        );
-        const icon = checked ? props.icon || <CheckIcon {...iconProps} /> : null;
-        const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: classNames(props.className, cx('root', { checked, focusedState })),
+                className: classNames(props.className, cx('root', { checked })),
                 style: props.style,
-                onClick: (e) => onClick(e),
+                'data-p-highlight': checked,
+                'data-p-disabled': props.disabled,
                 onContextMenu: props.onContextMenu,
                 onMouseDown: props.onMouseDown
             },
@@ -139,50 +113,61 @@ export const Checkbox = React.memo(
             ptm('root')
         );
 
-        const hiddenInputWrapperProps = mergeProps(
-            {
-                className: 'p-hidden-accessible'
-            },
-            ptm('hiddenInputWrapper')
-        );
+        const createInputElement = () => {
+            const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+            const inputProps = mergeProps(
+                {
+                    id: props.inputId,
+                    type: 'checkbox',
+                    className: cx('input'),
+                    name: props.name,
+                    tabIndex: props.tabIndex,
+                    defaultChecked: checked,
+                    onFocus: (e) => onFocus(e),
+                    onBlur: (e) => onBlur(e),
+                    onChange: (e) => onChange(e),
+                    disabled: props.disabled,
+                    readOnly: props.readOnly,
+                    required: props.required,
+                    'aria-invalid': props.invalid,
+                    checked: isChecked(),
+                    ...ariaProps
+                },
+                ptm('input')
+            );
 
-        const hiddenInputProps = mergeProps(
-            {
-                id: props.inputId,
-                type: 'checkbox',
-                name: props.name,
-                tabIndex: props.tabIndex,
-                defaultChecked: checked,
-                onFocus: (e) => onFocus(e),
-                onBlur: (e) => onBlur(e),
-                onKeyDown: (e) => onKeyDown(e),
-                disabled: props.disabled,
-                readOnly: props.readOnly,
-                required: props.required,
-                ...ariaProps
-            },
-            ptm('hiddenInput')
-        );
+            return <input ref={inputRef} {...inputProps} />;
+        };
 
-        const inputProps = mergeProps(
-            {
-                className: cx('input', { checked, focusedState }),
-                'data-p-highlight': checked,
-                'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState
-            },
-            ptm('input')
-        );
+        const createBoxElement = () => {
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            );
+            const boxProps = mergeProps(
+                {
+                    className: cx('box', { checked }),
+                    'data-p-highlight': checked,
+                    'data-p-disabled': props.disabled
+                },
+                ptm('box')
+            );
+
+            const icon = checked ? props.icon || <CheckIcon {...iconProps} /> : null;
+            const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
+
+            return <div {...boxProps}>{checkboxIcon}</div>;
+        };
 
         return (
             <>
                 <div ref={elementRef} {...rootProps}>
-                    <div {...hiddenInputWrapperProps}>
-                        <input ref={inputRef} {...hiddenInputProps} />
-                    </div>
-                    <div {...inputProps}>{checkboxIcon}</div>
+                    {createInputElement()}
+                    {createBoxElement()}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );
     })

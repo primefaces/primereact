@@ -30,7 +30,7 @@ describe('Fieldset', () => {
                 </Fieldset>
             </PrimeReactProvider>
         );
-        const legend = container.getElementsByClassName('p-fieldset-legend')[0];
+        const legend = container.querySelectorAll('[data-pc-section="toggler"]')[0];
 
         expect(container).toMatchSnapshot('toggleable-open');
 
@@ -54,7 +54,7 @@ describe('Fieldset', () => {
                 </Fieldset>
             </PrimeReactProvider>
         );
-        const legend = container.getElementsByClassName('p-fieldset-legend')[0];
+        const legend = container.querySelectorAll('[data-pc-section="toggler"]')[0];
 
         expect(container).toMatchSnapshot('expandable-open');
 

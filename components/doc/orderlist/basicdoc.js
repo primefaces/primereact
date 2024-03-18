@@ -29,7 +29,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
+<OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -61,7 +61,7 @@ export default function BasicDemo() {
     
     return (
         <div className="card xl:flex xl:justify-content-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
         </div>
     )
 }
@@ -109,7 +109,7 @@ export default function BasicDemo() {
     
     return (
         <div className="card xl:flex xl:justify-content-center">
-            <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
+            <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
         </div>
     )
 }
@@ -140,7 +140,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card xl:flex xl:justify-content-center">
-                <OrderList value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
+                <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products"></OrderList>
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

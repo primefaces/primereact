@@ -22,7 +22,7 @@ return(
                     Unstyled mode is disabled by default for all components. Using the PrimeReactContext during installation, set <i>unstyled</i> as true to enable it globally. Visit the <Link href="/unstyled">Unstyled mode</Link> documentation for
                     more information and examples.
                 </p>
-                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
             </DocSectionText>
         </>
     );

@@ -16,6 +16,7 @@ import { SizesDoc } from '@/components/doc/splitbutton/sizesdoc';
 import { TextDoc } from '@/components/doc/splitbutton/textdoc';
 import { StyledDoc } from '@/components/doc/splitbutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/splitbutton/theming/tailwinddoc';
+import { TemplateDoc } from '@/components/doc/splitbutton/templatedoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -33,6 +34,11 @@ const SplitButtonDemo = () => {
             id: 'loading',
             label: 'Loading',
             component: LoadingDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'severity',
@@ -70,11 +76,10 @@ const SplitButtonDemo = () => {
             component: SizesDoc
         },
         {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

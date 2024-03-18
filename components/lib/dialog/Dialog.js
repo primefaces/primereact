@@ -2,16 +2,17 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useDisplayOrder, useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = DialogBase.getProps(inProps, context);
 
@@ -36,6 +37,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
     const shouldBlockScroll = visibleState && (props.blockScroll || (props.maximizable && maximized));
+    const isCloseOnEscape = props.closable && props.closeOnEscape && visibleState;
+    const displayOrder = useDisplayOrder('dialog', isCloseOnEscape);
 
     const { ptm, cx, sx, isUnstyled } = DialogBase.setMetaData({
         props,
@@ -49,15 +52,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    const displayOrder = useDisplayOrder('dialog', visibleState);
-
     useGlobalOnEscapeKey({
         callback: (event) => {
-            if (props.closable && props.closeOnEscape) {
-                onClose(event);
-            }
+            onClose(event);
         },
-        when: visibleState,
+        when: isCloseOnEscape && displayOrder,
         priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
@@ -76,7 +75,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.closable && props.showHeader) {
+        if (!isActiveElementInDialog && props.closable && props.showHeader && closeRef.current) {
             closeRef.current.focus();
         }
     };
@@ -299,7 +298,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const onExiting = () => {
         if (props.modal) {
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
     };
 
@@ -383,19 +382,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         unbindDocumentKeyDownListener();
     };
 
-    const destroyStyle = () => {
-        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
-    };
-
     const createStyle = () => {
-        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce, context && context.styleContainer);
 
         let innerHTML = '';
 
         for (let breakpoint in props.breakpoints) {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
-                    [data-pc-name="dialog"][${attributeSelector.current}] {
+                     [data-pc-name="dialog"][${attributeSelector.current}] {
                         width: ${props.breakpoints[breakpoint]} !important;
                     }
                 }
@@ -405,15 +400,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         styleElement.current.innerHTML = innerHTML;
     };
 
-    useUpdateEffect(() => {
-        if (props.breakpoints) {
-            createStyle();
-        }
-
-        return () => {
-            destroyStyle();
-        };
-    }, [props.breakpoints]);
+    const destroyStyle = () => {
+        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
+    };
 
     useMountEffect(() => {
         updateGlobalDialogsRegistry(true);
@@ -422,6 +411,17 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             setMaskVisibleState(true);
         }
     });
+
+    React.useEffect(() => {
+        if (props.breakpoints) {
+            createStyle();
+        }
+
+        return () => {
+            destroyStyle();
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.breakpoints]);
 
     useUpdateEffect(() => {
         if (props.visible && !maskVisibleState) {
@@ -629,14 +629,66 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    const createElement = () => {
+    const findMessageProperty = (obj) => {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (key === 'message') {
+                    return obj[key];
+                } else if (typeof obj[key] === 'object') {
+                    const result = findMessageProperty(obj[key]);
+
+                    if (result !== undefined) {
+                        return result;
+                    }
+                }
+            }
+        }
+
+        return undefined;
+    };
+
+    const createTemplateElement = ({ maskProps, rootProps, transitionProps }) => {
+        const messageProps = {
+            header: props.header,
+            content: props.message,
+            message: props?.children?.[1]?.props?.children
+        };
+
+        const templateElementProps = { headerRef, contentRef, footerRef, closeRef, hide: onClose, message: messageProps };
+
+        return (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
+                    <div {...rootProps}>{ObjectUtils.getJSXElement(inProps.content, templateElementProps)}</div>
+                </CSSTransition>
+            </div>
+        );
+    };
+
+    const createElement = ({ maskProps, rootProps, transitionProps }) => {
         const header = createHeader();
         const content = createContent();
         const footer = createFooter();
         const resizer = createResizer();
 
+        return (
+            <div {...maskProps}>
+                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
+                    <div {...rootProps}>
+                        {header}
+                        {content}
+                        {footer}
+                        {resizer}
+                    </div>
+                </CSSTransition>
+            </div>
+        );
+    };
+
+    const createDialog = () => {
         const headerId = idState + '_header';
         const contentId = idState + '_content';
+
         const transitionTimeout = {
             enter: props.position === 'center' ? 150 : 300,
             exit: props.position === 'center' ? 150 : 300
@@ -684,24 +736,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             ptm('transition')
         );
 
-        return (
-            <div {...maskProps}>
-                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
-                    <div {...rootProps}>
-                        {header}
-                        {content}
-                        {footer}
-                        {resizer}
-                    </div>
-                </CSSTransition>
-            </div>
-        );
-    };
+        if (inProps?.content) {
+            const templateElement = createTemplateElement({ maskProps, rootProps, transitionProps });
 
-    const createDialog = () => {
-        const element = createElement();
+            return <Portal element={templateElement} appendTo={props.appendTo} visible />;
+        } else {
+            const element = createElement({ maskProps, rootProps, transitionProps });
 
-        return <Portal element={element} appendTo={props.appendTo} visible />;
+            return <Portal element={element} appendTo={props.appendTo} visible />;
+        }
     };
 
     return maskVisibleState && createDialog();

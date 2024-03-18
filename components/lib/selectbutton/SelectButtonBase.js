@@ -2,7 +2,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-selectbutton p-buttonset p-component', props.className),
+    root: ({ props }) => classNames('p-selectbutton p-buttonset p-component', props.className, { 'p-invalid': props.invalid }),
     button: ({ itemProps: props, focusedState }) =>
         classNames('p-button p-component', {
             'p-highlight': props.selected,
@@ -23,6 +23,7 @@ export const SelectButtonBase = ComponentBase.extend({
         optionDisabled: null,
         tabIndex: null,
         multiple: false,
+        invalid: false,
         unselectable: true,
         allowEmpty: true,
         disabled: false,

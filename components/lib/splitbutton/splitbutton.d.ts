@@ -38,13 +38,13 @@ export interface SplitButtonPassThroughOptions {
      */
     root?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the Button component.
-     */
-    button?: ButtonPassThroughOptions;
-    /**
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    button?: ButtonPassThroughOptions;
     /**
      * Uses to pass attributes to the Button component.
      */
@@ -127,9 +127,9 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     outlined?: boolean | undefined;
     /**
-     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger".
+     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger", "contrast".
      */
-    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'contrast' | undefined;
     /**
      * Defines the size of the button, valid values are "small" and "large".
      */
@@ -185,7 +185,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | null | undefined | (() => HTMLElement);
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Content of the tooltip.
      */

@@ -4,11 +4,10 @@ import { TabMenu } from '@/components/lib/tabmenu/TabMenu';
 
 export function BasicDoc(props) {
     const items = [
-        { label: 'Home', icon: 'pi pi-fw pi-home' },
-        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-        { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
-        { label: 'Documentation', icon: 'pi pi-fw pi-file' },
-        { label: 'Settings', icon: 'pi pi-fw pi-cog' }
+        { label: 'Dashboard', icon: 'pi pi-home' },
+        { label: 'Transactions', icon: 'pi pi-chart-line' },
+        { label: 'Products', icon: 'pi pi-list' },
+        { label: 'Messages', icon: 'pi pi-inbox' }
     ];
 
     const code = {
@@ -21,11 +20,10 @@ import { TabMenu } from 'primereact/tabmenu';
 
 export default function BasicDemo() {
     const items = [
-        {label: 'Home', icon: 'pi pi-fw pi-home'},
-        {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-        {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
-        {label: 'Documentation', icon: 'pi pi-fw pi-file'},
-        {label: 'Settings', icon: 'pi pi-fw pi-cog'}
+        { label: 'Dashboard', icon: 'pi pi-home' },
+        { label: 'Transactions', icon: 'pi pi-chart-line' },
+        { label: 'Products', icon: 'pi pi-list' },
+        { label: 'Messages', icon: 'pi pi-inbox' }
     ];
 
     return (
@@ -42,11 +40,10 @@ import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
     const items: MenuItem[] = [
-        {label: 'Home', icon: 'pi pi-fw pi-home'},
-        {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-        {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
-        {label: 'Documentation', icon: 'pi pi-fw pi-file'},
-        {label: 'Settings', icon: 'pi pi-fw pi-cog'}
+        { label: 'Dashboard', icon: 'pi pi-home' },
+        { label: 'Transactions', icon: 'pi pi-chart-line' },
+        { label: 'Products', icon: 'pi pi-list' },
+        { label: 'Messages', icon: 'pi pi-inbox' }
     ];
 
     return (

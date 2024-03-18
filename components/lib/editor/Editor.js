@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, mergeProps } from '../utils/Utils';
-import { EditorBase } from './EditorBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, classNames } from '../utils/Utils';
+import { EditorBase } from './EditorBase';
 
 const QuillJS = (function () {
     try {
@@ -16,6 +15,7 @@ const QuillJS = (function () {
 
 export const Editor = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = EditorBase.getProps(inProps, context);
         const { ptm, cx, isUnstyled } = EditorBase.setMetaData({
@@ -28,6 +28,8 @@ export const Editor = React.memo(
         const toolbarRef = React.useRef(null);
         const quill = React.useRef(null);
         const isQuillLoaded = React.useRef(false);
+
+        const [quillCreated, setQuillCreated] = React.useState(false);
 
         useMountEffect(() => {
             if (!isQuillLoaded.current) {
@@ -44,93 +46,108 @@ export const Editor = React.memo(
 
                 if (QuillJS) {
                     // GitHub #3097 loaded by script only
-                    quill.current = new Quill(contentRef.current, configuration);
-                    initQuill();
-
-                    if (quill.current && quill.current.getModule('toolbar')) {
-                        props.onLoad && props.onLoad(quill.current);
-                    }
+                    initQuill(new Quill(contentRef.current, configuration));
                 } else {
-                    import('quill')
-                        .then((module) => {
-                            if (module && DomHandler.isExist(contentRef.current)) {
-                                if (module.default) {
-                                    // webpack
-                                    quill.current = new module.default(contentRef.current, configuration);
-                                } else {
-                                    // parceljs
-                                    quill.current = new module(contentRef.current, configuration);
-                                }
+                    import('quill').then((module) => {
+                        if (module && DomHandler.isExist(contentRef.current)) {
+                            let quillInstance;
 
-                                initQuill();
+                            if (module.default) {
+                                // webpack
+                                quillInstance = new module.default(contentRef.current, configuration);
+                            } else {
+                                // parceljs
+                                quillInstance = new module(contentRef.current, configuration);
                             }
-                        })
-                        .then(() => {
-                            if (quill.current && quill.current.getModule('toolbar')) {
-                                props.onLoad && props.onLoad(quill.current);
-                            }
-                        });
+
+                            initQuill(quillInstance);
+                        }
+                    });
                 }
 
                 isQuillLoaded.current = true;
             }
         });
 
-        const initQuill = () => {
+        const onTextChange = (delta, oldContents, source) => {
+            let firstChild = contentRef.current.children[0];
+            let html = firstChild ? firstChild.innerHTML : null;
+            let text = quill.current.getText();
+
+            if (html === '<p><br></p>') {
+                html = null;
+            }
+
+            // GitHub #2271 prevent infinite loop on clipboard paste of HTML
+            if (source === 'api') {
+                const htmlValue = contentRef.current.children[0];
+                const editorValue = document.createElement('div');
+
+                editorValue.innerHTML = props.value || '';
+
+                // this is necessary because Quill rearranged style elements
+                if (DomHandler.isEqualElement(htmlValue, editorValue)) {
+                    return;
+                }
+            }
+
+            if (props.maxLength) {
+                const length = quill.current.getLength();
+
+                if (length > props.maxLength) {
+                    quill.current.deleteText(props.maxLength, length);
+                }
+            }
+
+            if (props.onTextChange) {
+                props.onTextChange({
+                    htmlValue: html,
+                    textValue: text,
+                    delta: delta,
+                    source: source
+                });
+            }
+        };
+
+        const onSelectionChange = (range, oldRange, source) => {
+            if (props.onSelectionChange) {
+                props.onSelectionChange({
+                    range: range,
+                    oldRange: oldRange,
+                    source: source
+                });
+            }
+        };
+
+        const initQuill = (quillInstance) => {
+            quill.current = quillInstance;
+
             if (props.value) {
                 quill.current.setContents(quill.current.clipboard.convert(props.value));
             }
 
-            quill.current.on('text-change', (delta, oldContents, source) => {
-                let firstChild = contentRef.current.children[0];
-                let html = firstChild ? firstChild.innerHTML : null;
-                let text = quill.current.getText();
-
-                if (html === '<p><br></p>') {
-                    html = null;
-                }
-
-                // GitHub #2271 prevent infinite loop on clipboard paste of HTML
-                if (source === 'api') {
-                    const htmlValue = contentRef.current.children[0];
-                    const editorValue = document.createElement('div');
-
-                    editorValue.innerHTML = props.value || '';
-
-                    // this is necessary because Quill rearranged style elements
-                    if (DomHandler.isEqualElement(htmlValue, editorValue)) {
-                        return;
-                    }
-                }
-
-                if (props.maxLength) {
-                    const length = quill.current.getLength();
-
-                    if (length > props.maxLength) {
-                        quill.current.deleteText(props.maxLength, length);
-                    }
-                }
-
-                if (props.onTextChange) {
-                    props.onTextChange({
-                        htmlValue: html,
-                        textValue: text,
-                        delta: delta,
-                        source: source
-                    });
-                }
-            });
-
-            quill.current.on('selection-change', (range, oldRange, source) => {
-                if (props.onSelectionChange) {
-                    props.onSelectionChange({
-                        range: range,
-                        oldRange: oldRange,
-                        source: source
-                    });
-                }
-            });
+            setQuillCreated(true);
         };
+
+        useUpdateEffect(() => {
+            if (quillCreated) {
+                quill.current.on('text-change', onTextChange);
+                quill.current.on('selection-change', onSelectionChange);
+
+                return () => {
+                    quill.current.off('text-change', onTextChange);
+                    quill.current.off('selection-change', onSelectionChange);
+                };
+            }
+        });
+
+        useUpdateEffect(() => {
+            if (quillCreated) {
+                if (quill.current && quill.current.getModule('toolbar')) {
+                    props.onLoad && props.onLoad(quill.current);
+                }
+            }
+        }, [quillCreated]);
 
         useUpdateEffect(() => {
             if (quill.current && !quill.current.hasFocus()) {
@@ -189,7 +206,7 @@ export const Editor = React.memo(
                         </span>
                         <span {...formatsProps}>
                             <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'ordered', 'aria-label': 'Ordered List' }, 'list')}></button>
-                            <button {...getMergeProps({ type: 'button', className: cx('list'), value: 'bullet', 'aria-label': 'Unordered List' }, 'list')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'bullet', 'aria-label': 'Unordered List' }, 'list')}></button>
                             <select {...getMergeProps({ className: 'ql-align' }, 'select')}>
                                 <option {...getMergeProps({ defaultValue: true }, 'option')}></option>
                                 <option {...getMergeProps({ value: 'center' }, 'option')}></option>

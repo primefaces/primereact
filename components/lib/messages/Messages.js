@@ -3,7 +3,8 @@ import { TransitionGroup } from 'react-transition-group';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
+import { ObjectUtils } from '../utils/Utils';
 import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 
@@ -11,6 +12,7 @@ let messageIdx = 0;
 
 export const Messages = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MessagesBase.getProps(inProps, context);
         const [messagesState, setMessagesState] = React.useState([]);
@@ -75,7 +77,7 @@ export const Messages = React.memo(
 
             setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
 
-            props.onRemove && props.onRemove(removeMessage);
+            props.onRemove && props.onRemove(removeMessage.message || removeMessage);
         };
 
         const onClose = (messageInfo) => {

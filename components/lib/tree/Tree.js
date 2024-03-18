@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { useUpdateEffect } from '../hooks/useUpdateEffect';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = TreeBase.getProps(inProps, context);
 
@@ -20,6 +23,7 @@ export const Tree = React.memo(
         const filterChanged = React.useRef(false);
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const childFocusEvent = React.useRef(null);
         const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
             props,
             state: {
@@ -40,12 +44,41 @@ export const Tree = React.memo(
         };
 
         const onToggle = (event) => {
+            const { originalEvent, value, navigateFocusToChild } = event;
+
             if (props.onToggle) {
-                props.onToggle(event);
+                props.onToggle({ originalEvent, value });
             } else {
-                setExpandedKeysState(event.value);
+                if (navigateFocusToChild) {
+                    childFocusEvent.current = originalEvent;
+                }
+
+                setExpandedKeysState(value);
             }
         };
+
+        useUpdateEffect(() => {
+            if (childFocusEvent.current) {
+                const event = childFocusEvent.current;
+                const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
+                const listElement = nodeElement.children[1];
+
+                if (listElement) {
+                    if (nodeElement) {
+                        nodeElement.tabIndex = '-1';
+                    }
+
+                    const childElement = listElement.children[0];
+
+                    if (childElement) {
+                        childElement.tabIndex = '0';
+                        childElement.focus();
+                    }
+                }
+
+                childFocusEvent.current = null;
+            }
+        }, [expandedKeys]);
 
         const onDragStart = (event) => {
             dragState.current = {
@@ -82,7 +115,7 @@ export const Tree = React.memo(
         };
 
         const onDrop = (event) => {
-            if (validateDropNode(dragState.current.path, event.path)) {
+            if (validateDropNode(dragState.current?.path, event.path)) {
                 const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
@@ -185,7 +218,7 @@ export const Tree = React.memo(
         };
 
         const validateDropPoint = (event) => {
-            let _validateDrop = validateDrop(dragState.current.path, event.path);
+            let _validateDrop = validateDrop(dragState.current?.path, event.path);
 
             if (_validateDrop) {
                 //child dropped to next sibling's drop point
@@ -250,6 +283,8 @@ export const Tree = React.memo(
             setFilterValueState(ObjectUtils.isNotEmpty(value) ? value : '');
             _filter();
         };
+
+        const childNodeFocus = (node) => {};
 
         const _filter = () => {
             if (!filterChanged.current) {
@@ -341,6 +376,11 @@ export const Tree = React.memo(
                     hostName="Tree"
                     key={node.key || node.label}
                     node={node}
+                    level={props.level + 1}
+                    originalOptions={props.value}
+                    index={index}
+                    last={last}
+                    path={String(index)}
                     checkboxIcon={props.checkboxIcon}
                     collapseIcon={props.collapseIcon}
                     contextMenuSelectionKey={props.contextMenuSelectionKey}
@@ -349,9 +389,7 @@ export const Tree = React.memo(
                     dragdropScope={props.dragdropScope}
                     expandIcon={props.expandIcon}
                     expandedKeys={expandedKeys}
-                    index={index}
                     isNodeLeaf={isNodeLeaf}
-                    last={last}
                     metaKeySelection={props.metaKeySelection}
                     nodeTemplate={props.nodeTemplate}
                     onClick={props.onNodeClick}
@@ -368,8 +406,6 @@ export const Tree = React.memo(
                     onSelectionChange={props.onSelectionChange}
                     onToggle={onToggle}
                     onUnselect={props.onUnselect}
-                    originalOptions={props.value}
-                    path={String(index)}
                     propagateSelectionDown={props.propagateSelectionDown}
                     propagateSelectionUp={props.propagateSelectionUp}
                     ptm={ptm}
@@ -380,31 +416,62 @@ export const Tree = React.memo(
             );
         };
 
-        const createRootChildren = () => {
-            if (props.filter) {
-                filterChanged.current = true;
-                _filter();
-            }
+        const createEmptyMessageNode = () => {
+            const emptyMessageProps = mergeProps(
+                {
+                    className: classNames(props.contentClassName, cx('emptyMessage')),
+                    role: 'treeitem'
+                },
+                ptm('emptyMessage')
+            );
 
-            const value = getRootNode();
+            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
 
+            return (
+                <li {...emptyMessageProps}>
+                    <span className="p-treenode-content">{message}</span>
+                </li>
+            );
+        };
+
+        const createRootChildrenContainer = (children) => {
+            const containerProps = mergeProps(
+                {
+                    className: classNames(props.contentClassName, cx('container')),
+                    role: 'tree',
+                    'aria-label': props.ariaLabel,
+                    'aria-labelledby': props.ariaLabelledBy,
+                    style: props.contentStyle,
+                    ...ariaProps
+                },
+                ptm('container')
+            );
+
+            return <ul {...containerProps}>{children}</ul>;
+        };
+
+        const createRootChildren = (value) => {
             return value.map((node, index) => createRootChild(node, index, index === value.length - 1));
         };
 
         const createModel = () => {
             if (props.value) {
-                const rootNodes = createRootChildren();
-                const containerProps = mergeProps(
-                    {
-                        className: classNames(props.contentClassName, cx('container')),
-                        role: 'tree',
-                        style: props.contentStyle,
-                        ...ariaProps
-                    },
-                    ptm('container')
-                );
+                if (props.filter) {
+                    filterChanged.current = true;
+                    _filter();
+                }
 
-                return <ul {...containerProps}>{rootNodes}</ul>;
+                const value = getRootNode();
+
+                if (value.length > 0) {
+                    const rootNodes = createRootChildren(value);
+
+                    return createRootChildrenContainer(rootNodes);
+                } else {
+                    const emptyMessageNode = createEmptyMessageNode();
+
+                    return createRootChildrenContainer(emptyMessageNode);
+                }
             }
 
             return null;

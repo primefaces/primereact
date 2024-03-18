@@ -1,11 +1,14 @@
 import * as React from 'react';
+import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { Checkbox } from '../checkbox/Checkbox';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const { ptm, cx } = props;
+    const mergeProps = useMergeProps();
+    const { ptm, cx, isUnstyled } = props;
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -13,30 +16,11 @@ export const MultiSelectItem = React.memo((props) => {
             context: {
                 selected: props.selected,
                 disabled: props.disabled,
-                focused: focusedState
+                focused: focusedState,
+                focusedIndex: props.focusedIndex,
+                index: props.index
             }
         });
-    };
-
-    const onClick = (event) => {
-        if (props.onClick) {
-            props.onClick({
-                originalEvent: event,
-                option: props.option
-            });
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-    };
-
-    const onKeyDown = (event) => {
-        if (props.onKeyDown) {
-            props.onKeyDown({
-                originalEvent: event,
-                option: props.option
-            });
-        }
     };
 
     const onFocus = (event) => {
@@ -45,6 +29,15 @@ export const MultiSelectItem = React.memo((props) => {
 
     const onBlur = (event) => {
         setFocusedState(false);
+    };
+
+    const onClick = (event) => {
+        if (props.onClick) {
+            props.onClick(event, props.option);
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
     };
 
     const checkboxIconProps = mergeProps(
@@ -58,7 +51,7 @@ export const MultiSelectItem = React.memo((props) => {
     const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { selected: props.selected }) : null;
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
-    const tabIndex = props.disabled ? null : props.tabIndex || 0;
+    const tabIndex = props.disabled ? -1 : props.tabIndex;
 
     const checkboxContainerProps = mergeProps(
         {
@@ -67,23 +60,14 @@ export const MultiSelectItem = React.memo((props) => {
         getPTOptions('checkboxContainer')
     );
 
-    const checkboxProps = mergeProps(
-        {
-            className: cx('checkbox', { itemProps: props }),
-            'data-p-highlight': props.selected
-        },
-        getPTOptions('checkbox')
-    );
-
     const itemProps = mergeProps(
         {
             className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
             style: props.style,
             onClick: onClick,
-            tabIndex: tabIndex,
-            onKeyDown: onKeyDown,
             onFocus: onFocus,
             onBlur: onBlur,
+            tabIndex: tabIndex,
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
@@ -95,7 +79,7 @@ export const MultiSelectItem = React.memo((props) => {
     return (
         <li {...itemProps}>
             <div {...checkboxContainerProps}>
-                <div {...checkboxProps}>{checkboxIcon}</div>
+                <Checkbox checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
             </div>
             <span>{content}</span>
             <Ripple />
