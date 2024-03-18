@@ -715,7 +715,7 @@ export const BodyCell = React.memo((props) => {
                         'aria-label': ariaLabel('cancelEdit'),
                         onClick: rowEditorProps.onCancelClick,
                         className: rowEditorProps.cancelClassName,
-                        tabIndex: props.tabIndex,
+                        tabIndex: props.tabIndex
                     },
                     getColumnPTOptions('rowEditorCancelButton')
                 );
