@@ -83,12 +83,12 @@ const classes = {
         }),
     inputToken: 'p-chips-input-token',
     container: ({ isFilled }) => classNames('p-inputtext p-chips-multiple-container', { 'p-variant-filled': isFilled }),
-    root: ({ isFilled, focusedState, disabled }) =>
+    root: ({ isFilled, focusedState, disabled, invalid }) =>
         classNames('p-chips p-component p-inputwrapper', {
             'p-inputwrapper-filled': isFilled,
             'p-inputwrapper-focus': focusedState,
             'p-disabled': disabled,
-            'p-invalid': props.invalid,
+            'p-invalid': invalid,
             'p-focus': focusedState
         })
 };
