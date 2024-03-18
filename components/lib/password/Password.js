@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -291,16 +291,26 @@ export const Password = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
+        const onToggleMaskKeyDown = (event) => {
+            if (event.key === 'Enter' || event.code === 'Space') {
+                toggleMask();
+                event.preventDefault();
+            }
+        };
+
         const createIcon = () => {
             let icon;
 
             const hideIconProps = mergeProps(
                 {
                     key: 'hideIcon',
-                    role: 'button',
-                    tabIndex: props.tabIndex,
+                    role: 'switch',
+                    tabIndex: props.tabIndex || '0',
                     className: cx('hideIcon'),
-                    onClick: toggleMask
+                    onClick: toggleMask,
+                    onKeyDown: onToggleMaskKeyDown,
+                    'aria-label': ariaLabel('passwordHide') || 'Hide Password',
+                    'aria-checked': 'false'
                 },
                 ptm('hideIcon')
             );
@@ -308,10 +318,13 @@ export const Password = React.memo(
             const showIconProps = mergeProps(
                 {
                     key: 'showIcon',
-                    role: 'button',
-                    tabIndex: props.tabIndex,
+                    role: 'switch',
+                    tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),
-                    onClick: toggleMask
+                    onClick: toggleMask,
+                    onKeyDown: onToggleMaskKeyDown,
+                    'aria-label': ariaLabel('passwordShow') || 'Show Password',
+                    'aria-checked': 'true'
                 },
                 ptm('showIcon')
             );
