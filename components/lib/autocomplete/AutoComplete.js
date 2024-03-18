@@ -134,7 +134,7 @@ export const AutoComplete = React.memo(
 
         const updateModel = (event, value) => {
             // #2176 only call change if value actually changed
-            if (selectedItem && ObjectUtils.deepEquals(selectedItem.current, value)) {
+            if (selectedItem.current && ObjectUtils.deepEquals(selectedItem.current, value)) {
                 return;
             }
 
@@ -606,6 +606,8 @@ export const AutoComplete = React.memo(
                     );
                 });
             }
+
+            selectedItem.current = null;
 
             return null;
         };
