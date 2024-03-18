@@ -865,10 +865,13 @@ const Tailwind = {
         dropdownButton: {
             className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
         },
-        panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
+        panel: 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
         list: 'm-0 sm:p-0 list-none',
+        sublistWrapper: {
+            className: classNames('block absolute left-full top-0', 'min-w-full z-10')
+        },
         sublist: {
-            className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
+            className: classNames('py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
         },
         item: ({ state }) => ({
             className: classNames('cursor-pointer font-normal whitespace-nowrap', 'm-0 border-0 bg-transparent transition-shadow rounded-none', {
