@@ -174,6 +174,11 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      */
     max?: number | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When present, it specifies that the element should be disabled.
      * @defaultValue false
      */
@@ -206,7 +211,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      */
     ariaLabelledBy?: string | undefined;
     /**
-     * Separator char to add an item when pressed in addition to the enter key. Currently only possible value is ','.
+     * Separator char to add an item when pressed in addition to the enter key.
      */
     separator?: string | undefined;
     /**

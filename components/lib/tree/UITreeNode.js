@@ -714,7 +714,7 @@ export const UITreeNode = React.memo((props) => {
                 getPTOptions('nodeIcon')
             );
 
-            return <span {...nodeIconProps}></span>;
+            return IconUtils.getJSXIcon(icon, { ...nodeIconProps }, { props });
         }
 
         return null;

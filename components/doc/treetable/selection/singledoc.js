@@ -66,7 +66,7 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { NodeService } from './service/NodeService';
 
 export default function SingleRowSelectionDemo() {
-    const [nodes, setNodes] = useState<TreeNode>([]);
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState<string | null>(null);
     const [metaKey, setMetaKey] = useState<boolean>(true);
 

@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CheckboxPassThroughType } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -50,6 +51,14 @@ export interface ToggleButtonPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the box's DOM element.
+     */
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 /**
  * Custom toggle button change target options
@@ -117,6 +126,21 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @defaultValue left
      */
     iconPos?: 'left' | 'right' | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @defaultValue false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that an input field is read-only.
+     * @default false
+     */
+    readonly?: boolean | undefined;
     /**
      * Icon for the off state.
      */

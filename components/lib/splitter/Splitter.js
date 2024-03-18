@@ -253,14 +253,14 @@ export const Splitter = React.memo(
                 }
 
                 case 'Home': {
-                    resizePanel(index, 100, minSize);
+                    resizePanel(index, 100 - minSize, minSize);
 
                     event.preventDefault();
                     break;
                 }
 
                 case 'End': {
-                    resizePanel(index, minSize, 100);
+                    resizePanel(index, minSize, 100 - minSize);
 
                     event.preventDefault();
                     break;
@@ -269,10 +269,10 @@ export const Splitter = React.memo(
                 case 'NumpadEnter':
 
                 case 'Enter': {
-                    if (prevSize.current > 100 - (minSize || 5)) {
-                        resizePanel(index, minSize, 100);
+                    if (prevSize.current >= 100 - (minSize || 5)) {
+                        resizePanel(index, minSize, 100 - minSize);
                     } else {
-                        resizePanel(index, 100, minSize);
+                        resizePanel(index, 100 - minSize, minSize);
                     }
 
                     event.preventDefault();
@@ -388,8 +388,7 @@ export const Splitter = React.memo(
                     onTouchStart: (event) => onGutterTouchStart(event, index),
                     onTouchMove: (event) => onGutterTouchMove(event),
                     onTouchEnd: (event) => onGutterTouchEnd(event),
-                    'data-p-splitter-gutter-resizing': false,
-                    role: 'separator'
+                    'data-p-splitter-gutter-resizing': false
                 },
                 ptm('gutter')
             );
@@ -398,6 +397,7 @@ export const Splitter = React.memo(
                 {
                     tabIndex: getPanelProp(panel, 'tabIndex') || 0,
                     className: cx('gutterHandler'),
+                    role: 'separator',
                     'aria-orientation': horizontal ? 'vertical' : 'horizontal',
                     'aria-controls': panelId,
                     'aria-label': getPanelProp(panel, 'aria-label'),

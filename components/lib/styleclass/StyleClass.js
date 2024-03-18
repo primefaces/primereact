@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { StyleClassBase } from './StyleClassBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const StyleClass = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -86,15 +86,25 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
 
                 DomHandler.addClass(targetRef.current, props.enterActiveClassName);
 
+                // enterClassName will be deprecated, use enterFromClassName
                 if (props.enterClassName) {
                     DomHandler.removeClass(targetRef.current, props.enterClassName);
+                }
+
+                if (props.enterFromClassName) {
+                    DomHandler.removeClass(targetRef.current, props.enterFromClassName);
                 }
 
                 bindTargetEnterListener({ target: targetRef.current });
             }
         } else {
+            // enterClassName will be deprecated, use enterFromClassName
             if (props.enterClassName) {
                 DomHandler.removeClass(targetRef.current, props.enterClassName);
+            }
+
+            if (props.enterFromClassName) {
+                DomHandler.removeClass(targetRef.current, props.enterFromClassName);
             }
 
             if (props.enterToClassName) {
@@ -111,15 +121,25 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
                 animating.current = true;
                 DomHandler.addClass(targetRef.current, props.leaveActiveClassName);
 
+                // leaveClassName will be deprecated, use leaveFromClassName
                 if (props.leaveClassName) {
                     DomHandler.removeClass(targetRef.current, props.leaveClassName);
+                }
+
+                if (props.leaveFromClassName) {
+                    DomHandler.removeClass(targetRef.current, props.leaveFromClassName);
                 }
 
                 bindTargetLeaveListener({ target: targetRef.current });
             }
         } else {
+            // leaveClassName will be deprecated, use leaveFromClassName
             if (props.leaveClassName) {
                 DomHandler.removeClass(targetRef.current, props.leaveClassName);
+            }
+
+            if (props.leaveFromClassName) {
+                DomHandler.removeClass(targetRef.current, props.leaveFromClassName);
             }
 
             if (props.leaveToClassName) {

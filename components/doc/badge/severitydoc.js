@@ -10,6 +10,8 @@ export function SeverityDoc(props) {
 <Badge value="4" severity="info"></Badge>
 <Badge value="12" severity="warning"></Badge>
 <Badge value="3" severity="danger"></Badge>
+<Badge value="7" severity="secondary"></Badge>
+<Badge value="5" severity="contrast"></Badge>
         `,
         javascript: `
 import React from 'react';
@@ -23,6 +25,8 @@ export default function SeverityDemo() {
             <Badge value="4" severity="info"></Badge >
             <Badge value="12" severity="warning"></Badge>
             <Badge value="3" severity="danger"></Badge>
+            <Badge value="7" severity="secondary"></Badge>
+            <Badge value="5" severity="contrast"></Badge>
         </div>
     );
 }
@@ -39,6 +43,8 @@ export default function SeverityDemo() {
             <Badge value="4" severity="info"></Badge >
             <Badge value="12" severity="warning"></Badge>
             <Badge value="3" severity="danger"></Badge>
+            <Badge value="7" severity="secondary"></Badge>
+            <Badge value="5" severity="contrast"></Badge>
         </div>
     );
 }
@@ -58,6 +64,8 @@ export default function SeverityDemo() {
                 <Badge value="4" severity="info"></Badge>
                 <Badge value="12" severity="warning"></Badge>
                 <Badge value="3" severity="danger"></Badge>
+                <Badge value="7" severity="secondary"></Badge>
+                <Badge value="5" severity="contrast"></Badge>
             </div>
             <DocSectionCode code={code} />
         </>

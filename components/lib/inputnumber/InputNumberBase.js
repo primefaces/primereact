@@ -8,7 +8,8 @@ const classes = {
             'p-inputwrapper-focus': focusedState,
             'p-inputnumber-buttons-stacked': stacked,
             'p-inputnumber-buttons-horizontal': horizontal,
-            'p-inputnumber-buttons-vertical': vertical
+            'p-inputnumber-buttons-vertical': vertical,
+            'p-invalid': props.invalid
         }),
     buttonGroup: 'p-inputnumber-button-group',
     incrementButton: ({ props }) =>
@@ -151,6 +152,7 @@ export const InputNumberBase = ComponentBase.extend({
         inputMode: null,
         inputRef: null,
         inputStyle: null,
+        invalid: false,
         locale: undefined,
         localeMatcher: undefined,
         max: null,
