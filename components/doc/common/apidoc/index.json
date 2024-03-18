@@ -1876,6 +1876,125 @@
                             "description": "['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
                         },
                         {
+                            "name": "chooseYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Year"
+                        },
+                        {
+                            "name": "chooseMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Month"
+                        },
+                        {
+                            "name": "chooseDate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Date"
+                        },
+                        {
+                            "name": "prevDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Decade"
+                        },
+                        {
+                            "name": "nextDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Decade"
+                        },
+                        {
+                            "name": "prevYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Year"
+                        },
+                        {
+                            "name": "nextYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Year"
+                        },
+                        {
+                            "name": "prevMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Month"
+                        },
+                        {
+                            "name": "nextMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Month"
+                        },
+                        {
+                            "name": "prevHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Hour"
+                        },
+                        {
+                            "name": "nextHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Hour"
+                        },
+                        {
+                            "name": "prevMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Minute"
+                        },
+                        {
+                            "name": "nextMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Minute"
+                        },
+                        {
+                            "name": "prevSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Second"
+                        },
+                        {
+                            "name": "nextSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Second"
+                        },
+                        {
+                            "name": "am",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "AM"
+                        },
+                        {
+                            "name": "pm",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "PM"
+                        },
+                        {
                             "name": "today",
                             "optional": true,
                             "readonly": false,
@@ -1957,7 +2076,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "Object",
-                            "description": "True"
+                            "description": "ARIA labels"
                         }
                     ],
                     "callbacks": []
