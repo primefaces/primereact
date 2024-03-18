@@ -118,6 +118,11 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
      */
     multiple?: boolean | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Whether selection can be cleared.
      * @deprecated Use 'allowEmpty' property instead.
      * @defaultValue true

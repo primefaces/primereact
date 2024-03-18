@@ -7,6 +7,7 @@ const classes = {
         classNames('p-multiselect p-component p-inputwrapper', {
             'p-multiselect-chip': props.display === 'chip',
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-multiselect-clearable': props.showClear && !props.disabled,
             'p-focus': focusedState,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
@@ -53,10 +54,6 @@ const classes = {
         }),
     checkboxContainer: 'p-checkbox p-component',
     checkboxIcon: 'p-checkbox-icon p-c',
-    checkbox: ({ itemProps: props }) =>
-        classNames('p-checkbox-box', {
-            'p-highlight': props.selected
-        }),
     transition: 'p-connected-overlay'
 };
 
@@ -234,10 +231,12 @@ export const MultiSelectBase = ComponentBase.extend({
         inline: false,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemCheckboxIcon: null,
         itemClassName: null,
         itemTemplate: null,
         loading: false,
+        loadingIcon: null,
         maxSelectedLabels: null,
         name: null,
         onBlur: null,

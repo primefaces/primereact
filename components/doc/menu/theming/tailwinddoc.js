@@ -23,17 +23,20 @@ const Tailwind = {
         menu: {
             className: classNames('m-0 p-0 list-none', 'outline-none')
         },
-        content: ({ context }) => ({
+        content: ({ state }) => ({
             className: classNames(
                 'text-gray-700 dark:text-white/80 transition-shadow duration-200 rounded-none',
                 'hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80', // Hover
                 {
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': state.focused
                 }
             )
         }),
         action: {
             className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative')
+        },
+        menuitem: {
+            className: classNames('hover:bg-gray-200')
         },
         icon: 'text-gray-600 dark:text-white/70 mr-2',
         submenuheader: {

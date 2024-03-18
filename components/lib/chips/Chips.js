@@ -155,7 +155,7 @@ export const Chips = React.memo(
                 return;
             }
 
-            switch (event.code) {
+            switch (event.key) {
                 case 'Backspace':
                     if (inputValue.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
@@ -164,7 +164,6 @@ export const Chips = React.memo(
                     break;
 
                 case 'Enter':
-                case 'NumpadEnter':
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
                     }
@@ -189,11 +188,6 @@ export const Chips = React.memo(
 
                     if (isMaxedOut()) {
                         event.preventDefault();
-                    } else if (props.separator === ',') {
-                        // GitHub #3885 Android Opera gives strange code 229 for comma
-                        if (event.key === props.separator || (DomHandler.isAndroid() && event.which === 229)) {
-                            addItem(event, inputValue, true);
-                        }
                     }
 
                     break;
@@ -221,6 +215,22 @@ export const Chips = React.memo(
 
             inputRef.current.value = '';
             preventDefault && event.preventDefault();
+        };
+
+        const onChange = (event) => {
+            const value = event.target.value?.trim();
+
+            if (value === props.separator) {
+                inputRef.current.value = '';
+
+                return;
+            }
+
+            if (props.separator && value.endsWith(props.separator)) {
+                const trimmedValue = value.slice(0, -1);
+
+                addItem(event, trimmedValue);
+            }
         };
 
         const onPaste = (event) => {
@@ -372,9 +382,11 @@ export const Chips = React.memo(
                     ref: inputRef,
                     placeholder: props.placeholder,
                     type: 'text',
+                    enterKeyHint: 'enter',
                     name: props.name,
                     disabled: props.disabled || isMaxedOut(),
                     onKeyDown: (e) => onKeyDown(e),
+                    onChange: (e) => onChange(e),
                     onPaste: (e) => onPaste(e),
                     onFocus: (e) => onFocus(e),
                     onBlur: (e) => onBlur(e),

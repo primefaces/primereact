@@ -8,6 +8,7 @@ const classes = {
             'p-cascadeselect p-component p-inputwrapper',
             {
                 'p-disabled': props.disabled,
+                'p-invalid': props.invalid,
                 'p-focus': focusedState,
                 'p-inputwrapper-filled': props.value,
                 'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -149,6 +150,7 @@ export const CascadeSelectBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemTemplate: null,
         name: null,
         onBeforeHide: null,

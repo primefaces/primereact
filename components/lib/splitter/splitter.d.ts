@@ -140,11 +140,6 @@ interface SplitterPanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
      */
     children?: React.ReactNode | undefined;
     /**
-     * Step factor to increment/decrement the size of the panels while pressing the arrow keys.
-     * @defaultValue 5
-     */
-    step?: number | undefined;
-    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {SplitterPanelPassThroughOptions}
      */
@@ -196,6 +191,11 @@ export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Step factor to increment/decrement the size of the panels while pressing the arrow keys.
+     * @defaultValue 5
+     */
+    step?: number | undefined;
     /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {SplitterPassThroughOptions}

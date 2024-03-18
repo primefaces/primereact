@@ -2,50 +2,16 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState }) =>
+    root: ({ props }) =>
         classNames('p-radiobutton p-component', {
-            'p-radiobutton-checked': props.checked,
-            'p-radiobutton-disabled': props.disabled,
-            'p-radiobutton-focused': focusedState
-        }),
-    input: ({ props, focusedState }) =>
-        classNames('p-radiobutton-box', {
             'p-highlight': props.checked,
             'p-disabled': props.disabled,
-            'p-focus': focusedState
+            'p-invalid': props.invalid
         }),
+    box: 'p-radiobutton-box',
+    input: 'p-radiobutton-input',
     icon: 'p-radiobutton-icon'
 };
-
-const styles = `
-@layer primereact {
-    .p-radiobutton {
-        display: inline-flex;
-        cursor: pointer;
-        user-select: none;
-        vertical-align: bottom;
-    }
-    
-    .p-radiobutton-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .p-radiobutton-icon {
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        transform: translateZ(0) scale(.1);
-        border-radius: 50%;
-        visibility: hidden;
-    }
-    
-    .p-radiobutton-box.p-highlight .p-radiobutton-icon {
-        transform: translateZ(0) scale(1.0, 1.0);
-        visibility: visible;
-    }
-}
-`;
 
 export const RadioButtonBase = ComponentBase.extend({
     defaultProps: {
@@ -57,6 +23,7 @@ export const RadioButtonBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         name: null,
         onChange: null,
         onClick: null,
@@ -69,7 +36,6 @@ export const RadioButtonBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes,
-        styles
+        classes
     }
 });

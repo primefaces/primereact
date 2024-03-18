@@ -2,6 +2,7 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/dropdown/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/dropdown/basicdoc';
+import { CheckmarkDoc } from '@/components/doc/dropdown/checkmarkdoc';
 import { ClearIconDoc } from '@/components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '@/components/doc/dropdown/disableddoc';
 import { EditableDoc } from '@/components/doc/dropdown/editabledoc';
@@ -32,6 +33,11 @@ const DropdownDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'checkmark',
+            label: 'Checkmark',
+            component: CheckmarkDoc
         },
         {
             id: 'editable',

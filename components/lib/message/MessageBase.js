@@ -15,13 +15,9 @@ export const MessageBase = ComponentBase.extend({
     },
     css: {
         classes: {
-            root: ({ props }) =>
+            root: ({ props: { severity } }) =>
                 classNames('p-inline-message p-component', {
-                    'p-inline-message-info': props.severity === 'info',
-                    'p-inline-message-warn': props.severity === 'warn',
-                    'p-inline-message-error': props.severity === 'error',
-                    'p-inline-message-success': props.severity === 'success',
-                    'p-inline-message-icon-only': !props.text
+                    [`p-inline-message-${severity}`]: severity
                 }),
             icon: 'p-inline-message-icon',
             text: 'p-inline-message-text'

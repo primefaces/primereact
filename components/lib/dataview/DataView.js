@@ -6,10 +6,12 @@ import { SpinnerIcon } from '../icons/spinner';
 import { ThLargeIcon } from '../icons/thlarge';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { useMergeProps } from '../hooks/Hooks';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = DataViewLayoutOptionsBase.getProps(inProps, context);
     const { ptm, cx } = DataViewLayoutOptionsBase.setMetaData({
@@ -76,6 +78,7 @@ export const DataViewItem = React.memo((props) => {
 
 export const DataView = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = DataViewBase.getProps(inProps, context);
         const [firstState, setFirstState] = React.useState(props.first);

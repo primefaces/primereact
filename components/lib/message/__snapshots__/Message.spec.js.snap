@@ -5,7 +5,7 @@ exports[`Message content 1`] = `
   <div
     aria-atomic="true"
     aria-live="polite"
-    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    class="p-inline-message p-component p-inline-message-info"
     data-pc-name="message"
     data-pc-section="root"
     role="alert"
@@ -22,7 +22,7 @@ exports[`Message default 1`] = `
   <div
     aria-atomic="true"
     aria-live="polite"
-    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    class="p-inline-message p-component p-inline-message-info"
     data-pc-name="message"
     data-pc-section="root"
     role="alert"
@@ -57,7 +57,7 @@ exports[`Message icon 1`] = `
   <div
     aria-atomic="true"
     aria-live="polite"
-    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    class="p-inline-message p-component p-inline-message-info"
     data-pc-name="message"
     data-pc-section="root"
     role="alert"
@@ -231,7 +231,7 @@ exports[`Message templating 1`] = `
   <div
     aria-atomic="true"
     aria-live="polite"
-    class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    class="p-inline-message p-component p-inline-message-info"
     data-pc-name="message"
     data-pc-section="root"
     role="alert"

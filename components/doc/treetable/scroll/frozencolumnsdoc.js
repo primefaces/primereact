@@ -60,7 +60,7 @@ import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
 export default function FrozenColumnsDemo() {
-    const [nodes, setNodes] = useState([]);
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));

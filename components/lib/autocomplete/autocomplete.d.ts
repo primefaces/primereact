@@ -227,7 +227,7 @@ export interface AutoCompleteContext {
  * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
+export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
     /**
      * Unique identifier of the element.
      */
@@ -256,6 +256,11 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue 300
      */
     delay?: number | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
     /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false

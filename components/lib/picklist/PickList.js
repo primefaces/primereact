@@ -226,21 +226,45 @@ export const PickList = React.memo(
         const sourceList = getVisibleList(props.source, 'source');
         const targetList = getVisibleList(props.target, 'target');
 
-        const onListFocus = (event, type) => {
-            const listElement = getListElement(type);
-            const selectedFirstItem = DomHandler.findSingle(listElement, '[data-p-highlight="true"]') || DomHandler.findSingle(listElement, '[data-pc-section="item"]');
-            const itemList = listElement && listElement.children ? [...listElement.children] : [];
+        const findCurrentFocusedIndex = (listElement) => {
+            if (focusedOptionIndex === -1) {
+                const itemList = listElement && listElement.children ? [...listElement.children] : [];
+                let selectedOptionIndex = findFirstSelectedOptionIndex(listElement, itemList);
 
-            if (selectedFirstItem) {
-                const findIndex = ObjectUtils.findIndexInList(selectedFirstItem, itemList);
+                if (props.autoOptionFocus && selectedOptionIndex === -1) {
+                    selectedOptionIndex = findFirstFocusedOptionIndex(listElement, itemList);
+                }
 
-                setFocused({ ...focused, [type]: true });
-
-                const index = focusedOptionIndex !== -1 ? focusedOptionIndex : selectedFirstItem ? findIndex : -1;
-
-                changeFocusedOptionIndex(index, type);
-                props.onFocus && props.onFocus(event);
+                return selectedOptionIndex;
             }
+
+            return -1;
+        };
+
+        const findFirstSelectedOptionIndex = (listElement, itemList) => {
+            if (sourceSelectionState.length || targetSelectionState.length) {
+                const selectedFirstItem = DomHandler.findSingle(listElement, '[data-p-highlight="true"]');
+
+                return ObjectUtils.findIndexInList(selectedFirstItem, itemList);
+            }
+
+            return -1;
+        };
+
+        const findFirstFocusedOptionIndex = (listElement, itemList) => {
+            const firstFocusableItem = DomHandler.findSingle(listElement, '[data-pc-section="item"]');
+
+            return ObjectUtils.findIndexInList(firstFocusableItem, itemList);
+        };
+
+        const onListFocus = (event, type) => {
+            setFocused({ ...focused, [type]: true });
+
+            const listElement = getListElement(type);
+            const currentFocusedIndex = findCurrentFocusedIndex(listElement);
+
+            changeFocusedOptionIndex(currentFocusedIndex, type);
+            props.onFocus && props.onFocus(event);
         };
 
         const onListBlur = (event, type) => {
@@ -467,7 +491,15 @@ export const PickList = React.memo(
 
             const items = DomHandler.find(listElement, '[data-pc-section="item"]');
 
-            let order = index >= items.length ? items.length - 1 : index < 0 ? 0 : index;
+            let order;
+
+            if (index >= items.length) {
+                order = items.length - 1;
+            } else if (index < 0) {
+                return;
+            } else {
+                order = index;
+            }
 
             setFocusedOptionIndex(items[order].getAttribute('id'));
             scrollInViewWithFocus(items[order].getAttribute('id'), type);
