@@ -53,6 +53,7 @@ export function SeverityDoc(props) {
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" />
 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" />
+<SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -108,6 +109,7 @@ export default function SeverityDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" />
         </div>
     )
 }
@@ -167,6 +169,7 @@ export default function SeverityDemo() {
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" />
             <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" />
+            <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" />
         </div>
     )
 }
@@ -187,6 +190,7 @@ export default function SeverityDemo() {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="warning" />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="help" />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="danger" />
+                <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="contrast" />
             </div>
             <DocSectionCode code={code} />
         </>

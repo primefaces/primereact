@@ -120,6 +120,7 @@ export const MultiSelectPanel = React.memo(
                         disabled={disabled}
                         className={props.itemClassName}
                         checkboxIcon={props.checkboxIcon}
+                        isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
                     />
@@ -197,6 +198,7 @@ export const MultiSelectPanel = React.memo(
                         disabled={disabled}
                         className={props.itemClassName}
                         checkboxIcon={props.checkboxIcon}
+                        isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
                     />

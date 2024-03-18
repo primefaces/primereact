@@ -106,17 +106,17 @@ export default function ContextMenuDemo() {
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
-import { TreeTable } from 'primereact/treetable';
+import { TreeTable, TreeTableExpandedKeysType } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { TreeNode } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
 export default function ContextMenuDemo() {
-    const [nodes, setNodes] = useState<TreeNode>([]);
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
     const [expandedKeys, setExpandedKeys] = useState<TreeTableExpandedKeysType | null>(null);
-    const [selectedNodeKey, setSelectedNodeKey] = useState<string>(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState<string | null>(null);
     const toast = useRef<Toast>(null);
     const cm = useRef<ContextMenu>(null);
     const menu = [

@@ -17,10 +17,10 @@ export const Dropdown = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = DropdownBase.getProps(inProps, context);
         const [filterState, setFilterState] = React.useState('');
-        const [clicked, setClicked] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+        const clickedRef = React.useRef(false);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const firstHiddenFocusableElementOnOverlay = React.useRef(null);
@@ -117,7 +117,7 @@ export const Dropdown = React.memo(
                 overlayVisibleState ? hide() : show();
             }
 
-            setClicked(true);
+            clickedRef.current = true;
         };
 
         const onInputFocus = (event) => {
@@ -240,14 +240,14 @@ export const Dropdown = React.memo(
 
                 default:
                     if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                        !overlayVisibleState && show();
+                        !overlayVisibleState && !props.editable && show();
                         !props.editable && searchOptions(event, event.key);
                     }
 
                     break;
             }
 
-            setClicked(false);
+            clickedRef.current = false;
         };
 
         const onFilterInputKeyDown = (event) => {
@@ -386,7 +386,7 @@ export const Dropdown = React.memo(
                 show();
                 props.editable && changeFocusedOptionIndex(event, findSelectedOptionIndex());
             } else {
-                const optionIndex = focusedOptionIndex !== -1 ? findNextOptionIndex(focusedOptionIndex) : clicked ? findFirstOptionIndex() : findFirstFocusedOptionIndex();
+                const optionIndex = focusedOptionIndex !== -1 ? findNextOptionIndex(focusedOptionIndex) : clickedRef.current ? findFirstOptionIndex() : findFirstFocusedOptionIndex();
 
                 changeFocusedOptionIndex(event, optionIndex);
             }
@@ -403,7 +403,7 @@ export const Dropdown = React.memo(
                 state.overlayVisible && hide();
                 event.preventDefault();
             } else {
-                const optionIndex = focusedOptionIndex !== -1 ? findPrevOptionIndex(focusedOptionIndex) : clicked ? findLastOptionIndex() : findLastFocusedOptionIndex();
+                const optionIndex = focusedOptionIndex !== -1 ? findPrevOptionIndex(focusedOptionIndex) : clickedRef.current ? findLastOptionIndex() : findLastFocusedOptionIndex();
 
                 changeFocusedOptionIndex(event, optionIndex);
 
@@ -627,8 +627,6 @@ export const Dropdown = React.memo(
         };
 
         const onEditableInputChange = (event) => {
-            !overlayVisibleState && show();
-
             let searchIndex = null;
 
             if (event.target.value) {
@@ -725,7 +723,9 @@ export const Dropdown = React.memo(
         const selectItem = (event) => {
             if (selectedOption !== event.option) {
                 updateEditableLabel(event.option);
+                setFocusedOptionIndex(-1);
                 const optionValue = getOptionValue(event.option);
+                const selectedOptionIndex = findOptionIndexInList(event.option, visibleOptions);
 
                 if (props.onChange) {
                     props.onChange({
@@ -744,6 +744,8 @@ export const Dropdown = React.memo(
                         }
                     });
                 }
+
+                changeFocusedOptionIndex(event.originalEvent, selectedOptionIndex);
             }
         };
 
@@ -788,11 +790,11 @@ export const Dropdown = React.memo(
 
         const hide = () => {
             setOverlayVisibleState(false);
-            setClicked(false);
+            clickedRef.current = false;
         };
 
         const onFocus = () => {
-            if (props.editable) {
+            if (props.editable && !overlayVisibleState && clickedRef.current === false) {
                 DomHandler.focus(inputRef.current);
             }
         };

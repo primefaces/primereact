@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CheckboxPassThroughType } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -22,7 +23,6 @@ export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButt
  */
 export interface RadioButtonPassThroughMethodOptions {
     props: RadioButtonProps;
-    state: RadioButtonState;
 }
 
 /**
@@ -35,21 +35,17 @@ export interface RadioButtonPassThroughOptions {
      */
     root?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the input's DOM element.
-     */
-    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the hidden accessible DOM element wrapper.
+     * Uses to pass attributes to the input's DOM element.
      */
-    hiddenInputWrapper?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the hidden accessible DOM element.
+     * Used to pass attributes to the box's DOM element.
      */
-    hiddenInput?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
@@ -63,17 +59,6 @@ export interface RadioButtonPassThroughOptions {
 }
 
 /**
- * Defines current inline state in RadioButton component.
- */
-export interface RadioButtonState {
-    /**
-     * Current focused state as a boolean.
-     * @defaultValue false
-     */
-    focused: boolean;
-}
-
-/**
  * Custom change event.
  * @see {@link RadioButtonProps.onChange}
  * @extends {FormEvent}
@@ -82,18 +67,10 @@ export interface RadioButtonState {
 interface RadioButtonChangeEvent extends FormEvent {}
 
 /**
- * Custom click event.
- * @see {@link RadioButtonProps.onClick}
- * @extends {FormEvent}
- * @event
- */
-interface RadioButtonClickEvent extends FormEvent {}
-
-/**
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref' | 'pt'> {
+export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
@@ -121,10 +98,20 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     checked?: boolean | undefined;
     /**
-     * When present, it specifies that the element value cannot be altered.
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */
     disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that an input field is read-only.
+     * @default false
+     */
+    readonly?: boolean | undefined;
     /**
      * When present, it specifies that an input field must be filled out before submitting the form.
      * @defaultValue false
@@ -143,11 +130,6 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @param {RadioButtonChangeEvent} event - Custom change event.
      */
     onChange?(event: RadioButtonChangeEvent): void;
-    /**
-     * Callback to invoke on click.  Mark the event with preventDefault to prevent the option from changing.
-     * @param {RadioButtonClickEvent} event - Custom click event.
-     */
-    onClick?(event: RadioButtonClickEvent): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
