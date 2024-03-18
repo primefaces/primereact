@@ -227,7 +227,7 @@ export interface AutoCompleteContext {
  * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
+export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
     /**
      * Unique identifier of the element.
      */

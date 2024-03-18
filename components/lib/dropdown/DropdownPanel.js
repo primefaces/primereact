@@ -89,10 +89,12 @@ export const DropdownPanel = React.memo(
                         style={style}
                         template={props.itemTemplate}
                         selected={props.isSelected(option)}
+                        highlightOnSelect={props.highlightOnSelect}
                         disabled={disabled}
                         onClick={props.onOptionClick}
                         ptm={ptm}
                         cx={cx}
+                        checkmark={props.checkmark}
                     />
                 );
             });
@@ -128,10 +130,18 @@ export const DropdownPanel = React.memo(
                     },
                     getPTOptions('itemGroup')
                 );
+                const itemGroupLabelProps = mergeProps(
+                    {
+                        className: cx('itemGroupLabel')
+                    },
+                    getPTOptions('itemGroupLabel')
+                );
 
                 return (
                     <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{groupContent}</li>
+                        <li {...itemGroupProps}>
+                            <span {...itemGroupLabelProps}>{groupContent}</span>
+                        </li>
                         {groupChildrenContent}
                     </React.Fragment>
                 );
@@ -150,10 +160,12 @@ export const DropdownPanel = React.memo(
                         style={style}
                         template={props.itemTemplate}
                         selected={props.isSelected(option)}
+                        highlightOnSelect={props.highlightOnSelect}
                         disabled={disabled}
                         onClick={props.onOptionClick}
                         ptm={ptm}
                         cx={cx}
+                        checkmark={props.checkmark}
                     />
                 );
             }

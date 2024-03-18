@@ -43,6 +43,10 @@ export interface SidebarPassThroughOptions {
      */
     closeButtonIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the custom icons content's DOM element.
+     */
+    icons?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the close icon's DOM element.
      */
     closeIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
@@ -50,10 +54,6 @@ export interface SidebarPassThroughOptions {
      * Uses to pass attributes to the content's DOM element.
      */
     content?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the custom icons content's DOM element.
-     */
-    icons?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the mask's DOM element.
      */

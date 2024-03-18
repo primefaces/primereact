@@ -23,7 +23,6 @@ exports[`Splitter Nested 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="separator"
       style="width: 4px;"
     >
       <div
@@ -35,6 +34,7 @@ exports[`Splitter Nested 1`] = `
         aria-valuetext="20%"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        role="separator"
         tabindex="0"
       />
     </div>
@@ -66,7 +66,6 @@ exports[`Splitter Nested 1`] = `
           class="p-splitter-gutter"
           data-p-splitter-gutter-resizing="false"
           data-pc-section="gutter"
-          role="separator"
           style="height: 4px;"
         >
           <div
@@ -78,6 +77,7 @@ exports[`Splitter Nested 1`] = `
             aria-valuetext="15%"
             class="p-splitter-gutter-handle"
             data-pc-section="gutterhandler"
+            role="separator"
             tabindex="0"
           />
         </div>
@@ -109,7 +109,6 @@ exports[`Splitter Nested 1`] = `
               class="p-splitter-gutter"
               data-p-splitter-gutter-resizing="false"
               data-pc-section="gutter"
-              role="separator"
               style="width: 4px;"
             >
               <div
@@ -121,6 +120,7 @@ exports[`Splitter Nested 1`] = `
                 aria-valuetext="20%"
                 class="p-splitter-gutter-handle"
                 data-pc-section="gutterhandler"
+                role="separator"
                 tabindex="0"
               />
             </div>
@@ -165,7 +165,6 @@ exports[`Splitter Single Panel with size 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="separator"
       style="height: 4px;"
     >
       <div
@@ -177,6 +176,7 @@ exports[`Splitter Single Panel with size 1`] = `
         aria-valuetext="5%"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        role="separator"
         tabindex="0"
       />
     </div>
@@ -207,7 +207,6 @@ exports[`Splitter Single Panel without size 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="separator"
       style="height: 4px;"
     >
       <div
@@ -219,6 +218,7 @@ exports[`Splitter Single Panel without size 1`] = `
         aria-valuetext="100%"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        role="separator"
         tabindex="0"
       />
     </div>
@@ -249,7 +249,6 @@ exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = 
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="separator"
       style="width: 4px;"
     >
       <div
@@ -261,6 +260,7 @@ exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = 
         aria-valuetext="50%"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        role="separator"
         tabindex="0"
       />
     </div>
@@ -301,7 +301,6 @@ exports[`Splitter Vertical layout 1`] = `
       class="p-splitter-gutter"
       data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
-      role="separator"
       style="height: 4px;"
     >
       <div
@@ -313,6 +312,7 @@ exports[`Splitter Vertical layout 1`] = `
         aria-valuetext="50%"
         class="p-splitter-gutter-handle"
         data-pc-section="gutterhandler"
+        role="separator"
         tabindex="0"
       />
     </div>

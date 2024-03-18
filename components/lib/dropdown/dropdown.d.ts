@@ -94,9 +94,25 @@ export interface DropdownPassThroughOptions {
      */
     itemGroup?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
+     * Used to pass attributes to the item group label's DOM element.
+     */
+    itemGroupLabel?: DropdownPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the item's DOM element.
      */
     item?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to pass attributes to the item label's DOM element.
+     */
+    itemLabel?: DropdownPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the check icon's DOM element.
+     */
+    checkIcon?: DropdownPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    /**
+     * Used to pass attributes to the bank icon's DOM element.
+     */
+    blankIcon?: DropdownPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
@@ -266,6 +282,16 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     editable?: boolean | undefined;
     /**
+     *  Whether the selected option will be add highlight class.
+     *  @defaultValue true
+     */
+    highlightOnSelect?: boolean | undefined;
+    /**
+     *  Whether the selected option will be shown with a check mark.
+     *  @defaultValue false
+     */
+    checkmark?: boolean | undefined;
+    /**
      * Template to display when filtering does not return any results.
      * @defaultValue No available options
      */
@@ -324,6 +350,16 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Unique identifier of the element.
      */
     id?: string | undefined;
+    /**
+     * When enabled, the focused tab is activated.
+     * @defaultValue false
+     */
+    selectOnFocus?: false;
+    /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
+     */
+    autoOptionFocus?: false;
     /**
      * Identifier of the focusable input.
      */

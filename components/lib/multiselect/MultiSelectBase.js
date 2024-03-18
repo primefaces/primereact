@@ -54,10 +54,6 @@ const classes = {
         }),
     checkboxContainer: 'p-checkbox p-component',
     checkboxIcon: 'p-checkbox-icon p-c',
-    checkbox: ({ itemProps: props }) =>
-        classNames('p-checkbox-box', {
-            'p-highlight': props.selected
-        }),
     transition: 'p-connected-overlay'
 };
 
@@ -240,6 +236,7 @@ export const MultiSelectBase = ComponentBase.extend({
         itemClassName: null,
         itemTemplate: null,
         loading: false,
+        loadingIcon: null,
         maxSelectedLabels: null,
         name: null,
         onBlur: null,

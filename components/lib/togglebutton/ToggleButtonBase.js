@@ -2,23 +2,27 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    label: 'p-button-label',
-    icon: ({ props, label }) =>
-        classNames('p-button-icon p-c', {
-            'p-button-icon-left': props.iconPos === 'left' && label,
-            'p-button-icon-right': props.iconPos === 'right' && label
-        }),
-    root: ({ props, hasIcon, hasLabel }) =>
+    root: ({ props }) =>
         classNames(
-            'p-button p-togglebutton p-component',
+            'p-togglebutton p-component',
             {
-                'p-button-icon-only': hasIcon && !hasLabel,
-                'p-highlight': props.checked,
                 'p-disabled': props.disabled,
+                'p-highlight': props.checked,
                 'p-invalid': props.invalid
             },
             props.className
-        )
+        ),
+    input: 'p-togglebutton-input',
+    box: ({ hasIcon, hasLabel }) =>
+        classNames('p-button p-component', {
+            'p-button-icon-only': hasIcon && !hasLabel
+        }),
+    icon: ({ props, label }) =>
+        classNames('p-button-icon', {
+            'p-button-icon-left': props.iconPos === 'left' && label,
+            'p-button-icon-right': props.iconPos === 'right' && label
+        }),
+    label: 'p-button-label'
 };
 
 export const ToggleButtonBase = ComponentBase.extend({

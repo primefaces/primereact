@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useMergeProps } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { CheckIcon } from '../icons/check';
+import { BlankIcon } from '../icons/blank';
 
 export const DropdownItem = React.memo((props) => {
     const mergeProps = useMergeProps();
-    const { ptm, cx, selected, disabled, option, label, index, focusedOptionIndex } = props;
+    const { ptm, cx, selected, disabled, option, label, index, focusedOptionIndex, checkmark, highlightOnSelect } = props;
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -30,7 +32,7 @@ export const DropdownItem = React.memo((props) => {
         {
             role: 'option',
             key: props.label,
-            className: classNames(option.className, cx('item', { selected, disabled, label, index, focusedOptionIndex })),
+            className: classNames(option.className, cx('item', { selected, disabled, label, index, focusedOptionIndex, highlightOnSelect })),
             style: props.style,
             onClick: (e) => onClick(e, index),
             'aria-label': label,
@@ -41,10 +43,39 @@ export const DropdownItem = React.memo((props) => {
         },
         getPTOptions('item', { selected, disabled, option, label })
     );
+    const itemGroupLabelProps = mergeProps(
+        {
+            className: cx('itemLabel')
+        },
+        getPTOptions('itemLabel')
+    );
+
+    const iconRenderer = () => {
+        if (selected) {
+            const checkIconProps = mergeProps(
+                {
+                    className: cx('checkIcon')
+                },
+                getPTOptions('checIcon')
+            );
+
+            return <CheckIcon {...checkIconProps} />;
+        } else {
+            const blankIconProps = mergeProps(
+                {
+                    className: cx('blankIcon')
+                },
+                getPTOptions('blankIcon')
+            );
+
+            return <BlankIcon {...blankIconProps} />;
+        }
+    };
 
     return (
         <li {...itemProps}>
-            {content}
+            {checkmark && iconRenderer()}
+            <span {...itemGroupLabelProps}>{content}</span>
             <Ripple />
         </li>
     );

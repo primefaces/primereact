@@ -260,6 +260,11 @@ export interface PickListProps {
      */
     targetHeader?: React.ReactNode | undefined;
     /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue true
+     */
+    autoOptionFocus?: boolean | undefined;
+    /**
      * Inline style of the element.
      */
     style?: React.CSSProperties | undefined;

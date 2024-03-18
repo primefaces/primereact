@@ -96,7 +96,7 @@ export const ListBoxBase = ComponentBase.extend({
         listStyle: null,
         metaKeySelection: false,
         selectOnFocus: false,
-        autoOptionFocus: true,
+        autoOptionFocus: false,
         multiple: false,
         onChange: null,
         onFilterValueChange: null,

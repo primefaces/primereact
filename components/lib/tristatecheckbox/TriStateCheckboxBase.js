@@ -1,16 +1,17 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-tristatecheckbox p-checkbox p-component', { 'p-checkbox-disabled': props.disabled }),
-    checkIcon: 'p-checkbox-icon p-c',
-    checkbox: ({ props, focusedState }) =>
-        classNames('p-checkbox-box', {
-            'p-highlight': ObjectUtils.isNotEmpty(props.value),
+    root: ({ props }) =>
+        classNames('p-tristatecheckbox p-checkbox p-component', {
+            'p-highlight': props.value !== null,
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
-            'p-focus': focusedState
-        })
+            'p-variant-filled': props.variant === 'filled'
+        }),
+    checkIcon: 'p-checkbox-icon p-c',
+    box: 'p-checkbox-box',
+    input: 'p-checkbox-input'
 };
 
 export const TriStateCheckboxBase = ComponentBase.extend({
