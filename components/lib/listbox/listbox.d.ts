@@ -400,6 +400,21 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
     /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
+     */
+    autoOptionFocus?: boolean | undefined;
+    /**
+     * When enabled, the focused option is selected.
+     * @defaultValue false
+     */
+    selectOnFocus?: boolean | undefined;
+    /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {ListboxPassThroughOptions}
      */
