@@ -211,7 +211,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      */
     ariaLabelledBy?: string | undefined;
     /**
-     * Separator char to add an item when pressed in addition to the enter key. Currently only possible value is ','.
+     * Separator char to add an item when pressed in addition to the enter key.
      */
     separator?: string | undefined;
     /**
