@@ -89,6 +89,7 @@ export const ListBoxBase = ComponentBase.extend({
         filterTemplate: null,
         filterValue: null,
         selectOnFocus: false,
+        focusOnHover: true,
         id: null,
         itemTemplate: null,
         invalid: false,
