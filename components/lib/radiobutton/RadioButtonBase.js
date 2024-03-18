@@ -23,6 +23,7 @@ export const RadioButtonBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         name: null,
         onChange: null,
         onClick: null,

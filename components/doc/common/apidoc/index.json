@@ -3639,6 +3639,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
@@ -5931,6 +5939,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keepInvalid",
                             "optional": true,
                             "readonly": false,
@@ -7450,6 +7466,13 @@
                             "description": "Icon to show in each of the decrement buttons."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
@@ -8951,6 +8974,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
@@ -9973,6 +10004,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -10611,6 +10650,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keyfilter",
@@ -22846,6 +22893,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
@@ -29618,6 +29673,14 @@
                             "description": "When present, it specifies that the element value cannot be altered."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -30039,6 +30102,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "locale",
                             "optional": true,
                             "readonly": false,
@@ -30318,19 +30389,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when the key pressed down."
-                        },
-                        {
-                            "name": "onKeyUp",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "KeyboardEvent<HTMLInputElement>",
-                                    "description": "Browser event"
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when the key released."
                         },
                         {
                             "name": "onValueChange",
@@ -30614,6 +30672,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -30857,6 +30923,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -31064,6 +31138,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keyfilter",
@@ -31669,6 +31751,14 @@
                             "type": "string",
                             "default": "",
                             "description": "When specified, filter displays with this value."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemTemplate",
@@ -35097,6 +35187,14 @@
                             "type": "Ref<HTMLSelectElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemCheckboxIcon",
@@ -40522,6 +40620,13 @@
                             "description": "Uses to pass attributes to the show icon's DOM element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
@@ -43106,6 +43211,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When present, it specifies that the element should be disabled."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "multiple",
@@ -51807,6 +51920,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "metaKeySelection",
                             "optional": true,
                             "readonly": false,
@@ -54419,6 +54540,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When present, it specifies that the element value cannot be altered."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "pt",

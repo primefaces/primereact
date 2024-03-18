@@ -10,7 +10,8 @@ const classes = {
         classNames(
             'p-listbox p-component',
             {
-                'p-disabled': props.disabled
+                'p-disabled': props.disabled,
+                'p-invalid': props.invalid
             },
             props.className
         ),
@@ -90,6 +91,7 @@ export const ListBoxBase = ComponentBase.extend({
         selectOnFocus: false,
         id: null,
         itemTemplate: null,
+        invalid: false,
         listClassName: null,
         listStyle: null,
         metaKeySelection: false,
