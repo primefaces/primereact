@@ -34,6 +34,7 @@ export const ToggleButtonBase = ComponentBase.extend({
         onLabel: 'Yes',
         offLabel: 'No',
         iconPos: 'left',
+        invalid: false,
         style: null,
         className: null,
         checked: false,

@@ -6,6 +6,7 @@ const classes = {
     root: ({ props, focusedState, overlayVisibleState }) =>
         classNames('p-dropdown p-component p-inputwrapper', {
             'p-disabled': props.disabled,
+            'p-invalid': props.invalid,
             'p-focus': focusedState,
             'p-dropdown-clearable': props.showClear && !props.disabled,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
@@ -182,6 +183,7 @@ export const DropdownBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemTemplate: null,
         loading: false,
         loadingIcon: null,

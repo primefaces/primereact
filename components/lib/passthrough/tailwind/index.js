@@ -5,9 +5,9 @@ export const TRANSITIONS = {
         timeout: 500,
         classNames: {
             enter: 'max-h-0',
-            enterActive: '!max-h-40 overflow-hidden transition-all duration-500 ease-in-out',
-            exit: 'max-h-40',
-            exitActive: '!max-h-0 overflow-hidden transition-all duration-500 ease-in'
+            enterActive: '!max-h-[1000px] overflow-hidden transition-[max-height] duration-500 ease-in',
+            exit: 'max-h-[1000px]',
+            exitActive: '!max-h-0 overflow-hidden transition-[max-height] duration-500 ease-out'
         }
     },
     overlay: {

@@ -8,6 +8,7 @@ const classes = {
             'p-autocomplete-dd': props.dropdown,
             'p-autocomplete-multiple': props.multiple,
             'p-inputwrapper-filled': props.value,
+            'p-invalid': props.invalid,
             'p-inputwrapper-focus': focusedState
         }),
     container: ({ props }) =>
@@ -165,6 +166,7 @@ export const AutoCompleteBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         inputStyle: null,
+        invalid: false,
         itemTemplate: null,
         loadingIcon: null,
         maxLength: null,

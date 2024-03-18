@@ -76,6 +76,11 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     size?: number | string | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;

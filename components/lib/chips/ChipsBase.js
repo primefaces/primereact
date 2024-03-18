@@ -88,6 +88,7 @@ const classes = {
             'p-inputwrapper-filled': isFilled,
             'p-inputwrapper-focus': focusedState,
             'p-disabled': disabled,
+            'p-invalid': props.invalid,
             'p-focus': focusedState
         })
 };
@@ -104,6 +105,7 @@ export const ChipsBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemTemplate: null,
         keyfilter: null,
         max: null,
