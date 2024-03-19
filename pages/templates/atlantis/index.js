@@ -7,6 +7,7 @@ import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import AtlantisLogo from './AtlantisLogo';
+import Link from 'next/link';
 
 const features2Data = [
     {
@@ -89,7 +90,7 @@ const animationFeaturesData1 = [
             <>
                 Atlantis uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
                 <a href="https://www.figma.com/file/two0OGwOwHfq0sdjeK34l0/Preview-%7C-Atlantis-2022?node-id=15%3A1427&t=2lNJ5EzW0xuvQWdm-1">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the
-                Atlantis Figma file as they are available in <a href="/uikit">PrimeOne for Figma</a> only.
+                Atlantis Figma file as they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/features-animation-figma.png'

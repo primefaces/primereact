@@ -7,6 +7,7 @@ import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import VeronaLogo from './VeronaLogo';
+import Link from 'next/link';
 
 const features2Data = [
     {
@@ -89,7 +90,7 @@ const animationFeaturesData1 = [
             <>
                 Verona uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
                 <a href="https://www.figma.com/file/PgQXX4HXMPeCkT74tGajod/Preview-%7C-Verona-2022?node-id=1303%3A750">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Verona Figma file as they
-                are available in <a href="/uikit">PrimeOne for Figma</a> only.
+                are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/verona/features-animation-figma.png'

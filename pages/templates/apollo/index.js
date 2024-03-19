@@ -7,6 +7,7 @@ import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import ApolloLogo from './ApolloLogo';
+import Link from 'next/link';
 
 const apolloRelatedData = [
     {
@@ -90,7 +91,7 @@ const animationFeaturesData1 = [
             <>
                 Apollo uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
                 <a href="https://www.figma.com/file/zQOW0XBXdCTqODzEOqwBtt/Preview-%7C-Apollo-2022?node-id=335%3A21768&t=urYI89V3PLNAZEJG-1/">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the
-                Apollo Figma file as they are available in <a href="/uikit">PrimeOne for Figma</a> only.
+                Apollo Figma file as they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-figma.png'

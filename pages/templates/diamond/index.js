@@ -7,6 +7,7 @@ import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import DiamondLogo from './DiamondLogo';
+import Link from 'next/link';
 
 const features2Data = [
     {
@@ -89,7 +90,7 @@ const animationFeaturesData1 = [
             <>
                 Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
                 <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as
-                they are available in <a href="/uikit">PrimeOne for Figma</a> only.
+                they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-figma.png'
