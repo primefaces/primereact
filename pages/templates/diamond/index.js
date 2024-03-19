@@ -70,15 +70,8 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>
-                , choose from the wide range of blocks and customize the way you like. Note that{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>{' '}
-                is not included in the template and requires a separate purchase.
+                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
+                the template and requires a separate purchase.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -95,14 +88,8 @@ const animationFeaturesData1 = [
         description: (
             <>
                 Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
-                <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531" target="_blank">
-                    preview the Figma file
-                </a>{' '}
-                before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as they are available in{' '}
-                <a href="/uikit" target="_blank">
-                    PrimeOne for Figma
-                </a>{' '}
-                only.
+                <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as
+                they are available in <a href="/uikit">PrimeOne for Figma</a> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/features-animation-figma.png'
