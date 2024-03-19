@@ -50,7 +50,7 @@ export const AutoCompletePanel = React.memo(
         };
 
         const findKeyIndex = (array, key, value) => {
-            return array.map((obj, index) => (obj[key] === value ? index : undefined)).filter((index) => index !== undefined)[0];
+            return array.findIndex((obj) => obj[key] === value);
         };
 
         const latestKey = React.useRef({ key: null, index: 0, keyIndex: 0 });
@@ -61,7 +61,7 @@ export const AutoCompletePanel = React.memo(
             if (props.optionGroupLabel) {
                 const keyIndex = findKeyIndex(props.suggestions, props.optionGroupLabel, suggestion);
 
-                if (keyIndex !== undefined) {
+                if (keyIndex !== -1) {
                     latestKey.current = { key: suggestion, index, keyIndex };
                     const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : suggestion;
                     const key = index + '_' + getOptionGroupRenderKey(suggestion);
