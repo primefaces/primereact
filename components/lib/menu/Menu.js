@@ -94,10 +94,10 @@ export const Menu = React.memo(
         };
 
         const onItemMouseEnter = (key) => {
-          if (props.popup && focusedOptionIndex !== key) {
-            setFocusedOptionIndex(key);
-          }
-        }
+            if (props.popup && focusedOptionIndex !== key) {
+                setFocusedOptionIndex(key);
+            }
+        };
 
         const onListFocus = (event) => {
             setFocused(true);
