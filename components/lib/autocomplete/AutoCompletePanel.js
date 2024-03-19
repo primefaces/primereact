@@ -79,7 +79,7 @@ export const AutoCompletePanel = React.memo(
                     return <li {...itemGroupProps}>{content}</li>;
                 } else {
                     const key = index + '_' + latestKey.current.keyIndex;
-                    const selected = props.selectedItem === suggestion;
+                    const selected = ObjectUtils.deepEquals(props.selectedItem, suggestion);
                     const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
                     const itemProps = mergeProps(
                         {
