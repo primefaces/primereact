@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.5.3](https://github.com/primefaces/primereact/tree/10.5.3) (2024-03-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.5.2...10.5.3)
+
+**Fixed bugs:**
+- Messages Missing MergeProps [\#6179](https://github.com/primefaces/primereact/issues/6179)
+
 ## [10.5.2](https://github.com/primefaces/primereact/tree/10.5.2) (2024-03-19)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.5.1...10.5.2)
