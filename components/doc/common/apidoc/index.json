@@ -51946,8 +51946,8 @@
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "",
+                            "type": "ReactNode | Function",
+                            "default": "No available options",
                             "description": "Text to display when there is no data."
                         },
                         {
