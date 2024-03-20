@@ -134,7 +134,7 @@ export const RadioButton = React.memo(
                     onBlur: onBlur,
                     onChange: onChange,
                     disabled: props.disabled,
-                    readonly: props.readonly,
+                    readOnly: props.readonly,
                     required: props.required,
                     tabIndex: props.tabIndex,
                     className: cx('input'),
