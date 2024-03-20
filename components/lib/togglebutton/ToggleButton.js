@@ -124,7 +124,7 @@ export const ToggleButton = React.memo(
                 'aria-pressed': props.checked,
                 'aria-invalid': props.invalid,
                 disabled: props.disabled,
-                readonly: props.readonly,
+                readOnly: props.readonly,
                 value: props.checked,
                 checked: props.checked
             },
