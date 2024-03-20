@@ -634,6 +634,7 @@ export const TreeSelect = React.memo(
         };
 
         const createContent = () => {
+            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
                     className: cx('emptyMessage')
@@ -671,7 +672,7 @@ export const TreeSelect = React.memo(
                         __parentMetadata={{ parent: metaData }}
                     ></Tree>
 
-                    {hasNoOptions && <div {...emptyMessageProps}>{props.emptyMessage || localeOption('emptyMessage')}</div>}
+                    {hasNoOptions && <div {...emptyMessageProps}>{message}</div>}
                 </>
             );
         };
