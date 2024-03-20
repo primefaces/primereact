@@ -19,25 +19,13 @@ export declare type FloatLabelPassThroughType<T> = PassThroughType<T, FloatLabel
  */
 export interface FloatLabelPassThroughMethodOptions {
     /**
-     * Defines instance.
-     */
-    instance: any;
-    /**
      * Defines valid properties.
      */
     props: FloatLabelProps;
     /**
-     * Defines valid attributes.
-     */
-    attrs: any;
-    /**
      * Defines parent options.
      */
     parent: any;
-    /**
-     * Defines passthrough(pt) options in global config.
-     */
-    global: object | undefined;
 }
 
 /**
