@@ -19,7 +19,9 @@ export const ListBox = React.memo(
         const firstHiddenFocusableElement = React.useRef(null);
         const lastHiddenFocusableElement = React.useRef(null);
         const [startRangeIndex, setStartRangeIndex] = React.useState(-1);
+        const [focused, setFocused] = React.useState(false);
         const [filterValueState, setFilterValueState] = React.useState('');
+        const [searchValue, setSearchValue] = React.useState('');
         const elementRef = React.useRef(null);
         const virtualScrollerRef = React.useRef(null);
         const id = React.useRef(null);
@@ -47,6 +49,16 @@ export const ListBox = React.memo(
             props.multiple ? onOptionSelectMultiple(event.originalEvent, option) : onOptionSelectSingle(event.originalEvent, option);
             optionTouched.current = false;
             index !== -1 && setFocusedOptionIndex(index);
+        };
+
+        const onOptionMouseDown = (event, index) => {
+            changeFocusedOptionIndex(event, index);
+        };
+
+        const onOptionMouseMove = (event, index) => {
+            if (props.focusOnHover && focused) {
+                changeFocusedOptionIndex(event, index);
+            }
         };
 
         const onOptionTouchEnd = () => {
@@ -150,6 +162,31 @@ export const ListBox = React.memo(
             return visibleOptions.findIndex((option) => isValidOption(option));
         };
 
+        const findLastSelectedOptionIndex = () => {
+            return hasSelectedOption() ? ObjectUtils.findLastIndex(visibleOptions, (option) => isValidSelectedOption(option)) : -1;
+        };
+
+        const findSelectedOptionIndex = () => {
+            if (hasSelectedOption()) {
+                if (props.multiple) {
+                    for (let index = props.value.length - 1; index >= 0; index--) {
+                        const value = props.value[index];
+                        const matchedOptionIndex = visibleOptions.findIndex((option) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
+
+                        if (matchedOptionIndex > -1) return matchedOptionIndex;
+                    }
+                } else {
+                    return visibleOptions.findIndex((option) => isValidSelectedOption(option));
+                }
+            }
+
+            return -1;
+        };
+
+        const findFirstSelectedOptionIndex = () => {
+            return hasSelectedOption() ? visibleOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
+        };
+
         const findLastOptionIndex = () => {
             return ObjectUtils.findLastIndex(visibleOptions, (option) => isValidOption(option));
         };
@@ -173,7 +210,7 @@ export const ListBox = React.memo(
         const findNearestSelectedOptionIndex = (index, firstCheckUp = false) => {
             let matchedOptionIndex = -1;
 
-            if (hasSelectedOption) {
+            if (hasSelectedOption()) {
                 if (firstCheckUp) {
                     matchedOptionIndex = findPrevSelectedOptionIndex(index);
                     matchedOptionIndex = matchedOptionIndex === -1 ? findNextSelectedOptionIndex(index) : matchedOptionIndex;
@@ -191,7 +228,7 @@ export const ListBox = React.memo(
         };
 
         const searchOptions = (event, char) => {
-            searchValue = (searchValue || '') + char;
+            setSearchValue((searchValue || '') + char);
 
             let optionIndex = -1;
 
@@ -217,19 +254,19 @@ export const ListBox = React.memo(
             }
 
             searchTimeout.current = setTimeout(() => {
-                searchValue = '';
+                setSearchValue('');
                 searchTimeout.current = null;
             }, 500);
         };
 
         const findNextSelectedOptionIndex = (index) => {
-            const matchedOptionIndex = hasSelectedOption && index < visibleOptions.length - 1 ? visibleOptions.slice(index + 1).findIndex((option) => isValidSelectedOption(option)) : -1;
+            const matchedOptionIndex = hasSelectedOption() && index < visibleOptions.length - 1 ? visibleOptions.slice(index + 1).findIndex((option) => isValidSelectedOption(option)) : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : -1;
         };
 
         const findPrevSelectedOptionIndex = (index) => {
-            const matchedOptionIndex = hasSelectedOption && index > 0 ? ObjectUtils.findLastIndex(visibleOptions.slice(0, index), (option) => isValidSelectedOption(option)) : -1;
+            const matchedOptionIndex = hasSelectedOption() && index > 0 ? ObjectUtils.findLastIndex(visibleOptions.slice(0, index), (option) => isValidSelectedOption(option)) : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex : -1;
         };
@@ -254,6 +291,12 @@ export const ListBox = React.memo(
             const selectedIndex = findFirstSelectedOptionIndex();
 
             return selectedIndex < 0 ? findFirstOptionIndex() : selectedIndex;
+        };
+
+        const findLastFocusedOptionIndex = () => {
+            const selectedIndex = findLastSelectedOptionIndex();
+
+            return selectedIndex < 0 ? findLastOptionIndex() : selectedIndex;
         };
 
         const changeFocusedOptionIndex = (event, index) => {
@@ -355,7 +398,7 @@ export const ListBox = React.memo(
             event.preventDefault();
         };
 
-        const onKeyDown = (event) => {
+        const onListKeyDown = (event) => {
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
@@ -426,7 +469,7 @@ export const ListBox = React.memo(
                 if (element) {
                     element.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
                 } else if (props.virtualScrollerOptions) {
-                    virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(index !== -1 ? index : props.focusedOptionIndex);
+                    virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(index !== -1 ? index : focusedOptionIndex);
                 }
             }, 0);
         };
@@ -449,6 +492,15 @@ export const ListBox = React.memo(
         const resetFilter = () => {
             setFilterValueState('');
             props.onFilter && props.onFilter({ filter: '' });
+        };
+
+        const autoUpdateModel = (isFocus = focused) => {
+            if (props.selectOnFocus && props.autoOptionFocus && !hasSelectedOption() && !props.multiple && isFocus) {
+                const currentFocusOptionIndex = findFirstFocusedOptionIndex();
+
+                onOptionSelect(null, visibleOptions[currentFocusOptionIndex]);
+                setFocusedOptionIndex(currentFocusOptionIndex);
+            }
         };
 
         const updateModel = (event, value) => {
@@ -503,11 +555,15 @@ export const ListBox = React.memo(
             return list.findIndex((item) => ObjectUtils.equals(value, getOptionValue(item), key));
         };
 
+        const isEquals = (value1, value2) => {
+            return ObjectUtils.equals(value1, value2, equalityKey());
+        };
+
         const isSelected = (option) => {
             const optionValue = getOptionValue(option);
-            const key = equalityKey();
 
-            return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, key)) : ObjectUtils.equals(props.value, optionValue, key);
+            if (props.multiple) return (props.value || []).some((value) => isEquals(value, optionValue));
+            else return isEquals(props.value, optionValue);
         };
 
         const filter = (option) => {
@@ -560,6 +616,19 @@ export const ListBox = React.memo(
             }
 
             lastHiddenFocusableElement.current.tabIndex = -1;
+        };
+
+        const onListFocus = () => {
+            setFocused(true);
+            setFocusedOptionIndex(focusedOptionIndex !== -1 ? focusedOptionIndex : props.autoOptionFocus ? findFirstFocusedOptionIndex() : findSelectedOptionIndex());
+            autoUpdateModel(true);
+        };
+
+        const onListBlur = (event) => {
+            setFocused(false);
+            setFocusedOptionIndex(-1);
+            setStartRangeIndex(-1);
+            setSearchValue('');
         };
 
         const getOptionGroupRenderKey = (optionGroup) => {
@@ -658,6 +727,8 @@ export const ListBox = React.memo(
                         style={style}
                         template={props.itemTemplate}
                         selected={isSelected(option)}
+                        onOptionMouseDown={onOptionMouseDown}
+                        onOptionMouseMove={onOptionMouseMove}
                         onClick={onOptionSelect}
                         index={j}
                         focusedOptionIndex={focusedOptionIndex}
@@ -706,6 +777,8 @@ export const ListBox = React.memo(
                         key={optionKey}
                         label={optionLabel}
                         index={index}
+                        onOptionMouseDown={onOptionMouseDown}
+                        onOptionMouseMove={onOptionMouseMove}
                         focusedOptionIndex={focusedOptionIndex}
                         option={option}
                         style={style}
@@ -761,6 +834,9 @@ export const ListBox = React.memo(
                                     role: 'listbox',
                                     tabIndex: '-1',
                                     'aria-multiselectable': props.multiple,
+                                    onFocus: onListFocus,
+                                    onBlur: onListBlur,
+                                    onKeyDown: onListKeyDown,
                                     ...ariaProps
                                 },
                                 ptCallbacks.ptm('list')
@@ -782,7 +858,9 @@ export const ListBox = React.memo(
                         role: 'listbox',
                         'aria-multiselectable': props.multiple,
                         tabIndex: '-1',
-                        onKeyDown: onKeyDown,
+                        onFocus: onListFocus,
+                        onBlur: onListBlur,
+                        onKeyDown: onListKeyDown,
                         ...ariaProps
                     },
                     ptCallbacks.ptm('list')

@@ -6,6 +6,7 @@ import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAn
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import AvalonLogo from './AvalonLogo';
 import AvalonSeparator from './AvalonSeparator';
+import Link from 'next/link';
 
 const features2Data = [
     {
@@ -70,15 +71,8 @@ const animationFeaturesData1 = [
         title: 'PrimeBlocks',
         description: (
             <>
-                Fully compatible with{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>
-                , choose from the wide range of blocks and customize the way you like. Note that{' '}
-                <a href="https://blocks.primereact.org/" target="_blank">
-                    PrimeBlocks
-                </a>{' '}
-                is not included in the template and requires a separate purchase.
+                Fully compatible with <a href="https://blocks.primereact.org/">PrimeBlocks</a>, choose from the wide range of blocks and customize the way you like. Note that <a href="https://blocks.primereact.org/">PrimeBlocks</a> is not included in
+                the template and requires a separate purchase.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-blocks.png'
@@ -95,14 +89,8 @@ const animationFeaturesData1 = [
         description: (
             <>
                 Avalon uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
-                <a href="https://www.figma.com/file/LuzEn29BAxr03T2vMQ5A1y/Preview-%7C-Avalon-1.0.0?type=design&mode=design&t=ME7xK2sAYOLoKCrT-1" target="_blank">
-                    preview the Figma file
-                </a>{' '}
-                before the purchase. Note that PrimeReact UI components are excluded from the Avalon Figma file as they are available in{' '}
-                <a href="/uikit" target="_blank">
-                    PrimeOne for Figma
-                </a>{' '}
-                only.
+                <a href="https://www.figma.com/file/LuzEn29BAxr03T2vMQ5A1y/Preview-%7C-Avalon-1.0.0?type=design&mode=design&t=ME7xK2sAYOLoKCrT-1">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the
+                Avalon Figma file as they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
         src: 'https://primefaces.org/cdn/primereact/images/templates/avalon/features-animation-figma.png'

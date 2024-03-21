@@ -12,6 +12,25 @@ export const useStyle = (css, options = {}) => {
     const defaultDocument = DomHandler.isClient() ? window.document : undefined;
     const { document = defaultDocument, manual = false, name = `style_${++_id}`, id = undefined, media = undefined } = options;
 
+    const getCurrentStyleRef = (styleContainer) => {
+        const existingStyle = styleContainer.querySelector(`style[data-primereact-style-id="${name}"]`);
+
+        if (existingStyle) {
+            return existingStyle;
+        }
+
+        if (id !== undefined) {
+            const existingElement = document.getElementById(id);
+
+            if (existingElement) {
+                return existingElement;
+            }
+        }
+
+        // finally if not found create the new style
+        return document.createElement('style');
+    };
+
     const update = (newCSS) => {
         isLoaded && css !== newCSS && (styleRef.current.textContent = newCSS);
     };
@@ -21,16 +40,16 @@ export const useStyle = (css, options = {}) => {
 
         const styleContainer = context?.styleContainer || document.head;
 
-        styleRef.current = styleContainer.querySelector(`style[data-primereact-style-id="${name}"]`) || document.getElementById(id) || document.createElement('style');
+        styleRef.current = getCurrentStyleRef(styleContainer);
 
         if (!styleRef.current.isConnected) {
             styleRef.current.type = 'text/css';
-            id && (styleRef.current.id = id);
-            media && (styleRef.current.media = media);
+            if (id) styleRef.current.id = id;
+            if (media) styleRef.current.media = media;
 
             DomHandler.addNonce(styleRef.current, (context && context.nonce) || PrimeReact.nonce);
             styleContainer.appendChild(styleRef.current);
-            name && styleRef.current.setAttribute('data-primereact-style-id', name);
+            if (name) styleRef.current.setAttribute('data-primereact-style-id', name);
         }
 
         styleRef.current.textContent = css;

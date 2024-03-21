@@ -1876,6 +1876,125 @@
                             "description": "['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
                         },
                         {
+                            "name": "chooseYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Year"
+                        },
+                        {
+                            "name": "chooseMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Month"
+                        },
+                        {
+                            "name": "chooseDate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Date"
+                        },
+                        {
+                            "name": "prevDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Decade"
+                        },
+                        {
+                            "name": "nextDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Decade"
+                        },
+                        {
+                            "name": "prevYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Year"
+                        },
+                        {
+                            "name": "nextYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Year"
+                        },
+                        {
+                            "name": "prevMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Month"
+                        },
+                        {
+                            "name": "nextMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Month"
+                        },
+                        {
+                            "name": "prevHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Hour"
+                        },
+                        {
+                            "name": "nextHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Hour"
+                        },
+                        {
+                            "name": "prevMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Minute"
+                        },
+                        {
+                            "name": "nextMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Minute"
+                        },
+                        {
+                            "name": "prevSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Second"
+                        },
+                        {
+                            "name": "nextSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Second"
+                        },
+                        {
+                            "name": "am",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "AM"
+                        },
+                        {
+                            "name": "pm",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "PM"
+                        },
+                        {
                             "name": "today",
                             "optional": true,
                             "readonly": false,
@@ -1957,7 +2076,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "Object",
-                            "description": "True"
+                            "description": "ARIA labels"
                         }
                     ],
                     "callbacks": []
@@ -3637,6 +3756,14 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the input field."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemTemplate",
@@ -5931,6 +6058,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keepInvalid",
                             "optional": true,
                             "readonly": false,
@@ -7450,6 +7585,13 @@
                             "description": "Icon to show in each of the decrement buttons."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
@@ -8951,6 +9093,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
@@ -9973,6 +10123,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -10613,6 +10771,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -10690,7 +10856,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "Separator char to add an item when pressed in addition to the enter key. Currently only possible value is ','."
+                            "description": "Separator char to add an item when pressed in addition to the enter key."
                         },
                         {
                             "name": "tooltip",
@@ -22846,6 +23012,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "itemTemplate",
                             "optional": true,
                             "readonly": false,
@@ -29618,6 +29792,14 @@
                             "description": "When present, it specifies that the element value cannot be altered."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -30039,6 +30221,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "locale",
                             "optional": true,
                             "readonly": false,
@@ -30318,19 +30508,6 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when the key pressed down."
-                        },
-                        {
-                            "name": "onKeyUp",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "KeyboardEvent<HTMLInputElement>",
-                                    "description": "Browser event"
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when the key released."
                         },
                         {
                             "name": "onValueChange",
@@ -30614,6 +30791,14 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -30857,6 +31042,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -31064,6 +31257,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "keyfilter",
@@ -31562,7 +31763,7 @@
                             "name": "autoOptionFocus",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
                             "description": "Whether to focus on the first visible or selected element."
                         },
@@ -31669,6 +31870,22 @@
                             "type": "string",
                             "default": "",
                             "description": "When specified, filter displays with this value."
+                        },
+                        {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemTemplate",
@@ -31786,9 +32003,9 @@
                             "name": "selectOnFocus",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
-                            "description": "When enabled, the focused tab is activated."
+                            "description": "When enabled, the focused option is selected."
                         },
                         {
                             "name": "tooltip",
@@ -35097,6 +35314,14 @@
                             "type": "Ref<HTMLSelectElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "itemCheckboxIcon",
@@ -40522,6 +40747,13 @@
                             "description": "Uses to pass attributes to the show icon's DOM element."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
@@ -43108,6 +43340,14 @@
                             "description": "When present, it specifies that the element should be disabled."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "multiple",
                             "optional": true,
                             "readonly": false,
@@ -43673,6 +43913,13 @@
                             "description": "Uses to pass attributes to the close button's DOM element."
                         },
                         {
+                            "name": "icons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the custom icons content's DOM element."
+                        },
+                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
@@ -43685,13 +43932,6 @@
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
-                        },
-                        {
-                            "name": "icons",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the custom icons content's DOM element."
                         },
                         {
                             "name": "mask",
@@ -51706,8 +51946,8 @@
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
-                            "default": "",
+                            "type": "ReactNode | Function",
+                            "default": "No available options",
                             "description": "Text to display when there is no data."
                         },
                         {
@@ -51805,6 +52045,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the input element."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "metaKeySelection",
@@ -54419,6 +54667,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When present, it specifies that the element value cannot be altered."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
                             "name": "pt",

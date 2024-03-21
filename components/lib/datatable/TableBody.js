@@ -296,8 +296,6 @@ export const TableBody = React.memo(
                 onSelect({ originalEvent, data, type });
             }
 
-            focusOnElement(originalEvent, true);
-
             if (props.onSelectionChange && selection !== props.selection) {
                 props.onSelectionChange({
                     originalEvent,
@@ -322,8 +320,6 @@ export const TableBody = React.memo(
 
             anchorRowIndex.current = rangeRowIndex.current;
             anchorCellIndex.current = event.cellIndex;
-
-            focusOnElement(event.originalEvent, false);
         };
 
         const selectRange = (event) => {

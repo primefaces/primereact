@@ -622,7 +622,7 @@ export const Menubar = React.memo(
                     ref: menuButtonRef,
                     href: '#',
                     tabIndex: '0',
-                    'aria-haspopup': mobileActiveState && props.model && props.model.lentgh > 0 ? true : false,
+                    'aria-haspopup': mobileActiveState && props.model && props.model.length > 0 ? true : false,
                     'aria-expanded': mobileActiveState,
                     'aria-label': ariaLabel('navigation'),
                     'aria-controls': idState,
