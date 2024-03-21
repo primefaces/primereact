@@ -121,25 +121,13 @@ export const MultiStateCheckbox = React.memo(
             if (props.id) {
                 const label = document.querySelector(`label[for="${props.id}"]`);
 
-                const clickCheckbox = () => {
-                    if (DomHandler.isExist(elementRef.current)) {
-                        elementRef.current.click();
-                    }
-                };
-
                 if (label) {
                     label.addEventListener('click', () => {
-                        clickCheckbox();
+                        if (DomHandler.isExist(elementRef.current)) {
+                            elementRef.current.click();
+                        }
                     });
                 }
-
-                return () => {
-                    if (label) {
-                        label.removeEventListener('click', () => {
-                            clickCheckbox();
-                        });
-                    }
-                };
             }
         });
 
