@@ -122,7 +122,6 @@ export const Checkbox = React.memo(
                     className: cx('input'),
                     name: props.name,
                     tabIndex: props.tabIndex,
-                    defaultChecked: checked,
                     onFocus: (e) => onFocus(e),
                     onBlur: (e) => onBlur(e),
                     onChange: (e) => onChange(e),
@@ -130,7 +129,7 @@ export const Checkbox = React.memo(
                     readOnly: props.readOnly,
                     required: props.required,
                     'aria-invalid': props.invalid,
-                    checked: isChecked(),
+                    checked: checked,
                     ...ariaProps
                 },
                 ptm('input')
