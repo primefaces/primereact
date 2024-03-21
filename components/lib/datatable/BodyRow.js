@@ -493,7 +493,7 @@ export const BodyRow = React.memo((props) => {
         },
         getBodyRowPTOptions('bodyRow'),
         {
-            className: rowClassName // #5983 must be last so all unstyled merging takes place first
+            className: classNames(rowClassName) // #5983 must be last so all unstyled merging takes place first
         }
     );
 
