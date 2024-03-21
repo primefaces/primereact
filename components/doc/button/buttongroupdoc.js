@@ -3,7 +3,7 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { ButtonGroup } from '@/components/lib/buttongroup/ButtonGroup';
 
-export function ButtonSetDoc(props) {
+export function ButtonGroupDoc(props) {
     const code = {
         basic: `
 <ButtonGroup>
