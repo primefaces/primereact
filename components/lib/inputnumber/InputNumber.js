@@ -981,10 +981,10 @@ export const InputNumber = React.memo(
                     originalEvent: event,
                     value: value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,

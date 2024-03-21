@@ -61,10 +61,10 @@ export const MultiStateCheckbox = React.memo(
                     originalEvent: event,
                     value: newValue,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
