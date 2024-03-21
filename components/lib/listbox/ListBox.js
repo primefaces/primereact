@@ -128,10 +128,10 @@ export const ListBox = React.memo(
                     originalEvent: event,
                     value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -509,10 +509,10 @@ export const ListBox = React.memo(
                     originalEvent: event,
                     value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,

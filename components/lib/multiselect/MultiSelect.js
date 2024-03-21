@@ -411,10 +411,10 @@ export const MultiSelect = React.memo(
                     value,
                     selectedOption,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
