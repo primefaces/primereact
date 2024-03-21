@@ -117,6 +117,20 @@ export const MultiStateCheckbox = React.memo(
             }
         });
 
+        useMountEffect(() => {
+            if (props.id) {
+                const label = document.querySelector(`label[for="${props.id}"]`);
+
+                if (label) {
+                    label.addEventListener('click', () => {
+                        if (DomHandler.isExist(elementRef.current)) {
+                            elementRef.current.click();
+                        }
+                    });
+                }
+            }
+        });
+
         const createIcon = () => {
             const icon = (selectedOption && getOptionIcon(selectedOption)) || '';
             const className = classNames('p-checkbox-icon p-c', {
