@@ -39,7 +39,6 @@
         //
         // The following rules point out areas where you might have made mistakes.
         //
-        "comma-dangle": 2, // disallow or enforce trailing commas
         "no-cond-assign": 2, // disallow assignment in conditional expressions
         "no-console": 1, // disallow use of console (off by default in the node environment)
         "no-constant-condition": 2, // disallow use of constant expressions in conditions
@@ -115,7 +114,6 @@
         "no-self-compare": 2, // disallow comparisons where both sides are exactly the same (off by default)
         "no-sequences": 2, // disallow use of comma operator
         "no-throw-literal": 2, // restrict what can be thrown as an exception (off by default)
-        "no-unused-expressions": 2, // disallow usage of expressions in statement position
         "no-void": 2, // disallow use of void operator (off by default)
         "no-warning-comments": [0, { "terms": ["todo", "fixme"], "location": "start" }], // disallow usage of configurable warning terms in comments": 2, // e.g. TODO or FIXME (off by default)
         "no-with": 2, // disallow use of the with statement
@@ -174,7 +172,6 @@
         "no-new-object": 1, // disallow use of the Object constructor
         "no-spaced-func": 1, // disallow space between function identifier and application
         "no-trailing-spaces": 1, // disallow trailing whitespace at the end of lines
-        "no-underscore-dangle": 1, // disallow dangling underscores in identifiers
         "no-wrap-func": 1, // disallow wrapping of non-IIFE statements in parens
         "one-var": [1, "never"], // allow just one var statement per function (off by default)
         "operator-assignment": [1, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
