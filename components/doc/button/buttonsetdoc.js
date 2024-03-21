@@ -1,28 +1,30 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
+import { ButtonGroup } from '@/components/lib/buttongroup/ButtonGroup';
 
 export function ButtonSetDoc(props) {
     const code = {
         basic: `
-<span className="p-buttonset">
+<ButtonGroup>
     <Button label="Save" icon="pi pi-check" />
     <Button label="Delete" icon="pi pi-trash" />
     <Button label="Cancel" icon="pi pi-times" />
-</span>
+</ButtonGroup>
         `,
         javascript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
+import { ButtonGroup } from 'primereact/buttongroup';
 
 export default function ButtonSetDemo() {
     return (
         <div className="card flex justify-content-center">
-            <span className="p-buttonset">
+            <ButtonGroup>
                 <Button label="Save" icon="pi pi-check" />
                 <Button label="Delete" icon="pi pi-trash" />
                 <Button label="Cancel" icon="pi pi-times" />
-            </span>
+            </ButtonGroup>
         </div>
     )
 }
@@ -30,15 +32,16 @@ export default function ButtonSetDemo() {
         typescript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
+import { ButtonGroup } from 'primereact/buttongroup';
 
 export default function ButtonSetDemo() {
     return (
         <div className="card flex justify-content-center">
-            <span className="p-buttonset">
+            <ButtonGroup>
                 <Button label="Save" icon="pi pi-check" />
                 <Button label="Delete" icon="pi pi-trash" />
                 <Button label="Cancel" icon="pi pi-times" />
-            </span>
+            </ButtonGroup>
         </div>
     )
 }
@@ -49,15 +52,15 @@ export default function ButtonSetDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Multiple buttons are grouped when wrapped inside an element with <i>p-buttonset</i> class.
+                    Multiple buttons are grouped when wrapped inside an element with <i>ButtonGroup</i> component.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <span className="p-buttonset">
+                <ButtonGroup>
                     <Button label="Save" icon="pi pi-check" />
                     <Button label="Delete" icon="pi pi-trash" />
                     <Button label="Cancel" icon="pi pi-times" />
-                </span>
+                </ButtonGroup>
             </div>
             <DocSectionCode code={code} />
         </>
