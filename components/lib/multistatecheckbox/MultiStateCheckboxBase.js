@@ -6,14 +6,19 @@ const classes = {
         classNames('p-checkbox-icon p-c', {
             [`${icon}`]: true
         }),
-    root: ({ props }) => classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled }),
-    checkbox: ({ props, selectedOption, focusedState }) =>
+    root: ({ props, selectedOption, focusedState }) =>
+        classNames('p-multistatecheckbox p-checkbox p-component', props.className, {
+            'p-disabled': props.disabled,
+            'p-highlight': !!selectedOption,
+            'p-focus': focusedState,
+            'p-invalid': props.invalid,
+            'p-variant-filled': props.variant === 'filled'
+        }),
+    checkbox: ({ props, selectedOption }) =>
         classNames(
             'p-checkbox-box',
             {
-                'p-highlight': !!selectedOption,
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
+                'p-disabled': props.disabled
             },
             selectedOption && selectedOption.className
         )

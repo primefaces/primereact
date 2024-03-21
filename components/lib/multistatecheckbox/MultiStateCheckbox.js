@@ -158,7 +158,7 @@ export const MultiStateCheckbox = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { focusedState, selectedOption })),
                 style: props.style,
                 onClick: onClick
             },
