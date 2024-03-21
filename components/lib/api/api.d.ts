@@ -1182,6 +1182,22 @@ export interface LocaleOptions {
          * Rotate Left
          */
         rotateLeft?: string;
+        /**
+         * Select
+         */
+        selectLabel?: string;
+        /**
+         * Unselect
+         */
+        unselectLabel?: string;
+        /**
+         * Expand
+         */
+        expandLabel?: string;
+        /**
+         * Collapse
+         */
+        collapseLabel?: string;
     };
 }
 

@@ -57,9 +57,12 @@ export const RowRadioButton = React.memo((props) => {
     };
 
     const name = `${props.tableSelector}_dt_radio`;
+    const tabIndex = props.disabled ? null : '0';
     const radiobuttonWrapperProps = mergeProps(
         {
-            className: cx('radiobuttonWrapper', { rowProps: props, focusedState })
+            className: cx('radiobuttonWrapper', { rowProps: props, focusedState }),
+            tabIndex: tabIndex,
+            'aria-label': props.ariaLabel
         },
         getColumnPTOptions('radiobuttonWrapper')
     );
@@ -78,8 +81,7 @@ export const RowRadioButton = React.memo((props) => {
             onFocus: (e) => onFocus(e),
             onBlur: (e) => onBlur(e),
             onChange: (e) => onChange(e),
-            onKeyDown: (e) => onKeyDown(e),
-            'aria-label': props.ariaLabel
+            onKeyDown: (e) => onKeyDown(e)
         },
         getColumnPTOptions('hiddenInput')
     );
