@@ -128,6 +128,16 @@ export const MultiStateCheckbox = React.memo(
                         }
                     });
                 }
+
+                return () => {
+                    if (label) {
+                        label.removeEventListener('click', () => {
+                            if (DomHandler.isExist(elementRef.current)) {
+                                elementRef.current.click();
+                            }
+                        });
+                    }
+                };
             }
         });
 
