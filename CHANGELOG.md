@@ -1,5 +1,94 @@
 # Changelog
 
+## [10.5.3](https://github.com/primefaces/primereact/tree/10.5.3) (2024-03-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.5.2...10.5.3)
+
+**Fixed bugs:**
+- Messages Missing MergeProps [\#6179](https://github.com/primefaces/primereact/issues/6179)
+
+## [10.5.2](https://github.com/primefaces/primereact/tree/10.5.2) (2024-03-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.5.1...10.5.2)
+
+**New Features:**
+
+- Calendar: add 'hideOnRangeSelection' from PrimeVue [\#5970](https://github.com/primefaces/primereact/issues/5970)
+- New MeterGroup Component [\#5977](https://github.com/primefaces/primereact/issues/5977)
+- New invalid properties [\#6139](https://github.com/primefaces/primereact/issues/6139)
+
+**Enhancements:**
+
+- Primereact uses document.getElementById(undefined) for appending component styles [\#6079](https://github.com/primefaces/primereact/issues/6079)
+- InputNumber: onChange and onValueChange events are not triggered when using keyboard shortcut for "cut" action [\#6047](https://github.com/primefaces/primereact/issues/6047)
+- StyleClass: deprecate enterClassName/leaveClassName use enterFromClassName/leaveFromClassName [\#6105](https://github.com/primefaces/primereact/issues/6105)
+- Contrast and Secondary Variants for Badge/Tag/Message/Toast [\#5985](https://github.com/primefaces/primereact/issues/5985)
+- LastPageLink in Paginator: doesn't give "totalPages" in options [\#5978](https://github.com/primefaces/primereact/issues/5978)
+- Toast: onRemove's message changes its data structure [\#5972](https://github.com/primefaces/primereact/issues/5972)
+- Password: (accessiblility) cannot access toggle button using keyboard [\#6046](https://github.com/primefaces/primereact/issues/6046)
+- DataTable_BodyCell: Duplicate key "aria-label" in object literal [\#6168](https://github.com/primefaces/primereact/issues/6168)
+- Splitter: Accessibility updates [\#6039](https://github.com/primefaces/primereact/issues/6039)
+- Tree : Accessibility issues [\#5426](https://github.com/primefaces/primereact/issues/5426)
+- Primereact Dropdown accessibility. Value isn't being read by VoiceOver screen reader. [\#5836](https://github.com/primefaces/primereact/issues/5836)
+- Multiselect: Accessibility issue aria-allowed-role - list-box role not allowed [\#5446](https://github.com/primefaces/primereact/issues/5446)
+- ListBox: options not focusable using keyboard [\#3672](https://github.com/primefaces/primereact/issues/3672)
+- Dropdown: NVDA failed to read correctly readonly [\#1413](https://github.com/primefaces/primereact/issues/1413)
+
+**Fixed bugs:**
+
+- MultiStateCheckbox: unstyled prop doesnt work properly [\#6061](https://github.com/primefaces/primereact/issues/6061)
+- Dropdown: unselects option when loses focus [\#6035](https://github.com/primefaces/primereact/issues/6035)
+- Image: Preview toolbar buttons only close the preview in unstyled NextJS 14 [\#6037](https://github.com/primefaces/primereact/issues/6037)
+- Dropdown component fails to expand the dropdown box after adding the filter and editable properties. [\#6027](https://github.com/primefaces/primereact/issues/6027)
+- Tree: Lazy loaded tree crashes when using keyboard navigation (right arrow) to expand [\#6049](https://github.com/primefaces/primereact/issues/6049)
+- DomHandler.js: getComputedStyle getPropertyValue should be in hyphen case. [\#6055](https://github.com/primefaces/primereact/issues/6055)
+- AutoComplete: Resetting value doesn't work [\#6044](https://github.com/primefaces/primereact/issues/6044)
+- Chips: the component doesn't function properly on mobile devices [\#6086](https://github.com/primefaces/primereact/issues/6086)
+- MultiSelect: selectedOption undefined on MultiSelectChangeEvent [\#6097](https://github.com/primefaces/primereact/issues/6097)
+- Documentation: Problem with Dark Theme in Default column on Components API section [\#6125](https://github.com/primefaces/primereact/issues/6125)
+- Datatable: Horizontal scroller with selection/checkbox resets to initial position on clicking row [\#3155](https://github.com/primefaces/primereact/issues/3155)
+- Password: the feedback bar does not reset when I clear the field [\#6119](https://github.com/primefaces/primereact/issues/6119)
+- Slider: Null event.value within the onSlideEnd [\#6101](https://github.com/primefaces/primereact/issues/6101)
+- Typescript: update LocaleOptions interface [\#6050](https://github.com/primefaces/primereact/issues/6050)
+- Accordion/PanelMenu: (Tailwind) animation issues [\#5540](https://github.com/primefaces/primereact/issues/5540)
+- InputNumber onValueChange ignores Numpad Enter [\#6107](https://github.com/primefaces/primereact/issues/6107)
+- Dialog: inconsistency between theming documentation and used classnames (from source code) [\#6024](https://github.com/primefaces/primereact/issues/6024)
+- OrganizationChart: Documentation issue in Basic and Template sections. [\#6070](https://github.com/primefaces/primereact/issues/6070)
+- TreeTable: Documentation issues [\#6078](https://github.com/primefaces/primereact/issues/6078)
+- Sidebar: "Pass Through" documentation corrections [\#6068](https://github.com/primefaces/primereact/issues/6068)
+- Speed Dial: TypeError: Cannot read properties of undefined (reading 'visible') [\#6156](https://github.com/primefaces/primereact/issues/6156)
+- TextInput: className property is written two times into the class attribute in DOM [\#6160](https://github.com/primefaces/primereact/issues/6160)
+- Typo error in the DataTable documentation [\#6147](https://github.com/primefaces/primereact/issues/6147)
+- MultiSelect: loading prop in typescript shows error when called [\#6113](https://github.com/primefaces/primereact/issues/6113)
+- Documentation: Duplicate useState in HeadlessSidebar Demo Full Code Example [\#6033](https://github.com/primefaces/primereact/issues/6033)
+- Tailwind: content does not exist in MenuPassThroughOption [\#6063](https://github.com/primefaces/primereact/issues/6063)
+- Tooltip component shows unstyled error [\#6080](https://github.com/primefaces/primereact/issues/6080)
+- Calendar: TypeScript Definitions do not match with actual PT props [\#6094](https://github.com/primefaces/primereact/issues/6094)
+- Tree_Drag and Drop: validateDropPoint function is throwing error [\#6048](https://github.com/primefaces/primereact/issues/6048)
+- Tree: Custom icon assignation is not working [\#6116](https://github.com/primefaces/primereact/issues/6116)
+- ConfirmDialog. Error message: "Warning: Invalid value for prop content on div tag. [\#6111](https://github.com/primefaces/primereact/issues/6111)
+- Accordion: Wrong prop in TailwindDoc [\#6132](https://github.com/primefaces/primereact/issues/6132)
+- AutoComplete: event type in onInput prop is FormEvent-HtmlSpanElement [\#6145](https://github.com/primefaces/primereact/issues/6145)
+- Dropdown: editable prop requires optionLabel to be exactly "name" and options object to contain a "name" key [\#6076](https://github.com/primefaces/primereact/issues/6076)
+- TreeTable: Accessibility navigation is triggered when editing a cell following 10.3.3 update [\#6018](https://github.com/primefaces/primereact/issues/6018)
+- DataTable: Memory leak when data updated continuously [\#5927](https://github.com/primefaces/primereact/issues/5927)
+- DataTable: Virtual Scroller position resets upon lazy loaded [\#6015](https://github.com/primefaces/primereact/issues/6015)
+- Knobs: Wrong component shown in basic code example for React Hook Form [\#6013](https://github.com/primefaces/primereact/issues/6013)
+- Showcase: Problem For DataTable in TS [\#6002](https://github.com/primefaces/primereact/issues/6002)
+- useDisplayOrder: clears incorrect [\#6000](https://github.com/primefaces/primereact/issues/6000)
+- DataTable: Virtual Scroll error in dev mode [\#6006](https://github.com/primefaces/primereact/issues/6006)
+- Datatable + Virtual Scroller: Multiselect passes undefined to onSelectionChange [\#5870](https://github.com/primefaces/primereact/issues/5870)
+- Dropdown: editable input get console error when optionValue is not 'name' [\#6004](https://github.com/primefaces/primereact/issues/6004)
+- DataTable: rowClassName don't take prevalence over passthrough tailwind [\#5983](https://github.com/primefaces/primereact/issues/5983)
+- TabMenu is not updating its style when using unstyled mode and controlled mode [\#5992](https://github.com/primefaces/primereact/issues/5992)
+- SelectButton: Inappropriate UI [\#5841](https://github.com/primefaces/primereact/issues/5841)
+- Calendar: using yearNavigator cause exception error [\#5973](https://github.com/primefaces/primereact/issues/5973)
+- MenubarSub: Each child in a list should have a unique "key" prop. [\#5976](https://github.com/primefaces/primereact/issues/5976)
+- Sidebar: Unable to write unit test: groupToDisplayedElements'group'.findLastIndex is not a function [\#5954](https://github.com/primefaces/primereact/issues/5954)
+- BlockUI: setting blocked to false has no effect [\#5889](https://github.com/primefaces/primereact/issues/5889)
+- Select button accepts children but doesnt render them [\#5888](https://github.com/primefaces/primereact/issues/5888)
+- DataTableColReorderEvent.columns has a wrong type [\#5962](https://github.com/primefaces/primereact/issues/5962)
+
 ## [10.5.1](https://github.com/primefaces/primereact/tree/10.5.1) (2024-02-14)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.5.0...10.5.1)

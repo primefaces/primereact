@@ -43,10 +43,10 @@ export const RadioButton = React.memo(
                     value: props.value,
                     checked: value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         type: 'radio',
@@ -134,7 +134,7 @@ export const RadioButton = React.memo(
                     onBlur: onBlur,
                     onChange: onChange,
                     disabled: props.disabled,
-                    readonly: props.readonly,
+                    readOnly: props.readonly,
                     required: props.required,
                     tabIndex: props.tabIndex,
                     className: cx('input'),

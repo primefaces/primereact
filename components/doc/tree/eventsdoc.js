@@ -80,8 +80,9 @@ export default function EventsDemo() {
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
-import { Tree, TreeNode, TreeEventNodeEvent } from 'primereact/tree';
+import { Tree, TreeEventNodeEvent } from 'primereact/tree';
 import { Toast } from 'primereact/toast';
+import { TreeNode } from "primereact/treenode";
 import { NodeService } from './service/NodeService';
 
 export default function EventsDemo() {

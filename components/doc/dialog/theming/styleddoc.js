@@ -20,7 +20,7 @@ export function StyledDoc(props) {
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>p-dialog-titlebar</td>
+                            <td>p-dialog-header</td>
                             <td>Container of header.</td>
                         </tr>
                         <tr>
@@ -28,12 +28,16 @@ export function StyledDoc(props) {
                             <td>Header element.</td>
                         </tr>
                         <tr>
-                            <td>p-dialog-titlebar-icon</td>
+                            <td>p-dialog-header-icons</td>
                             <td>Icon container inside header.</td>
                         </tr>
                         <tr>
-                            <td>p-dialog-titlebar-close</td>
+                            <td>p-dialog-header-close</td>
                             <td>Close icon element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-dialog-header-maximize</td>
+                            <td>Maximize icon element.</td>
                         </tr>
                         <tr>
                             <td>p-dialog-content</td>

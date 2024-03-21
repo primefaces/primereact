@@ -201,6 +201,13 @@ export const PanelMenuList = React.memo((props) => {
             setActiveItemPath(_activeItemPath);
         }
 
+        if (processedItem.item) {
+            processedItem.item = {
+                ...processedItem.item,
+                expanded
+            };
+        }
+
         DomHandler.focus(getListElement());
         setFocusedItem(processedItem);
     };

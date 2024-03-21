@@ -322,6 +322,12 @@ export const InputNumber = React.memo(
                 return;
             }
 
+            if (event.shiftKey || event.altKey) {
+                isSpecialChar.current = true;
+
+                return;
+            }
+
             if (props.onKeyDown) {
                 props.onKeyDown(event);
 
@@ -333,20 +339,10 @@ export const InputNumber = React.memo(
 
             lastValue.current = event.target.value;
 
-            if (event.shiftKey || event.altKey) {
-                isSpecialChar.current = true;
-
-                return;
-            }
-
             let selectionStart = event.target.selectionStart;
             let selectionEnd = event.target.selectionEnd;
             let inputValue = event.target.value;
             let newValueStr = null;
-
-            if (event.altKey) {
-                event.preventDefault();
-            }
 
             switch (event.code) {
                 //up
@@ -379,6 +375,7 @@ export const InputNumber = React.memo(
 
                 //enter and tab
                 case 'Tab':
+                case 'NumpadEnter':
                 case 'Enter':
                     newValueStr = validateValue(parseValue(inputValue));
                     inputRef.current.value = formatValue(newValueStr);
@@ -494,37 +491,17 @@ export const InputNumber = React.memo(
                     break;
 
                 default:
+                    event.preventDefault();
+
+                    let char = event.key;
+                    const _isDecimalSign = isDecimalSign(char);
+                    const _isMinusSign = isMinusSign(char);
+
+                    if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                        insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                    }
+
                     break;
-            }
-        };
-
-        const onInputKeyUp = (event) => {
-            if (props.disabled || props.readOnly) {
-                return;
-            }
-
-            if (props.onKeyUp) {
-                props.onKeyUp(event);
-
-                // do not continue if the user defined event wants to prevent
-                if (event.defaultPrevented) {
-                    return;
-                }
-            }
-
-            const code = event.which || event.keyCode;
-
-            if (code !== 13) {
-                // to submit a form
-                event.preventDefault();
-            }
-
-            const char = String.fromCharCode(code);
-            const _isDecimalSign = isDecimalSign(char);
-            const _isMinusSign = isMinusSign(char);
-
-            if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
-                insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
             }
         };
 
@@ -1004,10 +981,10 @@ export const InputNumber = React.memo(
                     originalEvent: event,
                     value: value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -1137,7 +1114,6 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
                     onPointerDown={onInputPointerDown}

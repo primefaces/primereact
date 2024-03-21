@@ -132,10 +132,10 @@ export const TreeSelect = React.memo(
                     originalEvent: event,
                     value: undefined,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -634,6 +634,7 @@ export const TreeSelect = React.memo(
         };
 
         const createContent = () => {
+            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
                     className: cx('emptyMessage')
@@ -671,7 +672,7 @@ export const TreeSelect = React.memo(
                         __parentMetadata={{ parent: metaData }}
                     ></Tree>
 
-                    {hasNoOptions && <div {...emptyMessageProps}>{props.emptyMessage || localeOption('emptyMessage')}</div>}
+                    {hasNoOptions && <div {...emptyMessageProps}>{message}</div>}
                 </>
             );
         };

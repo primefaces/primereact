@@ -5,9 +5,9 @@ export const TRANSITIONS = {
         timeout: 500,
         classNames: {
             enter: 'max-h-0',
-            enterActive: '!max-h-40 overflow-hidden transition-all duration-500 ease-in-out',
-            exit: 'max-h-40',
-            exitActive: '!max-h-0 overflow-hidden transition-all duration-500 ease-in'
+            enterActive: '!max-h-[1000px] overflow-hidden transition-[max-height] duration-500 ease-in',
+            exit: 'max-h-[1000px]',
+            exitActive: '!max-h-0 overflow-hidden transition-[max-height] duration-500 ease-out'
         }
     },
     overlay: {
@@ -729,9 +729,9 @@ const Tailwind = {
     speeddial: {
         root: 'absolute flex',
         button: {
-            root: ({ state }) => ({
+            root: ({ parent }) => ({
                 className: classNames('w-16 !h-16 !rounded-full justify-center z-10', {
-                    'rotate-45': state.visible
+                    'rotate-45': parent.state.visible
                 })
             }),
             label: {
@@ -865,10 +865,13 @@ const Tailwind = {
         dropdownButton: {
             className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
         },
-        panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
+        panel: 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
         list: 'm-0 sm:p-0 list-none',
+        sublistWrapper: {
+            className: classNames('block absolute left-full top-0', 'min-w-full z-10')
+        },
         sublist: {
-            className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
+            className: classNames('py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
         },
         item: ({ state }) => ({
             className: classNames('cursor-pointer font-normal whitespace-nowrap', 'm-0 border-0 bg-transparent transition-shadow rounded-none', {

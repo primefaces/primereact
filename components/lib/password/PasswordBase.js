@@ -98,6 +98,7 @@ export const PasswordBase = ComponentBase.extend({
         className: null,
         inputStyle: null,
         inputClassName: null,
+        invalid: false,
         panelStyle: null,
         panelClassName: null,
         transitionOptions: null,

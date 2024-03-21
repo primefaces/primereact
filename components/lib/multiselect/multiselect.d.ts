@@ -621,6 +621,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     placeholder?: string | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {MultiSelectPassThroughOptions}
      */
@@ -689,6 +694,16 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Index of the element in tabbing order.
      */
     tabIndex?: number | undefined;
+    /**
+     * When enabled, the focused tab is activated.
+     * @defaultValue false
+     */
+    selectOnFocus?: false;
+    /**
+     * Whether to focus on the first visible or selected element.
+     * @defaultValue false
+     */
+    autoOptionFocus?: false;
     /**
      * Content of the tooltip.
      */

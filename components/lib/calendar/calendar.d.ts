@@ -566,6 +566,11 @@ interface CalendarBaseProps {
      */
     decrementIcon?: IconType<CalendarProps> | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * When specified, disables the component.
      * @defaultValue false
      */
