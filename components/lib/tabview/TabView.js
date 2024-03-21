@@ -415,7 +415,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
         const navContentProps = mergeProps(
             {
-                id: idState,
+                id: idState + '_navcontent',
                 ref: contentRef,
                 className: cx('navcontent'),
                 style: props.style,

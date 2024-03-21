@@ -53,10 +53,10 @@ export const Chips = React.memo(
                     originalEvent: event,
                     value: values,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
@@ -200,10 +200,10 @@ export const Chips = React.memo(
                     originalEvent: event,
                     value: items,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,
