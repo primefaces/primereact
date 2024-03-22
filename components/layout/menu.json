@@ -58,6 +58,10 @@
                             "to": "/editor"
                         },
                         {
+                            "name": "FloatLabel",
+                            "to": "/floatlabel"
+                        },
+                        {
                             "name": "InputGroup",
                             "to": "/inputgroup"
                         },
