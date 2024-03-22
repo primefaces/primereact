@@ -350,11 +350,6 @@ export const TableBody = React.memo(
                 rangeStart = rangeEnd = rangeRowIndex.current;
             }
 
-            if (props.paginator) {
-                rangeStart = Math.max(rangeStart - props.first, 0);
-                rangeEnd -= props.first;
-            }
-
             return isAllowCellSelection ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
         };
 
