@@ -1,7 +1,7 @@
 import { AccessibilityDoc } from '@/components/doc/button/accessibilitydoc';
 import { BadgesDoc } from '@/components/doc/button/badgesdoc';
 import { BasicDoc } from '@/components/doc/button/basicdoc';
-import { ButtonSetDoc } from '@/components/doc/button/buttonsetdoc';
+import { ButtonGroupDoc } from '@/components/doc/button/buttongroupdoc';
 import { DisabledDoc } from '@/components/doc/button/disableddoc';
 import { IconOnlyDoc } from '@/components/doc/button/icononlydoc';
 import { IconsDoc } from '@/components/doc/button/iconsdoc';
@@ -96,9 +96,9 @@ const ButtonDemo = () => {
             component: BadgesDoc
         },
         {
-            id: 'buttonset',
-            label: 'Button Set',
-            component: ButtonSetDoc
+            id: 'buttongroup',
+            label: 'Button Group',
+            component: ButtonGroupDoc
         },
         {
             id: 'sizes',
