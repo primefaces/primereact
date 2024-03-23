@@ -576,6 +576,14 @@ export const Calendar = React.memo(
             }
         };
 
+        const roundMinutesToStep = (minutes) => {
+            if (props.stepMinute) {
+                return Math.round(minutes / props.stepMinute) * props.stepMinute;
+            }
+
+            return minutes;
+        };
+
         const incrementHour = (event) => {
             const currentTime = getCurrentDateTime();
             const currentHour = currentTime.getHours();
@@ -606,10 +614,10 @@ export const Calendar = React.memo(
                             updateTime(event, newHour, props.maxDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                         }
                     } else {
-                        updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                        updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 } else {
-                    updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
 
@@ -646,10 +654,10 @@ export const Calendar = React.memo(
                             updateTime(event, newHour, props.minDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                         }
                     } else {
-                        updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                        updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 } else {
-                    updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
 
