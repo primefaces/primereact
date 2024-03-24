@@ -60,6 +60,11 @@ export interface IconFieldProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     iconPosition?: 'left' | 'right' | undefined;
     /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {IconFieldPassThroughOptions}
      */

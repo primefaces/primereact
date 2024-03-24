@@ -1,130 +1,56 @@
 import React from 'react';
 import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
-// import { AccessibilityDoc } from '@/components/doc/iconfield/accessibilitydoc';
+import { ImportDoc } from '@/components/doc/iconfield/importdoc';
 import { BasicDoc } from '@/components/doc/iconfield/basicdoc';
-// // import { DisabledDoc } from '@/components/doc/iconfield/disableddoc';
-// import { FloatLabelDoc } from '@/components/doc/iconfield/floatlabeldoc';
-// import { FormikDoc } from '@/components/doc/iconfield/form/formikdoc';
-// import { HookFormDoc } from '@/components/doc/iconfield/form/hookformdoc';
-// import { HelpTextDoc } from '@/components/doc/iconfield/helptextdoc';
-// import { IconsDoc } from '@/components/doc/iconfield/iconsdoc';
-// import { ImportDoc } from '@/components/doc/iconfield/importdoc';
-// import { InvalidDoc } from '@/components/doc/iconfield/invaliddoc';
-// import { KeyFilterDoc } from '@/components/doc/iconfield/keyfilterdoc';
-// import { PTDoc } from '@/components/doc/iconfield/pt/ptdoc';
-// import { Wireframe } from '@/components/doc/iconfield/pt/wireframe';
-// import { SizesDoc } from '@/components/doc/iconfield/sizesdoc';
-// import { StyledDoc } from '@/components/doc/iconfield/theming/styleddoc';
-// import { TailwindDoc } from '@/components/doc/iconfield/theming/tailwinddoc';
+import { TemplateDoc } from '@/components/doc/iconfield/templatedoc';
+import { AccessibilityDoc } from '@/components/doc/iconfield/accessibilitydoc';
+import { Wireframe } from '@/components/doc/iconfield/pt/wireframe';
+import { StyledDoc } from '@/components/doc/iconfield/theming/styleddoc';
 
 const IconFieldDemo = () => {
     const docs = [
-        // {
-        //     id: 'import',
-        //     label: 'Import',
-        //     component: ImportDoc
-        // },
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
         {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
-        //     {
-        //         id: 'icons',
-        //         label: 'Icons',
-        //         component: IconsDoc
-        //     },
-        //     {
-        //         id: 'keyfilter',
-        //         label: 'Key Filter',
-        //         component: KeyFilterDoc
-        //     },
-        //     {
-        //         id: 'sizes',
-        //         label: 'Sizes',
-        //         component: SizesDoc
-        //     },
-        //     {
-        //         id: 'helptext',
-        //         label: 'Help Text',
-        //         component: HelpTextDoc
-        //     },
-        //     {
-        //         id: 'floatlabel',
-        //         label: 'Float Label',
-        //         component: FloatLabelDoc
-        //     },
-        //     {
-        //         id: 'invalid',
-        //         label: 'Invalid',
-        //         component: InvalidDoc
-        //     },
-        //     {
-        //         id: 'disabled',
-        //         label: 'Disabled',
-        //         component: DisabledDoc
-        //     },
-        //     {
-        //         id: 'form',
-        //         label: 'Form',
-        //         description: 'Compatibility with popular React form libraries.',
-        //         children: [
-        //             {
-        //                 id: 'formik',
-        //                 label: 'Formik',
-        //                 component: FormikDoc
-        //             },
-        //             {
-        //                 id: 'hookform',
-        //                 label: 'Hook Form',
-        //                 component: HookFormDoc
-        //             }
-        //         ]
-        //     },
+    ];
 
-        //     {
-        //         id: 'accessibility',
-        //         label: 'Accessibility',
-        //         component: AccessibilityDoc
-        //     }
-        // ];
-        // const ptDocs = [
-        //     {
-        //         id: 'pt.wireframe',
-        //         label: 'Wireframe',
-        //         component: Wireframe
-        //     },
-        //     {
-        //         id: 'pt.iconfield.options',
-        //         label: 'IconField PT Options',
-        //         component: DocApiTable
-        //     },
-        //     {
-        //         id: 'pt.demo',
-        //         label: 'Example',
-        //         component: PTDoc
-        //     }
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.iconfield.options',
+            label: 'IconField PT Options',
+            component: DocApiTable
+        }
     ];
 
     const themingDocs = [
-        // {
-        //     id: 'styled',
-        //     label: 'Styled',
-        //     component: StyledDoc
-        // },
-        // {
-        //     id: 'unstyled',
-        //     label: 'Unstyled',
-        //     description: 'Theming is implemented with the pass through properties in unstyled mode.',
-        //     children: [
-        //         {
-        //             id: 'tailwind',
-        //             label: 'Tailwind',
-        //             component: TailwindDoc
-        //         }
-        //     ]
-        // }
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        }
     ];
 
     return (
@@ -134,7 +60,7 @@ const IconFieldDemo = () => {
             description="IconField is an extension to standard input element with theming and keyfiltering."
             componentDocs={docs}
             apiDocs={['IconField']}
-            // ptDocs={ptDocs}
+            ptDocs={ptDocs}
             themingDocs={themingDocs}
         />
     );

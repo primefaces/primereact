@@ -69,12 +69,12 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
                 <IconField iconPosition="left">
-                    <InputIcon className="pi pi-search"> </InputIcon>
+                    <InputIcon className="pi pi-search" />
                     <InputText v-model="value1" placeholder="Search" />
                 </IconField>
 
                 <IconField>
-                    <InputIcon className="pi pi-spin pi-spinner"> </InputIcon>
+                    <InputIcon className="pi pi-spin pi-spinner" />
                     <InputText v-model="value2" />
                 </IconField>
             </div>

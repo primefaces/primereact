@@ -27015,6 +27015,133 @@
             }
         }
     },
+    "iconfield": {
+        "description": "IconField wraps an input and an icon.\n\n[Live Demo](https://www.primereact.org/iconfield/)",
+        "components": {
+            "IconField": {
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in IconField component. In addition to these, all properties of HTMLInputElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "iconPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"right\"",
+                            "default": "right",
+                            "description": "Position of the icon"
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconFieldPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "IconFieldPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconFieldProps"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconFieldContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "IconFieldPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconFieldPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "IconFieldContext": {
+                    "description": "Defines current options in IconField component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "iconPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"right\"",
+                            "description": "Position of the icon"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "IconFieldPassThroughType": {
+                    "values": "PassThroughType<T, IconFieldPassThroughMethodOptions>"
+                }
+            }
+        }
+    },
     "icons/angledoubledown": {
         "components": {
             "AngleDoubleDownIcon": {
@@ -29738,6 +29865,105 @@
             "values": {
                 "InplacePassThroughType": {
                     "values": "PassThroughType<T, InplacePassThroughMethodOptions>"
+                }
+            }
+        }
+    },
+    "inputicon": {
+        "description": "InputIcon displays an icon.\n\n[Live Demo](https://www.primereact.org/iconfield/)",
+        "components": {
+            "InputIcon": {
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in InputIcon component. In addition to these, all properties of HTMLInputElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputIconPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "InputIconPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputIconProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InputIconPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputIconPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InputIconPassThroughType": {
+                    "values": "PassThroughType<T, InputIconPassThroughMethodOptions>"
                 }
             }
         }

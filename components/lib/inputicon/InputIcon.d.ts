@@ -41,7 +41,12 @@ export interface InputIconPassThroughOptions {
  * Defines valid properties in InputIcon component. In addition to these, all properties of HTMLInputElement can be used in this component.
  * @group Properties
  */
-export interface InputIconProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>> {
+export interface InputIconProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
     /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {InputIconPassThroughOptions}

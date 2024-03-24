@@ -26,7 +26,9 @@ export const InputIcon = React.memo(
 
         return (
             <>
-                <span {...rootProps} ref={elementRef} />
+                <span {...rootProps} ref={elementRef}>
+                    {props.children}
+                </span>
             </>
         );
     })
