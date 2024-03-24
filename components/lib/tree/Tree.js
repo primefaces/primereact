@@ -62,11 +62,19 @@ export const Tree = React.memo(
                 const event = childFocusEvent.current;
                 const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
                 const listElement = nodeElement.children[1];
-                const childElement = listElement.children[0];
 
-                nodeElement.tabIndex = '-1';
-                childElement.tabIndex = '0';
-                childElement.focus();
+                if (listElement) {
+                    if (nodeElement) {
+                        nodeElement.tabIndex = '-1';
+                    }
+
+                    const childElement = listElement.children[0];
+
+                    if (childElement) {
+                        childElement.tabIndex = '0';
+                        childElement.focus();
+                    }
+                }
 
                 childFocusEvent.current = null;
             }
@@ -107,7 +115,7 @@ export const Tree = React.memo(
         };
 
         const onDrop = (event) => {
-            if (validateDropNode(dragState.current.path, event.path)) {
+            if (validateDropNode(dragState.current?.path, event.path)) {
                 const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
@@ -210,7 +218,7 @@ export const Tree = React.memo(
         };
 
         const validateDropPoint = (event) => {
-            let _validateDrop = validateDrop(dragState.current.path, event.path);
+            let _validateDrop = validateDrop(dragState.current?.path, event.path);
 
             if (_validateDrop) {
                 //child dropped to next sibling's drop point

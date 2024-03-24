@@ -411,8 +411,9 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     dropdownIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * Text to display when there is no data.
+     * @defaultValue No available options
      */
-    emptyMessage?: string | undefined;
+    emptyMessage?: React.ReactNode | ((props: TreeSelectProps) => React.ReactNode) | undefined;
     /**
      * An array of keys to represent the state of the treeselect expansion state in controlled mode.
      */
@@ -504,6 +505,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * Hint text for the input field.
      */
     placeholder?: string | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
     /**
      * Clears the filter value when hiding the dropdown.
      * @defaultValue false

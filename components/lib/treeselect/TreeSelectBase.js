@@ -10,6 +10,7 @@ const classes = {
                 'p-treeselect-chip': props.display === 'chip',
                 'p-treeselect-clearable': props.showClear && !props.disabled,
                 'p-disabled': props.disabled,
+                'p-invalid': props.invalid,
                 'p-focus': focusedState,
                 'p-inputwrapper-filled': !isValueEmpty,
                 'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -161,6 +162,7 @@ export const TreeSelectBase = ComponentBase.extend({
         filterValue: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         metaKeySelection: false,
         name: null,
         nodeTemplate: null,

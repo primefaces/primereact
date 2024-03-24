@@ -123,7 +123,7 @@ export const MultiSelect = React.memo(
                     .filter((option) => isValidOption(option))
                     .map((option) => getOptionValue(option));
 
-                updateModel(event, value);
+                updateModel(event, value, value);
             }
         };
 
@@ -138,7 +138,7 @@ export const MultiSelect = React.memo(
             if (selected) value = props.value.filter((val) => !ObjectUtils.equals(val, getOptionValue(option), equalityKey));
             else value = [...(props.value || []), getOptionValue(option)];
 
-            updateModel(event, value);
+            updateModel(event, value, option);
             index !== -1 && setFocusedOptionIndex(index);
         };
 
@@ -349,7 +349,7 @@ export const MultiSelect = React.memo(
                     if (event.code === 'KeyA' && metaKey) {
                         const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
 
-                        updateModel(event, value);
+                        updateModel(event, value, value);
 
                         event.preventDefault();
                         break;
@@ -411,10 +411,10 @@ export const MultiSelect = React.memo(
                     value,
                     selectedOption,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         name: props.name,

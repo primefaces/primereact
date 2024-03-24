@@ -12,29 +12,25 @@ export const RadioButton = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = RadioButtonBase.getProps(inProps, context);
 
-        const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
         const { ptm, cx, isUnstyled } = RadioButtonBase.setMetaData({
-            props,
-            state: {
-                focused: focusedState
-            }
+            props
         });
 
-        useHandleStyle(RadioButtonBase.css.styles, isUnstyled, { name: 'radiobutton', styled: true });
+        useHandleStyle(RadioButtonBase.css.styles, isUnstyled, { name: 'radiobutton' });
 
         const select = (event) => {
-            onClick(event);
+            onChange(event);
         };
 
-        const onClick = (event) => {
-            if (props.disabled) {
+        const onChange = (event) => {
+            if (props.disabled || props.readonly) {
                 return;
             }
 
-            if (props.onChange || props.onClick) {
+            if (props.onChange) {
                 const checked = props.checked;
                 const radioClicked = event.target instanceof HTMLDivElement;
                 const inputClicked = event.target === inputRef.current;
@@ -47,10 +43,10 @@ export const RadioButton = React.memo(
                     value: props.value,
                     checked: value,
                     stopPropagation: () => {
-                        event.stopPropagation();
+                        event?.stopPropagation();
                     },
                     preventDefault: () => {
-                        event.preventDefault();
+                        event?.preventDefault();
                     },
                     target: {
                         type: 'radio',
@@ -61,7 +57,7 @@ export const RadioButton = React.memo(
                     }
                 };
 
-                props.onClick && props.onClick(eventData);
+                props?.onChange?.(eventData);
 
                 // do not continue if the user defined click wants to prevent
                 if (event.defaultPrevented) {
@@ -69,7 +65,7 @@ export const RadioButton = React.memo(
                 }
 
                 if (isInputToggled || isRadioToggled) {
-                    props.onChange && props.onChange(eventData);
+                    props?.onChange?.(eventData);
 
                     if (isRadioToggled) {
                         inputRef.current.checked = value;
@@ -77,24 +73,24 @@ export const RadioButton = React.memo(
                 }
 
                 DomHandler.focus(inputRef.current);
-                event.preventDefault();
             }
         };
 
-        const onFocus = () => {
-            setFocusedState(true);
+        const onFocus = (event) => {
+            props?.onFocus?.(event);
         };
 
-        const onBlur = () => {
-            setFocusedState(false);
+        const onBlur = (event) => {
+            props?.onBlur?.(event);
         };
 
-        const onKeyDown = (event) => {
-            if (event.code === 'Space' || event.key === ' ') {
-                // event.key is for Android support
-                onClick(event);
-            }
-        };
+        React.useImperativeHandle(ref, () => ({
+            props,
+            select,
+            focus: () => DomHandler.focus(inputRef.current),
+            getElement: () => elementRef.current,
+            getInput: () => inputRef.current
+        }));
 
         React.useEffect(() => {
             if (inputRef.current) {
@@ -112,75 +108,71 @@ export const RadioButton = React.memo(
             }
         });
 
-        React.useImperativeHandle(ref, () => ({
-            props,
-            select,
-            focus: () => DomHandler.focus(inputRef.current),
-            getElement: () => elementRef.current,
-            getInput: () => inputRef.current
-        }));
-
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = RadioButtonBase.getOtherProps(props);
-        const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
 
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root', { focusedState })),
+                id: props.id,
+                className: classNames(props.className, cx('root')),
                 style: props.style,
-                onClick: onClick,
                 'data-p-checked': props.checked
             },
             RadioButtonBase.getOtherProps(props),
             ptm('root')
         );
 
-        const hiddenInputWrapperProps = mergeProps(
-            {
-                className: 'p-hidden-accessible'
-            },
-            ptm('hiddenInputWrapper')
-        );
+        const createInputElement = () => {
+            const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+            const inputProps = mergeProps(
+                {
+                    id: props.inputId,
+                    type: 'radio',
+                    name: props.name,
+                    defaultChecked: props.checked,
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onChange: onChange,
+                    disabled: props.disabled,
+                    readOnly: props.readonly,
+                    required: props.required,
+                    tabIndex: props.tabIndex,
+                    className: cx('input'),
+                    ...ariaProps
+                },
+                ptm('input')
+            );
 
-        const hiddenInputProps = mergeProps(
-            {
-                type: 'radio',
-                name: props.name,
-                defaultChecked: props.checked,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                disabled: props.disabled,
-                required: props.required,
-                tabIndex: props.tabIndex,
-                ...ariaProps
-            },
-            ptm('hiddenInput')
-        );
+            return <input ref={inputRef} {...inputProps} />;
+        };
 
-        const inputProps = mergeProps(
-            {
-                className: cx('input', { focusedState })
-            },
-            ptm('input')
-        );
+        const createBoxElement = () => {
+            const boxProps = mergeProps(
+                {
+                    className: cx('box')
+                },
+                ptm('box')
+            );
 
-        const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            ptm('icon')
-        );
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            );
+
+            return (
+                <div {...boxProps}>
+                    <div {...iconProps}></div>
+                </div>
+            );
+        };
 
         return (
             <>
-                <div id={props.id} ref={elementRef} {...rootProps}>
-                    <div {...hiddenInputWrapperProps}>
-                        <input id={props.inputId} ref={inputRef} {...hiddenInputProps} />
-                    </div>
-                    <div {...inputProps}>
-                        <div {...iconProps}></div>
-                    </div>
+                <div ref={elementRef} {...rootProps}>
+                    {createInputElement()}
+                    {createBoxElement()}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>

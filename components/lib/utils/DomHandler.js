@@ -599,7 +599,7 @@ export default class DomHandler {
                 let styleDeclaration = node ? getComputedStyle(node) : null;
 
                 return (
-                    styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY')))
+                    styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflow-x')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflow-y')))
                 );
             };
 
@@ -772,9 +772,9 @@ export default class DomHandler {
     }
 
     static scrollInView(container, item) {
-        let borderTopValue = getComputedStyle(container).getPropertyValue('borderTopWidth');
+        let borderTopValue = getComputedStyle(container).getPropertyValue('border-top-width');
         let borderTop = borderTopValue ? parseFloat(borderTopValue) : 0;
-        let paddingTopValue = getComputedStyle(container).getPropertyValue('paddingTop');
+        let paddingTopValue = getComputedStyle(container).getPropertyValue('padding-top');
         let paddingTop = paddingTopValue ? parseFloat(paddingTopValue) : 0;
         let containerRect = container.getBoundingClientRect();
         let itemRect = item.getBoundingClientRect();

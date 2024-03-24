@@ -68,6 +68,11 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
      */
     autoResize?: boolean | undefined;
     /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Format definition of the keys to block.
      */
     keyfilter?: KeyFilterType;

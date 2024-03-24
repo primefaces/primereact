@@ -68,50 +68,31 @@ const buttonStyles = `
     order: 2;
 }
 
-.p-buttonset .p-button {
+.p-button-group .p-button {
     margin: 0;
 }
 
-.p-buttonset .p-button:not(:last-child) {
+.p-button-group .p-button:not(:last-child) {
     border-right: 0 none;
 }
 
-.p-buttonset .p-button:not(:first-of-type):not(:last-of-type) {
+.p-button-group .p-button:not(:first-of-type):not(:last-of-type) {
     border-radius: 0;
 }
 
-.p-buttonset .p-button:first-of-type {
+.p-button-group .p-button:first-of-type {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.p-buttonset .p-button:last-of-type {
+.p-button-group .p-button:last-of-type {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.p-buttonset .p-button:focus {
+.p-button-group .p-button:focus {
     position: relative;
     z-index: 1;
-}
-`;
-const checkboxStyles = `
-.p-checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-    position: relative;
-}
-
-.p-checkbox.p-checkbox-disabled {
-    cursor: auto;
-}
-
-.p-checkbox-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 `;
 const inputTextStyles = `
@@ -221,34 +202,6 @@ const inputTextStyles = `
     display: block;
     width: 100%;
 }
-`;
-const radioButtonStyles = `
-.p-radiobutton {
-    display: inline-flex;
-    cursor: pointer;
-    user-select: none;
-    vertical-align: bottom;
-}
-
-.p-radiobutton-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.p-radiobutton-icon {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0) scale(.1);
-    border-radius: 50%;
-    visibility: hidden;
-}
-
-.p-radiobutton-box.p-highlight .p-radiobutton-icon {
-    transform: translateZ(0) scale(1.0, 1.0);
-    visibility: visible;
-}
-
 `;
 const iconStyles = `
 .p-icon {
@@ -456,9 +409,7 @@ const commonStyle = `
     }
 
     ${buttonStyles}
-    ${checkboxStyles}
     ${inputTextStyles}
-    ${radioButtonStyles}
     ${iconStyles}
 }
 `;

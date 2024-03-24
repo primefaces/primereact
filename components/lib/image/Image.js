@@ -105,15 +105,21 @@ export const Image = React.memo(
             DomHandler.saveAs({ name, src });
         };
 
-        const rotateRight = () => {
+        const rotateRight = (event) => {
+            event.stopPropagation();
+
             setRotateState((prevRotate) => prevRotate + 90);
         };
 
-        const rotateLeft = () => {
+        const rotateLeft = (event) => {
+            event.stopPropagation();
+
             setRotateState((prevRotate) => prevRotate - 90);
         };
 
-        const zoomIn = () => {
+        const zoomIn = (event) => {
+            event.stopPropagation();
+
             setScaleState((prevScale) => {
                 if (zoomInDisabled) return prevScale;
 
@@ -121,7 +127,9 @@ export const Image = React.memo(
             });
         };
 
-        const zoomOut = () => {
+        const zoomOut = (event) => {
+            event.stopPropagation();
+
             setScaleState((prevScale) => {
                 if (zoomOutDisabled) return prevScale;
 

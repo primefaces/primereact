@@ -8,6 +8,7 @@ const classes = {
             'p-cascadeselect p-component p-inputwrapper',
             {
                 'p-disabled': props.disabled,
+                'p-invalid': props.invalid,
                 'p-focus': focusedState,
                 'p-inputwrapper-filled': props.value,
                 'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -24,6 +25,7 @@ const classes = {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
+    sublistWrapper: 'p-cascadeselect-sublist-wrapper',
     sublist: 'p-cascadeselect-panel p-cascadeselect-items p-cascadeselect-sublist',
     item: ({ option, isGroup, isSelected }) =>
         classNames('p-cascadeselect-item', {
@@ -77,12 +79,6 @@ const styles = `
         min-width: 100%;
     }
     
-    .p-cascadeselect-panel {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    
     .p-cascadeselect-item {
         cursor: pointer;
         font-weight: normal;
@@ -115,7 +111,7 @@ const styles = `
         width: 1%;
     }
     
-    .p-cascadeselect-sublist {
+    .p-cascadeselect-sublist-wrapper {
         position: absolute;
         min-width: 100%;
         z-index: 1;
@@ -126,7 +122,7 @@ const styles = `
         overflow: visible;
     }
     
-    .p-cascadeselect-item-active > .p-cascadeselect-sublist {
+    .p-cascadeselect-item-active > .p-cascadeselect-sublist-wrapper {
         display: block;
         left: 100%;
         top: 0;
@@ -149,6 +145,7 @@ export const CascadeSelectBase = ComponentBase.extend({
         id: null,
         inputId: null,
         inputRef: null,
+        invalid: false,
         itemTemplate: null,
         name: null,
         onBeforeHide: null,

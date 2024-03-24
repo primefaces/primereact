@@ -95,7 +95,7 @@ interface TimelineEvent {
 }
 
 export default function TemplateDemo() {
-    const events: TimelineEvent = [
+    const events: TimelineEvent[] = [
         { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
         { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
         { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
@@ -113,7 +113,7 @@ export default function TemplateDemo() {
     const customizedContent = (item: TimelineEvent) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} width={200} className="shadow-1" />}
+                { item.image && <img src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.image} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>

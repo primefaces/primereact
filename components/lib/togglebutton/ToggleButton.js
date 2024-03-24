@@ -13,12 +13,8 @@ export const ToggleButton = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
-        const [focusedState, setFocusedState] = React.useState(false);
         const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
-            props,
-            state: {
-                focused: focusedState
-            }
+            props
         });
 
         useHandleStyle(ToggleButtonBase.css.styles, isUnstyled, { name: 'togglebutton' });
@@ -29,7 +25,7 @@ export const ToggleButton = React.memo(
         const icon = props.checked ? props.onIcon : props.offIcon;
 
         const toggle = (e) => {
-            if (!props.disabled && props.onChange) {
+            if (!props.disabled && props.onChange && !props.readonly) {
                 props.onChange({
                     originalEvent: e,
                     value: !props.checked,
@@ -56,13 +52,11 @@ export const ToggleButton = React.memo(
         };
 
         const onFocus = (event) => {
-            setFocusedState(true);
-            props.onFocus && props.onFocus(event);
+            props?.onFocus?.(event);
         };
 
         const onBlur = (event) => {
-            setFocusedState(false);
-            props.onBlur && props.onBlur(event);
+            props?.onBlur?.(event);
         };
 
         const createIcon = () => {
@@ -108,14 +102,6 @@ export const ToggleButton = React.memo(
                 ref: elementRef,
                 id: props.id,
                 className: cx('root', { hasIcon, hasLabel }),
-                style: props.style,
-                onClick: toggle,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                tabIndex: tabIndex,
-                role: 'button',
-                'aria-pressed': props.checked,
                 'data-p-highlight': props.checked,
                 'data-p-disabled': props.disabled
             },
@@ -123,12 +109,44 @@ export const ToggleButton = React.memo(
             ptm('root')
         );
 
+        const inputProps = mergeProps(
+            {
+                id: props.inputId,
+                className: cx('input'),
+                style: props.style,
+                onChange: toggle,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                tabIndex: tabIndex,
+                role: 'switch',
+                type: 'checkbox',
+                'aria-pressed': props.checked,
+                'aria-invalid': props.invalid,
+                disabled: props.disabled,
+                readOnly: props.readonly,
+                value: props.checked,
+                checked: props.checked
+            },
+            ptm('input')
+        );
+
+        const boxProps = mergeProps(
+            {
+                className: cx('box', { hasIcon, hasLabel })
+            },
+            ptm('box')
+        );
+
         return (
             <>
                 <div {...rootProps}>
-                    {iconElement}
-                    <span {...labelProps}>{label}</span>
-                    <Ripple />
+                    <input {...inputProps} />
+                    <div {...boxProps}>
+                        {iconElement}
+                        <span {...labelProps}>{label}</span>
+                        <Ripple />
+                    </div>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>

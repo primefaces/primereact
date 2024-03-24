@@ -8,7 +8,8 @@ const classes = {
             {
                 'p-disabled': props.disabled,
                 'p-filled': isFilled,
-                'p-inputtextarea-resizable': props.autoResize
+                'p-inputtextarea-resizable': props.autoResize,
+                'p-invalid': props.invalid
             },
             props.className
         )
@@ -32,6 +33,7 @@ export const InputTextareaBase = ComponentBase.extend({
         __TYPE: 'InputTextarea',
         __parentMetadata: null,
         autoResize: false,
+        invalid: false,
         keyfilter: null,
         onBlur: null,
         onFocus: null,

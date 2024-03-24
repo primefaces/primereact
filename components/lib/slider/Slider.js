@@ -19,6 +19,7 @@ export const Slider = React.memo(
         const initY = React.useRef(0);
         const barWidth = React.useRef(0);
         const barHeight = React.useRef(0);
+        const touchId = React.useRef();
         const value = props.range ? props.value || [props.min, props.max] : props.value || props.min || 0;
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
@@ -69,6 +70,8 @@ export const Slider = React.memo(
 
                 props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: newValue });
 
+                touchId.current = undefined;
+
                 unbindDocumentMouseMoveListener();
                 unbindDocumentMouseUpListener();
                 unbindDocumentTouchMoveListener();
@@ -83,6 +86,10 @@ export const Slider = React.memo(
         };
 
         const onTouchStart = (event, index) => {
+            if (event.changedTouches && event.changedTouches[0]) {
+                touchId.current = event.changedTouches[0].identifier;
+            }
+
             bindDocumentTouchMoveListener();
             bindDocumentTouchEndListener();
             onDragStart(event, index);
@@ -156,11 +163,19 @@ export const Slider = React.memo(
             barHeight.current = elementRef.current.offsetHeight;
         };
 
+        const trackTouch = (event) => {
+            const _event = Array.from(event.changedTouches ?? []).find((t) => t.identifier === touchId.current) || event;
+
+            return {
+                pageX: _event.pageX,
+                pageY: _event.pageY
+            };
+        };
+
         const setValue = (event) => {
             let handleValue;
 
-            let pageX = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageX : event.pageX;
-            let pageY = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageY : event.pageY;
+            const { pageX, pageY } = trackTouch(event);
 
             if (!pageX || !pageY) {
                 return;

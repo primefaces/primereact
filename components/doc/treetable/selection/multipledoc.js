@@ -75,7 +75,7 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { NodeService } from './service/NodeService';
 
 export default function MultipleRowsSelectionDemo() {
-    const [nodes, setNodes] = useState<TreeNode>([]);
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState<TreeTableSelectionKeysType | null>(null);
     const [metaKey, setMetaKey] = useState<boolean>(true);
 
