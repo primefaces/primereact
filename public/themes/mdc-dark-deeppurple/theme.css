@@ -1384,6 +1384,15 @@
   .p-input-icon-right > .p-inputtext {
     padding-right: 2.5rem;
   }
+  .p-icon-field-left > .p-inputtext {
+    padding-left: 2.5rem;
+  }
+  .p-icon-field-left.p-float-label > label {
+    left: 2.5rem;
+  }
+  .p-icon-field-right > .p-inputtext {
+    padding-right: 2.5rem;
+  }
   ::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.6);
   }
@@ -1412,6 +1421,26 @@
   .p-inputtext-lg .p-inputtext {
     font-size: 1.25rem;
     padding: 0.9375rem 0.9375rem;
+  }
+  .p-icon-field {
+    position: relative;
+  }
+  .p-icon-field > .p-input-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-fluid .p-icon-field-left,
+  .p-fluid .p-icon-field-right {
+    width: 100%;
+  }
+  .p-icon-field-left > .p-input-icon:first-of-type {
+    left: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .p-icon-field-right > .p-input-icon:last-of-type {
+    right: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
   }
   .p-listbox-list-wrapper {
     overflow: auto;
@@ -1912,19 +1941,6 @@
   }
   .p-input-filled .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover).p-highlight .p-radiobutton-box {
     background: #121212;
-  }
-  .p-rating {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  .p-rating-item {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  .p-rating.p-readonly .p-rating-item {
-    cursor: default;
   }
   .p-rating {
     position: relative;
@@ -6042,24 +6058,6 @@
   .p-inline-message.p-inline-message-error .p-inline-message-icon {
     color: #b71c1c;
   }
-  .p-inline-message.p-inline-message-secondary {
-    background: #A5D6A7;
-    border: solid transparent;
-    border-width: 1px;
-    color: #121212;
-  }
-  .p-inline-message.p-inline-message-secondary .p-inline-message-icon {
-    color: #121212;
-  }
-  .p-inline-message.p-inline-message-contrast {
-    background: #ffffff;
-    border: solid transparent;
-    border-width: 1px;
-    color: #121212;
-  }
-  .p-inline-message.p-inline-message-contrast .p-inline-message-icon {
-    color: #121212;
-  }
   .p-inline-message .p-inline-message-icon {
     font-size: 1rem;
     margin-right: 0.5rem;
@@ -6143,30 +6141,6 @@
   }
   .p-message.p-message-error .p-message-close {
     color: #b71c1c;
-  }
-  .p-message.p-message-secondary {
-    background: #A5D6A7;
-    border: solid transparent;
-    border-width: 0 0 0 0;
-    color: #121212;
-  }
-  .p-message.p-message-secondary .p-message-icon {
-    color: #121212;
-  }
-  .p-message.p-message-secondary .p-message-close {
-    color: #121212;
-  }
-  .p-message.p-message-contrast {
-    background: #ffffff;
-    border: solid transparent;
-    border-width: 0 0 0 0;
-    color: #121212;
-  }
-  .p-message.p-message-contrast .p-message-icon {
-    color: #121212;
-  }
-  .p-message.p-message-contrast .p-message-close {
-    color: #121212;
   }
   .p-message .p-message-text {
     font-size: 1rem;
@@ -6268,26 +6242,6 @@
   .p-toast .p-toast-message.p-toast-message-error .p-toast-message-icon,
   .p-toast .p-toast-message.p-toast-message-error .p-toast-icon-close {
     color: #b71c1c;
-  }
-  .p-toast .p-toast-message.p-toast-message-secondary {
-    background: #A5D6A7;
-    border: solid transparent;
-    border-width: 0 0 0 0;
-    color: #121212;
-  }
-  .p-toast .p-toast-message.p-toast-message-secondary .p-toast-message-icon,
-  .p-toast .p-toast-message.p-toast-message-secondary .p-toast-icon-close {
-    color: #121212;
-  }
-  .p-toast .p-toast-message.p-toast-message-contrast {
-    background: #ffffff;
-    border: solid transparent;
-    border-width: 0 0 0 0;
-    color: #121212;
-  }
-  .p-toast .p-toast-message.p-toast-message-contrast .p-toast-message-icon,
-  .p-toast .p-toast-message.p-toast-message-contrast .p-toast-icon-close {
-    color: #121212;
   }
   .p-galleria .p-galleria-close {
     margin: 0.5rem;
@@ -6554,14 +6508,6 @@
     background-color: #ef9a9a;
     color: #212121;
   }
-  .p-tag.p-tag-secondary {
-    background-color: #A5D6A7;
-    color: #121212;
-  }
-  .p-tag.p-tag-contrast {
-    background-color: #ffffff;
-    color: #121212;
-  }
   .p-tag .p-tag-icon {
     margin-right: 0.25rem;
     font-size: 0.75rem;
@@ -6696,14 +6642,6 @@
   .p-badge.p-badge-danger {
     background-color: #ef9a9a;
     color: #212121;
-  }
-  .p-badge.p-badge-secondary {
-    background-color: #A5D6A7;
-    color: #121212;
-  }
-  .p-badge.p-badge-contrast {
-    background-color: #ffffff;
-    color: #121212;
   }
   .p-badge.p-badge-lg {
     font-size: 1.125rem;
