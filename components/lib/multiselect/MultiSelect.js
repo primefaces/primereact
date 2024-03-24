@@ -400,6 +400,10 @@ export const MultiSelect = React.memo(
                     }
                 }
 
+                if (props.selectionLimit && value && value.length) {
+                    value = value.slice(0, props.selectionLimit);
+                }
+
                 updateModel(event.originalEvent, value, value);
             }
         };
