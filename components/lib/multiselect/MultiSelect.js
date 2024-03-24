@@ -653,6 +653,10 @@ export const MultiSelect = React.memo(
                 return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
             }
 
+            if (props.selectionLimit && props.value && props.value.length >= props.selectionLimit && !isSelected(option)) {
+                return true;
+            }
+
             return option && option['disabled'] !== undefined ? option['disabled'] : false;
         };
 
