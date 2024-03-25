@@ -362,7 +362,7 @@ export const BodyCell = React.memo((props) => {
 
     const onKeyDown = (event) => {
         if (props.editMode !== 'row') {
-            if (event.code === 'Enter' || event.code === 'Tab') {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Tab') {
                 switchCellToViewMode(event, true);
             }
 

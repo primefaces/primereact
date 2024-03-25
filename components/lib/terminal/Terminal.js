@@ -58,6 +58,7 @@ export const Terminal = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     if (!!commandTextState) {
                         let newCommands = [...commandsState];
 

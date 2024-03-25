@@ -179,6 +179,7 @@ export const BodyRow = React.memo((props) => {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(row, event, target);
                     break;
 

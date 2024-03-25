@@ -97,6 +97,7 @@ export const Dock = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     onSpaceKey(event);
                     event.preventDefault();

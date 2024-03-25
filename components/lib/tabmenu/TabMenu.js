@@ -138,6 +138,7 @@ export const TabMenu = React.memo(
 
                 case 'Space':
                 case 'Enter':
+                case 'NumpadEnter':
                     itemClick(event, item, index);
                     event.preventDefault();
                     break;

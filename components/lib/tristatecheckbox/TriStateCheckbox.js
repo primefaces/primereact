@@ -61,7 +61,7 @@ export const TriStateCheckbox = React.memo(
         };
 
         const onKeyDown = (e) => {
-            if (e.code === 'Enter' || e.code === 'Space') {
+            if (e.code === 'Enter' || e.code === 'NumpadEnter' || e.code === 'Space') {
                 onChange(e);
                 e.preventDefault();
             }

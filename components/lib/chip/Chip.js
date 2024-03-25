@@ -20,7 +20,7 @@ export const Chip = React.memo(
         useHandleStyle(ChipBase.css.styles, isUnstyled, { name: 'chip' });
 
         const onKeyDown = (event) => {
-            if (event.code === 'Enter' || event.code === 'Backspace') {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Backspace') {
                 close(event);
             }
         };

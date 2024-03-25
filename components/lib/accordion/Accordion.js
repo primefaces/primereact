@@ -106,6 +106,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 break;
 
             case 'Enter':
+            case 'NumpadEnter':
             case 'Space':
                 onTabEnterKey(event, tab, index);
                 break;

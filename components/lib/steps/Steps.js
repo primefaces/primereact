@@ -84,6 +84,7 @@ export const Steps = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     itemClick(event, item, index);
                     event.preventDefault();
