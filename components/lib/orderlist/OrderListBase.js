@@ -100,6 +100,7 @@ export const OrderListBase = ComponentBase.extend({
         moveBottomIcon: null,
         dataKey: null,
         autoOptionFocus: true,
+        focusOnHover: true,
         breakpoint: '960px',
         onChange: null,
         itemTemplate: null,

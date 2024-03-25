@@ -97,6 +97,12 @@ export const OrderListSubList = React.memo(
             }
         };
 
+        const onMouseMoveChangeHoverItem = (event, index) => {
+            if (props.focusOnHover && props.focused) {
+                props?.changeFocusedOptionIndex?.(index);
+            }
+        };
+
         const createDropPoint = (index, key) => {
             const droppointProps = mergeProps(
                 {
@@ -147,7 +153,8 @@ export const OrderListSubList = React.memo(
                                 className: classNames(props.className, cx('item', { selected, focused })),
                                 'aria-selected': selected,
                                 'data-p-highlight': selected,
-                                'data-p-focused': focused
+                                'data-p-focused': focused,
+                                onMouseMove: (e) => onMouseMoveChangeHoverItem(e, i)
                             },
                             getPTOptions(item, 'item')
                         );
@@ -178,7 +185,8 @@ export const OrderListSubList = React.memo(
                                 className: classNames(props.className, cx('item', { selected, focused })),
                                 'aria-selected': selected,
                                 'data-p-highlight': selected,
-                                'data-p-focused': focused
+                                'data-p-focused': focused,
+                                onMouseMove: (e) => onMouseMoveChangeHoverItem(e, i)
                             },
                             getPTOptions(item, 'item')
                         );

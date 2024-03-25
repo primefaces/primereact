@@ -177,6 +177,11 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     autoOptionFocus?: boolean | undefined;
     /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
+    /**
      * Inline style of the list element.
      */
     listStyle?: React.CSSProperties | undefined;
