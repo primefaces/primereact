@@ -14,7 +14,6 @@ export const DropdownPanel = React.memo(
         const mergeProps = useMergeProps();
         const { ptm, cx, sx } = props;
         const context = React.useContext(PrimeReactContext);
-        const virtualScrollerRef = React.useRef(null);
 
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
@@ -71,6 +70,12 @@ export const DropdownPanel = React.memo(
             return null;
         };
 
+        const onMouseMoveChangeHoverItem = (event, index) => {
+            if (props.focusOnHover) {
+                props?.changeFocusedOptionIndex?.(event, index);
+            }
+        };
+
         const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
@@ -95,6 +100,7 @@ export const DropdownPanel = React.memo(
                         ptm={ptm}
                         cx={cx}
                         checkmark={props.checkmark}
+                        onMouseMove={onMouseMoveChangeHoverItem}
                     />
                 );
             });
@@ -166,6 +172,7 @@ export const DropdownPanel = React.memo(
                         ptm={ptm}
                         cx={cx}
                         checkmark={props.checkmark}
+                        onMouseMove={onMouseMoveChangeHoverItem}
                     />
                 );
             }

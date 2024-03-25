@@ -39,7 +39,8 @@ export const DropdownItem = React.memo((props) => {
             'aria-selected': selected,
             'data-p-highlight': selected,
             'data-p-focused': focusedOptionIndex === index,
-            'data-p-disabled': disabled
+            'data-p-disabled': disabled,
+            onMouseMove: (e) => props?.onMouseMove(e, index)
         },
         getPTOptions('item', { selected, disabled, option, label })
     );
