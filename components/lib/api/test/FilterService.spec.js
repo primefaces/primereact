@@ -8,20 +8,20 @@ afterEach(() => {
 });
 
 const checkParametersNullOrUndefined = (filterType) => {
-    it('When value parameter is undefined', () => {
+    it('When filter parameter is undefined', () => {
         expect(filters[filterType]('value', undefined)).toBeTruthy();
     });
 
-    it('When value parameter is null', () => {
+    it('When filter parameter is null', () => {
         expect(filters[filterType]('value', null)).toBeTruthy();
     });
 
-    it('When filter parameter is undefined', () => {
+    it('When value parameter is undefined', () => {
         expect(filters[filterType](undefined, 'filter')).toBeFalsy();
     });
 
-    it('When filter parameter is null', () => {
-        expect(filters[filterType](undefined, 'filter')).toBeFalsy();
+    it('When value parameter is null', () => {
+        expect(filters[filterType](null, 'filter')).toBeFalsy();
     });
 };
 
@@ -138,6 +138,40 @@ describe('FilterService', () => {
             const inFilter = filters.in('d', 'filter');
 
             expect(inFilter).toBeFalsy();
+        });
+    });
+
+    describe('notIn filter test', () => {
+        it('When filter parameter is undefined', () => {
+            expect(filters.notIn('value', undefined)).toBeTruthy();
+        });
+
+        it('When filter parameter is null', () => {
+            expect(filters.notIn('value', null)).toBeTruthy();
+        });
+
+        it('When value parameter is undefined', () => {
+            expect(filters.notIn(undefined, 'filter')).toBeTruthy();
+        });
+
+        it('When value parameter is null', () => {
+            expect(filters.notIn(null, 'filter')).toBeTruthy();
+        });
+
+        it('When value parameter equal to any filter word', () => {
+            jest.spyOn(ObjectUtils, 'removeAccents').mockImplementation((value, filter) => value === filter);
+
+            const notInFilter = filters.notIn('e', 'filter');
+
+            expect(notInFilter).toBeFalsy();
+        });
+
+        it('When value parameter not equal to any filter word', () => {
+            jest.spyOn(ObjectUtils, 'removeAccents').mockImplementation((value, filter) => value === filter);
+
+            const notInFilter = filters.notIn('d', 'filter');
+
+            expect(notInFilter).toBeTruthy();
         });
     });
 

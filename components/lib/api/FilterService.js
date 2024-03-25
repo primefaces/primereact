@@ -122,6 +122,19 @@ export const FilterService = {
 
             return false;
         },
+        notIn(value, filter) {
+            if (filter === undefined || filter === null || filter.length === 0) {
+                return true;
+            }
+
+            for (let i = 0; i < filter.length; i++) {
+                if (ObjectUtils.equals(value, filter[i])) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
         between(value, filter) {
             if (filter == null || filter[0] == null || filter[1] == null) {
                 return true;
