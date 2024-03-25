@@ -363,7 +363,7 @@ export interface PickListProps {
      */
     filterBy?: string | undefined;
     /**
-     * 	Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte".
+     * 	Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt" and "gte".
      * @defaultValue contains
      */
     filterMatchMode?: string | undefined;

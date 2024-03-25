@@ -31,7 +31,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
     };
 
     const onThumbnailKeydown = (event) => {
-        if (event.code === 'Enter' || event.code === 'Space') {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {
             props.onItemClick({
                 originalEvent: event,
                 index: props.index

@@ -218,7 +218,7 @@ export const Calendar = React.memo(
         };
 
         const onPickerKeyDown = (event, type, direction) => {
-            if (event.code === 'Enter' || event.code === 'Space') {
+            if (event.key === 'Enter' || event.key === 'Space') {
                 onTimePickerElementMouseDown(event, type, direction);
                 event.preventDefault();
 
@@ -229,7 +229,7 @@ export const Calendar = React.memo(
         };
 
         const onPickerKeyUp = (event) => {
-            if (event.code === 'Enter' || event.code === 'Space') {
+            if (event.key === 'Enter' || event.key === 'Space') {
                 onTimePickerElementMouseUp();
                 event.preventDefault();
 
@@ -576,6 +576,14 @@ export const Calendar = React.memo(
             }
         };
 
+        const roundMinutesToStep = (minutes) => {
+            if (props.stepMinute) {
+                return Math.round(minutes / props.stepMinute) * props.stepMinute;
+            }
+
+            return minutes;
+        };
+
         const incrementHour = (event) => {
             const currentTime = getCurrentDateTime();
             const currentHour = currentTime.getHours();
@@ -606,10 +614,10 @@ export const Calendar = React.memo(
                             updateTime(event, newHour, props.maxDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                         }
                     } else {
-                        updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                        updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 } else {
-                    updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
 
@@ -646,10 +654,10 @@ export const Calendar = React.memo(
                             updateTime(event, newHour, props.minDate.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
                         }
                     } else {
-                        updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                        updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                     }
                 } else {
-                    updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+                    updateTime(event, newHour, roundMinutesToStep(currentTime.getMinutes()), currentTime.getSeconds(), currentTime.getMilliseconds());
                 }
             }
 
@@ -801,7 +809,7 @@ export const Calendar = React.memo(
             const currentHour = currentTime.getHours();
             const newHour = currentHour >= 12 ? currentHour - 12 : currentHour + 12;
 
-            if (validateHour(convertTo24Hour(newHour, !(currentHour > 11)), currentTime)) {
+            if (validateHour(convertTo24Hour(newHour, currentHour > 11), currentTime)) {
                 updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
             }
 
@@ -1670,7 +1678,7 @@ export const Calendar = React.memo(
         };
 
         const switchToMonthView = (event) => {
-            if (event && event.code && (event.code === 'Enter' || event.code === 'Space')) {
+            if (event && event.code && (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space')) {
                 viewChangedWithKeyDown.current = true;
             }
 
@@ -1679,7 +1687,7 @@ export const Calendar = React.memo(
         };
 
         const switchToYearView = (event) => {
-            if (event && event.code && (event.code === 'Enter' || event.code === 'Space')) {
+            if (event && event.code && (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space')) {
                 viewChangedWithKeyDown.current = true;
             }
 

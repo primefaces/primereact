@@ -322,7 +322,7 @@ export const InputNumber = React.memo(
                 return;
             }
 
-            if (event.shiftKey || event.altKey) {
+            if (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey) {
                 isSpecialChar.current = true;
 
                 return;
@@ -377,6 +377,7 @@ export const InputNumber = React.memo(
                 case 'Tab':
                 case 'NumpadEnter':
                 case 'Enter':
+                case 'NumpadEnter':
                     newValueStr = validateValue(parseValue(inputValue));
                     inputRef.current.value = formatValue(newValueStr);
                     inputRef.current.setAttribute('aria-valuenow', newValueStr);

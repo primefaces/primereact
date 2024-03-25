@@ -106,6 +106,7 @@ export const SpeedDial = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     onEnterKey(event);
                     break;
