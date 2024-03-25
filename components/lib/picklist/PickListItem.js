@@ -60,7 +60,8 @@ export const PickListItem = React.memo((props) => {
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
-            'data-p-focused': props.focused
+            'data-p-focused': props.focused,
+            onMouseMove: props.onMouseMove
         },
         getPTOptions('item')
     );

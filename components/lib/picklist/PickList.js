@@ -652,6 +652,9 @@ export const PickList = React.memo(
                     sourceFilterIcon={props.sourceFilterIcon}
                     ptm={ptm}
                     cx={cx}
+                    focusedList={focused}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    focusOnHover={props.focusOnHover}
                 />
 
                 <PickListTransferControls
@@ -706,6 +709,9 @@ export const PickList = React.memo(
                     targetFilterIcon={props.targetFilterIcon}
                     ptm={ptm}
                     cx={cx}
+                    focusedList={focused}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    focusOnHover={props.focusOnHover}
                 />
 
                 {props.showTargetControls && (
