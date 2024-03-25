@@ -94,6 +94,12 @@ export const MultiSelectPanel = React.memo(
             return null;
         };
 
+        const onMouseMoveChangeHoverItem = (event, index) => {
+            if (props.focusOnHover) {
+                props?.changeFocusedOptionIndex?.(event, index);
+            }
+        };
+
         const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
@@ -123,6 +129,7 @@ export const MultiSelectPanel = React.memo(
                         isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
+                        onMouseMove={onMouseMoveChangeHoverItem}
                     />
                 );
             });
@@ -201,6 +208,7 @@ export const MultiSelectPanel = React.memo(
                         isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
+                        onMouseMove={onMouseMoveChangeHoverItem}
                     />
                 );
             }

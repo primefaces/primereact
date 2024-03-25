@@ -221,6 +221,7 @@ export const MultiSelectBase = ComponentBase.extend({
         filterInputAutoFocus: true,
         filterLocale: undefined,
         selectOnFocus: false,
+        focusOnHover: true,
         autoOptionFocus: false,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
