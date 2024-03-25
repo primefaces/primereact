@@ -809,7 +809,7 @@ export const Calendar = React.memo(
             const currentHour = currentTime.getHours();
             const newHour = currentHour >= 12 ? currentHour - 12 : currentHour + 12;
 
-            if (validateHour(convertTo24Hour(newHour, !(currentHour > 11)), currentTime)) {
+            if (validateHour(convertTo24Hour(newHour, currentHour > 11), currentTime)) {
                 updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
             }
 
