@@ -41204,6 +41204,14 @@
                             "description": "Defines how the items are filtered, valid values are \"contains\" (default) \"startsWith\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\" and \"gte\"."
                         },
                         {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
+                        },
+                        {
                             "name": "id",
                             "optional": true,
                             "readonly": false,
