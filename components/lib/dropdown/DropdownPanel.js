@@ -70,7 +70,7 @@ export const DropdownPanel = React.memo(
             return null;
         };
 
-        const onMouseMoveChangeHoverItem = (event, index) => {
+        const changeFocusedItemOnHover = (event, index) => {
             if (props.focusOnHover) {
                 props?.changeFocusedOptionIndex?.(event, index);
             }
@@ -100,7 +100,7 @@ export const DropdownPanel = React.memo(
                         ptm={ptm}
                         cx={cx}
                         checkmark={props.checkmark}
-                        onMouseMove={onMouseMoveChangeHoverItem}
+                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             });
@@ -172,7 +172,7 @@ export const DropdownPanel = React.memo(
                         ptm={ptm}
                         cx={cx}
                         checkmark={props.checkmark}
-                        onMouseMove={onMouseMoveChangeHoverItem}
+                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             }

@@ -94,7 +94,7 @@ export const MultiSelectPanel = React.memo(
             return null;
         };
 
-        const onMouseMoveChangeHoverItem = (event, index) => {
+        const changeFocusedItemOnHover = (event, index) => {
             if (props.focusOnHover) {
                 props?.changeFocusedOptionIndex?.(event, index);
             }
@@ -129,7 +129,7 @@ export const MultiSelectPanel = React.memo(
                         isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
-                        onMouseMove={onMouseMoveChangeHoverItem}
+                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             });
@@ -208,7 +208,7 @@ export const MultiSelectPanel = React.memo(
                         isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
-                        onMouseMove={onMouseMoveChangeHoverItem}
+                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             }

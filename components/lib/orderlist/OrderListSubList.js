@@ -97,7 +97,7 @@ export const OrderListSubList = React.memo(
             }
         };
 
-        const onMouseMoveChangeHoverItem = (event, index) => {
+        const changeFocusedItemOnHover = (event, index) => {
             if (props.focusOnHover && props.focused) {
                 props?.changeFocusedOptionIndex?.(index);
             }
@@ -154,7 +154,7 @@ export const OrderListSubList = React.memo(
                                 'aria-selected': selected,
                                 'data-p-highlight': selected,
                                 'data-p-focused': focused,
-                                onMouseMove: (e) => onMouseMoveChangeHoverItem(e, i)
+                                onMouseMove: (e) => changeFocusedItemOnHover(e, i)
                             },
                             getPTOptions(item, 'item')
                         );
@@ -186,7 +186,7 @@ export const OrderListSubList = React.memo(
                                 'aria-selected': selected,
                                 'data-p-highlight': selected,
                                 'data-p-focused': focused,
-                                onMouseMove: (e) => onMouseMoveChangeHoverItem(e, i)
+                                onMouseMove: (e) => changeFocusedItemOnHover(e, i)
                             },
                             getPTOptions(item, 'item')
                         );
