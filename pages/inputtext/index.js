@@ -7,7 +7,6 @@ import { FloatLabelDoc } from '@/components/doc/inputtext/floatlabeldoc';
 import { FormikDoc } from '@/components/doc/inputtext/form/formikdoc';
 import { HookFormDoc } from '@/components/doc/inputtext/form/hookformdoc';
 import { HelpTextDoc } from '@/components/doc/inputtext/helptextdoc';
-import { IconsDoc } from '@/components/doc/inputtext/iconsdoc';
 import { ImportDoc } from '@/components/doc/inputtext/importdoc';
 import { InvalidDoc } from '@/components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/inputtext/keyfilterdoc';
@@ -28,11 +27,6 @@ const InputTextDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'icons',
-            label: 'Icons',
-            component: IconsDoc
         },
         {
             id: 'keyfilter',
