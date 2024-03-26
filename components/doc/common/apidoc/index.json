@@ -23095,6 +23095,14 @@
                             "description": "Reference of the focusable input element."
                         },
                         {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
+                        },
+                        {
                             "name": "highlightOnSelect",
                             "optional": true,
                             "readonly": false,
@@ -35498,6 +35506,14 @@
                             "description": "Use flex layout for the items panel."
                         },
                         {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
+                        },
+                        {
                             "name": "id",
                             "optional": true,
                             "readonly": false,
@@ -37149,6 +37165,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Custom template of filter element."
+                        },
+                        {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
                         },
                         {
                             "name": "header",
