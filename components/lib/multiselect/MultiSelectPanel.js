@@ -64,6 +64,10 @@ export const MultiSelectPanel = React.memo(
                     filterRef={filterInputRef}
                     filterValue={props.filterValue}
                     filterTemplate={props.filterTemplate}
+                    visibleOptions={props.visibleOptions}
+                    isValidOption={props.isValidOption}
+                    getOptionValue={props.getOptionValue}
+                    updateModel={props.updateModel}
                     onFilter={onFilterInputChange}
                     filterPlaceholder={props.filterPlaceholder}
                     onClose={props.onCloseClick}
@@ -175,43 +179,43 @@ export const MultiSelectPanel = React.memo(
                         {groupChildrenContent}
                     </React.Fragment>
                 );
-            } else {
-                const optionLabel = props.getOptionLabel(option);
-                const optionKey = index + '_' + props.getOptionRenderKey(option);
-                const disabled = props.isOptionDisabled(option);
-                const tabIndex = disabled ? null : props.tabIndex || 0;
-                const selected = props.isSelected(option);
-
-                return (
-                    <MultiSelectItem
-                        hostName={props.hostName}
-                        key={optionKey}
-                        focusedOptionIndex={props.focusedOptionIndex}
-                        label={optionLabel}
-                        option={option}
-                        style={style}
-                        index={index}
-                        template={props.itemTemplate}
-                        selected={selected}
-                        onClick={props.onOptionSelect}
-                        tabIndex={tabIndex}
-                        disabled={disabled}
-                        className={props.itemClassName}
-                        checkboxIcon={props.checkboxIcon}
-                        isUnstyled={isUnstyled}
-                        ptm={ptm}
-                        cx={cx}
-                    />
-                );
             }
+
+            const optionLabel = props.getOptionLabel(option);
+            const optionKey = index + '_' + props.getOptionRenderKey(option);
+            const disabled = props.isOptionDisabled(option);
+            const tabIndex = disabled ? null : props.tabIndex || 0;
+            const selected = props.isSelected(option);
+
+            return (
+                <MultiSelectItem
+                    hostName={props.hostName}
+                    key={optionKey}
+                    focusedOptionIndex={props.focusedOptionIndex}
+                    label={optionLabel}
+                    option={option}
+                    style={style}
+                    index={index}
+                    template={props.itemTemplate}
+                    selected={selected}
+                    onClick={props.onOptionSelect}
+                    tabIndex={tabIndex}
+                    disabled={disabled}
+                    className={props.itemClassName}
+                    checkboxIcon={props.checkboxIcon}
+                    isUnstyled={isUnstyled}
+                    ptm={ptm}
+                    cx={cx}
+                />
+            );
         };
 
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
                 return props.visibleOptions.map(createItem);
-            } else {
-                return props.hasFilter ? createEmptyFilter() : createEmptyContent();
             }
+
+            return props.hasFilter ? createEmptyFilter() : createEmptyContent();
         };
 
         const createContent = () => {
@@ -245,32 +249,32 @@ export const MultiSelectPanel = React.memo(
                 };
 
                 return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} __parentMetadata={{ parent: props.metaData }} />;
-            } else {
-                const items = createItems();
-
-                const wrapperProps = mergeProps(
-                    {
-                        className: cx('wrapper'),
-                        style: { maxHeight: props.scrollHeight }
-                    },
-                    getPTOptions('wrapper')
-                );
-
-                const listProps = mergeProps(
-                    {
-                        className: cx('list'),
-                        role: 'listbox',
-                        'aria-multiselectable': true
-                    },
-                    getPTOptions('list')
-                );
-
-                return (
-                    <div {...wrapperProps}>
-                        <ul {...listProps}>{items}</ul>
-                    </div>
-                );
             }
+
+            const items = createItems();
+
+            const wrapperProps = mergeProps(
+                {
+                    className: cx('wrapper'),
+                    style: { maxHeight: props.scrollHeight }
+                },
+                getPTOptions('wrapper')
+            );
+
+            const listProps = mergeProps(
+                {
+                    className: cx('list'),
+                    role: 'listbox',
+                    'aria-multiselectable': true
+                },
+                getPTOptions('list')
+            );
+
+            return (
+                <div {...wrapperProps}>
+                    <ul {...listProps}>{items}</ul>
+                </div>
+            );
         };
 
         const createElement = () => {
@@ -343,11 +347,11 @@ export const MultiSelectPanel = React.memo(
             return (
                 <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
-                        <span {...firstHiddenElementProps}></span>
+                        <span {...firstHiddenElementProps} />
                         {header}
                         {content}
                         {footer}
-                        <span {...lastHiddenElementProps}></span>
+                        <span {...lastHiddenElementProps} />
                     </div>
                 </CSSTransition>
             );
@@ -355,7 +359,9 @@ export const MultiSelectPanel = React.memo(
 
         const element = createElement();
 
-        if (props.inline) return element;
+        if (props.inline) {
+            return element;
+        }
 
         return <Portal element={element} appendTo={props.appendTo} />;
     })
