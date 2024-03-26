@@ -67,12 +67,12 @@ export const MultiSelectItem = React.memo((props) => {
             onClick: onClick,
             onFocus: onFocus,
             onBlur: onBlur,
+            onMouseMove: (e) => props?.onMouseMove(e, props.index),
             tabIndex: tabIndex,
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
-            'data-p-disabled': props.disabled,
-            onMouseMove: (e) => props?.onMouseMove(e, props.index)
+            'data-p-disabled': props.disabled
         },
         getPTOptions('item')
     );

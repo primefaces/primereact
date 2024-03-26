@@ -122,6 +122,7 @@ export const MultiSelectPanel = React.memo(
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
+                        onMouseMove={changeFocusedItemOnHover}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -129,7 +130,6 @@ export const MultiSelectPanel = React.memo(
                         isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
-                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             });
@@ -201,6 +201,7 @@ export const MultiSelectPanel = React.memo(
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
+                        onMouseMove={changeFocusedItemOnHover}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -208,7 +209,6 @@ export const MultiSelectPanel = React.memo(
                         isUnstyled={isUnstyled}
                         ptm={ptm}
                         cx={cx}
-                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             }

@@ -35,12 +35,12 @@ export const DropdownItem = React.memo((props) => {
             className: classNames(option.className, cx('item', { selected, disabled, label, index, focusedOptionIndex, highlightOnSelect })),
             style: props.style,
             onClick: (e) => onClick(e, index),
+            onMouseMove: (e) => props?.onMouseMove(e, index),
             'aria-label': label,
             'aria-selected': selected,
             'data-p-highlight': selected,
             'data-p-focused': focusedOptionIndex === index,
-            'data-p-disabled': disabled,
-            onMouseMove: (e) => props?.onMouseMove(e, index)
+            'data-p-disabled': disabled
         },
         getPTOptions('item', { selected, disabled, option, label })
     );

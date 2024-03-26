@@ -82,9 +82,9 @@ export const PickListSubList = React.memo(
                             onClick={props.onItemClick}
                             onKeyDown={props.onItemKeyDown}
                             onMouseDown={(event) => props.onOptionMouseDown({ ...event, index, type: props.type })}
+                            onMouseMove={() => changeFocusedItemOnHover(index)}
                             ptm={ptm}
                             cx={cx}
-                            onMouseMove={() => changeFocusedItemOnHover(index)}
                         />
                     );
                 });

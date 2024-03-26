@@ -148,13 +148,13 @@ export const OrderListSubList = React.memo(
                                 draggable: 'true',
                                 onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
                                 onMouseDown: props.onOptionMouseDown,
+                                onMouseMove: (e) => changeFocusedItemOnHover(e, i),
                                 onDragStart: (e) => onDragStart(e, i),
                                 onDragEnd: onDragEnd,
                                 className: classNames(props.className, cx('item', { selected, focused })),
                                 'aria-selected': selected,
                                 'data-p-highlight': selected,
-                                'data-p-focused': focused,
-                                onMouseMove: (e) => changeFocusedItemOnHover(e, i)
+                                'data-p-focused': focused
                             },
                             getPTOptions(item, 'item')
                         );
@@ -182,11 +182,11 @@ export const OrderListSubList = React.memo(
                                 role: 'option',
                                 onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
                                 onMouseDown: props.onOptionMouseDown,
+                                onMouseMove: (e) => changeFocusedItemOnHover(e, i),
                                 className: classNames(props.className, cx('item', { selected, focused })),
                                 'aria-selected': selected,
                                 'data-p-highlight': selected,
-                                'data-p-focused': focused,
-                                onMouseMove: (e) => changeFocusedItemOnHover(e, i)
+                                'data-p-focused': focused
                             },
                             getPTOptions(item, 'item')
                         );

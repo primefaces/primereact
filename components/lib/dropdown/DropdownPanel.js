@@ -97,10 +97,10 @@ export const DropdownPanel = React.memo(
                         highlightOnSelect={props.highlightOnSelect}
                         disabled={disabled}
                         onClick={props.onOptionClick}
+                        onMouseMove={changeFocusedItemOnHover}
                         ptm={ptm}
                         cx={cx}
                         checkmark={props.checkmark}
-                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             });
@@ -169,10 +169,10 @@ export const DropdownPanel = React.memo(
                         highlightOnSelect={props.highlightOnSelect}
                         disabled={disabled}
                         onClick={props.onOptionClick}
+                        onMouseMove={changeFocusedItemOnHover}
                         ptm={ptm}
                         cx={cx}
                         checkmark={props.checkmark}
-                        onMouseMove={changeFocusedItemOnHover}
                     />
                 );
             }
