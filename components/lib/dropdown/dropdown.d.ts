@@ -329,7 +329,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filterLocale?: string | undefined;
     /**
-     * Defines how the items are filtered.
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
     filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
