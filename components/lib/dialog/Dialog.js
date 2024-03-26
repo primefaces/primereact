@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useDraggable, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
@@ -21,14 +21,14 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
     const [maximizedState, setMaximizedState] = React.useState(props.maximized);
+    const [draggableState, setDraggableState] = React.useState(false);
     const dialogRef = React.useRef(null);
+    const headerRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const pointerRef = React.useRef(null);
     const contentRef = React.useRef(null);
-    const headerRef = React.useRef(null);
     const footerRef = React.useRef(null);
     const closeRef = React.useRef(null);
-    const dragging = React.useRef(false);
     const resizing = React.useRef(false);
     const lastPageX = React.useRef(null);
     const lastPageY = React.useRef(null);
@@ -60,11 +60,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
+    const draggable = useDraggable({ targetRef: dialogRef, handleRef: headerRef, onDragStart: props.onDragStart, onDrag: props.onDrag, onDragEnd: props.onDragEnd, enabled: draggableState, keepInViewport: props.keepInViewport });
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
     const [bindDocumentResizeEndListener, unbindDocumentResizEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onResizeEnd(event) });
-    const [bindDocumentDragListener, unbindDocumentDragListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onDrag(event) });
-    const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
         props.onHide();
@@ -146,68 +145,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         }
     };
 
-    const onDragStart = (event) => {
-        if (DomHandler.hasClass(event.target, 'p-dialog-header-icon') || DomHandler.hasClass(event.target.parentElement, 'p-dialog-header-icon')) {
-            return;
-        }
-
-        if (props.draggable) {
-            dragging.current = true;
-            lastPageX.current = event.pageX;
-            lastPageY.current = event.pageY;
-            dialogRef.current.style.margin = '0';
-            DomHandler.addClass(document.body, 'p-unselectable-text');
-
-            props.onDragStart && props.onDragStart(event);
-        }
-    };
-
-    const onDrag = (event) => {
-        if (dragging.current) {
-            const width = DomHandler.getOuterWidth(dialogRef.current);
-            const height = DomHandler.getOuterHeight(dialogRef.current);
-            const deltaX = event.pageX - lastPageX.current;
-            const deltaY = event.pageY - lastPageY.current;
-            const offset = dialogRef.current.getBoundingClientRect();
-            const leftPos = offset.left + deltaX;
-            const topPos = offset.top + deltaY;
-            const viewport = DomHandler.getViewport();
-            const computedStyle = getComputedStyle(dialogRef.current);
-            const leftMargin = parseFloat(computedStyle.marginLeft);
-            const topMargin = parseFloat(computedStyle.marginTop);
-
-            dialogRef.current.style.position = 'fixed';
-
-            if (props.keepInViewport) {
-                if (leftPos >= props.minX && leftPos + width < viewport.width) {
-                    lastPageX.current = event.pageX;
-                    dialogRef.current.style.left = leftPos - leftMargin + 'px';
-                }
-
-                if (topPos >= props.minY && topPos + height < viewport.height) {
-                    lastPageY.current = event.pageY;
-                    dialogRef.current.style.top = topPos - topMargin + 'px';
-                }
-            } else {
-                lastPageX.current = event.pageX;
-                dialogRef.current.style.left = leftPos - leftMargin + 'px';
-                lastPageY.current = event.pageY;
-                dialogRef.current.style.top = topPos - topMargin + 'px';
-            }
-
-            props.onDrag && props.onDrag(event);
-        }
-    };
-
-    const onDragEnd = (event) => {
-        if (dragging.current) {
-            dragging.current = false;
-            DomHandler.removeClass(document.body, 'p-unselectable-text');
-
-            props.onDragEnd && props.onDragEnd(event);
-        }
-    };
-
     const onResizeStart = (event) => {
         if (props.resizable) {
             resizing.current = true;
@@ -284,6 +221,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const onEnter = () => {
         dialogRef.current.setAttribute(attributeSelector.current, '');
+        setDraggableState(props.draggable);
     };
 
     const onEntered = () => {
@@ -303,7 +241,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const onExited = () => {
-        dragging.current = false;
+        setDraggableState(false);
         ZIndexUtils.clear(maskRef.current);
         setMaskVisibleState(false);
         disableDocumentSettings();
@@ -361,11 +299,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const bindGlobalListeners = () => {
-        if (props.draggable) {
-            bindDocumentDragListener();
-            bindDocumentDragEndListener();
-        }
-
         if (props.resizable) {
             bindDocumentResizeListener();
             bindDocumentResizeEndListener();
@@ -375,8 +308,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const unbindGlobalListeners = () => {
-        unbindDocumentDragListener();
-        unbindDocumentDragEndListener();
         unbindDocumentResizeListener();
         unbindDocumentResizEndListener();
         unbindDocumentKeyDownListener();
@@ -555,8 +486,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 {
                     ref: headerRef,
                     style: props.headerStyle,
-                    className: cx('header'),
-                    onMouseDown: onDragStart
+                    className: cx('header')
                 },
                 ptm('header')
             );

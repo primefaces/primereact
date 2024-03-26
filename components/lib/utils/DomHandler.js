@@ -115,14 +115,10 @@ export default class DomHandler {
     }
 
     static getViewport() {
-        let win = window,
-            d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName('body')[0],
-            w = win.innerWidth || e.clientWidth || g.clientWidth,
-            h = win.innerHeight || e.clientHeight || g.clientHeight;
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 
-        return { width: w, height: h };
+        return { width: vw, height: vh };
     }
 
     static getOffset(el) {
