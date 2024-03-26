@@ -18,7 +18,7 @@ export const JumpToPageInput = React.memo((inProps) => {
         }
     };
 
-    const value = props.pageCount > 0 ? props.page + 1 : 0;
+    const value = props.totalPages > 0 ? props.page + 1 : 0;
     const element = (
         <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} pt={props.ptm('JTPInput')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} aria-label={ariaLabelValue} />
     );
