@@ -56,7 +56,7 @@ export const Checkbox = React.memo(
                     }
                 };
 
-                props.onChange && props.onChange(eventData);
+                props?.onChange?.(eventData);
 
                 // do not continue if the user defined click wants to prevent
                 if (event.defaultPrevented) {
