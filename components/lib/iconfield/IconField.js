@@ -28,7 +28,7 @@ export const IconField = React.memo(
 
         return (
             <div {...rootProps} ref={elementRef}>
-                <>{props.children}</>
+                {props.children}
             </div>
         );
     })
