@@ -1384,6 +1384,15 @@
   .p-input-icon-right > .p-inputtext {
     padding-right: 3rem;
   }
+  .p-icon-field-left > .p-inputtext {
+    padding-left: 3rem;
+  }
+  .p-icon-field-left.p-float-label > label {
+    left: 3rem;
+  }
+  .p-icon-field-right > .p-inputtext {
+    padding-right: 3rem;
+  }
   ::-webkit-input-placeholder {
     color: rgba(0, 0, 0, 0.6);
   }
@@ -1412,6 +1421,26 @@
   .p-inputtext-lg .p-inputtext {
     font-size: 1.25rem;
     padding: 1.25rem 1.25rem;
+  }
+  .p-icon-field {
+    position: relative;
+  }
+  .p-icon-field > .p-input-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-fluid .p-icon-field-left,
+  .p-fluid .p-icon-field-right {
+    width: 100%;
+  }
+  .p-icon-field-left > .p-input-icon:first-of-type {
+    left: 1rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .p-icon-field-right > .p-input-icon:last-of-type {
+    right: 1rem;
+    color: rgba(0, 0, 0, 0.6);
   }
   .p-listbox-list-wrapper {
     overflow: auto;
