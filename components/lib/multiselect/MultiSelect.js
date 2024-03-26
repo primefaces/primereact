@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -791,12 +791,13 @@ export const MultiSelect = React.memo(
 
         const getSelectedItemsLabel = () => {
             const pattern = /{(.*?)}/;
+            const selectedItemsLabel = props.selectedItemsLabel || localeOption('selectionMessage');
 
-            if (pattern.test(props.selectedItemsLabel)) {
-                return props.selectedItemsLabel.replace(props.selectedItemsLabel.match(pattern)[0], props.value.length + '');
+            if (pattern.test(selectedItemsLabel)) {
+                return selectedItemsLabel.replace(selectedItemsLabel.match(pattern)[0], props.value.length + '');
             }
 
-            return props.selectedItemsLabel;
+            return selectedItemsLabel;
         };
 
         const getLabel = () => {
