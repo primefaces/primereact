@@ -1364,6 +1364,15 @@
   .p-input-icon-right > .p-inputtext {
     padding-right: 2rem;
   }
+  .p-icon-field-left > .p-inputtext {
+    padding-left: 2rem;
+  }
+  .p-icon-field-left.p-float-label > label {
+    left: 2rem;
+  }
+  .p-icon-field-right > .p-inputtext {
+    padding-right: 2rem;
+  }
   ::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.6);
   }
@@ -1392,6 +1401,26 @@
   .p-inputtext-lg .p-inputtext {
     font-size: 1.25rem;
     padding: 0.625rem 0.625rem;
+  }
+  .p-icon-field {
+    position: relative;
+  }
+  .p-icon-field > .p-input-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-fluid .p-icon-field-left,
+  .p-fluid .p-icon-field-right {
+    width: 100%;
+  }
+  .p-icon-field-left > .p-input-icon:first-of-type {
+    left: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .p-icon-field-right > .p-input-icon:last-of-type {
+    right: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
   }
   .p-listbox-list-wrapper {
     overflow: auto;
@@ -4327,6 +4356,109 @@
   }
   .p-splitter .p-splitter-gutter-resizing {
     background: #304562;
+  }
+  .p-stepper .p-stepper-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .p-stepper .p-stepper-header {
+    padding: 0.5rem;
+  }
+  .p-stepper .p-stepper-header .p-stepper-action {
+    transition: box-shadow 0.2s;
+    border-radius: 3px;
+    background: transparent;
+    outline-color: transparent;
+  }
+  .p-stepper .p-stepper-header .p-stepper-action .p-stepper-number {
+    color: rgba(255, 255, 255, 0.87);
+    border: 0 none;
+    border-width: 2px;
+    background: transparent;
+    min-width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1.143rem;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
+    margin-left: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .p-stepper .p-stepper-header .p-stepper-action:not(.p-disabled):focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #ffe284;
+  }
+  .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+    background: rgba(255, 213, 79, 0.16);
+    color: rgba(255, 255, 255, 0.87);
+  }
+  .p-stepper .p-stepper-header.p-highlight .p-stepper-title {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  .p-stepper .p-stepper-header:not(.p-disabled):focus-visible {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #ffe284;
+  }
+  .p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
+    background-color: #ffd54f;
+  }
+  .p-stepper .p-stepper-panels {
+    background: #1f2d40;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  .p-stepper .p-stepper-separator {
+    background-color: #304562;
+    width: 100%;
+    height: 2px;
+    margin-inline-start: 1rem;
+    transition: box-shadow 0.2s;
+  }
+  .p-stepper.p-stepper-vertical {
+    display: flex;
+    flex-direction: column;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-toggleable-content {
+    display: flex;
+    flex: 1 1 auto;
+    background: #1f2d40;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel {
+    display: flex;
+    flex-direction: column;
+    flex: initial;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel.p-stepper-panel-active {
+    flex: 1 1 auto;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-header {
+    flex: initial;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-content {
+    width: 100%;
+    padding-left: 1rem;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-separator {
+    flex: 0 0 auto;
+    width: 2px;
+    height: auto;
+    margin-inline-start: calc(1.75rem + 2px);
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel:has(~ .p-stepper-panel-active) .p-stepper-separator {
+    background-color: #ffd54f;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel:last-of-type .p-stepper-content {
+    padding-left: 3rem;
   }
   .p-scrollpanel .p-scrollpanel-bar {
     background: #304562;
