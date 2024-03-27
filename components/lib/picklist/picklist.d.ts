@@ -265,6 +265,11 @@ export interface PickListProps {
      */
     autoOptionFocus?: boolean | undefined;
     /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
+    /**
      * Inline style of the element.
      */
     style?: React.CSSProperties | undefined;

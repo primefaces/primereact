@@ -67,6 +67,7 @@ export const MultiSelectItem = React.memo((props) => {
             onClick: onClick,
             onFocus: onFocus,
             onBlur: onBlur,
+            onMouseMove: (e) => props?.onMouseMove(e, props.index),
             tabIndex: tabIndex,
             role: 'option',
             'aria-selected': props.selected,

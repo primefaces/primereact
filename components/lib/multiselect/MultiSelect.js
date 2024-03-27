@@ -1107,6 +1107,7 @@ export const MultiSelect = React.memo(
                         sx={sx}
                         isUnstyled={isUnstyled}
                         metaData={metaData}
+                        changeFocusedOptionIndex={changeFocusedOptionIndex}
                     />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}

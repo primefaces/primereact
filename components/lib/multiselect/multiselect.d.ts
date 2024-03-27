@@ -700,6 +700,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     selectOnFocus?: false;
     /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
+    /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false
      */

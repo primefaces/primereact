@@ -94,6 +94,12 @@ export const MultiSelectPanel = React.memo(
             return null;
         };
 
+        const changeFocusedItemOnHover = (event, index) => {
+            if (props.focusOnHover) {
+                props?.changeFocusedOptionIndex?.(event, index);
+            }
+        };
+
         const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
@@ -116,6 +122,7 @@ export const MultiSelectPanel = React.memo(
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
+                        onMouseMove={changeFocusedItemOnHover}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -194,6 +201,7 @@ export const MultiSelectPanel = React.memo(
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
+                        onMouseMove={changeFocusedItemOnHover}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}

@@ -477,6 +477,8 @@ export const OrderList = React.memo(
                     isUnstyled={isUnstyled}
                     ptm={ptm}
                     cx={cx}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    {...props}
                 />
             </div>
         );
