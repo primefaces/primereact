@@ -12005,9 +12005,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "FilterMatchMode",
+                            "type": "string",
                             "default": "",
-                            "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
+                            "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },
                         {
                             "name": "filterMatchModeOptions",
@@ -12663,8 +12663,8 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "FilterMatchMode",
-                            "description": "Type of filter match."
+                            "type": "string",
+                            "description": "Type of filter match; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         }
                     ]
                 },
@@ -13913,8 +13913,8 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notIn\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
-                            "description": "Type of filter match."
+                            "type": "string",
+                            "description": "Type of filter match; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         }
                     ],
                     "callbacks": []
@@ -13962,11 +13962,11 @@
                             "description": "The label to display for the match mode"
                         },
                         {
-                            "name": "value",
+                            "name": "matchMode",
                             "optional": false,
                             "readonly": false,
                             "type": "string",
-                            "description": "The match mode type"
+                            "description": "Type of filter match; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         }
                     ],
                     "callbacks": []
@@ -23067,7 +23067,7 @@
                             "readonly": false,
                             "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "filterPlaceholder",
@@ -32291,9 +32291,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered, valid values are \"contains\" (default), \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "filterPlaceholder",
@@ -35695,7 +35695,7 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
                             "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
@@ -37372,9 +37372,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered, valid values are \"contains\" (default), \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "filterPlaceholder",
@@ -41425,9 +41425,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered, valid values are \"contains\" (default) \"startsWith\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\" and \"gte\"."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "focusOnHover",
