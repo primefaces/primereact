@@ -680,9 +680,9 @@ interface ColumnFilterMetaData {
      */
     value: any;
     /**
-     * Type of filter match.
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+    matchMode: FilterMatchMode | string;
 }
 
 interface ColumnFilterMetaDataWithConstraint {
@@ -723,9 +723,9 @@ interface ColumnFilterMatchModeChangeEvent {
      */
     field: string;
     /**
-     * Type of filter match.
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: FilterMatchMode;
+    matchMode: FilterMatchMode | string;
 }
 
 /**
@@ -818,9 +818,9 @@ interface ColumnFilterMatchModeOptions {
      */
     label: string;
     /**
-     * The match mode type
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    value: FilterMatchMode | string;
+    matchMode: FilterMatchMode | string;
 }
 
 /**
@@ -962,9 +962,9 @@ export interface ColumnProps {
      */
     filterHeaderStyle?: React.CSSProperties | undefined;
     /**
-     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
+     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    filterMatchMode?: FilterMatchMode | undefined;
+    filterMatchMode?: FilterMatchMode | string | undefined;
     /**
      * An array of label-value pairs to override the global match mode options.
      */

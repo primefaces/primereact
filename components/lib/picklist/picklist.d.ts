@@ -368,10 +368,10 @@ export interface PickListProps {
      */
     filterBy?: string | undefined;
     /**
-     * 	Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt" and "gte".
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
-    filterMatchMode?: string | undefined;
+    filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
     /**
      * Locale to use in filtering. The default locale is the host environment's current locale.
      * @defaultValue undefined

@@ -301,10 +301,10 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     filterLocale?: string | undefined;
     /**
-     * Defines how the items are filtered, valid values are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
-    filterMatchMode?: string | undefined;
+    filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
     /**
      * Placeholder text to show when filter input is empty.
      */
