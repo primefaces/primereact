@@ -163,18 +163,6 @@ export interface ColumnPassThroughOptions {
      */
     sortBadge?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the checkbox wrapper's DOM element.
-     */
-    headerCheckboxWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the header checkbox's DOM element.
-     */
-    headerCheckbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the header checkbox icon's DOM element.
-     */
-    headerCheckboxIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
      * Uses to pass attributes to the column filter's DOM element.
      */
     columnFilter?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -281,30 +269,6 @@ export interface ColumnPassThroughOptions {
      */
     columnTitle?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the radiobutton wrapper's DOM element.
-     */
-    radiobuttonWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton's DOM element.
-     */
-    radiobutton?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton icon's DOM element.
-     */
-    radiobuttonIcon?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox wrapper's DOM element.
-     */
-    checkboxWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox's DOM element.
-     */
-    checkbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox icon's DOM element.
-     */
-    checkboxIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
      * Uses to pass attributes to the rowtoggler's DOM element.
      */
     rowToggler?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -344,18 +308,6 @@ export interface ColumnPassThroughOptions {
      * Uses to pass attributes to the row editor cancel icon's DOM element.
      */
     rowEditorCancelIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
-     */
-    hiddenHeaderInputWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
-     */
-    hiddenInputWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input's DOM element.
-     */
-    hiddenInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
