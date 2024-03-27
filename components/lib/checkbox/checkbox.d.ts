@@ -86,7 +86,7 @@ interface CheckboxChangeEvent extends FormEvent {}
  * Defines valid properties in Checkbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     /**
      * Unique identifier of the element.
      */
