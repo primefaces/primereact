@@ -46342,6 +46342,445 @@
             }
         }
     },
+    "stepper": {
+        "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.\n\n[Live Demo](https://www.primereact.org/stepper/)",
+        "components": {
+            "Stepper": {
+                "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in Stepper component.",
+                    "values": [
+                        {
+                            "name": "activeStep",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "Active step index of stepper."
+                        },
+                        {
+                            "name": "linear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the steps are clickable or not."
+                        },
+                        {
+                            "name": "orientation",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"horizontal\" | \"vertical\"",
+                            "default": "horizontal",
+                            "description": "Orientation of the stepper."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": [
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "StepperChangeEvent"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when an active panel is changed."
+                        }
+                    ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "StepperPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepperProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepperState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "Stepper.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughOptionType",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "nav",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughOptionType",
+                            "description": "Used to pass attributes to the nav's DOM element."
+                        },
+                        {
+                            "name": "panelContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughOptionType",
+                            "description": "Used to pass attributes to the panel container's DOM element."
+                        },
+                        {
+                            "name": "stepperpanel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the end handler's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperPassThroughAttributes": {
+                    "description": "Custom passthrough attributes for each DOM elements",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperState": {
+                    "description": "Defines current inline state in Stepper component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "activeStep",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current active index state."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperChangeEvent": {
+                    "description": "Custom tab change event.",
+                    "relatedProp": "onChange",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Event",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of the selected stepper panel"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "StepperPassThroughOptionType": {
+                    "values": "StepperPassThroughAttributes | Function | string | null | undefined"
+                }
+            }
+        }
+    },
+    "stepperpanel": {
+        "description": "StepperPanel is a helper component for Stepper component.\n\n[Live Demo](https://www.primereact.org/stepper/)",
+        "components": {
+            "StepperPanel": {
+                "description": "StepperPanel is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in StepperPanel component.",
+                    "values": [
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Orientation of tab headers."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptions",
+                            "default": "",
+                            "description": "Used to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "StepperPanelPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepperPanelProps",
+                            "description": "Defines valid properties."
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepperPanelContext",
+                            "description": "Defines current options."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperPanelPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "number",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the number's DOM element."
+                        },
+                        {
+                            "name": "title",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the title's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "toggleableContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughOptionType",
+                            "description": "Used to pass attributes to the toggleable content's DOM element."
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPanelPassThroughTransitionType",
+                            "description": "Used to control Vue Transition API."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperPanelPassThroughAttributes": {
+                    "description": "Custom passthrough attributes for each DOM elements",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepperPanelContext": {
+                    "description": "Defines current options in StepperPanel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current index of the stepperpanel."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Count of stepperpanels"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the stepperpanel is first."
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the stepperpanel is last."
+                        },
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the stepperpanel is active."
+                        },
+                        {
+                            "name": "highlighted",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the stepperpanel is highlighted."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the stepperpanel is disabled."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "StepperPanelPassThroughOptionType": {
+                    "values": "StepperPanelPassThroughAttributes | Function | string | null | undefined"
+                },
+                "StepperPanelPassThroughTransitionType": {
+                    "values": "TransitionProps | Function | undefined"
+                }
+            }
+        }
+    },
     "steps": {
         "description": "Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.\n\n[Live Demo](https://www.primereact.org/steps/)",
         "components": {

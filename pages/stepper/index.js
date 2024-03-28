@@ -77,11 +77,11 @@ const StepperDemo = () => {
 
     return (
         <DocComponent
-            title="React Input Component"
+            title="React Stepper Component"
             header="Stepper"
             description="The Stepper component displays a wizard-like workflow by guiding users through the multi-step progression."
             componentDocs={docs}
-            apiDocs={['InputText']}
+            apiDocs={['Stepper', 'StepperPanel']}
             ptDocs={ptDocs}
             themingDocs={themingDocs}
         />
