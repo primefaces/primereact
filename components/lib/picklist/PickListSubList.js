@@ -57,6 +57,12 @@ export const PickListSubList = React.memo(
             return null;
         };
 
+        const changeFocusedItemOnHover = (index) => {
+            if (props.focusOnHover && props.focusedList[props.type]) {
+                props?.changeFocusedOptionIndex?.(index, props.type);
+            }
+        };
+
         const createItems = () => {
             if (props.list) {
                 return props.list.map((item, index) => {
@@ -76,6 +82,7 @@ export const PickListSubList = React.memo(
                             onClick={props.onItemClick}
                             onKeyDown={props.onItemKeyDown}
                             onMouseDown={(event) => props.onOptionMouseDown({ ...event, index, type: props.type })}
+                            onMouseMove={() => changeFocusedItemOnHover(index)}
                             ptm={ptm}
                             cx={cx}
                         />

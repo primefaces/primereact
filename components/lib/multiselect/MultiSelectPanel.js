@@ -98,6 +98,12 @@ export const MultiSelectPanel = React.memo(
             return null;
         };
 
+        const changeFocusedItemOnHover = (event, index) => {
+            if (props.focusOnHover) {
+                props?.changeFocusedOptionIndex?.(event, index);
+            }
+        };
+
         const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
@@ -120,6 +126,7 @@ export const MultiSelectPanel = React.memo(
                         template={props.itemTemplate}
                         selected={selected}
                         onClick={props.onOptionSelect}
+                        onMouseMove={changeFocusedItemOnHover}
                         tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
@@ -179,36 +186,38 @@ export const MultiSelectPanel = React.memo(
                         {groupChildrenContent}
                     </React.Fragment>
                 );
-            }
+          
+            } else {
+                const optionLabel = props.getOptionLabel(option);
+                const optionKey = index + '_' + props.getOptionRenderKey(option);
+                const disabled = props.isOptionDisabled(option);
+                const tabIndex = disabled ? null : props.tabIndex || 0;
+                const selected = props.isSelected(option);
 
-            const optionLabel = props.getOptionLabel(option);
-            const optionKey = index + '_' + props.getOptionRenderKey(option);
-            const disabled = props.isOptionDisabled(option);
-            const tabIndex = disabled ? null : props.tabIndex || 0;
-            const selected = props.isSelected(option);
+                return (
+                    <MultiSelectItem
+                        hostName={props.hostName}
+                        key={optionKey}
+                        focusedOptionIndex={props.focusedOptionIndex}
+                        label={optionLabel}
+                        option={option}
+                        style={style}
+                        index={index}
+                        template={props.itemTemplate}
+                        selected={selected}
+                        onClick={props.onOptionSelect}
+                        onMouseMove={changeFocusedItemOnHover}
+                        tabIndex={tabIndex}
+                        disabled={disabled}
+                        className={props.itemClassName}
+                        checkboxIcon={props.checkboxIcon}
+                        isUnstyled={isUnstyled}
+                        ptm={ptm}
+                        cx={cx}
+                    />
+                );
 
-            return (
-                <MultiSelectItem
-                    hostName={props.hostName}
-                    key={optionKey}
-                    focusedOptionIndex={props.focusedOptionIndex}
-                    label={optionLabel}
-                    option={option}
-                    style={style}
-                    index={index}
-                    template={props.itemTemplate}
-                    selected={selected}
-                    onClick={props.onOptionSelect}
-                    tabIndex={tabIndex}
-                    disabled={disabled}
-                    className={props.itemClassName}
-                    checkboxIcon={props.checkboxIcon}
-                    isUnstyled={isUnstyled}
-                    ptm={ptm}
-                    cx={cx}
-                />
-            );
-        };
+             }
 
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {

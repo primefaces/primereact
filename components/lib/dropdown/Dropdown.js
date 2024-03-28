@@ -1251,9 +1251,9 @@ export const Dropdown = React.memo(
                         onOptionClick={onOptionClick}
                         ptm={ptm}
                         resetFilter={resetFilter}
-                        setFocusedOptionIndex={setFocusedOptionIndex}
-                        firstFocusableElement={<span {...firstHiddenFocusableElementProps}></span>}
-                        lastFocusableElement={<span {...lastHiddenFocusableElementProps}></span>}
+                        changeFocusedOptionIndex={changeFocusedOptionIndex}
+                        firstFocusableElement={<span {...firstHiddenFocusableElementProps} />}
+                        lastFocusableElement={<span {...lastHiddenFocusableElementProps} />}
                         sx={sx}
                     />
                 </div>

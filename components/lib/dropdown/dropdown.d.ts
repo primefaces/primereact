@@ -329,7 +329,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filterLocale?: string | undefined;
     /**
-     * Defines how the items are filtered.
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
     filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
@@ -355,6 +355,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @defaultValue false
      */
     selectOnFocus?: false;
+    /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
     /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false

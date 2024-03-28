@@ -12005,9 +12005,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "FilterMatchMode",
+                            "type": "string",
                             "default": "",
-                            "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
+                            "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },
                         {
                             "name": "filterMatchModeOptions",
@@ -12663,8 +12663,8 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "FilterMatchMode",
-                            "description": "Type of filter match."
+                            "type": "string",
+                            "description": "Type of filter match; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         }
                     ]
                 },
@@ -13829,8 +13829,8 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notIn\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
-                            "description": "Type of filter match."
+                            "type": "string",
+                            "description": "Type of filter match; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         }
                     ],
                     "callbacks": []
@@ -13878,11 +13878,11 @@
                             "description": "The label to display for the match mode"
                         },
                         {
-                            "name": "value",
+                            "name": "matchMode",
                             "optional": false,
                             "readonly": false,
                             "type": "string",
-                            "description": "The match mode type"
+                            "description": "Type of filter match; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         }
                     ],
                     "callbacks": []
@@ -22983,7 +22983,7 @@
                             "readonly": false,
                             "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "filterPlaceholder",
@@ -23009,6 +23009,14 @@
                             "type": "Ref<HTMLInputElement>",
                             "default": "",
                             "description": "Reference of the focusable input element."
+                        },
+                        {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
                         },
                         {
                             "name": "highlightOnSelect",
@@ -27145,6 +27153,133 @@
             }
         }
     },
+    "iconfield": {
+        "description": "IconField wraps an input and an icon.\n\n[Live Demo](https://www.primereact.org/iconfield/)",
+        "components": {
+            "IconField": {
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in IconField component. In addition to these, all properties of HTMLInputElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "iconPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"right\"",
+                            "default": "right",
+                            "description": "Position of the icon"
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconFieldPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "IconFieldPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconFieldProps"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "IconFieldContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "IconFieldPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconFieldPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "IconFieldContext": {
+                    "description": "Defines current options in IconField component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "iconPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"right\"",
+                            "description": "Position of the icon"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "IconFieldPassThroughType": {
+                    "values": "PassThroughType<T, IconFieldPassThroughMethodOptions>"
+                }
+            }
+        }
+    },
     "icons/angledoubledown": {
         "components": {
             "AngleDoubleDownIcon": {
@@ -29872,6 +30007,105 @@
             }
         }
     },
+    "inputicon": {
+        "description": "InputIcon displays an icon.\n\n[Live Demo](https://www.primereact.org/iconfield/)",
+        "components": {
+            "InputIcon": {
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in InputIcon component. In addition to these, all properties of HTMLInputElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputIconPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "InputIconPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputIconProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InputIconPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputIconPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InputIconPassThroughType": {
+                    "values": "PassThroughType<T, InputIconPassThroughMethodOptions>"
+                }
+            }
+        }
+    },
     "inputmask": {
         "description": "InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.\n\n[Live Demo](https://www.primereact.org/inputmask/)",
         "components": {
@@ -31973,9 +32207,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered, valid values are \"contains\" (default), \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "filterPlaceholder",
@@ -35377,7 +35611,7 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
                             "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
@@ -35412,6 +35646,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Use flex layout for the items panel."
+                        },
+                        {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
                         },
                         {
                             "name": "id",
@@ -37046,9 +37288,9 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered, valid values are \"contains\" (default), \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
                         },
                         {
                             "name": "filterPlaceholder",
@@ -37065,6 +37307,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Custom template of filter element."
+                        },
+                        {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
                         },
                         {
                             "name": "header",
@@ -41091,9 +41341,17 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "\"endsWith\" | \"startsWith\" | \"contains\" | \"equals\" | \"notEquals\"",
                             "default": "contains",
-                            "description": "Defines how the items are filtered, valid values are \"contains\" (default) \"startsWith\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"notIn\", \"lt\", \"lte\", \"gt\" and \"gte\"."
+                            "description": "Defines how the items are filtered, valid values are \"contains\", (default) \"startsWith\", \"endsWith\", \"equals\" and \"notEquals\"."
+                        },
+                        {
+                            "name": "focusOnHover",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the focus is placed on the hovered option."
                         },
                         {
                             "name": "id",

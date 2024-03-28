@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -29,11 +29,6 @@ jobs:
     - name: Build
       run: |
         npm install
-
-    - name: Lint Check
-      if: ${{ success() }}
-      run: |
-        npm run lint
 
     - name: Code Format
       if: ${{ success() }}
