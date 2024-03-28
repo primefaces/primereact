@@ -6,6 +6,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { Checkbox } from '../checkbox/Checkbox';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -670,33 +671,24 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const checkboxIconProps = mergeProps(
-                {
-                    className: cx('checkboxIcon')
-                },
-                getPTOptions('checkboxIcon')
-            );
-            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
-            const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
-            const checkboxContainerProps = mergeProps(
-                {
-                    'aria-hidden': true,
-                    className: cx('checkboxContainer')
-                },
-                getPTOptions('checkboxContainer')
-            );
+            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon  /> : null;
+            const checkboxIcon = IconUtils.getJSXIcon(icon, {}, props);
             const checkboxProps = mergeProps(
                 {
-                    className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
-                    role: 'checkbox'
+                    className: cx('nodeCheckbox', {  partialChecked }),
+                    checked: checked || partialChecked, 
+                    icon: checkboxIcon,
+                    tabIndex: -1,
+                    unstyled: props?.isUnstyled?.(),
+                    'data-p-checked': checked,
+                    'data-p-partialchecked': partialChecked,
+                    onChange: onClick
                 },
-                getPTOptions('checkbox')
+                getPTOptions('nodeCheckbox')
             );
 
             return (
-                <div {...checkboxContainerProps}>
-                    <div {...checkboxProps}>{checkboxIcon}</div>
-                </div>
+                <Checkbox {...checkboxProps} />
             );
         }
 
@@ -830,7 +822,7 @@ export const UITreeNode = React.memo((props) => {
             },
             getPTOptions('subgroup')
         );
-
+        
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
                 <ul {...subgroupProps}>
