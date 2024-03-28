@@ -10,7 +10,7 @@ import { StepperHeader } from './StepperHeader';
 import { StepperSeparator } from './StepperSeparator';
 
 export const Stepper = React.memo(
-    React.forwardRef((inProps) => {
+    React.forwardRef((inProps, ref) => {
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = StepperBase.getProps(inProps, context);
@@ -156,6 +156,12 @@ export const Stepper = React.memo(
                 );
             });
         };
+
+        React.useImperativeHandle(ref, () => ({
+            getElement: () => navRef.current,
+            nextCallback: (e) => nextCallback(e, activeStepState),
+            prevCallback: (e) => prevCallback(e, activeStepState)
+        }));
 
         const createPanelContent = () => {
             return stepperPanels().map((step, index) => {
