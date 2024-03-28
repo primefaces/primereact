@@ -186,7 +186,6 @@ export const MultiSelectPanel = React.memo(
                         {groupChildrenContent}
                     </React.Fragment>
                 );
-          
             } else {
                 const optionLabel = props.getOptionLabel(option);
                 const optionKey = index + '_' + props.getOptionRenderKey(option);
@@ -216,8 +215,8 @@ export const MultiSelectPanel = React.memo(
                         cx={cx}
                     />
                 );
-
-             }
+            }
+        };
 
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
