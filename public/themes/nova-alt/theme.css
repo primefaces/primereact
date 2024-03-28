@@ -3812,9 +3812,6 @@
     padding: 0;
     list-style-type: none;
   }
-  .p-tree-wrapper {
-    overflow: auto;
-  }
   .p-treenode-selectable {
     cursor: pointer;
     user-select: none;
@@ -3927,6 +3924,10 @@
     background: #eaeaea;
     color: #333333;
   }
+  .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-dragover {
+    background: #eaeaea;
+    color: #333333;
+  }
   .p-tree .p-tree-filter-container {
     margin-bottom: 0.5rem;
   }
@@ -3947,6 +3948,139 @@
   .p-tree .p-tree-loading-icon.p-icon {
     width: 2rem;
     height: 2rem;
+  }
+  .p-tree .p-treenode-droppoint {
+    height: 0.5rem;
+  }
+  .p-tree .p-treenode-droppoint.p-treenode-droppoint-active {
+    background: #0062ae;
+  }
+  .p-treetable {
+    position: relative;
+  }
+  .p-treetable > .p-treetable-wrapper {
+    overflow: auto;
+  }
+  .p-treetable table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+  }
+  .p-treetable .p-sortable-column {
+    cursor: pointer;
+    user-select: none;
+  }
+  .p-treetable-selectable .p-treetable-tbody > tr {
+    cursor: pointer;
+  }
+  .p-treetable-toggler {
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+  }
+  .p-treetable-toggler + .p-checkbox {
+    vertical-align: middle;
+  }
+  .p-treetable-toggler + .p-checkbox + span {
+    vertical-align: middle;
+  }
+  /* Resizable */
+  .p-treetable-resizable > .p-treetable-wrapper {
+    overflow-x: auto;
+  }
+  .p-treetable-resizable .p-treetable-thead > tr > th,
+  .p-treetable-resizable .p-treetable-tfoot > tr > td,
+  .p-treetable-resizable .p-treetable-tbody > tr > td {
+    overflow: hidden;
+  }
+  .p-treetable-resizable .p-resizable-column {
+    background-clip: padding-box;
+    position: relative;
+  }
+  .p-treetable-resizable-fit .p-resizable-column:last-child .p-column-resizer {
+    display: none;
+  }
+  .p-treetable .p-column-resizer {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: 0.5rem;
+    height: 100%;
+    padding: 0px;
+    cursor: col-resize;
+    border: 1px solid transparent;
+  }
+  .p-treetable .p-column-resizer-helper {
+    width: 1px;
+    position: absolute;
+    z-index: 10;
+    display: none;
+  }
+  /* Scrollable */
+  .p-treetable-scrollable-wrapper {
+    position: relative;
+  }
+  .p-treetable-scrollable-header,
+  .p-treetable-scrollable-footer {
+    overflow: hidden;
+    border: 0 none;
+  }
+  .p-treetable-scrollable-body {
+    overflow: auto;
+    position: relative;
+  }
+  .p-treetable-virtual-table {
+    position: absolute;
+  }
+  /* Frozen Columns */
+  .p-treetable-frozen-view .p-treetable-scrollable-body {
+    overflow: hidden;
+  }
+  .p-treetable-unfrozen-view {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  /* Reorder */
+  .p-treetable-reorder-indicator-up,
+  .p-treetable-reorder-indicator-down {
+    position: absolute;
+    display: none;
+  }
+  /* Loader */
+  .p-treetable .p-treetable-loading-overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  /* Alignment */
+  .p-treetable .p-treetable-thead > tr > th.p-align-left > .p-column-header-content,
+  .p-treetable .p-treetable-tbody > tr > td.p-align-left,
+  .p-treetable .p-treetable-tfoot > tr > td.p-align-left {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .p-treetable .p-treetable-thead > tr > th.p-align-right > .p-column-header-content,
+  .p-treetable .p-treetable-tbody > tr > td.p-align-right,
+  .p-treetable .p-treetable-tfoot > tr > td.p-align-right {
+    text-align: right;
+    justify-content: flex-end;
+  }
+  .p-treetable .p-treetable-thead > tr > th.p-align-center > .p-column-header-content,
+  .p-treetable .p-treetable-tbody > tr > td.p-align-center,
+  .p-treetable .p-treetable-tfoot > tr > td.p-align-center {
+    text-align: center;
+    justify-content: center;
   }
   .p-treetable .p-paginator-top {
     border-width: 1px 1px 0 1px;
