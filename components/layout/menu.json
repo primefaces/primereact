@@ -59,7 +59,13 @@
                         },
                         {
                             "name": "FloatLabel",
-                            "to": "/floatlabel"
+                            "to": "/floatlabel",
+                            "badge": "NEW"
+                        },
+                        {
+                            "name": "IconField",
+                            "to": "/iconfield",
+                            "badge": "NEW"
                         },
                         {
                             "name": "InputGroup",
@@ -246,7 +252,8 @@
                         },
                         {
                             "name": "Stepper",
-                            "to": "/stepper"
+                            "to": "/stepper",
+                            "badge": "NEW"
                         },
                         {
                             "name": "TabView",
@@ -406,6 +413,11 @@
                         {
                             "name": "Inplace",
                             "to": "/inplace"
+                        },
+                        {
+                            "name": "MeterGroup",
+                            "to": "/metergroup",
+                            "badge": "NEW"
                         },
                         {
                             "name": "ScrollTop",
