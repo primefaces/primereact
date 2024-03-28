@@ -13000,6 +13000,13 @@
                             "description": "Uses to pass attributes to the sort badge's DOM element."
                         },
                         {
+                            "name": "headerCheckbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
                             "name": "columnFilter",
                             "optional": true,
                             "readonly": false,
