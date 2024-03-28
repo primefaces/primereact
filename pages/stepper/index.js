@@ -1,4 +1,5 @@
 import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/stepper/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/stepper/basicdoc';
 import { ImportDoc } from '@/components/doc/stepper/importdoc';
 import { LinearDoc } from '@/components/doc/stepper/lineardoc';
@@ -25,6 +26,11 @@ const StepperDemo = () => {
             id: 'linear',
             label: 'Linear',
             component: LinearDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
     const ptDocs = [
