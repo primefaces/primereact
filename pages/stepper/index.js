@@ -3,6 +3,8 @@ import { AccessibilityDoc } from '@/components/doc/stepper/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/stepper/basicdoc';
 import { ImportDoc } from '@/components/doc/stepper/importdoc';
 import { LinearDoc } from '@/components/doc/stepper/lineardoc';
+import { StyledDoc } from '@/components/doc/stepper/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/stepper/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/stepper/verticaldoc';
 
 const StepperDemo = () => {
@@ -52,23 +54,23 @@ const StepperDemo = () => {
     ];
 
     const themingDocs = [
-        // {
-        //     id: 'styled',
-        //     label: 'Styled',
-        //     component: StyledDoc
-        // },
-        // {
-        //     id: 'unstyled',
-        //     label: 'Unstyled',
-        //     description: 'Theming is implemented with the pass through properties in unstyled mode.',
-        //     children: [
-        //         {
-        //             id: 'tailwind',
-        //             label: 'Tailwind',
-        //             component: TailwindDoc
-        //         }
-        //     ]
-        // }
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
     ];
 
     return (
