@@ -822,64 +822,56 @@ export const UITreeNode = React.memo((props) => {
             },
             getPTOptions('subgroup')
         );
-        const wrapperProps = mergeProps(
-            {
-                className: cx('wrapper'),
-            },
-            getPTOptions('wrapper')
-        )
-
+        
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
-                <div >
-                    <ul {...subgroupProps}>
-                        {props.node.children.map((childNode, index) => {
-                            return (
-                                <UITreeNode
-                                    key={childNode.key || childNode.label}
-                                    node={childNode}
-                                    checkboxIcon={props.checkboxIcon}
-                                    collapseIcon={props.collapseIcon}
-                                    contextMenuSelectionKey={props.contextMenuSelectionKey}
-                                    cx={cx}
-                                    disabled={props.disabled}
-                                    dragdropScope={props.dragdropScope}
-                                    expandIcon={props.expandIcon}
-                                    expandedKeys={props.expandedKeys}
-                                    index={index}
-                                    isNodeLeaf={props.isNodeLeaf}
-                                    last={index === props.node.children.length - 1}
-                                    metaKeySelection={props.metaKeySelection}
-                                    nodeTemplate={props.nodeTemplate}
-                                    onClick={props.onClick}
-                                    onCollapse={props.onCollapse}
-                                    onContextMenu={props.onContextMenu}
-                                    onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                                    onDoubleClick={props.onDoubleClick}
-                                    onDragEnd={props.onDragEnd}
-                                    onDragStart={props.onDragStart}
-                                    onDrop={props.onDrop}
-                                    onDropPoint={props.onDropPoint}
-                                    onExpand={props.onExpand}
-                                    onPropagateUp={propagateUp}
-                                    onSelect={props.onSelect}
-                                    onSelectionChange={props.onSelectionChange}
-                                    onToggle={props.onToggle}
-                                    onUnselect={props.onUnselect}
-                                    originalOptions={props.originalOptions}
-                                    parent={props.node}
-                                    path={props.path + '-' + index}
-                                    propagateSelectionDown={props.propagateSelectionDown}
-                                    propagateSelectionUp={props.propagateSelectionUp}
-                                    ptm={ptm}
-                                    selectionKeys={props.selectionKeys}
-                                    selectionMode={props.selectionMode}
-                                    togglerTemplate={props.togglerTemplate}
-                                />
-                            );
-                        })}
-                    </ul>
-                </div>
+                <ul {...subgroupProps}>
+                    {props.node.children.map((childNode, index) => {
+                        return (
+                            <UITreeNode
+                                key={childNode.key || childNode.label}
+                                node={childNode}
+                                checkboxIcon={props.checkboxIcon}
+                                collapseIcon={props.collapseIcon}
+                                contextMenuSelectionKey={props.contextMenuSelectionKey}
+                                cx={cx}
+                                disabled={props.disabled}
+                                dragdropScope={props.dragdropScope}
+                                expandIcon={props.expandIcon}
+                                expandedKeys={props.expandedKeys}
+                                index={index}
+                                isNodeLeaf={props.isNodeLeaf}
+                                last={index === props.node.children.length - 1}
+                                metaKeySelection={props.metaKeySelection}
+                                nodeTemplate={props.nodeTemplate}
+                                onClick={props.onClick}
+                                onCollapse={props.onCollapse}
+                                onContextMenu={props.onContextMenu}
+                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                                onDoubleClick={props.onDoubleClick}
+                                onDragEnd={props.onDragEnd}
+                                onDragStart={props.onDragStart}
+                                onDrop={props.onDrop}
+                                onDropPoint={props.onDropPoint}
+                                onExpand={props.onExpand}
+                                onPropagateUp={propagateUp}
+                                onSelect={props.onSelect}
+                                onSelectionChange={props.onSelectionChange}
+                                onToggle={props.onToggle}
+                                onUnselect={props.onUnselect}
+                                originalOptions={props.originalOptions}
+                                parent={props.node}
+                                path={props.path + '-' + index}
+                                propagateSelectionDown={props.propagateSelectionDown}
+                                propagateSelectionUp={props.propagateSelectionUp}
+                                ptm={ptm}
+                                selectionKeys={props.selectionKeys}
+                                selectionMode={props.selectionMode}
+                                togglerTemplate={props.togglerTemplate}
+                            />
+                        );
+                    })}
+                </ul>
             );
         }
 

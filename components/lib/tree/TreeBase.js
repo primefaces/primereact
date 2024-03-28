@@ -13,7 +13,6 @@ const classes = {
     filterContainer: 'p-tree-filter-container',
     input: 'p-tree-filter p-inputtext p-component',
     searchIcon: 'p-tree-filter-icon',
-    wrapper: 'p-tree-wrapper',
     container: 'p-tree-container',
     node: ({ isLeaf }) =>
         classNames('p-treenode', {
