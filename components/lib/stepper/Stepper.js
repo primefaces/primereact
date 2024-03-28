@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/Componentbase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -30,7 +30,7 @@ export const Stepper = React.memo(
         });
 
         const getStepProp = (step, name) => {
-            return step.props ? step.props[name] : undefined;
+            return step?.props?.[name];
         };
 
         const getStepKey = (step, index) => {
@@ -130,7 +130,7 @@ export const Stepper = React.memo(
                 const panelProps = mergeProps(
                     {
                         className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index })),
-                        'aria-current': isStepActive(index) ? 'step' : undefined,
+                        'aria-current': isStepActive(index) && 'step',
                         role: 'presentation',
                         'data-p-highlight': isStepActive(index),
                         'data-p-disabled': isItemDisabled(index),
@@ -223,12 +223,13 @@ export const Stepper = React.memo(
 
         const createVertical = () => {
             return stepperPanels().map((step, index) => {
-                const contentRef = React.useRef();
+                const contentRef = React.createRef(null);
+
                 const navProps = mergeProps(
                     {
                         ref: navRef,
                         className: cx('panel', { props, index, isStepActive }),
-                        'aria-current': isStepActive(index) ? 'step' : undefined,
+                        'aria-current': isStepActive(index) && 'step',
                         ...getStepPT(step, 'root', index),
                         ...getStepPT(step, 'panel', index),
                         'data-p-highlight': isStepActive(index),
