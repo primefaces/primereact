@@ -33,16 +33,17 @@ export const MultiSelectHeader = React.memo((props) => {
         }
     };
 
-    const onSelectAll = (event) => {
+    const onToggleAll = (event) => {
         if (props.onSelectAll) {
             props.onSelectAll({
                 originalEvent: event,
                 checked: props.selectAll
             });
-        }
+        } else {
+            const value = props.isAllSelected() ? [] : props.visibleOptions.filter((option) => props.isValidOption(option)).map((option) => props.getOptionValue(option));
 
-        event.preventDefault();
-        event.stopPropagation();
+            props.updateModel(event, value, value);
+        }
     };
 
     const createFilterElement = () => {
@@ -130,7 +131,7 @@ export const MultiSelectHeader = React.memo((props) => {
 
     const checkboxElement = props.showSelectAll && (
         <div {...headerCheckboxContainerProps}>
-            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} pt={ptm('headerCheckbox')} unstyled={isUnstyled()} />
+            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onToggleAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} pt={ptm('headerCheckbox')} unstyled={isUnstyled()} />
             {!props.filter && <label {...headerSelectAllLabelProps}>{props.selectAllLabel}</label>}
         </div>
     );
@@ -182,7 +183,7 @@ export const MultiSelectHeader = React.memo((props) => {
             className: 'p-multiselect-header',
             checkboxElement,
             checked: props.selectAll,
-            onChange: onSelectAll,
+            onChange: onToggleAll,
             filterElement,
             closeElement,
             closeElementClassName: 'p-multiselect-close p-link',

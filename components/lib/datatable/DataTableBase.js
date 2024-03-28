@@ -317,6 +317,7 @@ const classes = {
     thead: 'p-datatable-thead',
     tfoot: 'p-datatable-tfoot',
     footer: 'p-datatable-footer',
+    checkIcon: 'p-checkbox-icon',
     resizeHelper: 'p-column-resizer-helper',
     reorderIndicatorUp: 'p-datatable-reorder-indicator-up',
     reorderIndicatorDown: 'p-datatable-reorder-indicator-down',
@@ -334,7 +335,6 @@ const classes = {
     columnTitle: 'p-column-title',
     bodyRow: ({ rowProps: props }) =>
         classNames({
-            'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
             'p-highlight-contextmenu': props.contextMenuSelected,
             'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
             'p-row-odd': props.rowIndex % 2 !== 0
@@ -389,21 +389,7 @@ const classes = {
     emptyMessage: 'p-datatable-emptymessage',
     sortBadge: 'p-sortable-column-badge',
     sortIcon: 'p-sortable-column-icon',
-    checkboxWrapper: ({ rowProps: props, focusedState }) => classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState, 'p-disabled': props.disabled }),
-    checkbox: ({ rowProps: props, focusedState }) => classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState }),
-    checkboxIcon: 'p-checkbox-icon',
-    radiobuttonWrapper: ({ rowProps: props, focusedState }) => classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState, 'p-disabled': props.disabled }),
-    radiobutton: ({ rowProps: props, focusedState }) => classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState }),
-    radiobuttonIcon: 'p-radiobutton-icon',
     headerTitle: 'p-column-title',
-    headerCheckboxWrapper: 'p-checkbox p-component',
-    headerCheckbox: ({ headerProps: props, focusedState }) =>
-        classNames('p-checkbox-box p-component', {
-            'p-highlight': props.checked,
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
-        }),
-    headerCheckboxIcon: 'p-checkbox-icon',
     headerContent: 'p-column-header-content',
     headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }) =>
         ObjectUtils.isEmpty(props)

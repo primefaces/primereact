@@ -13000,27 +13000,6 @@
                             "description": "Uses to pass attributes to the sort badge's DOM element."
                         },
                         {
-                            "name": "headerCheckboxWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox wrapper's DOM element."
-                        },
-                        {
-                            "name": "headerCheckbox",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the header checkbox's DOM element."
-                        },
-                        {
-                            "name": "headerCheckboxIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the header checkbox icon's DOM element."
-                        },
-                        {
                             "name": "columnFilter",
                             "optional": true,
                             "readonly": false,
@@ -13196,48 +13175,6 @@
                             "description": "Uses to pass attributes to the column title's DOM element."
                         },
                         {
-                            "name": "radiobuttonWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the radiobutton wrapper's DOM element."
-                        },
-                        {
-                            "name": "radiobutton",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the radiobutton's DOM element."
-                        },
-                        {
-                            "name": "radiobuttonIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the radiobutton icon's DOM element."
-                        },
-                        {
-                            "name": "checkboxWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox wrapper's DOM element."
-                        },
-                        {
-                            "name": "checkbox",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox's DOM element."
-                        },
-                        {
-                            "name": "checkboxIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the checkbox icon's DOM element."
-                        },
-                        {
                             "name": "rowToggler",
                             "optional": true,
                             "readonly": false,
@@ -13306,27 +13243,6 @@
                             "readonly": false,
                             "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the row editor cancel icon's DOM element."
-                        },
-                        {
-                            "name": "hiddenHeaderInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInput",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the hidden input's DOM element."
                         },
                         {
                             "name": "hooks",
