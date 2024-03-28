@@ -6,6 +6,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { Checkbox } from '../checkbox/Checkbox';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -670,33 +671,24 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const checkboxIconProps = mergeProps(
-                {
-                    className: cx('checkboxIcon')
-                },
-                getPTOptions('checkboxIcon')
-            );
-            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
-            const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
-            const checkboxContainerProps = mergeProps(
-                {
-                    'aria-hidden': true,
-                    className: cx('checkboxContainer')
-                },
-                getPTOptions('checkboxContainer')
-            );
+            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon  /> : null;
+            const checkboxIcon = IconUtils.getJSXIcon(icon, {}, props);
             const checkboxProps = mergeProps(
                 {
-                    className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
-                    role: 'checkbox'
+                    className: cx('nodeCheckbox', {  partialChecked }),
+                    checked: checked || partialChecked, 
+                    icon: checkboxIcon,
+                    tabIndex: -1,
+                    unstyled: props?.isUnstyled?.(),
+                    'data-p-checked': checked,
+                    'data-p-partialchecked': partialChecked,
+                    onChange: onClick
                 },
-                getPTOptions('checkbox')
+                getPTOptions('nodeCheckbox')
             );
 
             return (
-                <div {...checkboxContainerProps}>
-                    <div {...checkboxProps}>{checkboxIcon}</div>
-                </div>
+                <Checkbox {...checkboxProps} />
             );
         }
 
@@ -830,56 +822,64 @@ export const UITreeNode = React.memo((props) => {
             },
             getPTOptions('subgroup')
         );
+        const wrapperProps = mergeProps(
+            {
+                className: cx('wrapper'),
+            },
+            getPTOptions('wrapper')
+        )
 
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
-                <ul {...subgroupProps}>
-                    {props.node.children.map((childNode, index) => {
-                        return (
-                            <UITreeNode
-                                key={childNode.key || childNode.label}
-                                node={childNode}
-                                checkboxIcon={props.checkboxIcon}
-                                collapseIcon={props.collapseIcon}
-                                contextMenuSelectionKey={props.contextMenuSelectionKey}
-                                cx={cx}
-                                disabled={props.disabled}
-                                dragdropScope={props.dragdropScope}
-                                expandIcon={props.expandIcon}
-                                expandedKeys={props.expandedKeys}
-                                index={index}
-                                isNodeLeaf={props.isNodeLeaf}
-                                last={index === props.node.children.length - 1}
-                                metaKeySelection={props.metaKeySelection}
-                                nodeTemplate={props.nodeTemplate}
-                                onClick={props.onClick}
-                                onCollapse={props.onCollapse}
-                                onContextMenu={props.onContextMenu}
-                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                                onDoubleClick={props.onDoubleClick}
-                                onDragEnd={props.onDragEnd}
-                                onDragStart={props.onDragStart}
-                                onDrop={props.onDrop}
-                                onDropPoint={props.onDropPoint}
-                                onExpand={props.onExpand}
-                                onPropagateUp={propagateUp}
-                                onSelect={props.onSelect}
-                                onSelectionChange={props.onSelectionChange}
-                                onToggle={props.onToggle}
-                                onUnselect={props.onUnselect}
-                                originalOptions={props.originalOptions}
-                                parent={props.node}
-                                path={props.path + '-' + index}
-                                propagateSelectionDown={props.propagateSelectionDown}
-                                propagateSelectionUp={props.propagateSelectionUp}
-                                ptm={ptm}
-                                selectionKeys={props.selectionKeys}
-                                selectionMode={props.selectionMode}
-                                togglerTemplate={props.togglerTemplate}
-                            />
-                        );
-                    })}
-                </ul>
+                <div >
+                    <ul {...subgroupProps}>
+                        {props.node.children.map((childNode, index) => {
+                            return (
+                                <UITreeNode
+                                    key={childNode.key || childNode.label}
+                                    node={childNode}
+                                    checkboxIcon={props.checkboxIcon}
+                                    collapseIcon={props.collapseIcon}
+                                    contextMenuSelectionKey={props.contextMenuSelectionKey}
+                                    cx={cx}
+                                    disabled={props.disabled}
+                                    dragdropScope={props.dragdropScope}
+                                    expandIcon={props.expandIcon}
+                                    expandedKeys={props.expandedKeys}
+                                    index={index}
+                                    isNodeLeaf={props.isNodeLeaf}
+                                    last={index === props.node.children.length - 1}
+                                    metaKeySelection={props.metaKeySelection}
+                                    nodeTemplate={props.nodeTemplate}
+                                    onClick={props.onClick}
+                                    onCollapse={props.onCollapse}
+                                    onContextMenu={props.onContextMenu}
+                                    onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                                    onDoubleClick={props.onDoubleClick}
+                                    onDragEnd={props.onDragEnd}
+                                    onDragStart={props.onDragStart}
+                                    onDrop={props.onDrop}
+                                    onDropPoint={props.onDropPoint}
+                                    onExpand={props.onExpand}
+                                    onPropagateUp={propagateUp}
+                                    onSelect={props.onSelect}
+                                    onSelectionChange={props.onSelectionChange}
+                                    onToggle={props.onToggle}
+                                    onUnselect={props.onUnselect}
+                                    originalOptions={props.originalOptions}
+                                    parent={props.node}
+                                    path={props.path + '-' + index}
+                                    propagateSelectionDown={props.propagateSelectionDown}
+                                    propagateSelectionUp={props.propagateSelectionUp}
+                                    ptm={ptm}
+                                    selectionKeys={props.selectionKeys}
+                                    selectionMode={props.selectionMode}
+                                    togglerTemplate={props.togglerTemplate}
+                                />
+                            );
+                        })}
+                    </ul>
+                </div>
             );
         }
 
