@@ -1,8 +1,10 @@
+import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/stepper/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/stepper/basicdoc';
 import { ImportDoc } from '@/components/doc/stepper/importdoc';
 import { LinearDoc } from '@/components/doc/stepper/lineardoc';
+import { Wireframe } from '@/components/doc/stepper/pt/wireframe';
 import { StyledDoc } from '@/components/doc/stepper/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/stepper/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/stepper/verticaldoc';
@@ -36,21 +38,21 @@ const StepperDemo = () => {
         }
     ];
     const ptDocs = [
-        // {
-        //     id: 'pt.wireframe',
-        //     label: 'Wireframe',
-        //     component: Wireframe
-        // },
-        // {
-        //     id: 'pt.inputtext.options',
-        //     label: 'InputText PT Options',
-        //     component: DocApiTable
-        // },
-        // {
-        //     id: 'pt.demo',
-        //     label: 'Example',
-        //     component: PTDoc
-        // }
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.stepper.options',
+            label: 'Stepper PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.stepperpanel.options',
+            label: 'StepperPanel PT Options',
+            component: DocApiTable
+        }
     ];
 
     const themingDocs = [
