@@ -245,6 +245,10 @@
                             "to": "/splitter"
                         },
                         {
+                            "name": "Stepper",
+                            "to": "/stepper"
+                        },
+                        {
                             "name": "TabView",
                             "to": "/tabview"
                         },
