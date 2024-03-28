@@ -3860,6 +3860,65 @@
   .p-picklist .p-picklist-list .p-picklist-item.p-highlight.p-focus {
     background: rgba(206, 147, 216, 0.24);
   }
+  .p-tree-container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: auto;
+  }
+  .p-treenode-children {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .p-tree-wrapper {
+    overflow: auto;
+  }
+  .p-treenode-selectable {
+    cursor: pointer;
+    user-select: none;
+  }
+  .p-tree-toggler {
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .p-treenode-leaf > .p-treenode-content .p-tree-toggler {
+    visibility: hidden;
+  }
+  .p-treenode-content {
+    display: flex;
+    align-items: center;
+  }
+  .p-tree-filter {
+    width: 100%;
+  }
+  .p-tree-filter-container {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+  .p-tree-filter-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+  .p-tree-loading {
+    position: relative;
+    min-height: 4rem;
+  }
+  .p-tree .p-tree-loading-overlay {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .p-tree {
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: #1e1e1e;
@@ -3908,7 +3967,7 @@
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
     margin-right: 0.5rem;
   }
-  .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox .p-indeterminate .p-checkbox-icon {
+  .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox.p-indeterminate .p-checkbox-icon {
     color: rgba(255, 255, 255, 0.87);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
@@ -3924,10 +3983,6 @@
     color: #CE93D8;
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
-    background: hsla(0, 0%, 100%, 0.04);
-    color: rgba(255, 255, 255, 0.87);
-  }
-  .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-dragover {
     background: hsla(0, 0%, 100%, 0.04);
     color: rgba(255, 255, 255, 0.87);
   }
@@ -3951,12 +4006,6 @@
   .p-tree .p-tree-loading-icon.p-icon {
     width: 2rem;
     height: 2rem;
-  }
-  .p-tree .p-treenode-droppoint {
-    height: 0.5rem;
-  }
-  .p-tree .p-treenode-droppoint.p-treenode-droppoint-active {
-    background: rgba(182, 94, 197, 0.16);
   }
   .p-treetable .p-paginator-top {
     border-width: 0 0 1px 0;
