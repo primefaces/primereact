@@ -9,7 +9,7 @@ import { IconUtils } from '../utils/Utils';
 export const HeaderCheckbox = React.memo((props) => {
     const mergeProps = useMergeProps();
     const getColumnProps = () => ColumnBase.getCProps(props.column);
-    const { ptm, ptmo } = props.ptCallbacks;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
         const cProps = getColumnProps();
@@ -39,7 +39,7 @@ export const HeaderCheckbox = React.memo((props) => {
 
     const headerCheckboxIconProps = mergeProps(
         {
-            className: 'p-checkbox-icon'
+            className: cx('checkIcon')
         },
         getColumnPTOptions('headerCheckbox.icon')
     );

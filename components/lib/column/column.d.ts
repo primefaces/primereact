@@ -163,6 +163,10 @@ export interface ColumnPassThroughOptions {
      */
     sortBadge?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Uses to pass attributes to the header checkbox's DOM element.
+     */
+    headerCheckbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the column filter's DOM element.
      */
     columnFilter?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
