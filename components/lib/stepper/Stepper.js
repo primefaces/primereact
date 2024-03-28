@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/Componentbase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMergeProps } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { UniqueComponentId, classNames } from '../utils/Utils';
 import { StepperBase } from './StepperBase';
 import { StepperContent } from './StepperContent';
@@ -17,10 +17,17 @@ export const Stepper = React.memo(
         const { ptm, cx, isUnstyled, ptmo } = StepperBase.setMetaData({
             props
         });
+        const [idState, setIdState] = React.useState(props.id);
         const [activeStepState, setActiveStepState] = React.useState(props.activeStep);
         const navRef = React.useRef();
 
         useHandleStyle(StepperBase.css.styles, isUnstyled, { name: 'stepper' });
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         const getStepProp = (step, name) => {
             return step.props ? step.props[name] : undefined;
@@ -45,16 +52,15 @@ export const Stepper = React.memo(
         const updateActiveStep = (event, index) => {
             setActiveStepState(index);
 
-            //component event propu olarak ekle
             props.onChangeStep && props.onChangeStep({ originalEvent: event, index });
         };
 
         const getStepHeaderActionId = (index) => {
-            return `${UniqueComponentId()}_${index}_header_action`;
+            return `${idState}_${index}_header_action`;
         };
 
         const getStepContentId = (index) => {
-            return `${UniqueComponentId()}_${index}content`;
+            return `${idState}_${index}content`;
         };
 
         const stepperPanels = () => {
@@ -217,6 +223,7 @@ export const Stepper = React.memo(
 
         const createVertical = () => {
             return stepperPanels().map((step, index) => {
+                const contentRef = React.useRef();
                 const navProps = mergeProps(
                     {
                         ref: navRef,
@@ -237,10 +244,15 @@ export const Stepper = React.memo(
                 });
 
                 const transitionProps = mergeProps({
-                    ...getStepPT(step, 'transition', index)
+                    classNames: cx('stepper.content'),
+                    ...getStepPT(step, 'transition', index),
+                    timeout: { enter: 1000, exit: 450 },
+                    in: isStepActive(index),
+                    unmountOnExit: true
                 });
 
                 const toggleableContentProps = mergeProps({
+                    ref: contentRef,
                     className: cx('stepper.toggleableContent'),
                     ...getStepPT(step, 'toggleableContent', index)
                 });
@@ -263,8 +275,8 @@ export const Stepper = React.memo(
                                 cx={cx}
                             />
                         </div>
-                        <CSSTransition {...transitionProps}>
-                            <div style={{ display: !isStepActive(index) && 'none' }} {...toggleableContentProps}>
+                        <CSSTransition nodeRef={contentRef} {...transitionProps}>
+                            <div {...toggleableContentProps}>
                                 {index !== stepperPanels().length - 1 && (
                                     <StepperSeparator
                                         template={step.children?.separator}
