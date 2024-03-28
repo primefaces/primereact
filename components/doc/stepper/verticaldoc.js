@@ -48,7 +48,7 @@ export default function BasicDemo() {
     const stepperRef = useRef(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card">
             <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }} orientation="vertical">
                 <StepperPanel header="Header I">
                     <div className="flex flex-column h-12rem">
@@ -90,7 +90,7 @@ export default function BasicDemo() {
     const stepperRef = useRef(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card">
             <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }} orientation="vertical">
                 <StepperPanel header="Header I">
                     <div className="flex flex-column h-12rem">
@@ -131,8 +131,8 @@ export default function BasicDemo() {
                     Layout of the Stepper is configured with the <i>orientation</i> property that accepts <i>horizontal</i> and <i>vertical</i> as available options.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }} orientation="vertical">
+            <div className="card">
+                <Stepper ref={stepperRef} orientation="vertical">
                     <StepperPanel header="Header I">
                         <div className="flex flex-column h-12rem">
                             <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">Content I</div>
