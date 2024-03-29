@@ -2,6 +2,7 @@ import { useClickOutside } from './useClickOutside';
 import { useCounter } from './useCounter';
 import { useDebounce } from './useDebounce';
 import { useDisplayOrder } from './useDisplayOrder';
+import { useDraggable } from './useDraggable';
 import { useEventListener } from './useEventListener';
 import { useFavicon } from './useFavicon';
 import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey } from './useGlobalOnEscapeKey';
@@ -28,6 +29,7 @@ export {
     useCounter,
     useDebounce,
     useDisplayOrder,
+    useDraggable,
     useEventListener,
     useFavicon,
     useGlobalOnEscapeKey,
