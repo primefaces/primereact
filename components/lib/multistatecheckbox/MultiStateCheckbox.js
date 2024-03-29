@@ -5,6 +5,7 @@ import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { MultiStateCheckboxBase } from './MultiStateCheckboxBase';
+import { Checkbox } from '../checkbox/checkbox';
 
 export const MultiStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -165,10 +166,10 @@ export const MultiStateCheckbox = React.memo(
             MultiStateCheckboxBase.getOtherProps(props),
             ptm('root')
         );
-
+        
         const checkboxProps = mergeProps(
             {
-                className: cx('checkbox', { focusedState, selectedOption }),
+                className: classNames(props.className),
                 style: sx('checkbox', { selectedOption }),
                 tabIndex: props.tabIndex,
                 onFocus: onFocus,
@@ -176,6 +177,10 @@ export const MultiStateCheckbox = React.memo(
                 onKeyDown: onKeyDown,
                 role: 'checkbox',
                 'aria-checked': ariaChecked,
+                onChange: onClick,
+                checked: !!selectedOption,
+                disabled: props?.disabled,
+                icon,
                 ...ariaProps
             },
             ptm('checkbox')
@@ -192,7 +197,7 @@ export const MultiStateCheckbox = React.memo(
         return (
             <>
                 <div {...rootProps}>
-                    <div {...checkboxProps}>{icon}</div>
+                    <Checkbox {...checkboxProps} />
                     {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
