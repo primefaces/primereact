@@ -412,6 +412,7 @@ export const Tree = React.memo(
                     selectionKeys={props.selectionKeys}
                     selectionMode={props.selectionMode}
                     togglerTemplate={props.togglerTemplate}
+                    isUnstyled={isUnstyled}
                 />
             );
         };
