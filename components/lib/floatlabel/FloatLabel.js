@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/Componentbase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { classNames } from '../utils/Utils';
 import { FloatLabelBase } from './FloatLabelBase';

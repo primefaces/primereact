@@ -1,6 +1,6 @@
 import React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/Componentbase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { UniqueComponentId, classNames } from '../utils/Utils';
