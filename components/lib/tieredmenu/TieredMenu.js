@@ -124,62 +124,62 @@ export const TieredMenu = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'ArrowLeft':
-                onArrowLeftKey(event);
-                break;
+                case 'ArrowLeft':
+                    onArrowLeftKey(event);
+                    break;
 
-            case 'ArrowRight':
-                onArrowRightKey(event);
-                break;
+                case 'ArrowRight':
+                    onArrowRightKey(event);
+                    break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+                case 'Home':
+                    onHomeKey(event);
+                    break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+                case 'End':
+                    onEndKey(event);
+                    break;
 
-            case 'Space':
-                onSpaceKey(event);
-                break;
+                case 'Space':
+                    onSpaceKey(event);
+                    break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                break;
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
 
-            case 'Escape':
-                props.popup && DomHandler.focus(targetRef.current);
-                onEscapeKey(event);
-                break;
+                case 'Escape':
+                    props.popup && DomHandler.focus(targetRef.current);
+                    onEscapeKey(event);
+                    break;
 
-            case 'Tab':
-                onTabKey(event);
-                break;
+                case 'Tab':
+                    onTabKey(event);
+                    break;
 
-            case 'PageDown':
-            case 'PageUp':
-            case 'Backspace':
-            case 'ShiftLeft':
-            case 'ShiftRight':
-                //NOOP
-                break;
+                case 'PageDown':
+                case 'PageUp':
+                case 'Backspace':
+                case 'ShiftLeft':
+                case 'ShiftRight':
+                    //NOOP
+                    break;
 
-            default:
-                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                    searchItems(event.key);
-                }
+                default:
+                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                        searchItems(event.key);
+                    }
 
-                break;
+                    break;
             }
         };
 

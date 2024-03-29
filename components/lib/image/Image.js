@@ -85,17 +85,17 @@ export const Image = React.memo(
 
         const onMaskKeydown = (event) => {
             switch (event.code) {
-            case 'Escape':
-                hide();
-                setTimeout(() => {
-                    DomHandler.focus(previewButton.current);
-                }, 200);
-                event.preventDefault();
+                case 'Escape':
+                    hide();
+                    setTimeout(() => {
+                        DomHandler.focus(previewButton.current);
+                    }, 200);
+                    event.preventDefault();
 
-                break;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

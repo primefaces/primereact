@@ -167,7 +167,9 @@ function equals(obj1, obj2) {
     }
 
     if (obj1 && obj2 && typeof obj1 === 'object' && typeof obj2 === 'object') {
-        let i; let length; let key;
+        let i;
+        let length;
+        let key;
 
         let keys = Object.keys(obj1);
 
@@ -177,13 +179,13 @@ function equals(obj1, obj2) {
             return false;
         }
 
-        for (i = length; i-- !== 0;) {
+        for (i = length; i-- !== 0; ) {
             if (!Object.prototype.hasOwnProperty.call(obj2, keys[i])) {
                 return false;
             }
         }
 
-        for (i = length; i-- !== 0;) {
+        for (i = length; i-- !== 0; ) {
             key = keys[i];
 
             if (!equals(obj1[key], obj2[key])) {

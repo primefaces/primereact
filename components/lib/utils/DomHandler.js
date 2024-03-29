@@ -362,7 +362,8 @@ export default class DomHandler {
             let windowScrollTop = this.getWindowScrollTop();
             let windowScrollLeft = this.getWindowScrollLeft();
             let viewport = this.getViewport();
-            let top; let left;
+            let top;
+            let left;
 
             if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
                 top = targetOffset.top + windowScrollTop - elementOuterHeight;
@@ -397,7 +398,8 @@ export default class DomHandler {
             const targetHeight = target.offsetHeight;
             const targetOffset = target.getBoundingClientRect();
             const viewport = this.getViewport();
-            let top; let left;
+            let top;
+            let left;
 
             if (targetOffset.top + targetHeight + elementDimensions.height > viewport.height) {
                 top = -1 * elementDimensions.height;
@@ -1162,7 +1164,9 @@ export default class DomHandler {
      * Get the attribute names for an element and sorts them alpha for comparison
      */
     static getAttributeNames(node) {
-        let index; let rv; let attrs;
+        let index;
+        let rv;
+        let attrs;
 
         rv = [];
         attrs = node.attributes;
@@ -1184,7 +1188,11 @@ export default class DomHandler {
      * elem2 = style="font-size: 28px; color: red"
      */
     static isEqualElement(elm1, elm2) {
-        let attrs1; let attrs2; let name; let node1; let node2;
+        let attrs1;
+        let attrs2;
+        let name;
+        let node1;
+        let node2;
 
         // Compare attributes without order sensitivity
         attrs1 = DomHandler.getAttributeNames(elm1);

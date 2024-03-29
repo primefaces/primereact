@@ -153,31 +153,31 @@ export const CascadeSelect = React.memo(
 
         const onInputKeyDown = (event) => {
             switch (event.which) {
-            //down
-            case 40:
-                if (overlayVisibleState) {
-                    DomHandler.findSingle(overlayRef.current, '[data-pc-section="item"]').children[0].focus();
-                } else if (event.altKey && props.options && props.options.length) {
-                    show();
-                }
+                //down
+                case 40:
+                    if (overlayVisibleState) {
+                        DomHandler.findSingle(overlayRef.current, '[data-pc-section="item"]').children[0].focus();
+                    } else if (event.altKey && props.options && props.options.length) {
+                        show();
+                    }
 
-                event.preventDefault();
-                break;
+                    event.preventDefault();
+                    break;
 
                 //space
-            case 32:
-                overlayVisibleState ? hide() : show();
+                case 32:
+                    overlayVisibleState ? hide() : show();
 
-                event.preventDefault();
-                break;
+                    event.preventDefault();
+                    break;
 
                 //tab
-            case 9:
-                hide();
-                break;
+                case 9:
+                    hide();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

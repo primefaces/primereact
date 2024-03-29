@@ -200,9 +200,8 @@ export const InputNumber = React.memo(
                 .replace(_numeral.current, _index.current);
 
             if (filteredText) {
-                if (filteredText === '-')
-                // Minus sign
-                {
+                if (filteredText === '-') {
+                    // Minus sign
                     return filteredText;
                 }
 
@@ -347,164 +346,164 @@ export const InputNumber = React.memo(
             let newValueStr = null;
 
             switch (event.code) {
-            //up
-            case 'ArrowUp':
-                spin(event, 1);
-                event.preventDefault();
-                break;
+                //up
+                case 'ArrowUp':
+                    spin(event, 1);
+                    event.preventDefault();
+                    break;
 
                 //down
-            case 'ArrowDown':
-                spin(event, -1);
-                event.preventDefault();
-                break;
+                case 'ArrowDown':
+                    spin(event, -1);
+                    event.preventDefault();
+                    break;
 
                 //left
-            case 'ArrowLeft':
-                if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
-                    event.preventDefault();
-                }
+                case 'ArrowLeft':
+                    if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
+                        event.preventDefault();
+                    }
 
-                break;
+                    break;
 
                 //right
-            case 'ArrowRight':
-                if (!isNumeralChar(inputValue.charAt(selectionStart))) {
-                    event.preventDefault();
-                }
+                case 'ArrowRight':
+                    if (!isNumeralChar(inputValue.charAt(selectionStart))) {
+                        event.preventDefault();
+                    }
 
-                break;
+                    break;
 
                 //enter and tab
-            case 'Tab':
-            case 'NumpadEnter':
-            case 'Enter':
-            case 'NumpadEnter':
-                newValueStr = validateValue(parseValue(inputValue));
-                inputRef.current.value = formatValue(newValueStr);
-                inputRef.current.setAttribute('aria-valuenow', newValueStr);
-                updateModel(event, newValueStr);
-                break;
+                case 'Tab':
+                case 'NumpadEnter':
+                case 'Enter':
+                case 'NumpadEnter':
+                    newValueStr = validateValue(parseValue(inputValue));
+                    inputRef.current.value = formatValue(newValueStr);
+                    inputRef.current.setAttribute('aria-valuenow', newValueStr);
+                    updateModel(event, newValueStr);
+                    break;
 
                 //backspace
-            case 'Backspace':
-                event.preventDefault();
+                case 'Backspace':
+                    event.preventDefault();
 
-                if (selectionStart === selectionEnd) {
-                    const deleteChar = inputValue.charAt(selectionStart - 1);
+                    if (selectionStart === selectionEnd) {
+                        const deleteChar = inputValue.charAt(selectionStart - 1);
 
-                    if (isNumeralChar(deleteChar)) {
-                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
-                        const decimalLength = getDecimalLength(inputValue);
+                        if (isNumeralChar(deleteChar)) {
+                            const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
+                            const decimalLength = getDecimalLength(inputValue);
 
-                        if (_group.current.test(deleteChar)) {
-                            _group.current.lastIndex = 0;
-                            newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
-                        } else if (_decimal.current.test(deleteChar)) {
-                            _decimal.current.lastIndex = 0;
+                            if (_group.current.test(deleteChar)) {
+                                _group.current.lastIndex = 0;
+                                newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
+                            } else if (_decimal.current.test(deleteChar)) {
+                                _decimal.current.lastIndex = 0;
 
-                            if (decimalLength) {
-                                inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
+                                if (decimalLength) {
+                                    inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
+                                } else {
+                                    newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
+                                }
+                            } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                                const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
+                                newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
+                            } else if (decimalCharIndexWithoutPrefix === 1) {
+                                newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
+                                newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                             }
-                        } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                            const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+                        } else if (_currency.current.test(deleteChar)) {
+                            const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
 
-                            newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
-                        } else if (decimalCharIndexWithoutPrefix === 1) {
-                            newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
-                            newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
-                        } else {
-                            newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
+                            if (minusCharIndex === currencyCharIndex - 1) {
+                                newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
+                            }
                         }
-                    } else if (_currency.current.test(deleteChar)) {
-                        const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
 
-                        if (minusCharIndex === currencyCharIndex - 1) {
-                            newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
-                        }
+                        updateValue(event, newValueStr, null, 'delete-single');
+                    } else {
+                        newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
+                        updateValue(event, newValueStr, null, 'delete-range');
                     }
 
-                    updateValue(event, newValueStr, null, 'delete-single');
-                } else {
-                    newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
-                    updateValue(event, newValueStr, null, 'delete-range');
-                }
-
-                break;
+                    break;
 
                 // del
-            case 'Delete':
-                event.preventDefault();
+                case 'Delete':
+                    event.preventDefault();
 
-                if (selectionStart === selectionEnd) {
-                    const deleteChar = inputValue.charAt(selectionStart);
-                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
+                    if (selectionStart === selectionEnd) {
+                        const deleteChar = inputValue.charAt(selectionStart);
+                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
-                    if (isNumeralChar(deleteChar)) {
-                        const decimalLength = getDecimalLength(inputValue);
+                        if (isNumeralChar(deleteChar)) {
+                            const decimalLength = getDecimalLength(inputValue);
 
-                        if (_group.current.test(deleteChar)) {
-                            _group.current.lastIndex = 0;
-                            newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
-                        } else if (_decimal.current.test(deleteChar)) {
-                            _decimal.current.lastIndex = 0;
+                            if (_group.current.test(deleteChar)) {
+                                _group.current.lastIndex = 0;
+                                newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
+                            } else if (_decimal.current.test(deleteChar)) {
+                                _decimal.current.lastIndex = 0;
 
-                            if (decimalLength) {
-                                inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                                if (decimalLength) {
+                                    inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                                } else {
+                                    newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
+                                }
+                            } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                                const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
+                                newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
+                            } else if (decimalCharIndexWithoutPrefix === 1) {
+                                newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
+                                newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                             }
-                        } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                            const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
-
-                            newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
-                        } else if (decimalCharIndexWithoutPrefix === 1) {
-                            newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
-                            newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
-                        } else {
-                            newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                         }
+
+                        updateValue(event, newValueStr, null, 'delete-back-single');
+                    } else {
+                        newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
+                        updateValue(event, newValueStr, null, 'delete-range');
                     }
 
-                    updateValue(event, newValueStr, null, 'delete-back-single');
-                } else {
-                    newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
-                    updateValue(event, newValueStr, null, 'delete-range');
-                }
+                    break;
 
-                break;
+                case 'End':
+                    event.preventDefault();
 
-            case 'End':
-                event.preventDefault();
+                    if (!ObjectUtils.isEmpty(props.max)) {
+                        updateModel(event, props.max);
+                    }
 
-                if (!ObjectUtils.isEmpty(props.max)) {
-                    updateModel(event, props.max);
-                }
+                    break;
+                case 'Home':
+                    event.preventDefault();
 
-                break;
-            case 'Home':
-                event.preventDefault();
+                    if (!ObjectUtils.isEmpty(props.min)) {
+                        updateModel(event, props.min);
+                    }
 
-                if (!ObjectUtils.isEmpty(props.min)) {
-                    updateModel(event, props.min);
-                }
+                    break;
 
-                break;
+                default:
+                    event.preventDefault();
 
-            default:
-                event.preventDefault();
+                    let char = event.key;
+                    const _isDecimalSign = isDecimalSign(char);
+                    const _isMinusSign = isMinusSign(char);
 
-                let char = event.key;
-                const _isDecimalSign = isDecimalSign(char);
-                const _isMinusSign = isMinusSign(char);
+                    if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                        insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                    }
 
-                if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
-                    insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
-                }
-
-                break;
+                    break;
             }
         };
 

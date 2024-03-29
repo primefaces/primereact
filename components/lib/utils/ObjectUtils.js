@@ -32,7 +32,7 @@ export default class ObjectUtils {
                     return false;
                 }
 
-                for (i = length; i-- !== 0;) {
+                for (i = length; i-- !== 0; ) {
                     if (!this.deepEquals(a[i], b[i])) {
                         return false;
                     }
@@ -75,13 +75,13 @@ export default class ObjectUtils {
                 return false;
             }
 
-            for (i = length; i-- !== 0;) {
+            for (i = length; i-- !== 0; ) {
                 if (!Object.prototype.hasOwnProperty.call(b, keys[i])) {
                     return false;
                 }
             }
 
-            for (i = length; i-- !== 0;) {
+            for (i = length; i-- !== 0; ) {
                 key = keys[i];
 
                 if (!this.deepEquals(a[key], b[key])) {

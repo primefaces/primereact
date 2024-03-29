@@ -322,14 +322,14 @@ export const MegaMenu = React.memo(
             const _visibleItems =
                 processedItem && processedItem.key === focusedItemInfo.parentKey
                     ? processedItem.items.reduce((items, col) => {
-                        col.forEach((submenu) => {
-                            submenu.items.forEach((a) => {
-                                items.push(a);
-                            });
-                        });
+                          col.forEach((submenu) => {
+                              submenu.items.forEach((a) => {
+                                  items.push(a);
+                              });
+                          });
 
-                        return items;
-                    }, [])
+                          return items;
+                      }, [])
                     : processedItems;
 
             setVisibleItems(_visibleItems);
@@ -360,61 +360,61 @@ export const MegaMenu = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'ArrowLeft':
-                onArrowLeftKey(event);
-                break;
+                case 'ArrowLeft':
+                    onArrowLeftKey(event);
+                    break;
 
-            case 'ArrowRight':
-                onArrowRightKey(event);
-                break;
+                case 'ArrowRight':
+                    onArrowRightKey(event);
+                    break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+                case 'Home':
+                    onHomeKey(event);
+                    break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+                case 'End':
+                    onEndKey(event);
+                    break;
 
-            case 'Space':
-                onSpaceKey(event);
-                break;
+                case 'Space':
+                    onSpaceKey(event);
+                    break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                break;
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
 
-            case 'Escape':
-                onEscapeKey(event);
-                break;
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
 
-            case 'Tab':
-                onTabKey(event);
-                break;
+                case 'Tab':
+                    onTabKey(event);
+                    break;
 
-            case 'PageDown':
-            case 'PageUp':
-            case 'Backspace':
-            case 'ShiftLeft':
-            case 'ShiftRight':
-                //NOOP
-                break;
+                case 'PageDown':
+                case 'PageUp':
+                case 'Backspace':
+                case 'ShiftLeft':
+                case 'ShiftRight':
+                    //NOOP
+                    break;
 
-            default:
-                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                    searchItems(event, event.key);
-                }
+                default:
+                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                        searchItems(event, event.key);
+                    }
 
-                break;
+                    break;
             }
         };
 
@@ -1060,18 +1060,18 @@ export const MegaMenu = React.memo(
                         }
 
                         ${
-    horizontal
-        ? `
+                            horizontal
+                                ? `
                                     .p-megamenu[${selector}] .p-menuitem-active  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
                                         transform: rotate(-180deg);
                                     }
                             `
-        : ''
-}
+                                : ''
+                        }
 
                         ${
-    vertical
-        ? `                                                                   
+                            vertical
+                                ? `                                                                   
                                     .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
                                         transform: rotate(90deg);
                                     }
@@ -1080,8 +1080,8 @@ export const MegaMenu = React.memo(
                                         transform: rotate(-90deg);
                                     }
                             `
-        : ''
-}
+                                : ''
+                        }
                     }
                 `;
 

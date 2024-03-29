@@ -229,25 +229,25 @@ export const Tooltip = React.memo(
                 let { top: mouseTrackTop, left: mouseTrackLeft } = getMouseTrackPosition(target);
 
                 switch (currentPosition) {
-                case 'left':
-                    left = left - (_containerSize.width + mouseTrackLeft);
-                    top = top - (_containerSize.height / 2 - mouseTrackTop);
-                    break;
-                case 'right':
-                case 'mouse':
-                    left = left + mouseTrackLeft;
-                    top = top - (_containerSize.height / 2 - mouseTrackTop);
-                    break;
-                case 'top':
-                    left = left - (_containerSize.width / 2 - mouseTrackLeft);
-                    top = top - (_containerSize.height + mouseTrackTop);
-                    break;
-                case 'bottom':
-                    left = left - (_containerSize.width / 2 - mouseTrackLeft);
-                    top = top + mouseTrackTop;
-                    break;
-                default:
-                    break;
+                    case 'left':
+                        left = left - (_containerSize.width + mouseTrackLeft);
+                        top = top - (_containerSize.height / 2 - mouseTrackTop);
+                        break;
+                    case 'right':
+                    case 'mouse':
+                        left = left + mouseTrackLeft;
+                        top = top - (_containerSize.height / 2 - mouseTrackTop);
+                        break;
+                    case 'top':
+                        left = left - (_containerSize.width / 2 - mouseTrackLeft);
+                        top = top - (_containerSize.height + mouseTrackTop);
+                        break;
+                    case 'bottom':
+                        left = left - (_containerSize.width / 2 - mouseTrackLeft);
+                        top = top + mouseTrackTop;
+                        break;
+                    default:
+                        break;
                 }
 
                 if (left <= 0 || containerSize.current.width > _containerSize.width) {

@@ -177,17 +177,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const getStorage = () => {
         switch (props.stateStorage) {
-        case 'local':
-            return window.localStorage;
+            case 'local':
+                return window.localStorage;
 
-        case 'session':
-            return window.sessionStorage;
+            case 'session':
+                return window.sessionStorage;
 
-        case 'custom':
-            return null;
+            case 'custom':
+                return null;
 
-        default:
-            throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
+            default:
+                throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
         }
     };
 
@@ -392,7 +392,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         widths.forEach((width, index) => {
             let style = `width: ${width}px !important; max-width: ${width}px !important`;
 
-            innerHTML = innerHTML + `
+            innerHTML =
+                innerHTML +
+                `
                 ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
@@ -612,7 +614,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
             let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
-            innerHTML = innerHTML + `
+            innerHTML =
+                innerHTML +
+                `
                  ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
@@ -1216,11 +1220,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             Object.entries(filters).forEach(([prop, value]) => {
                 cloned[prop] = value.operator
                     ? {
-                        operator: value.operator,
-                        constraints: value.constraints.map((constraint) => {
-                            return { ...constraint };
-                        })
-                    }
+                          operator: value.operator,
+                          constraints: value.constraints.map((constraint) => {
+                              return { ...constraint };
+                          })
+                      }
                     : { ...value };
             });
         } else {

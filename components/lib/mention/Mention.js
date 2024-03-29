@@ -289,98 +289,98 @@ export const Mention = React.memo(
                 let highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
                 switch (event.which) {
-                //down
-                case 40:
-                    if (highlightItem) {
-                        let nextElement = highlightItem.nextElementSibling;
-
-                        if (nextElement) {
-                            const nextElementIndex = DomHandler.index(nextElement);
-                            const highlightItemIndex = DomHandler.index(highlightItem);
-
-                            setHighlightState((prevState) => {
-                                const newState = [...prevState];
-
-                                newState[nextElementIndex] = true;
-                                newState[highlightItemIndex] = false;
-
-                                return newState;
-                            });
-
-                            DomHandler.scrollInView(overlayRef.current, nextElement);
-                        }
-                    } else {
-                        highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
-
+                    //down
+                    case 40:
                         if (highlightItem) {
-                            const highlightItemIndex = DomHandler.index(highlightItem);
+                            let nextElement = highlightItem.nextElementSibling;
 
-                            setHighlightState((prevState) => {
-                                const newState = [...prevState];
+                            if (nextElement) {
+                                const nextElementIndex = DomHandler.index(nextElement);
+                                const highlightItemIndex = DomHandler.index(highlightItem);
 
-                                newState[highlightItemIndex] = true;
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
 
-                                return newState;
-                            });
+                                    newState[nextElementIndex] = true;
+                                    newState[highlightItemIndex] = false;
+
+                                    return newState;
+                                });
+
+                                DomHandler.scrollInView(overlayRef.current, nextElement);
+                            }
+                        } else {
+                            highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
+
+                            if (highlightItem) {
+                                const highlightItemIndex = DomHandler.index(highlightItem);
+
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
+
+                                    newState[highlightItemIndex] = true;
+
+                                    return newState;
+                                });
+                            }
                         }
-                    }
 
-                    event.preventDefault();
-                    break;
+                        event.preventDefault();
+                        break;
 
                     //up
-                case 38:
-                    if (highlightItem) {
-                        let previousElement = highlightItem.previousElementSibling;
+                    case 38:
+                        if (highlightItem) {
+                            let previousElement = highlightItem.previousElementSibling;
 
-                        if (previousElement) {
-                            const previousElementIndex = DomHandler.index(previousElement);
-                            const highlightItemIndex = DomHandler.index(highlightItem);
+                            if (previousElement) {
+                                const previousElementIndex = DomHandler.index(previousElement);
+                                const highlightItemIndex = DomHandler.index(highlightItem);
 
-                            setHighlightState((prevState) => {
-                                const newState = [...prevState];
+                                setHighlightState((prevState) => {
+                                    const newState = [...prevState];
 
-                                newState[previousElementIndex] = true;
-                                newState[highlightItemIndex] = false;
+                                    newState[previousElementIndex] = true;
+                                    newState[highlightItemIndex] = false;
 
-                                return newState;
-                            });
+                                    return newState;
+                                });
 
-                            DomHandler.scrollInView(overlayRef.current, previousElement);
+                                DomHandler.scrollInView(overlayRef.current, previousElement);
+                            }
                         }
-                    }
 
-                    event.preventDefault();
-                    break;
+                        event.preventDefault();
+                        break;
 
                     //backspace
-                case 8:
-                    const { value, selectionStart } = event.target;
-                    const key = value.substring(selectionStart - 1, selectionStart);
+                    case 8:
+                        const { value, selectionStart } = event.target;
+                        const key = value.substring(selectionStart - 1, selectionStart);
 
-                    if (key === triggerState.key) {
-                        hide();
-                    }
+                        if (key === triggerState.key) {
+                            hide();
+                        }
 
-                    break;
+                        break;
 
                     //enter
-                case 13:
-                    if (highlightItem) {
-                        selectItem(event, props.suggestions[DomHandler.index(highlightItem)]);
-                    }
+                    case 13:
+                        if (highlightItem) {
+                            selectItem(event, props.suggestions[DomHandler.index(highlightItem)]);
+                        }
 
-                    event.preventDefault();
-                    break;
+                        event.preventDefault();
+                        break;
 
                     //escape
-                case 27:
-                    hide();
-                    event.preventDefault();
-                    break;
+                    case 27:
+                        hide();
+                        event.preventDefault();
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             }
         };
@@ -425,8 +425,8 @@ export const Mention = React.memo(
             if (!isFilled && isInputWrapperFilled) {
                 _isUnstyled
                     ? DomHandler.setAttributes(elementRef.current, {
-                        'data-p-inputwrapper-filled': false
-                    })
+                          'data-p-inputwrapper-filled': false
+                      })
                     : DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
             }
         }, [isFilled]);

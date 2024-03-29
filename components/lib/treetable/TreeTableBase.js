@@ -45,13 +45,13 @@ const classes = {
         options.filterOnly
             ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
-                'p-sortable-column': getColumnProp(column, 'sortable'),
-                'p-highlight': sorted,
-                'p-frozen-column': frozen,
-                'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable'),
-                'p-reorderable-column': props.reorderableColumns && getColumnProp(column, 'reorderable') && !frozen,
-                [`p-align-${align}`]: !!align
-            }),
+                  'p-sortable-column': getColumnProp(column, 'sortable'),
+                  'p-highlight': sorted,
+                  'p-frozen-column': frozen,
+                  'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable'),
+                  'p-reorderable-column': props.reorderableColumns && getColumnProp(column, 'reorderable') && !frozen,
+                  [`p-align-${align}`]: !!align
+              }),
     columnResizer: 'p-column-resizer p-clickable',
     sortIcon: 'p-sortable-column-icon',
     row: ({ isSelected, rowProps: props }) => ({

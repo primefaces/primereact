@@ -88,7 +88,7 @@ const features1Data = [
     {
         src: 'https://primefaces.org/cdn/primereact/images/templates/sakai/sakai-github.png',
         title: 'Open Source and Free to Use',
-        description: 'Explore Sakai, our versatile, open-source React application template. It\'s free for your every innovation.'
+        description: "Explore Sakai, our versatile, open-source React application template. It's free for your every innovation."
     },
     {
         src: 'https://primefaces.org/cdn/primereact/images/templates/sakai/sakai-ready.png',

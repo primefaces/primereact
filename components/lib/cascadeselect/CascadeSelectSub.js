@@ -38,65 +38,65 @@ export const CascadeSelectSub = React.memo((props) => {
         const listItem = event.currentTarget.parentElement;
 
         switch (event.key) {
-        case 'Down':
-        case 'ArrowDown':
-            const nextItem = findNextItem(listItem);
+            case 'Down':
+            case 'ArrowDown':
+                const nextItem = findNextItem(listItem);
 
-            if (nextItem) {
-                nextItem.children[0].focus();
-            }
-
-            break;
-
-        case 'Up':
-        case 'ArrowUp':
-            const prevItem = findPrevItem(listItem);
-
-            if (prevItem) {
-                prevItem.children[0].focus();
-            }
-
-            break;
-
-        case 'Right':
-        case 'ArrowRight':
-            if (isOptionGroup(option)) {
-                if (activeOptionState === option) {
-                    listItem.children[1].children[0].children[0].focus();
-                } else {
-                    setActiveOptionState(option);
+                if (nextItem) {
+                    nextItem.children[0].focus();
                 }
-            }
 
-            break;
+                break;
 
-        case 'Left':
-        case 'ArrowLeft':
-            setActiveOptionState(null);
+            case 'Up':
+            case 'ArrowUp':
+                const prevItem = findPrevItem(listItem);
 
-            const parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
+                if (prevItem) {
+                    prevItem.children[0].focus();
+                }
 
-            if (parentList) {
-                parentList.focus();
-            }
+                break;
 
-            break;
+            case 'Right':
+            case 'ArrowRight':
+                if (isOptionGroup(option)) {
+                    if (activeOptionState === option) {
+                        listItem.children[1].children[0].children[0].focus();
+                    } else {
+                        setActiveOptionState(option);
+                    }
+                }
 
-        case 'Enter':
-            onOptionClick(event, option);
-            break;
+                break;
 
-        case 'Tab':
-        case 'Escape':
-            if (props.onPanelHide) {
-                props.onPanelHide();
-                event.preventDefault();
-            }
+            case 'Left':
+            case 'ArrowLeft':
+                setActiveOptionState(null);
 
-            break;
+                const parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
 
-        default:
-            break;
+                if (parentList) {
+                    parentList.focus();
+                }
+
+                break;
+
+            case 'Enter':
+                onOptionClick(event, option);
+                break;
+
+            case 'Tab':
+            case 'Escape':
+                if (props.onPanelHide) {
+                    props.onPanelHide();
+                    event.preventDefault();
+                }
+
+                break;
+
+            default:
+                break;
         }
 
         event.preventDefault();

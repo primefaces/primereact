@@ -124,135 +124,135 @@ export const Paginator = React.memo(
             let element;
 
             switch (key) {
-            case 'FirstPageLink':
-                element = (
-                    <FirstPageLink
-                        hostName="Paginator"
-                        key={key}
-                        page={page}
-                        totalPages={totalPages}
-                        totalRecords={props.totalRecords}
-                        rows={props.rows}
-                        onClick={changePageToFirst}
-                        disabled={isFirstPage || isEmpty}
-                        template={template}
-                        firstPageLinkIcon={props.firstPageLinkIcon}
-                        ptm={ptm}
-                        cx={cx}
-                    />
-                );
-                break;
+                case 'FirstPageLink':
+                    element = (
+                        <FirstPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToFirst}
+                            disabled={isFirstPage || isEmpty}
+                            template={template}
+                            firstPageLinkIcon={props.firstPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
+                    break;
 
-            case 'PrevPageLink':
-                element = (
-                    <PrevPageLink
-                        hostName="Paginator"
-                        key={key}
-                        page={page}
-                        totalPages={totalPages}
-                        totalRecords={props.totalRecords}
-                        rows={props.rows}
-                        onClick={changePageToPrev}
-                        disabled={isFirstPage || isEmpty}
-                        template={template}
-                        prevPageLinkIcon={props.prevPageLinkIcon}
-                        ptm={ptm}
-                        cx={cx}
-                    />
-                );
-                break;
+                case 'PrevPageLink':
+                    element = (
+                        <PrevPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToPrev}
+                            disabled={isFirstPage || isEmpty}
+                            template={template}
+                            prevPageLinkIcon={props.prevPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
+                    break;
 
-            case 'NextPageLink':
-                element = (
-                    <NextPageLink
-                        hostName="Paginator"
-                        key={key}
-                        page={page}
-                        totalPages={totalPages}
-                        totalRecords={props.totalRecords}
-                        rows={props.rows}
-                        onClick={changePageToNext}
-                        disabled={isLastPage || isEmpty}
-                        template={template}
-                        nextPageLinkIcon={props.nextPageLinkIcon}
-                        ptm={ptm}
-                        cx={cx}
-                    />
-                );
-                break;
+                case 'NextPageLink':
+                    element = (
+                        <NextPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToNext}
+                            disabled={isLastPage || isEmpty}
+                            template={template}
+                            nextPageLinkIcon={props.nextPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
+                    break;
 
-            case 'LastPageLink':
-                element = (
-                    <LastPageLink
-                        hostName="Paginator"
-                        key={key}
-                        page={page}
-                        totalPages={totalPages}
-                        totalRecords={props.totalRecords}
-                        rows={props.rows}
-                        onClick={changePageToLast}
-                        disabled={isLastPage || isEmpty}
-                        template={template}
-                        lastPageLinkIcon={props.lastPageLinkIcon}
-                        ptm={ptm}
-                        cx={cx}
-                    />
-                );
-                break;
+                case 'LastPageLink':
+                    element = (
+                        <LastPageLink
+                            hostName="Paginator"
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            onClick={changePageToLast}
+                            disabled={isLastPage || isEmpty}
+                            template={template}
+                            lastPageLinkIcon={props.lastPageLinkIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
+                    );
+                    break;
 
-            case 'PageLinks':
-                element = (
-                    <PageLinks hostName="Paginator" key={key} page={page} totalPages={totalPages} totalRecords={props.totalRecords} rows={props.rows} value={updatePageLinks()} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />
-                );
-                break;
+                case 'PageLinks':
+                    element = (
+                        <PageLinks hostName="Paginator" key={key} page={page} totalPages={totalPages} totalRecords={props.totalRecords} rows={props.rows} value={updatePageLinks()} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />
+                    );
+                    break;
 
-            case 'RowsPerPageDropdown':
-                element = (
-                    <RowsPerPageDropdown
-                        hostName="Paginator"
-                        key={key}
-                        value={props.rows}
-                        page={page}
-                        totalPages={totalPages}
-                        totalRecords={props.totalRecords}
-                        options={props.rowsPerPageOptions}
-                        onChange={onRowsChange}
-                        appendTo={props.dropdownAppendTo}
-                        template={template}
-                        disabled={isEmpty}
-                        unstyled={props.unstyled}
-                        ptm={ptm}
-                        cx={cx}
-                        metaData={metaData}
-                    />
-                );
-                break;
+                case 'RowsPerPageDropdown':
+                    element = (
+                        <RowsPerPageDropdown
+                            hostName="Paginator"
+                            key={key}
+                            value={props.rows}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            options={props.rowsPerPageOptions}
+                            onChange={onRowsChange}
+                            appendTo={props.dropdownAppendTo}
+                            template={template}
+                            disabled={isEmpty}
+                            unstyled={props.unstyled}
+                            ptm={ptm}
+                            cx={cx}
+                            metaData={metaData}
+                        />
+                    );
+                    break;
 
-            case 'CurrentPageReport':
-                element = (
-                    <CurrentPageReport
-                        hostName="Paginator"
-                        reportTemplate={props.currentPageReportTemplate}
-                        key={key}
-                        page={page}
-                        totalPages={totalPages}
-                        totalRecords={props.totalRecords}
-                        rows={props.rows}
-                        first={props.first}
-                        template={template}
-                        ptm={ptm}
-                    />
-                );
-                break;
-            case 'JumpToPageInput':
-                element = (
-                    <JumpToPageInput hostName="Paginator" key={key} rows={props.rows} page={page} totalPages={totalPages} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />
-                );
-                break;
+                case 'CurrentPageReport':
+                    element = (
+                        <CurrentPageReport
+                            hostName="Paginator"
+                            reportTemplate={props.currentPageReportTemplate}
+                            key={key}
+                            page={page}
+                            totalPages={totalPages}
+                            totalRecords={props.totalRecords}
+                            rows={props.rows}
+                            first={props.first}
+                            template={template}
+                            ptm={ptm}
+                        />
+                    );
+                    break;
+                case 'JumpToPageInput':
+                    element = (
+                        <JumpToPageInput hostName="Paginator" key={key} rows={props.rows} page={page} totalPages={totalPages} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />
+                    );
+                    break;
 
-            default:
-                element = null;
-                break;
+                default:
+                    element = null;
+                    break;
             }
 
             return element;
@@ -265,13 +265,13 @@ export const Paginator = React.memo(
                 if (typeof template === 'object') {
                     return template.layout
                         ? template.layout.split(' ').map((value) => {
-                            const key = value.trim();
+                              const key = value.trim();
 
-                            return createElement(key, template[key]);
-                        })
+                              return createElement(key, template[key]);
+                          })
                         : Object.entries(template).map(([key, _template]) => {
-                            return createElement(key, _template);
-                        });
+                              return createElement(key, _template);
+                          });
                 }
 
                 return template.split(' ').map((value) => {

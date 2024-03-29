@@ -28,7 +28,9 @@ export const InputMask = React.memo(
         };
 
         const caret = (first, last) => {
-            let range; let begin; let end;
+            let range;
+            let begin;
+            let end;
             let inputEl = elementRef.current;
 
             if (!inputEl || !inputEl.offsetParent || inputEl !== document.activeElement) {
@@ -86,23 +88,20 @@ export const InputMask = React.memo(
         };
 
         const seekNext = (pos) => {
-            while (++pos < len.current && !tests.current[pos]) {
-
-            }
+            while (++pos < len.current && !tests.current[pos]) {}
 
             return pos;
         };
 
         const seekPrev = (pos) => {
-            while (--pos >= 0 && !tests.current[pos]) {
-
-            }
+            while (--pos >= 0 && !tests.current[pos]) {}
 
             return pos;
         };
 
         const shiftL = (begin, end) => {
-            let i; let j;
+            let i;
+            let j;
 
             if (begin < 0) {
                 return;
@@ -126,7 +125,10 @@ export const InputMask = React.memo(
         };
 
         const shiftR = (pos) => {
-            let i; let c; let j; let t;
+            let i;
+            let c;
+            let j;
+            let t;
 
             for (i = pos, c = getPlaceholder(pos); i < len.current; i++) {
                 if (tests.current[i]) {

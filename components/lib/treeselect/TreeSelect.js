@@ -189,69 +189,69 @@ export const TreeSelect = React.memo(
 
         const onHeaderElementKeyDown = (event, isHideButton) => {
             switch (event.code) {
-            case 'ArrowDown':
-                event.preventDefault();
-                setFocusToFocusableFirstNode();
+                case 'ArrowDown':
+                    event.preventDefault();
+                    setFocusToFocusableFirstNode();
 
-                break;
+                    break;
 
-            case 'ArrowUp':
-                event.preventDefault();
-                focusInputRef.current && DomHandler.focus(focusInputRef.current);
+                case 'ArrowUp':
+                    event.preventDefault();
+                    focusInputRef.current && DomHandler.focus(focusInputRef.current);
 
-                break;
+                    break;
 
-            case 'Space':
-            case 'Enter':
-            case 'NumpadEnter':
-                event.preventDefault();
+                case 'Space':
+                case 'Enter':
+                case 'NumpadEnter':
+                    event.preventDefault();
 
-                if (isHideButton) {
-                    hide();
-                }
+                    if (isHideButton) {
+                        hide();
+                    }
 
-                break;
+                    break;
 
-            case 'Escape':
-                onEscapeKey(event);
-                break;
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 
         const onKeyDown = (event) => {
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'Space':
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                break;
+                case 'Space':
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
 
-            case 'Escape':
-                onEscapeKey(event);
-                break;
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
 
-            case 'Tab':
-                if (overlayVisibleState) {
-                    event.preventDefault();
+                case 'Tab':
+                    if (overlayVisibleState) {
+                        event.preventDefault();
 
-                    if (event.shiftKey) {
-                        setFocusToFocusableFirstNode();
-                    } else {
-                        onTabKey(event);
+                        if (event.shiftKey) {
+                            setFocusToFocusableFirstNode();
+                        } else {
+                            onTabKey(event);
+                        }
                     }
-                }
 
-                break;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 
@@ -579,13 +579,13 @@ export const TreeSelect = React.memo(
                 content = (
                     <>
                         {selectedNodes &&
-                                selectedNodes.map((node, index) => {
-                                    return (
-                                        <div {...tokenProps} key={`${node.key}_${index}`}>
-                                            <span {...tokenLabelProps}>{node.label}</span>
-                                        </div>
-                                    );
-                                })}
+                            selectedNodes.map((node, index) => {
+                                return (
+                                    <div {...tokenProps} key={`${node.key}_${index}`}>
+                                        <span {...tokenLabelProps}>{node.label}</span>
+                                    </div>
+                                );
+                            })}
 
                         {isValueEmpty && (props.placeholder || 'empty')}
                     </>

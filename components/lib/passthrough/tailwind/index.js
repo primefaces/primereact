@@ -335,38 +335,38 @@ const Tailwind = {
                 classNames:
                     props.position === 'top'
                         ? {
-                            enter: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0',
-                            enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
-                            exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                            exitActive: '!opacity-0 !scale-75 translate-x-0 -translate-y-full translate-z-0'
-                        }
+                              enter: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-0 -translate-y-full translate-z-0'
+                          }
                         : props.position === 'bottom'
-                            ? {
+                          ? {
                                 enter: 'opacity-0 scale-75 translate-y-full',
                                 enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
                                 exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
                                 exitActive: '!opacity-0 !scale-75 translate-x-0 translate-y-full translate-z-0'
                             }
-                            : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
-                                ? {
-                                    enter: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
+                          : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
+                            ? {
+                                  enter: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
+                                  enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                                  exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                                  exitActive: '!opacity-0 !scale-75 -translate-x-full translate-y-0 translate-z-0'
+                              }
+                            : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
+                              ? {
+                                    enter: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
                                     enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
                                     exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                                    exitActive: '!opacity-0 !scale-75 -translate-x-full translate-y-0 translate-z-0'
+                                    exitActive: '!opacity-0 !scale-75 translate-x-full translate-y-0 translate-z-0'
                                 }
-                                : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
-                                    ? {
-                                        enter: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
-                                        enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
-                                        exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                                        exitActive: '!opacity-0 !scale-75 translate-x-full translate-y-0 translate-z-0'
-                                    }
-                                    : {
-                                        enter: 'opacity-0 scale-75',
-                                        enterActive: '!opacity-100 !scale-100 transition-all duration-200 ease-out',
-                                        exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
-                                        exitActive: '!opacity-0 !scale-75'
-                                    }
+                              : {
+                                    enter: 'opacity-0 scale-75',
+                                    enterActive: '!opacity-100 !scale-100 transition-all duration-200 ease-out',
+                                    exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                                    exitActive: '!opacity-0 !scale-75'
+                                }
             };
         }
     },
@@ -453,40 +453,40 @@ const Tailwind = {
                 timeout: 300,
                 classNames: props.fullScreen
                     ? {
-                        enter: 'opacity-0',
-                        enterActive: '!opacity-100 transition-opacity duration-300 ease-in',
-                        exit: 'opacity-100 transition-opacity duration-300 ease-in',
-                        exitActive: '!opacity-0'
-                    }
+                          enter: 'opacity-0',
+                          enterActive: '!opacity-100 transition-opacity duration-300 ease-in',
+                          exit: 'opacity-100 transition-opacity duration-300 ease-in',
+                          exitActive: '!opacity-0'
+                      }
                     : props.position === 'top'
-                        ? {
+                      ? {
                             enter: 'translate-x-0 -translate-y-full translate-z-0',
                             enterActive: '!translate-y-0 transition-transform duration-300',
                             exit: 'translate-y-0 transition-transform duration-300',
                             exitActive: 'translate-x-0 !-translate-y-full translate-z-0'
                         }
-                        : props.position === 'bottom'
-                            ? {
-                                enter: 'translate-x-0 translate-y-full translate-z-0',
-                                enterActive: '!translate-y-0 transition-transform duration-300',
-                                exit: 'translate-y-0 transition-transform duration-300',
-                                exitActive: 'translate-x-0 !translate-y-full translate-z-0'
+                      : props.position === 'bottom'
+                        ? {
+                              enter: 'translate-x-0 translate-y-full translate-z-0',
+                              enterActive: '!translate-y-0 transition-transform duration-300',
+                              exit: 'translate-y-0 transition-transform duration-300',
+                              exitActive: 'translate-x-0 !translate-y-full translate-z-0'
+                          }
+                        : props.position === 'left'
+                          ? {
+                                enter: '-translate-x-full translate-y-0 translate-z-0',
+                                enterActive: '!translate-x-0 transition-transform duration-300',
+                                exit: 'translate-x-0 transition-transform duration-300',
+                                exitActive: '!-translate-x-full translate-y-0 translate-z-0'
                             }
-                            : props.position === 'left'
-                                ? {
-                                    enter: '-translate-x-full translate-y-0 translate-z-0',
-                                    enterActive: '!translate-x-0 transition-transform duration-300',
-                                    exit: 'translate-x-0 transition-transform duration-300',
-                                    exitActive: '!-translate-x-full translate-y-0 translate-z-0'
-                                }
-                                : props.position === 'right'
-                                    ? {
-                                        enter: 'translate-x-full translate-y-0 translate-z-0',
-                                        enterActive: '!translate-x-0 transition-transform duration-300',
-                                        exit: 'translate-x-0 transition-transform duration-300',
-                                        exitActive: '!translate-x-full translate-y-0 translate-z-0'
-                                    }
-                                    : undefined
+                          : props.position === 'right'
+                            ? {
+                                  enter: 'translate-x-full translate-y-0 translate-z-0',
+                                  enterActive: '!translate-x-0 transition-transform duration-300',
+                                  exit: 'translate-x-0 transition-transform duration-300',
+                                  exitActive: '!translate-x-full translate-y-0 translate-z-0'
+                              }
+                            : undefined
             };
         }
     },
@@ -845,7 +845,7 @@ const Tailwind = {
                 'absolute cursor-pointer top-0 left-0 right-0 bottom-0 border border-transparent',
                 'transition-colors duration-200 rounded-2xl',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
-                'before:absolute before:content-\'\' before:top-1/2 before:bg-white before:dark:bg-gray-900 before:w-5 before:h-5 before:left-1 before:-mt-2.5 before:rounded-full before:transition-duration-200',
+                "before:absolute before:content-'' before:top-1/2 before:bg-white before:dark:bg-gray-900 before:w-5 before:h-5 before:left-1 before:-mt-2.5 before:rounded-full before:transition-duration-200",
                 {
                     'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 hover:dark:bg-gray-700 ': !props.checked,
                     'bg-blue-500 before:transform before:translate-x-5': props.checked

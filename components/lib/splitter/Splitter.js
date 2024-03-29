@@ -116,14 +116,14 @@ export const Splitter = React.memo(
 
         const getStorage = React.useCallback(() => {
             switch (props.stateStorage) {
-            case 'local':
-                return window.localStorage;
+                case 'local':
+                    return window.localStorage;
 
-            case 'session':
-                return window.sessionStorage;
+                case 'session':
+                    return window.sessionStorage;
 
-            default:
-                throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local" and "session".');
+                default:
+                    throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local" and "session".');
             }
         }, [props.stateStorage]);
 
@@ -170,7 +170,9 @@ export const Splitter = React.memo(
         };
 
         const onResize = (event, step = 0, isKeyDown = false) => {
-            let newPos; let newNextPanelSize; let newPrevPanelSize;
+            let newPos;
+            let newNextPanelSize;
+            let newPrevPanelSize;
             const pageX = event.type === 'touchmove' ? event.touches[0].pageX : event.pageX;
             const pageY = event.type === 'touchmove' ? event.touches[0].pageY : event.pageY;
 
@@ -228,72 +230,72 @@ export const Splitter = React.memo(
             const minSize = (props.children[index].props && props.children[index].props.minSize) || 0;
 
             switch (event.code) {
-            case 'ArrowLeft': {
-                if (horizontal) {
-                    setTimer(event, index, props.step * -1);
+                case 'ArrowLeft': {
+                    if (horizontal) {
+                        setTimer(event, index, props.step * -1);
+                    }
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowRight': {
+                    if (horizontal) {
+                        setTimer(event, index, props.step);
+                    }
 
-            case 'ArrowRight': {
-                if (horizontal) {
-                    setTimer(event, index, props.step);
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowDown': {
+                    if (!horizontal) {
+                        setTimer(event, index, props.step * -1);
+                    }
 
-            case 'ArrowDown': {
-                if (!horizontal) {
-                    setTimer(event, index, props.step * -1);
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowUp': {
+                    if (!horizontal) {
+                        setTimer(event, index, props.step);
+                    }
 
-            case 'ArrowUp': {
-                if (!horizontal) {
-                    setTimer(event, index, props.step);
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
-
-            case 'Home': {
-                resizePanel(index, 100 - minSize, minSize);
-
-                event.preventDefault();
-                break;
-            }
-
-            case 'End': {
-                resizePanel(index, minSize, 100 - minSize);
-
-                event.preventDefault();
-                break;
-            }
-
-            case 'NumpadEnter':
-
-            case 'Enter': {
-                if (prevSize.current >= 100 - (minSize || 5)) {
-                    resizePanel(index, minSize, 100 - minSize);
-                } else {
+                case 'Home': {
                     resizePanel(index, 100 - minSize, minSize);
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'End': {
+                    resizePanel(index, minSize, 100 - minSize);
 
-            default:
-                //no op
-                break;
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'NumpadEnter':
+
+                case 'Enter': {
+                    if (prevSize.current >= 100 - (minSize || 5)) {
+                        resizePanel(index, minSize, 100 - minSize);
+                    } else {
+                        resizePanel(index, 100 - minSize, minSize);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                default:
+                    //no op
+                    break;
             }
         };
 
@@ -372,7 +374,7 @@ export const Splitter = React.memo(
             panelElements.map((panelElement, i) => {
                 prevSize.current = panelSize(panelSizes, 0);
 
-                if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, '[data-pc-name=\'splitter\']') && DomHandler.find(panelElement, '[data-pc-section=\'root\']'))) {
+                if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-name='splitter']") && DomHandler.find(panelElement, "[data-pc-section='root']"))) {
                     !isUnstyled() && DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
                     panelElement.setAttribute('data-p-splitter-panel-nested', true);
                     setNested(true);

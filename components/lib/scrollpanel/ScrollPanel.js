@@ -175,53 +175,53 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const onKeyDown = (event) => {
         if (orientationState === 'vertical') {
             switch (event.code) {
-            case 'ArrowDown': {
-                setTimer('scrollTop', props.step);
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowDown': {
+                    setTimer('scrollTop', props.step);
+                    event.preventDefault();
+                    break;
+                }
 
-            case 'ArrowUp': {
-                setTimer('scrollTop', props.step * -1);
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowUp': {
+                    setTimer('scrollTop', props.step * -1);
+                    event.preventDefault();
+                    break;
+                }
 
-            case 'ArrowLeft':
+                case 'ArrowLeft':
 
-            case 'ArrowRight': {
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowRight': {
+                    event.preventDefault();
+                    break;
+                }
 
-            default:
-                //no op
-                break;
+                default:
+                    //no op
+                    break;
             }
         } else if (orientationState === 'horizontal') {
             switch (event.code) {
-            case 'ArrowRight': {
-                setTimer('scrollLeft', props.step);
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowRight': {
+                    setTimer('scrollLeft', props.step);
+                    event.preventDefault();
+                    break;
+                }
 
-            case 'ArrowLeft': {
-                setTimer('scrollLeft', props.step * -1);
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowLeft': {
+                    setTimer('scrollLeft', props.step * -1);
+                    event.preventDefault();
+                    break;
+                }
 
-            case 'ArrowDown':
+                case 'ArrowDown':
 
-            case 'ArrowUp': {
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowUp': {
+                    event.preventDefault();
+                    break;
+                }
 
-            default:
-                //no op
-                break;
+                default:
+                    //no op
+                    break;
             }
         }
     };

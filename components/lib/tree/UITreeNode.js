@@ -304,40 +304,40 @@ export const UITreeNode = React.memo((props) => {
         }
 
         switch (event.code) {
-        case 'Tab':
-            onTabKey(event);
+            case 'Tab':
+                onTabKey(event);
 
-            break;
+                break;
 
-        case 'ArrowDown':
-            onArrowDown(event);
+            case 'ArrowDown':
+                onArrowDown(event);
 
-            break;
+                break;
 
-        case 'ArrowUp':
-            onArrowUp(event);
+            case 'ArrowUp':
+                onArrowUp(event);
 
-            break;
+                break;
 
-        case 'ArrowRight':
-            onArrowRight(event);
+            case 'ArrowRight':
+                onArrowRight(event);
 
-            break;
+                break;
 
-        case 'ArrowLeft':
-            onArrowLeft(event);
+            case 'ArrowLeft':
+                onArrowLeft(event);
 
-            break;
+                break;
 
-        case 'Enter':
-        case 'NumpadEnter':
-        case 'Space':
-            onEnterKey(event);
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onEnterKey(event);
 
-            break;
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     };
 

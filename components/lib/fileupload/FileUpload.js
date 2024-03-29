@@ -544,7 +544,11 @@ export const FileUpload = React.memo(
         const createAdvanced = () => {
             const chooseButton = createChooseButton();
             const emptyContent = createEmptyContent();
-            let uploadButton; let cancelButton; let filesList; let uplaodedFilesList; let progressBar;
+            let uploadButton;
+            let cancelButton;
+            let filesList;
+            let uplaodedFilesList;
+            let progressBar;
 
             if (!props.auto) {
                 const uploadOptions = props.uploadOptions;

@@ -188,26 +188,26 @@ export const ColumnFilter = React.memo((props) => {
 
     const onToggleButtonKeyDown = (event) => {
         switch (event.key) {
-        case 'Escape':
-        case 'Tab':
-            hide();
-            break;
+            case 'Escape':
+            case 'Tab':
+                hide();
+                break;
 
-        case 'ArrowDown':
-            if (overlayVisibleState) {
-                const focusable = DomHandler.getFirstFocusableElement(overlayRef.current);
+            case 'ArrowDown':
+                if (overlayVisibleState) {
+                    const focusable = DomHandler.getFirstFocusableElement(overlayRef.current);
 
-                focusable && focusable.focus();
-                event.preventDefault();
-            } else if (event.altKey) {
-                setOverlayVisibleState(true);
-                event.preventDefault();
-            }
+                    focusable && focusable.focus();
+                    event.preventDefault();
+                } else if (event.altKey) {
+                    setOverlayVisibleState(true);
+                    event.preventDefault();
+                }
 
-            break;
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     };
 
@@ -260,38 +260,38 @@ export const ColumnFilter = React.memo((props) => {
         let item = event.target;
 
         switch (event.key) {
-        case 'ArrowDown':
-            const nextItem = findNextItem(item);
+            case 'ArrowDown':
+                const nextItem = findNextItem(item);
 
-            if (nextItem) {
-                item.removeAttribute('tabindex');
-                nextItem.tabIndex = 0;
-                nextItem.focus();
-            }
+                if (nextItem) {
+                    item.removeAttribute('tabindex');
+                    nextItem.tabIndex = 0;
+                    nextItem.focus();
+                }
 
-            event.preventDefault();
-            break;
+                event.preventDefault();
+                break;
 
-        case 'ArrowUp':
-            const prevItem = findPrevItem(item);
+            case 'ArrowUp':
+                const prevItem = findPrevItem(item);
 
-            if (prevItem) {
-                item.removeAttribute('tabindex');
-                prevItem.tabIndex = 0;
-                prevItem.focus();
-            }
+                if (prevItem) {
+                    item.removeAttribute('tabindex');
+                    prevItem.tabIndex = 0;
+                    prevItem.focus();
+                }
 
-            event.preventDefault();
-            break;
+                event.preventDefault();
+                break;
 
-        case 'Enter':
-            clear ? clearFilter() : onRowMatchModeChange(matchMode.value);
+            case 'Enter':
+                clear ? clearFilter() : onRowMatchModeChange(matchMode.value);
 
-            event.preventDefault();
-            break;
+                event.preventDefault();
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     };
 

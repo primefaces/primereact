@@ -41,9 +41,9 @@ export function mergeProps(props, options = {}) {
 
                 merged[key] = existingFn
                     ? (...args) => {
-                        existingFn(...args);
-                        value(...args);
-                    }
+                          existingFn(...args);
+                          value(...args);
+                      }
                     : value;
             } else {
                 merged[key] = value;

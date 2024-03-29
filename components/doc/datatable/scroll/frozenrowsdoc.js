@@ -42,7 +42,8 @@ export function FrozenRowsDoc(props) {
     };
 
     const toggleLock = (data, frozen, index) => {
-        let _lockedCustomers; let _unlockedCustomers;
+        let _lockedCustomers;
+        let _unlockedCustomers;
 
         if (frozen) {
             _lockedCustomers = lockedCustomers.filter((c, i) => i !== index);

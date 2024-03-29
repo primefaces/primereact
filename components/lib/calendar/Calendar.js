@@ -103,37 +103,37 @@ export const Calendar = React.memo(
 
         const onInputKeyDown = (event) => {
             switch (event.code) {
-            case 'ArrowDown': {
-                if (!overlayVisibleState) {
-                    show();
-                } else {
-                    focusToFirstCell();
+                case 'ArrowDown': {
+                    if (!overlayVisibleState) {
+                        show();
+                    } else {
+                        focusToFirstCell();
 
-                    event.preventDefault();
+                        event.preventDefault();
+                    }
+
+                    break;
                 }
 
-                break;
-            }
-
-            case 'Escape': {
-                hide();
-                props.touchUI && disableModality();
-                break;
-            }
-
-            case 'Tab': {
-                if (overlayRef && overlayRef.current) {
-                    DomHandler.getFocusableElements(overlayRef.current).forEach((el) => (el.tabIndex = '-1'));
+                case 'Escape': {
                     hide();
                     props.touchUI && disableModality();
+                    break;
                 }
 
-                break;
-            }
+                case 'Tab': {
+                    if (overlayRef && overlayRef.current) {
+                        DomHandler.getFocusableElements(overlayRef.current).forEach((el) => (el.tabIndex = '-1'));
+                        hide();
+                        props.touchUI && disableModality();
+                    }
 
-            default:
-                //no op
-                break;
+                    break;
+                }
+
+                default:
+                    //no op
+                    break;
             }
         };
 
@@ -201,19 +201,19 @@ export const Calendar = React.memo(
 
         const onContainerButtonKeydown = (event) => {
             switch (event.code) {
-            case 'Tab':
-                !props.inline && trapFocus(event);
-                break;
+                case 'Tab':
+                    !props.inline && trapFocus(event);
+                    break;
 
-            case 'Escape':
-                hide(null, reFocusInputField);
-                event.preventDefault();
+                case 'Escape':
+                    hide(null, reFocusInputField);
+                    event.preventDefault();
 
-                break;
+                    break;
 
-            default:
-                //no op
-                break;
+                default:
+                    //no op
+                    break;
             }
         };
 
@@ -552,44 +552,44 @@ export const Calendar = React.memo(
             }, interval || 500);
 
             switch (type) {
-            case 0:
-                if (direction === 1) {
-                    incrementHour(event);
-                } else {
-                    decrementHour(event);
-                }
+                case 0:
+                    if (direction === 1) {
+                        incrementHour(event);
+                    } else {
+                        decrementHour(event);
+                    }
 
-                break;
+                    break;
 
-            case 1:
-                if (direction === 1) {
-                    incrementMinute(event);
-                } else {
-                    decrementMinute(event);
-                }
+                case 1:
+                    if (direction === 1) {
+                        incrementMinute(event);
+                    } else {
+                        decrementMinute(event);
+                    }
 
-                break;
+                    break;
 
-            case 2:
-                if (direction === 1) {
-                    incrementSecond(event);
-                } else {
-                    decrementSecond(event);
-                }
+                case 2:
+                    if (direction === 1) {
+                        incrementSecond(event);
+                    } else {
+                        decrementSecond(event);
+                    }
 
-                break;
+                    break;
 
-            case 3:
-                if (direction === 1) {
-                    incrementMilliSecond(event);
-                } else {
-                    decrementMilliSecond(event);
-                }
+                case 3:
+                    if (direction === 1) {
+                        incrementMilliSecond(event);
+                    } else {
+                        decrementMilliSecond(event);
+                    }
 
-                break;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 
@@ -1128,54 +1128,17 @@ export const Calendar = React.memo(
             const cellIndex = DomHandler.index(cell);
 
             switch (event.code) {
-            case 'ArrowDown': {
-                cellContent.tabIndex = '-1';
+                case 'ArrowDown': {
+                    cellContent.tabIndex = '-1';
 
-                let nextRow = cell.parentElement.nextElementSibling;
+                    let nextRow = cell.parentElement.nextElementSibling;
 
-                if (nextRow) {
-                    let tableRowIndex = DomHandler.index(cell.parentElement);
-                    const tableRows = Array.from(cell.parentElement.parentElement.children);
-                    const nextTableRows = tableRows.slice(tableRowIndex + 1);
-
-                    let hasNextFocusableDate = nextTableRows.find((el) => {
-                        let focusCell = el.children[cellIndex].children[0];
-
-                        return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
-                    });
-
-                    if (hasNextFocusableDate) {
-                        let focusCell = hasNextFocusableDate.children[cellIndex].children[0];
-
-                        focusCell.tabIndex = '0';
-                        focusCell.focus();
-                    } else {
-                        navigation.current = { backward: false };
-                        navForward(event);
-                    }
-                } else {
-                    navigation.current = { backward: false };
-                    navForward(event);
-                }
-
-                event.preventDefault();
-                break;
-            }
-
-            case 'ArrowUp': {
-                cellContent.tabIndex = '-1';
-
-                if (event.altKey) {
-                    hide(null, reFocusInputField);
-                } else {
-                    let prevRow = cell.parentElement.previousElementSibling;
-
-                    if (prevRow) {
+                    if (nextRow) {
                         let tableRowIndex = DomHandler.index(cell.parentElement);
                         const tableRows = Array.from(cell.parentElement.parentElement.children);
-                        const prevTableRows = tableRows.slice(0, tableRowIndex).reverse();
+                        const nextTableRows = tableRows.slice(tableRowIndex + 1);
 
-                        let hasNextFocusableDate = prevTableRows.find((el) => {
+                        let hasNextFocusableDate = nextTableRows.find((el) => {
                             let focusCell = el.children[cellIndex].children[0];
 
                             return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
@@ -1187,164 +1150,201 @@ export const Calendar = React.memo(
                             focusCell.tabIndex = '0';
                             focusCell.focus();
                         } else {
+                            navigation.current = { backward: false };
+                            navForward(event);
+                        }
+                    } else {
+                        navigation.current = { backward: false };
+                        navForward(event);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowUp': {
+                    cellContent.tabIndex = '-1';
+
+                    if (event.altKey) {
+                        hide(null, reFocusInputField);
+                    } else {
+                        let prevRow = cell.parentElement.previousElementSibling;
+
+                        if (prevRow) {
+                            let tableRowIndex = DomHandler.index(cell.parentElement);
+                            const tableRows = Array.from(cell.parentElement.parentElement.children);
+                            const prevTableRows = tableRows.slice(0, tableRowIndex).reverse();
+
+                            let hasNextFocusableDate = prevTableRows.find((el) => {
+                                let focusCell = el.children[cellIndex].children[0];
+
+                                return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
+                            });
+
+                            if (hasNextFocusableDate) {
+                                let focusCell = hasNextFocusableDate.children[cellIndex].children[0];
+
+                                focusCell.tabIndex = '0';
+                                focusCell.focus();
+                            } else {
+                                navigation.current = { backward: true };
+                                navBackward(event);
+                            }
+                        } else {
                             navigation.current = { backward: true };
                             navBackward(event);
                         }
-                    } else {
-                        navigation.current = { backward: true };
-                        navBackward(event);
                     }
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowLeft': {
+                    cellContent.tabIndex = '-1';
+                    let prevCell = cell.previousElementSibling;
 
-            case 'ArrowLeft': {
-                cellContent.tabIndex = '-1';
-                let prevCell = cell.previousElementSibling;
+                    if (prevCell) {
+                        const cells = Array.from(cell.parentElement.children);
+                        const prevCells = cells.slice(0, cellIndex).reverse();
 
-                if (prevCell) {
-                    const cells = Array.from(cell.parentElement.children);
-                    const prevCells = cells.slice(0, cellIndex).reverse();
+                        let hasNextFocusableDate = prevCells.find((el) => {
+                            let focusCell = el.children[0];
 
-                    let hasNextFocusableDate = prevCells.find((el) => {
-                        let focusCell = el.children[0];
+                            return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
+                        });
 
-                        return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
-                    });
+                        if (hasNextFocusableDate) {
+                            let focusCell = hasNextFocusableDate.children[0];
 
-                    if (hasNextFocusableDate) {
-                        let focusCell = hasNextFocusableDate.children[0];
-
-                        focusCell.tabIndex = '0';
-                        focusCell.focus();
+                            focusCell.tabIndex = '0';
+                            focusCell.focus();
+                        } else {
+                            navigateToMonth(true, groupIndex, event);
+                        }
                     } else {
                         navigateToMonth(true, groupIndex, event);
                     }
-                } else {
-                    navigateToMonth(true, groupIndex, event);
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowRight': {
+                    cellContent.tabIndex = '-1';
+                    let nextCell = cell.nextElementSibling;
 
-            case 'ArrowRight': {
-                cellContent.tabIndex = '-1';
-                let nextCell = cell.nextElementSibling;
+                    if (nextCell) {
+                        const cells = Array.from(cell.parentElement.children);
+                        const nextCells = cells.slice(cellIndex + 1);
+                        let hasNextFocusableDate = nextCells.find((el) => {
+                            let focusCell = el.children[0];
 
-                if (nextCell) {
-                    const cells = Array.from(cell.parentElement.children);
-                    const nextCells = cells.slice(cellIndex + 1);
-                    let hasNextFocusableDate = nextCells.find((el) => {
-                        let focusCell = el.children[0];
+                            return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
+                        });
 
-                        return !DomHandler.getAttribute(focusCell, 'data-p-disabled');
-                    });
+                        if (hasNextFocusableDate) {
+                            let focusCell = hasNextFocusableDate.children[0];
 
-                    if (hasNextFocusableDate) {
-                        let focusCell = hasNextFocusableDate.children[0];
-
-                        focusCell.tabIndex = '0';
-                        focusCell.focus();
+                            focusCell.tabIndex = '0';
+                            focusCell.focus();
+                        } else {
+                            navigateToMonth(false, groupIndex, event);
+                        }
                     } else {
                         navigateToMonth(false, groupIndex, event);
                     }
-                } else {
-                    navigateToMonth(false, groupIndex, event);
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'Enter':
+                case 'NumpadEnter':
 
-            case 'Enter':
-            case 'NumpadEnter':
-
-            case 'Space': {
-                onDateSelect(event, date);
-                event.preventDefault();
-                break;
-            }
-
-            case 'Escape': {
-                hide(null, reFocusInputField);
-                event.preventDefault();
-                break;
-            }
-
-            case 'Tab': {
-                if (!props.inline) {
-                    trapFocus(event);
+                case 'Space': {
+                    onDateSelect(event, date);
+                    event.preventDefault();
+                    break;
                 }
 
-                break;
-            }
-
-            case 'Home': {
-                cellContent.tabIndex = '-1';
-                let currentRow = cell.parentElement;
-                let focusCell = currentRow.children[0].children[0];
-
-                if (DomHandler.getAttribute(focusCell, 'data-p-disabled')) {
-                    navigateToMonth(groupIndex, true, event);
-                } else {
-                    focusCell.tabIndex = '0';
-                    focusCell.focus();
+                case 'Escape': {
+                    hide(null, reFocusInputField);
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'Tab': {
+                    if (!props.inline) {
+                        trapFocus(event);
+                    }
 
-            case 'End': {
-                cellContent.tabIndex = '-1';
-                let currentRow = cell.parentElement;
-                let focusCell = currentRow.children[currentRow.children.length - 1].children[0];
-
-                if (DomHandler.getAttribute(focusCell, 'data-p-disabled')) {
-                    navigateToMonth(groupIndex, false, event);
-                } else {
-                    focusCell.tabIndex = '0';
-                    focusCell.focus();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'Home': {
+                    cellContent.tabIndex = '-1';
+                    let currentRow = cell.parentElement;
+                    let focusCell = currentRow.children[0].children[0];
 
-            case 'PageUp': {
-                cellContent.tabIndex = '-1';
+                    if (DomHandler.getAttribute(focusCell, 'data-p-disabled')) {
+                        navigateToMonth(groupIndex, true, event);
+                    } else {
+                        focusCell.tabIndex = '0';
+                        focusCell.focus();
+                    }
 
-                if (event.shiftKey) {
-                    navigation.current = { backward: true };
-                    navBackward(event);
-                } else {
-                    navigateToMonth(groupIndex, true, event);
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'End': {
+                    cellContent.tabIndex = '-1';
+                    let currentRow = cell.parentElement;
+                    let focusCell = currentRow.children[currentRow.children.length - 1].children[0];
 
-            case 'PageDown': {
-                cellContent.tabIndex = '-1';
+                    if (DomHandler.getAttribute(focusCell, 'data-p-disabled')) {
+                        navigateToMonth(groupIndex, false, event);
+                    } else {
+                        focusCell.tabIndex = '0';
+                        focusCell.focus();
+                    }
 
-                if (event.shiftKey) {
-                    navigation.current = { backward: false };
-                    navForward(event);
-                } else {
-                    navigateToMonth(groupIndex, false, event);
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'PageUp': {
+                    cellContent.tabIndex = '-1';
 
-            default:
-                //no op
-                break;
+                    if (event.shiftKey) {
+                        navigation.current = { backward: true };
+                        navBackward(event);
+                    } else {
+                        navigateToMonth(groupIndex, true, event);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'PageDown': {
+                    cellContent.tabIndex = '-1';
+
+                    if (event.shiftKey) {
+                        navigation.current = { backward: false };
+                        navForward(event);
+                    } else {
+                        navigateToMonth(groupIndex, false, event);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                default:
+                    //no op
+                    break;
             }
         };
 
@@ -1377,105 +1377,105 @@ export const Calendar = React.memo(
             const cell = event.currentTarget;
 
             switch (event.code) {
-            //arrows
-            case 'ArrowUp':
+                //arrows
+                case 'ArrowUp':
 
-            case 'ArrowDown': {
-                cell.tabIndex = '-1';
-                const cells = cell.parentElement.children;
-                const cellIndex = DomHandler.index(cell);
-                const nextCell = cells[event.which === 40 ? cellIndex + 3 : cellIndex - 3];
+                case 'ArrowDown': {
+                    cell.tabIndex = '-1';
+                    const cells = cell.parentElement.children;
+                    const cellIndex = DomHandler.index(cell);
+                    const nextCell = cells[event.which === 40 ? cellIndex + 3 : cellIndex - 3];
 
-                if (nextCell) {
-                    nextCell.tabIndex = '0';
-                    nextCell.focus();
+                    if (nextCell) {
+                        nextCell.tabIndex = '0';
+                        nextCell.focus();
+                    }
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowLeft': {
+                    cell.tabIndex = '-1';
+                    const prevCell = cell.previousElementSibling;
 
-            case 'ArrowLeft': {
-                cell.tabIndex = '-1';
-                const prevCell = cell.previousElementSibling;
+                    if (prevCell) {
+                        prevCell.tabIndex = '0';
+                        prevCell.focus();
+                    } else {
+                        navigation.current = { backward: true };
+                        navBackward(event);
+                    }
 
-                if (prevCell) {
-                    prevCell.tabIndex = '0';
-                    prevCell.focus();
-                } else {
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowRight': {
+                    cell.tabIndex = '-1';
+                    const nextCell = cell.nextElementSibling;
+
+                    if (nextCell) {
+                        nextCell.tabIndex = '0';
+                        nextCell.focus();
+                    } else {
+                        navigation.current = { backward: false };
+                        navForward(event);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'PageUp': {
+                    if (event.shiftKey) {
+                        return;
+                    }
+
                     navigation.current = { backward: true };
                     navBackward(event);
+
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'PageDown': {
+                    if (event.shiftKey) {
+                        return;
+                    }
 
-            case 'ArrowRight': {
-                cell.tabIndex = '-1';
-                const nextCell = cell.nextElementSibling;
-
-                if (nextCell) {
-                    nextCell.tabIndex = '0';
-                    nextCell.focus();
-                } else {
                     navigation.current = { backward: false };
                     navForward(event);
+
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'Enter':
+                case 'NumpadEnter':
 
-            case 'PageUp': {
-                if (event.shiftKey) {
-                    return;
+                case 'Space': {
+                    if (props.view !== 'month') {
+                        viewChangedWithKeyDown.current = true;
+                    }
+
+                    onMonthSelect(event, index);
+                    event.preventDefault();
+                    break;
                 }
 
-                navigation.current = { backward: true };
-                navBackward(event);
-
-                break;
-            }
-
-            case 'PageDown': {
-                if (event.shiftKey) {
-                    return;
+                case 'Escape': {
+                    hide(null, reFocusInputField);
+                    event.preventDefault();
+                    break;
                 }
 
-                navigation.current = { backward: false };
-                navForward(event);
-
-                break;
-            }
-
-            case 'Enter':
-            case 'NumpadEnter':
-
-            case 'Space': {
-                if (props.view !== 'month') {
-                    viewChangedWithKeyDown.current = true;
+                case 'Tab': {
+                    trapFocus(event);
+                    break;
                 }
 
-                onMonthSelect(event, index);
-                event.preventDefault();
-                break;
-            }
-
-            case 'Escape': {
-                hide(null, reFocusInputField);
-                event.preventDefault();
-                break;
-            }
-
-            case 'Tab': {
-                trapFocus(event);
-                break;
-            }
-
-            default:
-                //no op
-                break;
+                default:
+                    //no op
+                    break;
             }
         };
 
@@ -1483,105 +1483,105 @@ export const Calendar = React.memo(
             const cell = event.currentTarget;
 
             switch (event.code) {
-            //arrows
-            case 'ArrowUp':
+                //arrows
+                case 'ArrowUp':
 
-            case 'ArrowDown': {
-                cell.tabIndex = '-1';
-                let cells = cell.parentElement.children;
-                let cellIndex = DomHandler.index(cell);
-                let nextCell = cells[event.code === 'ArrowDown' ? cellIndex + 2 : cellIndex - 2];
+                case 'ArrowDown': {
+                    cell.tabIndex = '-1';
+                    let cells = cell.parentElement.children;
+                    let cellIndex = DomHandler.index(cell);
+                    let nextCell = cells[event.code === 'ArrowDown' ? cellIndex + 2 : cellIndex - 2];
 
-                if (nextCell) {
-                    nextCell.tabIndex = '0';
-                    nextCell.focus();
+                    if (nextCell) {
+                        nextCell.tabIndex = '0';
+                        nextCell.focus();
+                    }
+
+                    event.preventDefault();
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'ArrowLeft': {
+                    cell.tabIndex = '-1';
+                    let prevCell = cell.previousElementSibling;
 
-            case 'ArrowLeft': {
-                cell.tabIndex = '-1';
-                let prevCell = cell.previousElementSibling;
+                    if (prevCell) {
+                        prevCell.tabIndex = '0';
+                        prevCell.focus();
+                    } else {
+                        navigation.current = { backward: true };
+                        navBackward(event);
+                    }
 
-                if (prevCell) {
-                    prevCell.tabIndex = '0';
-                    prevCell.focus();
-                } else {
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'ArrowRight': {
+                    cell.tabIndex = '-1';
+                    let nextCell = cell.nextElementSibling;
+
+                    if (nextCell) {
+                        nextCell.tabIndex = '0';
+                        nextCell.focus();
+                    } else {
+                        navigation.current = { backward: false };
+                        navForward(event);
+                    }
+
+                    event.preventDefault();
+                    break;
+                }
+
+                case 'PageUp': {
+                    if (event.shiftKey) {
+                        return;
+                    }
+
                     navigation.current = { backward: true };
                     navBackward(event);
+
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'PageDown': {
+                    if (event.shiftKey) {
+                        return;
+                    }
 
-            case 'ArrowRight': {
-                cell.tabIndex = '-1';
-                let nextCell = cell.nextElementSibling;
-
-                if (nextCell) {
-                    nextCell.tabIndex = '0';
-                    nextCell.focus();
-                } else {
                     navigation.current = { backward: false };
                     navForward(event);
+
+                    break;
                 }
 
-                event.preventDefault();
-                break;
-            }
+                case 'Enter':
+                case 'NumpadEnter':
 
-            case 'PageUp': {
-                if (event.shiftKey) {
-                    return;
+                case 'Space': {
+                    if (props.view !== 'year') {
+                        viewChangedWithKeyDown.current = true;
+                    }
+
+                    onYearSelect(event, index);
+                    event.preventDefault();
+                    break;
                 }
 
-                navigation.current = { backward: true };
-                navBackward(event);
-
-                break;
-            }
-
-            case 'PageDown': {
-                if (event.shiftKey) {
-                    return;
+                case 'Escape': {
+                    hide(null, reFocusInputField);
+                    event.preventDefault();
+                    break;
                 }
 
-                navigation.current = { backward: false };
-                navForward(event);
-
-                break;
-            }
-
-            case 'Enter':
-            case 'NumpadEnter':
-
-            case 'Space': {
-                if (props.view !== 'year') {
-                    viewChangedWithKeyDown.current = true;
+                case 'Tab': {
+                    trapFocus(event);
+                    break;
                 }
 
-                onYearSelect(event, index);
-                event.preventDefault();
-                break;
-            }
-
-            case 'Escape': {
-                hide(null, reFocusInputField);
-                event.preventDefault();
-                break;
-            }
-
-            case 'Tab': {
-                trapFocus(event);
-                break;
-            }
-
-            default:
-                //no op
-                break;
+                default:
+                    //no op
+                    break;
             }
         };
 
@@ -1625,7 +1625,10 @@ export const Calendar = React.memo(
 
         const selectTime = (date, timeMeta) => {
             if (props.showTime) {
-                let hours; let minutes; let seconds; let milliseconds;
+                let hours;
+                let minutes;
+                let seconds;
+                let milliseconds;
 
                 if (timeMeta) {
                     ({ hours, minutes, seconds, milliseconds } = timeMeta);
@@ -2009,7 +2012,8 @@ export const Calendar = React.memo(
         };
 
         const getPreviousMonthAndYear = (month, year) => {
-            let m; let y;
+            let m;
+            let y;
 
             if (month === 0) {
                 m = 11;
@@ -2023,7 +2027,8 @@ export const Calendar = React.memo(
         };
 
         const getNextMonthAndYear = (month, year) => {
-            let m; let y;
+            let m;
+            let y;
 
             if (month === 11) {
                 m = 0;
@@ -2512,47 +2517,47 @@ export const Calendar = React.memo(
             if (date) {
                 for (iFormat = 0; iFormat < format.length; iFormat++) {
                     if (literal) {
-                        if (format.charAt(iFormat) === '\'' && !lookAhead('\'')) {
+                        if (format.charAt(iFormat) === "'" && !lookAhead("'")) {
                             literal = false;
                         } else {
                             output = output + format.charAt(iFormat);
                         }
                     } else {
                         switch (format.charAt(iFormat)) {
-                        case 'd':
-                            output = output + formatNumber('d', date.getDate(), 2);
-                            break;
-                        case 'D':
-                            output = output + formatName('D', date.getDay(), dayNamesShort, dayNames);
-                            break;
-                        case 'o':
-                            output = output + formatNumber('o', Math.round((new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
-                            break;
-                        case 'm':
-                            output = output + formatNumber('m', date.getMonth() + 1, 2);
-                            break;
-                        case 'M':
-                            output = output + formatName('M', date.getMonth(), monthNamesShort, monthNames);
-                            break;
-                        case 'y':
-                            output = output + (lookAhead('y') ? date.getFullYear() : (date.getFullYear() % 100 < 10 ? '0' : '') + (date.getFullYear() % 100));
-                            break;
-                        case '@':
-                            output = output + date.getTime();
-                            break;
-                        case '!':
-                            output = output + (date.getTime() * 10000 + ticksTo1970);
-                            break;
-                        case '\'':
-                            if (lookAhead('\'')) {
-                                output = output + '\'';
-                            } else {
-                                literal = true;
-                            }
+                            case 'd':
+                                output = output + formatNumber('d', date.getDate(), 2);
+                                break;
+                            case 'D':
+                                output = output + formatName('D', date.getDay(), dayNamesShort, dayNames);
+                                break;
+                            case 'o':
+                                output = output + formatNumber('o', Math.round((new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000), 3);
+                                break;
+                            case 'm':
+                                output = output + formatNumber('m', date.getMonth() + 1, 2);
+                                break;
+                            case 'M':
+                                output = output + formatName('M', date.getMonth(), monthNamesShort, monthNames);
+                                break;
+                            case 'y':
+                                output = output + (lookAhead('y') ? date.getFullYear() : (date.getFullYear() % 100 < 10 ? '0' : '') + (date.getFullYear() % 100));
+                                break;
+                            case '@':
+                                output = output + date.getTime();
+                                break;
+                            case '!':
+                                output = output + (date.getTime() * 10000 + ticksTo1970);
+                                break;
+                            case "'":
+                                if (lookAhead("'")) {
+                                    output = output + "'";
+                                } else {
+                                    literal = true;
+                                }
 
-                            break;
-                        default:
-                            output = output + format.charAt(iFormat);
+                                break;
+                            default:
+                                output = output + format.charAt(iFormat);
                         }
                     }
                 }
@@ -2800,53 +2805,53 @@ export const Calendar = React.memo(
 
             for (iFormat = 0; iFormat < format.length; iFormat++) {
                 if (literal) {
-                    if (format.charAt(iFormat) === '\'' && !lookAhead('\'')) {
+                    if (format.charAt(iFormat) === "'" && !lookAhead("'")) {
                         literal = false;
                     } else {
                         checkLiteral();
                     }
                 } else {
                     switch (format.charAt(iFormat)) {
-                    case 'd':
-                        day = getNumber('d');
-                        break;
-                    case 'D':
-                        getName('D', dayNamesShort, dayNames);
-                        break;
-                    case 'o':
-                        doy = getNumber('o');
-                        break;
-                    case 'm':
-                        month = getNumber('m');
-                        break;
-                    case 'M':
-                        month = getName('M', monthNamesShort, monthNames);
-                        break;
-                    case 'y':
-                        year = getNumber('y');
-                        break;
-                    case '@':
-                        date = new Date(getNumber('@'));
-                        year = date.getFullYear();
-                        month = date.getMonth() + 1;
-                        day = date.getDate();
-                        break;
-                    case '!':
-                        date = new Date((getNumber('!') - ticksTo1970) / 10000);
-                        year = date.getFullYear();
-                        month = date.getMonth() + 1;
-                        day = date.getDate();
-                        break;
-                    case '\'':
-                        if (lookAhead('\'')) {
-                            checkLiteral();
-                        } else {
-                            literal = true;
-                        }
+                        case 'd':
+                            day = getNumber('d');
+                            break;
+                        case 'D':
+                            getName('D', dayNamesShort, dayNames);
+                            break;
+                        case 'o':
+                            doy = getNumber('o');
+                            break;
+                        case 'm':
+                            month = getNumber('m');
+                            break;
+                        case 'M':
+                            month = getName('M', monthNamesShort, monthNames);
+                            break;
+                        case 'y':
+                            year = getNumber('y');
+                            break;
+                        case '@':
+                            date = new Date(getNumber('@'));
+                            year = date.getFullYear();
+                            month = date.getMonth() + 1;
+                            day = date.getDate();
+                            break;
+                        case '!':
+                            date = new Date((getNumber('!') - ticksTo1970) / 10000);
+                            year = date.getFullYear();
+                            month = date.getMonth() + 1;
+                            day = date.getDate();
+                            break;
+                        case "'":
+                            if (lookAhead("'")) {
+                                checkLiteral();
+                            } else {
+                                literal = true;
+                            }
 
-                        break;
-                    default:
-                        checkLiteral();
+                            break;
+                        default:
+                            checkLiteral();
                     }
                 }
             }

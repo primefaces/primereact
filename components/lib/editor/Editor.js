@@ -11,7 +11,7 @@ const QuillJS = (function () {
     } catch {
         return null;
     }
-}());
+})();
 
 export const Editor = React.memo(
     React.forwardRef((inProps, ref) => {

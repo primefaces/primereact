@@ -135,39 +135,39 @@ export const OrderList = React.memo(
 
         const onListKeyDown = (event) => {
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+                case 'Home':
+                    onHomeKey(event);
+                    break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+                case 'End':
+                    onEndKey(event);
+                    break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                break;
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
 
-            case 'Space':
-                onSpaceKey(event);
-                break;
+                case 'Space':
+                    onSpaceKey(event);
+                    break;
 
-            case 'KeyA':
-                if (event.ctrlKey) {
-                    setSelectionState(visibleList);
-                    event.preventDefault();
-                }
+                case 'KeyA':
+                    if (event.ctrlKey) {
+                        setSelectionState(visibleList);
+                        event.preventDefault();
+                    }
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

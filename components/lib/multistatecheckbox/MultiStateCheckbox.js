@@ -92,7 +92,8 @@ export const MultiStateCheckbox = React.memo(
         };
 
         const getSelectedOptionMap = () => {
-            let option; let index;
+            let option;
+            let index;
 
             if (props.options) {
                 index = props.options.findIndex((option) => ObjectUtils.equals(props.value, getOptionValue(option), equalityKey));

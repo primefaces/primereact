@@ -113,7 +113,7 @@ export const ProgressBar = React.memo(
             return createIndeterminate();
         }
 
-        throw new Error(props.mode + ' is not a valid mode for the ProgressBar. Valid values are \'determinate\' and \'indeterminate\'');
+        throw new Error(props.mode + " is not a valid mode for the ProgressBar. Valid values are 'determinate' and 'indeterminate'");
     })
 );
 

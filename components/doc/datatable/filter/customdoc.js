@@ -63,20 +63,20 @@ export function CustomFilterDoc(props) {
 
     const getSeverity = (status) => {
         switch (status) {
-        case 'unqualified':
-            return 'danger';
+            case 'unqualified':
+                return 'danger';
 
-        case 'qualified':
-            return 'success';
+            case 'qualified':
+                return 'success';
 
-        case 'new':
-            return 'info';
+            case 'new':
+                return 'info';
 
-        case 'negotiation':
-            return 'warning';
+            case 'negotiation':
+                return 'warning';
 
-        case 'renewal':
-            return null;
+            case 'renewal':
+                return null;
         }
     };
 

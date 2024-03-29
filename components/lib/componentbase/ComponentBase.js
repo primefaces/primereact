@@ -557,10 +557,10 @@ const _getPT = (pt, key = '', callback) => {
 
     return ObjectUtils.isNotEmpty(_usept)
         ? {
-            _usept,
-            originalValue: getValue(pt.originalValue),
-            value: getValue(pt.value)
-        }
+              _usept,
+              originalValue: getValue(pt.originalValue),
+              value: getValue(pt.value)
+          }
         : getValue(pt, true);
 };
 

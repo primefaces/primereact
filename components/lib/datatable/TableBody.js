@@ -332,7 +332,9 @@ export const TableBody = React.memo(
         };
 
         const selectRange = (event) => {
-            let rangeStart; let rangeEnd; let selectedSize;
+            let rangeStart;
+            let rangeEnd;
+            let selectedSize;
 
             const isAllowCellSelection = allowCellSelection();
             const index = ObjectUtils.findIndexInList(event.data, props.value, props.dataKey);

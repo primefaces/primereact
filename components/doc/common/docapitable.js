@@ -103,8 +103,8 @@ const DocApiTable = (props) => {
                                 {Object.entries(d).map(
                                     ([k, v], index) =>
                                         k !== 'readonly' &&
-                                            k !== 'optional' &&
-                                            k !== 'deprecated' && (
+                                        k !== 'optional' &&
+                                        k !== 'deprecated' && (
                                             <td key={index}>
                                                 {k === 'parameters' ? (
                                                     v.map((_v, i) => {

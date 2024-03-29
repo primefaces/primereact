@@ -63,7 +63,7 @@ export const useStackBlitz = (props) => {
             title: props.title || 'PrimeReact Demo',
             template: 'node',
             description: props.embedded
-                ? 'This example demonstrates how to style components with Tailwind CSS using PrimeReact\'s unstyled property. As mentioned in the PrimeReact documentation, components can be styled or have HTML attributes added using a global or inline pass through approach. In this example, we utilize the global PT approach with Tailwind CSS.'
+                ? "This example demonstrates how to style components with Tailwind CSS using PrimeReact's unstyled property. As mentioned in the PrimeReact documentation, components can be styled or have HTML attributes added using a global or inline pass through approach. In this example, we utilize the global PT approach with Tailwind CSS."
                 : '**' +
                   (props.description || '') +
                   '**\n PrimeReact is an open source UI library for React featuring a rich set of 90+ components, a theme designer, various theme alternatives such as Material, Bootstrap, Tailwind, premium templates and professional support. In addition, it integrates with PrimeBlock, which has 370+ ready to use UI blocks to build spectacular applications in no time.',

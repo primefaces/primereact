@@ -89,30 +89,30 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
     const onTabHeaderKeyDown = (event, tab, index) => {
         switch (event.code) {
-        case 'ArrowDown':
-            onTabArrowDownKey(event);
-            break;
+            case 'ArrowDown':
+                onTabArrowDownKey(event);
+                break;
 
-        case 'ArrowUp':
-            onTabArrowUpKey(event);
-            break;
+            case 'ArrowUp':
+                onTabArrowUpKey(event);
+                break;
 
-        case 'Home':
-            onTabHomeKey(event);
-            break;
+            case 'Home':
+                onTabHomeKey(event);
+                break;
 
-        case 'End':
-            onTabEndKey(event);
-            break;
+            case 'End':
+                onTabEndKey(event);
+                break;
 
-        case 'Enter':
-        case 'NumpadEnter':
-        case 'Space':
-            onTabEnterKey(event, tab, index);
-            break;
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onTabEnterKey(event, tab, index);
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     };
 

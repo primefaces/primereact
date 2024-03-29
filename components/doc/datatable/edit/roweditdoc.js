@@ -20,17 +20,17 @@ export function RowEditDoc(props) {
 
     const getSeverity = (value) => {
         switch (value) {
-        case 'INSTOCK':
-            return 'success';
+            case 'INSTOCK':
+                return 'success';
 
-        case 'LOWSTOCK':
-            return 'warning';
+            case 'LOWSTOCK':
+                return 'warning';
 
-        case 'OUTOFSTOCK':
-            return 'danger';
+            case 'OUTOFSTOCK':
+                return 'danger';
 
-        default:
-            return null;
+            default:
+                return null;
         }
     };
 

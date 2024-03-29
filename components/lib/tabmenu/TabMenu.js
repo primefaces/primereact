@@ -116,39 +116,39 @@ export const TabMenu = React.memo(
 
         const onKeyDownItem = (event, item, index) => {
             switch (event.code) {
-            case 'ArrowRight':
-                navigateToNextItem(event.target);
-                event.preventDefault();
-                break;
+                case 'ArrowRight':
+                    navigateToNextItem(event.target);
+                    event.preventDefault();
+                    break;
 
-            case 'ArrowLeft':
-                navigateToPrevItem(event.target);
-                event.preventDefault();
-                break;
+                case 'ArrowLeft':
+                    navigateToPrevItem(event.target);
+                    event.preventDefault();
+                    break;
 
-            case 'Home':
-                navigateToFirstItem(event.target);
-                event.preventDefault();
-                break;
+                case 'Home':
+                    navigateToFirstItem(event.target);
+                    event.preventDefault();
+                    break;
 
-            case 'End':
-                navigateToLastItem(event.target);
-                event.preventDefault();
-                break;
+                case 'End':
+                    navigateToLastItem(event.target);
+                    event.preventDefault();
+                    break;
 
-            case 'Space':
-            case 'Enter':
-            case 'NumpadEnter':
-                itemClick(event, item, index);
-                event.preventDefault();
-                break;
+                case 'Space':
+                case 'Enter':
+                case 'NumpadEnter':
+                    itemClick(event, item, index);
+                    event.preventDefault();
+                    break;
 
-            case 'Tab':
-                onTabKey();
-                break;
+                case 'Tab':
+                    onTabKey();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

@@ -40,35 +40,36 @@ export const SelectButtonItem = React.memo((props) => {
 
     const onKeyDown = (event, index) => {
         switch (event.code) {
-        case 'Space': {
-            onClick(event, index);
-            event.preventDefault();
-            break;
-        }
+            case 'Space': {
+                onClick(event, index);
+                event.preventDefault();
+                break;
+            }
 
-        case 'ArrowDown':
+            case 'ArrowDown':
 
-        case 'ArrowRight': {
-            changeTabIndexes(event, 'next');
-            event.preventDefault();
-            break;
-        }
+            case 'ArrowRight': {
+                changeTabIndexes(event, 'next');
+                event.preventDefault();
+                break;
+            }
 
-        case 'ArrowUp':
+            case 'ArrowUp':
 
-        case 'ArrowLeft': {
-            changeTabIndexes(event, 'prev');
-            event.preventDefault();
-            break;
-        }
+            case 'ArrowLeft': {
+                changeTabIndexes(event, 'prev');
+                event.preventDefault();
+                break;
+            }
 
-        default:
-            break;
+            default:
+                break;
         }
     };
 
     const changeTabIndexes = (event, direction) => {
-        let firstTabableChild; let index;
+        let firstTabableChild;
+        let index;
 
         for (let i = 0; i <= props.elementRef.current.children.length - 1; i++) {
             if (props.elementRef.current.children[i].getAttribute('tabindex') === '0') {

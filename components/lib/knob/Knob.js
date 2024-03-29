@@ -179,43 +179,43 @@ export const Knob = React.memo(
         const onKeyDown = (event) => {
             if (!props.disabled && !props.readonly) {
                 switch (event.code) {
-                case 'ArrowRight':
-                case 'ArrowUp':
-                    event.preventDefault();
-                    updateModelValue(props.value + 1);
-                    break;
+                    case 'ArrowRight':
+                    case 'ArrowUp':
+                        event.preventDefault();
+                        updateModelValue(props.value + 1);
+                        break;
 
-                case 'ArrowLeft':
+                    case 'ArrowLeft':
 
-                case 'ArrowDown': {
-                    event.preventDefault();
-                    updateModelValue(props.value - 1);
-                    break;
-                }
+                    case 'ArrowDown': {
+                        event.preventDefault();
+                        updateModelValue(props.value - 1);
+                        break;
+                    }
 
-                case 'Home': {
-                    event.preventDefault();
-                    updateModelValue(props.min);
-                    break;
-                }
+                    case 'Home': {
+                        event.preventDefault();
+                        updateModelValue(props.min);
+                        break;
+                    }
 
-                case 'End': {
-                    event.preventDefault();
-                    updateModelValue(props.max);
-                    break;
-                }
+                    case 'End': {
+                        event.preventDefault();
+                        updateModelValue(props.max);
+                        break;
+                    }
 
-                case 'PageUp': {
-                    event.preventDefault();
-                    updateModelValue(props.value + 10);
-                    break;
-                }
+                    case 'PageUp': {
+                        event.preventDefault();
+                        updateModelValue(props.value + 10);
+                        break;
+                    }
 
-                case 'PageDown': {
-                    event.preventDefault();
-                    updateModelValue(props.value - 10);
-                    break;
-                }
+                    case 'PageDown': {
+                        event.preventDefault();
+                        updateModelValue(props.value - 10);
+                        break;
+                    }
                 }
             }
         };

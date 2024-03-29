@@ -247,35 +247,35 @@ export const Carousel = React.memo(
 
         const onIndicatorKeydown = (event) => {
             switch (event.code) {
-            case 'ArrowRight':
-                onRightKey();
-                break;
+                case 'ArrowRight':
+                    onRightKey();
+                    break;
 
-            case 'ArrowLeft':
-                onLeftKey();
-                break;
+                case 'ArrowLeft':
+                    onLeftKey();
+                    break;
 
-            case 'Home':
-                onHomeKey();
-                event.preventDefault();
-                break;
+                case 'Home':
+                    onHomeKey();
+                    event.preventDefault();
+                    break;
 
-            case 'End':
-                onEndKey();
-                event.preventDefault();
-                break;
+                case 'End':
+                    onEndKey();
+                    event.preventDefault();
+                    break;
 
-            case 'ArrowUp':
-            case 'ArrowDown':
-                event.preventDefault();
-                break;
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    event.preventDefault();
+                    break;
 
-            case 'Tab':
-                onTabKey();
-                break;
+                case 'Tab':
+                    onTabKey();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 
@@ -375,7 +375,9 @@ export const Carousel = React.memo(
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
                     let res = responsiveOptions.current[i];
 
-                    innerHTML = innerHTML + `
+                    innerHTML =
+                        innerHTML +
+                        `
                     @media screen and (max-width: ${res.breakpoint}) {
                         .p-carousel[${attributeSelector.current}] .p-carousel-item {
                             flex: 1 0 ${100 / res.numVisible}%

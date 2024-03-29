@@ -413,62 +413,62 @@ export const ListBox = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+                case 'Home':
+                    onHomeKey(event);
+                    break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+                case 'End':
+                    onEndKey(event);
+                    break;
 
-            case 'PageDown':
-                onPageDownKey(event);
-                break;
+                case 'PageDown':
+                    onPageDownKey(event);
+                    break;
 
-            case 'PageUp':
-                onPageUpKey(event);
-                break;
+                case 'PageUp':
+                    onPageUpKey(event);
+                    break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-            case 'Space':
-                onSpaceKey(event);
-                event.preventDefault();
-                break;
-
-            case 'Tab':
-                // NOOP
-                break;
-
-            case 'ShiftLeft':
-            case 'ShiftRight':
-                onShiftKey(event);
-                break;
-
-            default:
-                if (props.multiple && event.code === 'KeyA' && metaKey) {
-                    const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
-
-                    updateModel(event, value);
-
+                case 'Enter':
+                case 'NumpadEnter':
+                case 'Space':
+                    onSpaceKey(event);
                     event.preventDefault();
                     break;
-                }
 
-                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                    searchOptions(event, event.key);
-                    event.preventDefault();
-                }
+                case 'Tab':
+                    // NOOP
+                    break;
 
-                break;
+                case 'ShiftLeft':
+                case 'ShiftRight':
+                    onShiftKey(event);
+                    break;
+
+                default:
+                    if (props.multiple && event.code === 'KeyA' && metaKey) {
+                        const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
+
+                        updateModel(event, value);
+
+                        event.preventDefault();
+                        break;
+                    }
+
+                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                        searchOptions(event, event.key);
+                        event.preventDefault();
+                    }
+
+                    break;
             }
         };
 

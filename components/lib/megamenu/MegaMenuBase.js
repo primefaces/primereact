@@ -32,25 +32,25 @@ const classes = {
         let columnClass;
 
         switch (length) {
-        case 2:
-            columnClass = 'p-megamenu-col-6';
-            break;
+            case 2:
+                columnClass = 'p-megamenu-col-6';
+                break;
 
-        case 3:
-            columnClass = 'p-megamenu-col-4';
-            break;
+            case 3:
+                columnClass = 'p-megamenu-col-4';
+                break;
 
-        case 4:
-            columnClass = 'p-megamenu-col-3';
-            break;
+            case 4:
+                columnClass = 'p-megamenu-col-3';
+                break;
 
-        case 6:
-            columnClass = 'p-megamenu-col-2';
-            break;
+            case 6:
+                columnClass = 'p-megamenu-col-2';
+                break;
 
-        default:
-            columnClass = 'p-megamenu-col-12';
-            break;
+            default:
+                columnClass = 'p-megamenu-col-12';
+                break;
         }
 
         return columnClass;

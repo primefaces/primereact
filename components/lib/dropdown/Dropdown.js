@@ -183,68 +183,68 @@ export const Dropdown = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'ArrowLeft':
-            case 'ArrowRight':
-                onArrowLeftKey(event, props.editable);
-                break;
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    onArrowLeftKey(event, props.editable);
+                    break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+                case 'Home':
+                    onHomeKey(event);
+                    break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+                case 'End':
+                    onEndKey(event);
+                    break;
 
-            case 'PageDown':
-                onPageDownKey(event);
-                break;
+                case 'PageDown':
+                    onPageDownKey(event);
+                    break;
 
-            case 'PageUp':
-                onPageUpKey(event);
-                break;
+                case 'PageUp':
+                    onPageUpKey(event);
+                    break;
 
-            case 'Space':
-                onSpaceKey(event, props.editable);
-                break;
+                case 'Space':
+                    onSpaceKey(event, props.editable);
+                    break;
 
-            case 'NumpadEnter':
-            case 'Enter':
-                onEnterKey(event);
-                break;
+                case 'NumpadEnter':
+                case 'Enter':
+                    onEnterKey(event);
+                    break;
 
-            case 'Escape':
-                onEscapeKey(event);
-                break;
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
 
-            case 'Tab':
-                onTabKey(event);
-                break;
+                case 'Tab':
+                    onTabKey(event);
+                    break;
 
-            case 'Backspace':
-                onBackspaceKey(event, props.editable);
-                break;
+                case 'Backspace':
+                    onBackspaceKey(event, props.editable);
+                    break;
 
-            case 'ShiftLeft':
-            case 'ShiftRight':
-                //NOOP
-                break;
+                case 'ShiftLeft':
+                case 'ShiftRight':
+                    //NOOP
+                    break;
 
-            default:
-                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                    !overlayVisibleState && !props.editable && show();
-                    !props.editable && searchOptions(event, event.key);
-                }
+                default:
+                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                        !overlayVisibleState && !props.editable && show();
+                        !props.editable && searchOptions(event, event.key);
+                    }
 
-                break;
+                    break;
             }
 
             clickedRef.current = false;
@@ -252,28 +252,28 @@ export const Dropdown = React.memo(
 
         const onFilterInputKeyDown = (event) => {
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'ArrowLeft':
-            case 'ArrowRight':
-                onArrowLeftKey(event, true);
-                break;
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    onArrowLeftKey(event, true);
+                    break;
 
-            case 'Escape':
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                event.preventDefault();
-                break;
+                case 'Escape':
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    event.preventDefault();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

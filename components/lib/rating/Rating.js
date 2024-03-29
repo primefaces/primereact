@@ -85,25 +85,25 @@ export const Rating = React.memo(
 
         const onStarKeyDown = (event, value) => {
             switch (event.key) {
-            case 'Enter':
-            case 'Space':
-                rate(event, value);
-                event.preventDefault();
-                break;
-            case 'ArrowLeft':
-            case 'ArrowUp':
-                event.preventDefault();
-                rate(event, props.value - 1 < 1 ? props.stars : props.value - 1);
-                break;
+                case 'Enter':
+                case 'Space':
+                    rate(event, value);
+                    event.preventDefault();
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    event.preventDefault();
+                    rate(event, props.value - 1 < 1 ? props.stars : props.value - 1);
+                    break;
 
-            case 'ArrowRight':
-            case 'ArrowDown':
-                event.preventDefault();
-                rate(event, props.value + 1 > props.stars ? 1 : props.value + 1);
-                break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    event.preventDefault();
+                    rate(event, props.value + 1 > props.stars ? 1 : props.value + 1);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

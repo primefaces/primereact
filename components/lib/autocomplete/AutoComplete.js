@@ -273,103 +273,103 @@ export const AutoComplete = React.memo(
                 let highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
                 switch (event.which) {
-                //down
-                case 40:
-                    if (highlightItem) {
-                        let nextElement = findNextItem(highlightItem);
-
-                        if (nextElement) {
-                            !isUnstyled() && DomHandler.addClass(nextElement, 'p-highlight');
-                            nextElement.setAttribute('data-p-highlight', true);
-                            !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
-                            highlightItem.setAttribute('data-p-highlight', false);
-                            DomHandler.scrollInView(getScrollableElement(), nextElement);
-                        }
-                    } else {
-                        highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
-
-                        if (DomHandler.getAttribute(highlightItem, 'data-pc-section') === 'itemgroup') {
-                            highlightItem = findNextItem(highlightItem);
-                        }
-
+                    //down
+                    case 40:
                         if (highlightItem) {
-                            !isUnstyled() && DomHandler.addClass(highlightItem, 'p-highlight');
-                            highlightItem.setAttribute('data-p-highlight', true);
-                        }
-                    }
+                            let nextElement = findNextItem(highlightItem);
 
-                    event.preventDefault();
-                    break;
+                            if (nextElement) {
+                                !isUnstyled() && DomHandler.addClass(nextElement, 'p-highlight');
+                                nextElement.setAttribute('data-p-highlight', true);
+                                !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', false);
+                                DomHandler.scrollInView(getScrollableElement(), nextElement);
+                            }
+                        } else {
+                            highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
+
+                            if (DomHandler.getAttribute(highlightItem, 'data-pc-section') === 'itemgroup') {
+                                highlightItem = findNextItem(highlightItem);
+                            }
+
+                            if (highlightItem) {
+                                !isUnstyled() && DomHandler.addClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', true);
+                            }
+                        }
+
+                        event.preventDefault();
+                        break;
 
                     //up
-                case 38:
-                    if (highlightItem) {
-                        let previousElement = findPrevItem(highlightItem);
+                    case 38:
+                        if (highlightItem) {
+                            let previousElement = findPrevItem(highlightItem);
 
-                        if (previousElement) {
-                            !isUnstyled() && DomHandler.addClass(previousElement, 'p-highlight');
-                            previousElement.setAttribute('data-p-highlight', true);
-                            !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
-                            highlightItem.setAttribute('data-p-highlight', false);
-                            DomHandler.scrollInView(getScrollableElement(), previousElement);
+                            if (previousElement) {
+                                !isUnstyled() && DomHandler.addClass(previousElement, 'p-highlight');
+                                previousElement.setAttribute('data-p-highlight', true);
+                                !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', false);
+                                DomHandler.scrollInView(getScrollableElement(), previousElement);
+                            }
                         }
-                    }
 
-                    event.preventDefault();
-                    break;
+                        event.preventDefault();
+                        break;
 
                     //enter
-                case 13:
-                    if (highlightItem) {
-                        selectHighlightItem(event, highlightItem);
-                        hide();
-                        event.preventDefault();
-                    }
+                    case 13:
+                        if (highlightItem) {
+                            selectHighlightItem(event, highlightItem);
+                            hide();
+                            event.preventDefault();
+                        }
 
-                    break;
+                        break;
 
                     //escape
-                case 27:
-                    hide();
-                    event.preventDefault();
-                    break;
+                    case 27:
+                        hide();
+                        event.preventDefault();
+                        break;
 
                     //tab
-                case 9:
-                    if (highlightItem) {
-                        selectHighlightItem(event, highlightItem);
-                    }
+                    case 9:
+                        if (highlightItem) {
+                            selectHighlightItem(event, highlightItem);
+                        }
 
-                    hide();
-                    break;
+                        hide();
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             }
 
             if (props.multiple) {
                 switch (event.which) {
-                //backspace
-                case 8:
-                    if (props.value && props.value.length && !inputRef.current.value) {
-                        const removedValue = props.value[props.value.length - 1];
-                        const newValue = props.value.slice(0, -1);
+                    //backspace
+                    case 8:
+                        if (props.value && props.value.length && !inputRef.current.value) {
+                            const removedValue = props.value[props.value.length - 1];
+                            const newValue = props.value.slice(0, -1);
 
-                        updateModel(event, newValue);
+                            updateModel(event, newValue);
 
-                        if (props.onUnselect) {
-                            props.onUnselect({
-                                originalEvent: event,
-                                value: removedValue
-                            });
+                            if (props.onUnselect) {
+                                props.onUnselect({
+                                    originalEvent: event,
+                                    value: removedValue
+                                });
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             }
         };

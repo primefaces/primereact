@@ -16,7 +16,7 @@ export function TemplateDoc(props) {
     const [rows, setRows] = useState([10, 10, 10]);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
+    const [pageInputTooltip, setPageInputTooltip] = useState("Press 'Enter' key to go to this page.");
 
     const onPageChange = (e, index) => {
         setFirst(first.map((f, i) => (index === i ? e.first : f)));
@@ -39,7 +39,7 @@ export function TemplateDoc(props) {
                 _first[0] = currentPage ? options.rows * (page - 1) : 0;
 
                 setFirst(_first);
-                setPageInputTooltip('Press \'Enter\' key to go to this page.');
+                setPageInputTooltip("Press 'Enter' key to go to this page.");
             }
         }
     };

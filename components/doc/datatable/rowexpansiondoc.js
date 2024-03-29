@@ -73,36 +73,36 @@ export function RowExpansionDoc(props) {
 
     const getProductSeverity = (product) => {
         switch (product.inventoryStatus) {
-        case 'INSTOCK':
-            return 'success';
+            case 'INSTOCK':
+                return 'success';
 
-        case 'LOWSTOCK':
-            return 'warning';
+            case 'LOWSTOCK':
+                return 'warning';
 
-        case 'OUTOFSTOCK':
-            return 'danger';
+            case 'OUTOFSTOCK':
+                return 'danger';
 
-        default:
-            return null;
+            default:
+                return null;
         }
     };
 
     const getOrderSeverity = (order) => {
         switch (order.status) {
-        case 'DELIVERED':
-            return 'success';
+            case 'DELIVERED':
+                return 'success';
 
-        case 'CANCELLED':
-            return 'danger';
+            case 'CANCELLED':
+                return 'danger';
 
-        case 'PENDING':
-            return 'warning';
+            case 'PENDING':
+                return 'warning';
 
-        case 'RETURNED':
-            return 'info';
+            case 'RETURNED':
+                return 'info';
 
-        default:
-            return null;
+            default:
+                return null;
         }
     };
 

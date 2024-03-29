@@ -171,20 +171,20 @@ export const ColorPicker = React.memo(
 
         const updateModel = () => {
             switch (props.format) {
-            case 'hex':
-                onChange(HSBtoHEX(hsbValue.current));
-                break;
+                case 'hex':
+                    onChange(HSBtoHEX(hsbValue.current));
+                    break;
 
-            case 'rgb':
-                onChange(HSBtoRGB(hsbValue.current));
-                break;
+                case 'rgb':
+                    onChange(HSBtoRGB(hsbValue.current));
+                    break;
 
-            case 'hsb':
-                onChange(hsbValue.current);
-                break;
+                case 'hsb':
+                    onChange(hsbValue.current);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 
@@ -193,20 +193,20 @@ export const ColorPicker = React.memo(
 
             if (value) {
                 switch (props.format) {
-                case 'hex':
-                    hsb = HEXtoHSB(value);
-                    break;
+                    case 'hex':
+                        hsb = HEXtoHSB(value);
+                        break;
 
-                case 'rgb':
-                    hsb = RGBtoHSB(value);
-                    break;
+                    case 'rgb':
+                        hsb = RGBtoHSB(value);
+                        break;
 
-                case 'hsb':
-                    hsb = value;
-                    break;
+                    case 'hsb':
+                        hsb = value;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             } else {
                 hsb = HEXtoHSB(props.defaultColor);
@@ -311,20 +311,20 @@ export const ColorPicker = React.memo(
 
         const onInputKeydown = (event) => {
             switch (event.which) {
-            //space
-            case 32:
-                togglePanel();
-                event.preventDefault();
-                break;
+                //space
+                case 32:
+                    togglePanel();
+                    event.preventDefault();
+                    break;
 
                 //escape and tab
-            case 27:
-            case 9:
-                hide();
-                break;
+                case 27:
+                case 9:
+                    hide();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

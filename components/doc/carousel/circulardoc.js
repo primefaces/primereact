@@ -33,17 +33,17 @@ export function CircularDoc(props) {
 
     const getSeverity = (product) => {
         switch (product.inventoryStatus) {
-        case 'INSTOCK':
-            return 'success';
+            case 'INSTOCK':
+                return 'success';
 
-        case 'LOWSTOCK':
-            return 'warning';
+            case 'LOWSTOCK':
+                return 'warning';
 
-        case 'OUTOFSTOCK':
-            return 'danger';
+            case 'OUTOFSTOCK':
+                return 'danger';
 
-        default:
-            return null;
+            default:
+                return null;
         }
     };
 

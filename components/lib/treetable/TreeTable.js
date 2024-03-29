@@ -755,7 +755,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 let col = columns[j];
                 let filterMeta = filters ? filters[getColumnProp(col, 'field')] : null;
                 let filterField = getColumnProp(col, 'field');
-                let filterValue; let filterConstraint; let paramsWithoutNode; let options;
+                let filterValue;
+                let filterConstraint;
+                let paramsWithoutNode;
+                let options;
 
                 //local
                 if (filterMeta) {
@@ -1027,7 +1030,8 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         const columns = getColumns();
         const frozenColumns = getFrozenColumns(columns);
         const scrollableColumns = frozenColumns ? getScrollableColumns(columns) : columns;
-        let frozenView; let scrollableView;
+        let frozenView;
+        let scrollableView;
 
         if (frozenColumns) {
             frozenView = createScrollableView(value, frozenColumns, true, props.frozenHeaderColumnGroup, props.frozenFooterColumnGroup);

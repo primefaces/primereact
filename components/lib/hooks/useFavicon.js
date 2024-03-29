@@ -10,7 +10,7 @@ const TYPE_MAP = {
 export const useFavicon = (newIcon = '', rel = 'shortcut icon') => {
     React.useLayoutEffect(() => {
         if (newIcon) {
-            const linkElements = document.querySelectorAll('link[rel*=\'icon\']');
+            const linkElements = document.querySelectorAll("link[rel*='icon']");
 
             linkElements.forEach((linkEl) => {
                 document.head.removeChild(linkEl);

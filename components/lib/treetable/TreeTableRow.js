@@ -278,45 +278,45 @@ export const TreeTableRow = React.memo((props) => {
 
     const onKeyDown = (event, item) => {
         switch (event.code) {
-        case 'ArrowDown':
-            onArrowDownKey(event);
-            break;
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-        case 'ArrowUp':
-            onArrowUpKey(event);
-            break;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-        case 'ArrowLeft':
-            onArrowLeftKey(event);
-            break;
+            case 'ArrowLeft':
+                onArrowLeftKey(event);
+                break;
 
-        case 'ArrowRight':
-            onArrowRightKey(event);
-            break;
+            case 'ArrowRight':
+                onArrowRightKey(event);
+                break;
 
-        case 'Home':
-            onHomeKey(event);
-            break;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-        case 'End':
-            onEndKey(event);
-            break;
+            case 'End':
+                onEndKey(event);
+                break;
 
-        case 'Enter':
-        case 'NumpadEnter':
-        case 'Space':
-            if (!DomHandler.isClickable(event.target)) {
-                onEnterKey(event, item);
-            }
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                if (!DomHandler.isClickable(event.target)) {
+                    onEnterKey(event, item);
+                }
 
-            break;
+                break;
 
-        case 'Tab':
-            onTabKey(event);
-            break;
+            case 'Tab':
+                onTabKey(event);
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     };
 
@@ -545,7 +545,8 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const createCell = (column, index) => {
-        let toggler; let checkbox;
+        let toggler;
+        let checkbox;
 
         if (getColumnProp(column, 'hidden')) {
             return null;

@@ -41,24 +41,24 @@ export function CellEditDoc(props) {
         let { rowData, newValue, field, originalEvent: event } = e;
 
         switch (field) {
-        case 'quantity':
-        case 'price':
-            if (isPositiveInteger(newValue)) {
-                rowData[field] = newValue;
-            } else {
-                event.preventDefault();
-            }
+            case 'quantity':
+            case 'price':
+                if (isPositiveInteger(newValue)) {
+                    rowData[field] = newValue;
+                } else {
+                    event.preventDefault();
+                }
 
-            break;
+                break;
 
-        default:
-            if (newValue.trim().length > 0) {
-                rowData[field] = newValue;
-            } else {
-                event.preventDefault();
-            }
+            default:
+                if (newValue.trim().length > 0) {
+                    rowData[field] = newValue;
+                } else {
+                    event.preventDefault();
+                }
 
-            break;
+                break;
         }
     };
 

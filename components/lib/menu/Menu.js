@@ -116,43 +116,43 @@ export const Menu = React.memo(
 
         const onListKeyDown = (event) => {
             switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onArrowUpKey(event);
+                    break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+                case 'Home':
+                    onHomeKey(event);
+                    break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+                case 'End':
+                    onEndKey(event);
+                    break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                break;
+                case 'Enter':
+                case 'NumpadEnter':
+                    onEnterKey(event);
+                    break;
 
-            case 'Space':
-                onSpaceKey(event);
-                break;
+                case 'Space':
+                    onSpaceKey(event);
+                    break;
 
-            case 'Escape':
-                if (props.popup) {
-                    DomHandler.focus(targetRef.current);
-                    hide(event);
-                }
+                case 'Escape':
+                    if (props.popup) {
+                        DomHandler.focus(targetRef.current);
+                        hide(event);
+                    }
 
-            case 'Tab':
-                props.popup && visibleState && hide(event);
-                break;
+                case 'Tab':
+                    props.popup && visibleState && hide(event);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

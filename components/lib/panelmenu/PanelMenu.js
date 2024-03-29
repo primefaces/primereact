@@ -93,30 +93,30 @@ export const PanelMenu = React.memo(
 
         const onHeaderKeyDown = (event, item) => {
             switch (event.code) {
-            case 'ArrowDown':
-                onHeaderArrowDownKey(event);
-                break;
+                case 'ArrowDown':
+                    onHeaderArrowDownKey(event);
+                    break;
 
-            case 'ArrowUp':
-                onHeaderArrowUpKey(event);
-                break;
+                case 'ArrowUp':
+                    onHeaderArrowUpKey(event);
+                    break;
 
-            case 'Home':
-                onHeaderHomeKey(event);
-                break;
+                case 'Home':
+                    onHeaderHomeKey(event);
+                    break;
 
-            case 'End':
-                onHeaderEndKey(event);
-                break;
+                case 'End':
+                    onHeaderEndKey(event);
+                    break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-            case 'Space':
-                onHeaderEnterKey(event, item);
-                break;
+                case 'Enter':
+                case 'NumpadEnter':
+                case 'Space':
+                    onHeaderEnterKey(event, item);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 

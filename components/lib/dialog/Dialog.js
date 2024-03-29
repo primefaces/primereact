@@ -392,7 +392,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         let innerHTML = '';
 
         for (let breakpoint in props.breakpoints) {
-            innerHTML = innerHTML + `
+            innerHTML =
+                innerHTML +
+                `
                 @media screen and (max-width: ${breakpoint}) {
                      [data-pc-name="dialog"][${attributeSelector.current}] {
                         width: ${props.breakpoints[breakpoint]} !important;

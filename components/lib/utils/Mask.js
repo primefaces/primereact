@@ -14,10 +14,23 @@ export function mask(el, options) {
     };
 
     options = { ...defaultOptions, ...options };
-    let tests; let partialPosition; let len; let firstNonMaskPos; let defs; let androidChrome; let lastRequiredNonMaskPos; let oldVal; let focusText; let caretTimeoutId; let buffer; let defaultBuffer;
+    let tests;
+    let partialPosition;
+    let len;
+    let firstNonMaskPos;
+    let defs;
+    let androidChrome;
+    let lastRequiredNonMaskPos;
+    let oldVal;
+    let focusText;
+    let caretTimeoutId;
+    let buffer;
+    let defaultBuffer;
 
     const caret = (first, last) => {
-        let range; let begin; let end;
+        let range;
+        let begin;
+        let end;
 
         if (!el.offsetParent || el !== document.activeElement) {
             return;
@@ -73,23 +86,20 @@ export function mask(el, options) {
     };
 
     const seekNext = (pos) => {
-        while (++pos < len && !tests[pos]) {
-
-        }
+        while (++pos < len && !tests[pos]) {}
 
         return pos;
     };
 
     const seekPrev = (pos) => {
-        while (--pos >= 0 && !tests[pos]) {
-
-        }
+        while (--pos >= 0 && !tests[pos]) {}
 
         return pos;
     };
 
     const shiftL = (begin, end) => {
-        let i; let j;
+        let i;
+        let j;
 
         if (begin < 0) {
             return;
@@ -113,7 +123,10 @@ export function mask(el, options) {
     };
 
     const shiftR = (pos) => {
-        let i; let c; let j; let t;
+        let i;
+        let c;
+        let j;
+        let t;
 
         for (i = pos, c = getPlaceholder(pos); i < len; i++) {
             if (tests[i]) {
