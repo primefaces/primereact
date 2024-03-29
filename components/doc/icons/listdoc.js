@@ -16,8 +16,26 @@ export function ListDoc(props) {
             setFilteredIcons(icons);
         }
 
-        if (icons) {
-            setFilteredIcons(icons.filter((it) => it.icon.tags[0].indexOf(event.target.value) !== -1));
+        if (event.target.value && icons) {
+            let sanitizedInput = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+
+            var newFilteredIcons = icons.filter((icon) => {
+                return (
+                    icon.icon.tags.some((tag) =>
+                        tag
+                            .replace(/[^\w\s]/gi, '')
+                            .replace(/\s/g, '')
+                            .includes(sanitizedInput.toLowerCase())
+                    ) ||
+                    icon.properties.name
+                        .replace(/[^\w\s]/gi, '')
+                        .replace(/\s/g, '')
+                        .toLowerCase()
+                        .includes(sanitizedInput.toLowerCase())
+                );
+            })
+
+            setFilteredIcons(newFilteredIcons);
         }
     };
 
