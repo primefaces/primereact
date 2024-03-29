@@ -1,5 +1,43 @@
 # Changelog
 
+## [10.6.0](https://github.com/primefaces/primereact/tree/10.6.0) (2024-03-29)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.5.3...10.6.0)
+
+**New Features:**
+- New Component - Stepper [\#6250](https://github.com/primefaces/primereact/issues/6250)
+- New Component - ButtonGroup [\#6251](https://github.com/primefaces/primereact/issues/6251)
+- New Component - FloatLabel [\#6190](https://github.com/primefaces/primereact/issues/6190)
+- New Component - IconField | InputIcon [\#6229](https://github.com/primefaces/primereact/issues/6229)
+- Datatable: "not-in" mode for filter function [\#6252](https://github.com/primefaces/primereact/issues/6252)
+
+**Enhancements:**
+- Component structure enhancement - Tree TreeTable [\#6240](https://github.com/primefaces/primereact/issues/6240)
+- MultistateCheckbox update [\#6249](https://github.com/primefaces/primereact/issues/6249)
+- Enhancement focusOnHover Prop [\#6230](https://github.com/primefaces/primereact/issues/6230)
+- TreeSelect: can't change default text "No results found" when not find data in filter TreeSelect [\#6173](https://github.com/primefaces/primereact/issues/6173)
+- Listbox - focusOnHover prop [\#6171](https://github.com/primefaces/primereact/issues/6171)
+
+**Fixed bugs:**
+- Paginator: JumpToPageInput is broken by latest changes in Paginator [\#6226](https://github.com/primefaces/primereact/issues/6226)
+- RadioButton: onChange is being triggered twice. [\#6223](https://github.com/primefaces/primereact/issues/6223)
+- MultiSelect: selectionMessage not changing using locales [\#6220](https://github.com/primefaces/primereact/issues/6220)
+- DataTable: NumpadEnter ignored during cell editing (and many other cases) [\#6023](https://github.com/primefaces/primereact/issues/6023)
+- InputNumber: Does not allow copy/pasting [\#6192](https://github.com/primefaces/primereact/issues/6192)
+- DataTable: RowClass conditional styling not working [\#6194](https://github.com/primefaces/primereact/issues/6194)
+- Calendar: AM/PM does not work properly if minDate and maxDate validations are provided as prop [\#6151](https://github.com/primefaces/primereact/issues/6151)
+- Calendar: When using timeonly and stepMinute prop together, minute is not showing correctly in the input field [\#5998](https://github.com/primefaces/primereact/issues/5998)
+- DataTable 10.5.3: Drag to select doesn't work on any page past page 1 when paginated [\#6211](https://github.com/primefaces/primereact/issues/6211)
+- Checkbox: Warning: specify either the checked prop, or the defaultChecked prop, but not both [\#6197](https://github.com/primefaces/primereact/issues/6197)
+- Dropdown: missing hover style [\#6196](https://github.com/primefaces/primereact/issues/6196)
+- TabView: Id doubles at root and nav elements [\#6201](https://github.com/primefaces/primereact/issues/6201)
+- RadioButton, ToggleButton: Warning: Invalid DOM property readonly. Did you mean readOnly? [\#6186](https://github.com/primefaces/primereact/issues/6186)
+- RadioButtoCheckBox wrong display [\#6181](https://github.com/primefaces/primereact/issues/6181)
+- Checkbox: prop onClick changes the event type in 10.5.3 [\#6231](https://github.com/primefaces/primereact/issues/6231)
+- TabView: TabPanel doesn't close if the 'closeIcon' prop is used [\#6165](https://github.com/primefaces/primereact/issues/6165)
+- DataTable: Column Filter Typescript fix [\#6233](https://github.com/primefaces/primereact/issues/6233)
+- ListBox: throw undefined error calling preventDefault() when running jest tests. [\#6184](https://github.com/primefaces/primereact/issues/6184)
+
 ## [10.5.3](https://github.com/primefaces/primereact/tree/10.5.3) (2024-03-19)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.5.2...10.5.3)
