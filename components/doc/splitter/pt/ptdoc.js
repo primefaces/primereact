@@ -46,7 +46,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <Splitter pt={{ root: { style: { height: '300px' } }, gutterHandler: { className: 'bg-primary' } }}>
                     <SplitterPanel pt={{ root: { className: 'flex align-items-center justify-content-center' } }}> Panel 1 </SplitterPanel>

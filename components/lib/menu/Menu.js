@@ -100,7 +100,9 @@ export const Menu = React.memo(
                 if (selectedOptionIndex !== -1) {
                     changeFocusedOptionIndex(selectedOptionIndex);
                     setSelectedOptionIndex(-1);
-                } else changeFocusedOptionIndex(0);
+                } else {
+                    changeFocusedOptionIndex(0);
+                }
             }
 
             props.onFocus && props.onFocus(event);
@@ -114,43 +116,43 @@ export const Menu = React.memo(
 
         const onListKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(event);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                case 'Home':
-                    onHomeKey(event);
-                    break;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                case 'End':
-                    onEndKey(event);
-                    break;
+            case 'End':
+                onEndKey(event);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                    onEnterKey(event);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+                onEnterKey(event);
+                break;
 
-                case 'Space':
-                    onSpaceKey(event);
-                    break;
+            case 'Space':
+                onSpaceKey(event);
+                break;
 
-                case 'Escape':
-                    if (props.popup) {
-                        DomHandler.focus(targetRef.current);
-                        hide(event);
-                    }
+            case 'Escape':
+                if (props.popup) {
+                    DomHandler.focus(targetRef.current);
+                    hide(event);
+                }
 
-                case 'Tab':
-                    props.popup && visibleState && hide(event);
-                    break;
+            case 'Tab':
+                props.popup && visibleState && hide(event);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -243,7 +245,7 @@ export const Menu = React.memo(
 
         const onEnter = () => {
             DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
-            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
 
             if (props.popup) {
@@ -319,7 +321,7 @@ export const Menu = React.memo(
                 ptm('separator')
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createMenuItem = (item, index, parentId = null) => {

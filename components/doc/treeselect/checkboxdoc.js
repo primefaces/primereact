@@ -124,7 +124,7 @@ export default function CheckboxDemo() {
                     selectionMode="checkbox"
                     display="chip"
                     placeholder="Select Items"
-                ></TreeSelect>
+                />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

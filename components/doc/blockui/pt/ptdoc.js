@@ -64,11 +64,11 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <div className="mb-3">
-                    <Button label="Block" onClick={() => setBlocked(true)} className="mr-2"></Button>
-                    <Button label="Unblock" onClick={() => setBlocked(false)}></Button>
+                    <Button label="Block" onClick={() => setBlocked(true)} className="mr-2" />
+                    <Button label="Unblock" onClick={() => setBlocked(false)} />
                 </div>
                 <BlockUI blocked={blocked} pt={{ root: { className: 'surface-ground p-2 border-round-sm' } }}>
                     <p className="m-0">

@@ -59,7 +59,7 @@ export const SlideMenuSub = React.memo((props) => {
             ptm('separator', { hostName: props.hostName })
         );
 
-        return <li {...separatorProps}></li>;
+        return <li {...separatorProps} />;
     };
 
     const createSubmenu = (item, index) => {

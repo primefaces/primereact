@@ -182,7 +182,7 @@ export default function OutlinedDemo() {
                 <p>Outlined buttons display a border without a background initially.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} outlined />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" outlined />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" outlined />

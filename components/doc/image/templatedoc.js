@@ -3,7 +3,7 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Image } from '@/components/lib/image/Image';
 
 export function TemplateDoc(props) {
-    const icon = <i className="pi pi-search"></i>;
+    const icon = <i className="pi pi-search" />;
 
     const code = {
         basic: `

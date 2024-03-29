@@ -44,7 +44,7 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card flex flex-column align-items-center">
                 <p>Scroll down the page to display the ScrollTo component.</p>
-                <i className="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite text-2xl" style={{ fontSize: '2rem', marginBottom: '30rem' }}></i>
+                <i className="pi pi-angle-down fadeout animation-duration-1000 animation-iteration-infinite text-2xl" style={{ fontSize: '2rem', marginBottom: '30rem' }} />
                 <ScrollTop />
             </div>
             <DocSectionCode code={code} />

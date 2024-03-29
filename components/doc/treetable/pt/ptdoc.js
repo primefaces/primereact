@@ -167,7 +167,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <TreeTable sortMode="multiple" value={nodes} tableStyle={{ minWidth: '50rem' }}>
                     <Column
@@ -178,7 +178,7 @@ export default function PTDemo() {
                         pt={{
                             sortBadge: { className: 'text-orange-400' }
                         }}
-                    ></Column>
+                    />
                     <Column
                         field="size"
                         header="Size"
@@ -186,7 +186,7 @@ export default function PTDemo() {
                         pt={{
                             sortBadge: { className: 'text-orange-400' }
                         }}
-                    ></Column>
+                    />
                     <Column
                         field="type"
                         header="Type"
@@ -194,7 +194,7 @@ export default function PTDemo() {
                         pt={{
                             sortBadge: { className: 'text-orange-400' }
                         }}
-                    ></Column>
+                    />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

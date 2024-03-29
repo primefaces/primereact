@@ -66,45 +66,57 @@ export const Dock = React.memo(
 
         const onListKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    if (props.position === 'left' || props.position === 'right') onArrowDownKey();
-                    event.preventDefault();
-                    break;
+            case 'ArrowDown':
+                if (props.position === 'left' || props.position === 'right') {
+                    onArrowDownKey();
+                }
 
-                case 'ArrowUp':
-                    if (props.position === 'left' || props.position === 'right') onArrowUpKey();
-                    event.preventDefault();
-                    break;
+                event.preventDefault();
+                break;
 
-                case 'ArrowRight':
-                    if (props.position === 'top' || props.position === 'bottom') onArrowDownKey();
-                    event.preventDefault();
-                    break;
+            case 'ArrowUp':
+                if (props.position === 'left' || props.position === 'right') {
+                    onArrowUpKey();
+                }
 
-                case 'ArrowLeft':
-                    if (props.position === 'top' || props.position === 'bottom') onArrowUpKey();
-                    event.preventDefault();
-                    break;
+                event.preventDefault();
+                break;
 
-                case 'Home':
-                    onHomeKey();
-                    event.preventDefault();
-                    break;
+            case 'ArrowRight':
+                if (props.position === 'top' || props.position === 'bottom') {
+                    onArrowDownKey();
+                }
 
-                case 'End':
-                    onEndKey();
-                    event.preventDefault();
-                    break;
+                event.preventDefault();
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                case 'Space':
-                    onSpaceKey(event);
-                    event.preventDefault();
-                    break;
+            case 'ArrowLeft':
+                if (props.position === 'top' || props.position === 'bottom') {
+                    onArrowUpKey();
+                }
 
-                default:
-                    break;
+                event.preventDefault();
+                break;
+
+            case 'Home':
+                onHomeKey();
+                event.preventDefault();
+                break;
+
+            case 'End':
+                onEndKey();
+                event.preventDefault();
+                break;
+
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onSpaceKey(event);
+                event.preventDefault();
+                break;
+
+            default:
+                break;
             }
         };
 

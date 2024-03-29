@@ -41,7 +41,7 @@ export default function InvalidDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Checkbox className="p-invalid"></Checkbox>
+                <Checkbox className="p-invalid" />
             </div>
             <DocSectionCode code={code} />
         </>

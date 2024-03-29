@@ -10,7 +10,7 @@ import { Calendar } from 'primereact/calendar';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

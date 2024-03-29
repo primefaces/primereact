@@ -114,9 +114,9 @@ export default function MultipleColumnsDemo() {
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} sortMode="multiple" tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" expander sortable></Column>
-                    <Column field="size" header="Size" sortable></Column>
-                    <Column field="type" header="Type" sortable></Column>
+                    <Column field="name" header="Name" expander sortable />
+                    <Column field="size" header="Size" sortable />
+                    <Column field="type" header="Type" sortable />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

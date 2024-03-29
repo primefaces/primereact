@@ -158,10 +158,10 @@ export default function PaginatorTemplateDemo() {
                         paginatorRight={paginatorRight}
                         tableStyle={{ minWidth: '50rem' }}
                     >
-                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
-                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
-                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
-                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }} />
+                        <Column field="country.name" header="Country" style={{ width: '25%' }} />
+                        <Column field="company" header="Company" style={{ width: '25%' }} />
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

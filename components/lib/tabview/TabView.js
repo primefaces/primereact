@@ -115,8 +115,11 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 return;
             }
 
-            if (props.onTabChange) props.onTabChange({ originalEvent: event, index });
-            else setActiveIndexState(index);
+            if (props.onTabChange) {
+                props.onTabChange({ originalEvent: event, index });
+            } else {
+                setActiveIndexState(index);
+            }
         }
 
         updateScrollBar({ index });
@@ -124,38 +127,38 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const onKeyDown = (event, tab, index) => {
         switch (event.code) {
-            case 'ArrowLeft':
-                onTabArrowLeftKey(event);
-                break;
+        case 'ArrowLeft':
+            onTabArrowLeftKey(event);
+            break;
 
-            case 'ArrowRight':
-                onTabArrowRightKey(event);
-                break;
+        case 'ArrowRight':
+            onTabArrowRightKey(event);
+            break;
 
-            case 'Home':
-                onTabHomeKey(event);
-                break;
+        case 'Home':
+            onTabHomeKey(event);
+            break;
 
-            case 'End':
-                onTabEndKey(event);
-                break;
+        case 'End':
+            onTabEndKey(event);
+            break;
 
-            case 'PageDown':
-                onPageDownKey(event);
-                break;
+        case 'PageDown':
+            onPageDownKey(event);
+            break;
 
-            case 'PageUp':
-                onPageUpKey(event);
-                break;
+        case 'PageUp':
+            onPageUpKey(event);
+            break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-            case 'Space':
-                onTabEnterKey(event, tab, index);
-                break;
+        case 'Enter':
+        case 'NumpadEnter':
+        case 'Space':
+            onTabEnterKey(event, tab, index);
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     };
 
@@ -289,8 +292,11 @@ export const TabView = React.forwardRef((inProps, ref) => {
         setForwardIsDisabledState(false);
         setHiddenTabsState([]);
 
-        if (props.onTabChange) props.onTabChange({ index: activeIndex });
-        else setActiveIndexState(props.activeIndex);
+        if (props.onTabChange) {
+            props.onTabChange({ index: activeIndex });
+        } else {
+            setActiveIndexState(props.activeIndex);
+        }
     };
 
     React.useEffect(() => {
@@ -454,7 +460,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             <div {...navContentProps}>
                 <ul {...navProps}>
                     {headers}
-                    <li {...inkbarProps}></li>
+                    <li {...inkbarProps} />
                 </ul>
             </div>
         );

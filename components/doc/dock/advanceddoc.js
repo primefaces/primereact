@@ -221,25 +221,25 @@ export function AdvancedDoc(props) {
         let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
 
         switch (command) {
-            case 'date':
-                response = 'Today is ' + new Date().toDateString();
-                break;
+        case 'date':
+            response = 'Today is ' + new Date().toDateString();
+            break;
 
-            case 'greet':
-                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
-                break;
+        case 'greet':
+            response = 'Hola ' + text.substring(argsIndex + 1) + '!';
+            break;
 
-            case 'random':
-                response = Math.floor(Math.random() * 100);
-                break;
+        case 'random':
+            response = Math.floor(Math.random() * 100);
+            break;
 
-            case 'clear':
-                response = null;
-                break;
+        case 'clear':
+            response = null;
+            break;
 
-            default:
-                response = 'Unknown command: ' + command;
-                break;
+        default:
+            response = 'Unknown command: ' + command;
+            break;
         }
 
         if (response) {
@@ -254,19 +254,26 @@ export function AdvancedDoc(props) {
 
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
-        if (context) context.setAppendTo('self');
-        else PrimeReact.appendTo = 'self';
+
+        if (context) {
+            context.setAppendTo('self');
+        } else {
+            PrimeReact.appendTo = 'self';
+        }
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            if (context) context.setAppendTo(null);
-            else PrimeReact.appendTo = null;
+            if (context) {
+                context.setAppendTo(null);
+            } else {
+                PrimeReact.appendTo = null;
+            }
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const start = <i className="pi pi-apple"></i>;
+    const start = <i className="pi pi-apple" />;
     const end = (
         <React.Fragment>
             <i className="pi pi-video" />

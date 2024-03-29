@@ -67,7 +67,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
 

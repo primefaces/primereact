@@ -5,7 +5,7 @@ import { snapshot } from '../../test';
 
 describe('Tag', () => {
     snapshot(<Tag />, 'default');
-    snapshot(<Tag value={`jest`} />, 'value');
+    snapshot(<Tag value={'jest'} />, 'value');
     snapshot(<Tag severity="success" />, 'sevrity success');
     snapshot(<Tag severity="info" />, 'sevrity info');
     snapshot(<Tag severity="warning" />, 'sevrity warning');

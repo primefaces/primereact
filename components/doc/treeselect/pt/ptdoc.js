@@ -129,7 +129,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <TreeSelect
                     value={selectedNodeKey}
@@ -144,7 +144,7 @@ export default function PTDemo() {
                             })
                         }
                     }}
-                ></TreeSelect>
+                />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

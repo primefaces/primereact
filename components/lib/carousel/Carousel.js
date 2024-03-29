@@ -92,15 +92,15 @@ export const Carousel = React.memo(
                 totalShiftedItems = numScrollState * page * -1;
 
                 if (isCircular) {
-                    totalShiftedItems -= numVisibleState;
+                    totalShiftedItems = totalShiftedItems - numVisibleState;
                 }
 
                 isRemainingItemsAdded.current = false;
             } else {
-                totalShiftedItems += numScrollState * dir;
+                totalShiftedItems = totalShiftedItems + numScrollState * dir;
 
                 if (isRemainingItemsAdded.current) {
-                    totalShiftedItems += remainingItems.current - numScrollState * dir;
+                    totalShiftedItems = totalShiftedItems + (remainingItems.current - numScrollState * dir);
                     isRemainingItemsAdded.current = false;
                 }
 
@@ -116,7 +116,7 @@ export const Carousel = React.memo(
                 totalShiftedItems = 0;
                 page = totalIndicators - 1;
             } else if (page === totalIndicators - 1 && remainingItems.current > 0) {
-                totalShiftedItems += remainingItems.current * -1 - numScrollState * dir;
+                totalShiftedItems = totalShiftedItems + (remainingItems.current * -1 - numScrollState * dir);
                 isRemainingItemsAdded.current = true;
             }
 
@@ -151,7 +151,7 @@ export const Carousel = React.memo(
                     let totalShiftedItems = matchedResponsiveData.numScroll * page * -1;
 
                     if (isCircular) {
-                        totalShiftedItems -= matchedResponsiveData.numVisible;
+                        totalShiftedItems = totalShiftedItems - matchedResponsiveData.numVisible;
                     }
 
                     setTotalShiftedItemsState(totalShiftedItems);
@@ -247,35 +247,35 @@ export const Carousel = React.memo(
 
         const onIndicatorKeydown = (event) => {
             switch (event.code) {
-                case 'ArrowRight':
-                    onRightKey();
-                    break;
+            case 'ArrowRight':
+                onRightKey();
+                break;
 
-                case 'ArrowLeft':
-                    onLeftKey();
-                    break;
+            case 'ArrowLeft':
+                onLeftKey();
+                break;
 
-                case 'Home':
-                    onHomeKey();
-                    event.preventDefault();
-                    break;
+            case 'Home':
+                onHomeKey();
+                event.preventDefault();
+                break;
 
-                case 'End':
-                    onEndKey();
-                    event.preventDefault();
-                    break;
+            case 'End':
+                onEndKey();
+                event.preventDefault();
+                break;
 
-                case 'ArrowUp':
-                case 'ArrowDown':
-                    event.preventDefault();
-                    break;
+            case 'ArrowUp':
+            case 'ArrowDown':
+                event.preventDefault();
+                break;
 
-                case 'Tab':
-                    onTabKey();
-                    break;
+            case 'Tab':
+                onTabKey();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -375,7 +375,7 @@ export const Carousel = React.memo(
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
                     let res = responsiveOptions.current[i];
 
-                    innerHTML += `
+                    innerHTML = innerHTML + `
                     @media screen and (max-width: ${res.breakpoint}) {
                         .p-carousel[${attributeSelector.current}] .p-carousel-item {
                             flex: 1 0 ${100 / res.numVisible}%
@@ -451,11 +451,11 @@ export const Carousel = React.memo(
                 totalShiftedItems = page * numScrollState * -1;
 
                 if (isCircular) {
-                    totalShiftedItems -= numVisibleState;
+                    totalShiftedItems = totalShiftedItems - numVisibleState;
                 }
 
                 if (page === totalIndicators - 1 && remainingItems.current > 0) {
-                    totalShiftedItems += -1 * remainingItems.current + numScrollState;
+                    totalShiftedItems = totalShiftedItems + (-1 * remainingItems.current + numScrollState);
                     isRemainingItemsAdded.current = true;
                 } else {
                     isRemainingItemsAdded.current = false;

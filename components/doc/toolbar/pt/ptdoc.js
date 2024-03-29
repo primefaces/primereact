@@ -96,7 +96,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <Toolbar
                     pt={{
@@ -104,7 +104,7 @@ export default function PTDemo() {
                     }}
                     start={startContent}
                     end={endContent}
-                ></Toolbar>
+                />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -90,7 +90,7 @@ export const FocusTrap = React.memo(
                         data-p-hidden-focusable={true}
                         onFocus={onFocus}
                         data-pc-section={section}
-                    ></span>
+                    />
                 );
             };
 

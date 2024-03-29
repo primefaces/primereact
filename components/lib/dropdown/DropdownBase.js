@@ -16,9 +16,9 @@ const classes = {
         props.editable
             ? 'p-dropdown-label p-inputtext'
             : classNames('p-dropdown-label p-inputtext', {
-                  'p-placeholder': label === null && props.placeholder,
-                  'p-dropdown-label-empty': label === null && !props.placeholder
-              }),
+                'p-placeholder': label === null && props.placeholder,
+                'p-dropdown-label-empty': label === null && !props.placeholder
+            }),
     trigger: 'p-dropdown-trigger',
     emptyMessage: 'p-dropdown-empty-message',
     itemGroup: ({ optionGroupLabel }) =>

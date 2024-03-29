@@ -95,7 +95,7 @@ const ThemeSection = () => {
         const value = e.target.value;
         let _filters = { ...filters };
 
-        _filters['global'].value = value;
+        _filters.global.value = value;
 
         setFilters(_filters);
         setGlobalFilterValue(value);
@@ -146,29 +146,29 @@ const ThemeSection = () => {
     };
 
     const activityBodyTemplate = (rowData) => {
-        return <ProgressBar value={rowData.activity} showValue={false} style={{ height: '6px' }}></ProgressBar>;
+        return <ProgressBar value={rowData.activity} showValue={false} style={{ height: '6px' }} />;
     };
 
     const actionBodyTemplate = () => {
-        return <Button type="button" icon="pi pi-cog" className="p-button-text"></Button>;
+        return <Button type="button" icon="pi pi-cog" className="p-button-text" />;
     };
 
     const getSeverity = (status) => {
         switch (status) {
-            case 'unqualified':
-                return 'danger';
+        case 'unqualified':
+            return 'danger';
 
-            case 'qualified':
-                return 'success';
+        case 'qualified':
+            return 'success';
 
-            case 'new':
-                return 'info';
+        case 'new':
+            return 'info';
 
-            case 'negotiation':
-                return 'warning';
+        case 'negotiation':
+            return 'warning';
 
-            case 'renewal':
-                return null;
+        case 'renewal':
+            return null;
         }
     };
 
@@ -212,7 +212,7 @@ const ThemeSection = () => {
                         emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     >
-                        <Column selectionMode="multiple" style={{ width: '3rem' }}></Column>
+                        <Column selectionMode="multiple" style={{ width: '3rem' }} />
                         <Column field="name" header="Name" sortable style={{ minWidth: '14rem' }} />
                         <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filterPlaceholder="Search by country" />
                         <Column sortable header="Agent" sortField="representative.name" filterField="representative" style={{ minWidth: '14rem' }} body={representativeBodyTemplate} />

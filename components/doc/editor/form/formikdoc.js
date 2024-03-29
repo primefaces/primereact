@@ -16,9 +16,9 @@ export function FormikDoc(props) {
     const renderHeader = () => {
         return (
             <span className="ql-formats">
-                <button className="ql-bold" aria-label="Bold"></button>
-                <button className="ql-italic" aria-label="Italic"></button>
-                <button className="ql-underline" aria-label="Underline"></button>
+                <button className="ql-bold" aria-label="Bold" />
+                <button className="ql-italic" aria-label="Italic" />
+                <button className="ql-underline" aria-label="Underline" />
             </span>
         );
     };

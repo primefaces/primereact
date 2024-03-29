@@ -80,7 +80,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <ConfirmDialog pt={{ headerTitle: { className: 'text-primary' } }} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" />
             <div className="card flex justify-content-center">
                 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />

@@ -137,7 +137,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <MultiSelect
                     value={selectedCities}
@@ -154,10 +154,10 @@ export default function PTDemo() {
                         item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined }),
                         token: ({ context }) => {
                             switch (context.value.code) {
-                                case 'NY':
-                                    return 'bg-red-300';
-                                case 'RM':
-                                    return 'bg-green-300';
+                            case 'NY':
+                                return 'bg-red-300';
+                            case 'RM':
+                                return 'bg-green-300';
                             }
 
                             return 'bg-gray-100';

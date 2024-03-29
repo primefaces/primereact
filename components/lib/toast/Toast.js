@@ -98,7 +98,7 @@ export const Toast = React.memo(
         };
 
         useUpdateEffect(() => {
-            ZIndexUtils.set('toast', containerRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['toast']) || PrimeReact.zIndex['toast']);
+            ZIndexUtils.set('toast', containerRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.toast) || PrimeReact.zIndex.toast);
         }, [messagesState, props.baseZIndex]);
 
         useUnmountEffect(() => {

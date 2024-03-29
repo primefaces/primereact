@@ -10,7 +10,7 @@ import { Image } from 'primereact/image';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

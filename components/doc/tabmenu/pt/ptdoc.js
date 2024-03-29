@@ -95,7 +95,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <TabMenu
                     model={items}

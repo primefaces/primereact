@@ -18,7 +18,7 @@ export function PTDoc(props) {
                 <div className="flex-1 flex flex-column gap-2 xl:mr-8">
                     <span className="font-bold">{item.name}</span>
                     <div className="flex align-items-center gap-2">
-                        <i className="pi pi-tag text-sm"></i>
+                        <i className="pi pi-tag text-sm" />
                         <span>{item.category}</span>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card xl:flex xl:justify-content-center">
                 <OrderList
                     dataKey="id"
@@ -188,7 +188,7 @@ export default function PTDemo() {
                         },
                         item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
                     }}
-                ></OrderList>
+                />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

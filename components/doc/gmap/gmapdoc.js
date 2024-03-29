@@ -131,11 +131,15 @@ export function GMapDoc(props) {
             document.body.appendChild(script);
 
             script.onload = () => {
-                if (callback) callback();
+                if (callback) {
+                    callback();
+                }
             };
         }
 
-        if (existingScript && callback) callback();
+        if (existingScript && callback) {
+            callback();
+        }
     };
 
     const removeGoogleMaps = () => {
@@ -577,7 +581,7 @@ export default function GMapDoc() {
                     Applying <i>p-invalid</i> class to an input element indicates a failed validation.
                 </p>
             </DocSectionText>
-            <Toast ref={toast}></Toast>
+            <Toast ref={toast} />
 
             {googleMapsReady && (
                 <div className="card">

@@ -21,10 +21,10 @@ function MenuItem(props) {
                 <StyleClass nodeRef={btnRef} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                     <button ref={btnRef} type="button" className="px-link">
                         <span className="menu-icon">
-                            <i className={menuItem.icon}></i>
+                            <i className={menuItem.icon} />
                         </span>
                         <span>{menuItem.name}</span>
-                        <i className="menu-toggle-icon pi pi-angle-down"></i>
+                        <i className="menu-toggle-icon pi pi-angle-down" />
                     </button>
                 </StyleClass>
             )}
@@ -33,11 +33,11 @@ function MenuItem(props) {
                     <a target="_blank" rel="noopener noreferrer">
                         {menuItem?.icon && root && (
                             <span className="menu-icon">
-                                <i className={menuItem?.icon}></i>
+                                <i className={menuItem?.icon} />
                             </span>
                         )}
                         <span>{menuItem?.name}</span>
-                        {menuItem?.badge && <Badge value={menuItem?.badge} className="ml-auto"></Badge>}
+                        {menuItem?.badge && <Badge value={menuItem?.badge} className="ml-auto" />}
                     </a>
                 </Link>
             )}
@@ -46,11 +46,11 @@ function MenuItem(props) {
                     <a className={classNames({ 'router-link-active': menuItem.to === router.pathname })}>
                         {menuItem?.icon && root && (
                             <span className="menu-icon">
-                                <i className={menuItem.icon}></i>
+                                <i className={menuItem.icon} />
                             </span>
                         )}
                         <span>{menuItem?.name}</span>
-                        {menuItem?.badge && <Badge value={menuItem.badge} className="ml-auto"></Badge>}
+                        {menuItem?.badge && <Badge value={menuItem.badge} className="ml-auto" />}
                     </a>
                 </Link>
             )}
@@ -59,7 +59,7 @@ function MenuItem(props) {
                 <div className={classNames('overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out', { hidden: menuItem.children && root && isActiveRootmenuItem(menuItem) })}>
                     <ol>
                         {menuItem.children.map((item, index) => (
-                            <MenuItem root={false} menuItem={item} key={`_root${index}`}></MenuItem>
+                            <MenuItem root={false} menuItem={item} key={`_root${index}`} />
                         ))}
                     </ol>
                 </div>

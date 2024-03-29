@@ -135,11 +135,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     const focusedIndex = focusableElements.indexOf(document.activeElement);
 
                     if (event.shiftKey) {
-                        if (focusedIndex === -1 || focusedIndex === 0) focusableElements[focusableElements.length - 1].focus();
-                        else focusableElements[focusedIndex - 1].focus();
+                        if (focusedIndex === -1 || focusedIndex === 0) {
+                            focusableElements[focusableElements.length - 1].focus();
+                        } else {
+                            focusableElements[focusedIndex - 1].focus();
+                        }
+                    } else if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) {
+                        focusableElements[0].focus();
                     } else {
-                        if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) focusableElements[0].focus();
-                        else focusableElements[focusedIndex + 1].focus();
+                        focusableElements[focusedIndex + 1].focus();
                     }
                 }
             }
@@ -247,8 +251,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             let newHeight = height + deltaY;
 
             if (hasBeenDragged) {
-                newWidth += deltaX;
-                newHeight += deltaY;
+                newWidth = newWidth + deltaX;
+                newHeight = newHeight + deltaY;
             }
 
             if ((!minWidth || newWidth > minWidth) && offset.left + newWidth < viewport.width) {
@@ -388,7 +392,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         let innerHTML = '';
 
         for (let breakpoint in props.breakpoints) {
-            innerHTML += `
+            innerHTML = innerHTML + `
                 @media screen and (max-width: ${breakpoint}) {
                      [data-pc-name="dialog"][${attributeSelector.current}] {
                         width: ${props.breakpoints[breakpoint]} !important;
@@ -441,7 +445,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -623,7 +627,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const createResizer = () => {
         if (props.resizable) {
-            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></span>;
+            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart} />;
         }
 
         return null;
@@ -740,11 +744,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const templateElement = createTemplateElement({ maskProps, rootProps, transitionProps });
 
             return <Portal element={templateElement} appendTo={props.appendTo} visible />;
-        } else {
-            const element = createElement({ maskProps, rootProps, transitionProps });
-
-            return <Portal element={element} appendTo={props.appendTo} visible />;
         }
+
+        const element = createElement({ maskProps, rootProps, transitionProps });
+
+        return <Portal element={element} appendTo={props.appendTo} visible />;
     };
 
     return maskVisibleState && createDialog();

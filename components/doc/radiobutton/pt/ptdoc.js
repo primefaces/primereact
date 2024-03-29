@@ -123,7 +123,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-3">
                     {categories.map((category) => {

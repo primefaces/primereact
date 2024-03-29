@@ -64,11 +64,11 @@ const typeScriptFiles = {
 const getConfiguredDependencies = (isUnstyled, isTypeScript) => {
     const defaultDependencies = {
         '@types/react': '^18.2.38', // For stackblitz
-        react: app_dependencies['react'] || 'latest',
+        react: app_dependencies.react || 'latest',
         'react-dom': app_dependencies['react-dom'] || 'latest',
         'react-transition-group': app_dependencies['react-transition-group'] || 'latest',
         primereact: PrimeReact.version || 'latest', // latest
-        primeicons: app_dependencies['primeicons'] || 'latest',
+        primeicons: app_dependencies.primeicons || 'latest',
         vite: 'latest',
         '@vitejs/plugin-react': 'latest',
         ...(isTypeScript ? typeScriptDependencies : '')
@@ -77,16 +77,16 @@ const getConfiguredDependencies = (isUnstyled, isTypeScript) => {
     if (isUnstyled) {
         return {
             ...defaultDependencies,
-            tailwindcss: app_dependencies['tailwindcss'] || 'latest',
-            postcss: app_dependencies['postcss'] || 'latest',
-            autoprefixer: app_dependencies['autoprefixer'] || 'latest'
-        };
-    } else {
-        return {
-            ...defaultDependencies,
-            primeflex: app_dependencies['primeflex'] || 'latest'
+            tailwindcss: app_dependencies.tailwindcss || 'latest',
+            postcss: app_dependencies.postcss || 'latest',
+            autoprefixer: app_dependencies.autoprefixer || 'latest'
         };
     }
+
+    return {
+        ...defaultDependencies,
+        primeflex: app_dependencies.primeflex || 'latest'
+    };
 };
 
 const getUnstyledFiles = (path, isTypeScript) => {

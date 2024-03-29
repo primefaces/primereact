@@ -91,8 +91,8 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card">
                 <div className="mb-3">
-                    <Button label="Block" onClick={() => setBlocked(true)} className="mr-2"></Button>
-                    <Button label="Unblock" onClick={() => setBlocked(false)} severity="secondary"></Button>
+                    <Button label="Block" onClick={() => setBlocked(true)} className="mr-2" />
+                    <Button label="Unblock" onClick={() => setBlocked(false)} severity="secondary" />
                 </div>
                 <BlockUI blocked={blocked}>
                     <Panel header="Basic">

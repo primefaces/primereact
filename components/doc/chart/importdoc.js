@@ -10,7 +10,7 @@ import { Chart } from 'primereact/chart';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

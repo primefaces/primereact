@@ -64,7 +64,9 @@ export const ColumnFilter = React.memo((props) => {
     });
 
     const hasFilter = () => {
-        if (!filterStoreModel || !filterModel) return false;
+        if (!filterStoreModel || !filterModel) {
+            return false;
+        }
 
         return filterStoreModel.operator ? !isFilterBlank(filterModel.constraints[0].value) : !isFilterBlank(filterModel.value);
     };
@@ -128,11 +130,11 @@ export const ColumnFilter = React.memo((props) => {
                     matchMode: filterStoreModel.constraints[0].matchMode,
                     operator: filterStoreModel.operator
                 };
-            } else {
-                return {
-                    matchMode: filterStoreModel.matchMode
-                };
             }
+
+            return {
+                matchMode: filterStoreModel.matchMode
+            };
         }
     };
 
@@ -186,26 +188,26 @@ export const ColumnFilter = React.memo((props) => {
 
     const onToggleButtonKeyDown = (event) => {
         switch (event.key) {
-            case 'Escape':
-            case 'Tab':
-                hide();
-                break;
+        case 'Escape':
+        case 'Tab':
+            hide();
+            break;
 
-            case 'ArrowDown':
-                if (overlayVisibleState) {
-                    const focusable = DomHandler.getFirstFocusableElement(overlayRef.current);
+        case 'ArrowDown':
+            if (overlayVisibleState) {
+                const focusable = DomHandler.getFirstFocusableElement(overlayRef.current);
 
-                    focusable && focusable.focus();
-                    event.preventDefault();
-                } else if (event.altKey) {
-                    setOverlayVisibleState(true);
-                    event.preventDefault();
-                }
+                focusable && focusable.focus();
+                event.preventDefault();
+            } else if (event.altKey) {
+                setOverlayVisibleState(true);
+                event.preventDefault();
+            }
 
-                break;
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     };
 
@@ -258,38 +260,38 @@ export const ColumnFilter = React.memo((props) => {
         let item = event.target;
 
         switch (event.key) {
-            case 'ArrowDown':
-                const nextItem = findNextItem(item);
+        case 'ArrowDown':
+            const nextItem = findNextItem(item);
 
-                if (nextItem) {
-                    item.removeAttribute('tabindex');
-                    nextItem.tabIndex = 0;
-                    nextItem.focus();
-                }
+            if (nextItem) {
+                item.removeAttribute('tabindex');
+                nextItem.tabIndex = 0;
+                nextItem.focus();
+            }
 
-                event.preventDefault();
-                break;
+            event.preventDefault();
+            break;
 
-            case 'ArrowUp':
-                const prevItem = findPrevItem(item);
+        case 'ArrowUp':
+            const prevItem = findPrevItem(item);
 
-                if (prevItem) {
-                    item.removeAttribute('tabindex');
-                    prevItem.tabIndex = 0;
-                    prevItem.focus();
-                }
+            if (prevItem) {
+                item.removeAttribute('tabindex');
+                prevItem.tabIndex = 0;
+                prevItem.focus();
+            }
 
-                event.preventDefault();
-                break;
+            event.preventDefault();
+            break;
 
-            case 'Enter':
-                clear ? clearFilter() : onRowMatchModeChange(matchMode.value);
+        case 'Enter':
+            clear ? clearFilter() : onRowMatchModeChange(matchMode.value);
 
-                event.preventDefault();
-                break;
+            event.preventDefault();
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     };
 
@@ -385,7 +387,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const onOverlayEnter = () => {
-        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
 
@@ -659,7 +661,7 @@ export const ColumnFilter = React.memo((props) => {
                             </li>
                         );
                     })}
-                    <li {...filterSeparatorProps}></li>
+                    <li {...filterSeparatorProps} />
                     <li {...filterRowItemProps}>{_noFilterLabel}</li>
                 </ul>
             );

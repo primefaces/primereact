@@ -12,7 +12,7 @@ export function PTDoc(props) {
 
     useEffect(() => {
         CustomerService.getCustomersSmall().then((data) => {
-            data.forEach((d) => (d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
+            data.forEach((d) => (d.nickname = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`));
             setCustomers(data);
         });
     }, []);
@@ -238,7 +238,7 @@ export default function BasicDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <Mention
                     value={value}

@@ -62,9 +62,9 @@ export const PanelMenu = React.memo(
         const isItemActive = (item) => {
             if (props.expandedKeys) {
                 return props.expandedKeys[getItemProp(item, 'key')];
-            } else {
-                return props.multiple ? activeItemsState.some((subItem) => ObjectUtils.equals(item, subItem)) : ObjectUtils.equals(item, activeItemState);
             }
+
+            return props.multiple ? activeItemsState.some((subItem) => ObjectUtils.equals(item, subItem)) : ObjectUtils.equals(item, activeItemState);
         };
 
         const isItemVisible = (item) => {
@@ -93,30 +93,30 @@ export const PanelMenu = React.memo(
 
         const onHeaderKeyDown = (event, item) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    onHeaderArrowDownKey(event);
-                    break;
+            case 'ArrowDown':
+                onHeaderArrowDownKey(event);
+                break;
 
-                case 'ArrowUp':
-                    onHeaderArrowUpKey(event);
-                    break;
+            case 'ArrowUp':
+                onHeaderArrowUpKey(event);
+                break;
 
-                case 'Home':
-                    onHeaderHomeKey(event);
-                    break;
+            case 'Home':
+                onHeaderHomeKey(event);
+                break;
 
-                case 'End':
-                    onHeaderEndKey(event);
-                    break;
+            case 'End':
+                onHeaderEndKey(event);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                case 'Space':
-                    onHeaderEnterKey(event, item);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onHeaderEnterKey(event, item);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -215,8 +215,11 @@ export const PanelMenu = React.memo(
             if (props.expandedKeys) {
                 let _keys = { ...props.expandedKeys };
 
-                if (expanded) _keys[item.key] = true;
-                else delete _keys[item.key];
+                if (expanded) {
+                    _keys[item.key] = true;
+                } else {
+                    delete _keys[item.key];
+                }
 
                 props.onExpandedKeysChange && props.onExpandedKeysChange(_keys);
             }

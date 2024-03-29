@@ -10,7 +10,7 @@ import { Menubar } from 'primereact/menubar';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

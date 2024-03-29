@@ -36,7 +36,9 @@ export const useStyle = (css, options = {}) => {
     };
 
     const load = () => {
-        if (!document || isLoaded) return;
+        if (!document || isLoaded) {
+            return;
+        }
 
         const styleContainer = context?.styleContainer || document.head;
 
@@ -44,12 +46,21 @@ export const useStyle = (css, options = {}) => {
 
         if (!styleRef.current.isConnected) {
             styleRef.current.type = 'text/css';
-            if (id) styleRef.current.id = id;
-            if (media) styleRef.current.media = media;
+
+            if (id) {
+                styleRef.current.id = id;
+            }
+
+            if (media) {
+                styleRef.current.media = media;
+            }
 
             DomHandler.addNonce(styleRef.current, (context && context.nonce) || PrimeReact.nonce);
             styleContainer.appendChild(styleRef.current);
-            if (name) styleRef.current.setAttribute('data-primereact-style-id', name);
+
+            if (name) {
+                styleRef.current.setAttribute('data-primereact-style-id', name);
+            }
         }
 
         styleRef.current.textContent = css;
@@ -58,14 +69,18 @@ export const useStyle = (css, options = {}) => {
     };
 
     const unload = () => {
-        if (!document || !styleRef.current) return;
+        if (!document || !styleRef.current) {
+            return;
+        }
 
         DomHandler.removeInlineStyle(styleRef.current);
         setIsLoaded(false);
     };
 
     useEffect(() => {
-        if (!manual) load();
+        if (!manual) {
+            load();
+        }
 
         // return () => {if (!manual) unload()}; /* @todo */
         // eslint-disable-next-line react-hooks/exhaustive-deps

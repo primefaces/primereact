@@ -41,14 +41,14 @@ export const Timeline = React.memo(
                         },
                         getPTOptions('marker', index)
                     );
-                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div {...markerProps}></div>;
+                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div {...markerProps} />;
                     const connectorProps = mergeProps(
                         {
                             className: cx('connector')
                         },
                         getPTOptions('connector', index)
                     );
-                    const connector = index !== props.value.length - 1 && <div {...connectorProps}></div>;
+                    const connector = index !== props.value.length - 1 && <div {...connectorProps} />;
                     const content = ObjectUtils.getJSXElement(props.content, item, index);
 
                     const eventProps = mergeProps(

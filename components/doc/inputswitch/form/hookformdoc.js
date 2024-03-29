@@ -188,7 +188,7 @@ export default function HookFormDoc() {
                         rules={{ required: 'Accept is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.checked })}></label>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.checked })} />
                                 <InputSwitch inputId={field.name} checked={field.value} inputRef={field.ref} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.value)} />
                                 {getFormErrorMessage(field.name)}
                             </>

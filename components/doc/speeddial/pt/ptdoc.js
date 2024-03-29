@@ -127,7 +127,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
                     <SpeedDial

@@ -78,8 +78,8 @@ export const KeyFilter = {
     },
 
     validate(e, keyfilter) {
-        let value = e.target.value,
-            validatePattern = true;
+        let value = e.target.value;
+        let validatePattern = true;
 
         const regex = this.getRegex(keyfilter);
 

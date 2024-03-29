@@ -59,7 +59,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <Image
                     src="https://primefaces.org/cdn/primereact/images/galleria/galleria7.jpg"

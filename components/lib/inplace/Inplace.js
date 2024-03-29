@@ -103,7 +103,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
                 }
             });
 
-            return <Button {...closeButtonProps}></Button>;
+            return <Button {...closeButtonProps} />;
         }
 
         return null;

@@ -11,29 +11,32 @@ export function BasicDoc(props) {
         let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
 
         switch (command) {
-            case 'date':
-                response = 'Today is ' + new Date().toDateString();
-                break;
+        case 'date':
+            response = 'Today is ' + new Date().toDateString();
+            break;
 
-            case 'greet':
-                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
-                break;
+        case 'greet':
+            response = 'Hola ' + text.substring(argsIndex + 1) + '!';
+            break;
 
-            case 'random':
-                response = Math.floor(Math.random() * 100);
-                break;
+        case 'random':
+            response = Math.floor(Math.random() * 100);
+            break;
 
-            case 'clear':
-                response = null;
-                break;
+        case 'clear':
+            response = null;
+            break;
 
-            default:
-                response = 'Unknown command: ' + command;
-                break;
+        default:
+            response = 'Unknown command: ' + command;
+            break;
         }
 
-        if (response) TerminalService.emit('response', response);
-        else TerminalService.emit('clear');
+        if (response) {
+            TerminalService.emit('response', response);
+        } else {
+            TerminalService.emit('clear');
+        }
     };
 
     useEffect(() => {

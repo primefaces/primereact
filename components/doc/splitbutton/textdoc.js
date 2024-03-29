@@ -179,7 +179,7 @@ export default function TextDemo() {
                 <p>Text buttons are displayed as textual elements.</p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} text />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="secondary" text />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} severity="success" text />

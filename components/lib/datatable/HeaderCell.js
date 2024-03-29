@@ -87,9 +87,13 @@ export const HeaderCell = React.memo((props) => {
 
     const getAriaSort = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            if (sorted && sortOrder < 0) return 'descending';
-            else if (sorted && sortOrder > 0) return 'ascending';
-            else return 'none';
+            if (sorted && sortOrder < 0) {
+                return 'descending';
+            } else if (sorted && sortOrder > 0) {
+                return 'ascending';
+            }
+
+            return 'none';
         }
 
         return null;
@@ -108,7 +112,7 @@ export const HeaderCell = React.memo((props) => {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
 
-                styleObject['right'] = right + 'px';
+                styleObject.right = right + 'px';
             } else {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
@@ -117,7 +121,7 @@ export const HeaderCell = React.memo((props) => {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
 
-                styleObject['left'] = left + 'px';
+                styleObject.left = left + 'px';
             }
 
             let filterRow = elementRef.current.parentElement.nextElementSibling;
@@ -125,11 +129,11 @@ export const HeaderCell = React.memo((props) => {
             if (filterRow) {
                 let index = DomHandler.index(elementRef.current);
 
-                filterRow.children[index].style.left = styleObject['left'];
-                filterRow.children[index].style.right = styleObject['right'];
+                filterRow.children[index].style.left = styleObject.left;
+                filterRow.children[index].style.right = styleObject.right;
             }
 
-            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            const isSameStyle = styleObjectState.left === styleObject.left && styleObjectState.right === styleObject.right;
 
             !isSameStyle && setStyleObjectState(styleObject);
         }
@@ -240,7 +244,7 @@ export const HeaderCell = React.memo((props) => {
                 getColumnPTOptions('columnResizer')
             );
 
-            return <span {...columnResizerProps}></span>;
+            return <span {...columnResizerProps} />;
         }
 
         return null;

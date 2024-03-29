@@ -38,7 +38,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" pt={{ image: { className: 'w-4rem h-4rem' } }} />
             </div>

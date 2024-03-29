@@ -171,20 +171,20 @@ export const ColorPicker = React.memo(
 
         const updateModel = () => {
             switch (props.format) {
-                case 'hex':
-                    onChange(HSBtoHEX(hsbValue.current));
-                    break;
+            case 'hex':
+                onChange(HSBtoHEX(hsbValue.current));
+                break;
 
-                case 'rgb':
-                    onChange(HSBtoRGB(hsbValue.current));
-                    break;
+            case 'rgb':
+                onChange(HSBtoRGB(hsbValue.current));
+                break;
 
-                case 'hsb':
-                    onChange(hsbValue.current);
-                    break;
+            case 'hsb':
+                onChange(hsbValue.current);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -193,20 +193,20 @@ export const ColorPicker = React.memo(
 
             if (value) {
                 switch (props.format) {
-                    case 'hex':
-                        hsb = HEXtoHSB(value);
-                        break;
+                case 'hex':
+                    hsb = HEXtoHSB(value);
+                    break;
 
-                    case 'rgb':
-                        hsb = RGBtoHSB(value);
-                        break;
+                case 'rgb':
+                    hsb = RGBtoHSB(value);
+                    break;
 
-                    case 'hsb':
-                        hsb = value;
-                        break;
+                case 'hsb':
+                    hsb = value;
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             } else {
                 hsb = HEXtoHSB(props.defaultColor);
@@ -280,7 +280,7 @@ export const ColorPicker = React.memo(
         const onOverlayEnter = () => {
             const styles = !props.inline ? { position: 'absolute', top: '0', left: '0' } : undefined;
 
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, styles);
             alignOverlay();
         };
@@ -311,20 +311,20 @@ export const ColorPicker = React.memo(
 
         const onInputKeydown = (event) => {
             switch (event.which) {
-                //space
-                case 32:
-                    togglePanel();
-                    event.preventDefault();
-                    break;
+            //space
+            case 32:
+                togglePanel();
+                event.preventDefault();
+                break;
 
                 //escape and tab
-                case 27:
-                case 9:
-                    hide();
-                    break;
+            case 27:
+            case 9:
+                hide();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -396,14 +396,14 @@ export const ColorPicker = React.memo(
                 hsb.h = -1;
             }
 
-            hsb.h *= 60;
+            hsb.h = hsb.h * 60;
 
             if (hsb.h < 0) {
-                hsb.h += 360;
+                hsb.h = hsb.h + 360;
             }
 
-            hsb.s *= 100 / 255;
-            hsb.b *= 100 / 255;
+            hsb.s = hsb.s * (100 / 255);
+            hsb.b = hsb.b * (100 / 255);
 
             return hsb;
         };
@@ -429,7 +429,9 @@ export const ColorPicker = React.memo(
                 let t2 = ((255 - s) * v) / 255;
                 let t3 = ((t1 - t2) * (h % 60)) / 60;
 
-                if (h === 360) h = 0;
+                if (h === 360) {
+                    h = 0;
+                }
 
                 if (h < 60) {
                     rgb.r = t1;
@@ -564,7 +566,7 @@ export const ColorPicker = React.memo(
             return (
                 <div {...selectorProps}>
                     <div {...colorProps}>
-                        <div {...colorHandlerProps}></div>
+                        <div {...colorHandlerProps} />
                     </div>
                 </div>
             );
@@ -591,7 +593,7 @@ export const ColorPicker = React.memo(
 
             return (
                 <div ref={hueViewRef} {...hueProps}>
-                    <div ref={hueHandleRef} {...hueHandlerProps}></div>
+                    <div ref={hueHandleRef} {...hueHandlerProps} />
                 </div>
             );
         };

@@ -20,17 +20,17 @@ export function RowEditDoc(props) {
 
     const getSeverity = (value) => {
         switch (value) {
-            case 'INSTOCK':
-                return 'success';
+        case 'INSTOCK':
+            return 'success';
 
-            case 'LOWSTOCK':
-                return 'warning';
+        case 'LOWSTOCK':
+            return 'warning';
 
-            case 'OUTOFSTOCK':
-                return 'danger';
+        case 'OUTOFSTOCK':
+            return 'danger';
 
-            default:
-                return null;
+        default:
+            return null;
         }
     };
 
@@ -55,7 +55,7 @@ export function RowEditDoc(props) {
                 onChange={(e) => options.editorCallback(e.value)}
                 placeholder="Select a Status"
                 itemTemplate={(option) => {
-                    return <Tag value={option} severity={getSeverity(option)}></Tag>;
+                    return <Tag value={option} severity={getSeverity(option)} />;
                 }}
             />
         );
@@ -66,7 +66,7 @@ export function RowEditDoc(props) {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData.inventoryStatus)}></Tag>;
+        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData.inventoryStatus)} />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -308,11 +308,11 @@ export default function RowEditingDemo() {
             <DeferredDemo onLoad={loadDemoData}>
                 <div className="card p-fluid">
                     <DataTable value={products} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
-                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
-                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
-                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
-                        <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
+                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }} />
+                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }} />
+                        <Column rowEditor={allowEdit} headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

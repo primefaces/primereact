@@ -15,8 +15,11 @@ export function DynamicDoc(props) {
     const onCategoryChange = (e) => {
         let _selectedCategories = [...selectedCategories];
 
-        if (e.checked) _selectedCategories.push(e.value);
-        else _selectedCategories = _selectedCategories.filter((category) => category.key !== e.value.key);
+        if (e.checked) {
+            _selectedCategories.push(e.value);
+        } else {
+            _selectedCategories = _selectedCategories.filter((category) => category.key !== e.value.key);
+        }
 
         setSelectedCategories(_selectedCategories);
     };

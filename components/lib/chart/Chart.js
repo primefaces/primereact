@@ -11,7 +11,7 @@ const ChartJS = (function () {
     } catch {
         return null;
     }
-})();
+}());
 
 const PrimeReactChart = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -114,7 +114,7 @@ const PrimeReactChart = React.memo(
 
         return (
             <div {...rootProps}>
-                <canvas {...canvasProps}></canvas>
+                <canvas {...canvasProps} />
             </div>
         );
     }),

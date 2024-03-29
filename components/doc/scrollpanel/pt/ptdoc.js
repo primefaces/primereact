@@ -95,7 +95,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <ScrollPanel pt={{ root: { style: { width: '100%', height: '200px' } }, bary: { className: 'bg-primary' } }}>
                     <p>

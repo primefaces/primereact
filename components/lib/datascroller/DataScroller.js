@@ -40,23 +40,21 @@ export const DataScroller = React.memo(
                     props.onLazyLoad(createLazyLoadMetadata());
                 }
 
-                first.current += props.rows;
-            } else {
-                if (value.current) {
-                    for (let i = first.current; i < first.current + props.rows; i++) {
-                        if (i >= value.current.length) {
-                            break;
-                        }
-
-                        dataToRender.current.push(value.current[i]);
+                first.current = first.current + props.rows;
+            } else if (value.current) {
+                for (let i = first.current; i < first.current + props.rows; i++) {
+                    if (i >= value.current.length) {
+                        break;
                     }
 
-                    if (value.current.length !== 0) {
-                        first.current += props.rows;
-                    }
-
-                    setDataToRenderState([...dataToRender.current]);
+                    dataToRender.current.push(value.current[i]);
                 }
+
+                if (value.current.length !== 0) {
+                    first.current = first.current + props.rows;
+                }
+
+                setDataToRenderState([...dataToRender.current]);
             }
         };
 
@@ -81,9 +79,9 @@ export const DataScroller = React.memo(
         const bindScrollListener = () => {
             if (props.inline) {
                 scrollFunction.current = () => {
-                    let scrollTop = contentRef.current.scrollTop,
-                        scrollHeight = contentRef.current.scrollHeight,
-                        viewportHeight = contentRef.current.clientHeight;
+                    let scrollTop = contentRef.current.scrollTop;
+                    let scrollHeight = contentRef.current.scrollHeight;
+                    let viewportHeight = contentRef.current.clientHeight;
 
                     if (scrollTop >= scrollHeight * props.buffer - viewportHeight) {
                         load();
@@ -93,11 +91,11 @@ export const DataScroller = React.memo(
                 contentRef.current.addEventListener('scroll', scrollFunction.current);
             } else {
                 scrollFunction.current = () => {
-                    let docBody = document.body,
-                        docElement = document.documentElement,
-                        scrollTop = window.pageYOffset || document.documentElement.scrollTop,
-                        winHeight = docElement.clientHeight,
-                        docHeight = Math.max(docBody.scrollHeight, docBody.offsetHeight, winHeight, docElement.scrollHeight, docElement.offsetHeight);
+                    let docBody = document.body;
+                    let docElement = document.documentElement;
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    let winHeight = docElement.clientHeight;
+                    let docHeight = Math.max(docBody.scrollHeight, docBody.offsetHeight, winHeight, docElement.scrollHeight, docElement.offsetHeight);
 
                     if (scrollTop >= docHeight * props.buffer - winHeight) {
                         load();

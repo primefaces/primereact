@@ -63,55 +63,55 @@ export const PanelMenuList = React.memo((props) => {
         const metaKey = event.metaKey || event.ctrlKey;
 
         switch (event.code) {
-            case 'ArrowDown':
-                onArrowDownKey(event);
-                break;
+        case 'ArrowDown':
+            onArrowDownKey(event);
+            break;
 
-            case 'ArrowUp':
-                onArrowUpKey(event);
-                break;
+        case 'ArrowUp':
+            onArrowUpKey(event);
+            break;
 
-            case 'ArrowLeft':
-                onArrowLeftKey(event);
-                break;
+        case 'ArrowLeft':
+            onArrowLeftKey(event);
+            break;
 
-            case 'ArrowRight':
-                onArrowRightKey(event);
-                break;
+        case 'ArrowRight':
+            onArrowRightKey(event);
+            break;
 
-            case 'Home':
-                onHomeKey(event);
-                break;
+        case 'Home':
+            onHomeKey(event);
+            break;
 
-            case 'End':
-                onEndKey(event);
-                break;
+        case 'End':
+            onEndKey(event);
+            break;
 
-            case 'Space':
-                onSpaceKey(event);
-                break;
+        case 'Space':
+            onSpaceKey(event);
+            break;
 
-            case 'Enter':
-            case 'NumpadEnter':
-                onEnterKey(event);
-                break;
+        case 'Enter':
+        case 'NumpadEnter':
+            onEnterKey(event);
+            break;
 
-            case 'Escape':
-            case 'Tab':
-            case 'PageDown':
-            case 'PageUp':
-            case 'Backspace':
-            case 'ShiftLeft':
-            case 'ShiftRight':
-                //NOOP
-                break;
+        case 'Escape':
+        case 'Tab':
+        case 'PageDown':
+        case 'PageUp':
+        case 'Backspace':
+        case 'ShiftLeft':
+        case 'ShiftRight':
+            //NOOP
+            break;
 
-            default:
-                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                    searchItems(event, event.key);
-                }
+        default:
+            if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                searchItems(event, event.key);
+            }
 
-                break;
+            break;
         }
     };
 
@@ -331,17 +331,23 @@ export const PanelMenuList = React.memo((props) => {
     const findProcessedItemByItemKey = (key, processed, level = 0) => {
         const _processedItems = processed ? processed : level === 0 && props.model;
 
-        if (!_processedItems) return null;
+        if (!_processedItems) {
+            return null;
+        }
 
         for (let i = 0; i < _processedItems.length; i++) {
             const processedItem = _processedItems[i];
             const processedKey = getItemProp(processedItem, 'key') || processedItem.key;
 
-            if (processedKey === key) return processedItem;
+            if (processedKey === key) {
+                return processedItem;
+            }
 
             const matchedItem = findProcessedItemByItemKey(key, processedItem.items, level + 1);
 
-            if (matchedItem) return matchedItem;
+            if (matchedItem) {
+                return matchedItem;
+            }
         }
     };
 
@@ -360,7 +366,7 @@ export const PanelMenuList = React.memo((props) => {
                     parentKey
                 };
 
-                newItem['items'] = createProcessedItems(item.items, level + 1, newItem, key);
+                newItem.items = createProcessedItems(item.items, level + 1, newItem, key);
                 processedItems.push(newItem);
             });
 

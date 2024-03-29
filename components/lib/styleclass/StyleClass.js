@@ -63,8 +63,11 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
             targetRef.current = resolveTarget();
 
             if (props.toggleClassName) {
-                if (DomHandler.hasClass(targetRef.current, props.toggleClassName)) DomHandler.removeClass(targetRef.current, props.toggleClassName);
-                else DomHandler.addClass(targetRef.current, props.toggleClassName);
+                if (DomHandler.hasClass(targetRef.current, props.toggleClassName)) {
+                    DomHandler.removeClass(targetRef.current, props.toggleClassName);
+                } else {
+                    DomHandler.addClass(targetRef.current, props.toggleClassName);
+                }
             } else {
                 DomHandler.isVisible(targetRef.current) ? leave() : enter();
             }
@@ -158,20 +161,20 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
         }
 
         switch (props.selector) {
-            case '@next':
-                return elementRef.current && elementRef.current.nextElementSibling;
+        case '@next':
+            return elementRef.current && elementRef.current.nextElementSibling;
 
-            case '@prev':
-                return elementRef.current && elementRef.current.previousElementSibling;
+        case '@prev':
+            return elementRef.current && elementRef.current.previousElementSibling;
 
-            case '@parent':
-                return elementRef.current && elementRef.current.parentElement;
+        case '@parent':
+            return elementRef.current && elementRef.current.parentElement;
 
-            case '@grandparent':
-                return elementRef.current && elementRef.current.parentElement.parentElement;
+        case '@grandparent':
+            return elementRef.current && elementRef.current.parentElement.parentElement;
 
-            default:
-                return document.querySelector(props.selector);
+        default:
+            return document.querySelector(props.selector);
         }
     };
 

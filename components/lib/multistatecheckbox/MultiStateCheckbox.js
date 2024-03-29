@@ -92,7 +92,7 @@ export const MultiStateCheckbox = React.memo(
         };
 
         const getSelectedOptionMap = () => {
-            let option, index;
+            let option; let index;
 
             if (props.options) {
                 index = props.options.findIndex((option) => ObjectUtils.equals(props.value, getOptionValue(option), equalityKey));
@@ -152,8 +152,8 @@ export const MultiStateCheckbox = React.memo(
         const otherProps = MultiStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const icon = createIcon();
-        const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
-        const ariaChecked = !!selectedOption ? 'true' : 'false';
+        const ariaValueLabel = selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
+        const ariaChecked = selectedOption ? 'true' : 'false';
 
         const rootProps = mergeProps(
             {

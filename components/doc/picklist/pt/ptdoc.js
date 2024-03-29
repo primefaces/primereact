@@ -24,7 +24,7 @@ export function PTDoc(props) {
                 <div className="flex-1 flex flex-column gap-2">
                     <span className="font-bold">{item.name}</span>
                     <div className="flex align-items-center gap-2">
-                        <i className="pi pi-tag text-sm"></i>
+                        <i className="pi pi-tag text-sm" />
                         <span>{item.category}</span>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <PickList
                     dataKey="id"

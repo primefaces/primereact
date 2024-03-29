@@ -18,7 +18,7 @@ export function TemplateDoc(props) {
         let files = e.files;
 
         for (let i = 0; i < e.files.length; i++) {
-            _totalSize += files[i].size || 0;
+            _totalSize = _totalSize + (files[i].size || 0);
         }
 
         setTotalSize(_totalSize);
@@ -28,7 +28,7 @@ export function TemplateDoc(props) {
         let _totalSize = 0;
 
         e.files.forEach((file) => {
-            _totalSize += file.size || 0;
+            _totalSize = _totalSize + (file.size || 0);
         });
 
         setTotalSize(_totalSize);
@@ -56,7 +56,7 @@ export function TemplateDoc(props) {
                 {cancelButton}
                 <div className="flex align-items-center gap-3 ml-auto">
                     <span>{formatedValue} / 1 MB</span>
-                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }} />
                 </div>
             </div>
         );
@@ -81,7 +81,7 @@ export function TemplateDoc(props) {
     const emptyTemplate = () => {
         return (
             <div className="flex align-items-center flex-column">
-                <i className="pi pi-image mt-3 p-5" style={{ fontSize: '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)' }}></i>
+                <i className="pi pi-image mt-3 p-5" style={{ fontSize: '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)' }} />
                 <span style={{ fontSize: '1.2em', color: 'var(--text-color-secondary)' }} className="my-5">
                     Drag and Drop Image Here
                 </span>
@@ -343,7 +343,7 @@ echo '<p>Fake Upload Process</p>'; ?>
                 <p>Uploader UI can be customized with templating.</p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
 
                 <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
                 <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />

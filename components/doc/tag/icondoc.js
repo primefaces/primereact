@@ -53,11 +53,11 @@ export default function IconDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-2">
-                <Tag icon="pi pi-user" value="Primary"></Tag>
-                <Tag icon="pi pi-check" severity="success" value="Success"></Tag>
-                <Tag icon="pi pi-info-circle" severity="info" value="Info"></Tag>
-                <Tag icon="pi pi-exclamation-triangle" severity="warning" value="Warning"></Tag>
-                <Tag icon="pi pi-times" severity="danger" value="Danger"></Tag>
+                <Tag icon="pi pi-user" value="Primary" />
+                <Tag icon="pi pi-check" severity="success" value="Success" />
+                <Tag icon="pi pi-info-circle" severity="info" value="Info" />
+                <Tag icon="pi pi-exclamation-triangle" severity="warning" value="Warning" />
+                <Tag icon="pi pi-times" severity="danger" value="Danger" />
             </div>
             <DocSectionCode code={code} />
         </>

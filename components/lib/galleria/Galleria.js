@@ -76,7 +76,7 @@ export const Galleria = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
             !isUnstyled() && DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 

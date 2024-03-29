@@ -136,9 +136,9 @@ export default function SingleRowSelectionDemo() {
                     <label htmlFor="input-metakey">MetaKey</label>
                 </div>
                 <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
+                    <Column field="name" header="Name" expander />
+                    <Column field="size" header="Size" />
+                    <Column field="type" header="Type" />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

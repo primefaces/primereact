@@ -10,7 +10,9 @@ export function PTDoc(props) {
     ];
 
     const panelClassName = (parent, index) => {
-        if (parent.state.activeIndex === index) return 'bg-primary';
+        if (parent.state.activeIndex === index) {
+            return 'bg-primary';
+        }
     };
 
     const code = {
@@ -109,7 +111,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <TabView>
                     {tabs.map((tab, i) => {

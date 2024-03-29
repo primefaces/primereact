@@ -38,14 +38,14 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         listener: (event, { type, valid }) => {
             if (valid) {
                 switch (type) {
-                    case 'outside':
-                        props.dismissable && !isPanelClicked.current && hide();
-                        break;
-                    case 'resize':
-                    case 'scroll':
-                    case 'orientationchange':
-                        align();
-                        break;
+                case 'outside':
+                    props.dismissable && !isPanelClicked.current && hide();
+                    break;
+                case 'resize':
+                case 'scroll':
+                case 'orientationchange':
+                    align();
+                    break;
                 }
             }
 
@@ -133,7 +133,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
-        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         align();
     };
@@ -185,7 +185,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             let innerHTML = '';
 
             for (let breakpoint in props.breakpoints) {
-                innerHTML += `
+                innerHTML = innerHTML + `
                     @media screen and (max-width: ${breakpoint}) {
                         .p-overlaypanel[${attributeSelector.current}] {
                             width: ${props.breakpoints[breakpoint]};

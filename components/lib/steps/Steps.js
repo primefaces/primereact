@@ -59,39 +59,39 @@ export const Steps = React.memo(
             }
 
             switch (event.code) {
-                case 'ArrowRight':
-                    navigateToNextItem(event.target);
-                    event.preventDefault();
-                    break;
+            case 'ArrowRight':
+                navigateToNextItem(event.target);
+                event.preventDefault();
+                break;
 
-                case 'ArrowLeft':
-                    navigateToPrevItem(event.target);
-                    event.preventDefault();
-                    break;
+            case 'ArrowLeft':
+                navigateToPrevItem(event.target);
+                event.preventDefault();
+                break;
 
-                case 'Home':
-                    navigateToFirstItem(event.target);
-                    event.preventDefault();
-                    break;
+            case 'Home':
+                navigateToFirstItem(event.target);
+                event.preventDefault();
+                break;
 
-                case 'End':
-                    navigateToLastItem(event.target);
-                    event.preventDefault();
-                    break;
+            case 'End':
+                navigateToLastItem(event.target);
+                event.preventDefault();
+                break;
 
-                case 'Tab':
-                    //no op
-                    break;
+            case 'Tab':
+                //no op
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                case 'Space':
-                    itemClick(event, item, index);
-                    event.preventDefault();
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                itemClick(event, item, index);
+                event.preventDefault();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 

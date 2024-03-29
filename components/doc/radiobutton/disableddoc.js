@@ -41,7 +41,7 @@ export default function DisabledDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <RadioButton checked disabled></RadioButton>
+                <RadioButton checked disabled />
             </div>
             <DocSectionCode code={code} />
         </>

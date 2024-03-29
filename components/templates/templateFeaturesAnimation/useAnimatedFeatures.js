@@ -10,7 +10,10 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     const isVisible = useVisible(animationRef);
 
     const clearAllIntervals = () => {
-        if (intervalIds.length <= 0) return;
+        if (intervalIds.length <= 0) {
+            return;
+        }
+
         intervalIds.forEach((intervalId) => window.clearInterval(intervalId));
         setIntervalIds([]);
     };
@@ -30,7 +33,10 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     };
 
     const handleHover = (cardId, type) => {
-        if (cancelInterval || cardId !== selectedID) return;
+        if (cancelInterval || cardId !== selectedID) {
+            return;
+        }
+
         clearAllIntervals();
 
         if (type === 'onMouseLeave') {
@@ -52,7 +58,10 @@ const useAnimatedFeatures = (animationRef, arrayLength, seconds = 10000) => {
     }, [animationRef, isVisible]);
 
     useEffect(() => {
-        if (!hoveredID) null;
+        if (!hoveredID) {
+            null;
+        }
+
         handleHover(hoveredID, 'onMouseEnter');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedID]);

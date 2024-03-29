@@ -93,7 +93,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }}></i>}>
+                <BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
                     <Panel header="Prime React News">
                         <p className="m-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -104,7 +104,7 @@ export default function TemplateDemo() {
                 </BlockUI>
                 <div className="mt-3 flex flex-column align-items-center">
                     <h3>Continue reading?</h3>
-                    <Button label={buttonText} onClick={() => setBlocked((oldState) => !oldState)}></Button>
+                    <Button label={buttonText} onClick={() => setBlocked((oldState) => !oldState)} />
                 </div>
             </div>
             <DocSectionCode code={code} />

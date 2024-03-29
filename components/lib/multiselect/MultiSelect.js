@@ -297,93 +297,93 @@ export const MultiSelect = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
-                case 'ArrowUp':
-                    if (props.inline) {
-                        break;
-                    }
-
-                    onArrowUpKey(event);
+            case 'ArrowUp':
+                if (props.inline) {
                     break;
+                }
 
-                case 'ArrowDown':
-                    if (props.inline) {
-                        break;
-                    }
+                onArrowUpKey(event);
+                break;
 
-                    onArrowDownKey(event);
-
+            case 'ArrowDown':
+                if (props.inline) {
                     break;
+                }
 
-                case 'Space':
-                case 'NumpadEnter':
-                case 'Enter':
-                    if (props.inline) {
-                        break;
-                    }
+                onArrowDownKey(event);
 
-                    onEnterKey(event);
+                break;
+
+            case 'Space':
+            case 'NumpadEnter':
+            case 'Enter':
+                if (props.inline) {
                     break;
+                }
 
-                case 'Home':
-                    if (props.inline) {
-                        break;
-                    }
+                onEnterKey(event);
+                break;
 
-                    onHomeKey(event);
+            case 'Home':
+                if (props.inline) {
+                    break;
+                }
+
+                onHomeKey(event);
+                event.preventDefault();
+                break;
+
+            case 'End':
+                if (props.inline) {
+                    break;
+                }
+
+                onEndKey(event);
+                event.preventDefault();
+                break;
+
+            case 'PageDown':
+                onPageDownKey(event);
+                break;
+
+            case 'PageUp':
+                onPageUpKey(event);
+                break;
+
+            case 'Escape':
+                if (props.inline) {
+                    break;
+                }
+
+                hide();
+                break;
+
+            case 'Tab':
+                onTabKey(event);
+                break;
+
+            case 'ShiftLeft':
+            case 'ShiftRight':
+                onShiftKey(event);
+                break;
+
+            default:
+                if (event.code === 'KeyA' && metaKey) {
+                    const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
+
+                    updateModel(event, value, value);
+
                     event.preventDefault();
                     break;
+                }
 
-                case 'End':
-                    if (props.inline) {
-                        break;
-                    }
-
-                    onEndKey(event);
+                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                    !overlayVisibleState && show();
+                    searchOptions(event);
                     event.preventDefault();
-                    break;
+                }
 
-                case 'PageDown':
-                    onPageDownKey(event);
-                    break;
-
-                case 'PageUp':
-                    onPageUpKey(event);
-                    break;
-
-                case 'Escape':
-                    if (props.inline) {
-                        break;
-                    }
-
-                    hide();
-                    break;
-
-                case 'Tab':
-                    onTabKey(event);
-                    break;
-
-                case 'ShiftLeft':
-                case 'ShiftRight':
-                    onShiftKey(event);
-                    break;
-
-                default:
-                    if (event.code === 'KeyA' && metaKey) {
-                        const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
-
-                        updateModel(event, value, value);
-
-                        event.preventDefault();
-                        break;
-                    }
-
-                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                        !overlayVisibleState && show();
-                        searchOptions(event);
-                        event.preventDefault();
-                    }
-
-                    break;
+                break;
             }
 
             setClicked(false);

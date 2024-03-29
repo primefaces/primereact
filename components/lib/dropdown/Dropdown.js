@@ -74,12 +74,12 @@ export const Dropdown = React.memo(
                     }
 
                     return filteredGroups;
-                } else {
-                    return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                 }
-            } else {
-                return props.options;
+
+                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
+
+            return props.options;
         };
 
         const onFirstHiddenFocus = (event) => {
@@ -183,68 +183,68 @@ export const Dropdown = React.memo(
             const metaKey = event.metaKey || event.ctrlKey;
 
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(event);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                case 'ArrowLeft':
-                case 'ArrowRight':
-                    onArrowLeftKey(event, props.editable);
-                    break;
+            case 'ArrowLeft':
+            case 'ArrowRight':
+                onArrowLeftKey(event, props.editable);
+                break;
 
-                case 'Home':
-                    onHomeKey(event);
-                    break;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                case 'End':
-                    onEndKey(event);
-                    break;
+            case 'End':
+                onEndKey(event);
+                break;
 
-                case 'PageDown':
-                    onPageDownKey(event);
-                    break;
+            case 'PageDown':
+                onPageDownKey(event);
+                break;
 
-                case 'PageUp':
-                    onPageUpKey(event);
-                    break;
+            case 'PageUp':
+                onPageUpKey(event);
+                break;
 
-                case 'Space':
-                    onSpaceKey(event, props.editable);
-                    break;
+            case 'Space':
+                onSpaceKey(event, props.editable);
+                break;
 
-                case 'NumpadEnter':
-                case 'Enter':
-                    onEnterKey(event);
-                    break;
+            case 'NumpadEnter':
+            case 'Enter':
+                onEnterKey(event);
+                break;
 
-                case 'Escape':
-                    onEscapeKey(event);
-                    break;
+            case 'Escape':
+                onEscapeKey(event);
+                break;
 
-                case 'Tab':
-                    onTabKey(event);
-                    break;
+            case 'Tab':
+                onTabKey(event);
+                break;
 
-                case 'Backspace':
-                    onBackspaceKey(event, props.editable);
-                    break;
+            case 'Backspace':
+                onBackspaceKey(event, props.editable);
+                break;
 
-                case 'ShiftLeft':
-                case 'ShiftRight':
-                    //NOOP
-                    break;
+            case 'ShiftLeft':
+            case 'ShiftRight':
+                //NOOP
+                break;
 
-                default:
-                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                        !overlayVisibleState && !props.editable && show();
-                        !props.editable && searchOptions(event, event.key);
-                    }
+            default:
+                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                    !overlayVisibleState && !props.editable && show();
+                    !props.editable && searchOptions(event, event.key);
+                }
 
-                    break;
+                break;
             }
 
             clickedRef.current = false;
@@ -252,28 +252,28 @@ export const Dropdown = React.memo(
 
         const onFilterInputKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(event);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                case 'ArrowLeft':
-                case 'ArrowRight':
-                    onArrowLeftKey(event, true);
-                    break;
+            case 'ArrowLeft':
+            case 'ArrowRight':
+                onArrowLeftKey(event, true);
+                break;
 
-                case 'Escape':
-                case 'Enter':
-                case 'NumpadEnter':
-                    onEnterKey(event);
-                    event.preventDefault();
-                    break;
+            case 'Escape':
+            case 'Enter':
+            case 'NumpadEnter':
+                onEnterKey(event);
+                event.preventDefault();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -506,9 +506,13 @@ export const Dropdown = React.memo(
                 const optionIndex = index === -1 ? -1 : index.option;
                 const option = findNextOptionInList(getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
 
-                if (option) return option;
-                else if (groupIndex + 1 !== visibleOptions.length) return findNextOption({ group: groupIndex + 1, option: -1 });
-                else return null;
+                if (option) {
+                    return option;
+                } else if (groupIndex + 1 !== visibleOptions.length) {
+                    return findNextOption({ group: groupIndex + 1, option: -1 });
+                }
+
+                return null;
             }
 
             return findNextOptionInList(visibleOptions, index);
@@ -536,9 +540,13 @@ export const Dropdown = React.memo(
                 const optionIndex = index.option;
                 const option = findPrevOptionInList(getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
 
-                if (option) return option;
-                else if (groupIndex > 0) return findPrevOption({ group: groupIndex - 1, option: getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
-                else return null;
+                if (option) {
+                    return option;
+                } else if (groupIndex > 0) {
+                    return findPrevOption({ group: groupIndex - 1, option: getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
+                }
+
+                return null;
             }
 
             return findPrevOptionInList(visibleOptions, index);
@@ -573,8 +581,11 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            if (currentSearchChar.current === char) searchValue.current = char;
-            else searchValue.current = searchValue.current ? searchValue.current + char : char;
+            if (currentSearchChar.current === char) {
+                searchValue.current = char;
+            } else {
+                searchValue.current = searchValue.current ? searchValue.current + char : char;
+            }
 
             currentSearchChar.current = char;
 
@@ -801,7 +812,7 @@ export const Dropdown = React.memo(
         };
 
         const onOverlayEnter = (callback) => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
             callback && callback();
@@ -852,11 +863,11 @@ export const Dropdown = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option['label'] !== undefined ? option['label'] : option;
+            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option.label !== undefined ? option.label : option;
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option && option['value'] !== undefined ? option['value'] : option;
+            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option && option.value !== undefined ? option.value : option;
         };
 
         const getOptionRenderKey = (option) => {
@@ -872,7 +883,7 @@ export const Dropdown = React.memo(
                 return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
             }
 
-            return option && option['disabled'] !== undefined ? option['disabled'] : false;
+            return option && option.disabled !== undefined ? option.disabled : false;
         };
 
         const getOptionGroupRenderKey = (optionGroup) => {
@@ -1073,19 +1084,19 @@ export const Dropdown = React.memo(
                 );
 
                 return <input {...inputProps} />;
-            } else {
-                const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
-                const inputProps = mergeProps(
-                    {
-                        ref: inputRef,
-                        className: cx('input', { label }),
-                        tabIndex: '-1'
-                    },
-                    ptm('input')
-                );
-
-                return <span {...inputProps}>{content}</span>;
             }
+
+            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
+            const inputProps = mergeProps(
+                {
+                    ref: inputRef,
+                    className: cx('input', { label }),
+                    tabIndex: '-1'
+                },
+                ptm('input')
+            );
+
+            return <span {...inputProps}>{content}</span>;
         };
 
         const createClearIcon = () => {

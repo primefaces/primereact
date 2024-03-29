@@ -51,7 +51,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex flex-wrap gap-3 justify-content-center">
                 <Button
                     label="Submit"

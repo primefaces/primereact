@@ -36,7 +36,9 @@ export function DocApiSection(props) {
                     Object.entries(mod.events.values).forEach(([eKey, eValue]) => {
                         const [id, label] = [`api.${componentName}.${eKey}`, eKey];
 
-                        if (isExcluded('event', eKey)) return;
+                        if (isExcluded('event', eKey)) {
+                            return;
+                        }
 
                         eMap.children.push({
                             id,
@@ -70,7 +72,9 @@ export function DocApiSection(props) {
                     Object.entries(mod.interfaces.values).forEach(([iKey, iValue]) => {
                         const [id, label] = [`api.${componentName}.${iKey}`, iKey];
 
-                        if (isExcluded('interfaces', iKey)) return;
+                        if (isExcluded('interfaces', iKey)) {
+                            return;
+                        }
 
                         iMap.children.push({
                             id,
@@ -109,7 +113,9 @@ export function DocApiSection(props) {
                     Object.entries(mod.types.values).forEach(([tKey, tValue]) => {
                         const [id, label] = [`api.${componentName}.${tKey}`, tKey];
 
-                        if (isExcluded('types', tKey)) return;
+                        if (isExcluded('types', tKey)) {
+                            return;
+                        }
 
                         tMap.children.push({
                             id,
@@ -217,7 +223,9 @@ export function DocApiSection(props) {
                         if (ObjectUtils.isNotEmpty(cValue.props) && ObjectUtils.isNotEmpty(cValue.props.values) && !isExcludedAll('props')) {
                             const [id, label] = [`api.${cKey}.props`, 'Props'];
 
-                            if (isExcluded('props', cKey)) return;
+                            if (isExcluded('props', cKey)) {
+                                return;
+                            }
 
                             cMap.children.push({
                                 id,
@@ -229,7 +237,9 @@ export function DocApiSection(props) {
                         if (ObjectUtils.isNotEmpty(cValue.callbacks) && ObjectUtils.isNotEmpty(cValue.callbacks.values) && !isExcludedAll('callbacks')) {
                             const [id, label] = [`api.${cKey}.callbacks`, 'Callbacks'];
 
-                            if (isExcluded('callbacks', cKey)) return;
+                            if (isExcluded('callbacks', cKey)) {
+                                return;
+                            }
 
                             cMap.children.push({
                                 id,
@@ -241,7 +251,9 @@ export function DocApiSection(props) {
                         if (ObjectUtils.isNotEmpty(cValue.methods) && ObjectUtils.isNotEmpty(cValue.methods.values) && !isExcludedAll('methods')) {
                             const [id, label] = [`api.${cKey}.methods`, 'Methods'];
 
-                            if (isExcluded('methods', cKey)) return;
+                            if (isExcluded('methods', cKey)) {
+                                return;
+                            }
 
                             cMap.children.push({
                                 id,
@@ -269,7 +281,9 @@ export function DocApiSection(props) {
                         if (ObjectUtils.isNotEmpty(mValue.props) && ObjectUtils.isNotEmpty(mValue.props.values) && !isExcludedAll('props')) {
                             const [id, label] = [`api.${mKey}.props`, 'Props'];
 
-                            if (isExcluded('props', mKey)) return;
+                            if (isExcluded('props', mKey)) {
+                                return;
+                            }
 
                             mMap.children.push({
                                 id,

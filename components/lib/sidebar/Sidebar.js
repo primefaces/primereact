@@ -138,7 +138,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
             setVisibleState(true);
         }
     }, [maskVisibleState]);

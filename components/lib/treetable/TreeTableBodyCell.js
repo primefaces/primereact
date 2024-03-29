@@ -205,11 +205,15 @@ export const TreeTableBodyCell = (props) => {
     let content;
 
     if (editingState) {
-        if (columnEditor) content = ObjectUtils.getJSXElement(columnEditor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
-        else throw new Error('Editor is not found on column.');
+        if (columnEditor) {
+            content = ObjectUtils.getJSXElement(columnEditor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
+        } else {
+            throw new Error('Editor is not found on column.');
+        }
+    } else if (props.body) {
+        content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
     } else {
-        if (props.body) content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
-        else content = ObjectUtils.resolveFieldData(props.node.data, props.field);
+        content = ObjectUtils.resolveFieldData(props.node.data, props.field);
     }
 
     const editorKeyHelperProps = mergeProps(

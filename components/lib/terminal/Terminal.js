@@ -46,35 +46,35 @@ export const Terminal = React.memo(
 
         const onKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowUp':
-                    if (commandsState && commandsState.length) {
-                        const prevIndex = indexState - 1 < 0 ? commandsState.length - 1 : indexState - 1;
-                        const command = commandsState[prevIndex];
+            case 'ArrowUp':
+                if (commandsState && commandsState.length) {
+                    const prevIndex = indexState - 1 < 0 ? commandsState.length - 1 : indexState - 1;
+                    const command = commandsState[prevIndex];
 
-                        setIndexState(prevIndex);
-                        setCommandTextState(command.text);
-                    }
+                    setIndexState(prevIndex);
+                    setCommandTextState(command.text);
+                }
 
-                    break;
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                    if (!!commandTextState) {
-                        let newCommands = [...commandsState];
+            case 'Enter':
+            case 'NumpadEnter':
+                if (commandTextState) {
+                    let newCommands = [...commandsState];
 
-                        newCommands.push({ text: commandTextState });
+                    newCommands.push({ text: commandTextState });
 
-                        setIndexState((prevIndex) => prevIndex + 1);
-                        setCommandTextState('');
-                        setCommandsState(newCommands);
-                        setEmittedTextState(commandTextState);
-                        isEmitted.current = true;
-                    }
+                    setIndexState((prevIndex) => prevIndex + 1);
+                    setCommandTextState('');
+                    setCommandsState(newCommands);
+                    setEmittedTextState(commandTextState);
+                    isEmitted.current = true;
+                }
 
-                    break;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 

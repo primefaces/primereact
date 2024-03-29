@@ -125,7 +125,7 @@ export const InputNumber = React.memo(
                 return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
             }
 
-            return new RegExp(`[]`, 'g');
+            return new RegExp('[]', 'g');
         };
 
         const getPrefixExpression = () => {
@@ -201,8 +201,10 @@ export const InputNumber = React.memo(
 
             if (filteredText) {
                 if (filteredText === '-')
-                    // Minus sign
+                // Minus sign
+                {
                     return filteredText;
+                }
 
                 let parsedValue = +filteredText;
 
@@ -345,164 +347,164 @@ export const InputNumber = React.memo(
             let newValueStr = null;
 
             switch (event.code) {
-                //up
-                case 'ArrowUp':
-                    spin(event, 1);
-                    event.preventDefault();
-                    break;
+            //up
+            case 'ArrowUp':
+                spin(event, 1);
+                event.preventDefault();
+                break;
 
                 //down
-                case 'ArrowDown':
-                    spin(event, -1);
-                    event.preventDefault();
-                    break;
+            case 'ArrowDown':
+                spin(event, -1);
+                event.preventDefault();
+                break;
 
                 //left
-                case 'ArrowLeft':
-                    if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
-                        event.preventDefault();
-                    }
+            case 'ArrowLeft':
+                if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
+                    event.preventDefault();
+                }
 
-                    break;
+                break;
 
                 //right
-                case 'ArrowRight':
-                    if (!isNumeralChar(inputValue.charAt(selectionStart))) {
-                        event.preventDefault();
-                    }
+            case 'ArrowRight':
+                if (!isNumeralChar(inputValue.charAt(selectionStart))) {
+                    event.preventDefault();
+                }
 
-                    break;
+                break;
 
                 //enter and tab
-                case 'Tab':
-                case 'NumpadEnter':
-                case 'Enter':
-                case 'NumpadEnter':
-                    newValueStr = validateValue(parseValue(inputValue));
-                    inputRef.current.value = formatValue(newValueStr);
-                    inputRef.current.setAttribute('aria-valuenow', newValueStr);
-                    updateModel(event, newValueStr);
-                    break;
+            case 'Tab':
+            case 'NumpadEnter':
+            case 'Enter':
+            case 'NumpadEnter':
+                newValueStr = validateValue(parseValue(inputValue));
+                inputRef.current.value = formatValue(newValueStr);
+                inputRef.current.setAttribute('aria-valuenow', newValueStr);
+                updateModel(event, newValueStr);
+                break;
 
                 //backspace
-                case 'Backspace':
-                    event.preventDefault();
+            case 'Backspace':
+                event.preventDefault();
 
-                    if (selectionStart === selectionEnd) {
-                        const deleteChar = inputValue.charAt(selectionStart - 1);
+                if (selectionStart === selectionEnd) {
+                    const deleteChar = inputValue.charAt(selectionStart - 1);
 
-                        if (isNumeralChar(deleteChar)) {
-                            const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
-                            const decimalLength = getDecimalLength(inputValue);
+                    if (isNumeralChar(deleteChar)) {
+                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
+                        const decimalLength = getDecimalLength(inputValue);
 
-                            if (_group.current.test(deleteChar)) {
-                                _group.current.lastIndex = 0;
-                                newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
-                            } else if (_decimal.current.test(deleteChar)) {
-                                _decimal.current.lastIndex = 0;
+                        if (_group.current.test(deleteChar)) {
+                            _group.current.lastIndex = 0;
+                            newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
+                        } else if (_decimal.current.test(deleteChar)) {
+                            _decimal.current.lastIndex = 0;
 
-                                if (decimalLength) {
-                                    inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
-                                } else {
-                                    newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
-                                }
-                            } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                                const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
-
-                                newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
-                            } else if (decimalCharIndexWithoutPrefix === 1) {
-                                newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
-                                newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
+                            if (decimalLength) {
+                                inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                             }
-                        } else if (_currency.current.test(deleteChar)) {
-                            const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
+                        } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                            const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
 
-                            if (minusCharIndex === currencyCharIndex - 1) {
-                                newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
-                            }
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
+                        } else if (decimalCharIndexWithoutPrefix === 1) {
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
+                            newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
+                        } else {
+                            newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                         }
+                    } else if (_currency.current.test(deleteChar)) {
+                        const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
 
-                        updateValue(event, newValueStr, null, 'delete-single');
-                    } else {
-                        newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
-                        updateValue(event, newValueStr, null, 'delete-range');
+                        if (minusCharIndex === currencyCharIndex - 1) {
+                            newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
+                        }
                     }
 
-                    break;
+                    updateValue(event, newValueStr, null, 'delete-single');
+                } else {
+                    newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
+                    updateValue(event, newValueStr, null, 'delete-range');
+                }
+
+                break;
 
                 // del
-                case 'Delete':
-                    event.preventDefault();
+            case 'Delete':
+                event.preventDefault();
 
-                    if (selectionStart === selectionEnd) {
-                        const deleteChar = inputValue.charAt(selectionStart);
-                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
+                if (selectionStart === selectionEnd) {
+                    const deleteChar = inputValue.charAt(selectionStart);
+                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
-                        if (isNumeralChar(deleteChar)) {
-                            const decimalLength = getDecimalLength(inputValue);
+                    if (isNumeralChar(deleteChar)) {
+                        const decimalLength = getDecimalLength(inputValue);
 
-                            if (_group.current.test(deleteChar)) {
-                                _group.current.lastIndex = 0;
-                                newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
-                            } else if (_decimal.current.test(deleteChar)) {
-                                _decimal.current.lastIndex = 0;
+                        if (_group.current.test(deleteChar)) {
+                            _group.current.lastIndex = 0;
+                            newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
+                        } else if (_decimal.current.test(deleteChar)) {
+                            _decimal.current.lastIndex = 0;
 
-                                if (decimalLength) {
-                                    inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
-                                } else {
-                                    newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
-                                }
-                            } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                                const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
-
-                                newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
-                            } else if (decimalCharIndexWithoutPrefix === 1) {
-                                newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
-                                newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
+                            if (decimalLength) {
+                                inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                             }
+                        } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
+                            const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
+                            newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
+                        } else if (decimalCharIndexWithoutPrefix === 1) {
+                            newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
+                            newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
+                        } else {
+                            newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                         }
-
-                        updateValue(event, newValueStr, null, 'delete-back-single');
-                    } else {
-                        newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
-                        updateValue(event, newValueStr, null, 'delete-range');
                     }
 
-                    break;
+                    updateValue(event, newValueStr, null, 'delete-back-single');
+                } else {
+                    newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
+                    updateValue(event, newValueStr, null, 'delete-range');
+                }
 
-                case 'End':
-                    event.preventDefault();
+                break;
 
-                    if (!ObjectUtils.isEmpty(props.max)) {
-                        updateModel(event, props.max);
-                    }
+            case 'End':
+                event.preventDefault();
 
-                    break;
-                case 'Home':
-                    event.preventDefault();
+                if (!ObjectUtils.isEmpty(props.max)) {
+                    updateModel(event, props.max);
+                }
 
-                    if (!ObjectUtils.isEmpty(props.min)) {
-                        updateModel(event, props.min);
-                    }
+                break;
+            case 'Home':
+                event.preventDefault();
 
-                    break;
+                if (!ObjectUtils.isEmpty(props.min)) {
+                    updateModel(event, props.min);
+                }
 
-                default:
-                    event.preventDefault();
+                break;
 
-                    let char = event.key;
-                    const _isDecimalSign = isDecimalSign(char);
-                    const _isMinusSign = isMinusSign(char);
+            default:
+                event.preventDefault();
 
-                    if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
-                        insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
-                    }
+                let char = event.key;
+                const _isDecimalSign = isDecimalSign(char);
+                const _isMinusSign = isMinusSign(char);
 
-                    break;
+                if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                    insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                }
+
+                break;
             }
         };
 
@@ -513,7 +515,7 @@ export const InputNumber = React.memo(
                 return;
             }
 
-            let data = (event.clipboardData || window['clipboardData']).getData('Text');
+            let data = (event.clipboardData || window.clipboardData).getData('Text');
 
             if (data) {
                 let filteredData = parseValue(data);
@@ -564,7 +566,9 @@ export const InputNumber = React.memo(
             let formatter = new Intl.NumberFormat(_locale, getOptions());
             let parseVal = parseValue(formatter.format(val));
 
-            if (parseVal === null) return false;
+            if (parseVal === null) {
+                return false;
+            }
 
             return parseVal % 1 !== 0;
         };
@@ -679,22 +683,27 @@ export const InputNumber = React.memo(
                 return text + value.slice(suffix);
             } else if (end === value.length) {
                 return value.slice(0, start) + text;
-            } else {
-                const selectionValue = value.slice(start, end);
-                // Fix: if the suffix starts with a space, the input will be cleared after pasting
-                const space = /\s$/.test(selectionValue) ? ' ' : '';
-
-                return value.slice(0, start) + text + space + value.slice(end);
             }
+
+            const selectionValue = value.slice(start, end);
+            // Fix: if the suffix starts with a space, the input will be cleared after pasting
+            const space = /\s$/.test(selectionValue) ? ' ' : '';
+
+            return value.slice(0, start) + text + space + value.slice(end);
         };
 
         const deleteRange = (value, start, end) => {
             let newValueStr;
 
-            if (end - start === value.length) newValueStr = '';
-            else if (start === 0) newValueStr = value.slice(end);
-            else if (end === value.length) newValueStr = value.slice(0, start);
-            else newValueStr = value.slice(0, start) + value.slice(end);
+            if (end - start === value.length) {
+                newValueStr = '';
+            } else if (start === 0) {
+                newValueStr = value.slice(end);
+            } else if (end === value.length) {
+                newValueStr = value.slice(0, start);
+            } else {
+                newValueStr = value.slice(0, start) + value.slice(end);
+            }
 
             return newValueStr;
         };
@@ -768,9 +777,9 @@ export const InputNumber = React.memo(
                 resetRegex();
 
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         };
 
         const resetRegex = () => {
@@ -911,9 +920,9 @@ export const InputNumber = React.memo(
                     let isGroupChar = _group.current.test(nextChar);
 
                     if (isGroupChar && diff === 1) {
-                        selectionEnd += 1;
+                        selectionEnd = selectionEnd + 1;
                     } else if (!isGroupChar && isNumeralChar(prevChar)) {
-                        selectionEnd += -1 * diff + 1;
+                        selectionEnd = selectionEnd + (-1 * diff + 1);
                     }
 
                     _group.current.lastIndex = 0;

@@ -40,46 +40,52 @@ export const SelectButtonItem = React.memo((props) => {
 
     const onKeyDown = (event, index) => {
         switch (event.code) {
-            case 'Space': {
-                onClick(event, index);
-                event.preventDefault();
-                break;
-            }
+        case 'Space': {
+            onClick(event, index);
+            event.preventDefault();
+            break;
+        }
 
-            case 'ArrowDown':
+        case 'ArrowDown':
 
-            case 'ArrowRight': {
-                changeTabIndexes(event, 'next');
-                event.preventDefault();
-                break;
-            }
+        case 'ArrowRight': {
+            changeTabIndexes(event, 'next');
+            event.preventDefault();
+            break;
+        }
 
-            case 'ArrowUp':
+        case 'ArrowUp':
 
-            case 'ArrowLeft': {
-                changeTabIndexes(event, 'prev');
-                event.preventDefault();
-                break;
-            }
+        case 'ArrowLeft': {
+            changeTabIndexes(event, 'prev');
+            event.preventDefault();
+            break;
+        }
 
-            default:
-                break;
+        default:
+            break;
         }
     };
 
     const changeTabIndexes = (event, direction) => {
-        let firstTabableChild, index;
+        let firstTabableChild; let index;
 
         for (let i = 0; i <= props.elementRef.current.children.length - 1; i++) {
-            if (props.elementRef.current.children[i].getAttribute('tabindex') === '0') firstTabableChild = { elem: props.elementRef.current.children[i], index: i };
+            if (props.elementRef.current.children[i].getAttribute('tabindex') === '0') {
+                firstTabableChild = { elem: props.elementRef.current.children[i], index: i };
+            }
         }
 
         if (direction === 'prev') {
-            if (firstTabableChild.index === 0) index = props.elementRef.current.children.length - 1;
-            else index = firstTabableChild.index - 1;
+            if (firstTabableChild.index === 0) {
+                index = props.elementRef.current.children.length - 1;
+            } else {
+                index = firstTabableChild.index - 1;
+            }
+        } else if (firstTabableChild.index === props.elementRef.current.children.length - 1) {
+            index = 0;
         } else {
-            if (firstTabableChild.index === props.elementRef.current.children.length - 1) index = 0;
-            else index = firstTabableChild.index + 1;
+            index = firstTabableChild.index + 1;
         }
 
         props.setFocusedIndex(index);

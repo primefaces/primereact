@@ -120,9 +120,9 @@ export const BodyRow = React.memo((props) => {
             }
 
             return groupRowSpan === 1 ? null : groupRowSpan;
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     const onClick = (event) => {
@@ -162,38 +162,38 @@ export const BodyRow = React.memo((props) => {
             const { target, currentTarget: row } = event;
 
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(row, event);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(row, event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(row, event);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(row, event);
+                break;
 
-                case 'Home':
-                    onHomeKey(row, event);
-                    break;
+            case 'Home':
+                onHomeKey(row, event);
+                break;
 
-                case 'End':
-                    onEndKey(row, event);
-                    break;
+            case 'End':
+                onEndKey(row, event);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                    onEnterKey(row, event, target);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+                onEnterKey(row, event, target);
+                break;
 
-                case 'Space':
-                    onSpaceKey(row, event, target);
-                    break;
+            case 'Space':
+                onSpaceKey(row, event, target);
+                break;
 
-                case 'Tab':
-                    onTabKey(row, event);
-                    break;
+            case 'Tab':
+                onTabKey(row, event);
+                break;
 
-                default:
-                    //no op
-                    break;
+            default:
+                //no op
+                break;
             }
         }
     };
@@ -327,8 +327,11 @@ export const BodyRow = React.memo((props) => {
 
                 editingRows = props.editingRows ? [...props.editingRows] : [];
 
-                if (editingRowIndex !== -1) editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
-                else editingRows.push(data);
+                if (editingRowIndex !== -1) {
+                    editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
+                } else {
+                    editingRows.push(data);
+                }
             }
 
             props.onRowEditChange({

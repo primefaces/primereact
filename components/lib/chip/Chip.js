@@ -63,7 +63,7 @@ export const Chip = React.memo(
                     ptm('image')
                 );
 
-                content.push(<img alt={props.imageAlt} {...imageProps}></img>);
+                content.push(<img alt={props.imageAlt} {...imageProps} />);
             } else if (props.icon) {
                 const chipIconProps = mergeProps(
                     {

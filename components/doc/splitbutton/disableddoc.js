@@ -163,7 +163,7 @@ export default function DisabledDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} disabled />
             </div>
             <DocSectionCode code={code} />

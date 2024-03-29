@@ -85,8 +85,11 @@ export const OrderListSubList = React.memo(
                 const bottomDiff = offsetY + listElementRef.current.clientHeight - event.pageY;
                 const topDiff = event.pageY - offsetY;
 
-                if (bottomDiff < 25 && bottomDiff > 0) listElementRef.current.scrollTop += 15;
-                else if (topDiff < 25 && topDiff > 0) listElementRef.current.scrollTop -= 15;
+                if (bottomDiff < 25 && bottomDiff > 0) {
+                    listElementRef.current.scrollTop += 15;
+                } else if (topDiff < 25 && topDiff > 0) {
+                    listElementRef.current.scrollTop -= 15;
+                }
             }
         };
 
@@ -114,7 +117,7 @@ export const OrderListSubList = React.memo(
                 _ptm('droppoint')
             );
 
-            return <li key={key} {...droppointProps}></li>;
+            return <li key={key} {...droppointProps} />;
         };
 
         const createHeader = () => {
@@ -175,29 +178,29 @@ export const OrderListSubList = React.memo(
                         items.push(createDropPoint(i, key + '_droppoint'));
 
                         return items;
-                    } else {
-                        const itemProps = mergeProps(
-                            {
-                                id: key,
-                                role: 'option',
-                                onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
-                                onMouseDown: props.onOptionMouseDown,
-                                onMouseMove: (e) => changeFocusedItemOnHover(e, i),
-                                className: classNames(props.className, cx('item', { selected, focused })),
-                                'aria-selected': selected,
-                                'data-p-highlight': selected,
-                                'data-p-focused': focused
-                            },
-                            getPTOptions(item, 'item')
-                        );
-
-                        return (
-                            <li key={key} {...itemProps}>
-                                {content}
-                                <Ripple />
-                            </li>
-                        );
                     }
+
+                    const itemProps = mergeProps(
+                        {
+                            id: key,
+                            role: 'option',
+                            onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
+                            onMouseDown: props.onOptionMouseDown,
+                            onMouseMove: (e) => changeFocusedItemOnHover(e, i),
+                            className: classNames(props.className, cx('item', { selected, focused })),
+                            'aria-selected': selected,
+                            'data-p-highlight': selected,
+                            'data-p-focused': focused
+                        },
+                        getPTOptions(item, 'item')
+                    );
+
+                    return (
+                        <li key={key} {...itemProps}>
+                            {content}
+                            <Ripple />
+                        </li>
+                    );
                 });
             }
 

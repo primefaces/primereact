@@ -50,14 +50,14 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <ProgressBar
                     value={50}
                     pt={{
                         value: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)' } }
                     }}
-                ></ProgressBar>
+                />
             </div>
             <DocSectionCode code={code} />
         </>

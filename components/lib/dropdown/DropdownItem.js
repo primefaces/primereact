@@ -61,16 +61,16 @@ export const DropdownItem = React.memo((props) => {
             );
 
             return <CheckIcon {...checkIconProps} />;
-        } else {
-            const blankIconProps = mergeProps(
-                {
-                    className: cx('blankIcon')
-                },
-                getPTOptions('blankIcon')
-            );
-
-            return <BlankIcon {...blankIconProps} />;
         }
+
+        const blankIconProps = mergeProps(
+            {
+                className: cx('blankIcon')
+            },
+            getPTOptions('blankIcon')
+        );
+
+        return <BlankIcon {...blankIconProps} />;
     };
 
     return (

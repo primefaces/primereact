@@ -65,25 +65,25 @@ export const PickList = React.memo(
         const handleScrollPosition = (listElement, direction) => {
             if (listElement) {
                 switch (direction) {
-                    case 'up':
-                        scrollInView(listElement, -1);
-                        break;
+                case 'up':
+                    scrollInView(listElement, -1);
+                    break;
 
-                    case 'top':
-                        listElement.scrollTop = 0;
-                        break;
+                case 'top':
+                    listElement.scrollTop = 0;
+                    break;
 
-                    case 'down':
-                        scrollInView(listElement, 1);
-                        break;
+                case 'down':
+                    scrollInView(listElement, 1);
+                    break;
 
-                    case 'bottom':
-                        /* TODO: improve this code block */
-                        setTimeout(() => (listElement.scrollTop = listElement.scrollHeight), 100);
-                        break;
+                case 'bottom':
+                    /* TODO: improve this code block */
+                    setTimeout(() => (listElement.scrollTop = listElement.scrollHeight), 100);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             }
         };
@@ -104,60 +104,60 @@ export const PickList = React.memo(
             let selectedValue = [];
 
             switch (direction) {
-                case 'toTarget':
-                    selectedValue = sourceSelection;
+            case 'toTarget':
+                selectedValue = sourceSelection;
 
-                    if (props.onMoveToTarget) {
-                        props.onMoveToTarget({
-                            originalEvent,
-                            value: selectedValue
-                        });
-                    }
+                if (props.onMoveToTarget) {
+                    props.onMoveToTarget({
+                        originalEvent,
+                        value: selectedValue
+                    });
+                }
 
-                    break;
+                break;
 
-                case 'allToTarget':
-                    selectedValue = props.source;
+            case 'allToTarget':
+                selectedValue = props.source;
 
-                    if (props.onMoveAllToTarget) {
-                        props.onMoveAllToTarget({
-                            originalEvent,
-                            value: selectedValue
-                        });
-                    }
+                if (props.onMoveAllToTarget) {
+                    props.onMoveAllToTarget({
+                        originalEvent,
+                        value: selectedValue
+                    });
+                }
 
-                    selectedValue = [];
+                selectedValue = [];
 
-                    break;
+                break;
 
-                case 'toSource':
-                    selectedValue = targetSelection;
+            case 'toSource':
+                selectedValue = targetSelection;
 
-                    if (props.onMoveToSource) {
-                        props.onMoveToSource({
-                            originalEvent,
-                            value: selectedValue
-                        });
-                    }
+                if (props.onMoveToSource) {
+                    props.onMoveToSource({
+                        originalEvent,
+                        value: selectedValue
+                    });
+                }
 
-                    break;
+                break;
 
-                case 'allToSource':
-                    selectedValue = props.target;
+            case 'allToSource':
+                selectedValue = props.target;
 
-                    if (props.onMoveAllToSource) {
-                        props.onMoveAllToSource({
-                            originalEvent,
-                            value: selectedValue
-                        });
-                    }
+                if (props.onMoveAllToSource) {
+                    props.onMoveAllToSource({
+                        originalEvent,
+                        value: selectedValue
+                    });
+                }
 
-                    selectedValue = [];
+                selectedValue = [];
 
-                    break;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
 
             onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
@@ -174,8 +174,11 @@ export const PickList = React.memo(
         };
 
         const onSelectionChange = (e, stateKey, callback) => {
-            if (stateKey === 'sourceSelection') setSourceSelectionState(e.value);
-            else setTargetSelectionState(e.value);
+            if (stateKey === 'sourceSelection') {
+                setSourceSelectionState(e.value);
+            } else {
+                setTargetSelectionState(e.value);
+            }
 
             if (callback) {
                 callback(e);
@@ -283,7 +286,9 @@ export const PickList = React.memo(
             let selected = index !== -1;
             let metaSelection = props.metaKeySelection;
 
-            if (!arrowKeyClick) setFocusedOptionIndex(selectedId);
+            if (!arrowKeyClick) {
+                setFocusedOptionIndex(selectedId);
+            }
 
             if (metaSelection) {
                 const metaKey = originalEvent.metaKey || originalEvent.ctrlKey || originalEvent.shiftKey;
@@ -297,9 +302,10 @@ export const PickList = React.memo(
 
                     selection.push(item);
                 }
+            } else if (selected) {
+                selection.splice(index, 1);
             } else {
-                if (selected) selection.splice(index, 1);
-                else selection.push(item);
+                selection.push(item);
             }
 
             if (isSource) {
@@ -316,44 +322,47 @@ export const PickList = React.memo(
 
         const onListKeyDown = (event, type) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event, type);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(event, type);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(event, type);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(event, type);
+                break;
 
-                case 'Home':
-                    onHomeKey(event, type);
-                    break;
+            case 'Home':
+                onHomeKey(event, type);
+                break;
 
-                case 'End':
-                    onEndKey(event, type);
-                    break;
+            case 'End':
+                onEndKey(event, type);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                    onEnterKey(event, type);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+                onEnterKey(event, type);
+                break;
 
-                case 'Space':
-                    onSpaceKey(event, type);
-                    break;
+            case 'Space':
+                onSpaceKey(event, type);
+                break;
 
-                case 'KeyA':
-                    if (event.ctrlKey) {
-                        const isSource = type === 'source';
+            case 'KeyA':
+                if (event.ctrlKey) {
+                    const isSource = type === 'source';
 
-                        if (isSource) setSourceSelectionState([...sourceList]);
-                        else setTargetSelectionState([...targetList]);
-
-                        onSelectionChange({ originalEvent: event, value: [...sourceList] }, isSource ? 'sourceSelection' : 'targetSelection', isSource ? props.onSourceSelectionChange : props.onTargetSelectionChange);
-                        event.preventDefault();
+                    if (isSource) {
+                        setSourceSelectionState([...sourceList]);
+                    } else {
+                        setTargetSelectionState([...targetList]);
                     }
 
-                default:
-                    break;
+                    onSelectionChange({ originalEvent: event, value: [...sourceList] }, isSource ? 'sourceSelection' : 'targetSelection', isSource ? props.onSourceSelectionChange : props.onTargetSelectionChange);
+                    event.preventDefault();
+                }
+
+            default:
+                break;
             }
         };
 
@@ -634,8 +643,8 @@ export const PickList = React.memo(
                     onListBlur={(e) => onListBlur(e, 'source')}
                     onOptionMouseDown={(index) => onOptionMouseDown(index, 'source')}
                     onItemClick={(e) => onItemClick(e, 'source')}
-                    focusedOptionId={focused['source'] ? focusedOptionId : null}
-                    ariaActivedescendant={focused['source'] ? focusedOptionId : null}
+                    focusedOptionId={focused.source ? focusedOptionId : null}
+                    ariaActivedescendant={focused.source ? focusedOptionId : null}
                     itemTemplate={sourceItemTemplate}
                     header={props.sourceHeader}
                     style={props.sourceStyle}
@@ -691,8 +700,8 @@ export const PickList = React.memo(
                     onListBlur={(e) => onListBlur(e, 'target')}
                     onOptionMouseDown={(index) => onOptionMouseDown(index, 'target')}
                     onItemClick={(e) => onItemClick(e, 'target')}
-                    focusedOptionId={focused['target'] ? focusedOptionId : null}
-                    ariaActivedescendant={focused['target'] ? focusedOptionId : null}
+                    focusedOptionId={focused.target ? focusedOptionId : null}
+                    ariaActivedescendant={focused.target ? focusedOptionId : null}
                     itemTemplate={targetItemTemplate}
                     header={props.targetHeader}
                     style={props.targetStyle}

@@ -62,7 +62,7 @@ describe('BlockUI', () => {
         const ref = React.createRef();
         const { container } = render(
             <PrimeReactProvider>
-                <BlockUI ref={ref} blocked={false} fullScreen></BlockUI>
+                <BlockUI ref={ref} blocked={false} fullScreen />
             </PrimeReactProvider>
         );
 

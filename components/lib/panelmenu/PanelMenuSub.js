@@ -101,7 +101,7 @@ export const PanelMenuSub = React.memo(
                 _ptm('separator')
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createSubmenu = (processedItem, active) => {

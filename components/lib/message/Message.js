@@ -41,20 +41,20 @@ export const Message = React.memo(
 
             if (!icon) {
                 switch (props.severity) {
-                    case 'info':
-                        icon = <InfoCircleIcon {...iconProps} />;
-                        break;
-                    case 'warn':
-                        icon = <ExclamationTriangleIcon {...iconProps} />;
-                        break;
-                    case 'error':
-                        icon = <TimesCircleIcon {...iconProps} />;
-                        break;
-                    case 'success':
-                        icon = <CheckIcon {...iconProps} />;
-                        break;
-                    default:
-                        break;
+                case 'info':
+                    icon = <InfoCircleIcon {...iconProps} />;
+                    break;
+                case 'warn':
+                    icon = <ExclamationTriangleIcon {...iconProps} />;
+                    break;
+                case 'error':
+                    icon = <TimesCircleIcon {...iconProps} />;
+                    break;
+                case 'success':
+                    icon = <CheckIcon {...iconProps} />;
+                    break;
+                default:
+                    break;
                 }
             }
 

@@ -99,7 +99,7 @@ export default function InvalidDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="md:w-20rem w-full p-invalid" placeholder="Select Item" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

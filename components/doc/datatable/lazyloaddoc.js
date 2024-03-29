@@ -60,7 +60,7 @@ export function LazyLoadDoc(props) {
     };
 
     const onFilter = (event) => {
-        event['first'] = 0;
+        event.first = 0;
         setlazyState(event);
     };
 

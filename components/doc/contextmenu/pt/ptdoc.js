@@ -445,7 +445,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex md:justify-content-center">
                 <ContextMenu
                     model={items}

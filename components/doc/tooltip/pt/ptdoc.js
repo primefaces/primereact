@@ -67,7 +67,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
                 <InputText
                     type="text"

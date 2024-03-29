@@ -260,7 +260,7 @@ export const BodyCell = React.memo((props) => {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
 
-                styleObject['right'] = right + 'px';
+                styleObject.right = right + 'px';
             } else {
                 let left = 0;
                 let prev = elementRef.current && elementRef.current.previousElementSibling;
@@ -269,10 +269,10 @@ export const BodyCell = React.memo((props) => {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
 
-                styleObject['left'] = left + 'px';
+                styleObject.left = left + 'px';
             }
 
-            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            const isSameStyle = styleObjectState.left === styleObject.left && styleObjectState.right === styleObject.right;
 
             !isSameStyle && setStyleObjectState(styleObject);
         }
@@ -375,72 +375,72 @@ export const BodyCell = React.memo((props) => {
             const { target, currentTarget: cell } = event;
 
             switch (event.code) {
-                case 'ArrowLeft':
-                    let prevCell = findPrevSelectableCell(cell);
+            case 'ArrowLeft':
+                let prevCell = findPrevSelectableCell(cell);
 
-                    if (prevCell) {
-                        changeTabIndex(cell, prevCell);
-                        prevCell.focus();
-                    }
+                if (prevCell) {
+                    changeTabIndex(cell, prevCell);
+                    prevCell.focus();
+                }
 
+                event.preventDefault();
+                break;
+
+            case 'ArrowRight':
+                let nextCell = findNextSelectableCell(cell);
+
+                if (nextCell) {
+                    changeTabIndex(cell, nextCell);
+                    nextCell.focus();
+                }
+
+                event.preventDefault();
+                break;
+
+            case 'ArrowUp':
+                let upCell = findUpSelectableCell(cell);
+
+                if (upCell) {
+                    changeTabIndex(cell, upCell);
+                    upCell.focus();
+                }
+
+                event.preventDefault();
+                break;
+
+            case 'ArrowDown':
+                let downCell = findDownSelectableCell(cell);
+
+                if (downCell) {
+                    changeTabIndex(cell, downCell);
+                    downCell.focus();
+                }
+
+                event.preventDefault();
+                break;
+
+            case 'Enter':
+            case 'NumpadEnter':
+                if (event.shiftKey || event.ctrlKey) {
+                    // #5192 allow TextArea to add new lines
+                } else if (!DomHandler.isClickable(target)) {
+                    onClick(event);
                     event.preventDefault();
-                    break;
+                }
 
-                case 'ArrowRight':
-                    let nextCell = findNextSelectableCell(cell);
+                break;
 
-                    if (nextCell) {
-                        changeTabIndex(cell, nextCell);
-                        nextCell.focus();
-                    }
-
+            case 'Space':
+                if (!DomHandler.isClickable(target) && !target.readOnly) {
+                    onClick(event);
                     event.preventDefault();
-                    break;
+                }
 
-                case 'ArrowUp':
-                    let upCell = findUpSelectableCell(cell);
+                break;
 
-                    if (upCell) {
-                        changeTabIndex(cell, upCell);
-                        upCell.focus();
-                    }
-
-                    event.preventDefault();
-                    break;
-
-                case 'ArrowDown':
-                    let downCell = findDownSelectableCell(cell);
-
-                    if (downCell) {
-                        changeTabIndex(cell, downCell);
-                        downCell.focus();
-                    }
-
-                    event.preventDefault();
-                    break;
-
-                case 'Enter':
-                case 'NumpadEnter':
-                    if (event.shiftKey || event.ctrlKey) {
-                        // #5192 allow TextArea to add new lines
-                    } else if (!DomHandler.isClickable(target)) {
-                        onClick(event);
-                        event.preventDefault();
-                    }
-
-                    break;
-
-                case 'Space':
-                    if (!DomHandler.isClickable(target) && !target.readOnly) {
-                        onClick(event);
-                        event.preventDefault();
-                    }
-
-                    break;
-
-                default:
-                    //no op
-                    break;
+            default:
+                //no op
+                break;
             }
         }
     };
@@ -555,7 +555,7 @@ export const BodyCell = React.memo((props) => {
     };
 
     const createElement = () => {
-        let content, editorKeyHelper;
+        let content; let editorKeyHelper;
         const cellSelected = props.allowCellSelection && isSelected();
         const isRowEditor = props.editMode === 'row';
         const tabIndex = getTabIndex(cellSelected);
@@ -674,7 +674,7 @@ export const BodyCell = React.memo((props) => {
             );
 
             if (body) {
-                expanderProps['element'] = content;
+                expanderProps.element = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, expander: expanderProps });
             }
         } else if (isRowEditor && rowEditor) {
@@ -761,7 +761,7 @@ export const BodyCell = React.memo((props) => {
             }
 
             if (body) {
-                rowEditorProps['element'] = content;
+                rowEditorProps.element = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
             }
         } else if (body && (!editingState || !editor)) {
@@ -781,7 +781,7 @@ export const BodyCell = React.memo((props) => {
             content = value;
         }
 
-        content = typeof content == 'boolean' ? content.toString() : content;
+        content = typeof content === 'boolean' ? content.toString() : content;
 
         if (!isRowEditor && editor) {
             const editorKeyHelperProps = mergeProps(

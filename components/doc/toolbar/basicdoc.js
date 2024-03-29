@@ -35,7 +35,7 @@ export function BasicDoc(props) {
 
     const endContent = (
         <React.Fragment>
-            <SplitButton label="Save" model={items} icon="pi pi-check"></SplitButton>
+            <SplitButton label="Save" model={items} icon="pi pi-check" />
         </React.Fragment>
     );
 

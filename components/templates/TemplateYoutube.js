@@ -53,7 +53,7 @@ const TemplateYoutube = ({
                 </div>
                 <Dialog header="Video Content" visible={youtubeVideoVisible} style={{ width: '70vw' }} onHide={() => setYoutubeVideoVisible(false)}>
                     <div className="template-youtube-video">
-                        <iframe src={youtubeLink} title="PrimeNG 2023 Roadmap" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe src={youtubeLink} title="PrimeNG 2023 Roadmap" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
                     </div>
                 </Dialog>
             </div>

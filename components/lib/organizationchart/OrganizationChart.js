@@ -60,8 +60,11 @@ export const OrganizationChart = React.memo(
 
         const findIndexInSelection = (node) => {
             if (props.selectionMode && props.selection) {
-                if (props.selectionMode === 'single') return props.selection === node ? 0 : -1;
-                else if (props.selectionMode === 'multiple') return props.selection.findIndex((selectedNode) => selectedNode === node);
+                if (props.selectionMode === 'single') {
+                    return props.selection === node ? 0 : -1;
+                } else if (props.selectionMode === 'multiple') {
+                    return props.selection.findIndex((selectedNode) => selectedNode === node);
+                }
             }
 
             return -1;

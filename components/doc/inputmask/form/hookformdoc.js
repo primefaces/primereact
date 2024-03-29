@@ -210,7 +210,7 @@ export default function HookFormDoc() {
                         rules={{ required: 'Phone is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })} />
                                 <InputMask id={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} mask="99-999999" placeholder="99-999999" />
                                 {getFormErrorMessage(field.name)}
                             </>

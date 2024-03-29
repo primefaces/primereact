@@ -73,29 +73,27 @@ export const Password = React.memo(
                 let label = null;
 
                 switch (meterState.strength) {
-                    case 'weak':
-                        label = weakLabel;
-                        break;
+                case 'weak':
+                    label = weakLabel;
+                    break;
 
-                    case 'medium':
-                        label = mediumLabel;
-                        break;
+                case 'medium':
+                    label = mediumLabel;
+                    break;
 
-                    case 'strong':
-                        label = strongLabel;
-                        break;
+                case 'strong':
+                    label = strongLabel;
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
 
                 if (label && infoTextState !== label) {
                     setInfoTextState(label);
                 }
-            } else {
-                if (infoTextState !== promptLabel) {
-                    setInfoTextState(promptLabel);
-                }
+            } else if (infoTextState !== promptLabel) {
+                setInfoTextState(promptLabel);
             }
         };
 
@@ -108,34 +106,34 @@ export const Password = React.memo(
             let meter = null;
 
             switch (testStrength(value)) {
-                case 1:
-                    label = weakLabel;
-                    meter = {
-                        strength: 'weak',
-                        width: '33.33%'
-                    };
-                    break;
+            case 1:
+                label = weakLabel;
+                meter = {
+                    strength: 'weak',
+                    width: '33.33%'
+                };
+                break;
 
-                case 2:
-                    label = mediumLabel;
-                    meter = {
-                        strength: 'medium',
-                        width: '66.66%'
-                    };
-                    break;
+            case 2:
+                label = mediumLabel;
+                meter = {
+                    strength: 'medium',
+                    width: '66.66%'
+                };
+                break;
 
-                case 3:
-                    label = strongLabel;
-                    meter = {
-                        strength: 'strong',
-                        width: '100%'
-                    };
-                    break;
+            case 3:
+                label = strongLabel;
+                meter = {
+                    strength: 'strong',
+                    width: '100%'
+                };
+                break;
 
-                default:
-                    label = promptLabel;
-                    meter = null;
-                    break;
+            default:
+                label = promptLabel;
+                meter = null;
+                break;
             }
 
             setMeterState(meter);
@@ -173,7 +171,7 @@ export const Password = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
@@ -395,7 +393,7 @@ export const Password = React.memo(
             ) : (
                 <>
                     <div {...meterProps}>
-                        <div {...meterLabelProps}></div>
+                        <div {...meterLabelProps} />
                     </div>
                     <div {...infoProps}>{infoTextState}</div>
                 </>

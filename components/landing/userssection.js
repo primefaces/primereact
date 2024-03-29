@@ -47,14 +47,14 @@ const UsersSection = () => {
                 <span className="ml-2"> </span>
             </div>
             <div className="logo-section relative w-full md:w-8 mt-6 users-container">
-                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2"></div>
+                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2" />
                 <Marquee users={users1} />
-                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2"></div>
+                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2" />
             </div>
             <div className="logo-section relative w-full md:w-8 mt-2 users-container">
-                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2"></div>
+                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2" />
                 <Marquee users={users2} reverse />
-                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2"></div>
+                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2" />
             </div>
         </section>
     );

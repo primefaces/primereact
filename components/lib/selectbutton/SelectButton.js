@@ -64,11 +64,11 @@ export const SelectButton = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option['label'] !== undefined ? option['label'] : option;
+            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option.label !== undefined ? option.label : option;
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option && option['value'] !== undefined ? option['value'] : option;
+            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option && option.value !== undefined ? option.value : option;
         };
 
         const isOptionDisabled = (option) => {
@@ -76,7 +76,7 @@ export const SelectButton = React.memo(
                 return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
             }
 
-            return option && option['disabled'] !== undefined ? option['disabled'] : false;
+            return option && option.disabled !== undefined ? option.disabled : false;
         };
 
         const isSelected = (option) => {

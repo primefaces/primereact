@@ -72,7 +72,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <div style={{ width: '250px', height: '200px', overflow: 'auto' }}>
                     <p>

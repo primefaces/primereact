@@ -116,9 +116,13 @@ export const Knob = React.memo(
         const updateModel = (angle, start) => {
             let mappedValue;
 
-            if (angle > maxRadians) mappedValue = mapRange(angle, minRadians, maxRadians, props.min, props.max);
-            else if (angle < start) mappedValue = mapRange(angle + 2 * Math.PI, minRadians, maxRadians, props.min, props.max);
-            else return;
+            if (angle > maxRadians) {
+                mappedValue = mapRange(angle, minRadians, maxRadians, props.min, props.max);
+            } else if (angle < start) {
+                mappedValue = mapRange(angle + 2 * Math.PI, minRadians, maxRadians, props.min, props.max);
+            } else {
+                return;
+            }
 
             if (props.onChange) {
                 props.onChange({
@@ -130,9 +134,13 @@ export const Knob = React.memo(
         const updateModelValue = (newValue) => {
             let currentValue;
 
-            if (newValue > props.max) currentValue = props.max;
-            else if (newValue < props.min) currentValue = props.min;
-            else currentValue = newValue;
+            if (newValue > props.max) {
+                currentValue = props.max;
+            } else if (newValue < props.min) {
+                currentValue = props.min;
+            } else {
+                currentValue = newValue;
+            }
 
             if (props.onChange) {
                 props.onChange({
@@ -171,43 +179,43 @@ export const Knob = React.memo(
         const onKeyDown = (event) => {
             if (!props.disabled && !props.readonly) {
                 switch (event.code) {
-                    case 'ArrowRight':
-                    case 'ArrowUp':
-                        event.preventDefault();
-                        updateModelValue(props.value + 1);
-                        break;
+                case 'ArrowRight':
+                case 'ArrowUp':
+                    event.preventDefault();
+                    updateModelValue(props.value + 1);
+                    break;
 
-                    case 'ArrowLeft':
+                case 'ArrowLeft':
 
-                    case 'ArrowDown': {
-                        event.preventDefault();
-                        updateModelValue(props.value - 1);
-                        break;
-                    }
+                case 'ArrowDown': {
+                    event.preventDefault();
+                    updateModelValue(props.value - 1);
+                    break;
+                }
 
-                    case 'Home': {
-                        event.preventDefault();
-                        updateModelValue(props.min);
-                        break;
-                    }
+                case 'Home': {
+                    event.preventDefault();
+                    updateModelValue(props.min);
+                    break;
+                }
 
-                    case 'End': {
-                        event.preventDefault();
-                        updateModelValue(props.max);
-                        break;
-                    }
+                case 'End': {
+                    event.preventDefault();
+                    updateModelValue(props.max);
+                    break;
+                }
 
-                    case 'PageUp': {
-                        event.preventDefault();
-                        updateModelValue(props.value + 10);
-                        break;
-                    }
+                case 'PageUp': {
+                    event.preventDefault();
+                    updateModelValue(props.value + 10);
+                    break;
+                }
 
-                    case 'PageDown': {
-                        event.preventDefault();
-                        updateModelValue(props.value - 10);
-                        break;
-                    }
+                case 'PageDown': {
+                    event.preventDefault();
+                    updateModelValue(props.value - 10);
+                    break;
+                }
                 }
             }
         };
@@ -286,8 +294,8 @@ export const Knob = React.memo(
         return (
             <div {...rootProps}>
                 <svg {...svgProps}>
-                    <path {...rangeProps}></path>
-                    <path {...valueProps}></path>
+                    <path {...rangeProps} />
+                    <path {...valueProps} />
                     {text}
                 </svg>
             </div>

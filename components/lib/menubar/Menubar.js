@@ -138,67 +138,69 @@ export const Menubar = React.memo(
             const code = event.code;
 
             switch (code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(event);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                case 'ArrowLeft':
-                    onArrowLeftKey(event);
-                    break;
+            case 'ArrowLeft':
+                onArrowLeftKey(event);
+                break;
 
-                case 'ArrowRight':
-                    onArrowRightKey(event);
-                    break;
+            case 'ArrowRight':
+                onArrowRightKey(event);
+                break;
 
-                case 'Home':
-                    onHomeKey(event);
-                    break;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                case 'End':
-                    onEndKey(event);
-                    break;
+            case 'End':
+                onEndKey(event);
+                break;
 
-                case 'Space':
-                    onSpaceKey(event);
-                    break;
+            case 'Space':
+                onSpaceKey(event);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                    onEnterKey(event);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+                onEnterKey(event);
+                break;
 
-                case 'Escape':
-                    onEscapeKey(event);
-                    break;
+            case 'Escape':
+                onEscapeKey(event);
+                break;
 
-                case 'Tab':
-                    onTabKey(event);
-                    break;
+            case 'Tab':
+                onTabKey(event);
+                break;
 
-                case 'PageDown':
-                case 'PageUp':
-                case 'Backspace':
-                case 'ShiftLeft':
-                case 'ShiftRight':
-                    break;
+            case 'PageDown':
+            case 'PageUp':
+            case 'Backspace':
+            case 'ShiftLeft':
+            case 'ShiftRight':
+                break;
 
-                default:
-                    if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
-                        searchItems(event, event.key);
-                    }
+            default:
+                if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
+                    searchItems(event, event.key);
+                }
 
-                    break;
+                break;
             }
         };
 
         const onItemChange = (event) => {
             const { processedItem, isFocus } = event;
 
-            if (ObjectUtils.isEmpty(processedItem)) return;
+            if (ObjectUtils.isEmpty(processedItem)) {
+                return;
+            }
 
             const { index, key, level, parentKey, items } = processedItem;
             const grouped = ObjectUtils.isNotEmpty(items);
@@ -236,18 +238,16 @@ export const Menubar = React.memo(
                         setDirty(true);
                     }
                 }, 0);
+            } else if (grouped) {
+                DomHandler.focus(rootMenuRef.current);
+                onItemChange({ originalEvent, processedItem });
             } else {
-                if (grouped) {
-                    DomHandler.focus(rootMenuRef.current);
-                    onItemChange({ originalEvent, processedItem });
-                } else {
-                    const rootProcessedItem = root ? processedItem : activeItemPath.find((p) => p.parentKey === '');
-                    const rootProcessedItemIndex = rootProcessedItem ? rootProcessedItem.index : -1;
+                const rootProcessedItem = root ? processedItem : activeItemPath.find((p) => p.parentKey === '');
+                const rootProcessedItemIndex = rootProcessedItem ? rootProcessedItem.index : -1;
 
-                    hide(originalEvent);
-                    setFocusedItemInfo({ index: rootProcessedItemIndex, parentKey: rootProcessedItem ? rootProcessedItem.parentKey : '' });
-                    setMobileActiveState(false);
-                }
+                hide(originalEvent);
+                setFocusedItemInfo({ index: rootProcessedItemIndex, parentKey: rootProcessedItem ? rootProcessedItem.parentKey : '' });
+                setMobileActiveState(false);
             }
         };
 
@@ -506,7 +506,7 @@ export const Menubar = React.memo(
                         parentKey
                     };
 
-                    newItem['items'] = createProcessedItems(item.items, level + 1, newItem, key);
+                    newItem.items = createProcessedItems(item.items, level + 1, newItem, key);
                     _processedItems.push(newItem);
                 });
 
@@ -523,7 +523,7 @@ export const Menubar = React.memo(
             if (mobileActiveState) {
                 bindOutsideClickListener();
                 bindResizeListener();
-                ZIndexUtils.set('menu', rootMenuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', rootMenuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             } else {
                 unbindResizeListener();
                 unbindOutsideClickListener();

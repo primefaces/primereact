@@ -177,17 +177,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const getStorage = () => {
         switch (props.stateStorage) {
-            case 'local':
-                return window.localStorage;
+        case 'local':
+            return window.localStorage;
 
-            case 'session':
-                return window.sessionStorage;
+        case 'session':
+            return window.sessionStorage;
 
-            case 'custom':
-                return null;
+        case 'custom':
+            return null;
 
-            default:
-                throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
+        default:
+            throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
         }
     };
 
@@ -392,7 +392,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         widths.forEach((width, index) => {
             let style = `width: ${width}px !important; max-width: ${width}px !important`;
 
-            innerHTML += `
+            innerHTML = innerHTML + `
                 ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
@@ -422,16 +422,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const findParentHeader = (element) => {
         if (element.nodeName === 'TH') {
             return element;
-        } else {
-            let parent = element.parentElement;
-
-            while (parent.nodeName !== 'TH') {
-                parent = parent.parentElement;
-                if (!parent) break;
-            }
-
-            return parent;
         }
+
+        let parent = element.parentElement;
+
+        while (parent.nodeName !== 'TH') {
+            parent = parent.parentElement;
+
+            if (!parent) {
+                break;
+            }
+        }
+
+        return parent;
     };
 
     const getGroupRowSortField = () => {
@@ -443,8 +446,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             return val.filter((data, index) => {
                 let isSelectable = true;
 
-                if (props.showSelectionElement) isSelectable = props.showSelectionElement({ rowIndex: index, props });
-                if (props.isDataSelectable && isSelectable) isSelectable = props.isDataSelectable({ data, index });
+                if (props.showSelectionElement) {
+                    isSelectable = props.showSelectionElement({ rowIndex: index, props });
+                }
+
+                if (props.isDataSelectable && isSelectable) {
+                    isSelectable = props.isDataSelectable({ data, index });
+                }
 
                 return isSelectable;
             });
@@ -456,13 +464,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const allRowsSelected = (processedData) => {
         if (props.onSelectAllChange) {
             return props.selectAll;
-        } else {
-            const data = props.selectionPageOnly ? dataToRender(processedData) : processedData;
-            const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
-            const selectableVal = getSelectableData(val);
-
-            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => ObjectUtils.isArray(props.selection) && props.selection.some((s) => isEquals(s, sv)));
         }
+
+        const data = props.selectionPageOnly ? dataToRender(processedData) : processedData;
+        const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
+        const selectableVal = getSelectableData(val);
+
+        return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => ObjectUtils.isArray(props.selection) && props.selection.some((s) => isEquals(s, sv)));
     };
 
     const getSelectionModeInColumn = (columns) => {
@@ -490,11 +498,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         if (editing) {
             !meta && (meta = editingMeta[editingKey] = { data: { ...rowData }, fields: [] });
-            meta['fields'].push(field);
+            meta.fields.push(field);
         } else if (meta) {
-            const fields = meta['fields'].filter((f) => f !== field);
+            const fields = meta.fields.filter((f) => f !== field);
 
-            !fields.length ? delete editingMeta[editingKey] : (meta['fields'] = fields);
+            !fields.length ? delete editingMeta[editingKey] : (meta.fields = fields);
         }
 
         setEditingMetaState(editingMeta);
@@ -604,7 +612,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
             let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
-            innerHTML += `
+            innerHTML = innerHTML + `
                  ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
                 ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
@@ -632,8 +640,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const { originalEvent: event, column } = e;
 
         if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false && !getColumnProp(column, 'frozen')) {
-            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.getAttribute(event.target, '[data-pc-section="columnresizer"]')) event.currentTarget.draggable = false;
-            else event.currentTarget.draggable = true;
+            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.getAttribute(event.target, '[data-pc-section="columnresizer"]')) {
+                event.currentTarget.draggable = false;
+            } else {
+                event.currentTarget.draggable = true;
+            }
         }
     };
 
@@ -673,7 +684,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             return;
         }
 
-        if (!props.reorderableColumns) return;
+        if (!props.reorderableColumns) {
+            return;
+        }
 
         colReorderIconWidth.current = DomHandler.getHiddenElementOuterWidth(reorderIndicatorUpRef.current);
         colReorderIconHeight.current = DomHandler.getHiddenElementOuterHeight(reorderIndicatorUpRef.current);
@@ -955,8 +968,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const addSortMeta = (meta, multiSortMeta) => {
         const index = multiSortMeta.findIndex((sortMeta) => sortMeta.field === meta.field);
 
-        if (index >= 0) multiSortMeta[index] = meta;
-        else multiSortMeta.push(meta);
+        if (index >= 0) {
+            multiSortMeta[index] = meta;
+        } else {
+            multiSortMeta.push(meta);
+        }
     };
 
     const removeSortMeta = (meta, multiSortMeta) => {
@@ -1098,14 +1114,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const filterLocal = (data, filters) => {
-        if (!data) return;
+        if (!data) {
+            return;
+        }
 
         let activeFilters = filters ? getActiveFilters(filters) : {};
 
         let columns = getColumns();
         let filteredValue = [];
 
-        let isGlobalFilter = activeFilters['global'] || props.globalFilter;
+        let isGlobalFilter = activeFilters.global || props.globalFilter;
         let globalFilterFieldsArray;
 
         if (isGlobalFilter) {
@@ -1150,8 +1168,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             if (localMatch && isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
                 for (let j = 0; j < globalFilterFieldsArray.length; j++) {
                     let globalFilterField = globalFilterFieldsArray[j];
-                    let matchMode = activeFilters['global'] ? activeFilters['global'].matchMode : props.globalFilterMatchMode;
-                    let value = activeFilters['global'] ? activeFilters['global'].value : props.globalFilter;
+                    let matchMode = activeFilters.global ? activeFilters.global.matchMode : props.globalFilterMatchMode;
+                    let value = activeFilters.global ? activeFilters.global.value : props.globalFilter;
 
                     globalMatch = FilterService.filters[matchMode](ObjectUtils.resolveFieldData(data[i], globalFilterField), value, props.filterLocale);
 
@@ -1198,11 +1216,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             Object.entries(filters).forEach(([prop, value]) => {
                 cloned[prop] = value.operator
                     ? {
-                          operator: value.operator,
-                          constraints: value.constraints.map((constraint) => {
-                              return { ...constraint };
-                          })
-                      }
+                        operator: value.operator,
+                        constraints: value.constraints.map((constraint) => {
+                            return { ...constraint };
+                        })
+                    }
                     : { ...value };
             });
         } else {
@@ -1315,17 +1333,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     .replace(/"/g, '""')
                     .replace(/\n/g, '\u2028');
 
-                csv += '"' + columnHeader + '"';
+                csv = csv + ('"' + columnHeader + '"');
 
                 if (i < columns.length - 1) {
-                    csv += props.csvSeparator;
+                    csv = csv + props.csvSeparator;
                 }
             }
         });
 
         //body
         data.forEach((record) => {
-            csv += '\n';
+            csv = csv + '\n';
             columns.forEach((column, i) => {
                 const [colField, exportField, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'exportField'), getColumnProp(column, 'exportable')];
                 const field = exportField || colField;
@@ -1339,12 +1357,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         } else {
                             cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
                         }
-                    } else cellData = '';
+                    } else {
+                        cellData = '';
+                    }
 
-                    csv += '"' + cellData + '"';
+                    csv = csv + ('"' + cellData + '"');
 
                     if (i < columns.length - 1) {
-                        csv += props.csvSeparator;
+                        csv = csv + props.csvSeparator;
                     }
                 }
             });
@@ -1401,8 +1421,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 }
 
                 if (sortField || ObjectUtils.isNotEmpty(multiSortMeta)) {
-                    if (props.sortMode === 'single') data = sortSingle(data, sortField, sortOrder);
-                    else if (props.sortMode === 'multiple') data = sortMultiple(data, multiSortMeta);
+                    if (props.sortMode === 'single') {
+                        data = sortSingle(data, sortField, sortOrder);
+                    } else if (props.sortMode === 'multiple') {
+                        data = sortMultiple(data, multiSortMeta);
+                    }
                 }
             }
         }
@@ -1798,7 +1821,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const createContent = (processedData, columns, selectionModeInColumn, empty) => {
-        if (!columns) return;
+        if (!columns) {
+            return;
+        }
 
         const _isVirtualScrollerDisabled = isVirtualScrollerDisabled();
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
@@ -1922,7 +1947,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 ptCallbacks.ptm('resizeHelper')
             );
 
-            return <div ref={resizeHelperRef} {...resizeHelperProps}></div>;
+            return <div ref={resizeHelperRef} {...resizeHelperProps} />;
         }
 
         return null;

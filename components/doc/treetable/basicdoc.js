@@ -108,9 +108,9 @@ export default function BasicDemo() {
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
+                    <Column field="name" header="Name" expander />
+                    <Column field="size" header="Size" />
+                    <Column field="type" header="Type" />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

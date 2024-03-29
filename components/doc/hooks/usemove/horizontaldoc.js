@@ -91,7 +91,7 @@ export default function HorizontalDemo() {
                             width: `${x * 100}%`,
                             height: '8px'
                         }}
-                    ></div>
+                    />
                     <div
                         className="absolute block border-circle border-solid border-2 border-teal-500 -ml-2 surface-overlay z-3"
                         style={{
@@ -100,7 +100,7 @@ export default function HorizontalDemo() {
                             left: `calc(${x * 100}%)`,
                             cursor: 'grab'
                         }}
-                    ></div>
+                    />
                 </div>
                 <span className="text-xl">
                     Value: <strong>{Math.round(x * 100)}</strong>

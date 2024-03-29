@@ -29,9 +29,13 @@ export const TriStateCheckbox = React.memo(
 
             let newValue;
 
-            if (props.value === null || props.value === undefined) newValue = true;
-            else if (props.value === true) newValue = false;
-            else if (props.value === false) newValue = null;
+            if (props.value === null || props.value === undefined) {
+                newValue = true;
+            } else if (props.value === true) {
+                newValue = false;
+            } else if (props.value === false) {
+                newValue = null;
+            }
 
             if (props.onChange) {
                 props.onChange({

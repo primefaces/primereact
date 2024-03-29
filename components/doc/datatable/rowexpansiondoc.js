@@ -48,7 +48,7 @@ export function RowExpansionDoc(props) {
     };
 
     const statusOrderBodyTemplate = (rowData) => {
-        return <Tag value={rowData.status.toLowerCase()} severity={getOrderSeverity(rowData)}></Tag>;
+        return <Tag value={rowData.status.toLowerCase()} severity={getOrderSeverity(rowData)} />;
     };
 
     const searchBodyTemplate = () => {
@@ -68,41 +68,41 @@ export function RowExpansionDoc(props) {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return <Tag value={rowData.inventoryStatus} severity={getProductSeverity(rowData)}></Tag>;
+        return <Tag value={rowData.inventoryStatus} severity={getProductSeverity(rowData)} />;
     };
 
     const getProductSeverity = (product) => {
         switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
+        case 'INSTOCK':
+            return 'success';
 
-            case 'LOWSTOCK':
-                return 'warning';
+        case 'LOWSTOCK':
+            return 'warning';
 
-            case 'OUTOFSTOCK':
-                return 'danger';
+        case 'OUTOFSTOCK':
+            return 'danger';
 
-            default:
-                return null;
+        default:
+            return null;
         }
     };
 
     const getOrderSeverity = (order) => {
         switch (order.status) {
-            case 'DELIVERED':
-                return 'success';
+        case 'DELIVERED':
+            return 'success';
 
-            case 'CANCELLED':
-                return 'danger';
+        case 'CANCELLED':
+            return 'danger';
 
-            case 'PENDING':
-                return 'warning';
+        case 'PENDING':
+            return 'warning';
 
-            case 'RETURNED':
-                return 'info';
+        case 'RETURNED':
+            return 'info';
 
-            default:
-                return null;
+        default:
+            return null;
         }
     };
 
@@ -115,12 +115,12 @@ export function RowExpansionDoc(props) {
             <div className="p-3">
                 <h5>Orders for {data.name}</h5>
                 <DataTable value={data.orders}>
-                    <Column field="id" header="Id" sortable></Column>
-                    <Column field="customer" header="Customer" sortable></Column>
-                    <Column field="date" header="Date" sortable></Column>
-                    <Column field="amount" header="Amount" body={amountBodyTemplate} sortable></Column>
-                    <Column field="status" header="Status" body={statusOrderBodyTemplate} sortable></Column>
-                    <Column headerStyle={{ width: '4rem' }} body={searchBodyTemplate}></Column>
+                    <Column field="id" header="Id" sortable />
+                    <Column field="customer" header="Customer" sortable />
+                    <Column field="date" header="Date" sortable />
+                    <Column field="amount" header="Amount" body={amountBodyTemplate} sortable />
+                    <Column field="status" header="Status" body={statusOrderBodyTemplate} sortable />
+                    <Column headerStyle={{ width: '4rem' }} body={searchBodyTemplate} />
                 </DataTable>
             </div>
         );

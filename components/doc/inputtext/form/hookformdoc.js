@@ -197,7 +197,7 @@ export default function HookFormDoc() {
                         rules={{ required: 'Name - Surname is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })}></label>
+                                <label htmlFor={field.name} className={classNames({ 'p-error': errors.value })} />
                                 <span className="p-float-label">
                                     <InputText id={field.name} value={field.value} className={classNames({ 'p-invalid': fieldState.error })} onChange={(e) => field.onChange(e.target.value)} />
                                     <label htmlFor={field.name}>Name - Surname</label>

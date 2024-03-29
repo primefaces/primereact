@@ -17,17 +17,17 @@ export function PTDoc(props) {
 
     const getSeverity = (product) => {
         switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
+        case 'INSTOCK':
+            return 'success';
 
-            case 'LOWSTOCK':
-                return 'warning';
+        case 'LOWSTOCK':
+            return 'warning';
 
-            case 'OUTOFSTOCK':
-                return 'danger';
+        case 'OUTOFSTOCK':
+            return 'danger';
 
-            default:
-                return null;
+        default:
+            return null;
         }
     };
 
@@ -39,18 +39,18 @@ export function PTDoc(props) {
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
+                            <Rating value={product.rating} readOnly cancel={false} />
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
+                                    <i className="pi pi-tag" />
                                     <span className="font-semibold">{product.category}</span>
                                 </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                                <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <span className="text-2xl font-semibold">${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'} />
                         </div>
                     </div>
                 </div>
@@ -64,19 +64,19 @@ export function PTDoc(props) {
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                         <div className="flex align-items-center gap-2">
-                            <i className="pi pi-tag"></i>
+                            <i className="pi pi-tag" />
                             <span className="font-semibold">{product.category}</span>
                         </div>
-                        <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                        <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <img className="w-9 shadow-2 border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
                         <div className="text-2xl font-bold">{product.name}</div>
-                        <Rating value={product.rating} readOnly cancel={false}></Rating>
+                        <Rating value={product.rating} readOnly cancel={false} />
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <span className="text-2xl font-semibold">${product.price}</span>
-                        <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'} />
                     </div>
                 </div>
             </div>
@@ -88,8 +88,11 @@ export function PTDoc(props) {
             return;
         }
 
-        if (layout === 'list') return listItem(product);
-        else if (layout === 'grid') return gridItem(product);
+        if (layout === 'list') {
+            return listItem(product);
+        } else if (layout === 'grid') {
+            return gridItem(product);
+        }
     };
 
     const header = () => {
@@ -398,7 +401,7 @@ export default function BasicDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card">
                 <DataView
                     value={products}

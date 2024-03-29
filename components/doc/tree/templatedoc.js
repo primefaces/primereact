@@ -56,7 +56,7 @@ export function TemplateDoc(props) {
 
         return (
             <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={options.onClick}>
-                <span className={iconClassName} aria-hidden="true"></span>
+                <span className={iconClassName} aria-hidden="true" />
             </button>
         );
     };

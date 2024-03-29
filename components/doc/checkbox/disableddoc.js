@@ -41,7 +41,7 @@ export default function DisabledDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Checkbox checked disabled></Checkbox>
+                <Checkbox checked disabled />
             </div>
             <DocSectionCode code={code} />
         </>

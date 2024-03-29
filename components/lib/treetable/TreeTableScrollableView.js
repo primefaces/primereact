@@ -50,9 +50,9 @@ export const TreeTableScrollableView = React.memo((props) => {
             }
 
             return el;
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     const onHeaderScroll = () => {
@@ -113,9 +113,9 @@ export const TreeTableScrollableView = React.memo((props) => {
             );
 
             return <colgroup {...scrollableColgroupProps}>{cols}</colgroup>;
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     const width = props.frozen ? props.frozenWidth : 'calc(100% - ' + props.frozenWidth + ')';

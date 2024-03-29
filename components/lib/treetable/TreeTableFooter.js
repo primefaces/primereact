@@ -69,9 +69,9 @@ export const TreeTableFooter = React.memo((props) => {
             const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
 
             return <tr {...footerRowProps}>{headerCells}</tr>;
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     const hasFooter = () => {
@@ -90,9 +90,9 @@ export const TreeTableFooter = React.memo((props) => {
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;
-    } else {
-        return null;
     }
+
+    return null;
 });
 
 TreeTableFooter.displayName = 'TreeTableFooter';

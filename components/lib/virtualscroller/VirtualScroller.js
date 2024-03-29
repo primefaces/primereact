@@ -114,12 +114,10 @@ export const VirtualScroller = React.memo(
                         } else if (viewport.first.cols - first.cols > index[1]) {
                             scrollToItem((viewport.first.cols - 1) * props.itemSize[1], viewport.first.rows * props.itemSize[0]);
                         }
-                    } else {
-                        if (viewport.first - first > index) {
-                            const pos = (viewport.first - 1) * props.itemSize;
+                    } else if (viewport.first - first > index) {
+                        const pos = (viewport.first - 1) * props.itemSize;
 
-                            horizontal ? scrollToItem(pos, 0) : scrollToItem(0, pos);
-                        }
+                        horizontal ? scrollToItem(pos, 0) : scrollToItem(0, pos);
                     }
                 } else if (isToEnd) {
                     if (both) {
@@ -128,12 +126,10 @@ export const VirtualScroller = React.memo(
                         } else if (viewport.last.cols - first.cols <= index[1] + 1) {
                             scrollToItem((viewport.first.cols + 1) * props.itemSize[1], viewport.first.rows * props.itemSize[0]);
                         }
-                    } else {
-                        if (viewport.last - first <= index + 1) {
-                            const pos = (viewport.first + 1) * props.itemSize;
+                    } else if (viewport.last - first <= index + 1) {
+                        const pos = (viewport.first + 1) * props.itemSize;
 
-                            horizontal ? scrollToItem(pos, 0) : scrollToItem(0, pos);
-                        }
+                        horizontal ? scrollToItem(pos, 0) : scrollToItem(0, pos);
                     }
                 }
             } else {
@@ -332,15 +328,18 @@ export const VirtualScroller = React.memo(
             };
 
             const calculateFirst = (_currentIndex, _triggerIndex, _first, _last, _num, _numT, _isScrollDownOrRight) => {
-                if (_currentIndex <= _numT) return 0;
-                else return Math.max(0, _isScrollDownOrRight ? (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) : _currentIndex > _triggerIndex ? _first : _currentIndex - 2 * _numT);
+                if (_currentIndex <= _numT) {
+                    return 0;
+                }
+
+                return Math.max(0, _isScrollDownOrRight ? (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) : _currentIndex > _triggerIndex ? _first : _currentIndex - 2 * _numT);
             };
 
             const calculateLast = (_currentIndex, _first, _last, _num, _numT, _isCols) => {
                 let lastValue = _first + _num + 2 * _numT;
 
                 if (_currentIndex >= _numT) {
-                    lastValue += _numT + 1;
+                    lastValue = lastValue + (_numT + 1);
                 }
 
                 return getLast(lastValue, _isCols);
@@ -514,9 +513,13 @@ export const VirtualScroller = React.memo(
             const items = props.items;
 
             if (items && !loadingState) {
-                if (both) return items.slice(props.appendOnly ? 0 : firstState.rows, lastState.rows).map((item) => (props.columns ? item : item.slice(props.appendOnly ? 0 : firstState.cols, lastState.cols)));
-                else if (horizontal && props.columns) return items;
-                else return items.slice(props.appendOnly ? 0 : firstState, lastState);
+                if (both) {
+                    return items.slice(props.appendOnly ? 0 : firstState.rows, lastState.rows).map((item) => (props.columns ? item : item.slice(props.appendOnly ? 0 : firstState.cols, lastState.cols)));
+                } else if (horizontal && props.columns) {
+                    return items;
+                }
+
+                return items.slice(props.appendOnly ? 0 : firstState, lastState);
             }
 
             return [];
@@ -655,7 +658,7 @@ export const VirtualScroller = React.memo(
                     ptm('spacer')
                 );
 
-                return <div {...spacerProps}></div>;
+                return <div {...spacerProps} />;
             }
 
             return null;
@@ -726,40 +729,40 @@ export const VirtualScroller = React.memo(
                     {content}
                 </React.Fragment>
             );
-        } else {
-            const className = classNames(
-                'p-virtualscroller',
-                {
-                    'p-virtualscroller-inline': props.inline,
-                    'p-virtualscroller-both p-both-scroll': both,
-                    'p-virtualscroller-horizontal p-horizontal-scroll': horizontal
-                },
-                props.className
-            );
-
-            const loader = createLoader();
-            const content = createContent();
-            const spacer = createSpacer();
-            const rootProps = mergeProps(
-                {
-                    ref: elementRef,
-                    className,
-                    tabIndex: props.tabIndex,
-                    style: props.style,
-                    onScroll: (e) => onScroll(e)
-                },
-                VirtualScrollerBase.getOtherProps(props),
-                ptm('root')
-            );
-
-            return (
-                <div {...rootProps}>
-                    {content}
-                    {spacer}
-                    {loader}
-                </div>
-            );
         }
+
+        const className = classNames(
+            'p-virtualscroller',
+            {
+                'p-virtualscroller-inline': props.inline,
+                'p-virtualscroller-both p-both-scroll': both,
+                'p-virtualscroller-horizontal p-horizontal-scroll': horizontal
+            },
+            props.className
+        );
+
+        const loader = createLoader();
+        const content = createContent();
+        const spacer = createSpacer();
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className,
+                tabIndex: props.tabIndex,
+                style: props.style,
+                onScroll: (e) => onScroll(e)
+            },
+            VirtualScrollerBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        return (
+            <div {...rootProps}>
+                {content}
+                {spacer}
+                {loader}
+            </div>
+        );
     })
 );
 

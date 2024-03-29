@@ -237,9 +237,9 @@ export default function EditDemo() {
             </DocSectionText>
             <div className="card">
                 <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
-                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
+                    <Column field="name" header="Name" expander style={{ height: '3.5rem' }} />
+                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }} />
+                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }} />
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

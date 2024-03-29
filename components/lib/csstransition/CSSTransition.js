@@ -61,13 +61,13 @@ export const CSSTransition = React.forwardRef((inProps, ref) => {
 
     if (disabled) {
         return props.in ? props.children : null;
-    } else {
-        const immutableProps = { nodeRef: props.nodeRef, in: props.in, onEnter: onEnter, onEntering: onEntering, onEntered: onEntered, onExit: onExit, onExiting: onExiting, onExited: onExited };
-        const mutableProps = { classNames: props.classNames, timeout: props.timeout, unmountOnExit: props.unmountOnExit };
-        const mergedProps = { ...mutableProps, ...(props.options || {}), ...immutableProps };
-
-        return <ReactCSSTransition {...mergedProps}>{props.children}</ReactCSSTransition>;
     }
+
+    const immutableProps = { nodeRef: props.nodeRef, in: props.in, onEnter: onEnter, onEntering: onEntering, onEntered: onEntered, onExit: onExit, onExiting: onExiting, onExited: onExited };
+    const mutableProps = { classNames: props.classNames, timeout: props.timeout, unmountOnExit: props.unmountOnExit };
+    const mergedProps = { ...mutableProps, ...(props.options || {}), ...immutableProps };
+
+    return <ReactCSSTransition {...mergedProps}>{props.children}</ReactCSSTransition>;
 });
 
 CSSTransition.displayName = 'CSSTransition';

@@ -36,7 +36,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card flex justify-content-center">
                 <Badge value="2" pt={{ root: { className: 'bg-primary border-round-sm' } }} />
             </div>

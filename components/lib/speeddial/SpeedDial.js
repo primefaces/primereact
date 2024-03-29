@@ -89,66 +89,66 @@ export const SpeedDial = React.memo(
 
         const onKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDown(event);
-                    break;
+            case 'ArrowDown':
+                onArrowDown(event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUp(event);
-                    break;
+            case 'ArrowUp':
+                onArrowUp(event);
+                break;
 
-                case 'ArrowLeft':
-                    onArrowLeft(event);
-                    break;
+            case 'ArrowLeft':
+                onArrowLeft(event);
+                break;
 
-                case 'ArrowRight':
-                    onArrowRight(event);
-                    break;
+            case 'ArrowRight':
+                onArrowRight(event);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                case 'Space':
-                    onEnterKey(event);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                onEnterKey(event);
+                break;
 
-                case 'Escape':
-                    onEscapeKey(event);
-                    break;
+            case 'Escape':
+                onEscapeKey(event);
+                break;
 
-                case 'Home':
-                    onHomeKey(event);
-                    break;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                case 'End':
-                    onEndKey(event);
-                    break;
+            case 'End':
+                onEndKey(event);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
         const onTogglerKeydown = (event) => {
             switch (event.code) {
-                case 'ArrowDown':
-                case 'ArrowLeft':
-                    onTogglerArrowDown(event);
+            case 'ArrowDown':
+            case 'ArrowLeft':
+                onTogglerArrowDown(event);
 
-                    break;
+                break;
 
-                case 'ArrowUp':
-                case 'ArrowRight':
-                    onTogglerArrowUp(event);
+            case 'ArrowUp':
+            case 'ArrowRight':
+                onTogglerArrowUp(event);
 
-                    break;
+                break;
 
-                case 'Escape':
-                    onEscapeKey();
+            case 'Escape':
+                onEscapeKey();
 
-                    break;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -566,7 +566,7 @@ export const SpeedDial = React.memo(
                     ptm('mask')
                 );
 
-                return <div {...maskProps}></div>;
+                return <div {...maskProps} />;
             }
 
             return null;

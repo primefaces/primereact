@@ -38,10 +38,10 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const calculateContainerHeight = () => {
         const containerStyles = getComputedStyle(containerRef.current);
         const xBarStyles = getComputedStyle(xBarRef.current);
-        const pureContainerHeight = DomHandler.getHeight(containerRef.current) - parseInt(xBarStyles['height'], 10);
+        const pureContainerHeight = DomHandler.getHeight(containerRef.current) - parseInt(xBarStyles.height, 10);
 
         if (containerStyles['max-height'] !== 'none' && pureContainerHeight === 0) {
-            if (contentRef.current.offsetHeight + parseInt(xBarStyles['height'], 10) > parseInt(containerStyles['max-height'], 10)) {
+            if (contentRef.current.offsetHeight + parseInt(xBarStyles.height, 10) > parseInt(containerStyles['max-height'], 10)) {
                 containerRef.current.style.height = containerStyles['max-height'];
             } else {
                 containerRef.current.style.height =
@@ -175,53 +175,53 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const onKeyDown = (event) => {
         if (orientationState === 'vertical') {
             switch (event.code) {
-                case 'ArrowDown': {
-                    setTimer('scrollTop', props.step);
-                    event.preventDefault();
-                    break;
-                }
+            case 'ArrowDown': {
+                setTimer('scrollTop', props.step);
+                event.preventDefault();
+                break;
+            }
 
-                case 'ArrowUp': {
-                    setTimer('scrollTop', props.step * -1);
-                    event.preventDefault();
-                    break;
-                }
+            case 'ArrowUp': {
+                setTimer('scrollTop', props.step * -1);
+                event.preventDefault();
+                break;
+            }
 
-                case 'ArrowLeft':
+            case 'ArrowLeft':
 
-                case 'ArrowRight': {
-                    event.preventDefault();
-                    break;
-                }
+            case 'ArrowRight': {
+                event.preventDefault();
+                break;
+            }
 
-                default:
-                    //no op
-                    break;
+            default:
+                //no op
+                break;
             }
         } else if (orientationState === 'horizontal') {
             switch (event.code) {
-                case 'ArrowRight': {
-                    setTimer('scrollLeft', props.step);
-                    event.preventDefault();
-                    break;
-                }
+            case 'ArrowRight': {
+                setTimer('scrollLeft', props.step);
+                event.preventDefault();
+                break;
+            }
 
-                case 'ArrowLeft': {
-                    setTimer('scrollLeft', props.step * -1);
-                    event.preventDefault();
-                    break;
-                }
+            case 'ArrowLeft': {
+                setTimer('scrollLeft', props.step * -1);
+                event.preventDefault();
+                break;
+            }
 
-                case 'ArrowDown':
+            case 'ArrowDown':
 
-                case 'ArrowUp': {
-                    event.preventDefault();
-                    break;
-                }
+            case 'ArrowUp': {
+                event.preventDefault();
+                break;
+            }
 
-                default:
-                    //no op
-                    break;
+            default:
+                //no op
+                break;
             }
         }
     };
@@ -352,8 +352,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                     {props.children}
                 </div>
             </div>
-            <div {...barXProps}></div>
-            <div {...barYProps}></div>
+            <div {...barXProps} />
+            <div {...barYProps} />
         </div>
     );
 });

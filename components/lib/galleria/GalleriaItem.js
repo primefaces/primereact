@@ -87,48 +87,48 @@ export const GalleriaItem = React.memo(
 
         const onIndicatorKeyDown = (event, index) => {
             switch (event.code) {
-                case 'Enter':
-                case 'NumpadEnter':
-                case 'Space':
-                    stopSlideShow();
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+                stopSlideShow();
 
-                    props.onActiveItemChange({
-                        index
-                    });
-                    event.preventDefault();
-                    break;
+                props.onActiveItemChange({
+                    index
+                });
+                event.preventDefault();
+                break;
 
-                case 'ArrowRight':
-                    onRightKey();
-                    break;
+            case 'ArrowRight':
+                onRightKey();
+                break;
 
-                case 'ArrowLeft':
-                    onLeftKey();
-                    break;
+            case 'ArrowLeft':
+                onLeftKey();
+                break;
 
-                case 'Home':
-                    onHomeKey();
-                    event.preventDefault();
-                    break;
+            case 'Home':
+                onHomeKey();
+                event.preventDefault();
+                break;
 
-                case 'End':
-                    onEndKey();
-                    event.preventDefault();
-                    break;
+            case 'End':
+                onEndKey();
+                event.preventDefault();
+                break;
 
-                case 'Tab':
-                    onTabKey();
-                    break;
+            case 'Tab':
+                onTabKey();
+                break;
 
-                case 'ArrowDown':
-                case 'ArrowUp':
-                case 'PageUp':
-                case 'PageDown':
-                    event.preventDefault();
-                    break;
+            case 'ArrowDown':
+            case 'ArrowUp':
+            case 'PageUp':
+            case 'PageDown':
+                event.preventDefault();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 

@@ -33,17 +33,17 @@ export function NumScrollDoc(props) {
 
     const getSeverity = (product) => {
         switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
+        case 'INSTOCK':
+            return 'success';
 
-            case 'LOWSTOCK':
-                return 'warning';
+        case 'LOWSTOCK':
+            return 'warning';
 
-            case 'OUTOFSTOCK':
-                return 'danger';
+        case 'OUTOFSTOCK':
+            return 'danger';
 
-            default:
-                return null;
+        default:
+            return null;
         }
     };
 
@@ -60,7 +60,7 @@ export function NumScrollDoc(props) {
                 <div>
                     <h4 className="mb-1">{product.name}</h4>
                     <h6 className="mt-0 mb-3">${product.price}</h6>
-                    <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                    <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
                         <Button icon="pi pi-search" className="p-button p-button-rounded" />
                         <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />

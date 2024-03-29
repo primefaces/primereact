@@ -197,7 +197,7 @@ export default function FormikDoc() {
                         onChange={(e) => {
                             formik.setFieldValue('checked', e.checked);
                         }}
-                    ></Checkbox>
+                    />
                     {getFormErrorMessage('checked')}
                     <Button type="submit" label="Submit" />
                 </form>

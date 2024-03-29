@@ -115,7 +115,7 @@ export const MenubarSub = React.memo(
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createSubmenu = (processedItem) => {

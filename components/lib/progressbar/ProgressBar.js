@@ -96,7 +96,7 @@ export const ProgressBar = React.memo(
             return (
                 <div id={props.id} ref={elementRef} {...rootProps}>
                     <div {...containerProps}>
-                        <div {...valueProps}></div>
+                        <div {...valueProps} />
                     </div>
                 </div>
             );
@@ -107,9 +107,13 @@ export const ProgressBar = React.memo(
             getElement: () => elementRef.current
         }));
 
-        if (props.mode === 'determinate') return createDeterminate();
-        else if (props.mode === 'indeterminate') return createIndeterminate();
-        else throw new Error(props.mode + " is not a valid mode for the ProgressBar. Valid values are 'determinate' and 'indeterminate'");
+        if (props.mode === 'determinate') {
+            return createDeterminate();
+        } else if (props.mode === 'indeterminate') {
+            return createIndeterminate();
+        }
+
+        throw new Error(props.mode + ' is not a valid mode for the ProgressBar. Valid values are \'determinate\' and \'indeterminate\'');
     })
 );
 

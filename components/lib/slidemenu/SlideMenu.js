@@ -91,7 +91,7 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             }
 
             DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });

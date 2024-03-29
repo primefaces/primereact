@@ -38,65 +38,65 @@ export const CascadeSelectSub = React.memo((props) => {
         const listItem = event.currentTarget.parentElement;
 
         switch (event.key) {
-            case 'Down':
-            case 'ArrowDown':
-                const nextItem = findNextItem(listItem);
+        case 'Down':
+        case 'ArrowDown':
+            const nextItem = findNextItem(listItem);
 
-                if (nextItem) {
-                    nextItem.children[0].focus();
+            if (nextItem) {
+                nextItem.children[0].focus();
+            }
+
+            break;
+
+        case 'Up':
+        case 'ArrowUp':
+            const prevItem = findPrevItem(listItem);
+
+            if (prevItem) {
+                prevItem.children[0].focus();
+            }
+
+            break;
+
+        case 'Right':
+        case 'ArrowRight':
+            if (isOptionGroup(option)) {
+                if (activeOptionState === option) {
+                    listItem.children[1].children[0].children[0].focus();
+                } else {
+                    setActiveOptionState(option);
                 }
+            }
 
-                break;
+            break;
 
-            case 'Up':
-            case 'ArrowUp':
-                const prevItem = findPrevItem(listItem);
+        case 'Left':
+        case 'ArrowLeft':
+            setActiveOptionState(null);
 
-                if (prevItem) {
-                    prevItem.children[0].focus();
-                }
+            const parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
 
-                break;
+            if (parentList) {
+                parentList.focus();
+            }
 
-            case 'Right':
-            case 'ArrowRight':
-                if (isOptionGroup(option)) {
-                    if (activeOptionState === option) {
-                        listItem.children[1].children[0].children[0].focus();
-                    } else {
-                        setActiveOptionState(option);
-                    }
-                }
+            break;
 
-                break;
+        case 'Enter':
+            onOptionClick(event, option);
+            break;
 
-            case 'Left':
-            case 'ArrowLeft':
-                setActiveOptionState(null);
+        case 'Tab':
+        case 'Escape':
+            if (props.onPanelHide) {
+                props.onPanelHide();
+                event.preventDefault();
+            }
 
-                const parentList = event.currentTarget.parentElement.parentElement.previousElementSibling;
+            break;
 
-                if (parentList) {
-                    parentList.focus();
-                }
-
-                break;
-
-            case 'Enter':
-                onOptionClick(event, option);
-                break;
-
-            case 'Tab':
-            case 'Escape':
-                if (props.onPanelHide) {
-                    props.onPanelHide();
-                    event.preventDefault();
-                }
-
-                break;
-
-            default:
-                break;
+        default:
+            break;
         }
 
         event.preventDefault();
@@ -124,13 +124,11 @@ export const CascadeSelectSub = React.memo((props) => {
                     value: option
                 });
             }
-        } else {
-            if (props.onOptionSelect) {
-                props.onOptionSelect({
-                    originalEvent: event,
-                    value: getOptionValue(option)
-                });
-            }
+        } else if (props.onOptionSelect) {
+            props.onOptionSelect({
+                originalEvent: event,
+                value: getOptionValue(option)
+            });
         }
     };
 

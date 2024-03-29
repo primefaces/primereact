@@ -395,16 +395,16 @@ const classes = {
         ObjectUtils.isEmpty(props)
             ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
-                  'p-filter-column': !props.headerColumnGroup && props.filterDisplay === 'row',
-                  'p-sortable-column': getColumnProp('sortable'),
-                  'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
-                  'p-highlight': sortMeta.sorted,
-                  'p-frozen-column': frozen,
-                  'p-selection-column': getColumnProp('selectionMode'),
-                  'p-sortable-disabled': getColumnProp('sortable') && _isSortableDisabled,
-                  'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable') && !frozen,
-                  [`p-align-${align}`]: !!align
-              }),
+                'p-filter-column': !props.headerColumnGroup && props.filterDisplay === 'row',
+                'p-sortable-column': getColumnProp('sortable'),
+                'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
+                'p-highlight': sortMeta.sorted,
+                'p-frozen-column': frozen,
+                'p-selection-column': getColumnProp('selectionMode'),
+                'p-sortable-disabled': getColumnProp('sortable') && _isSortableDisabled,
+                'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable') && !frozen,
+                [`p-align-${align}`]: !!align
+            }),
     footerCell: ({ getColumnProp, align }) =>
         classNames({
             'p-frozen-column': getColumnProp('frozen'),

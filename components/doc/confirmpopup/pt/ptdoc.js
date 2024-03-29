@@ -81,7 +81,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <>
                 <ConfirmPopup
                     pt={{

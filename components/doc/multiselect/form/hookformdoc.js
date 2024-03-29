@@ -195,7 +195,7 @@ export default function HookFormDoc() {
         <>
             <DocSectionText {...props}>
                 {/* TO DO: Add demo content. */}
-                <p></p>
+                <p />
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">

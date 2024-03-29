@@ -107,7 +107,7 @@ export default function FloatLabelDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className=" p-float-label w-full md:w-20rem">
-                    <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="w-full"></TreeSelect>
+                    <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="w-full" />
                     <label htmlFor="treeselect">TreeSelect</label>
                 </span>
             </div>

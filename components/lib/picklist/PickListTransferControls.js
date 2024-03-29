@@ -19,16 +19,16 @@ export const PickListTransferControls = React.memo((props) => {
 
     function getIconComponent(iconType) {
         switch (iconType) {
-            case 'moveToTargetIcon':
-                return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> : props.moveToTargetIcon || <AngleRightIcon />;
-            case 'moveAllToTargetIcon':
-                return props.moveAllToTargetIcon || viewChanged ? props.moveAllToTargetIcon || <AngleDoubleDownIcon /> : props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
-            case 'moveToSourceIcon':
-                return props.moveToSourceIcon || viewChanged ? props.moveToSourceIcon || <AngleUpIcon /> : props.moveToSourceIcon || <AngleLeftIcon />;
-            case 'moveAllToSourceIcon':
-                return props.moveAllToSourceIcon || viewChanged ? props.moveAllToSourceIcon || <AngleDoubleUpIcon /> : props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
-            default:
-                return null;
+        case 'moveToTargetIcon':
+            return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> : props.moveToTargetIcon || <AngleRightIcon />;
+        case 'moveAllToTargetIcon':
+            return props.moveAllToTargetIcon || viewChanged ? props.moveAllToTargetIcon || <AngleDoubleDownIcon /> : props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
+        case 'moveToSourceIcon':
+            return props.moveToSourceIcon || viewChanged ? props.moveToSourceIcon || <AngleUpIcon /> : props.moveToSourceIcon || <AngleLeftIcon />;
+        case 'moveAllToSourceIcon':
+            return props.moveAllToSourceIcon || viewChanged ? props.moveAllToSourceIcon || <AngleDoubleUpIcon /> : props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
+        default:
+            return null;
         }
     }
 
@@ -144,7 +144,7 @@ export const PickListTransferControls = React.memo((props) => {
                 unstyled={unstyled}
                 aria-label={ariaLabel('moveToTarget')}
                 __parentMetadata={{ parent: props.metaData }}
-            ></Button>
+            />
             <Button
                 disabled={moveAllRightDisabled}
                 type="button"
@@ -154,8 +154,8 @@ export const PickListTransferControls = React.memo((props) => {
                 unstyled={unstyled}
                 aria-label={ariaLabel('moveAllToTarget')}
                 __parentMetadata={{ parent: props.metaData }}
-            ></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} aria-label={ariaLabel('moveToSource')} __parentMetadata={{ parent: props.metaData }}></Button>
+            />
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} aria-label={ariaLabel('moveToSource')} __parentMetadata={{ parent: props.metaData }} />
             <Button
                 disabled={moveAllLeftDisabled}
                 type="button"
@@ -165,7 +165,7 @@ export const PickListTransferControls = React.memo((props) => {
                 unstyled={unstyled}
                 aria-label={ariaLabel('moveAllToSource')}
                 __parentMetadata={{ parent: props.metaData }}
-            ></Button>
+            />
         </div>
     );
 });

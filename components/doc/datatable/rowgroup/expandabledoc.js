@@ -63,20 +63,20 @@ export function ExpandableRowGroupDoc(props) {
 
     const getSeverity = (status) => {
         switch (status) {
-            case 'unqualified':
-                return 'danger';
+        case 'unqualified':
+            return 'danger';
 
-            case 'qualified':
-                return 'success';
+        case 'qualified':
+            return 'success';
 
-            case 'new':
-                return 'info';
+        case 'new':
+            return 'info';
 
-            case 'negotiation':
-                return 'warning';
+        case 'negotiation':
+            return 'warning';
 
-            case 'renewal':
-                return null;
+        case 'renewal':
+            return null;
         }
     };
 
@@ -354,11 +354,11 @@ export default function ExpandableRowGroupDemo() {
                         rowGroupFooterTemplate={footerTemplate}
                         tableStyle={{ minWidth: '50rem' }}
                     >
-                        <Column field="name" header="Name" style={{ width: '20%' }}></Column>
-                        <Column field="country" header="Country" body={countryBodyTemplate} style={{ width: '20%' }}></Column>
-                        <Column field="company" header="Company" style={{ width: '20%' }}></Column>
-                        <Column field="status" header="Status" body={statusBodyTemplate} style={{ width: '20%' }}></Column>
-                        <Column field="date" header="Date" style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" style={{ width: '20%' }} />
+                        <Column field="country" header="Country" body={countryBodyTemplate} style={{ width: '20%' }} />
+                        <Column field="company" header="Company" style={{ width: '20%' }} />
+                        <Column field="status" header="Status" body={statusBodyTemplate} style={{ width: '20%' }} />
+                        <Column field="date" header="Date" style={{ width: '20%' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

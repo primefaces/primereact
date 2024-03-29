@@ -14,10 +14,10 @@ export function mask(el, options) {
     };
 
     options = { ...defaultOptions, ...options };
-    let tests, partialPosition, len, firstNonMaskPos, defs, androidChrome, lastRequiredNonMaskPos, oldVal, focusText, caretTimeoutId, buffer, defaultBuffer;
+    let tests; let partialPosition; let len; let firstNonMaskPos; let defs; let androidChrome; let lastRequiredNonMaskPos; let oldVal; let focusText; let caretTimeoutId; let buffer; let defaultBuffer;
 
     const caret = (first, last) => {
-        let range, begin, end;
+        let range; let begin; let end;
 
         if (!el.offsetParent || el !== document.activeElement) {
             return;
@@ -29,8 +29,8 @@ export function mask(el, options) {
 
             if (el.setSelectionRange) {
                 el.setSelectionRange(begin, end);
-            } else if (el['createTextRange']) {
-                range = el['createTextRange']();
+            } else if (el.createTextRange) {
+                range = el.createTextRange();
                 range.collapse(true);
                 range.moveEnd('character', end);
                 range.moveStart('character', begin);
@@ -40,8 +40,8 @@ export function mask(el, options) {
             if (el.setSelectionRange) {
                 begin = el.selectionStart;
                 end = el.selectionEnd;
-            } else if (document['selection'] && document['selection'].createRange) {
-                range = document['selection'].createRange();
+            } else if (document.selection && document.selection.createRange) {
+                range = document.selection.createRange();
                 begin = 0 - range.duplicate().moveStart('character', -100000);
                 end = begin + range.text.length;
             }
@@ -73,19 +73,23 @@ export function mask(el, options) {
     };
 
     const seekNext = (pos) => {
-        while (++pos < len && !tests[pos]);
+        while (++pos < len && !tests[pos]) {
+
+        }
 
         return pos;
     };
 
     const seekPrev = (pos) => {
-        while (--pos >= 0 && !tests[pos]);
+        while (--pos >= 0 && !tests[pos]) {
+
+        }
 
         return pos;
     };
 
     const shiftL = (begin, end) => {
-        let i, j;
+        let i; let j;
 
         if (begin < 0) {
             return;
@@ -109,7 +113,7 @@ export function mask(el, options) {
     };
 
     const shiftR = (pos) => {
-        let i, c, j, t;
+        let i; let c; let j; let t;
 
         for (i = pos, c = getPlaceholder(pos); i < len; i++) {
             if (tests[i]) {
@@ -133,16 +137,24 @@ export function mask(el, options) {
         if (oldVal && oldVal.length && oldVal.length > curVal.length) {
             // a deletion or backspace happened
             checkVal(true);
-            while (pos.begin > 0 && !tests[pos.begin - 1]) pos.begin--;
+
+            while (pos.begin > 0 && !tests[pos.begin - 1]) {
+                pos.begin--;
+            }
 
             if (pos.begin === 0) {
-                while (pos.begin < firstNonMaskPos && !tests[pos.begin]) pos.begin++;
+                while (pos.begin < firstNonMaskPos && !tests[pos.begin]) {
+                    pos.begin++;
+                }
             }
 
             caret(pos.begin, pos.begin);
         } else {
             checkVal(true);
-            while (pos.begin < len && !tests[pos.begin]) pos.begin++;
+
+            while (pos.begin < len && !tests[pos.begin]) {
+                pos.begin++;
+            }
 
             caret(pos.begin, pos.begin);
         }
@@ -173,10 +185,10 @@ export function mask(el, options) {
             return;
         }
 
-        let k = e.which || e.keyCode,
-            pos,
-            begin,
-            end;
+        let k = e.which || e.keyCode;
+        let pos;
+        let begin;
+        let end;
 
         oldVal = el.value;
 
@@ -214,12 +226,12 @@ export function mask(el, options) {
             return;
         }
 
-        let k = e.which || e.keyCode,
-            pos = caret(),
-            p,
-            c,
-            next,
-            completed;
+        let k = e.which || e.keyCode;
+        let pos = caret();
+        let p;
+        let c;
+        let next;
+        let completed;
 
         if (e.ctrlKey || e.altKey || e.metaKey || k < 32) {
             //Ignore
@@ -288,11 +300,11 @@ export function mask(el, options) {
 
     const checkVal = (allow) => {
         //try to place characters where they belong
-        let test = el.value,
-            lastMatch = -1,
-            i,
-            c,
-            pos;
+        let test = el.value;
+        let lastMatch = -1;
+        let i;
+        let c;
+        let pos;
 
         for (i = 0, pos = 0; i < len; i++) {
             if (tests[i]) {
@@ -329,7 +341,10 @@ export function mask(el, options) {
             if (options.autoClear || buffer.join('') === defaultBuffer) {
                 // Invalid value. Remove it and replace it with the
                 // mask, which is the default behavior.
-                if (el.value) el.value = '';
+                if (el.value) {
+                    el.value = '';
+                }
+
                 clearBuffer(0, len);
             } else {
                 // Invalid value, but we opt to show the value to the
@@ -376,8 +391,11 @@ export function mask(el, options) {
     };
 
     const onInput = (event) => {
-        if (androidChrome) handleAndroidInput(event);
-        else handleInputChange(event);
+        if (androidChrome) {
+            handleAndroidInput(event);
+        } else {
+            handleInputChange(event);
+        }
     };
 
     const handleInputChange = (e) => {
@@ -492,8 +510,11 @@ export function mask(el, options) {
             let c = maskTokens[i];
 
             if (c !== '?') {
-                if (defs[c]) buffer.push(getPlaceholder(i));
-                else buffer.push(c);
+                if (defs[c]) {
+                    buffer.push(getPlaceholder(i));
+                } else {
+                    buffer.push(c);
+                }
             }
         }
 

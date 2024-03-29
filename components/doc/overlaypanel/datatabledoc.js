@@ -15,7 +15,7 @@ export function DataTableDoc(props) {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name} />
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>

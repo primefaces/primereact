@@ -64,7 +64,7 @@ export default function CaptchaDoc() {
                 <p>Styling Demo Content.</p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse} />
             </div>
             <DocSectionCode code={code} />

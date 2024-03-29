@@ -68,7 +68,7 @@ export default function ImageDemo() {
                 <Inplace>
                     <InplaceDisplay>
                         <span className="inline-flex align-items-center">
-                            <span className="pi pi-image"></span>
+                            <span className="pi pi-image" />
                             <span className="ml-2">View Picture</span>
                         </span>
                     </InplaceDisplay>

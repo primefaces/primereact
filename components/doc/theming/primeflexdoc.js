@@ -25,9 +25,9 @@ export function PrimeFlexDoc(props) {
                 <p>Here is an example to demonstrate how to align 3 buttons horizontally on bigger screens and display them as stacked on smaller ones.</p>
             </DocSectionText>
             <div className="card flex flex-column md:flex-row justify-content-between my-5">
-                <Button type="button" label="Button 1" className="mb-3 md:mb-0"></Button>
-                <Button type="button" label="Button 2" className="p-button-secondary mb-3 md:mb-0"></Button>
-                <Button type="button" label="Button 3" className="p-button-help"></Button>
+                <Button type="button" label="Button 1" className="mb-3 md:mb-0" />
+                <Button type="button" label="Button 2" className="p-button-secondary mb-3 md:mb-0" />
+                <Button type="button" label="Button 3" className="p-button-help" />
             </div>
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>

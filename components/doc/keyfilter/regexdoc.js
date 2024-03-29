@@ -70,7 +70,7 @@ export default function RegexDemo() {
                 </div>
                 <div className="flex-auto">
                     <label htmlFor="chars" className="font-bold block mb-2">
-                        Block {`< > * !`}
+                        Block {'< > * !'}
                     </label>
                     <InputText id="chars" keyfilter={/^[^<>*!]+$/} className="w-full" />
                 </div>

@@ -66,7 +66,7 @@ export default function AutoDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
             </div>
             <DocSectionCode code={code} />

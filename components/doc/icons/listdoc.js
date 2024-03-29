@@ -19,7 +19,7 @@ export function ListDoc(props) {
         if (event.target.value && icons) {
             let sanitizedInput = event.target.value.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
 
-            var newFilteredIcons = icons.filter((icon) => {
+            let newFilteredIcons = icons.filter((icon) => {
                 return (
                     icon.icon.tags.some((tag) =>
                         tag
@@ -33,7 +33,7 @@ export function ListDoc(props) {
                         .toLowerCase()
                         .includes(sanitizedInput.toLowerCase())
                 );
-            })
+            });
 
             setFilteredIcons(newFilteredIcons);
         }
@@ -42,9 +42,13 @@ export function ListDoc(props) {
     useEffect(() => {
         IconService.getIcons().then((data) => {
             data.sort((icon1, icon2) => {
-                if (icon1.properties.name < icon2.properties.name) return -1;
-                else if (icon1.properties.name < icon2.properties.name) return 1;
-                else return 0;
+                if (icon1.properties.name < icon2.properties.name) {
+                    return -1;
+                } else if (icon1.properties.name < icon2.properties.name) {
+                    return 1;
+                }
+
+                return 0;
             });
 
             setIcons(data);
@@ -71,7 +75,7 @@ export function ListDoc(props) {
                             return (
                                 icon.tags.indexOf('deprecate') === -1 && (
                                     <div className="col-12 md:col-2 mb-5" key={properties.name}>
-                                        <i className={'text-2xl mb-3 text-color-secondary pi pi-' + properties.name}></i>
+                                        <i className={'text-2xl mb-3 text-color-secondary pi pi-' + properties.name} />
                                         <div>pi-{properties.name}</div>
                                     </div>
                                 )

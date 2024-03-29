@@ -10,7 +10,7 @@ export function TemplateDoc(props) {
         return (
             <div>
                 <span>{item} - (active)</span>
-                <i className="pi pi-user-plus"></i>
+                <i className="pi pi-user-plus" />
             </div>
         );
     };

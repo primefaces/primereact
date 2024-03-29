@@ -65,8 +65,11 @@ export const OrderList = React.memo(
             const selected = selectedIndex !== -1;
             let newSelection;
 
-            if (selected) newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
-            else newSelection = metaKey ? [...selectionState, value] : [value];
+            if (selected) {
+                newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
+            } else {
+                newSelection = metaKey ? [...selectionState, value] : [value];
+            }
 
             setSelectionState(newSelection);
         };
@@ -75,8 +78,11 @@ export const OrderList = React.memo(
             const item = visibleList[index];
             const selected = ObjectUtils.findIndexInList(item, selectionState) !== -1;
 
-            if (selected) setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
-            else setSelectionState([...selectionState, item]);
+            if (selected) {
+                setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
+            } else {
+                setSelectionState([...selectionState, item]);
+            }
         };
 
         const findCurrentFocusedIndex = (listElement) => {
@@ -129,39 +135,39 @@ export const OrderList = React.memo(
 
         const onListKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowDown':
-                    onArrowDownKey(event);
-                    break;
+            case 'ArrowDown':
+                onArrowDownKey(event);
+                break;
 
-                case 'ArrowUp':
-                    onArrowUpKey(event);
-                    break;
+            case 'ArrowUp':
+                onArrowUpKey(event);
+                break;
 
-                case 'Home':
-                    onHomeKey(event);
-                    break;
+            case 'Home':
+                onHomeKey(event);
+                break;
 
-                case 'End':
-                    onEndKey(event);
-                    break;
+            case 'End':
+                onEndKey(event);
+                break;
 
-                case 'Enter':
-                case 'NumpadEnter':
-                    onEnterKey(event);
-                    break;
+            case 'Enter':
+            case 'NumpadEnter':
+                onEnterKey(event);
+                break;
 
-                case 'Space':
-                    onSpaceKey(event);
-                    break;
+            case 'Space':
+                onSpaceKey(event);
+                break;
 
-                case 'KeyA':
-                    if (event.ctrlKey) {
-                        setSelectionState(visibleList);
-                        event.preventDefault();
-                    }
+            case 'KeyA':
+                if (event.ctrlKey) {
+                    setSelectionState(visibleList);
+                    event.preventDefault();
+                }
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 

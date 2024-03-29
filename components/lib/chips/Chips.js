@@ -96,20 +96,20 @@ export const Chips = React.memo(
 
         const onContainerKeyDown = (event) => {
             switch (event.code) {
-                case 'ArrowLeft':
-                    onArrowLeftKeyOn(event);
-                    break;
+            case 'ArrowLeft':
+                onArrowLeftKeyOn(event);
+                break;
 
-                case 'ArrowRight':
-                    onArrowRightKeyOn(event);
-                    break;
+            case 'ArrowRight':
+                onArrowRightKeyOn(event);
+                break;
 
-                case 'Backspace':
-                    onBackspaceKeyOn(event);
-                    break;
+            case 'Backspace':
+                onBackspaceKeyOn(event);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -118,7 +118,10 @@ export const Chips = React.memo(
 
             if (inputRef.current.value.length === 0 && props.value && props.value.length > 0) {
                 focusIndex = focusIndex === null ? props.value.length - 1 : focusIndex - 1;
-                if (focusIndex < 0) focusIndex = 0;
+
+                if (focusIndex < 0) {
+                    focusIndex = 0;
+                }
             }
 
             setFocusedIndex(focusIndex);
@@ -156,41 +159,41 @@ export const Chips = React.memo(
             }
 
             switch (event.key) {
-                case 'Backspace':
-                    if (inputValue.length === 0 && values.length > 0) {
-                        removeItem(event, values.length - 1);
-                    }
+            case 'Backspace':
+                if (inputValue.length === 0 && values.length > 0) {
+                    removeItem(event, values.length - 1);
+                }
 
-                    break;
+                break;
 
-                case 'Enter':
-                    if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
-                        addItem(event, inputValue, true);
-                    }
+            case 'Enter':
+                if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
+                    addItem(event, inputValue, true);
+                }
 
-                    break;
+                break;
 
-                case 'ArrowLeft':
-                    if (inputValue.length === 0 && values && values.length > 0) {
-                        DomHandler.focus(listRef.current);
-                    }
+            case 'ArrowLeft':
+                if (inputValue.length === 0 && values && values.length > 0) {
+                    DomHandler.focus(listRef.current);
+                }
 
-                    break;
+                break;
 
-                case 'ArrowRight':
-                    event.stopPropagation();
-                    break;
+            case 'ArrowRight':
+                event.stopPropagation();
+                break;
 
-                default:
-                    if (props.keyfilter) {
-                        KeyFilter.onKeyPress(event, props.keyfilter);
-                    }
+            default:
+                if (props.keyfilter) {
+                    KeyFilter.onKeyPress(event, props.keyfilter);
+                }
 
-                    if (isMaxedOut()) {
-                        event.preventDefault();
-                    }
+                if (isMaxedOut()) {
+                    event.preventDefault();
+                }
 
-                    break;
+                break;
             }
         };
 
@@ -236,7 +239,7 @@ export const Chips = React.memo(
         const onPaste = (event) => {
             if (props.separator) {
                 let separator = props.separator.replace('\\n', '\n').replace('\\r', '\r').replace('\\t', '\t');
-                let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
+                let pastedData = (event.clipboardData || window.clipboardData).getData('Text');
 
                 if (props.keyfilter) {
                     KeyFilter.onPaste(event, props.keyfilter);

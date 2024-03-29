@@ -215,7 +215,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DeferredDemo onLoad={loadDemoData}>
                 <div className="card">
                     <DataTable
@@ -233,7 +233,7 @@ export default function PTDemo() {
                                 sortBadge: { className: 'bg-primary' },
                                 headerCell: { style: { width: '25%' } }
                             }}
-                        ></Column>
+                        />
                         <Column
                             field="name"
                             header="Name"
@@ -242,7 +242,7 @@ export default function PTDemo() {
                                 sortBadge: { className: 'bg-primary' },
                                 headerCell: { style: { width: '25%' } }
                             }}
-                        ></Column>
+                        />
                         <Column
                             field="category"
                             header="Category"
@@ -251,7 +251,7 @@ export default function PTDemo() {
                                 sortBadge: { className: 'bg-primary' },
                                 headerCell: { style: { width: '25%' } }
                             }}
-                        ></Column>
+                        />
                         <Column
                             field="quantity"
                             header="Quantity"
@@ -260,7 +260,7 @@ export default function PTDemo() {
                                 sortBadge: { className: 'bg-primary' },
                                 headerCell: { style: { width: '25%' } }
                             }}
-                        ></Column>
+                        />
                     </DataTable>
                 </div>
             </DeferredDemo>

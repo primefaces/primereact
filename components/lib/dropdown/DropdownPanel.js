@@ -151,31 +151,31 @@ export const DropdownPanel = React.memo(
                         {groupChildrenContent}
                     </React.Fragment>
                 );
-            } else {
-                const optionLabel = props.getOptionLabel(option);
-                const optionKey = index + '_' + props.getOptionRenderKey(option);
-                const disabled = props.isOptionDisabled(option);
-
-                return (
-                    <DropdownItem
-                        key={optionKey}
-                        label={optionLabel}
-                        index={index}
-                        focusedOptionIndex={props.focusedOptionIndex}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={props.isSelected(option)}
-                        highlightOnSelect={props.highlightOnSelect}
-                        disabled={disabled}
-                        onClick={props.onOptionClick}
-                        onMouseMove={changeFocusedItemOnHover}
-                        ptm={ptm}
-                        cx={cx}
-                        checkmark={props.checkmark}
-                    />
-                );
             }
+
+            const optionLabel = props.getOptionLabel(option);
+            const optionKey = index + '_' + props.getOptionRenderKey(option);
+            const disabled = props.isOptionDisabled(option);
+
+            return (
+                <DropdownItem
+                    key={optionKey}
+                    label={optionLabel}
+                    index={index}
+                    focusedOptionIndex={props.focusedOptionIndex}
+                    option={option}
+                    style={style}
+                    template={props.itemTemplate}
+                    selected={props.isSelected(option)}
+                    highlightOnSelect={props.highlightOnSelect}
+                    disabled={disabled}
+                    onClick={props.onOptionClick}
+                    onMouseMove={changeFocusedItemOnHover}
+                    ptm={ptm}
+                    cx={cx}
+                    checkmark={props.checkmark}
+                />
+            );
         };
 
         const createItems = () => {
@@ -304,30 +304,30 @@ export const DropdownPanel = React.memo(
                 };
 
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
-            } else {
-                const items = createItems();
-                const wrapperProps = mergeProps(
-                    {
-                        className: cx('wrapper'),
-                        style: sx('wrapper')
-                    },
-                    getPTOptions('wrapper')
-                );
-
-                const listProps = mergeProps(
-                    {
-                        className: cx('list'),
-                        role: 'listbox'
-                    },
-                    getPTOptions('list')
-                );
-
-                return (
-                    <div {...wrapperProps}>
-                        <ul {...listProps}>{items}</ul>
-                    </div>
-                );
             }
+
+            const items = createItems();
+            const wrapperProps = mergeProps(
+                {
+                    className: cx('wrapper'),
+                    style: sx('wrapper')
+                },
+                getPTOptions('wrapper')
+            );
+
+            const listProps = mergeProps(
+                {
+                    className: cx('list'),
+                    role: 'listbox'
+                },
+                getPTOptions('list')
+            );
+
+            return (
+                <div {...wrapperProps}>
+                    <ul {...listProps}>{items}</ul>
+                </div>
+            );
         };
 
         const createElement = () => {

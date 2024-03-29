@@ -25,7 +25,7 @@ export const MeterGroup = (inProps) => {
     let precentages = [];
 
     values.map((item) => {
-        totalPercent += item.value;
+        totalPercent = totalPercent + item.value;
         precentages.push(Math.round((item.value / totalPercent) * 100));
     });
 
@@ -69,9 +69,9 @@ export const MeterGroup = (inProps) => {
                 );
 
                 return ObjectUtils.getJSXElement(item.meterTemplate || meter, { ...item, percentage: calculatedPercantage, index }, meterTemplateProps);
-            } else {
-                return <span key={index} {...meterProps} />;
             }
+
+            return <span key={index} {...meterProps} />;
         });
 
         const meterContainerProps = mergeProps(

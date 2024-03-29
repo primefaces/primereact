@@ -85,17 +85,17 @@ export const Image = React.memo(
 
         const onMaskKeydown = (event) => {
             switch (event.code) {
-                case 'Escape':
-                    hide();
-                    setTimeout(() => {
-                        DomHandler.focus(previewButton.current);
-                    }, 200);
-                    event.preventDefault();
+            case 'Escape':
+                hide();
+                setTimeout(() => {
+                    DomHandler.focus(previewButton.current);
+                }, 200);
+                event.preventDefault();
 
-                    break;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -121,7 +121,9 @@ export const Image = React.memo(
             event.stopPropagation();
 
             setScaleState((prevScale) => {
-                if (zoomInDisabled) return prevScale;
+                if (zoomInDisabled) {
+                    return prevScale;
+                }
 
                 return prevScale + 0.1;
             });
@@ -131,14 +133,16 @@ export const Image = React.memo(
             event.stopPropagation();
 
             setScaleState((prevScale) => {
-                if (zoomOutDisabled) return prevScale;
+                if (zoomOutDisabled) {
+                    return prevScale;
+                }
 
                 return prevScale - 0.1;
             });
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
         };
 
         const onEntered = () => {

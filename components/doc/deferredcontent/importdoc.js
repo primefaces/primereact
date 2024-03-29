@@ -10,7 +10,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

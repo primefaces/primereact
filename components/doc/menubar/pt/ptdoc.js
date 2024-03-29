@@ -437,7 +437,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <div className="card relative z-2">
                 <Menubar
                     model={items}

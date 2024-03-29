@@ -5,7 +5,7 @@ const SupportPage = () => {
 
             <div className="flex flex-column xl:flex-row mb-5 gap-5">
                 <div className="card xl:w-3 m-0 relative overflow-hidden">
-                    <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
+                    <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }} />
                     <div className="text-2xl text-900 font-semibold mb-3 relative">Community Support</div>
                     <p className="m-0 line-height-3 relative text-lg text-800">
                         <a href="https://github.com/orgs/primefaces/discussions" className="text-primary hover:underline font-medium">
@@ -19,7 +19,7 @@ const SupportPage = () => {
                         although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PRO support instead.
                     </p>
                 </div>
-                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: `url(/images/support/card-pro.jpg)` }}>
+                <div className="card m-0 xl:w-9 text-white bg-cover" style={{ backgroundImage: 'url(/images/support/card-pro.jpg)' }}>
                     <div className="text-2xl font-semibold mb-3">PRO Support</div>
                     <p className="m-0 line-height-3 text-lg">
                         With PRO support, it's easy to support, tune and add features to PrimeReact as if it were an in- house library. PRO is a term based commercial support service. With the exclusive services of PRO account, it is no longer needed
@@ -44,55 +44,55 @@ const SupportPage = () => {
                 <div className="flex flex-wrap -mt-3 gap-3 text-800">
                     <ul className="flex-auto list-none p-0 m-0 text-lg p-3">
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Access to Private JIRA</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Response within 1 business day</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Unlimited Issue Tickets</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Conference Calls</span>
                         </li>
                     </ul>
                     <ul className="flex-auto list-none p-0 m-0 text-lg p-3">
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">PrimeBlocks - Enterprise License</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Theme Designer - Extended License</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Figma UI Kit - Enterprise License</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">1 Premium Template - Extended License</span>
                         </li>
                     </ul>
                     <ul className="flex-auto list-none p-0 m-0 text-lg p-3">
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Maintenance for Any Version</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Visual Theme Builder (Soon)</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Figma to Theme Generator (Soon)</span>
                         </li>
                         <li className="flex align-items-center mb-3">
-                            <i className="pi pi-check-circle mr-3 text-green-500"></i>
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">PrimeIcons PRO - (Soon)</span>
                         </li>
                     </ul>

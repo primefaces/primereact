@@ -5,14 +5,16 @@ export function classNames(...args) {
         for (let i = 0; i < args.length; i++) {
             let className = args[i];
 
-            if (!className) continue;
+            if (!className) {
+                continue;
+            }
 
             const type = typeof className;
 
             if (type === 'string' || type === 'number') {
                 classes.push(className);
             } else if (type === 'object') {
-                const _classes = Array.isArray(className) ? className : Object.entries(className).map(([key, value]) => (!!value ? key : null));
+                const _classes = Array.isArray(className) ? className : Object.entries(className).map(([key, value]) => (value ? key : null));
 
                 classes = _classes.length ? classes.concat(_classes.filter((c) => !!c)) : classes;
             }

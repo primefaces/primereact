@@ -10,7 +10,7 @@ import { ColorPicker } from 'primereact/colorpicker';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

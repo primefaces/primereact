@@ -49,7 +49,7 @@ export function ColumnGroupDoc(props) {
         let total = 0;
 
         for (let sale of sales) {
-            total += sale.lastYearProfit;
+            total = total + sale.lastYearProfit;
         }
 
         return formatCurrency(total);
@@ -59,7 +59,7 @@ export function ColumnGroupDoc(props) {
         let total = 0;
 
         for (let sale of sales) {
-            total += sale.thisYearProfit;
+            total = total + sale.thisYearProfit;
         }
 
         return formatCurrency(total);

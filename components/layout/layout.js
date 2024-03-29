@@ -30,17 +30,21 @@ export default function Layout({ children }) {
 
         if (darkMode) {
             newTheme = theme.replace('dark', 'light');
+        } else if (theme.includes('light') && theme !== 'fluent-light') {
+            newTheme = theme.replace('light', 'dark');
         } else {
-            if (theme.includes('light') && theme !== 'fluent-light') newTheme = theme.replace('light', 'dark');
-            else newTheme = 'lara-dark-cyan';
+            newTheme = 'lara-dark-cyan';
         }
 
         changeTheme(newTheme, !darkMode);
     };
 
     useEffect(() => {
-        if (sidebarActive) DomHandler.blockBodyScroll('blocked-scroll');
-        else DomHandler.unblockBodyScroll('blocked-scroll');
+        if (sidebarActive) {
+            DomHandler.blockBodyScroll('blocked-scroll');
+        } else {
+            DomHandler.unblockBodyScroll('blocked-scroll');
+        }
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -67,17 +71,17 @@ export default function Layout({ children }) {
                 <meta name="twitter:site" content="@primereact" />
                 <meta name="twitter:title" content="PrimeReact | React UI Component Library" />
                 <meta name="twitter:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
-                <meta property="og:type" content="website"></meta>
-                <meta property="og:title" content="PrimeReact | React UI Component Library"></meta>
-                <meta property="og:url" content="https://primereact.org"></meta>
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="PrimeReact | React UI Component Library" />
+                <meta property="og:url" content="https://primereact.org" />
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
-                <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
-                <meta property="og:ttl" content="604800"></meta>
-                <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon"></link>
+                <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg" />
+                <meta property="og:ttl" content="604800" />
+                <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon" />
             </Head>
             <NewsSection />
             <Topbar showConfigurator showMenuButton onMenuButtonClick={() => setSidebarActive(true)} onConfigButtonClick={() => setConfigActive(true)} onDarkSwitchClick={toggleDarkMode} />
-            <div className={classNames('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={() => setSidebarActive(false)}></div>
+            <div className={classNames('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={() => setSidebarActive(false)} />
             <Config active={configActive} onHide={() => setConfigActive(false)} onDarkSwitchClick={toggleDarkMode} />
             <div className="layout-content">
                 <Menu active={sidebarActive} />

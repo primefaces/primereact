@@ -13,7 +13,7 @@ export function TemplateDoc(props) {
     ];
 
     const justifyTemplate = (option) => {
-        return <i className={option.icon}></i>;
+        return <i className={option.icon} />;
     };
 
     const code = {

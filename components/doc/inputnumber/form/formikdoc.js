@@ -26,11 +26,11 @@ export function FormikDoc(props) {
             }
 
             if (data.year < 1960) {
-                errors.year = `Enter a valid year.`;
+                errors.year = 'Enter a valid year.';
             }
 
             if (data.year > 2050) {
-                errors.year = `Enter a valid year.`;
+                errors.year = 'Enter a valid year.';
             }
 
             return errors;

@@ -153,31 +153,31 @@ export const CascadeSelect = React.memo(
 
         const onInputKeyDown = (event) => {
             switch (event.which) {
-                //down
-                case 40:
-                    if (overlayVisibleState) {
-                        DomHandler.findSingle(overlayRef.current, '[data-pc-section="item"]').children[0].focus();
-                    } else if (event.altKey && props.options && props.options.length) {
-                        show();
-                    }
+            //down
+            case 40:
+                if (overlayVisibleState) {
+                    DomHandler.findSingle(overlayRef.current, '[data-pc-section="item"]').children[0].focus();
+                } else if (event.altKey && props.options && props.options.length) {
+                    show();
+                }
 
-                    event.preventDefault();
-                    break;
+                event.preventDefault();
+                break;
 
                 //space
-                case 32:
-                    overlayVisibleState ? hide() : show();
+            case 32:
+                overlayVisibleState ? hide() : show();
 
-                    event.preventDefault();
-                    break;
+                event.preventDefault();
+                break;
 
                 //tab
-                case 9:
-                    hide();
-                    break;
+            case 9:
+                hide();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         };
 
@@ -200,7 +200,7 @@ export const CascadeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
 

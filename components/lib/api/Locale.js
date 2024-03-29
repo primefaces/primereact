@@ -137,7 +137,7 @@ function locale(locale) {
 }
 
 function addLocale(locale, options) {
-    locales[locale] = { ...locales['en'], ...options };
+    locales[locale] = { ...locales.en, ...options };
 }
 
 function updateLocaleOption(key, value, locale) {
@@ -176,7 +176,7 @@ function ariaLabel(ariaKey, options) {
     const _locale = PrimeReact.locale;
 
     try {
-        let ariaLabel = localeOptions(_locale)['aria'][ariaKey];
+        let ariaLabel = localeOptions(_locale).aria[ariaKey];
 
         if (ariaLabel) {
             for (const key in options) {
