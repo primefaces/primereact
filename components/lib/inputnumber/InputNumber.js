@@ -323,7 +323,7 @@ export const InputNumber = React.memo(
                 return;
             }
 
-            if (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey) {
+            if (event.altKey || event.ctrlKey || event.metaKey) {
                 isSpecialChar.current = true;
 
                 return;
