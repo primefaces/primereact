@@ -3,11 +3,11 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props }) =>
-    classNames('p-tree p-component', {
-        'p-tree-selectable': props.selectionMode,
-        'p-tree-loading': props.loading,
-        'p-disabled': props.disabled
-    }),
+        classNames('p-tree p-component', {
+            'p-tree-selectable': props.selectionMode,
+            'p-tree-loading': props.loading,
+            'p-disabled': props.disabled
+        }),
     loadingOverlay: 'p-tree-loading-overlay p-component-overlay',
     loadingIcon: 'p-tree-loading-icon',
     filterContainer: 'p-tree-filter-container',
@@ -17,14 +17,14 @@ const classes = {
     node: ({ isLeaf }) =>
         classNames('p-treenode', {
             'p-treenode-leaf': isLeaf
-    }),
+        }),
     content: ({ nodeProps: props, checked, selected, isCheckboxSelectionMode }) =>
         classNames('p-treenode-content', {
             'p-treenode-selectable': props.selectionMode && props.node.selectable !== false,
             'p-highlight': isCheckboxSelectionMode() ? checked : selected,
             'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
             'p-disabled': props.disabled
-    }),
+        }),
     toggler: 'p-tree-toggler p-link',
     togglerIcon: 'p-tree-toggler-icon',
     nodeCheckbox: ({ partialChecked }) => classNames({ 'p-indeterminate': partialChecked }),
@@ -35,10 +35,8 @@ const classes = {
     emptyMessage: 'p-treenode p-tree-empty-message',
     droppoint: 'p-treenode-droppoint',
     header: 'p-tree-header',
-    footer: 'p-tree-footer',
-  
+    footer: 'p-tree-footer'
 };
-
 
 const styles = `
     .p-tree-container {

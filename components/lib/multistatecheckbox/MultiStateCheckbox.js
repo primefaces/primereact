@@ -166,7 +166,7 @@ export const MultiStateCheckbox = React.memo(
             MultiStateCheckboxBase.getOtherProps(props),
             ptm('root')
         );
-        
+
         const checkboxProps = mergeProps(
             {
                 className: classNames(props.className),

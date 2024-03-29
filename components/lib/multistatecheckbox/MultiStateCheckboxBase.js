@@ -6,7 +6,7 @@ const classes = {
         classNames('p-checkbox-icon p-c', {
             [`${icon}`]: true
         }),
-    root: ({ props }) => classNames('p-multistatecheckbox p-checkbox p-component', props.classNames),
+    root: ({ props }) => classNames('p-multistatecheckbox p-checkbox p-component', props.classNames)
 };
 
 const inlineStyles = {

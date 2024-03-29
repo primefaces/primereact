@@ -444,7 +444,7 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const isSelected = () => {
-        if (props.selectionMode === 'single' || ((props.selectionMode === 'multiple' ) && props.selectionKeys)) {
+        if (props.selectionMode === 'single' || (props.selectionMode === 'multiple' && props.selectionKeys)) {
             return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
         }
 
@@ -527,9 +527,7 @@ export const TreeTableRow = React.memo((props) => {
                 getColumnCheckboxPTOptions(column, 'rowCheckbox')
             );
 
-            return (
-               <Checkbox {...rowCheckboxProps} />
-            );
+            return <Checkbox {...rowCheckboxProps} />;
         } else {
             return null;
         }

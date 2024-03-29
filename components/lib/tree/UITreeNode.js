@@ -671,12 +671,12 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon  /> : null;
+            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
             const checkboxIcon = IconUtils.getJSXIcon(icon, {}, props);
             const checkboxProps = mergeProps(
                 {
-                    className: cx('nodeCheckbox', {  partialChecked }),
-                    checked: checked || partialChecked, 
+                    className: cx('nodeCheckbox', { partialChecked }),
+                    checked: checked || partialChecked,
                     icon: checkboxIcon,
                     tabIndex: -1,
                     unstyled: props?.isUnstyled?.(),
@@ -687,9 +687,7 @@ export const UITreeNode = React.memo((props) => {
                 getPTOptions('nodeCheckbox')
             );
 
-            return (
-                <Checkbox {...checkboxProps} />
-            );
+            return <Checkbox {...checkboxProps} />;
         }
 
         return null;
@@ -822,7 +820,7 @@ export const UITreeNode = React.memo((props) => {
             },
             getPTOptions('subgroup')
         );
-        
+
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
                 <ul {...subgroupProps}>
