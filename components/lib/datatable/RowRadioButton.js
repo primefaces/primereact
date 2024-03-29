@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
-import { RadioButton } from '../radioButton/RadioButton';
+import { RadioButton } from '../radiobutton/RadioButton';
 
 export const RowRadioButton = React.memo((props) => {
     const mergeProps = useMergeProps();

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { Checkbox } from '../checkbox/Checkbox';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { MultiStateCheckboxBase } from './MultiStateCheckboxBase';
-import { Checkbox } from '../checkbox/checkbox';
 
 export const MultiStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
