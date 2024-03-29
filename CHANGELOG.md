@@ -17,6 +17,7 @@
 - Enhancement focusOnHover Prop [\#6230](https://github.com/primefaces/primereact/issues/6230)
 - TreeSelect: can't change default text "No results found" when not find data in filter TreeSelect [\#6173](https://github.com/primefaces/primereact/issues/6173)
 - Listbox - focusOnHover prop [\#6171](https://github.com/primefaces/primereact/issues/6171)
+- Upgrade PrimeIcons 7.0.0 [\#6255](https://github.com/primefaces/primereact/issues/6255)
 
 **Fixed bugs:**
 - Paginator: JumpToPageInput is broken by latest changes in Paginator [\#6226](https://github.com/primefaces/primereact/issues/6226)
