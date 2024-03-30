@@ -631,7 +631,7 @@ export const TreeSelect = React.memo(
                         onPointerUp: clear,
                         tabIndex: props.tabIndex || '0',
                         onKeyDown: onClearIconKeyDown,
-                        'aria-label': 'Clear Selection'
+                        'aria-label': localeOption('clear')
                     },
                     ptm('clearIcon')
                 );
