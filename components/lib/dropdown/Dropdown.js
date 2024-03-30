@@ -957,10 +957,7 @@ export const Dropdown = React.memo(
         }, [overlayVisibleState, filterState, props.filter]);
 
         useUpdateEffect(() => {
-            if (filterState && (!props.options || props.options.length === 0)) {
-                setFilterState('');
-            }
-
+          
             updateInputField();
 
             if (inputRef.current) {
