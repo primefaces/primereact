@@ -5,8 +5,6 @@ import { DropdownDoc } from '@/components/doc/autocomplete/dropdowndoc';
 import { FilledDoc } from '@/components/doc/autocomplete/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '@/components/doc/autocomplete/forceselectiondoc';
-import { FormikDoc } from '@/components/doc/autocomplete/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/autocomplete/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '@/components/doc/autocomplete/importdoc';
 import { InvalidDoc } from '@/components/doc/autocomplete/invaliddoc';
@@ -87,23 +85,6 @@ const AutoCompleteDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
         },
         {
             id: 'accessibility',
