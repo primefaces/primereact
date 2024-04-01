@@ -2,6 +2,7 @@ import { AccessibilityDoc } from '@/components/doc/autocomplete/accessibilitydoc
 import { BasicDoc } from '@/components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '@/components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '@/components/doc/autocomplete/dropdowndoc';
+import { FilledDoc } from '@/components/doc/autocomplete/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '@/components/doc/autocomplete/forceselectiondoc';
 import { FormikDoc } from '@/components/doc/autocomplete/form/formikdoc';
@@ -71,6 +72,11 @@ const AutoCompleteDemo = () => {
             id: 'floatlabel',
             label: 'Float Label',
             component: FloatLabelDoc
+        },
+        {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
         },
         {
             id: 'invalid',
