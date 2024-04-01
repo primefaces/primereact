@@ -1331,6 +1331,7 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     appearance: none;
     border-radius: 6px;
+    outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
     border-color: #6366f1;
@@ -1343,6 +1344,15 @@
   }
   .p-inputtext.p-invalid.p-component {
     border-color: #e24c4c;
+  }
+  .p-inputtext.p-variant-filled {
+    background-color: #f3f4f6;
+  }
+  .p-inputtext.p-variant-filled:enabled:hover {
+    background-color: #f3f4f6;
+  }
+  .p-inputtext.p-variant-filled:enabled:focus {
+    background-color: #ffffff;
   }
   .p-inputtext.p-inputtext-sm {
     font-size: 0.875rem;
@@ -1357,29 +1367,8 @@
     color: #6b7280;
     transition-duration: 0.2s;
   }
-  .p-float-label > label.p-error {
+  .p-float-label > .p-invalid + label {
     color: #e24c4c;
-  }
-  .p-input-icon-left > i:first-of-type,
-  .p-input-icon-left > svg:first-of-type,
-  .p-input-icon-left > .p-input-prefix {
-    left: 0.75rem;
-    color: #6b7280;
-  }
-  .p-input-icon-left > .p-inputtext {
-    padding-left: 2.5rem;
-  }
-  .p-input-icon-left.p-float-label > label {
-    left: 2.5rem;
-  }
-  .p-input-icon-right > i:last-of-type,
-  .p-input-icon-right > svg:last-of-type,
-  .p-input-icon-right > .p-input-suffix {
-    right: 0.75rem;
-    color: #6b7280;
-  }
-  .p-input-icon-right > .p-inputtext {
-    padding-right: 2.5rem;
   }
   .p-icon-field-left > .p-inputtext {
     padding-left: 2.5rem;
