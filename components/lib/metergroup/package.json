@@ -1,0 +1,7 @@
+{
+    "main": "./metergroup.cjs.js",
+    "module": "./metergroup.esm.js",
+    "unpkg": "./metergroup.min.js",
+    "types": "./metergroup.d.ts",
+    "sideEffects": false
+}
