@@ -466,6 +466,7 @@ export const FileUpload = React.memo(
                         disabled={disabled}
                         pt={ptm('removeButton')}
                         __parentMetadata={{ parent: metaData }}
+                        unstyled={isUnstyled()}
                     />
                 </div>
             );
@@ -584,6 +585,7 @@ export const FileUpload = React.memo(
                         className={uploadOptions.className}
                         pt={ptm('uploadButton')}
                         __parentMetadata={{ parent: metaData }}
+                        unstyled={isUnstyled()}
                     />
                 );
                 cancelButton = (
@@ -598,6 +600,7 @@ export const FileUpload = React.memo(
                         className={cancelOptions.className}
                         pt={ptm('cancelButton')}
                         __parentMetadata={{ parent: metaData }}
+                        unstyled={isUnstyled()}
                     />
                 );
             }
