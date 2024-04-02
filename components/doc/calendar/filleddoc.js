@@ -1,20 +1,25 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Calendar } from '@/components/lib/calendar/Calendar';
+import { useState } from 'react';
 
-export function InvalidDoc(props) {
+export function FilledDoc(props) {
+    const [date, setDate] = useState(null);
+
     const code = {
         basic: `
-<Calendar invalid/>
+<Calendar variant="filled" value={date} onChange={(e) => setDate(e.value)} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function InvalidDemo() {
+export default function FilledDemo() {
+    const [date, setDate] = useState(null);
+
     return (
         <div className="card flex justify-content-center">
-            <Calendar invalid/>
+            <Calendar variant="filled" value={date} onChange={(e) => setDate(e.value)} />
         </div>
     )
 }
@@ -22,11 +27,14 @@ export default function InvalidDemo() {
         typescript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
-export default function InvalidDemo() {
+export default function FilledDemo() {
+    const [date, setDate] = useState<Nullable<Date>>(null);
+
     return (
         <div className="card flex justify-content-center">
-            <Calendar invalid/>
+            <Calendar variant="filled" value={date} onChange={(e) => setDate(e.value)} />
         </div>
     )
 }
@@ -37,11 +45,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+                    Specify the <i>variant</i> property as <i>filled</i> to display the component with a higher visual emphasis than the default <i>outlined</i> style.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar invalid />
+                <Calendar variant="filled" value={date} onChange={(e) => setDate(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>
