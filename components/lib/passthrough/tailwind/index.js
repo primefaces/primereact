@@ -2273,7 +2273,7 @@ const Tailwind = {
         toolbar: {
             className: classNames('absolute top-0 right-0 z-10 flex', 'p-4')
         },
-        rotaterightbutton: {
+        rotateRightButton: {
             className: classNames(
                 'flex justify-center items-center',
                 'text-white bg-transparent w-12 h-12 rounded-full transition duration-200 ease-in-out mr-2',
@@ -2281,8 +2281,8 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
             )
         },
-        rotaterighticon: 'w-6 h-6',
-        rotateleftbutton: {
+        rotateRightIcon: 'w-6 h-6',
+        rotateLeftButton: {
             className: classNames(
                 'flex justify-center items-center',
                 'text-white bg-transparent w-12 h-12 rounded-full transition duration-200 ease-in-out mr-2',
@@ -2290,8 +2290,8 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
             )
         },
-        rotatelefticon: 'w-6 h-6',
-        zoomoutbutton: {
+        rotateLeftIcon: 'w-6 h-6',
+        zoomOutButton: {
             className: classNames(
                 'flex justify-center items-center',
                 'text-white bg-transparent w-12 h-12 rounded-full transition duration-200 ease-in-out mr-2',
@@ -2299,8 +2299,8 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
             )
         },
-        zoomouticon: 'w-6 h-6',
-        zoominbutton: {
+        zoomOutIcon: 'w-6 h-6',
+        zoomInButton: {
             className: classNames(
                 'flex justify-center items-center',
                 'text-white bg-transparent w-12 h-12 rounded-full transition duration-200 ease-in-out mr-2',
@@ -2308,8 +2308,8 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
             )
         },
-        zoominicon: 'w-6 h-6',
-        closebutton: {
+        zoomInIcon: 'w-6 h-6',
+        closeButton: {
             className: classNames(
                 'flex justify-center items-center',
                 'text-white bg-transparent w-12 h-12 rounded-full transition duration-200 ease-in-out mr-2',
@@ -2317,7 +2317,7 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
             )
         },
-        closeicon: 'w-6 h-6',
+        closeIcon: 'w-6 h-6',
         transition: {
             timeout: 150,
             classNames: {
