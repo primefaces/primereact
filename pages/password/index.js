@@ -3,9 +3,8 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/password/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/password/basicdoc';
 import { DisabledDoc } from '@/components/doc/password/disableddoc';
+import { FilledDoc } from '@/components/doc/password/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/password/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/password/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/password/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/password/importdoc';
 import { InvalidDoc } from '@/components/doc/password/invaliddoc';
 import { LocaleDoc } from '@/components/doc/password/localedoc';
@@ -55,6 +54,11 @@ const PasswordDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -64,24 +68,6 @@ const PasswordDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
