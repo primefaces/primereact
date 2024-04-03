@@ -3,23 +3,23 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Checkbox } from '@/components/lib/checkbox/Checkbox';
 import { useState } from 'react';
 
-export function InvalidDoc(props) {
+export function FilledDoc(props) {
     const [checked, setChecked] = useState(false);
 
     const code = {
         basic: `
-<Checkbox invalid={!checked} onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>
+<Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function InvalidDemo() { 
+export default function FilledDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
         <div className="card flex justify-content-center">
-            <Checkbox invalid={!checked} onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>
+            <Checkbox variant="filled" onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         </div>
     )
 }
@@ -28,12 +28,12 @@ export default function InvalidDemo() {
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function InvalidDemo() {
-    const [checked, setChecked] = useState(false);
+export default function FilledDemo() {
+    const [checked, setChecked] = useState<boolean>(false);
 
     return (
         <div className="card flex justify-content-center">
-            <Checkbox invalid={!checked} onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>
+            <Checkbox variant="filled" onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Specify the <i>variant</i> property as <i>filled</i> to display the component with a higher visual emphasis than the default <i>outlined</i> style.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Checkbox invalid={!checked} onChange={(e) => setChecked(e.checked)} checked={checked} />
+                <Checkbox variant="filled" onChange={(e) => setChecked(e.checked)} checked={checked} />
             </div>
             <DocSectionCode code={code} />
         </>

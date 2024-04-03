@@ -2,8 +2,7 @@ import { AccessibilityDoc } from '@/components/doc/checkbox/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '@/components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '@/components/doc/checkbox/dynamicdoc';
-import { FormikDoc } from '@/components/doc/checkbox/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/checkbox/form/hookformdoc';
+import { FilledDoc } from '@/components/doc/checkbox/filleddoc';
 import { GroupDoc } from '@/components/doc/checkbox/groupdoc';
 import { ImportDoc } from '@/components/doc/checkbox/importdoc';
 import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
@@ -42,28 +41,15 @@ const CheckboxDemo = () => {
             component: InvalidDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
