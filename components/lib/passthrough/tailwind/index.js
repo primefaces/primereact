@@ -3078,7 +3078,7 @@ const Tailwind = {
                 'flex flex-col h-full': props.scrollHeight
             })
         }),
-        loadingoverlay: {
+        loadingOverlay: {
             className: classNames(
                 'fixed w-full h-full t-0 l-0 bg-gray-100/40',
                 'transition duration-200',
@@ -3086,14 +3086,14 @@ const Tailwind = {
                 'dark:bg-gray-950/40' // Dark Mode
             )
         },
-        loadingicon: 'w-8 h-8',
+        loadingIcon: 'w-8 h-8',
         header: {
             className: classNames(
                 'bg-slate-50 text-slate-700 border border-x-0 border-t-0 border-gray-300 p-4 font-bold',
                 'dark:bg-gray-900 dark:text-white/70 dark:border-blue-900/40' // Dark Mode
             )
         },
-        scrollablewrapper: ({ props }) => ({
+        scrollableWrapper: ({ props }) => ({
             className: classNames({
                 'relative overflow-auto': props.scrollable,
                 'overflow-x-auto': props.resizableColumns
@@ -3127,7 +3127,7 @@ const Tailwind = {
                 block: props.scrollable
             })
         }),
-        headerrow: ({ props }) => ({
+        headerRow: ({ props }) => ({
             className: classNames({
                 'flex flex-nowrap w-full': props.scrollable
             })
@@ -3144,7 +3144,7 @@ const Tailwind = {
             )
         }),
         column: {
-            headercell: ({ context }) => ({
+            headerCell: ({ context }) => ({
                 className: classNames(
                     'text-left border-gray-300 border font-bold',
                     'transition duration-200 p-4',
@@ -3160,7 +3160,7 @@ const Tailwind = {
                     }
                 )
             }),
-            bodycell: ({ context }) => ({
+            bodyCell: ({ context }) => ({
                 className: classNames(
                     'text-left border-gray-300 border',
                     'transition duration-200 p-4',
@@ -3174,7 +3174,7 @@ const Tailwind = {
                     }
                 )
             }),
-            rowtoggler: ({ context }) => ({
+            rowToggler: ({ context }) => ({
                 className: classNames(
                     'relative inline-flex items-center justify-center align-center cursor-pointer select-none overflow-hidden bg-transparent',
                     'w-8 h-8 border-0 rounded mr-0.5',
@@ -3188,20 +3188,20 @@ const Tailwind = {
             sort: {
                 className: 'inline-block align-middle'
             },
-            sorticon: ({ context }) => ({
+            sortIcon: ({ context }) => ({
                 className: classNames('ml-2 inline-block align-middle', {
                     'text-blue-700 dark:text-white/80': context.sorted,
                     'text-slate-700 dark:text-white/70': !context.sorted
                 })
             }),
-            sortbadge: {
+            sortBadge: {
                 className: classNames(
                     'h-[1.143rem] min-w-[1.143rem] leading-[1.143rem] text-blue-700 bg-blue-50 ml-2 rounded-[50%]',
                     'dark:text-white/80 dark:bg-blue-500/40' // Dark Mode
                 )
             },
-            columnresizer: 'block absolute top-0 right-0 m-0 w-2 h-full p-0 cursor-col-resize border border-transparent',
-            checkboxwrapper: {
+            columnResizer: 'block absolute top-0 right-0 m-0 w-2 h-full p-0 cursor-col-resize border border-transparent',
+            checkboxWrapper: {
                 className: classNames('cursor-pointer inline-flex relative select-none align-bottom', 'w-6 h-6 mr-2')
             },
             checkbox: ({ context }) => ({
@@ -3217,13 +3217,13 @@ const Tailwind = {
                     }
                 )
             }),
-            checkboxicon: ({ context }) => ({
+            checkboxIcon: ({ context }) => ({
                 className: classNames('w-4 h-4 transition-all duration-200 text-base dark:text-gray-900', {
                     'text-white': context.checked
                 })
             })
         },
-        resizehelper: 'absolute hidden w-px z-10 bg-blue-500 dark:bg-blue-300'
+        resizeHelper: 'absolute hidden w-px z-10 bg-blue-500 dark:bg-blue-300'
     },
     datatable: {
         root: ({ props }) => ({
