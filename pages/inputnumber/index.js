@@ -4,9 +4,8 @@ import { AccessibilityDoc } from '@/components/doc/inputnumber/accessibilitydoc'
 import { ButtonsDoc } from '@/components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '@/components/doc/inputnumber/currencydoc';
 import { DisabledDoc } from '@/components/doc/inputnumber/disableddoc';
+import { FilledDoc } from '@/components/doc/inputnumber/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/inputnumber/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/inputnumber/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/inputnumber/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/inputnumber/importdoc';
 import { InvalidDoc } from '@/components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '@/components/doc/inputnumber/localedoc';
@@ -61,6 +60,11 @@ const InputNumberDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -70,24 +74,6 @@ const InputNumberDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
