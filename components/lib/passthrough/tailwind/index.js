@@ -2818,7 +2818,7 @@ const Tailwind = {
             })
         }),
         buttons: 'flex flex-row xl:flex-col justify-center p-5',
-        movetotargetbutton: {
+        moveToTargetButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2831,7 +2831,7 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        movealltotargetbutton: {
+        moveAllToTargetButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2844,7 +2844,7 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        movetosourcebutton: {
+        moveToSourceButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2857,7 +2857,7 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        movealltosourcebutton: {
+        moveAllToSourceButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
