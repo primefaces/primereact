@@ -3231,7 +3231,7 @@ const Tailwind = {
                 'flex flex-col h-full': props.scrollable && props.scrollHeight === 'flex'
             })
         }),
-        loadingoverlay: {
+        loadingOverlay: {
             className: classNames(
                 'fixed w-full h-full t-0 l-0 bg-gray-100/40',
                 'transition duration-200',
@@ -3239,7 +3239,7 @@ const Tailwind = {
                 'dark:bg-gray-950/40' // Dark Mode
             )
         },
-        loadingicon: 'w-8 h-8',
+        loadingIcon: 'w-8 h-8',
         wrapper: ({ props }) => ({
             className: classNames({
                 relative: props.scrollable,
@@ -3276,7 +3276,7 @@ const Tailwind = {
             )
         },
         column: {
-            headercell: ({ context, props }) => ({
+            headerCell: ({ context, props }) => ({
                 className: classNames(
                     'text-left border-0 border-b border-solid border-gray-300 dark:border-blue-900/40 font-bold',
                     'transition duration-200',
@@ -3290,8 +3290,8 @@ const Tailwind = {
                     }
                 )
             }),
-            headercontent: 'flex items-center',
-            bodycell: ({ props, context }) => ({
+            headerContent: 'flex items-center',
+            bodyCell: ({ props, context }) => ({
                 className: classNames(
                     'text-left border-0 border-b border-solid border-gray-300',
                     context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
@@ -3302,7 +3302,7 @@ const Tailwind = {
                     }
                 )
             }),
-            footercell: ({ context }) => ({
+            footerCell: ({ context }) => ({
                 className: classNames(
                     'text-left border-0 border-b border-solid border-gray-300 font-bold',
                     'bg-slate-50 text-slate-700',
@@ -3314,10 +3314,10 @@ const Tailwind = {
                     }
                 )
             }),
-            sorticon: ({ context }) => ({
+            sortIcon: ({ context }) => ({
                 className: classNames('ml-2', context.sorted ? 'text-blue-700 dark:text-white/80' : 'text-slate-700 dark:text-white/70')
             }),
-            sortbadge: {
+            sortBadge: {
                 className: classNames(
                     'flex items-center justify-center align-middle',
                     'rounded-[50%] w-[1.143rem] leading-[1.143rem] ml-2',
@@ -3325,52 +3325,52 @@ const Tailwind = {
                     'dark:text-white/80 dark:bg-blue-400' // Dark Mode
                 )
             },
-            columnfilter: 'inline-flex items-center ml-auto',
-            filteroverlay: {
+            columnFilter: 'inline-flex items-center ml-auto',
+            filterOverlay: {
                 className: classNames(
                     'bg-white text-gray-600 border-0 rounded-md min-w-[12.5rem]',
                     'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' //Dark Mode
                 )
             },
-            filtermatchmodedropdown: {
+            filterMatchModeDropdown: {
                 root: 'min-[0px]:flex mb-2'
             },
-            filterrowitems: 'm-0 p-0 py-3 list-none ',
-            filterrowitem: ({ context }) => ({
+            filterRowItems: 'm-0 p-0 py-3 list-none ',
+            filterRowItem: ({ context }) => ({
                 className: classNames(
                     'm-0 py-3 px-5 bg-transparent',
                     'transition duration-200',
                     context?.highlighted ? 'text-blue-700 bg-blue-100 dark:text-white/80 dark:bg-blue-300' : 'text-gray-600 bg-transparent dark:text-white/80 dark:bg-transparent'
                 )
             }),
-            filteroperator: {
+            filterOperator: {
                 className: classNames(
                     'px-5 py-3 border-b border-solid border-gray-300 text-slate-700 bg-slate-50 rounded-t-md',
                     'dark:border-blue-900/40 dark:text-white/80 dark:bg-gray-900' // Dark Mode
                 )
             },
-            filteroperatordropdown: {
+            filterOperatorDropdown: {
                 root: 'min-[0px]:flex'
             },
-            filterconstraint: 'p-5 border-b border-solid border-gray-300 dark:border-blue-900/40',
-            filteraddrule: 'py-3 px-5',
-            filteraddrulebutton: {
+            filterConstraint: 'p-5 border-b border-solid border-gray-300 dark:border-blue-900/40',
+            filterAddRule: 'py-3 px-5',
+            filterAddRuleButton: {
                 root: 'justify-center w-full min-[0px]:text-sm',
                 label: 'flex-auto grow-0',
                 icon: 'mr-2'
             },
-            filterremovebutton: {
+            filterRemoveButton: {
                 root: 'ml-2',
                 label: 'grow-0'
             },
-            filterbuttonbar: 'flex items-center justify-between p-5',
-            filterclearbutton: {
+            filterButtonbar: 'flex items-center justify-between p-5',
+            filterClearButton: {
                 root: 'w-auto min-[0px]:text-sm border-blue-500 text-blue-500 px-4 py-3'
             },
-            filterapplybutton: {
+            filterApplyButton: {
                 root: 'w-auto min-[0px]:text-sm px-4 py-3'
             },
-            filtermenubutton: ({ context }) => ({
+            filterMenuButton: ({ context }) => ({
                 className: classNames(
                     'inline-flex justify-center items-center cursor-pointer no-underline overflow-hidden relative ml-2',
                     'w-8 h-8 rounded-[50%]',
@@ -3383,14 +3383,14 @@ const Tailwind = {
                     }
                 )
             }),
-            headerfilterclearbutton: ({ context }) => ({
+            headerFilterClearButton: ({ context }) => ({
                 className: classNames('inline-flex justify-center items-center cursor-pointer no-underline overflow-hidden relative', 'text-left bg-transparent m-0 p-0 border-none select-none ml-2', {
                     invisible: !context.hidden
                 })
             }),
-            columnresizer: 'block absolute top-0 right-0 m-0 w-2 h-full p-0 cursor-col-resize border border-transparent',
+            columnResizer: 'block absolute top-0 right-0 m-0 w-2 h-full p-0 cursor-col-resize border border-transparent',
             rowreordericon: 'cursor-move',
-            roweditorinitbutton: {
+            rowEditorInitButton: {
                 className: classNames(
                     'inline-flex items-center justify-center overflow-hidden relative',
                     'text-left cursor-pointer select-none',
@@ -3402,7 +3402,7 @@ const Tailwind = {
                     'dark:text-white/70' // Dark Mode
                 )
             },
-            roweditorsavebutton: {
+            rowEditorSaveButton: {
                 className: classNames(
                     'inline-flex items-center justify-center overflow-hidden relative',
                     'text-left cursor-pointer select-none',
@@ -3414,7 +3414,7 @@ const Tailwind = {
                     'dark:text-white/70' // Dark Mode
                 )
             },
-            roweditorcancelbutton: {
+            rowEditorCancelButton: {
                 className: classNames(
                     'inline-flex items-center justify-center overflow-hidden relative',
                     'text-left cursor-pointer select-none',
@@ -3449,7 +3449,7 @@ const Tailwind = {
             headercheckboxwrapper: {
                 className: classNames('cursor-pointer inline-flex relative select-none align-bottom', 'w-6 h-6')
             },
-            headercheckbox: ({ context }) => ({
+            headerCheckbox: ({ context }) => ({
                 className: classNames(
                     'flex items-center justify-center',
                     'border-2 w-6 h-6 text-gray-600 rounded-lg transition-colors duration-200',
@@ -3478,7 +3478,7 @@ const Tailwind = {
             checkboxicon: 'w-4 h-4 transition-all duration-200 text-white text-base dark:text-gray-900',
             transition: TRANSITIONS.overlay
         },
-        bodyrow: ({ context }) => ({
+        bodyRow: ({ context }) => ({
             className: classNames(
                 context.selected ? 'bg-blue-50 text-blue-700 dark:bg-blue-300' : 'bg-white text-gray-600 dark:bg-gray-900',
                 context.stripedRows ? (context.index % 2 === 0 ? 'bg-white text-gray-600 dark:bg-gray-900' : 'bg-blue-50/50 text-gray-600 dark:bg-gray-950') : '',
@@ -3491,11 +3491,11 @@ const Tailwind = {
                 }
             )
         }),
-        rowexpansion: 'bg-white text-gray-600 dark:bg-gray-900 dark:text-white/80',
-        rowgroupheader: {
+        rowExpansion: 'bg-white text-gray-600 dark:bg-gray-900 dark:text-white/80',
+        rowGroupHeader: {
             className: classNames('sticky z-[1]', 'bg-white text-gray-600', 'transition duration-200')
         },
-        rowgroupfooter: {
+        rowgroupFooter: {
             className: classNames('sticky z-[1]', 'bg-white text-gray-600', 'transition duration-200')
         },
         rowgrouptoggler: {
@@ -3508,7 +3508,7 @@ const Tailwind = {
             )
         },
         rowgrouptogglericon: 'inline-block w-4 h-4',
-        resizehelper: 'absolute hidden w-px z-10 bg-blue-500 dark:bg-blue-300'
+        resizeHelper: 'absolute hidden w-px z-10 bg-blue-500 dark:bg-blue-300'
     },
     // CHART
     chart: {
