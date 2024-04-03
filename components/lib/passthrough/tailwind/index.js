@@ -2482,7 +2482,7 @@ const Tailwind = {
                 }
             )
         }),
-        checkboxcontainer: 'mr-2',
+        checkboxContainer: 'mr-2',
         checkbox: ({ context, props }) => ({
             className: classNames(
                 'cursor-pointer inline-flex relative select-none align-bottom',
@@ -2499,11 +2499,11 @@ const Tailwind = {
                 }
             )
         }),
-        nodeicon: 'mr-2 text-gray-600 dark:text-white/70',
+        nodeIcon: 'mr-2 text-gray-600 dark:text-white/70',
         subgroup: {
             className: classNames('m-0 list-none', 'p-0 pl-4')
         },
-        filtercontainer: {
+        filterContainer: {
             className: classNames('mb-2', 'relative block w-full')
         },
         input: {
@@ -2513,7 +2513,7 @@ const Tailwind = {
                 'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        searchicon: 'absolute top-1/2 -mt-2 right-3 text-gray-600 dark:hover:text-white/70'
+        searchIcon: 'absolute top-1/2 -mt-2 right-3 text-gray-600 dark:hover:text-white/70'
     },
     // DATA
     timeline: {
