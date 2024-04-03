@@ -610,7 +610,7 @@ const Tailwind = {
         text: 'text-base font-normal flex flex-col flex-1 grow shrink ml-4',
         summary: 'font-bold block',
         detail: 'mt-1 block',
-        closebutton: {
+        closeButton: {
             className: classNames('w-8 h-8 rounded-full bg-transparent transition duration-200 ease-in-out', 'ml-auto overflow-hidden relative', 'flex items-center justify-center', 'hover:bg-white/30')
         },
         transition: {
