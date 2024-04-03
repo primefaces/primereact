@@ -2585,7 +2585,7 @@ const Tailwind = {
         header: 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white/80 border-gray-200 dark:border-blue-900/40 border-t border-b p-4 font-bold'
     },
     dataviewlayoutoptions: {
-        listbutton: ({ props }) => ({
+        listButton: ({ props }) => ({
             className: classNames(
                 'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom justify-center border',
                 'transition duration-200',
@@ -2593,7 +2593,7 @@ const Tailwind = {
                 props.layout === 'list' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
             )
         }),
-        gridbutton: ({ props }) => ({
+        gridButton: ({ props }) => ({
             className: classNames(
                 'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom justify-center border',
                 'transition duration-200',
