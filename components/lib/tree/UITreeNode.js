@@ -681,8 +681,11 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
-            const checkboxIcon = IconUtils.getJSXIcon(icon, {}, props);
+            const checkboxIconProps = mergeProps({
+                className: cx('checkIcon')
+            });
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
+            const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
             const checkboxProps = mergeProps(
                 {
                     className: cx('nodeCheckbox', { partialChecked }),
