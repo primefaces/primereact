@@ -3,8 +3,6 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/inputswitch/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '@/components/doc/inputswitch/disableddoc';
-import { FormikDoc } from '@/components/doc/inputswitch/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/inputswitch/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/inputswitch/importdoc';
 import { InvalidDoc } from '@/components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '@/components/doc/inputswitch/preselectiondoc';
@@ -40,24 +38,6 @@ const InputSwitchDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

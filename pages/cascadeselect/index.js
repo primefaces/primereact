@@ -1,9 +1,8 @@
 import { AccessibilityDoc } from '@/components/doc/cascadeselect/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/cascadeselect/basicdoc';
 import { DisabledDoc } from '@/components/doc/cascadeselect/disableddoc';
+import { FilledDoc } from '@/components/doc/cascadeselect/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/cascadeselect/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/cascadeselect/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/cascadeselect/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/cascadeselect/importdoc';
 import { InvalidDoc } from '@/components/doc/cascadeselect/invaliddoc';
 import { LoadingDoc } from '@/components/doc/cascadeselect/loadingdoc';
@@ -43,6 +42,11 @@ const CascadeSelectDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -52,24 +56,6 @@ const CascadeSelectDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

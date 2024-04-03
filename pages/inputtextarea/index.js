@@ -4,9 +4,8 @@ import { AccessibilityDoc } from '@/components/doc/inputtextarea/accessibilitydo
 import { AutoResizeDoc } from '@/components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '@/components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '@/components/doc/inputtextarea/disableddoc';
+import { FilledDoc } from '@/components/doc/inputtextarea/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/inputtextarea/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/inputtextarea/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/inputtextarea/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '@/components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/inputtextarea/keyfilterdoc';
@@ -43,6 +42,11 @@ const InputTextareaDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -52,24 +56,6 @@ const InputTextareaDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

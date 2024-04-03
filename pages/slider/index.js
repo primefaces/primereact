@@ -2,6 +2,7 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/slider/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/slider/basicdoc';
+import { FilterDoc } from '@/components/doc/slider/filterdoc';
 import { ImportDoc } from '@/components/doc/slider/importdoc';
 import { InputDoc } from '@/components/doc/slider/inputdoc';
 import { PTDoc } from '@/components/doc/slider/pt/ptdoc';
@@ -40,11 +41,15 @@ const SliderDemo = () => {
             component: RangeDoc
         },
         {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
         },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

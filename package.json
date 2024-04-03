@@ -29,8 +29,6 @@
         "@docsearch/react": "3.5.2",
         "chart.js": "4.4.1",
         "file-saver": "2.0.5",
-        "final-form": "^4.20.10",
-        "formik": "^2.4.5",
         "fs-extra": "^11.2.0",
         "jspdf": "2.5.1",
         "jspdf-autotable": "3.8.1",
@@ -41,8 +39,6 @@
         "quill": "1.3.7",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-final-form": "^6.5.9",
-        "react-hook-form": "^7.48.2",
         "react-transition-group": "^4.4.5",
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
     },

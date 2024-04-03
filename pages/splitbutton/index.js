@@ -3,6 +3,7 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/splitbutton/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/splitbutton/basicdoc';
 import { DisabledDoc } from '@/components/doc/splitbutton/disableddoc';
+import { IconsDoc } from '@/components/doc/splitbutton/iconsdoc';
 import { ImportDoc } from '@/components/doc/splitbutton/importdoc';
 import { LoadingDoc } from '@/components/doc/splitbutton/loadingdoc';
 import { OutlinedDoc } from '@/components/doc/splitbutton/outlineddoc';
@@ -13,10 +14,10 @@ import { RaisedTextDoc } from '@/components/doc/splitbutton/raisedtextdoc';
 import { RoundedDoc } from '@/components/doc/splitbutton/roundeddoc';
 import { SeverityDoc } from '@/components/doc/splitbutton/severitydoc';
 import { SizesDoc } from '@/components/doc/splitbutton/sizesdoc';
+import { TemplateDoc } from '@/components/doc/splitbutton/templatedoc';
 import { TextDoc } from '@/components/doc/splitbutton/textdoc';
 import { StyledDoc } from '@/components/doc/splitbutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/splitbutton/theming/tailwinddoc';
-import { TemplateDoc } from '@/components/doc/splitbutton/templatedoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -31,6 +32,16 @@ const SplitButtonDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'icons',
+            label: 'Icons',
+            component: IconsDoc
+        },
+        {
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
+        },
+        {
             id: 'loading',
             label: 'Loading',
             component: LoadingDoc
@@ -39,11 +50,6 @@ const SplitButtonDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'severity',
-            label: 'Severity',
-            component: SeverityDoc
         },
         {
             id: 'raised',

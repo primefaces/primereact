@@ -267,6 +267,11 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Displays a button next to the input field when enabled.
      * @defaultValue false
      */

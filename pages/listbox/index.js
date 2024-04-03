@@ -4,8 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/listbox/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/listbox/basicdoc';
 import { DisabledDoc } from '@/components/doc/listbox/disableddoc';
 import { FilterDoc } from '@/components/doc/listbox/filterdoc';
-import { FormikDoc } from '@/components/doc/listbox/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/listbox/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/listbox/groupdoc';
 import { ImportDoc } from '@/components/doc/listbox/importdoc';
 import { InvalidDoc } from '@/components/doc/listbox/invaliddoc';
@@ -64,24 +62,6 @@ const ListBoxDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

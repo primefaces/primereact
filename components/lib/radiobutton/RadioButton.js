@@ -112,7 +112,7 @@ export const RadioButton = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 'data-p-checked': props.checked
             },

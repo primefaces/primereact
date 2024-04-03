@@ -659,6 +659,7 @@
     border: 1px solid rgba(0, 0, 0, 0.38);
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     border-radius: 4px;
+    outline-color: transparent;
   }
   .p-cascadeselect:not(.p-disabled):hover {
     border-color: rgba(0, 0, 0, 0.87);
@@ -668,6 +669,15 @@
     outline-offset: 0;
     box-shadow: none;
     border-color: #3F51B5;
+  }
+  .p-cascadeselect.p-variant-filled {
+    background-color: #f5f5f5;
+  }
+  .p-cascadeselect.p-variant-filled:enabled:hover {
+    background-color: #ececec;
+  }
+  .p-cascadeselect.p-variant-filled:enabled:focus {
+    background-color: #dcdcdc;
   }
   .p-cascadeselect .p-cascadeselect-label {
     background: transparent;
@@ -709,37 +719,28 @@
     transition: none;
     border-radius: 0;
   }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content {
-    padding: 0.75rem 0.75rem;
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:first-child {
+    margin-top: 0;
   }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: none;
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:last-child {
+    margin-bottom: 0;
   }
   .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight {
     color: #3F51B5;
     background: rgba(63, 81, 181, 0.12);
   }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:not(.p-highlight):not(.p-disabled):hover {
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight.p-focus {
+    background: rgba(63, 81, 181, 0.24);
+  }
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:not(.p-highlight):not(.p-disabled).p-focus {
     color: rgba(0, 0, 0, 0.87);
     background: rgba(0, 0, 0, 0.04);
   }
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content {
+    padding: 0.75rem 0.75rem;
+  }
   .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-group-icon {
     font-size: 0.875rem;
-  }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-group-icon.p-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-  .p-input-filled .p-cascadeselect {
-    background: #f5f5f5;
-  }
-  .p-input-filled .p-cascadeselect:not(.p-disabled):hover {
-    background-color: #ececec;
-  }
-  .p-input-filled .p-cascadeselect:not(.p-disabled).p-focus {
-    background-color: #dcdcdc;
   }
   .p-checkbox {
     position: relative;
@@ -1334,6 +1335,7 @@
     transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
     appearance: none;
     border-radius: 4px;
+    outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
     border-color: rgba(0, 0, 0, 0.87);
@@ -1346,6 +1348,15 @@
   }
   .p-inputtext.p-invalid.p-component {
     border-color: #b00020;
+  }
+  .p-inputtext.p-variant-filled {
+    background-color: #f5f5f5;
+  }
+  .p-inputtext.p-variant-filled:enabled:hover {
+    background-color: #ececec;
+  }
+  .p-inputtext.p-variant-filled:enabled:focus {
+    background-color: #dcdcdc;
   }
   .p-inputtext.p-inputtext-sm {
     font-size: 0.875rem;
@@ -1360,29 +1371,8 @@
     color: rgba(0, 0, 0, 0.6);
     transition-duration: 0.2s;
   }
-  .p-float-label > label.p-error {
+  .p-float-label > .p-invalid + label {
     color: #b00020;
-  }
-  .p-input-icon-left > i:first-of-type,
-  .p-input-icon-left > svg:first-of-type,
-  .p-input-icon-left > .p-input-prefix {
-    left: 0.75rem;
-    color: rgba(0, 0, 0, 0.6);
-  }
-  .p-input-icon-left > .p-inputtext {
-    padding-left: 2.5rem;
-  }
-  .p-input-icon-left.p-float-label > label {
-    left: 2.5rem;
-  }
-  .p-input-icon-right > i:last-of-type,
-  .p-input-icon-right > svg:last-of-type,
-  .p-input-icon-right > .p-input-suffix {
-    right: 0.75rem;
-    color: rgba(0, 0, 0, 0.6);
-  }
-  .p-input-icon-right > .p-inputtext {
-    padding-right: 2.5rem;
   }
   .p-icon-field-left > .p-inputtext {
     padding-left: 2.5rem;
@@ -2084,6 +2074,15 @@
   }
   .p-treeselect.p-treeselect-clearable .p-treeselect-label {
     padding-right: 1.75rem;
+  }
+  .p-treeselect.p-variant-filled {
+    background: #f5f5f5;
+  }
+  .p-treeselect.p-variant-filled:not(.p-disabled):hover {
+    background-color: #ececec;
+  }
+  .p-treeselect.p-variant-filled:not(.p-disabled).p-focus {
+    background-color: #dcdcdc;
   }
   .p-treeselect .p-treeselect-label {
     padding: 0.75rem 0.75rem;

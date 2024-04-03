@@ -6,10 +6,9 @@ import { CheckboxDoc } from '@/components/doc/treeselect/checkboxdoc';
 import { ClearIconDoc } from '@/components/doc/treeselect/clearicondoc';
 import { ControlledDoc } from '@/components/doc/treeselect/controlleddoc';
 import { DisabledDoc } from '@/components/doc/treeselect/disableddoc';
+import { FilledDoc } from '@/components/doc/treeselect/filleddoc';
 import { FilterDoc } from '@/components/doc/treeselect/filterdoc';
 import { FloatLabelDoc } from '@/components/doc/treeselect/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/treeselect/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/treeselect/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/treeselect/importdoc';
 import { InvalidDoc } from '@/components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '@/components/doc/treeselect/multipledoc';
@@ -61,6 +60,11 @@ const TreeSelectDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -70,24 +74,6 @@ const TreeSelectDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

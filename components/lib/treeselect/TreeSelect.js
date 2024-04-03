@@ -840,7 +840,7 @@ export const TreeSelect = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root', { focusedState, overlayVisibleState, isValueEmpty }),
+                className: cx('root', { context, focusedState, overlayVisibleState, isValueEmpty }),
                 style: props.style,
                 onClick: onClick
             },

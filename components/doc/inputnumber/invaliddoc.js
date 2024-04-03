@@ -8,7 +8,7 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<InputNumber className="p-invalid" value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
+<InputNumber invalid value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
 `,
         javascript: `
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <InputNumber className="p-invalid" value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
+            <InputNumber invalid value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
         </div>
     )
 }
@@ -33,7 +33,7 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <InputNumber className="p-invalid" value={value} onValueChange={(e: InputNumberValueChangeEvent) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
+            <InputNumber invalid value={value} onValueChange={(e: InputNumberValueChangeEvent) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputNumber className="p-invalid" value={value} onValueChange={(e) => setValue(e.value)} minFractionDigits={2} />
+                <InputNumber invalid value={value} onValueChange={(e) => setValue(e.value)} minFractionDigits={2} />
             </div>
             <DocSectionCode code={code} />
         </>

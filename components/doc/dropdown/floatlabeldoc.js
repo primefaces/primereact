@@ -1,6 +1,7 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
 import { useState } from 'react';
 
 export function FloatLabelDoc(props) {
@@ -15,14 +16,15 @@ export function FloatLabelDoc(props) {
 
     const code = {
         basic: `
-<span className="p-float-label w-full md:w-14rem">
+<FloatLabel>
     <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
     <label htmlFor="dd-city">Select a City</label>
-</span>
+</FloatLabel>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import { FloatLabel } from 'primereact/floatlabel';
 
 export default function FloatLabelDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -36,10 +38,10 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <span className="p-float-label w-full md:w-14rem">
+            <FloatLabel className="w-full md:w-14rem">
                 <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
                 <label htmlFor="dd-city">Select a City</label>
-            </span>
+            </FloatLabel>
         </div>
     )
 }
@@ -47,6 +49,7 @@ export default function FloatLabelDemo() {
         typescript: `
 import React, { useState } from "react";
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { FloatLabel } from 'primereact/floatlabel';
 
 interface City {
     name: string;
@@ -65,10 +68,10 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <span className="p-float-label w-full md:w-14rem">
+            <FloatLabel className="w-full md:w-14rem">
                 <Dropdown inputId="dd-city" value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
                 <label htmlFor="dd-city">Select a City</label>
-            </span>
+            </FloatLabel>
         </div>
     )
 }
@@ -81,10 +84,10 @@ export default function FloatLabelDemo() {
                 <p>A floating label appears on top of the input field when focused.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <span className="p-float-label w-full md:w-14rem">
+                <FloatLabel className="w-full md:w-14rem">
                     <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
                     <label htmlFor="dd-city">Select a City</label>
-                </span>
+                </FloatLabel>
             </div>
             <DocSectionCode code={code} />
         </>

@@ -3,8 +3,6 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/multistatecheckbox/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '@/components/doc/multistatecheckbox/disableddoc';
-import { FormikDoc } from '@/components/doc/multistatecheckbox/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/multistatecheckbox/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/multistatecheckbox/importdoc';
 import { InvalidDoc } from '@/components/doc/multistatecheckbox/invaliddoc';
 import { PTDoc } from '@/components/doc/multistatecheckbox/pt/ptdoc';
@@ -34,24 +32,6 @@ const MultiStateCheckboxDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

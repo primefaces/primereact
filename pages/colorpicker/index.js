@@ -1,8 +1,6 @@
 import { AccessibilityDoc } from '@/components/doc/colorpicker/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/colorpicker/basicdoc';
 import { DisabledDoc } from '@/components/doc/colorpicker/disableddoc';
-import { FormikDoc } from '@/components/doc/colorpicker/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/colorpicker/form/hookformdoc';
 import { FormatDoc } from '@/components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '@/components/doc/colorpicker/importdoc';
 import { InlineDoc } from '@/components/doc/colorpicker/inlinedoc';
@@ -40,24 +38,6 @@ const ColorPickerDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',

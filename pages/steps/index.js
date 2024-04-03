@@ -5,6 +5,7 @@ import { BasicDoc } from '@/components/doc/steps/basicdoc';
 import { ControlledDoc } from '@/components/doc/steps/controlleddoc';
 import { ImportDoc } from '@/components/doc/steps/importdoc';
 import { InteractiveDoc } from '@/components/doc/steps/interactivedoc';
+import { LinearDoc } from '@/components/doc/steps/lineardoc';
 import { PTDoc } from '@/components/doc/steps/pt/ptdoc';
 import { Wireframe } from '@/components/doc/steps/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/steps/templatedoc';
@@ -27,6 +28,11 @@ const StepsDemo = () => {
             id: 'controlled',
             label: 'Controlled',
             component: ControlledDoc
+        },
+        {
+            id: 'linear',
+            label: 'Linear',
+            component: LinearDoc
         },
         {
             id: 'interactive',

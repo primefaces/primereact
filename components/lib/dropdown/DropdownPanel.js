@@ -230,7 +230,7 @@ export const DropdownPanel = React.memo(
                         ref: filterInputRef,
                         type: 'text',
                         autoComplete: 'off',
-                        className: cx('filterInput'),
+                        className: cx('filterInput', { context }),
                         placeholder: props.filterPlaceholder,
                         onKeyDown: props.onFilterInputKeyDown,
                         onChange: (e) => onFilterInputChange(e),

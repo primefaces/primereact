@@ -3,7 +3,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState, isValueEmpty }) =>
+    root: ({ props, focusedState, context, overlayVisibleState, isValueEmpty }) =>
         classNames(
             'p-treeselect p-component p-inputwrapper',
             {
@@ -12,6 +12,7 @@ const classes = {
                 'p-disabled': props.disabled,
                 'p-invalid': props.invalid,
                 'p-focus': focusedState,
+                'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
                 'p-inputwrapper-filled': !isValueEmpty,
                 'p-inputwrapper-focus': focusedState || overlayVisibleState
             },
@@ -163,6 +164,7 @@ export const TreeSelectBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         metaKeySelection: false,
         name: null,
         nodeTemplate: null,
