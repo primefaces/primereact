@@ -31,7 +31,7 @@ const classes = {
     nodeIcon: 'p-treenode-icon',
     label: 'p-treenode-label',
     subgroup: 'p-treenode-children',
-
+    checkIcon: 'p-checkbox-icon',
     emptyMessage: 'p-treenode p-tree-empty-message',
     droppoint: 'p-treenode-droppoint',
     header: 'p-tree-header',
