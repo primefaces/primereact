@@ -4,10 +4,9 @@ import { AccessibilityDoc } from '@/components/doc/multiselect/accessibilitydoc'
 import { BasicDoc } from '@/components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '@/components/doc/multiselect/chipsdoc';
 import { DisabledDoc } from '@/components/doc/multiselect/disableddoc';
+import { FilledDoc } from '@/components/doc/multiselect/filleddoc';
 import { FilterDoc } from '@/components/doc/multiselect/filterdoc';
 import { FloatLabelDoc } from '@/components/doc/multiselect/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/multiselect/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/multiselect/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/multiselect/groupdoc';
 import { ImportDoc } from '@/components/doc/multiselect/importdoc';
 import { InvalidDoc } from '@/components/doc/multiselect/invaliddoc';
@@ -67,6 +66,11 @@ const MultiSelectDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -76,24 +80,6 @@ const MultiSelectDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
