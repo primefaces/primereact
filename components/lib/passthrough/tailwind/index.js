@@ -1576,14 +1576,14 @@ const Tailwind = {
             className: 'h-44 w-40',
             style: { background: 'linear-gradient(to top, #000 0%, rgb(0 0 0 / 0) 100%), linear-gradient(to right, #fff 0%, rgb(255 255 255 / 0) 100%)' }
         },
-        colorhandle: {
+        colorHandle: {
             className: classNames('rounded-full border border-solid cursor-pointer h-3 w-3 absolute  opacity-85', 'border-white')
         },
         hue: {
             className: 'h-44 w-6 absolute top-2 left-44 opacity-85',
             style: { background: 'linear-gradient(0deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red)' }
         },
-        huehandle: 'border-solid border-2 cursor-pointer h-2 w-8 left-0 -ml-1 -mt-1 opacity-85 absolute',
+        hueHandle: 'border-solid border-2 cursor-pointer h-2 w-8 left-0 -ml-1 -mt-1 opacity-85 absolute',
         transition: TRANSITIONS.overlay
     },
     editor: {
