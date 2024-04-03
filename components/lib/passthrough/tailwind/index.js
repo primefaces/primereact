@@ -2658,7 +2658,7 @@ const Tailwind = {
     orderlist: {
         root: 'flex',
         controls: 'flex flex-col justify-center p-5',
-        moveupbutton: {
+        moveUpButton: {
             root: ({ context }) => ({
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2674,7 +2674,7 @@ const Tailwind = {
             }),
             label: () => ({ className: classNames('flex-initial w-0') })
         },
-        movetopbutton: {
+        moveTopButton: {
             root: ({ context }) => ({
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2690,7 +2690,7 @@ const Tailwind = {
             }),
             label: () => ({ className: classNames('flex-initial w-0') })
         },
-        movedownbutton: {
+        moveDownButton: {
             root: ({ context }) => ({
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2706,7 +2706,7 @@ const Tailwind = {
             }),
             label: () => ({ className: classNames('flex-initial w-0') })
         },
-        movebottombutton: {
+        moveBottomButton: {
             root: ({ context }) => ({
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
