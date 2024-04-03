@@ -2072,6 +2072,15 @@
   .p-treeselect.p-treeselect-clearable .p-treeselect-label {
     padding-right: 1.75rem;
   }
+  .p-treeselect.p-variant-filled {
+    background: #f3f4f6;
+  }
+  .p-treeselect.p-variant-filled:not(.p-disabled):hover {
+    background-color: #f3f4f6;
+  }
+  .p-treeselect.p-variant-filled:not(.p-disabled).p-focus {
+    background-color: #ffffff;
+  }
   .p-treeselect .p-treeselect-label {
     padding: 0.75rem 0.75rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
