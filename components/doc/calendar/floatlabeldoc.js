@@ -2,6 +2,7 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Calendar } from '@/components/lib/calendar/Calendar';
 import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export function FloatLabelDoc(props) {
@@ -56,7 +57,9 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A floating label appears on top of the input field when focused.</p>
+                <p>
+                    A floating label appears on top of the input field when focused. Visit <Link href="/floatlabel">FloatLabel</Link> documentation for more information.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <FloatLabel>

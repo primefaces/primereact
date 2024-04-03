@@ -3,23 +3,23 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Chips } from '@/components/lib/chips/Chips';
 import { useState } from 'react';
 
-export function InvalidDoc(props) {
+export function FilledDoc(props) {
     const [value, setValue] = useState([]);
 
     const code = {
         basic: `
-<Chips invalid value={value} onChange={(e) => setValue(e.value)} />
+<Chips variant="filled" value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
-export default function InvalidDemo() {
+export default function FilledDemo() {
     const [value, setValue] = useState([]);
 
     return (
         <div className="card p-fluid">
-            <Chips invalid value={value} onChange={(e) => setValue(e.value)} />
+            <Chips variant="filled" value={value} onChange={(e) => setValue(e.value)} />
         </div>
     )
 }
@@ -28,12 +28,12 @@ export default function InvalidDemo() {
 import React, { useState } from "react";
 import { Chips, ChipsChangeEvent } from "primereact/chips";
 
-export default function InvalidDemo() {
+export default function FilledDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
         <div className="card p-fluid">
-            <Chips invalid value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} />
+            <Chips variant="filled" value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} />
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+                    Specify the <i>variant</i> property as <i>filled</i> to display the component with a higher visual emphasis than the default <i>outlined</i> style.
                 </p>
             </DocSectionText>
             <div className="card p-fluid">
-                <Chips invalid value={value} onChange={(e) => setValue(e.value)} />
+                <Chips variant="filled" value={value} onChange={(e) => setValue(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>
