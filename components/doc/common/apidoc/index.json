@@ -4022,6 +4022,14 @@
                             "description": "Value of the component."
                         },
                         {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
+                        },
+                        {
                             "name": "virtualScrollerOptions",
                             "optional": true,
                             "readonly": false,
@@ -6541,6 +6549,14 @@
                             "description": "Value of the component."
                         },
                         {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
+                        },
+                        {
                             "name": "view",
                             "optional": true,
                             "readonly": false,
@@ -7712,6 +7728,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "When specified, disables the component."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "description": "Specifies the input variant of the component."
                         },
                         {
                             "name": "disabledDates",
@@ -9350,6 +9373,14 @@
                             "type": "any",
                             "default": "",
                             "description": "Value of the component."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -10340,6 +10371,14 @@
                             "type": "any",
                             "default": "",
                             "description": "Value of the component."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -11004,6 +11043,14 @@
                             "type": "string[]",
                             "default": "",
                             "description": "Value of the component."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -23330,6 +23377,14 @@
                             "description": "The template of selected item."
                         },
                         {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
+                        },
+                        {
                             "name": "virtualScrollerOptions",
                             "optional": true,
                             "readonly": false,
@@ -30281,6 +30336,14 @@
                             "type": "string",
                             "default": "",
                             "description": "The value of component"
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -30822,6 +30885,14 @@
                             "type": "null | number",
                             "default": "",
                             "description": "Value of the component."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -31491,6 +31562,14 @@
                             "type": "string",
                             "default": "",
                             "description": "The value of component"
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -31692,6 +31771,14 @@
                             "type": "string",
                             "default": "",
                             "description": "The value of component"
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -36029,6 +36116,14 @@
                             "type": "any",
                             "default": "",
                             "description": "Value of the component."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         },
                         {
                             "name": "virtualScrollerOptions",
@@ -41141,6 +41236,13 @@
                             "description": "When present, it specifies that the component should have invalid state style."
                         },
                         {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "description": "Specifies the input variant of the component."
+                        },
+                        {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
@@ -42688,6 +42790,14 @@
                             "type": "any",
                             "default": "",
                             "description": "Value of the radio."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -53063,6 +53173,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of selected values."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
@@ -55573,6 +55691,14 @@
                             "type": "null | boolean",
                             "default": "",
                             "description": "Value of the TriStateCheckbox."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
