@@ -2119,7 +2119,7 @@ const Tailwind = {
             })
         }),
         icon: 'mr-2',
-        submenuicon: 'ml-auto',
+        submenuIcon: 'ml-auto',
         separator: 'border-t border-gray-300 my-1 dark:border-blue-900/40',
         submenu: {
             className: classNames('py-1 bg-white dark:bg-gray-900 border-0 shadow-md min-w-full', 'absolute z-10', 'left-full top-0')
