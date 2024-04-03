@@ -2903,7 +2903,7 @@ const Tailwind = {
                 'dark:bg-gray-900 dark:text-white/60 dark:border-blue-900/40' // Dark Mode
             )
         },
-        firstpagebutton: ({ context }) => ({
+        firstPageButton: ({ context }) => ({
             className: classNames(
                 'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
                 'border-0 text-gray-500  min-w-[3rem] h-12 m-[0.143rem] rounded-md',
@@ -2915,7 +2915,7 @@ const Tailwind = {
                 }
             )
         }),
-        previouspagebutton: ({ context }) => ({
+        prevPageButton: ({ context }) => ({
             className: classNames(
                 'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
@@ -2927,7 +2927,7 @@ const Tailwind = {
                 }
             )
         }),
-        nextpagebutton: ({ context }) => ({
+        nextPageButton: ({ context }) => ({
             className: classNames(
                 'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
@@ -2939,7 +2939,7 @@ const Tailwind = {
                 }
             )
         }),
-        lastpagebutton: ({ context }) => ({
+        lastPageButton: ({ context }) => ({
             className: classNames(
                 'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
@@ -2951,7 +2951,7 @@ const Tailwind = {
                 }
             )
         }),
-        pagebutton: ({ context }) => ({
+        pageButton: ({ context }) => ({
             className: classNames(
                 'relative inline-flex items-center justify-center user-none overflow-hidden leading-none',
                 'border-0 text-gray-500 min-w-[3rem] h-12 m-[0.143rem] rounded-md',
@@ -2963,7 +2963,7 @@ const Tailwind = {
                 }
             )
         }),
-        rowperpagedropdown: {
+        RPPDropdown: {
             root: ({ props, state }) => ({
                 className: classNames(
                     'inline-flex relative cursor-pointer user-none',
@@ -3011,7 +3011,7 @@ const Tailwind = {
                 )
             })
         },
-        jumptopageinput: {
+        JTPInput: {
             root: 'inline-flex mx-2',
             input: {
                 className: classNames(
