@@ -626,6 +626,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     invalid?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {MultiSelectPassThroughOptions}
      */
