@@ -2014,16 +2014,16 @@ const Tailwind = {
                 'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80' // Focus
             )
         },
-        headeraction: {
+        headerAction: {
             className: classNames('flex items-center select-none cursor-pointer relative no-underline', 'text-gray-700 dark:text-white/80 p-5 font-bold')
         },
-        headersubmenuicon: {
+        headerSubmenuIcon: {
             className: classNames('mr-2')
         },
-        headericon: {
+        headerIcon: {
             className: classNames('mr-2')
         },
-        menucontent: {
+        menuContent: {
             className: classNames('py-1 border border-t-0 border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 rounded-t-none rounded-br-md rounded-bl-md')
         },
         menu: {
@@ -2047,7 +2047,7 @@ const Tailwind = {
         submenu: {
             className: classNames('p-0 pl-4 m-0 list-none')
         },
-        submenuicon: {
+        submenuIcon: {
             className: classNames('mr-2')
         },
         transition: TRANSITIONS.toggleable
