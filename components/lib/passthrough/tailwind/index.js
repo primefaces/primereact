@@ -1906,7 +1906,7 @@ const Tailwind = {
             })
         }),
         icon: 'mr-2',
-        submenuicon: ({ props }) => ({
+        submenuIcon: ({ props }) => ({
             className: classNames({
                 'ml-auto sm:ml-2': props.root,
                 'ml-auto': !props.root
@@ -1969,7 +1969,7 @@ const Tailwind = {
                 'no-underline w-8 h-8 items-center justify-center rounded-full transition hover:bg-gray-200 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
             )
         }),
-        headeraction: {
+        headerAction: {
             className: classNames('select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative', 'py-3 px-5 select-none')
         },
         action: {
@@ -1981,7 +1981,7 @@ const Tailwind = {
         submenuItem: {
             className: classNames('text-gray-700 hover:bg-gray-200')
         },
-        submenuicon: ({ props }) => ({
+        submenuIcon: ({ props }) => ({
             className: classNames({
                 'ml-2': props.orientation === 'horizontal',
                 'ml-auto': props.orientation !== 'horizontal'
@@ -1997,7 +1997,7 @@ const Tailwind = {
         submenu: {
             className: classNames('m-0 list-none', 'py-1 w-48')
         },
-        submenuheader: {
+        submenuHeader: {
             className: classNames('m-0 py-3 px-5 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-semibold rounded-tr-md rounded-tl-md')
         }
     },
