@@ -11,7 +11,6 @@ import { InvalidDoc } from '@/components/doc/inputnumber/invaliddoc';
 import { LocaleDoc } from '@/components/doc/inputnumber/localedoc';
 import { NumeralsDoc } from '@/components/doc/inputnumber/numberalsdoc';
 import { PrefixSuffixDoc } from '@/components/doc/inputnumber/prefixsuffixdoc';
-import { PTDoc } from '@/components/doc/inputnumber/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputnumber/pt/wireframe';
 import { StyledDoc } from '@/components/doc/inputnumber/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputnumber/theming/tailwinddoc';
@@ -90,11 +89,6 @@ const InputNumberDemo = () => {
             id: 'pt.inputnumber.options',
             label: 'InputNumber PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

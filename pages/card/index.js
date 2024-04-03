@@ -2,7 +2,6 @@ import { AccessibilityDoc } from '@/components/doc/card/accessibilitydoc';
 import { AdvancedDoc } from '@/components/doc/card/advanceddoc';
 import { BasicDoc } from '@/components/doc/card/basicdoc';
 import { ImportDoc } from '@/components/doc/card/importdoc';
-import { PTDoc } from '@/components/doc/card/pt/ptdoc';
 import { Wireframe } from '@/components/doc/card/pt/wireframe';
 import { StyledDoc } from '@/components/doc/card/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/card/theming/tailwinddoc';
@@ -44,11 +43,6 @@ const CardDemo = () => {
             id: 'pt.card.options',
             label: 'Card PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

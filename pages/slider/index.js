@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/slider/basicdoc';
 import { FilterDoc } from '@/components/doc/slider/filterdoc';
 import { ImportDoc } from '@/components/doc/slider/importdoc';
 import { InputDoc } from '@/components/doc/slider/inputdoc';
-import { PTDoc } from '@/components/doc/slider/pt/ptdoc';
 import { Wireframe } from '@/components/doc/slider/pt/wireframe';
 import { RangeDoc } from '@/components/doc/slider/rangedoc';
 import { StepDoc } from '@/components/doc/slider/stepdoc';
@@ -66,11 +65,6 @@ const SliderDemo = () => {
             id: 'pt.slider.options',
             label: 'Slider PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

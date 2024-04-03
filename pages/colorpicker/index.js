@@ -4,7 +4,6 @@ import { DisabledDoc } from '@/components/doc/colorpicker/disableddoc';
 import { FormatDoc } from '@/components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '@/components/doc/colorpicker/importdoc';
 import { InlineDoc } from '@/components/doc/colorpicker/inlinedoc';
-import { PTDoc } from '@/components/doc/colorpicker/pt/ptdoc';
 import { Wireframe } from '@/components/doc/colorpicker/pt/wireframe';
 import { StyledDoc } from '@/components/doc/colorpicker/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/colorpicker/theming/tailwinddoc';
@@ -54,11 +53,6 @@ const ColorPickerDemo = () => {
             id: 'pt.colorpicker.options',
             label: 'ColorPicker PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -6,7 +6,6 @@ import { DisabledDoc } from '@/components/doc/tristatecheckbox/disableddoc';
 import { FilledDoc } from '@/components/doc/tristatecheckbox/filleddoc';
 import { ImportDoc } from '@/components/doc/tristatecheckbox/importdoc';
 import { InvalidDoc } from '@/components/doc/tristatecheckbox/invaliddoc';
-import { PTDoc } from '@/components/doc/tristatecheckbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tristatecheckbox/pt/wireframe';
 import { StyledDoc } from '@/components/doc/tristatecheckbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tristatecheckbox/theming/tailwinddoc';
@@ -54,11 +53,6 @@ const TriStateCheckboxDemo = () => {
             id: 'pt.tristatecheckbox.options',
             label: 'TriStateCheckbox PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

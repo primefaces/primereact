@@ -7,7 +7,6 @@ import { FilledDoc } from '@/components/doc/radiobutton/filleddoc';
 import { GroupDoc } from '@/components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '@/components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '@/components/doc/radiobutton/invaliddoc';
-import { PTDoc } from '@/components/doc/radiobutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/radiobutton/pt/wireframe';
 import { StyledDoc } from '@/components/doc/radiobutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/radiobutton/theming/tailwinddoc';
@@ -60,11 +59,6 @@ const RadioButtonDemo = () => {
             id: 'pt.radiobutton.options',
             label: 'RadioButton PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -9,7 +9,6 @@ import { FloatLabelDoc } from '@/components/doc/inputtextarea/floatlabeldoc';
 import { ImportDoc } from '@/components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '@/components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/inputtextarea/keyfilterdoc';
-import { PTDoc } from '@/components/doc/inputtextarea/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputtextarea/pt/wireframe';
 import { StyledDoc } from '@/components/doc/inputtextarea/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputtextarea/theming/tailwinddoc';
@@ -72,11 +71,6 @@ const InputTextareaDemo = () => {
             id: 'pt.inputtextarea.options',
             label: 'InputTextarea PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

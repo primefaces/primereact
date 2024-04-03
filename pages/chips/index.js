@@ -6,7 +6,6 @@ import { FloatLabelDoc } from '@/components/doc/chips/floatlabeldoc';
 import { ImportDoc } from '@/components/doc/chips/importdoc';
 import { InvalidDoc } from '@/components/doc/chips/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/chips/keyfilterdoc';
-import { PTDoc } from '@/components/doc/chips/pt/ptdoc';
 import { Wireframe } from '@/components/doc/chips/pt/wireframe';
 import { SeparatorDoc } from '@/components/doc/chips/separatordoc';
 import { TemplateDoc } from '@/components/doc/chips/templatedoc';
@@ -78,11 +77,6 @@ const ChipsDemo = () => {
             id: 'pt.chips.options',
             label: 'Chips PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

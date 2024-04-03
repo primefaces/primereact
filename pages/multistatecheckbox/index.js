@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/multistatecheckbox/basicdoc';
 import { DisabledDoc } from '@/components/doc/multistatecheckbox/disableddoc';
 import { ImportDoc } from '@/components/doc/multistatecheckbox/importdoc';
 import { InvalidDoc } from '@/components/doc/multistatecheckbox/invaliddoc';
-import { PTDoc } from '@/components/doc/multistatecheckbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/multistatecheckbox/pt/wireframe';
 import { StyledDoc } from '@/components/doc/multistatecheckbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/multistatecheckbox/theming/tailwinddoc';
@@ -48,11 +47,6 @@ const MultiStateCheckboxDemo = () => {
             id: 'pt.multistatecheckbox.options',
             label: 'MultiStateCheckbox PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

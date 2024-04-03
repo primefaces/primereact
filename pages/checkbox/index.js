@@ -6,7 +6,6 @@ import { FilledDoc } from '@/components/doc/checkbox/filleddoc';
 import { GroupDoc } from '@/components/doc/checkbox/groupdoc';
 import { ImportDoc } from '@/components/doc/checkbox/importdoc';
 import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
-import { PTDoc } from '@/components/doc/checkbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/checkbox/pt/wireframe';
 import { StyledDoc } from '@/components/doc/checkbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/checkbox/theming/tailwinddoc';
@@ -67,11 +66,6 @@ const CheckboxDemo = () => {
             id: 'pt.checkbox.options',
             label: 'Checkbox PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

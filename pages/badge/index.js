@@ -3,7 +3,6 @@ import { BasicDoc } from '@/components/doc/badge/basicdoc';
 import { ButtonDoc } from '@/components/doc/badge/buttondoc';
 import { ImportDoc } from '@/components/doc/badge/importdoc';
 import { PositionDoc } from '@/components/doc/badge/positiondoc';
-import { PTDoc } from '@/components/doc/badge/pt/ptdoc';
 import { Wireframe } from '@/components/doc/badge/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/badge/severitydoc';
 import { SizeDoc } from '@/components/doc/badge/sizedoc';
@@ -62,11 +61,6 @@ const BadgeDemo = () => {
             id: 'pt.badge.options',
             label: 'Badge PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

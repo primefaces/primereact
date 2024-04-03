@@ -8,7 +8,6 @@ import { GroupDoc } from '@/components/doc/listbox/groupdoc';
 import { ImportDoc } from '@/components/doc/listbox/importdoc';
 import { InvalidDoc } from '@/components/doc/listbox/invaliddoc';
 import { MultipleDoc } from '@/components/doc/listbox/multipledoc';
-import { PTDoc } from '@/components/doc/listbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/listbox/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/listbox/templatedoc';
 import { StyledDoc } from '@/components/doc/listbox/theming/styleddoc';
@@ -78,11 +77,6 @@ const ListBoxDemo = () => {
             id: 'pt.listbox.options',
             label: 'Listbox PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

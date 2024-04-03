@@ -11,7 +11,6 @@ import { GroupDoc } from '@/components/doc/multiselect/groupdoc';
 import { ImportDoc } from '@/components/doc/multiselect/importdoc';
 import { InvalidDoc } from '@/components/doc/multiselect/invaliddoc';
 import { LoadingDoc } from '@/components/doc/multiselect/loadingdoc';
-import { PTDoc } from '@/components/doc/multiselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/multiselect/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/multiselect/templatedoc';
 import { StyledDoc } from '@/components/doc/multiselect/theming/styleddoc';
@@ -96,11 +95,6 @@ const MultiSelectDemo = () => {
             id: 'pt.multiselect.options',
             label: 'MultiSelect PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

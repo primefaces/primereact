@@ -14,7 +14,6 @@ import { ImportDoc } from '@/components/doc/dropdown/importdoc';
 import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
 import { LazyVirtualScrollDoc } from '@/components/doc/dropdown/lazyvirtualscrolldoc';
 import { LoadingDoc } from '@/components/doc/dropdown/loadingdoc';
-import { PTDoc } from '@/components/doc/dropdown/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dropdown/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/dropdown/templatedoc';
 import { StyledDoc } from '@/components/doc/dropdown/theming/styleddoc';
@@ -114,11 +113,6 @@ const DropdownDemo = () => {
             id: 'pt.dropdown.options',
             label: 'Dropdown PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 
