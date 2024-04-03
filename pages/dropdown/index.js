@@ -6,10 +6,9 @@ import { CheckmarkDoc } from '@/components/doc/dropdown/checkmarkdoc';
 import { ClearIconDoc } from '@/components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '@/components/doc/dropdown/disableddoc';
 import { EditableDoc } from '@/components/doc/dropdown/editabledoc';
+import { FilledDoc } from '@/components/doc/dropdown/filleddoc';
 import { FilterDoc } from '@/components/doc/dropdown/filterdoc';
 import { FloatLabelDoc } from '@/components/doc/dropdown/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/dropdown/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/dropdown/form/hookformdoc';
 import { GroupDoc } from '@/components/doc/dropdown/groupdoc';
 import { ImportDoc } from '@/components/doc/dropdown/importdoc';
 import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
@@ -85,6 +84,11 @@ const DropdownDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -94,24 +98,6 @@ const DropdownDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
