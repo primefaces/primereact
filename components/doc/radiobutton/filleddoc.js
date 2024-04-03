@@ -2,19 +2,19 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 
-export function InvalidDoc(props) {
+export function FilledDoc(props) {
     const code = {
         basic: `
-<RadioButton invalid/>
+<RadioButton variant="filled" />
         `,
         javascript: `
 import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
-export default function InvalidDemo() {
+export default function FilledDemo() {
     return (
         <div className="card flex justify-content-center align-items-center">
-            <RadioButton invalid/>
+            <RadioButton variant="filled" />
         </div>
     )
 }
@@ -23,10 +23,10 @@ export default function InvalidDemo() {
 import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
-export default function InvalidDemo() {
+export default function FilledDemo() {
     return (
         <div className="card flex justify-content-center align-items-center">
-            <RadioButton invalid/>
+            <RadioButton variant="filled" />
         </div>
     )
 }
@@ -37,11 +37,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+                    Specify the <i>variant</i> property as <i>filled</i> to display the component with a higher visual emphasis than the default <i>outlined</i> style.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center align-items-center">
-                <RadioButton invalid />
+                <RadioButton variant="filled" />
             </div>
             <DocSectionCode code={code} />
         </>
