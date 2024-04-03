@@ -1199,7 +1199,7 @@ const Tailwind = {
             className: classNames('border-collapse w-full', 'my-2')
         },
         tableHeaderCell: 'p-2',
-        weekday: 'text-gray-600 dark:text-white/70',
+        weekDay: 'text-gray-600 dark:text-white/70',
         day: 'p-2',
         dayLabel: ({ context }) => ({
             className: classNames(
