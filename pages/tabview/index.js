@@ -7,7 +7,6 @@ import { ControlledDoc } from '@/components/doc/tabview/controlleddoc';
 import { DisabledDoc } from '@/components/doc/tabview/disableddoc';
 import { HeaderIconDoc } from '@/components/doc/tabview/headericondoc';
 import { ImportDoc } from '@/components/doc/tabview/importdoc';
-import { PTDoc } from '@/components/doc/tabview/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tabview/pt/wireframe';
 import { ScrollableDoc } from '@/components/doc/tabview/scrollabledoc';
 import { TemplateDoc } from '@/components/doc/tabview/templatedoc';
@@ -79,11 +78,6 @@ const TabViewDemo = () => {
             id: 'pt.tabpanel.options',
             label: 'TabPanel PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -15,7 +15,6 @@ import { MinMaxDoc } from '@/components/doc/calendar/minmaxdoc';
 import { MonthPickerDoc } from '@/components/doc/calendar/monthpickerdoc';
 import { MultipleDoc } from '@/components/doc/calendar/multipledoc';
 import { MultipleMonthsDoc } from '@/components/doc/calendar/multiplemonthsdoc';
-import { PTDoc } from '@/components/doc/calendar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/calendar/pt/wireframe';
 import { RangeDoc } from '@/components/doc/calendar/rangedoc';
 import { StyledDoc } from '@/components/doc/calendar/theming/styleddoc';
@@ -144,11 +143,6 @@ const CalendarDemo = () => {
             id: 'pt.calendar.options',
             label: 'Calendar PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -3,7 +3,6 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/panel/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/panel/basicdoc';
 import { ImportDoc } from '@/components/doc/panel/importdoc';
-import { PTDoc } from '@/components/doc/panel/pt/ptdoc';
 import { Wireframe } from '@/components/doc/panel/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/panel/templatedoc';
 import { StyledDoc } from '@/components/doc/panel/theming/styleddoc';
@@ -50,11 +49,6 @@ const PanelDemo = () => {
             id: 'pt.panel.options',
             label: 'Panel PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

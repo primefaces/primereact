@@ -6,7 +6,6 @@ import { ColorDoc } from '@/components/doc/knob/colordoc';
 import { DisabledDoc } from '@/components/doc/knob/disableddoc';
 import { ImportDoc } from '@/components/doc/knob/importdoc';
 import { MinMaxDoc } from '@/components/doc/knob/minmaxdoc';
-import { PTDoc } from '@/components/doc/knob/pt/ptdoc';
 import { Wireframe } from '@/components/doc/knob/pt/wireframe';
 import { ReactiveDoc } from '@/components/doc/knob/reactivedoc';
 import { ReadOnlyDoc } from '@/components/doc/knob/readonlydoc';
@@ -90,11 +89,6 @@ const KnobDemo = () => {
             id: 'pt.knob.options',
             label: 'Knob PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

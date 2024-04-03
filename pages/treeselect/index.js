@@ -12,7 +12,6 @@ import { FloatLabelDoc } from '@/components/doc/treeselect/floatlabeldoc';
 import { ImportDoc } from '@/components/doc/treeselect/importdoc';
 import { InvalidDoc } from '@/components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '@/components/doc/treeselect/multipledoc';
-import { PTDoc } from '@/components/doc/treeselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/treeselect/pt/wireframe';
 import { StyledDoc } from '@/components/doc/treeselect/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/treeselect/theming/tailwinddoc';
@@ -90,11 +89,6 @@ const TreeSelectDemo = () => {
             id: 'pt.treeselect.options',
             label: 'TreeSelect PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

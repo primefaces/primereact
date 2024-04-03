@@ -2,16 +2,15 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/contextmenu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/contextmenu/basicdoc';
-import { DocumentDoc } from '@/components/doc/contextmenu/documentdoc';
-import { ImportDoc } from '@/components/doc/contextmenu/importdoc';
-import { PTDoc } from '@/components/doc/contextmenu/pt/ptdoc';
-import { Wireframe } from '@/components/doc/contextmenu/pt/wireframe';
-import { StyledDoc } from '@/components/doc/contextmenu/theming/styleddoc';
-import { TemplateDoc } from '@/components/doc/contextmenu/templatedoc';
-import { TailwindDoc } from '@/components/doc/contextmenu/theming/tailwinddoc';
 import { CommandDoc } from '@/components/doc/contextmenu/commanddoc';
 import { DataTableDoc } from '@/components/doc/contextmenu/datatabledoc';
+import { DocumentDoc } from '@/components/doc/contextmenu/documentdoc';
+import { ImportDoc } from '@/components/doc/contextmenu/importdoc';
+import { Wireframe } from '@/components/doc/contextmenu/pt/wireframe';
 import { RouterDoc } from '@/components/doc/contextmenu/routerdoc';
+import { TemplateDoc } from '@/components/doc/contextmenu/templatedoc';
+import { StyledDoc } from '@/components/doc/contextmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/contextmenu/theming/tailwinddoc';
 
 const ContextMenuDemo = () => {
     const docs = [
@@ -66,11 +65,6 @@ const ContextMenuDemo = () => {
             id: 'pt.contextmenu.options',
             label: 'ContextMenu PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

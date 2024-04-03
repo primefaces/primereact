@@ -9,7 +9,6 @@ import { ImportDoc } from '@/components/doc/inputmask/importdoc';
 import { InvalidDoc } from '@/components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '@/components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '@/components/doc/inputmask/optionaldoc';
-import { PTDoc } from '@/components/doc/inputmask/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputmask/pt/wireframe';
 import { SlotCharDoc } from '@/components/doc/inputmask/slotchardoc';
 import { StyledDoc } from '@/components/doc/inputmask/theming/styleddoc';
@@ -79,11 +78,6 @@ const InputMaskDemo = () => {
             id: 'pt.inputmask.options',
             label: 'InputMask PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

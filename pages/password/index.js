@@ -9,7 +9,6 @@ import { ImportDoc } from '@/components/doc/password/importdoc';
 import { InvalidDoc } from '@/components/doc/password/invaliddoc';
 import { LocaleDoc } from '@/components/doc/password/localedoc';
 import { MeterDoc } from '@/components/doc/password/meterdoc';
-import { PTDoc } from '@/components/doc/password/pt/ptdoc';
 import { Wireframe } from '@/components/doc/password/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/password/templatedoc';
 import { StyledDoc } from '@/components/doc/password/theming/styleddoc';
@@ -84,11 +83,6 @@ const PasswordDemo = () => {
             id: 'pt.password.options',
             label: 'Password PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

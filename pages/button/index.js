@@ -9,7 +9,6 @@ import { ImportDoc } from '@/components/doc/button/importdoc';
 import { LinkDoc } from '@/components/doc/button/linkdoc';
 import { LoadingDoc } from '@/components/doc/button/loadingdoc';
 import { OutlinedDoc } from '@/components/doc/button/outlineddoc';
-import { PTDoc } from '@/components/doc/button/pt/ptdoc';
 import { Wireframe } from '@/components/doc/button/pt/wireframe';
 import { RaisedDoc } from '@/components/doc/button/raiseddoc';
 import { RaisedTextDoc } from '@/components/doc/button/raisedtextdoc';
@@ -128,11 +127,6 @@ const ButtonDemo = () => {
             id: 'pt.button.options',
             label: 'Button PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

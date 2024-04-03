@@ -10,7 +10,6 @@ import { ImportDoc } from '@/components/doc/autocomplete/importdoc';
 import { InvalidDoc } from '@/components/doc/autocomplete/invaliddoc';
 import { MultipleDoc } from '@/components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '@/components/doc/autocomplete/objectsdoc';
-import { PTDoc } from '@/components/doc/autocomplete/pt/ptdoc';
 import { Wireframe } from '@/components/doc/autocomplete/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/autocomplete/templatedoc';
 import { StyledDoc } from '@/components/doc/autocomplete/theming/styleddoc';
@@ -102,11 +101,6 @@ const AutoCompleteDemo = () => {
             id: 'pt.autocomplete.options',
             label: 'AutoComplete PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

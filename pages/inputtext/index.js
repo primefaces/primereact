@@ -9,7 +9,6 @@ import { HelpTextDoc } from '@/components/doc/inputtext/helptextdoc';
 import { ImportDoc } from '@/components/doc/inputtext/importdoc';
 import { InvalidDoc } from '@/components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/inputtext/keyfilterdoc';
-import { PTDoc } from '@/components/doc/inputtext/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputtext/pt/wireframe';
 import { SizesDoc } from '@/components/doc/inputtext/sizesdoc';
 import { StyledDoc } from '@/components/doc/inputtext/theming/styleddoc';
@@ -78,11 +77,6 @@ const InputTextDemo = () => {
             id: 'pt.inputtext.options',
             label: 'InputText PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

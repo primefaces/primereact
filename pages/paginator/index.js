@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/paginator/basicdoc';
 import { ImagesDoc } from '@/components/doc/paginator/imagesdoc';
 import { ImportDoc } from '@/components/doc/paginator/importdoc';
 import { LayoutDoc } from '@/components/doc/paginator/layoutdoc';
-import { PTDoc } from '@/components/doc/paginator/pt/ptdoc';
 import { Wireframe } from '@/components/doc/paginator/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/paginator/templatedoc';
 import { StyledDoc } from '@/components/doc/paginator/theming/styleddoc';
@@ -55,11 +54,6 @@ const PaginatorDemo = () => {
             id: 'pt.paginator.options',
             label: 'Paginator PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

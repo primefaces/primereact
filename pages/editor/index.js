@@ -3,7 +3,6 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/editor/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/editor/basicdoc';
 import { ImportDoc } from '@/components/doc/editor/importdoc';
-import { PTDoc } from '@/components/doc/editor/pt/ptdoc';
 import { Wireframe } from '@/components/doc/editor/pt/wireframe';
 import { QuillDoc } from '@/components/doc/editor/quilldoc';
 import { ReadOnlyDoc } from '@/components/doc/editor/readonlydoc';
@@ -54,11 +53,6 @@ const EditorDemo = () => {
             id: 'pt.editor.options',
             label: 'Editor PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -6,7 +6,6 @@ import { DisabledDoc } from '@/components/doc/inputswitch/disableddoc';
 import { ImportDoc } from '@/components/doc/inputswitch/importdoc';
 import { InvalidDoc } from '@/components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '@/components/doc/inputswitch/preselectiondoc';
-import { PTDoc } from '@/components/doc/inputswitch/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputswitch/pt/wireframe';
 import { StyledDoc } from '@/components/doc/inputswitch/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputswitch/theming/tailwinddoc';
@@ -54,11 +53,6 @@ const InputSwitchDemo = () => {
             id: 'pt.inputswitch.options',
             label: 'InputSwitch PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

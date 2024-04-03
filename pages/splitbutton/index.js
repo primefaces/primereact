@@ -7,7 +7,6 @@ import { IconsDoc } from '@/components/doc/splitbutton/iconsdoc';
 import { ImportDoc } from '@/components/doc/splitbutton/importdoc';
 import { LoadingDoc } from '@/components/doc/splitbutton/loadingdoc';
 import { OutlinedDoc } from '@/components/doc/splitbutton/outlineddoc';
-import { PTDoc } from '@/components/doc/splitbutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/splitbutton/pt/wireframe';
 import { RaisedDoc } from '@/components/doc/splitbutton/raiseddoc';
 import { RaisedTextDoc } from '@/components/doc/splitbutton/raisedtextdoc';
@@ -103,11 +102,6 @@ const SplitButtonDemo = () => {
             id: 'pt.splitbutton.options',
             label: 'SplitButton PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -6,7 +6,6 @@ import { CustomizedDoc } from '@/components/doc/togglebutton/customizeddoc';
 import { DisabledDoc } from '@/components/doc/togglebutton/disableddoc';
 import { ImportDoc } from '@/components/doc/togglebutton/importdoc';
 import { InvalidDoc } from '@/components/doc/togglebutton/invaliddoc';
-import { PTDoc } from '@/components/doc/togglebutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/togglebutton/pt/wireframe';
 import { StyledDoc } from '@/components/doc/togglebutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/togglebutton/theming/tailwinddoc';
@@ -54,11 +53,6 @@ const ToggleButtonDemo = () => {
             id: 'pt.togglebutton.options',
             label: 'ToggleButton PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

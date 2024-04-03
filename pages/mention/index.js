@@ -7,7 +7,6 @@ import { DisabledDoc } from '@/components/doc/mention/disableddoc';
 import { FloatLabelDoc } from '@/components/doc/mention/floatlabeldoc';
 import { ImportDoc } from '@/components/doc/mention/importdoc';
 import { InvalidDoc } from '@/components/doc/mention/invaliddoc';
-import { PTDoc } from '@/components/doc/mention/pt/ptdoc';
 import { Wireframe } from '@/components/doc/mention/pt/wireframe';
 import { StyledDoc } from '@/components/doc/mention/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/mention/theming/tailwinddoc';
@@ -66,11 +65,6 @@ const MentionDemo = () => {
             id: 'pt.mention.options',
             label: 'Mention PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 
