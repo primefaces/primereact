@@ -290,7 +290,7 @@ const Tailwind = {
                 'cursor-row-resize': props.layout !== 'horizontal'
             })
         }),
-        gutterhandler: ({ props }) => ({
+        gutterHandler: ({ props }) => ({
             className: classNames('bg-gray-300 dark:bg-gray-600 transition-all duration-200', {
                 'h-7 w-[0.3rem]': props.layout == 'horizontal',
                 'w-7 h-[0.3rem]': props.layout == 'vertical'
