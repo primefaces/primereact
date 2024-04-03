@@ -188,6 +188,7 @@ export const DropdownBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         itemTemplate: null,
         loading: false,
         loadingIcon: null,
