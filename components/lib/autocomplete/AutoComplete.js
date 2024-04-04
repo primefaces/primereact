@@ -546,7 +546,7 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    className={classNames(props.inputClassName, cx('input'))}
+                    className={classNames(props.inputClassName, cx('input', { context }))}
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
@@ -666,7 +666,7 @@ export const AutoComplete = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: multiContainerRef,
-                    className: cx('container'),
+                    className: cx('container', { context }),
                     onClick: allowMoreValues ? onMultiContainerClick : undefined,
                     onContextMenu: props.onContextMenu,
                     onMouseDown: props.onMouseDown,

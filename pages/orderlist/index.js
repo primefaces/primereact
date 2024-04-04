@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/orderlist/basicdoc';
 import { DragDropDoc } from '@/components/doc/orderlist/dragdropdoc';
 import { FilterDoc } from '@/components/doc/orderlist/filterdoc';
 import { ImportDoc } from '@/components/doc/orderlist/importdoc';
-import { PTDoc } from '@/components/doc/orderlist/pt/ptdoc';
 import { Wireframe } from '@/components/doc/orderlist/pt/wireframe';
 import { StyledDoc } from '@/components/doc/orderlist/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/orderlist/theming/tailwinddoc';
@@ -49,11 +48,6 @@ const OrderListDemo = () => {
             id: 'pt.orderlist.options',
             label: 'OrderList PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
     const themingDocs = [

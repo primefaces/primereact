@@ -416,7 +416,7 @@ export const Chips = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx('container', { isFilled }),
+                    className: cx('container', { context }),
                     onClick: (e) => onWrapperClick(e),
                     onKeyDown: (e) => onContainerKeyDown(e),
                     tabIndex: -1,

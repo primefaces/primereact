@@ -273,6 +273,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Icon of the dropdown.
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;

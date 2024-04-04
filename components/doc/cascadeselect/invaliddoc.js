@@ -82,9 +82,9 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
+<CascadeSelect invalid value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-    className="p-invalid w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }} />
+    className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -171,9 +171,9 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
+            <CascadeSelect invalid value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
                 optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-                className="p-invalid w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }} />
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }} />
         </div>
     )
 }
@@ -279,9 +279,9 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <CascadeSelect value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
+            <CascadeSelect invalid value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
                 optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-                className="p-invalid w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }} />
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }} />
         </div>
     )
 }
@@ -292,18 +292,19 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <CascadeSelect
+                    invalid
                     value={selectedCity}
                     onChange={(e) => setSelectedCity(e.value)}
                     options={countries}
                     optionLabel="cname"
                     optionGroupLabel="name"
                     optionGroupChildren={['states', 'cities']}
-                    className="p-invalid w-full md:w-14rem"
+                    className="w-full md:w-14rem"
                     breakpoint="767px"
                     placeholder="Select a City"
                     style={{ minWidth: '14rem' }}

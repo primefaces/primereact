@@ -99,6 +99,11 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that the value cannot be changed.
      * @defaultValue false
      */

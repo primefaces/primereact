@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption, ariaLabel } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -462,6 +462,7 @@ export const Password = React.memo(
                 onInput: onInput,
                 onKeyUp: onKeyup,
                 invalid: props.invalid,
+                variant: props.variant,
                 style: props.inputStyle,
                 tabIndex: props.tabIndex,
                 tooltip: props.tooltip,

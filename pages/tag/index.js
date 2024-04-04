@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/tag/basicdoc';
 import { IconDoc } from '@/components/doc/tag/icondoc';
 import { ImportDoc } from '@/components/doc/tag/importdoc';
 import { PillDoc } from '@/components/doc/tag/pilldoc';
-import { PTDoc } from '@/components/doc/tag/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tag/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/tag/severitydoc';
 import { TemplateDoc } from '@/components/doc/tag/templatedoc';
@@ -62,11 +61,6 @@ const TerminalDemo = () => {
             id: 'pt.tag.options',
             label: 'Tag PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

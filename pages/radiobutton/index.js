@@ -3,12 +3,10 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/radiobutton/accessibilitydoc';
 import { DisabledDoc } from '@/components/doc/radiobutton/disableddoc';
 import { DynamicDoc } from '@/components/doc/radiobutton/dynamicdoc';
-import { FormikDoc } from '@/components/doc/radiobutton/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/radiobutton/form/hookformdoc';
+import { FilledDoc } from '@/components/doc/radiobutton/filleddoc';
 import { GroupDoc } from '@/components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '@/components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '@/components/doc/radiobutton/invaliddoc';
-import { PTDoc } from '@/components/doc/radiobutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/radiobutton/pt/wireframe';
 import { StyledDoc } from '@/components/doc/radiobutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/radiobutton/theming/tailwinddoc';
@@ -31,6 +29,11 @@ const RadioButtonDemo = () => {
             component: DynamicDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -40,24 +43,6 @@ const RadioButtonDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -74,11 +59,6 @@ const RadioButtonDemo = () => {
             id: 'pt.radiobutton.options',
             label: 'RadioButton PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

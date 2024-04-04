@@ -108,6 +108,11 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that an input field is read-only.
      * @default false
      */
