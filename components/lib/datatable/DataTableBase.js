@@ -335,6 +335,7 @@ const classes = {
     columnTitle: 'p-column-title',
     bodyRow: ({ rowProps: props }) =>
         classNames({
+            'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
             'p-highlight-contextmenu': props.contextMenuSelected,
             'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
             'p-row-odd': props.rowIndex % 2 !== 0
