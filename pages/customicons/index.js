@@ -3,6 +3,7 @@ import { FontAwesomeDoc } from '@/components/doc/customicons/fontawesomedoc';
 import { ImageDoc } from '@/components/doc/customicons/imagedoc';
 import { MaterialDoc } from '@/components/doc/customicons/materialdoc';
 import { SVGDoc } from '@/components/doc/customicons/svgdoc';
+import { SVGStringDoc } from '@/components/doc/customicons/svgstringdoc';
 
 const ContextMenuDemo = () => {
     const docs = [
@@ -20,6 +21,11 @@ const ContextMenuDemo = () => {
             id: 'svg',
             label: 'SVG',
             component: SVGDoc
+        },
+        {
+            id: 'svgstring',
+            label: 'SVG String',
+            component: SVGStringDoc
         },
         {
             id: 'image',
