@@ -2162,20 +2162,10 @@ const Tailwind = {
     },
     metergroup: {
         root: ({ props }) => ({
-            className: classNames(
-                'flex gap-4',
-                { 'flex-col': props.orientation == 'horizontal', 'flex-row': props.orientation == 'vertical' }
-            )
+            className: classNames('flex gap-4', { 'flex-col': props.orientation == 'horizontal', 'flex-row': props.orientation == 'vertical' })
         }),
         metercontainer: ({ props }) => ({
-            className: classNames(
-                'flex',
-                { 'flex-col': props.orientation === 'vertical' },
-                { 'w-2 h-full': props.orientation === 'vertical' },
-                { 'h-2': props.orientation === 'horizontal' },
-                'bg-gray-200 dark:bg-gray-700',
-                'rounded-lg'
-            )
+            className: classNames('flex', { 'flex-col': props.orientation === 'vertical' }, { 'w-2 h-full': props.orientation === 'vertical' }, { 'h-2': props.orientation === 'horizontal' }, 'bg-gray-200 dark:bg-gray-700', 'rounded-lg')
         }),
         meter: ({ props }) => ({
             className: classNames(
