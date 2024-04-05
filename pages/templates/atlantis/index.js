@@ -1,13 +1,12 @@
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateLicense from '@/components/templates/TemplateLicense';
-import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
-import AtlantisLogo from './AtlantisLogo';
 import Link from 'next/link';
+import AtlantisLogo from './AtlantisLogo';
 
 const features2Data = [
     {
@@ -41,21 +40,6 @@ const features2Data = [
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
         src: 'https://primefaces.org/cdn/primereact/images/templates/atlantis/atlantis-features2-mobile.png'
-    }
-];
-
-const relatedData = [
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/freya-react.jpg',
-        href: '/templates/freya'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima-react.jpg',
-        href: '/templates/ultima'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/roma-react.jpg',
-        href: '/templates/roma'
     }
 ];
 
@@ -220,8 +204,6 @@ const AtlantisPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <AtlantisSeperator />
             <TemplateFeatures featuresData={features2Data} displayType="vertical" />
-            <AtlantisSeperator />
-            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };
