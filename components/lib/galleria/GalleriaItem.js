@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { ariaLabel, localeOption } from '../api/Api';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
@@ -21,11 +21,11 @@ export const GalleriaItem = React.memo(
         };
 
         const ariaSlideNumber = (value) => {
-            return localeOption('aria') ? localeOption('aria').slideNumber.replace(/{slideNumber}/g, value) : undefined;
+            return ariaLabel('slideNumber', { slideNumber: value });
         };
 
         const ariaPageLabel = (value) => {
-            return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
+            return ariaLabel('pageLabel', { page: value });
         };
 
         const next = () => {

@@ -1,10 +1,10 @@
-import React, { useRef, useContext, useState } from 'react';
-import { useMergeProps } from '../hooks/Hooks';
-import { PrimeReactContext } from '../api/Api';
-import { InputOtpBase } from './BaseInputOtp';
 import { InputText } from '@/components/lib/inputtext/InputText';
+import React, { useContext, useRef, useState } from 'react';
+import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { InputOtpBase } from './BaseInputOtp';
 
 export const InputOtp = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -179,6 +179,7 @@ export const InputOtp = React.memo(
                     invalid: props?.invalid,
                     tabIndex: props?.tabIndex,
                     unstyled: props?.unstyled,
+                    'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
                     className: cx('input')
                 },
                 ptm('input')

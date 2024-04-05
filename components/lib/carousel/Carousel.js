@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -510,7 +510,7 @@ export const Carousel = React.memo(
         });
 
         const ariaSlideNumber = (value) => {
-            return localeOption('aria') ? localeOption('aria').slideNumber.replace(/{slideNumber}/g, value) : undefined;
+            return ariaLabel('slideNumber', { slideNumber: value });
         };
 
         const createItems = () => {
@@ -724,7 +724,7 @@ export const Carousel = React.memo(
         };
 
         const ariaPageLabel = (value) => {
-            return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
+            return ariaLabel('pageLabel', { page: value });
         };
 
         const createIndicator = (index) => {
