@@ -13932,7 +13932,7 @@
                             "description": "The label to display for the match mode"
                         },
                         {
-                            "name": "matchMode",
+                            "name": "value",
                             "optional": false,
                             "readonly": false,
                             "type": "string",
