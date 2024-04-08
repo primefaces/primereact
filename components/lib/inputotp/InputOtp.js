@@ -77,7 +77,7 @@ export const InputOtp = React.memo(
 	const onPaste = (event) => {
 		let paste = event.clipboardData.getData('text');
 
-		if (paste.lenght) {
+		if (paste.length) {
 			let pastedCode = paste.substring(0, props.length + 1);
 
 			if (!props.integerOnly || !isNaN(pastedCode)) {
