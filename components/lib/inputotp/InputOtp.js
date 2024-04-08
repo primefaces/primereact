@@ -3,6 +3,7 @@ import { useMergeProps } from '../hooks/Hooks';
 import { PrimeReactContext } from '../api/Api';
 import { InputOtpBase } from './BaseInputOtp';
 import { InputText } from '@/components/lib/inputtext/InputText';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
 export const InputOtp = React.memo(
@@ -11,7 +12,7 @@ export const InputOtp = React.memo(
 	const mergeProps = useMergeProps();
 	const context = useContext(PrimeReactContext);
 	const props = InputOtpBase.getProps(inProps, context);
-	const { ptm, cx } = InputOtpBase.setMetaData({
+	const { ptm, cx, isUnstyled } = InputOtpBase.setMetaData({
 		props,
 		...props.__parentMetadata,
 		context: {
@@ -19,26 +20,40 @@ export const InputOtp = React.memo(
 		}
 	});
 
+	useHandleStyle(InputOtpBase.css.styles, isUnstyled, { name: 'inputotp' });
+
 	const defaultValue = props.value ? props.value?.toString()?.split?.('') : new Array(props.length);
 	const [tokens, setTokens] = useState(defaultValue);
 
-	const moveToNextInput = (event) => {
-		const nextInput = event.target.nextElementSibling;
+	const findNextInput = (element) => {
+		const nextInput = element.nextElementSibling;
 
 		if (!nextInput) return;
 
-		if (nextInput.nodeName === 'INPUT') {
+		return nextInput.nodeName === 'INPUT' ? nextInput : findNextInput(nextInput);
+	}
+
+	const findPrevInput = (element) => {
+		const prevInput = element.previousElementSibling;
+
+		if (!prevInput) return;
+
+		return prevInput.nodeName === 'INPUT' ? prevInput : findPrevInput(prevInput);
+	};
+
+	const moveToNextInput = (event) => {
+		const nextInput = findNextInput(event.target);
+
+		if (nextInput) {
 			nextInput.focus();
 			nextInput.select();
 		}
 	}
 
 	const moveToPrevInput = (event) => {
-		const prevInput = event.target.previousElementSibling;
+		const prevInput = findPrevInput(event.target);
 
-		if (!prevInput) return;
-
-		if (prevInput.nodeName === 'INPUT') {
+		if (prevInput) {
 			prevInput.focus();
 			prevInput.select();
 		}
@@ -145,7 +160,7 @@ export const InputOtp = React.memo(
 		}
 
 		const inputElementIndex = props.length - remainingInputs;
-		const inputElementActions = {
+		const inputElementEvents = {
 			onInput: (event) => onInput(event, inputElementIndex),
 			onKeyDown: onKeydown,
 			onFocus,
@@ -163,13 +178,13 @@ export const InputOtp = React.memo(
 				readOnly: props?.readOnly,
 				disabled: props?.disabled,
 				invalid: props?.invalid,
-				tabIndex: props?.tabIndex,  
+				tabIndex: props?.tabIndex, 
+				unstyled: props?.unstyled, 
                 className: cx('input'),
-				...inputElementActions
             },
             ptm('input')
         );		
-		const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, {...inputElementActions, props: inputElementProps}) : <InputText {...inputElementProps} />;
+		const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, {events: inputElementEvents, props: inputElementProps}) : <InputText {...inputElementProps} {...inputElementEvents} />;
 		const inputElements = [inputElement, ...createInputElements(remainingInputs - 1)];
 
 		return inputElements;
@@ -178,7 +193,8 @@ export const InputOtp = React.memo(
 	const rootElementProps = mergeProps(
 		{
 			className: cx('root'),
-			ref: elementRef
+			ref: elementRef,
+			style: props?.style,
 		},
 		ptm('root')
 	);

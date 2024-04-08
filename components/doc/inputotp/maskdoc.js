@@ -3,23 +3,23 @@ import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { InputOtp } from '@/components/lib/inputotp/inputotp';
 
-export function BasicDoc(props) {
+export function MaskDoc(props) {
     const [token, setTokens] = useState();
 
     const code = {
         basic: `
-<InputOtp value={token} onChange={(e) => setTokens(e.value)}/>
+<InputOtp value={token} onChange={(e) => setTokens(e.value)} mask/>
         `,
         javascript: `
 import React, { useState } from 'react';
 import { InputOtp } from 'primereact/inputotp';
 
-export default function BasicDemo() {
+export default function MaskDemo() {
     const [token, setTokens] = useState();
 
     return (
         <div className="card flex justify-content-center">
-            <InputOtp value={token} onChange={(e) => setTokens(e.value)}/>
+            <InputOtp value={token} onChange={(e) => setTokens(e.value)} mask/>
         </div>
     );
 }
@@ -28,12 +28,12 @@ export default function BasicDemo() {
 import React, { useState } from 'react';
 import { InputOtp } from 'primereact/inputotp';
 
-export default function BasicDemo() {
+export default function MaskDemo() {
     const [token, setTokens] = useState<string | number | undefined>();
 
     return (
         <div className="card flex justify-content-center">
-            <InputOtp value={token} onChange={(e) => setTokens(e.value)}/>
+            <InputOtp value={token} onChange={(e) => setTokens(e.value)} mask/>
         </div>
     );
 }
@@ -44,11 +44,11 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    The number of characters is defined with the <i>length</i> property, which is set to 4 by default.
+                Enable the <i>mask</i> option to hide the values in the input fields.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputOtp value={token} onChange={(e) => setTokens(e.value)}/>
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} mask/>
             </div>
             <DocSectionCode code={code} />
         </>
