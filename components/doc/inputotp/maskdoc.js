@@ -44,11 +44,11 @@ export default function MaskDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                Enable the <i>mask</i> option to hide the values in the input fields.
+                    Enable the <i>mask</i> option to hide the values in the input fields.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputOtp value={token} onChange={(e) => setTokens(e.value)} mask/>
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} mask />
             </div>
             <DocSectionCode code={code} />
         </>

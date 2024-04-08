@@ -57,7 +57,6 @@ export interface InputOtpContext {
     disabled: boolean;
 }
 
-
 /**
  * Custom change event
  * @see {@link InputNumberProps.onChange}

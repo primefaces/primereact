@@ -44,11 +44,11 @@ export default function IntegerOnlyDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                When <i>integerOnly</i> is present, only integers can be accepted as input.
+                    When <i>integerOnly</i> is present, only integers can be accepted as input.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputOtp value={token} onChange={(e) => setTokens(e.value)} integerOnly/>
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} integerOnly />
             </div>
             <DocSectionCode code={code} />
         </>

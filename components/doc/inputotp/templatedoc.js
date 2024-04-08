@@ -6,7 +6,7 @@ import { InputOtp } from '@/components/lib/inputotp/inputotp';
 export function TemplateDoc(props) {
     const [token, setTokens] = useState();
 
-    const customInput = ({events, props: attr}) => <input {...events} {...attr} type="text" className="custom-otp-input" />;
+    const customInput = ({ events, props: attr }) => <input {...events} {...attr} type="text" className="custom-otp-input" />;
 
     const code = {
         basic: `
@@ -97,9 +97,7 @@ export default function TemplateDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    Define a template with your own UI elements with bindings to the provided events and attributes to replace the default design.
-                </p>
+                <p>Define a template with your own UI elements with bindings to the provided events and attributes to replace the default design.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <style scoped>
@@ -122,7 +120,7 @@ export default function TemplateDemo() {
                     `}
                 </style>
 
-                <InputOtp value={token} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} inputTemplate={customInput} />
             </div>
             <DocSectionCode code={code} />
         </>

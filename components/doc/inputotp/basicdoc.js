@@ -48,7 +48,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputOtp value={token} onChange={(e) => setTokens(e.value)}/>
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -72,7 +72,7 @@ const InputOtpDemo = () => {
             id: 'styled',
             label: 'Styled',
             component: StyledDoc
-        },
+        }
     ];
 
     return (

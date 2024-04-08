@@ -7,12 +7,17 @@ import { Button } from '@/components/lib/button/Button';
 export function SampleDoc(props) {
     const [token, setTokens] = useState();
 
-    const customInput = ({events, props: attr}) => {
-        return <><input {...events} {...attr} type="text" className="custom-otp-input-sample" />
-            {attr.id === 2 && <div className="px-3">
-                <i className="pi pi-minus" />
-            </div>}
-        </>
+    const customInput = ({ events, props: attr }) => {
+        return (
+            <>
+                <input {...events} {...attr} type="text" className="custom-otp-input-sample" />
+                {attr.id === 2 && (
+                    <div className="px-3">
+                        <i className="pi pi-minus" />
+                    </div>
+                )}
+            </>
+        );
     };
 
     const code = {
@@ -181,9 +186,7 @@ export default function SampleDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    A sample UI implementation with templating and additional elements.
-                </p>
+                <p>A sample UI implementation with templating and additional elements.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <style scoped>
@@ -228,7 +231,7 @@ export default function SampleDemo() {
                 <div className="flex flex-column align-items-center">
                     <p className="font-bold text-xl mb-2">Authenticate Your Account</p>
                     <p className="text-color-secondary block mb-5">Please enter the code sent to your phone.</p>
-                    <InputOtp value={token} onChange={(e) => setTokens(e.value)} length={6} inputTemplate={customInput} style={{gap: 0}}/>
+                    <InputOtp value={token} onChange={(e) => setTokens(e.value)} length={6} inputTemplate={customInput} style={{ gap: 0 }} />
                     <div className="flex justify-content-between mt-5 align-self-stretch">
                         <Button label="Resend Code" link className="p-0"></Button>
                         <Button label="Submit Code"></Button>
