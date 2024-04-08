@@ -3,17 +3,12 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, isFilled, context }) =>
-        classNames(
-            'p-inputtext p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled,
-                'p-invalid': props.invalid,
-                'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
-            },
-
-            props.className
-        )
+        classNames('p-inputtext p-component', {
+            'p-disabled': props.disabled,
+            'p-filled': isFilled,
+            'p-invalid': props.invalid,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
+        })
 };
 
 export const InputTextBase = ComponentBase.extend({
