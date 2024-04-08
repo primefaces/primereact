@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { InputOtp } from '@/components/lib/inputotp/InputOtp';
+import { InputText } from '@/components/lib/inputtext/InputText';
 
 export function BasicDoc(props) {
+    const [token, setTokens] = useState('12');
+
     const code = {
         basic: `
 <InputOtp />
@@ -33,6 +37,14 @@ export default function BasicDemo() {
         `
     };
 
+    const inputTemplate = (options) => {     
+        return (
+            <InputText
+                {...options?.props}
+            />
+        );
+    }
+
     return (
         <>
             <DocSectionText {...props}>
@@ -41,7 +53,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputOtp />
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} inputTemplate={inputTemplate}/>
             </div>
             <DocSectionCode code={code} />
         </>

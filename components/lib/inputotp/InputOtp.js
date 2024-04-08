@@ -2,6 +2,8 @@ import React, { useRef, useContext, useState } from 'react'
 import { useMergeProps } from '../hooks/Hooks';
 import { PrimeReactContext } from '../api/Api';
 import { InputOtpBase } from './BaseInputOtp';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { ObjectUtils } from '../primereact.all';
 
 export const InputOtp = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -12,6 +14,9 @@ export const InputOtp = React.memo(
 	const { ptm, cx } = InputOtpBase.setMetaData({
 		props,
 		...props.__parentMetadata,
+		context: {
+			disabled: props.disabled,		
+		}
 	});
 
 	const defaultValue = props.value ? props.value?.toString()?.split?.('') : new Array(props.length);
@@ -49,6 +54,7 @@ export const InputOtp = React.memo(
 	const updateTokens = (event, index) => {
 		const inputValue = event.target.value;
 		const newTokens = [...tokens];
+
 		newTokens[index] = inputValue;
 		newTokens = newTokens.join('');
 		newTokens = newTokens ? newTokens.split('') : new Array(props.length);
@@ -116,9 +122,9 @@ export const InputOtp = React.memo(
 			}
 
 			case 'ArrowUp':
+
 			case 'ArrowDown': {
 				event.preventDefault();
-
 				break;
 			}
 
@@ -139,6 +145,13 @@ export const InputOtp = React.memo(
 		}
 
 		const inputElementIndex = props.length - remainingInputs;
+		const inputElementActions = {
+			onInput: (event) => onInput(event, inputElementIndex),
+			onKeyDown: onKeydown,
+			onFocus,
+			onBlur,
+			onPaste,
+		}
 		const inputElementProps = mergeProps(
             {
 				id: inputElementIndex,
@@ -150,17 +163,13 @@ export const InputOtp = React.memo(
 				readOnly: props?.readOnly,
 				disabled: props?.disabled,
 				invalid: props?.invalid,
-				tabIndex: props?.tabIndex,
-				onInput: (event) => onInput(event, inputElementIndex),
-				onKeyDown: onKeydown,
-				onFocus,
-				onBlur,
-				onPaste,
+				tabIndex: props?.tabIndex,  
                 className: cx('input'),
+				...inputElementActions
             },
             ptm('input')
         );		
-		const inputElement = <input {...inputElementProps} />;
+		const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, {...inputElementActions, props: inputElementProps}) : <InputText {...inputElementProps} />;
 		const inputElements = [inputElement, ...createInputElements(remainingInputs - 1)];
 
 		return inputElements;
