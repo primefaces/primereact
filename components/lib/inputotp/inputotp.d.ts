@@ -129,7 +129,6 @@ export interface InputOtpProps extends Omit<React.DetailedHTMLProps<React.InputH
     /**
      * Callback to invoke while typing value on input
      * @param {React.FormEvent<HTMLInputElement>} event - Browser event
-     * @param {boolean} validatePattern - Whether to validate the value
      */
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     /**
