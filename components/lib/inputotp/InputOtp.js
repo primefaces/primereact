@@ -3,7 +3,7 @@ import { useMergeProps } from '../hooks/Hooks';
 import { PrimeReactContext } from '../api/Api';
 import { InputOtpBase } from './BaseInputOtp';
 import { InputText } from '@/components/lib/inputtext/InputText';
-import { ObjectUtils } from '../primereact.all';
+import { ObjectUtils } from '../utils/Utils';
 
 export const InputOtp = React.memo(
     React.forwardRef((inProps, ref) => {
