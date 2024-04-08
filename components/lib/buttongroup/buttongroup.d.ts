@@ -55,6 +55,11 @@ export interface ButtonGroupPassThroughAttributes {
  */
 export interface ButtonGroupProps {
     /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {ButtonGroupPassThroughOptions}
      */
