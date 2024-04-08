@@ -144,7 +144,7 @@ export interface InputOtpProps extends Omit<React.DetailedHTMLProps<React.InputH
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     /**
      * Callback to invoke on value change.
-     * @param {InputNumberChangeEvent} event - Custom change event
+     * @param {InputOtpChangeEvent} event - Custom change event
      */
     onChange?(event: InputOtpChangeEvent): void;
     /**
