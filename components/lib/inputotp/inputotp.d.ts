@@ -59,7 +59,7 @@ export interface InputOtpContext {
 
 /**
  * Custom change event
- * @see {@link InputNumberProps.onChange}
+ * @see {@link InputOtpProps.onChange}
  * @event
  */
 interface InputOtpChangeEvent {
