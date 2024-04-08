@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/scrollpanel/accessibilitydoc'
 import { BasicDoc } from '@/components/doc/scrollpanel/basicdoc';
 import { CustomDemo } from '@/components/doc/scrollpanel/customdoc';
 import { ImportDoc } from '@/components/doc/scrollpanel/importdoc';
-import { PTDoc } from '@/components/doc/scrollpanel/pt/ptdoc';
 import { Wireframe } from '@/components/doc/scrollpanel/pt/wireframe';
 import { StyledDoc } from '@/components/doc/scrollpanel/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/scrollpanel/theming/tailwinddoc';
@@ -44,11 +43,6 @@ const ScrollPanelDemo = () => {
             id: 'pt.scrollpanel.options',
             label: 'ScrollPanel PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/menubar/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/menubar/basicdoc';
 import { CommandDoc } from '@/components/doc/menubar/commanddoc';
 import { ImportDoc } from '@/components/doc/menubar/importdoc';
-import { PTDoc } from '@/components/doc/menubar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/menubar/pt/wireframe';
 import { RouterDoc } from '@/components/doc/menubar/routerdoc';
 import { TemplateDoc } from '@/components/doc/menubar/templatedoc';
@@ -54,11 +53,6 @@ const MenubarDemo = () => {
             id: 'pt.menubar.options',
             label: 'Menubar PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

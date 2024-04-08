@@ -5,7 +5,7 @@ import { BasicDoc } from '@/components/doc/steps/basicdoc';
 import { ControlledDoc } from '@/components/doc/steps/controlleddoc';
 import { ImportDoc } from '@/components/doc/steps/importdoc';
 import { InteractiveDoc } from '@/components/doc/steps/interactivedoc';
-import { PTDoc } from '@/components/doc/steps/pt/ptdoc';
+import { LinearDoc } from '@/components/doc/steps/lineardoc';
 import { Wireframe } from '@/components/doc/steps/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/steps/templatedoc';
 import { StyledDoc } from '@/components/doc/steps/theming/styleddoc';
@@ -27,6 +27,11 @@ const StepsDemo = () => {
             id: 'controlled',
             label: 'Controlled',
             component: ControlledDoc
+        },
+        {
+            id: 'linear',
+            label: 'Linear',
+            component: LinearDoc
         },
         {
             id: 'interactive',
@@ -55,11 +60,6 @@ const StepsDemo = () => {
             id: 'pt.steps.options',
             label: 'Steps PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

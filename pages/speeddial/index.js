@@ -6,7 +6,6 @@ import { CustomDoc } from '@/components/doc/speeddial/customdoc';
 import { ImportDoc } from '@/components/doc/speeddial/importdoc';
 import { LinearDoc } from '@/components/doc/speeddial/lineardoc';
 import { MaskDoc } from '@/components/doc/speeddial/maskdoc';
-import { PTDoc } from '@/components/doc/speeddial/pt/ptdoc';
 import { Wireframe } from '@/components/doc/speeddial/pt/wireframe';
 import { QuarterCircleDoc } from '@/components/doc/speeddial/quartercircledoc';
 import { SemiCircleDoc } from '@/components/doc/speeddial/semicircledoc';
@@ -74,11 +73,6 @@ const SpeedDialDemo = () => {
             id: 'pt.speeddial.options',
             label: 'SpeedDial PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

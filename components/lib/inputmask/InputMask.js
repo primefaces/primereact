@@ -27,6 +27,8 @@ export const InputMask = React.memo(
             props
         };
 
+        const { cx } = InputMaskBase.setMetaData(metaData);
+
         const caret = (first, last) => {
             let range;
             let begin;
@@ -622,7 +624,7 @@ export const InputMask = React.memo(
         }, [isValueUpdated]);
 
         const otherProps = InputMaskBase.getOtherProps(props);
-        const className = classNames('p-inputmask', props.className);
+        const className = classNames(props.className, cx('root', { context }));
 
         return (
             <InputText

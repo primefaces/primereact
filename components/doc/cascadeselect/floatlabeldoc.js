@@ -1,6 +1,8 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { CascadeSelect } from '@/components/lib/cascadeselect/CascadeSelect';
+import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export function FloatLabelDoc(props) {
@@ -82,16 +84,17 @@ export function FloatLabelDoc(props) {
 
     const code = {
         basic: `
-<span className="p-float-label">
+<FloatLabel>
     <CascadeSelect inputId="cs-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
         optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
         className="w-full md:w-14rem" breakpoint="767px" style={{ minWidth: '14rem' }} />
     <label htmlFor="cs-city">City</label>
-</span>
+</FloatLabel>
         `,
         javascript: `
 import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
+import { FloatLabel } from 'primereact/floatlabel';
 
 export default function FloatLabelDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -174,12 +177,12 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <span className="p-float-label">
+            <FloatLabel>
                 <CascadeSelect inputId="cs-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
                     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
                     className="w-full md:w-14rem" breakpoint="767px" style={{ minWidth: '14rem' }} />
                 <label htmlFor="cs-city">City</label>
-            </span>
+            </FloatLabel>
         </div>
     )
 }
@@ -187,6 +190,7 @@ export default function FloatLabelDemo() {
         typescript: `
 import React, { useState } from "react";
 import { CascadeSelect, CascadeSelectChangeEvent } from 'primereact/cascadeselect';
+import { FloatLabel } from 'primereact/floatlabel';
 
 interface City {
     cname: string;
@@ -285,12 +289,12 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <span className="p-float-label">
+            <FloatLabel>
                 <CascadeSelect inputId="cs-city" value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
                     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
                     className="w-full md:w-14rem" breakpoint="767px" style={{ minWidth: '14rem' }} />
                 <label htmlFor="cs-city">City</label>
-            </span>
+            </FloatLabel>
         </div>
     )
 }
@@ -300,10 +304,12 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A floating label appears on top of the input field when focused.</p>
+                <p>
+                    A floating label appears on top of the input field when focused. Visit <Link href="/floatlabel">FloatLabel</Link> documentation for more information.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <span className="p-float-label">
+                <FloatLabel>
                     <CascadeSelect
                         inputId="cs-city"
                         value={selectedCity}
@@ -317,7 +323,7 @@ export default function FloatLabelDemo() {
                         style={{ minWidth: '14rem' }}
                     />
                     <label htmlFor="cs-city">City</label>
-                </span>
+                </FloatLabel>
             </div>
             <DocSectionCode code={code} />
         </>

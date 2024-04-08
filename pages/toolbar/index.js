@@ -2,11 +2,10 @@ import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/toolbar/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/toolbar/basicdoc';
+import { CustomDoc } from '@/components/doc/toolbar/customdoc';
 import { ImportDoc } from '@/components/doc/toolbar/importdoc';
-import { PTDoc } from '@/components/doc/toolbar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/toolbar/pt/wireframe';
 import { StyledDoc } from '@/components/doc/toolbar/theming/styleddoc';
-import { CustomDoc } from '@/components/doc/toolbar/customdoc';
 import { TailwindDoc } from '@/components/doc/toolbar/theming/tailwinddoc';
 
 const ToolbarDemo = () => {
@@ -43,11 +42,6 @@ const ToolbarDemo = () => {
             id: 'pt.toolbar.options',
             label: 'Toolbar PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

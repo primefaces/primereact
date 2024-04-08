@@ -9,9 +9,9 @@
  */
 import * as React from 'react';
 import { InputText, InputTextPassThroughOptions, InputTextProps } from '../inputtext';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { PassThroughOptions } from '../passthrough';
 
 /**
  * Custom complete event
@@ -66,6 +66,16 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange' | 'pt'> 
      * @defaultValue false
      */
     disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that the component should have invalid state style.
+     * @defaultValue false
+     */
+    invalid?: boolean | undefined;
+    /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
     /**
      * When present, it specifies that an input field is read-only.
      * @defaultValue false

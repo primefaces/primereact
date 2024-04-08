@@ -3,12 +3,9 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/inputswitch/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '@/components/doc/inputswitch/disableddoc';
-import { FormikDoc } from '@/components/doc/inputswitch/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/inputswitch/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/inputswitch/importdoc';
 import { InvalidDoc } from '@/components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '@/components/doc/inputswitch/preselectiondoc';
-import { PTDoc } from '@/components/doc/inputswitch/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputswitch/pt/wireframe';
 import { StyledDoc } from '@/components/doc/inputswitch/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputswitch/theming/tailwinddoc';
@@ -41,24 +38,6 @@ const InputSwitchDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
-        {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
@@ -74,11 +53,6 @@ const InputSwitchDemo = () => {
             id: 'pt.inputswitch.options',
             label: 'InputSwitch PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 
