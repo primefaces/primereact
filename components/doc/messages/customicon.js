@@ -17,7 +17,7 @@ export function CustomIcon(props) {
                     sticky: true,
                     content: (
                         <React.Fragment>
-                            <img alt="logo" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" width="32" />
+                            <img alt="logo" src="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" width="32" />
                             <div className="ml-2">How may I help you?</div>
                         </React.Fragment>
                     )
@@ -35,7 +35,7 @@ msgs.current.show([
         sticky: true,
         content: (
             <React.Fragment>
-                <img alt="logo" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" width="32" />
+                <img alt="logo" src="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" width="32" />
                 <div className="ml-2">How may I help you?</div>
             </React.Fragment>
         )
@@ -60,7 +60,7 @@ export default function BasicDemo() {
                     sticky: true,
                     content: (
                         <React.Fragment>
-                            <img alt="logo" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" width="32" />
+                            <img alt="logo" src="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" width="32" />
                             <div className="ml-2">How may I help you?</div>
                         </React.Fragment>
                     )
@@ -93,7 +93,7 @@ export default function BasicDemo() {
                     sticky: true,
                     content: (
                         <React.Fragment>
-                            <img alt="logo" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" width="32" />
+                            <img alt="logo" src="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" width="32" />
                             <div className="ml-2">How may I help you?</div>
                         </React.Fragment>
                     )

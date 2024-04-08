@@ -7,7 +7,7 @@ export function TemplateDoc(props) {
     const [activeIndex, setActiveIndex] = useState(0);
     const itemRenderer = (item, itemIndex) => (
         <a className="p-menuitem-link flex align-items-center gap-2" onClick={() => setActiveIndex(itemIndex)}>
-            <img alt={item.name} src={`https://primefaces.org/cdn/primevue/images/avatar/${item.image}`} style={{ width: '32px' }} />
+            <img alt={item.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${item.image}`} style={{ width: '32px' }} />
             <span className="font-bold">{item.name}</span>
         </a>
     );
@@ -42,7 +42,7 @@ export default function TemplateDemo() {
     const [activeIndex, setActiveIndex] = useState(0);
     const itemRenderer = (item, itemIndex) => (
         <a className="p-menuitem-link flex align-items-center gap-2" onClick={() => setActiveIndex(itemIndex)}>
-            <img alt={item.name} src={\`https://primefaces.org/cdn/primevue/images/avatar/\${item.image}\`} style={{ width: '32px' }} />
+            <img alt={item.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${item.image}\`} style={{ width: '32px' }} />
             <span className="font-bold">{item.name}</span>
         </a>
     );
@@ -82,7 +82,7 @@ export default function TemplateDemo() {
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const itemRenderer = (item, itemIndex) => (
         <a className="p-menuitem-link flex align-items-center gap-2" onClick={() => setActiveIndex(itemIndex)}>
-            <img alt={item.name} src={\`https://primefaces.org/cdn/primevue/images/avatar/\${item.image}\`} style={{ width: '32px' }} />
+            <img alt={item.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${item.image}\`} style={{ width: '32px' }} />
             <span className="font-bold">{item.name}</span>
         </a>
     );
