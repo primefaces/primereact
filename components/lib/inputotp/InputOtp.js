@@ -113,7 +113,7 @@ export const InputOtp = React.memo(
 			}
 
 			case 'Backspace': {
-				if (event.target.value.length === 0) {
+				if (event.target?.value?.length === 0) {
 					moveToPrevInput(event);
 					event.preventDefault();
 				}
