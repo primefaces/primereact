@@ -1425,6 +1425,15 @@
     right: 0.75rem;
     color: #495057;
   }
+  .p-inputotp {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .p-inputotp-input {
+    text-align: center;
+    width: 2.5rem;
+  }
   .p-listbox-list-wrapper {
     overflow: auto;
   }

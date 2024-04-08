@@ -1442,6 +1442,15 @@
     right: 1rem;
     color: rgba(255, 255, 255, 0.6);
   }
+  .p-inputotp {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .p-inputotp-input {
+    text-align: center;
+    width: 3rem;
+  }
   .p-listbox-list-wrapper {
     overflow: auto;
   }
