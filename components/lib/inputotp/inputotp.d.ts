@@ -70,7 +70,7 @@ interface InputOtpChangeEvent {
     /**
      * New value
      */
-    value: string | number | undefined;
+    value?: string | number | null;
 }
 
 /**
@@ -79,10 +79,10 @@ interface InputOtpChangeEvent {
  */
 export interface InputOtpProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'value' | 'size' | 'onChange'> {
     /**
-     * Specifies whether a inputotp should be checked or not.
-     * @defaultValue false
+     * Specifies the value of the component.
+     * @defaultValue null
      */
-    value?: string | number;
+    value?: string | number | null;
     /**
      * When present, it specifies that the component should have invalid state style.
      * @defaultValue false
