@@ -70,7 +70,7 @@ interface InputOtpChangeEvent {
     /**
      * New value
      */
-    value: number | null;
+    value: string | number | undefined;
 }
 
 /**
