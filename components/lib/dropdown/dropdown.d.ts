@@ -326,7 +326,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
-     * @defaultValue true
+     * @defaultValue false
      */
     filterInputAutoFocus?: boolean | undefined;
     /**

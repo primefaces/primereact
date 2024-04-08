@@ -23020,7 +23020,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "true",
+                            "default": "false",
                             "description": "When the panel is opened, it specifies that the filter input should focus automatically."
                         },
                         {
