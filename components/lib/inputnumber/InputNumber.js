@@ -1099,7 +1099,7 @@ export const InputNumber = React.memo(
         }, [props.disabled]);
 
         const createInputElement = () => {
-            const className = classNames('p-inputnumber-input', props.inputClassName);
+            const className = classNames(props.inputClassName, cx('input', { context }));
             const valueToRender = formattedValue(props.value);
 
             return (

@@ -3,14 +3,12 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/inputtext/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '@/components/doc/inputtext/disableddoc';
+import { FilledDoc } from '@/components/doc/inputtext/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/inputtext/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/inputtext/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/inputtext/form/hookformdoc';
 import { HelpTextDoc } from '@/components/doc/inputtext/helptextdoc';
 import { ImportDoc } from '@/components/doc/inputtext/importdoc';
 import { InvalidDoc } from '@/components/doc/inputtext/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/inputtext/keyfilterdoc';
-import { PTDoc } from '@/components/doc/inputtext/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputtext/pt/wireframe';
 import { SizesDoc } from '@/components/doc/inputtext/sizesdoc';
 import { StyledDoc } from '@/components/doc/inputtext/theming/styleddoc';
@@ -49,6 +47,11 @@ const InputTextDemo = () => {
             component: FloatLabelDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
@@ -58,24 +61,6 @@ const InputTextDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -92,11 +77,6 @@ const InputTextDemo = () => {
             id: 'pt.inputtext.options',
             label: 'InputText PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

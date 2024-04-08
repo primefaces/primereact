@@ -776,7 +776,7 @@ interface ColumnFilterMatchModeOptions {
     /**
      * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: FilterMatchMode | string;
+    value: FilterMatchMode | string;
 }
 
 /**

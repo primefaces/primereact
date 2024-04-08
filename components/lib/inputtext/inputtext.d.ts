@@ -81,6 +81,11 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     invalid?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;

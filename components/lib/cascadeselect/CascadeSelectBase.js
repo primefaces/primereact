@@ -1,14 +1,14 @@
-import PrimeReact from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState }) =>
+    root: ({ props, focusedState, overlayVisibleState, context }) =>
         classNames(
             'p-cascadeselect p-component p-inputwrapper',
             {
                 'p-disabled': props.disabled,
                 'p-invalid': props.invalid,
+                'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
                 'p-focus': focusedState,
                 'p-inputwrapper-filled': props.value,
                 'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -20,11 +20,7 @@ const classes = {
             'p-placeholder': label === props.placeholder,
             'p-cascadeselect-label-empty': !props.value && label === 'p-emptylabel'
         }),
-    list: ({ context }) =>
-        classNames('p-cascadeselect-panel p-cascadeselect-items', {
-            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-        }),
+    list: 'p-cascadeselect-panel p-cascadeselect-items',
     sublistWrapper: 'p-cascadeselect-sublist-wrapper',
     sublist: 'p-cascadeselect-panel p-cascadeselect-items p-cascadeselect-sublist',
     item: ({ option, isGroup, isSelected }) =>
@@ -146,6 +142,7 @@ export const CascadeSelectBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         itemTemplate: null,
         name: null,
         onBeforeHide: null,

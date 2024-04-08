@@ -3,7 +3,6 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/terminal/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/terminal/basicdoc';
 import { ImportDoc } from '@/components/doc/terminal/importdoc';
-import { PTDoc } from '@/components/doc/terminal/pt/ptdoc';
 import { Wireframe } from '@/components/doc/terminal/pt/wireframe';
 import { StyledDoc } from '@/components/doc/terminal/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/terminal/theming/tailwinddoc';
@@ -38,11 +37,6 @@ const TerminalDemo = () => {
             id: 'pt.terminal.options',
             label: 'Terminal PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

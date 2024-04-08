@@ -8,7 +8,7 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<Chips value={value} onChange={(e) => setValue(e.value)} />
+<Chips invalid value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ export default function InvalidDemo() {
 
     return (
         <div className="card p-fluid">
-            <Chips value={value} onChange={(e) => setValue(e.value)} className="p-invalid" />
+            <Chips invalid value={value} onChange={(e) => setValue(e.value)} />
         </div>
     )
 }
@@ -33,7 +33,7 @@ export default function InvalidDemo() {
 
     return (
         <div className="card p-fluid">
-            <Chips value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} className="p-invalid" />
+            <Chips invalid value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} />
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card p-fluid">
-                <Chips value={value} onChange={(e) => setValue(e.value)} className="p-invalid" />
+                <Chips invalid value={value} onChange={(e) => setValue(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

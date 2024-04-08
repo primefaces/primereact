@@ -661,6 +661,7 @@
     border: 1px solid #d8dee9;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 4px;
+    outline-color: transparent;
   }
   .p-cascadeselect:not(.p-disabled):hover {
     border-color: #81a1c1;
@@ -670,6 +671,15 @@
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #c0d0e0;
     border-color: #81a1c1;
+  }
+  .p-cascadeselect.p-variant-filled {
+    background-color: #eceff4;
+  }
+  .p-cascadeselect.p-variant-filled:enabled:hover {
+    background-color: #eceff4;
+  }
+  .p-cascadeselect.p-variant-filled:enabled:focus {
+    background-color: #ffffff;
   }
   .p-cascadeselect .p-cascadeselect-label {
     background: transparent;
@@ -711,37 +721,28 @@
     transition: none;
     border-radius: 0;
   }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content {
-    padding: 0.5rem 1rem;
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:first-child {
+    margin-top: 0;
   }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content:focus {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: inset 0 0 0 0.15rem #c0d0e0;
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:last-child {
+    margin-bottom: 0;
   }
   .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight {
     color: #2e3440;
     background: #d8dee9;
   }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:not(.p-highlight):not(.p-disabled):hover {
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight.p-focus {
+    background: #bec8da;
+  }
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item:not(.p-highlight):not(.p-disabled).p-focus {
     color: #4c566a;
     background: transparent;
   }
+  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content {
+    padding: 0.5rem 1rem;
+  }
   .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-group-icon {
     font-size: 0.875rem;
-  }
-  .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-group-icon.p-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-  .p-input-filled .p-cascadeselect {
-    background: #eceff4;
-  }
-  .p-input-filled .p-cascadeselect:not(.p-disabled):hover {
-    background-color: #eceff4;
-  }
-  .p-input-filled .p-cascadeselect:not(.p-disabled).p-focus {
-    background-color: #ffffff;
   }
   .p-checkbox {
     position: relative;
@@ -1336,6 +1337,7 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     appearance: none;
     border-radius: 4px;
+    outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
     border-color: #81a1c1;
@@ -1348,6 +1350,15 @@
   }
   .p-inputtext.p-invalid.p-component {
     border-color: #bf616a;
+  }
+  .p-inputtext.p-variant-filled {
+    background-color: #eceff4;
+  }
+  .p-inputtext.p-variant-filled:enabled:hover {
+    background-color: #eceff4;
+  }
+  .p-inputtext.p-variant-filled:enabled:focus {
+    background-color: #ffffff;
   }
   .p-inputtext.p-inputtext-sm {
     font-size: 0.875rem;
@@ -1362,29 +1373,8 @@
     color: #4c566a;
     transition-duration: 0.2s;
   }
-  .p-float-label > label.p-error {
+  .p-float-label > .p-invalid + label {
     color: #bf616a;
-  }
-  .p-input-icon-left > i:first-of-type,
-  .p-input-icon-left > svg:first-of-type,
-  .p-input-icon-left > .p-input-prefix {
-    left: 0.5rem;
-    color: #81a1c1;
-  }
-  .p-input-icon-left > .p-inputtext {
-    padding-left: 2rem;
-  }
-  .p-input-icon-left.p-float-label > label {
-    left: 2rem;
-  }
-  .p-input-icon-right > i:last-of-type,
-  .p-input-icon-right > svg:last-of-type,
-  .p-input-icon-right > .p-input-suffix {
-    right: 0.5rem;
-    color: #81a1c1;
-  }
-  .p-input-icon-right > .p-inputtext {
-    padding-right: 2rem;
   }
   .p-icon-field-left > .p-inputtext {
     padding-left: 2rem;
@@ -2095,6 +2085,15 @@
   }
   .p-treeselect.p-treeselect-clearable .p-treeselect-label {
     padding-right: 1.5rem;
+  }
+  .p-treeselect.p-variant-filled {
+    background: #eceff4;
+  }
+  .p-treeselect.p-variant-filled:not(.p-disabled):hover {
+    background-color: #eceff4;
+  }
+  .p-treeselect.p-variant-filled:not(.p-disabled).p-focus {
+    background-color: #ffffff;
   }
   .p-treeselect .p-treeselect-label {
     padding: 0.5rem 0.5rem;

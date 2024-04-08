@@ -3,9 +3,8 @@ import { BasicDoc } from '@/components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '@/components/doc/calendar/buttonbardoc';
 import { DateTemplateDoc } from '@/components/doc/calendar/datetemplatedoc';
 import { DisabledDoc } from '@/components/doc/calendar/disableddoc';
+import { FilledDoc } from '@/components/doc/calendar/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/calendar/floatlabeldoc';
-import { FormikDoc } from '@/components/doc/calendar/form/formikdoc';
-import { HookFormDoc } from '@/components/doc/calendar/form/hookfromdoc';
 import { FormatDoc } from '@/components/doc/calendar/formatdoc';
 import { IconDoc } from '@/components/doc/calendar/icondoc';
 import { ImportDoc } from '@/components/doc/calendar/importdoc';
@@ -16,7 +15,6 @@ import { MinMaxDoc } from '@/components/doc/calendar/minmaxdoc';
 import { MonthPickerDoc } from '@/components/doc/calendar/monthpickerdoc';
 import { MultipleDoc } from '@/components/doc/calendar/multipledoc';
 import { MultipleMonthsDoc } from '@/components/doc/calendar/multiplemonthsdoc';
-import { PTDoc } from '@/components/doc/calendar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/calendar/pt/wireframe';
 import { RangeDoc } from '@/components/doc/calendar/rangedoc';
 import { StyledDoc } from '@/components/doc/calendar/theming/styleddoc';
@@ -110,6 +108,11 @@ const CalendarDemo = () => {
             component: InlineDoc
         },
         {
+            id: 'filled',
+            label: 'Filled',
+            component: FilledDoc
+        },
+        {
             id: 'floatlabel',
             label: 'Float Label',
             component: FloatLabelDoc
@@ -124,24 +127,6 @@ const CalendarDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'form',
-            label: 'Form',
-            description: 'Compatibility with popular React form libraries.',
-            children: [
-                {
-                    id: 'formik',
-                    label: 'Formik',
-                    component: FormikDoc
-                },
-                {
-                    id: 'hookform',
-                    label: 'Hook Form',
-                    component: HookFormDoc
-                }
-            ]
-        },
-
         {
             id: 'accessibility',
             label: 'Accessibility',
@@ -158,11 +143,6 @@ const CalendarDemo = () => {
             id: 'pt.calendar.options',
             label: 'Calendar PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

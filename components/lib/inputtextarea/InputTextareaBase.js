@@ -2,14 +2,15 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, isFilled }) =>
+    root: ({ props, context, isFilled }) =>
         classNames(
             'p-inputtextarea p-inputtext p-component',
             {
                 'p-disabled': props.disabled,
                 'p-filled': isFilled,
                 'p-inputtextarea-resizable': props.autoResize,
-                'p-invalid': props.invalid
+                'p-invalid': props.invalid,
+                'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
             },
             props.className
         )
@@ -34,6 +35,7 @@ export const InputTextareaBase = ComponentBase.extend({
         __parentMetadata: null,
         autoResize: false,
         invalid: false,
+        variant: null,
         keyfilter: null,
         onBlur: null,
         onFocus: null,

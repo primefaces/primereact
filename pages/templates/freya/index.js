@@ -1,13 +1,12 @@
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateLicense from '@/components/templates/TemplateLicense';
-import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
-import FreyaLogo from './FreyaLogo';
 import Link from 'next/link';
+import FreyaLogo from './FreyaLogo';
 
 const features2Data = [
     {
@@ -41,21 +40,6 @@ const features2Data = [
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
         src: 'https://primefaces.org/cdn/primereact/images/templates/freya/freya-features2-mobile.png'
-    }
-];
-
-const relatedData = [
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond-react.jpg',
-        href: '/templates/diamond'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
-        href: '/templates/babylon'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/ultima-react.jpg',
-        href: '/templates/ultima'
     }
 ];
 
@@ -215,8 +199,6 @@ const FreyaPage = () => {
             <TemplateFeatures featuresData={features2Data} displayType="vertical" />
             <FreyaSeparator />
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
-            <FreyaSeparator />
-            <TemplateRelated relatedData={relatedData} />
         </div>
     );
 };
