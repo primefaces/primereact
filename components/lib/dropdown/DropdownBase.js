@@ -178,7 +178,7 @@ export const DropdownBase = ComponentBase.extend({
         filterBy: null,
         filterClearIcon: null,
         filterIcon: null,
-        filterInputAutoFocus: true,
+        filterInputAutoFocus: false,
         filterLocale: undefined,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
