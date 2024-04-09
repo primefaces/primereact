@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -1099,12 +1099,22 @@ export const Dropdown = React.memo(
             return <span {...inputProps}>{content}</span>;
         };
 
+        const onClearIconKeyDown = (event) => {
+            if (event.key === 'Enter' || event.code === 'Space') {
+                clear(event);
+                event.preventDefault();
+            }
+        };
+
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
                 const clearIconProps = mergeProps(
                     {
                         className: cx('clearIcon'),
-                        onPointerUp: clear
+                        onPointerUp: clear,
+                        tabIndex: props.tabIndex || '0',
+                        onKeyDown: onClearIconKeyDown,
+                        'aria-label': localeOption('clear')
                     },
                     ptm('clearIcon')
                 );
