@@ -28,7 +28,7 @@ const classes = {
     content: 'p-sidebar-content',
     icons: 'p-sidebar-icons',
     root: ({ props, context }) =>
-        classNames('p-sidebar p-component', props.className, {
+        classNames('p-sidebar p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),

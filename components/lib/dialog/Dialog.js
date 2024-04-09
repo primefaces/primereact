@@ -8,7 +8,7 @@ import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
@@ -714,7 +714,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             {
                 ref: dialogRef,
                 id: idState,
-                className: cx('root', { props, maximized, context }),
+                className: classNames(props.className, cx('root', { props, maximized, context })),
                 style: props.style,
                 onClick: props.onClick,
                 role: 'dialog',
