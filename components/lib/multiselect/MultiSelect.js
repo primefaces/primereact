@@ -465,11 +465,20 @@ export const MultiSelect = React.memo(
             props.onFilter && props.onFilter({ filter: '' });
         };
 
-        const scrollInView = () => {
-            const highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
+        const scrollInView = (event) => {
+            if (!overlayVisibleState) {
+                return;
+            }
 
-            if (highlightItem && highlightItem.scrollIntoView) {
-                highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            let focusedItem;
+            if (event) {
+                focusedItem = event.currentTarget;
+            } else {
+                focusedItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
+            }
+
+            if (focusedItem && focusedItem.scrollIntoView) {
+                focusedItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
         };
 
@@ -792,7 +801,7 @@ export const MultiSelect = React.memo(
         const changeFocusedOptionIndex = (event, index) => {
             if (focusedOptionIndex !== index) {
                 setFocusedOptionIndex(index);
-                scrollInView();
+                scrollInView(event);
 
                 if (props.selectOnFocus) {
                     onOptionSelect(event, visibleOptions[index], false);
