@@ -31136,6 +31136,282 @@
             }
         }
     },
+    "inputotp": {
+        "description": "InputOtp is an extension to standard input element with theming and keyfiltering.\n\n[Live Demo](https://www.primereact.org/inputotp/)",
+        "components": {
+            "InputOtp": {
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": []
+                },
+                "props": {
+                    "description": "Defines valid properties in InputOtp component. In addition to these, all properties of HTMLInputElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should be disabled."
+                        },
+                        {
+                            "name": "inputTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TemplateType<InputOtpProps>",
+                            "default": "",
+                            "description": "Template of an item."
+                        },
+                        {
+                            "name": "integerOnly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that an input field is integer-only."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
+                            "name": "length",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "4",
+                            "description": "Number of characters to initiate."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Mask pattern."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputOtpPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "readonly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that an input field is read-only."
+                        },
+                        {
+                            "name": "tabindex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "false",
+                            "description": "Specifies whether a inputotp should be checked or not."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": [
+                        {
+                            "name": "onBlur",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when autocomplete loses focus."
+                        },
+                        {
+                            "name": "onChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "InputOtpChangeEvent",
+                                    "description": "Custom change event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on value change."
+                        },
+                        {
+                            "name": "onFocus",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "FocusEvent<HTMLInputElement, Element>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when autocomplete gets focus."
+                        },
+                        {
+                            "name": "onInput",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "FormEvent<HTMLInputElement>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke while typing value on input"
+                        }
+                    ]
+                }
+            }
+        },
+        "events": {
+            "description": "Defines the custom events used by the component's callbacks.",
+            "values": {
+                "InputOtpChangeEvent": {
+                    "description": "Custom change event",
+                    "relatedProp": "InputNumberProps.onChange",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "null | number",
+                            "description": "New value"
+                        }
+                    ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "InputOtpPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputOtpProps"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputOtpContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InputOtpPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputOtpPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputOtpPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the Tooltip component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InputOtpContext": {
+                    "description": "Defines current options in InputOtp component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the component as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InputOtpPassThroughType": {
+                    "values": "PassThroughType<T, InputOtpPassThroughMethodOptions>"
+                }
+            }
+        }
+    },
     "inputswitch": {
         "description": "InputSwitch is used to select a boolean value.\n\n[Live Demo](https://www.primereact.org/inputswitch/)",
         "components": {

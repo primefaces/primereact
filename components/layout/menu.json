@@ -84,6 +84,11 @@
                             "to": "/inputnumber"
                         },
                         {
+                            "name": "InputOtp",
+                            "to": "/inputotp",
+                            "badge": "NEW"
+                        },
+                        {
                             "name": "InputText",
                             "to": "/inputtext"
                         },

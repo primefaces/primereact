@@ -111,6 +111,7 @@ export default function FilterDemo() {
                         value={filterValues[filter]}
                         onChange={(e) => {
                             const newFilterValues = [...filterValues];
+
                             newFilterValues[filter] = e.value;
                             setFilterValues(newFilterValues);
                         }}

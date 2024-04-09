@@ -1434,6 +1434,15 @@
     right: 0.5rem;
     color: #81a1c1;
   }
+  .p-inputotp {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .p-inputotp-input {
+    text-align: center;
+    width: 2rem;
+  }
   .p-listbox-list-wrapper {
     overflow: auto;
   }
@@ -4560,109 +4569,6 @@
   }
   .p-splitter .p-splitter-gutter-resizing {
     background: #c2c7d1;
-  }
-  .p-stepper .p-stepper-nav {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-  .p-stepper .p-stepper-header {
-    padding: 0.5rem;
-  }
-  .p-stepper .p-stepper-header .p-stepper-action {
-    transition: none;
-    border-radius: 4px;
-    background: #ffffff;
-    outline-color: transparent;
-  }
-  .p-stepper .p-stepper-header .p-stepper-action .p-stepper-number {
-    color: #4c566a;
-    border: 1px solid #ffffff;
-    border-width: 2px;
-    background: #ffffff;
-    min-width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
-    font-size: 1.143rem;
-    border-radius: 50%;
-    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-  }
-  .p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
-    margin-left: 0.5rem;
-    color: #81a1c1;
-    font-weight: 600;
-    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-  }
-  .p-stepper .p-stepper-header .p-stepper-action:not(.p-disabled):focus-visible {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem #c0d0e0;
-  }
-  .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
-    background: #d8dee9;
-    color: #2e3440;
-  }
-  .p-stepper .p-stepper-header.p-highlight .p-stepper-title {
-    color: #4c566a;
-  }
-  .p-stepper .p-stepper-header:not(.p-disabled):focus-visible {
-    outline: 0 none;
-    outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem #c0d0e0;
-  }
-  .p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
-    background-color: #5e81ac;
-  }
-  .p-stepper .p-stepper-panels {
-    background: #ffffff;
-    padding: 1rem;
-    color: #4c566a;
-  }
-  .p-stepper .p-stepper-separator {
-    background-color: #e5e9f0;
-    width: 100%;
-    height: 2px;
-    margin-inline-start: 1rem;
-    transition: none;
-  }
-  .p-stepper.p-stepper-vertical {
-    display: flex;
-    flex-direction: column;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-toggleable-content {
-    display: flex;
-    flex: 1 1 auto;
-    background: #ffffff;
-    color: #4c566a;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel {
-    display: flex;
-    flex-direction: column;
-    flex: initial;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel.p-stepper-panel-active {
-    flex: 1 1 auto;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-header {
-    flex: initial;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-content {
-    width: 100%;
-    padding-left: 1rem;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-separator {
-    flex: 0 0 auto;
-    width: 2px;
-    height: auto;
-    margin-inline-start: calc(1.75rem + 2px);
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel:has(~ .p-stepper-panel-active) .p-stepper-separator {
-    background-color: #5e81ac;
-  }
-  .p-stepper.p-stepper-vertical .p-stepper-panel:last-of-type .p-stepper-content {
-    padding-left: 3rem;
   }
   .p-scrollpanel .p-scrollpanel-bar {
     background: #eceff4;
