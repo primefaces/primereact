@@ -31239,9 +31239,9 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "string | number",
-                            "default": "false",
-                            "description": "Specifies whether a inputotp should be checked or not."
+                            "type": "null | string | number",
+                            "default": "null",
+                            "description": "Specifies the value of the component."
                         },
                         {
                             "name": "variant",
@@ -31317,7 +31317,7 @@
             "values": {
                 "InputOtpChangeEvent": {
                     "description": "Custom change event",
-                    "relatedProp": "InputNumberProps.onChange",
+                    "relatedProp": "onChange",
                     "props": [
                         {
                             "name": "originalEvent",
@@ -31328,9 +31328,9 @@
                         },
                         {
                             "name": "value",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
-                            "type": "null | number",
+                            "type": "null | string | number",
                             "description": "New value"
                         }
                     ]
