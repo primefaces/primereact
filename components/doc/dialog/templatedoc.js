@@ -10,7 +10,7 @@ export function TemplateDoc(props) {
 
     const headerElement = (
         <div className="inline-flex align-items-center justify-content-center gap-2">
-            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
             <span className="font-bold white-space-nowrap">Amy Elsner</span>
         </div>
     );
@@ -44,7 +44,7 @@ export default function TemplateDemo() {
 
     const headerElement = (
         <div className="inline-flex align-items-center justify-content-center gap-2">
-            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
             <span className="font-bold white-space-nowrap">Amy Elsner</span>
         </div>
     );
@@ -79,7 +79,7 @@ export default function TemplateDemo() {
 
     const headerElement = (
         <div className="inline-flex align-items-center justify-content-center gap-2">
-            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
             <span className="font-bold white-space-nowrap">Amy Elsner</span>
         </div>
     );

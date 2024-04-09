@@ -72,7 +72,7 @@ export interface StepperPanelPassThroughOptions {
      */
     toggleableContent?: StepperPanelPassThroughOptionType;
     /**
-     * Used to control Vue Transition API.
+     * Used to control React Transition API.
      */
     transition?: StepperPanelPassThroughTransitionType;
     /**
