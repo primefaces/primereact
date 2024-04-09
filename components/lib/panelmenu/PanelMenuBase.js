@@ -10,7 +10,7 @@ const classes = {
     header: ({ active, item }) => classNames('p-component p-panelmenu-header', { 'p-highlight': active && !!item.items, 'p-disabled': item.disabled }),
     headerContent: 'p-panelmenu-header-content',
     menuContent: 'p-panelmenu-content',
-    root: ({ props }) => classNames('p-panelmenu p-component', props.className),
+    root: 'p-panelmenu p-component',
     separator: 'p-menuitem-separator',
     toggleableContent: ({ active }) =>
         classNames('p-toggleable-content', {

@@ -12,13 +12,9 @@ const classes = {
             'p-disabled': disabled
         }),
     root: ({ props }) =>
-        classNames(
-            'p-steps p-component',
-            {
-                'p-readonly': props.readOnly
-            },
-            props.className
-        )
+        classNames('p-steps p-component', {
+            'p-readonly': props.readOnly
+        })
 };
 
 const styles = `

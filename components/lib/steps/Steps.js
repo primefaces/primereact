@@ -282,7 +282,7 @@ export const Steps = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             StepsBase.getOtherProps(props),
