@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
-import { InputOtp } from '@/components/lib/inputotp/inputotp';
 import { Button } from '@/components/lib/button/Button';
+import { InputOtp } from '@/components/lib/inputotp/InputOtp';
+import { useState } from 'react';
 
 export function SampleDoc(props) {
     const [token, setTokens] = useState();
