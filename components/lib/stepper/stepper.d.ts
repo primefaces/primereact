@@ -134,4 +134,4 @@ export interface StepperProps {
  *
  * @group Component
  */
-export declare const Stepper: React.Component<StepperProps, any>;
+export declare const Stepper: React.FC<React.PropsWithChildren<StepperProps>>;
