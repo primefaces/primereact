@@ -153,7 +153,7 @@ export const AutoCompletePanel = React.memo(
                 getPTOptions(suggestion, 'item')
             );
 
-            return createListItem(suggestion, index, itemProps);
+            return createListItem(suggestion, undefined, index, itemProps);
         };
 
         const createItems = () => {
