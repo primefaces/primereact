@@ -467,6 +467,7 @@ export const InputNumber = React.memo(
                         newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
                         updateValue(event, newValueStr, null, 'delete-range');
                     }
+
                     break;
 
                 // del

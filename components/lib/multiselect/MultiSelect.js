@@ -471,6 +471,7 @@ export const MultiSelect = React.memo(
             }
 
             let focusedItem;
+
             if (event) {
                 focusedItem = event.currentTarget;
             } else {
