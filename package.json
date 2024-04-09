@@ -79,7 +79,7 @@
         "rollup-plugin-postcss": "^4.0.2",
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.69.5",
-        "typedoc": "0.24.8",
+        "typedoc": "0.25.12",
         "typescript": "5.1.6"
     },
     "engines": {
