@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useMergeProps, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -27,7 +27,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
     };
 
     const ariaPageLabel = (value) => {
-        return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
+        return ariaLabel('pageLabel', { page: value });
     };
 
     const onThumbnailKeydown = (event) => {
