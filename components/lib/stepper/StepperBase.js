@@ -16,7 +16,7 @@ const classes = {
                 'p-disabled': isItemDisabled(index)
             });
         },
-        action: 'p-stepper-action',
+        action: 'p-stepper-action p-component',
         number: 'p-stepper-number',
         title: 'p-stepper-title',
         separator: 'p-stepper-separator',
