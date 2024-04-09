@@ -5,13 +5,16 @@ import Link from 'next/link';
 export function TailwindDoc(props) {
     const code = {
         basic: `
-const Tailwind = {   
+const Tailwind = {
     inputswitch: {
         root: ({ props }) => ({
             className: classNames('inline-block relative', 'w-12 h-7', {
                 'opacity-60 select-none pointer-events-none cursor-default': props.disabled
             })
         }),
+        input: {
+            className: classNames('absolute appearance-none top-0 left-0 size-full p-0 m-0 opacity-0 z-10 outline-none cursor-pointer')
+        },
         slider: ({ props }) => ({
             className: classNames(
                 'absolute cursor-pointer top-0 left-0 right-0 bottom-0 border border-transparent',

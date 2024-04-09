@@ -840,6 +840,9 @@ const Tailwind = {
                 'opacity-60 select-none pointer-events-none cursor-default': props.disabled
             })
         }),
+        input: {
+            className: classNames('absolute appearance-none top-0 left-0 size-full p-0 m-0 opacity-0 z-10 outline-none cursor-pointer')
+        },
         slider: ({ props }) => ({
             className: classNames(
                 'absolute cursor-pointer top-0 left-0 right-0 bottom-0 border border-transparent',
@@ -1048,7 +1051,10 @@ const Tailwind = {
         root: {
             className: classNames('cursor-pointer inline-flex relative select-none align-bottom', 'w-6 h-6')
         },
-        input: ({ props, context }) => ({
+        input: {
+            className: classNames('absolute appearance-none top-0 left-0 size-full p-0 m-0 opacity-0 z-10 outline-none cursor-pointer')
+        },
+        box: ({ props, context }) => ({
             className: classNames(
                 'flex items-center justify-center',
                 'border-2 w-6 h-6 text-gray-600 rounded-lg transition-colors duration-200',
