@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { useMergeProps } from '../hooks/Hooks';
+import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { MeterGroupBase } from './MeterGroupBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { MeterGroupBase } from './MeterGroupBase';
 
 export const MeterGroup = (inProps) => {
-    const context = useContext(PrimeReactContext);
+    const context = React.useContext(PrimeReactContext);
     const props = MeterGroupBase.getProps(inProps, context);
     const { values, min, max, orientation, labelPosition, start, end, meter, labelList } = props;
 
@@ -146,7 +146,8 @@ export const MeterGroup = (inProps) => {
         values
     };
 
-    const labelElement = ObjectUtils.getJSXElement(labelList || createLabelList, { values, totalPercent });
+    const labelListContent = labelList || createLabelList();
+    const labelElement = ObjectUtils.getJSXElement(labelListContent, { values, totalPercent });
 
     return (
         <div {...rootProps} role="meter" aria-valuemin={min} aria-valuemax={max} aria-valuenow={totalPercent}>
