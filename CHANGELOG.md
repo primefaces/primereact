@@ -1,5 +1,41 @@
 # Changelog
 
+## [10.6.3](https://github.com/primefaces/primereact/tree/10.6.3) (2024-04-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.6.2...10.6.3)
+
+**New Features:**
+
+- New component InputOtp [\#6327](https://github.com/primefaces/primereact/issues/6327)
+
+**Enhancements:**
+
+- Unable to select item in Autcomplete with keyboard [\#6308](https://github.com/primefaces/primereact/issues/6308)
+- Core: p-hidden-accessible modernization [\#6163](https://github.com/primefaces/primereact/issues/6163)
+- Multiselect: must hit TAB key twice to move focus to next dropdown element [\#6288](https://github.com/primefaces/primereact/issues/6288)
+
+**Fixed bugs:**
+
+- Dropdown filter : Filter Field Resets to Empty String on Empty Filter Result when uing onFilterEvent to fetch options dynamically [\#6265](https://github.com/primefaces/primereact/issues/6265)
+- Multiselect scroll position reset bug [\#6305](https://github.com/primefaces/primereact/issues/6305)
+- InputNumber: does not work with czech and slovak keyboard layout [\#6237](https://github.com/primefaces/primereact/issues/6237)
+- InputNumber: Cannot insert value on Android [\#6275](https://github.com/primefaces/primereact/issues/6275)
+- InputNumber: cannot shift + num key  [\#6257](https://github.com/primefaces/primereact/issues/6257)
+- ButtonGroup: missing children prop [\#6333](https://github.com/primefaces/primereact/issues/6333)
+- InputText: It doesn't take classNames when unstyled is true [\#6274](https://github.com/primefaces/primereact/issues/6274)
+- Dropdown: Focus change when editable and filter enabled [\#6297](https://github.com/primefaces/primereact/issues/6297)
+- DataTable: Drag Selection Highlight Doesn't Appear in 10.6.2 [\#6272](https://github.com/primefaces/primereact/issues/6272)
+- Core: Merging PT props only respects lower-case props [\#6289](https://github.com/primefaces/primereact/issues/6289)
+- Calendar: Incorrect year with numberOfMonths and yearNavigator [\#6285](https://github.com/primefaces/primereact/issues/6285)
+- Core: Unstyled property does not inherit to children [\#6142](https://github.com/primefaces/primereact/issues/6142)
+- Vite: Build issues [\#6276](https://github.com/primefaces/primereact/issues/6276)
+- ButtonGroup: forwardRef render functions accept exactly two parameters [\#6263](https://github.com/primefaces/primereact/issues/6263)
+- MeterGroup: Component is not exported from the library [\#6268](https://github.com/primefaces/primereact/issues/6268)
+- Tree: row selection checkbox not getting checked [\#6216](https://github.com/primefaces/primereact/issues/6216)
+- Multiple Components: classnames not being set in unstyled mode [\#6329](https://github.com/primefaces/primereact/issues/6329)
+- ToggleButton: Checkboxes showing before button [\#6222](https://github.com/primefaces/primereact/issues/6222)
+
+
 ## [10.6.2](https://github.com/primefaces/primereact/tree/10.6.2) (2024-03-29)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.6.1...10.6.2)
