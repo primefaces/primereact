@@ -10,7 +10,7 @@ const classes = {
         }),
     range: 'p-slider-range',
     root: ({ props, vertical, horizontal }) =>
-        classNames('p-slider p-component', props.className, {
+        classNames('p-slider p-component', {
             'p-disabled': props.disabled,
             'p-slider-horizontal': horizontal,
             'p-slider-vertical': vertical

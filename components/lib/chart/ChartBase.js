@@ -1,5 +1,4 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
 
 export const ChartBase = ComponentBase.extend({
     defaultProps: {
@@ -17,7 +16,7 @@ export const ChartBase = ComponentBase.extend({
     },
     css: {
         classes: {
-            root: ({ props }) => classNames('p-chart', props.className)
+            root: 'p-chart'
         },
         inlineStyles: {
             root: ({ props }) =>

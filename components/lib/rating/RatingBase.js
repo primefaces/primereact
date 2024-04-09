@@ -7,14 +7,10 @@ const classes = {
     cancelIcon: 'p-rating-icon p-rating-cancel',
     cancelItem: 'p-rating-item p-rating-cancel-item',
     root: ({ props }) =>
-        classNames(
-            'p-rating',
-            {
-                'p-disabled': props.disabled,
-                'p-readonly': props.readOnly
-            },
-            props.className
-        )
+        classNames('p-rating', {
+            'p-disabled': props.disabled,
+            'p-readonly': props.readOnly
+        })
 };
 
 const styles = `

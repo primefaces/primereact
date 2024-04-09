@@ -7,7 +7,7 @@ import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
@@ -550,7 +550,7 @@ export const Mention = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { focusedState, isFilled }),
+                className: classNames(props.className, cx('root', { focusedState, isFilled })),
                 style: props.style
             },
             MentionBase.getOtherProps(props),

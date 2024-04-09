@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react';
-import { useMergeProps } from '../hooks/Hooks';
 import { PrimeReactContext } from '../api/Api';
+import { useMergeProps } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
 import { IconFieldBase } from './IconFieldBase';
 
 export const IconField = React.memo(
@@ -20,7 +21,7 @@ export const IconField = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: cx('root', { iconPosition: props.iconPosition })
+                className: classNames(props.className, cx('root', { iconPosition: props.iconPosition }))
             },
             IconFieldBase.getOtherProps(props),
             ptm('root')

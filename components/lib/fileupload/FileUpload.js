@@ -646,7 +646,7 @@ export const FileUpload = React.memo(
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style
                 },
                 FileUploadBase.getOtherProps(props),

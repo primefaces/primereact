@@ -9,7 +9,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { Tree } from '../tree/Tree';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
@@ -840,7 +840,7 @@ export const TreeSelect = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root', { context, focusedState, overlayVisibleState, isValueEmpty }),
+                className: classNames(props.className, cx('root', { context, focusedState, overlayVisibleState, isValueEmpty })),
                 style: props.style,
                 onClick: onClick
             },

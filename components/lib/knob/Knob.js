@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMergeProps } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
 
 const radius = 40;
@@ -243,7 +244,7 @@ export const Knob = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             ptm('root')
