@@ -6,7 +6,7 @@ import { BanIcon } from '../icons/ban';
 import { StarIcon } from '../icons/star';
 import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
-import { IconUtils, ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
 
 export const Rating = React.memo(
@@ -198,7 +198,7 @@ export const Rating = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             RatingBase.getOtherProps(props),

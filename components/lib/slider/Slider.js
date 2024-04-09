@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMergeProps } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { SliderBase } from './SliderBase';
 
 export const Slider = React.memo(
@@ -358,7 +358,7 @@ export const Slider = React.memo(
         const rootProps = mergeProps(
             {
                 style: props.style,
-                className: cx('root', { vertical, horizontal }),
+                className: classNames(props.className, cx('root', { vertical, horizontal })),
                 onClick: onBarClick
             },
             SliderBase.getOtherProps(props),

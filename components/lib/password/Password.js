@@ -445,7 +445,7 @@ export const Password = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { isFilled, focusedState }),
+                className: classNames(props.className, cx('root', { isFilled, focusedState })),
                 style: props.style
             },
             ptm('root')

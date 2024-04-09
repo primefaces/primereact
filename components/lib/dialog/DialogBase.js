@@ -29,7 +29,7 @@ const classes = {
         );
     },
     root: ({ props, maximized, context }) =>
-        classNames('p-dialog p-component', props.className, {
+        classNames('p-dialog p-component', {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
             'p-dialog-default': !maximized,

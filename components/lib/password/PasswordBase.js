@@ -4,15 +4,11 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, isFilled, focusedState }) =>
-        classNames(
-            'p-password p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState,
-                'p-input-icon-right': props.toggleMask
-            },
-            props.className
-        ),
+        classNames('p-password p-component p-inputwrapper', {
+            'p-inputwrapper-filled': isFilled,
+            'p-inputwrapper-focus': focusedState,
+            'p-input-icon-right': props.toggleMask
+        }),
     input: ({ props }) => classNames('p-password-input', props.inputClassName),
     panel: ({ props, context }) =>
         classNames('p-password-panel p-component', props.panelClassName, {

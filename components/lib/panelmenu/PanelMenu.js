@@ -429,7 +429,7 @@ export const PanelMenu = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 id: props.id,
                 style: props.style
             },

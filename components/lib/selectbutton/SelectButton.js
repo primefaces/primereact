@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
 
@@ -140,7 +140,7 @@ export const SelectButton = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style,
                 role: 'group'
             },

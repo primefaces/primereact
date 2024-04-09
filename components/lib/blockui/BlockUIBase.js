@@ -2,7 +2,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-blockui-container', props.containerClassName),
+    root: 'p-blockui-container',
     mask: ({ props }) =>
         classNames('p-blockui p-component-overlay p-component-overlay-enter', {
             'p-blockui-document': props.fullScreen

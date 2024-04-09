@@ -4,7 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
 
@@ -650,7 +650,7 @@ export const ColorPicker = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             ColorPickerBase.getOtherProps(props),
             ptm('root')

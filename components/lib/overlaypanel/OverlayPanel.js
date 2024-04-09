@@ -7,7 +7,7 @@ import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
@@ -266,7 +266,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: cx('root', { context }),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 onClick: (e) => onPanelClick(e)
             },

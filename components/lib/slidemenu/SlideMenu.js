@@ -6,7 +6,7 @@ import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, use
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 
@@ -175,7 +175,7 @@ export const SlideMenu = React.memo(
                 {
                     ref: menuRef,
                     id: props.id,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style,
                     onClick: (e) => onPanelClick(e)
                 },

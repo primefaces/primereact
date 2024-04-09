@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { DomHandler, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, classNames } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
@@ -287,7 +287,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
             id: props.id,
             ref: containerRef,
             style: props.style,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         ScrollPanelBase.getOtherProps(props),
         ptm('root')

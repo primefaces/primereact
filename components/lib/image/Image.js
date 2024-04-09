@@ -384,7 +384,7 @@ export const Image = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             ImageBase.getOtherProps(props),
             ptm('root')

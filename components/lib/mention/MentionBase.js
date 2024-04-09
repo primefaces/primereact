@@ -10,14 +10,10 @@ const classes = {
     panel: ({ props }) => classNames('p-mention-panel p-component', props.panelClassName),
     input: ({ props }) => classNames('p-mention-input', props.inputClassName),
     root: ({ props, isFilled, focusedState }) =>
-        classNames(
-            'p-mention p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        ),
+        classNames('p-mention p-component p-inputwrapper', {
+            'p-inputwrapper-filled': isFilled,
+            'p-inputwrapper-focus': focusedState
+        }),
     transition: 'p-connected-overlay'
 };
 

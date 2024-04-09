@@ -4,13 +4,9 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props }) =>
-        classNames(
-            'p-colorpicker p-component',
-            {
-                'p-colorpicker-overlay': !props.inline
-            },
-            props.className
-        ),
+        classNames('p-colorpicker p-component', {
+            'p-colorpicker-overlay': !props.inline
+        }),
     input: ({ props }) =>
         classNames('p-colorpicker-preview p-inputtext', props.inputClassName, {
             'p-disabled': props.disabled

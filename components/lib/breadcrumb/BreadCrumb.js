@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
@@ -243,7 +243,7 @@ export const BreadCrumb = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             BreadCrumbBase.getOtherProps(props),
