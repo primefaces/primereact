@@ -5,13 +5,15 @@ import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 const baseStyle = `
 .p-hidden-accessible {
     border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
     padding: 0;
+    margin: -1px;
     position: absolute;
+    height: 1px;
     width: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 .p-hidden-accessible input,
