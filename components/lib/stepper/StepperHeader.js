@@ -2,11 +2,12 @@ import * as React from 'react';
 import { useMergeProps } from '../hooks/Hooks';
 
 export const StepperHeader = React.memo(
-    React.forwardRef((props) => {
+    React.forwardRef((props, ref) => {
         const mergeProps = useMergeProps();
         const { cx } = props;
 
         const buttonProps = mergeProps({
+            ref: ref,
             id: props.id,
             className: cx('stepper.action'),
             role: 'tab',
