@@ -318,6 +318,38 @@ export const InputNumber = React.memo(
             isSpecialChar.current = false;
         };
 
+        const onInputAndroidKey = (event) => {
+            if (!DomHandler.isAndroid() || props.disabled || props.readOnly) {
+                return;
+            }
+
+            if (props.onKeyUp) {
+                props.onKeyUp(event);
+
+                // do not continue if the user defined event wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
+            }
+
+            const code = event.which || event.keyCode;
+
+            if (code !== 13) {
+                // to submit a form
+                event.preventDefault();
+            }
+
+            const char = String.fromCharCode(code);
+            const _isDecimalSign = isDecimalSign(char);
+            const _isMinusSign = isMinusSign(char);
+
+            if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
+                insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+            } else {
+                updateValue(event, event.target.value, null, 'delete-single');
+            }
+        };
+
         const onInputKeyDown = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
@@ -339,6 +371,11 @@ export const InputNumber = React.memo(
             }
 
             lastValue.current = event.target.value;
+
+            // Android is handled specially in onInputAndroidKey
+            if (DomHandler.isAndroid()) {
+                return;
+            }
 
             let selectionStart = event.target.selectionStart;
             let selectionEnd = event.target.selectionEnd;
@@ -430,7 +467,6 @@ export const InputNumber = React.memo(
                         newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
                         updateValue(event, newValueStr, null, 'delete-range');
                     }
-
                     break;
 
                 // del
@@ -1123,6 +1159,7 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
+                    onKeyPress={onInputAndroidKey}
                     onInput={onInput}
                     onClick={onInputClick}
                     onPointerDown={onInputPointerDown}
