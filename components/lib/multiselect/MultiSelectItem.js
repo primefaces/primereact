@@ -1,12 +1,13 @@
 import * as React from 'react';
+import { Checkbox } from '../checkbox/Checkbox';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
-import { Checkbox } from '../checkbox/Checkbox';
 import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const checkboxRef = React.useRef(null);
     const mergeProps = useMergeProps();
     const { ptm, cx, isUnstyled } = props;
 
@@ -25,6 +26,7 @@ export const MultiSelectItem = React.memo((props) => {
 
     const onFocus = (event) => {
         setFocusedState(true);
+        checkboxRef?.current?.getInput().focus();
     };
 
     const onBlur = (event) => {
@@ -80,7 +82,7 @@ export const MultiSelectItem = React.memo((props) => {
     return (
         <li {...itemProps}>
             <div {...checkboxContainerProps}>
-                <Checkbox checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
+                <Checkbox ref={checkboxRef} checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
             </div>
             <span>{content}</span>
             <Ripple />
