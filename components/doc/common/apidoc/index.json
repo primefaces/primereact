@@ -46984,7 +46984,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "StepperPanelPassThroughTransitionType",
-                            "description": "Used to control Vue Transition API."
+                            "description": "Used to control React Transition API."
                         },
                         {
                             "name": "hooks",
