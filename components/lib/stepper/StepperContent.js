@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useMergeProps } from '../hooks/Hooks';
 
 export const StepperContent = React.memo(
-    React.forwardRef((props) => {
+    React.forwardRef((props, ref) => {
         const mergeProps = useMergeProps();
         const { cx, ptm } = props;
 
         const rootProps = mergeProps(
             {
+                ref: ref,
                 id: props.id,
                 className: cx('stepper.content', { stepperpanel: props.stepperpanel, index: props.index }),
                 role: 'tabpanel',
