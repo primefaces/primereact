@@ -9,13 +9,9 @@ const classes = {
     prevbutton: 'p-tabview-nav-prev p-tabview-nav-btn p-link',
     nextbutton: 'p-tabview-nav-next p-tabview-nav-btn p-link',
     root: ({ props }) =>
-        classNames(
-            'p-tabview p-component',
-            {
-                'p-tabview-scrollable': props.scrollable
-            },
-            props.className
-        ),
+        classNames('p-tabview p-component', {
+            'p-tabview-scrollable': props.scrollable
+        }),
     navcontainer: 'p-tabview-nav-container',
     tab: {
         header: ({ selected, disabled, headerClassName, _className }) => classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className),

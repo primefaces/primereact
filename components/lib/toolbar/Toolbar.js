@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 import { ToolbarBase } from './ToolbarBase';
 
 export const Toolbar = React.memo(
@@ -51,7 +51,7 @@ export const Toolbar = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 role: 'toolbar'
             },
             ToolbarBase.getOtherProps(props),
