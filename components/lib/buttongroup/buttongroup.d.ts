@@ -55,11 +55,6 @@ export interface ButtonGroupPassThroughAttributes {
  */
 export interface ButtonGroupProps {
     /**
-     * Used to get the child elements of the component.
-     * @readonly
-     */
-    children?: React.ReactNode | undefined;
-    /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {ButtonGroupPassThroughOptions}
      */
@@ -88,4 +83,4 @@ export interface ButtonGroupProps {
  * @group Component
  *
  */
-export declare const ButtonGroup: React.ForwardRefExoticComponent<ButtonGroupProps>;
+export declare const ButtonGroup: React.ForwardRefExoticComponent<React.PropsWithChildren<ButtonGroupProps> & React.RefAttributes<HTMLDivElement>>;
