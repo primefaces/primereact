@@ -183,7 +183,7 @@ exports[`BlockUI container style and className 1`] = `
   <div>
     <div
       aria-busy="true"
-      class="p-blockui-container container-jest"
+      class="container-jest p-blockui-container"
       data-pc-name="blockui"
       data-pc-section="root"
       style="cursor: pointer;"
