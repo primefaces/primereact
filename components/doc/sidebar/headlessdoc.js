@@ -198,8 +198,8 @@ import React, { useState, useRef } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
-import { Ripple } from 'primereact/Ripple';
-import { StyleClass } from 'primereact/StyleClass';
+import { Ripple } from 'primereact/ripple';
+import { StyleClass } from 'primereact/styleclass';
 
 export default function HeadlessDemo() {
     const [visible, setVisible] = useState(false);
@@ -405,8 +405,8 @@ import React, { useState, useRef } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
-import { Ripple } from 'primereact/Ripple';
-import { StyleClass } from 'primereact/StyleClass';
+import { Ripple } from 'primereact/ripple';
+import { StyleClass } from 'primereact/styleclass';
 
 export default function HeadlessDemo() {
     const [visible, setVisible] = useState<boolean>(false);
