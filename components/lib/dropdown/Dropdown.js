@@ -156,11 +156,11 @@ export const Dropdown = React.memo(
         };
 
         const onOptionSelect = (event, option, isHide = true) => {
-            const value = getOptionValue(option);
+            // const value = getOptionValue(option);
 
             selectItem({
                 originalEvent: event,
-                option: value
+                option: option
             });
 
             isHide && hide(true);
