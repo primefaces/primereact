@@ -35,6 +35,11 @@ jobs:
       run: |
         npm run format:check
 
+    - name: Lint Check
+      if: ${{ success() }}
+      run: |
+        npm run lint
+
     - name: TypeScript Check
       if: ${{ success() }}
       run: |
