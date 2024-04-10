@@ -33,6 +33,10 @@ export const AutoCompletePanel = React.memo(
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
         };
 
+        const getOptionRenderKey = (option) => {
+            return ObjectUtils.resolveFieldData(option, props.field);
+        };
+
         const createFooter = () => {
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
@@ -145,6 +149,7 @@ export const AutoCompletePanel = React.memo(
                 );
             }
 
+            const key = `${index}_${typeof suggestion === 'object' ? getOptionRenderKey(suggestion) : suggestion}`;
             const itemProps = mergeProps(
                 {
                     style,
@@ -153,7 +158,7 @@ export const AutoCompletePanel = React.memo(
                 getPTOptions(suggestion, 'item')
             );
 
-            return createListItem(suggestion, undefined, index, itemProps);
+            return createListItem(suggestion, key, index, itemProps);
         };
 
         const createItems = () => {
