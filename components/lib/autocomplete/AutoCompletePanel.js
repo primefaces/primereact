@@ -149,7 +149,7 @@ export const AutoCompletePanel = React.memo(
                 );
             }
 
-            const key = `${index}_${typeof suggestion === 'object' ? getOptionRenderKey(suggestion) : suggestion}`;
+            const key = `${index}_${ObjectUtils.isObject(suggestion) ? getOptionRenderKey(suggestion) : suggestion}`;
             const itemProps = mergeProps(
                 {
                     style,
