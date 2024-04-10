@@ -83,6 +83,15 @@ export interface StepperChangeEvent {
 }
 
 /**
+ * Defines custom RefAttributes methods
+ */
+export interface StepperRefAttributes {
+    getElement: () => HTMLDivElement;
+    nextCallback: (e: React.SyntheticEvent) => void;
+    prevCallback: (e: React.SyntheticEvent) => void;
+}
+
+/**
  * Defines valid properties in Stepper component.
  * @group Properties
  */
@@ -134,4 +143,4 @@ export interface StepperProps {
  *
  * @group Component
  */
-export declare const Stepper: React.FC<React.PropsWithChildren<StepperProps>>;
+export declare const Stepper: React.ForwardRefExoticComponent<React.PropsWithChildren<StepperProps> & React.RefAttributes<StepperRefAttributes>>;
