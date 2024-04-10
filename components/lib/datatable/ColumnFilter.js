@@ -6,7 +6,7 @@ import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
 import FocusTrap from '../focustrap/FocusTrap';
-import { useMergeProps, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { FilterIcon } from '../icons/filter';
 import { FilterSlashIcon } from '../icons/filterslash';
 import { PlusIcon } from '../icons/plus';
@@ -20,7 +20,7 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } fr
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
     const overlayRef = React.useRef(null);
-    const overlayId = React.useRef(() => UniqueComponentId());
+    const overlayId = React.useRef(null);
     const iconRef = React.useRef(null);
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
@@ -475,6 +475,12 @@ export const ColumnFilter = React.memo((props) => {
     useUpdateEffect(() => {
         if (props.display === 'menu' && overlayVisibleState) {
             DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
+        }
+    });
+
+    useMountEffect(() => {
+        if (!overlayId.current) {
+            overlayId.current = UniqueComponentId();
         }
     });
 
