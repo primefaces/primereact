@@ -87,8 +87,8 @@ export interface StepperChangeEvent {
  */
 export interface StepperRefAttributes {
     getElement: () => HTMLDivElement;
-    nextCallback: (e: React.SyntheticEvent) => void;
-    prevCallback: (e: React.SyntheticEvent) => void;
+    nextCallback: (e?: React.SyntheticEvent) => void;
+    prevCallback: (e?: React.SyntheticEvent) => void;
 }
 
 /**
