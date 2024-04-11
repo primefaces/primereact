@@ -1,8 +1,8 @@
-import { InputText } from '@/components/lib/inputtext/InputText';
 import React, { useContext, useRef, useState } from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { ObjectUtils } from '../utils/Utils';
 import { InputOtpBase } from './BaseInputOtp';
 
