@@ -93,6 +93,12 @@ export const Menu = React.memo(
             }
         };
 
+        const onItemMouseMove = (event, key) => {
+            if (event && props.popup && focusedOptionIndex !== key) {
+                setFocusedOptionIndex(key);
+            }
+        };
+
         const onListFocus = (event) => {
             setFocused(true);
 
@@ -349,6 +355,7 @@ export const Menu = React.memo(
             const contentProps = mergeProps(
                 {
                     onClick: (event) => onItemClick(event, item, key),
+                    onMouseMove: (event) => onItemMouseMove(event, key),
                     className: cx('content')
                 },
                 ptm('content')
