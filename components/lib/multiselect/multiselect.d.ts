@@ -455,7 +455,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */
-    disabled?: boolean | undefined;
+    disabled?: boolean;
     /**
      * Used mode to display the selected item. Valid values are 'comma' and 'chip'.
      * @defaultValue comma
@@ -478,7 +478,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue true
      */
-    filter?: boolean | undefined;
+    filter?: boolean;
     /**
      * When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.
      * @defaultValue label
@@ -488,7 +488,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true
      */
-    filterInputAutoFocus?: boolean | undefined;
+    filterInputAutoFocus?: boolean;
     /**
      * Icon of the filter icon.
      */
@@ -515,12 +515,12 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Whether to display selected items in the label section or always display the placeholder as the default label.
      * @defaultValue false
      */
-    fixedPlaceholder?: boolean | undefined;
+    fixedPlaceholder?: boolean;
     /**
      * Use flex layout for the items panel.
      * @defaultValue false
      */
-    flex?: boolean | undefined;
+    flex?: boolean;
     /**
      * Unique identifier of the element.
      */
@@ -529,7 +529,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Render the items panel inline.
      * @defaultValue false
      */
-    inline?: boolean | undefined;
+    inline?: boolean;
     /**
      * Identifier of the focusable input.
      */
@@ -554,7 +554,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Displays a loader to indicate data load is in progress.
      * @defaultValue false
      */
-    loading?: boolean | undefined;
+    loading?: boolean;
     /**
      * The icon to show while indicating data load is in progress.
      */
@@ -599,7 +599,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Specifies the visibility of the overlay panel.
      * @defaultValue false
      */
-    overlayVisible?: boolean | undefined;
+    overlayVisible?: boolean;
     /**
      * Style class of the overlay panel element.
      */
@@ -624,7 +624,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * When present, it specifies that the component should have invalid state style.
      * @defaultValue false
      */
-    invalid?: boolean | undefined;
+    invalid?: boolean;
     /**
      * Specifies the input variant of the component.
      * @defaultValue outlined
@@ -653,7 +653,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Clears the filter value when hiding the dropdown.
      * @defaultValue false
      */
-    resetFilterOnHide?: boolean | undefined;
+    resetFilterOnHide?: boolean;
     /**
      * Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.
      * @defaultValue 200px
@@ -663,7 +663,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Whether all data is selected.
      * @defaultValue false
      */
-    selectAll?: boolean | undefined;
+    selectAll?: boolean;
     /**
      * Function that gets an item in the value and returns the content for it.
      */
@@ -681,12 +681,12 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * When enabled, a clear icon is displayed to clear the value.
      * @defaultValue false
      */
-    showClear?: boolean | undefined;
+    showClear?: boolean;
     /**
      * Whether to show the select all checkbox inside the panel's header.
      * @defaultValue true
      */
-    showSelectAll?: boolean | undefined;
+    showSelectAll?: boolean;
     /**
      * Label to display if showSelectAll is true
      */
@@ -703,17 +703,17 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * When enabled, the focused tab is activated.
      * @defaultValue false
      */
-    selectOnFocus?: false;
+    selectOnFocus?: boolean;
     /**
      * When enabled, the focus is placed on the hovered option.
      * @defaultValue true
      */
-    focusOnHover?: boolean | undefined;
+    focusOnHover?: boolean;
     /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false
      */
-    autoOptionFocus?: false;
+    autoOptionFocus?: boolean;
     /**
      * Content of the tooltip.
      */
@@ -729,7 +729,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     /**
      * Whether the option should be used as the value for the select element.
      */
-    useOptionAsValue?: boolean | undefined;
+    useOptionAsValue?: boolean;
     /**
      * Value of the component.
      */
