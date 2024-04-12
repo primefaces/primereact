@@ -25698,6 +25698,14 @@
                     "description": "Defines valid properties in FloatLabel component.",
                     "values": [
                         {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
