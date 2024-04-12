@@ -1,9 +1,12 @@
+import DeferredDemo from '@/components/demo/DeferredDemo';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dialog } from '@/components/lib/dialog/Dialog';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { InputTextarea } from '@/components/lib/inputtextarea/InputTextarea';
@@ -13,9 +16,8 @@ import { Tag } from '@/components/lib/tag/Tag';
 import { Toast } from '@/components/lib/toast/Toast';
 import { Toolbar } from '@/components/lib/toolbar/Toolbar';
 import { classNames } from '@/components/lib/utils/Utils';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
-import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export function ProductsDoc(props) {
     let emptyProduct = {
@@ -235,10 +237,10 @@ export function ProductsDoc(props) {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage Products</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
-            </span>
+            </IconField>
         </div>
     );
     const productDialogFooter = (
@@ -290,6 +292,8 @@ import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
@@ -514,10 +518,10 @@ export default function ProductsDemo() {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage Products</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
-            </span>
+            </IconField>
         </div>
     );
     const productDialogFooter = (
@@ -648,6 +652,8 @@ import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { RadioButton, RadioButtonChangeEvent } from 'primereact/radiobutton';
 import { InputNumber,InputNumberValueChangeEvent } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
@@ -898,10 +904,10 @@ export default function ProductsDemo() {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage Products</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" placeholder="Search..." onInput={(e) => {const target = e.target as HTMLInputElement; setGlobalFilter(target.value);}}  />
-            </span>
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
+                 <InputText type="search" placeholder="Search..." onInput={(e) => {const target = e.target as HTMLInputElement; setGlobalFilter(target.value);}}  />
+            </IconField>
         </div>
     );
     const productDialogFooter = (

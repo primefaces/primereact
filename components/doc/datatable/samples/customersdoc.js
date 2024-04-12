@@ -1,3 +1,4 @@
+import DeferredDemo from '@/components/demo/DeferredDemo';
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { FilterMatchMode, FilterOperator } from '@/components/lib/api/Api';
@@ -6,15 +7,16 @@ import { Calendar } from '@/components/lib/calendar/Calendar';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
 import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
 import { Slider } from '@/components/lib/slider/Slider';
 import { Tag } from '@/components/lib/tag/Tag';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
-import DeferredDemo from '@/components/demo/DeferredDemo';
 
 export const CustomersDoc = (props) => {
     const [customers, setCustomers] = useState([]);
@@ -101,10 +103,10 @@ export const CustomersDoc = (props) => {
         return (
             <div className="flex flex-wrap gap-2 justify-content-between align-items-center">
                 <h4 className="m-0">Customers</h4>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -222,6 +224,8 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
@@ -317,10 +321,10 @@ export default function CustomersDemo() {
         return (
             <div className="flex flex-wrap gap-2 justify-content-between align-items-center">
                 <h4 className="m-0">Customers</h4>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -441,6 +445,8 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
 import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
@@ -559,10 +565,10 @@ export default function CustomersDemo() {
         return (
             <div className="flex flex-wrap gap-2 justify-content-between align-items-center">
                 <h4 className="m-0">Customers</h4>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
