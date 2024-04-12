@@ -1,8 +1,8 @@
 import * as React from 'react';
-import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterMatchMode, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useUpdateEffect, useMergeProps } from '../hooks/Hooks';
+import { useEventListener, useUpdateEffect, useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
@@ -13,6 +13,7 @@ import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
+import { getStorage } from '../../utils/utils';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const mergeProps = useMergeProps();
@@ -82,6 +83,185 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             }
         }
     });
+
+    const isCustomStateStorage = () => {
+        return props.stateStorage === 'custom';
+    };
+
+    const isStateful = () => {
+        return props.stateKey != null || isCustomStateStorage();
+    };
+
+    const saveState = () => {
+        let state = {};
+
+        if (props.paginator) {
+            state.first = getFirst();
+            state.rows = getRows();
+        }
+
+        const sortField = getSortField();
+
+        if (sortField) {
+            state.sortField = sortField;
+            state.sortOrder = getSortOrder();
+        }
+
+        const multiSortMeta = getMultiSortMeta();
+
+        if (multiSortMeta) {
+            state.multiSortMeta = multiSortMeta;
+        }
+
+        if (hasFilter()) {
+            state.filters = getFilters();
+        }
+
+        if (props.reorderableColumns) {
+            state.columnOrder = columnOrderState;
+        }
+
+        state.expandedKeysState = expandedKeysState;
+
+        if (props.selectionKeys && props.onSelectionChange) {
+            state.selectionKeys = props.selectionKeys;
+        }
+
+        if (isCustomStateStorage()) {
+            if (props.customSaveState) {
+                props.customSaveState(state);
+            }
+        } else {
+            const storage = getStorage(props.stateStorage);
+
+            if (ObjectUtils.isNotEmpty(state)) {
+                storage.setItem(props.stateKey, JSON.stringify(state));
+            }
+        }
+
+        if (props.onStateSave) {
+            props.onStateSave(state);
+        }
+    };
+
+    const clearState = () => {
+        const storage = getStorage(props.stateStorage);
+
+        if (storage && props.stateKey) {
+            storage.removeItem(props.stateKey);
+        }
+    };
+
+    const restoreState = () => {
+        let restoredState = {};
+
+        if (isCustomStateStorage()) {
+            if (props.customRestoreState) {
+                restoredState = props.customRestoreState();
+            }
+        } else {
+            const storage = getStorage(props.stateStorage);
+            const stateString = storage.getItem(props.stateKey);
+            const dateFormat = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
+
+            const reviver = function (key, value) {
+                return typeof value === 'string' && dateFormat.test(value) ? new Date(value) : value;
+            };
+
+            if (stateString) {
+                restoredState = JSON.parse(stateString, reviver);
+            }
+        }
+
+        _restoreState(restoredState);
+    };
+
+    const restoreTableState = (restoredState) => {
+        _restoreState(restoredState);
+    };
+
+    const _restoreState = (restoredState = {}) => {
+        if (ObjectUtils.isNotEmpty(restoredState)) {
+            if (props.paginator) {
+                if (props.onPage) {
+                    const getOnPageParams = (first, rows) => {
+                        const totalRecords = getTotalRecords(processedData());
+                        const pageCount = Math.ceil(totalRecords / rows) || 1;
+                        const page = Math.floor(first / rows);
+
+                        return { first, rows, page, pageCount };
+                    };
+
+                    props.onPage(createEvent(getOnPageParams(restoredState.first, restoredState.rows)));
+                } else {
+                    setFirstState(restoredState.first);
+                    setRowsState(restoredState.rows);
+                }
+            }
+
+            if (restoredState.sortField) {
+                if (props.onSort) {
+                    props.onSort(
+                        createEvent({
+                            sortField: restoredState.sortField,
+                            sortOrder: restoredState.sortOrder
+                        })
+                    );
+                } else {
+                    setSortFieldState(restoredState.sortField);
+                    setSortOrderState(restoredState.sortOrder);
+                }
+            }
+
+            if (restoredState.multiSortMeta) {
+                if (props.onSort) {
+                    props.onSort(
+                        createEvent({
+                            multiSortMeta: restoredState.multiSortMeta
+                        })
+                    );
+                } else {
+                    setMultiSortMetaState(restoredState.multiSortMeta);
+                }
+            }
+
+            if (restoredState.filters) {
+                if (props.onFilter) {
+                    props.onFilter(
+                        createEvent({
+                            filters: restoredState.filters
+                        })
+                    );
+                } else {
+                    setFiltersState(cloneFilters(restoredState.filters));
+                }
+            }
+
+            if (props.reorderableColumns) {
+                setColumnOrderState(restoredState.columnOrder);
+            }
+
+            if (restoredState.expandedKeysState) {
+                if (props.onToggle) {
+                    props.onRowToggle({
+                        data: restoredState.expandedKeysState
+                    });
+                } else {
+                    setExpandedKeysState(restoredState.expandedKeysState);
+                }
+            }
+
+            if (restoredState.selectionKeys && props.onSelectionChange) {
+                props.onSelectionChange({
+                    value: restoredState.selectionKeys
+                });
+            }
+
+            if (props.onStateRestore) {
+                props.onStateRestore(restoredState);
+            }
+        }
+    };
 
     const onToggle = (event) => {
         const { originalEvent, value, navigateFocusToChild } = event;
@@ -337,6 +517,41 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const cloneFilters = (filters) => {
+        filters = filters || props.filters;
+        let cloned = {};
+
+        if (filters) {
+            Object.entries(filters).forEach(([prop, value]) => {
+                cloned[prop] = value;
+            });
+        } else {
+            const columns = getColumns();
+
+            cloned = columns.reduce((filters, col) => {
+                const field = getColumnProp(col, 'filterField') || getColumnProp(col, 'field');
+                const filterFunction = getColumnProp(col, 'filterFunction');
+                const dataType = getColumnProp(col, 'dataType');
+                const matchMode =
+                    getColumnProp(col, 'filterMatchMode') ||
+                    ((context && context.filterMatchModeOptions[dataType]) || PrimeReact.filterMatchModeOptions[dataType]
+                        ? (context && context.filterMatchModeOptions[dataType][0]) || PrimeReact.filterMatchModeOptions[dataType][0]
+                        : FilterMatchMode.STARTS_WITH);
+                let constraint = { value: null, matchMode };
+
+                if (filterFunction) {
+                    FilterService.register(`custom_${field}`, (...args) => filterFunction(...args, { column: col }));
+                }
+
+                filters[field] = constraint;
+
+                return filters;
+            }, {});
+        }
+
+        return cloned;
+    };
+
     const hasFilter = () => {
         return ObjectUtils.isNotEmpty(getFilters());
     };
@@ -436,6 +651,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                     column: resizeColumnProps.current,
                     delta: delta
                 });
+            }
+
+            if (isStateful()) {
+                saveState();
             }
         }
 
@@ -893,6 +1112,18 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return data;
     };
 
+    useMountEffect(() => {
+        if (isStateful()) {
+            restoreState();
+        }
+    });
+
+    useUpdateEffect(() => {
+        if (isStateful()) {
+            saveState();
+        }
+    });
+
     useUpdateEffect(() => {
         if (childFocusEvent.current) {
             const nodeElement = childFocusEvent.current.target;
@@ -908,9 +1139,25 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         props,
+        clearState,
         filter,
-        getElement: () => elementRef.current
+        getElement: () => elementRef.current,
+        restoreState,
+        restoreTableState,
+        saveState
     }));
+
+    const createEvent = (event) => {
+        return {
+            first: getFirst(),
+            rows: getRows(),
+            sortField: getSortField(),
+            sortOrder: getSortOrder(),
+            multiSortMeta: getMultiSortMeta(),
+            filters: getFilters(),
+            ...event
+        };
+    };
 
     const createTableHeader = (columns, columnGroup) => {
         const sortField = getSortField();
