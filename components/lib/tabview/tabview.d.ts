@@ -363,6 +363,10 @@ export interface TabViewPassThroughOptions {
      * Uses to pass attributes to the panel's DOM element.
      */
     panelContainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to accordion tabs.
+     */
+    tab?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
