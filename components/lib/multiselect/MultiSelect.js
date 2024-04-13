@@ -686,17 +686,17 @@ export const MultiSelect = React.memo(
         };
 
         const isOptionDisabled = (option) => {
+            // disable if we have hit our selection limit
+            if (!allowOptionSelect() && !isSelected(option)) {
+                return true;
+            }
+
             // check if custom optionDisabled function is being used
             const { optionDisabled } = props;
             if (optionDisabled) {
                 return ObjectUtils.isFunction(optionDisabled) ? optionDisabled(option) : ObjectUtils.resolveFieldData(option, optionDisabled);
             }
 
-            // disable if we have hit our selection limit
-            if (!allowOptionSelect() && !isSelected(option)) {
-                return true;
-            }
-            
             // fallback to the option itself disabled value
             return option && (option.disabled ?? false);
         };
