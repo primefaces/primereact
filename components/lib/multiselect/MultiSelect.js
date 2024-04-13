@@ -693,6 +693,7 @@ export const MultiSelect = React.memo(
 
             // check if custom optionDisabled function is being used
             const { optionDisabled } = props;
+
             if (optionDisabled) {
                 return ObjectUtils.isFunction(optionDisabled) ? optionDisabled(option) : ObjectUtils.resolveFieldData(option, optionDisabled);
             }
