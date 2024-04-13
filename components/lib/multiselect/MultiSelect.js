@@ -422,6 +422,7 @@ export const MultiSelect = React.memo(
                     }
                 }
 
+                // make sure not to exceed the selection limit
                 if (props.selectionLimit && value && value.length) {
                     value = value.slice(0, props.selectionLimit);
                 }
@@ -685,15 +686,19 @@ export const MultiSelect = React.memo(
         };
 
         const isOptionDisabled = (option) => {
-            if (props.optionDisabled) {
-                return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
+            // check if custom optionDisabled function is being used
+            const { optionDisabled } = props;
+            if (optionDisabled) {
+                return ObjectUtils.isFunction(optionDisabled) ? optionDisabled(option) : ObjectUtils.resolveFieldData(option, optionDisabled);
             }
 
-            if (props.selectionLimit && props.value && props.value.length >= props.selectionLimit && !isSelected(option)) {
+            // disable if we have hit our selection limit
+            if (!allowOptionSelect() && !isSelected(option)) {
                 return true;
             }
-
-            return option && option.disabled !== undefined ? option.disabled : false;
+            
+            // fallback to the option itself disabled value
+            return option && (option.disabled ?? false);
         };
 
         const isOptionValueUsed = (option) => {
