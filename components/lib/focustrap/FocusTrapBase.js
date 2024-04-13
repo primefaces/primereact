@@ -1,7 +1,7 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
-const styles = ``;
+const styles = '';
 
 export const FocusTrapBase = ComponentBase.extend({
     defaultProps: {

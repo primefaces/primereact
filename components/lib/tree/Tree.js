@@ -111,7 +111,9 @@ export const Tree = React.memo(
                 }
 
                 return result;
-            } else return value;
+            }
+
+            return value;
         };
 
         const onDrop = (event) => {
@@ -125,11 +127,17 @@ export const Tree = React.memo(
                 let dragNode = dragNodeParent ? dragNodeParent.children[dragState.current.index] : value[dragState.current.index];
                 let dropNode = findNode(value, event.path.split('-'));
 
-                if (dropNode.children) dropNode.children.push(dragNode);
-                else dropNode.children = [dragNode];
+                if (dropNode.children) {
+                    dropNode.children.push(dragNode);
+                } else {
+                    dropNode.children = [dragNode];
+                }
 
-                if (dragNodeParent) dragNodeParent.children.splice(dragState.current.index, 1);
-                else value.splice(dragState.current.index, 1);
+                if (dragNodeParent) {
+                    dragNodeParent.children.splice(dragState.current.index, 1);
+                } else {
+                    value.splice(dragState.current.index, 1);
+                }
 
                 if (props.onDragDrop) {
                     props.onDragDrop({
@@ -159,17 +167,24 @@ export const Tree = React.memo(
                 let dragNode = dragNodeParent ? dragNodeParent.children[dragState.current.index] : value[dragState.current.index];
                 let siblings = areSiblings(dragState.current.path, event.path);
 
-                if (dragNodeParent) dragNodeParent.children.splice(dragState.current.index, 1);
-                else value.splice(dragState.current.index, 1);
+                if (dragNodeParent) {
+                    dragNodeParent.children.splice(dragState.current.index, 1);
+                } else {
+                    value.splice(dragState.current.index, 1);
+                }
 
                 if (event.position < 0) {
                     let dropIndex = siblings ? (dragState.current.index > event.index ? event.index : event.index - 1) : event.index;
 
-                    if (dropNodeParent) dropNodeParent.children.splice(dropIndex, 0, dragNode);
-                    else value.splice(dropIndex, 0, dragNode);
+                    if (dropNodeParent) {
+                        dropNodeParent.children.splice(dropIndex, 0, dragNode);
+                    } else {
+                        value.splice(dropIndex, 0, dragNode);
+                    }
+                } else if (dropNodeParent) {
+                    dropNodeParent.children.push(dragNode);
                 } else {
-                    if (dropNodeParent) dropNodeParent.children.push(dragNode);
-                    else value.push(dragNode);
+                    value.push(dragNode);
                 }
 
                 if (props.onDragDrop) {
@@ -187,19 +202,19 @@ export const Tree = React.memo(
         const validateDrop = (dragPath, dropPath) => {
             if (!dragPath) {
                 return false;
-            } else {
-                //same node
-                if (dragPath === dropPath) {
-                    return false;
-                }
-
-                //parent dropped on an descendant
-                if (dropPath.indexOf(dragPath) === 0) {
-                    return false;
-                }
-
-                return true;
             }
+
+            //same node
+            if (dragPath === dropPath) {
+                return false;
+            }
+
+            //parent dropped on an descendant
+            if (dropPath.indexOf(dragPath) === 0) {
+                return false;
+            }
+
+            return true;
         };
 
         const validateDropNode = (dragPath, dropPath) => {
@@ -212,9 +227,9 @@ export const Tree = React.memo(
                 }
 
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         };
 
         const validateDropPoint = (event) => {
@@ -227,31 +242,34 @@ export const Tree = React.memo(
                 }
 
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         };
 
         const areSiblings = (path1, path2) => {
-            if (path1.length === 1 && path2.length === 1) return true;
-            else return path1.substring(0, path1.lastIndexOf('-')) === path2.substring(0, path2.lastIndexOf('-'));
+            if (path1.length === 1 && path2.length === 1) {
+                return true;
+            }
+
+            return path1.substring(0, path1.lastIndexOf('-')) === path2.substring(0, path2.lastIndexOf('-'));
         };
 
         const findNode = (value, path) => {
             if (path.length === 0) {
                 return null;
-            } else {
-                const index = parseInt(path[0], 10);
-                const nextSearchRoot = value.children ? value.children[index] : value[index];
-
-                if (path.length === 1) {
-                    return nextSearchRoot;
-                } else {
-                    path.shift();
-
-                    return findNode(nextSearchRoot, path);
-                }
             }
+
+            const index = parseInt(path[0], 10);
+            const nextSearchRoot = value.children ? value.children[index] : value[index];
+
+            if (path.length === 1) {
+                return nextSearchRoot;
+            }
+
+            path.shift();
+
+            return findNode(nextSearchRoot, path);
         };
 
         const isNodeLeaf = (node) => {
@@ -412,6 +430,7 @@ export const Tree = React.memo(
                     selectionKeys={props.selectionKeys}
                     selectionMode={props.selectionMode}
                     togglerTemplate={props.togglerTemplate}
+                    isUnstyled={isUnstyled}
                 />
             );
         };
@@ -467,11 +486,11 @@ export const Tree = React.memo(
                     const rootNodes = createRootChildren(value);
 
                     return createRootChildrenContainer(rootNodes);
-                } else {
-                    const emptyMessageNode = createEmptyMessageNode();
-
-                    return createRootChildrenContainer(emptyMessageNode);
                 }
+
+                const emptyMessageNode = createEmptyMessageNode();
+
+                return createRootChildrenContainer(emptyMessageNode);
             }
 
             return null;

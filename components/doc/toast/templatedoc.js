@@ -29,7 +29,7 @@ export function TemplateDoc(props) {
                             <span className="font-bold text-900">Amy Elsner</span>
                         </div>
                         <div className="font-medium text-lg my-3 text-900">{props.message.summary}</div>
-                        <Button className="p-button-sm flex" label="Reply" severity="success" onClick={clear}></Button>
+                        <Button className="p-button-sm flex" label="Reply" severity="success" onClick={clear} />
                     </div>
                 )
             });

@@ -4,7 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
 
 export const InputTextarea = React.memo(
@@ -127,7 +127,7 @@ export const InputTextarea = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root', { isFilled }),
+                className: classNames(props.className, cx('root', { context, isFilled })),
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyUp: onKeyUp,
@@ -142,7 +142,7 @@ export const InputTextarea = React.memo(
 
         return (
             <>
-                <textarea {...rootProps}></textarea>
+                <textarea {...rootProps} />
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );

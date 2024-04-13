@@ -2,29 +2,22 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    container: 'p-tree-container',
-    loadingIcon: 'p-tree-loading-icon',
-    loadingOverlay: 'p-tree-loading-overlay p-component-overlay',
-    searchIcon: 'p-tree-filter-icon',
-    emptyMessage: 'p-treenode p-tree-empty-message',
-    filterContainer: 'p-tree-filter-container',
-    input: 'p-tree-filter p-inputtext p-component',
-    header: 'p-tree-header',
-    footer: 'p-tree-footer',
     root: ({ props }) =>
         classNames('p-tree p-component', {
             'p-tree-selectable': props.selectionMode,
             'p-tree-loading': props.loading,
             'p-disabled': props.disabled
         }),
-    label: 'p-treenode-label',
-    checkboxIcon: 'p-checkbox-icon p-c',
-    checkboxContainer: 'p-checkbox p-component',
-    checkbox: ({ nodeProps: props, checked, partialChecked }) => classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': props.disabled }),
-    nodeIcon: 'p-treenode-icon',
-    togglerIcon: 'p-tree-toggler-icon',
-    toggler: 'p-tree-toggler p-link',
-    droppoint: 'p-treenode-droppoint',
+    loadingOverlay: 'p-tree-loading-overlay p-component-overlay',
+    loadingIcon: 'p-tree-loading-icon',
+    filterContainer: 'p-tree-filter-container',
+    input: 'p-tree-filter p-inputtext p-component',
+    searchIcon: 'p-tree-filter-icon',
+    container: 'p-tree-container',
+    node: ({ isLeaf }) =>
+        classNames('p-treenode', {
+            'p-treenode-leaf': isLeaf
+        }),
     content: ({ nodeProps: props, checked, selected, isCheckboxSelectionMode }) =>
         classNames('p-treenode-content', {
             'p-treenode-selectable': props.selectionMode && props.node.selectable !== false,
@@ -32,15 +25,20 @@ const classes = {
             'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
             'p-disabled': props.disabled
         }),
+    toggler: 'p-tree-toggler p-link',
+    togglerIcon: 'p-tree-toggler-icon',
+    nodeCheckbox: ({ partialChecked }) => classNames({ 'p-indeterminate': partialChecked }),
+    nodeIcon: 'p-treenode-icon',
+    label: 'p-treenode-label',
     subgroup: 'p-treenode-children',
-    node: ({ isLeaf }) =>
-        classNames('p-treenode', {
-            'p-treenode-leaf': isLeaf
-        })
+    checkIcon: 'p-checkbox-icon',
+    emptyMessage: 'p-treenode p-tree-empty-message',
+    droppoint: 'p-treenode-droppoint',
+    header: 'p-tree-header',
+    footer: 'p-tree-footer'
 };
 
 const styles = `
-@layer primereact {
     .p-tree-container {
         margin: 0;
         padding: 0;
@@ -107,7 +105,7 @@ const styles = `
         align-items: center;
         justify-content: center;
     }
-}
+
 `;
 
 export const TreeBase = ComponentBase.extend({
@@ -166,7 +164,6 @@ export const TreeBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes,
-        styles
+        classes
     }
 });

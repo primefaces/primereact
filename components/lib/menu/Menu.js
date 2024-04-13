@@ -100,7 +100,9 @@ export const Menu = React.memo(
                 if (selectedOptionIndex !== -1) {
                     changeFocusedOptionIndex(selectedOptionIndex);
                     setSelectedOptionIndex(-1);
-                } else changeFocusedOptionIndex(0);
+                } else {
+                    changeFocusedOptionIndex(0);
+                }
             }
 
             props.onFocus && props.onFocus(event);
@@ -131,6 +133,7 @@ export const Menu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 
@@ -242,7 +245,7 @@ export const Menu = React.memo(
 
         const onEnter = () => {
             DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
-            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
 
             if (props.popup) {
@@ -318,7 +321,7 @@ export const Menu = React.memo(
                 ptm('separator')
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createMenuItem = (item, index, parentId = null) => {

@@ -10,7 +10,7 @@ import { OrganizationChart } from 'primereact/organizationchart';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

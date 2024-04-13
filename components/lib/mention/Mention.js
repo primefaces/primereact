@@ -7,7 +7,7 @@ import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
@@ -71,7 +71,7 @@ export const Mention = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
@@ -265,12 +265,10 @@ export const Mention = React.memo(
                 DomHandler.setAttributes(elementRef.current, {
                     'data-p-inputwrapper-filled': isFilled
                 });
+            } else if (isFilled) {
+                DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled');
             } else {
-                if (isFilled) {
-                    DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled');
-                } else {
-                    DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
-                }
+                DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
             }
         };
 
@@ -552,7 +550,7 @@ export const Mention = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { focusedState, isFilled }),
+                className: classNames(props.className, cx('root', { focusedState, isFilled })),
                 style: props.style
             },
             MentionBase.getOtherProps(props),

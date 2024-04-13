@@ -506,6 +506,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     placeholder?: string | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that the component should have invalid state style.
      * @defaultValue false
      */

@@ -14,8 +14,8 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
-    className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+<TreeSelect invalid value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+    className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
@@ -32,8 +32,8 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
-                className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+            <TreeSelect invalid value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+                className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         </div>
     );
 }
@@ -54,8 +54,8 @@ export default function InvalidDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
-                className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+            <TreeSelect invalid value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
+                className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         </div>
     );
 }
@@ -95,11 +95,11 @@ export default function InvalidDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                    Invalid state is displayed using the <i>invalid</i> prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+                <TreeSelect invalid value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="md:w-20rem w-full" placeholder="Select Item" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

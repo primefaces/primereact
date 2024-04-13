@@ -177,6 +177,11 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     autoOptionFocus?: boolean | undefined;
     /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
+    /**
      * Inline style of the list element.
      */
     listStyle?: React.CSSProperties | undefined;
@@ -243,10 +248,10 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     filterBy?: string | undefined;
     /**
-     * Defines how the items are filtered, valid values are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
-    filterMatchMode?: string | undefined;
+    filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
     /**
      * Placeholder text to show when filter input is empty.
      */

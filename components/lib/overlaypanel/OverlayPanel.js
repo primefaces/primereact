@@ -7,7 +7,7 @@ import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
@@ -133,7 +133,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
-        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         align();
     };
@@ -185,7 +185,9 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             let innerHTML = '';
 
             for (let breakpoint in props.breakpoints) {
-                innerHTML += `
+                innerHTML =
+                    innerHTML +
+                    `
                     @media screen and (max-width: ${breakpoint}) {
                         .p-overlaypanel[${attributeSelector.current}] {
                             width: ${props.breakpoints[breakpoint]};
@@ -264,7 +266,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: cx('root', { context }),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 onClick: (e) => onPanelClick(e)
             },

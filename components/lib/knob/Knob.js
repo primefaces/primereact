@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMergeProps } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
 
 const radius = 40;
@@ -116,9 +117,13 @@ export const Knob = React.memo(
         const updateModel = (angle, start) => {
             let mappedValue;
 
-            if (angle > maxRadians) mappedValue = mapRange(angle, minRadians, maxRadians, props.min, props.max);
-            else if (angle < start) mappedValue = mapRange(angle + 2 * Math.PI, minRadians, maxRadians, props.min, props.max);
-            else return;
+            if (angle > maxRadians) {
+                mappedValue = mapRange(angle, minRadians, maxRadians, props.min, props.max);
+            } else if (angle < start) {
+                mappedValue = mapRange(angle + 2 * Math.PI, minRadians, maxRadians, props.min, props.max);
+            } else {
+                return;
+            }
 
             if (props.onChange) {
                 props.onChange({
@@ -130,9 +135,13 @@ export const Knob = React.memo(
         const updateModelValue = (newValue) => {
             let currentValue;
 
-            if (newValue > props.max) currentValue = props.max;
-            else if (newValue < props.min) currentValue = props.min;
-            else currentValue = newValue;
+            if (newValue > props.max) {
+                currentValue = props.max;
+            } else if (newValue < props.min) {
+                currentValue = props.min;
+            } else {
+                currentValue = newValue;
+            }
 
             if (props.onChange) {
                 props.onChange({
@@ -235,7 +244,7 @@ export const Knob = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             ptm('root')
@@ -286,8 +295,8 @@ export const Knob = React.memo(
         return (
             <div {...rootProps}>
                 <svg {...svgProps}>
-                    <path {...rangeProps}></path>
-                    <path {...valueProps}></path>
+                    <path {...rangeProps} />
+                    <path {...valueProps} />
                     {text}
                 </svg>
             </div>

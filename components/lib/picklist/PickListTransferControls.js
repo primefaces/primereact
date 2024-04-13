@@ -135,16 +135,7 @@ export const PickListTransferControls = React.memo((props) => {
 
     return (
         <div {...buttonsProps}>
-            <Button
-                disabled={moveRightDisabled}
-                type="button"
-                icon={moveToTargetIcon}
-                onClick={moveRight}
-                pt={ptm('moveToTargetButton')}
-                unstyled={unstyled}
-                aria-label={ariaLabel('moveToTarget')}
-                __parentMetadata={{ parent: props.metaData }}
-            ></Button>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={ptm('moveToTargetButton')} unstyled={unstyled} aria-label={ariaLabel('moveToTarget')} __parentMetadata={{ parent: props.metaData }} />
             <Button
                 disabled={moveAllRightDisabled}
                 type="button"
@@ -154,8 +145,8 @@ export const PickListTransferControls = React.memo((props) => {
                 unstyled={unstyled}
                 aria-label={ariaLabel('moveAllToTarget')}
                 __parentMetadata={{ parent: props.metaData }}
-            ></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} aria-label={ariaLabel('moveToSource')} __parentMetadata={{ parent: props.metaData }}></Button>
+            />
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} aria-label={ariaLabel('moveToSource')} __parentMetadata={{ parent: props.metaData }} />
             <Button
                 disabled={moveAllLeftDisabled}
                 type="button"
@@ -165,7 +156,7 @@ export const PickListTransferControls = React.memo((props) => {
                 unstyled={unstyled}
                 aria-label={ariaLabel('moveAllToSource')}
                 __parentMetadata={{ parent: props.metaData }}
-            ></Button>
+            />
         </div>
     );
 });

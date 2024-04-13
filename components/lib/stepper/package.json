@@ -1,0 +1,7 @@
+{
+    "main": "./stepper.cjs.js",
+    "module": "./stepper.esm.js",
+    "unpkg": "./stepper.min.js",
+    "types": "./stepper.d.ts",
+    "sideEffects": false
+}

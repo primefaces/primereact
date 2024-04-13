@@ -184,7 +184,7 @@ export const FileUpload = React.memo(
 
             if (props.customUpload) {
                 if (props.fileLimit) {
-                    uploadedFileCount += files.length;
+                    uploadedFileCount = uploadedFileCount + files.length;
                 }
 
                 if (props.uploadHandler) {
@@ -234,7 +234,7 @@ export const FileUpload = React.memo(
 
                         if (xhr.status >= 200 && xhr.status < 300) {
                             if (props.fileLimit) {
-                                uploadedFileCount += files.length;
+                                uploadedFileCount = uploadedFileCount + files.length;
                             }
 
                             if (props.onUpload) {
@@ -243,13 +243,11 @@ export const FileUpload = React.memo(
                                     files
                                 });
                             }
-                        } else {
-                            if (props.onError) {
-                                props.onError({
-                                    xhr,
-                                    files
-                                });
-                            }
+                        } else if (props.onError) {
+                            props.onError({
+                                xhr,
+                                files
+                            });
                         }
 
                         clear();
@@ -292,7 +290,7 @@ export const FileUpload = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Enter') {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter') {
                 choose();
             }
         };
@@ -418,8 +416,11 @@ export const FileUpload = React.memo(
         };
 
         const onRemoveClick = (e, badgeOptions, index) => {
-            if (badgeOptions.severity === 'warning') remove(e, index);
-            else removeUploadedFiles(e, index);
+            if (badgeOptions.severity === 'warning') {
+                remove(e, index);
+            } else {
+                removeUploadedFiles(e, index);
+            }
         };
 
         const createFile = (file, index, badgeOptions) => {
@@ -465,6 +466,7 @@ export const FileUpload = React.memo(
                         disabled={disabled}
                         pt={ptm('removeButton')}
                         __parentMetadata={{ parent: metaData }}
+                        unstyled={isUnstyled()}
                     />
                 </div>
             );
@@ -543,7 +545,11 @@ export const FileUpload = React.memo(
         const createAdvanced = () => {
             const chooseButton = createChooseButton();
             const emptyContent = createEmptyContent();
-            let uploadButton, cancelButton, filesList, uplaodedFilesList, progressBar;
+            let uploadButton;
+            let cancelButton;
+            let filesList;
+            let uplaodedFilesList;
+            let progressBar;
 
             if (!props.auto) {
                 const uploadOptions = props.uploadOptions;
@@ -579,6 +585,7 @@ export const FileUpload = React.memo(
                         className={uploadOptions.className}
                         pt={ptm('uploadButton')}
                         __parentMetadata={{ parent: metaData }}
+                        unstyled={isUnstyled()}
                     />
                 );
                 cancelButton = (
@@ -593,6 +600,7 @@ export const FileUpload = React.memo(
                         className={cancelOptions.className}
                         pt={ptm('cancelButton')}
                         __parentMetadata={{ parent: metaData }}
+                        unstyled={isUnstyled()}
                     />
                 );
             }
@@ -638,7 +646,7 @@ export const FileUpload = React.memo(
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style
                 },
                 FileUploadBase.getOtherProps(props),
@@ -739,8 +747,11 @@ export const FileUpload = React.memo(
             );
         };
 
-        if (props.mode === 'advanced') return createAdvanced();
-        else if (props.mode === 'basic') return createBasic();
+        if (props.mode === 'advanced') {
+            return createAdvanced();
+        } else if (props.mode === 'basic') {
+            return createBasic();
+        }
     })
 );
 

@@ -3,11 +3,12 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState }) =>
+    root: ({ props, focusedState, overlayVisibleState, context }) =>
         classNames('p-dropdown p-component p-inputwrapper', {
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
             'p-focus': focusedState,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
             'p-dropdown-clearable': props.showClear && !props.disabled,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
             'p-inputwrapper-focus': focusedState || overlayVisibleState
@@ -32,7 +33,10 @@ const classes = {
     filterIcon: 'p-dropdown-filter-icon',
     filterClearIcon: 'p-dropdown-filter-clear-icon',
     filterContainer: ({ clearIcon }) => classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon }),
-    filterInput: 'p-dropdown-filter p-inputtext p-component',
+    filterInput: ({ props, context }) =>
+        classNames('p-dropdown-filter p-inputtext p-component', {
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
+        }),
     list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? 'p-dropdown-items' : 'p-dropdown-items'),
     panel: ({ context }) =>
         classNames('p-dropdown-panel p-component', {
@@ -174,7 +178,7 @@ export const DropdownBase = ComponentBase.extend({
         filterBy: null,
         filterClearIcon: null,
         filterIcon: null,
-        filterInputAutoFocus: true,
+        filterInputAutoFocus: false,
         filterLocale: undefined,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
@@ -184,6 +188,7 @@ export const DropdownBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         itemTemplate: null,
         loading: false,
         loadingIcon: null,
@@ -200,6 +205,7 @@ export const DropdownBase = ComponentBase.extend({
         optionDisabled: null,
         optionGroupChildren: 'items',
         selectOnFocus: false,
+        focusOnHover: true,
         autoOptionFocus: false,
         optionGroupLabel: null,
         optionGroupTemplate: null,

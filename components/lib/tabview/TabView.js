@@ -6,7 +6,7 @@ import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { TimesIcon } from '../icons/times';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
 
 export const TabPanel = () => {};
@@ -115,8 +115,11 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 return;
             }
 
-            if (props.onTabChange) props.onTabChange({ originalEvent: event, index });
-            else setActiveIndexState(index);
+            if (props.onTabChange) {
+                props.onTabChange({ originalEvent: event, index });
+            } else {
+                setActiveIndexState(index);
+            }
         }
 
         updateScrollBar({ index });
@@ -149,6 +152,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 break;
 
             case 'Enter':
+            case 'NumpadEnter':
             case 'Space':
                 onTabEnterKey(event, tab, index);
                 break;
@@ -288,8 +292,11 @@ export const TabView = React.forwardRef((inProps, ref) => {
         setForwardIsDisabledState(false);
         setHiddenTabsState([]);
 
-        if (props.onTabChange) props.onTabChange({ index: activeIndex });
-        else setActiveIndexState(props.activeIndex);
+        if (props.onTabChange) {
+            props.onTabChange({ index: activeIndex });
+        } else {
+            setActiveIndexState(props.activeIndex);
+        }
     };
 
     React.useEffect(() => {
@@ -338,9 +345,15 @@ export const TabView = React.forwardRef((inProps, ref) => {
         );
         const titleElement = <span {...headerTitleProps}>{header}</span>;
         const rightIconElement = rightIcon && IconUtils.getJSXIcon(rightIcon, undefined, { props });
-        const iconClassName = 'p-tabview-close';
-        const icon = closeIcon || <TimesIcon className={iconClassName} onClick={(e) => onTabHeaderClose(e, index)} />;
-        const closableIconElement = closable ? IconUtils.getJSXIcon(icon, { className: iconClassName, onClick: (e) => onTabHeaderClose(e, index) }, { props }) : null;
+        const closeIconProps = mergeProps(
+            {
+                className: cx('tab.closeIcon'),
+                onClick: (e) => onTabHeaderClose(e, index)
+            },
+            getTabPT(tab, 'closeIcon', index)
+        );
+        const icon = closeIcon || <TimesIcon {...closeIconProps} />;
+        const closableIconElement = closable ? IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props }) : null;
 
         const headerActionProps = mergeProps(
             {
@@ -447,7 +460,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             <div {...navContentProps}>
                 <ul {...navProps}>
                     {headers}
-                    <li {...inkbarProps}></li>
+                    <li {...inkbarProps} />
                 </ul>
             </div>
         );
@@ -553,7 +566,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             id: idState,
             ref: elementRef,
             style: props.style,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         TabViewBase.getOtherProps(props),
         ptm('root')

@@ -32,12 +32,14 @@ export default function NewsSection() {
         localStorage.setItem(storageKey, JSON.stringify(item));
     };
 
-    if (!newsActive) return null;
+    if (!newsActive) {
+        return null;
+    }
 
     return (
         <div className="layout-news">
             <div className="layout-news-container">
-                <i></i>
+                <i />
                 <div className="layout-news-content">
                     <span className="layout-news-text">{announcement.content}</span>
                     <a className="layout-news-link" href={announcement.linkHref}>
@@ -45,7 +47,7 @@ export default function NewsSection() {
                     </a>
                 </div>
                 <a className="layout-news-close" onClick={close}>
-                    <span className="pi pi-times"></span>
+                    <span className="pi pi-times" />
                 </a>
             </div>
         </div>

@@ -5,13 +5,15 @@ import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 const baseStyle = `
 .p-hidden-accessible {
     border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
     padding: 0;
+    margin: -1px;
     position: absolute;
+    height: 1px;
     width: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 .p-hidden-accessible input,
@@ -470,8 +472,13 @@ export const ComponentBase = {
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
 
-                if (Array.isArray(value)) return { className: classNames(...value) };
-                if (ObjectUtils.isString(value)) return { className: value };
+                if (Array.isArray(value)) {
+                    return { className: classNames(...value) };
+                }
+
+                if (ObjectUtils.isString(value)) {
+                    return { className: value };
+                }
 
                 if (value?.hasOwnProperty('className') && Array.isArray(value.className)) {
                     return { className: classNames(...value.className) };
@@ -541,7 +548,7 @@ const getOptionValue = (obj, key = '', params = {}) => {
 };
 
 const _getPT = (pt, key = '', callback) => {
-    const _usept = pt?.['_usept'];
+    const _usept = pt?._usept;
 
     const getValue = (value, checkSameKey = false) => {
         const _value = callback ? callback(value) : value;
@@ -563,13 +570,17 @@ const _usePT = (pt, callback, key, params) => {
     const fn = (value) => callback(value, key, params);
 
     if (pt?.hasOwnProperty('_usept')) {
-        const { mergeSections = true, mergeProps: useMergeProps = false, classNameMergeFunction } = pt['_usept'] || ComponentBase.context.ptOptions || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false, classNameMergeFunction } = pt._usept || ComponentBase.context.ptOptions || {};
         const originalValue = fn(pt.originalValue);
         const value = fn(pt.value);
 
-        if (originalValue === undefined && value === undefined) return undefined;
-        else if (ObjectUtils.isString(value)) return value;
-        else if (ObjectUtils.isString(originalValue)) return originalValue;
+        if (originalValue === undefined && value === undefined) {
+            return undefined;
+        } else if (ObjectUtils.isString(value)) {
+            return value;
+        } else if (ObjectUtils.isString(originalValue)) {
+            return originalValue;
+        }
 
         return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps([originalValue, value], { classNameMergeFunction }) : { ...originalValue, ...value }) : value;
     }
@@ -619,7 +630,10 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
         loadBaseStyle();
         loadGlobalStyle();
         loadCommonStyle();
-        if (!styled) load();
+
+        if (!styled) {
+            load();
+        }
     });
 
     useUpdateEffect(() => {

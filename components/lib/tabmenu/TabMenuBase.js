@@ -16,7 +16,7 @@ const classes = {
         ),
     inkbar: 'p-tabmenu-ink-bar',
     menu: 'p-tabmenu-nav p-reset',
-    root: ({ props }) => classNames('p-tabmenu p-component', props.className)
+    root: 'p-tabmenu p-component'
 };
 
 const styles = `

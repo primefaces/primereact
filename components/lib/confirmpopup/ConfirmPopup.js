@@ -141,7 +141,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '50%', left: '50%', marginTop: '10px' });
             align();
         };
@@ -353,7 +353,7 @@ export const ConfirmPopup = React.memo(
             {
                 ref: overlayRef,
                 id: getPropValue('id'),
-                className: cx('root', { context, getPropValue }),
+                className: classNames(props.className, cx('root', { context, getPropValue })),
                 style: getPropValue('style'),
                 onClick: onPanelClick
             },

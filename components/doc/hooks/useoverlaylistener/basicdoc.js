@@ -11,7 +11,9 @@ export function BasicDoc(props) {
     const overlayRef = useRef(null);
 
     const handleEvents = (event, options) => {
-        if (options.valid) setVisible(false);
+        if (options.valid) {
+            setVisible(false);
+        }
     };
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({

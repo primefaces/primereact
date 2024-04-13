@@ -6,7 +6,7 @@ import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlob
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
@@ -138,7 +138,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.modal) || PrimeReact.zIndex.modal);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -215,7 +215,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const rootProps = mergeProps(
         {
             id: props.id,
-            className: cx('root', { context }),
+            className: classNames(props.className, cx('root', { context })),
             style: props.style,
             role: 'complementary'
         },

@@ -6,6 +6,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { Checkbox } from '../checkbox/Checkbox';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -75,13 +76,11 @@ export const UITreeNode = React.memo((props) => {
                     node: props.node
                 });
             }
-        } else {
-            if (props.onCollapse) {
-                props.onCollapse({
-                    originalEvent: event,
-                    node: props.node
-                });
-            }
+        } else if (props.onCollapse) {
+            props.onCollapse({
+                originalEvent: event,
+                node: props.node
+            });
         }
     };
 
@@ -98,9 +97,9 @@ export const UITreeNode = React.memo((props) => {
             const lastChildElement = childrenListElement.children[childrenListElement.children.length - 1];
 
             return findLastVisibleDescendant(lastChildElement);
-        } else {
-            return nodeElement;
         }
+
+        return nodeElement;
     };
 
     const getParentNodeElement = (nodeElement) => {
@@ -136,8 +135,11 @@ export const UITreeNode = React.memo((props) => {
                 selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
 
                 if (checked) {
-                    if (props.propagateSelectionDown) propagateDown(props.node, false, selectionKeys);
-                    else delete selectionKeys[props.node.key];
+                    if (props.propagateSelectionDown) {
+                        propagateDown(props.node, false, selectionKeys);
+                    } else {
+                        delete selectionKeys[props.node.key];
+                    }
 
                     if (props.propagateSelectionUp && props.onPropagateUp) {
                         props.onPropagateUp({
@@ -154,8 +156,11 @@ export const UITreeNode = React.memo((props) => {
                         });
                     }
                 } else {
-                    if (props.propagateSelectionDown) propagateDown(props.node, true, selectionKeys);
-                    else selectionKeys[props.node.key] = { checked: true };
+                    if (props.propagateSelectionDown) {
+                        propagateDown(props.node, true, selectionKeys);
+                    } else {
+                        selectionKeys[props.node.key] = { checked: true };
+                    }
 
                     if (props.propagateSelectionUp && props.onPropagateUp) {
                         props.onPropagateUp({
@@ -208,49 +213,45 @@ export const UITreeNode = React.memo((props) => {
                             });
                         }
                     }
-                } else {
-                    if (isSingleSelectionMode()) {
-                        if (selected) {
-                            selectionKeys = null;
+                } else if (isSingleSelectionMode()) {
+                    if (selected) {
+                        selectionKeys = null;
 
-                            if (props.onUnselect) {
-                                props.onUnselect({
-                                    originalEvent: event,
-                                    node: props.node
-                                });
-                            }
-                        } else {
-                            selectionKeys = props.node.key;
-
-                            if (props.onSelect) {
-                                props.onSelect({
-                                    originalEvent: event,
-                                    node: props.node
-                                });
-                            }
+                        if (props.onUnselect) {
+                            props.onUnselect({
+                                originalEvent: event,
+                                node: props.node
+                            });
                         }
                     } else {
-                        if (selected) {
-                            selectionKeys = { ...props.selectionKeys };
-                            delete selectionKeys[props.node.key];
+                        selectionKeys = props.node.key;
 
-                            if (props.onUnselect) {
-                                props.onUnselect({
-                                    originalEvent: event,
-                                    node: props.node
-                                });
-                            }
-                        } else {
-                            selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
-                            selectionKeys[props.node.key] = true;
-
-                            if (props.onSelect) {
-                                props.onSelect({
-                                    originalEvent: event,
-                                    node: props.node
-                                });
-                            }
+                        if (props.onSelect) {
+                            props.onSelect({
+                                originalEvent: event,
+                                node: props.node
+                            });
                         }
+                    }
+                } else if (selected) {
+                    selectionKeys = { ...props.selectionKeys };
+                    delete selectionKeys[props.node.key];
+
+                    if (props.onUnselect) {
+                        props.onUnselect({
+                            originalEvent: event,
+                            node: props.node
+                        });
+                    }
+                } else {
+                    selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
+                    selectionKeys[props.node.key] = true;
+
+                    if (props.onSelect) {
+                        props.onSelect({
+                            originalEvent: event,
+                            node: props.node
+                        });
                     }
                 }
             }
@@ -298,7 +299,9 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onKeyDown = (event) => {
-        if (!isSameNode(event)) return;
+        if (!isSameNode(event)) {
+            return;
+        }
 
         switch (event.code) {
             case 'Tab':
@@ -344,15 +347,13 @@ export const UITreeNode = React.memo((props) => {
 
         if (listElement) {
             focusRowChange(nodeElement, listElement.children[0]);
+        } else if (nodeElement.nextElementSibling) {
+            focusRowChange(nodeElement, nodeElement.nextElementSibling);
         } else {
-            if (nodeElement.nextElementSibling) {
-                focusRowChange(nodeElement, nodeElement.nextElementSibling);
-            } else {
-                let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
+            let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
 
-                if (nextSiblingAncestor) {
-                    focusRowChange(nodeElement, nextSiblingAncestor);
-                }
+            if (nextSiblingAncestor) {
+                focusRowChange(nodeElement, nextSiblingAncestor);
             }
         }
 
@@ -376,7 +377,9 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onArrowRight = (event) => {
-        if (isLeaf || expanded) return;
+        if (isLeaf || expanded) {
+            return;
+        }
 
         event.currentTarget.tabIndex = -1;
 
@@ -475,7 +478,9 @@ export const UITreeNode = React.memo((props) => {
         let checkedChildCount = 0;
 
         for (let child of props.node.children) {
-            if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
+            if (selectionKeys[child.key] && selectionKeys[child.key].checked) {
+                checkedChildCount++;
+            }
         }
 
         const parentKey = props.node.key;
@@ -500,8 +505,11 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const propagateDown = (node, check, selectionKeys) => {
-        if (check) selectionKeys[node.key] = { checked: true, partialChecked: false };
-        else delete selectionKeys[node.key];
+        if (check) {
+            selectionKeys[node.key] = { checked: true, partialChecked: false };
+        } else {
+            delete selectionKeys[node.key];
+        }
 
         if (node.children && node.children.length) {
             for (let i = 0; i < node.children.length; i++) {
@@ -511,8 +519,11 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const isSelected = () => {
-        if (props.selectionMode && props.selectionKeys) return isSingleSelectionMode() ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
-        else return false;
+        if (props.selectionMode && props.selectionKeys) {
+            return isSingleSelectionMode() ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
+        }
+
+        return false;
     };
 
     const isChecked = () => {
@@ -670,34 +681,26 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const checkboxIconProps = mergeProps(
-                {
-                    className: cx('checkboxIcon')
-                },
-                getPTOptions('checkboxIcon')
-            );
+            const checkboxIconProps = mergeProps({
+                className: cx('checkIcon')
+            });
             const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
             const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
-            const checkboxContainerProps = mergeProps(
-                {
-                    'aria-hidden': true,
-                    className: cx('checkboxContainer')
-                },
-                getPTOptions('checkboxContainer')
-            );
             const checkboxProps = mergeProps(
                 {
-                    className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
-                    role: 'checkbox'
+                    className: cx('nodeCheckbox', { partialChecked }),
+                    checked: checked || partialChecked,
+                    icon: checkboxIcon,
+                    tabIndex: -1,
+                    unstyled: props?.isUnstyled?.(),
+                    'data-p-checked': checked,
+                    'data-p-partialchecked': partialChecked,
+                    onChange: onClick
                 },
-                getPTOptions('checkbox')
+                getPTOptions('nodeCheckbox')
             );
 
-            return (
-                <div {...checkboxContainerProps}>
-                    <div {...checkboxProps}>{checkboxIcon}</div>
-                </div>
-            );
+            return <Checkbox {...checkboxProps} />;
         }
 
         return null;
@@ -777,7 +780,7 @@ export const UITreeNode = React.memo((props) => {
                 getPTOptions('droppoint')
             );
 
-            return <li {...droppointProps}></li>;
+            return <li {...droppointProps} />;
         }
 
         return null;

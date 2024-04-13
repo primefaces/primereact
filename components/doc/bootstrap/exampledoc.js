@@ -10,7 +10,7 @@ export function ExampleDoc(props) {
                 </p>
 
                 <div className="flex justify-content-center">
-                    <iframe className="w-full h-full" style={{ border: '1px solid rgba(0, 0, 0, 0.1)', borderRadius: '2px', minHeight: '800px' }} src="https://stackblitz.com/edit/stackblitz-starters-waigrp?file=src%2FApp.js" allowfullscreen></iframe>
+                    <iframe className="w-full h-full" style={{ border: '1px solid rgba(0, 0, 0, 0.1)', borderRadius: '2px', minHeight: '800px' }} src="https://stackblitz.com/edit/stackblitz-starters-waigrp?file=src%2FApp.js" allowfullscreen />
                 </div>
             </DocSectionText>
         </>

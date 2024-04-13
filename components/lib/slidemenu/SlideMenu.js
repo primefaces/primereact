@@ -6,7 +6,7 @@ import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, use
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 
@@ -91,7 +91,7 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
             }
 
             DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
@@ -175,7 +175,7 @@ export const SlideMenu = React.memo(
                 {
                     ref: menuRef,
                     id: props.id,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style,
                     onClick: (e) => onPanelClick(e)
                 },

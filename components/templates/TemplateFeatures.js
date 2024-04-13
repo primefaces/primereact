@@ -11,7 +11,7 @@ const TemplateFeatures = ({ featuresData, displayType }) => {
                     {featuresData.map((data, i) => (
                         <div key={i} className="template-features-horizontal-card">
                             <div className="template-features-horizontal-card-top">
-                                <img src={darkMode ? data.darkSrc || data.src : data.src} alt={data.title}></img>
+                                <img src={darkMode ? data.darkSrc || data.src : data.src} alt={data.title} />
                             </div>
                             <div className="template-features-horizontal-card-bottom">
                                 <h5 className="template-features-horizontal-card-bottom-title">{data.title}</h5>
@@ -36,7 +36,7 @@ const TemplateFeatures = ({ featuresData, displayType }) => {
                         .map((_, i) => (
                             <div key={i} className="template-features-vertical-col">
                                 {(i === 0 ? firstColumnData : secondColumnData).map((data, j) => (
-                                    <div key={j} className={`template-features-vertical-card `}>
+                                    <div key={j} className={'template-features-vertical-card '}>
                                         <div className="template-features-vertical-card-image">
                                             <img src={darkMode ? data.darkSrc || data.src : data.src} alt={data.title} />
                                         </div>

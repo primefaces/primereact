@@ -32,8 +32,11 @@ export function BasicDoc(props) {
                 break;
         }
 
-        if (response) TerminalService.emit('response', response);
-        else TerminalService.emit('clear');
+        if (response) {
+            TerminalService.emit('response', response);
+        } else {
+            TerminalService.emit('clear');
+        }
     };
 
     useEffect(() => {

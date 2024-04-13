@@ -6,6 +6,9 @@ export function CSSLayerDoc(props) {
         basic: `
 @layer tailwind-base, primereact, tailwind-utilities;
 
+/* IMPORTANT: In "styled" mode you must add the PrimeReact Theme here. Do NOT include in "unstyled" mode */
+@import 'primereact/resources/themes/lara-light-blue/theme.css' layer(primereact);
+
 @layer tailwind-base {
   @tailwind base;
 }

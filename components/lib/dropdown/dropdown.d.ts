@@ -273,6 +273,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Icon of the dropdown.
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;
@@ -321,7 +326,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
-     * @defaultValue true
+     * @defaultValue false
      */
     filterInputAutoFocus?: boolean | undefined;
     /**
@@ -329,7 +334,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filterLocale?: string | undefined;
     /**
-     * Defines how the items are filtered.
+     * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
     filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
@@ -355,6 +360,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @defaultValue false
      */
     selectOnFocus?: false;
+    /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
     /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false

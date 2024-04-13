@@ -576,6 +576,11 @@ interface CalendarBaseProps {
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Array with dates to disable.
      */
     disabledDates?: Date[] | undefined;

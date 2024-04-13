@@ -14,7 +14,6 @@ import { ImportDoc } from '@/components/doc/treetable/importdoc';
 import { LazyLoadDoc } from '@/components/doc/treetable/lazyloaddoc';
 import { PaginatorBasicDoc } from '@/components/doc/treetable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '@/components/doc/treetable/paginator/templatedoc';
-import { PTDoc } from '@/components/doc/treetable/pt/ptdoc';
 import { Wireframe } from '@/components/doc/treetable/pt/wireframe';
 import { ReorderDoc } from '@/components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '@/components/doc/treetable/resize/expandmodedoc';
@@ -216,11 +215,6 @@ const TreeTableDemo = () => {
             id: 'pt.column.options',
             label: 'Column PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

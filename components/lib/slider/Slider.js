@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMergeProps } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { SliderBase } from './SliderBase';
 
 export const Slider = React.memo(
@@ -51,8 +51,14 @@ export const Slider = React.memo(
             dragging.current = true;
             updateDomData();
             sliderHandleClick.current = true;
-            handleIndex.current = index;
-            //event.preventDefault();
+
+            if (props.range && value[0] === props.max) {
+                handleIndex.current = 0;
+            } else {
+                handleIndex.current = index;
+            }
+
+            event.preventDefault();
         };
 
         const onDrag = (event) => {
@@ -181,8 +187,11 @@ export const Slider = React.memo(
                 return;
             }
 
-            if (horizontal) handleValue = ((pageX - initX.current) * 100) / barWidth.current;
-            else handleValue = ((initY.current + barHeight.current - pageY) * 100) / barHeight.current;
+            if (horizontal) {
+                handleValue = ((pageX - initX.current) * 100) / barWidth.current;
+            } else {
+                handleValue = ((initY.current + barHeight.current - pageY) * 100) / barHeight.current;
+            }
 
             let newValue = (props.max - props.min) * (handleValue / 100) + props.min;
 
@@ -190,8 +199,11 @@ export const Slider = React.memo(
                 const oldValue = props.range ? value[handleIndex.current] : value;
                 const diff = newValue - oldValue;
 
-                if (diff < 0) newValue = oldValue + Math.ceil(newValue / props.step - oldValue / props.step) * props.step;
-                else if (diff > 0) newValue = oldValue + Math.floor(newValue / props.step - oldValue / props.step) * props.step;
+                if (diff < 0) {
+                    newValue = oldValue + Math.ceil(newValue / props.step - oldValue / props.step) * props.step;
+                } else if (diff > 0) {
+                    newValue = oldValue + Math.floor(newValue / props.step - oldValue / props.step) * props.step;
+                }
             } else {
                 newValue = Math.floor(newValue);
             }
@@ -205,11 +217,15 @@ export const Slider = React.memo(
 
             if (props.range) {
                 if (handleIndex.current === 0) {
-                    if (parsedValue < props.min) parsedValue = props.min;
-                    else if (parsedValue > props.max) parsedValue = props.max;
-                } else {
-                    if (parsedValue > props.max) parsedValue = props.max;
-                    else if (parsedValue < props.min) parsedValue = props.min;
+                    if (parsedValue < props.min) {
+                        parsedValue = props.min;
+                    } else if (parsedValue > props.max) {
+                        parsedValue = props.max;
+                    }
+                } else if (parsedValue > props.max) {
+                    parsedValue = props.max;
+                } else if (parsedValue < props.min) {
+                    parsedValue = props.min;
                 }
 
                 newValue = [...value];
@@ -222,8 +238,11 @@ export const Slider = React.memo(
                     });
                 }
             } else {
-                if (parsedValue < props.min) parsedValue = props.min;
-                else if (parsedValue > props.max) parsedValue = props.max;
+                if (parsedValue < props.min) {
+                    parsedValue = props.min;
+                } else if (parsedValue > props.max) {
+                    parsedValue = props.max;
+                }
 
                 newValue = parsedValue;
 
@@ -266,7 +285,7 @@ export const Slider = React.memo(
                 ptm('handle')
             );
 
-            return <span {...handleProps}></span>;
+            return <span {...handleProps} />;
         };
 
         const createRangeSlider = () => {
@@ -290,7 +309,7 @@ export const Slider = React.memo(
 
             return (
                 <>
-                    <span {...rangeProps}></span>
+                    <span {...rangeProps} />
                     {rangeStartHandle}
                     {rangeEndHandle}
                 </>
@@ -300,9 +319,13 @@ export const Slider = React.memo(
         const createSingleSlider = () => {
             let handleValue;
 
-            if (value < props.min) handleValue = props.min;
-            else if (value > props.max) handleValue = props.max;
-            else handleValue = ((value - props.min) * 100) / (props.max - props.min);
+            if (value < props.min) {
+                handleValue = props.min;
+            } else if (value > props.max) {
+                handleValue = props.max;
+            } else {
+                handleValue = ((value - props.min) * 100) / (props.max - props.min);
+            }
 
             const rangeStyle = horizontal ? { width: handleValue + '%' } : { height: handleValue + '%' };
             const handle = horizontal ? createHandle(handleValue, null, null) : createHandle(null, handleValue, null);
@@ -317,7 +340,7 @@ export const Slider = React.memo(
 
             return (
                 <>
-                    <span {...rangeProps}></span>
+                    <span {...rangeProps} />
                     {handle}
                 </>
             );
@@ -335,7 +358,7 @@ export const Slider = React.memo(
         const rootProps = mergeProps(
             {
                 style: props.style,
-                className: cx('root', { vertical, horizontal }),
+                className: classNames(props.className, cx('root', { vertical, horizontal })),
                 onClick: onBarClick
             },
             SliderBase.getOtherProps(props),

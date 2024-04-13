@@ -36,7 +36,7 @@ export const Skeleton = React.memo(
             ptm('root')
         );
 
-        return <div {...rootProps}></div>;
+        return <div {...rootProps} />;
     })
 );
 

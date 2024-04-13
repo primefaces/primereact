@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { DomHandler, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, classNames } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
@@ -38,10 +38,10 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const calculateContainerHeight = () => {
         const containerStyles = getComputedStyle(containerRef.current);
         const xBarStyles = getComputedStyle(xBarRef.current);
-        const pureContainerHeight = DomHandler.getHeight(containerRef.current) - parseInt(xBarStyles['height'], 10);
+        const pureContainerHeight = DomHandler.getHeight(containerRef.current) - parseInt(xBarStyles.height, 10);
 
         if (containerStyles['max-height'] !== 'none' && pureContainerHeight === 0) {
-            if (contentRef.current.offsetHeight + parseInt(xBarStyles['height'], 10) > parseInt(containerStyles['max-height'], 10)) {
+            if (contentRef.current.offsetHeight + parseInt(xBarStyles.height, 10) > parseInt(containerStyles['max-height'], 10)) {
                 containerRef.current.style.height = containerStyles['max-height'];
             } else {
                 containerRef.current.style.height =
@@ -287,7 +287,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
             id: props.id,
             ref: containerRef,
             style: props.style,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         ScrollPanelBase.getOtherProps(props),
         ptm('root')
@@ -352,8 +352,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                     {props.children}
                 </div>
             </div>
-            <div {...barXProps}></div>
-            <div {...barYProps}></div>
+            <div {...barXProps} />
+            <div {...barYProps} />
         </div>
     );
 });

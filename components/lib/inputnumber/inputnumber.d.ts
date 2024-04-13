@@ -238,6 +238,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     disabled?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * When present, it specifies that the element must be filled out before submitting the form.
      * @defaultValue false
      */

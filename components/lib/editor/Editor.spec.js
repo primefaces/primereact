@@ -41,7 +41,7 @@ describe('Editor', () => {
                         onClick={() => {
                             ref.current.getQuill().setText('789');
                         }}
-                    ></button>
+                    />
                     <Editor
                         ref={ref}
                         value={text}

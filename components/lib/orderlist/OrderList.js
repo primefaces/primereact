@@ -65,8 +65,11 @@ export const OrderList = React.memo(
             const selected = selectedIndex !== -1;
             let newSelection;
 
-            if (selected) newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
-            else newSelection = metaKey ? [...selectionState, value] : [value];
+            if (selected) {
+                newSelection = metaKey ? selectionState.filter((_, i) => i !== selectedIndex) : [value];
+            } else {
+                newSelection = metaKey ? [...selectionState, value] : [value];
+            }
 
             setSelectionState(newSelection);
         };
@@ -75,8 +78,11 @@ export const OrderList = React.memo(
             const item = visibleList[index];
             const selected = ObjectUtils.findIndexInList(item, selectionState) !== -1;
 
-            if (selected) setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
-            else setSelectionState([...selectionState, item]);
+            if (selected) {
+                setSelectionState(selectionState.filter((selectedItem) => selectedItem !== item));
+            } else {
+                setSelectionState([...selectionState, item]);
+            }
         };
 
         const findCurrentFocusedIndex = (listElement) => {
@@ -477,6 +483,8 @@ export const OrderList = React.memo(
                     isUnstyled={isUnstyled}
                     ptm={ptm}
                     cx={cx}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    {...props}
                 />
             </div>
         );

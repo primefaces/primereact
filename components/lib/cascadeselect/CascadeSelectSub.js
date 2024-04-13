@@ -124,13 +124,11 @@ export const CascadeSelectSub = React.memo((props) => {
                     value: option
                 });
             }
-        } else {
-            if (props.onOptionSelect) {
-                props.onOptionSelect({
-                    originalEvent: event,
-                    value: getOptionValue(option)
-                });
-            }
+        } else if (props.onOptionSelect) {
+            props.onOptionSelect({
+                originalEvent: event,
+                value: getOptionValue(option)
+            });
         }
     };
 

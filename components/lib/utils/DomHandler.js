@@ -13,7 +13,7 @@ export default class DomHandler {
             let width = el.offsetWidth;
             let style = getComputedStyle(el);
 
-            width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+            width = width + (parseFloat(style.paddingLeft) + parseFloat(style.paddingRight));
 
             return width;
         }
@@ -26,7 +26,7 @@ export default class DomHandler {
             let width = el.offsetWidth;
             let style = getComputedStyle(el);
 
-            width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+            width = width - (parseFloat(style.paddingLeft) + parseFloat(style.paddingRight));
 
             return width;
         }
@@ -57,7 +57,7 @@ export default class DomHandler {
             if (margin) {
                 let style = getComputedStyle(el);
 
-                width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+                width = width + (parseFloat(style.marginLeft) + parseFloat(style.marginRight));
             }
 
             return width;
@@ -73,7 +73,7 @@ export default class DomHandler {
             if (margin) {
                 let style = getComputedStyle(el);
 
-                height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+                height = height + (parseFloat(style.marginTop) + parseFloat(style.marginBottom));
             }
 
             return height;
@@ -89,7 +89,7 @@ export default class DomHandler {
             if (margin) {
                 let style = getComputedStyle(el);
 
-                height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+                height = height + (parseFloat(style.marginTop) + parseFloat(style.marginBottom));
             }
 
             return height;
@@ -105,7 +105,7 @@ export default class DomHandler {
             if (margin) {
                 let style = getComputedStyle(el);
 
-                width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+                width = width + (parseFloat(style.marginLeft) + parseFloat(style.marginRight));
             }
 
             return width;
@@ -115,12 +115,12 @@ export default class DomHandler {
     }
 
     static getViewport() {
-        let win = window,
-            d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName('body')[0],
-            w = win.innerWidth || e.clientWidth || g.clientWidth,
-            h = win.innerHeight || e.clientHeight || g.clientHeight;
+        let win = window;
+        let d = document;
+        let e = d.documentElement;
+        let g = d.getElementsByTagName('body')[0];
+        let w = win.innerWidth || e.clientWidth || g.clientWidth;
+        let h = win.innerHeight || e.clientHeight || g.clientHeight;
 
         return { width: w, height: h };
     }
@@ -147,8 +147,13 @@ export default class DomHandler {
             let num = 0;
 
             for (let i = 0; i < children.length; i++) {
-                if (children[i] === element) return num;
-                if (children[i].nodeType === 1) num++;
+                if (children[i] === element) {
+                    return num;
+                }
+
+                if (children[i].nodeType === 1) {
+                    num++;
+                }
             }
         }
 
@@ -167,7 +172,7 @@ export default class DomHandler {
                 let styles = className.split(' ');
 
                 for (let i = 0; i < styles.length; i++) {
-                    element.className += ' ' + styles[i];
+                    element.className = element.className + (' ' + styles[i]);
                 }
             }
         }
@@ -193,22 +198,31 @@ export default class DomHandler {
 
     static addClass(element, className) {
         if (element && className) {
-            if (element.classList) element.classList.add(className);
-            else element.className += ' ' + className;
+            if (element.classList) {
+                element.classList.add(className);
+            } else {
+                element.className = element.className + (' ' + className);
+            }
         }
     }
 
     static removeClass(element, className) {
         if (element && className) {
-            if (element.classList) element.classList.remove(className);
-            else element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+            if (element.classList) {
+                element.classList.remove(className);
+            } else {
+                element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+            }
         }
     }
 
     static hasClass(element, className) {
         if (element) {
-            if (element.classList) return element.classList.contains(className);
-            else return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
+            if (element.classList) {
+                return element.classList.contains(className);
+            }
+
+            return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
         }
 
         return false;
@@ -246,7 +260,7 @@ export default class DomHandler {
                         } else if (type === 'object') {
                             const _cv = Array.isArray(v)
                                 ? computedStyles(rule, v)
-                                : Object.entries(v).map(([_k, _v]) => (rule === 'style' && (!!_v || _v === 0) ? `${_k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}:${_v}` : !!_v ? _k : undefined));
+                                : Object.entries(v).map(([_k, _v]) => (rule === 'style' && (!!_v || _v === 0) ? `${_k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}:${_v}` : _v ? _k : undefined));
 
                             cv = _cv.length ? cv.concat(_cv.filter((c) => !!c)) : cv;
                         }
@@ -305,7 +319,7 @@ export default class DomHandler {
             let height = el.offsetHeight;
             let style = getComputedStyle(el);
 
-            height -= parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+            height = height - (parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth));
 
             return height;
         }
@@ -318,7 +332,7 @@ export default class DomHandler {
             let width = el.offsetWidth;
             let style = getComputedStyle(el);
 
-            width -= parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+            width = width - (parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth));
 
             return width;
         }
@@ -348,7 +362,8 @@ export default class DomHandler {
             let windowScrollTop = this.getWindowScrollTop();
             let windowScrollLeft = this.getWindowScrollLeft();
             let viewport = this.getViewport();
-            let top, left;
+            let top;
+            let left;
 
             if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
                 top = targetOffset.top + windowScrollTop - elementOuterHeight;
@@ -366,8 +381,11 @@ export default class DomHandler {
             const targetOffsetPx = targetOffset.left;
             const alignOffset = align === 'left' ? 0 : elementOuterWidth - targetOuterWidth;
 
-            if (targetOffsetPx + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
-            else left = targetOffsetPx - alignOffset + windowScrollLeft;
+            if (targetOffsetPx + targetOuterWidth + elementOuterWidth > viewport.width) {
+                left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+            } else {
+                left = targetOffsetPx - alignOffset + windowScrollLeft;
+            }
 
             element.style.top = top + 'px';
             element.style.left = left + 'px';
@@ -380,7 +398,8 @@ export default class DomHandler {
             const targetHeight = target.offsetHeight;
             const targetOffset = target.getBoundingClientRect();
             const viewport = this.getViewport();
-            let top, left;
+            let top;
+            let left;
 
             if (targetOffset.top + targetHeight + elementDimensions.height > viewport.height) {
                 top = -1 * elementDimensions.height;
@@ -585,7 +604,7 @@ export default class DomHandler {
     }
 
     static getParents(element, parents = []) {
-        return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
+        return element.parentNode === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
     static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
@@ -613,7 +632,7 @@ export default class DomHandler {
             };
 
             for (let parent of parents) {
-                let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
+                let scrollSelectors = parent.nodeType === 1 && parent.dataset.scrollselectors;
 
                 if (scrollSelectors) {
                     let selectors = scrollSelectors.split(',');
@@ -710,12 +729,12 @@ export default class DomHandler {
 
     static fadeOut(element, duration) {
         if (element) {
-            let opacity = 1,
-                interval = 50,
-                gap = interval / duration;
+            let opacity = 1;
+            let interval = 50;
+            let gap = interval / duration;
 
             let fading = setInterval(() => {
-                opacity -= gap;
+                opacity = opacity - gap;
 
                 if (opacity <= 0) {
                     opacity = 0;
@@ -732,7 +751,7 @@ export default class DomHandler {
     }
 
     static isIOS() {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window['MSStream'];
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     }
 
     static isAndroid() {
@@ -756,15 +775,23 @@ export default class DomHandler {
     }
 
     static appendChild(element, target) {
-        if (this.isElement(target)) target.appendChild(element);
-        else if (target.el && target.el.nativeElement) target.el.nativeElement.appendChild(element);
-        else throw new Error('Cannot append ' + target + ' to ' + element);
+        if (this.isElement(target)) {
+            target.appendChild(element);
+        } else if (target.el && target.el.nativeElement) {
+            target.el.nativeElement.appendChild(element);
+        } else {
+            throw new Error('Cannot append ' + target + ' to ' + element);
+        }
     }
 
     static removeChild(element, target) {
-        if (this.isElement(target)) target.removeChild(element);
-        else if (target.el && target.el.nativeElement) target.el.nativeElement.removeChild(element);
-        else throw new Error('Cannot remove ' + element + ' from ' + target);
+        if (this.isElement(target)) {
+            target.removeChild(element);
+        } else if (target.el && target.el.nativeElement) {
+            target.el.nativeElement.removeChild(element);
+        } else {
+            throw new Error('Cannot remove ' + element + ' from ' + target);
+        }
     }
 
     static isElement(obj) {
@@ -797,9 +824,9 @@ export default class DomHandler {
             } else if (window.getSelection().removeAllRanges && window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects().length > 0) {
                 window.getSelection().removeAllRanges();
             }
-        } else if (document['selection'] && document['selection'].empty) {
+        } else if (document.selection && document.selection.empty) {
             try {
-                document['selection'].empty();
+                document.selection.empty();
             } catch (error) {
                 //ignore IE bug
             }
@@ -811,22 +838,24 @@ export default class DomHandler {
             let style = getComputedStyle(el);
 
             return el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
-        } else {
-            if (this.calculatedScrollbarWidth != null) return this.calculatedScrollbarWidth;
-
-            let scrollDiv = document.createElement('div');
-
-            scrollDiv.className = 'p-scrollbar-measure';
-            document.body.appendChild(scrollDiv);
-
-            let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-
-            document.body.removeChild(scrollDiv);
-
-            this.calculatedScrollbarWidth = scrollbarWidth;
-
-            return scrollbarWidth;
         }
+
+        if (this.calculatedScrollbarWidth != null) {
+            return this.calculatedScrollbarWidth;
+        }
+
+        let scrollDiv = document.createElement('div');
+
+        scrollDiv.className = 'p-scrollbar-measure';
+        document.body.appendChild(scrollDiv);
+
+        let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+
+        document.body.removeChild(scrollDiv);
+
+        this.calculatedScrollbarWidth = scrollbarWidth;
+
+        return scrollbarWidth;
     }
 
     static calculateBodyScrollbarWidth() {
@@ -841,13 +870,13 @@ export default class DomHandler {
 
             if (matched.browser) {
                 this.browser[matched.browser] = true;
-                this.browser['version'] = matched.version;
+                this.browser.version = matched.version;
             }
 
-            if (this.browser['chrome']) {
-                this.browser['webkit'] = true;
-            } else if (this.browser['webkit']) {
-                this.browser['safari'] = true;
+            if (this.browser.chrome) {
+                this.browser.webkit = true;
+            } else if (this.browser.webkit) {
+                this.browser.safari = true;
             }
         }
 
@@ -903,7 +932,9 @@ export default class DomHandler {
         let visibleFocusableElements = [];
 
         for (let focusableElement of focusableElements) {
-            if (getComputedStyle(focusableElement).display !== 'none' && getComputedStyle(focusableElement).visibility !== 'hidden') visibleFocusableElements.push(focusableElement);
+            if (getComputedStyle(focusableElement).display !== 'none' && getComputedStyle(focusableElement).visibility !== 'hidden') {
+                visibleFocusableElements.push(focusableElement);
+            }
         }
 
         return visibleFocusableElements;
@@ -941,7 +972,10 @@ export default class DomHandler {
      * @return {HTMLElement | undefined} the first focusable HTML element found
      */
     static focusFirstElement(el, scrollTo) {
-        if (!el) return;
+        if (!el) {
+            return;
+        }
+
         const firstFocusableElement = DomHandler.getFirstFocusableElement(el);
 
         firstFocusableElement && DomHandler.focus(firstFocusableElement, scrollTo);
@@ -1108,7 +1142,9 @@ export default class DomHandler {
     }
 
     static getTargetElement(target) {
-        if (!target) return null;
+        if (!target) {
+            return null;
+        }
 
         if (target === 'document') {
             return document;
@@ -1116,19 +1152,21 @@ export default class DomHandler {
             return window;
         } else if (typeof target === 'object' && target.hasOwnProperty('current')) {
             return this.isExist(target.current) ? target.current : null;
-        } else {
-            const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
-            const element = isFunction(target) ? target() : target;
-
-            return (element && element.nodeType === 9) || this.isExist(element) ? element : null;
         }
+
+        const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
+        const element = isFunction(target) ? target() : target;
+
+        return (element && element.nodeType === 9) || this.isExist(element) ? element : null;
     }
 
     /**
      * Get the attribute names for an element and sorts them alpha for comparison
      */
     static getAttributeNames(node) {
-        let index, rv, attrs;
+        let index;
+        let rv;
+        let attrs;
 
         rv = [];
         attrs = node.attributes;
@@ -1150,7 +1188,11 @@ export default class DomHandler {
      * elem2 = style="font-size: 28px; color: red"
      */
     static isEqualElement(elm1, elm2) {
-        let attrs1, attrs2, name, node1, node2;
+        let attrs1;
+        let attrs2;
+        let name;
+        let node1;
+        let node2;
 
         // Compare attributes without order sensitivity
         attrs1 = DomHandler.getAttributeNames(elm1);
@@ -1179,11 +1221,9 @@ export default class DomHandler {
                         return false;
                     }
                 }
-            } else {
-                if (elm1.getAttribute(name) !== elm2.getAttribute(name)) {
-                    // console.log("Found nodes with mis-matched values for attribute '" + name + "'; not equiv");
-                    return false;
-                }
+            } else if (elm1.getAttribute(name) !== elm2.getAttribute(name)) {
+                // console.log("Found nodes with mis-matched values for attribute '" + name + "'; not equiv");
+                return false;
             }
         }
 

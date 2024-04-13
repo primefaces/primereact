@@ -27,8 +27,12 @@ export const InputMask = React.memo(
             props
         };
 
+        const { cx } = InputMaskBase.setMetaData(metaData);
+
         const caret = (first, last) => {
-            let range, begin, end;
+            let range;
+            let begin;
+            let end;
             let inputEl = elementRef.current;
 
             if (!inputEl || !inputEl.offsetParent || inputEl !== document.activeElement) {
@@ -41,22 +45,20 @@ export const InputMask = React.memo(
 
                 if (inputEl.setSelectionRange) {
                     inputEl.setSelectionRange(begin, end);
-                } else if (inputEl['createTextRange']) {
-                    range = inputEl['createTextRange']();
+                } else if (inputEl.createTextRange) {
+                    range = inputEl.createTextRange();
                     range.collapse(true);
                     range.moveEnd('character', end);
                     range.moveStart('character', begin);
                     range.select();
                 }
-            } else {
-                if (inputEl.setSelectionRange) {
-                    begin = inputEl.selectionStart;
-                    end = inputEl.selectionEnd;
-                } else if (document['selection'] && document['selection'].createRange) {
-                    range = document['selection'].createRange();
-                    begin = 0 - range.duplicate().moveStart('character', -100000);
-                    end = begin + range.text.length;
-                }
+            } else if (inputEl.setSelectionRange) {
+                begin = inputEl.selectionStart;
+                end = inputEl.selectionEnd;
+            } else if (document.selection && document.selection.createRange) {
+                range = document.selection.createRange();
+                begin = 0 - range.duplicate().moveStart('character', -100000);
+                end = begin + range.text.length;
             }
 
             return { begin: begin, end: end };
@@ -88,19 +90,20 @@ export const InputMask = React.memo(
         };
 
         const seekNext = (pos) => {
-            while (++pos < len.current && !tests.current[pos]);
+            while (++pos < len.current && !tests.current[pos]) {}
 
             return pos;
         };
 
         const seekPrev = (pos) => {
-            while (--pos >= 0 && !tests.current[pos]);
+            while (--pos >= 0 && !tests.current[pos]) {}
 
             return pos;
         };
 
         const shiftL = (begin, end) => {
-            let i, j;
+            let i;
+            let j;
 
             if (begin < 0) {
                 return;
@@ -124,7 +127,10 @@ export const InputMask = React.memo(
         };
 
         const shiftR = (pos) => {
-            let i, c, j, t;
+            let i;
+            let c;
+            let j;
+            let t;
 
             for (i = pos, c = getPlaceholder(pos); i < len.current; i++) {
                 if (tests.current[i]) {
@@ -152,16 +158,24 @@ export const InputMask = React.memo(
             if (oldVal.current.length && oldVal.current.length > curVal.length) {
                 // a deletion or backspace happened
                 checkVal(true);
-                while (pos.begin > 0 && !tests.current[pos.begin - 1]) pos.begin--;
+
+                while (pos.begin > 0 && !tests.current[pos.begin - 1]) {
+                    pos.begin--;
+                }
 
                 if (pos.begin === 0) {
-                    while (pos.begin < firstNonMaskPos.current && !tests.current[pos.begin]) pos.begin++;
+                    while (pos.begin < firstNonMaskPos.current && !tests.current[pos.begin]) {
+                        pos.begin++;
+                    }
                 }
 
                 caret(pos.begin, pos.begin);
             } else {
                 checkVal(true);
-                while (pos.begin < len.current && !tests.current[pos.begin]) pos.begin++;
+
+                while (pos.begin < len.current && !tests.current[pos.begin]) {
+                    pos.begin++;
+                }
 
                 caret(pos.begin, pos.begin);
             }
@@ -197,10 +211,10 @@ export const InputMask = React.memo(
                 return;
             }
 
-            let k = e.which || e.keyCode,
-                pos,
-                begin,
-                end;
+            let k = e.which || e.keyCode;
+            let pos;
+            let begin;
+            let end;
 
             oldVal.current = elementRef.current.value;
 
@@ -249,11 +263,11 @@ export const InputMask = React.memo(
                 return;
             }
 
-            let k = e.which || e.keyCode,
-                p,
-                c,
-                next,
-                completed;
+            let k = e.which || e.keyCode;
+            let p;
+            let c;
+            let next;
+            let completed;
 
             if (e.ctrlKey || e.altKey || e.metaKey || k < 32) {
                 //Ignore
@@ -325,11 +339,11 @@ export const InputMask = React.memo(
         const checkVal = (allow) => {
             isValueChecked.current = true;
             //try to place characters where they belong
-            let test = elementRef.current && elementRef.current.value,
-                lastMatch = -1,
-                i,
-                c,
-                pos;
+            let test = elementRef.current && elementRef.current.value;
+            let lastMatch = -1;
+            let i;
+            let c;
+            let pos;
 
             for (i = 0, pos = 0; i < len.current; i++) {
                 if (tests.current[i]) {
@@ -366,7 +380,10 @@ export const InputMask = React.memo(
                 if (props.autoClear || buffer.current.join('') === defaultBuffer.current) {
                     // Invalid value. Remove it and replace it with the
                     // mask, which is the default behavior.
-                    if (elementRef.current && elementRef.current.value) elementRef.current.value = '';
+                    if (elementRef.current && elementRef.current.value) {
+                        elementRef.current.value = '';
+                    }
+
                     clearBuffer(0, len.current);
                 } else {
                     // Invalid value, but we opt to show the value to the
@@ -483,8 +500,11 @@ export const InputMask = React.memo(
         };
 
         const updateFilledState = () => {
-            if (elementRef.current && elementRef.current.value && elementRef.current.value.length > 0) DomHandler.addClass(elementRef.current, 'p-filled');
-            else DomHandler.removeClass(elementRef.current, 'p-filled');
+            if (elementRef.current && elementRef.current.value && elementRef.current.value.length > 0) {
+                DomHandler.addClass(elementRef.current, 'p-filled');
+            } else {
+                DomHandler.removeClass(elementRef.current, 'p-filled');
+            }
         };
 
         const updateValue = (allow) => {
@@ -561,8 +581,11 @@ export const InputMask = React.memo(
                     let c = maskTokens[i];
 
                     if (c !== '?') {
-                        if (defs[c]) buffer.current.push(getPlaceholder(i));
-                        else buffer.current.push(c);
+                        if (defs[c]) {
+                            buffer.current.push(getPlaceholder(i));
+                        } else {
+                            buffer.current.push(c);
+                        }
                     }
                 }
 
@@ -601,7 +624,7 @@ export const InputMask = React.memo(
         }, [isValueUpdated]);
 
         const otherProps = InputMaskBase.getOtherProps(props);
-        const className = classNames('p-inputmask', props.className);
+        const className = classNames(props.className, cx('root', { context }));
 
         return (
             <InputText

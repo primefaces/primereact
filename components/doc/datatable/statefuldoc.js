@@ -108,13 +108,13 @@ export function StatefulDoc(props) {
         const value = event.target.value;
         let _filters = { ...filters };
 
-        _filters['global'].value = value;
+        _filters.global.value = value;
 
         setFilters(_filters);
     };
 
     const renderHeader = () => {
-        const value = filters['global'] ? filters['global'].value : '';
+        const value = filters.global ? filters.global.value : '';
 
         return (
             <span className="p-input-icon-left">
@@ -489,8 +489,8 @@ export default function BasicDemo() {
                         emptyMessage="No customers found."
                         tableStyle={{ minWidth: '50rem' }}
                     >
-                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search" style={{ width: '25%' }}></Column>
-                        <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search" style={{ width: '25%' }}></Column>
+                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search" style={{ width: '25%' }} />
+                        <Column header="Country" body={countryBodyTemplate} sortable sortField="country.name" filter filterField="country.name" filterPlaceholder="Search" style={{ width: '25%' }} />
                         <Column
                             header="Agent"
                             body={representativeBodyTemplate}
@@ -502,8 +502,8 @@ export default function BasicDemo() {
                             filterElement={representativeFilterTemplate}
                             filterMenuStyle={{ width: '14rem' }}
                             style={{ width: '25%' }}
-                        ></Column>
-                        <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }} style={{ width: '25%' }}></Column>
+                        />
+                        <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterElement={statusFilterTemplate} filterMenuStyle={{ width: '14rem' }} style={{ width: '25%' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

@@ -59,7 +59,13 @@
                         },
                         {
                             "name": "FloatLabel",
-                            "to": "/floatlabel"
+                            "to": "/floatlabel",
+                            "badge": "NEW"
+                        },
+                        {
+                            "name": "IconField",
+                            "to": "/iconfield",
+                            "badge": "NEW"
                         },
                         {
                             "name": "InputGroup",
@@ -76,6 +82,11 @@
                         {
                             "name": "InputNumber",
                             "to": "/inputnumber"
+                        },
+                        {
+                            "name": "InputOtp",
+                            "to": "/inputotp",
+                            "badge": "NEW"
                         },
                         {
                             "name": "InputText",
@@ -245,6 +256,11 @@
                             "to": "/splitter"
                         },
                         {
+                            "name": "Stepper",
+                            "to": "/stepper",
+                            "badge": "NEW"
+                        },
+                        {
                             "name": "TabView",
                             "to": "/tabview"
                         },
@@ -404,6 +420,11 @@
                             "to": "/inplace"
                         },
                         {
+                            "name": "MeterGroup",
+                            "to": "/metergroup",
+                            "badge": "NEW"
+                        },
+                        {
                             "name": "ScrollTop",
                             "to": "/scrolltop"
                         },
@@ -495,7 +516,8 @@
             "children": [
                 {
                     "name": "Prime Icons",
-                    "to": "/icons"
+                    "to": "/icons",
+                    "badge": "UPDATED"
                 },
                 {
                     "name": "Custom Icons",

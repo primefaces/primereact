@@ -11,7 +11,7 @@ export function TemplateDoc(props) {
     <AccordionTab
         header={
             <span className="flex align-items-center gap-2 w-full">
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Amy Elsner</span>
                 <Badge value="3" className="ml-auto" />
             </span>
@@ -27,7 +27,7 @@ export function TemplateDoc(props) {
     <AccordionTab
         header={
             <span className="flex align-items-center gap-2 w-full">
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Onyama Limba</span>
                 <Badge value="4" className="ml-auto" />
             </span>
@@ -43,7 +43,7 @@ export function TemplateDoc(props) {
     <AccordionTab
         header={
             <span className="flex align-items-center gap-2 w-full">
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                 <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                 <Badge value="2" className="ml-auto" />
             </span>
@@ -71,7 +71,7 @@ export default function TemplateDemo() {
                 <AccordionTab
                     header={
                         <span className="flex align-items-center gap-2 w-full">
-                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                             <span className="font-bold white-space-nowrap">Amy Elsner</span>
                             <Badge value="3" className="ml-auto" />
                         </span>
@@ -87,7 +87,7 @@ export default function TemplateDemo() {
                 <AccordionTab
                     header={
                         <span className="flex align-items-center gap-2 w-full">
-                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                             <span className="font-bold white-space-nowrap">Onyama Limba</span>
                             <Badge value="4" className="ml-auto" />
                         </span>
@@ -103,7 +103,7 @@ export default function TemplateDemo() {
                 <AccordionTab
                     header={
                         <span className="flex align-items-center gap-2 w-full">
-                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                             <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                             <Badge value="2" className="ml-auto" />
                         </span>
@@ -134,7 +134,7 @@ export default function TemplateDemo() {
                 <AccordionTab
                     header={
                         <span className="flex align-items-center gap-2 w-full">
-                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                             <span className="font-bold white-space-nowrap">Amy Elsner</span>
                             <Badge value="3" className="ml-auto" />
                         </span>
@@ -150,7 +150,7 @@ export default function TemplateDemo() {
                 <AccordionTab
                     header={
                         <span className="flex align-items-center gap-2 w-full">
-                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                             <span className="font-bold white-space-nowrap">Onyama Limba</span>
                             <Badge value="4" className="ml-auto" />
                         </span>
@@ -166,7 +166,7 @@ export default function TemplateDemo() {
                 <AccordionTab
                     header={
                         <span className="flex align-items-center gap-2 w-full">
-                            <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                             <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                             <Badge value="2" className="ml-auto" />
                         </span>
@@ -198,7 +198,7 @@ export default function TemplateDemo() {
                     <AccordionTab
                         header={
                             <span className="flex align-items-center gap-2 w-full">
-                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                                 <span className="font-bold white-space-nowrap">Amy Elsner</span>
                                 <Badge value="3" className="ml-auto" />
                             </span>
@@ -213,7 +213,7 @@ export default function TemplateDemo() {
                     <AccordionTab
                         header={
                             <span className="flex align-items-center gap-2 w-full">
-                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                                 <span className="font-bold white-space-nowrap">Onyama Limba</span>
                                 <Badge value="4" className="ml-auto" />
                             </span>
@@ -227,7 +227,7 @@ export default function TemplateDemo() {
                     <AccordionTab
                         header={
                             <span className="flex align-items-center gap-2 w-full">
-                                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png" shape="circle" />
+                                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" shape="circle" />
                                 <span className="font-bold white-space-nowrap">Ioni Bowcher</span>
                                 <Badge value="2" className="ml-auto" />
                             </span>

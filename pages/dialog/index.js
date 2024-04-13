@@ -3,18 +3,17 @@ import { DocComponent } from '@/components/doc/common/doccomponent';
 import { AccessibilityDoc } from '@/components/doc/dialog/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/dialog/basicdoc';
 import { FooterDoc } from '@/components/doc/dialog/footerdoc';
+import { HeadlessDoc } from '@/components/doc/dialog/headlessdoc';
 import { ImportDoc } from '@/components/doc/dialog/importdoc';
 import { LongContentDoc } from '@/components/doc/dialog/longcontentdoc';
 import { MaximizableDoc } from '@/components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '@/components/doc/dialog/positiondoc';
-import { PTDoc } from '@/components/doc/dialog/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dialog/pt/wireframe';
 import { ResponsiveDoc } from '@/components/doc/dialog/responsivedoc';
+import { TemplateDoc } from '@/components/doc/dialog/templatedoc';
 import { StyledDoc } from '@/components/doc/dialog/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/dialog/theming/tailwinddoc';
 import { WithoutModalDoc } from '@/components/doc/dialog/withoutmodaldoc';
-import { TemplateDoc } from '@/components/doc/dialog/templatedoc';
-import { HeadlessDoc } from '@/components/doc/dialog/headlessdoc';
 
 const DialogDemo = () => {
     const docs = [
@@ -85,11 +84,6 @@ const DialogDemo = () => {
             id: 'pt.dialog.options',
             label: 'Dialog PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

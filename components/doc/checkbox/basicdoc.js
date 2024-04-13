@@ -48,7 +48,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Checkbox onChange={(e) => setChecked(e.checked)} checked={checked}></Checkbox>
+                <Checkbox onChange={(e) => setChecked(e.checked)} checked={checked} />
             </div>
             <DocSectionCode code={code} />
         </>

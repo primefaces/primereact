@@ -1,28 +1,12 @@
 import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateLicense from '@/components/templates/TemplateLicense';
-import TemplateRelated from '@/components/templates/TemplateRelated';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
 import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
-import ApolloLogo from './ApolloLogo';
 import Link from 'next/link';
-
-const apolloRelatedData = [
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond-react.jpg',
-        href: '/templates/diamond'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/avalon-react.jpg',
-        href: '/templates/avalon'
-    },
-    {
-        src: 'https://primefaces.org/cdn/primereact/images/templates/babylon-react.jpg',
-        href: '/templates/babylon'
-    }
-];
+import ApolloLogo from './ApolloLogo';
 
 const apolloFeatures2Data = [
     {
@@ -243,8 +227,6 @@ const ApolloPage = () => {
             <TemplateFeaturesAnimation featuresData={animationFeaturesData1} />
             <ApolloSeparator />
             <TemplateFeatures featuresData={apolloFeatures2Data} displayType="vertical" />
-            <ApolloSeparator />
-            <TemplateRelated relatedData={apolloRelatedData} />
         </div>
     );
 };

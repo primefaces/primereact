@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/rating/basicdoc';
 import { DisabledDoc } from '@/components/doc/rating/disableddoc';
 import { ImportDoc } from '@/components/doc/rating/importdoc';
 import { NumberOfStarsDoc } from '@/components/doc/rating/numberofstarsdoc';
-import { PTDoc } from '@/components/doc/rating/pt/ptdoc';
 import { Wireframe } from '@/components/doc/rating/pt/wireframe';
 import { ReadOnlyDoc } from '@/components/doc/rating/readonlydoc';
 import { TemplateDoc } from '@/components/doc/rating/templatedoc';
@@ -67,11 +66,6 @@ const RatingDemo = () => {
             id: 'pt.rating.options',
             label: 'Rating PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

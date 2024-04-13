@@ -10,7 +10,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

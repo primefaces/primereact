@@ -109,7 +109,9 @@ export const Ripple = React.memo(
             }
         });
 
-        if (!isRippleActive) return null;
+        if (!isRippleActive) {
+            return null;
+        }
 
         const rootProps = mergeProps(
             {
@@ -120,7 +122,7 @@ export const Ripple = React.memo(
             ptm('root')
         );
 
-        return <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span>;
+        return <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd} />;
     })
 );
 

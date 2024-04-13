@@ -91,7 +91,7 @@ export default function VerticalDemo() {
                             width: '8px',
                             height: `${y * 100}%`
                         }}
-                    ></div>
+                    />
                     <div
                         className="absolute block border-circle border-solid border-2 border-purple-500 -mb-2 surface-overlay z-3"
                         style={{
@@ -100,7 +100,7 @@ export default function VerticalDemo() {
                             bottom: `calc(${y * 100}%)`,
                             cursor: 'grab'
                         }}
-                    ></div>
+                    />
                 </div>
                 <span className="text-xl">
                     Value: <strong>{Math.round(y * 100)}</strong>

@@ -29,9 +29,13 @@ export const TriStateCheckbox = React.memo(
 
             let newValue;
 
-            if (props.value === null || props.value === undefined) newValue = true;
-            else if (props.value === true) newValue = false;
-            else if (props.value === false) newValue = null;
+            if (props.value === null || props.value === undefined) {
+                newValue = true;
+            } else if (props.value === true) {
+                newValue = false;
+            } else if (props.value === false) {
+                newValue = null;
+            }
 
             if (props.onChange) {
                 props.onChange({
@@ -61,7 +65,7 @@ export const TriStateCheckbox = React.memo(
         };
 
         const onKeyDown = (e) => {
-            if (e.code === 'Enter' || e.code === 'Space') {
+            if (e.code === 'Enter' || e.code === 'NumpadEnter' || e.code === 'Space') {
                 onChange(e);
                 e.preventDefault();
             }
@@ -132,7 +136,7 @@ export const TriStateCheckbox = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { context })),
                 style: props.style,
                 'data-p-disabled': props.disabled
             },

@@ -8,7 +8,7 @@ const Custom404 = () => {
                     4
                 </span>
                 <div className="flex align-items-center justify-content-center bg-primary border-circle w-8rem h-8rem">
-                    <i className="pi pi-prime text-7xl"></i>
+                    <i className="pi pi-prime text-7xl" />
                 </div>
                 <span className="font-bold" style={{ fontSize: '144px' }}>
                     4

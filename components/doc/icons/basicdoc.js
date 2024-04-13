@@ -19,10 +19,10 @@ export function BasicDoc(props) {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center gap-3">
-                <i className="pi pi-check"></i>
-                <i className="pi pi-times"></i>
-                <span className="pi pi-search"></span>
-                <span className="pi pi-user"></span>
+                <i className="pi pi-check" />
+                <i className="pi pi-times" />
+                <span className="pi pi-search" />
+                <span className="pi pi-user" />
             </div>
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>

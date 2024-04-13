@@ -42,7 +42,9 @@ const globalEscKeyHandlingLogic = {
      */
     onGlobalKeyDown(event) {
         // Do nothing if not an "esc" key is pressed:
-        if (event.code !== 'Escape') return;
+        if (event.code !== 'Escape') {
+            return;
+        }
 
         const escKeyListeners = globalEscKeyHandlingLogic.escKeyListeners;
         const maxPrimaryPriority = Math.max(...escKeyListeners.keys());
@@ -101,7 +103,9 @@ const globalEscKeyHandlingLogic = {
 
 export const useGlobalOnEscapeKey = ({ callback, when, priority }) => {
     useEffect(() => {
-        if (!when) return;
+        if (!when) {
+            return;
+        }
 
         return globalEscKeyHandlingLogic.addListener(callback, priority);
     }, [callback, when, priority]);

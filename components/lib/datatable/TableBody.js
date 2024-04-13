@@ -52,8 +52,11 @@ export const TableBody = React.memo(
         const isCheckboxSelectionModeInColumn = props.selectionModeInColumn === 'multiple';
 
         const equals = (data1, data2) => {
-            if (allowCellSelection()) return (data1.rowIndex === data2.rowIndex || data1.rowData === data2.rowData) && (data1.field === data2.field || data1.cellIndex === data2.cellIndex);
-            else return props.compareSelectionBy === 'equals' ? data1 === data2 : ObjectUtils.equals(data1, data2, props.dataKey);
+            if (allowCellSelection()) {
+                return (data1.rowIndex === data2.rowIndex || data1.rowData === data2.rowData) && (data1.field === data2.field || data1.cellIndex === data2.cellIndex);
+            }
+
+            return props.compareSelectionBy === 'equals' ? data1 === data2 : ObjectUtils.equals(data1, data2, props.dataKey);
         };
 
         const isSelectionEnabled = () => {
@@ -100,38 +103,44 @@ export const TableBody = React.memo(
             if (rowData && props.expandedRows) {
                 if (isSubheaderGrouping && props.expandableRowGroups) {
                     return isRowGroupExpanded(rowData);
-                } else {
-                    if (props.dataKey) {
-                        const rowId = ObjectUtils.resolveFieldData(rowData, props.dataKey);
-                        let expanded = false;
-
-                        if (props.expandedRows) {
-                            if (Array.isArray(props.expandedRows)) {
-                                expanded = props.expandedRows.some((row) => ObjectUtils.resolveFieldData(row, props.dataKey) === rowId);
-                            } else {
-                                expanded = props.expandedRows[rowId] !== undefined;
-                            }
-                        }
-
-                        return expanded;
-                    } else {
-                        return findIndex(props.expandedRows, rowData) !== -1;
-                    }
                 }
+
+                if (props.dataKey) {
+                    const rowId = ObjectUtils.resolveFieldData(rowData, props.dataKey);
+                    let expanded = false;
+
+                    if (props.expandedRows) {
+                        if (Array.isArray(props.expandedRows)) {
+                            expanded = props.expandedRows.some((row) => ObjectUtils.resolveFieldData(row, props.dataKey) === rowId);
+                        } else {
+                            expanded = props.expandedRows[rowId] !== undefined;
+                        }
+                    }
+
+                    return expanded;
+                }
+
+                return findIndex(props.expandedRows, rowData) !== -1;
             }
 
             return false;
         };
 
         const isRowGroupExpanded = (rowData) => {
-            if (props.dataKey === props.groupRowsBy) return Object.keys(props.expandedRows).some((data) => ObjectUtils.equals(data, ObjectUtils.resolveFieldData(rowData, props.dataKey)));
-            else return props.expandedRows.some((data) => ObjectUtils.equals(data, rowData, props.groupRowsBy));
+            if (props.dataKey === props.groupRowsBy) {
+                return Object.keys(props.expandedRows).some((data) => ObjectUtils.equals(data, ObjectUtils.resolveFieldData(rowData, props.dataKey)));
+            }
+
+            return props.expandedRows.some((data) => ObjectUtils.equals(data, rowData, props.groupRowsBy));
         };
 
         const isRowEditing = (rowData) => {
             if (props.editMode === 'row' && rowData && props.editingRows) {
-                if (props.dataKey) return props.editingRows ? props.editingRows[ObjectUtils.resolveFieldData(rowData, props.dataKey)] !== undefined : false;
-                else return findIndex(props.editingRows, rowData) !== -1;
+                if (props.dataKey) {
+                    return props.editingRows ? props.editingRows[ObjectUtils.resolveFieldData(rowData, props.dataKey)] !== undefined : false;
+                }
+
+                return findIndex(props.editingRows, rowData) !== -1;
             }
 
             return false;
@@ -189,7 +198,7 @@ export const TableBody = React.memo(
 
         const rowGroupHeaderStyle = () => {
             if (props.scrollable) {
-                return { top: rowGroupHeaderStyleObjectState['top'] };
+                return { top: rowGroupHeaderStyleObjectState.top };
             }
 
             return null;
@@ -207,26 +216,26 @@ export const TableBody = React.memo(
                 const previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, props.groupRowsBy);
 
                 return !ObjectUtils.deepEquals(currentRowFieldData, previousRowFieldData);
-            } else {
-                return true;
             }
+
+            return true;
         };
 
         const shouldRenderRowGroupFooter = (value, rowData, i, expanded) => {
             if (props.expandableRowGroups && !expanded) {
                 return false;
-            } else {
-                const currentRowFieldData = ObjectUtils.resolveFieldData(rowData, props.groupRowsBy);
-                const nextRowData = value[i + 1];
-
-                if (nextRowData) {
-                    const nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, props.groupRowsBy);
-
-                    return !ObjectUtils.deepEquals(currentRowFieldData, nextRowFieldData);
-                } else {
-                    return true;
-                }
             }
+
+            const currentRowFieldData = ObjectUtils.resolveFieldData(rowData, props.groupRowsBy);
+            const nextRowData = value[i + 1];
+
+            if (nextRowData) {
+                const nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, props.groupRowsBy);
+
+                return !ObjectUtils.deepEquals(currentRowFieldData, nextRowFieldData);
+            }
+
+            return true;
         };
 
         const updateFrozenRowStickyPosition = () => {
@@ -323,7 +332,9 @@ export const TableBody = React.memo(
         };
 
         const selectRange = (event) => {
-            let rangeStart, rangeEnd, selectedSize;
+            let rangeStart;
+            let rangeEnd;
+            let selectedSize;
 
             const isAllowCellSelection = allowCellSelection();
             const index = ObjectUtils.findIndexInList(event.data, props.value, props.dataKey);
@@ -373,9 +384,9 @@ export const TableBody = React.memo(
         };
 
         const selectRangeOnCell = (event, rowRangeStart, rowRangeEnd) => {
-            let cellRangeStart,
-                cellRangeEnd,
-                cellIndex = event.cellIndex;
+            let cellRangeStart;
+            let cellRangeEnd;
+            let cellIndex = event.cellIndex;
 
             if (cellIndex > anchorCellIndex.current) {
                 cellRangeStart = anchorCellIndex.current;
@@ -421,13 +432,19 @@ export const TableBody = React.memo(
         };
 
         const onSelect = (event) => {
-            if (allowCellSelection()) props.onCellSelect && props.onCellSelect({ originalEvent: event.originalEvent, ...event.data, type: event.type });
-            else props.onRowSelect && props.onRowSelect(event);
+            if (allowCellSelection()) {
+                props.onCellSelect && props.onCellSelect({ originalEvent: event.originalEvent, ...event.data, type: event.type });
+            } else {
+                props.onRowSelect && props.onRowSelect(event);
+            }
         };
 
         const onUnselect = (event) => {
-            if (allowCellSelection()) props.onCellUnselect && props.onCellUnselect({ originalEvent: event.originalEvent, ...event.data, type: event.type });
-            else props.onRowUnselect && props.onRowUnselect(event);
+            if (allowCellSelection()) {
+                props.onCellUnselect && props.onCellUnselect({ originalEvent: event.originalEvent, ...event.data, type: event.type });
+            } else {
+                props.onRowUnselect && props.onRowUnselect(event);
+            }
         };
 
         const enableDragSelection = (event) => {
@@ -550,7 +567,9 @@ export const TableBody = React.memo(
                 const hasSelection = ObjectUtils.isNotEmpty(props.selection);
                 const data = hasSelection ? props.selection : event.data;
 
-                if (hasSelection) DomHandler.clearSelection();
+                if (hasSelection) {
+                    DomHandler.clearSelection();
+                }
 
                 if (props.onContextMenuSelectionChange) {
                     props.onContextMenuSelectionChange({
@@ -585,8 +604,11 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) event.currentTarget.draggable = true;
-            else event.currentTarget.draggable = false;
+            if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) {
+                event.currentTarget.draggable = true;
+            } else {
+                event.currentTarget.draggable = false;
+            }
 
             if (allowRowDrag(e)) {
                 enableDragSelection(event, 'row');
@@ -768,8 +790,13 @@ export const TableBody = React.memo(
             const dx = event.clientX - x;
             const dy = event.clientY - y;
 
-            if (dy < 0) dragSelectionHelper.current.style.top = `${event.pageY + 5}px`;
-            if (dx < 0) dragSelectionHelper.current.style.left = `${event.pageX + 5}px`;
+            if (dy < 0) {
+                dragSelectionHelper.current.style.top = `${event.pageY + 5}px`;
+            }
+
+            if (dx < 0) {
+                dragSelectionHelper.current.style.left = `${event.pageX + 5}px`;
+            }
 
             dragSelectionHelper.current.style.height = `${Math.abs(dy)}px`;
             dragSelectionHelper.current.style.width = `${Math.abs(dx)}px`;

@@ -62,9 +62,9 @@ export const PanelMenu = React.memo(
         const isItemActive = (item) => {
             if (props.expandedKeys) {
                 return props.expandedKeys[getItemProp(item, 'key')];
-            } else {
-                return props.multiple ? activeItemsState.some((subItem) => ObjectUtils.equals(item, subItem)) : ObjectUtils.equals(item, activeItemState);
             }
+
+            return props.multiple ? activeItemsState.some((subItem) => ObjectUtils.equals(item, subItem)) : ObjectUtils.equals(item, activeItemState);
         };
 
         const isItemVisible = (item) => {
@@ -215,8 +215,11 @@ export const PanelMenu = React.memo(
             if (props.expandedKeys) {
                 let _keys = { ...props.expandedKeys };
 
-                if (expanded) _keys[item.key] = true;
-                else delete _keys[item.key];
+                if (expanded) {
+                    _keys[item.key] = true;
+                } else {
+                    delete _keys[item.key];
+                }
 
                 props.onExpandedKeysChange && props.onExpandedKeysChange(_keys);
             }
@@ -426,7 +429,7 @@ export const PanelMenu = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 id: props.id,
                 style: props.style
             },

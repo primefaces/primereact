@@ -126,7 +126,7 @@ export default function LoginDemo() {
                             <label className="w-6rem">Password</label>
                             <InputText id="password" type="password" className="w-12rem" />
                         </div>
-                        <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
+                        <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto" />
                     </div>
                     <div className="w-full md:w-2">
                         <Divider layout="vertical" className="hidden md:flex">
@@ -137,7 +137,7 @@ export default function LoginDemo() {
                         </Divider>
                     </div>
                     <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
-                        <Button label="Sign Up" icon="pi pi-user-plus" severity="success" className="w-10rem"></Button>
+                        <Button label="Sign Up" icon="pi pi-user-plus" severity="success" className="w-10rem" />
                     </div>
                 </div>
             </div>

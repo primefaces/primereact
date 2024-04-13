@@ -42,17 +42,17 @@ export function InlineDataScrollerDoc(props) {
                                 <div className="text-700">{data.description}</div>
                             </div>
                             <div className="flex flex-column gap-2">
-                                <Rating value={data.rating} readOnly cancel={false}></Rating>
+                                <Rating value={data.rating} readOnly cancel={false} />
                                 <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag product-category-icon"></i>
+                                    <i className="pi pi-tag product-category-icon" />
                                     <span className="font-semibold">{data.category}</span>
                                 </span>
                             </div>
                         </div>
                         <div className="flex flex-row lg:flex-column align-items-center lg:align-items-end gap-4 lg:gap-2">
                             <span className="text-2xl font-semibold">${data.price}</span>
-                            <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                            <Tag value={data.inventoryStatus} severity={getSeverity(data)}></Tag>
+                            <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'} />
+                            <Tag value={data.inventoryStatus} severity={getSeverity(data)} />
                         </div>
                     </div>
                 </div>

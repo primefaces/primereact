@@ -107,8 +107,11 @@ export const ListBox = React.memo(
                 let metaKey = event.metaKey || event.ctrlKey;
 
                 if (selected) {
-                    if (metaKey) value = removeOption(option);
-                    else value = [getOptionValue(option)];
+                    if (metaKey) {
+                        value = removeOption(option);
+                    } else {
+                        value = [getOptionValue(option)];
+                    }
 
                     valueChanged = true;
                 } else {
@@ -117,8 +120,11 @@ export const ListBox = React.memo(
                     valueChanged = true;
                 }
             } else {
-                if (selected) value = removeOption(option);
-                else value = [...(props.value || []), getOptionValue(option)];
+                if (selected) {
+                    value = removeOption(option);
+                } else {
+                    value = [...(props.value || []), getOptionValue(option)];
+                }
 
                 valueChanged = true;
             }
@@ -173,7 +179,9 @@ export const ListBox = React.memo(
                         const value = props.value[index];
                         const matchedOptionIndex = visibleOptions.findIndex((option) => isValidSelectedOption(option) && isEquals(value, getOptionValue(option)));
 
-                        if (matchedOptionIndex > -1) return matchedOptionIndex;
+                        if (matchedOptionIndex > -1) {
+                            return matchedOptionIndex;
+                        }
                     }
                 } else {
                     return visibleOptions.findIndex((option) => isValidSelectedOption(option));
@@ -334,8 +342,11 @@ export const ListBox = React.memo(
 
         const onEnterKey = (event) => {
             if (focusedOptionIndex !== -1) {
-                if (props.multiple && event.shiftKey) onOptionSelectRange(event, focusedOptionIndex);
-                else onOptionSelect(event, visibleOptions[focusedOptionIndex]);
+                if (props.multiple && event.shiftKey) {
+                    onOptionSelectRange(event, focusedOptionIndex);
+                } else {
+                    onOptionSelect(event, visibleOptions[focusedOptionIndex]);
+                }
             }
 
             event.preventDefault();
@@ -562,8 +573,11 @@ export const ListBox = React.memo(
         const isSelected = (option) => {
             const optionValue = getOptionValue(option);
 
-            if (props.multiple) return (props.value || []).some((value) => isEquals(value, optionValue));
-            else return isEquals(props.value, optionValue);
+            if (props.multiple) {
+                return (props.value || []).some((value) => isEquals(value, optionValue));
+            }
+
+            return isEquals(props.value, optionValue);
         };
 
         const filter = (option) => {
@@ -574,11 +588,11 @@ export const ListBox = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option['label'] !== undefined ? option['label'] : option;
+            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option.label !== undefined ? option.label : option;
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option && option['value'] !== undefined ? option['value'] : option;
+            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option && option.value !== undefined ? option.value : option;
         };
 
         const getOptionRenderKey = (option) => {
@@ -590,7 +604,7 @@ export const ListBox = React.memo(
                 return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
             }
 
-            return option && option['disabled'] !== undefined ? option['disabled'] : false;
+            return option && option.disabled !== undefined ? option.disabled : false;
         };
 
         const onFirstHiddenFocus = () => {
@@ -660,12 +674,12 @@ export const ListBox = React.memo(
                     }
 
                     return filteredGroups;
-                } else {
-                    return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                 }
-            } else {
-                return props.options;
+
+                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
+
+            return props.options;
         };
 
         const scrollToSelectedIndex = () => {
@@ -764,34 +778,34 @@ export const ListBox = React.memo(
                         {groupChildrenContent}
                     </React.Fragment>
                 );
-            } else {
-                const optionLabel = getOptionLabel(option);
-                const optionKey = index + '_' + getOptionRenderKey(option);
-                const disabled = isOptionDisabled(option);
-
-                return (
-                    <ListBoxItem
-                        id={id.current + '_' + index}
-                        hostName="ListBox"
-                        optionKey={optionKey}
-                        key={optionKey}
-                        label={optionLabel}
-                        index={index}
-                        onOptionMouseDown={onOptionMouseDown}
-                        onOptionMouseMove={onOptionMouseMove}
-                        focusedOptionIndex={focusedOptionIndex}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={isSelected(option)}
-                        onClick={onOptionSelect}
-                        onTouchEnd={onOptionTouchEnd}
-                        disabled={disabled}
-                        ptCallbacks={ptCallbacks}
-                        metaData={metaData}
-                    />
-                );
             }
+
+            const optionLabel = getOptionLabel(option);
+            const optionKey = index + '_' + getOptionRenderKey(option);
+            const disabled = isOptionDisabled(option);
+
+            return (
+                <ListBoxItem
+                    id={id.current + '_' + index}
+                    hostName="ListBox"
+                    optionKey={optionKey}
+                    key={optionKey}
+                    label={optionLabel}
+                    index={index}
+                    onOptionMouseDown={onOptionMouseDown}
+                    onOptionMouseMove={onOptionMouseMove}
+                    focusedOptionIndex={focusedOptionIndex}
+                    option={option}
+                    style={style}
+                    template={props.itemTemplate}
+                    selected={isSelected(option)}
+                    onClick={onOptionSelect}
+                    onTouchEnd={onOptionTouchEnd}
+                    disabled={disabled}
+                    ptCallbacks={ptCallbacks}
+                    metaData={metaData}
+                />
+            );
         };
 
         const createItems = () => {
@@ -848,26 +862,26 @@ export const ListBox = React.memo(
                 };
 
                 return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptCallbacks.ptm('virtualScroller')} />;
-            } else {
-                const items = createItems();
-
-                const listProps = mergeProps(
-                    {
-                        ref: listRef,
-                        className: ptCallbacks.cx('list'),
-                        role: 'listbox',
-                        'aria-multiselectable': props.multiple,
-                        tabIndex: '-1',
-                        onFocus: onListFocus,
-                        onBlur: onListBlur,
-                        onKeyDown: onListKeyDown,
-                        ...ariaProps
-                    },
-                    ptCallbacks.ptm('list')
-                );
-
-                return <ul {...listProps}>{items}</ul>;
             }
+
+            const items = createItems();
+
+            const listProps = mergeProps(
+                {
+                    ref: listRef,
+                    className: ptCallbacks.cx('list'),
+                    role: 'listbox',
+                    'aria-multiselectable': props.multiple,
+                    tabIndex: '-1',
+                    onFocus: onListFocus,
+                    onBlur: onListBlur,
+                    onKeyDown: onListKeyDown,
+                    ...ariaProps
+                },
+                ptCallbacks.ptm('list')
+            );
+
+            return <ul {...listProps}>{items}</ul>;
         };
 
         const visibleOptions = getVisibleOptions();
@@ -928,10 +942,10 @@ export const ListBox = React.memo(
         return (
             <>
                 <div {...rootProps}>
-                    <span {...hiddenFirstElement}></span>
+                    <span {...hiddenFirstElement} />
                     {header}
                     <div {...wrapperProps}>{list}</div>
-                    <span {...hiddenLastElement}></span>
+                    <span {...hiddenLastElement} />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptCallbacks.ptm('tooltip')} {...props.tooltipOptions} />}
             </>

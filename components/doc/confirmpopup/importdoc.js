@@ -11,7 +11,7 @@ import { confirmPopup } from 'primereact/confirmpopup'; // To use confirmPopup m
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props} />
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>
     );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption, ariaLabel } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -92,10 +92,8 @@ export const Password = React.memo(
                 if (label && infoTextState !== label) {
                     setInfoTextState(label);
                 }
-            } else {
-                if (infoTextState !== promptLabel) {
-                    setInfoTextState(promptLabel);
-                }
+            } else if (infoTextState !== promptLabel) {
+                setInfoTextState(promptLabel);
             }
         };
 
@@ -173,7 +171,7 @@ export const Password = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
@@ -395,7 +393,7 @@ export const Password = React.memo(
             ) : (
                 <>
                     <div {...meterProps}>
-                        <div {...meterLabelProps}></div>
+                        <div {...meterLabelProps} />
                     </div>
                     <div {...infoProps}>{infoTextState}</div>
                 </>
@@ -447,7 +445,7 @@ export const Password = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { isFilled, focusedState }),
+                className: classNames(props.className, cx('root', { isFilled, focusedState })),
                 style: props.style
             },
             ptm('root')
@@ -464,6 +462,7 @@ export const Password = React.memo(
                 onInput: onInput,
                 onKeyUp: onKeyup,
                 invalid: props.invalid,
+                variant: props.variant,
                 style: props.inputStyle,
                 tabIndex: props.tabIndex,
                 tooltip: props.tooltip,

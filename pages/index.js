@@ -39,12 +39,12 @@ export default function Home() {
                 <meta name="twitter:site" content="@primereact" />
                 <meta name="twitter:title" content="PrimeReact | React UI Component Library" />
                 <meta name="twitter:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
-                <meta property="og:type" content="website"></meta>
-                <meta property="og:title" content="PrimeReact | React UI Component Library"></meta>
-                <meta property="og:url" content="https://primereact.org"></meta>
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="PrimeReact | React UI Component Library" />
+                <meta property="og:url" content="https://primereact.org" />
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
-                <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg"></meta>
-                <meta property="og:ttl" content="604800"></meta>
+                <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg" />
+                <meta property="og:ttl" content="604800" />
             </Head>
             <NewsSection />
             <Topbar onDarkSwitchClick={toggleDarkMode} />

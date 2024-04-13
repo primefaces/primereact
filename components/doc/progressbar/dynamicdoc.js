@@ -13,7 +13,7 @@ export function DynamicDoc(props) {
         let _val = value;
 
         interval.current = setInterval(() => {
-            _val += Math.floor(Math.random() * 10) + 1;
+            _val = _val + (Math.floor(Math.random() * 10) + 1);
 
             if (_val >= 100) {
                 _val = 100;
@@ -126,8 +126,8 @@ export default function DynamicDemo() {
                 <p>Value is reactive so updating it dynamically changes the bar as well.</p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
-                <ProgressBar value={value}></ProgressBar>
+                <Toast ref={toast} />
+                <ProgressBar value={value} />
             </div>
             <DocSectionCode code={code} />
         </>

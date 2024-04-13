@@ -66,13 +66,13 @@ export default function PositionDemo() {
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-4">
                 <i className="pi pi-bell p-overlay-badge" style={{ fontSize: '2rem' }}>
-                    <Badge value="2"></Badge>
+                    <Badge value="2" />
                 </i>
                 <i className="pi pi-calendar p-overlay-badge" style={{ fontSize: '2rem' }}>
-                    <Badge value="5+" severity="danger"></Badge>
+                    <Badge value="5+" severity="danger" />
                 </i>
                 <i className="pi pi-envelope p-overlay-badge" style={{ fontSize: '2rem' }}>
-                    <Badge severity="danger"></Badge>
+                    <Badge severity="danger" />
                 </i>
             </div>
             <DocSectionCode code={code} />

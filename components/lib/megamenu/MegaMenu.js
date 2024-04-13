@@ -115,24 +115,24 @@ export const MegaMenu = React.memo(
 
                 setActiveItemState(null);
                 setFocusedItemInfo({ index, key, parentKey });
+            } else if (grouped) {
+                onItemChange(event);
             } else {
-                if (grouped) {
-                    onItemChange(event);
-                } else {
-                    const rootProcessedItemIndex = activeItemState ? activeItemState.index : -1;
-                    const rootProcessedItemKey = activeItemState ? activeItemState.key : '';
+                const rootProcessedItemIndex = activeItemState ? activeItemState.index : -1;
+                const rootProcessedItemKey = activeItemState ? activeItemState.key : '';
 
-                    hide(originalEvent);
-                    setFocusedItemInfo({ index: rootProcessedItemIndex, key: rootProcessedItemKey, parentKey: '' });
-                    setMobileActiveState(false);
-                }
+                hide(originalEvent);
+                setFocusedItemInfo({ index: rootProcessedItemIndex, key: rootProcessedItemKey, parentKey: '' });
+                setMobileActiveState(false);
             }
         };
 
         const onItemChange = (event) => {
             const { processedItem, isFocus } = event;
 
-            if (ObjectUtils.isEmpty(processedItem)) return;
+            if (ObjectUtils.isEmpty(processedItem)) {
+                return;
+            }
 
             const { index, key, parentKey, items } = processedItem;
             const grouped = ObjectUtils.isNotEmpty(items);
@@ -182,17 +182,15 @@ export const MegaMenu = React.memo(
                 setActiveItemState(null);
                 setFocusedItemInfo({ index, key, parentKey });
                 setDirty(!root);
+            } else if (grouped) {
+                onItemChange(event);
             } else {
-                if (grouped) {
-                    onItemChange(event);
-                } else {
-                    const rootProcessedItem = root ? processedItem : activeItemState;
+                const rootProcessedItem = root ? processedItem : activeItemState;
 
-                    hide();
-                    changeFocusedItemInfo(originalEvent, rootProcessedItem ? rootProcessedItem.index : -1);
-                    setMobileActiveState(false);
-                    DomHandler.focus(menubarRef.current);
-                }
+                hide();
+                changeFocusedItemInfo(originalEvent, rootProcessedItem ? rootProcessedItem.index : -1);
+                setMobileActiveState(false);
+                DomHandler.focus(menubarRef.current);
             }
         };
 
@@ -227,7 +225,7 @@ export const MegaMenu = React.memo(
                 hide();
             } else {
                 setMobileActiveState(true);
-                ZIndexUtils.set('menu', menubarRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menubarRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
                 setTimeout(() => {
                     show();
                 }, 1);
@@ -288,7 +286,7 @@ export const MegaMenu = React.memo(
                 bindListeners();
 
                 if (!isMobileMode) {
-                    ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
+                    ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.menu) || PrimeReact.zIndex.menu);
                 }
             } else {
                 unbindListeners();
@@ -391,6 +389,7 @@ export const MegaMenu = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(event);
                     break;
 
@@ -406,7 +405,6 @@ export const MegaMenu = React.memo(
                 case 'PageUp':
                 case 'Backspace':
                 case 'ShiftLeft':
-                    focusedItemInfo;
                 case 'ShiftRight':
                     //NOOP
                     break;
@@ -755,7 +753,7 @@ export const MegaMenu = React.memo(
                         columnIndex: columnIndex !== undefined ? columnIndex : parent && parent.columnIndex !== undefined ? parent.columnIndex : index
                     };
 
-                    newItem['items'] = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
+                    newItem.items = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
                     _processedItems.push(newItem);
                 });
 
@@ -775,7 +773,7 @@ export const MegaMenu = React.memo(
                 ptm('separator')
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createSubmenuIcon = (item) => {
@@ -805,96 +803,96 @@ export const MegaMenu = React.memo(
 
             if (item.separator) {
                 return createSeparator(index);
-            } else {
-                const key = getItemId(processedItem);
-                const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
-                const iconProps = mergeProps(
-                    {
-                        className: classNames(item.icon, cx('icon'))
-                    },
-                    ptm('icon')
-                );
-                const labelProps = mergeProps(
-                    {
-                        className: cx('label')
-                    },
-                    ptm('label')
-                );
-                const iconClassName = classNames(item.icon, 'p-menuitem-icon');
-                const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
-                const label = item.label && <span {...labelProps}>{item.label}</span>;
-
-                const actionProps = mergeProps(
-                    {
-                        href: item.url || '#',
-                        className: cx('action', { item }),
-                        target: item.target,
-                        tabIndex: '-1',
-                        'aria-hidden': true
-                    },
-                    getPTOptions(processedItem, 'action', index)
-                );
-
-                const isFocused = isItemFocused(processedItem);
-                const isDisabled = isItemDisabled(processedItem);
-                const isGroup = isItemGroup(processedItem);
-                const isActive = isItemActive(processedItem);
-
-                const submenuItemProps = mergeProps(
-                    {
-                        key,
-                        id: key,
-                        'aria-label': getItemLabel(processedItem),
-                        'aria-disabled': isDisabled,
-                        'aria-haspopup': isGroup ? 'menu' : undefined,
-                        'aria-level': '2',
-                        'aria-expanded': isGroup ? isActive : undefined,
-                        'aria-setsize': getAriaSetSize(),
-                        'aria-posinset': getAriaPosInset(index),
-                        'data-p-highlight': isActive,
-                        'data-p-disabled': isDisabled,
-                        'data-p-focused': isFocused,
-                        className: classNames(item.className, cx('submenuItem', { focused: isFocused, disabled: isDisabled, active: isActive })),
-                        style: item.style,
-                        role: 'menuitem'
-                    },
-                    getPTOptions(processedItem, 'submenuItem', index)
-                );
-
-                const contentProps = mergeProps(
-                    {
-                        onClick: (event) => onLeafClick({ originalEvent: event, processedItem: processedItem }),
-                        className: cx('content')
-                    },
-                    getPTOptions(processedItem, 'content', index)
-                );
-
-                let content = (
-                    <a {...actionProps}>
-                        {icon}
-                        {label}
-                        <Ripple />
-                    </a>
-                );
-
-                if (item.template) {
-                    const defaultContentOptions = {
-                        className: linkClassName,
-                        labelClassName: 'p-menuitem-text',
-                        iconClassName,
-                        element: content,
-                        props
-                    };
-
-                    content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
-                }
-
-                return (
-                    <li {...submenuItemProps}>
-                        <div {...contentProps}>{content}</div>
-                    </li>
-                );
             }
+
+            const key = getItemId(processedItem);
+            const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
+            const iconProps = mergeProps(
+                {
+                    className: classNames(item.icon, cx('icon'))
+                },
+                ptm('icon')
+            );
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                ptm('label')
+            );
+            const iconClassName = classNames(item.icon, 'p-menuitem-icon');
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
+            const label = item.label && <span {...labelProps}>{item.label}</span>;
+
+            const actionProps = mergeProps(
+                {
+                    href: item.url || '#',
+                    className: cx('action', { item }),
+                    target: item.target,
+                    tabIndex: '-1',
+                    'aria-hidden': true
+                },
+                getPTOptions(processedItem, 'action', index)
+            );
+
+            const isFocused = isItemFocused(processedItem);
+            const isDisabled = isItemDisabled(processedItem);
+            const isGroup = isItemGroup(processedItem);
+            const isActive = isItemActive(processedItem);
+
+            const submenuItemProps = mergeProps(
+                {
+                    key,
+                    id: key,
+                    'aria-label': getItemLabel(processedItem),
+                    'aria-disabled': isDisabled,
+                    'aria-haspopup': isGroup ? 'menu' : undefined,
+                    'aria-level': '2',
+                    'aria-expanded': isGroup ? isActive : undefined,
+                    'aria-setsize': getAriaSetSize(),
+                    'aria-posinset': getAriaPosInset(index),
+                    'data-p-highlight': isActive,
+                    'data-p-disabled': isDisabled,
+                    'data-p-focused': isFocused,
+                    className: classNames(item.className, cx('submenuItem', { focused: isFocused, disabled: isDisabled, active: isActive })),
+                    style: item.style,
+                    role: 'menuitem'
+                },
+                getPTOptions(processedItem, 'submenuItem', index)
+            );
+
+            const contentProps = mergeProps(
+                {
+                    onClick: (event) => onLeafClick({ originalEvent: event, processedItem: processedItem }),
+                    className: cx('content')
+                },
+                getPTOptions(processedItem, 'content', index)
+            );
+
+            let content = (
+                <a {...actionProps}>
+                    {icon}
+                    {label}
+                    <Ripple />
+                </a>
+            );
+
+            if (item.template) {
+                const defaultContentOptions = {
+                    className: linkClassName,
+                    labelClassName: 'p-menuitem-text',
+                    iconClassName,
+                    element: content,
+                    props
+                };
+
+                content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+            }
+
+            return (
+                <li {...submenuItemProps}>
+                    <div {...contentProps}>{content}</div>
+                </li>
+            );
         };
 
         const createSubmenu = (submenu, index) => {

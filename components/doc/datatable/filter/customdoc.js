@@ -18,9 +18,17 @@ import { CustomerService } from '../../../../service/CustomerService';
 FilterService.register('custom_activity', (value, filters) => {
     const [from, to] = filters ?? [null, null];
 
-    if (from === null && to === null) return true;
-    if (from !== null && to === null) return from <= value;
-    if (from === null && to !== null) return value <= to;
+    if (from === null && to === null) {
+        return true;
+    }
+
+    if (from !== null && to === null) {
+        return from <= value;
+    }
+
+    if (from === null && to !== null) {
+        return value <= to;
+    }
 
     return from <= value && value <= to;
 });
@@ -91,7 +99,7 @@ export function CustomFilterDoc(props) {
         const value = e.target.value;
         let _filters = { ...filters };
 
-        _filters['global'].value = value;
+        _filters.global.value = value;
 
         setFilters(_filters);
         setGlobalFilterValue(value);
@@ -146,7 +154,7 @@ export function CustomFilterDoc(props) {
     };
 
     const verifiedBodyTemplate = (rowData) => {
-        return <i className={classNames('pi', { 'true-icon pi-check-circle': rowData.verified, 'false-icon pi-times-circle': !rowData.verified })}></i>;
+        return <i className={classNames('pi', { 'true-icon pi-check-circle': rowData.verified, 'false-icon pi-times-circle': !rowData.verified })} />;
     };
 
     const representativeRowFilterTemplate = (options) => {

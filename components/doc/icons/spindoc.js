@@ -17,8 +17,8 @@ export function SpinDoc(props) {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center gap-3">
-                <i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }}></i>
-                <i className="pi pi-spin pi-cog" style={{ fontSize: '2rem' }}></i>
+                <i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }} />
+                <i className="pi pi-spin pi-cog" style={{ fontSize: '2rem' }} />
             </div>
             <DocSectionCode code={code} hideToggleCode import hideStackBlitz />
         </>

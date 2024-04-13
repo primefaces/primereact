@@ -118,7 +118,10 @@ export const Chips = React.memo(
 
             if (inputRef.current.value.length === 0 && props.value && props.value.length > 0) {
                 focusIndex = focusIndex === null ? props.value.length - 1 : focusIndex - 1;
-                if (focusIndex < 0) focusIndex = 0;
+
+                if (focusIndex < 0) {
+                    focusIndex = 0;
+                }
             }
 
             setFocusedIndex(focusIndex);
@@ -236,7 +239,7 @@ export const Chips = React.memo(
         const onPaste = (event) => {
             if (props.separator) {
                 let separator = props.separator.replace('\\n', '\n').replace('\\r', '\r').replace('\\t', '\t');
-                let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
+                let pastedData = (event.clipboardData || window.clipboardData).getData('Text');
 
                 if (props.keyfilter) {
                     KeyFilter.onPaste(event, props.keyfilter);
@@ -413,7 +416,7 @@ export const Chips = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx('container', { isFilled }),
+                    className: cx('container', { context }),
                     onClick: (e) => onWrapperClick(e),
                     onKeyDown: (e) => onContainerKeyDown(e),
                     tabIndex: -1,

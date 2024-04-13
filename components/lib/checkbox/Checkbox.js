@@ -56,7 +56,7 @@ export const Checkbox = React.memo(
                     }
                 };
 
-                props.onChange && props.onChange(eventData);
+                props?.onChange?.(eventData);
 
                 // do not continue if the user defined click wants to prevent
                 if (event.defaultPrevented) {
@@ -102,7 +102,7 @@ export const Checkbox = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: classNames(props.className, cx('root', { checked })),
+                className: classNames(props.className, cx('root', { checked, context })),
                 style: props.style,
                 'data-p-highlight': checked,
                 'data-p-disabled': props.disabled,

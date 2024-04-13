@@ -174,8 +174,11 @@ export const PickList = React.memo(
         };
 
         const onSelectionChange = (e, stateKey, callback) => {
-            if (stateKey === 'sourceSelection') setSourceSelectionState(e.value);
-            else setTargetSelectionState(e.value);
+            if (stateKey === 'sourceSelection') {
+                setSourceSelectionState(e.value);
+            } else {
+                setTargetSelectionState(e.value);
+            }
 
             if (callback) {
                 callback(e);
@@ -283,7 +286,9 @@ export const PickList = React.memo(
             let selected = index !== -1;
             let metaSelection = props.metaKeySelection;
 
-            if (!arrowKeyClick) setFocusedOptionIndex(selectedId);
+            if (!arrowKeyClick) {
+                setFocusedOptionIndex(selectedId);
+            }
 
             if (metaSelection) {
                 const metaKey = originalEvent.metaKey || originalEvent.ctrlKey || originalEvent.shiftKey;
@@ -297,9 +302,10 @@ export const PickList = React.memo(
 
                     selection.push(item);
                 }
+            } else if (selected) {
+                selection.splice(index, 1);
             } else {
-                if (selected) selection.splice(index, 1);
-                else selection.push(item);
+                selection.push(item);
             }
 
             if (isSource) {
@@ -345,8 +351,11 @@ export const PickList = React.memo(
                     if (event.ctrlKey) {
                         const isSource = type === 'source';
 
-                        if (isSource) setSourceSelectionState([...sourceList]);
-                        else setTargetSelectionState([...targetList]);
+                        if (isSource) {
+                            setSourceSelectionState([...sourceList]);
+                        } else {
+                            setTargetSelectionState([...targetList]);
+                        }
 
                         onSelectionChange({ originalEvent: event, value: [...sourceList] }, isSource ? 'sourceSelection' : 'targetSelection', isSource ? props.onSourceSelectionChange : props.onTargetSelectionChange);
                         event.preventDefault();
@@ -634,8 +643,8 @@ export const PickList = React.memo(
                     onListBlur={(e) => onListBlur(e, 'source')}
                     onOptionMouseDown={(index) => onOptionMouseDown(index, 'source')}
                     onItemClick={(e) => onItemClick(e, 'source')}
-                    focusedOptionId={focused['source'] ? focusedOptionId : null}
-                    ariaActivedescendant={focused['source'] ? focusedOptionId : null}
+                    focusedOptionId={focused.source ? focusedOptionId : null}
+                    ariaActivedescendant={focused.source ? focusedOptionId : null}
                     itemTemplate={sourceItemTemplate}
                     header={props.sourceHeader}
                     style={props.sourceStyle}
@@ -652,6 +661,9 @@ export const PickList = React.memo(
                     sourceFilterIcon={props.sourceFilterIcon}
                     ptm={ptm}
                     cx={cx}
+                    focusedList={focused}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    focusOnHover={props.focusOnHover}
                 />
 
                 <PickListTransferControls
@@ -688,8 +700,8 @@ export const PickList = React.memo(
                     onListBlur={(e) => onListBlur(e, 'target')}
                     onOptionMouseDown={(index) => onOptionMouseDown(index, 'target')}
                     onItemClick={(e) => onItemClick(e, 'target')}
-                    focusedOptionId={focused['target'] ? focusedOptionId : null}
-                    ariaActivedescendant={focused['target'] ? focusedOptionId : null}
+                    focusedOptionId={focused.target ? focusedOptionId : null}
+                    ariaActivedescendant={focused.target ? focusedOptionId : null}
                     itemTemplate={targetItemTemplate}
                     header={props.targetHeader}
                     style={props.targetStyle}
@@ -706,6 +718,9 @@ export const PickList = React.memo(
                     targetFilterIcon={props.targetFilterIcon}
                     ptm={ptm}
                     cx={cx}
+                    focusedList={focused}
+                    changeFocusedOptionIndex={changeFocusedOptionIndex}
+                    focusOnHover={props.focusOnHover}
                 />
 
                 {props.showTargetControls && (

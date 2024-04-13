@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useUnmountEffect } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
 import { ChartBase } from './ChartBase';
 
 // GitHub #3059 wrapper if loaded by script tag
@@ -96,7 +97,7 @@ const PrimeReactChart = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: sx('root'),
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             ChartBase.getOtherProps(props),
             ptm('root')
@@ -114,7 +115,7 @@ const PrimeReactChart = React.memo(
 
         return (
             <div {...rootProps}>
-                <canvas {...canvasProps}></canvas>
+                <canvas {...canvasProps} />
             </div>
         );
     }),

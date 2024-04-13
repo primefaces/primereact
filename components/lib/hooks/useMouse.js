@@ -6,7 +6,8 @@ export const useMouse = () => {
     const ref = React.useRef(null);
 
     const handleMouseMove = React.useCallback((event) => {
-        let x, y;
+        let x;
+        let y;
 
         if (ref.current) {
             const rect = event.currentTarget.getBoundingClientRect();

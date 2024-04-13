@@ -183,21 +183,21 @@ export default function HeadlessDemo() {
                                 <label htmlFor="username" className="text-primary-50 font-semibold">
                                     Username
                                 </label>
-                                <InputText id="username" label="Username" className="bg-white-alpha-20 border-none p-3 text-primary-50"></InputText>
+                                <InputText id="username" label="Username" className="bg-white-alpha-20 border-none p-3 text-primary-50" />
                             </div>
                             <div className="inline-flex flex-column gap-2">
                                 <label htmlFor="username" className="text-primary-50 font-semibold">
                                     Username
                                 </label>
-                                <InputText id="password" label="Password" className="bg-white-alpha-20 border-none p-3 text-primary-50" type="password"></InputText>
+                                <InputText id="password" label="Password" className="bg-white-alpha-20 border-none p-3 text-primary-50" type="password" />
                             </div>
                             <div className="flex align-items-center gap-2">
-                                <Button label="Sign-In" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
-                                <Button label="Cancel" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
+                                <Button label="Sign-In" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" />
+                                <Button label="Cancel" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" />
                             </div>
                         </div>
                     )}
-                ></Dialog>
+                />
             </div>
             <DocSectionCode code={code} />
         </>

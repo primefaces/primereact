@@ -159,10 +159,10 @@ export default function ConditionalStyleDemo() {
             <DeferredDemo onLoad={loadDemoData}>
                 <div className="card">
                     <DataTable value={products} rowClassName={rowClass} tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="code" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="category" header="Category"></Column>
-                        <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
+                        <Column field="code" header="Code" />
+                        <Column field="name" header="Name" />
+                        <Column field="category" header="Category" />
+                        <Column field="quantity" header="Quantity" body={stockBodyTemplate} />
                     </DataTable>
                 </div>
             </DeferredDemo>

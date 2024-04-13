@@ -14,48 +14,79 @@ export default class ObjectUtils {
      * @returns true if equals, false it not
      */
     static deepEquals(a, b) {
-        if (a === b) return true;
+        if (a === b) {
+            return true;
+        }
 
-        if (a && b && typeof a == 'object' && typeof b == 'object') {
-            let arrA = Array.isArray(a),
-                arrB = Array.isArray(b),
-                i,
-                length,
-                key;
+        if (a && b && typeof a === 'object' && typeof b === 'object') {
+            let arrA = Array.isArray(a);
+            let arrB = Array.isArray(b);
+            let i;
+            let length;
+            let key;
 
             if (arrA && arrB) {
                 length = a.length;
-                if (length !== b.length) return false;
-                for (i = length; i-- !== 0; ) if (!this.deepEquals(a[i], b[i])) return false;
+
+                if (length !== b.length) {
+                    return false;
+                }
+
+                for (i = length; i-- !== 0; ) {
+                    if (!this.deepEquals(a[i], b[i])) {
+                        return false;
+                    }
+                }
 
                 return true;
             }
 
-            if (arrA !== arrB) return false;
+            if (arrA !== arrB) {
+                return false;
+            }
 
-            let dateA = a instanceof Date,
-                dateB = b instanceof Date;
+            let dateA = a instanceof Date;
+            let dateB = b instanceof Date;
 
-            if (dateA !== dateB) return false;
-            if (dateA && dateB) return a.getTime() === b.getTime();
+            if (dateA !== dateB) {
+                return false;
+            }
 
-            let regexpA = a instanceof RegExp,
-                regexpB = b instanceof RegExp;
+            if (dateA && dateB) {
+                return a.getTime() === b.getTime();
+            }
 
-            if (regexpA !== regexpB) return false;
-            if (regexpA && regexpB) return a.toString() === b.toString();
+            let regexpA = a instanceof RegExp;
+            let regexpB = b instanceof RegExp;
+
+            if (regexpA !== regexpB) {
+                return false;
+            }
+
+            if (regexpA && regexpB) {
+                return a.toString() === b.toString();
+            }
 
             let keys = Object.keys(a);
 
             length = keys.length;
 
-            if (length !== Object.keys(b).length) return false;
+            if (length !== Object.keys(b).length) {
+                return false;
+            }
 
-            for (i = length; i-- !== 0; ) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+            for (i = length; i-- !== 0; ) {
+                if (!Object.prototype.hasOwnProperty.call(b, keys[i])) {
+                    return false;
+                }
+            }
 
             for (i = length; i-- !== 0; ) {
                 key = keys[i];
-                if (!this.deepEquals(a[key], b[key])) return false;
+
+                if (!this.deepEquals(a[key], b[key])) {
+                    return false;
+                }
             }
 
             return true;
@@ -74,7 +105,9 @@ export default class ObjectUtils {
         try {
             const value = data[field];
 
-            if (this.isNotEmpty(value)) return value;
+            if (this.isNotEmpty(value)) {
+                return value;
+            }
         } catch {
             // Performance optimization: https://github.com/primefaces/primereact/issues/4797
             // do nothing and continue to other methods to resolve field data
@@ -87,20 +120,20 @@ export default class ObjectUtils {
                 return data[field];
             } else if (field.indexOf('.') === -1) {
                 return data[field];
-            } else {
-                let fields = field.split('.');
-                let value = data;
+            }
 
-                for (var i = 0, len = fields.length; i < len; ++i) {
-                    if (value == null) {
-                        return null;
-                    }
+            let fields = field.split('.');
+            let value = data;
 
-                    value = value[fields[i]];
+            for (let i = 0, len = fields.length; i < len; ++i) {
+                if (value == null) {
+                    return null;
                 }
 
-                return value;
+                value = value[fields[i]];
             }
+
+            return value;
         }
 
         return null;
@@ -147,8 +180,8 @@ export default class ObjectUtils {
     static reorderArray(value, from, to) {
         if (value && from !== to) {
             if (to >= value.length) {
-                to %= value.length;
-                from %= value.length;
+                to = to % value.length;
+                from = from % value.length;
             }
 
             value.splice(to, 0, value.splice(from, 1)[0]);
@@ -406,11 +439,17 @@ export default class ObjectUtils {
         const emptyValue1 = this.isEmpty(value1);
         const emptyValue2 = this.isEmpty(value2);
 
-        if (emptyValue1 && emptyValue2) result = 0;
-        else if (emptyValue1) result = order;
-        else if (emptyValue2) result = -order;
-        else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparator(value1, value2);
-        else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        if (emptyValue1 && emptyValue2) {
+            result = 0;
+        } else if (emptyValue1) {
+            result = order;
+        } else if (emptyValue2) {
+            result = -order;
+        } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+            result = comparator(value1, value2);
+        } else {
+            result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+        }
 
         return result;
     }
@@ -472,7 +511,7 @@ export default class ObjectUtils {
         const fields = field.split('.');
         let obj = data;
 
-        for (var i = 0, len = fields.length; i < len; ++i) {
+        for (let i = 0, len = fields.length; i < len; ++i) {
             // Check if we are on the last field
             if (i + 1 - len === 0) {
                 obj[fields[i]] = value;

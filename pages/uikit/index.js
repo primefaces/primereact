@@ -25,27 +25,27 @@ const UIKitPage = (props) => {
 
                                 <ul className="flex flex-wrap m-0 p-0 text-lg">
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Auto Layout</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Variants</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Styles</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Interactive Components</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Boolean, Instance Swap and Text Properties</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Nested Instances</span>
                                     </li>
                                 </ul>
@@ -59,19 +59,19 @@ const UIKitPage = (props) => {
 
                                 <ul className="flex flex-wrap m-0 p-0 text-lg">
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Numerous Components</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Icon Library</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Easy Customization</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Atomic Approach</span>
                                     </li>
                                 </ul>
@@ -91,11 +91,11 @@ const UIKitPage = (props) => {
 
                                 <ul className="flex flex-wrap m-0 p-0 text-lg">
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Lara Light</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Lara Dark</span>
                                     </li>
                                 </ul>
@@ -111,15 +111,15 @@ const UIKitPage = (props) => {
 
                                 <ul className="flex flex-wrap m-0 p-0 text-lg">
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Countless Design Tokens</span>
                                     </li>
                                     <li className="flex align-items-center w-6 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Light and Dark Sets</span>
                                     </li>
                                     <li className="flex align-items-center w-12 p-3">
-                                        <i className="pi pi-check-circle text-green-600 mr-2"></i>
+                                        <i className="pi pi-check-circle text-green-600 mr-2" />
                                         <span className="font-bold">Well Documented</span>
                                     </li>
                                 </ul>
@@ -169,27 +169,27 @@ const UIKitPage = (props) => {
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span className="font-bold">1 Designer</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Auto Layout & Variants</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Interactive Components</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Tokens Studio Support</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Lifetime Support</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Use on Unlimited Projects</span>
                                             </li>
                                         </ul>
@@ -213,27 +213,27 @@ const UIKitPage = (props) => {
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span className="font-bold">Up to 5 Designers</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Auto Layout & Variants</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Interactive Components</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Tokens Studio Support</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Lifetime Support</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Use on Unlimited Projects</span>
                                             </li>
                                         </ul>
@@ -257,27 +257,27 @@ const UIKitPage = (props) => {
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span className="font-bold">Unlimited Designers</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Auto Layout & Variants</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Interactive Components</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Tokens Studio Support</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Lifetime Support</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
-                                                <i className="pi pi-check-circle text-green-500 mr-2"></i>
+                                                <i className="pi pi-check-circle text-green-500 mr-2" />
                                                 <span>Use on Unlimited Projects</span>
                                             </li>
                                         </ul>

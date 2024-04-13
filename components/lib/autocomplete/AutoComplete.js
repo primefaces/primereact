@@ -73,14 +73,12 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isEmpty(query)) {
                 hide();
                 props.onClear && props.onClear(event);
+            } else if (query.length >= props.minLength) {
+                timeout.current = setTimeout(() => {
+                    search(event, query, 'input');
+                }, props.delay);
             } else {
-                if (query.length >= props.minLength) {
-                    timeout.current = setTimeout(() => {
-                        search(event, query, 'input');
-                    }, props.delay);
-                } else {
-                    hide();
-                }
+                hide();
             }
         };
 
@@ -171,9 +169,9 @@ export const AutoComplete = React.memo(
                     const resolvedFieldData = ObjectUtils.resolveFieldData(value, props.field);
 
                     return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
-                } else {
-                    return value;
                 }
+
+                return value;
             }
 
             return '';
@@ -193,7 +191,7 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
@@ -242,8 +240,11 @@ export const AutoComplete = React.memo(
                 DomHandler.focus(inputRef.current, props.dropdownAutoFocus);
             }
 
-            if (props.dropdownMode === 'blank') search(event, '', 'dropdown');
-            else if (props.dropdownMode === 'current') search(event, inputRef.current.value, 'dropdown');
+            if (props.dropdownMode === 'blank') {
+                search(event, '', 'dropdown');
+            } else if (props.dropdownMode === 'current') {
+                search(event, inputRef.current.value, 'dropdown');
+            }
 
             if (props.onDropdownClick) {
                 props.onDropdownClick({
@@ -545,7 +546,7 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    className={classNames(props.inputClassName, cx('input'))}
+                    className={classNames(props.inputClassName, cx('input', { context }))}
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
@@ -665,7 +666,7 @@ export const AutoComplete = React.memo(
             const containerProps = mergeProps(
                 {
                     ref: multiContainerRef,
-                    className: cx('container'),
+                    className: cx('container', { context }),
                     onClick: allowMoreValues ? onMultiContainerClick : undefined,
                     onContextMenu: props.onContextMenu,
                     onMouseDown: props.onMouseDown,

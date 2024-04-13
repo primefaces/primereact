@@ -35,6 +35,7 @@ export const DropdownItem = React.memo((props) => {
             className: classNames(option.className, cx('item', { selected, disabled, label, index, focusedOptionIndex, highlightOnSelect })),
             style: props.style,
             onClick: (e) => onClick(e, index),
+            onMouseMove: (e) => props?.onMouseMove(e, index),
             'aria-label': label,
             'aria-selected': selected,
             'data-p-highlight': selected,
@@ -60,16 +61,16 @@ export const DropdownItem = React.memo((props) => {
             );
 
             return <CheckIcon {...checkIconProps} />;
-        } else {
-            const blankIconProps = mergeProps(
-                {
-                    className: cx('blankIcon')
-                },
-                getPTOptions('blankIcon')
-            );
-
-            return <BlankIcon {...blankIconProps} />;
         }
+
+        const blankIconProps = mergeProps(
+            {
+                className: cx('blankIcon')
+            },
+            getPTOptions('blankIcon')
+        );
+
+        return <BlankIcon {...blankIconProps} />;
     };
 
     return (

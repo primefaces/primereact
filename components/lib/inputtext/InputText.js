@@ -4,7 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
 
 export const InputText = React.memo(
@@ -71,7 +71,7 @@ export const InputText = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: cx('root', { isFilled }),
+                className: classNames(props.className, cx('root', { context, isFilled })),
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onKeyDown: onKeyDown,

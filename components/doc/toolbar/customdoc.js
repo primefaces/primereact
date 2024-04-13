@@ -33,13 +33,13 @@ export function CustomDoc(props) {
     const centerContent = (
         <div className="flex flex-wrap align-items-center gap-3">
             <button className="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
-                <i className="pi pi-home text-2xl"></i>
+                <i className="pi pi-home text-2xl" />
             </button>
             <button className="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
-                <i className="pi pi-user text-2xl"></i>
+                <i className="pi pi-user text-2xl" />
             </button>
             <button className="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
-                <i className="pi pi-search text-2xl"></i>
+                <i className="pi pi-search text-2xl" />
             </button>
         </div>
     );
@@ -47,7 +47,7 @@ export function CustomDoc(props) {
     const endContent = (
         <React.Fragment>
             <div className="flex align-items-center gap-2">
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold text-bluegray-50">Amy Elsner</span>
             </div>
         </React.Fragment>
@@ -105,7 +105,7 @@ export default function CustomDemo() {
     const endContent = (
         <React.Fragment>
             <div className="flex align-items-center gap-2">
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold text-bluegray-50">Amy Elsner</span>
             </div>
         </React.Fragment>
@@ -166,7 +166,7 @@ export default function CustomDemo() {
     const endContent = (
         <React.Fragment>
             <div className="flex align-items-center gap-2">
-                <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold text-bluegray-50">Amy Elsner</span>
             </div>
         </React.Fragment>

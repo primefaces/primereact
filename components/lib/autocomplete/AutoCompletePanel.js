@@ -121,39 +121,39 @@ export const AutoCompletePanel = React.memo(
                         const key = index + '_' + getOptionGroupRenderKey(suggestion);
 
                         return createLabelItem(suggestion, key, index, { style });
-                    } else {
-                        const key = index + '_' + latestKey.current.keyIndex;
-                        const itemProps = mergeProps({
-                            style,
-                            'data-group': latestKey.current.keyIndex,
-                            'data-index': index - latestKey.current.index - 1,
-                            'data-p-disabled': suggestion.disabled
-                        });
-
-                        return createListItem(suggestion, key, index, itemProps);
                     }
-                } else {
-                    const childrenContent = createGroupChildren(suggestion, index, style);
-                    const key = index + '_' + getOptionGroupRenderKey(suggestion);
 
-                    return (
-                        <React.Fragment key={key}>
-                            {createLabelItem(suggestion, undefined, index, { style })}
-                            {childrenContent}
-                        </React.Fragment>
-                    );
-                }
-            } else {
-                const itemProps = mergeProps(
-                    {
+                    const key = index + '_' + latestKey.current.keyIndex;
+                    const itemProps = mergeProps({
                         style,
+                        'data-group': latestKey.current.keyIndex,
+                        'data-index': index - latestKey.current.index - 1,
                         'data-p-disabled': suggestion.disabled
-                    },
-                    getPTOptions(suggestion, 'item')
-                );
+                    });
 
-                return createListItem(suggestion, index, itemProps);
+                    return createListItem(suggestion, key, index, itemProps);
+                }
+
+                const childrenContent = createGroupChildren(suggestion, index, style);
+                const key = index + '_' + getOptionGroupRenderKey(suggestion);
+
+                return (
+                    <React.Fragment key={key}>
+                        {createLabelItem(suggestion, undefined, index, { style })}
+                        {childrenContent}
+                    </React.Fragment>
+                );
             }
+
+            const itemProps = mergeProps(
+                {
+                    style,
+                    'data-p-disabled': suggestion.disabled
+                },
+                getPTOptions(suggestion, 'item')
+            );
+
+            return createListItem(suggestion, undefined, index, itemProps);
         };
 
         const createItems = () => {
@@ -217,31 +217,31 @@ export const AutoCompletePanel = React.memo(
                 };
 
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={_ptm('virtualScroller')} __parentMetadata={{ parent: props.metaData }} />;
-            } else {
-                const items = createItems();
-                const listProps = mergeProps(
-                    {
-                        id: props.listId,
-                        className: cx('list'),
-                        role: 'listbox'
-                    },
-                    _ptm('list')
-                );
-
-                const listWrapperProps = mergeProps(
-                    {
-                        className: cx('listWrapper'),
-                        style: { maxHeight: props.scrollHeight || 'auto' }
-                    },
-                    _ptm('listWrapper')
-                );
-
-                return (
-                    <div {...listWrapperProps}>
-                        <ul {...listProps}>{items}</ul>
-                    </div>
-                );
             }
+
+            const items = createItems();
+            const listProps = mergeProps(
+                {
+                    id: props.listId,
+                    className: cx('list'),
+                    role: 'listbox'
+                },
+                _ptm('list')
+            );
+
+            const listWrapperProps = mergeProps(
+                {
+                    className: cx('listWrapper'),
+                    style: { maxHeight: props.scrollHeight || 'auto' }
+                },
+                _ptm('listWrapper')
+            );
+
+            return (
+                <div {...listWrapperProps}>
+                    <ul {...listProps}>{items}</ul>
+                </div>
+            );
         };
 
         const createElement = () => {

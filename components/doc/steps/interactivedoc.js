@@ -135,7 +135,7 @@ export default function InteractiveDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <Steps model={items} activeIndex={activeIndex} onSelect={(e) => setActiveIndex(e.index)} readOnly={false} />
             </div>
             <DocSectionCode code={code} />

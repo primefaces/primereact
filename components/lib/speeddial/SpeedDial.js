@@ -106,6 +106,7 @@ export const SpeedDial = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     onEnterKey(event);
                     break;
@@ -565,7 +566,7 @@ export const SpeedDial = React.memo(
                     ptm('mask')
                 );
 
-                return <div {...maskProps}></div>;
+                return <div {...maskProps} />;
             }
 
             return null;

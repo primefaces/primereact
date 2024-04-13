@@ -42,7 +42,7 @@ const ThemingDoc = () => {
                 you may use a named class, CSS Modules or a CSS-in-JS solution like styled-jsx. A video tutorial that goes through the alternatives below is available.`,
             content: (
                 <div className="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3pO79DdPpiU" frameBorder="0" allowFullScreen="true" title="Scoped CSS with PrimeReact"></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3pO79DdPpiU" frameBorder="0" allowFullScreen="true" title="Scoped CSS with PrimeReact" />
                 </div>
             ),
             children: [

@@ -502,7 +502,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Defines how the items are filtered, valid values are "contains", (default) "startsWith", "endsWith", "equals" and "notEquals".
      * @defaultValue contains
      */
-    filterMatchMode?: string | undefined;
+    filterMatchMode?: 'contains' | 'startsWith' | 'endsWith' | 'equals' | 'notEquals' | undefined;
     /**
      * Placeholder text to show when filter input is empty.
      */
@@ -626,6 +626,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     invalid?: boolean | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {MultiSelectPassThroughOptions}
      */
@@ -699,6 +704,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue false
      */
     selectOnFocus?: false;
+    /**
+     * When enabled, the focus is placed on the hovered option.
+     * @defaultValue true
+     */
+    focusOnHover?: boolean | undefined;
     /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false

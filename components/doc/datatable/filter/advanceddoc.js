@@ -92,7 +92,7 @@ export function AdvancedFilterDoc(props) {
         const value = e.target.value;
         let _filters = { ...filters };
 
-        _filters['global'].value = value;
+        _filters.global.value = value;
 
         setFilters(_filters);
         setGlobalFilterValue(value);
@@ -135,11 +135,11 @@ export function AdvancedFilterDoc(props) {
     };
 
     const filterClearTemplate = (options) => {
-        return <Button type="button" icon="pi pi-times" onClick={options.filterClearCallback} severity="secondary"></Button>;
+        return <Button type="button" icon="pi pi-times" onClick={options.filterClearCallback} severity="secondary" />;
     };
 
     const filterApplyTemplate = (options) => {
-        return <Button type="button" icon="pi pi-check" onClick={options.filterApplyCallback} severity="success"></Button>;
+        return <Button type="button" icon="pi pi-check" onClick={options.filterApplyCallback} severity="success" />;
     };
 
     const filterFooterTemplate = () => {
@@ -199,13 +199,13 @@ export function AdvancedFilterDoc(props) {
     };
 
     const activityBodyTemplate = (rowData) => {
-        return <ProgressBar value={rowData.activity} showValue={false} style={{ height: '6px' }}></ProgressBar>;
+        return <ProgressBar value={rowData.activity} showValue={false} style={{ height: '6px' }} />;
     };
 
     const activityFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3" />
                 <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
@@ -215,7 +215,7 @@ export function AdvancedFilterDoc(props) {
     };
 
     const verifiedBodyTemplate = (rowData) => {
-        return <i className={classNames('pi', { 'text-green-500 pi-check-circle': rowData.verified, 'text-red-500 pi-times-circle': !rowData.verified })}></i>;
+        return <i className={classNames('pi', { 'text-green-500 pi-check-circle': rowData.verified, 'text-red-500 pi-times-circle': !rowData.verified })} />;
     };
 
     const verifiedFilterTemplate = (options) => {

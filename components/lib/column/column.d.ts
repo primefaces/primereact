@@ -163,17 +163,9 @@ export interface ColumnPassThroughOptions {
      */
     sortBadge?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the checkbox wrapper's DOM element.
-     */
-    headerCheckboxWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the header checkbox's DOM element.
      */
     headerCheckbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the header checkbox icon's DOM element.
-     */
-    headerCheckboxIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the column filter's DOM element.
      */
@@ -281,30 +273,6 @@ export interface ColumnPassThroughOptions {
      */
     columnTitle?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the radiobutton wrapper's DOM element.
-     */
-    radiobuttonWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton's DOM element.
-     */
-    radiobutton?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the radiobutton icon's DOM element.
-     */
-    radiobuttonIcon?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox wrapper's DOM element.
-     */
-    checkboxWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox's DOM element.
-     */
-    checkbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox icon's DOM element.
-     */
-    checkboxIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
      * Uses to pass attributes to the rowtoggler's DOM element.
      */
     rowToggler?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -344,18 +312,6 @@ export interface ColumnPassThroughOptions {
      * Uses to pass attributes to the row editor cancel icon's DOM element.
      */
     rowEditorCancelIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
-     */
-    hiddenHeaderInputWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
-     */
-    hiddenInputWrapper?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input's DOM element.
-     */
-    hiddenInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
@@ -680,9 +636,9 @@ interface ColumnFilterMetaData {
      */
     value: any;
     /**
-     * Type of filter match.
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+    matchMode: FilterMatchMode | string;
 }
 
 interface ColumnFilterMetaDataWithConstraint {
@@ -723,9 +679,9 @@ interface ColumnFilterMatchModeChangeEvent {
      */
     field: string;
     /**
-     * Type of filter match.
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    matchMode: FilterMatchMode;
+    matchMode: FilterMatchMode | string;
 }
 
 /**
@@ -818,7 +774,7 @@ interface ColumnFilterMatchModeOptions {
      */
     label: string;
     /**
-     * The match mode type
+     * Type of filter match; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
     value: FilterMatchMode | string;
 }
@@ -962,9 +918,9 @@ export interface ColumnProps {
      */
     filterHeaderStyle?: React.CSSProperties | undefined;
     /**
-     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
+     * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "notIn", "lt", "lte", "gt", "gte" and "custom".
      */
-    filterMatchMode?: FilterMatchMode | undefined;
+    filterMatchMode?: FilterMatchMode | string | undefined;
     /**
      * An array of label-value pairs to override the global match mode options.
      */

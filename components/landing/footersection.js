@@ -97,7 +97,7 @@ const FooterSection = () => {
                     </div>
                 </div>
 
-                <hr className="section-divider mt-8"></hr>
+                <hr className="section-divider mt-8" />
 
                 <div className="flex flex-wrap justify-content-between py-6 gap-5">
                     <span>
@@ -144,16 +144,16 @@ const FooterSection = () => {
                     </span>
                     <div className="flex align-items-center">
                         <a href="https://twitter.com/primereact" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">
-                            <i className="pi pi-twitter"></i>
+                            <i className="pi pi-twitter" />
                         </a>
                         <a href="https://github.com/primefaces/primereact" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">
-                            <i className="pi pi-github"></i>
+                            <i className="pi pi-github" />
                         </a>
                         <a href="https://discord.gg/gzKFYnpmCY" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">
-                            <i className="pi pi-discord"></i>
+                            <i className="pi pi-discord" />
                         </a>
                         <a href="https://github.com/orgs/primefaces/discussions" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center">
-                            <i className="pi pi-comments"></i>
+                            <i className="pi pi-comments" />
                         </a>
                     </div>
                 </div>

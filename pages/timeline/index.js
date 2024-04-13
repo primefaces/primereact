@@ -6,7 +6,6 @@ import { BasicDoc } from '@/components/doc/timeline/basicdoc';
 import { HorizontalDoc } from '@/components/doc/timeline/horizontaldoc';
 import { ImportDoc } from '@/components/doc/timeline/importdoc';
 import { OppositeDoc } from '@/components/doc/timeline/oppositedoc';
-import { PTDoc } from '@/components/doc/timeline/pt/ptdoc';
 import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
 import { TemplateDoc } from '@/components/doc/timeline/templatedoc';
 import { StyledDoc } from '@/components/doc/timeline/theming/styleddoc';
@@ -61,11 +60,6 @@ const TimelineDemo = () => {
             id: 'pt.timeline.options',
             label: 'Timeline PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

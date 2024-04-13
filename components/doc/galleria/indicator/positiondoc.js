@@ -200,7 +200,7 @@ export default function PositionDemo() {
                     })}
                 </div>
                 <div className="flex align-items-center mb-5">
-                    <Checkbox inputId="inside_cbox" onChange={(e) => setInside(e.checked)} checked={inside}></Checkbox>
+                    <Checkbox inputId="inside_cbox" onChange={(e) => setInside(e.checked)} checked={inside} />
                     <label htmlFor="inside_cbox" className="ml-2">
                         Inside
                     </label>

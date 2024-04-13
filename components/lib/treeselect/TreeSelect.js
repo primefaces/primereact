@@ -9,7 +9,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { Tree } from '../tree/Tree';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
@@ -206,7 +206,10 @@ export const TreeSelect = React.memo(
                 case 'NumpadEnter':
                     event.preventDefault();
 
-                    if (isHideButton) hide();
+                    if (isHideButton) {
+                        hide();
+                    }
+
                     break;
 
                 case 'Escape':
@@ -238,8 +241,11 @@ export const TreeSelect = React.memo(
                     if (overlayVisibleState) {
                         event.preventDefault();
 
-                        if (event.shiftKey) setFocusToFocusableFirstNode();
-                        else onTabKey(event);
+                        if (event.shiftKey) {
+                            setFocusToFocusableFirstNode();
+                        } else {
+                            onTabKey(event);
+                        }
                     }
 
                     break;
@@ -250,7 +256,10 @@ export const TreeSelect = React.memo(
         };
 
         const onArrowDownKey = (event) => {
-            if (overlayVisibleState) return;
+            if (overlayVisibleState) {
+                return;
+            }
+
             focusToTree.current = true;
             show();
 
@@ -306,7 +315,7 @@ export const TreeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             setFocusToFocusableFirstNode();
             alignOverlay();
@@ -564,25 +573,23 @@ export const TreeSelect = React.memo(
 
             if (props.valueTemplate) {
                 content = ObjectUtils.getJSXElement(props.valueTemplate, selectedNodes, props);
-            } else {
-                if (props.display === 'comma') {
-                    content = getLabel() || 'empty';
-                } else if (props.display === 'chip') {
-                    content = (
-                        <>
-                            {selectedNodes &&
-                                selectedNodes.map((node, index) => {
-                                    return (
-                                        <div {...tokenProps} key={`${node.key}_${index}`}>
-                                            <span {...tokenLabelProps}>{node.label}</span>
-                                        </div>
-                                    );
-                                })}
+            } else if (props.display === 'comma') {
+                content = getLabel() || 'empty';
+            } else if (props.display === 'chip') {
+                content = (
+                    <>
+                        {selectedNodes &&
+                            selectedNodes.map((node, index) => {
+                                return (
+                                    <div {...tokenProps} key={`${node.key}_${index}`}>
+                                        <span {...tokenLabelProps}>{node.label}</span>
+                                    </div>
+                                );
+                            })}
 
-                            {isValueEmpty && (props.placeholder || 'empty')}
-                        </>
-                    );
-                }
+                        {isValueEmpty && (props.placeholder || 'empty')}
+                    </>
+                );
             }
 
             return (
@@ -670,7 +677,7 @@ export const TreeSelect = React.memo(
                         value={props.options}
                         pt={ptm('tree')}
                         __parentMetadata={{ parent: metaData }}
-                    ></Tree>
+                    />
 
                     {hasNoOptions && <div {...emptyMessageProps}>{message}</div>}
                 </>
@@ -833,7 +840,7 @@ export const TreeSelect = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root', { focusedState, overlayVisibleState, isValueEmpty }),
+                className: classNames(props.className, cx('root', { context, focusedState, overlayVisibleState, isValueEmpty })),
                 style: props.style,
                 onClick: onClick
             },
@@ -866,8 +873,8 @@ export const TreeSelect = React.memo(
                     header={header}
                     hide={hide}
                     footer={footer}
-                    firstHiddenFocusableElementOnOverlay={<span {...firstHiddenFocusableElementOnOverlayProps}></span>}
-                    lastHiddenFocusableElementOnOverlay={<span {...lastHiddenFocusableElementOnOverlayProps}></span>}
+                    firstHiddenFocusableElementOnOverlay={<span {...firstHiddenFocusableElementOnOverlayProps} />}
+                    lastHiddenFocusableElementOnOverlay={<span {...lastHiddenFocusableElementOnOverlayProps} />}
                     transitionOptions={props.transitionOptions}
                     in={overlayVisibleState}
                     onEnter={onOverlayEnter}

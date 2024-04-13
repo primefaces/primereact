@@ -169,7 +169,7 @@ export default function SizesDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
-                <Toast ref={toast}></Toast>
+                <Toast ref={toast} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} size="small" />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} />
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items} size="large" />

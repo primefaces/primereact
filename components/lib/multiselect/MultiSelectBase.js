@@ -3,11 +3,12 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, focusedState, overlayVisibleState }) =>
+    root: ({ props, context, focusedState, overlayVisibleState }) =>
         classNames('p-multiselect p-component p-inputwrapper', {
             'p-multiselect-chip': props.display === 'chip',
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
             'p-multiselect-clearable': props.showClear && !props.disabled,
             'p-focus': focusedState,
             'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
@@ -221,6 +222,7 @@ export const MultiSelectBase = ComponentBase.extend({
         filterInputAutoFocus: true,
         filterLocale: undefined,
         selectOnFocus: false,
+        focusOnHover: true,
         autoOptionFocus: false,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
@@ -232,6 +234,7 @@ export const MultiSelectBase = ComponentBase.extend({
         inputId: null,
         inputRef: null,
         invalid: false,
+        variant: null,
         itemCheckboxIcon: null,
         itemClassName: null,
         itemTemplate: null,

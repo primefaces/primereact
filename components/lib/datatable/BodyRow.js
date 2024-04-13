@@ -120,9 +120,9 @@ export const BodyRow = React.memo((props) => {
             }
 
             return groupRowSpan === 1 ? null : groupRowSpan;
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     const onClick = (event) => {
@@ -179,6 +179,7 @@ export const BodyRow = React.memo((props) => {
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                     onEnterKey(row, event, target);
                     break;
 
@@ -326,8 +327,11 @@ export const BodyRow = React.memo((props) => {
 
                 editingRows = props.editingRows ? [...props.editingRows] : [];
 
-                if (editingRowIndex !== -1) editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
-                else editingRows.push(data);
+                if (editingRowIndex !== -1) {
+                    editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
+                } else {
+                    editingRows.push(data);
+                }
             }
 
             props.onRowEditChange({
@@ -493,7 +497,7 @@ export const BodyRow = React.memo((props) => {
         },
         getBodyRowPTOptions('bodyRow'),
         {
-            className: rowClassName // #5983 must be last so all unstyled merging takes place first
+            className: classNames(rowClassName) // #5983 must be last so all unstyled merging takes place first
         }
     );
 

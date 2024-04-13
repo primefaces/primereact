@@ -260,7 +260,7 @@ export const BodyCell = React.memo((props) => {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
 
-                styleObject['right'] = right + 'px';
+                styleObject.right = right + 'px';
             } else {
                 let left = 0;
                 let prev = elementRef.current && elementRef.current.previousElementSibling;
@@ -269,10 +269,10 @@ export const BodyCell = React.memo((props) => {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
 
-                styleObject['left'] = left + 'px';
+                styleObject.left = left + 'px';
             }
 
-            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            const isSameStyle = styleObjectState.left === styleObject.left && styleObjectState.right === styleObject.right;
 
             !isSameStyle && setStyleObjectState(styleObject);
         }
@@ -362,7 +362,7 @@ export const BodyCell = React.memo((props) => {
 
     const onKeyDown = (event) => {
         if (props.editMode !== 'row') {
-            if (event.code === 'Enter' || event.code === 'Tab') {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Tab') {
                 switchCellToViewMode(event, true);
             }
 
@@ -555,7 +555,8 @@ export const BodyCell = React.memo((props) => {
     };
 
     const createElement = () => {
-        let content, editorKeyHelper;
+        let content;
+        let editorKeyHelper;
         const cellSelected = props.allowCellSelection && isSelected();
         const isRowEditor = props.editMode === 'row';
         const tabIndex = getTabIndex(cellSelected);
@@ -674,7 +675,7 @@ export const BodyCell = React.memo((props) => {
             );
 
             if (body) {
-                expanderProps['element'] = content;
+                expanderProps.element = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, expander: expanderProps });
             }
         } else if (isRowEditor && rowEditor) {
@@ -761,7 +762,7 @@ export const BodyCell = React.memo((props) => {
             }
 
             if (body) {
-                rowEditorProps['element'] = content;
+                rowEditorProps.element = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
             }
         } else if (body && (!editingState || !editor)) {
@@ -781,7 +782,7 @@ export const BodyCell = React.memo((props) => {
             content = value;
         }
 
-        content = typeof content == 'boolean' ? content.toString() : content;
+        content = typeof content === 'boolean' ? content.toString() : content;
 
         if (!isRowEditor && editor) {
             const editorKeyHelperProps = mergeProps(

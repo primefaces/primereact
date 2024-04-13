@@ -9,6 +9,7 @@ import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
+import { Checkbox } from '../checkbox/Checkbox';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -121,13 +122,11 @@ export const TreeTableRow = React.memo((props) => {
                     node: props.node
                 });
             }
-        } else {
-            if (props.onCollapse) {
-                props.onCollapse({
-                    originalEvent: event,
-                    node: props.node
-                });
-            }
+        } else if (props.onCollapse) {
+            props.onCollapse({
+                originalEvent: event,
+                node: props.node
+            });
         }
     };
 
@@ -160,8 +159,11 @@ export const TreeTableRow = React.memo((props) => {
         let selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
 
         if (checked) {
-            if (props.propagateSelectionDown) propagateDown(props.node, false, selectionKeys);
-            else delete selectionKeys[props.node.key];
+            if (props.propagateSelectionDown) {
+                propagateDown(props.node, false, selectionKeys);
+            } else {
+                delete selectionKeys[props.node.key];
+            }
 
             if (props.propagateSelectionUp && props.onPropagateUp) {
                 props.onPropagateUp({
@@ -178,8 +180,11 @@ export const TreeTableRow = React.memo((props) => {
                 });
             }
         } else {
-            if (props.propagateSelectionDown) propagateDown(props.node, true, selectionKeys);
-            else selectionKeys[props.node.key] = { checked: true };
+            if (props.propagateSelectionDown) {
+                propagateDown(props.node, true, selectionKeys);
+            } else {
+                selectionKeys[props.node.key] = { checked: true };
+            }
 
             if (props.propagateSelectionUp && props.onPropagateUp) {
                 props.onPropagateUp({
@@ -207,23 +212,15 @@ export const TreeTableRow = React.memo((props) => {
         DomHandler.clearSelection();
     };
 
-    const onCheckboxFocus = () => {
-        !isUnstyled() && DomHandler.addClass(checkboxBoxRef.current, 'p-focus');
-        !isUnstyled() && DomHandler.addClass(checkboxRef.current, 'p-checkbox-focused');
-    };
-
-    const onCheckboxBlur = () => {
-        !isUnstyled() && DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
-        !isUnstyled() && DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
-    };
-
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
 
         for (let child of props.node.children) {
-            if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
+            if (selectionKeys[child.key] && selectionKeys[child.key].checked) {
+                checkedChildCount++;
+            }
         }
 
         const parentKey = props.node.key;
@@ -248,8 +245,11 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const propagateDown = (node, check, selectionKeys) => {
-        if (check) selectionKeys[node.key] = { checked: true, partialChecked: false };
-        else delete selectionKeys[node.key];
+        if (check) {
+            selectionKeys[node.key] = { checked: true, partialChecked: false };
+        } else {
+            delete selectionKeys[node.key];
+        }
 
         if (node.children && node.children.length) {
             for (let i = 0; i < node.children.length; i++) {
@@ -340,14 +340,11 @@ export const TreeTableRow = React.memo((props) => {
         const ishiddenIcon = DomHandler.findSingle(event.currentTarget, 'button').style.visibility === 'hidden';
         const togglerElement = DomHandler.findSingle(elementRef.current, '[data-pc-section="rowtoggler"]');
 
-        if (ishiddenIcon) return;
+        if (ishiddenIcon) {
+            return;
+        }
 
-        // !expanded && togglerElement.click();
         !expanded && expand(event, true);
-
-        // this.$nextTick(() => {
-        //     this.onArrowDownKey(event);
-        // });
 
         event.preventDefault();
     };
@@ -362,7 +359,6 @@ export const TreeTableRow = React.memo((props) => {
         const togglerElement = DomHandler.findSingle(currentTarget, '[data-pc-section="rowtoggler"]');
 
         if (expanded && !ishiddenIcon) {
-            // togglerElement.click();
             collapse(event);
 
             return;
@@ -395,17 +391,10 @@ export const TreeTableRow = React.memo((props) => {
         setTabIndexForSelectionMode(event, nodeTouched.current);
 
         if (props.selectionMode === 'checkbox') {
-            // this.toggleCheckbox();
             onCheckboxChange(event);
 
             return;
         }
-
-        // this.$emit('node-click', {
-        //     originalEvent: event,
-        //     nodeTouched: nodeTouched.current,
-        //     node: this.node
-        // });
 
         props.onRowClick(event, props.node);
 
@@ -466,7 +455,7 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const isSelected = () => {
-        if (props.selectionMode === 'single' || ((props.selectionMode === 'multiple' || props.selectionMode === 'checkbox') && props.selectionKeys)) {
+        if (props.selectionMode === 'single' || (props.selectionMode === 'multiple' && props.selectionKeys)) {
             return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
         }
 
@@ -532,63 +521,32 @@ export const TreeTableRow = React.memo((props) => {
         if (props.selectionMode === 'checkbox' && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const checboxIconProps = mergeProps(
+            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
+            const checkIcon = IconUtils.getJSXIcon(icon, {}, { props, checked, partialChecked });
+            const rowCheckboxProps = mergeProps(
                 {
-                    className: cx('checkboxIcon')
+                    className: cx('rowCheckbox'),
+                    checked: checked || partialChecked,
+                    onChange: onCheckboxChange,
+                    icon: checkIcon,
+                    unstyled: isUnstyled?.(),
+                    tabIndex: -1,
+                    'data-p-highlight': checked,
+                    'data-p-checked': checked,
+                    'data-p-partialchecked': partialChecked
                 },
-                getColumnCheckboxPTOptions(column, 'checkboxIcon')
-            );
-            const icon = checked ? props.checkboxIcon || <CheckIcon {...checboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checboxIconProps} /> : null;
-            const checkIcon = IconUtils.getJSXIcon(icon, { ...checboxIconProps }, { props, checked, partialChecked });
-            const hiddenInputProps = mergeProps(
-                {
-                    type: 'checkbox',
-                    onFocus: (e) => onCheckboxFocus(e),
-                    onBlur: (e) => onCheckboxBlur(e)
-                },
-                getColumnCheckboxPTOptions(column, 'hiddenInput')
-            );
-            const checkboxWrapperProps = mergeProps(
-                {
-                    className: cx('checkboxWrapper'),
-                    onClick: (e) => onCheckboxChange(e),
-                    role: 'checkbox',
-                    'aria-checked': checked
-                },
-                getColumnCheckboxPTOptions(column, 'checkboxWrapper')
+                getColumnCheckboxPTOptions(column, 'rowCheckbox')
             );
 
-            const hiddenInputWrapperProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible'
-                },
-                getColumnCheckboxPTOptions(column, 'hiddenInputWrapper')
-            );
-
-            const checkboxProps = mergeProps(
-                {
-                    className: cx('checkbox', { checked, partialChecked })
-                },
-                getColumnCheckboxPTOptions(column, 'checkbox')
-            );
-
-            return (
-                <div ref={checkboxRef} {...checkboxWrapperProps}>
-                    <div {...hiddenInputWrapperProps}>
-                        <input {...hiddenInputProps} />
-                    </div>
-                    <div ref={checkboxBoxRef} {...checkboxProps}>
-                        {checkIcon}
-                    </div>
-                </div>
-            );
-        } else {
-            return null;
+            return <Checkbox {...rowCheckboxProps} />;
         }
+
+        return null;
     };
 
     const createCell = (column, index) => {
-        let toggler, checkbox;
+        let toggler;
+        let checkbox;
 
         if (getColumnProp(column, 'hidden')) {
             return null;
@@ -660,9 +618,9 @@ export const TreeTableRow = React.memo((props) => {
                     />
                 );
             });
-        } else {
-            return null;
         }
+
+        return null;
     };
 
     const cells = props.columns.map(createCell);

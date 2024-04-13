@@ -150,7 +150,7 @@ export const ContextMenuSub = React.memo(
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps}></li>;
+            return <li {...separatorProps} />;
         };
 
         const createSubmenu = (item, index) => {

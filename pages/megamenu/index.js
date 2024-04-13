@@ -4,7 +4,6 @@ import { AccessibilityDoc } from '@/components/doc/megamenu/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/megamenu/basicdoc';
 import { CommandDoc } from '@/components/doc/megamenu/commanddoc';
 import { ImportDoc } from '@/components/doc/megamenu/importdoc';
-import { PTDoc } from '@/components/doc/megamenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/megamenu/pt/wireframe';
 import { RouterDoc } from '@/components/doc/megamenu/routerdoc';
 import { TemplateDoc } from '@/components/doc/megamenu/templatedoc';
@@ -60,11 +59,6 @@ const MegaMenuDemo = () => {
             id: 'pt.megamenu.options',
             label: 'MegaMenu PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

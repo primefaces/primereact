@@ -18,7 +18,7 @@ export function FilterDoc(props) {
                 <div className="flex-1 flex flex-column gap-2 xl:mr-8">
                     <span className="font-bold">{item.name}</span>
                     <div className="flex align-items-center gap-2">
-                        <i className="pi pi-tag text-sm"></i>
+                        <i className="pi pi-tag text-sm" />
                         <span>{item.category}</span>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ export default function FilterDemo() {
                 </p>
             </DocSectionText>
             <div className="card xl:flex xl:justify-content-center">
-                <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name"></OrderList>
+                <OrderList dataKey="id" value={products} onChange={(e) => setProducts(e.value)} itemTemplate={itemTemplate} header="Products" filter filterBy="name" />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

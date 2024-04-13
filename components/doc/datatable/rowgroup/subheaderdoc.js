@@ -345,11 +345,11 @@ export default function SubHeaderRowGroupDemo() {
                         rowGroupFooterTemplate={footerTemplate}
                         tableStyle={{ minWidth: '50rem' }}
                     >
-                        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
-                        <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '200px' }}></Column>
-                        <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
-                        <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '200px' }}></Column>
-                        <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
+                        <Column field="name" header="Name" style={{ minWidth: '200px' }} />
+                        <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '200px' }} />
+                        <Column field="company" header="Company" style={{ minWidth: '200px' }} />
+                        <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '200px' }} />
+                        <Column field="date" header="Date" style={{ minWidth: '200px' }} />
                     </DataTable>
                 </div>
             </DeferredDemo>

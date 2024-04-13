@@ -64,7 +64,9 @@ export const ColumnFilter = React.memo((props) => {
     });
 
     const hasFilter = () => {
-        if (!filterStoreModel || !filterModel) return false;
+        if (!filterStoreModel || !filterModel) {
+            return false;
+        }
 
         return filterStoreModel.operator ? !isFilterBlank(filterModel.constraints[0].value) : !isFilterBlank(filterModel.value);
     };
@@ -128,11 +130,11 @@ export const ColumnFilter = React.memo((props) => {
                     matchMode: filterStoreModel.constraints[0].matchMode,
                     operator: filterStoreModel.operator
                 };
-            } else {
-                return {
-                    matchMode: filterStoreModel.matchMode
-                };
             }
+
+            return {
+                matchMode: filterStoreModel.matchMode
+            };
         }
     };
 
@@ -385,7 +387,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const onOverlayEnter = () => {
-        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
         DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
 
@@ -659,7 +661,7 @@ export const ColumnFilter = React.memo((props) => {
                             </li>
                         );
                     })}
-                    <li {...filterSeparatorProps}></li>
+                    <li {...filterSeparatorProps} />
                     <li {...filterRowItemProps}>{_noFilterLabel}</li>
                 </ul>
             );

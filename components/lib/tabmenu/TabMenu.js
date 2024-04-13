@@ -138,6 +138,7 @@ export const TabMenu = React.memo(
 
                 case 'Space':
                 case 'Enter':
+                case 'NumpadEnter':
                     itemClick(event, item, index);
                     event.preventDefault();
                     break;
@@ -328,7 +329,7 @@ export const TabMenu = React.memo(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style
                 },
                 TabMenuBase.getOtherProps(props),
@@ -339,7 +340,7 @@ export const TabMenu = React.memo(
                 <div {...rootProps}>
                     <ul {...menuProps}>
                         {items}
-                        <li {...inkbarProps}></li>
+                        <li {...inkbarProps} />
                     </ul>
                 </div>
             );

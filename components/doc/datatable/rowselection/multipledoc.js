@@ -143,10 +143,10 @@ export default function MultipleRowsSelectionDemo() {
                         <label htmlFor="input-metakey">MetaKey</label>
                     </div>
                     <DataTable value={products} selectionMode="multiple" selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
-                        <Column field="code" header="Code"></Column>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="category" header="Category"></Column>
-                        <Column field="quantity" header="Quantity"></Column>
+                        <Column field="code" header="Code" />
+                        <Column field="name" header="Name" />
+                        <Column field="category" header="Category" />
+                        <Column field="quantity" header="Quantity" />
                     </DataTable>
                 </div>
             </DeferredDemo>

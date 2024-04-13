@@ -13,7 +13,7 @@ export function NextJSDoc(props) {
                 </p>
             </DocSectionText>
             <div className="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/OrRffCobuts" frameBorder="0" allowFullScreen title="Getting Started With NextJs"></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/OrRffCobuts" frameBorder="0" allowFullScreen title="Getting Started With NextJs" />
             </div>
         </>
     );

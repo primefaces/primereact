@@ -6,7 +6,7 @@ import { CodeHighlight } from './codehighlight';
 
 export function DocSectionCode(props) {
     const [codeMode, setCodeMode] = useState('basic');
-    const [codeLang, setCodeLang] = useState(props.code['javascript'] ? 'javascript' : 'basic');
+    const [codeLang, setCodeLang] = useState(props.code.javascript ? 'javascript' : 'basic');
     const codeEditor = useCodeEditor({ ...props, template: 'vite' });
 
     useEffect(() => {
@@ -44,14 +44,14 @@ export function DocSectionCode(props) {
                                     onClick={() => setCodeLang('javascript')}
                                     tooltip="JavaScript Code"
                                     tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
-                                ></Button>
+                                />
                                 <Button
                                     className={classNames('py-0 px-2 border-round h-2rem shadow-none', { 'code-active': codeLang === 'typescript' })}
                                     label="TS"
                                     onClick={() => setCodeLang('typescript')}
                                     tooltip="TypeScript Code"
                                     tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
-                                ></Button>
+                                />
                             </>
                         )}
 
@@ -63,7 +63,7 @@ export function DocSectionCode(props) {
                                 tooltip="Toggle Full Code"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             >
-                                <i className="pi pi-code"></i>
+                                <i className="pi pi-code" />
                             </Button>
                         )}
                         {!props.hideToggleCode && props.code.data ? (
@@ -74,7 +74,7 @@ export function DocSectionCode(props) {
                                 tooltip="View Data"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             >
-                                <i className="pi pi-database"></i>
+                                <i className="pi pi-database" />
                             </Button>
                         ) : null}
                         {!props.hideStackBlitz && (
@@ -97,7 +97,7 @@ export function DocSectionCode(props) {
                             tooltip="Copy Code"
                             tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                         >
-                            <i className="pi pi-copy"></i>
+                            <i className="pi pi-copy" />
                         </Button>
                     </div>
 
@@ -129,7 +129,7 @@ export function DocSectionCode(props) {
                     )}
                 </div>
             )}
-            {props.embedded && <div id="embed"></div>}
+            {props.embedded && <div id="embed" />}
         </>
     );
 }

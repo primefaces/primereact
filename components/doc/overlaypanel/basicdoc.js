@@ -62,7 +62,7 @@ export default function BasicDemo() {
             <div className="card flex justify-content-center">
                 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
                 <OverlayPanel ref={op}>
-                    <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
+                    <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
                 </OverlayPanel>
             </div>
             <DocSectionCode code={code} />

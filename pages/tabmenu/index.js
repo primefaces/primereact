@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/tabmenu/basicdoc';
 import { CommandDoc } from '@/components/doc/tabmenu/commanddoc';
 import { ControlledDoc } from '@/components/doc/tabmenu/controlleddoc';
 import { ImportDoc } from '@/components/doc/tabmenu/importdoc';
-import { PTDoc } from '@/components/doc/tabmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tabmenu/pt/wireframe';
 import { RouterDoc } from '@/components/doc/tabmenu/routerdoc';
 import { TemplateDoc } from '@/components/doc/tabmenu/templatedoc';
@@ -61,11 +60,6 @@ const TabMenuDemo = () => {
             id: 'pt.tabmenu.options',
             label: 'TabMenu PT Options',
             component: DocApiTable
-        },
-        {
-            id: 'pt.demo',
-            label: 'Example',
-            component: PTDoc
         }
     ];
 

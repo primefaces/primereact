@@ -9,18 +9,15 @@ const classes = {
     prevbutton: 'p-tabview-nav-prev p-tabview-nav-btn p-link',
     nextbutton: 'p-tabview-nav-next p-tabview-nav-btn p-link',
     root: ({ props }) =>
-        classNames(
-            'p-tabview p-component',
-            {
-                'p-tabview-scrollable': props.scrollable
-            },
-            props.className
-        ),
+        classNames('p-tabview p-component', {
+            'p-tabview-scrollable': props.scrollable
+        }),
     navcontainer: 'p-tabview-nav-container',
     tab: {
         header: ({ selected, disabled, headerClassName, _className }) => classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className),
         headertitle: 'p-tabview-title',
         headeraction: 'p-tabview-nav-link',
+        closeIcon: 'p-tabview-close',
         content: ({ props, selected, getTabProp, tab, isSelected, shouldUseTab, index }) =>
             shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index)) ? classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), 'p-tabview-panel', { 'p-hidden': !selected }) : undefined
     }

@@ -7,7 +7,7 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { SpinnerIcon } from '../icons/spinner';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
 
@@ -200,7 +200,7 @@ export const CascadeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex.overlay) || PrimeReact.zIndex.overlay);
             DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
 
@@ -471,7 +471,7 @@ export const CascadeSelect = React.memo(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className: cx('root', { focusedState, overlayVisibleState }),
+                    className: classNames(props.className, cx('root', { focusedState, overlayVisibleState, context })),
                     style: props.style,
                     onClick: (e) => onClick(e)
                 },

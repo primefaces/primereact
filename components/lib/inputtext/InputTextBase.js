@@ -2,16 +2,13 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props, isFilled }) =>
-        classNames(
-            'p-inputtext p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled,
-                'p-invalid': props.invalid
-            },
-            props.className
-        )
+    root: ({ props, isFilled, context }) =>
+        classNames('p-inputtext p-component', {
+            'p-disabled': props.disabled,
+            'p-filled': isFilled,
+            'p-invalid': props.invalid,
+            'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
+        })
 };
 
 export const InputTextBase = ComponentBase.extend({
@@ -21,6 +18,7 @@ export const InputTextBase = ComponentBase.extend({
         children: undefined,
         className: null,
         invalid: false,
+        variant: null,
         keyfilter: null,
         onBeforeInput: null,
         onInput: null,

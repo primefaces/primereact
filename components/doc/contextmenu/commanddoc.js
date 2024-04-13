@@ -67,9 +67,13 @@ export function CommandDoc(props) {
     };
 
     const getBadge = (user) => {
-        if (user.role === 'Member') return 'info';
-        else if (user.role === 'Guest') return 'warning';
-        else return null;
+        if (user.role === 'Member') {
+            return 'info';
+        } else if (user.role === 'Guest') {
+            return 'warning';
+        }
+
+        return null;
     };
 
     const code = {
@@ -82,7 +86,7 @@ export function CommandDoc(props) {
             onContextMenu={(event) => onRightClick(event, user)}
         >
             <div className="flex align-items-center gap-2">
-                <img alt="user.name" src={\`https://primefaces.org/cdn/primevue/images/avatar/\${user.image}\`} style={{ width: '32px' }} />
+                <img alt="user.name" src={\`https://primefaces.org/cdn/primereact/images/avatar/\${user.image}\`} style={{ width: '32px' }} />
                 <span className="font-bold">{user.name}</span>
             </div>
             <Tag value={user.role} severity={getBadge(user)} />
@@ -175,7 +179,7 @@ export default function CommandDemo() {
                         onContextMenu={(event) => onRightClick(event, user)}
                     >
                         <div className="flex align-items-center gap-2">
-                            <img alt="user.name" src={\`https://primefaces.org/cdn/primevue/images/avatar/\${user.image}\`} style={{ width: '32px' }} />
+                            <img alt="user.name" src={\`https://primefaces.org/cdn/primereact/images/avatar/\${user.image}\`} style={{ width: '32px' }} />
                             <span className="font-bold">{user.name}</span>
                         </div>
                         <Tag value={user.role} severity={getBadge(user)} />
@@ -277,7 +281,7 @@ export default function CommandDemo() {
                         onContextMenu={(event) => onRightClick(event, user)}
                     >
                         <div className="flex align-items-center gap-2">
-                            <img alt={user.name} src={\`https://primefaces.org/cdn/primevue/images/avatar/\${user.image}\`} style={{ width: '32px' }} />
+                            <img alt={user.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${user.image}\`} style={{ width: '32px' }} />
                             <span className="font-bold">{user.name}</span>
                         </div>
                         <Tag value={user.role} severity={getBadge(user)} />
@@ -308,7 +312,7 @@ export default function CommandDemo() {
                             onContextMenu={(event) => onRightClick(event, user)}
                         >
                             <div className="flex align-items-center gap-2">
-                                <img alt="user.name" src={`https://primefaces.org/cdn/primevue/images/avatar/${user.image}`} style={{ width: '32px' }} />
+                                <img alt="user.name" src={`https://primefaces.org/cdn/primereact/images/avatar/${user.image}`} style={{ width: '32px' }} />
                                 <span className="font-bold">{user.name}</span>
                             </div>
                             <Tag value={user.role} severity={getBadge(user)} />

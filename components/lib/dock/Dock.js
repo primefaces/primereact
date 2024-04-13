@@ -67,22 +67,34 @@ export const Dock = React.memo(
         const onListKeyDown = (event) => {
             switch (event.code) {
                 case 'ArrowDown':
-                    if (props.position === 'left' || props.position === 'right') onArrowDownKey();
+                    if (props.position === 'left' || props.position === 'right') {
+                        onArrowDownKey();
+                    }
+
                     event.preventDefault();
                     break;
 
                 case 'ArrowUp':
-                    if (props.position === 'left' || props.position === 'right') onArrowUpKey();
+                    if (props.position === 'left' || props.position === 'right') {
+                        onArrowUpKey();
+                    }
+
                     event.preventDefault();
                     break;
 
                 case 'ArrowRight':
-                    if (props.position === 'top' || props.position === 'bottom') onArrowDownKey();
+                    if (props.position === 'top' || props.position === 'bottom') {
+                        onArrowDownKey();
+                    }
+
                     event.preventDefault();
                     break;
 
                 case 'ArrowLeft':
-                    if (props.position === 'top' || props.position === 'bottom') onArrowUpKey();
+                    if (props.position === 'top' || props.position === 'bottom') {
+                        onArrowUpKey();
+                    }
+
                     event.preventDefault();
                     break;
 
@@ -97,6 +109,7 @@ export const Dock = React.memo(
                     break;
 
                 case 'Enter':
+                case 'NumpadEnter':
                 case 'Space':
                     onSpaceKey(event);
                     event.preventDefault();
