@@ -137,20 +137,36 @@ function locale(locale) {
 }
 
 function addLocale(locale, options) {
+    if (locale.includes('__proto__') || locale.includes('prototype')) {
+        throw new Error('Unsafe locale detected');
+    }
+
     locales[locale] = { ...locales.en, ...options };
 }
 
 function updateLocaleOption(key, value, locale) {
+    if (key.includes('__proto__') || key.includes('prototype')) {
+        throw new Error('Unsafe key detected');
+    }
+
     localeOptions(locale)[key] = value;
 }
 
 function updateLocaleOptions(options, locale) {
+    if (locale.includes('__proto__') || locale.includes('prototype')) {
+        throw new Error('Unsafe locale detected');
+    }
+
     const _locale = locale || PrimeReact.locale;
 
     locales[_locale] = { ...locales[_locale], ...options };
 }
 
 function localeOption(key, locale) {
+    if (key.includes('__proto__') || key.includes('prototype')) {
+        throw new Error('Unsafe key detected');
+    }
+
     const _locale = locale || PrimeReact.locale;
 
     try {
@@ -173,6 +189,10 @@ function localeOption(key, locale) {
  * @returns the ARIA label with replaced values
  */
 function ariaLabel(ariaKey, options) {
+    if (ariaKey.includes('__proto__') || ariaKey.includes('prototype')) {
+        throw new Error('Unsafe ariaKey detected');
+    }
+
     const _locale = PrimeReact.locale;
 
     try {
@@ -194,6 +214,10 @@ function ariaLabel(ariaKey, options) {
 
 function localeOptions(locale) {
     const _locale = locale || PrimeReact.locale;
+
+    if (_locale.includes('__proto__') || _locale.includes('prototype')) {
+        throw new Error('Unsafe locale detected');
+    }
 
     return locales[_locale];
 }
