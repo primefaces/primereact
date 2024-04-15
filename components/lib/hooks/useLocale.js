@@ -146,20 +146,34 @@ export const useLocale = () => {
     };
 
     const addLocale = (locale, options) => {
+        if (locale.includes('__proto__') || locale.includes('prototype')) {
+            throw new Error('Unsafe locale detected');
+        }
         locales[locale] = { ...locales['en'], ...options };
     };
 
     const updateLocaleOption = (key, value, locale) => {
+        if (key.includes('__proto__') || key.includes('prototype')) {
+            throw new Error('Unsafe key detected');
+        }
+
         localeOptions(locale)[key] = value;
     };
 
     const updateLocaleOptions = (options, locale) => {
+        if (locale.includes('__proto__') || locale.includes('prototype')) {
+            throw new Error('Unsafe locale detected');
+        }
         const _locale = locale || (context && context.locale) || PrimeReact.locale;
 
         locales[_locale] = { ...locales[_locale], ...options };
     };
 
     const localeOption = (key, locale) => {
+        if (key.includes('__proto__') || key.includes('prototype')) {
+            throw new Error('Unsafe key detected');
+        }
+
         const _locale = locale || (context && context.locale) || PrimeReact.locale;
 
         try {
@@ -182,6 +196,9 @@ export const useLocale = () => {
      * @returns the ARIA label with replaced values
      */
     const ariaLabel = (ariaKey, options) => {
+        if (ariaKey.includes('__proto__') || ariaKey.includes('prototype')) {
+            throw new Error('Unsafe ariaKey detected');
+        }
         const _locale = (context && context.locale) || PrimeReact.locale;
 
         try {
@@ -203,6 +220,9 @@ export const useLocale = () => {
 
     const localeOptions = (locale) => {
         const _locale = locale || (context && context.locale) || PrimeReact.locale;
+        if (_locale.includes('__proto__') || _locale.includes('prototype')) {
+            throw new Error('Unsafe locale detected');
+        }
 
         return locales[_locale];
     };
