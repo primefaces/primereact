@@ -1,9 +1,11 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
+import { InputText } from '@/components/lib/inputtext/InputText';
 import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
 import { Toolbar } from '@/components/lib/toolbar/Toolbar';
-import { InputText } from '@/components/lib/inputtext/InputText';
 import React from 'react';
 
 export function BasicDoc(props) {
@@ -27,10 +29,10 @@ export function BasicDoc(props) {
     );
 
     const centerContent = (
-        <span classclassName="p-input-icon-left">
-            <i classclassName="pi pi-search" />
+        <IconField iconPosition="left">
+            <InputIcon className="pi pi-search" />
             <InputText placeholder="Search" />
-        </span>
+        </IconField>
     );
 
     const endContent = (
@@ -49,6 +51,8 @@ import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { SplitButton } from 'primereact/splitbutton';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 
 export default function BasicDemo() {
     const items = [
@@ -71,10 +75,10 @@ export default function BasicDemo() {
     );
 
     const centerContent = (
-        <span classclassName="p-input-icon-left">
-            <i classclassName="pi pi-search" />
+        <IconField iconPosition="left">
+            <InputIcon className="pi pi-search" />
             <InputText placeholder="Search" />
-        </span>
+        </IconField>
     );
 
     const endContent = (
@@ -97,6 +101,8 @@ import { Button } from 'primereact/button';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 
 export default function BasicDemo() {
     const items: MenuItem[] = [
@@ -119,10 +125,10 @@ export default function BasicDemo() {
     );
 
     const centerContent = (
-        <span classclassName="p-input-icon-left">
-            <i classclassName="pi pi-search" />
+        <IconField iconPosition="left">
+            <InputIcon className="pi pi-search" />
             <InputText placeholder="Search" />
-        </span>
+        </IconField>
     );
 
     const endContent = (

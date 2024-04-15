@@ -1,6 +1,8 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Column } from '@/components/lib/column/Column';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { TreeTable } from '@/components/lib/treetable/TreeTable';
@@ -23,10 +25,10 @@ export function FilterDoc(props) {
     const getHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <div className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
-                </div>
+                </IconField>
             </div>
         );
     };
@@ -48,6 +50,8 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { SelectButton } from 'primereact/selectbutton';
 import { NodeService } from './service/NodeService';
 
@@ -67,10 +71,10 @@ export default function FilterDemo() {
     const getHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <div className="p-input-icon-left">
-                    <i className="pi pi-search"></i>
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
-                </div>
+                </IconField>
             </div>
         );
     };
@@ -96,6 +100,8 @@ import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import { SelectButton } from 'primereact/selectbutton';
 import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
@@ -121,10 +127,10 @@ export default function FilterDemo() {
     const getHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <div className="p-input-icon-left">
-                    <i className="pi pi-search"></i>
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" />
-                </div>
+                </IconField>
             </div>
         );
     };
