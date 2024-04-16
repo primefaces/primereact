@@ -224,17 +224,17 @@ FilterService.register('custom_activity', (value, filters) => {
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterService } from 'primereact/api';
-import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
-import { Tag } from 'primereact/tag';
-import { TriStateCheckbox, TriStateCheckboxChangeEvent} from 'primereact/tristatecheckbox';
-import { CustomerService } from './service/CustomerService';
 import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { MultiSelect } from 'primereact/multiselect';
+import { Tag } from 'primereact/tag';
+import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import { CustomerService } from './service/CustomerService';
 
 // The rule argument should be a string in the format "custom_[field]".
 FilterService.register('custom_activity', (value, filters) => {
@@ -427,17 +427,17 @@ export default function CustomFilterDemo() {
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterService } from 'primereact/api';
-import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
-import { Tag } from 'primereact/tag';
-import { TriStateCheckbox, TriStateCheckboxChangeEvent} from 'primereact/tristatecheckbox';
-import { CustomerService } from './service/CustomerService';
 import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { MultiSelect } from 'primereact/multiselect';
+import { Tag } from 'primereact/tag';
+import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import { CustomerService } from './service/CustomerService';
 
 interface Representative {
   name: string;
