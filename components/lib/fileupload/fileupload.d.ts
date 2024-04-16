@@ -66,6 +66,10 @@ export interface FileUploadPassThroughOptions {
      */
     cancelButton?: ButtonPassThroughOptions;
     /**
+     * Uses to pass attributes to the cancel icon's DOM element.
+     */
+    cancelIcon?: FileUploadPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the content's DOM element.
      */
     content?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
