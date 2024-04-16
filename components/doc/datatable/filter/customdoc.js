@@ -5,6 +5,8 @@ import { FilterMatchMode, FilterService } from '@/components/lib/api/Api';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { IconField } from '@/components/lib/iconfield/IconField';
+import { InputIcon } from '@/components/lib/inputicon/InputIcon';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
@@ -108,10 +110,10 @@ export function CustomFilterDoc(props) {
     const renderHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -318,10 +320,10 @@ export default function CustomFilterDemo() {
     const renderHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };
@@ -546,10 +548,10 @@ export default function CustomFilterDemo() {
     const renderHeader = () => {
         return (
             <div className="flex justify-content-end">
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
+                <IconField iconPosition="left">
+                    <InputIcon className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
+                </IconField>
             </div>
         );
     };

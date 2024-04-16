@@ -25287,6 +25287,13 @@
                             "description": "Uses to pass attributes to the cancel button's DOM element."
                         },
                         {
+                            "name": "cancelIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the cancel icon's DOM element."
+                        },
+                        {
                             "name": "content",
                             "optional": true,
                             "readonly": false,
