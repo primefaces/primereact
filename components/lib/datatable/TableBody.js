@@ -565,7 +565,7 @@ export const TableBody = React.memo(
         const onRowRightClick = (event) => {
             if (props.onContextMenu || props.onContextMenuSelectionChange) {
                 const hasSelection = ObjectUtils.isNotEmpty(props.selection);
-                const data = hasSelection ? props.selection : event.data;
+                const data = event.data;
 
                 if (hasSelection) {
                     DomHandler.clearSelection();
@@ -574,14 +574,16 @@ export const TableBody = React.memo(
                 if (props.onContextMenuSelectionChange) {
                     props.onContextMenuSelectionChange({
                         originalEvent: event.originalEvent,
-                        value: data
+                        value: data,
+                        index: event.index
                     });
                 }
 
                 if (props.onContextMenu) {
                     props.onContextMenu({
                         originalEvent: event.originalEvent,
-                        data
+                        data,
+                        index: event.index
                     });
                 }
 
