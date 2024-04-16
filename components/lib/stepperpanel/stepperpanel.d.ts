@@ -155,4 +155,4 @@ export interface StepperPanelProps {
  *
  * @group Component
  */
-export declare const StepperPanel: React.Component<StepperPanelProps, any>;
+export declare const StepperPanel: React.FC<React.PropsWithChildren<StepperPanelProps>>;
