@@ -41258,6 +41258,14 @@
                             "description": "Inline style of the input field."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
                             "name": "keyfilter",
                             "optional": true,
                             "readonly": false,
@@ -41384,6 +41392,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"filled\" | \"outlined\"",
+                            "default": "outlined",
+                            "description": "Specifies the input variant of the component."
                         },
                         {
                             "name": "weakLabel",
