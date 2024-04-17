@@ -10,7 +10,10 @@ const Tailwind = {
         root: {
             className: classNames('cursor-pointer inline-flex relative select-none align-bottom', 'w-6 h-6')
         },
-        checkbox: ({ props }) => ({
+        input: {
+            className: classNames('absolute appearance-none top-0 left-0 size-full p-0 m-0 opacity-0 z-10 outline-none cursor-pointer')
+        },
+        box: ({ props }) => ({
             className: classNames(
                 'flex items-center justify-center',
                 'border-2 w-6 h-6 rounded-lg transition-colors duration-200',
@@ -23,7 +26,8 @@ const Tailwind = {
                     'cursor-default opacity-60': props.disabled
                 }
             )
-        })
+        }),
+        icon: 'w-4 h-4 transition-all duration-200 text-white text-base dark:text-gray-900'
     }
 }
     `
