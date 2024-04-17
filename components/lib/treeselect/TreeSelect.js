@@ -654,6 +654,7 @@ export const TreeSelect = React.memo(
                     <Tree
                         ref={treeRef}
                         id={listId.current}
+                        emptyMessage={props.emptyMessage}
                         expandedKeys={expandedKeys}
                         filter={props.filter}
                         filterBy={props.filterBy}
