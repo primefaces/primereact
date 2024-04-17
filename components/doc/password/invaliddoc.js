@@ -5,7 +5,7 @@ import { Password } from '@/components/lib/password/Password';
 export function InvalidDoc(props) {
     const code = {
         basic: `
-<Password invalid />
+<Password invalid="true" />
         `,
         javascript: `
 import React from "react";
@@ -14,7 +14,7 @@ import { Password } from 'primereact/password';
 export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Password invalid />
+            <Password invalid="true" />
         </div>
     )
 }
@@ -26,7 +26,7 @@ import { Password } from 'primereact/password';
 export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Password invalid />
+            <Password invalid="true" />
         </div>
     )
 }
@@ -41,7 +41,7 @@ export default function InvalidDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password invalid />
+                <Password invalid="true" />
             </div>
             <DocSectionCode code={code} />
         </>
