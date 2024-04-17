@@ -144,17 +144,20 @@ export const TriStateCheckbox = React.memo(
             ptm('root')
         );
 
-        const inputProps = mergeProps({
-            id: props.inputId,
-            className: cx('input'),
-            type: 'checkbox',
-            'aria-invalid': props.invalid,
-            disabled: props.disabled,
-            readOnly: props.readOnly,
-            value: props.value,
-            checked: props.value,
-            onChange: onChange
-        });
+        const inputProps = mergeProps(
+            {
+                id: props.inputId,
+                className: cx('input'),
+                type: 'checkbox',
+                'aria-invalid': props.invalid,
+                disabled: props.disabled,
+                readOnly: props.readOnly,
+                value: props.value,
+                checked: props.value,
+                onChange: onChange
+            },
+            ptm('input')
+        );
 
         return (
             <>
