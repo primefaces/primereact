@@ -41520,20 +41520,6 @@
                             "description": "Uses to pass attributes to the show icon's DOM element."
                         },
                         {
-                            "name": "invalid",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "When present, it specifies that the component should have invalid state style."
-                        },
-                        {
-                            "name": "variant",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "\"filled\" | \"outlined\"",
-                            "description": "Specifies the input variant of the component."
-                        },
-                        {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
