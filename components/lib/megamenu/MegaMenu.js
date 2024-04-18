@@ -738,29 +738,28 @@ export const MegaMenu = React.memo(
         };
 
         const createProcessedItems = (items, level = 0, parent = {}, parentKey = '', columnIndex) => {
-            const _processedItems = [];
+            if (!items) return [];
 
-            if (items && !Array.isArray(items)) {
+            if (!Array.isArray(items)) {
                 items = [items];
             }
-            items &&
-                items.forEach((item, index) => {
-                    const key = (parentKey !== '' ? parentKey + '_' : '') + (columnIndex !== undefined ? columnIndex + '_' : '') + index;
-                    const newItem = {
-                        item,
-                        index,
-                        level,
-                        key,
-                        parent,
-                        parentKey,
-                        columnIndex: columnIndex !== undefined ? columnIndex : parent && parent.columnIndex !== undefined ? parent.columnIndex : index
-                    };
 
-                    newItem.items = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
-                    _processedItems.push(newItem);
-                });
+            return items.map((item, index) => {
+                const key = `${parentKey !== '' ? parentKey + '_' : ''}${columnIndex !== undefined ? columnIndex + '_' : ''}${index}`;
+                const newItem = {
+                    item,
+                    index,
+                    level,
+                    key,
+                    parent,
+                    parentKey,
+                    columnIndex: columnIndex !== undefined ? columnIndex : parent && parent.columnIndex !== undefined ? parent.columnIndex : index
+                };
 
-            return _processedItems;
+                newItem.items = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
+
+                return newItem;
+            });
         };
 
         const createSeparator = (index) => {
