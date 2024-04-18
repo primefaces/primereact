@@ -740,6 +740,9 @@ export const MegaMenu = React.memo(
         const createProcessedItems = (items, level = 0, parent = {}, parentKey = '', columnIndex) => {
             const _processedItems = [];
 
+            if (items && !Array.isArray(items)) {
+                items = [items];
+            }
             items &&
                 items.forEach((item, index) => {
                     const key = (parentKey !== '' ? parentKey + '_' : '') + (columnIndex !== undefined ? columnIndex + '_' : '') + index;
@@ -1054,7 +1057,7 @@ export const MegaMenu = React.memo(
                         .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
                             margin-left: auto;
                         }
-                        
+
                         .p-megamenu[${selector}] .p-submenu-list .p-menuitem-content .p-menuitem-link {
                             padding-left: 2.25rem;
                         }
@@ -1071,7 +1074,7 @@ export const MegaMenu = React.memo(
 
                         ${
                             vertical
-                                ? `                                                                   
+                                ? `
                                     .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
                                         transform: rotate(90deg);
                                     }
