@@ -740,6 +740,7 @@ export const MegaMenu = React.memo(
         const createProcessedItems = (items, level = 0, parent = {}, parentKey = '', columnIndex) => {
             if (!items) return [];
 
+            // #6415 if passed a single array[] instead of a matrix [][]
             if (!Array.isArray(items)) {
                 items = [items];
             }
