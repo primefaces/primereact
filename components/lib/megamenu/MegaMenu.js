@@ -738,26 +738,29 @@ export const MegaMenu = React.memo(
         };
 
         const createProcessedItems = (items, level = 0, parent = {}, parentKey = '', columnIndex) => {
-            const _processedItems = [];
+            if (!items) return [];
 
-            items &&
-                items.forEach((item, index) => {
-                    const key = (parentKey !== '' ? parentKey + '_' : '') + (columnIndex !== undefined ? columnIndex + '_' : '') + index;
-                    const newItem = {
-                        item,
-                        index,
-                        level,
-                        key,
-                        parent,
-                        parentKey,
-                        columnIndex: columnIndex !== undefined ? columnIndex : parent && parent.columnIndex !== undefined ? parent.columnIndex : index
-                    };
+            // #6415 if passed a single array[] instead of a matrix [][]
+            if (!Array.isArray(items)) {
+                items = [items];
+            }
 
-                    newItem.items = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
-                    _processedItems.push(newItem);
-                });
+            return items.map((item, index) => {
+                const key = `${parentKey !== '' ? parentKey + '_' : ''}${columnIndex !== undefined ? columnIndex + '_' : ''}${index}`;
+                const newItem = {
+                    item,
+                    index,
+                    level,
+                    key,
+                    parent,
+                    parentKey,
+                    columnIndex: columnIndex !== undefined ? columnIndex : parent && parent.columnIndex !== undefined ? parent.columnIndex : index
+                };
 
-            return _processedItems;
+                newItem.items = level === 0 && item.items && item.items.length > 0 ? item.items.map((_items, _index) => createProcessedItems(_items, level + 1, newItem, key, _index)) : createProcessedItems(item.items, level + 1, newItem, key);
+
+                return newItem;
+            });
         };
 
         const createSeparator = (index) => {
@@ -1054,7 +1057,7 @@ export const MegaMenu = React.memo(
                         .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
                             margin-left: auto;
                         }
-                        
+
                         .p-megamenu[${selector}] .p-submenu-list .p-menuitem-content .p-menuitem-link {
                             padding-left: 2.25rem;
                         }
@@ -1071,7 +1074,7 @@ export const MegaMenu = React.memo(
 
                         ${
                             vertical
-                                ? `                                                                   
+                                ? `
                                     .p-megamenu[${selector}] .p-menuitem  > .p-menuitem-content >  .p-menuitem-link > .p-submenu-icon {
                                         transform: rotate(90deg);
                                     }
