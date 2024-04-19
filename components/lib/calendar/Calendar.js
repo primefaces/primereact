@@ -1055,7 +1055,7 @@ export const Calendar = React.memo(
                 setViewDateState(value);
             }
 
-            if (value !== null || true) {
+            if (value !== null) {
                 setCurrentMonth(value.getMonth());
                 setCurrentYear(value.getFullYear());
             } else {
