@@ -1055,8 +1055,13 @@ export const Calendar = React.memo(
                 setViewDateState(value);
             }
 
-            setCurrentMonth(value.getMonth());
-            setCurrentYear(value.getFullYear());
+            if (value !== null || true) {
+                setCurrentMonth(value.getMonth());
+                setCurrentYear(value.getFullYear());
+            } else {
+                setCurrentMonth(null);
+                setCurrentYear(null);
+            }
         };
 
         const setNavigationState = (newViewDate) => {
