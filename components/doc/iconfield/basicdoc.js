@@ -26,7 +26,7 @@ import { InputText } from "primereact/inputtext";
 
 export default function BasicDemo() {
     return (
-        <>
+        <div className="flex gap-3">
             <IconField iconPosition="left">
                 <InputIcon className="pi pi-search"> </InputIcon>
                 <InputText v-model="value1" placeholder="Search" />
@@ -36,7 +36,7 @@ export default function BasicDemo() {
                 <InputIcon className="pi pi-spin pi-spinner"> </InputIcon>
                 <InputText v-model="value2" />
             </IconField>
-        </>
+        </div>
     )
 }
         `,
@@ -48,7 +48,7 @@ import { InputText } from "primereact/inputtext";
 
 export default function BasicDemo() {
     return (
-        <>
+        <div className="flex gap-3">
             <IconField iconPosition="left">
                 <InputIcon className="pi pi-search"> </InputIcon>
                 <InputText v-model="value1" placeholder="Search" />
@@ -58,7 +58,7 @@ export default function BasicDemo() {
                 <InputIcon className="pi pi-spin pi-spinner"> </InputIcon>
                 <InputText v-model="value2" />
             </IconField>
-        </>
+        </div>
     )
 }
         `
@@ -72,7 +72,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap justify-content-center gap-3">
-                <>
+                <div className="flex gap-3">
                     <IconField iconPosition="left">
                         <InputIcon className="pi pi-search" />
                         <InputText v-model="value1" placeholder="Search" />
@@ -82,7 +82,7 @@ export default function BasicDemo() {
                         <InputIcon className="pi pi-spin pi-spinner" />
                         <InputText v-model="value2" />
                     </IconField>
-                </>
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>
