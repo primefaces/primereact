@@ -35,7 +35,7 @@ export const Chips = React.memo(
             }
 
             let values = [...props.value];
-            const removedItem = values.splice(index, 1);
+            const removedItem = values.splice(index, 1)[0];
 
             if (!isRemovable(removedItem, index)) {
                 return;
@@ -319,18 +319,18 @@ export const Chips = React.memo(
         };
 
         const createRemoveIcon = (value, index) => {
-            const iconProps = mergeProps(
-                {
-                    className: cx('removeTokenIcon'),
-                    onClick: (event) => removeItem(event, index),
-                    'aria-hidden': 'true'
-                },
-                ptm('removeTokenIcon')
-            );
-            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
-            const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
-
             if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
+                const iconProps = mergeProps(
+                    {
+                        className: cx('removeTokenIcon'),
+                        onClick: (event) => removeItem(event, index),
+                        'aria-hidden': 'true'
+                    },
+                    ptm('removeTokenIcon')
+                );
+                const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+                const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
                 return removeIcon;
             }
 
