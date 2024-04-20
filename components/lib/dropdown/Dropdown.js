@@ -57,6 +57,8 @@ export const Dropdown = React.memo(
             when: overlayVisibleState
         });
 
+        const flatedGroupOptions = props.optionGroupLabel ? props.options.flatMap((item) => item.items) : null
+
         const getVisibleOptions = () => {
             if (hasFilter && !isLazy) {
                 const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale);
@@ -298,7 +300,8 @@ export const Dropdown = React.memo(
         };
 
         const findSelectedOptionIndex = () => {
-            return hasSelectedOption ? visibleOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
+            const appropriateOptions = flatedGroupOptions ?? visibleOptions
+            return hasSelectedOption ? appropriateOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
         };
 
         const findFirstFocusedOptionIndex = () => {
@@ -352,22 +355,26 @@ export const Dropdown = React.memo(
             return selectedIndex < 0 ? findLastOptionIndex() : selectedIndex;
         };
 
+
+        const appropriateOptions = () => flatedGroupOptions ?? visibleOptions
+
         const findFirstOptionIndex = () => {
-            return visibleOptions.findIndex((option) => isValidOption(option));
+            return appropriateOptions().findIndex((option) => isValidOption(option));
         };
 
         const findLastOptionIndex = () => {
-            return ObjectUtils.findLastIndex(visibleOptions, (option) => isValidOption(option));
+            return ObjectUtils.findLastIndex(appropriateOptions(), (option) => isValidOption(option));
         };
 
         const findNextOptionIndex = (index) => {
-            const matchedOptionIndex = index < visibleOptions.length - 1 ? visibleOptions.slice(index + 1).findIndex((option) => isValidOption(option)) : -1;
+            const options = appropriateOptions()
+            const matchedOptionIndex = index < options.length - 1 ? options.slice(index + 1).findIndex((option) => isValidOption(option)) : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : index;
         };
 
         const findPrevOptionIndex = (index) => {
-            const matchedOptionIndex = index > 0 ? ObjectUtils.findLastIndex(visibleOptions.slice(0, index), (option) => isValidOption(option)) : -1;
+            const matchedOptionIndex = index > 0 ? ObjectUtils.findLastIndex(appropriateOptions().slice(0, index), (option) => isValidOption(option)) : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex : index;
         };
@@ -377,7 +384,7 @@ export const Dropdown = React.memo(
                 setFocusedOptionIndex(index);
 
                 if (props.selectOnFocus) {
-                    onOptionSelect(event, visibleOptions[index], false);
+                    onOptionSelect(event, flatedGroupOptions ? flatedGroupOptions[index]: visibleOptions[index], false);
                 }
             }
         };
@@ -464,7 +471,7 @@ export const Dropdown = React.memo(
                 onArrowDownKey(event);
             } else {
                 if (focusedOptionIndex !== -1) {
-                    onOptionSelect(event, visibleOptions[focusedOptionIndex]);
+                    onOptionSelect(event, flatedGroupOptions ? flatedGroupOptions[focusedOptionIndex]: visibleOptions[focusedOptionIndex]);
                 }
 
                 hide();

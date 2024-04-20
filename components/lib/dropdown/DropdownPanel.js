@@ -76,7 +76,7 @@ export const DropdownPanel = React.memo(
             }
         };
 
-        const createGroupChildren = (optionGroup, style) => {
+        const createGroupChildren = (optionGroup, style, passedOptionsCount) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
             return groupChildren.map((option, j) => {
@@ -87,7 +87,7 @@ export const DropdownPanel = React.memo(
                 return (
                     <DropdownItem
                         key={optionKey}
-                        index={j}
+                        index={j + passedOptionsCount}
                         focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
@@ -118,7 +118,7 @@ export const DropdownPanel = React.memo(
             return <li {...emptyMessageProps}>{message}</li>;
         };
 
-        const createItem = (option, index, scrollerOptions = {}) => {
+        const createItem = (option, index, scrollerOptions = {},passedOptionsCount) => {
             let style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
             style = { ...style, ...option.style };
@@ -126,7 +126,7 @@ export const DropdownPanel = React.memo(
             if (props.optionGroupLabel) {
                 const { optionGroupLabel } = props;
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style);
+                const groupChildrenContent = createGroupChildren(option, style, passedOptionsCount);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
@@ -180,6 +180,18 @@ export const DropdownPanel = React.memo(
 
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
+
+
+                if (props.optionGroupLabel) {
+                    let passedOptionsCount = 0 
+                   
+                    return props.visibleOptions.map((group,index) => {
+                        passedOptionsCount += group.items.length
+                        return createItem(group,index,{},passedOptionsCount - group.items.length)
+                    })
+
+                }
+
                 return props.visibleOptions.map(createItem);
             } else if (props.hasFilter) {
                 return createEmptyMessage(props.emptyFilterMessage, true);
