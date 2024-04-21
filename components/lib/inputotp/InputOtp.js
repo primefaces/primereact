@@ -68,7 +68,7 @@ export const InputOtp = React.memo(
 
         const updateTokens = (event, index) => {
             const inputValue = event.target.value;
-            const newTokens = [...tokens];
+            let newTokens = [...tokens];
 
             newTokens[index] = inputValue;
             newTokens = newTokens.join('');
