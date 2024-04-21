@@ -76,7 +76,7 @@ export const DropdownPanel = React.memo(
             }
         };
 
-        const createGroupChildren = (optionGroup, style, passedOptionsCount) => {
+        const createGroupChildren = (optionGroup, style, index) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
             return groupChildren.map((option, j) => {
@@ -87,7 +87,7 @@ export const DropdownPanel = React.memo(
                 return (
                     <DropdownItem
                         key={optionKey}
-                        index={j + passedOptionsCount}
+                        index={j + index}
                         focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}

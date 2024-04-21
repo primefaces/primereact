@@ -57,7 +57,7 @@ export const Dropdown = React.memo(
             when: overlayVisibleState
         });
 
-        const flatedGroupOptions = props.optionGroupLabel ? props.options.flatMap((item) => item.items) : null
+        const flattenedOptions = props.optionGroupLabel ? props.options.flatMap((item) => item.items) : null
 
         const getVisibleOptions = () => {
             if (hasFilter && !isLazy) {
@@ -300,7 +300,7 @@ export const Dropdown = React.memo(
         };
 
         const findSelectedOptionIndex = () => {
-            const appropriateOptions = flatedGroupOptions ?? visibleOptions
+            const appropriateOptions = flattenedOptions ?? visibleOptions
             return hasSelectedOption ? appropriateOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
         };
 
@@ -355,8 +355,7 @@ export const Dropdown = React.memo(
             return selectedIndex < 0 ? findLastOptionIndex() : selectedIndex;
         };
 
-
-        const appropriateOptions = () => flatedGroupOptions ?? visibleOptions
+        const appropriateOptions = () => flattenedOptions ?? visibleOptions
 
         const findFirstOptionIndex = () => {
             return appropriateOptions().findIndex((option) => isValidOption(option));
@@ -384,7 +383,7 @@ export const Dropdown = React.memo(
                 setFocusedOptionIndex(index);
 
                 if (props.selectOnFocus) {
-                    onOptionSelect(event, flatedGroupOptions ? flatedGroupOptions[index]: visibleOptions[index], false);
+                    onOptionSelect(event, flattenedOptions ? flattenedOptions[index]: visibleOptions[index], false);
                 }
             }
         };
@@ -471,7 +470,7 @@ export const Dropdown = React.memo(
                 onArrowDownKey(event);
             } else {
                 if (focusedOptionIndex !== -1) {
-                    onOptionSelect(event, flatedGroupOptions ? flatedGroupOptions[focusedOptionIndex]: visibleOptions[focusedOptionIndex]);
+                    onOptionSelect(event, flattenedOptions ? flattenedOptions[focusedOptionIndex]: visibleOptions[focusedOptionIndex]);
                 }
 
                 hide();
