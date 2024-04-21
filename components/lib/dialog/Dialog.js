@@ -127,12 +127,17 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         if (event.key === 'Tab') {
             event.preventDefault();
             const focusableElements = DomHandler.getFocusableElements(dialog);
+            console.log(focusableElements)
+
 
             if (focusableElements && focusableElements.length > 0) {
                 if (!document.activeElement) {
                     focusableElements[0].focus();
                 } else {
                     const focusedIndex = focusableElements.indexOf(document.activeElement);
+
+                    console.log(focusedIndex)
+                    console.log('shift key')
 
                     if (event.shiftKey) {
                         if (focusedIndex === -1 || focusedIndex === 0) {
@@ -143,7 +148,25 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     } else if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) {
                         focusableElements[0].focus();
                     } else {
-                        focusableElements[focusedIndex + 1].focus();
+                        let shouldBeFocused = focusableElements[focusedIndex + 1]
+                        shouldBeFocused.focus()
+                        let activeEl = document.activeElement;
+
+                        let passedElemetns = 0
+
+                        //find next focusable element
+                        while (activeEl !== shouldBeFocused && passedElemetns < focusableElements.length) {
+                            let nextIndex = focusedIndex + passedElemetns + 1
+                            if (nextIndex > focusableElements.length - 1) {
+                                nextIndex = 0
+                            }
+
+                            shouldBeFocused = focusableElements[nextIndex]
+                            shouldBeFocused.focus()
+                            activeEl = document.activeElement
+
+                            passedElemetns += 1
+                        }
                     }
                 }
             }
