@@ -127,17 +127,12 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         if (event.key === 'Tab') {
             event.preventDefault();
             const focusableElements = DomHandler.getFocusableElements(dialog);
-            console.log(focusableElements)
-
 
             if (focusableElements && focusableElements.length > 0) {
                 if (!document.activeElement) {
                     focusableElements[0].focus();
                 } else {
                     const focusedIndex = focusableElements.indexOf(document.activeElement);
-
-                    console.log(focusedIndex)
-                    console.log('shift key')
 
                     if (event.shiftKey) {
                         if (focusedIndex === -1 || focusedIndex === 0) {
@@ -152,11 +147,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                         shouldBeFocused.focus()
                         let activeEl = document.activeElement;
 
-                        let passedElemetns = 0
+                        let passedElemetns = 1
 
                         //find next focusable element
                         while (activeEl !== shouldBeFocused && passedElemetns < focusableElements.length) {
-                            let nextIndex = focusedIndex + passedElemetns + 1
+                            let nextIndex = focusedIndex + passedElemetns
                             if (nextIndex > focusableElements.length - 1) {
                                 nextIndex = 0
                             }
