@@ -58,6 +58,7 @@ export const Dropdown = React.memo(
         });
 
         const flattenedOptions = props.optionGroupLabel ? props.options.flatMap((item) => item.items) : null
+        const appropriateOptions = () => flattenedOptions ?? visibleOptions
 
         const getVisibleOptions = () => {
             if (hasFilter && !isLazy) {
@@ -354,8 +355,6 @@ export const Dropdown = React.memo(
 
             return selectedIndex < 0 ? findLastOptionIndex() : selectedIndex;
         };
-
-        const appropriateOptions = () => flattenedOptions ?? visibleOptions
 
         const findFirstOptionIndex = () => {
             return appropriateOptions().findIndex((option) => isValidOption(option));
