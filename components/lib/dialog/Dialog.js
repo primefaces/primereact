@@ -143,25 +143,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     } else if (focusedIndex === -1 || focusedIndex === focusableElements.length - 1) {
                         focusableElements[0].focus();
                     } else {
-                        let shouldBeFocused = focusableElements[focusedIndex + 1]
-                        shouldBeFocused.focus()
-                        let activeEl = document.activeElement;
-
-                        let passedElemetns = 1
-
-                        //find next focusable element
-                        while (activeEl !== shouldBeFocused && passedElemetns < focusableElements.length) {
-                            let nextIndex = focusedIndex + passedElemetns
-                            if (nextIndex > focusableElements.length - 1) {
-                                nextIndex = 0
-                            }
-
-                            shouldBeFocused = focusableElements[nextIndex]
-                            shouldBeFocused.focus()
-                            activeEl = document.activeElement
-
-                            passedElemetns += 1
-                        }
+                        focusableElements[focusedIndex + 1].focus();
                     }
                 }
             }

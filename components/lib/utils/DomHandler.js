@@ -932,7 +932,7 @@ export default class DomHandler {
         let visibleFocusableElements = [];
 
         for (let focusableElement of focusableElements) {
-            if (getComputedStyle(focusableElement).display !== 'none' && getComputedStyle(focusableElement).visibility !== 'hidden') {
+            if (getComputedStyle(focusableElement).display !== 'none' && focusableElement.offsetParent !== null && getComputedStyle(focusableElement).visibility !== 'hidden') {
                 visibleFocusableElements.push(focusableElement);
             }
         }
