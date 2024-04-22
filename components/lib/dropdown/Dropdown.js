@@ -80,7 +80,7 @@ export const Dropdown = React.memo(
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
 
-                    for (let optgroup of options) {
+                    for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
 
                         if (filteredSubOptions && filteredSubOptions.length) {
@@ -88,7 +88,7 @@ export const Dropdown = React.memo(
                         }
                     }
 
-                    return filteredGroups;
+                    return flatOptions(filteredGroups);
                 }
 
                 return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
