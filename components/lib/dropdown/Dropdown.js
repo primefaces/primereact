@@ -57,10 +57,24 @@ export const Dropdown = React.memo(
             when: overlayVisibleState
         });
 
-        const flattenedOptions = props.optionGroupLabel ? props.options.flatMap((item) => item.items) : null
-        const appropriateOptions = () => flattenedOptions ?? visibleOptions
+        function flatOptions(options) {
+            return (options || []).reduce((result, option, index) => {
+                result.push({ optionGroup: option, group: true, index, code: option.code, label: option.label });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push({...o, code: option.code}));
+
+                return result;
+            }, []);
+        }
 
         const getVisibleOptions = () => {
+            
+            const options = props.optionGroupLabel ? flatOptions(props.options) : props.options
+
+            console.log(options)
+
             if (hasFilter && !isLazy) {
                 const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
@@ -68,21 +82,21 @@ export const Dropdown = React.memo(
                 if (props.optionGroupLabel) {
                     let filteredGroups = [];
 
-                    for (let optgroup of props.options) {
+                    for (let optgroup of options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
 
                         if (filteredSubOptions && filteredSubOptions.length) {
                             filteredGroups.push({ ...optgroup, ...{ [`${props.optionGroupChildren}`]: filteredSubOptions } });
                         }
                     }
-
                     return filteredGroups;
                 }
 
-                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
-            return props.options;
+
+            return options;
         };
 
         const onFirstHiddenFocus = (event) => {
@@ -301,8 +315,7 @@ export const Dropdown = React.memo(
         };
 
         const findSelectedOptionIndex = () => {
-            const appropriateOptions = flattenedOptions ?? visibleOptions
-            return hasSelectedOption ? appropriateOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
+            return hasSelectedOption ? visibleOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
         };
 
         const findFirstFocusedOptionIndex = () => {
@@ -357,22 +370,21 @@ export const Dropdown = React.memo(
         };
 
         const findFirstOptionIndex = () => {
-            return appropriateOptions().findIndex((option) => isValidOption(option));
+            return visibleOptions.findIndex((option) => isValidOption(option));
         };
 
         const findLastOptionIndex = () => {
-            return ObjectUtils.findLastIndex(appropriateOptions(), (option) => isValidOption(option));
+            return ObjectUtils.findLastIndex(visibleOptions, (option) => isValidOption(option));
         };
 
         const findNextOptionIndex = (index) => {
-            const options = appropriateOptions()
-            const matchedOptionIndex = index < options.length - 1 ? options.slice(index + 1).findIndex((option) => isValidOption(option)) : -1;
+            const matchedOptionIndex = index < visibleOptions.length - 1 ? visibleOptions.slice(index + 1).findIndex((option) => isValidOption(option)) : -1
 
             return matchedOptionIndex > -1 ? matchedOptionIndex + index + 1 : index;
         };
 
         const findPrevOptionIndex = (index) => {
-            const matchedOptionIndex = index > 0 ? ObjectUtils.findLastIndex(appropriateOptions().slice(0, index), (option) => isValidOption(option)) : -1;
+            const matchedOptionIndex = index > 0 ? ObjectUtils.findLastIndex(visibleOptions.slice(0, index), (option) => isValidOption(option)) : -1;
 
             return matchedOptionIndex > -1 ? matchedOptionIndex : index;
         };
@@ -382,7 +394,7 @@ export const Dropdown = React.memo(
                 setFocusedOptionIndex(index);
 
                 if (props.selectOnFocus) {
-                    onOptionSelect(event, flattenedOptions ? flattenedOptions[index]: visibleOptions[index], false);
+                    onOptionSelect(event, visibleOptions[index], false);
                 }
             }
         };

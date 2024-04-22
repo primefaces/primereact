@@ -76,10 +76,10 @@ export const DropdownPanel = React.memo(
             }
         };
 
-        const createGroupChildren = (optionGroup, style, index) => {
+        const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
-            return groupChildren.map((option, j) => {
+            return (groupChildren || []).map((option, j) => {
                 const optionLabel = props.getOptionLabel(option);
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
@@ -87,7 +87,7 @@ export const DropdownPanel = React.memo(
                 return (
                     <DropdownItem
                         key={optionKey}
-                        index={j + index}
+                        index={j}
                         focusedOptionIndex={props.focusedOptionIndex}
                         label={optionLabel}
                         option={option}
@@ -118,15 +118,45 @@ export const DropdownPanel = React.memo(
             return <li {...emptyMessageProps}>{message}</li>;
         };
 
-        const createItem = (option, index, scrollerOptions = {},passedOptionsCount) => {
+
+        const createItem = (option, index, scrollerOptions = {}) => {
             let style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
             style = { ...style, ...option.style };
 
-            if (props.optionGroupLabel) {
+            // if (props.optionGroupLabel) {
+            //     const { optionGroupLabel } = props;
+            //     const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
+            //     const groupChildrenContent = createGroupChildren(option, style);
+            //     const key = index + '_' + props.getOptionGroupRenderKey(option);
+            //     const itemGroupProps = mergeProps(
+            //         {
+            //             className: cx('itemGroup', { optionGroupLabel }),
+            //             style,
+            //             'data-p-highlight': props.selected
+            //         },
+            //         getPTOptions('itemGroup')
+            //     );
+            //     const itemGroupLabelProps = mergeProps(
+            //         {
+            //             className: cx('itemGroupLabel')
+            //         },
+            //         getPTOptions('itemGroupLabel')
+            //     );
+
+            //     return (
+            //         <React.Fragment key={key}>
+            //             <li {...itemGroupProps}>
+            //                 <span {...itemGroupLabelProps}>{groupContent}</span>
+            //             </li>
+            //             {groupChildrenContent}
+            //         </React.Fragment>
+            //     );
+            // }
+
+            if (option.group && props.optionGroupLabel) {
                 const { optionGroupLabel } = props;
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style, passedOptionsCount);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
@@ -144,13 +174,11 @@ export const DropdownPanel = React.memo(
                 );
 
                 return (
-                    <React.Fragment key={key}>
-                        <li {...itemGroupProps}>
+                    <li key={key} {...itemGroupProps}>
                             <span {...itemGroupLabelProps}>{groupContent}</span>
-                        </li>
-                        {groupChildrenContent}
-                    </React.Fragment>
-                );
+                    </li>
+                )
+                
             }
 
             const optionLabel = props.getOptionLabel(option);
@@ -180,18 +208,6 @@ export const DropdownPanel = React.memo(
 
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
-
-
-                if (props.optionGroupLabel) {
-                    let passedOptionsCount = 0 
-                   
-                    return props.visibleOptions.map((group,index) => {
-                        passedOptionsCount += group.items.length
-                        return createItem(group,index,{},passedOptionsCount - group.items.length)
-                    })
-
-                }
-
                 return props.visibleOptions.map(createItem);
             } else if (props.hasFilter) {
                 return createEmptyMessage(props.emptyFilterMessage, true);
