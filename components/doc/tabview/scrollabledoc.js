@@ -3,11 +3,11 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { TabPanel, TabView } from '@/components/lib/tabview/TabView';
 
 export function ScrollableDoc(props) {
-    const tabs = Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i + 1}`, content: `Tab ${i + 1} Content` }));
+    const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: `Tab ${i + 1}`, content: `Tab ${i + 1} Content` }));
     const code = {
         basic: `
 <TabView scrollable>
-    {tabs.map((tab) => {
+    {scrollableTabs.map((tab) => {
         return (
             <TabPanel key={tab.title} header={tab.title}>
                 <p className="m-0">{tab.content}</p>
@@ -21,12 +21,12 @@ import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 
 export default function ScrollableDemo() {
-    const tabs = Array.from({ length: 50 }, (_, i) => ({ title: \`Tab \${i + 1}\`, content: \`Tab \${i + 1} Content\` }))
+    const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: \`Tab \${i + 1}\`, content: \`Tab \${i + 1} Content\` }))
 
     return (
         <div className="card">
             <TabView scrollable>
-                {tabs.map((tab) => {
+                {scrollableTabs.map((tab) => {
                     return (
                         <TabPanel key={tab.title} header={tab.title}>
                             <p className="m-0">{tab.content}</p>
@@ -43,12 +43,12 @@ import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 
 export default function ScrollableDemo() {
-    const tabs = Array.from({ length: 50 }, (_, i) => ({ title: \`Tab \${i + 1}\`, content: \`Tab \${i + 1} Content\` }))
+    const scrollableTabs = Array.from({ length: 50 }, (_, i) => ({ title: \`Tab \${i + 1}\`, content: \`Tab \${i + 1} Content\` }))
 
     return (
         <div className="card">
             <TabView scrollable>
-                {tabs.map((tab) => {
+                {scrollableTabs.map((tab) => {
                     return (
                         <TabPanel key={tab.title} header={tab.title}>
                             <p className="m-0">{tab.content}</p>
@@ -71,7 +71,7 @@ export default function ScrollableDemo() {
             </DocSectionText>
             <div className="card">
                 <TabView scrollable>
-                    {tabs.map((tab) => {
+                    {scrollableTabs.map((tab) => {
                         return (
                             <TabPanel key={tab.title} header={tab.title}>
                                 <p className="m-0">{tab.content}</p>
