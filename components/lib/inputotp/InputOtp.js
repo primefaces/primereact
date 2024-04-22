@@ -202,3 +202,5 @@ export const InputOtp = React.memo(
         return <div {...rootElementProps}>{createInputElements(props.length)}</div>;
     })
 );
+
+InputOtp.displayName = 'InputOtp';
