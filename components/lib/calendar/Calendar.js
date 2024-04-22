@@ -1055,7 +1055,7 @@ export const Calendar = React.memo(
                 setViewDateState(value);
             }
 
-            if(!value) {
+            if (!value) {
                 onClearButtonClick(event);
             }
 
