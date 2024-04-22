@@ -53,7 +53,7 @@ export interface FloatLabelProps {
      * Used to get the child elements of the component.
      * @readonly
      */
-    children?: React.ReactNode | undefined;
+    children?: React.ReactNode[] | undefined;
     /**
      * Used to pass attributes to DOM elements inside the component.
      * @type {FloatLabelPassThroughOptions}
