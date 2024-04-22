@@ -260,7 +260,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const width = DomHandler.getWidth(contentRef.current);
 
         setBackwardIsDisabledState(scrollLeft === 0);
-        setForwardIsDisabledState(scrollLeft === scrollWidth - width);
+        setForwardIsDisabledState(parseInt(scrollLeft) === scrollWidth - width);
     };
 
     const onScroll = (event) => {
