@@ -25701,7 +25701,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": true,
-                            "type": "ReactNode",
+                            "type": "ReactNode[]",
                             "default": "",
                             "description": "Used to get the child elements of the component."
                         },
