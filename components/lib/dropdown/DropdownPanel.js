@@ -119,7 +119,7 @@ export const DropdownPanel = React.memo(
                 )
                 
             }
-            const optionKey = index + '_' + props.getOptionRenderKey(option);
+            const optionKey = props.getOptionRenderKey(option) + '_' + index;
             const optionLabel = props.getOptionLabel(option);
             const disabled = props.isOptionDisabled(option);
 
