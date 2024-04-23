@@ -225,6 +225,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         show,
         hide,
         align,
+        isVisible: () => visibleState,
         getElement: () => overlayRef.current
     }));
 
