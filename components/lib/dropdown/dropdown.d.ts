@@ -249,7 +249,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
      */
-    autoFocus?: boolean | undefined;
+    autoFocus?: boolean;
     /**
      * Style class of the component.
      */
@@ -266,12 +266,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, it specifies that the component should have invalid state style.
      * @defaultValue false
      */
-    invalid?: boolean | undefined;
+    invalid?: boolean;
     /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */
-    disabled?: boolean | undefined;
+    disabled?: boolean;
     /**
      * Specifies the input variant of the component.
      * @defaultValue outlined
@@ -285,17 +285,17 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, custom value instead of predefined options can be entered using the editable input field.
      * @defaultValue false
      */
-    editable?: boolean | undefined;
+    editable?: boolean;
     /**
      *  Whether the selected option will be add highlight class.
      *  @defaultValue true
      */
-    highlightOnSelect?: boolean | undefined;
+    highlightOnSelect?: boolean;
     /**
      *  Whether the selected option will be shown with a check mark.
      *  @defaultValue false
      */
-    checkmark?: boolean | undefined;
+    checkmark?: boolean;
     /**
      * Template to display when filtering does not return any results.
      * @defaultValue No available options
@@ -310,7 +310,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue false
      */
-    filter?: boolean | undefined;
+    filter?: boolean;
     /**
      * Icon of the filter to search.
      */
@@ -328,7 +328,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue false
      */
-    filterInputAutoFocus?: boolean | undefined;
+    filterInputAutoFocus?: boolean;
     /**
      * Locale to use in filtering. The default locale is the host environment's current locale.
      */
@@ -359,17 +359,17 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When enabled, the focused tab is activated.
      * @defaultValue false
      */
-    selectOnFocus?: false;
+    selectOnFocus?: boolean;
     /**
      * When enabled, the focus is placed on the hovered option.
      * @defaultValue true
      */
-    focusOnHover?: boolean | undefined;
+    focusOnHover?: boolean;
     /**
      * Whether to focus on the first visible or selected element.
      * @defaultValue false
      */
-    autoOptionFocus?: false;
+    autoOptionFocus?: boolean;
     /**
      * Identifier of the focusable input.
      */
@@ -386,7 +386,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Displays a loader to indicate data load is in progress.
      * @defaultValue false
      */
-    loading?: boolean | undefined;
+    loading?: boolean;
     /**
      * The icon to show while indicating data load is in progress.
      */
@@ -449,12 +449,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When present, it specifies that an input field must be filled out before submitting the form.
      * @defaultValue false
      */
-    required?: boolean | undefined;
+    required?: boolean;
     /**
      * Clears the filter value when hiding the dropdown.
      * @defaultValue false
      */
-    resetFilterOnHide?: boolean | undefined;
+    resetFilterOnHide?: boolean;
     /**
      * Height of the viewport in pixels, a scrollbar is defined if height of list exceeds this value.
      * @defaultValue 200px
@@ -464,17 +464,17 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * When enabled, a clear icon is displayed to clear the value.
      * @defaultValue false
      */
-    showClear?: boolean | undefined;
+    showClear?: boolean;
     /**
      * When enabled, a clear icon is displayed to clear the filtered value.
      * @defaultValue false
      */
-    showFilterClear?: boolean | undefined;
+    showFilterClear?: boolean;
     /**
      * When enabled, overlay panel will be visible with input focus.
      * @defaultValue false
      */
-    showOnFocus?: boolean | undefined;
+    showOnFocus?: boolean;
     /**
      * Inline style of the element.
      */
