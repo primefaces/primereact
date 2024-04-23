@@ -875,6 +875,13 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 const filters = (localState && localState.filters) || getFilters();
                 const sortField = (localState && localState.sortField) || getSortField();
                 const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
+                const columns = getColumns();
+                const sortColumn = columns.find((col) => getColumnProp(col, 'field') === sortField);
+
+                if (sortColumn) {
+                    columnSortable.current = getColumnProp(sortColumn, 'sortable');
+                    columnSortFunction.current = getColumnProp(sortColumn, 'sortFunction');
+                }
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
                     data = filterLocal(data, filters);
