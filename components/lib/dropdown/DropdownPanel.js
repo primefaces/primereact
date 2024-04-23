@@ -114,10 +114,9 @@ export const DropdownPanel = React.memo(
 
                 return (
                     <li key={key} {...itemGroupProps}>
-                            <span {...itemGroupLabelProps}>{groupContent}</span>
+                        <span {...itemGroupLabelProps}>{groupContent}</span>
                     </li>
-                )
-                
+                );
             }
             const optionKey = props.getOptionRenderKey(option) + '_' + index;
             const optionLabel = props.getOptionLabel(option);
