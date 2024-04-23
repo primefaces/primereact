@@ -844,10 +844,16 @@ export const Dropdown = React.memo(
         };
 
         const scrollInView = () => {
-            const highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
+            const focusedItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-focused="true"]');
 
-            if (highlightItem && highlightItem.scrollIntoView) {
-                highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            if (focusedItem && focusedItem.scrollIntoView) {
+                focusedItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+            } else {
+                const highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
+
+                if (highlightItem && highlightItem.scrollIntoView) {
+                    highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                }
             }
         };
 
@@ -945,10 +951,10 @@ export const Dropdown = React.memo(
         });
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && props.value) {
+            if (overlayVisibleState && (props.value || focusedOptionIndex >= 0)) {
                 scrollInView();
             }
-        }, [overlayVisibleState, props.value]);
+        }, [overlayVisibleState, props.value, focusedOptionIndex]);
 
         useUpdateEffect(() => {
             if (overlayVisibleState && filterState && props.filter) {
