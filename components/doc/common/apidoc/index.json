@@ -16407,7 +16407,7 @@
                             "name": "cellSelection",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
                             "description": "Whether to cell selection is enabled or not."
                         },
@@ -17254,7 +17254,7 @@
                                     "description": "Custom data selectable event."
                                 }
                             ],
-                            "returnType": "undefined | null | boolean",
+                            "returnType": "null | boolean",
                             "description": "Function that returns a boolean to decide whether the data should be selectable."
                         },
                         {
@@ -17758,7 +17758,7 @@
                                     "type": "DataTableRowEditValidatorOptions<TValue>"
                                 }
                             ],
-                            "returnType": "undefined | boolean",
+                            "returnType": "boolean",
                             "description": "Callback to invoke to validate the editing row when the save icon is clicked on row editing mode."
                         },
                         {
@@ -17796,7 +17796,7 @@
                                     "description": "Options for the row reorder element."
                                 }
                             ],
-                            "returnType": "undefined | null | boolean",
+                            "returnType": "null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row."
                         },
                         {
@@ -17815,7 +17815,7 @@
                                     "description": "Options for the row reorder element."
                                 }
                             ],
-                            "returnType": "undefined | null | boolean",
+                            "returnType": "null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row."
                         }
                     ]
@@ -20198,7 +20198,7 @@
                                     "description": "Custom data selectable event."
                                 }
                             ],
-                            "returnType": "undefined | null | boolean",
+                            "returnType": "null | boolean",
                             "description": "Function that returns a boolean to decide whether the data should be selectable."
                         },
                         {
@@ -20676,7 +20676,7 @@
                                     "type": "DataTableRowEditValidatorOptions<TValue>"
                                 }
                             ],
-                            "returnType": "undefined | boolean",
+                            "returnType": "boolean",
                             "description": "Callback to invoke to validate the editing row when the save icon is clicked on row editing mode."
                         },
                         {
@@ -20714,7 +20714,7 @@
                                     "description": "Options for the row reorder element."
                                 }
                             ],
-                            "returnType": "undefined | null | boolean",
+                            "returnType": "null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row."
                         },
                         {
@@ -20733,7 +20733,7 @@
                                     "description": "Options for the row reorder element."
                                 }
                             ],
-                            "returnType": "undefined | null | boolean",
+                            "returnType": "null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row."
                         }
                     ],
@@ -22899,7 +22899,7 @@
                             "name": "autoOptionFocus",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
                             "description": "Whether to focus on the first visible or selected element."
                         },
@@ -23284,7 +23284,7 @@
                             "name": "selectOnFocus",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
                             "description": "When enabled, the focused tab is activated."
                         },
@@ -35860,7 +35860,7 @@
                             "name": "autoOptionFocus",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
                             "description": "Whether to focus on the first visible or selected element."
                         },
@@ -36324,7 +36324,7 @@
                             "name": "selectOnFocus",
                             "optional": true,
                             "readonly": false,
-                            "type": "false",
+                            "type": "boolean",
                             "default": "false",
                             "description": "When enabled, the focused tab is activated."
                         },
