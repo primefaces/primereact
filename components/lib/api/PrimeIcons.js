@@ -19,7 +19,7 @@ export const PrimeIcons = Object.freeze({
     ARROW_CIRCLE_LEFT: 'pi pi-arrow-circle-left',
     ARROW_CIRCLE_RIGHT: 'pi pi-arrow-circle-right',
     ARROW_CIRCLE_UP: 'pi pi-arrow-circle-up',
-    ARROW_DOWN_LEFTANDARROW_UP_RIGHT_TO_CENTER: 'pi pi-arrow-down-left-and-arrow-up-right-to-center',
+    ARROW_DOWN_LEFT_AND_ARROW_UP_RIGHT_TO_CENTER: 'pi pi-arrow-down-left-and-arrow-up-right-to-center',
     ARROW_DOWN_LEFT: 'pi pi-arrow-down-left',
     ARROW_DOWN_RIGHT: 'pi pi-arrow-down-right',
     ARROW_DOWN: 'pi pi-arrow-down',
