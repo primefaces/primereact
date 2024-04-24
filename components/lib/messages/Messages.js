@@ -73,7 +73,7 @@ export const Messages = React.memo(
 
         const remove = (messageInfo) => {
             // allow removal by ID or by message equality
-            const removeMessage = messageInfo._pId ? messageInfo.message : messageInfo;
+            const removeMessage = messageInfo._pId ? messageInfo._pId : messageInfo.message || messageInfo;
 
             setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
 
