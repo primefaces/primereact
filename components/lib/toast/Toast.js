@@ -77,6 +77,7 @@ export const Toast = React.memo(
         const remove = (messageInfo) => {
             // allow removal by ID or by message equality
             const removeMessage = messageInfo._pId ? messageInfo.message : messageInfo;
+
             // 'remove if message equals another toast's messages' part is removed because it breaks the toast's remove by id feature at multiple toasts
             setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId));
 
