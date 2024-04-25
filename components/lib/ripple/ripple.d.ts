@@ -8,6 +8,28 @@
  *
  */
 import * as React from 'react';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils';
+
+export declare type RipplePassThroughType<T> = PassThroughType<T, RipplePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface RipplePassThroughMethodOptions {
+    props: RippleProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link RippleProps.pt}
+ */
+export interface RipplePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: RipplePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Ripple component.
@@ -24,6 +46,16 @@ export interface RippleProps {
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {RipplePassThroughOptions}
+     */
+    pt?: RipplePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
