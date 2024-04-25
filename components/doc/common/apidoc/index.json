@@ -500,6 +500,13 @@
                             "readonly": false,
                             "type": "AccordionPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "accordiontab",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to accordion tabs."
                         }
                     ],
                     "callbacks": []
@@ -48817,6 +48824,13 @@
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "tab",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to accordion tabs."
                         }
                     ],
                     "callbacks": []
