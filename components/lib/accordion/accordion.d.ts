@@ -241,6 +241,10 @@ export interface AccordionPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: AccordionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to accordion tabs.
+     */
+    accordiontab?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

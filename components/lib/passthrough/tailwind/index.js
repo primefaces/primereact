@@ -129,7 +129,7 @@ const Tailwind = {
     },
     accordion: {
         root: 'mb-1',
-        tab: {
+        accordiontab: {
             root: 'mb-1',
             header: ({ context }) => {
                 return {
