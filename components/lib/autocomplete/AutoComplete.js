@@ -250,11 +250,9 @@ export const AutoComplete = React.memo(
         };
 
         const removeItem = (event, index) => {
-            
             const removedValue = props.value[index];
             const newValue = props.value.filter((_, i) => index !== i);
             
-            console.log(removedValue, newValue);
             updateModel(event, newValue);
 
             if (props.onUnselect) {
