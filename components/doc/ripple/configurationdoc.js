@@ -10,7 +10,7 @@ import { PrimeReactProvider } from 'primereact/api';
 
 export default function MyApp({ Component }) {
     const value = {
-        ripple: false,
+        ripple: true,
         ...
     };
 
