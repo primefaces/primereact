@@ -68,6 +68,7 @@ import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
 import { ProgressSpinnerPassThroughOptions } from '../progressspinner/progressspinner';
 import { RadioButtonPassThroughOptions } from '../radiobutton/radiobutton';
 import { RatingPassThroughOptions } from '../rating/rating';
+import { RipplePassThroughOptions } from '../ripple/ripple';
 import { RowPassThroughOptions } from '../row/row';
 import { ScrollPanelPassThroughOptions } from '../scrollpanel/scrollpanel';
 import { ScrollTopPassThroughOptions } from '../scrolltop/scrolltop';
@@ -546,6 +547,10 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for Rating.
      */
     rating?: RatingPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for Ripple.
+     */
+    ripple?: RipplePassThroughOptions;
     /**
      * Custom passthrough(pt) options for Row.
      */

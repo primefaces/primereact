@@ -514,17 +514,17 @@ export declare class VirtualScroller extends React.Component<VirtualScrollerProp
     public scrollTo(options: VirtualScrollerOptionsType): void;
     /**
      * Scroll to move to a specific item.
-     * @param {number} index - Index of item according to orientation mode.
+     * @param {number | number[]} index - Index of item according to orientation mode.
      * @param {'auto' | 'smooth'} behavior - Behavior of scroll, valid values are 'auto' and 'smooth'
      */
     public scrollToIndex(index: number | number[], behavior?: 'auto' | 'smooth'): void;
     /**
      * It is used to move the specified index into the view. It is a method that will usually be needed when keyboard support is added to the virtualScroller component.
-     * @param {number} index - Index of item according to orientation mode.
+     * @param {number | number[]} index - Index of item according to orientation mode.
      * @param {'to-start' | 'to-end'} to - Defines the location of the item in view, valid values are 'to-start' and 'to-end'.
      * @param {'auto' | 'smooth'} behavior - Behavior of scroll, valid values are 'auto' and 'smooth'
      */
-    public scrollInView(index: number | number[], to: 'to-start' | 'to-end', behavior?: 'auto' | 'smooth'): void;
+    public scrollInView(index: number | number[], to?: 'to-start' | 'to-end', behavior?: 'auto' | 'smooth'): void;
     /**
      * Returns the range of items added to the DOM.
      */
