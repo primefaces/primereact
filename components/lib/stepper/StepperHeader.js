@@ -11,6 +11,7 @@ export const StepperHeader = React.memo(
             id: props.id,
             className: cx('stepper.action'),
             role: 'tab',
+            type: 'button',
             tabIndex: props.disabled ? -1 : undefined,
             'aria-controls': props.ariaControls,
             onClick: (e) => props.clickCallback(e, props.index)
