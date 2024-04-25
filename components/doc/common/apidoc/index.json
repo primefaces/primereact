@@ -1422,6 +1422,13 @@
                             "description": "Custom passthrough(pt) options for Rating."
                         },
                         {
+                            "name": "ripple",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RipplePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Ripple."
+                        },
+                        {
                             "name": "row",
                             "optional": true,
                             "readonly": false,
@@ -43568,6 +43575,22 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RipplePassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -43580,6 +43603,46 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "RipplePassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RippleProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "RipplePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RipplePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "RipplePassThroughType": {
+                    "values": "PassThroughType<T, RipplePassThroughMethodOptions>"
                 }
             }
         }
