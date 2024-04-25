@@ -38565,6 +38565,12 @@
                             "description": "Hides the overlay."
                         },
                         {
+                            "name": "isVisible",
+                            "parameters": [],
+                            "returnType": "boolean",
+                            "description": "Checks whether the overlay is currently visible."
+                        },
+                        {
                             "name": "show",
                             "parameters": [
                                 {
