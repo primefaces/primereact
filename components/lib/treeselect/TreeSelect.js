@@ -797,7 +797,12 @@ export const TreeSelect = React.memo(
                     props
                 };
 
-                return ObjectUtils.getJSXElement(props.panelHeaderTemplate, defaultOptions);
+                return (
+                    <div>
+                        {content}
+                        {ObjectUtils.getJSXElement(props.panelHeaderTemplate, defaultOptions)}
+                    </div>
+                );
             }
 
             return content;
