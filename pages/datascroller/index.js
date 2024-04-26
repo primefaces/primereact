@@ -7,7 +7,7 @@ import { InlineDataScrollerDoc } from '@/components/doc/datascroller/inlinedoc';
 import { LoaderDataScrollerDoc } from '@/components/doc/datascroller/loaderdoc';
 import { StyledDoc } from '@/components/doc/datascroller/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/datascroller/theming/tailwinddoc';
-import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
+import { Wireframe } from '@/components/doc/datascroller/pt/wireframe';
 
 const DataScrollerDemo = () => {
     const docs = [
