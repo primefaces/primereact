@@ -144,9 +144,10 @@ export const Calendar = React.memo(
 
         const updateValueOnInput = (event, rawValue, invalidCallback) => {
             try {
-                const value = parseValueFromString(rawValue);
+                const value = parseValueFromString(props.timeOnly ? rawValue.replace('_','') : rawValue);
 
                 if (isValidSelection(value)) {
+                    console.log('valid')
                     updateModel(event, value);
                     updateViewDate(event, value.length ? value[0] : value);
                 }
@@ -2464,7 +2465,8 @@ export const Calendar = React.memo(
             if (inputRef.current.value.length === formattedValue.length - 1 && !formatAlways) {
                 return;
             }
-
+            console.log(inputRef.current.value, formattedValue)
+            
             inputRef.current.value = formattedValue;
         };
 
