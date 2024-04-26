@@ -146,7 +146,6 @@ export const Calendar = React.memo(
             try {
                 
                 const value = parseValueFromString(rawValue);
-                console.log('parsed',value)
 
                 if (isValidSelection(value)) {
                     updateModel(event, value);
@@ -1787,8 +1786,6 @@ export const Calendar = React.memo(
 
                 viewStateChanged.current = true;
 
-                console.log(newValue, typeof newValue)
-
                 onChangeRef.current({
                     originalEvent: event,
                     value: newValue,
@@ -2428,7 +2425,6 @@ export const Calendar = React.memo(
         };
 
         const updateInputfield = (value,formatAlways) => {
-            console.log('updateInputfield', )
             if (!inputRef.current) {
                 return;
             }
