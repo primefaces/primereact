@@ -144,7 +144,9 @@ export const Calendar = React.memo(
 
         const updateValueOnInput = (event, rawValue, invalidCallback) => {
             try {
+                
                 const value = parseValueFromString(rawValue);
+                console.log('parsed',value)
 
                 if (isValidSelection(value)) {
                     updateModel(event, value);
@@ -1778,9 +1780,14 @@ export const Calendar = React.memo(
 
         const updateModel = (event, value) => {
             if (props.onChange) {
+                
+                const originInputValue = event.target.value
+
                 const newValue = cloneDate(value);
 
                 viewStateChanged.current = true;
+
+                console.log(newValue, typeof newValue)
 
                 onChangeRef.current({
                     originalEvent: event,
@@ -1797,6 +1804,8 @@ export const Calendar = React.memo(
                         value: newValue
                     }
                 });
+
+                event.target.value = originInputValue
             }
         };
 
@@ -2418,7 +2427,8 @@ export const Calendar = React.memo(
             return true;
         };
 
-        const updateInputfield = (value) => {
+        const updateInputfield = (value,formatAlways) => {
+            console.log('updateInputfield', )
             if (!inputRef.current) {
                 return;
             }
@@ -2455,6 +2465,10 @@ export const Calendar = React.memo(
                 } catch (err) {
                     formattedValue = value;
                 }
+            }
+
+            if (inputRef.current.value.length === formattedValue.length - 1 && !formatAlways) {
+                return
             }
 
             inputRef.current.value = formattedValue;
@@ -2997,6 +3011,7 @@ export const Calendar = React.memo(
         }, [currentView]);
 
         useUpdateEffect(() => {
+
             if (!props.onViewDateChange && !viewStateChanged.current) {
                 setValue(props.value);
             }
@@ -3004,6 +3019,7 @@ export const Calendar = React.memo(
             if (props.viewDate) {
                 updateViewDate(null, getViewDate(props.viewDate));
             }
+
         }, [props.onViewDateChange, props.value, props.viewDate]);
 
         useUpdateEffect(() => {
@@ -3017,6 +3033,9 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             const newDate = props.value;
+
+            console.log('newDate',props.value)
+            console.log('previous',previousValue)
 
             if (previousValue !== newDate) {
                 updateInputfield(newDate);
