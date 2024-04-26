@@ -96,7 +96,7 @@ export const Calendar = React.memo(
         };
 
         const onInputBlur = (event) => {
-            !props.keepInvalid && updateInputfield(props.value);
+            updateInputfield(props.value,true)
             props.onBlur && props.onBlur(event);
             setFocusedState(false);
         };
@@ -3033,9 +3033,6 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             const newDate = props.value;
-
-            console.log('newDate',props.value)
-            console.log('previous',previousValue)
 
             if (previousValue !== newDate) {
                 updateInputfield(newDate);
