@@ -64,7 +64,8 @@ export const KeyFilter = {
             return;
         }
 
-        const isPrintableKey = key.length === 1;
+        // some AZERTY keys come in with 2 chars like ´ç if Dead key is pressed first
+        const isPrintableKey = key.length <= 2;
 
         if (!isPrintableKey) {
             return;
