@@ -10413,6 +10413,19 @@
                             "description": "Callback to invoke on value change"
                         },
                         {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MouseEvent<HTMLInputElement, MouseEvent> & Object",
+                                    "description": "click event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
+                        },
+                        {
                             "name": "onContextMenu",
                             "parameters": [
                                 {
