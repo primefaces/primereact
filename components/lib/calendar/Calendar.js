@@ -24,7 +24,7 @@ export const Calendar = React.memo(
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
         const [idState, setIdState] = React.useState(props.id);
-        const isTypingRef = React.useRef(null);
+        const isTypingRef = React.useRef(false);
 
         const metaData = {
             props,
