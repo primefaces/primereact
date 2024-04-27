@@ -34403,6 +34403,40 @@
                             "optional": false,
                             "readonly": false,
                             "type": "MenuState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenuContext": {
+                    "description": "Defines current options in Menu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "item",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Current menuitem"
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of the menuitem"
+                        },
+                        {
+                            "name": "parentId",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "null | string",
+                            "description": "Id of the submenu header containing the menuitem"
                         }
                     ],
                     "callbacks": []

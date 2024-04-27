@@ -29,6 +29,16 @@ export const Menu = React.memo(
             }
         });
 
+        const getMenuItemPTOptions = (key, item, index, parentId) => {
+            return ptm(key, {
+                context: {
+                    item,
+                    index,
+                    parentId
+                }
+            });
+        };
+
         useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -335,14 +345,14 @@ export const Menu = React.memo(
                 {
                     className: cx('icon')
                 },
-                ptm('icon')
+                getMenuItemPTOptions('icon', item, index, parentId)
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
                     className: cx('label')
                 },
-                ptm('label')
+                getMenuItemPTOptions('label', item, index, parentId)
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const key = item.id || (parentId || idState) + '_' + index;
@@ -351,7 +361,7 @@ export const Menu = React.memo(
                     onClick: (event) => onItemClick(event, item, key),
                     className: cx('content')
                 },
-                ptm('content')
+                getMenuItemPTOptions('content', item, index, parentId)
             );
 
             const actionProps = mergeProps(
@@ -366,7 +376,7 @@ export const Menu = React.memo(
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },
-                ptm('action')
+                getMenuItemPTOptions('action', item, index, parentId)
             );
 
             let content = (
@@ -405,7 +415,7 @@ export const Menu = React.memo(
                     'data-p-focused': focusedOptionId() === key,
                     'data-p-disabled': item.disabled || false
                 },
-                ptm('menuitem')
+                getMenuItemPTOptions('menuitem', item, index, parentId)
             );
 
             return <li {...menuitemProps}>{content}</li>;
