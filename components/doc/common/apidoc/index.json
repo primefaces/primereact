@@ -34421,7 +34421,7 @@
                             "name": "item",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "MenuItem",
                             "description": "Current menuitem"
                         },
                         {

@@ -34,7 +34,7 @@ export interface MenuContext {
     /**
      * Current menuitem
      */
-    item: any;
+    item: MenuItem;
     /**
      * Index of the menuitem
      */
