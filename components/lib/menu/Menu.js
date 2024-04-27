@@ -332,8 +332,8 @@ export const Menu = React.memo(
             if (item.visible === false) {
                 return null;
             }
-            
-            const menuContext = {item, index, parentId}
+
+            const menuContext = { item, index, parentId };
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
