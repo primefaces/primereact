@@ -29,14 +29,8 @@ export const Menu = React.memo(
             }
         });
 
-        const getMenuItemPTOptions = (key, item, index, parentId) => {
-            return ptm(key, {
-                context: {
-                    item,
-                    index,
-                    parentId
-                }
-            });
+        const getMenuItemPTOptions = (key, menuContext) => {
+            return ptm(key, { context: menuContext });
         };
 
         useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
@@ -338,21 +332,22 @@ export const Menu = React.memo(
             if (item.visible === false) {
                 return null;
             }
-
+            
+            const menuContext = {item, index, parentId}
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                getMenuItemPTOptions('icon', item, index, parentId)
+                getMenuItemPTOptions('icon', menuContext)
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
                     className: cx('label')
                 },
-                getMenuItemPTOptions('label', item, index, parentId)
+                getMenuItemPTOptions('label', menuContext)
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const key = item.id || (parentId || idState) + '_' + index;
@@ -361,7 +356,7 @@ export const Menu = React.memo(
                     onClick: (event) => onItemClick(event, item, key),
                     className: cx('content')
                 },
-                getMenuItemPTOptions('content', item, index, parentId)
+                getMenuItemPTOptions('content', menuContext)
             );
 
             const actionProps = mergeProps(
@@ -376,7 +371,7 @@ export const Menu = React.memo(
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },
-                getMenuItemPTOptions('action', item, index, parentId)
+                getMenuItemPTOptions('action', menuContext)
             );
 
             let content = (
@@ -415,7 +410,7 @@ export const Menu = React.memo(
                     'data-p-focused': focusedOptionId() === key,
                     'data-p-disabled': item.disabled || false
                 },
-                getMenuItemPTOptions('menuitem', item, index, parentId)
+                getMenuItemPTOptions('menuitem', menuContext)
             );
 
             return <li {...menuitemProps}>{content}</li>;
