@@ -131,11 +131,6 @@ export const AutoComplete = React.memo(
         };
 
         const updateModel = (event, value) => {
-            // #2176 only call change if value actually changed
-            if (selectedItem.current && ObjectUtils.deepEquals(selectedItem.current, value)) {
-                return;
-            }
-
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
@@ -257,7 +252,7 @@ export const AutoComplete = React.memo(
         const removeItem = (event, index) => {
             const removedValue = props.value[index];
             const newValue = props.value.filter((_, i) => index !== i);
-
+            
             updateModel(event, newValue);
 
             if (props.onUnselect) {
