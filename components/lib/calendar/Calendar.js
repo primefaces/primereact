@@ -1057,12 +1057,16 @@ export const Calendar = React.memo(
                 setViewDateState(value);
             }
 
+            if (!value) {
+                onClearButtonClick(event);
+            }
+
             if (value !== null) {
-                setCurrentMonth(value.getMonth());
-                setCurrentYear(value.getFullYear());
-            } else {
-                setCurrentMonth(null);
-                setCurrentYear(null);
+                const day = value.getDate();
+                const month = value.getMonth();
+                const year = value.getFullYear();
+
+                onDateSelect(event, { day, month, year, selectable: isSelectable(day, month, year) });
             }
         };
 
