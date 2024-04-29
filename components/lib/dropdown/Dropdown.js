@@ -57,7 +57,21 @@ export const Dropdown = React.memo(
             when: overlayVisibleState
         });
 
+        const flatOptions = (options) => {
+            return (options || []).reduce((result, option, index) => {
+                result.push({ optionGroup: option, group: true, index, code: option.code, label: option.label });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
+
+                return result;
+            }, []);
+        };
+
         const getVisibleOptions = () => {
+            const options = props.optionGroupLabel ? flatOptions(props.options) : props.options;
+
             if (hasFilter && !isLazy) {
                 const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
@@ -73,13 +87,13 @@ export const Dropdown = React.memo(
                         }
                     }
 
-                    return filteredGroups;
+                    return flatOptions(filteredGroups);
                 }
 
-                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
-            return props.options;
+            return options;
         };
 
         const onFirstHiddenFocus = (event) => {

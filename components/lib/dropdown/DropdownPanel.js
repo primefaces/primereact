@@ -76,36 +76,6 @@ export const DropdownPanel = React.memo(
             }
         };
 
-        const createGroupChildren = (optionGroup, style) => {
-            const groupChildren = props.getOptionGroupChildren(optionGroup);
-
-            return groupChildren.map((option, j) => {
-                const optionLabel = props.getOptionLabel(option);
-                const optionKey = j + '_' + props.getOptionRenderKey(option);
-                const disabled = props.isOptionDisabled(option);
-
-                return (
-                    <DropdownItem
-                        key={optionKey}
-                        index={j}
-                        focusedOptionIndex={props.focusedOptionIndex}
-                        label={optionLabel}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={props.isSelected(option)}
-                        highlightOnSelect={props.highlightOnSelect}
-                        disabled={disabled}
-                        onClick={props.onOptionClick}
-                        onMouseMove={changeFocusedItemOnHover}
-                        ptm={ptm}
-                        cx={cx}
-                        checkmark={props.checkmark}
-                    />
-                );
-            });
-        };
-
         const createEmptyMessage = (emptyMessage, isFilter) => {
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
             const emptyMessageProps = mergeProps(
@@ -123,10 +93,9 @@ export const DropdownPanel = React.memo(
 
             style = { ...style, ...option.style };
 
-            if (props.optionGroupLabel) {
+            if (option.group && props.optionGroupLabel) {
                 const { optionGroupLabel } = props;
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
@@ -144,17 +113,14 @@ export const DropdownPanel = React.memo(
                 );
 
                 return (
-                    <React.Fragment key={key}>
-                        <li {...itemGroupProps}>
-                            <span {...itemGroupLabelProps}>{groupContent}</span>
-                        </li>
-                        {groupChildrenContent}
-                    </React.Fragment>
+                    <li key={key} {...itemGroupProps}>
+                        <span {...itemGroupLabelProps}>{groupContent}</span>
+                    </li>
                 );
             }
 
+            const optionKey = props.getOptionRenderKey(option) + '_' + index;
             const optionLabel = props.getOptionLabel(option);
-            const optionKey = index + '_' + props.getOptionRenderKey(option);
             const disabled = props.isOptionDisabled(option);
 
             return (
