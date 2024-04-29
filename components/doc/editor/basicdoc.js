@@ -50,7 +50,7 @@ export default function BasicDemo() {
             <div className="card">
                 <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} style={{ height: '320px' }} />
             </div>
-            <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }} />
+            <DocSectionCode code={code} dependencies={{ quill: '2.0.0' }} />
         </>
     );
 }
