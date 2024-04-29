@@ -313,9 +313,19 @@ export const InputNumber = React.memo(
 
             if (isSpecialChar.current) {
                 event.target.value = lastValue.current;
+                isSpecialChar.current = false;
             }
 
-            isSpecialChar.current = false;
+            if (DomHandler.isAndroid()) {
+                return;
+            }
+
+            // #6324 Chrome is allowing accent-dead characters through...
+            const inputType = event.nativeEvent.inputType;
+            const data = event.nativeEvent.data;
+            if (inputType === 'insertText' && /\D/.test(data)) {
+                event.target.value = lastValue.current;
+            }
         };
 
         const onInputAndroidKey = (event) => {
