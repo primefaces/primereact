@@ -200,6 +200,7 @@ export const Splitter = React.memo(
 
         const onResizeEnd = (event) => {
             let sizes = [...panelSizes];
+
             sizes[prevPanelIndex.current] = prevPanelSizeNew.current;
             sizes[prevPanelIndex.current + 1] = nextPanelSizeNew.current;
 
