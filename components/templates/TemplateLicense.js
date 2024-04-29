@@ -5,10 +5,13 @@ const TemplateLicense = ({ license }) => {
         <div className="template-license-wrapper">
             <div className="template-license">
                 <div className="template-license-cards">
-                    {license.licenseDetails.map(({ title, price, included }, i) => (
+                    {license.licenseDetails.map(({ title, price, discountPrice, included }, i) => (
                         <div key={i} className="template-license-card">
                             <span>{title}</span>
-                            <h2>{price}</h2>
+                            <div className="template-license-price flex gap-3">
+                                <h2 className={discountPrice && 'discount'} >{price}</h2>
+                                <h2 hidden={!discountPrice}>{discountPrice}</h2>
+                            </div>
                             <div className="template-license-card-included">
                                 {included.map((txt, j) => (
                                     <p key={j}>{txt}</p>
