@@ -24,6 +24,7 @@ export const Calendar = React.memo(
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
         const [idState, setIdState] = React.useState(props.id);
+        const isTypingRef = React.useRef(false);
 
         const metaData = {
             props,
@@ -96,7 +97,7 @@ export const Calendar = React.memo(
         };
 
         const onInputBlur = (event) => {
-            !props.keepInvalid && updateInputfield(props.value);
+            updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
             setFocusedState(false);
         };
@@ -144,9 +145,10 @@ export const Calendar = React.memo(
 
         const updateValueOnInput = (event, rawValue, invalidCallback) => {
             try {
-                const value = parseValueFromString(rawValue);
+                const value = parseValueFromString(props.timeOnly ? rawValue.replace('_', '') : rawValue);
 
                 if (isValidSelection(value)) {
+                    isTypingRef.current = true;
                     updateModel(event, value);
                     updateViewDate(event, value.length ? value[0] : value);
                 }
@@ -3019,7 +3021,11 @@ export const Calendar = React.memo(
             const newDate = props.value;
 
             if (previousValue !== newDate) {
-                updateInputfield(newDate);
+                if (!isTypingRef.current) {
+                    updateInputfield(newDate);
+                }
+
+                isTypingRef.current = false;
 
                 // #3516 view date not updated when value set programatically
                 if (!visible && newDate) {
