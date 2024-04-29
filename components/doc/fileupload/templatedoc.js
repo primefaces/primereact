@@ -230,7 +230,7 @@ export default function TemplateDemo() {
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
 
-    const onTemplateSelect = (e: FileUploadUploadEvent) => {
+    const onTemplateSelect = (e: FileUploadSelectEvent) => {
         let _totalSize = totalSize;
         let files = e.files;
 
