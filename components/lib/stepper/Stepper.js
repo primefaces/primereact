@@ -165,6 +165,8 @@ export const Stepper = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             getElement: () => navRef.current,
+            getActiveStep: () => activeStepState,
+            setActiveStep: (step) => setActiveStepState(step),
             nextCallback: (e) => nextCallback(e, activeStepState),
             prevCallback: (e) => prevCallback(e, activeStepState)
         }));

@@ -84,9 +84,12 @@ export interface StepperChangeEvent {
 
 /**
  * Defines custom RefAttributes methods
+ * @group Methods
  */
 export interface StepperRefAttributes {
     getElement: () => HTMLDivElement;
+    getActiveStep: () => number | undefined;
+    setActiveStep: (step: number) => void;
     nextCallback: (e?: React.SyntheticEvent) => void;
     prevCallback: (e?: React.SyntheticEvent) => void;
 }
