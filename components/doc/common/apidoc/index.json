@@ -47206,31 +47206,6 @@
                         }
                     ],
                     "callbacks": []
-                },
-                "StepperRefAttributes": {
-                    "description": "Defines custom RefAttributes methods",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "getElement",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "Function"
-                        },
-                        {
-                            "name": "nextCallback",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "Function"
-                        },
-                        {
-                            "name": "prevCallback",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "Function"
-                        }
-                    ],
-                    "callbacks": []
                 }
             }
         },
