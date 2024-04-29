@@ -146,6 +146,13 @@ export const TreeSelect = React.memo(
             }
         };
 
+        const onClearIconKeyDown = (event) => {
+            if (event.key === 'Enter' || event.code === 'Space') {
+                clear(event);
+                event.preventDefault();
+            }
+        };
+
         const onNodeSelect = (node) => {
             props.onNodeSelect && props.onNodeSelect(node);
             isSingleSelectionMode && hide();
@@ -628,7 +635,10 @@ export const TreeSelect = React.memo(
                 const clearIconProps = mergeProps(
                     {
                         className: cx('clearIcon'),
-                        onPointerUp: clear
+                        onPointerUp: clear,
+                        tabIndex: props.tabIndex || '0',
+                        onKeyDown: onClearIconKeyDown,
+                        'aria-label': localeOption('clear')
                     },
                     ptm('clearIcon')
                 );
