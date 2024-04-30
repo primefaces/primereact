@@ -1413,6 +1413,11 @@
                 margin: 1rem 0 1.25rem;
             }
 
+            .discount {
+                color: var(--text-color-secondary);
+                text-decoration: line-through;
+            }
+
             button {
                 padding: 0.25rem 0.75rem;
                 border-radius: 0.375rem;
