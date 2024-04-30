@@ -27,7 +27,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         }
     };
 
-    const { ptm, ptmo, cx, sx, isUnstyled } = AccordionBase.setMetaData({
+    const { ptm, ptmo, cx, isUnstyled } = AccordionBase.setMetaData({
         ...metaData
     });
 
@@ -36,7 +36,6 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
 
     const getTabPT = (tab, key, index) => {
-        const atProps = AccordionTabBase.getCProps(tab);
         const tabMetaData = {
             // props: atProps, /* @todo */
             parent: metaData,
