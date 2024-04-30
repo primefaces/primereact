@@ -257,7 +257,7 @@ export const Chips = React.memo(
             }
         };
 
-        const onContainerFocus = (event) => {
+        const onContainerFocus = () => {
             setFocusedState(true);
         };
 
