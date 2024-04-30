@@ -256,7 +256,6 @@ export const PanelMenu = React.memo(
                 props.model.forEach((item) => {
                     if (item.expanded) {
                         changeActiveItem(null, item);
-                        item.expanded = false;
                     }
                 });
             // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -272,7 +271,7 @@ export const PanelMenu = React.memo(
             }
 
             const key = item.id || idState + '_' + index;
-            const active = isItemActive(item) || item.expanded;
+            const active = isItemActive(item);
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const headerIconProps = mergeProps(
                 {
