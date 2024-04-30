@@ -384,7 +384,7 @@ export const ListBox = React.memo(
                 const len = target.value.length;
 
                 target.setSelectionRange(len, len);
-                setFocusedOptionIndex(-1) ;
+                setFocusedOptionIndex(-1);
             } else {
                 let metaKey = event.metaKey || event.ctrlKey;
                 let optionIndex = findLastOptionIndex();
