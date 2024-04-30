@@ -423,11 +423,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         props,
         resetPosition,
         getElement: () => dialogRef.current,
-        getMask: () => maskRef.current,
-        getContent: () => contentRef.current,
-        getHeader: () => headerRef.current,
-        getFooter: () => footerRef.current,
-        getCloseButton: () => closeRef.current
+        getContent: () => contentRef.current
     }));
 
     const createCloseIcon = () => {
