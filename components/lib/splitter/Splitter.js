@@ -199,7 +199,10 @@ export const Splitter = React.memo(
         };
 
         const onResizeEnd = (event) => {
-            const sizes = [prevPanelSizeNew.current, nextPanelSizeNew.current];
+            let sizes = [...panelSizes];
+
+            sizes[prevPanelIndex.current] = prevPanelSizeNew.current;
+            sizes[prevPanelIndex.current + 1] = nextPanelSizeNew.current;
 
             if (props.onResizeEnd) {
                 props.onResizeEnd({
@@ -371,8 +374,11 @@ export const Splitter = React.memo(
         React.useEffect(() => {
             const panelElements = [...elementRef.current.children].filter((child) => DomHandler.getAttribute(child, 'data-pc-section') === 'splitterpanel.root');
 
+            let _panelSizes = [];
+
             panelElements.map((panelElement, i) => {
                 prevSize.current = panelSize(panelSizes, 0);
+                _panelSizes[i] = panelSize(panelSizes, i);
 
                 if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, "[data-pc-name='splitter']") && DomHandler.find(panelElement, "[data-pc-section='root']"))) {
                     !isUnstyled() && DomHandler.addClass(panelElement, 'p-splitter-panel-nested');
@@ -380,6 +386,8 @@ export const Splitter = React.memo(
                     setNested(true);
                 }
             });
+
+            setPanelSizes(_panelSizes);
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
