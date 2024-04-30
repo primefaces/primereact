@@ -3,8 +3,10 @@ import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/A
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { IconField } from '../iconfield/IconField';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
+import { InputIcon } from '../inputicon/InputIcon';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
@@ -297,6 +299,10 @@ export const Password = React.memo(
         };
 
         const createIcon = () => {
+            if (!props.toggleMask) {
+                return null;
+            }
+
             let icon;
 
             const hideIconProps = mergeProps(
@@ -335,24 +341,20 @@ export const Password = React.memo(
 
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
-            if (props.toggleMask) {
-                let content = eyeIcon;
+            let content = eyeIcon;
 
-                if (props.icon) {
-                    const defaultIconOptions = {
-                        onClick: toggleMask,
-                        className,
-                        element: content,
-                        props
-                    };
+            if (props.icon) {
+                const defaultIconOptions = {
+                    onClick: toggleMask,
+                    className,
+                    element: content,
+                    props
+                };
 
-                    content = ObjectUtils.getJSXElement(props.icon, defaultIconOptions);
-                }
-
-                return content;
+                content = ObjectUtils.getJSXElement(props.icon, defaultIconOptions);
             }
 
-            return null;
+            return content;
         };
 
         const createPanel = () => {
@@ -476,10 +478,20 @@ export const Password = React.memo(
             ptm('input')
         );
 
+        let input = <InputText {...inputTextProps} />;
+
+        if (icon) {
+            input = (
+                <IconField>
+                    <InputIcon>{icon}</InputIcon>
+                    {input}
+                </IconField>
+            );
+        }
+
         return (
             <div {...rootProps}>
-                <InputText {...inputTextProps} />
-                {icon}
+                {input}
                 {panel}
             </div>
         );
