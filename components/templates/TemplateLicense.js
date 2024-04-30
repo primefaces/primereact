@@ -9,7 +9,7 @@ const TemplateLicense = ({ license }) => {
                         <div key={i} className="template-license-card">
                             <span>{title}</span>
                             <div className="template-license-price flex gap-3">
-                                <h2 className={discountPrice && 'discount'} >{price}</h2>
+                                <h2 className={discountPrice && 'discount'}>{price}</h2>
                                 <h2 hidden={!discountPrice}>{discountPrice}</h2>
                             </div>
                             <div className="template-license-card-included">
