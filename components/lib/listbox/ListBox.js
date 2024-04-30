@@ -384,7 +384,7 @@ export const ListBox = React.memo(
                 const len = target.value.length;
 
                 target.setSelectionRange(len, len);
-                focusedOptionIndex = -1;
+                setFocusedOptionIndex(-1);
             } else {
                 let metaKey = event.metaKey || event.ctrlKey;
                 let optionIndex = findLastOptionIndex();
@@ -580,13 +580,6 @@ export const ListBox = React.memo(
             return isEquals(props.value, optionValue);
         };
 
-        const filter = (option) => {
-            const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
-            const optionLabel = getOptionLabel(option).toLocaleLowerCase(props.filterLocale);
-
-            return optionLabel.indexOf(filterValue) > -1;
-        };
-
         const getOptionLabel = (option) => {
             return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option && option.label !== undefined ? option.label : option;
         };
@@ -638,7 +631,7 @@ export const ListBox = React.memo(
             autoUpdateModel(true);
         };
 
-        const onListBlur = (event) => {
+        const onListBlur = () => {
             setFocused(false);
             setFocusedOptionIndex(-1);
             setStartRangeIndex(-1);
