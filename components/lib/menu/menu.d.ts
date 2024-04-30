@@ -24,6 +24,25 @@ export declare type MenuPassThroughTransitionType = ReactCSSTransitionProps | ((
 export interface MenuPassThroughMethodOptions {
     props: MenuProps;
     state: MenuState;
+    context: MenuContext;
+}
+
+/**
+ * Defines current options in Menu component.
+ */
+export interface MenuContext {
+    /**
+     * Current menuitem
+     */
+    item: MenuItem;
+    /**
+     * Index of the menuitem
+     */
+    index: number;
+    /**
+     * Id of the submenu header containing the menuitem
+     */
+    parentId: string | null;
 }
 
 /**

@@ -29,6 +29,10 @@ export const Menu = React.memo(
             }
         });
 
+        const getMenuItemPTOptions = (key, menuContext) => {
+            return ptm(key, { context: menuContext });
+        };
+
         useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -335,20 +339,21 @@ export const Menu = React.memo(
                 return null;
             }
 
+            const menuContext = { item, index, parentId };
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                ptm('icon')
+                getMenuItemPTOptions('icon', menuContext)
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
                     className: cx('label')
                 },
-                ptm('label')
+                getMenuItemPTOptions('label', menuContext)
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const key = item.id || (parentId || idState) + '_' + index;
@@ -358,7 +363,7 @@ export const Menu = React.memo(
                     onMouseMove: (event) => onItemMouseMove(event, key),
                     className: cx('content')
                 },
-                ptm('content')
+                getMenuItemPTOptions('content', menuContext)
             );
 
             const actionProps = mergeProps(
@@ -373,7 +378,7 @@ export const Menu = React.memo(
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },
-                ptm('action')
+                getMenuItemPTOptions('action', menuContext)
             );
 
             let content = (
@@ -412,7 +417,7 @@ export const Menu = React.memo(
                     'data-p-focused': focusedOptionId() === key,
                     'data-p-disabled': item.disabled || false
                 },
-                ptm('menuitem')
+                getMenuItemPTOptions('menuitem', menuContext)
             );
 
             return <li {...menuitemProps}>{content}</li>;
