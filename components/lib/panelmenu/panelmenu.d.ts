@@ -49,6 +49,10 @@ export interface PanelMenuPassThroughOptions {
      */
     headerAction?: PanelMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
+     * Uses to pass attributes to the header content's DOM element.
+     */
+    headerContent?: PanelMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the submenuIcon's DOM element.
      */
     submenuIcon?: PanelMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
@@ -182,21 +186,25 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
     transitionOptions?: CSSTransitionProps | undefined;
+
     /**
      * Callback to invoke when a panel gets expanded.
      * @param {PanelMenuHeaderItemClickEvent} event - custom event.
      */
     onShow?(event: PanelMenuHeaderItemClickEvent): void;
+
     /**
      * Callback to invoke when a panel gets collapsed.
      * @param {PanelMenuHeaderItemClickEvent} event - custom event.
      */
     onHide?(event: PanelMenuHeaderItemClickEvent): void;
+
     /**
      * Callback to when the expandedKeys changes.
      * @param {*} value - New value.
      */
     onExpandedKeysChange?(value: any): void;
+
     /**
      * Used to get the child elements of the component.
      * @readonly
