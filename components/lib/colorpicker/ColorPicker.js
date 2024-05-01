@@ -219,10 +219,6 @@ export const ColorPicker = React.memo(
             hsbValue.current = toHSB(value);
         };
 
-        const areHSBEqual = (val1, val2) => {
-            return val1.h === val2.h && val1.s === val2.s && val1.b === val2.b;
-        };
-
         const onChange = (value) => {
             if (props.onChange) {
                 props.onChange({
@@ -334,31 +330,6 @@ export const ColorPicker = React.memo(
                 s: Math.min(100, Math.max(0, hsb.s)),
                 b: Math.min(100, Math.max(0, hsb.b))
             };
-        };
-
-        const validateRGB = (rgb) => {
-            return {
-                r: Math.min(255, Math.max(0, rgb.r)),
-                g: Math.min(255, Math.max(0, rgb.g)),
-                b: Math.min(255, Math.max(0, rgb.b))
-            };
-        };
-
-        const validateHEX = (hex) => {
-            let len = 6 - hex.length;
-
-            if (len > 0) {
-                let o = [];
-
-                for (let i = 0; i < len; i++) {
-                    o.push('0');
-                }
-
-                o.push(hex);
-                hex = o.join('');
-            }
-
-            return hex;
         };
 
         const HEXtoRGB = (hex) => {
