@@ -48,7 +48,7 @@ export const BreadCrumb = React.memo(
             return url === lastPath ? 'page' : undefined;
         };
 
-        const createHome = (index) => {
+        const createHome = () => {
             const home = props.home;
 
             if (home) {
