@@ -1859,6 +1859,28 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      */
     public saveState(): void;
     /**
+     * Retrieves the currently applied filters for the data table.
+     * @returns {DataTableFilterMeta | undefined} The currently applied filters, if any, or undefined if no filters are set.
+     */
+    public getFilterMeta(): DataTableFilterMeta | undefined;
+    /**
+     * Sets the filters for the data table.
+     * @param {DataTableFilterMeta} filters - The filters to be applied to the data table.
+     * @returns {void}
+     */
+    public setFilterMeta(filters: DataTableFilterMeta): void;
+    /**
+     * Retrieves the currently applied multiple sort metadata for the data table.
+     * @returns {DataTableSortMeta[] | undefined} The currently applied sorts, if any, or undefined if no sorts are set.
+     */
+    public getSortMeta(): DataTableSortMeta[] | undefined;
+    /**
+     * Sets the multiple sort metadata for the data table.
+     * @param {DataTableSortMeta[]} sorts - The sorts to be applied to the data table.
+     * @returns {void}
+     */
+    public setSortMeta(sorts: DataTableSortMeta[]): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */
