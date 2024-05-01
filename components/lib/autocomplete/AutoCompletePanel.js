@@ -98,7 +98,7 @@ export const AutoCompletePanel = React.memo(
             );
         };
 
-        const createGroupChildren = (optionGroup, i, style) => {
+        const createGroupChildren = (optionGroup, i) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
             return groupChildren.map((item, j) => {
