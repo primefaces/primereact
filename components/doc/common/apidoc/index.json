@@ -16344,6 +16344,18 @@
                             "description": "Used to get container element."
                         },
                         {
+                            "name": "getFilterMeta",
+                            "parameters": [],
+                            "returnType": "undefined | DataTableFilterMeta",
+                            "description": "Retrieves the currently applied filters for the data table."
+                        },
+                        {
+                            "name": "getSortMeta",
+                            "parameters": [],
+                            "returnType": "undefined | DataTableSortMeta[]",
+                            "description": "Retrieves the currently applied multiple sort metadata for the data table."
+                        },
+                        {
                             "name": "getTable",
                             "parameters": [],
                             "returnType": "HTMLTableElement",
@@ -16408,6 +16420,30 @@
                             "parameters": [],
                             "returnType": "void",
                             "description": "Saves the state."
+                        },
+                        {
+                            "name": "setFilterMeta",
+                            "parameters": [
+                                {
+                                    "name": "filters",
+                                    "type": "DataTableFilterMeta",
+                                    "description": "The filters to be applied to the data table."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Sets the filters for the data table."
+                        },
+                        {
+                            "name": "setSortMeta",
+                            "parameters": [
+                                {
+                                    "name": "sorts",
+                                    "type": "DataTableSortMeta[]",
+                                    "description": "The sorts to be applied to the data table."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Sets the multiple sort metadata for the data table."
                         }
                     ]
                 },
