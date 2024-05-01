@@ -49,6 +49,10 @@ export interface PanelMenuPassThroughOptions {
      */
     headerAction?: PanelMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
+     * Uses to pass attributes to the header content's DOM element.
+     */
+    headerContent?: PanelMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the submenuIcon's DOM element.
      */
     submenuIcon?: PanelMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
