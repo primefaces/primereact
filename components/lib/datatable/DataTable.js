@@ -1531,6 +1531,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         restoreState,
         restoreTableState,
         saveState,
+        getFilterMeta: () => filtersState,
+        setFilterMeta: (filters) => setFiltersState(filters),
+        getSortMeta: () => multiSortMetaState,
+        setSortMeta: (sorts) => setMultiSortMetaState(sorts),
         getElement: () => elementRef.current,
         getTable: () => tableRef.current,
         getVirtualScroller: () => virtualScrollerRef.current
