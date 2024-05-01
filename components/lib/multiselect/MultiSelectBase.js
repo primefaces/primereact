@@ -53,7 +53,7 @@ const classes = {
             'p-disabled': props.disabled,
             'p-focus': props.focusedOptionIndex === props.index
         }),
-    checkboxContainer: 'p-checkbox p-component',
+    checkboxContainer: 'p-multiselect-checkbox',
     checkboxIcon: 'p-checkbox-icon p-c',
     transition: 'p-connected-overlay'
 };
