@@ -880,7 +880,7 @@ export const Calendar = React.memo(
         };
 
         const convertTo24Hour = (hour, pm) => {
-            if (props.hourFormat == '12') {
+            if (props.hourFormat === '12') {
                 return hour === 12 ? (pm ? 12 : 0) : pm ? hour + 12 : hour;
             }
 
@@ -1608,7 +1608,7 @@ export const Calendar = React.memo(
 
             if (isMultipleSelection()) {
                 if (isSelected(dateMeta)) {
-                    let value = props.value.filter((date, i) => {
+                    let value = props.value.filter((date) => {
                         return !isDateEquals(date, dateMeta);
                     });
 
