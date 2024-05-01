@@ -40934,6 +40934,13 @@
                             "description": "Uses to pass attributes to the header action's DOM element."
                         },
                         {
+                            "name": "headerContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header content's DOM element."
+                        },
+                        {
                             "name": "submenuIcon",
                             "optional": true,
                             "readonly": false,
