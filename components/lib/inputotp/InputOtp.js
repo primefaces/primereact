@@ -79,6 +79,10 @@ export const InputOtp = React.memo(
         };
 
         const onInput = (event, index) => {
+            if (event.nativeEvent.inputType === 'insertFromPaste') {
+                return; // handled in onPaste
+            }
+
             updateTokens(event, index);
 
             if (event.nativeEvent.inputType === 'deleteContentBackward') {
@@ -91,13 +95,13 @@ export const InputOtp = React.memo(
         const onPaste = (event) => {
             let paste = event.clipboardData.getData('text');
 
-
             if (paste.length) {
                 let pastedCode = paste.substring(0, props.length + 1);
 
                 if (!props.integerOnly || !isNaN(pastedCode)) {
                     const newTokens = pastedCode.split('');
 
+                    setTokens(newTokens);
                     onChange(event, newTokens);
                 }
             }
