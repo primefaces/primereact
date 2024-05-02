@@ -139,19 +139,16 @@ export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
-
     /**
      * Callback to invoke when menu receives focus.
      * @param {React.SyntheticEvent} event - Browser event.
      */
     onFocus?(event: React.SyntheticEvent): void;
-
     /**
      * Callback to invoke when menu loses focus.
      * @param {React.SyntheticEvent} event - Browser event.
      */
     onBlur?(event: React.SyntheticEvent): void;
-
     /**
      * The template of trailing element.
      */
