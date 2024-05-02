@@ -117,7 +117,7 @@ export interface StepperProps {
     /**
      * Callback to invoke when an active panel is changed.
      */
-    onChange?(event: StepperChangeEvent): void;
+    onChangeStep?(event: StepperChangeEvent): void;
     /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {StepperPassThroughOptions}
