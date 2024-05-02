@@ -47157,7 +47157,7 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onChange",
+                            "name": "onChangeStep",
                             "parameters": [
                                 {
                                     "name": "event",
@@ -47265,7 +47265,7 @@
                 },
                 "StepperChangeEvent": {
                     "description": "Custom tab change event.",
-                    "relatedProp": "onChange",
+                    "relatedProp": "StepperProps.onChange",
                     "props": [
                         {
                             "name": "originalEvent",
