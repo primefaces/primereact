@@ -54,6 +54,10 @@ export interface MenubarPassThroughOptions {
      */
     label?: MenubarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the submenu's DOM element.
+     */
+    submenu?: MenubarPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
      * Uses to pass attributes to the submenu icon's DOM element.
      */
     submenuIcon?: MenubarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
