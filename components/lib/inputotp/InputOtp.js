@@ -79,6 +79,10 @@ export const InputOtp = React.memo(
         };
 
         const onInput = (event, index) => {
+            if (event.nativeEvent.inputType === 'insertFromPaste') {
+                return; // handled in onPaste
+            }
+
             updateTokens(event, index);
 
             if (event.nativeEvent.inputType === 'deleteContentBackward') {
