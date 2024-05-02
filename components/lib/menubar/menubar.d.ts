@@ -54,6 +54,10 @@ export interface MenubarPassThroughOptions {
      */
     label?: MenubarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the submenu's DOM element.
+     */
+    submenu?: MenubarPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
      * Uses to pass attributes to the submenu icon's DOM element.
      */
     submenuIcon?: MenubarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
@@ -135,16 +139,19 @@ export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
+
     /**
      * Callback to invoke when menu receives focus.
      * @param {React.SyntheticEvent} event - Browser event.
      */
     onFocus?(event: React.SyntheticEvent): void;
+
     /**
      * Callback to invoke when menu loses focus.
      * @param {React.SyntheticEvent} event - Browser event.
      */
     onBlur?(event: React.SyntheticEvent): void;
+
     /**
      * The template of trailing element.
      */
@@ -188,11 +195,13 @@ export declare class Menubar extends React.Component<MenubarProps, any> {
      * @return {HTMLDivElement} Container element
      */
     public getElement(): HTMLDivElement;
+
     /**
      * Used to get root menu element.
      * @return {HTMLElement} Root menu element
      */
     public getRootMenu(): HTMLElement;
+
     /**
      * Used to get menu button element.
      * @return {HTMLElement} Menu button element
