@@ -650,7 +650,20 @@ export const ListBox = React.memo(
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
         };
 
+        const flatOptions = (options) => {
+            return (options || []).reduce((result, option, index) => {
+                result.push({ optionGroup: option, group: true, index, code: option.code, label: option.label });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
+
+                return result;
+            }, []);
+        };
+
         const getVisibleOptions = () => {
+
             if (hasFilter) {
                 const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
