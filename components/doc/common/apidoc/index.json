@@ -34811,6 +34811,13 @@
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
+                            "name": "submenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the submenu's DOM element."
+                        },
+                        {
                             "name": "submenuIcon",
                             "optional": true,
                             "readonly": false,
@@ -41686,6 +41693,13 @@
                             "readonly": false,
                             "type": "PasswordPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "iconField",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the IconField component"
                         }
                     ],
                     "callbacks": []
