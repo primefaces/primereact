@@ -1061,7 +1061,7 @@ export const Calendar = React.memo(
                 onClearButtonClick(event);
             }
 
-            if (value !== null) {
+            if (value && props.onSelect) {
                 const day = value.getDate();
                 const month = value.getMonth();
                 const year = value.getFullYear();
