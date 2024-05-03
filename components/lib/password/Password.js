@@ -490,8 +490,6 @@ export const Password = React.memo(
                 ptm('iconField')
             ) : {} 
 
-            console.log(iconFieldProps)
-
             input = (
                 <IconField {...iconFieldProps} >
                     <InputIcon>{icon}</InputIcon>
