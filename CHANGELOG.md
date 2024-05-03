@@ -1,5 +1,30 @@
 # Changelog
 
+## [10.6.5](https://github.com/primefaces/primereact/tree/10.6.5) (2024-05-03)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.6.4...10.6.5)
+
+**Fixed Bugs:**
+
+-   pt headerContent fix in [\#6529](https://github.com/primefaces/primereact/pull/6529)
+-   fix optionLabel in [\#6520](https://github.com/primefaces/primereact/pull/6520)
+-   remove unused codes in [\#6509](https://github.com/primefaces/primereact/pull/6509)
+-   remove unused code in [\#6511](https://github.com/primefaces/primereact/pull/6511)
+-   fix unexpected type coercion and removed unused code in [\#6513](https://github.com/primefaces/primereact/pull/6513)
+-   removed unused code in [\#6515](https://github.com/primefaces/primereact/pull/6515)
+-   removed unused codes in [\#6517](https://github.com/primefaces/primereact/pull/6517)
+-   Multiselect checkbox CSS class in [\#6532](https://github.com/primefaces/primereact/pull/6532)
+-   Datatable expose sorts and filters in ref in [\#6533](https://github.com/primefaces/primereact/pull/6533)
+-   MeterGroup correct CSS handle style in [\#6534](https://github.com/primefaces/primereact/pull/6534)
+-   Stepper fix TS docs to onChangeStep in [\#6546](https://github.com/primefaces/primereact/pull/6546)
+-   Button as link docs in [\#6547](https://github.com/primefaces/primereact/pull/6547)
+-   pt submenu fix in [\#6544](https://github.com/primefaces/primereact/pull/6544)
+-   AccordionTab PT error in [\#6549](https://github.com/primefaces/primereact/pull/6549)
+-   Remove setTokens in onPaste on InputOtp to avoid duplicate values in [\#6526](https://github.com/primefaces/primereact/pull/6526)
+-   dropdown filter fix in [\#6551](https://github.com/primefaces/primereact/pull/6551)
+-   fix updateViewDate event in [\#6559](https://github.com/primefaces/primereact/pull/6559)
+-   Missing PT Option for IconField in Password in [\#6560](https://github.com/primefaces/primereact/pull/6560)
+
 ## [10.6.4](https://github.com/primefaces/primereact/tree/10.6.4) (2024-04-3O)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.6.3...10.6.4)
