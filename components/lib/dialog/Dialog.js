@@ -61,10 +61,26 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
-    const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
-    const [bindDocumentResizeEndListener, unbindDocumentResizEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onResizeEnd(event) });
-    const [bindDocumentDragListener, unbindDocumentDragListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onDrag(event) });
-    const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
+    const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({
+        type: 'mousemove',
+        target: () => window.document,
+        listener: (event) => onResize(event)
+    });
+    const [bindDocumentResizeEndListener, unbindDocumentResizEndListener] = useEventListener({
+        type: 'mouseup',
+        target: () => window.document,
+        listener: (event) => onResizeEnd(event)
+    });
+    const [bindDocumentDragListener, unbindDocumentDragListener] = useEventListener({
+        type: 'mousemove',
+        target: () => window.document,
+        listener: (event) => onDrag(event)
+    });
+    const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({
+        type: 'mouseup',
+        target: () => window.document,
+        listener: (event) => onDragEnd(event)
+    });
 
     const onClose = (event) => {
         props.onHide();
@@ -264,8 +280,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const onExited = () => {
-        props.onHide && props.onHide();
-
         dragging.current = false;
         ZIndexUtils.clear(maskRef.current);
         setMaskVisibleState(false);
@@ -616,7 +630,14 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             message: props?.children?.[1]?.props?.children
         };
 
-        const templateElementProps = { headerRef, contentRef, footerRef, closeRef, hide: onClose, message: messageProps };
+        const templateElementProps = {
+            headerRef,
+            contentRef,
+            footerRef,
+            closeRef,
+            hide: onClose,
+            message: messageProps
+        };
 
         return ObjectUtils.getJSXElement(inProps.content, templateElementProps);
     };
