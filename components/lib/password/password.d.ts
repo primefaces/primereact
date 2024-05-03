@@ -75,11 +75,10 @@ export interface PasswordPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: PasswordPassThroughTransitionType;
-     /**
+    /**
      * Uses to pass attributes to the IconField component
      */
     iconField?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-
 }
 
 /**

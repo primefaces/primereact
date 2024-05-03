@@ -20,7 +20,7 @@ const classes = {
     info: ({ strength }) => classNames('p-password-info', strength),
     showIcon: 'p-password-show-icon',
     hideIcon: 'p-password-hide-icon',
-    transition: 'p-connected-overlay',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `
