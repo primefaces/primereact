@@ -481,11 +481,10 @@ export const Password = React.memo(
         let input = <InputText {...inputTextProps} />;
 
         if (icon) {
-            const iconField = props.iconField;
-            const iconFieldProps = iconField
+            const iconFieldProps = props.iconField
                 ? mergeProps(
                       {
-                          className: classNames(iconField.className)
+                          className: classNames(props.iconField.className)
                       },
                       ptm('iconField')
                   )
