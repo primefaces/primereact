@@ -85,6 +85,7 @@ export const PasswordBase = ComponentBase.extend({
         header: null,
         content: null,
         footer: null,
+        iconFieldClassName: null,
         showIcon: null,
         hideIcon: null,
         icon: null,
