@@ -14,7 +14,7 @@ export function HeadlessDoc(props) {
 <Dialog
     visible={visible}
     modal
-    onHide={() => setVisible(false)}
+    onHide={() => {if (!visible) return; setVisible(false); }}
     content={({ hide }) => (
         <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
             <...>
@@ -36,7 +36,7 @@ export default function HeadlessDemo() {
             <Dialog
                 visible={visible}
                 modal
-                onHide={() => setVisible(false)}
+                onHide={() => {if (!visible) return; setVisible(false); }}
                 content={({ hide }) => (
                     <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="block mx-auto">
@@ -96,7 +96,7 @@ export default function HeadlessDemo() {
             <Dialog
                 visible={visible}
                 modal
-                onHide={() => setVisible(false)}
+                onHide={() => {if (!visible) return; setVisible(false); }}
                 content={({ hide }) => (
                     <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="block mx-auto">
@@ -156,7 +156,10 @@ export default function HeadlessDemo() {
                 <Dialog
                     visible={visible}
                     modal
-                    onHide={() => setVisible(false)}
+                    onHide={() => {
+                        if (!visible) return;
+                        setVisible(false);
+                    }}
                     content={({ hide }) => (
                         <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" className="block mx-auto">
