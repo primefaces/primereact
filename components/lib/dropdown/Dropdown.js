@@ -557,7 +557,10 @@ export const Dropdown = React.memo(
                 if (option) {
                     return option;
                 } else if (groupIndex > 0) {
-                    return findPrevOption({ group: groupIndex - 1, option: getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
+                    return findPrevOption({
+                        group: groupIndex - 1,
+                        option: getOptionGroupChildren(visibleOptions[groupIndex - 1]).length
+                    });
                 }
 
                 return null;
@@ -883,11 +886,11 @@ export const Dropdown = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : ObjectUtils.resolveFieldData(option, 'label') || option;
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
+            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : ObjectUtils.resolveFieldData(option, 'value') || option;
         };
 
         const getOptionRenderKey = (option) => {

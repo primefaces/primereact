@@ -452,10 +452,6 @@ export const AutoComplete = React.memo(
             return props.value ? props.value.some((v) => ObjectUtils.equals(v, val)) : false;
         };
 
-        const findOptionIndex = (option) => {
-            return props.suggestions ? props.suggestions.findIndex((s) => ObjectUtils.equals(s, option)) : -1;
-        };
-
         const getScrollableElement = () => {
             return overlayRef.current.firstChild;
         };

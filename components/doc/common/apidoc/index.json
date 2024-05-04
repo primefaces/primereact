@@ -16344,6 +16344,18 @@
                             "description": "Used to get container element."
                         },
                         {
+                            "name": "getFilterMeta",
+                            "parameters": [],
+                            "returnType": "undefined | DataTableFilterMeta",
+                            "description": "Retrieves the currently applied filters for the data table."
+                        },
+                        {
+                            "name": "getSortMeta",
+                            "parameters": [],
+                            "returnType": "undefined | DataTableSortMeta[]",
+                            "description": "Retrieves the currently applied multiple sort metadata for the data table."
+                        },
+                        {
                             "name": "getTable",
                             "parameters": [],
                             "returnType": "HTMLTableElement",
@@ -16408,6 +16420,30 @@
                             "parameters": [],
                             "returnType": "void",
                             "description": "Saves the state."
+                        },
+                        {
+                            "name": "setFilterMeta",
+                            "parameters": [
+                                {
+                                    "name": "filters",
+                                    "type": "DataTableFilterMeta",
+                                    "description": "The filters to be applied to the data table."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Sets the filters for the data table."
+                        },
+                        {
+                            "name": "setSortMeta",
+                            "parameters": [
+                                {
+                                    "name": "sorts",
+                                    "type": "DataTableSortMeta[]",
+                                    "description": "The sorts to be applied to the data table."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Sets the multiple sort metadata for the data table."
                         }
                     ]
                 },
@@ -34775,6 +34811,13 @@
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
+                            "name": "submenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the submenu's DOM element."
+                        },
+                        {
                             "name": "submenuIcon",
                             "optional": true,
                             "readonly": false,
@@ -40934,6 +40977,13 @@
                             "description": "Uses to pass attributes to the header action's DOM element."
                         },
                         {
+                            "name": "headerContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header content's DOM element."
+                        },
+                        {
                             "name": "submenuIcon",
                             "optional": true,
                             "readonly": false,
@@ -41643,6 +41693,13 @@
                             "readonly": false,
                             "type": "PasswordPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "iconField",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the IconField component"
                         }
                     ],
                     "callbacks": []
@@ -47114,7 +47171,7 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
-                            "name": "onChange",
+                            "name": "onChangeStep",
                             "parameters": [
                                 {
                                     "name": "event",
@@ -47222,7 +47279,7 @@
                 },
                 "StepperChangeEvent": {
                     "description": "Custom tab change event.",
-                    "relatedProp": "onChange",
+                    "relatedProp": "StepperProps.onChange",
                     "props": [
                         {
                             "name": "originalEvent",

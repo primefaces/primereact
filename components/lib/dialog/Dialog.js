@@ -264,8 +264,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const onExited = () => {
-        props.onHide && props.onHide();
-
         dragging.current = false;
         ZIndexUtils.clear(maskRef.current);
         setMaskVisibleState(false);

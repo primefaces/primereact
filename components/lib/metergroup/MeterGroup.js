@@ -19,7 +19,7 @@ export const MeterGroup = (inProps) => {
         }
     });
 
-    useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'progressbar' });
+    useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'metergroup' });
 
     let totalPercent = 0;
     let precentages = [];

@@ -1,9 +1,9 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
 import { Button } from '@/components/lib/button/Button';
 import { Dialog } from '@/components/lib/dialog/Dialog';
 import { useState } from 'react';
-import { Avatar } from '@/components/lib/avatar/Avatar';
 
 export function TemplateDoc(props) {
     const [visible, setVisible] = useState(false);
@@ -24,7 +24,7 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
-<Dialog header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
+<Dialog header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
     <p className="m-0">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -58,7 +58,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
-            <Dialog visible={visible} modal header={headerElement} footer={footerContent} style={{ width: '50rem' }} onHide={() => setVisible(false)}>
+            <Dialog visible={visible} modal header={headerElement} footer={footerContent} style={{ width: '50rem' }} onHide={() => {if (!visible) return; setVisible(false); }}>
                 <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -93,7 +93,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
-            <Dialog visible={visible} modal header={headerElement} footer={footerContent} style={{ width: '50rem' }} onHide={() => setVisible(false)}>
+            <Dialog visible={visible} modal header={headerElement} footer={footerContent} style={{ width: '50rem' }} onHide={() => {if (!visible) return; setVisible(false); }}>
                 <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -112,7 +112,17 @@ export default function TemplateDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
-                <Dialog visible={visible} modal header={headerElement} footer={footerContent} style={{ width: '50rem' }} onHide={() => setVisible(false)}>
+                <Dialog
+                    visible={visible}
+                    modal
+                    header={headerElement}
+                    footer={footerContent}
+                    style={{ width: '50rem' }}
+                    onHide={() => {
+                        if (!visible) return;
+                        setVisible(false);
+                    }}
+                >
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
