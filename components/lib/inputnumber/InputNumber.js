@@ -650,7 +650,7 @@ export const InputNumber = React.memo(
             }
 
             _currency.current.lastIndex = 0;
-            
+
             return { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex };
         };
 
