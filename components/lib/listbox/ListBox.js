@@ -729,39 +729,6 @@ export const ListBox = React.memo(
             ) : null;
         };
 
-        // const createGroupChildren = (optionGroup, style) => {
-        //     const groupChildren = getOptionGroupChildren(optionGroup);
-
-        //     return groupChildren.map((option, j) => {
-        //         const optionLabel = getOptionLabel(option);
-        //         const optionKey = j + '_' + getOptionRenderKey(option);
-        //         const disabled = isOptionDisabled(option);
-
-        //         return (
-        //             <ListBoxItem
-        //                 id={id.current + '_' + j}
-        //                 hostName="ListBox"
-        //                 optionKey={optionKey}
-        //                 key={optionKey}
-        //                 label={optionLabel}
-        //                 option={option}
-        //                 style={style}
-        //                 template={props.itemTemplate}
-        //                 selected={isSelected(option)}
-        //                 onOptionMouseDown={onOptionMouseDown}
-        //                 onOptionMouseMove={onOptionMouseMove}
-        //                 onClick={onOptionSelect}
-        //                 index={j}
-        //                 focusedOptionIndex={focusedOptionIndex}
-        //                 onTouchEnd={onOptionTouchEnd}
-        //                 disabled={disabled}
-        //                 ptCallbacks={ptCallbacks}
-        //                 metaData={metaData}
-        //             />
-        //         );
-        //     });
-        // };
-
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
