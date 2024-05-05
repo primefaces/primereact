@@ -732,27 +732,6 @@ export const ListBox = React.memo(
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
-            // if (props.optionGroupLabel) {
-            //     const groupChildrenContent = createGroupChildren(option, style);
-            //     const key = index + '_' + getOptionGroupRenderKey(option);
-
-            //     const itemGroupProps = mergeProps(
-            //         {
-            //             className: ptCallbacks.cx('itemGroup'),
-            //             style: ptCallbacks.sx('itemGroup', { scrollerOptions }),
-            //             role: 'group'
-            //         },
-            //         ptCallbacks.ptm('itemGroup')
-            //     );
-
-            //     return (
-            //         <React.Fragment key={key}>
-            //             <li {...itemGroupProps}>{groupContent}</li>
-            //             {groupChildrenContent}
-            //         </React.Fragment>
-            //     );
-            // }
-
             const optionLabel = getOptionLabel(option);
             const optionKey = index + '_' + getOptionRenderKey(option);
             const disabled = isOptionDisabled(option);
