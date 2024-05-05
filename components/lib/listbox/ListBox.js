@@ -665,7 +665,6 @@ export const ListBox = React.memo(
         const getVisibleOptions = () => {
             const options = props.optionGroupLabel ? flatOptions(props.options) : props.options;
 
-
             if (hasFilter) {
                 const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
@@ -730,47 +729,70 @@ export const ListBox = React.memo(
             ) : null;
         };
 
-        const createGroupChildren = (optionGroup, style) => {
-            const groupChildren = getOptionGroupChildren(optionGroup);
+        // const createGroupChildren = (optionGroup, style) => {
+        //     const groupChildren = getOptionGroupChildren(optionGroup);
 
-            return groupChildren.map((option, j) => {
-                const optionLabel = getOptionLabel(option);
-                const optionKey = j + '_' + getOptionRenderKey(option);
-                const disabled = isOptionDisabled(option);
+        //     return groupChildren.map((option, j) => {
+        //         const optionLabel = getOptionLabel(option);
+        //         const optionKey = j + '_' + getOptionRenderKey(option);
+        //         const disabled = isOptionDisabled(option);
 
-                return (
-                    <ListBoxItem
-                        id={id.current + '_' + j}
-                        hostName="ListBox"
-                        optionKey={optionKey}
-                        key={optionKey}
-                        label={optionLabel}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={isSelected(option)}
-                        onOptionMouseDown={onOptionMouseDown}
-                        onOptionMouseMove={onOptionMouseMove}
-                        onClick={onOptionSelect}
-                        index={j}
-                        focusedOptionIndex={focusedOptionIndex}
-                        onTouchEnd={onOptionTouchEnd}
-                        disabled={disabled}
-                        ptCallbacks={ptCallbacks}
-                        metaData={metaData}
-                    />
-                );
-            });
-        };
+        //         return (
+        //             <ListBoxItem
+        //                 id={id.current + '_' + j}
+        //                 hostName="ListBox"
+        //                 optionKey={optionKey}
+        //                 key={optionKey}
+        //                 label={optionLabel}
+        //                 option={option}
+        //                 style={style}
+        //                 template={props.itemTemplate}
+        //                 selected={isSelected(option)}
+        //                 onOptionMouseDown={onOptionMouseDown}
+        //                 onOptionMouseMove={onOptionMouseMove}
+        //                 onClick={onOptionSelect}
+        //                 index={j}
+        //                 focusedOptionIndex={focusedOptionIndex}
+        //                 onTouchEnd={onOptionTouchEnd}
+        //                 disabled={disabled}
+        //                 ptCallbacks={ptCallbacks}
+        //                 metaData={metaData}
+        //             />
+        //         );
+        //     });
+        // };
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
-            if (props.optionGroupLabel) {
-                const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style);
-                const key = index + '_' + getOptionGroupRenderKey(option);
+            // if (props.optionGroupLabel) {
+            //     const groupChildrenContent = createGroupChildren(option, style);
+            //     const key = index + '_' + getOptionGroupRenderKey(option);
 
+            //     const itemGroupProps = mergeProps(
+            //         {
+            //             className: ptCallbacks.cx('itemGroup'),
+            //             style: ptCallbacks.sx('itemGroup', { scrollerOptions }),
+            //             role: 'group'
+            //         },
+            //         ptCallbacks.ptm('itemGroup')
+            //     );
+
+            //     return (
+            //         <React.Fragment key={key}>
+            //             <li {...itemGroupProps}>{groupContent}</li>
+            //             {groupChildrenContent}
+            //         </React.Fragment>
+            //     );
+            // }
+
+            const optionLabel = getOptionLabel(option);
+            const optionKey = index + '_' + getOptionRenderKey(option);
+            const disabled = isOptionDisabled(option);
+
+            if (option.group && props.optionGroupLabel) {
+                const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
+                const key = index + '_' + getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
                         className: ptCallbacks.cx('itemGroup'),
@@ -781,16 +803,11 @@ export const ListBox = React.memo(
                 );
 
                 return (
-                    <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{groupContent}</li>
-                        {groupChildrenContent}
-                    </React.Fragment>
+                    <li key={key} {...itemGroupProps}>
+                        {groupContent}
+                    </li>
                 );
             }
-
-            const optionLabel = getOptionLabel(option);
-            const optionKey = index + '_' + getOptionRenderKey(option);
-            const disabled = isOptionDisabled(option);
 
             return (
                 <ListBoxItem
