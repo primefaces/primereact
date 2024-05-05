@@ -663,6 +663,8 @@ export const ListBox = React.memo(
         };
 
         const getVisibleOptions = () => {
+            const options = props.optionGroupLabel ? flatOptions(props.options) : props.options;
+
 
             if (hasFilter) {
                 const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
@@ -679,13 +681,13 @@ export const ListBox = React.memo(
                         }
                     }
 
-                    return filteredGroups;
+                    return flatOptions(filteredGroups);
                 }
 
-                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
-            return props.options;
+            return options;
         };
 
         const scrollToSelectedIndex = () => {
