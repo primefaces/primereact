@@ -732,10 +732,6 @@ export const ListBox = React.memo(
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
-            const optionLabel = getOptionLabel(option);
-            const optionKey = index + '_' + getOptionRenderKey(option);
-            const disabled = isOptionDisabled(option);
-
             if (option.group && props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
                 const key = index + '_' + getOptionGroupRenderKey(option);
@@ -754,6 +750,10 @@ export const ListBox = React.memo(
                     </li>
                 );
             }
+
+            const optionLabel = getOptionLabel(option);
+            const optionKey = index + '_' + getOptionRenderKey(option);
+            const disabled = isOptionDisabled(option);
 
             return (
                 <ListBoxItem
