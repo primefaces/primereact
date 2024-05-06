@@ -664,6 +664,23 @@
                     ],
                     "returnType": "object",
                     "description": "Returns the values of locale options."
+                },
+                "ariaLabel": {
+                    "name": "ariaLabel",
+                    "parameters": [
+                        {
+                            "name": "ariaKey",
+                            "type": "string",
+                            "description": "Key of the ARIA label to look up in the locale."
+                        },
+                        {
+                            "name": "options",
+                            "type": "any",
+                            "description": "JSON options like { page: 2, user: \"John\", role: \"Admin\" }."
+                        }
+                    ],
+                    "returnType": "string",
+                    "description": "Finds an ARIA label in the locale by key and replaces options if provided."
                 }
             }
         },
