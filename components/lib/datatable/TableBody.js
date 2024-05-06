@@ -608,6 +608,7 @@ export const TableBody = React.memo(
 
             if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) {
                 event.currentTarget.draggable = true;
+                event.target.draggable = false;
             } else {
                 event.currentTarget.draggable = false;
             }

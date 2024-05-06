@@ -628,13 +628,16 @@ export const BodyCell = React.memo((props) => {
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            
+            const customIcon = getColumnProp('rowReorderIcon')
             const rowReorderIconProps = mergeProps(
                 {
                     className: cx('rowReorderIcon')
                 },
-                getColumnPTOptions('rowReorderIcon')
+                customIcon ? null : getColumnPTOptions('rowReorderIcon') 
             );
-            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
+            
+            const rowReorderIcon = customIcon || <BarsIcon {...rowReorderIconProps} />;
 
             content = showReorder ? IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props }) : null;
         } else if (expander) {
