@@ -79,6 +79,10 @@ export const InputOtp = React.memo(
         };
 
         const onInput = (event, index) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
             if (event.nativeEvent.inputType === 'insertFromPaste') {
                 return; // handled in onPaste
             }
@@ -93,6 +97,10 @@ export const InputOtp = React.memo(
         };
 
         const onPaste = (event) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
             let paste = event.clipboardData.getData('text');
 
             if (paste.length) {
@@ -117,6 +125,15 @@ export const InputOtp = React.memo(
         };
 
         const onKeydown = (event) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
+            // special keys should be ignored, if it is CTRL+V is handled in onPaste
+            if (event.altKey || event.ctrlKey || event.metaKey) {
+                return;
+            }
+
             switch (event.code) {
                 case 'ArrowLeft': {
                     moveToPrevInput(event);
@@ -148,10 +165,7 @@ export const InputOtp = React.memo(
 
                 default: {
                     // Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
-                    if (
-                        (props?.integerOnly && !(event.code === 'KeyV' || ((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9))) ||
-                        (tokens.join('').length >= props.length && event.code !== 'Delete')
-                    ) {
+                    if ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
                         event.preventDefault();
                     }
 
