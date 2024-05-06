@@ -732,7 +732,7 @@ export const ListBox = React.memo(
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
-            if (option.group && props.optionGroupLabel) {
+            if (option.group  && option.optionGroup && props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
                 const key = index + '_' + getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
