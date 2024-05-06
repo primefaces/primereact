@@ -729,6 +729,14 @@ export declare function localeOption(key: string, locale: string): any;
  */
 export declare function localeOptions(locale: string): object;
 
+/**
+ * Finds an ARIA label in the locale by key and replaces options if provided.
+ * @param {string} ariaKey - Key of the ARIA label to look up in the locale.
+ * @param {Object} options - JSON options like { page: 2, user: "John", role: "Admin" }.
+ * @returns {string} The ARIA label with replaced values.
+ */
+export declare function ariaLabel(ariaKey: string, options: any): string;
+
 // Locale Options
 export interface LocaleOptions {
     /**
