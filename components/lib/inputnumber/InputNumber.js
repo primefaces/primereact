@@ -1133,7 +1133,7 @@ export const InputNumber = React.memo(
         useUpdateEffect(() => {
             constructParser();
             changeValue();
-        }, [props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
+        }, [_locale, props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
 
         useUpdateEffect(() => {
             changeValue();
