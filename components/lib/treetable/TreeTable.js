@@ -911,7 +911,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     }));
 
     const createTableHeader = (columns, columnGroup) => {
-        const sortField = sortFieldState
+        const sortField = sortFieldState;
         const sortOrder = sortOrderState;
         const multiSortMeta = [...getMultiSortMeta()];
         const filters = getFilters();
