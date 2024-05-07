@@ -161,12 +161,11 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
         if (props.onSort) {
             props.onSort(eventMeta);
-        } else {
-            setFirstState(0);
-            setSortFieldState(eventMeta.sortField);
-            setSortOrderState(eventMeta.sortOrder);
-            setMultiSortMetaState(eventMeta.multiSortMeta);
         }
+        setFirstState(0);
+        setSortFieldState(eventMeta.sortField);
+        setSortOrderState(eventMeta.sortOrder);
+        setMultiSortMetaState(eventMeta.multiSortMeta);
 
         if (props.onValueChange) {
             props.onValueChange(
@@ -640,11 +639,11 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const getSortField = () => {
-        return props.onSort ? props.sortField : sortFieldState;
+        return sortFieldState;
     };
 
     const getSortOrder = () => {
-        return props.onSort ? props.sortOrder : sortOrderState;
+        return sortOrderState;
     };
 
     const getMultiSortMeta = () => {
