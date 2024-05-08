@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { ObjectUtils } from '../utils/Utils';
 import { InputOtpBase } from './BaseInputOtp';
@@ -173,6 +173,12 @@ export const InputOtp = React.memo(
                 }
             }
         };
+
+        useUpdateEffect(() => {
+            const value = props.value ? props.value?.toString()?.split?.('') : new Array(props.length);
+
+            setTokens(value);
+        }, [props.value]);
 
         const createInputElements = (remainingInputs) => {
             if (remainingInputs <= 0) {
