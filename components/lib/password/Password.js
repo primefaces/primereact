@@ -466,7 +466,7 @@ export const Password = React.memo(
                 invalid: props.invalid,
                 variant: props.variant,
                 style: props.inputStyle,
-                tabIndex: props.tabIndex,
+                tabIndex: props.tabIndex || '0',
                 tooltip: props.tooltip,
                 tooltipOptions: props.tooltipOptions,
                 type: type,
@@ -483,8 +483,8 @@ export const Password = React.memo(
         if (icon) {
             input = (
                 <IconField className={cx('iconField')} pt={ptm('iconField')} __parentMetadata={{ parent: metaData }}>
-                    <InputIcon>{icon}</InputIcon>
                     {input}
+                    <InputIcon>{icon}</InputIcon>
                 </IconField>
             );
         }
