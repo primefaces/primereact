@@ -34,7 +34,7 @@ export const KeyFilter = {
             return;
         }
 
-        if (e.ctrlKey || e.altKey) {
+        if (e.ctrlKey || e.altKey || e.metaKey) {
             return;
         }
 
