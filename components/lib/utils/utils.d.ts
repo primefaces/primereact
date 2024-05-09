@@ -177,20 +177,23 @@ export declare namespace ZIndexUtils {
 
 /**
  * Icon options passed to any icon.
- * ComponentProps are props from the owning component.
- * AdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example.
+ * @template ComponentProps Props from the owning component.
+ * @template AdditionalProps Any custom properties of an icon like SortIcon of the Datatable for example.
  */
 export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
     /**
-     * Icon specific properties.
+     * Icon specific properties. Size property allows FontAwesome to work properly.
+     * @type {(React.HTMLProps<unknown> & { size?: string }) | (React.SVGProps<unknown> & { size?: string })}
      */
-    iconProps: React.HTMLProps<any> | React.SVGProps<any>;
+    iconProps: (React.HTMLProps<unknown> & { size?: string }) | (React.SVGProps<unknown> & { size?: string });
     /**
      * The element representing the icon.
+     * @type {React.ReactNode}
      */
     element: React.ReactNode;
     /**
      * Properties of the owning component.
+     * @type {ComponentProps}
      */
     props?: ComponentProps;
     [key: string]: any;
