@@ -449,7 +449,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     type: 'button',
                     className: cx('closeButton'),
                     'aria-label': ariaLabel,
-                    onClick: onClose
+                    onClick: onClose,
+                    onKeyDown: (ev) => props.stopPropagationOnKeyDown && ev.stopPropagation()
                 },
                 ptm('closeButton')
             );

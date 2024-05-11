@@ -45,15 +45,15 @@ const styles = `
         background-color: transparent;
         transition-property: background-color;
     }
-    
+
     .p-dialog-visible {
         display: flex;
     }
-    
+
     .p-dialog-mask.p-component-overlay {
         pointer-events: auto;
     }
-    
+
     .p-dialog {
         display: flex;
         flex-direction: column;
@@ -62,29 +62,29 @@ const styles = `
         transform: scale(1);
         position: relative;
     }
-    
+
     .p-dialog-content {
         overflow-y: auto;
         flex-grow: 1;
     }
-    
+
     .p-dialog-header {
         display: flex;
         align-items: center;
         flex-shrink: 0;
     }
-    
+
     .p-dialog-footer {
         flex-shrink: 0;
     }
-    
+
     .p-dialog .p-dialog-header-icons {
         display: flex;
         align-items: center;
         align-self: flex-start;
         flex-shrink: 0;
     }
-    
+
     .p-dialog .p-dialog-header-icon {
         display: flex;
         align-items: center;
@@ -92,39 +92,39 @@ const styles = `
         overflow: hidden;
         position: relative;
     }
-    
+
     .p-dialog .p-dialog-title {
         flex-grow: 1;
     }
-    
+
     /* Fluid */
     .p-fluid .p-dialog-footer .p-button {
         width: auto;
     }
-    
+
     /* Animation */
     /* Center */
     .p-dialog-enter {
         opacity: 0;
         transform: scale(0.7);
     }
-    
+
     .p-dialog-enter-active {
         opacity: 1;
         transform: scale(1);
         transition: all 150ms cubic-bezier(0, 0, 0.2, 1);
     }
-    
+
     .p-dialog-enter-done {
         transform: none;
     }
-    
+
     .p-dialog-exit-active {
         opacity: 0;
         transform: scale(0.7);
         transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     /* Top, Bottom, Left, Right, Top* and Bottom* */
     .p-dialog-top .p-dialog,
     .p-dialog-bottom .p-dialog,
@@ -136,17 +136,17 @@ const styles = `
     .p-dialog-bottom-right .p-dialog {
         margin: 0.75em;
     }
-    
+
     .p-dialog-top .p-dialog-enter,
     .p-dialog-top .p-dialog-exit-active {
         transform: translate3d(0px, -100%, 0px);
     }
-    
+
     .p-dialog-bottom .p-dialog-enter,
     .p-dialog-bottom .p-dialog-exit-active {
         transform: translate3d(0px, 100%, 0px);
     }
-    
+
     .p-dialog-left .p-dialog-enter,
     .p-dialog-left .p-dialog-exit-active,
     .p-dialog-top-left .p-dialog-enter,
@@ -155,7 +155,7 @@ const styles = `
     .p-dialog-bottom-left .p-dialog-exit-active {
         transform: translate3d(-100%, 0px, 0px);
     }
-    
+
     .p-dialog-right .p-dialog-enter,
     .p-dialog-right .p-dialog-exit-active,
     .p-dialog-top-right .p-dialog-enter,
@@ -164,7 +164,7 @@ const styles = `
     .p-dialog-bottom-right .p-dialog-exit-active {
         transform: translate3d(100%, 0px, 0px);
     }
-    
+
     .p-dialog-top .p-dialog-enter-active,
     .p-dialog-bottom .p-dialog-enter-active,
     .p-dialog-left .p-dialog-enter-active,
@@ -176,7 +176,7 @@ const styles = `
         transform: translate3d(0px, 0px, 0px);
         transition: all 0.3s ease-out;
     }
-    
+
     .p-dialog-top .p-dialog-exit-active,
     .p-dialog-bottom .p-dialog-exit-active,
     .p-dialog-left .p-dialog-exit-active,
@@ -187,7 +187,7 @@ const styles = `
     .p-dialog-bottom-right .p-dialog-exit-active {
         transition: all 0.3s ease-out;
     }
-    
+
     /* Maximize */
     .p-dialog-maximized {
         transition: none;
@@ -199,16 +199,16 @@ const styles = `
         top: 0px !important;
         left: 0px !important;
     }
-    
+
     .p-dialog-maximized .p-dialog-content {
         flex-grow: 1;
     }
-    
+
     .p-confirm-dialog .p-dialog-content {
         display: flex;
         align-items: center;
     }
-    
+
     /* Resizable */
     .p-dialog .p-resizable-handle {
         position: absolute;
@@ -220,10 +220,10 @@ const styles = `
         right: 1px;
         bottom: 1px;
     }
-    
+
     .p-dialog-draggable .p-dialog-header {
         cursor: move;
-    }        
+    }
 }
 `;
 
@@ -295,6 +295,7 @@ export const DialogBase = ComponentBase.extend({
         resizable: true,
         rtl: false,
         showHeader: true,
+        stopPropagationOnKeyDown: false,
         style: null,
         transitionOptions: null,
         visible: false,

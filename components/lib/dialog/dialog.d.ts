@@ -338,6 +338,11 @@ export interface DialogProps {
      */
     showHeader?: boolean | undefined;
     /**
+     * Specifies if the onKeyDown event that cause the dialog to close when pressing close button should be stopped.
+     * @defaultValue false
+     */
+    stopPropagationOnKeyDown?: boolean | undefined;
+    /**
      * Icon to display in the dialog maximize button when dialog is not maximized.
      */
     maximizeIcon?: IconType<DialogProps> | undefined;

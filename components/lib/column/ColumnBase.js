@@ -42,6 +42,7 @@ export const ColumnBase = ComponentBase.extend({
         footer: null,
         footerClassName: null,
         footerStyle: null,
+        forceHasValidValue: false,
         frozen: false,
         header: null,
         headerClassName: null,

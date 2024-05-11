@@ -964,6 +964,12 @@ export interface ColumnProps {
      */
     frozen?: boolean | undefined;
     /**
+     * When enabled and cellEditorValidator is set, force to call cellEditorValidator
+     * before cell editor is closed. If cellEditorValidator returns false, editor stays open.
+     * @defaultValue false
+     */
+    forceHasValidValue?: boolean | undefined;
+    /**
      * Header content of the table.
      */
     header?: React.ReactNode | ((options: ColumnHeaderOptions) => React.ReactNode);
