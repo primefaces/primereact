@@ -56605,7 +56605,7 @@
             "values": {
                 "IconOptions": {
                     "values": "AdditionalProps & Object",
-                    "description": "Icon options passed to any icon.\nComponentProps are props from the owning component.\nAdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example."
+                    "description": "Icon options passed to any icon."
                 },
                 "IconType": {
                     "values": "React.ReactNode | Function"
