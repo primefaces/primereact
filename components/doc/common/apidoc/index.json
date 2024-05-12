@@ -21993,14 +21993,6 @@
                             "description": "Whether to show the header or not."
                         },
                         {
-                            "name": "stopPropagationOnKeyDown",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "Specifies if the onKeyDown event that cause the dialog to close when pressing close button should be stopped."
-                        },
-                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
