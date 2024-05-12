@@ -79,16 +79,16 @@ export const PanelMenu = React.memo(
             return ObjectUtils.equals(item, activeItemState);
         };
 
-        const getPanelId = (index) => {
+        const generatePanelId = (index) => {
             return `${idState}_${index}`;
         };
 
-        const getHeaderId = (index) => {
-            return `${getPanelId(index)}_header`;
+        const generateHeaderId = (itemId, index) => {
+            return `${itemId || generatePanelId(index)}_header`;
         };
 
-        const getContentId = (index) => {
-            return `${getPanelId(index)}_content`;
+        const generateContentId = (itemId, index) => {
+            return `${itemId || generatePanelId(index)}_content`;
         };
 
         const onHeaderKeyDown = (event, item) => {
@@ -299,8 +299,8 @@ export const PanelMenu = React.memo(
             const headerActionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: cx('headerAction'),
-                    tabIndex: '-1'
+                    tabIndex: '-1',
+                    className: cx('headerAction')
                 },
                 getPTOptions(item, 'headerAction', index)
             );
@@ -332,6 +332,7 @@ export const PanelMenu = React.memo(
             const panelProps = mergeProps(
                 {
                     key: key,
+                    id: item?.id || generatePanelId(index),
                     className: cx('panel', { item }),
                     style: item.style
                 },
@@ -340,12 +341,12 @@ export const PanelMenu = React.memo(
 
             const headerProps = mergeProps(
                 {
-                    id: getHeaderId(index),
+                    id: generateHeaderId(item?.id, index),
                     className: cx('header', { active, item }),
                     'aria-label': item.label,
                     'aria-expanded': active,
                     'aria-disabled': item.disabled,
-                    'aria-controls': getContentId(index),
+                    'aria-controls': generateContentId(item?.id, index),
                     tabIndex: item.disabled ? null : '0',
                     onClick: (event) => onItemClick(event, item),
                     onKeyDown: (event) => onHeaderKeyDown(event, item),
@@ -375,7 +376,7 @@ export const PanelMenu = React.memo(
                 {
                     className: cx('toggleableContent', { active }),
                     role: 'region',
-                    'aria-labelledby': getHeaderId(index)
+                    'aria-labelledby': generateHeaderId(item?.id, index)
                 },
                 getPTOptions(item, 'toggleableContent', index)
             );
@@ -398,10 +399,10 @@ export const PanelMenu = React.memo(
                         <div {...headerContentProps}>{content}</div>
                     </div>
                     <CSSTransition nodeRef={menuContentRef} {...transitionProps}>
-                        <div id={getContentId(index)} ref={menuContentRef} {...toggleableContentProps}>
+                        <div id={generateContentId(item?.id, index)} ref={menuContentRef} {...toggleableContentProps}>
                             <div {...menuContentProps}>
                                 <PanelMenuList
-                                    panelId={getPanelId(index)}
+                                    panelId={item?.id || generatePanelId(index)}
                                     menuProps={props}
                                     onToggle={changeExpandedKeys}
                                     onHeaderFocus={updateFocusedHeader}

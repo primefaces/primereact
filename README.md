@@ -44,7 +44,7 @@ export default function MyComponent() {
 
 ## Theming
 
-PrimeReact has two theming has modes; styled or unstyled.
+PrimeReact has two theming modes; styled or unstyled.
 
 **Styled Mode**
 
