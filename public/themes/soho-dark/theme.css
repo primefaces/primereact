@@ -10,7 +10,7 @@
   --text-color: rgba(255, 255, 255, 0.87);
   --text-color-secondary: rgba(255, 255, 255, 0.6);
   --primary-color: #b19df7;
-  --primary-color-text: hsl(234deg, 15%, 13%);
+  --primary-color-text: hsl(234, 15%, 13%);
   --surface-0: #1d1e27;
   --surface-50: #34343d;
   --surface-100: #4a4b52;
@@ -786,7 +786,7 @@
   }
   .p-checkbox .p-checkbox-box .p-checkbox-icon {
     transition-duration: 0.2s;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     font-size: 14px;
   }
   .p-checkbox .p-checkbox-box .p-checkbox-icon.p-icon {
@@ -805,7 +805,7 @@
   }
   .p-checkbox .p-checkbox-box .p-checkbox-icon {
     transition-duration: 0.2s;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     font-size: 14px;
   }
   .p-checkbox .p-checkbox-box .p-checkbox-icon.p-icon {
@@ -822,7 +822,7 @@
   .p-checkbox:not(.p-disabled):has(.p-checkbox-input:hover).p-highlight .p-checkbox-box {
     border-color: #9378f4;
     background: #9378f4;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-checkbox:not(.p-disabled):has(.p-checkbox-input:focus-visible) .p-checkbox-box {
     outline: 0 none;
@@ -1891,7 +1891,7 @@
     width: 12px;
     height: 12px;
     transition-duration: 0.2s;
-    background-color: hsl(234deg, 15%, 13%);
+    background-color: hsl(234, 15%, 13%);
   }
   .p-radiobutton.p-highlight .p-radiobutton-box {
     border-color: #b19df7;
@@ -1905,7 +1905,7 @@
     background: #9378f4;
   }
   .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover).p-highlight .p-radiobutton-box .p-radiobutton-icon {
-    background-color: hsl(234deg, 15%, 13%);
+    background-color: hsl(234, 15%, 13%);
   }
   .p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:focus-visible) .p-radiobutton-box {
     outline: 0 none;
@@ -2008,20 +2008,20 @@
   .p-selectbutton .p-button.p-highlight {
     background: #b19df7;
     border-color: #b19df7;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-selectbutton .p-button.p-highlight .p-button-icon-left,
   .p-selectbutton .p-button.p-highlight .p-button-icon-right {
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-selectbutton .p-button.p-highlight:hover {
     background: #a28af5;
     border-color: #a28af5;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-selectbutton .p-button.p-highlight:hover .p-button-icon-left,
   .p-selectbutton .p-button.p-highlight:hover .p-button-icon-right {
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-selectbutton.p-invalid > .p-button {
     border-color: #ff9a9a;
@@ -2232,11 +2232,11 @@
   .p-togglebutton.p-highlight .p-button {
     background: #b19df7;
     border-color: #b19df7;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-togglebutton.p-highlight .p-button .p-button-icon-left,
   .p-togglebutton.p-highlight .p-button .p-button-icon-right {
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover):not(.p-highlight) .p-button {
     background: rgba(255, 255, 255, 0.03);
@@ -2250,11 +2250,11 @@
   .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover).p-highlight .p-button {
     background: #a28af5;
     border-color: #a28af5;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover).p-highlight .p-button .p-button-icon-left,
   .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:hover).p-highlight .p-button .p-button-icon-right {
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-togglebutton:not(.p-disabled):has(.p-togglebutton-input:focus-visible) .p-button {
     outline: 0 none;
@@ -2266,7 +2266,7 @@
     border-color: #ff9a9a;
   }
   .p-button {
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     background: #b19df7;
     border: 1px solid #b19df7;
     padding: 0.75rem 1.25rem;
@@ -2276,12 +2276,12 @@
   }
   .p-button:not(:disabled):hover {
     background: #a28af5;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     border-color: #a28af5;
   }
   .p-button:not(:disabled):active {
     background: #9378f4;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     border-color: #9378f4;
   }
   .p-button.p-button-outlined {
@@ -2363,7 +2363,7 @@
     height: 1rem;
     line-height: 1rem;
     color: #b19df7;
-    background-color: hsl(234deg, 15%, 13%);
+    background-color: hsl(234, 15%, 13%);
   }
   .p-button.p-button-raised {
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -4365,7 +4365,7 @@
     border-radius: 50%;
     width: 1rem;
     height: 1rem;
-    background-color: hsl(234deg, 15%, 13%);
+    background-color: hsl(234, 15%, 13%);
   }
   .p-timeline .p-timeline-event-connector {
     background-color: #3e4053;
@@ -4702,6 +4702,68 @@
     outline-offset: 0;
     box-shadow: 0 0 0 1px #e0d8fc;
   }
+  .p-tabview-nav-container {
+    position: relative;
+  }
+  .p-tabview-scrollable .p-tabview-nav-container {
+    overflow: hidden;
+  }
+  .p-tabview-nav-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior: contain auto;
+    position: relative;
+  }
+  .p-tabview-nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    flex: 1 1 auto;
+  }
+  .p-tabview-nav-link {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  .p-tabview-ink-bar {
+    display: none;
+    z-index: 1;
+  }
+  .p-tabview-nav-link:focus {
+    z-index: 1;
+  }
+  .p-tabview-close {
+    z-index: 1;
+  }
+  .p-tabview-title {
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .p-tabview-nav-btn {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .p-tabview-nav-prev {
+    left: 0;
+  }
+  .p-tabview-nav-next {
+    right: 0;
+  }
+  .p-tabview-nav-content::-webkit-scrollbar {
+    display: none;
+  }
   .p-tabview .p-tabview-nav {
     background: transparent;
     border: 1px solid #3e4053;
@@ -4905,7 +4967,7 @@
   }
   .p-overlaypanel .p-overlaypanel-close {
     background: #b19df7;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     width: 2rem;
     height: 2rem;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
@@ -4916,7 +4978,7 @@
   }
   .p-overlaypanel .p-overlaypanel-close:enabled:hover {
     background: #a28af5;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
   }
   .p-overlaypanel:after {
     border: solid transparent;
@@ -6730,7 +6792,7 @@
   }
   .p-tag {
     background: #b19df7;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.25rem 0.4rem;
@@ -6844,7 +6906,7 @@
     background: #b19df7;
   }
   .p-progressbar .p-progressbar-label {
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     line-height: 1.5rem;
   }
   .p-terminal {
@@ -6860,7 +6922,7 @@
   }
   .p-badge {
     background: #b19df7;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     font-size: 0.75rem;
     font-weight: 700;
     min-width: 1.5rem;
@@ -6901,7 +6963,7 @@
   }
   .p-tag {
     background: #b19df7;
-    color: hsl(234deg, 15%, 13%);
+    color: hsl(234, 15%, 13%);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.25rem 0.4rem;
