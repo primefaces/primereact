@@ -45,11 +45,7 @@ export interface ChartPassThroughOptions {
  * Defines valid properties in Chart component.
  * @group Properties
  */
-export interface ChartProps {
-    /**
-     * Unique identifier of the element.
-     */
-    id?: string | undefined;
+export interface ChartProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content' | 'pt'> {
     /**
      * Type of the chart.
      */
@@ -74,14 +70,6 @@ export interface ChartProps {
      * Height of the chart in non-responsive mode.
      */
     height?: string | undefined;
-    /**
-     * Inline style of the element.
-     */
-    style?: React.CSSProperties | undefined;
-    /**
-     * Style class of the element.
-     */
-    className?: string | undefined;
     /**
      * ARIA label for the chart canvas. Defaults to options.plugins.title.text if available.
      * @default options.plugins.title.text
