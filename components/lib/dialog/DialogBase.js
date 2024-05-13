@@ -295,7 +295,6 @@ export const DialogBase = ComponentBase.extend({
         resizable: true,
         rtl: false,
         showHeader: true,
-        stopPropagationOnKeyDown: false,
         style: null,
         transitionOptions: null,
         visible: false,

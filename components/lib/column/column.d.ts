@@ -809,6 +809,12 @@ export interface ColumnProps {
      */
     bodyStyle?: React.CSSProperties | undefined;
     /**
+     * When enabled and cellEditorValidator is set, force to call cellEditorValidator
+     * before cell editor is closed. If cellEditorValidator returns false, editor stays open.
+     * @defaultValue false
+     */
+    cellEditValidateOnClose?: boolean | undefined;
+    /**
      * Event to trigger the validation, possible values are "click" and "blur".
      * @defaultValue click
      */
@@ -963,12 +969,6 @@ export interface ColumnProps {
      * @defaultValue false
      */
     frozen?: boolean | undefined;
-    /**
-     * When enabled and cellEditorValidator is set, force to call cellEditorValidator
-     * before cell editor is closed. If cellEditorValidator returns false, editor stays open.
-     * @defaultValue false
-     */
-    forceHasValidValue?: boolean | undefined;
     /**
      * Header content of the table.
      */
