@@ -60,7 +60,7 @@ export const BodyCell = React.memo((props) => {
 
     const cellEditValidateOnClose = () => {
         return getColumnProp('cellEditValidateOnClose');
-66  };
+    };
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
