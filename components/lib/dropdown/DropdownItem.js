@@ -57,7 +57,7 @@ export const DropdownItem = React.memo((props) => {
                 {
                     className: cx('checkIcon')
                 },
-                getPTOptions('checIcon')
+                getPTOptions('checkIcon')
             );
 
             return <CheckIcon {...checkIconProps} />;
