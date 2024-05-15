@@ -11898,7 +11898,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "When enabled and cellEditorValidator is set, force to call cellEditorValidator before cell editor is closed. If cellEditorValidator returns false, editor stays open."
+                            "description": "When enabled and cellEditorValidator is set, force to call cellEditorValidator\nbefore cell editor is closed. If cellEditorValidator returns false, editor stays open."
                         },
                         {
                             "name": "cellEditValidatorEvent",
