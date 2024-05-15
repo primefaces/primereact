@@ -890,7 +890,7 @@ export const Dropdown = React.memo(
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : ObjectUtils.resolveFieldData(option, 'value') || option;
+            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
         };
 
         const getOptionRenderKey = (option) => {
