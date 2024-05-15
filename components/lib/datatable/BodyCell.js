@@ -58,6 +58,10 @@ export const BodyCell = React.memo((props) => {
         return getColumnProp('editor');
     };
 
+    const cellEditValidateOnClose = () => {
+        return getColumnProp('cellEditValidateOnClose');
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
@@ -174,7 +178,7 @@ export const BodyCell = React.memo((props) => {
 
             let valid = true;
 
-            if (!submit && cellEditValidator) {
+            if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
                 valid = cellEditValidator(params);
             }
 

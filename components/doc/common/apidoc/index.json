@@ -11893,6 +11893,14 @@
                             "description": "Inline style of the body."
                         },
                         {
+                            "name": "cellEditValidateOnClose",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled and cellEditorValidator is set, force to call cellEditorValidator before cell editor is closed. If cellEditorValidator returns false, editor stays open."
+                        },
+                        {
                             "name": "cellEditValidatorEvent",
                             "optional": true,
                             "readonly": false,
