@@ -54869,6 +54869,22 @@
                             "description": "Order to sort the data by default."
                         },
                         {
+                            "name": "stateKey",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Unique identifier of a stateful table to use in state storage."
+                        },
+                        {
+                            "name": "stateStorage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"custom\" | \"local\" | \"session\"",
+                            "default": "session",
+                            "description": "Defines where a stateful table keeps its state, valid values are \"session\" for sessionStorage, \"local\" for localStorage and \"custom\"."
+                        },
+                        {
                             "name": "stripedRows",
                             "optional": true,
                             "readonly": false,
@@ -54945,6 +54961,25 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
+                        {
+                            "name": "customRestoreState",
+                            "parameters": [],
+                            "returnType": "undefined | object",
+                            "description": "A function to implement custom restoreState with stateStorage=\"custom\". Need to return state object."
+                        },
+                        {
+                            "name": "customSaveState",
+                            "parameters": [
+                                {
+                                    "name": "state",
+                                    "optional": false,
+                                    "type": "object",
+                                    "description": "The object to be stored."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "A function to implement custom saveState with stateStorage=\"custom\"."
+                        },
                         {
                             "name": "onCollapse",
                             "parameters": [
@@ -55126,6 +55161,32 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke on sort."
+                        },
+                        {
+                            "name": "onStateRestore",
+                            "parameters": [
+                                {
+                                    "name": "state",
+                                    "optional": false,
+                                    "type": "object",
+                                    "description": "Table state."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke table state is restored."
+                        },
+                        {
+                            "name": "onStateSave",
+                            "parameters": [
+                                {
+                                    "name": "state",
+                                    "optional": false,
+                                    "type": "object",
+                                    "description": "Table state."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke table state is saved."
                         },
                         {
                             "name": "onToggle",
