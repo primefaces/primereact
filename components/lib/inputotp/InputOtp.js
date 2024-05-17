@@ -116,7 +116,6 @@ export const InputOtp = React.memo(
         };
 
         const onFocus = (event) => {
-            console.log('onFocus', event);
             event.target.select();
             props?.focus?.(event);
         };
@@ -165,8 +164,12 @@ export const InputOtp = React.memo(
                 }
 
                 default: {
-                    // Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
-                    if ( (event.code !== 'Enter' && event.code !== 'Tab')  &&  ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || tokens.join('').length >= props.length && event.code !== 'Delete' )) {
+                    //Ignore Enter and Tab pressing and Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
+                    if (
+                        event.code !== 'Tab' &&
+                        event.code !== 'Enter' &&
+                        ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete'))
+                    ) {
                         event.preventDefault();
                     }
 
@@ -212,11 +215,7 @@ export const InputOtp = React.memo(
                 },
                 ptm('input')
             );
-            const inputElement = props?.inputTemplate ? (
-                ObjectUtils.getJSXElement(props?.inputTemplate, { events: inputElementEvents, props: inputElementProps })
-            ) : (
-                <InputText {...inputElementProps} {...inputElementEvents} />
-            );
+            const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, { events: inputElementEvents, props: inputElementProps }) : <InputText {...inputElementProps} {...inputElementEvents} />;
             const inputElements = [inputElement, ...createInputElements(remainingInputs - 1)];
 
             return inputElements;
