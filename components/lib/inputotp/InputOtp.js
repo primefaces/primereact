@@ -163,8 +163,14 @@ export const InputOtp = React.memo(
                     break;
                 }
 
+                case 'Tab':
+
+                case 'Enter': {
+                    break;
+                }
+
                 default: {
-                    // Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
+                    //Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
                     if ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
                         event.preventDefault();
                     }
