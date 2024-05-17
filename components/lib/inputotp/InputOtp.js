@@ -164,9 +164,11 @@ export const InputOtp = React.memo(
                 }
 
                 default: {
+                    console.log('DEF')
                     // Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
-                    if ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
-                        event.preventDefault();
+                    if ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Enter' && event.code !== 'Tab' && event.code !== 'Delete')) {
+                       event.preventDefault();
+                       console.log('PREVENT')
                     }
 
                     break;
@@ -211,7 +213,7 @@ export const InputOtp = React.memo(
                 },
                 ptm('input')
             );
-            const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, { events: inputElementEvents, props: inputElementProps }) : <InputText {...inputElementProps} {...inputElementEvents} />;
+            const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, { events: inputElementEvents, props: inputElementProps }) : <InputText key={remainingInputs - 1} {...inputElementProps} {...inputElementEvents} />;
             const inputElements = [inputElement, ...createInputElements(remainingInputs - 1)];
 
             return inputElements;
