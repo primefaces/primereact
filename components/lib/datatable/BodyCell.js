@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useEventListener, useMergeProps, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
