@@ -94,7 +94,9 @@ export const UITreeNode = React.memo((props) => {
         const childrenListElement = nodeElement.children[1];
 
         if (childrenListElement) {
-            const lastChildElement = childrenListElement.children[childrenListElement.children.length - 1];
+            //skip droppoint 
+            const offset = props.dragdropScope ? 2 : 1; 
+            const lastChildElement = childrenListElement.children[childrenListElement.children.length - offset];
 
             return findLastVisibleDescendant(lastChildElement);
         }
@@ -360,11 +362,25 @@ export const UITreeNode = React.memo((props) => {
         event.preventDefault();
     };
 
+    function getPreviousElement(element) {
+        const next = element.previousElementSibling;
+
+        if (next) {
+            //skip droppoint
+            if (next.getAttribute('data-pc-section') === 'droppoint' && next.previousElementSibling) {
+                return next.previousElementSibling;
+            }
+        } else {
+            return null;
+        }
+    }
+
     const onArrowUp = (event) => {
         const nodeElement = event.target;
+        const previous = getPreviousElement(nodeElement);
 
-        if (nodeElement.previousElementSibling) {
-            focusRowChange(nodeElement, nodeElement.previousElementSibling, findLastVisibleDescendant(nodeElement.previousElementSibling));
+        if (previous) {
+            focusRowChange(nodeElement, previous, findLastVisibleDescendant(previous));
         } else {
             let parentNodeElement = getParentNodeElement(nodeElement);
 
