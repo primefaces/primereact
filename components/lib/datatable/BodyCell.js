@@ -293,8 +293,6 @@ export const BodyCell = React.memo((props) => {
         if (currentData) {
             ObjectUtils.mutateFieldData(currentData, field, val);
         }
-
-        editingRowDataStateRef.current = editingRowData;
     };
 
     const onClick = (event) => {
@@ -523,6 +521,12 @@ export const BodyCell = React.memo((props) => {
             setEditingRowDataState(getEditingRowData());
         }
     }, [props.editingMeta]);
+
+    React.useEffect(() => {
+        if (editingRowDataState) {
+            editingRowDataStateRef.current = editingRowDataState;
+        }
+    }, [editingRowDataState]);
 
     React.useEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
