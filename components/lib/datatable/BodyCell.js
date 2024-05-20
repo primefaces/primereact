@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useEventListener, useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -25,6 +25,7 @@ export const BodyCell = React.memo((props) => {
     const selfClick = React.useRef(false);
     const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
+    const editingRowDataStateRef = React.useRef(null);
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
@@ -157,43 +158,41 @@ export const BodyCell = React.memo((props) => {
             unbindDocumentClickListener();
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
+            editingRowDataStateRef.current = null;
             selfClick.current = false;
         }, 1);
     };
 
     const switchCellToViewMode = (event, submit) => {
         const callbackParams = getCellCallbackParams(event);
+        const newRowData = { ...editingRowDataStateRef.current };
+        const newValue = resolveFieldData(newRowData);
+        const params = { ...callbackParams, newRowData, newValue };
+        const onCellEditCancel = getColumnProp('onCellEditCancel');
+        const cellEditValidator = getColumnProp('cellEditValidator');
+        const onCellEditComplete = getColumnProp('onCellEditComplete');
 
-        setEditingRowDataState((prev) => {
-            const newRowData = prev;
-            const newValue = resolveFieldData(newRowData);
-            const params = { ...callbackParams, newRowData, newValue };
-            const onCellEditCancel = getColumnProp('onCellEditCancel');
-            const cellEditValidator = getColumnProp('cellEditValidator');
-            const onCellEditComplete = getColumnProp('onCellEditComplete');
+        if (!submit && onCellEditCancel) {
+            onCellEditCancel(params);
+        }
 
-            if (!submit && onCellEditCancel) {
-                onCellEditCancel(params);
+        let valid = true;
+
+        if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
+            valid = cellEditValidator(params);
+        }
+
+        if (valid) {
+            if (submit && onCellEditComplete) {
+                onCellEditComplete(params);
             }
 
-            let valid = true;
+            closeCell(event);
+        } else {
+            event.preventDefault();
+        }
 
-            if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
-                valid = cellEditValidator(params);
-            }
-
-            if (valid) {
-                if (submit && onCellEditComplete) {
-                    setTimeout(() => onCellEditComplete(params));
-                }
-
-                closeCell(event);
-            } else {
-                event.preventDefault();
-            }
-
-            return newRowData;
-        });
+        setEditingRowDataState(newRowData);
     };
 
     const findNextSelectableCell = (cell) => {
@@ -294,6 +293,8 @@ export const BodyCell = React.memo((props) => {
         if (currentData) {
             ObjectUtils.mutateFieldData(currentData, field, val);
         }
+
+        editingRowDataStateRef.current = editingRowData;
     };
 
     const onClick = (event) => {
