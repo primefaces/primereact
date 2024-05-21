@@ -389,12 +389,7 @@ export const UITreeNode = React.memo((props) => {
         const prev = element.previousElementSibling;
 
         if (prev) {
-            if (!props.dragdropScope) {
-                return prev;
-            } else if (prev.getAttribute('data-pc-section') === 'droppoint' && prev.previousElementSibling) {
-                //skip droppoint
-                return prev.previousElementSibling;
-            }
+            return !props.dragdropScope ? prev : prev.previousElementSibling;
         }
 
         return null;
@@ -404,12 +399,7 @@ export const UITreeNode = React.memo((props) => {
         const next = element.nextElementSibling;
 
         if (next) {
-            if (!props.dragdropScope) {
-                return next;
-            } else if (next.getAttribute('data-pc-section') === 'droppoint' && next.nextElementSibling) {
-                //skip droppoint
-                return next.nextElementSibling;
-            }
+            return !props.dragdropScope ? next : next.nextElementSibling;
         }
 
         return null;

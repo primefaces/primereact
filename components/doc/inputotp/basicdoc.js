@@ -40,10 +40,6 @@ export default function BasicDemo() {
         `
     };
 
-    function onSubmitCallBack() {
-        console.log('onSubmit');
-    }
-
     return (
         <>
             <DocSectionText {...props}>
@@ -52,19 +48,8 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={onSubmitCallBack}>
-                    <InputOtp value={token} onChange={(e) => setTokens(e.value)} />
-                    <button type="submit" onClick={onSubmitCallBack}>
-                        SUBMIT
-                    </button>
-                </form>
+                <InputOtp value={token} onChange={(e) => setTokens(e.value)} />
             </div>
-            <form onSubmit={onSubmitCallBack}>
-                <input type="text" />
-                <button type="submit" onClick={onSubmitCallBack}>
-                    SUBMIT
-                </button>
-            </form>
             <DocSectionCode code={code} />
         </>
     );
