@@ -68,7 +68,8 @@ export const Tree = React.memo(
                         nodeElement.tabIndex = '-1';
                     }
 
-                    const childElement = listElement.children[0];
+                    //skip droppoint
+                    const childElement = props.dragdropScope ? listElement.children[1] : listElement.children[0];
 
                     if (childElement) {
                         childElement.tabIndex = '0';

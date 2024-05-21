@@ -84,11 +84,32 @@ export const UITreeNode = React.memo((props) => {
         }
     };
 
+    const findNextNonDroppointSibling = (nodeElement) => {
+        const nextNodeSibling = nodeElement.nextSibling;
+
+        if (nextNodeSibling) {
+            const isNextDropPoint = nextNodeSibling.getAttribute('data-pc-section') === 'droppoint';
+
+            if (isNextDropPoint) {
+                //skip drop point and return next elemnt
+                if (nextNodeSibling.nextElementSibling) {
+                    return nextNodeSibling.nextElementSibling;
+                } else {
+                    //nothing after droppoint go outside
+                    return null;
+                }
+            }
+
+            return nextNodeSibling;
+        }
+
+        return null;
+    };
+
     const findNextSiblingOfAncestor = (nodeElement) => {
         const parentNodeElement = getParentNodeElement(nodeElement);
-        const nextParentNodeElement = props.dragdropScope ? parentNodeElement?.nextElementSibling?.nextElementSibling : parentNodeElement.nextElementSibling
 
-        return parentNodeElement ? nextParentNodeElement || findNextSiblingOfAncestor(parentNodeElement) : null;
+        return parentNodeElement ? findNextNonDroppointSibling(parentNodeElement) || findNextSiblingOfAncestor(parentNodeElement) : null;
     };
 
     const findLastVisibleDescendant = (nodeElement) => {
@@ -347,16 +368,13 @@ export const UITreeNode = React.memo((props) => {
     const onArrowDown = (event) => {
         const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
         const listElement = nodeElement.children[1];
-        const nextElement = getNextElement(nodeElement)
+        const nextElement = getNextElement(nodeElement);
 
         if (listElement) {
-            console.log('1')
             focusRowChange(nodeElement, props.dragdropScope ? listElement.children[1] : listElement.children[0]);
         } else if (nextElement) {
-            console.log('2')
             focusRowChange(nodeElement, nextElement);
         } else {
-            console.log('3')
             let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
 
             if (nextSiblingAncestor) {
@@ -367,31 +385,35 @@ export const UITreeNode = React.memo((props) => {
         event.preventDefault();
     };
 
-    function getPreviousElement(element) {
+    const getPreviousElement = (element) => {
         const prev = element.previousElementSibling;
 
         if (prev) {
-            //skip droppoint
-            if (prev.getAttribute('data-pc-section') === 'droppoint' && prev.previousElementSibling) {
+            if (!props.dragdropScope) {
+                return prev;
+            } else if (prev.getAttribute('data-pc-section') === 'droppoint' && prev.previousElementSibling) {
+                //skip droppoint
                 return prev.previousElementSibling;
             }
-        } else {
-            return null;
         }
-    }
 
-    function getNextElement(element) {
+        return null;
+    };
+
+    const getNextElement = (element) => {
         const next = element.nextElementSibling;
 
         if (next) {
-            //skip droppoint
-            if (next.getAttribute('data-pc-section') === 'droppoint' && next.nextElementSibling) {
+            if (!props.dragdropScope) {
+                return next;
+            } else if (next.getAttribute('data-pc-section') === 'droppoint' && next.nextElementSibling) {
+                //skip droppoint
                 return next.nextElementSibling;
             }
-        } else {
-            return null;
         }
-    }
+
+        return null;
+    };
 
     const onArrowUp = (event) => {
         const nodeElement = event.target;
