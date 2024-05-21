@@ -164,6 +164,7 @@ const UIKitPage = (props) => {
                                         <div className="text-600 font-medium">For individual designers</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <div className="flex gap-3 flex-wrap">
+                                            <span className="text-2xl font-bold text-900 line-through text-color-secondary">$99</span>
                                             <span className="text-2xl font-bold text-900">$49</span>
                                         </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
@@ -208,6 +209,7 @@ const UIKitPage = (props) => {
                                         <div className="text-600 font-medium">For small teams</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <div className="flex gap-3 flex-wrap">
+                                            <span className="text-2xl font-bold text-900 line-through text-color-secondary">$249</span>
                                             <span className="text-2xl font-bold text-900">$149</span>
                                         </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />

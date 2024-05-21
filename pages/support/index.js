@@ -67,6 +67,10 @@ const SupportPage = () => {
                         </li>
                         <li className="flex align-items-center mb-3">
                             <i className="pi pi-check-circle mr-3 text-green-500" />
+                            <span className="line-height-3">Theme Designer - Extended License</span>
+                        </li>
+                        <li className="flex align-items-center mb-3">
+                            <i className="pi pi-check-circle mr-3 text-green-500" />
                             <span className="line-height-3">Figma UI Kit - Enterprise License</span>
                         </li>
                         <li className="flex align-items-center mb-3">
