@@ -12,7 +12,7 @@ export const Tooltip = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TooltipBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(false);
-        const [positionState, setPositionState] = React.useState(props.position);
+        const [positionState, setPositionState] = React.useState(props.position || 'right');
         const [classNameState, setClassNameState] = React.useState('');
         const metaData = {
             props,
@@ -449,7 +449,7 @@ export const Tooltip = React.memo(
                 bindWindowResizeListener();
                 bindOverlayScrollListener();
             } else {
-                setPositionState(props.position);
+                setPositionState(props.position || 'right');
                 setClassNameState('');
                 currentTargetRef.current = null;
                 containerSize.current = null;
