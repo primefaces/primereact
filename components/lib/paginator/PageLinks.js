@@ -73,7 +73,7 @@ export const PageLinks = React.memo((inProps) => {
                     },
                     page: pageLink - 1,
                     currentPage: props.page,
-                    totalPages: props.pageCount,
+                    totalPages: props.totalPages,
                     ariaLabel: ariaLabel('pageLabel', { page: pageLink }),
                     ariaCurrent: pageLink - 1 === props.page ? 'true' : undefined,
                     element,
