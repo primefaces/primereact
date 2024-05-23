@@ -894,6 +894,7 @@ export const MultiSelect = React.memo(
                         }
                     };
                     const label = getLabelByValue(val);
+                    const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
                             key: i,
@@ -913,14 +914,13 @@ export const MultiSelect = React.memo(
 
                     const tokenLabelProps = mergeProps(
                         {
-                            key: label + i,
                             className: cx('tokenLabel')
                         },
                         ptm('tokenLabel', context)
                     );
 
                     return (
-                        <div {...tokenProps} key={label}>
+                        <div {...tokenProps} key={labelKey}>
                             <span {...tokenLabelProps}>{label}</span>
                             {icon}
                         </div>
