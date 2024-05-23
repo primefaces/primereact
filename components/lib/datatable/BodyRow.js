@@ -269,7 +269,7 @@ export const BodyRow = React.memo((props) => {
                 focusedItem && focusedItem !== firstSelectedRow && (focusedItem.tabIndex = '-1');
             } else {
                 rows[0].tabIndex = '0';
-                focusedItem !== rows[0] && (rows[rowIndex].tabIndex = '-1');
+                focusedItem !== rows[0] && (rows[props.rowIndex].tabIndex = '-1');
             }
         }
     };
