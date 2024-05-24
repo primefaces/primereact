@@ -126,12 +126,13 @@ export const MeterGroup = (inProps) => {
                     );
 
                     const labelIcon = item.icon ? <i {...labelIconProps} /> : <span {...labelListIconProps} />;
+                    const itemPercentage = calculatePercentage(item.value);
 
                     return (
                         <li key={index} {...labelItemProps}>
                             {labelIcon}
                             <span {...labelProps}>
-                                {item?.label} {item?.value && `(${item?.value}%)`}
+                                {item?.label} {`(${itemPercentage}%)`}
                             </span>
                         </li>
                     );

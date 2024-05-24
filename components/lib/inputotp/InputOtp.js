@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
+import { useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { ObjectUtils } from '../utils/Utils';
 import { InputOtpBase } from './BaseInputOtp';
@@ -79,6 +79,10 @@ export const InputOtp = React.memo(
         };
 
         const onInput = (event, index) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
             if (event.nativeEvent.inputType === 'insertFromPaste') {
                 return; // handled in onPaste
             }
@@ -93,6 +97,10 @@ export const InputOtp = React.memo(
         };
 
         const onPaste = (event) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
             let paste = event.clipboardData.getData('text');
 
             if (paste.length) {
@@ -117,6 +125,15 @@ export const InputOtp = React.memo(
         };
 
         const onKeydown = (event) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
+            // special keys should be ignored, if it is CTRL+V is handled in onPaste
+            if (event.altKey || event.ctrlKey || event.metaKey) {
+                return;
+            }
+
             switch (event.code) {
                 case 'ArrowLeft': {
                     moveToPrevInput(event);
@@ -146,8 +163,14 @@ export const InputOtp = React.memo(
                     break;
                 }
 
+                case 'Tab':
+
+                case 'Enter': {
+                    break;
+                }
+
                 default: {
-                    // Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
+                    //Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
                     if ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
                         event.preventDefault();
                     }
@@ -156,6 +179,12 @@ export const InputOtp = React.memo(
                 }
             }
         };
+
+        useUpdateEffect(() => {
+            const value = props.value ? props.value?.toString()?.split?.('') : new Array(props.length);
+
+            setTokens(value);
+        }, [props.value]);
 
         const createInputElements = (remainingInputs) => {
             if (remainingInputs <= 0) {

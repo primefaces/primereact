@@ -30,6 +30,7 @@ import { SingleColumnDoc } from '@/components/doc/treetable/sort/singlecolumndoc
 import { TemplateDoc } from '@/components/doc/treetable/templatedoc';
 import { StyledDoc } from '@/components/doc/treetable/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/treetable/theming/tailwinddoc';
+import { StatefulDoc } from '@/components/doc/treetable/statefuldoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -193,7 +194,11 @@ const TreeTableDemo = () => {
             label: 'Context Menu',
             component: ContextMenuDoc
         },
-
+        {
+            id: 'stateful',
+            label: 'Stateful',
+            component: StatefulDoc
+        },
         {
             id: 'accessibility',
             label: 'Accessibility',

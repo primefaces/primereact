@@ -843,6 +843,15 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     sortOrder?: 1 | 0 | -1 | undefined | null;
     /**
+     * Unique identifier of a stateful table to use in state storage.
+     */
+    stateKey?: string | undefined;
+    /**
+     * Defines where a stateful table keeps its state, valid values are "session" for sessionStorage, "local" for localStorage and "custom".
+     * @defaultValue session
+     */
+    stateStorage?: 'session' | 'local' | 'custom' | undefined;
+    /**
      * Whether to displays rows with alternating colors.
      * @defaultValue false
      */
@@ -876,6 +885,16 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * An array of treenodes to display.
      */
     value?: TreeNode[] | undefined;
+    /**
+     * A function to implement custom restoreState with stateStorage="custom". Need to return state object.
+     * @return {object | undefined} Returns the state object.
+     */
+    customRestoreState?(): object | undefined;
+    /**
+     * A function to implement custom saveState with stateStorage="custom".
+     * @param {object} state - The object to be stored.
+     */
+    customSaveState?(state: object): void;
     /**
      * Callback to invoke when a column is reordered.
      * @param {TreeTableColReorderEvent} event - Custom column reorder event.
@@ -946,6 +965,16 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @param {TreeTableSortEvent} event - Custom sort event.
      */
     onSort?(event: TreeTableSortEvent): void;
+    /**
+     * Callback to invoke table state is restored.
+     * @param {object} state - Table state.
+     */
+    onStateRestore?(state: object): void;
+    /**
+     * Callback to invoke table state is saved.
+     * @param {object} state - Table state.
+     */
+    onStateSave?(state: object): void;
     /**
      * Callback to invoke when a node is toggled.
      * @param {TreeTableToggleEvent} event - Custom toggle event.

@@ -664,6 +664,23 @@
                     ],
                     "returnType": "object",
                     "description": "Returns the values of locale options."
+                },
+                "ariaLabel": {
+                    "name": "ariaLabel",
+                    "parameters": [
+                        {
+                            "name": "ariaKey",
+                            "type": "string",
+                            "description": "Key of the ARIA label to look up in the locale."
+                        },
+                        {
+                            "name": "options",
+                            "type": "any",
+                            "description": "JSON options like { page: 2, user: \"John\", role: \"Admin\" }."
+                        }
+                    ],
+                    "returnType": "string",
+                    "description": "Finds an ARIA label in the locale by key and replaces options if provided."
                 }
             }
         },
@@ -10013,14 +10030,6 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
-                            "name": "className",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Style class of the element."
-                        },
-                        {
                             "name": "data",
                             "optional": true,
                             "readonly": false,
@@ -10035,14 +10044,6 @@
                             "type": "string",
                             "default": "",
                             "description": "Height of the chart in non-responsive mode."
-                        },
-                        {
-                            "name": "id",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Unique identifier of the element."
                         },
                         {
                             "name": "options",
@@ -10075,14 +10076,6 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
-                        },
-                        {
-                            "name": "style",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CSSProperties",
-                            "default": "",
-                            "description": "Inline style of the element."
                         },
                         {
                             "name": "type",
@@ -11898,6 +11891,14 @@
                             "type": "CSSProperties",
                             "default": "",
                             "description": "Inline style of the body."
+                        },
+                        {
+                            "name": "cellEditValidateOnClose",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled and cellEditorValidator is set, force to call cellEditorValidator\nbefore cell editor is closed. If cellEditorValidator returns false, editor stays open."
                         },
                         {
                             "name": "cellEditValidatorEvent",
@@ -54868,6 +54869,22 @@
                             "description": "Order to sort the data by default."
                         },
                         {
+                            "name": "stateKey",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Unique identifier of a stateful table to use in state storage."
+                        },
+                        {
+                            "name": "stateStorage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"custom\" | \"local\" | \"session\"",
+                            "default": "session",
+                            "description": "Defines where a stateful table keeps its state, valid values are \"session\" for sessionStorage, \"local\" for localStorage and \"custom\"."
+                        },
+                        {
                             "name": "stripedRows",
                             "optional": true,
                             "readonly": false,
@@ -54944,6 +54961,25 @@
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
+                        {
+                            "name": "customRestoreState",
+                            "parameters": [],
+                            "returnType": "undefined | object",
+                            "description": "A function to implement custom restoreState with stateStorage=\"custom\". Need to return state object."
+                        },
+                        {
+                            "name": "customSaveState",
+                            "parameters": [
+                                {
+                                    "name": "state",
+                                    "optional": false,
+                                    "type": "object",
+                                    "description": "The object to be stored."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "A function to implement custom saveState with stateStorage=\"custom\"."
+                        },
                         {
                             "name": "onCollapse",
                             "parameters": [
@@ -55125,6 +55161,32 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke on sort."
+                        },
+                        {
+                            "name": "onStateRestore",
+                            "parameters": [
+                                {
+                                    "name": "state",
+                                    "optional": false,
+                                    "type": "object",
+                                    "description": "Table state."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke table state is restored."
+                        },
+                        {
+                            "name": "onStateSave",
+                            "parameters": [
+                                {
+                                    "name": "state",
+                                    "optional": false,
+                                    "type": "object",
+                                    "description": "Table state."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke table state is saved."
                         },
                         {
                             "name": "onToggle",
@@ -56572,7 +56634,7 @@
             "values": {
                 "IconOptions": {
                     "values": "AdditionalProps & Object",
-                    "description": "Icon options passed to any icon.\nComponentProps are props from the owning component.\nAdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example."
+                    "description": "Icon options passed to any icon."
                 },
                 "IconType": {
                     "values": "React.ReactNode | Function"

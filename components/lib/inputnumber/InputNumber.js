@@ -672,7 +672,8 @@ export const InputNumber = React.memo(
             if (sign.isMinusSign) {
                 const isNewMinusSign = minusCharIndex === -1;
 
-                if (isNewMinusSign && (selectionStart === 0 || selectionStart === currencyCharIndex + 1)) {
+                // #6522 - Selected negative value can't be overwritten with a minus ('-') symbol
+                if (selectionStart === 0 || selectionStart === currencyCharIndex + 1) {
                     newValueStr = inputValue;
 
                     if (isNewMinusSign || selectionEnd !== 0) {
@@ -1133,7 +1134,7 @@ export const InputNumber = React.memo(
         useUpdateEffect(() => {
             constructParser();
             changeValue();
-        }, [props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
+        }, [_locale, props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
 
         useUpdateEffect(() => {
             changeValue();
