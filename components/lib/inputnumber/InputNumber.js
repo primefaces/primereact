@@ -368,6 +368,7 @@ export const InputNumber = React.memo(
 
             if (event.altKey || event.ctrlKey || event.metaKey) {
                 isSpecialChar.current = true;
+
                 return;
             }
 
@@ -393,24 +394,35 @@ export const InputNumber = React.memo(
             let newValueStr = null;
 
             switch (event.code) {
+                //up
                 case 'ArrowUp':
                     spin(event, 1);
                     event.preventDefault();
                     break;
+
+                //down
                 case 'ArrowDown':
                     spin(event, -1);
                     event.preventDefault();
                     break;
+
+                //left
                 case 'ArrowLeft':
                     if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                         event.preventDefault();
                     }
+
                     break;
+
+                //right
                 case 'ArrowRight':
                     if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                         event.preventDefault();
                     }
+
                     break;
+
+                //enter and tab
                 case 'Tab':
                 case 'Enter':
                 case 'NumpadEnter':
@@ -419,18 +431,24 @@ export const InputNumber = React.memo(
                     inputRef.current.setAttribute('aria-valuenow', newValueStr);
                     updateModel(event, newValueStr);
                     break;
+
+                //backspace
                 case 'Backspace':
                     event.preventDefault();
+
                     if (selectionStart === selectionEnd) {
                         const deleteChar = inputValue.charAt(selectionStart - 1);
+
                         if (isNumeralChar(deleteChar)) {
                             const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
                             const decimalLength = getDecimalLength(inputValue);
+
                             if (_group.current.test(deleteChar)) {
                                 _group.current.lastIndex = 0;
                                 newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
                             } else if (_decimal.current.test(deleteChar)) {
                                 _decimal.current.lastIndex = 0;
+
                                 if (decimalLength) {
                                     inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
                                 } else {
@@ -438,6 +456,7 @@ export const InputNumber = React.memo(
                                 }
                             } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                                 const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
                             } else if (decimalCharIndexWithoutPrefix === 1) {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
@@ -447,28 +466,37 @@ export const InputNumber = React.memo(
                             }
                         } else if (_currency.current.test(deleteChar)) {
                             const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
+
                             if (minusCharIndex === currencyCharIndex - 1) {
                                 newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
                             }
                         }
+
                         updateValue(event, newValueStr, null, 'delete-single');
                     } else {
                         newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
                         updateValue(event, newValueStr, null, 'delete-range');
                     }
+
                     break;
+
+                // del
                 case 'Delete':
                     event.preventDefault();
+
                     if (selectionStart === selectionEnd) {
                         const deleteChar = inputValue.charAt(selectionStart);
                         const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
+
                         if (isNumeralChar(deleteChar)) {
                             const decimalLength = getDecimalLength(inputValue);
+
                             if (_group.current.test(deleteChar)) {
                                 _group.current.lastIndex = 0;
                                 newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
                             } else if (_decimal.current.test(deleteChar)) {
                                 _decimal.current.lastIndex = 0;
+
                                 if (decimalLength) {
                                     inputRef.current.setSelectionRange(selectionStart + 1, selectionStart + 1);
                                 } else {
@@ -476,6 +504,7 @@ export const InputNumber = React.memo(
                                 }
                             } else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
                                 const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
+
                                 newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
                             } else if (decimalCharIndexWithoutPrefix === 1) {
                                 newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
@@ -484,34 +513,45 @@ export const InputNumber = React.memo(
                                 newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                             }
                         }
+
                         updateValue(event, newValueStr, null, 'delete-back-single');
                     } else {
                         newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
                         updateValue(event, newValueStr, null, 'delete-range');
                     }
+
                     break;
+
                 case 'End':
                     event.preventDefault();
+
                     if (!ObjectUtils.isEmpty(props.max)) {
                         updateModel(event, props.max);
                     }
+
                     break;
                 case 'Home':
                     event.preventDefault();
+
                     if (!ObjectUtils.isEmpty(props.min)) {
                         updateModel(event, props.min);
                     }
+
                     break;
+
                 default:
                     event.preventDefault();
                     let char = event.key;
+
                     if (char) {
                         const _isDecimalSign = isDecimalSign(char);
                         const _isMinusSign = isMinusSign(char);
+
                         if ((event.code && (event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
                             insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
                         }
                     }
+
                     break;
             }
         };
