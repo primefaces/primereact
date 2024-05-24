@@ -375,7 +375,7 @@ export const InputNumber = React.memo(
             if (props.onKeyDown) {
                 props.onKeyDown(event);
 
-                // do not continue if the user defined event wants to prevent
+                // Do not continue if the user-defined event wants to prevent
                 if (event.defaultPrevented) {
                     return;
                 }
@@ -424,7 +424,6 @@ export const InputNumber = React.memo(
 
                 //enter and tab
                 case 'Tab':
-                case 'NumpadEnter':
                 case 'Enter':
                 case 'NumpadEnter':
                     newValueStr = validateValue(parseValue(inputValue));
@@ -542,13 +541,15 @@ export const InputNumber = React.memo(
 
                 default:
                     event.preventDefault();
-
                     let char = event.key;
-                    const _isDecimalSign = isDecimalSign(char);
-                    const _isMinusSign = isMinusSign(char);
 
-                    if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
-                        insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                    if (char) {
+                        const _isDecimalSign = isDecimalSign(char);
+                        const _isMinusSign = isMinusSign(char);
+
+                        if ((event.code && (event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                            insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                        }
                     }
 
                     break;
