@@ -1,5 +1,47 @@
 # Changelog
 
+## [10.6.6](https://github.com/primefaces/primereact/tree/10.6.6) (2024-05-24)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.6.5...10.6.6)
+
+## What's Changed
+
+**Fixed Bugs:**
+
+-   Add ariaLabel method to Typescript [#6582](https://github.com/primefaces/primereact/pull/6582)
+-   Locale fix [#6586](https://github.com/primefaces/primereact/pull/6586)
+-   Row reorder icon image won't break drag 'ghost' [#6581](https://github.com/primefaces/primereact/pull/6581)
+-   Add paste key [#6577](https://github.com/primefaces/primereact/pull/6577)
+-   Check meta key for MacOS [#6588](https://github.com/primefaces/primereact/pull/6588)
+-   InputOtp respect props.value change [#6595](https://github.com/primefaces/primereact/pull/6595)
+-   Fix typo in Scale doc [#6596](https://github.com/primefaces/primereact/pull/6596)
+-   Fix typo in PrimeFlex doc [#6597](https://github.com/primefaces/primereact/pull/6597)
+-   Password fix tab ordering of toggle mask [#6598](https://github.com/primefaces/primereact/pull/6598)
+-   Fix typo [#6601](https://github.com/primefaces/primereact/pull/6601)
+-   Show headless sidebar in all window sizes [#6605](https://github.com/primefaces/primereact/pull/6605)
+-   IconOptions typescript updated for FontAwesome [#6579](https://github.com/primefaces/primereact/pull/6579)
+-   PanelMenu MenuItem Id Prop Not Passed [#6607](https://github.com/primefaces/primereact/pull/6607)
+-   MeterGroup render items in percentage [#6612](https://github.com/primefaces/primereact/pull/6612)
+-   Minus sign after all selection - InputNumber [#6566](https://github.com/primefaces/primereact/pull/6566)
+-   Tabview Core Styles Moved to SASS Theme and Removed Inkbar for Lara [#6616](https://github.com/primefaces/primereact/pull/6616)
+-   Chart update TypeScript to inherit DIV [#6618](https://github.com/primefaces/primereact/pull/6618)
+-   Fix: Cannot npm link primereact on local project [#6619](https://github.com/primefaces/primereact/pull/6619)
+-   Added new capabilities and properties to Column and Dialog [#6611](https://github.com/primefaces/primereact/pull/6611)
+-   Dropdown fix checkIcon [#6630](https://github.com/primefaces/primereact/pull/6630)
+-   Feat: Stateful TreeTable [#6384](https://github.com/primefaces/primereact/pull/6384)
+-   InputOtp keyboard navigation [#6638](https://github.com/primefaces/primereact/pull/6638)
+-   DataTable: Column: onCellEditComplete is fired twice [#6641](https://github.com/primefaces/primereact/pull/6641)
+-   VirtualScroller improve useUpdate comparison [#6643](https://github.com/primefaces/primereact/pull/6643)
+-   Fixed typo [#6654](https://github.com/primefaces/primereact/pull/6654)
+-   BodyRow tab key handling [#6658](https://github.com/primefaces/primereact/pull/6658)
+-   Multiselect use unique label key [#6652](https://github.com/primefaces/primereact/pull/6652)
+-   Tooltip default position to 'right' if undefined [#6651](https://github.com/primefaces/primereact/pull/6651)
+-   PageLinks use totalPages [#6649](https://github.com/primefaces/primereact/pull/6649)
+-   Add missing components to primereact.all.js [#6637](https://github.com/primefaces/primereact/pull/6637)
+-   autocomplete value selection fix [#6664](https://github.com/primefaces/primereact/pull/6664)
+-   Galleria image in fullscreen mode not closing on escape button click [#6645](https://github.com/primefaces/primereact/pull/6645)
+-   DragDrop Tree keyboard navigation [#6646](https://github.com/primefaces/primereact/pull/6646)
+
 ## [10.6.5](https://github.com/primefaces/primereact/tree/10.6.5) (2024-05-03)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.6.4...10.6.5)
