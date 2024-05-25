@@ -30412,7 +30412,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "null | string",
                             "default": "",
                             "description": "The value of component"
                         },
@@ -31914,7 +31914,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "null | string",
                             "default": "",
                             "description": "The value of component"
                         },
