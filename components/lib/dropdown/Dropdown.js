@@ -1109,7 +1109,7 @@ export const Dropdown = React.memo(
                 return <input {...inputProps} />;
             }
 
-            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
+            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || props.emptyMessage || '';
             const inputProps = mergeProps(
                 {
                     ref: inputRef,
@@ -1119,7 +1119,7 @@ export const Dropdown = React.memo(
                 ptm('input')
             );
 
-            return <span {...inputProps}>{content}</span>;
+            return <span {...inputProps}>{content || <>&nbsp;</>}</span>;
         };
 
         const onClearIconKeyDown = (event) => {
