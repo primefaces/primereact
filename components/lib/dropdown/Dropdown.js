@@ -1119,7 +1119,7 @@ export const Dropdown = React.memo(
                 ptm('input')
             );
 
-            return <span {...inputProps}>{content || <>&nbsp;</>}</span>;
+            return <span {...inputProps}>{content}</span>;
         };
 
         const onClearIconKeyDown = (event) => {
