@@ -51152,6 +51152,14 @@
                             "description": "Content to be displayed in tooltip."
                         },
                         {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Specifies if pressing escape key should hide the tooltip."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,
