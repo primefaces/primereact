@@ -60,7 +60,7 @@ export interface TooltipOptions {
     className?: string | undefined;
     /**
      * Specifies if pressing escape key should hide the tooltip.
-     * @defaultValue true
+     * @defaultValue false
      */
     closeOnEscape?: boolean | undefined;
     /**
