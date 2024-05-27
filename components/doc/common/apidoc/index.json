@@ -51144,20 +51144,20 @@
                             "description": "Style class of the tooltip."
                         },
                         {
-                            "name": "content",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode",
-                            "default": "",
-                            "description": "Content to be displayed in tooltip."
-                        },
-                        {
                             "name": "closeOnEscape",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
                             "description": "Specifies if pressing escape key should hide the tooltip."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Content to be displayed in tooltip."
                         },
                         {
                             "name": "disabled",
@@ -51564,6 +51564,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the tooltip."
+                        },
+                        {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Specifies if pressing escape key should hide the tooltip."
                         },
                         {
                             "name": "disabled",
