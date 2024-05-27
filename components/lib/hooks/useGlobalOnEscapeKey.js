@@ -5,6 +5,7 @@ import { DomHandler } from '../utils/Utils';
  * Priorities of different components (bigger number handled first)
  */
 export const ESC_KEY_HANDLING_PRIORITIES = {
+    TOOLTIP: 10,
     SIDEBAR: 100,
     SLIDE_MENU: 200,
     DIALOG: 300,
