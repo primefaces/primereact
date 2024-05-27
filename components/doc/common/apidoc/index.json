@@ -44885,11 +44885,18 @@
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
                             "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
-                            "description": "Uses to pass attributes to the close button's DOM element."
+                            "description": "Uses to pass attributes to the close button icon's DOM element."
                         },
                         {
                             "name": "icons",
