@@ -16584,7 +16584,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "cell",
+                            "default": "null",
                             "description": "Defines editing mode, options are \"cell\" and \"row\"."
                         },
                         {
