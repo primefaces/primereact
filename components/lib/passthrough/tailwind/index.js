@@ -3386,11 +3386,7 @@ const Tailwind = {
                 className: classNames('relative inline-flex cursor-pointer select-none align-bottom', 'w-6 h-6')
             },
             radioButtonInput: {
-                className: classNames(
-                    'w-full h-full top-0 left-0 absolute appearance-none select-none',
-                    'p-0 m-0 opacity-0 z-[1] rounded-[50%] outline-none',
-                    'cursor-pointer peer'
-                )
+                className: classNames('w-full h-full top-0 left-0 absolute appearance-none select-none', 'p-0 m-0 opacity-0 z-[1] rounded-[50%] outline-none', 'cursor-pointer peer')
             },
             radioButtonBox: ({ context }) => ({
                 className: classNames(
