@@ -293,6 +293,8 @@ export const BodyCell = React.memo((props) => {
         if (currentData) {
             ObjectUtils.mutateFieldData(currentData, field, val);
         }
+
+        editingRowDataStateRef.current = editingRowData;
     };
 
     const onClick = (event) => {
