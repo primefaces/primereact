@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
@@ -20,8 +20,17 @@ export const ColorPicker = React.memo(
                 overlayVisible: overlayVisibleState
             }
         });
+        const isCloseOnEscape = overlayVisibleState && props.closeOnEscape;
+        const overlayDisplayOrder = useDisplayOrder('overlay-panel', isCloseOnEscape);
 
         useHandleStyle(ColorPickerBase.css.styles, isUnstyled, { name: 'colorpicker' });
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState && overlayDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayDisplayOrder]
+        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
