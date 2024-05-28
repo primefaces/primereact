@@ -328,12 +328,7 @@ const classes = {
             'p-editable-column': editor,
             'p-cell-editing': editor && editingState,
             'p-frozen-column': frozen,
-            'p-selectable-cell':
-                props.allowCellSelection &&
-                props.isSelectable({
-                    data: getCellParams(),
-                    index: props.rowIndex
-                }),
+            'p-selectable-cell': props.allowCellSelection && props.isSelectable({ data: getCellParams(), index: props.rowIndex }),
             'p-highlight': cellSelected,
             [`p-align-${align}`]: !!align
         }),
@@ -342,12 +337,7 @@ const classes = {
         classNames({
             'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
             'p-highlight-contextmenu': props.contextMenuSelected,
-            'p-selectable-row':
-                props.allowRowSelection &&
-                props.isSelectable({
-                    data: props.rowData,
-                    index: props.rowIndex
-                }),
+            'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
             'p-row-odd': props.rowIndex % 2 !== 0
         }),
     rowGroupTogglerIcon: 'p-row-toggler-icon',
@@ -451,7 +441,7 @@ export const DataTableBase = ComponentBase.extend({
         dataKey: null,
         defaultSortOrder: 1,
         dragSelection: false,
-        editMode: 'cell',
+        editMode: null,
         editingRows: null,
         emptyMessage: null,
         expandableRowGroups: false,
