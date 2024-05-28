@@ -103,6 +103,7 @@ export const TooltipBase = ComponentBase.extend({
         autoZIndex: true,
         baseZIndex: 0,
         className: null,
+        closeOnEscape: false,
         content: null,
         disabled: false,
         event: null,
