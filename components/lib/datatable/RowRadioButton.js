@@ -37,7 +37,10 @@ export const RowRadioButton = React.memo((props) => {
             checked: props.checked,
             disabled: props.disabled,
             name: `${props.tableSelector}_dt_radio`,
-            onChange: onChange
+            onChange: onChange,
+            input: getColumnPTOptions('radiobuttoninput'),
+            box: getColumnPTOptions('radiobuttonbox'),
+            icon: getColumnPTOptions('radiobuttonicon'),
             unstyled: props.unstyled
         },
         getColumnPTOptions('radiobutton')
