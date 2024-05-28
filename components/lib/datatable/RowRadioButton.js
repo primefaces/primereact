@@ -38,6 +38,7 @@ export const RowRadioButton = React.memo((props) => {
             disabled: props.disabled,
             name: `${props.tableSelector}_dt_radio`,
             onChange: onChange
+            unstyled: props.unstyled
         },
         getColumnPTOptions('radiobutton')
     );

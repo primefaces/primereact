@@ -617,6 +617,7 @@ export const BodyCell = React.memo((props) => {
                             ariaLabel={label}
                             ptCallbacks={props.ptCallbacks}
                             metaData={props.metaData}
+                            unstyled={props.unstyled}
                         />
                     )}
                     {selectionMode === 'multiple' && (
@@ -631,6 +632,7 @@ export const BodyCell = React.memo((props) => {
                             checkIcon={props.checkIcon}
                             ptCallbacks={props.ptCallbacks}
                             metaData={props.metaData}
+                            unstyled={props.unstyled}
                         />
                     )}
                 </>

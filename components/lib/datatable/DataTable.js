@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { getStorage } from '../../utils/utils';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
@@ -13,7 +14,6 @@ import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { getStorage } from '../../utils/utils';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -1533,7 +1533,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 },
                 ptCallbacks.ptm('loadingIcon')
             );
-            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin unstyled={props.unstyled} />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
             const loadingOverlayProps = mergeProps(
                 {
@@ -1707,6 +1707,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerOptions={options}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
+                unstyled={props.unstyled}
             />
         );
         const body = (
@@ -1792,10 +1793,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerOptions={options}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
+                unstyled={props.unstyled}
             />
         );
         const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
-            <TableBody hostName="DataTable" style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
+            <TableBody hostName="DataTable" style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} unstyled={props.unstyled} />
         ) : null;
 
         return (
@@ -1810,7 +1812,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createTableFooter = (options) => {
         const { columns } = options;
 
-        return <TableFooter hostName="DataTable" tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
+        return <TableFooter hostName="DataTable" tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} unstyled={props.unstyled} />;
     };
 
     const createContent = (processedData, columns, selectionModeInColumn, empty) => {
@@ -1844,6 +1846,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     pt={ptCallbacks.ptm('virtualScroller')}
                     __parentMetadata={{ parent: metaData }}
                     showSpacer={false}
+                    unstyled={props.unstyled}
                     contentTemplate={(options) => {
                         const ref = (el) => {
                             tableRef.current = el;
