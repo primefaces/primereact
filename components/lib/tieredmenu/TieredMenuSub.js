@@ -251,7 +251,6 @@ export const TieredMenuSub = React.memo(
                     'aria-disabled': disabled,
                     'aria-expanded': grouped ? active : undefined,
                     'aria-haspopup': grouped && !url ? 'menu' : undefined,
-                    'aria-level': props.level + 1,
                     'aria-setsize': getAriaSetSize(),
                     'aria-posinset': getAriaPosInset(index),
                     'data-p-highlight': active,
