@@ -35904,7 +35904,7 @@
                     "relatedProp": "",
                     "props": [
                         {
-                            "name": "totaLPercent",
+                            "name": "totalPercent",
                             "optional": false,
                             "readonly": false,
                             "type": "number"
