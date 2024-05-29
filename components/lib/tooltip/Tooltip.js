@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
@@ -32,6 +32,13 @@ export const Tooltip = React.memo(
         const { ptm, cx, sx, isUnstyled } = TooltipBase.setMetaData(metaData);
 
         useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: props.closeOnEscape,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.TOOLTIP, 0]
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
