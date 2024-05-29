@@ -7120,14 +7120,14 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the InputText component."
                         },
                         {
                             "name": "dropdownButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -7463,14 +7463,14 @@
                             "name": "todayButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
                             "name": "clearButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -16584,7 +16584,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "cell",
+                            "default": "null",
                             "description": "Defines editing mode, options are \"cell\" and \"row\"."
                         },
                         {
@@ -44885,11 +44885,18 @@
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
                             "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
-                            "description": "Uses to pass attributes to the close button's DOM element."
+                            "description": "Uses to pass attributes to the close button icon's DOM element."
                         },
                         {
                             "name": "icons",
@@ -51137,6 +51144,14 @@
                             "description": "Style class of the tooltip."
                         },
                         {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Specifies if pressing escape key should hide the tooltip."
+                        },
+                        {
                             "name": "content",
                             "optional": true,
                             "readonly": false,
@@ -51549,6 +51564,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the tooltip."
+                        },
+                        {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Specifies if pressing escape key should hide the tooltip."
                         },
                         {
                             "name": "disabled",

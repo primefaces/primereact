@@ -1109,7 +1109,7 @@ export const Dropdown = React.memo(
                 return <input {...inputProps} />;
             }
 
-            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
+            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || props.emptyMessage || <>&nbsp;</>;
             const inputProps = mergeProps(
                 {
                     ref: inputRef,
