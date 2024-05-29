@@ -22,11 +22,11 @@ export const MeterGroup = (inProps) => {
     useHandleStyle(MeterGroupBase.css.styles, isUnstyled, { name: 'metergroup' });
 
     let totalPercent = 0;
-    let precentages = [];
+    let percentages = [];
 
     values.map((item) => {
         totalPercent = totalPercent + item.value;
-        precentages.push(Math.round((item.value / totalPercent) * 100));
+        percentages.push(Math.round((item.value / totalPercent) * 100));
     });
 
     const calculatePercentage = (meterValue = 0) => {
@@ -126,12 +126,13 @@ export const MeterGroup = (inProps) => {
                     );
 
                     const labelIcon = item.icon ? <i {...labelIconProps} /> : <span {...labelListIconProps} />;
+                    const itemPercentage = calculatePercentage(item.value);
 
                     return (
                         <li key={index} {...labelItemProps}>
                             {labelIcon}
                             <span {...labelProps}>
-                                {item?.label} {item?.value && `(${item?.value}%)`}
+                                {item?.label} {`(${itemPercentage}%)`}
                             </span>
                         </li>
                     );
@@ -142,7 +143,7 @@ export const MeterGroup = (inProps) => {
 
     const templateProps = {
         totalPercent,
-        precentages,
+        percentages,
         values
     };
 

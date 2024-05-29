@@ -13,6 +13,7 @@ import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
+import { getStorage } from '../../utils/utils';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -175,24 +176,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return columns;
     };
 
-    const getStorage = () => {
-        switch (props.stateStorage) {
-            case 'local':
-                return window.localStorage;
-
-            case 'session':
-                return window.sessionStorage;
-
-            case 'custom':
-                return null;
-
-            default:
-                throw new Error(props.stateStorage + ' is not a valid value for the state storage, supported values are "local", "session" and "custom".');
-        }
-    };
-
     const saveState = () => {
-        let state = {};
+        const state = {};
 
         if (props.paginator) {
             state.first = getFirst();
@@ -237,7 +222,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 props.customSaveState(state);
             }
         } else {
-            const storage = getStorage();
+            const storage = getStorage(props.stateStorage);
 
             if (ObjectUtils.isNotEmpty(state)) {
                 storage.setItem(props.stateKey, JSON.stringify(state));
@@ -250,7 +235,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const clearState = () => {
-        const storage = getStorage();
+        const storage = getStorage(props.stateStorage);
 
         if (storage && props.stateKey) {
             storage.removeItem(props.stateKey);
@@ -265,7 +250,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 restoredState = props.customRestoreState();
             }
         } else {
-            const storage = getStorage();
+            const storage = getStorage(props.stateStorage);
             const stateString = storage.getItem(props.stateKey);
             const dateFormat = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
 

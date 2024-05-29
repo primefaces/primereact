@@ -1081,7 +1081,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     dragSelection?: boolean;
     /**
      * Defines editing mode, options are "cell" and "row".
-     * @defaultValue cell
+     * @defaultValue null
      */
     editMode?: string | undefined;
     /**

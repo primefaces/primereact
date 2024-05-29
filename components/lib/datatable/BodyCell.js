@@ -25,6 +25,7 @@ export const BodyCell = React.memo((props) => {
     const selfClick = React.useRef(false);
     const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
+    const editingRowDataStateRef = React.useRef(null);
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
@@ -56,6 +57,10 @@ export const BodyCell = React.memo((props) => {
 
     const isEditable = () => {
         return getColumnProp('editor');
+    };
+
+    const cellEditValidateOnClose = () => {
+        return getColumnProp('cellEditValidateOnClose');
     };
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
@@ -153,43 +158,41 @@ export const BodyCell = React.memo((props) => {
             unbindDocumentClickListener();
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
+            editingRowDataStateRef.current = null;
             selfClick.current = false;
         }, 1);
     };
 
     const switchCellToViewMode = (event, submit) => {
         const callbackParams = getCellCallbackParams(event);
+        const newRowData = { ...editingRowDataStateRef.current };
+        const newValue = resolveFieldData(newRowData);
+        const params = { ...callbackParams, newRowData, newValue };
+        const onCellEditCancel = getColumnProp('onCellEditCancel');
+        const cellEditValidator = getColumnProp('cellEditValidator');
+        const onCellEditComplete = getColumnProp('onCellEditComplete');
 
-        setEditingRowDataState((prev) => {
-            const newRowData = prev;
-            const newValue = resolveFieldData(newRowData);
-            const params = { ...callbackParams, newRowData, newValue };
-            const onCellEditCancel = getColumnProp('onCellEditCancel');
-            const cellEditValidator = getColumnProp('cellEditValidator');
-            const onCellEditComplete = getColumnProp('onCellEditComplete');
+        if (!submit && onCellEditCancel) {
+            onCellEditCancel(params);
+        }
 
-            if (!submit && onCellEditCancel) {
-                onCellEditCancel(params);
+        let valid = true;
+
+        if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
+            valid = cellEditValidator(params);
+        }
+
+        if (valid) {
+            if (submit && onCellEditComplete) {
+                onCellEditComplete(params);
             }
 
-            let valid = true;
+            closeCell(event);
+        } else {
+            event.preventDefault();
+        }
 
-            if (!submit && cellEditValidator) {
-                valid = cellEditValidator(params);
-            }
-
-            if (valid) {
-                if (submit && onCellEditComplete) {
-                    setTimeout(() => onCellEditComplete(params));
-                }
-
-                closeCell(event);
-            } else {
-                event.preventDefault();
-            }
-
-            return newRowData;
-        });
+        setEditingRowDataState(newRowData);
     };
 
     const findNextSelectableCell = (cell) => {
@@ -290,6 +293,8 @@ export const BodyCell = React.memo((props) => {
         if (currentData) {
             ObjectUtils.mutateFieldData(currentData, field, val);
         }
+
+        editingRowDataStateRef.current = editingRowData;
     };
 
     const onClick = (event) => {
@@ -520,6 +525,12 @@ export const BodyCell = React.memo((props) => {
     }, [props.editingMeta]);
 
     React.useEffect(() => {
+        if (editingRowDataState) {
+            editingRowDataStateRef.current = editingRowDataState;
+        }
+    }, [editingRowDataState]);
+
+    React.useEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
             const params = { ...callbackParams, editing: editingState, editingKey };
@@ -628,13 +639,16 @@ export const BodyCell = React.memo((props) => {
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+
+            const customIcon = getColumnProp('rowReorderIcon');
             const rowReorderIconProps = mergeProps(
                 {
                     className: cx('rowReorderIcon')
                 },
-                getColumnPTOptions('rowReorderIcon')
+                customIcon ? null : getColumnPTOptions('rowReorderIcon')
             );
-            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
+
+            const rowReorderIcon = customIcon || <BarsIcon {...rowReorderIconProps} />;
 
             content = showReorder ? IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props }) : null;
         } else if (expander) {

@@ -9,10 +9,8 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent, Nullable } from '../ts-helpers';
@@ -41,14 +39,14 @@ export interface CalendarPassThroughOptions {
     root?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the InputText component.
-     * @see {@link InputTextPassThroughOptions}
+     * @see {@link CalendarPassThroughType}
      */
-    input?: InputTextPassThroughOptions;
+    input?: CalendarPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     * @see {@link CalendarPassThroughType}
      */
-    dropdownButton?: ButtonPassThroughOptions;
+    dropdownButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the panel's DOM element.
      */
@@ -239,14 +237,14 @@ export interface CalendarPassThroughOptions {
     buttonbar?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     * @see {@link CalendarPassThroughType}
      */
-    todayButton?: ButtonPassThroughOptions;
+    todayButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     * @see {@link CalendarPassThroughType}
      */
-    clearButton?: ButtonPassThroughOptions;
+    clearButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the select's DOM element.
      */

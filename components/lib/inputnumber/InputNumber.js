@@ -375,7 +375,7 @@ export const InputNumber = React.memo(
             if (props.onKeyDown) {
                 props.onKeyDown(event);
 
-                // do not continue if the user defined event wants to prevent
+                // Do not continue if the user-defined event wants to prevent
                 if (event.defaultPrevented) {
                     return;
                 }
@@ -424,7 +424,6 @@ export const InputNumber = React.memo(
 
                 //enter and tab
                 case 'Tab':
-                case 'NumpadEnter':
                 case 'Enter':
                 case 'NumpadEnter':
                     newValueStr = validateValue(parseValue(inputValue));
@@ -542,13 +541,15 @@ export const InputNumber = React.memo(
 
                 default:
                     event.preventDefault();
-
                     let char = event.key;
-                    const _isDecimalSign = isDecimalSign(char);
-                    const _isMinusSign = isMinusSign(char);
 
-                    if (((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
-                        insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                    if (char) {
+                        const _isDecimalSign = isDecimalSign(char);
+                        const _isMinusSign = isMinusSign(char);
+
+                        if ((event.code && (event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                            insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
+                        }
                     }
 
                     break;
@@ -672,7 +673,8 @@ export const InputNumber = React.memo(
             if (sign.isMinusSign) {
                 const isNewMinusSign = minusCharIndex === -1;
 
-                if (isNewMinusSign && (selectionStart === 0 || selectionStart === currencyCharIndex + 1)) {
+                // #6522 - Selected negative value can't be overwritten with a minus ('-') symbol
+                if (selectionStart === 0 || selectionStart === currencyCharIndex + 1) {
                     newValueStr = inputValue;
 
                     if (isNewMinusSign || selectionEnd !== 0) {
@@ -1133,7 +1135,7 @@ export const InputNumber = React.memo(
         useUpdateEffect(() => {
             constructParser();
             changeValue();
-        }, [props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
+        }, [_locale, props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
 
         useUpdateEffect(() => {
             changeValue();

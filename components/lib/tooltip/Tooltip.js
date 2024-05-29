@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
@@ -12,7 +12,7 @@ export const Tooltip = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TooltipBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(false);
-        const [positionState, setPositionState] = React.useState(props.position);
+        const [positionState, setPositionState] = React.useState(props.position || 'right');
         const [classNameState, setClassNameState] = React.useState('');
         const metaData = {
             props,
@@ -32,6 +32,13 @@ export const Tooltip = React.memo(
         const { ptm, cx, sx, isUnstyled } = TooltipBase.setMetaData(metaData);
 
         useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: props.closeOnEscape,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.TOOLTIP, 0]
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -449,7 +456,7 @@ export const Tooltip = React.memo(
                 bindWindowResizeListener();
                 bindOverlayScrollListener();
             } else {
-                setPositionState(props.position);
+                setPositionState(props.position || 'right');
                 setClassNameState('');
                 currentTargetRef.current = null;
                 containerSize.current = null;

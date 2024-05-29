@@ -568,7 +568,29 @@ export const VirtualScroller = React.memo(
         }, [numToleratedItemsState]);
 
         useUpdateEffect(() => {
-            if (!prevProps.items || prevProps.items.length !== (props.items || []).length) {
+            // Check if the previous/current rows array exists
+            const prevRowsExist = prevProps.items !== undefined && prevProps.items !== null;
+            const currentRowsExist = props.items !== undefined && props.items !== null;
+
+            // Get the length of the previous/current rows array, or 0 if it doesn't exist
+            const prevRowsLength = prevRowsExist ? prevProps.items.length : 0;
+            const currentRowsLength = currentRowsExist ? props.items.length : 0;
+
+            // Check if the length of the rows arrays has changed
+            let valuesChanged = prevRowsLength !== currentRowsLength;
+
+            // If both is true, we also need to check the lengths of the first element (assuming it's a matrix)
+            if (both && !valuesChanged) {
+                // Get the length of the columns or 0
+                const prevColumnsLength = prevRowsExist && prevProps.items.length > 0 ? prevProps.items[0].length : 0;
+                const currentColumnsLength = currentRowsExist && props.items.length > 0 ? props.items[0].length : 0;
+
+                // Check if the length of the columns has changed
+                valuesChanged = prevColumnsLength !== currentColumnsLength;
+            }
+
+            // If the previous items array doesn't exist or if any values have changed, call the init function
+            if (!prevRowsExist || valuesChanged) {
                 init();
             }
 
