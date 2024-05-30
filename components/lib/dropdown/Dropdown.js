@@ -170,11 +170,9 @@ export const Dropdown = React.memo(
         };
 
         const onOptionSelect = (event, option, isHide = true) => {
-            const value = getOptionValue(option);
-
             selectItem({
                 originalEvent: event,
-                option: value
+                option
             });
 
             isHide && hide(true);
@@ -754,6 +752,7 @@ export const Dropdown = React.memo(
                 updateEditableLabel(event.option);
                 setFocusedOptionIndex(-1);
                 const optionValue = getOptionValue(event.option);
+
                 const selectedOptionIndex = findOptionIndexInList(event.option, visibleOptions);
 
                 if (props.onChange) {

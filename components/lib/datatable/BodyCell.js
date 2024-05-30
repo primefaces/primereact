@@ -602,7 +602,7 @@ export const BodyCell = React.memo((props) => {
                 const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
                 const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
 
-                label = `${props.selected ? ariaLabel('unselectLabel') : ariaLabel('selectLabel')} ${ariaLabelText}`;
+                label = `${props.selected ? ariaLabel('unselectRow') : ariaLabel('selectRow')} ${ariaLabelText}`;
             }
 
             content = showSelection && (
