@@ -450,7 +450,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     className: cx('closeButton'),
                     'aria-label': ariaLabel,
                     onClick: onClose,
-                    onKeyDown: (ev) => ev.stopPropagation()
+                    onKeyDown: (ev) => {
+                        if (ev.key !== 'Escape') {
+                            ev.stopPropagation();
+                        }
+                    }
                 },
                 ptm('closeButton')
             );
