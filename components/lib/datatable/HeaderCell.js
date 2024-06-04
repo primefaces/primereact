@@ -238,6 +238,7 @@ export const HeaderCell = React.memo((props) => {
                 {
                     className: cx('columnResizer'),
                     onMouseDown: (e) => onResizerMouseDown(e),
+                    // onTouchStart: (e) => onResizerMouseDown(e),
                     onClick: (e) => onResizerClick(e),
                     onDoubleClick: (e) => onResizerDoubleClick(e)
                 },
