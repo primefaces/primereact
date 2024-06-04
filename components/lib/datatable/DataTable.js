@@ -546,11 +546,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         columnResizing.current = true;
 
-        if (event.type == 'touchstart') {
-            lastResizeHelperX.current = event.changedTouches[0].clientX - containerLeft + elementRef.current.scrollLeft;
-        } else {
-            lastResizeHelperX.current = event.pageX - containerLeft + elementRef.current.scrollLeft;
-        }
+        lastResizeHelperX.current = (event.type === 'touchstart' ? event.changedTouches[0].clientX : event.pageX) - containerLeft + elementRef.current.scrollLeft;
 
         bindColumnResizeEvents();
     };
@@ -563,11 +559,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
 
-        if (event.type == 'touchmove') {
-            resizeHelperRef.current.style.left = event.changedTouches[0].clientX - containerLeft + elementRef.current.scrollLeft + 'px';
-        } else {
-            resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
-        }
+        resizeHelperRef.current.style.left = (event.type === 'touchmove' ? event.changedTouches[0].clientX : event.pageX) - containerLeft + elementRef.current.scrollLeft + 'px';
 
         resizeHelperRef.current.style.display = 'block';
     };
