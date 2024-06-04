@@ -86,28 +86,28 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setD_rowsState(props.rows);
     }
 
-    const moveListener = (event) => columnResizing.current && onColumnResize(event);
+    const columnResizeStartListener = (event) => columnResizing.current && onColumnResize(event);
 
-    const endListener = () => columnResizing.current && ((columnResizing.current = false), onColumnResizeEnd());
+    const columnResizeEndListener = () => columnResizing.current && ((columnResizing.current = false), onColumnResizeEnd());
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
         type: 'mousemove',
-        listener: moveListener
+        listener: columnResizeStartListener
     });
 
     const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
         type: 'mouseup',
-        listener: endListener
+        listener: columnResizeEndListener
     });
 
     const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({
         type: 'touchmove',
-        listener: moveListener
+        listener: columnResizeStartListener
     });
 
     const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({
         type: 'touchend',
-        listener: endListener
+        listener: columnResizeEndListener
     });
 
     const isCustomStateStorage = () => {
