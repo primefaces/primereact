@@ -662,7 +662,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const bindColumnResizeEvents = () => {
         bindDocumentMouseMoveListener();
         bindDocumentMouseUpListener();
-        bindDocumentTouchMoveListener()
+        bindDocumentTouchMoveListener();
         bindDocumentTouchEndListener();
     };
 

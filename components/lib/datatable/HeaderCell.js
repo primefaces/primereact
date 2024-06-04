@@ -196,7 +196,7 @@ export const HeaderCell = React.memo((props) => {
         props.onColumnDrop({ originalEvent: event, column: props.column });
     };
 
-    const onResizerMouseDown = (event) => {
+    const onResizeStart = (event) => {
         props.onColumnResizeStart({ originalEvent: event, column: props.column });
     };
 
@@ -237,8 +237,8 @@ export const HeaderCell = React.memo((props) => {
             const columnResizerProps = mergeProps(
                 {
                     className: cx('columnResizer'),
-                    onMouseDown: (e) => onResizerMouseDown(e),
-                    // onTouchStart: (e) => onResizerMouseDown(e),
+                    onMouseDown: (e) => onResizeStart(e),
+                    onTouchStart: (e) => onResizeStart(e),
                     onClick: (e) => onResizerClick(e),
                     onDoubleClick: (e) => onResizerDoubleClick(e)
                 },
