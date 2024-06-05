@@ -547,7 +547,7 @@ export const InputNumber = React.memo(
                         const _isDecimalSign = isDecimalSign(char);
                         const _isMinusSign = isMinusSign(char);
 
-                        if ((event.code && (event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                        if ((Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
                             insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
                         }
                     }
