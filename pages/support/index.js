@@ -31,7 +31,7 @@ const SupportPage = () => {
                     <div className="card m-0">
                         <div className="flex align-items-center justify-content-between mb-3">
                             <div className="text-2xl font-semibold">Service Features</div>
-                            <span className="font-bold text-lg">200$/h</span>
+                            <span className="font-bold text-lg">$200/h</span>
                         </div>
                         <div className="gap-5 px-3">
                             <ul className="flex-auto list-none m-0 p-0 text-lg">
