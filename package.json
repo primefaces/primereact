@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@docsearch/react": "3.5.2",
+        "@shopify/react-web-worker": "^5.0.17",
         "chart.js": "4.4.2",
         "file-saver": "2.0.5",
         "fs-extra": "^11.2.0",

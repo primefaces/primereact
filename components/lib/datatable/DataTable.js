@@ -14,8 +14,12 @@ import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
 import { getStorage } from '../../utils/utils';
+import { useWorker } from '@shopify/react-web-worker';
+import { createWorkerDataTableUtils } from '../../workers';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
+    const workerHandleUtils = useWorker(createWorkerDataTableUtils);
+
     const context = React.useContext(PrimeReactContext);
     const mergeProps = useMergeProps();
     const props = DataTableBase.getProps(inProps, context);
@@ -83,8 +87,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const filterTimeout = React.useRef(null);
 
     if (props.rows !== d_rowsState && !props.onPage) {
-        setRowsState(props.rows);
-        setD_rowsState(props.rows);
+        workerHandleUtils.setRows(setRowsState, setD_rowsState, props.rows);
     }
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
