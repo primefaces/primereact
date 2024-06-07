@@ -477,8 +477,7 @@ export const Calendar = React.memo(
         };
 
         const onMonthDropdownChange = (event, value) => {
-            const currentViewDate = getViewDate();
-            let newViewDate = cloneDate(currentViewDate);
+            let newViewDate = new Date();
 
             newViewDate.setMonth(parseInt(value, 10));
 
