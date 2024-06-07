@@ -55,7 +55,7 @@ export const BodyCell = React.memo((props) => {
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
     const isEditable = () => {
-        return getColumnProp('editor');
+        return ObjectUtils.isNotEmpty(props.editMode) && getColumnProp('editor');
     };
 
     const cellEditValidateOnClose = () => {
