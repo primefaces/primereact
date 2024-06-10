@@ -480,6 +480,7 @@ export const Calendar = React.memo(
             const currentViewDate = getViewDate();
             let newViewDate = cloneDate(currentViewDate);
 
+            newViewDate.setDate(1);
             newViewDate.setMonth(parseInt(value, 10));
 
             updateViewDate(event, newViewDate);
