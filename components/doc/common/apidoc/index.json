@@ -34791,6 +34791,13 @@
                             "description": "Uses to pass attributes to the list item's DOM element."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
                             "name": "action",
                             "optional": true,
                             "readonly": false,
