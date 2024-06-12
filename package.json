@@ -54,7 +54,7 @@
         "@rollup/plugin-replace": "^5.0.7",
         "@stackblitz/sdk": "1.10.0",
         "@svgr/webpack": "^8.1.0",
-        "@testing-library/jest-dom": "^6.4.2",
+        "@testing-library/jest-dom": "^6.4.6",
         "@testing-library/react": "^14.1.2",
         "@testing-library/user-event": "^14.5.2",
         "@types/node": "^20.14.2",
