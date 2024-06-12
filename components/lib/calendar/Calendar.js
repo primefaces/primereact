@@ -496,8 +496,19 @@ export const Calendar = React.memo(
 
         const onTodayButtonClick = (event) => {
             const today = new Date();
-            const dateMeta = { day: today.getDate(), month: today.getMonth(), year: today.getFullYear(), today: true, selectable: true };
-            const timeMeta = { hours: today.getHours(), minutes: today.getMinutes(), seconds: today.getSeconds(), milliseconds: today.getMilliseconds() };
+            const dateMeta = {
+                day: today.getDate(),
+                month: today.getMonth(),
+                year: today.getFullYear(),
+                today: true,
+                selectable: true
+            };
+            const timeMeta = {
+                hours: today.getHours(),
+                minutes: today.getMinutes(),
+                seconds: today.getSeconds(),
+                milliseconds: today.getMilliseconds()
+            };
 
             updateViewDate(event, today);
             onDateSelect(event, dateMeta, timeMeta);
@@ -1597,6 +1608,10 @@ export const Calendar = React.memo(
         };
 
         const onDateSelect = (event, dateMeta, timeMeta) => {
+            if (!event) {
+                return;
+            }
+
             if (props.disabled || !dateMeta.selectable) {
                 event.preventDefault();
 
@@ -1852,7 +1867,16 @@ export const Calendar = React.memo(
         };
 
         const onOverlayEnter = () => {
-            const styles = props.touchUI ? { position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' } : !props.inline ? { position: 'absolute', top: '0', left: '0' } : undefined;
+            const styles = props.touchUI
+                ? {
+                      position: 'fixed',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)'
+                  }
+                : !props.inline
+                  ? { position: 'absolute', top: '0', left: '0' }
+                  : undefined;
 
             DomHandler.addStyles(overlayRef.current, styles);
 
@@ -3119,7 +3143,12 @@ export const Calendar = React.memo(
         };
 
         const createBackwardNavigator = (isVisible) => {
-            const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e, trapFocus) } : { style: { visibility: 'hidden' } };
+            const navigatorProps = isVisible
+                ? {
+                      onClick: onPrevButtonClick,
+                      onKeyDown: (e) => onContainerButtonKeydown(e, trapFocus)
+                  }
+                : { style: { visibility: 'hidden' } };
             const previousIconProps = mergeProps(
                 {
                     className: cx('previousIcon')
@@ -3149,7 +3178,12 @@ export const Calendar = React.memo(
         };
 
         const createForwardNavigator = (isVisible) => {
-            const navigatorProps = isVisible ? { onClick: onNextButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
+            const navigatorProps = isVisible
+                ? {
+                      onClick: onNextButtonClick,
+                      onKeyDown: (e) => onContainerButtonKeydown(e)
+                  }
+                : { style: { visibility: 'hidden' } };
             const nextIconProps = mergeProps(
                 {
                     className: cx('nextIcon')
@@ -3189,7 +3223,15 @@ export const Calendar = React.memo(
                 const viewDate = getViewDate();
                 const viewMonth = viewDate.getMonth();
                 const displayedMonthOptions = monthNames
-                    .map((month, index) => ((!isInMinYear(viewDate) || index >= props.minDate.getMonth()) && (!isInMaxYear(viewDate) || index <= props.maxDate.getMonth()) ? { label: month, value: index, index } : null))
+                    .map((month, index) =>
+                        (!isInMinYear(viewDate) || index >= props.minDate.getMonth()) && (!isInMaxYear(viewDate) || index <= props.maxDate.getMonth())
+                            ? {
+                                  label: month,
+                                  value: index,
+                                  index
+                              }
+                            : null
+                    )
                     .filter((option) => !!option);
                 const displayedMonthNames = displayedMonthOptions.map((option) => option.label);
                 const selectProps = mergeProps(
