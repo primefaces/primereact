@@ -208,7 +208,6 @@ export const TreeSelect = React.memo(
 
                     break;
 
-                case 'Space':
                 case 'Enter':
                 case 'NumpadEnter':
                     event.preventDefault();
@@ -856,7 +855,15 @@ export const TreeSelect = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: classNames(props.className, cx('root', { context, focusedState, overlayVisibleState, isValueEmpty })),
+                className: classNames(
+                    props.className,
+                    cx('root', {
+                        context,
+                        focusedState,
+                        overlayVisibleState,
+                        isValueEmpty
+                    })
+                ),
                 style: props.style,
                 onClick: onClick
             },
