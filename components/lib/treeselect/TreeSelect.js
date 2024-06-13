@@ -207,7 +207,7 @@ export const TreeSelect = React.memo(
                     focusInputRef.current && DomHandler.focus(focusInputRef.current);
 
                     break;
-                    
+
                 case 'Enter':
                 case 'NumpadEnter':
                     event.preventDefault();
