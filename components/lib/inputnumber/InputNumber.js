@@ -58,8 +58,8 @@ export const InputNumber = React.memo(
                 currency: props.currency,
                 currencyDisplay: props.currencyDisplay,
                 useGrouping: props.useGrouping,
-                minimumFractionDigits: props.minFractionDigits,
-                maximumFractionDigits: props.maxFractionDigits,
+                minimumFractionDigits: props.minFractionDigits ?? undefined,
+                maximumFractionDigits: props.maxFractionDigits ?? undefined,
                 roundingMode: props.roundingMode
             };
         };
