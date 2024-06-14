@@ -2328,17 +2328,29 @@ export const Calendar = React.memo(
         };
 
         const isMonthSelected = (month) => {
-            if (isComparable()) {
-                let value = isRangeSelection() ? props.value[0] : props.value;
+            if (!isComparable()) return false;
 
-                if (isMultipleSelection()) {
-                    return value.some((currentValue) => currentValue.getMonth() === month && currentValue.getFullYear() === currentYear);
+            if (isMultipleSelection()) {
+                return props.value.some((v) => v.getMonth() === month && v.getFullYear() === currentYear);
+            } else if (isRangeSelection()) {
+                const [start, end] = props.value;
+                const startYear = start ? start.getFullYear() : null;
+                const endYear = end ? end.getFullYear() : null;
+                const startMonth = start ? start.getMonth() : null;
+                const endMonth = end ? end.getMonth() : null;
+
+                if (!end) {
+                    return startYear === currentYear && startMonth === month;
+                } else {
+                    const currentDate = new Date(currentYear, month, 1);
+                    const startDate = new Date(startYear, startMonth, 1);
+                    const endDate = new Date(endYear, endMonth, 1);
+
+                    return currentDate >= startDate && currentDate <= endDate;
                 }
-
-                return value.getMonth() === month && value.getFullYear() === currentYear;
+            } else {
+                return props.value.getMonth() === month && props.value.getFullYear() === currentYear;
             }
-
-            return false;
         };
 
         const isYearSelected = (year) => {
