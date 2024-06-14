@@ -2354,17 +2354,18 @@ export const Calendar = React.memo(
         };
 
         const isYearSelected = (year) => {
-            if (isComparable()) {
-                let value = isRangeSelection() ? props.value[0] : props.value;
+            if (!isComparable()) return false;
 
-                if (isMultipleSelection()) {
-                    return value.some((currentValue) => currentValue.getFullYear() === year);
-                }
+            if (isMultipleSelection()) {
+                return props.value.some((v) => v.getFullYear() === year);
+            } else if (isRangeSelection()) {
+                const start = props.value[0] ? props.value[0].getFullYear() : null;
+                const end = props.value[1] ? props.value[1].getFullYear() : null;
 
-                return value.getFullYear() === year;
+                return start === year || end === year || (start < year && end > year);
+            } else {
+                return props.value.getFullYear() === year;
             }
-
-            return false;
         };
 
         const switchViewButtonDisabled = () => {
