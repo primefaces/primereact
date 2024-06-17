@@ -473,7 +473,9 @@ export const Tooltip = React.memo(
             if (visibleState) {
                 applyDelay('updateDelay', () => {
                     updateText(currentTargetRef.current, () => {
-                        align(currentTargetRef.current);
+                        const position = getPosition(currentTargetRef.current);
+
+                        if (position !== 'mouse') align(currentTargetRef.current);
                     });
                 });
             }
