@@ -620,20 +620,20 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onDropPointDragOver = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
     };
 
     const onDropPointDragEnter = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
     };
 
     const onDropPointDragLeave = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
     };
@@ -655,7 +655,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onDragOver = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
             event.stopPropagation();
@@ -663,13 +663,13 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onDragEnter = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             DomHandler.addClass(contentRef.current, 'p-treenode-dragover');
         }
     };
 
     const onDragLeave = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
 
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
