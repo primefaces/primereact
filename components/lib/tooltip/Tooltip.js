@@ -470,12 +470,12 @@ export const Tooltip = React.memo(
         }, [visibleState]);
 
         useUpdateEffect(() => {
-            if (visibleState) {
+            const position = getPosition(currentTargetRef.current);
+
+            if (visibleState && position !== 'mouse') {
                 applyDelay('updateDelay', () => {
                     updateText(currentTargetRef.current, () => {
-                        const position = getPosition(currentTargetRef.current);
-
-                        if (position !== 'mouse') align(currentTargetRef.current);
+                        align(currentTargetRef.current);
                     });
                 });
             }
