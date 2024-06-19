@@ -297,6 +297,7 @@ export const DialogBase = ComponentBase.extend({
         showHeader: true,
         style: null,
         transitionOptions: null,
+        defaultVisible: false,
         visible: false,
         children: undefined
     },

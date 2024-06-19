@@ -67,7 +67,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
-        props.onHide();
+        if (props.onHide) {
+            props.onHide();
+        }
+
+        if (props.defaultVisible && isCloseOnEscape) {
+            setVisibleState(false);
+            setMaskVisibleState(false);
+        }
+
         event.preventDefault();
     };
 
@@ -405,6 +413,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             setVisibleState(true);
         }
     }, [maskVisibleState]);
+
+    useUpdateEffect(() => {
+        if (props.defaultVisible) {
+            setVisibleState(true);
+            setMaskVisibleState(true);
+        }
+    }, [props.defaultVisible]);
 
     useUpdateEffect(() => {
         updateGlobalDialogsRegistry(true);
