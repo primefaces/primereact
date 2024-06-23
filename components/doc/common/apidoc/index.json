@@ -562,8 +562,9 @@
                             "type": "PrimeReactProviderProps"
                         },
                         {
-                            "name": "context",
-                            "type": "any"
+                            "name": "deprecatedLegacyContext",
+                            "type": "any",
+                            "description": ""
                         }
                     ],
                     "returnType": "ReactNode"
@@ -48885,7 +48886,7 @@
                             "description": "Uses to pass attributes to the inkbar's DOM element."
                         },
                         {
-                            "name": "previousButton",
+                            "name": "prevButton",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLButtonElement>>",
