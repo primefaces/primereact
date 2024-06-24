@@ -1,4 +1,4 @@
-import AppContentContext from '@/components/layout/appcontentcontext';
+import { useAppConfig }  from '@/components/context/AppConfigContext';
 import { Badge } from '@/components/lib/badge/Badge';
 import { Button } from '@/components/lib/button/Button';
 import { Calendar } from '@/components/lib/calendar/Calendar';
@@ -12,10 +12,10 @@ import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { Slider } from '@/components/lib/slider/Slider';
 import { TabMenu } from '@/components/lib/tabmenu/TabMenu';
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
-    const { darkMode } = useContext(AppContentContext);
+    const { darkMode } = useAppConfig();
     const selectButtonOptions = [
         { name: 'Styled', value: 1 },
         { name: 'Unstyled', value: 2 }

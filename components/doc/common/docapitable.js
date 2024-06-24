@@ -1,12 +1,12 @@
 import { ObjectUtils, classNames } from '@/components/lib/utils/Utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
-import AppContentContext from '../../layout/appcontentcontext';
+import React from 'react';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 import { DocSectionText } from './docsectiontext';
 
 const DocApiTable = (props) => {
-    const appContentContext = useContext(AppContentContext);
+    const { darkMode } = useAppConfig();
 
     const { id, data, name, description, allowLink = true } = props;
     const isPT = id.startsWith('pt.');
@@ -117,13 +117,13 @@ const DocApiTable = (props) => {
                                                         );
                                                     })
                                                 ) : k === 'default' ? (
-                                                    <div className={classNames('doc-option-default', { 'doc-option-dark': appContentContext.darkMode, 'doc-option-light': !appContentContext.darkMode })}>
+                                                    <div className={classNames('doc-option-default', { 'doc-option-dark': darkMode, 'doc-option-light': !darkMode })}>
                                                         {ObjectUtils.isEmpty(v) ? 'null' : createContent(v, k === 'name', d.deprecated)}
                                                     </div>
                                                 ) : k === 'type' ? (
                                                     <span className="doc-option-type">{createContent(v, k === 'name', d.deprecated)}</span>
                                                 ) : k === 'returnType' ? (
-                                                    <div className={classNames('doc-option-returnType', { 'doc-option-dark': appContentContext.darkMode, 'doc-option-light': !appContentContext.darkMode })}>
+                                                    <div className={classNames('doc-option-returnType', { 'doc-option-dark': darkMode, 'doc-option-light': !darkMode })}>
                                                         {createContent(v, k === 'name', d.deprecated)}
                                                     </div>
                                                 ) : k === 'description' || k === 'values' ? (

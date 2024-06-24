@@ -1,4 +1,4 @@
-import AppContentContext from '@/components/layout/appcontentcontext';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 import { FilterMatchMode, FilterOperator } from '@/components/lib/api/Api';
 import { Button } from '@/components/lib/button/Button';
 import { Column } from '@/components/lib/column/Column';
@@ -9,11 +9,11 @@ import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
 import { Tag } from '@/components/lib/tag/Tag';
 import { classNames } from '@/components/lib/utils/Utils';
 import { CustomerService } from '@/service/CustomerService';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ThemeSection = () => {
     const [tableTheme, setTableTheme] = useState('lara-light-cyan');
-    const { darkMode } = useContext(AppContentContext);
+    const { darkMode } = useAppConfig();
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -155,20 +155,20 @@ const ThemeSection = () => {
 
     const getSeverity = (status) => {
         switch (status) {
-            case 'unqualified':
-                return 'danger';
+        case 'unqualified':
+            return 'danger';
 
-            case 'qualified':
-                return 'success';
+        case 'qualified':
+            return 'success';
 
-            case 'new':
-                return 'info';
+        case 'new':
+            return 'info';
 
-            case 'negotiation':
-                return 'warning';
+        case 'negotiation':
+            return 'warning';
 
-            case 'renewal':
-                return null;
+        case 'renewal':
+            return null;
         }
     };
 
