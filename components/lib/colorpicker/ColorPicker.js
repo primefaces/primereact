@@ -99,7 +99,7 @@ export const ColorPicker = React.memo(
 
         const getPositionY = (event) => {
             if (event.pageY !== undefined) return event.pageY;
-            else if (event.touches !== undefined) return event.touches[0].pageY;
+            else if (event.changedTouches !== undefined) return event.changedTouches[0].pageY;
             else return 0;
         };
 
