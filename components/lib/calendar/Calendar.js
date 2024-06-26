@@ -3070,28 +3070,28 @@ export const Calendar = React.memo(
                 isTypingRef.current = false;
 
                 // #3516 view date not updated when value set programatically
-                if (!visible && newDate) {
-                    let viewDate = newDate;
+                if (!newDate) return;
 
-                    if (isMultipleSelection()) {
-                        if (newDate.length) {
-                            viewDate = newDate[newDate.length - 1];
-                        }
-                    } else if (isRangeSelection()) {
-                        if (newDate.length) {
-                            let startDate = newDate[0];
-                            let endDate = newDate[1];
+                let viewDate = newDate;
 
-                            viewDate = endDate || startDate;
-                        }
+                if (isMultipleSelection()) {
+                    if (newDate.length) {
+                        viewDate = newDate[newDate.length - 1];
                     }
+                } else if (isRangeSelection()) {
+                    if (newDate.length) {
+                        let startDate = newDate[0];
+                        let endDate = newDate[1];
 
-                    if (viewDate instanceof Date) {
-                        validateDate(viewDate);
-                        setViewDateState(viewDate);
-                        setCurrentMonth(viewDate.getMonth());
-                        setCurrentYear(viewDate.getFullYear());
+                        viewDate = endDate || startDate;
                     }
+                }
+
+                if (viewDate instanceof Date) {
+                    validateDate(viewDate);
+                    setViewDateState(viewDate);
+                    setCurrentMonth(viewDate.getMonth());
+                    setCurrentYear(viewDate.getFullYear());
                 }
             }
         }, [props.value, visible]);
