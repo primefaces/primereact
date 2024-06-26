@@ -656,7 +656,7 @@ export const Dropdown = React.memo(
         const onEditableInputChange = (event) => {
             let searchIndex = null;
 
-            if (event.target.value) {
+            if (event.target.value && visibleOptions) {
                 searchIndex = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
             }
 
