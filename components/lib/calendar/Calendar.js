@@ -361,11 +361,15 @@ export const Calendar = React.memo(
 
             if (currentView === 'date') {
                 if (newViewDate.getMonth() === 0) {
+                    const newYear = decrementYear();
+
                     newViewDate.setMonth(11);
-                    newViewDate.setFullYear(decrementYear());
+                    newViewDate.setFullYear(newYear);
+                    props.onMonthChange && props.onMonthChange({ month: 11, year: newYear });
                     setCurrentMonth(11);
                 } else {
                     newViewDate.setMonth(newViewDate.getMonth() - 1);
+                    props.onMonthChange && props.onMonthChange({ month: currentMonth - 1, year: currentYear });
                     setCurrentMonth((prevState) => prevState - 1);
                 }
             } else if (currentView === 'month') {
@@ -406,11 +410,15 @@ export const Calendar = React.memo(
 
             if (currentView === 'date') {
                 if (newViewDate.getMonth() === 11) {
+                    const newYear = incrementYear();
+
                     newViewDate.setMonth(0);
-                    newViewDate.setFullYear(incrementYear());
+                    newViewDate.setFullYear(newYear);
+                    props.onMonthChange && props.onMonthChange({ month: 0, year: newYear });
                     setCurrentMonth(0);
                 } else {
                     newViewDate.setMonth(newViewDate.getMonth() + 1);
+                    props.onMonthChange && props.onMonthChange({ month: currentMonth + 1, year: currentYear });
                     setCurrentMonth((prevState) => prevState + 1);
                 }
             } else if (currentView === 'month') {
