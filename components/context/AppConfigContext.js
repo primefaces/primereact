@@ -44,7 +44,7 @@ export const defaultAppConfig = {
     // theme values
     appTheme: 'lara-cyan',
     primeTheme: 'lara-cyan',
-    themeMode: 'light',
+    themeMode: 'light'
 };
 
 export const AppConfigContext = createContext();
@@ -52,12 +52,7 @@ export const AppConfigContext = createContext();
 export const AppConfigProvider = (props) => {
     const { children, linkElementId = 'theme-link', themeStorageKey = 'primeTheme' } = props;
     const [config, setConfig] = useLocalStorage(defaultAppConfig, 'primereact:config');
-    const {
-        inputStyle,
-        ripple,
-        scale,
-        themeMode,
-    } = config;
+    const { inputStyle, ripple, scale, themeMode } = config;
     const theme = config[themeStorageKey];
     const darkMode = themeMode === 'dark';
 
@@ -160,7 +155,7 @@ export const AppConfigProvider = (props) => {
 
     const primeReactContext = {
         inputStyle,
-        ripple,
+        ripple
     };
 
     const appContentContext = {
@@ -169,7 +164,7 @@ export const AppConfigProvider = (props) => {
         darkMode,
         options: {
             inputStyles,
-            scales,
+            scales
         },
         theme,
         // actions
@@ -182,14 +177,12 @@ export const AppConfigProvider = (props) => {
         isThemeActive,
         showNews,
         switchMaterialCompactMode,
-        switchRipple,
+        switchRipple
     };
 
     return (
         <PrimeReactProvider value={primeReactContext}>
-            <AppConfigContext.Provider value={appContentContext}>
-                {children}
-            </AppConfigContext.Provider>
+            <AppConfigContext.Provider value={appContentContext}>{children}</AppConfigContext.Provider>
         </PrimeReactProvider>
     );
 };

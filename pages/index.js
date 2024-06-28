@@ -12,7 +12,7 @@ import NewsSection from '@/components/news/newssection';
 import Head from 'next/head';
 
 export default function Home() {
-    const { darkMode, newsActive, changeThemeMode, } = useAppConfig();
+    const { darkMode, newsActive, changeThemeMode } = useAppConfig();
     const landingClass = classNames('landing', { 'layout-light': !darkMode, 'layout-dark': darkMode, 'layout-news-active': newsActive });
 
     return (

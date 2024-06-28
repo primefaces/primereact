@@ -22,7 +22,7 @@ export default function Config(props) {
         isDarkModeDisabled,
         isThemeActive,
         switchMaterialCompactMode,
-        switchRipple,
+        switchRipple
     } = useAppConfig();
     const { inputStyles, scales } = options;
 
@@ -58,36 +58,38 @@ export default function Config(props) {
         <Sidebar visible={props.active} onHide={() => props.onHide()} className={classNames('layout-config w-full sm:w-26rem', { 'layout-dark': props.dark }, { 'layout-light': !props.dark })} position="right">
             <div className="p-2">
                 <section className="pb-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
-                    <h2 className="text-xl font-semibold m-0" id="scale-label">Scale</h2>
+                    <h2 className="text-xl font-semibold m-0" id="scale-label">
+                        Scale
+                    </h2>
                     <div className="flex align-items-center gap-2 border-1 surface-border py-1 px-2" style={{ borderRadius: '30px' }} aria-labelledby="scale-label" role="group">
                         <Button icon="pi pi-minus" onClick={handleMinusScaleClick} text rounded className="w-2rem h-2rem" disabled={scale === scales[0]} aria-label="Decrease scale" />
                         {scales.map((s) => {
-                            return (
-                                <i
-                                    className={classNames('pi pi-circle-fill text-sm text-200', { 'text-lg text-primary': s === scale })}
-                                    key={s}
-                                    aria-label={`Scale level ${s}px${s === scale ? ', current level' : ''}`}
-                                />
-                            );
+                            return <i className={classNames('pi pi-circle-fill text-sm text-200', { 'text-lg text-primary': s === scale })} key={s} aria-label={`Scale level ${s}px${s === scale ? ', current level' : ''}`} />;
                         })}
                         <Button icon="pi pi-plus" onClick={handlePlusScaleClick} text rounded className="w-2rem h-2rem" disabled={scale === scales[scales.length - 1]} aria-label="Increase scale" />
                     </div>
                 </section>
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
-                    <h2 className="text-xl font-semibold m-0" id="input-style-label">Input Style</h2>
+                    <h2 className="text-xl font-semibold m-0" id="input-style-label">
+                        Input Style
+                    </h2>
                     <div className="flex gap-5">
                         <SelectButton value={inputStyle} onChange={handleInputStyleChange} options={inputStyles} optionLabel="label" optionValue="value" allowEmpty={false} aria-labelledby="input-style-label" />
                     </div>
                 </section>
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
-                    <label className="text-xl font-semibold" htmlFor="ripple-effect">Ripple Effect</label>
+                    <label className="text-xl font-semibold" htmlFor="ripple-effect">
+                        Ripple Effect
+                    </label>
                     <InputSwitch checked={ripple} onChange={handleRippleSwitch} inputId="ripple-effect" />
                 </section>
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
-                    <label className={classNames('text-xl font-semibold', { 'p-disabled': isDarkModeDisabled() })} htmlFor="dark-mode">Dark Mode</label>
+                    <label className={classNames('text-xl font-semibold', { 'p-disabled': isDarkModeDisabled() })} htmlFor="dark-mode">
+                        Dark Mode
+                    </label>
                     <InputSwitch checked={darkMode} onChange={handleDarkModeSwitch} disabled={isDarkModeDisabled()} inputId="dark-mode" />
                 </section>
 
@@ -96,7 +98,9 @@ export default function Config(props) {
                     <div className="pb-4 border-bottom-1 surface-border" role="radiogroup" aria-labelledby="lara-theme-label">
                         <div className="flex align-items-center gap-2 mb-3">
                             <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-teal.png" alt="Lara Light Teal" className="border-circle" style={{ width: '1.5rem' }} />
-                            <h3 className="text-base font-medium m-0" id="lara-theme-label">Lara</h3>
+                            <h3 className="text-base font-medium m-0" id="lara-theme-label">
+                                Lara
+                            </h3>
                         </div>
                         <div className="flex align-items-center justify-content-between gap-3 mb-3">
                             <button
@@ -210,10 +214,12 @@ export default function Config(props) {
                     <div className="py-4 border-bottom-1 surface-border" role="radiogroup" aria-labelledby="material-theme-label">
                         <div className="flex align-items-center gap-2 mb-3">
                             <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Design" className="border-circle" style={{ width: '1.5rem' }} />
-                            <h3 className="text-base font-medium m-0" id="material-theme-label">Material Design</h3>
+                            <h3 className="text-base font-medium m-0" id="material-theme-label">
+                                Material Design
+                            </h3>
                             <div className="ml-auto flex align-items-center gap-2">
                                 <label htmlFor="material-condensed" className="text-sm">
-                                Condensed
+                                    Condensed
                                 </label>
                                 <InputSwitch inputId="material-condensed" checked={compactMaterialMode} onChange={handleMaterialCompactModeSwitch} className="ml-auto" />
                             </div>
@@ -252,7 +258,9 @@ export default function Config(props) {
                     <div className="py-4 border-bottom-1 surface-border" role="radiogroup" aria-labelledby="bootstrap-theme-label">
                         <div className="flex align-items-center gap-2 mb-3">
                             <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap" className="border-circle" style={{ width: '1.5rem' }} />
-                            <h3 className="text-base font-medium m-0" id="bootstrap-theme-label">Bootstrap</h3>
+                            <h3 className="text-base font-medium m-0" id="bootstrap-theme-label">
+                                Bootstrap
+                            </h3>
                         </div>
                         <div className="flex align-items-center justify-content-between gap-3">
                             <button
@@ -287,9 +295,11 @@ export default function Config(props) {
                     </div>
                     <div className="flex align-items-center justify-content-between gap-3 py-4 border-bottom-1 surface-border">
                         <div className="w-3" role="radiogroup" aria-labelledby="soho-theme-label">
-                            <div className="flex align-items-center gap-2 mb-3" >
+                            <div className="flex align-items-center gap-2 mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/themes/soho-light.png" alt="Soho" className="border-circle" style={{ width: '1.5rem' }} />
-                                <h3 className="text-base font-medium m-0" id="soho-theme-label">Soho</h3>
+                                <h3 className="text-base font-medium m-0" id="soho-theme-label">
+                                    Soho
+                                </h3>
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
@@ -308,7 +318,9 @@ export default function Config(props) {
                         <div className="w-3" role="radiogroup" aria-labelledby="viva-theme-label">
                             <div className="flex align-items-center gap-2 mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/themes/viva-light.svg" alt="Viva" className="border-circle" style={{ width: '1.5rem' }} />
-                                <h3 className="text-base font-medium m-0" id="viva-theme-label">Viva</h3>
+                                <h3 className="text-base font-medium m-0" id="viva-theme-label">
+                                    Viva
+                                </h3>
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
@@ -331,7 +343,9 @@ export default function Config(props) {
                         <div className="w-3" role="radiogroup" aria-labelledby="fluent-theme-label">
                             <div className="flex align-items-center gap-2 mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/themes/fluent-light.png" alt="Fluent" className="border-circle" style={{ width: '1.5rem' }} />
-                                <h3 className="text-base font-medium m-0" id="fluent-theme-label">Fluent</h3>
+                                <h3 className="text-base font-medium m-0" id="fluent-theme-label">
+                                    Fluent
+                                </h3>
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
@@ -350,7 +364,9 @@ export default function Config(props) {
                         <div className="w-3" role="radiogroup" aria-labelledby="mira-theme-label">
                             <div className="flex align-items-center gap-2 mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/themes/mira.jpg" alt="Mira" className="border-circle" style={{ width: '1.5rem' }} />
-                                <h3 className="text-base font-medium m-0" id="mira-theme-label">Mira</h3>
+                                <h3 className="text-base font-medium m-0" id="mira-theme-label">
+                                    Mira
+                                </h3>
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
@@ -369,7 +385,9 @@ export default function Config(props) {
                         <div className="w-3" role="radiogroup" aria-labelledby="nano-theme-label">
                             <div className="flex align-items-center gap-2 mb-3">
                                 <img src="https://primefaces.org/cdn/primereact/images/themes/nano.jpg" alt="Nano" className="border-circle" style={{ width: '1.5rem' }} />
-                                <h3 className="text-base font-medium m-0" id="nano-theme-label">Nano</h3>
+                                <h3 className="text-base font-medium m-0" id="nano-theme-label">
+                                    Nano
+                                </h3>
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {

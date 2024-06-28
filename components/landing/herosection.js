@@ -1,4 +1,4 @@
-import { useAppConfig }  from '@/components/context/AppConfigContext';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 import { Badge } from '@/components/lib/badge/Badge';
 import { Button } from '@/components/lib/button/Button';
 import { Calendar } from '@/components/lib/calendar/Calendar';

@@ -5,37 +5,37 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Lara Light Cyan',
-                value: 'cyan',
+                value: 'cyan'
             },
             {
                 label: 'Lara Light Green',
-                value: 'green',
+                value: 'green'
             },
             {
                 label: 'Lara Light Blue',
-                value: 'blue',
+                value: 'blue'
             },
             {
                 label: 'Lara Light Indigo',
-                value: 'indigo',
+                value: 'indigo'
             },
             {
                 label: 'Lara Light Purple',
-                value: 'purple',
+                value: 'purple'
             },
             {
                 label: 'Lara Light Amber',
-                value: 'amber',
+                value: 'amber'
             },
             {
                 label: 'Lara Light Teal',
-                value: 'teal',
+                value: 'teal'
             },
             {
                 label: 'Lara Light Pink',
-                value: 'pink',
-            },
-        ],
+                value: 'pink'
+            }
+        ]
     },
     material: {
         id: 'md',
@@ -43,13 +43,13 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Material Design Deep Purple',
-                value: 'deep-purple',
+                value: 'deep-purple'
             },
             {
                 label: 'Material Design Indigo',
-                value: 'indigo',
-            },
-        ],
+                value: 'indigo'
+            }
+        ]
     },
     bootstrap: {
         id: 'bootstrap4',
@@ -57,13 +57,13 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Bootstrap Blue',
-                value: 'blue',
+                value: 'blue'
             },
             {
                 label: 'Bootstrap Purple',
-                value: 'purple',
-            },
-        ],
+                value: 'purple'
+            }
+        ]
     },
     soho: {
         id: 'soho',
@@ -71,30 +71,29 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Soho Light',
-                value: 'light',
+                value: 'light'
             }
-        ],
+        ]
     },
-    viva:
-  {
-      id: 'viva',
-      name: 'Viva',
-      colors: [
-          {
-              label: 'Viva Light',
-              value: 'light',
-          }
-      ],
-  },
+    viva: {
+        id: 'viva',
+        name: 'Viva',
+        colors: [
+            {
+                label: 'Viva Light',
+                value: 'light'
+            }
+        ]
+    },
     fluent: {
         id: 'fluent',
         name: 'Fluent',
         colors: [
             {
                 label: 'Fluent Light',
-                value: '',
+                value: ''
             }
-        ],
+        ]
     },
     mira: {
         id: 'mira',
@@ -102,9 +101,9 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Mira Theme',
-                value: '',
+                value: ''
             }
-        ],
+        ]
     },
     nano: {
         id: 'nano',
@@ -112,8 +111,8 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Nano Theme',
-                value: '',
+                value: ''
             }
-        ],
-    },
+        ]
+    }
 };

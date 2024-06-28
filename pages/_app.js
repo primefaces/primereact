@@ -9,11 +9,7 @@ import '../styles/layout/layout.scss';
 
 function AppContent({ component: Component, pageProps }) {
     if (Component.getLayout) {
-        return (
-            <AppConfigProvider themeStorageKey="primeTheme">
-                {Component.getLayout(<Component {...pageProps} />)}
-            </AppConfigProvider>
-        );
+        return <AppConfigProvider themeStorageKey="primeTheme">{Component.getLayout(<Component {...pageProps} />)}</AppConfigProvider>;
     }
 
     return (

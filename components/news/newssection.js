@@ -6,7 +6,7 @@ export default function NewsSection() {
     const {
         announcement,
         hideNews,
-        newsActive,
+        newsActive
         // showNews,
     } = useAppConfig();
     const storageKey = 'primereact-news';

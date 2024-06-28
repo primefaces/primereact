@@ -123,9 +123,7 @@ const DocApiTable = (props) => {
                                                 ) : k === 'type' ? (
                                                     <span className="doc-option-type">{createContent(v, k === 'name', d.deprecated)}</span>
                                                 ) : k === 'returnType' ? (
-                                                    <div className={classNames('doc-option-returnType', { 'doc-option-dark': darkMode, 'doc-option-light': !darkMode })}>
-                                                        {createContent(v, k === 'name', d.deprecated)}
-                                                    </div>
+                                                    <div className={classNames('doc-option-returnType', { 'doc-option-dark': darkMode, 'doc-option-light': !darkMode })}>{createContent(v, k === 'name', d.deprecated)}</div>
                                                 ) : k === 'description' || k === 'values' ? (
                                                     <span className="doc-option-description">{v}</span>
                                                 ) : (

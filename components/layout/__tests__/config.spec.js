@@ -17,12 +17,12 @@ const Wrapper = (props) => {
 const renderConfig = (options) => {
     const user = userEvent.setup();
     const result = render(<Config {...componentProps} {...options?.props} />, {
-        wrapper: (wrapperProps) => <Wrapper {...wrapperProps} {...options?.wrapperProps} />,
+        wrapper: (wrapperProps) => <Wrapper {...wrapperProps} {...options?.wrapperProps} />
     });
 
     return {
         ...result,
-        user,
+        user
     };
 };
 
@@ -39,13 +39,14 @@ const dispatchThemeLoadEvent = () => {
     }
 };
 
-const waitForThemeLoad = () => new Promise((resolve) => {
-    const clonedLinkElement = document.getElementById(`${linkElementId}-clone`);
+const waitForThemeLoad = () =>
+    new Promise((resolve) => {
+        const clonedLinkElement = document.getElementById(`${linkElementId}-clone`);
 
-    clonedLinkElement.addEventListener('load', resolve, { once: true });
+        clonedLinkElement.addEventListener('load', resolve, { once: true });
 
-    dispatchThemeLoadEvent();
-});
+        dispatchThemeLoadEvent();
+    });
 
 const addLinkElement = () => {
     const linkElement = document.createElement('link');
@@ -70,7 +71,7 @@ describe('layout/config', () => {
     beforeEach(() => {
         addLinkElement();
     });
-    
+
     afterEach(() => {
         removeLinkElement();
         localStorage.clear();

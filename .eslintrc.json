@@ -21,8 +21,19 @@
             { "blankLine": "always", "prev": "*", "next": "block" },
             { "blankLine": "always", "prev": "block-like", "next": "*" },
             { "blankLine": "always", "prev": "*", "next": "block-like" }
-        ]
-    }
+        ],
+        "jest/no-conditional-expect": "off"
+    },
+    "overrides": [
+        {
+            "files": ["./components/test/index.js"],
+            "rules": {
+                "jest/no-export": "off",
+                "jest/valid-expect": "off",
+                "jest/valid-title": "off"
+            }
+        }
+    ]
 }
 // USE THE CONFIG BELOW DURING THE DEVELOPMENT
 // {
