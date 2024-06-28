@@ -3,7 +3,7 @@ import { switchTheme } from '@/components/utils/utils';
 import { useLocalStorage } from '@/components/lib/hooks/useStorage';
 import { PrimeReactProvider } from '@/components/lib/api/PrimeReactContext';
 
-const getCurrentTheme = (linkElementId) => {
+const getCurrentThemeName = (linkElementId) => {
     const linkElement = document.getElementById(linkElementId);
     const href = linkElement.getAttribute('href');
     const match = href.match(/\/([^/]+)\/theme\.css/);
@@ -13,6 +13,17 @@ const getCurrentTheme = (linkElementId) => {
     }
 
     return href;
+};
+
+const getThemeName = (theme, mode) => {
+    if (lightOnlyThemes.includes(theme)) {
+        return theme;
+    }
+
+    const [name, color] = theme.split('-');
+    const fullName = [name, mode, color].filter(Boolean).join('-');
+
+    return fullName;
 };
 
 export const inputStyles = [
@@ -47,8 +58,7 @@ export const AppConfigProvider = (props) => {
         scale,
         themeMode,
     } = config;
-    const [themeName, themeColor] = config[themeStorageKey].split('-');
-    const theme = [themeName, themeMode, themeColor].filter(Boolean).join('-');
+    const theme = config[themeStorageKey];
     const darkMode = themeMode === 'dark';
 
     const changeScale = (step) => {
@@ -135,12 +145,13 @@ export const AppConfigProvider = (props) => {
     };
 
     useEffect(() => {
-        const currentTheme = getCurrentTheme(linkElementId);
+        const themeName = getThemeName(theme, themeMode);
+        const currentThemeName = getCurrentThemeName(linkElementId);
 
-        if (currentTheme !== theme) {
-            switchTheme(currentTheme, theme, linkElementId);
+        if (currentThemeName !== themeName) {
+            switchTheme(currentThemeName, themeName, linkElementId);
         }
-    }, [linkElementId, theme]);
+    }, [linkElementId, theme, themeMode]);
 
     useEffect(() => {
         document.documentElement.style.fontSize = scale + 'px';

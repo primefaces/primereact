@@ -66,18 +66,14 @@ const removeLinkElement = () => {
     }
 };
 
-// cleanup
-afterEach(() => {
-    localStorage.clear();
-});
-
 describe('layout/config', () => {
     beforeEach(() => {
         addLinkElement();
     });
-
+    
     afterEach(() => {
         removeLinkElement();
+        localStorage.clear();
     });
 
     it('renders all sections correctly', () => {

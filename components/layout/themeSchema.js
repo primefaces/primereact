@@ -92,7 +92,7 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Fluent Light',
-                value: 'light',
+                value: '',
             }
         ],
     },
@@ -102,8 +102,18 @@ export const themeSchema = {
         colors: [
             {
                 label: 'Mira Theme',
-                value: 'theme',
+                value: '',
             }
         ],
-    }
+    },
+    nano: {
+        id: 'nano',
+        name: 'Nano',
+        colors: [
+            {
+                label: 'Nano Theme',
+                value: '',
+            }
+        ],
+    },
 };

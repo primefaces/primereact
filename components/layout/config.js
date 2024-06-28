@@ -335,13 +335,13 @@ export default function Config(props) {
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                    'border-primary': isThemeActive('fluent', 'light'),
-                                    'hover:border-500 surface-border': !isThemeActive('fluent', 'light')
+                                    'border-primary': isThemeActive('fluent-light'),
+                                    'hover:border-500 surface-border': !isThemeActive('fluent-light')
                                 })}
                                 style={{ borderRadius: 30 }}
-                                onClick={() => handleThemeChange('fluent', 'light')}
+                                onClick={() => handleThemeChange('fluent-light')}
                                 aria-label="Fluent Light"
-                                aria-checked={isThemeActive('fluent', 'light')}
+                                aria-checked={isThemeActive('fluent-light')}
                                 role="radio"
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #0078d4 0%, rgba(0, 120, 212, 0.5) 100%)' }} />
@@ -354,19 +354,37 @@ export default function Config(props) {
                             </div>
                             <button
                                 className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                    'border-primary': isThemeActive('mira'),
+                                    'hover:border-500 surface-border': !isThemeActive('mira')
+                                })}
+                                style={{ borderRadius: 30 }}
+                                onClick={() => handleThemeChange('mira')}
+                                aria-label="Mira Theme"
+                                aria-checked={isThemeActive('mira')}
+                                role="radio"
+                            >
+                                <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #81a1c1 0%, rgba(129, 161, 193, 0.5) 100%)' }} />
+                            </button>
+                        </div>
+                        <div className="w-3" role="radiogroup" aria-labelledby="nano-theme-label">
+                            <div className="flex align-items-center gap-2 mb-3">
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/nano.jpg" alt="Nano" className="border-circle" style={{ width: '1.5rem' }} />
+                                <h3 className="text-base font-medium m-0" id="nano-theme-label">Nano</h3>
+                            </div>
+                            <button
+                                className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
                                     'border-primary': isThemeActive('nano'),
                                     'hover:border-500 surface-border': !isThemeActive('nano')
                                 })}
                                 style={{ borderRadius: 30 }}
                                 onClick={() => handleThemeChange('nano')}
-                                aria-label="Mira Theme"
+                                aria-label="Nano Theme"
                                 aria-checked={isThemeActive('nano')}
                                 role="radio"
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #1469b4 0%, rgba(20, 105, 180, 0.5) 100%)' }} />
                             </button>
                         </div>
-                        <div className="w-3" />
                         <div className="w-3" />
                     </div>
                 </section>
