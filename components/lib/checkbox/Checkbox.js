@@ -12,8 +12,12 @@ export const Checkbox = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = CheckboxBase.getProps(inProps, context);
+        const [focusedState, setFocusedState] = React.useState(false);
         const { ptm, cx, isUnstyled } = CheckboxBase.setMetaData({
             props,
+            state: {
+                focused: focusedState
+            },
             context: {
                 checked: props.checked === props.trueValue,
                 disabled: props.disabled
@@ -68,10 +72,12 @@ export const Checkbox = React.memo(
         };
 
         const onFocus = () => {
+            setFocusedState(true);
             props?.onFocus?.();
         };
 
         const onBlur = () => {
+            setFocusedState(false);
             props?.onBlur?.();
         };
 
