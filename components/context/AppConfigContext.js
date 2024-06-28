@@ -135,6 +135,7 @@ export const AppConfigProvider = (props) => {
     const isDarkModeDisabled = () => lightOnlyThemes.includes(theme);
 
     const isThemeActive = (name, color) => {
+        const [themeName, themeColor] = theme.split('-');
         const isMaterialTheme = name === 'md';
 
         if (isMaterialTheme) {
