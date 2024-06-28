@@ -42,7 +42,7 @@ This will create a symlink in your global npm scope so that other local packages
 ```
 
 > [!WARNING]
-> Reminder! the XX.X.XX version must be a valid [valid semantic version](https://docs.npmjs.com/about-semantic-versioning) that you are using in your local project
+> Reminder! The XX.X.XX version must be a [valid semantic version](https://docs.npmjs.com/about-semantic-versioning) that you are using in your local project
 
 ### Now change your directory to your local project you are developing on!
 
@@ -74,7 +74,7 @@ You can now live develop in the `primereact/` directory and your changes should 
 
 ### Cleanup
 
-Once done, you can cleanup with:
+Once done, you can clean up with:
 
 ```shell
 ~/primereact/ $ npm unlink
