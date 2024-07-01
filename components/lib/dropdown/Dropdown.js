@@ -654,6 +654,7 @@ export const Dropdown = React.memo(
         };
 
         const onEditableInputChange = (event) => {
+            !overlayVisibleState && show();
             let searchIndex = null;
 
             if (event.target.value && visibleOptions) {
