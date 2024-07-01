@@ -310,7 +310,7 @@ export const Dropdown = React.memo(
         };
 
         const findSelectedOptionIndex = () => {
-            return hasSelectedOption ? visibleOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
+            return hasSelectedOption() ? visibleOptions.findIndex((option) => isValidSelectedOption(option)) : -1;
         };
 
         const findFirstFocusedOptionIndex = () => {
@@ -889,7 +889,12 @@ export const Dropdown = React.memo(
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : ObjectUtils.resolveFieldData(option, 'value') || option;
+            if (props.optionValue) {
+                return ObjectUtils.resolveFieldData(option, props.optionValue);
+            } else {
+                const dataValue = ObjectUtils.resolveFieldData(option, 'value');
+                return dataValue !== null ? dataValue : option;
+            }
         };
 
         const getOptionRenderKey = (option) => {
