@@ -562,9 +562,8 @@
                             "type": "PrimeReactProviderProps"
                         },
                         {
-                            "name": "deprecatedLegacyContext",
-                            "type": "any",
-                            "description": ""
+                            "name": "context",
+                            "type": "any"
                         }
                     ],
                     "returnType": "ReactNode"
