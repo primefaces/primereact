@@ -32,7 +32,7 @@
         "fs-extra": "^11.2.0",
         "jspdf": "2.5.1",
         "jspdf-autotable": "3.8.2",
-        "next": "12.3.4",
+        "next": "14.2.4",
         "path": "^0.12.7",
         "primeflex": "^3.3.1",
         "primeicons": "^7.0.0",
