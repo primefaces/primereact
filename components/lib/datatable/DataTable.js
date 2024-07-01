@@ -87,23 +87,28 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setD_rowsState(props.rows);
     }
 
+    const columnResizeStartListener = (event) => columnResizing.current && onColumnResize(event);
+
+    const columnResizeEndListener = () => columnResizing.current && ((columnResizing.current = false), onColumnResizeEnd());
+
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
         type: 'mousemove',
-        listener: (event) => {
-            if (columnResizing.current) {
-                onColumnResize(event);
-            }
-        }
+        listener: columnResizeStartListener
     });
 
     const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
         type: 'mouseup',
-        listener: () => {
-            if (columnResizing.current) {
-                columnResizing.current = false;
-                onColumnResizeEnd();
-            }
-        }
+        listener: columnResizeEndListener
+    });
+
+    const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({
+        type: 'touchmove',
+        listener: columnResizeStartListener
+    });
+
+    const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({
+        type: 'touchend',
+        listener: columnResizeEndListener
     });
 
     const isCustomStateStorage = () => {
@@ -507,9 +512,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
         resizeColumn.current = column;
+
         resizeColumnElement.current = event.currentTarget.parentElement;
+
         columnResizing.current = true;
-        lastResizeHelperX.current = event.pageX - containerLeft + elementRef.current.scrollLeft;
+
+        lastResizeHelperX.current = (event.type === 'touchstart' ? event.changedTouches[0].clientX : event.pageX) - containerLeft + elementRef.current.scrollLeft;
 
         bindColumnResizeEvents();
     };
@@ -521,7 +529,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
-        resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
+
+        resizeHelperRef.current.style.left = (event.type === 'touchmove' ? event.changedTouches[0].clientX : event.pageX) - containerLeft + elementRef.current.scrollLeft + 'px';
 
         resizeHelperRef.current.style.display = 'block';
     };
@@ -616,11 +625,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const bindColumnResizeEvents = () => {
         bindDocumentMouseMoveListener();
         bindDocumentMouseUpListener();
+        bindDocumentTouchMoveListener();
+        bindDocumentTouchEndListener();
     };
 
     const unbindColumnResizeEvents = () => {
         unbindDocumentMouseMoveListener();
         unbindDocumentMouseUpListener();
+        unbindDocumentTouchMoveListener();
+        unbindDocumentTouchEndListener();
     };
 
     const onColumnHeaderMouseDown = (e) => {
