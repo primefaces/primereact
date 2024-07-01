@@ -893,6 +893,7 @@ export const Dropdown = React.memo(
                 return ObjectUtils.resolveFieldData(option, props.optionValue);
             } else {
                 const dataValue = ObjectUtils.resolveFieldData(option, 'value');
+
                 return dataValue !== null ? dataValue : option;
             }
         };
