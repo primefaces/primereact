@@ -219,25 +219,38 @@ const Tailwind = {
                     'dark:text-white/70' // Dark Mode
                 )
             },
-            radiobuttonwrapper: {
+            radioButton: {
                 className: classNames('relative inline-flex cursor-pointer select-none align-bottom', 'w-6 h-6')
             },
-            radiobutton: ({ context }) => ({
+            radioButtonInput: {
                 className: classNames(
-                    'flex justify-center items-center',
-                    'border-2 w-6 h-6 text-gray-700 rounded-full transition duration-200 ease-in-out',
-                    context.checked ? 'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400' : 'border-gray-300 bg-white dark:border-blue-900/40 dark:bg-gray-900',
-                    {
-                        'hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]': !context.disabled,
-                        'cursor-default opacity-60': context.disabled
-                    }
+                    'w-full h-full top-0 left-0 absolute appearance-none select-none',
+                    'p-0 m-0 opacity-0 z-[1] rounded-[50%] outline-none',
+                    'cursor-pointer peer'
                 )
+            },
+            radioButtonBox: ({ context }) => ({
+                className: classNames(
+                    'flex items-center justify-center',
+                    'h-6 w-6 rounded-full border-2 text-gray-700 transition duration-200 ease-in-out',
+                    context.checked
+                        ? 'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400 peer-hover:bg-blue-700 peer-hover:border-blue-700'
+                        : 'border-gray-300 bg-white dark:border-blue-900/40 dark:bg-gray-900 peer-hover:border-blue-500',
+                    {
+                        'hover:border-blue-500 focus:shadow-input-focus focus:outline-none focus:outline-offset-0 dark:hover:border-blue-400 dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]': !context.disabled,
+                        'cursor-default opacity-60': context.disabled,
+                    },
+                ),
             }),
-            radiobuttonicon: ({ context }) => ({
-                className: classNames('transform rounded-full', 'block w-3 h-3 transition duration-200 bg-white dark:bg-gray-900', {
-                    'backface-hidden scale-10 invisible': context.checked === false,
-                    'transform scale-100 visible': context.checked === true
-                })
+            radioButtonIcon: ({ context }) => ({
+                className: classNames(
+                    'transform rounded-full',
+                    'block h-3 w-3 bg-white transition duration-200 dark:bg-gray-900',
+                    {
+                        'backface-hidden scale-10 invisible': context.checked === false,
+                        'visible scale-100 transform': context.checked === true,
+                    },
+                ),
             }),
             headercheckboxwrapper: {
                 className: classNames('cursor-pointer inline-flex relative select-none align-bottom', 'w-6 h-6')

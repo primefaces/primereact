@@ -456,6 +456,7 @@ export const BodyRow = React.memo((props) => {
                         virtualScrollerOptions={props.virtualScrollerOptions}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
+                        unstyled={props.unstyled}
                     />
                 );
             }

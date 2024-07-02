@@ -10,10 +10,8 @@
  */
 import * as React from 'react';
 import { FilterMatchMode } from '../api/api';
-import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
-import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
@@ -208,9 +206,8 @@ export interface ColumnPassThroughOptions {
     filterOperator?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Dropdown component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterOperatorDropdown?: DropdownPassThroughOptions;
+    filterOperatorDropdown?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the filter constraints' DOM element.
      */
@@ -221,45 +218,44 @@ export interface ColumnPassThroughOptions {
     filterConstraint?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Dropdown component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterMatchModeDropdown?: DropdownPassThroughOptions;
+    filterMatchModeDropdown?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the filter remove button container's DOM element.
      */
     filterRemove?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterRemoveButton?: DropdownPassThroughOptions;
+    filterRemoveButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the filter add rule's DOM element.
      */
     filterAddRule?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link DropdownPassThroughOptions}
      */
-    filterAddRuleButton?: DropdownPassThroughOptions;
+    filterAddRuleButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the filter buttonbar's DOM element.
      */
     filterButtonbar?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    filterClearButton?: ButtonPassThroughOptions;
+    filterClearButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
      */
-    filterApplyButton?: ButtonPassThroughOptions;
+    filterApplyButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the body cell's DOM element.
      */
     bodyCell?: ColumnPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the footer cell's DOM element.
+     */
+    footerCell?: ColumnPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the rowgroup toggler's DOM element.
      */
@@ -312,6 +308,26 @@ export interface ColumnPassThroughOptions {
      * Uses to pass attributes to the row editor cancel icon's DOM element.
      */
     rowEditorCancelIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the row reorder icon's DOM element.
+     */
+    rowReorderIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the row radiobutton wrapper's DOM element.
+     */
+    radioButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the row radiobutton input's DOM element.
+     */
+    radioButtonInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the row radiobutton box's DOM element.
+     */
+    radioButtonBox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the row radiobutton icon's DOM element.
+     */
+    radioButtonIcon?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
