@@ -1,6 +1,6 @@
 {
-    "plugins": ["@typescript-eslint", "jest-dom"],
-    "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
+    "plugins": ["@typescript-eslint", "jest-dom", "jest"],
+    "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier", "plugin:jest/recommended"],
     "rules": {
         "@next/next/no-img-element": "off",
         "react/display-name": "off",
@@ -21,8 +21,19 @@
             { "blankLine": "always", "prev": "*", "next": "block" },
             { "blankLine": "always", "prev": "block-like", "next": "*" },
             { "blankLine": "always", "prev": "*", "next": "block-like" }
-        ]
-    }
+        ],
+        "jest/no-conditional-expect": "off"
+    },
+    "overrides": [
+        {
+            "files": ["./components/test/index.js"],
+            "rules": {
+                "jest/no-export": "off",
+                "jest/valid-expect": "off",
+                "jest/valid-title": "off"
+            }
+        }
+    ]
 }
 // USE THE CONFIG BELOW DURING THE DEVELOPMENT
 // {
@@ -32,8 +43,8 @@
 //         "es6": true
 //     },
 
-//     "plugins": ["@typescript-eslint", "jest-dom"],
-//     "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
+//     "plugins": ["@typescript-eslint", "jest-dom", "jest"],
+//     "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier", "plugin:jest/recommended"],
 
 //     "ecmaFeatures": {
 //         "arrowFunctions": true,

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import AppContentContext from '../layout/appcontentcontext';
+import React from 'react';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 
 const TemplateFeatures = ({ featuresData, displayType }) => {
-    const { darkMode } = useContext(AppContentContext);
+    const { darkMode } = useAppConfig();
 
     const renderHorizontalFeatures = () => {
         return (

@@ -1,20 +1,19 @@
-import AppContentContext from '@/components/layout/appcontentcontext';
 import Config from '@/components/layout/config';
 import Footer from '@/components/layout/footer';
 import Menu from '@/components/layout/menu';
 import Topbar from '@/components/layout/topbar';
-import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
 import { DomHandler, classNames } from '@/components/lib/utils/Utils';
 import NewsSection from '@/components/news/newssection';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Layout({ children }) {
+    const { darkMode, inputStyle, newsActive, ripple, theme, changeThemeMode } = useAppConfig();
+
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
-    const { ripple, inputStyle } = useContext(PrimeReactContext);
-    const { theme, darkMode, newsActive, changeTheme } = useContext(AppContentContext);
     const router = useRouter();
 
     const wrapperClassName = classNames('layout-wrapper', {
@@ -25,20 +24,6 @@ export default function Layout({ children }) {
         'layout-light': !darkMode
     });
 
-    const toggleDarkMode = () => {
-        let newTheme = null;
-
-        if (darkMode) {
-            newTheme = theme.replace('dark', 'light');
-        } else if (theme.includes('light') && theme !== 'fluent-light') {
-            newTheme = theme.replace('light', 'dark');
-        } else {
-            newTheme = 'lara-dark-cyan';
-        }
-
-        changeTheme(newTheme, !darkMode);
-    };
-
     useEffect(() => {
         if (sidebarActive) {
             DomHandler.blockBodyScroll('blocked-scroll');
@@ -48,7 +33,7 @@ export default function Layout({ children }) {
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        const handleRouteChangeComplete = (l) => {
+        const handleRouteChangeComplete = () => {
             setSidebarActive(false);
         };
 
@@ -80,9 +65,9 @@ export default function Layout({ children }) {
                 <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon" />
             </Head>
             <NewsSection />
-            <Topbar showConfigurator showMenuButton onMenuButtonClick={() => setSidebarActive(true)} onConfigButtonClick={() => setConfigActive(true)} onDarkSwitchClick={toggleDarkMode} />
+            <Topbar showConfigurator showMenuButton onMenuButtonClick={() => setSidebarActive(true)} onConfigButtonClick={() => setConfigActive(true)} onDarkSwitchClick={changeThemeMode} />
             <div className={classNames('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={() => setSidebarActive(false)} />
-            <Config active={configActive} onHide={() => setConfigActive(false)} onDarkSwitchClick={toggleDarkMode} />
+            <Config active={configActive} onHide={() => setConfigActive(false)} />
             <div className="layout-content">
                 <Menu active={sidebarActive} />
                 <div className="layout-content-slot">{children}</div>

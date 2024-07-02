@@ -187,7 +187,7 @@ describe('FilterService', () => {
             expect(between).toBeTruthy();
         });
 
-        it('When value has getTime func and smaller than filter[0]', () => {
+        it('When value is a number and is higher than the first filter value', () => {
             const filter = 1;
             const filter1 = 2;
             const value = 2;
