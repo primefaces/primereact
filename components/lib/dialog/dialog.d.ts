@@ -354,6 +354,11 @@ export interface DialogProps {
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
+     * Specifies the default visibility of the dialog.
+     * @defaultValue false
+     */
+    defaultVisible?: boolean | undefined;
+    /**
      * Specifies the visibility of the dialog.
      * @defaultValue false
      */
@@ -396,7 +401,7 @@ export interface DialogProps {
     /**
      * Callback to invoke when dialog is hidden (Required).
      */
-    onHide(): void;
+    onHide?(): void;
     /**
      * Callback to invoke when the mask is clicked.
      * @param {React.MouseEvent<HTMLElement>} event - Browser event.
