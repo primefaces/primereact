@@ -116,6 +116,7 @@ export const Button = React.memo(
             {
                 ref: elementRef,
                 'aria-label': defaultAriaLabel,
+                'data-pc-autofocus': props.autoFocus,
                 className: classNames(props.className, cx('root', { size, disabled })),
                 disabled: disabled
             },
