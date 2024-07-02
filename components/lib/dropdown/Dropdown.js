@@ -654,6 +654,7 @@ export const Dropdown = React.memo(
         };
 
         const onEditableInputChange = (event) => {
+            !overlayVisibleState && show();
             let searchIndex = null;
 
             if (event.target.value && visibleOptions) {
@@ -885,7 +886,9 @@ export const Dropdown = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : ObjectUtils.resolveFieldData(option, 'label') || option;
+            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : ObjectUtils.resolveFieldData(option, 'label');
+
+            return ObjectUtils.isNotEmpty(optionLabel) ? optionLabel : option;
         };
 
         const getOptionValue = (option) => {

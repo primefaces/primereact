@@ -39,10 +39,20 @@ export const FocusTrap = React.memo(
             return firstFocusableElementRef.current && firstFocusableElementRef.current.parentElement;
         };
 
+        /**
+         * This method sets the auto focus on the first focusable element within the target element.
+         * It first tries to find a focusable element using the autoFocusSelector. If no such element is found,
+         * it then tries to find a focusable element using the firstFocusableSelector.
+         * If the autoFocus prop is set to true and a focusable element is found, it sets the focus on that element.
+         *
+         * @param {HTMLElement} target - The target element within which to find a focusable element.
+         */
         const setAutoFocus = (target) => {
             const { autoFocusSelector = '', firstFocusableSelector = '', autoFocus = false } = props || {};
+            const defaultAutoFocusSelector = `${getComputedSelector(autoFocusSelector)}`;
+            const computedAutoFocusSelector = `[autofocus]${defaultAutoFocusSelector}, [data-pc-autofocus='true']${defaultAutoFocusSelector}`;
 
-            let focusableElement = DomHandler.getFirstFocusableElement(target, `[autofocus]${getComputedSelector(autoFocusSelector)}`);
+            let focusableElement = DomHandler.getFirstFocusableElement(target, computedAutoFocusSelector);
 
             autoFocus && !focusableElement && (focusableElement = DomHandler.getFirstFocusableElement(target, getComputedSelector(firstFocusableSelector)));
 
