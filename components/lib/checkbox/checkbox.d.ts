@@ -83,7 +83,7 @@ export interface CheckboxState {
      * Current focused state as a boolean.
      * @defaultValue false
      */
-    focused: boolean;    
+    focused: boolean;
 }
 
 /**
