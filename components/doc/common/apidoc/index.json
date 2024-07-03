@@ -10502,6 +10502,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "CheckboxContext"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CheckboxState"
                         }
                     ],
                     "callbacks": []
@@ -10572,6 +10578,20 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current disabled state of the item as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CheckboxState": {
+                    "description": "Defines current inline state in Checkbox component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
                         }
                     ],
                     "callbacks": []
