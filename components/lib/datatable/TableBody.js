@@ -943,6 +943,7 @@ export const TableBody = React.memo(
                         collapsedRowIcon={props.collapsedRowIcon}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
+                        unstyled={props.unstyled}
                     />
                 );
                 const options = { index: rowIndex, props: props.tableProps, customRendering: false };
@@ -1068,6 +1069,7 @@ export const TableBody = React.memo(
                         virtualScrollerOptions={props.virtualScrollerOptions}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
+                        unstyled={props.unstyled}
                     />
                 );
             }
