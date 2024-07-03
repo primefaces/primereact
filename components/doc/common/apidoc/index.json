@@ -13155,7 +13155,7 @@
                             "name": "filterOperatorDropdown",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughOptions",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the Dropdown component."
                         },
                         {
@@ -13176,7 +13176,7 @@
                             "name": "filterMatchModeDropdown",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughOptions",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the Dropdown component."
                         },
                         {
@@ -13190,7 +13190,7 @@
                             "name": "filterRemoveButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughOptions",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -13204,7 +13204,7 @@
                             "name": "filterAddRuleButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughOptions",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -13218,14 +13218,14 @@
                             "name": "filterClearButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
                             "name": "filterApplyButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -13234,6 +13234,13 @@
                             "readonly": false,
                             "type": "ColumnPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
                             "description": "Uses to pass attributes to the body cell's DOM element."
+                        },
+                        {
+                            "name": "footerCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the footer cell's DOM element."
                         },
                         {
                             "name": "rowGroupToggler",
@@ -13325,6 +13332,41 @@
                             "readonly": false,
                             "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the row editor cancel icon's DOM element."
+                        },
+                        {
+                            "name": "rowReorderIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the row reorder icon's DOM element."
+                        },
+                        {
+                            "name": "radioButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the row radiobutton wrapper's DOM element."
+                        },
+                        {
+                            "name": "radioButtonInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the row radiobutton input's DOM element."
+                        },
+                        {
+                            "name": "radioButtonBox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the row radiobutton box's DOM element."
+                        },
+                        {
+                            "name": "radioButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the row radiobutton icon's DOM element."
                         },
                         {
                             "name": "hooks",
