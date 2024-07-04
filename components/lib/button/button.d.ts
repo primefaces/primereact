@@ -125,9 +125,9 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      */
     link?: boolean | undefined;
     /**
-     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger", "help".
+     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger", "help", "contrast".
      */
-    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | undefined;
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | 'contrast' | undefined;
     /**
      * Defines the size of the button, valid values are "small" and "large".
      */
