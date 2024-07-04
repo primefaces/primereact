@@ -886,13 +886,13 @@ export const Dropdown = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : ObjectUtils.resolveFieldData(option, 'label');
+            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option ? option['label'] : ObjectUtils.resolveFieldData(option, 'label');
 
             return ObjectUtils.isNotEmpty(optionLabel) ? optionLabel : option;
         };
 
         const getOptionValue = (option) => {
-            const optionValue = props.OptionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : ObjectUtils.resolveFieldData(option, 'value');
+            const optionValue = props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option ? option['value'] : ObjectUtils.resolveFieldData(option, 'value');
 
             return ObjectUtils.isNotEmpty(optionValue) ? optionValue : option;
         };
