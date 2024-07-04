@@ -153,7 +153,7 @@ export interface ToastMessage {
     /**
      * Severity of the message.
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
+    severity?: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast' | undefined;
     /**
      * Summary content of the message.
      */
