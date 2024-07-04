@@ -927,9 +927,9 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onExpand?(event: TreeTableEvent): void;
     /**
      * Callback to invoke on filtering.
-     * @param {TreeTableFilterMeta[]} filters - Custom treetable event.
+     * @param {TreeTableFilterMeta} filters - Custom treetable event.
      */
-    onFilter?(filters: TreeTableFilterMeta[]): void;
+    onFilter?(filters: TreeTableFilterMeta): void;
     /**
      * Callback to invoke on pagination.
      * @param {TreeTablePageEvent} event - Custom page event.
