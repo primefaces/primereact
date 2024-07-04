@@ -55157,7 +55157,7 @@
                                 {
                                     "name": "filters",
                                     "optional": false,
-                                    "type": "TreeTableFilterMeta[]",
+                                    "type": "TreeTableFilterMeta",
                                     "description": "Custom treetable event."
                                 }
                             ],
