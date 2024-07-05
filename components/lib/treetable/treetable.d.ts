@@ -478,7 +478,7 @@ interface TreeTablePageEvent {
     /**
      * Total number of pages.
      */
-    pageCount: number;
+    totalPages: number;
 }
 
 /**
