@@ -5640,9 +5640,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"help\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"help\", \"contrast\"."
                         },
                         {
                             "name": "size",
@@ -35271,7 +35271,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
                             "default": "",
                             "description": "Severity level of the message."
                         },
@@ -35589,7 +35589,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
                             "description": "Severity of the message."
                         },
                         {
@@ -50308,7 +50308,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
                             "description": "Severity level of the message."
                         },
                         {
@@ -50413,7 +50413,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"warn\" | \"contrast\"",
+                            "type": "\"error\" | \"success\" | \"secondary\" | \"info\" | \"contrast\" | \"warn\"",
                             "description": "Severity of the message."
                         },
                         {
