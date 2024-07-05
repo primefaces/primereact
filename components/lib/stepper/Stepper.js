@@ -30,7 +30,9 @@ export const Stepper = React.memo(
         });
 
         useUpdateEffect(() => {
-            setActiveStepState(props.activeStep);
+            if (props.activeStep >= 0 && props.activeStep <= stepperPanels().length - 1) {
+                updateActiveStep(undefined, props.activeStep);
+            }
         }, [props.activeStep]);
 
         const getStepProp = (step, name) => {
