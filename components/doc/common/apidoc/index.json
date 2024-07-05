@@ -55406,7 +55406,7 @@
                             "description": "Value of the new page."
                         },
                         {
-                            "name": "pageCount",
+                            "name": "totalPages",
                             "optional": false,
                             "readonly": false,
                             "type": "number",
