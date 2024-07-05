@@ -2,7 +2,7 @@ import React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { UniqueComponentId, classNames } from '../utils/Utils';
 import { StepperBase } from './StepperBase';
 import { StepperContent } from './StepperContent';
@@ -28,6 +28,12 @@ export const Stepper = React.memo(
                 setIdState(UniqueComponentId());
             }
         });
+
+        useUpdateEffect(() => {
+            if (props.activeStep >= 0 && props.activeStep <= stepperPanels().length - 1) {
+                updateActiveStep(undefined, props.activeStep);
+            }
+        }, [props.activeStep]);
 
         const getStepProp = (step, name) => {
             return step?.props?.[name];
