@@ -514,7 +514,7 @@ interface TreeTableSelectionEvent {
     /**
      * Selected node key.
      */
-    value: TreeTableSelectionKeysType;
+    value: TreeTableSelectionKeysType | string;
 }
 
 /**
