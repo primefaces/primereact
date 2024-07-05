@@ -55456,7 +55456,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "TreeTableSelectionKeysType",
+                            "type": "string | TreeTableSelectionKeysType",
                             "description": "Selected node key."
                         }
                     ]
