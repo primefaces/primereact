@@ -1546,7 +1546,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 },
                 ptCallbacks.ptm('loadingIcon')
             );
-            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin unstyled={props.unstyled} />;
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
             const loadingOverlayProps = mergeProps(
                 {
