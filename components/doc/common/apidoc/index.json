@@ -40945,6 +40945,19 @@
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": [
                         {
+                            "name": "onClose",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "PanelMenuHeaderItemClickEvent",
+                                    "description": "custom event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a panel gets collapsed."
+                        },
+                        {
                             "name": "onExpandedKeysChange",
                             "parameters": [
                                 {
@@ -40958,20 +40971,7 @@
                             "description": "Callback to when the expandedKeys changes."
                         },
                         {
-                            "name": "onHide",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "PanelMenuHeaderItemClickEvent",
-                                    "description": "custom event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a panel gets collapsed."
-                        },
-                        {
-                            "name": "onShow",
+                            "name": "onOpen",
                             "parameters": [
                                 {
                                     "name": "event",
