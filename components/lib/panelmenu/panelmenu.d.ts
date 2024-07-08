@@ -190,12 +190,12 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * Callback to invoke when a panel gets expanded.
      * @param {PanelMenuHeaderItemClickEvent} event - custom event.
      */
-    onShow?(event: PanelMenuHeaderItemClickEvent): void;
+    onOpen?(event: PanelMenuHeaderItemClickEvent): void;
     /**
      * Callback to invoke when a panel gets collapsed.
      * @param {PanelMenuHeaderItemClickEvent} event - custom event.
      */
-    onHide?(event: PanelMenuHeaderItemClickEvent): void;
+    onClose?(event: PanelMenuHeaderItemClickEvent): void;
     /**
      * Callback to when the expandedKeys changes.
      * @param {*} value - New value.
