@@ -150,9 +150,9 @@ const styles = `
 
 const inlineStyles = {
     wrapper: ({ props }) => ({ maxHeight: props.scrollHeight || 'auto' }),
-    panel: ({ props }) => {
-        props.panelStyle;
-    }
+    panel: ({ props }) => ({
+        ...props.panelStyle
+    })
 };
 
 export const DropdownBase = ComponentBase.extend({
