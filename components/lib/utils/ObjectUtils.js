@@ -387,12 +387,7 @@ export default class ObjectUtils {
     }
 
     static isScalar(value) {
-        return value != null && (
-            typeof value === 'string' ||
-            typeof value === 'number' ||
-            typeof value === 'bigint' ||
-            typeof value === 'boolean'
-        );
+        return value != null && (typeof value === 'string' || typeof value === 'number' || typeof value === 'bigint' || typeof value === 'boolean');
     }
 
     /**
