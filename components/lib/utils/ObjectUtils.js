@@ -386,6 +386,15 @@ export default class ObjectUtils {
         return /^[a-zA-Z\u00C0-\u017F]$/.test(char);
     }
 
+    static isScalar(value) {
+        return value != null && (
+            typeof value === 'string' ||
+            typeof value === 'number' ||
+            typeof value === 'bigint' ||
+            typeof value === 'boolean'
+        );
+    }
+
     /**
      * Firefox-v103 does not currently support the "findLast" method. It is stated that this method will be supported with Firefox-v104.
      * https://caniuse.com/mdn-javascript_builtins_array_findlast
