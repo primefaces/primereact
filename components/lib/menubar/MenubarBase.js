@@ -68,7 +68,7 @@ const styles = `
     .p-menubar .p-submenu-list {
         display: none;
         position: absolute;
-        z-index: 1;
+        z-index: 5;
     }
 
     .p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list {
