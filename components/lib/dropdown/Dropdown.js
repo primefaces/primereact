@@ -888,7 +888,7 @@ export const Dropdown = React.memo(
         const getOptionLabel = (option) => {
             const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option ? option['label'] : ObjectUtils.resolveFieldData(option, 'label');
 
-            return ObjectUtils.isNotEmpty(optionLabel) ? optionLabel : option;
+            return `${optionLabel}`;
         };
 
         const getOptionValue = (option) => {
