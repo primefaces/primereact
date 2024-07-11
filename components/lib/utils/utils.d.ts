@@ -146,6 +146,7 @@ export declare class ObjectUtils {
     static isString(value: any): boolean;
     static isPrintableCharacter(char: string): boolean;
     static isLetter(char: string): boolean;
+    static isScalar(value: any): boolean;
     static findLast(value: any[], callback: () => any): any;
     static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;

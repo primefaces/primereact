@@ -886,7 +886,11 @@ export const Dropdown = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option ? option['label'] : ObjectUtils.resolveFieldData(option, 'label');
+            if (ObjectUtils.isScalar(option)) {
+                return `${option}`;
+            }
+
+            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option['label'];
 
             return `${optionLabel}`;
         };
