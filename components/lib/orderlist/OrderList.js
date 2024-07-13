@@ -455,6 +455,7 @@ export const OrderList = React.memo(
                 <OrderListSubList
                     ref={listElementRef}
                     hostName="OrderList"
+                    {...props}
                     focused={focused}
                     ariaLabel={props.ariaLabel}
                     ariaLabelledBy={props.ariaLabelledBy}
@@ -484,7 +485,6 @@ export const OrderList = React.memo(
                     ptm={ptm}
                     cx={cx}
                     changeFocusedOptionIndex={changeFocusedOptionIndex}
-                    {...props}
                 />
             </div>
         );
