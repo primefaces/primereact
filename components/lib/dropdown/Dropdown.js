@@ -1138,7 +1138,7 @@ export const Dropdown = React.memo(
         };
 
         const createClearIcon = () => {
-            if (props.value != null && props.showClear && !props.disabled) {
+            if (props.value != null && props.showClear && !props.disabled && !ObjectUtils.isEmpty(props.options)) {
                 const clearIconProps = mergeProps(
                     {
                         className: cx('clearIcon'),
