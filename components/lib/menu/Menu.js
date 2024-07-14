@@ -319,13 +319,13 @@ export const Menu = React.memo(
             );
         };
 
-        const createSeparator = (index) => {
+        const createSeparator = (item, index) => {
             const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
                     id: key,
                     key,
-                    className: cx('separator'),
+                    className: classNames(item.className, cx('separator')),
                     role: 'separator'
                 },
                 ptm('separator')
@@ -424,7 +424,7 @@ export const Menu = React.memo(
         };
 
         const createItem = (item, index) => {
-            return item.separator ? createSeparator(index) : item.items ? createSubmenu(item, index) : createMenuItem(item, index);
+            return item.separator ? createSeparator(item, index) : item.items ? createSubmenu(item, index) : createMenuItem(item, index);
         };
 
         const createMenu = () => {
