@@ -55476,7 +55476,7 @@
                             "name": "column",
                             "optional": false,
                             "readonly": false,
-                            "type": "ColumnProps",
+                            "type": "Column",
                             "description": "Properties of the resized column."
                         },
                         {
