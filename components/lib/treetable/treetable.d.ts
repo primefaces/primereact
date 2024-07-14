@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import { ColumnProps } from '../column';
+import { Column } from '../column';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
@@ -530,7 +530,7 @@ interface TreeTableColumnResizeEndEvent {
     /**
      * Properties of the resized column.
      */
-    column: ColumnProps;
+    column: Column;
     /**
      * Change in column width.
      */
