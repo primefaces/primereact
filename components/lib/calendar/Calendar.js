@@ -1086,7 +1086,7 @@ export const Calendar = React.memo(
                 const month = value.getMonth();
                 const year = value.getFullYear();
 
-                onDateSelect(event, { day, month, year, selectable: isSelectable(day, month, year) });
+                onDateSelect(event, { day, month, year, selectable: isSelectable(day, month, year) }, null, true);
             }
         };
 
@@ -1616,7 +1616,7 @@ export const Calendar = React.memo(
             }
         };
 
-        const onDateSelect = (event, dateMeta, timeMeta) => {
+        const onDateSelect = (event, dateMeta, timeMeta, isUpdateViewDate) => {
             if (!event) {
                 return;
             }
@@ -1645,7 +1645,7 @@ export const Calendar = React.memo(
                 selectDate(event, dateMeta, timeMeta);
             }
 
-            if (!props.inline && isSingleSelection() && (!props.showTime || props.hideOnDateTimeSelect)) {
+            if (!props.inline && isSingleSelection() && (!props.showTime || props.hideOnDateTimeSelect) && !isUpdateViewDate) {
                 setTimeout(() => {
                     hide('dateselect');
                 }, 100);
