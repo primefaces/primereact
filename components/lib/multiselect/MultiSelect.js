@@ -1030,7 +1030,7 @@ export const MultiSelect = React.memo(
 
             return (
                 <div {...labelContainerProps}>
-                    <div {...labelProps}>{content || props.placeholder || 'empty'}</div>
+                    <div {...labelProps}>{content || props.placeholder || props.emptyMessage || 'empty'}</div>
                 </div>
             );
         };
