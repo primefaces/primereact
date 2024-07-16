@@ -1096,7 +1096,7 @@ export const MultiSelect = React.memo(
                 'aria-expanded': overlayVisibleState,
                 disabled: props.disabled,
                 tabIndex: !props.disabled ? props.tabIndex : -1,
-                value: props.value,
+                value: JSON.stringify(props.value),
                 ...ariaProps
             },
             ptm('input')
