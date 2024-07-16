@@ -360,7 +360,7 @@ export const UITreeNode = React.memo((props) => {
                 break;
 
             case 'Space':
-                if(!['INPUT'].includes(event.target.nodeName)) {
+                if (!['INPUT'].includes(event.target.nodeName)) {
                     onEnterKey(event);
                 }
 
