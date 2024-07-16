@@ -355,8 +355,14 @@ export const UITreeNode = React.memo((props) => {
 
             case 'Enter':
             case 'NumpadEnter':
-            case 'Space':
                 onEnterKey(event);
+
+                break;
+
+            case 'Space':
+                if (!['INPUT'].includes(event.target.nodeName)) {
+                    onEnterKey(event);
+                }
 
                 break;
 
