@@ -703,7 +703,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             <div {...maskProps}>
                 <CSSTransition nodeRef={dialogRef} {...transitionProps}>
                     <div {...rootProps}>
-                        <FocusTrap autoFocus>{contentElement}</FocusTrap>
+                        <FocusTrap autoFocus={props.focusOnShow}>{contentElement}</FocusTrap>
                     </div>
                 </CSSTransition>
             </div>
