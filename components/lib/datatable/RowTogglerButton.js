@@ -9,7 +9,7 @@ import { IconUtils } from '../utils/Utils';
 
 export const RowTogglerButton = React.memo((props) => {
     const mergeProps = useMergeProps();
-    const { ptm, ptmo, cx } = props.ptCallbacks;
+    const { ptm, ptmo, cx, isUnstyled } = props.ptCallbacks;
 
     const onClick = (event) => {
         props.onClick({
@@ -34,8 +34,10 @@ export const RowTogglerButton = React.memo((props) => {
     const rowGroupTogglerIconProps = mergeProps(
         {
             className: cx('rowGroupTogglerIcon'),
-            'aria-hidden': true
+            'aria-hidden': true,
+            unstyled: isUnstyled()
         },
+        ptm('rowGroupTogglerIcon'),
         getColumnPTOptions('rowGroupTogglerIcon')
     );
     const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...rowGroupTogglerIconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...rowGroupTogglerIconProps} />;
@@ -47,8 +49,10 @@ export const RowTogglerButton = React.memo((props) => {
             onClick: (e) => onClick(e),
             className: cx('rowGroupToggler'),
             tabIndex: props.tabIndex,
-            'aria-label': label
+            'aria-label': label,
+            unstyled: isUnstyled()
         },
+        ptm('rowGroupToggler'),
         getColumnPTOptions('rowGroupToggler')
     );
 

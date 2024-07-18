@@ -19353,11 +19353,25 @@
                             "description": "Uses to pass attributes to the row expansion's DOM element."
                         },
                         {
-                            "name": "rowgroupFooter",
+                            "name": "rowGroupFooter",
                             "optional": true,
                             "readonly": false,
                             "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the rowgroup footer's DOM element."
+                        },
+                        {
+                            "name": "rowGroupToggler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the rowgroup toggler's DOM element."
+                        },
+                        {
+                            "name": "rowGroupTogglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the rowgroup toggler icon's DOM element."
                         },
                         {
                             "name": "emptyMessage",

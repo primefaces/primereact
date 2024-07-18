@@ -943,7 +943,15 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the rowgroup footer's DOM element.
      */
-    rowgroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    rowGroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup toggler's DOM element.
+     */
+    rowGroupToggler?: DataTablePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup toggler icon's DOM element.
+     */
+    rowGroupTogglerIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
