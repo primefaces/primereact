@@ -1004,6 +1004,34 @@ export interface DataTablePassThroughOptions {
     hooks?: ComponentHooks;
 }
 
+/**
+ * Defines current options in DataTable bodyRow.
+ */
+export interface DataTableBodyRowContext {
+    selected: boolean;
+    selectable: boolean;
+    stripedRows: boolean;
+    index: number;
+}
+
+/**
+ * Defines current inline state in DataTable bodyRow.
+ */
+export interface DataTableBodyRowState {
+    editing: boolean;
+}
+
+/**
+ * Custom passthrough(pt) option method for bodyRow.
+ */
+export interface DataTableBodyRowPassThroughMethodOptions<TValue extends DataTableValueArray> {
+    hostName: string;
+    context: DataTableBodyRowContext;
+    parent: DataTablePassThroughMethodOptions<TValue>;
+    props: DataTableBaseProps<TValue>;
+    state: DataTableBodyRowState;
+}
+
 type SortOrder = 1 | 0 | -1 | null | undefined;
 
 /**

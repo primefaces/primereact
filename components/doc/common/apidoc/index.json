@@ -19460,6 +19460,87 @@
                     ],
                     "callbacks": []
                 },
+                "DataTableBodyRowContext": {
+                    "description": "Defines current options in DataTable bodyRow.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "selectable",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "stripedRows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataTableBodyRowState": {
+                    "description": "Defines current inline state in DataTable bodyRow.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "editing",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataTableBodyRowPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method for bodyRow.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "hostName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableBodyRowContext"
+                        },
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTablePassThroughMethodOptions<TValue>"
+                        },
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableBaseProps<TValue>"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableBodyRowState"
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "DataTableBaseProps": {
                     "description": "Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "relatedProp": "",
