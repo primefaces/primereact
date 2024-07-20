@@ -35548,6 +35548,14 @@
                             "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -35596,6 +35604,24 @@
                             "optional": false,
                             "readonly": false,
                             "type": "MessagesProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MessagesState"
+                        },
+                        {
+                            "name": "hostName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "index",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number"
                         }
                     ],
                     "callbacks": []
@@ -35666,6 +35692,20 @@
                             "readonly": false,
                             "type": "MessagesPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MessagesState": {
+                    "description": "Defines current inline state in Messages component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "messages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Object[]",
+                            "description": "Array of messages"
                         }
                     ],
                     "callbacks": []
