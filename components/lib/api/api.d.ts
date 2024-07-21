@@ -227,10 +227,10 @@ export interface APIOptions {
     unstyled?: boolean;
     /**
      * This method is used to change the theme dynamically.
-     * @param {string} theme - The name of the theme to be applied.
-     * @param {string} newTheme - The name of the new theme to be applied.
+     * @param {string} currentTheme - The name of the current theme. Example 'lara-light-blue'
+     * @param {string} newTheme - The name of the new theme to be applied. Example 'md-dark-deeppurple'
      * @param {string} linkElementId - The id of the link element to be updated.
-     * @param callback - Callback to invoke when the theme change is completed.
+     * @param {() => void} [callback] - Callback to invoke when the theme change is completed.
      */
     changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
     /**

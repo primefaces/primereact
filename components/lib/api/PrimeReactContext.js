@@ -44,20 +44,24 @@ export const PrimeReactProvider = (props) => {
 
     const changeTheme = (currentTheme, newTheme, linkElementId, callback) => {
         const linkElement = document.getElementById(linkElementId);
-        const cloneLinkElement = linkElement.cloneNode(true);
+
+        if (!linkElement) {
+            throw Error(`Element with id ${linkElementId} not found.`);
+        }
+
         const newThemeUrl = linkElement.getAttribute('href').replace(currentTheme, newTheme);
+        const newLinkElement = document.createElement('link');
 
-        cloneLinkElement.setAttribute('id', linkElementId + '-clone');
-        cloneLinkElement.setAttribute('href', newThemeUrl);
-        cloneLinkElement.addEventListener('load', () => {
-            linkElement.remove();
-            cloneLinkElement.setAttribute('id', linkElementId);
-
+        newLinkElement.setAttribute('rel', 'stylesheet');
+        newLinkElement.setAttribute('id', linkElementId);
+        newLinkElement.setAttribute('href', newThemeUrl);
+        newLinkElement.addEventListener('load', () => {
             if (callback) {
                 callback();
             }
         });
-        linkElement.parentNode?.insertBefore(cloneLinkElement, linkElement.nextSibling);
+
+        linkElement.parentNode?.replaceChild(newLinkElement, linkElement);
     };
 
     /**
