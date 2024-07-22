@@ -966,14 +966,13 @@
                                 {
                                     "name": "theme",
                                     "optional": true,
-                                    "type": "string",
-                                    "description": "The name of the theme to be applied."
+                                    "type": "string"
                                 },
                                 {
                                     "name": "newTheme",
                                     "optional": true,
                                     "type": "string",
-                                    "description": "The name of the new theme to be applied."
+                                    "description": "The name of the new theme to be applied. Example 'md-dark-deeppurple'"
                                 },
                                 {
                                     "name": "linkElementId",
@@ -9804,14 +9803,13 @@
                                 {
                                     "name": "theme",
                                     "optional": true,
-                                    "type": "string",
-                                    "description": "The name of the theme to be applied."
+                                    "type": "string"
                                 },
                                 {
                                     "name": "newTheme",
                                     "optional": true,
                                     "type": "string",
-                                    "description": "The name of the new theme to be applied."
+                                    "description": "The name of the new theme to be applied. Example 'md-dark-deeppurple'"
                                 },
                                 {
                                     "name": "linkElementId",
