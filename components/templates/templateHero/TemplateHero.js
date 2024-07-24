@@ -19,14 +19,14 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
                         {free ? 'Source Code' : 'Buy Now'}
                     </a>
                 </div>
-                <div className="template-hero-card-links ">
+                <div className="template-hero-card-links">
                     <a href={supportHref ?? 'https://github.com/orgs/primefaces/discussions/categories/primereact-templates'} target="_blank">
                         <i className="pi pi-github " style={{ fontSize: '1rem' }} />
-                        <span>{free ? 'Open Issues' : 'Get Support'}</span>
+                        <span>{free ? 'Open Issues' : 'Community'}</span>
                     </a>
                     <a href={docHref} target="_blank">
                         <i className="pi pi-book " style={{ fontSize: '1rem' }} />
-                        <span>Read Doc</span>
+                        <span>Documentation</span>
                     </a>
                 </div>
             </div>
