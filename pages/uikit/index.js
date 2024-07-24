@@ -186,7 +186,7 @@ const UIKitPage = (props) => {
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
-                                                <span>Lifetime Support</span>
+                                                <span>1 Year Free Updates</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
@@ -230,7 +230,7 @@ const UIKitPage = (props) => {
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
-                                                <span>Lifetime Support</span>
+                                                <span>1 Year Free Updates</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
@@ -274,7 +274,7 @@ const UIKitPage = (props) => {
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
-                                                <span>Lifetime Support</span>
+                                                <span>1 Year Free Updates</span>
                                             </li>
                                             <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2" />
