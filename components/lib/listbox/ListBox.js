@@ -474,6 +474,10 @@ export const ListBox = React.memo(
 
         const scrollInView = (index = -1) => {
             setTimeout(() => {
+                // As long as this is a timeout - there is not guarantee that listRef will still
+                // exist by the moment of calling that function. So, if list is already destroyed
+                // by this moment - do nothing:
+                if (!listRef.current) return;
                 const idx = index !== -1 ? `${id.current}_${index}` : focusedOptionId();
                 const element = listRef.current.querySelector(`li[id="${idx}"]`);
 
