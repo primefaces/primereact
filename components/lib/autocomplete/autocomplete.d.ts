@@ -12,6 +12,7 @@ import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-
 import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
@@ -111,7 +112,7 @@ export interface AutoCompletePassThroughOptions {
     /**
      * Uses to pass attributes to the input's DOM element.
      */
-    input?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    input?: InputTextPassThroughOptions;
     /**
      * Uses to pass attributes to the container's DOM element.
      */
@@ -592,9 +593,9 @@ export declare class AutoComplete extends React.Component<AutoCompleteProps, any
     public getElement(): HTMLSpanElement;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {InputText} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): typeof InputText;
     /**
      * Used to get overlay element.
      * @return {HTMLElement} Overlay element
