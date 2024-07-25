@@ -180,7 +180,7 @@ export const Calendar = React.memo(
                 }
             } else if (value.every((v) => isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && isSelectableTime(v))) {
                 if (isRangeSelection()) {
-                    isValid = value.length > 1 && value[1] > value[0] ? true : false;
+                    isValid = value.length > 1 && value[1] >= value[0];
                 }
             }
 
