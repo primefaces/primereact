@@ -25,58 +25,20 @@ body:
               Please fork [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
       validations:
           required: false
-    - type: input
-      id: pr-version
+    - type: textarea
+      id: system-info
       attributes:
-          label: PrimeReact version
-          placeholder: x.x.x
-      validations:
-          required: true
-    - type: dropdown
-      id: react-version
-      attributes:
-          label: React version
-          multiple: false
-          options:
-              - 17.x
-              - 18.x
-      validations:
-          required: true
-    - type: dropdown
-      id: language
-      attributes:
-          label: Language
-          multiple: false
-          options:
-              - TypeScript
-              - ES5
-              - ES6
-              - ALL
-      validations:
-          required: true
-    - type: dropdown
-      id: engine
-      attributes:
-          label: Build / Runtime
-          multiple: false
-          options:
-              - Create React App (CRA)
-              - Next.js
-              - Remix
-              - Vite
-              - Hydrogen
-              - Relay
-              - Preact
-              - Qwik
-      validations:
-          required: true
-    - type: input
-      id: browsers
-      attributes:
-          label: Browser(s)
-          description: List specific browser(s) the problem occurs on or leave blank if ALL browsers
+          label: System Information
+          description: Output of `npx envinfo --system --npmPackages primereact,react --binaries --browsers`
           placeholder: >
-              e.g. Safari 15, iOS 15.4, Chrome 90
+              System:...
+              Binaries:...
+              Browsers: ...
+              npmPackages:
+                 primereact: 10.7.0 => 10.7.0
+                 react: 18.3.1 => 18.3.1
+      validations:
+          required: true
     - type: textarea
       id: reproduce-steps
       attributes:
