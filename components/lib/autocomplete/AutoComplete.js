@@ -558,6 +558,7 @@ export const AutoComplete = React.memo(
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
                     pt={ptm('input')}
+                    unstyled={props.unstyled}
                     {...ariaProps}
                     __parentMetadata={{ parent: metaData }}
                 />

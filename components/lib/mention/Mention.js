@@ -533,6 +533,7 @@ export const Mention = React.memo(
                 className: cx('input'),
                 style: props.inputStyle,
                 ...inputProps,
+                unstyled: props.unstyled,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,

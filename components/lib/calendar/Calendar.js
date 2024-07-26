@@ -4138,6 +4138,7 @@ export const Calendar = React.memo(
                         tooltip={props.tooltip}
                         tooltipOptions={props.tooltipOptions}
                         pt={ptm('input')}
+                        unstyled={props.unstyled}
                         __parentMetadata={{ parent: metaData }}
                     />
                 );

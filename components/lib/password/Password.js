@@ -466,6 +466,7 @@ export const Password = React.memo(
                 invalid: props.invalid,
                 variant: props.variant,
                 style: props.inputStyle,
+                unstyled: props.unstyled,
                 tabIndex: props.tabIndex || '0',
                 tooltip: props.tooltip,
                 tooltipOptions: props.tooltipOptions,
