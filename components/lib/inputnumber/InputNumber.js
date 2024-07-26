@@ -25,7 +25,7 @@ export const InputNumber = React.memo(
         };
         const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData(metaData);
 
-        useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
+        useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber', styled: true });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
@@ -1188,6 +1188,7 @@ export const InputNumber = React.memo(
                     {...ariaProps}
                     {...dataProps}
                     pt={ptm('input')}
+                    unstyled={props.unstyled}
                     __parentMetadata={{ parent: metaData }}
                 />
             );
