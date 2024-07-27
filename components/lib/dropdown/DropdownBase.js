@@ -136,6 +136,7 @@ const styles = `
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
+        right: 2rem;
     }
     
     .p-fluid .p-dropdown {
