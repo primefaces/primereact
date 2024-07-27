@@ -5946,7 +5946,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
@@ -7120,7 +7120,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "type": "InputTextPassThroughOptions",
                             "description": "Uses to pass attributes to the InputText component."
                         },
                         {
@@ -9145,7 +9145,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
@@ -9845,7 +9845,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "type": "InputTextPassThroughOptions",
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
@@ -31602,7 +31602,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputOtpPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "type": "InputTextPassThroughOptions",
                             "description": "Uses to pass attributes to the Tooltip component."
                         },
                         {
