@@ -139,11 +139,11 @@ export const RadioButton = React.memo(
                     readOnly: props.readonly,
                     required: props.required,
                     tabIndex: props.tabIndex,
-                    className: cx('radiobuttoninput'),
+                    className: cx('input'),
                     ...ariaProps
                 },
                 inProps.input,
-                ptm('radiobuttoninput')
+                ptm('input')
             );
 
             return <input ref={inputRef} {...inputProps} />;
@@ -152,18 +152,18 @@ export const RadioButton = React.memo(
         const createBoxElement = () => {
             const boxProps = mergeProps(
                 {
-                    className: cx('radiobuttonbox')
+                    className: cx('box')
                 },
                 inProps.box,
-                ptm('radiobuttonbox')
+                ptm('box')
             );
 
             const iconProps = mergeProps(
                 {
-                    className: cx('radiobuttonicon')
+                    className: cx('icon')
                 },
                 inProps.icon,
-                ptm('radiobuttonicon')
+                ptm('icon')
             );
 
             return (

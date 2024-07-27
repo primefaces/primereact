@@ -9,9 +9,9 @@ const classes = {
             'p-invalid': props.invalid,
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
         }),
-    radiobuttonbox: 'p-radiobutton-box',
-    radiobuttoninput: 'p-radiobutton-input',
-    radiobuttonicon: 'p-radiobutton-icon'
+    box: 'p-radiobutton-box',
+    input: 'p-radiobutton-input',
+    icon: 'p-radiobutton-icon'
 };
 
 export const RadioButtonBase = ComponentBase.extend({
