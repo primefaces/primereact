@@ -158,7 +158,7 @@ export const MultiSelect = React.memo(
         };
 
         const onClick = (event) => {
-            if (!props.inline && !props.disabled && !props.loading && !isPanelClicked(event) && DomHandler.getAttribute(event.target, 'data-pc-section') !== 'removetokenicon' && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !props.loading && !isPanelClicked(event) && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -825,6 +825,8 @@ export const MultiSelect = React.memo(
         };
 
         const removeChip = (event, item) => {
+            event.stopPropagation();
+
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
             if (props.onRemove) {
