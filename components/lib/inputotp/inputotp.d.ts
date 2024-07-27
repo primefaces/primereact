@@ -9,10 +9,9 @@
  */
 import * as React from 'react';
 import { ComponentHooks } from '../componentbase/componentbase';
-import { KeyFilterType } from '../keyfilter';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
-import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { PassThroughType, TemplateType } from '../utils/utils';
 
 export declare type InputOtpPassThroughType<T> = PassThroughType<T, InputOtpPassThroughMethodOptions>;
@@ -38,7 +37,7 @@ export interface InputOtpPassThroughOptions {
      * Uses to pass attributes to the Tooltip component.
      * @see {@link TooltipPassThroughOptions}
      */
-    input?: InputOtpPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    input?: InputTextPassThroughOptions;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
