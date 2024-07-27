@@ -123,7 +123,12 @@ export const Editor = React.memo(
             quill.current = quillInstance;
 
             if (props.value) {
-                quill.current.clipboard.dangerouslyPasteHTML(props.value);
+                quillInstance.setContents(
+                    quillInstance.clipboard.convert({
+                        html: props.value,
+                        text: ''
+                    })
+                );
             }
 
             setQuillCreated(true);
@@ -151,7 +156,16 @@ export const Editor = React.memo(
 
         useUpdateEffect(() => {
             if (quill.current && !quill.current.hasFocus()) {
-                props.value ? quill.current.clipboard.dangerouslyPasteHTML(props.value) : quill.current.setText('');
+                if (props.value) {
+                    quill.current.setContents(
+                        quill.current.clipboard.convert({
+                            html: props.value,
+                            text: ''
+                        })
+                    );
+                } else {
+                    quill.current.setText('');
+                }
             }
         }, [props.value]);
 
