@@ -10,9 +10,11 @@
  */
 import * as React from 'react';
 import { FilterMatchMode } from '../api/api';
+import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
 import { PassThroughOptions } from '../passthrough';
+import { RadioButtonPassThroughOptions } from '../radiobutton/radiobutton';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -161,9 +163,9 @@ export interface ColumnPassThroughOptions {
      */
     sortBadge?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the header checkbox's DOM element.
+     * Uses to pass attributes to the header checkbox's component.
      */
-    headerCheckbox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerCheckbox?: CheckboxPassThroughOptions;
     /**
      * Uses to pass attributes to the column filter's DOM element.
      */
@@ -313,21 +315,13 @@ export interface ColumnPassThroughOptions {
      */
     rowReorderIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * Uses to pass attributes to the row radiobutton wrapper's DOM element.
+     * Uses to pass attributes to the row radiobutton component.
      */
-    radioButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowRadioButton?: RadioButtonPassThroughOptions;
     /**
-     * Uses to pass attributes to the row radiobutton input's DOM element.
+     * Uses to pass attributes to the row checkbox component.
      */
-    radioButtonInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Uses to pass attributes to the row radiobutton box's DOM element.
-     */
-    radioButtonBox?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the row radiobutton icon's DOM element.
-     */
-    radioButtonIcon?: ColumnPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowCheckbox?: CheckboxPassThroughOptions;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
