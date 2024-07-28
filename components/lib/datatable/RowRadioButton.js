@@ -30,21 +30,16 @@ export const RowRadioButton = React.memo((props) => {
         }
     };
 
-    const radioButtonProps = mergeProps(
-        {
-            role: 'radio',
-            'aria-checked': props.checked,
-            checked: props.checked,
-            disabled: props.disabled,
-            name: `${props.tableSelector}_dt_radio`,
-            onChange: onChange,
-            input: getColumnPTOptions('radiobuttoninput'),
-            box: getColumnPTOptions('radiobuttonbox'),
-            icon: getColumnPTOptions('radiobuttonicon'),
-            unstyled: props.unstyled
-        },
-        getColumnPTOptions('radiobutton')
-    );
+    const radioButtonProps = mergeProps({
+        role: 'radio',
+        'aria-checked': props.checked,
+        checked: props.checked,
+        disabled: props.disabled,
+        name: `${props.tableSelector}_dt_radio`,
+        onChange: onChange,
+        unstyled: props.unstyled,
+        pt: getColumnPTOptions('rowRadioButton')
+    });
 
     return <RadioButton {...radioButtonProps} />;
 });
