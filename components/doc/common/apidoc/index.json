@@ -13097,8 +13097,8 @@
                             "name": "headerCheckbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the header checkbox's DOM element."
+                            "type": "CheckboxPassThroughOptions",
+                            "description": "Uses to pass attributes to the header checkbox's component."
                         },
                         {
                             "name": "columnFilter",
@@ -13360,32 +13360,18 @@
                             "description": "Uses to pass attributes to the row reorder icon's DOM element."
                         },
                         {
-                            "name": "radioButton",
+                            "name": "rowRadioButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the row radiobutton wrapper's DOM element."
+                            "type": "RadioButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the row radiobutton component."
                         },
                         {
-                            "name": "radioButtonInput",
+                            "name": "rowCheckbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the row radiobutton input's DOM element."
-                        },
-                        {
-                            "name": "radioButtonBox",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the row radiobutton box's DOM element."
-                        },
-                        {
-                            "name": "radioButtonIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the row radiobutton icon's DOM element."
+                            "type": "CheckboxPassThroughOptions",
+                            "description": "Uses to pass attributes to the row checkbox component."
                         },
                         {
                             "name": "hooks",
