@@ -7,6 +7,7 @@ import { KeyPointsDoc } from '@/components/doc/contribution/keypointsdoc';
 import { CommunicationDoc } from '@/components/doc/contribution/communicationdoc';
 import { PathwayDoc } from '@/components/doc/contribution/pathwaydoc';
 import { BenefitsDoc } from '@/components/doc/contribution/benefitsdoc';
+import { CLADoc } from '@/components/doc/contribution/cladoc';
 
 const ContributionPage = () => {
     const docs = [
@@ -39,6 +40,11 @@ const ContributionPage = () => {
             id: 'benefits',
             label: 'Benefits',
             component: BenefitsDoc
+        },
+        {
+            id: 'cla',
+            label: 'CLA',
+            component: CLADoc
         }
     ];
 
