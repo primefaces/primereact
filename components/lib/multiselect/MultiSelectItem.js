@@ -46,7 +46,7 @@ export const MultiSelectItem = React.memo((props) => {
         {
             className: cx('checkboxIcon')
         },
-        getPTOptions('checkboxIcon')
+        getPTOptions('checkbox.icon')
     );
 
     const icon = props.checkboxIcon || <CheckIcon {...checkboxIconProps} />;
