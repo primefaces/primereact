@@ -154,10 +154,6 @@ export interface MultiSelectPassThroughOptions {
      */
     checkbox?: CheckboxPassThroughOptions;
     /**
-     * Uses to pass attributes to the checkbox icon's DOM element.
-     */
-    checkboxIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
      * Uses to pass attributes to the emptyMessage's DOM element.
      */
     emptyMessage?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
