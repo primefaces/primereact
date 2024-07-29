@@ -8,7 +8,6 @@ import { CommunicationDoc } from '@/components/doc/contribution/communicationdoc
 import { PathwayDoc } from '@/components/doc/contribution/pathwaydoc';
 import { BenefitsDoc } from '@/components/doc/contribution/benefitsdoc';
 
-
 const ContributionPage = () => {
     const docs = [
         {

@@ -1,7 +1,6 @@
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function PathwayDoc(props) {
-
     return (
         <DocSectionText {...props}>
             <p>PrimeTek offers an organization structure involving contributors and the core team:</p>
