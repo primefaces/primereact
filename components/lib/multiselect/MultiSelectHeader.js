@@ -117,7 +117,7 @@ export const MultiSelectHeader = React.memo((props) => {
         {
             className: cx('headerCheckboxIcon')
         },
-        getPTOptions('headerCheckboxIcon')
+        getPTOptions('headerCheckbox.icon')
     );
 
     const headerCheckboxContainerProps = mergeProps(
