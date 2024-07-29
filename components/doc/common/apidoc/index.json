@@ -37072,13 +37072,6 @@
                             "description": "Uses to pass attributes to the header checkbox's container DOM element."
                         },
                         {
-                            "name": "headerCheckboxIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the header checkbox icon's DOM element."
-                        },
-                        {
                             "name": "headerSelectAllLabel",
                             "optional": true,
                             "readonly": false,
@@ -37166,15 +37159,8 @@
                             "name": "checkbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "CheckboxPassThroughOptions",
                             "description": "Uses to pass attributes to the checkbox's DOM element."
-                        },
-                        {
-                            "name": "checkboxIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the checkbox icon's DOM element."
                         },
                         {
                             "name": "emptyMessage",
