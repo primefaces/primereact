@@ -152,7 +152,7 @@ export interface MultiSelectPassThroughOptions {
     /**
      * Uses to pass attributes to the checkbox's DOM element.
      */
-    checkbox?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    checkbox?: CheckboxPassThroughOptions;
     /**
      * Uses to pass attributes to the checkbox icon's DOM element.
      */
