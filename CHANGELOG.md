@@ -1,5 +1,52 @@
 # Changelog
 
+## [10.8.0](https://github.com/primefaces/primereact/tree/10.7.0) (2024-07-29)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.7.0...10.8.0)
+
+* Refactor Dropdown.js to improve optionLabel and optionValue retrieval by @Rekl0w [#6831](https://github.com/primefaces/primereact/pull/6831)
+* Update ToastMessage severity options by @Rekl0w [#6832](https://github.com/primefaces/primereact/pull/6832)
+* TreeTable onFilter type def by @melloware [#6837](https://github.com/primefaces/primereact/pull/6837)
+* Add 'contrast' style option to ButtonProps by @Rekl0w [#6839](https://github.com/primefaces/primereact/pull/6839)
+* Updating activeStep does not actually change the active step by @PuppetFoam [#6841](https://github.com/primefaces/primereact/pull/6841)
+* TreeTableSelectionKeys type def by @melloware [#6847](https://github.com/primefaces/primereact/pull/6847)
+* TreeTable Typescript for page event by @melloware [#6848](https://github.com/primefaces/primereact/pull/6848)
+* Datatable loader unstyled non-boolean attribute warning by @meddvedev [#6849](https://github.com/primefaces/primereact/pull/6849)
+* PanelMenu typedef for onOpen/onClose by @melloware [#6850](https://github.com/primefaces/primereact/pull/6850)
+* Sort icons match PrimeVue by @melloware [#6853](https://github.com/primefaces/primereact/pull/6853)
+* Fix panel style in DropdownBase.js by @Rekl0w [#6856](https://github.com/primefaces/primereact/pull/6856)
+* Update z-index for submenu list in MenubarBase.js by @Rekl0w [#6869](https://github.com/primefaces/primereact/pull/6869)
+* Re-rendering of Sidebar component by @jpranays [#6860](https://github.com/primefaces/primereact/pull/6860)
+* Dropdown crashes when label is an empty string by @VytautasLozickas [#6871](https://github.com/primefaces/primereact/pull/6871)
+* Return scalar values directly as a label for Dropdown by @VytautasLozickas [#6872](https://github.com/primefaces/primereact/pull/6872)
+* Change the order of applying default values to props by @KumJungMin [#6879](https://github.com/primefaces/primereact/pull/6879)
+* Hide clear button when options is empty in Dropdown by @KumJungMin [#6880](https://github.com/primefaces/primereact/pull/6880)
+* Revert #6058 by @melloware [#6885](https://github.com/primefaces/primereact/pull/6885)
+* Fix: Combine the className props in the Menu separator by @jijiseong [#6884](https://github.com/primefaces/primereact/pull/6884)
+* TreeTable onResizeEnd incorrect column value by @melloware [#6886](https://github.com/primefaces/primereact/pull/6886)
+* Update onDateSelect function to include isUpdateViewDate parameter by @Rekl0w [#6890](https://github.com/primefaces/primereact/pull/6890)
+* Tree inputText's onChange in nodeTemplate does not respond to a space key by @akshayaqburst [#6891](https://github.com/primefaces/primereact/pull/6891)
+* MultiSelect emptyMessage prop is not working by @ivanpajon [#6894](https://github.com/primefaces/primereact/pull/6894)
+* MultiSelect internal value is never updated by @ivanpajon [#6896](https://github.com/primefaces/primereact/pull/6896)
+* Related to PR #6896 by @ivanpajon [#6897](https://github.com/primefaces/primereact/pull/6897)
+* FocusOnShow prop in Dialog component by @ivanpajon [#6899](https://github.com/primefaces/primereact/pull/6899)
+* Custom passthrough options for bodyRow by @ivanpajon [#6902](https://github.com/primefaces/primereact/pull/6902)
+* Missing rowGroupToggler and rowGroupTogglerIcon by @ivanpajon [#6904](https://github.com/primefaces/primereact/pull/6904)
+* Missing props in MessagesPassThroughMethodOptions and MessagesProps by @ivanpajon [#6909](https://github.com/primefaces/primereact/pull/6909)
+* Improve changeTheme logic and javadoc by @melloware [#6913](https://github.com/primefaces/primereact/pull/6913)
+* Fix(Calendar): Reset the isOverlayClicked value after overlayVisibleState is set to false by @KumJungMin [#6921](https://github.com/primefaces/primereact/pull/6921)
+* Fix(Calendar): Allow the end date to be the same as the start date using input by @KumJungMin [#6919](https://github.com/primefaces/primereact/pull/6919)
+* Fix: Listbox crash in CI by @avasuro [#6925](https://github.com/primefaces/primereact/pull/6925)
+* Autocomplete fix input passthrough TS by @melloware [#6926](https://github.com/primefaces/primereact/pull/6926)
+* Unstyled prop forwarded to InputText by @melloware [#6930](https://github.com/primefaces/primereact/pull/6930)
+* Removing chips in multiselect cause open/close multiselect by @meddvedev [#6933](https://github.com/primefaces/primereact/pull/6933)
+* Radio Button Pass Through Options by @peconomou929 [#6935](https://github.com/primefaces/primereact/pull/6935)
+* Editor get focus on init and on every value change by @avasuro [#6937](https://github.com/primefaces/primereact/pull/6937)
+* Fix: Overlap icons in the dropdown filter component by @nitrogenous [#6865](https://github.com/primefaces/primereact/pull/6865)
+* Fix input passthrough TS by @melloware [#6938](https://github.com/primefaces/primereact/pull/6938)
+* Datatable fix row checkbox/radiobutton PT by @melloware [#6941](https://github.com/primefaces/primereact/pull/6941)
+* Datatable reorderable rows in unstyled mode by @gcko [#6943](https://github.com/primefaces/primereact/pull/6943)
+
 ## [10.7.0](https://github.com/primefaces/primereact/tree/10.7.0) (2024-07-03)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.6.6...10.7.0)
@@ -55,8 +102,6 @@
 ## [10.6.6](https://github.com/primefaces/primereact/tree/10.6.6) (2024-05-24)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.6.5...10.6.6)
-
-## What's Changed
 
 **Fixed Bugs:**
 
