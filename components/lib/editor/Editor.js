@@ -4,6 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, classNames } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
+import { useRef } from 'react';
 
 const QuillJS = (function () {
     try {
@@ -119,13 +120,17 @@ export const Editor = React.memo(
             }
         };
 
+        const initValue = useRef(props.value);
+
+        initValue.current = props.value;
+
         const initQuill = (quillInstance) => {
             quill.current = quillInstance;
 
-            if (props.value) {
+            if (initValue.current) {
                 quillInstance.setContents(
                     quillInstance.clipboard.convert({
-                        html: props.value,
+                        html: initValue.current,
                         text: ''
                     })
                 );
