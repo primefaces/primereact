@@ -193,12 +193,16 @@ export const AutoComplete = React.memo(
 
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-                const element = getScrollableElement().firstChild.firstChild;
+                autoHighlightFirstOption()
+            }
+        };
 
-                if (element) {
-                    !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
-                    element.setAttribute('data-p-highlight', true);
-                }
+        const autoHighlightFirstOption = () => {
+            const element = getScrollableElement()?.firstChild?.firstChild;
+
+            if (element) {
+                !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
+                element.setAttribute('data-p-highlight', true);
             }
         };
 
@@ -453,7 +457,7 @@ export const AutoComplete = React.memo(
         };
 
         const getScrollableElement = () => {
-            return overlayRef.current.firstChild;
+            return overlayRef?.current?.firstChild;
         };
 
         const getOptionGroupLabel = (optionGroup) => {
@@ -471,6 +475,12 @@ export const AutoComplete = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        React.useEffect(() => {
+            if (searchingState && props.autoHighlight && props.suggestions && props.suggestions.length) {
+                autoHighlightFirstOption();
+            };
+        }, [searchingState]);
 
         useMountEffect(() => {
             if (!idState) {
