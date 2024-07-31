@@ -193,7 +193,7 @@ export const AutoComplete = React.memo(
 
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-                autoHighlightFirstOption()
+                autoHighlightFirstOption();
             }
         };
 
@@ -479,7 +479,7 @@ export const AutoComplete = React.memo(
         React.useEffect(() => {
             if (searchingState && props.autoHighlight && props.suggestions && props.suggestions.length) {
                 autoHighlightFirstOption();
-            };
+            }
         }, [searchingState]);
 
         useMountEffect(() => {
