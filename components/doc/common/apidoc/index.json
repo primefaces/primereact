@@ -30014,7 +30014,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether the content is displayed or not."
+                            "description": "Whether the content is displayed or not. To use in controlled mode you must implement  `onToggle`  callback at a minimum."
                         },
                         {
                             "name": "ariaLabel",
