@@ -476,12 +476,6 @@ export const AutoComplete = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
-        React.useEffect(() => {
-            if (searchingState && props.autoHighlight && props.suggestions && props.suggestions.length) {
-                autoHighlightFirstOption();
-            }
-        }, [searchingState]);
-
         useMountEffect(() => {
             if (!idState) {
                 setIdState(UniqueComponentId());
@@ -493,6 +487,12 @@ export const AutoComplete = React.memo(
 
             alignOverlay();
         });
+
+        useUpdateEffect(() => {
+            if (searchingState && props.autoHighlight && props.suggestions && props.suggestions.length) {
+                autoHighlightFirstOption();
+            }
+        }, [searchingState]);
 
         useUpdateEffect(() => {
             if (searchingState) {
