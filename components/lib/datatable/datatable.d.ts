@@ -1104,7 +1104,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
-    dataKey?: string | undefined;
+    dataKey?: string | undefined | ((data: any) => string);
     /**
      * Default sort order of an unsorted column.
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
