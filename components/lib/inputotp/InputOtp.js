@@ -199,24 +199,22 @@ export const InputOtp = React.memo(
                 onBlur,
                 onPaste
             };
-            const inputElementProps = mergeProps(
-                {
-                    id: inputElementIndex,
-                    key: inputElementIndex,
-                    value: tokens[inputElementIndex] || '',
-                    inputMode: props?.integerOnly ? 'numeric' : 'text',
-                    type: props?.mask ? 'password' : 'text',
-                    variant: props?.variant,
-                    readOnly: props?.readOnly,
-                    disabled: props?.disabled,
-                    invalid: props?.invalid,
-                    tabIndex: props?.tabIndex,
-                    unstyled: props?.unstyled,
-                    'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
-                    className: cx('input')
-                },
-                ptm('input')
-            );
+            const inputElementProps = mergeProps({
+                id: inputElementIndex,
+                key: inputElementIndex,
+                value: tokens[inputElementIndex] || '',
+                inputMode: props?.integerOnly ? 'numeric' : 'text',
+                type: props?.mask ? 'password' : 'text',
+                variant: props?.variant,
+                readOnly: props?.readOnly,
+                disabled: props?.disabled,
+                invalid: props?.invalid,
+                tabIndex: props?.tabIndex,
+                unstyled: props?.unstyled,
+                'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
+                className: cx('input'),
+                pt: ptm('input')
+            });
             const inputElement = props?.inputTemplate ? (
                 ObjectUtils.getJSXElement(props?.inputTemplate, {
                     events: inputElementEvents,
