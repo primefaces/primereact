@@ -199,7 +199,7 @@ export const InputOtp = React.memo(
                 onBlur,
                 onPaste
             };
-            const inputElementProps = mergeProps({
+            const inputElementProps = {
                 id: inputElementIndex,
                 key: inputElementIndex,
                 value: tokens[inputElementIndex] || '',
@@ -214,7 +214,7 @@ export const InputOtp = React.memo(
                 'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
                 className: cx('input'),
                 pt: ptm('input')
-            });
+            };
             const inputElement = props?.inputTemplate ? (
                 ObjectUtils.getJSXElement(props?.inputTemplate, {
                     events: inputElementEvents,
