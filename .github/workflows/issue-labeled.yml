@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            This issue is a duplicate and has already been reported and fixed.  Please review closed issues for the upcoming milestone release.
+            This issue is a duplicate and has already been reported and possibly fixed.  Please review other issues both open and closed for a similar issue to this one.
       - name: Needs Reproducer
         if: "${{ github.event.label.name == 'Status: Needs Reproducer'}}"
         uses: actions-cool/issues-helper@v3
