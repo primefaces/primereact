@@ -16598,7 +16598,7 @@
                             "name": "dataKey",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "string | Function",
                             "default": "({currentPage} of {totalPages})",
                             "description": "Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering."
                         },
@@ -19631,7 +19631,7 @@
                             "name": "dataKey",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "string | Function",
                             "description": "Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering."
                         },
                         {
