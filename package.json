@@ -52,7 +52,7 @@
         "@rollup/plugin-commonjs": "^25.0.7",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-replace": "^5.0.7",
-        "@stackblitz/sdk": "1.10.0",
+        "@stackblitz/sdk": "1.11.0",
         "@svgr/webpack": "^8.1.0",
         "@testing-library/jest-dom": "^6.4.6",
         "@testing-library/react": "^14.1.2",
