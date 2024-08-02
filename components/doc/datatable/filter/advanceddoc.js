@@ -237,7 +237,7 @@ export function AdvancedFilterDoc(props) {
         basic: `
 <DataTable value={customers} paginator showGridlines rows={10} loading={loading} dataKey="id" 
         filters={filters} globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header}
-        emptyMessage="No customers found.">
+        emptyMessage="No customers found." onFilter={(e) => setFilters(e.filters)}>
     <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
     <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate}
         filter filterPlaceholder="Search by country" filterClear={filterClearTemplate} 
@@ -488,7 +488,7 @@ export default function AdvancedFilterDemo() {
         <div className="card">
             <DataTable value={customers} paginator showGridlines rows={10} loading={loading} dataKey="id" 
                     filters={filters} globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header}
-                    emptyMessage="No customers found.">
+                    emptyMessage="No customers found." onFilter={(e) => setFilters(e.filters)}>
                 <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
                 <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate}
                     filter filterPlaceholder="Search by country" filterClear={filterClearTemplate} 
@@ -784,7 +784,7 @@ export default function AdvancedFilterDemo() {
         <div className="card">
             <DataTable value={customers} paginator showGridlines rows={10} loading={loading} dataKey="id" 
                     filters={filters} globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header}
-                    emptyMessage="No customers found.">
+                    emptyMessage="No customers found." onFilter={(e) => setFilters(e.filters)}>
                 <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
                 <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate}
                     filter filterPlaceholder="Search by country" filterClear={filterClearTemplate} 
@@ -844,6 +844,7 @@ export default function AdvancedFilterDemo() {
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
                         header={header}
                         emptyMessage="No customers found."
+                        onFilter={(e) => setFilters(e.filters)}
                     >
                         <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
                         <Column
