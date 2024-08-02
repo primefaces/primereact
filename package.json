@@ -26,7 +26,7 @@
         "apiwebtypes": "node ./api-scripts/build-webtypes.js"
     },
     "dependencies": {
-        "@docsearch/react": "3.6.0",
+        "@docsearch/react": "3.6.1",
         "chart.js": "4.4.3",
         "file-saver": "2.0.5",
         "fs-extra": "^11.2.0",
