@@ -1,8 +1,8 @@
 :root {
-  font-family: "Inter var", sans-serif;
+  font-family: "InterVariable", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   font-variation-settings: normal;
-  --font-family: "Inter var", sans-serif;
+  --font-family: "InterVariable", sans-serif;
   --font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   --surface-a: #ffffff;
   --surface-b: #f9fafb;
@@ -52,20 +52,20 @@
 }
 
 @font-face {
-  font-family: "Inter var";
+  font-family: "InterVariable";
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
   font-named-instance: "Regular";
-  src: url("./fonts/Inter-roman.var.woff2?v=3.19") format("woff2");
+  src: url("./fonts/InterVariable.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Inter var";
+  font-family: "InterVariable";
   font-weight: 100 900;
   font-display: swap;
   font-style: italic;
   font-named-instance: "Italic";
-  src: url("./fonts/Inter-italic.var.woff2?v=3.19") format("woff2");
+  src: url("./fonts/InterVariable-Italic.woff2") format("woff2");
 }
 :root {
   --blue-50:#f5f9ff;
