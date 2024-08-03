@@ -3046,8 +3046,10 @@ export const Calendar = React.memo(
         }, [props.view]);
 
         useUpdateEffect(() => {
-            focusToFirstCell();
-        }, [currentView]);
+            if (visible && !props.inline) {
+                focusToFirstCell();
+            }
+        }, [visible, currentView, props.inline]);
 
         useUpdateEffect(() => {
             if (!props.onViewDateChange && !viewStateChanged.current) {
