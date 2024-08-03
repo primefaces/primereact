@@ -30,7 +30,7 @@ export const RowRadioButton = React.memo((props) => {
         }
     };
 
-    const radioButtonProps = mergeProps({
+    const radioButtonProps = {
         role: 'radio',
         'aria-checked': props.checked,
         checked: props.checked,
@@ -39,7 +39,7 @@ export const RowRadioButton = React.memo((props) => {
         onChange: onChange,
         unstyled: props.unstyled,
         pt: getColumnPTOptions('rowRadioButton')
-    });
+    };
 
     return <RadioButton {...radioButtonProps} />;
 });
