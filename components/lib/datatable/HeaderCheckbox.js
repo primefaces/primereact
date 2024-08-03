@@ -48,7 +48,7 @@ export const HeaderCheckbox = React.memo((props) => {
     const checkIcon = IconUtils.getJSXIcon(icon, { ...headerCheckboxIconProps }, { props });
     const tabIndex = props.disabled ? null : 0;
 
-    const headerCheckboxProps = mergeProps({
+    const headerCheckboxProps = {
         role: 'checkbox',
         'aria-checked': props.checked,
         'aria-label': props.checked ? ariaLabel('selectAll') : ariaLabel('unselectAll'),
@@ -57,8 +57,9 @@ export const HeaderCheckbox = React.memo((props) => {
         icon: checkIcon,
         checked: props.checked,
         disabled: props.disabled,
+        unstyled: props.unstyled,
         pt: getColumnPTOptions('headerCheckbox')
-    });
+    };
 
     return <Checkbox {...headerCheckboxProps} />;
 });

@@ -42,7 +42,7 @@ export const RowCheckbox = React.memo((props) => {
     const checkIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { props });
     const tabIndex = props.disabled ? null : '0';
 
-    const checkboxProps = mergeProps({
+    const checkboxProps = {
         role: 'checkbox',
         'aria-checked': props.checked,
         tabIndex: tabIndex,
@@ -51,8 +51,9 @@ export const RowCheckbox = React.memo((props) => {
         checked: props.checked,
         icon: checkIcon,
         disabled: props.disabled,
+        unstyled: props.unstyled,
         pt: getColumnPTOptions('rowCheckbox')
-    });
+    };
 
     return <Checkbox {...checkboxProps} />;
 });
