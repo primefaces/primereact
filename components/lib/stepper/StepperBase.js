@@ -107,7 +107,8 @@ export const StepperBase = ComponentBase.extend({
         __TYPE: 'Stepper',
         activeStep: 0,
         orientation: 'horizontal',
-        linear: false
+        linear: false,
+        onChangeStep: null
     },
     css: {
         classes,
