@@ -34,8 +34,7 @@ export const RowTogglerButton = React.memo((props) => {
     const rowGroupTogglerIconProps = mergeProps(
         {
             className: cx('rowGroupTogglerIcon'),
-            'aria-hidden': true,
-            unstyled: isUnstyled()
+            'aria-hidden': true
         },
         ptm('rowGroupTogglerIcon'),
         getColumnPTOptions('rowGroupTogglerIcon')
@@ -49,8 +48,7 @@ export const RowTogglerButton = React.memo((props) => {
             onClick: (e) => onClick(e),
             className: cx('rowGroupToggler'),
             tabIndex: props.tabIndex,
-            'aria-label': label,
-            unstyled: isUnstyled()
+            'aria-label': label
         },
         ptm('rowGroupToggler'),
         getColumnPTOptions('rowGroupToggler')

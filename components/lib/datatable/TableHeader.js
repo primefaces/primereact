@@ -214,15 +214,14 @@ export const TableHeader = React.memo((props) => {
                 const headerCellProps = mergeProps(
                     {
                         style: colStyle,
-                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col })),
-                        key: colKey
+                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col }))
                     },
                     getColumnPTOptions(col, 'root'),
                     getColumnPTOptions(col, 'headerCell')
                 );
 
                 return (
-                    <th {...headerCellProps}>
+                    <th key={colKey} {...headerCellProps}>
                         {checkbox}
                         {filterRow}
                     </th>
