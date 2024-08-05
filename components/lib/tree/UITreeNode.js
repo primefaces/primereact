@@ -609,19 +609,17 @@ export const UITreeNode = React.memo((props) => {
     const onDropPoint = (event, position) => {
         event.preventDefault();
 
-        if (props.node.droppable !== false) {
-            DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
+        DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
 
-            if (props.onDropPoint) {
-                const dropIndex = position === -1 ? props.index : props.index + 1;
+        if (props.onDropPoint) {
+            const dropIndex = position === -1 ? props.index : props.index + 1;
 
-                props.onDropPoint({
-                    originalEvent: event,
-                    path: props.path,
-                    index: dropIndex,
-                    position
-                });
-            }
+            props.onDropPoint({
+                originalEvent: event,
+                path: props.path,
+                index: dropIndex,
+                position
+            });
         }
     };
 
@@ -979,7 +977,7 @@ export const UITreeNode = React.memo((props) => {
 
     const node = createNode();
 
-    if (props.dragdropScope && !props.disabled) {
+    if (props.dragdropScope && !props.disabled && props.node.droppable) {
         const beforeDropPoint = createDropPoint(-1);
         const afterDropPoint = props.last ? createDropPoint(1) : null;
 
