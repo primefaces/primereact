@@ -148,7 +148,6 @@ export const Calendar = React.memo(
                 const value = parseValueFromString(props.timeOnly ? rawValue.replace('_', '') : rawValue);
 
                 if (isValidSelection(value)) {
-                    isTypingRef.current = true;
                     updateModel(event, value);
                     updateViewDate(event, value.length ? value[0] : value);
                 }
@@ -3074,11 +3073,12 @@ export const Calendar = React.memo(
             const newDate = props.value;
 
             if (previousValue !== newDate) {
-                if (!isTypingRef.current) {
+                const isInputFocused = document.activeElement === inputRef.current;
+
+                // Do not update value in input if user types something in it:
+                if (!isInputFocused) {
                     updateInputfield(newDate);
                 }
-
-                isTypingRef.current = false;
 
                 // #3516 view date not updated when value set programatically
                 if (!newDate) return;
