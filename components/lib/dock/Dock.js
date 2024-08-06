@@ -237,7 +237,6 @@ export const Dock = React.memo(
                 {
                     id: key,
                     role: 'menuitem',
-                    key,
                     'aria-label': label,
                     'aria-disabled': disabled,
                     'data-p-focused': active,
@@ -250,7 +249,7 @@ export const Dock = React.memo(
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={key}>
                     <div {...contentProps}>{content}</div>
                 </li>
             );

@@ -331,7 +331,6 @@ export const PanelMenu = React.memo(
 
             const panelProps = mergeProps(
                 {
-                    key: key,
                     id: item?.id || generatePanelId(index),
                     className: cx('panel', { item }),
                     style: item.style
@@ -394,7 +393,7 @@ export const PanelMenu = React.memo(
             );
 
             return (
-                <div {...panelProps}>
+                <div {...panelProps} key={key}>
                     <div {...headerProps}>
                         <div {...headerContentProps}>{content}</div>
                     </div>

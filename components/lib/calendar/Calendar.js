@@ -3587,8 +3587,7 @@ export const Calendar = React.memo(
             const dates = createDates(monthMetaData, groupIndex);
             const containerProps = mergeProps(
                 {
-                    className: cx('container'),
-                    key: UniqueComponentId('calendar_container_')
+                    className: cx('container')
                 },
                 ptm('container')
             );
@@ -3605,7 +3604,7 @@ export const Calendar = React.memo(
 
             return (
                 currentView === 'date' && (
-                    <div {...containerProps}>
+                    <div {...containerProps} key={UniqueComponentId('calendar_container_')}>
                         <table {...tableProps}>
                             <thead {...tableHeaderProps}>
                                 <tr {...tableHeaderRowProps}>{dayNames}</tr>
@@ -3635,15 +3634,14 @@ export const Calendar = React.memo(
 
             const headerProps = mergeProps(
                 {
-                    className: cx('header'),
-                    key: index
+                    className: cx('header')
                 },
                 ptm('header')
             );
 
             return (
                 <div {...groupProps} key={monthKey}>
-                    <div {...headerProps}>
+                    <div {...headerProps} key={index}>
                         {header}
                         {backwardNavigator}
                         {title}

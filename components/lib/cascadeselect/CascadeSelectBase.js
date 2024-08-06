@@ -134,6 +134,7 @@ export const CascadeSelectBase = ComponentBase.extend({
         disabled: false,
         loadingIcon: null,
         dropdownIcon: null,
+        loading: false,
         id: null,
         inputId: null,
         inputRef: null,

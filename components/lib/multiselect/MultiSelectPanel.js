@@ -149,7 +149,11 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('emptyMessage')
             );
 
-            return <li {...emptyMessageProps}>{emptyFilterMessage}</li>;
+            return (
+                <li {...emptyMessageProps} key="emptyFilterMessage">
+                    {emptyFilterMessage}
+                </li>
+            );
         };
 
         const createEmptyContent = () => {
@@ -162,7 +166,11 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('emptyMessage')
             );
 
-            return <li {...emptyMessageProps}>{emptyMessage}</li>;
+            return (
+                <li {...emptyMessageProps} key="emptyMessage">
+                    {emptyMessage}
+                </li>
+            );
         };
 
         const createItem = (option, index, scrollerOptions = {}) => {
@@ -182,7 +190,9 @@ export const MultiSelectPanel = React.memo(
 
                 return (
                     <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{groupContent}</li>
+                        <li {...itemGroupProps} key={key}>
+                            {groupContent}
+                        </li>
                         {groupChildrenContent}
                     </React.Fragment>
                 );

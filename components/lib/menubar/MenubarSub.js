@@ -103,11 +103,10 @@ export const MenubarSub = React.memo(
             return index - props.model.slice(0, index).filter((processedItem) => isItemVisible(processedItem) && getItemProp(processedItem, 'separator')).length + 1;
         };
 
-        const createSeparator = (index) => {
-            const key = props.id + '_separator_' + index;
+        const createSeparator = (processedItem, index) => {
+            const key = props.id + '_separator_' + index + '_' + processedItem.key;
             const separatorProps = mergeProps(
                 {
-                    key,
                     'data-id': key,
                     className: cx('separator'),
                     role: 'separator'
@@ -115,7 +114,7 @@ export const MenubarSub = React.memo(
                 ptm('separator', { hostName: props.hostName })
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenu = (processedItem) => {
@@ -258,7 +257,7 @@ export const MenubarSub = React.memo(
             );
 
             return (
-                <li {...menuitemProps} key={dataId}>
+                <li {...menuitemProps} key={`${dataId}`}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>
@@ -266,7 +265,7 @@ export const MenubarSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
-            return getItemProp(processedItem, 'separator') ? createSeparator(index) : createMenuitem(processedItem, index);
+            return getItemProp(processedItem, 'separator') ? createSeparator(processedItem, index) : createMenuitem(processedItem, index);
         };
 
         const createMenu = () => {

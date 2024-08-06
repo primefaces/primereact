@@ -94,14 +94,13 @@ export const PanelMenuSub = React.memo(
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 _ptm('separator')
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenu = (processedItem, active) => {
@@ -232,7 +231,6 @@ export const PanelMenuSub = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     className: cx('menuitem', { item, focused: itemFocused, disabled: disabled }),
                     style: item.style,
@@ -249,7 +247,7 @@ export const PanelMenuSub = React.memo(
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={key}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>

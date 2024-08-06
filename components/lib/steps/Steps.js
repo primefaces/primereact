@@ -232,7 +232,6 @@ export const Steps = React.memo(
 
             const menuItemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     className: cx('menuitem', { active, disabled, item }),
                     style: item.style
@@ -240,7 +239,11 @@ export const Steps = React.memo(
                 ptm('menuitem')
             );
 
-            return <li {...menuItemProps}>{content}</li>;
+            return (
+                <li {...menuItemProps} key={key}>
+                    {content}
+                </li>
+            );
         };
 
         const createItems = () => {

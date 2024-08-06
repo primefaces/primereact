@@ -201,7 +201,6 @@ export const InputOtp = React.memo(
             };
             const inputElementProps = {
                 id: inputElementIndex,
-                key: inputElementIndex,
                 value: tokens[inputElementIndex] || '',
                 inputMode: props?.integerOnly ? 'numeric' : 'text',
                 type: props?.mask ? 'password' : 'text',
@@ -221,7 +220,7 @@ export const InputOtp = React.memo(
                     props: inputElementProps
                 })
             ) : (
-                <InputText {...inputElementProps} {...inputElementEvents} />
+                <InputText {...inputElementProps} {...inputElementEvents} key={inputElementIndex} />
             );
             const inputElements = [inputElement, ...createInputElements(remainingInputs - 1)];
 
