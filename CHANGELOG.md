@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.8.2](https://github.com/primefaces/primereact/tree/10.8.2) (2024-08-06)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.8.1...10.8.2)
+
+-   Fixes Font Issues
+-   Fix #6989: Datatable errors in console by @melloware [#6990](https://github.com/primefaces/primereact/pull/6990)
+-   Fixes to undroppable tree nodes by @rpiaggio [#6988](https://github.com/primefaces/primereact/pull/6988)
+
 ## [10.8.1](https://github.com/primefaces/primereact/tree/10.8.1) (2024-08-05)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.8.0...10.8.1)
