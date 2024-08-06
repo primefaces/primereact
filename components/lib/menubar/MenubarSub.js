@@ -239,7 +239,6 @@ export const MenubarSub = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id,
-                    key: dataId,
                     'data-id': dataId,
                     role: 'menuitem',
                     'aria-label': item.label,
@@ -259,7 +258,7 @@ export const MenubarSub = React.memo(
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={dataId}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>
