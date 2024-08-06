@@ -50,7 +50,6 @@ export const DropdownPanel = React.memo(
         };
 
         const onFilterInputChange = (event) => {
-            props.virtualScrollerRef.current && props.virtualScrollerRef.current.scrollToIndex(0);
             props.onFilterInputChange && props.onFilterInputChange(event);
         };
 
