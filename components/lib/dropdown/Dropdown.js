@@ -990,6 +990,10 @@ export const Dropdown = React.memo(
         }, [overlayVisibleState, filterState, props.filter]);
 
         useUpdateEffect(() => {
+            virtualScrollerRef.current && virtualScrollerRef.current.scrollInView(0);
+        }, [filterState]);
+
+        useUpdateEffect(() => {
             if (filterState && (!props.options || props.options.length === 0)) {
                 setFilterState('');
             }
