@@ -57,7 +57,7 @@
   font-display: swap;
   font-style: normal;
   font-named-instance: "Regular";
-  src: url("./fonts/Inter-roman.var.woff2") format("woff2");
+  src: url("./fonts/InterVariable.woff2") format("woff2");
 }
 @font-face {
   font-family: "Inter var";
@@ -65,7 +65,7 @@
   font-display: swap;
   font-style: italic;
   font-named-instance: "Italic";
-  src: url("./fonts/Inter-italic.var.woff2") format("woff2");
+  src: url("./fonts/InterVariable-Italic.woff2") format("woff2");
 }
 :root {
   --blue-50:#f5f9ff;
