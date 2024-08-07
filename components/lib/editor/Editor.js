@@ -5,6 +5,7 @@ import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, classNames } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
 import { useRef } from 'react';
+import 'quill/dist/quill.snow.css';
 
 const QuillJS = (function () {
     try {
