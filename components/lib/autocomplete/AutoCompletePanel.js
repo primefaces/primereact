@@ -64,7 +64,6 @@ export const AutoCompletePanel = React.memo(
             const itemGroupProps = mergeProps(
                 {
                     index,
-                    key: key ? key : null,
                     className: cx('itemGroup'),
                     'data-p-highlight': false,
                     ...labelItemProps
@@ -72,7 +71,11 @@ export const AutoCompletePanel = React.memo(
                 _ptm('itemGroup')
             );
 
-            return <li {...itemGroupProps}>{content}</li>;
+            return (
+                <li {...itemGroupProps} key={key ? key : null}>
+                    {content}
+                </li>
+            );
         };
 
         const createListItem = (item, key, index, listItemProps) => {

@@ -307,7 +307,6 @@ export const Password = React.memo(
 
             const hideIconProps = mergeProps(
                 {
-                    key: 'hideIcon',
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('hideIcon'),
@@ -321,7 +320,6 @@ export const Password = React.memo(
 
             const showIconProps = mergeProps(
                 {
-                    key: 'showIcon',
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),

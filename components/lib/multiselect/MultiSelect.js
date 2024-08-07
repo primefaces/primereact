@@ -899,7 +899,6 @@ export const MultiSelect = React.memo(
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
-                            key: i,
                             className: cx('removeTokenIcon'),
                             onClick: (e) => removeChip(e, val)
                         },

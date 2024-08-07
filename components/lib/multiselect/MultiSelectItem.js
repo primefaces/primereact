@@ -80,7 +80,7 @@ export const MultiSelectItem = React.memo((props) => {
     );
 
     return (
-        <li {...itemProps}>
+        <li {...itemProps} key={props.index + '_multiselectitem'}>
             <div {...checkboxContainerProps}>
                 <Checkbox ref={checkboxRef} checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
             </div>

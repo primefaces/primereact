@@ -131,7 +131,6 @@ const GalleriaThumbnailItem = React.memo((props) => {
     const thumbnailItemProps = mergeProps(
         {
             className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
-            key: 'p-galleria-thumbnail-item-' + props.index,
             role: 'tab',
             'data-p-active': props.current,
             'aria-selected': props.current,
@@ -157,7 +156,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
     );
 
     return (
-        <div {...thumbnailItemProps}>
+        <div {...thumbnailItemProps} key={props.index + '_galleriathumbnailitem'}>
             <div {...thumbnailItemContentProps}>{content}</div>
         </div>
     );

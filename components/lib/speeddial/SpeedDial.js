@@ -466,7 +466,6 @@ export const SpeedDial = React.memo(
 
             const menuItemProps = mergeProps(
                 {
-                    key: index,
                     id: `${idState}_${index}`,
                     className: cx('menuitem', { active: isItemActive(`${idState}_${index}`) }),
                     style: getItemStyle(index),
@@ -476,7 +475,11 @@ export const SpeedDial = React.memo(
                 ptm('menuitem')
             );
 
-            return <li {...menuItemProps}>{content}</li>;
+            return (
+                <li {...menuItemProps} key={`${idState}_${index}`}>
+                    {content}
+                </li>
+            );
         };
 
         const createItems = () => {
