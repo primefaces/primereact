@@ -188,15 +188,16 @@ export const Dropdown = React.memo(
         };
 
         const onInputKeyDown = (event) => {
-            if (props.disabled || DomHandler.isAndroid()) {
+            if (props.disabled) {
                 event.preventDefault();
 
                 return;
             }
 
             const metaKey = event.metaKey || event.ctrlKey;
+            const code = DomHandler.isAndroid() ? event.key : event.code;
 
-            switch (event.code) {
+            switch (code) {
                 case 'ArrowDown':
                     onArrowDownKey(event);
                     break;
@@ -509,7 +510,7 @@ export const Dropdown = React.memo(
         };
 
         const onBackspaceKey = (event, pressedInInputText = false) => {
-            if (pressedInInputText) {
+            if (event && pressedInInputText) {
                 !overlayVisibleState && show();
             }
         };
