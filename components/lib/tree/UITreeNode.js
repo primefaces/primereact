@@ -977,7 +977,7 @@ export const UITreeNode = React.memo((props) => {
 
     const node = createNode();
 
-    if (props.dragdropScope && !props.disabled && props.node.droppable) {
+    if (props.dragdropScope && !props.disabled && (!props.parent || props.parent.droppable)) {
         const beforeDropPoint = createDropPoint(-1);
         const afterDropPoint = props.last ? createDropPoint(1) : null;
 
