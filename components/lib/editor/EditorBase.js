@@ -1067,8 +1067,6 @@ const styles = `
 .ql-container.ql-snow {
   border: 1px solid #ccc;
 }
-
-/*# sourceMappingURL=quill.snow.css.map*/
 `;
 
 export const EditorBase = ComponentBase.extend({
