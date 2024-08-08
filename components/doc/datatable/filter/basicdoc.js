@@ -590,7 +590,7 @@ export default function BasicFilterDemo() {
             <DocSectionText {...props}>
                 <p>
                     Data filtering is enabled by defining the <i>filters</i> property referring to a <i>DataTableFilterMeta</i> instance. Each column to filter also requires <i>filter</i> to be enabled. Built-in filter element is a input field and
-                    using <i>filterElement</i>, it is possible to customize the filtering with your own UI. Filter elements are display within a separe row when <i>filterDisplay</i> is defined as <i>row</i>.
+                    using <i>filterElement</i>, it is possible to customize the filtering with your own UI. Filter elements are displayed within a separate row when <i>filterDisplay</i> is defined as <i>row</i>.
                 </p>
                 <p>
                     The optional global filtering searches the data against a single value that is bound to the <i>global</i> key of the <i>filters</i> object. The fields to search against is defined with the <i>globalFilterFields</i>.
