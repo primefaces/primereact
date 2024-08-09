@@ -29,7 +29,7 @@ body:
       id: system-info
       attributes:
           label: System Information
-          description: Output of `npx envinfo --system --npmPackages primereact,react --binaries --browsers`
+          description: Output of `npx envinfo --system --npmPackages primereact,react,tailwindcss --binaries --browsers`
           placeholder: >
               System:...
               Binaries:...
