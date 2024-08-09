@@ -53,7 +53,7 @@ const Tailwind = {
                 'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
             )
         },
-        title: 'leading-8 mx-auto',
+        title: { className: 'leading-8 mx-auto' },
         monthTitle: {
             className: classNames('text-gray-700 dark:text-white/80 transition duration-200 font-semibold p-2', 'mr-2', 'hover:text-blue-500')
         },
@@ -70,9 +70,9 @@ const Tailwind = {
         table: {
             className: classNames('border-collapse w-full', 'my-2')
         },
-        tableHeaderCell: 'p-2',
-        weekday: 'text-gray-600 dark:text-white/70',
-        day: 'p-2',
+        tableHeaderCell: { className: 'p-2' },
+        weekday: { className: 'text-gray-600 dark:text-white/70' },
+        day: { className: 'p-2' },
         dayLabel: ({ context }) => ({
             className: classNames(
                 'w-10 h-10 rounded-full transition-shadow duration-200 border-transparent border',
@@ -88,7 +88,7 @@ const Tailwind = {
                 }
             )
         }),
-        monthPicker: 'my-2',
+        monthPicker: { className: 'my-2' },
         month: ({ context }) => ({
             className: classNames(
                 'w-1/3 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
@@ -114,11 +114,11 @@ const Tailwind = {
         timePicker: {
             className: classNames('flex justify-center items-center', 'border-t-1 border-solid border-gray-300 p-2')
         },
-        separatorContainer: 'flex items-center flex-col px-2',
-        separator: 'text-xl',
-        hourPicker: 'flex items-center flex-col px-2',
-        minutePicker: 'flex items-center flex-col px-2',
-        ampmPicker: 'flex items-center flex-col px-2',
+        separatorContainer: { className: 'flex items-center flex-col px-2' },
+        separator: { className: 'text-xl' },
+        hourPicker: { className: 'flex items-center flex-col px-2' },
+        minutePicker: { className: 'flex items-center flex-col px-2' },
+        ampmPicker: { className: 'flex items-center flex-col px-2' },
         incrementButton: {
             className: classNames(
                 'flex items-center justify-center cursor-pointer overflow-hidden relative',
@@ -133,7 +133,7 @@ const Tailwind = {
                 'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
             )
         },
-        groupContainer: 'flex',
+        groupContainer: { className: 'flex' },
         group: {
             className: classNames('flex-1', 'border-l border-gray-300 pr-0.5 pl-0.5 pt-0 pb-0', 'first:pl-0 first:border-l-0')
         },
