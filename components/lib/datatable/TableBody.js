@@ -710,7 +710,7 @@ export const TableBody = React.memo(
                         !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
                     }
 
-                    droppedRowIndex.current = index + 1;
+                    if (index + 1 !== draggedRowIndex.current) droppedRowIndex.current = index + 1;
                     rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'true');
                     !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
                 }
