@@ -12,7 +12,6 @@ import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-
 import { APIOptions } from '../api/api';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { IconType, PassThroughType } from '../utils/utils';
@@ -78,7 +77,7 @@ export interface CascadeSelectPassThroughOptions {
     /**
      * Uses to pass attributes to the input's DOM element.
      */
-    input?: InputTextPassThroughOptions;
+    input?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the label's DOM element.
      */
@@ -353,9 +352,9 @@ export declare class CascadeSelect extends React.Component<CascadeSelectProps, a
     public getElement(): HTMLDivElement;
     /**
      * Used to get input element.
-     * @return {InputText} Input element
+     * @return {HTMLInputElement} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): HTMLInputElement;
     /**
      * Used to get overlay element.
      * @return {HTMLElement} Overlay element
