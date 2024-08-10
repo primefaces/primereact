@@ -9145,7 +9145,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -9845,7 +9845,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
