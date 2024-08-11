@@ -5946,7 +5946,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -50539,7 +50539,7 @@
                             "name": "content",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode",
+                            "type": "ReactNode | Function",
                             "description": "Custom content of the message. If enabled, summary and details properties are ignored."
                         },
                         {
