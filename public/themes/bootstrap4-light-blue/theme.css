@@ -4634,7 +4634,6 @@
     transition: box-shadow 0.15s;
   }
   .p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
-    margin-left: 0.5rem;
     color: #6c757d;
     font-weight: 600;
     transition: box-shadow 0.15s;
@@ -4643,6 +4642,24 @@
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-top .p-stepper-title {
+    margin-bottom: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-top .p-stepper-separator {
+    margin-bottom: 1rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-right .p-stepper-title {
+    margin-left: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-left .p-stepper-title {
+    margin-right: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-bottom .p-stepper-title {
+    margin-top: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-bottom .p-stepper-separator {
+    margin-top: 1rem;
   }
   .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
     background: #007bff;
@@ -4695,6 +4712,9 @@
   .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-content {
     width: 100%;
     padding-left: 1rem;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-title {
+    margin-left: 0.5rem;
   }
   .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-separator {
     flex: 0 0 auto;

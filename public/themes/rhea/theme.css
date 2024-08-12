@@ -4552,7 +4552,6 @@
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
   .p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
-    margin-left: 0.5rem;
     color: #a6a6a6;
     font-weight: 700;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
@@ -4561,6 +4560,24 @@
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #e4e9ec;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-top .p-stepper-title {
+    margin-bottom: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-top .p-stepper-separator {
+    margin-bottom: 1rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-right .p-stepper-title {
+    margin-left: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-left .p-stepper-title {
+    margin-right: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-bottom .p-stepper-title {
+    margin-top: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-bottom .p-stepper-separator {
+    margin-top: 1rem;
   }
   .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
     background: #afd3c8;
@@ -4613,6 +4630,9 @@
   .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-content {
     width: 100%;
     padding-left: 1rem;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-title {
+    margin-left: 0.5rem;
   }
   .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-separator {
     flex: 0 0 auto;
