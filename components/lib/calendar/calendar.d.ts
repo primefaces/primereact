@@ -11,7 +11,6 @@ import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent, Nullable } from '../ts-helpers';
@@ -40,12 +39,10 @@ export interface CalendarPassThroughOptions {
     root?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the InputText component.
-     * @see {@link CalendarPassThroughType}
      */
-    input?: InputTextPassThroughOptions;
+    input?: CalendarPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link CalendarPassThroughType}
      */
     dropdownButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
@@ -1080,9 +1077,9 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
     public getElement(): HTMLSpanElement;
     /**
      * Used to get input element.
-     * @return {InputText} Input element
+     * @return {HTMLInputElement} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): HTMLInputElement;
     /**
      * Used to get overlay element.
      * @return {HTMLElement} Overlay element
