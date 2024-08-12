@@ -1271,6 +1271,13 @@
                             "description": "Custom passthrough(pt) options for InputNumber."
                         },
                         {
+                            "name": "inputotp",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputOtpPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputOtp."
+                        },
+                        {
                             "name": "inputswitch",
                             "optional": true,
                             "readonly": false,
@@ -31588,7 +31595,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "InputOtpPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the Tooltip component."
                         },
                         {
