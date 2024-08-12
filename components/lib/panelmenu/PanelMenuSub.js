@@ -137,7 +137,8 @@ export const PanelMenuSub = React.memo(
                                 onItemToggle={onItemToggle}
                                 menuProps={props.menuProps}
                                 model={processedItem.items}
-                                submenuIcon={props.submenuIcon}
+                                expandIcon={props.expandIcon}
+                                collapseIcon={props.collapseIcon}
                                 ptm={ptm}
                                 cx={cx}
                             />
@@ -183,7 +184,13 @@ export const PanelMenuSub = React.memo(
                 },
                 getPTOptions(processedItem, 'submenuicon', index)
             );
-            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
+
+            const submenuIcon = item.items && IconUtils.getJSXIcon(
+                active 
+                    ? (props.collapseIcon || <ChevronDownIcon {...submenuIconProps} />) 
+                    : (props.expandIcon || <ChevronRightIcon {...submenuIconProps} />)
+            );
+            
             const submenu = createSubmenu(processedItem, active);
             const actionProps = mergeProps(
                 {
