@@ -3,6 +3,7 @@ import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../a
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -1197,7 +1198,7 @@ export const Dropdown = React.memo(
                 },
                 ptm('dropdownIcon')
             );
-            const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
+            const icon = !overlayVisibleState ? props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} /> : props.collapseIcon || <ChevronUpIcon {...dropdownIconProps} />;
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
 
             const ariaLabel = props.placeholder || props.ariaLabel;
