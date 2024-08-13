@@ -47309,6 +47309,14 @@
                             "description": "Active step index of stepper."
                         },
                         {
+                            "name": "headerPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"top\" | \"bottom\" | \"right\"",
+                            "default": "",
+                            "description": "Position of the stepper panel header relative to the step number."
+                        },
+                        {
                             "name": "linear",
                             "optional": true,
                             "readonly": false,
