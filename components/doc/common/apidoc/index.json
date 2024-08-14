@@ -55977,6 +55977,27 @@
                             "description": "Uses to pass attributes to the hidden input's DOM element."
                         },
                         {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughOptions",
+                            "description": "Used to pass attributes to the Row helper components."
+                        },
+                        {
+                            "name": "column",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughOptions",
+                            "description": "Used to pass attributes to the Column helper components."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
                             "name": "hooks",
                             "optional": true,
                             "readonly": false,
