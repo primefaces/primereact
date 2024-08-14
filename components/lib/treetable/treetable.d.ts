@@ -9,11 +9,13 @@
  */
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import { Column } from '../column';
+import { Column, ColumnPassThroughOptions } from '../column';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
 import { PassThroughOptions } from '../passthrough';
+import { RowPassThroughOptions } from '../row/row';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -211,6 +213,19 @@ export interface TreeTablePassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: TreeTablePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the Row helper components.
+     */
+    row?: RowPassThroughOptions;
+    /**
+     * Used to pass attributes to the Column helper components.
+     */
+    column?: ColumnPassThroughOptions;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
