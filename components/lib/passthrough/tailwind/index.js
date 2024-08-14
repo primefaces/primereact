@@ -1090,7 +1090,10 @@ const Tailwind = {
         root: {
             className: classNames('relative inline-flex cursor-pointer select-none align-bottom', 'w-6 h-6')
         },
-        input: ({ props }) => ({
+        input: {
+            className: classNames('absolute appearance-none top-0 left-0 size-full p-0 m-0 opacity-0 z-10 outline-none cursor-pointer')
+        },
+        box: ({ props }) => ({
             className: classNames(
                 'flex justify-center items-center',
                 'border-2 w-6 h-6 text-gray-700 rounded-full transition duration-200 ease-in-out',
