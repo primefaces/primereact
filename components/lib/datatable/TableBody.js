@@ -592,14 +592,24 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (!isUnstyled() && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) {
-                event.currentTarget.draggable = true;
-                event.target.draggable = false;
-            } else if (isUnstyled() && DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon') {
-                event.currentTarget.draggable = true;
-                event.target.draggable = false;
+            if (isUnstyled()) {
+                const isDragHandle = DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]');
+
+                if (isDragHandle) {
+                    event.currentTarget.draggable = true;
+                    event.target.draggable = false;
+                } else {
+                    event.currentTarget.draggable = false;
+                }
             } else {
-                event.currentTarget.draggable = false;
+                const isDragHandle = DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
+
+                if (isDragHandle) {
+                    event.currentTarget.draggable = true;
+                    event.target.draggable = false;
+                } else {
+                    event.currentTarget.draggable = false;
+                }
             }
 
             if (allowRowDrag(e)) {
