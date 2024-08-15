@@ -593,18 +593,18 @@ export const TableBody = React.memo(
             const { originalEvent: event } = e;
 
             if (isUnstyled()) {
-                const isDragHandle = DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]');
+                const isDraggableHandle = DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]');
 
-                if (isDragHandle) {
+                if (isDraggableHandle) {
                     event.currentTarget.draggable = true;
                     event.target.draggable = false;
                 } else {
                     event.currentTarget.draggable = false;
                 }
             } else {
-                const isDragHandle = DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
+                const isDraggableHandle = DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
 
-                if (isDragHandle) {
+                if (isDraggableHandle) {
                     event.currentTarget.draggable = true;
                     event.target.draggable = false;
                 } else {
