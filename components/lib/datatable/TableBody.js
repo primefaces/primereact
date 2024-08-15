@@ -592,25 +592,12 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (isUnstyled()) {
-                const isDraggableHandle = DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]');
+            const isDraggableHandle = isUnstyled()
+                ? DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]')
+                : DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
 
-                if (isDraggableHandle) {
-                    event.currentTarget.draggable = true;
-                    event.target.draggable = false;
-                } else {
-                    event.currentTarget.draggable = false;
-                }
-            } else {
-                const isDraggableHandle = DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
-
-                if (isDraggableHandle) {
-                    event.currentTarget.draggable = true;
-                    event.target.draggable = false;
-                } else {
-                    event.currentTarget.draggable = false;
-                }
-            }
+            event.currentTarget.draggable = isDraggableHandle;
+            event.target.draggable = !isDraggableHandle;
 
             if (allowRowDrag(e)) {
                 enableDragSelection(event, 'row');
