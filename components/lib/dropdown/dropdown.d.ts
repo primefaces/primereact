@@ -282,6 +282,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
+     * Icon of collapse action.
+     */
+    collapseIcon?: IconType<DropdownProps> | undefined;
+    /**
      * When present, custom value instead of predefined options can be entered using the editable input field.
      * @defaultValue false
      */
