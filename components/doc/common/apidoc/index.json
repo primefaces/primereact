@@ -23149,6 +23149,14 @@
                             "description": "Icon of the dropdown."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "Icon of collapse action."
+                        },
+                        {
                             "name": "dataKey",
                             "optional": true,
                             "readonly": false,
@@ -23171,14 +23179,6 @@
                             "type": "IconType<DropdownProps>",
                             "default": "",
                             "description": "Icon of the dropdown."
-                        },
-                        {
-                            "name": "collapseIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "IconType<DropdownProps>",
-                            "default": "",
-                            "description": "Icon of the collapse action."
                         },
                         {
                             "name": "editable",
