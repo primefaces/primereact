@@ -38,23 +38,26 @@ exports[`Stepper header position bottom 1`] = `
         data-p-active="true"
         data-p-disabled="false"
         data-p-highlight="true"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_6_0content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_6_0_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             1
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header I
           </span>
@@ -71,23 +74,26 @@ exports[`Stepper header position bottom 1`] = `
         data-p-active="false"
         data-p-disabled="false"
         data-p-highlight="false"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_6_1content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_6_1_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             2
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header II
           </span>
@@ -103,7 +109,7 @@ exports[`Stepper header position bottom 1`] = `
         class="p-stepper-content"
         data-p-active="true"
         data-pc-name=""
-        data-pc-section="stepperpanel"
+        data-pc-section="content"
         id="pr_id_6_0content"
         role="tabpanel"
       >
@@ -132,23 +138,26 @@ exports[`Stepper header position left 1`] = `
         data-p-active="true"
         data-p-disabled="false"
         data-p-highlight="true"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_7_0content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_7_0_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             1
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header I
           </span>
@@ -165,23 +174,26 @@ exports[`Stepper header position left 1`] = `
         data-p-active="false"
         data-p-disabled="false"
         data-p-highlight="false"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_7_1content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_7_1_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             2
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header II
           </span>
@@ -197,7 +209,7 @@ exports[`Stepper header position left 1`] = `
         class="p-stepper-content"
         data-p-active="true"
         data-pc-name=""
-        data-pc-section="stepperpanel"
+        data-pc-section="content"
         id="pr_id_7_0content"
         role="tabpanel"
       >
@@ -226,23 +238,26 @@ exports[`Stepper header position right 1`] = `
         data-p-active="true"
         data-p-disabled="false"
         data-p-highlight="true"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_5_0content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_5_0_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             1
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header I
           </span>
@@ -259,23 +274,26 @@ exports[`Stepper header position right 1`] = `
         data-p-active="false"
         data-p-disabled="false"
         data-p-highlight="false"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_5_1content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_5_1_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             2
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header II
           </span>
@@ -291,7 +309,7 @@ exports[`Stepper header position right 1`] = `
         class="p-stepper-content"
         data-p-active="true"
         data-pc-name=""
-        data-pc-section="stepperpanel"
+        data-pc-section="content"
         id="pr_id_5_0content"
         role="tabpanel"
       >
@@ -320,23 +338,26 @@ exports[`Stepper header position top 1`] = `
         data-p-active="true"
         data-p-disabled="false"
         data-p-highlight="true"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_4_0content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_4_0_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             1
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header I
           </span>
@@ -353,23 +374,26 @@ exports[`Stepper header position top 1`] = `
         data-p-active="false"
         data-p-disabled="false"
         data-p-highlight="false"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_4_1content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_4_1_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             2
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header II
           </span>
@@ -385,7 +409,7 @@ exports[`Stepper header position top 1`] = `
         class="p-stepper-content"
         data-p-active="true"
         data-pc-name=""
-        data-pc-section="stepperpanel"
+        data-pc-section="content"
         id="pr_id_4_0content"
         role="tabpanel"
       >
@@ -414,23 +438,26 @@ exports[`Stepper panels 1`] = `
         data-p-active="true"
         data-p-disabled="false"
         data-p-highlight="true"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_2_0content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_2_0_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             1
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header I
           </span>
@@ -447,23 +474,26 @@ exports[`Stepper panels 1`] = `
         data-p-active="false"
         data-p-disabled="false"
         data-p-highlight="false"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_2_1content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_2_1_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             2
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header II
           </span>
@@ -480,23 +510,26 @@ exports[`Stepper panels 1`] = `
         data-p-active="false"
         data-p-disabled="false"
         data-p-highlight="false"
-        data-pc-section="stepperpanel"
+        data-pc-section="header"
         role="presentation"
       >
         <button
           aria-controls="pr_id_2_2content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_2_2_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             3
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header III
           </span>
@@ -512,7 +545,7 @@ exports[`Stepper panels 1`] = `
         class="p-stepper-content"
         data-p-active="true"
         data-pc-name=""
-        data-pc-section="stepperpanel"
+        data-pc-section="content"
         id="pr_id_2_0content"
         role="tabpanel"
       >
@@ -538,7 +571,7 @@ exports[`Stepper vertical 1`] = `
       data-p-disabled="false"
       data-p-highlight="true"
       data-pc-name=""
-      data-pc-section="nav"
+      data-pc-section="panel"
     >
       <div
         class="p-stepper-header p-highlight"
@@ -547,17 +580,20 @@ exports[`Stepper vertical 1`] = `
         <button
           aria-controls="pr_id_3_0content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_3_0_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             1
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header I
           </span>
@@ -577,7 +613,7 @@ exports[`Stepper vertical 1`] = `
           class="p-stepper-content p-toggleable-content"
           data-p-active="true"
           data-pc-name=""
-          data-pc-section="stepperpanel"
+          data-pc-section="content"
           id="pr_id_3_0content"
           role="tabpanel"
         >
@@ -592,7 +628,7 @@ exports[`Stepper vertical 1`] = `
       data-p-disabled="false"
       data-p-highlight="false"
       data-pc-name=""
-      data-pc-section="nav"
+      data-pc-section="panel"
     >
       <div
         class="p-stepper-header"
@@ -601,17 +637,20 @@ exports[`Stepper vertical 1`] = `
         <button
           aria-controls="pr_id_3_1content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_3_1_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             2
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header II
           </span>
@@ -625,7 +664,7 @@ exports[`Stepper vertical 1`] = `
       data-p-disabled="false"
       data-p-highlight="false"
       data-pc-name=""
-      data-pc-section="nav"
+      data-pc-section="panel"
     >
       <div
         class="p-stepper-header"
@@ -634,17 +673,20 @@ exports[`Stepper vertical 1`] = `
         <button
           aria-controls="pr_id_3_2content"
           class="p-stepper-action p-component"
+          data-pc-section="action"
           id="pr_id_3_2_header_action"
           role="tab"
           type="button"
         >
           <span
             class="p-stepper-number"
+            data-pc-section="number"
           >
             3
           </span>
           <span
             class="p-stepper-title"
+            data-pc-section="title"
           >
             Header III
           </span>
