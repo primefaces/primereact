@@ -14420,6 +14420,14 @@
                             "description": "Footer content of the confirm dialog."
                         },
                         {
+                            "name": "group",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Optional key to match the key of the confirmation, useful to target a specific confirm dialog instance."
+                        },
+                        {
                             "name": "header",
                             "optional": true,
                             "readonly": false,
