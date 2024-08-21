@@ -110,6 +110,10 @@ export interface StepperProps {
      */
     orientation?: 'horizontal' | 'vertical' | undefined;
     /**
+     * Position of the stepper panel header relative to the step number.
+     */
+    headerPosition?: 'top' | 'right' | 'bottom' | 'left' | undefined;
+    /**
      * Whether the steps are clickable or not.
      * @defaultValue false
      */
