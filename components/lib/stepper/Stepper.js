@@ -135,7 +135,7 @@ export const Stepper = React.memo(
             return stepperPanels().map((step, index) => {
                 const panelProps = mergeProps(
                     {
-                        className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index })),
+                        className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index, headerPosition: props.headerPosition, orientation: props.orientation })),
                         'aria-current': isStepActive(index) && 'step',
                         role: 'presentation',
                         'data-p-highlight': isStepActive(index),
