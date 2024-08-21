@@ -40996,12 +40996,28 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PanelMenuProps>",
+                            "default": "",
+                            "description": "Icon used when a submenu is expanded."
+                        },
+                        {
                             "name": "expandedKeys",
                             "optional": true,
                             "readonly": false,
                             "type": "PanelMenuExpandedKeys",
                             "default": "",
                             "description": "A map of keys to represent the expansion state in controlled mode."
+                        },
+                        {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PanelMenuProps>",
+                            "default": "",
+                            "description": "Icon used when a submenu is collapsed."
                         },
                         {
                             "name": "model",
@@ -41034,14 +41050,6 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
-                        },
-                        {
-                            "name": "submenuIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "IconType<PanelMenuProps>",
-                            "default": "",
-                            "description": "Icon of the submenu."
                         },
                         {
                             "name": "transitionOptions",
@@ -41175,11 +41183,18 @@
                             "description": "Uses to pass attributes to the header content's DOM element."
                         },
                         {
-                            "name": "submenuIcon",
+                            "name": "expandIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the submenuIcon's DOM element."
+                            "description": "Uses to pass attributes to the expand icon's DOM element."
+                        },
+                        {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the collapse icon's DOM element."
                         },
                         {
                             "name": "headerIcon",

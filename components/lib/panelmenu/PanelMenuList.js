@@ -429,7 +429,8 @@ export const PanelMenuList = React.memo((props) => {
             onItemToggle={onItemToggle}
             level={0}
             className={cx('submenu')}
-            submenuIcon={props.submenuIcon}
+            expandIcon={props.expandIcon}
+            collapseIcon={props.collapseIcon}
             root
             ptm={ptm}
             cx={cx}

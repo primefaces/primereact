@@ -53,9 +53,13 @@ export interface PanelMenuPassThroughOptions {
      */
     headerContent?: PanelMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the submenuIcon's DOM element.
+     * Uses to pass attributes to the expand icon's DOM element.
      */
-    submenuIcon?: PanelMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    expandIcon?: PanelMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the collapse icon's DOM element.
+     */
+    collapseIcon?: PanelMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the header icon's DOM element.
      */
@@ -179,9 +183,13 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     multiple?: boolean | undefined;
     /**
-     * Icon of the submenu.
+     * Icon used when a submenu is collapsed.
      */
-    submenuIcon?: IconType<PanelMenuProps> | undefined;
+    expandIcon?: IconType<PanelMenuProps> | undefined;
+    /**
+     * Icon used when a submenu is expanded.
+     */
+    collapseIcon?: IconType<PanelMenuProps> | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
