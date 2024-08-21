@@ -28,10 +28,10 @@ const classes = {
             }),
         panel: ({ props, isStepActive, index }) =>
             classNames('p-stepper-panel', {
-                    'p-stepper-panel-active': props.orientation === 'vertical' && isStepActive(index)
+                'p-stepper-panel-active': props.orientation === 'vertical' && isStepActive(index)
             })
     },
-    panelContainer: 'p-stepper-panels',
+    panelContainer: 'p-stepper-panels'
 };
 
 const styles = `

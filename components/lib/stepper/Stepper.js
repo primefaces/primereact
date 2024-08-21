@@ -133,16 +133,15 @@ export const Stepper = React.memo(
 
         const createPanel = () => {
             return stepperPanels().map((step, index) => {
-                const panelProps = mergeProps(
-                    {
-                        className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index, headerPosition: props.headerPosition, orientation: props.orientation })),
-                        'aria-current': isStepActive(index) && 'step',
-                        role: 'presentation',
-                        'data-p-highlight': isStepActive(index),
-                        'data-p-disabled': isItemDisabled(index),
-                        'data-p-active': isStepActive(index),
-                        ...getStepPT(step, 'header', index)
-                    });
+                const panelProps = mergeProps({
+                    className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index, headerPosition: props.headerPosition, orientation: props.orientation })),
+                    'aria-current': isStepActive(index) && 'step',
+                    role: 'presentation',
+                    'data-p-highlight': isStepActive(index),
+                    'data-p-disabled': isItemDisabled(index),
+                    'data-p-active': isStepActive(index),
+                    ...getStepPT(step, 'header', index)
+                });
 
                 return (
                     <li key={getStepKey(step, index)} {...panelProps}>
@@ -232,17 +231,16 @@ export const Stepper = React.memo(
             return stepperPanels().map((step, index) => {
                 const contentRef = React.createRef(null);
 
-                const navProps = mergeProps(
-                    {
-                        ref: navRef,
-                        className: cx('stepper.panel', { props, index, isStepActive }),
-                        'aria-current': isStepActive(index) && 'step',
-                        ...getStepPT(step, 'root', index),
-                        ...getStepPT(step, 'panel', index),
-                        'data-p-highlight': isStepActive(index),
-                        'data-p-disabled': isItemDisabled(index),
-                        'data-p-active': isStepActive(index)
-                    });
+                const navProps = mergeProps({
+                    ref: navRef,
+                    className: cx('stepper.panel', { props, index, isStepActive }),
+                    'aria-current': isStepActive(index) && 'step',
+                    ...getStepPT(step, 'root', index),
+                    ...getStepPT(step, 'panel', index),
+                    'data-p-highlight': isStepActive(index),
+                    'data-p-disabled': isItemDisabled(index),
+                    'data-p-active': isStepActive(index)
+                });
 
                 const headerProps = mergeProps({
                     className: cx('stepper.header', { step, isStepActive, isItemDisabled, index }),

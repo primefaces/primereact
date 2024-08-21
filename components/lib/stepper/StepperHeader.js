@@ -18,17 +18,15 @@ export const StepperHeader = React.memo(
             ...props.getStepPT(props.stepperpanel, 'action', props.index)
         });
 
-        const numberProps = mergeProps(
-            {
-                className: cx('stepper.number'),
-                ...props.getStepPT(props.stepperpanel, 'number', props.index),
-            });
-        
-        const titleProps = mergeProps(
-            {
-                className: cx('stepper.title'),
-                ...props.getStepPT(props.stepperpanel, 'title', props.index),
-            });
+        const numberProps = mergeProps({
+            className: cx('stepper.number'),
+            ...props.getStepPT(props.stepperpanel, 'number', props.index)
+        });
+
+        const titleProps = mergeProps({
+            className: cx('stepper.title'),
+            ...props.getStepPT(props.stepperpanel, 'title', props.index)
+        });
 
         return props.template ? (
             props.template()

@@ -6,17 +6,16 @@ export const StepperContent = React.memo(
         const mergeProps = useMergeProps();
         const { cx } = props;
 
-        const rootProps = mergeProps(
-            {
-                ref: ref,
-                id: props.id,
-                className: cx('stepper.content', { stepperpanel: props.stepperpanel, index: props.index }),
-                role: 'tabpanel',
-                'aria-labelledby': props.ariaLabelledby,
-                ...props.getStepPT(props.stepperpanel, 'root', props.index),
-                ...props.getStepPT(props.stepperpanel, 'content', props.index),
-                'data-p-active': props.active
-            });
+        const rootProps = mergeProps({
+            ref: ref,
+            id: props.id,
+            className: cx('stepper.content', { stepperpanel: props.stepperpanel, index: props.index }),
+            role: 'tabpanel',
+            'aria-labelledby': props.ariaLabelledby,
+            ...props.getStepPT(props.stepperpanel, 'root', props.index),
+            ...props.getStepPT(props.stepperpanel, 'content', props.index),
+            'data-p-active': props.active
+        });
 
         const createContent = () => {
             const ComponentToRender = props.template;
