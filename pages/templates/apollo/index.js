@@ -180,7 +180,6 @@ const license = {
         {
             title: 'Extended License',
             price: '$590',
-            price: '$59',
             discountPrice: '$390',
             included: ['Commercial Usage', 'Multiple End Products', '1 Year Free Updates']
         }
