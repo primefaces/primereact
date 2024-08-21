@@ -163,6 +163,10 @@ interface ConfirmDialogOptions {
  */
 export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer' | 'pt'> {
     /**
+     * Optional key to match the key of the confirmation, useful to target a specific confirm dialog instance.
+     */
+    group?: string | undefined;
+    /**
      * Unique tag key used to separate the confirmDialog components in the page.
      */
     tagKey?: string | undefined;
