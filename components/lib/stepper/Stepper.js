@@ -140,10 +140,9 @@ export const Stepper = React.memo(
                         role: 'presentation',
                         'data-p-highlight': isStepActive(index),
                         'data-p-disabled': isItemDisabled(index),
-                        'data-p-active': isStepActive(index)
-                    },
-                    ptm('stepperpanel')
-                );
+                        'data-p-active': isStepActive(index),
+                        ...getStepPT(step, 'header', index)
+                    });
 
                 return (
                     <li key={getStepKey(step, index)} {...panelProps}>
@@ -236,16 +235,14 @@ export const Stepper = React.memo(
                 const navProps = mergeProps(
                     {
                         ref: navRef,
-                        className: cx('panel', { props, index, isStepActive }),
+                        className: cx('stepper.panel', { props, index, isStepActive }),
                         'aria-current': isStepActive(index) && 'step',
                         ...getStepPT(step, 'root', index),
                         ...getStepPT(step, 'panel', index),
                         'data-p-highlight': isStepActive(index),
                         'data-p-disabled': isItemDisabled(index),
                         'data-p-active': isStepActive(index)
-                    },
-                    ptm('nav')
-                );
+                    });
 
                 const headerProps = mergeProps({
                     className: cx('stepper.header', { step, isStepActive, isItemDisabled, index }),

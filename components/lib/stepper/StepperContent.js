@@ -4,7 +4,7 @@ import { useMergeProps } from '../hooks/Hooks';
 export const StepperContent = React.memo(
     React.forwardRef((props, ref) => {
         const mergeProps = useMergeProps();
-        const { cx, ptm } = props;
+        const { cx } = props;
 
         const rootProps = mergeProps(
             {
@@ -16,9 +16,7 @@ export const StepperContent = React.memo(
                 ...props.getStepPT(props.stepperpanel, 'root', props.index),
                 ...props.getStepPT(props.stepperpanel, 'content', props.index),
                 'data-p-active': props.active
-            },
-            ptm('stepperpanel')
-        );
+            });
 
         const createContent = () => {
             const ComponentToRender = props.template;
