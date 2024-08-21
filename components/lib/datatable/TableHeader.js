@@ -168,11 +168,11 @@ export const TableHeader = React.memo((props) => {
         });
     };
 
-    const createCheckbox = (selectionMode) => {
+    const createCheckbox = (column, selectionMode) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
+            return <HeaderCheckbox hostName={props.hostName} column={column} checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} unstyled={props.unstyled} />;
         }
 
         return null;
@@ -209,7 +209,7 @@ export const TableHeader = React.memo((props) => {
                 const { filterHeaderStyle, style, filterHeaderClassName, className, frozen, columnKey, field, selectionMode, filter } = ColumnBase.getCProps(col);
                 const colStyle = { ...(filterHeaderStyle || {}), ...(style || {}) };
                 const colKey = columnKey || field || i;
-                const checkbox = createCheckbox(selectionMode);
+                const checkbox = createCheckbox(col, selectionMode);
                 const filterRow = createFilter(col, filter);
                 const headerCellProps = mergeProps(
                     {

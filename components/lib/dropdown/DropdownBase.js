@@ -170,6 +170,7 @@ export const DropdownBase = ComponentBase.extend({
         dataKey: null,
         disabled: false,
         dropdownIcon: null,
+        collapseIcon: null,
         editable: false,
         emptyFilterMessage: null,
         highlightOnSelect: true,

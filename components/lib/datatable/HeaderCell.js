@@ -304,7 +304,9 @@ export const HeaderCell = React.memo((props) => {
         if (props.showSelectAll && getColumnProp('selectionMode') === 'multiple' && props.filterDisplay !== 'row') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} unstyled={props.unstyled} />;
+            return (
+                <HeaderCheckbox hostName={props.hostName} column={props.column} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} unstyled={props.unstyled} />
+            );
         }
 
         return null;

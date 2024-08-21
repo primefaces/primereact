@@ -3,6 +3,7 @@ import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../a
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -30,7 +31,6 @@ export const Dropdown = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
-        const currentSearchChar = React.useRef(null);
         const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
         const hasFilter = ObjectUtils.isNotEmpty(filterState);
         const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
@@ -582,80 +582,6 @@ export const Dropdown = React.memo(
             return isOptionDisabled(option) ? findPrevOption(i) : option;
         };
 
-        const search = (event) => {
-            if (searchTimeout.current) {
-                clearTimeout(searchTimeout.current);
-            }
-
-            if (event.ctrlKey || event.metaKey || event.altKey) {
-                // ignore meta combinations like CTRL+F for browser search
-                return;
-            }
-
-            const char = event.key;
-
-            if (char.length !== 1 || props.editable) {
-                // only single character keys matter for searching
-                return;
-            }
-
-            if (currentSearchChar.current === char) {
-                searchValue.current = char;
-            } else {
-                searchValue.current = searchValue.current ? searchValue.current + char : char;
-            }
-
-            currentSearchChar.current = char;
-
-            if (searchValue.current) {
-                const searchIndex = getSelectedOptionIndex();
-
-                setFocusedOptionIndex(props.optionGroupLabel ? searchIndex : searchIndex + 1);
-            }
-
-            searchTimeout.current = setTimeout(() => {
-                searchValue.current = null;
-            }, 250);
-        };
-
-        const searchOptionInGroup = (index) => {
-            const searchIndex = index === -1 ? { group: 0, option: -1 } : index;
-
-            for (let i = searchIndex.group; i < visibleOptions.length; i++) {
-                let groupOptions = getOptionGroupChildren(visibleOptions[i]);
-
-                for (let j = searchIndex.group === i ? searchIndex.option + 1 : 0; j < groupOptions.length; j++) {
-                    if (matchesSearchValue(groupOptions[j])) {
-                        return groupOptions[j];
-                    }
-                }
-            }
-
-            for (let i = 0; i <= searchIndex.group; i++) {
-                let groupOptions = getOptionGroupChildren(visibleOptions[i]);
-
-                for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
-                    if (matchesSearchValue(groupOptions[j])) {
-                        return groupOptions[j];
-                    }
-                }
-            }
-
-            return null;
-        };
-
-        const matchesSearchValue = (option) => {
-            let label = getOptionLabel(option);
-
-            if (!label) {
-                return false;
-            }
-
-            label = label.toLocaleLowerCase(props.filterLocale);
-
-            return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
-        };
-
         const onEditableInputChange = (event) => {
             !overlayVisibleState && show();
             let searchIndex = null;
@@ -1197,7 +1123,7 @@ export const Dropdown = React.memo(
                 },
                 ptm('dropdownIcon')
             );
-            const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
+            const icon = !overlayVisibleState ? props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} /> : props.collapseIcon || <ChevronUpIcon {...dropdownIconProps} />;
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
 
             const ariaLabel = props.placeholder || props.ariaLabel;

@@ -1271,6 +1271,13 @@
                             "description": "Custom passthrough(pt) options for InputNumber."
                         },
                         {
+                            "name": "inputotp",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputOtpPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputOtp."
+                        },
+                        {
                             "name": "inputswitch",
                             "optional": true,
                             "readonly": false,
@@ -23142,6 +23149,14 @@
                             "description": "Icon of the dropdown."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "Icon of collapse action."
+                        },
+                        {
                             "name": "dataKey",
                             "optional": true,
                             "readonly": false,
@@ -31588,7 +31603,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "InputOtpPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the Tooltip component."
                         },
                         {
@@ -55976,6 +55991,27 @@
                             "readonly": false,
                             "type": "TreeTablePassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
+                        },
+                        {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughOptions",
+                            "description": "Used to pass attributes to the Row helper components."
+                        },
+                        {
+                            "name": "column",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughOptions",
+                            "description": "Used to pass attributes to the Column helper components."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
                         },
                         {
                             "name": "hooks",
