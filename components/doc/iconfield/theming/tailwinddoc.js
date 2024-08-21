@@ -19,6 +19,19 @@ const Tailwind = {
             })
         })
     },
+    // For each input wrapped with IconField you will need to add styling.
+    //  The following is an example for InputText
+    inputtext: {
+        root: ({ props, context }) => ({
+            className: classNames(
+                // Extend the root stylings with the following:
+                {
+                    'pl-8': context.iconPosition === 'left',
+                    'pr-8': props.iconPosition === 'right'
+                }
+            )
+        })
+    },
 }
         `
     };
