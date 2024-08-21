@@ -8,7 +8,8 @@ export const InputIconBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputIcon',
         __parentMetadata: null,
-        className: null
+        className: null,
+        iconPosition: null
     },
 
     css: {

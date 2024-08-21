@@ -798,6 +798,10 @@ const Tailwind = {
                     'text-lg px-4 py-4': props.size == 'large',
                     'text-xs px-2 py-2': props.size == 'small',
                     'p-3 text-base': !props.size || typeof props.size === 'number'
+                },
+                {
+                    'pl-8': context.iconPosition === 'left',
+                    'pr-8': props.iconPosition === 'right'
                 }
             )
         })
@@ -886,6 +890,19 @@ const Tailwind = {
         },
         optionGroupIcon: 'ml-auto',
         transition: TRANSITIONS.overlay
+    },
+    iconfield: {
+        root: {
+            className: classNames('relative')
+        }
+    },
+    inputicon: {
+        root: ({ context }) => ({
+            className: classNames('absolute top-1/2 -mt-2', {
+                'left-2': context.iconPosition === 'left',
+                'right-2': context.iconPosition === 'right'
+            })
+        })
     },
     inputmask: {
         root: 'font-sans text-base text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 py-3 px-3 border border-gray-300 dark:border-blue-900/40 hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)] transition duration-200 ease-in-out appearance-none rounded-md'

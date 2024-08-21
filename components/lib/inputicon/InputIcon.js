@@ -13,7 +13,10 @@ export const InputIcon = React.memo(
 
         const { ptm, cx } = InputIconBase.setMetaData({
             props,
-            ...props.__parentMetadata
+            ...props.__parentMetadata,
+            context: {
+                iconPosition: props.iconPosition
+            }
         });
 
         const rootProps = mergeProps(
