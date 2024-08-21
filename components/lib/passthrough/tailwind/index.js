@@ -250,31 +250,30 @@ const Tailwind = {
         },
         nav: {
             className: classNames('flex flex-1 list-none m-0 p-0', 'bg-transparent border border-gray-300 border-0 border-b-2', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ') // Flex, list, margin, padding, and border styles.
+        }
+    },
+    tabpanel: {
+        header: ({ props }) => ({
+            className: classNames('mr-0', { 'cursor-default pointer-events-none select-none user-select-none opacity-60': props?.disabled }) // Margin and condition-based styles.
+        }),
+        headerAction: ({ parent, context }) => ({
+            className: classNames(
+                'items-center cursor-pointer flex overflow-hidden relative select-none text-decoration-none user-select-none', // Flex and overflow styles.
+                'border-b-2 p-5 font-bold rounded-t-md transition-shadow duration-200 m-0', // Border, padding, font, and transition styles.
+                'transition-colors duration-200', // Transition duration style.
+                'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Focus styles.
+                {
+                    'border-gray-300 bg-white text-gray-700 hover:bg-white hover:border-gray-400 hover:text-gray-600 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80': parent.state.activeIndex !== context.index, // Condition-based hover styles.
+                    'bg-white border-blue-500 text-blue-500 dark:bg-gray-900 dark:border-blue-300 dark:text-blue-300': parent.state.activeIndex === context.index // Condition-based active styles.
+                }
+            ),
+            style: { marginBottom: '-2px' } // Negative margin style.
+        }),
+        headerTitle: {
+            className: classNames('leading-none whitespace-nowrap') // Leading and whitespace styles.
         },
-        tabpanel: {
-            header: ({ props }) => ({
-                className: classNames('mr-0', { 'cursor-default pointer-events-none select-none user-select-none opacity-60': props?.disabled }) // Margin and condition-based styles.
-            }),
-            headerAction: ({ parent, context }) => ({
-                className: classNames(
-                    'items-center cursor-pointer flex overflow-hidden relative select-none text-decoration-none user-select-none', // Flex and overflow styles.
-                    'border-b-2 p-5 font-bold rounded-t-md transition-shadow duration-200 m-0', // Border, padding, font, and transition styles.
-                    'transition-colors duration-200', // Transition duration style.
-                    'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Focus styles.
-                    {
-                        'border-gray-300 bg-white text-gray-700 hover:bg-white hover:border-gray-400 hover:text-gray-600 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80':
-                            parent.state.activeIndex !== context.index, // Condition-based hover styles.
-                        'bg-white border-blue-500 text-blue-500 dark:bg-gray-900 dark:border-blue-300 dark:text-blue-300': parent.state.activeIndex === context.index // Condition-based active styles.
-                    }
-                ),
-                style: { marginBottom: '-2px' } // Negative margin style.
-            }),
-            headerTitle: {
-                className: classNames('leading-none whitespace-nowrap') // Leading and whitespace styles.
-            },
-            content: {
-                className: classNames('bg-white p-5 border-0 text-gray-700 rounded-bl-md rounded-br-md', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80') // Background, padding, border, and text styles.
-            }
+        content: {
+            className: classNames('bg-white p-5 border-0 text-gray-700 rounded-bl-md rounded-br-md', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80') // Background, padding, border, and text styles.
         }
     },
     splitter: {
@@ -669,7 +668,7 @@ const Tailwind = {
                 {
                     'bg-transparent border-transparent': props.text && !props.plain,
                     'text-blue-500 dark:text-blue-400 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
-                    'text-gray-500 dark:text-grayy-400 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
+                    'text-gray-500 dark:text-gray-400 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
                     'text-green-500 dark:text-green-400 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
                     'text-orange-500 dark:text-orange-400 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
                     'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
@@ -799,6 +798,10 @@ const Tailwind = {
                     'text-lg px-4 py-4': props.size == 'large',
                     'text-xs px-2 py-2': props.size == 'small',
                     'p-3 text-base': !props.size || typeof props.size === 'number'
+                },
+                {
+                    'pl-8': context.iconPosition === 'left',
+                    'pr-8': props.iconPosition === 'right'
                 }
             )
         })
@@ -888,8 +891,33 @@ const Tailwind = {
         optionGroupIcon: 'ml-auto',
         transition: TRANSITIONS.overlay
     },
+    iconfield: {
+        root: {
+            className: classNames('relative')
+        }
+    },
+    inputicon: {
+        root: ({ context }) => ({
+            className: classNames('absolute top-1/2 -mt-2', {
+                'left-2': context.iconPosition === 'left',
+                'right-2': context.iconPosition === 'right'
+            })
+        })
+    },
     inputmask: {
         root: 'font-sans text-base text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 py-3 px-3 border border-gray-300 dark:border-blue-900/40 hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)] transition duration-200 ease-in-out appearance-none rounded-md'
+    },
+    inputotp: {
+        root: { className: 'flex items-center gap-2' },
+        input: {
+            root: {
+                className: classNames(
+                    'box-border text-center w-10 h-11 p-3 text-slate-900 border border-gray-300 rounded-lg transition-all duration-200',
+                    'hover:border-cyan-500',
+                    'focus:border-cyan-500 focus:shadow-[0_0_0_0.2rem_#a5f3fc] focus:outline-0 focus:outline-offset-0'
+                )
+            }
+        }
     },
     rating: {
         root: ({ props }) => ({
@@ -1078,7 +1106,10 @@ const Tailwind = {
         root: {
             className: classNames('relative inline-flex cursor-pointer select-none align-bottom', 'w-6 h-6')
         },
-        input: ({ props }) => ({
+        input: {
+            className: classNames('absolute appearance-none top-0 left-0 size-full p-0 m-0 opacity-0 z-10 outline-none cursor-pointer')
+        },
+        box: ({ props }) => ({
             className: classNames(
                 'flex justify-center items-center',
                 'border-2 w-6 h-6 text-gray-700 rounded-full transition duration-200 ease-in-out',

@@ -42,6 +42,7 @@ import { GalleriaPassThroughOptions } from '../galleria/galleria';
 import { ImagePassThroughOptions } from '../image/image';
 import { InplacePassThroughOptions } from '../inplace/inplace';
 import { InputNumberPassThroughOptions } from '../inputnumber/inputnumber';
+import { InputOtpPassThroughOptions } from '../inputotp/inputotp';
 import { InputSwitchPassThroughOptions } from '../inputswitch/inputswitch';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { InputTextareaPassThroughOptions } from '../inputtextarea/inputtextarea';
@@ -447,6 +448,10 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for InputNumber.
      */
     inputnumber?: InputNumberPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for InputOtp.
+     */
+    inputotp?: InputOtpPassThroughOptions;
     /**
      * Custom passthrough(pt) options for InputSwitch.
      */

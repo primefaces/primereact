@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { Children, cloneElement, useContext, useRef } from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useMergeProps } from '../hooks/Hooks';
 import { classNames } from '../utils/Utils';
@@ -29,7 +29,11 @@ export const IconField = React.memo(
 
         return (
             <div {...rootProps} ref={elementRef}>
-                {props.children}
+                {Children.map(props.children, (child, index) =>
+                    cloneElement(child, {
+                        iconPosition: props.iconPosition
+                    })
+                )}
             </div>
         );
     })
