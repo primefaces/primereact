@@ -148,11 +148,13 @@ const license = {
         {
             title: 'Basic License',
             price: '$59',
+            discountPrice: '$39',
             included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', '1 Year Free Updates']
         },
         {
             title: 'Extended License',
             price: '$590',
+            discountPrice: '$390',
             included: ['Commercial Usage', 'Multiple End Products', '1 Year Free Updates']
         }
     ]
