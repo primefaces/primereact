@@ -7,6 +7,7 @@ import { TemplateDoc } from '@/components/doc/iconfield/templatedoc';
 import { AccessibilityDoc } from '@/components/doc/iconfield/accessibilitydoc';
 import { Wireframe } from '@/components/doc/iconfield/pt/wireframe';
 import { StyledDoc } from '@/components/doc/iconfield/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/iconfield/theming/tailwinddoc';
 
 const IconFieldDemo = () => {
     const docs = [
@@ -50,6 +51,18 @@ const IconFieldDemo = () => {
             id: 'styled',
             label: 'Styled',
             component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
         }
     ];
 
