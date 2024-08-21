@@ -290,13 +290,9 @@ export const PanelMenu = React.memo(
                 },
                 getPTOptions(item, 'headerSubmenuIcon', index)
             );
-            
-            const submenuIcon = item.items && IconUtils.getJSXIcon(
-                active 
-                    ? (props.collapseIcon || <ChevronDownIcon {...headerSubmenuIconProps} />) 
-                    : (props.expandIcon || <ChevronRightIcon {...headerSubmenuIconProps} />)
-            );
-        
+
+            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.collapseIcon || <ChevronDownIcon {...headerSubmenuIconProps} /> : props.expandIcon || <ChevronRightIcon {...headerSubmenuIconProps} />);
+
             const headerLabelProps = mergeProps(
                 {
                     className: cx('headerLabel')
