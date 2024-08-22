@@ -711,6 +711,28 @@ export const FileUpload = React.memo(
                 ptm('input')
             );
             const input = !hasFiles && <input {...inputProps} />;
+
+    const removeIconProps = mergeProps(
+        {
+            className: cx('removeIcon'),
+            'aria-hidden': 'true'
+        },
+        ptm('removeIcon')
+    );
+
+    const removeButton = hasFiles && (
+        <Button
+            type="button"
+            icon={<TimesIcon {...removeIconProps} />}
+            text
+            rounded
+            severity="danger"
+            onClick={() => clear()} // Aquí se elimina el archivo
+            disabled={disabled}
+            pt={ptm('removeButton')}
+            unstyled={isUnstyled()}
+        />
+    );
             const rootProps = mergeProps(
                 {
                     className: classNames(props.className, cx('root')),
@@ -740,6 +762,7 @@ export const FileUpload = React.memo(
                     <span {...basicButtonProps}>
                         {chooseIcon}
                         {label}
+                        {removeButton}
                         {input}
                         <Ripple />
                     </span>
