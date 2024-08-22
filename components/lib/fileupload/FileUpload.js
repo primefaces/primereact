@@ -461,7 +461,7 @@ export const FileUpload = React.memo(
                         icon={props.removeIcon || <TimesIcon />}
                         text
                         rounded
-                        severity="danger"
+                        severity={props.removeButtonSeverity || 'secondary'}
                         onClick={(e) => onRemoveClick(e, badgeOptions, index)}
                         disabled={disabled}
                         pt={ptm('removeButton')}
@@ -712,27 +712,21 @@ export const FileUpload = React.memo(
             );
             const input = !hasFiles && <input {...inputProps} />;
 
-    const removeIconProps = mergeProps(
-        {
-            className: cx('removeIcon'),
-            'aria-hidden': 'true'
-        },
-        ptm('removeIcon')
-    );
+            const removeButton = hasFiles && !props.auto && props.showRemoveButton && (
+                <Button
+                    type="button"
+                    icon={props.removeIcon || <TimesIcon />}
+                    rounded
+                    text
+                    severity={props.removeButtonSeverity || 'secondary'}
+                    pt={ptm('removeButton')}
+                    __parentMetadata={{ parent: metaData }}
+                    unstyled={isUnstyled()}
+                    onClick={() => clear()}
+                    disabled={disabled}
+                />
+            );
 
-    const removeButton = hasFiles && (
-        <Button
-            type="button"
-            icon={<TimesIcon {...removeIconProps} />}
-            text
-            rounded
-            severity="danger"
-            onClick={() => clear()} // Aquí se elimina el archivo
-            disabled={disabled}
-            pt={ptm('removeButton')}
-            unstyled={isUnstyled()}
-        />
-    );
             const rootProps = mergeProps(
                 {
                     className: classNames(props.className, cx('root')),
@@ -762,10 +756,10 @@ export const FileUpload = React.memo(
                     <span {...basicButtonProps}>
                         {chooseIcon}
                         {label}
-                        {removeButton}
                         {input}
                         <Ripple />
                     </span>
+                    {removeButton}
                 </div>
             );
         };

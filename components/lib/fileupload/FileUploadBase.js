@@ -95,6 +95,8 @@ export const FileUploadBase = ComponentBase.extend({
         multiple: false,
         accept: null,
         removeIcon: null,
+        showRemoveButton: false,
+        removeButtonSeverity: "danger",
         disabled: false,
         auto: false,
         maxFileSize: null,
