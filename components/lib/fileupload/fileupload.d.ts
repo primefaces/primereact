@@ -450,6 +450,20 @@ interface FileUploadProps {
      * Icon of the remove element.
      */
     removeIcon?: IconType<FileUploadProps> | undefined;
+
+    /**
+     * Controls the visibility of the remove button.
+     * In the `basic` variant, it toggles the visibility of the remove button next to the selected file.
+     * @defaultValue true
+     */
+    showRemoveButton?: boolean | undefined;
+
+    /**
+     * Defines the style of the remove button. Valid values are "secondary", "success", "info", "warning", "danger", "help", "contrast".
+     * @defaultValue "danger"
+     */
+    removeButtonSeverity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | 'contrast' | undefined;
+
     /**
      * Disables the upload functionality.
      * @defaultValue false
