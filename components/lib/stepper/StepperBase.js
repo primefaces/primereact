@@ -25,13 +25,13 @@ const classes = {
         content: ({ props }) =>
             classNames('p-stepper-content', {
                 'p-toggleable-content': props.orientation === 'vertical'
+            }),
+        panel: ({ props, isStepActive, index }) =>
+            classNames('p-stepper-panel', {
+                'p-stepper-panel-active': props.orientation === 'vertical' && isStepActive(index)
             })
     },
-    panelContainer: 'p-stepper-panels',
-    panel: ({ props, isStepActive, index }) =>
-        classNames('p-stepper-panel', {
-            'p-stepper-panel-active': props.orientation === 'vertical' && isStepActive(index)
-        })
+    panelContainer: 'p-stepper-panels'
 };
 
 const styles = `
