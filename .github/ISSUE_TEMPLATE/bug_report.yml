@@ -30,6 +30,7 @@ body:
       attributes:
           label: System Information
           description: Output of `npx envinfo --system --npmPackages primereact,react,tailwindcss --binaries --browsers`
+          render: Shell
           placeholder: >
               System:...
               Binaries:...
