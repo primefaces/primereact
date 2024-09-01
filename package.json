@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@docsearch/react": "3.6.1",
-        "chart.js": "4.4.3",
+        "chart.js": "4.4.4",
         "file-saver": "2.0.5",
         "fs-extra": "^11.2.0",
         "jspdf": "2.5.1",
