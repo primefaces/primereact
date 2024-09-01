@@ -1290,7 +1290,7 @@
 .landing-themes .p-datatable .p-datatable-tfoot > tr > td {
   text-align: left;
   padding: 1rem 1rem;
-  border: 1px solid 3404040;
+  border: 1px solid #404040;
   border-width: 0 0 1px 0;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.87);
