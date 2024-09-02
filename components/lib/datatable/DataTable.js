@@ -1503,7 +1503,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             filter(props.globalFilter, 'global', props.globalFilterMatchMode);
         } else {
             // #3819 was filtering but now reset filter state
-            setFiltersState(props.filters);
+            if (d_filtersState["global"]) {
+                let filters = { ...d_filtersState };
+                delete filters["global"];
+                setD_filtersState(filters);
+                onFilterApply(filters);
+            }
         }
     }, [props.globalFilter, props.globalFilterMatchMode]);
 
