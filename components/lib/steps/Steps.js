@@ -33,7 +33,7 @@ export const Steps = React.memo(
 
         const getStepPT = (step, key, index) => {
             const stepMetaData = {
-                props: step.props,
+                // props: step.props,
                 parent: metaData,
                 context: {
                     index,
