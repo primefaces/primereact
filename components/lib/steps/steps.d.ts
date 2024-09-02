@@ -14,6 +14,50 @@ import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type StepsPassThroughType<T> = PassThroughType<T, StepsThroughMethodOptions>;
+export declare type StepPassThroughType<T> = PassThroughType<T, StepPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface StepPassThroughMethodOptions {
+    // props: StepsProps;
+    parent: StepsThroughMethodOptions;
+    context: StepContext;
+}
+
+/**
+ * Defines current inline context in Steps component.
+ */
+export interface StepContext {
+    /**
+     * Step index.
+     */
+    index: number;
+    /**
+     * Total number of steps
+     */
+    count: number;
+    /**
+     * Is this the first step?
+     * @defaultValue false
+     */
+    first: boolean;
+    /**
+     * Is this the last step?
+     * @defaultValue false
+     */
+    last: boolean;
+    /**
+     * Is this step currently selected.
+     * @defaultValue false
+     */
+    selected: boolean;
+    /**
+     * Is this step currently disabled.
+     * @defaultValue false
+     */
+    disabled: boolean;
+}
 
 /**
  * Custom passthrough(pt) option method.
@@ -42,19 +86,19 @@ export interface StepsPassThroughOptions {
     /**
      * Uses to pass attributes to the action's DOM element.
      */
-    action?: StepsPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    action?: StepPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
      * Uses to pass attributes to the step's DOM element.
      */
-    step?: StepsPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    step?: StepPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the label's DOM element.
      */
-    label?: StepsPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    label?: StepPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: StepsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: StepPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
