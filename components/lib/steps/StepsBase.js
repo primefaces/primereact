@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 const classes = {
     icon: ({ item }) => classNames('p-menuitem-icon', item.icon),
@@ -84,5 +84,6 @@ export const StepsBase = ComponentBase.extend({
     css: {
         classes,
         styles
-    }
+    },
+    getCProp: (step, name) => ObjectUtils.getComponentProp(step, name, StepsBase.defaultProps)
 });

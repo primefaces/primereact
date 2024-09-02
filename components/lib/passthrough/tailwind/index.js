@@ -2109,12 +2109,19 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        step: {
-            className: classNames('flex items-center justify-center', 'text-gray-700 dark:text-white/80 border border-gray-300 dark:border-blue-900/40  bg-white dark:bg-gray-900 w-[2rem] h-[2rem] leading-2rem text-sm z-10 rounded-full')
-        },
-        label: {
-            className: classNames('block', 'whitespace-nowrap overflow-hidden overflow-ellipsis max-w-full', 'mt-2 text-gray-500 dark:text-white/60')
-        }
+        step: ({ parent, context }) => ({
+            className: classNames('flex items-center justify-center', 'text-gray-700 dark:text-white/80 border border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900 w-[2rem] h-[2rem] leading-2rem text-sm z-10 rounded-full', {
+                'bg-white': parent.state.activeIndex !== context.index, // unselected item.
+                'bg-blue-500': parent.state.activeIndex === context.index // Selected item.
+            })
+        }),
+        label: ({ parent, context }) => ({
+            className: classNames('block', 'whitespace-nowrap overflow-hidden overflow-ellipsis max-w-full', 'mt-2 text-gray-500 dark:text-white/60', {
+                'font-normal': parent.state.activeIndex !== context.index, // unselected item.
+                'font-bold': parent.state.activeIndex === context.index, // Selected item.
+                'text-gray-500/60': context.disabled
+            })
+        })
     },
     tabmenu: {
         root: 'overflow-x-auto',
