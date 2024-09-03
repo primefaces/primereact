@@ -21285,16 +21285,17 @@
                                 {
                                     "name": "items",
                                     "optional": false,
-                                    "type": "any[]"
+                                    "type": "any[]",
+                                    "description": "Array of items to be rendered."
                                 },
                                 {
                                     "name": "layout",
                                     "optional": true,
                                     "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
-                                    "description": "Current layout."
+                                    "description": "Current layout mode."
                                 }
                             ],
-                            "returnType": "undefined | ReactNode[]",
+                            "returnType": "ReactNode | ReactNode[]",
                             "description": "Function that gets the options along with the layout mode and returns the content."
                         },
                         {
