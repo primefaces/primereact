@@ -469,7 +469,6 @@ export const SpeedDial = React.memo(
                     id: `${idState}_${index}`,
                     className: cx('menuitem', { active: isItemActive(`${idState}_${index}`) }),
                     style: getItemStyle(index),
-                    'aria-controls': idState + '_item',
                     role: 'menuitem'
                 },
                 ptm('menuitem')
@@ -533,7 +532,7 @@ export const SpeedDial = React.memo(
                 'aria-label': props['aria-label'],
                 'aria-expanded': visible,
                 'aria-haspopup': true,
-                'aria-controls': idState + '_list',
+                'aria-controls': getAriaControls,
                 'aria-labelledby': props.ariaLabelledby,
                 pt: ptm('button'),
                 unstyled: props.unstyled,
@@ -557,6 +556,16 @@ export const SpeedDial = React.memo(
             }
 
             return content;
+        };
+
+        const getAriaControls = () => {
+            let ariaControls = '';
+
+            for (let index = 0; index < props.model.length; index++) {
+                ariaControls = ariaControls + `${idState}_${index} `;
+            }
+
+            return ariaControls.trim();
         };
 
         const createMask = () => {
