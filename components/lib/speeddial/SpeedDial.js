@@ -560,9 +560,11 @@ export const SpeedDial = React.memo(
 
         const getAriaControls = () => {
             let ariaControls = '';
+
             for (let index = 0; index < props.model.length; index++) {
                 ariaControls = ariaControls + `${idState}_${index} `;
             }
+
             return ariaControls.trim();
         };
 
