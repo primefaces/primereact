@@ -145,18 +145,6 @@ export const MultiSelect = React.memo(
             index !== -1 && setFocusedOptionIndex(index);
         };
 
-        const findNextItem = (item) => {
-            const nextItem = item.nextElementSibling;
-
-            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-p-disabled') === true || DomHandler.getAttribute(nextItem, 'data-pc-section') === 'itemgroup' ? findNextItem(nextItem) : nextItem) : null;
-        };
-
-        const findPrevItem = (item) => {
-            const prevItem = item.previousElementSibling;
-
-            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-p-disabled') === true || DomHandler.getAttribute(prevItem, 'data-pc-section') === 'itemgroup' ? findPrevItem(prevItem) : prevItem) : null;
-        };
-
         const onClick = (event) => {
             if (!props.inline && !props.disabled && !props.loading && !isPanelClicked(event) && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
@@ -449,6 +437,7 @@ export const MultiSelect = React.memo(
                         value
                     }
                 });
+                DomHandler.focus(inputRef.current);
             }
         };
 
@@ -728,10 +717,6 @@ export const MultiSelect = React.memo(
 
         const isValidSelectedOption = (option) => {
             return isValidOption(option) && isSelected(option);
-        };
-
-        const checkValidity = () => {
-            return inputRef.current.checkValidity();
         };
 
         const findSelectedOptionIndex = () => {
