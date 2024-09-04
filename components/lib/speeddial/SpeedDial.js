@@ -1,13 +1,13 @@
-import * as React from "react";
-import { PrimeReactContext } from "../api/Api";
-import { Button } from "../button/Button";
-import { useHandleStyle } from "../componentbase/ComponentBase";
-import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUpdateEffect } from "../hooks/Hooks";
-import { MinusIcon } from "../icons/minus";
-import { PlusIcon } from "../icons/plus";
-import { Ripple } from "../ripple/Ripple";
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from "../utils/Utils";
-import { SpeedDialBase } from "./SpeedDialBase";
+import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -22,7 +22,7 @@ export const SpeedDial = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
         const visible = props.onVisibleChange ? props.visible : visibleState;
-        const speedDialDisplayOrder = useDisplayOrder("speed-dial", visible);
+        const speedDialDisplayOrder = useDisplayOrder('speed-dial', visible);
         const metaData = {
             props,
             state: {
@@ -31,7 +31,7 @@ export const SpeedDial = React.memo(
         };
         const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metaData);
 
-        useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: "speeddial" });
+        useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
 
         useGlobalOnEscapeKey({
             callback: () => {
@@ -42,7 +42,7 @@ export const SpeedDial = React.memo(
         });
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
-            type: "click",
+            type: 'click',
             listener: (event) => {
                 if (!isItemClicked.current && isOutsideClicked(event)) {
                     hide();
@@ -89,37 +89,37 @@ export const SpeedDial = React.memo(
 
         const onKeyDown = (event) => {
             switch (event.code) {
-                case "ArrowDown":
+                case 'ArrowDown':
                     onArrowDown(event);
                     break;
 
-                case "ArrowUp":
+                case 'ArrowUp':
                     onArrowUp(event);
                     break;
 
-                case "ArrowLeft":
+                case 'ArrowLeft':
                     onArrowLeft(event);
                     break;
 
-                case "ArrowRight":
+                case 'ArrowRight':
                     onArrowRight(event);
                     break;
 
-                case "Enter":
-                case "NumpadEnter":
-                case "Space":
+                case 'Enter':
+                case 'NumpadEnter':
+                case 'Space':
                     onEnterKey(event);
                     break;
 
-                case "Escape":
+                case 'Escape':
                     onEscapeKey(event);
                     break;
 
-                case "Home":
+                case 'Home':
                     onHomeKey(event);
                     break;
 
-                case "End":
+                case 'End':
                     onEndKey(event);
                     break;
 
@@ -130,19 +130,19 @@ export const SpeedDial = React.memo(
 
         const onTogglerKeydown = (event) => {
             switch (event.code) {
-                case "ArrowDown":
-                case "ArrowLeft":
+                case 'ArrowDown':
+                case 'ArrowLeft':
                     onTogglerArrowDown(event);
 
                     break;
 
-                case "ArrowUp":
-                case "ArrowRight":
+                case 'ArrowUp':
+                case 'ArrowRight':
                     onTogglerArrowUp(event);
 
                     break;
 
-                case "Escape":
+                case 'Escape':
                     onEscapeKey();
 
                     break;
@@ -179,7 +179,7 @@ export const SpeedDial = React.memo(
             onItemClick(event, props.model[itemIndex]);
             onBlur(event);
 
-            const buttonEl = DomHandler.findSingle(elementRef.current, "button");
+            const buttonEl = DomHandler.findSingle(elementRef.current, 'button');
 
             buttonEl && DomHandler.focus(buttonEl);
         };
@@ -187,7 +187,7 @@ export const SpeedDial = React.memo(
         const onEscapeKey = () => {
             hide();
 
-            const buttonEl = DomHandler.findSingle(elementRef.current, "button");
+            const buttonEl = DomHandler.findSingle(elementRef.current, 'button');
 
             buttonEl && DomHandler.focus(buttonEl);
         };
@@ -195,9 +195,9 @@ export const SpeedDial = React.memo(
         const onArrowUp = (event) => {
             let direction = props.direction;
 
-            if (direction === "up") {
+            if (direction === 'up') {
                 navigateNextItem(event);
-            } else if (direction === "down") {
+            } else if (direction === 'down') {
                 navigatePrevItem(event);
             } else {
                 navigateNextItem(event);
@@ -207,9 +207,9 @@ export const SpeedDial = React.memo(
         const onArrowDown = (event) => {
             let direction = props.direction;
 
-            if (direction === "up") {
+            if (direction === 'up') {
                 navigatePrevItem(event);
-            } else if (direction === "down") {
+            } else if (direction === 'down') {
                 navigateNextItem(event);
             } else {
                 navigatePrevItem(event);
@@ -218,8 +218,8 @@ export const SpeedDial = React.memo(
 
         const onArrowLeft = (event) => {
             let direction = props.direction;
-            const leftValidDirections = ["left", "up-right", "down-left"];
-            const rightValidDirections = ["right", "up-left", "down-right"];
+            const leftValidDirections = ['left', 'up-right', 'down-left'];
+            const rightValidDirections = ['right', 'up-left', 'down-right'];
 
             if (leftValidDirections.includes(direction)) {
                 navigateNextItem(event);
@@ -232,8 +232,8 @@ export const SpeedDial = React.memo(
 
         const onArrowRight = (event) => {
             let direction = props.direction;
-            const leftValidDirections = ["left", "up-right", "down-left"];
-            const rightValidDirections = ["right", "up-left", "down-right"];
+            const leftValidDirections = ['left', 'up-right', 'down-left'];
+            const rightValidDirections = ['right', 'up-left', 'down-right'];
 
             if (leftValidDirections.includes(direction)) {
                 navigatePrevItem(event);
@@ -276,18 +276,18 @@ export const SpeedDial = React.memo(
 
         const changeFocusedOptionIndex = (index) => {
             const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
-            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, "a"), "p-disabled"));
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
 
             if (filteredItems[index]) {
-                setFocusedOptionIndex(filteredItems[index].getAttribute("id"));
+                setFocusedOptionIndex(filteredItems[index].getAttribute('id'));
             }
         };
 
         const findPrevOptionIndex = (index) => {
             const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
-            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, "a"), "p-disabled"));
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
             const newIndex = index === -1 ? filteredItems[filteredItems.length - 1].id : index;
-            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute("id") === newIndex);
+            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute('id') === newIndex);
 
             matchedOptionIndex = index === -1 ? filteredItems.length - 1 : matchedOptionIndex - 1;
 
@@ -296,9 +296,9 @@ export const SpeedDial = React.memo(
 
         const findNextOptionIndex = (index) => {
             const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
-            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, "a"), "p-disabled"));
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
             const newIndex = index === -1 ? filteredItems[0].id : index;
-            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute("id") === newIndex);
+            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute('id') === newIndex);
 
             matchedOptionIndex = index === -1 ? 0 : matchedOptionIndex + 1;
 
@@ -326,45 +326,45 @@ export const SpeedDial = React.memo(
         const calculatePointStyle = (index) => {
             const type = props.type;
 
-            if (type !== "linear") {
+            if (type !== 'linear') {
                 const length = props.model.length;
                 const radius = props.radius || length * 20;
 
-                if (type === "circle") {
+                if (type === 'circle') {
                     const step = (2 * Math.PI) / length;
 
                     return {
                         left: `calc(${radius * Math.cos(step * index)}px + var(--item-diff-x, 0px))`,
                         top: `calc(${radius * Math.sin(step * index)}px + var(--item-diff-y, 0px))`
                     };
-                } else if (type === "semi-circle") {
+                } else if (type === 'semi-circle') {
                     const direction = props.direction;
                     const step = Math.PI / (length - 1);
                     const x = `calc(${radius * Math.cos(step * index)}px + var(--item-diff-x, 0px))`;
                     const y = `calc(${radius * Math.sin(step * index)}px + var(--item-diff-y, 0px))`;
 
-                    if (direction === "up") {
+                    if (direction === 'up') {
                         return { left: x, bottom: y };
-                    } else if (direction === "down") {
+                    } else if (direction === 'down') {
                         return { left: x, top: y };
-                    } else if (direction === "left") {
+                    } else if (direction === 'left') {
                         return { right: y, top: x };
-                    } else if (direction === "right") {
+                    } else if (direction === 'right') {
                         return { left: y, top: x };
                     }
-                } else if (type === "quarter-circle") {
+                } else if (type === 'quarter-circle') {
                     const direction = props.direction;
                     const step = Math.PI / (2 * (length - 1));
                     const x = `calc(${radius * Math.cos(step * index)}px + var(--item-diff-x, 0px))`;
                     const y = `calc(${radius * Math.sin(step * index)}px + var(--item-diff-y, 0px))`;
 
-                    if (direction === "up-left") {
+                    if (direction === 'up-left') {
                         return { right: x, bottom: y };
-                    } else if (direction === "up-right") {
+                    } else if (direction === 'up-right') {
                         return { left: x, bottom: y };
-                    } else if (direction === "down-left") {
+                    } else if (direction === 'down-left') {
                         return { right: y, top: x };
-                    } else if (direction === "down-right") {
+                    } else if (direction === 'down-right') {
                         return { left: y, top: x };
                     }
                 }
@@ -384,16 +384,16 @@ export const SpeedDial = React.memo(
         };
 
         useMountEffect(() => {
-            if (props.type !== "linear") {
-                const button = DomHandler.findSingle(elementRef.current, ".p-speeddial-button");
-                const firstItem = DomHandler.findSingle(listRef.current, ".p-speeddial-item");
+            if (props.type !== 'linear') {
+                const button = DomHandler.findSingle(elementRef.current, '.p-speeddial-button');
+                const firstItem = DomHandler.findSingle(listRef.current, '.p-speeddial-item');
 
                 if (button && firstItem) {
                     const wDiff = Math.abs(button.offsetWidth - firstItem.offsetWidth);
                     const hDiff = Math.abs(button.offsetHeight - firstItem.offsetHeight);
 
-                    listRef.current.style.setProperty("--item-diff-x", `${wDiff / 2}px`);
-                    listRef.current.style.setProperty("--item-diff-y", `${hDiff / 2}px`);
+                    listRef.current.style.setProperty('--item-diff-x', `${wDiff / 2}px`);
+                    listRef.current.style.setProperty('--item-diff-y', `${hDiff / 2}px`);
                 }
             }
         });
@@ -421,27 +421,27 @@ export const SpeedDial = React.memo(
             }
 
             const { disabled, icon: _icon, label, template, url, target, className: _itemClassName, style: _itemStyle } = item;
-            const contentClassName = classNames("p-speeddial-action", { "p-disabled": disabled });
-            const iconClassName = classNames("p-speeddial-action-icon", _icon);
+            const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
+            const iconClassName = classNames('p-speeddial-action-icon', _icon);
             const actionIconProps = mergeProps(
                 {
-                    className: cx("actionIcon")
+                    className: cx('actionIcon')
                 },
-                ptm("actionIcon")
+                ptm('actionIcon')
             );
             const actionProps = mergeProps(
                 {
-                    href: url || "#",
-                    role: "menuitem",
-                    className: classNames(_itemClassName, cx("action", { disabled })),
-                    "aria-label": item.label,
+                    href: url || '#',
+                    role: 'menuitem',
+                    className: classNames(_itemClassName, cx('action', { disabled })),
+                    'aria-label': item.label,
                     style: _itemStyle,
                     target: target,
-                    tabIndex: "-1",
-                    "data-pr-tooltip": label,
+                    tabIndex: '-1',
+                    'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
                 },
-                ptm("action")
+                ptm('action')
             );
             const icon = IconUtils.getJSXIcon(_icon, { ...actionIconProps }, { props });
             let content = (
@@ -467,11 +467,11 @@ export const SpeedDial = React.memo(
             const menuItemProps = mergeProps(
                 {
                     id: `${idState}_${index}`,
-                    className: cx("menuitem", { active: isItemActive(`${idState}_${index}`) }),
+                    className: cx('menuitem', { active: isItemActive(`${idState}_${index}`) }),
                     style: getItemStyle(index),
-                    role: "menuitem"
+                    role: 'menuitem'
                 },
-                ptm("menuitem")
+                ptm('menuitem')
             );
 
             return (
@@ -490,16 +490,16 @@ export const SpeedDial = React.memo(
             const menuProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx("menu"),
-                    style: sx("menu"),
-                    role: "menu",
-                    tabIndex: "-1",
+                    className: cx('menu'),
+                    style: sx('menu'),
+                    role: 'menu',
+                    tabIndex: '-1',
                     onFocus,
                     onKeyDown,
                     onBlur,
-                    "aria-activedescendant": focused ? focusedOptionId() : undefined
+                    'aria-activedescendant': focused ? focusedOptionId() : undefined
                 },
-                ptm("menu")
+                ptm('menu')
             );
 
             return <ul {...menuProps}>{items}</ul>;
@@ -509,9 +509,9 @@ export const SpeedDial = React.memo(
             const showIconVisible = (!visible && !!props.showIcon) || !props.hideIcon;
             const hideIconVisible = visible && !!props.hideIcon;
             const className = classNames(
-                "p-speeddial-button p-button-rounded",
+                'p-speeddial-button p-button-rounded',
                 {
-                    "p-speeddial-rotate": props.rotateAnimation && !props.hideIcon
+                    'p-speeddial-rotate': props.rotateAnimation && !props.hideIcon
                 },
                 props.buttonClassName
             );
@@ -522,19 +522,19 @@ export const SpeedDial = React.memo(
             const icon = showIconVisible ? props.showIcon || <PlusIcon /> : hideIconVisible ? props.hideIcon || <MinusIcon /> : null;
             const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, visible });
             const buttonProps = mergeProps({
-                type: "button",
+                type: 'button',
                 style: props.buttonStyle,
-                className: classNames(props.buttonClassName, cx("button")),
+                className: classNames(props.buttonClassName, cx('button')),
                 icon: toggleIcon,
                 onClick: (e) => onClick(e),
                 disabled: props.disabled,
                 onKeyDown: onTogglerKeydown,
-                "aria-label": props["aria-label"],
-                "aria-expanded": visible,
-                "aria-haspopup": true,
-                "aria-controls": getAriaControls,
-                "aria-labelledby": props.ariaLabelledby,
-                pt: ptm("button"),
+                'aria-label': props['aria-label'],
+                'aria-expanded': visible,
+                'aria-haspopup': true,
+                'aria-controls': getAriaControls,
+                'aria-labelledby': props.ariaLabelledby,
+                pt: ptm('button'),
                 unstyled: props.unstyled,
                 __parentMetadata: {
                     parent: metaData
@@ -559,7 +559,7 @@ export const SpeedDial = React.memo(
         };
 
         const getAriaControls = () => {
-            let ariaControls = "";
+            let ariaControls = '';
             for (let index = 0; index < props.model.length; index++) {
                 ariaControls = ariaControls + `${idState}_${index} `;
             }
@@ -570,10 +570,10 @@ export const SpeedDial = React.memo(
             if (props.mask) {
                 const maskProps = mergeProps(
                     {
-                        className: classNames(props.maskClassName, cx("mask", { visible })),
+                        className: classNames(props.maskClassName, cx('mask', { visible })),
                         style: props.maskStyle
                     },
-                    ptm("mask")
+                    ptm('mask')
                 );
 
                 return <div {...maskProps} />;
@@ -591,12 +591,12 @@ export const SpeedDial = React.memo(
         const mask = createMask();
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx("root", { visible })),
-                style: { ...props.style, ...sx("root") },
+                className: classNames(props.className, cx('root', { visible })),
+                style: { ...props.style, ...sx('root') },
                 id: idState
             },
             SpeedDialBase.getOtherProps(props),
-            ptm("root")
+            ptm('root')
         );
 
         return (
@@ -611,4 +611,4 @@ export const SpeedDial = React.memo(
     })
 );
 
-SpeedDial.displayName = "SpeedDial";
+SpeedDial.displayName = 'SpeedDial';
