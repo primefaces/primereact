@@ -367,7 +367,11 @@ export const InputNumber = React.memo(
             }
 
             if (event.altKey || event.ctrlKey || event.metaKey) {
-                isSpecialChar.current = true;
+                if (event.key.toLowerCase() === 'x' && (event.ctrlKey || event.metaKey)) {
+                    isSpecialChar.current = false;
+                } else {
+                    isSpecialChar.current = true;
+                }
 
                 return;
             }
