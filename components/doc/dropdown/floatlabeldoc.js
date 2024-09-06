@@ -1,7 +1,7 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
-import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
+import { FloatLabel } from '@/components/lib/floatlabel/floatlabel';
 import { useState } from 'react';
 
 export function FloatLabelDoc(props) {

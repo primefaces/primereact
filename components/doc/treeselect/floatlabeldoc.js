@@ -1,6 +1,6 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
-import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
+import { FloatLabel } from '@/components/lib/floatlabel/floatlabel';
 import { TreeSelect } from '@/components/lib/treeselect/TreeSelect';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ export function FloatLabelDoc(props) {
     const code = {
         basic: `
 <FloatLabel className="w-full md:w-20rem">
-    <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+    <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes}
         className="w-full"></TreeSelect>
     <label htmlFor="treeselect">TreeSelect</label>
 </FloatLabel>
@@ -31,7 +31,7 @@ import { NodeService } from './service/NodeService';
 export default function FloatLabelDemo() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-    
+
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []);
@@ -39,7 +39,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="card flex justify-content-center">
             <FloatLabel className="w-full md:w-20rem">
-                <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+                <TreeSelect inputId="treeselect" value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes}
                     className="w-full"></TreeSelect>
                 <label htmlFor="treeselect">TreeSelect</label>
             </FloatLabel>
@@ -57,7 +57,7 @@ import { NodeService } from './service/NodeService';
 export default function FloatLabelDemo() {
     const [nodes, setNodes] = useState<TreeNode[] | null>(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState<string>(null);
-    
+
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []);
@@ -65,7 +65,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="card flex justify-content-center">
             <FloatLabel className="w-full md:w-20rem">
-                <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
+                <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)}
                     className="w-full"></TreeSelect>
                 <label htmlFor="treeselect">TreeSelect</label>
             </FloatLabel>

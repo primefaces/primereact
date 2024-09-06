@@ -1236,6 +1236,13 @@
                             "description": "Custom passthrough(pt) options for FileUpload."
                         },
                         {
+                            "name": "floatlabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FloatLabelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for FloatLabel."
+                        },
+                        {
                             "name": "galleria",
                             "optional": true,
                             "readonly": false,

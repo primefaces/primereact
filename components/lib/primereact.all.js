@@ -34,7 +34,7 @@ export * from './dropdown/Dropdown';
 export * from './editor/Editor';
 export * from './fieldset/Fieldset';
 export * from './fileupload/FileUpload';
-export * from './floatlabel/FloatLabel';
+export * from './floatlabel/floatlabel';
 export * from './galleria/Galleria';
 export * from './hooks/Hooks';
 export * from './iconbase/IconBase';
