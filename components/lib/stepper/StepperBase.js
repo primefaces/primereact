@@ -31,7 +31,9 @@ const classes = {
                 'p-stepper-panel-active': props.orientation === 'vertical' && isStepActive(index)
             })
     },
-    panelContainer: 'p-stepper-panels'
+    panelContainer: 'p-stepper-panels',
+    start: 'p-stepper-start',
+    end: 'p-stepper-end'
 };
 
 const styles = `
@@ -134,7 +136,9 @@ export const StepperBase = ComponentBase.extend({
         orientation: 'horizontal',
         headerPosition: 'right',
         linear: false,
-        onChangeStep: null
+        onChangeStep: null,
+        start: null,
+        end: null
     },
     css: {
         classes,
