@@ -263,7 +263,7 @@ export const BreadCrumb = React.memo(
             <nav {...rootProps}>
                 <ol {...menuProps}>
                     {home}
-                    {home && separator}
+                    {home && !!items?.length && separator}
                     {items}
                 </ol>
             </nav>
