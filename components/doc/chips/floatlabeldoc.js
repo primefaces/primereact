@@ -1,7 +1,7 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Chips } from '@/components/lib/chips/Chips';
-import { FloatLabel } from '@/components/lib/floatlabel/Floatlabel';
+import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
 import Link from 'next/link';
 import { useState } from 'react';
 
