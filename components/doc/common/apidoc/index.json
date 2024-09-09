@@ -24782,7 +24782,7 @@
                         {
                             "name": "getFiles",
                             "parameters": [],
-                            "returnType": "File[]",
+                            "returnType": "FileUploadFile[]",
                             "description": "Gets the current files list."
                         },
                         {
@@ -24794,7 +24794,7 @@
                         {
                             "name": "getUploadedFiles",
                             "parameters": [],
-                            "returnType": "File[]",
+                            "returnType": "FileUploadFile[]",
                             "description": "Gets the current uploaded files list."
                         },
                         {
@@ -24814,7 +24814,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
-                                    "type": "File[]",
+                                    "type": "FileUploadFile[]",
                                     "description": "Current files."
                                 }
                             ],
@@ -24826,7 +24826,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
-                                    "type": "File[]",
+                                    "type": "FileUploadFile[]",
                                     "description": "Current uploaded files."
                                 }
                             ],
@@ -25334,7 +25334,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25355,7 +25355,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25375,7 +25375,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25415,7 +25415,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25654,7 +25654,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "FileUploadFile[]",
                             "description": "Current files."
                         },
                         {
@@ -25682,7 +25682,7 @@
                             "name": "uploadedFiles",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "FileUploadFile[]",
                             "description": "Current uploaded files."
                         }
                     ],
@@ -25843,7 +25843,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Array of files."
                         },
                         {
@@ -25892,7 +25892,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         }
                     ],
@@ -25927,6 +25927,10 @@
             "values": {
                 "FileUploadPassThroughType": {
                     "values": "PassThroughType<T, FileUploadPassThroughMethodOptions>"
+                },
+                "FileUploadFile": {
+                    "values": "File & Object",
+                    "description": "Defines a custom File type extended with objectURL"
                 }
             }
         }
