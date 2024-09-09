@@ -47355,6 +47355,14 @@
                             "description": "Active step index of stepper."
                         },
                         {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of end section."
+                        },
+                        {
                             "name": "headerPosition",
                             "optional": true,
                             "readonly": false,
@@ -47393,6 +47401,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of start section."
                         },
                         {
                             "name": "unstyled",
@@ -47478,6 +47494,20 @@
                             "description": "Used to pass attributes to the end handler's DOM element."
                         },
                         {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the start's DOM element."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the right's DOM element."
+                        },
+                        {
                             "name": "hooks",
                             "optional": true,
                             "readonly": false,
@@ -47542,6 +47572,9 @@
             "values": {
                 "StepperPassThroughOptionType": {
                     "values": "StepperPassThroughAttributes | Function | string | null | undefined"
+                },
+                "StepperPassThroughType": {
+                    "values": "PassThroughType<T, StepperPassThroughMethodOptions>"
                 }
             }
         }

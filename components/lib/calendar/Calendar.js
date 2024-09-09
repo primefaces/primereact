@@ -1959,6 +1959,11 @@ export const Calendar = React.memo(
                     DomHandler.absolutePosition(overlayRef.current, inputRef.current);
                 }
             }
+
+            // #6093 Forcibly remove minWidth when in unstyled mode
+            if (isUnstyled()) {
+                overlayRef.current.style.minWidth = '';
+            }
         };
 
         const enableModality = () => {

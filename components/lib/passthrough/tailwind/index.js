@@ -1224,9 +1224,9 @@ const Tailwind = {
             })
         },
         panel: ({ props }) => ({
-            className: classNames('bg-white dark:bg-gray-900', 'min-w-full', {
+            className: classNames('bg-white dark:bg-gray-900', 'top-0 left-0 w-auto min-w-min p-2 rounded-lg', {
                 'shadow-md border-0 absolute': !props.inline,
-                'inline-block overflow-x-auto border border-gray-300 dark:border-blue-900/40 p-2 rounded-lg': props.inline
+                'inline-block overflow-x-auto border border-gray-300 dark:border-blue-900/40': props.inline
             })
         }),
         header: {
@@ -1254,7 +1254,7 @@ const Tailwind = {
             )
         },
         table: {
-            className: classNames('border-collapse w-full', 'my-2')
+            className: classNames('border-collapse w-full', 'my-2 mx-0')
         },
         tableHeaderCell: 'p-2',
         weekDay: 'text-gray-600 dark:text-white/70',
@@ -1269,7 +1269,7 @@ const Tailwind = {
                     'cursor-pointer': !context.disabled
                 },
                 {
-                    'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
+                    'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
                 }
             )
@@ -1280,7 +1280,7 @@ const Tailwind = {
                 'w-1/3 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
-                { 'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
+                { 'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
             )
         }),
         yearPicker: {
@@ -1292,7 +1292,7 @@ const Tailwind = {
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
-                    'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
+                    'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
                 }
             )
@@ -1319,10 +1319,8 @@ const Tailwind = {
                 'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
             )
         },
-        groupContainer: 'flex',
-        group: {
-            className: classNames('flex-1', 'border-l border-gray-300 pr-0.5 pl-0.5 pt-0 pb-0', 'first:pl-0 first:border-l-0')
-        },
+        groupContainer: '',
+        group: '',
         transition: TRANSITIONS.overlay
     },
     listbox: {
