@@ -1,7 +1,7 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { CascadeSelect } from '@/components/lib/cascadeselect/CascadeSelect';
-import { FloatLabel } from '@/components/lib/floatlabel/floatlabel';
+import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
 import Link from 'next/link';
 import { useState } from 'react';
 
