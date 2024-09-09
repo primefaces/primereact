@@ -23598,6 +23598,14 @@
                             "description": "When enabled, it removes component related styles in the core."
                         },
                         {
+                            "name": "useOptionAsValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the option should be used as the value for the select element."
+                        },
+                        {
                             "name": "value",
                             "optional": true,
                             "readonly": false,
