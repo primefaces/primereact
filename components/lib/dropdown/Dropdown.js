@@ -825,6 +825,10 @@ export const Dropdown = React.memo(
         };
 
         const getOptionValue = (option) => {
+            if (props.useOptionAsValue) {
+                return option;
+            }
+
             const optionValue = props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option ? option['value'] : ObjectUtils.resolveFieldData(option, 'value');
 
             return props.optionValue || ObjectUtils.isNotEmpty(optionValue) ? optionValue : option;

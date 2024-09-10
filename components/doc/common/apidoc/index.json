@@ -1236,6 +1236,13 @@
                             "description": "Custom passthrough(pt) options for FileUpload."
                         },
                         {
+                            "name": "floatlabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FloatLabelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for FloatLabel."
+                        },
+                        {
                             "name": "galleria",
                             "optional": true,
                             "readonly": false,
@@ -21285,16 +21292,17 @@
                                 {
                                     "name": "items",
                                     "optional": false,
-                                    "type": "any[]"
+                                    "type": "any[]",
+                                    "description": "Array of items to be rendered."
                                 },
                                 {
                                     "name": "layout",
                                     "optional": true,
                                     "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
-                                    "description": "Current layout."
+                                    "description": "Current layout mode."
                                 }
                             ],
-                            "returnType": "undefined | ReactNode[]",
+                            "returnType": "ReactNode | ReactNode[]",
                             "description": "Function that gets the options along with the layout mode and returns the content."
                         },
                         {
@@ -23590,6 +23598,14 @@
                             "description": "When enabled, it removes component related styles in the core."
                         },
                         {
+                            "name": "useOptionAsValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the option should be used as the value for the select element."
+                        },
+                        {
                             "name": "value",
                             "optional": true,
                             "readonly": false,
@@ -24766,7 +24782,7 @@
                         {
                             "name": "getFiles",
                             "parameters": [],
-                            "returnType": "File[]",
+                            "returnType": "FileUploadFile[]",
                             "description": "Gets the current files list."
                         },
                         {
@@ -24778,7 +24794,7 @@
                         {
                             "name": "getUploadedFiles",
                             "parameters": [],
-                            "returnType": "File[]",
+                            "returnType": "FileUploadFile[]",
                             "description": "Gets the current uploaded files list."
                         },
                         {
@@ -24798,7 +24814,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
-                                    "type": "File[]",
+                                    "type": "FileUploadFile[]",
                                     "description": "Current files."
                                 }
                             ],
@@ -24810,7 +24826,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
-                                    "type": "File[]",
+                                    "type": "FileUploadFile[]",
                                     "description": "Current uploaded files."
                                 }
                             ],
@@ -25318,7 +25334,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25339,7 +25355,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25359,7 +25375,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25399,7 +25415,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25638,7 +25654,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "FileUploadFile[]",
                             "description": "Current files."
                         },
                         {
@@ -25666,7 +25682,7 @@
                             "name": "uploadedFiles",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "FileUploadFile[]",
                             "description": "Current uploaded files."
                         }
                     ],
@@ -25827,7 +25843,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Array of files."
                         },
                         {
@@ -25876,7 +25892,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         }
                     ],
@@ -25911,6 +25927,10 @@
             "values": {
                 "FileUploadPassThroughType": {
                     "values": "PassThroughType<T, FileUploadPassThroughMethodOptions>"
+                },
+                "FileUploadFile": {
+                    "values": "File & Object",
+                    "description": "Defines a custom File type extended with objectURL"
                 }
             }
         }
@@ -47347,6 +47367,14 @@
                             "description": "Active step index of stepper."
                         },
                         {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of end section."
+                        },
+                        {
                             "name": "headerPosition",
                             "optional": true,
                             "readonly": false,
@@ -47385,6 +47413,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of start section."
                         },
                         {
                             "name": "unstyled",
@@ -47470,6 +47506,20 @@
                             "description": "Used to pass attributes to the end handler's DOM element."
                         },
                         {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the start's DOM element."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the right's DOM element."
+                        },
+                        {
                             "name": "hooks",
                             "optional": true,
                             "readonly": false,
@@ -47534,6 +47584,9 @@
             "values": {
                 "StepperPassThroughOptionType": {
                     "values": "StepperPassThroughAttributes | Function | string | null | undefined"
+                },
+                "StepperPassThroughType": {
+                    "values": "PassThroughType<T, StepperPassThroughMethodOptions>"
                 }
             }
         }
@@ -47904,6 +47957,74 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "StepPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepsThroughMethodOptions"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepContext": {
+                    "description": "Defines current inline context in Steps component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Step index."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total number of steps"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the first step?"
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the last step?"
+                        },
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this step currently selected."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this step currently disabled."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "StepsThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
@@ -47946,28 +48067,28 @@
                             "name": "action",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
                             "description": "Uses to pass attributes to the action's DOM element."
                         },
                         {
                             "name": "step",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the step's DOM element."
                         },
                         {
                             "name": "label",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
@@ -47987,6 +48108,9 @@
             "values": {
                 "StepsPassThroughType": {
                     "values": "PassThroughType<T, StepsThroughMethodOptions>"
+                },
+                "StepPassThroughType": {
+                    "values": "PassThroughType<T, StepPassThroughMethodOptions>"
                 }
             }
         }

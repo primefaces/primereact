@@ -11,7 +11,7 @@ export function BasicDoc(props) {
         basic: `
 <FloatLabel>
     <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-    <label for="username">Username</label>
+    <label htmlFor="username">Username</label>
 </FloatLabel>
         `,
         javascript: `
@@ -26,7 +26,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <FloatLabel>
                 <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-                <label for="username">Username</label>
+                <label htmlFor"username">Username</label>
             </FloatLabel>
         </div>
     )
@@ -44,7 +44,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <FloatLabel>
                 <InputText id="username" value={value} onChange={(e) => setValue(e.target.value)} />
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
             </FloatLabel>
         </div>
     )

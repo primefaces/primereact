@@ -13,7 +13,8 @@ export const DropdownItem = React.memo((props) => {
         return ptm(key, {
             context: {
                 selected,
-                disabled
+                disabled,
+                focused: index === focusedOptionIndex
             }
         });
     };

@@ -67,6 +67,14 @@ export function StyledDoc() {
                             <td>p-stepper-content</td>
                             <td>Container element of stepper content.</td>
                         </tr>
+                        <tr>
+                            <td>p-stepper-start</td>
+                            <td>Start content container.</td>
+                        </tr>
+                        <tr>
+                            <td>p-stepper-end</td>
+                            <td>End content container.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -38,6 +38,7 @@ import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { EditorPassThroughOptions } from '../editor/editor';
 import { FieldsetPassThroughOptions } from '../fieldset/fieldset';
 import { FileUploadPassThroughOptions } from '../fileupload/fileupload';
+import { FloatLabelPassThroughOptions } from '../floatlabel/floatlabel';
 import { GalleriaPassThroughOptions } from '../galleria/galleria';
 import { ImagePassThroughOptions } from '../image/image';
 import { InplacePassThroughOptions } from '../inplace/inplace';
@@ -428,6 +429,10 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for FileUpload.
      */
     fileupload?: FileUploadPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for FloatLabel.
+     */
+    floatlabel?: FloatLabelPassThroughOptions;
     /**
      * Custom passthrough(pt) options for FullCalendar.
      */

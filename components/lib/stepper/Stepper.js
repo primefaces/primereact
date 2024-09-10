@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { UniqueComponentId, classNames } from '../utils/Utils';
+import { UniqueComponentId, classNames, ObjectUtils } from '../utils/Utils';
 import { StepperBase } from './StepperBase';
 import { StepperContent } from './StepperContent';
 import { StepperHeader } from './StepperHeader';
@@ -14,6 +14,8 @@ export const Stepper = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = StepperBase.getProps(inProps, context);
+        const start = ObjectUtils.getJSXElement(props.start, props);
+        const end = ObjectUtils.getJSXElement(props.end, props);
         const { ptm, cx, isUnstyled, ptmo } = StepperBase.setMetaData({
             props
         });
@@ -22,6 +24,20 @@ export const Stepper = React.memo(
         const navRef = React.useRef();
 
         useHandleStyle(StepperBase.css.styles, isUnstyled, { name: 'stepper' });
+
+        const startProps = mergeProps(
+            {
+                className: cx('start')
+            },
+            ptm('start')
+        );
+
+        const endProps = mergeProps(
+            {
+                className: cx('end')
+            },
+            ptm('end')
+        );
 
         useMountEffect(() => {
             if (!idState) {
@@ -326,10 +342,10 @@ export const Stepper = React.memo(
 
         return (
             <div {...rootProps}>
-                {props.start && props.start()}
+                {start && <div {...startProps}>{start}</div>}
                 {props.orientation === 'horizontal' && createHorizontal()}
                 {props.orientation === 'vertical' && createVertical()}
-                {props.end && props.end()}
+                {end && <div {...endProps}>{end}</div>}
             </div>
         );
     })
