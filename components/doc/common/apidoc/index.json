@@ -53061,18 +53061,11 @@
                             "description": "Uses to pass attributes to the toggler icon's DOM element."
                         },
                         {
-                            "name": "checkboxContainer",
+                            "name": "nodeCheckbox",
                             "optional": true,
                             "readonly": false,
                             "type": "TreePassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox container's DOM element."
-                        },
-                        {
-                            "name": "checkbox",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TreePassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox's DOM element."
+                            "description": "Uses to pass attributes to the node checkbox's DOM element."
                         },
                         {
                             "name": "checkboxIcon",
