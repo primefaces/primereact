@@ -156,7 +156,11 @@ export const Calendar = React.memo(
 
                 if (isValidSelection(value)) {
                     updateModel(event, value);
-                    updateViewDate(event, value.length ? value[0] : value);
+
+                    const date = value.length ? value[0] : value;
+
+                    updateViewDate(event, date);
+                    onViewDateSelect({ event, date });
                 }
             } catch (err) {
                 //invalid date
@@ -167,6 +171,16 @@ export const Calendar = React.memo(
 
                     updateModel(event, value);
                 }
+            }
+        };
+
+        const onViewDateSelect = ({ event, date }) => {
+            if (date && props.onSelect) {
+                const day = date.getDate();
+                const month = date.getMonth();
+                const year = date.getFullYear();
+
+                onDateSelect(event, { day, month, year, selectable: isSelectable(day, month, year) }, null, true);
             }
         };
 
@@ -1083,17 +1097,7 @@ export const Calendar = React.memo(
                 setViewDateState(value);
             }
 
-            if (!value) {
-                onClearButtonClick(event);
-            }
-
-            if (value && props.onSelect) {
-                const day = value.getDate();
-                const month = value.getMonth();
-                const year = value.getFullYear();
-
-                onDateSelect(event, { day, month, year, selectable: isSelectable(day, month, year) }, null, true);
-            }
+            if (!value) onClearButtonClick(event);
         };
 
         const setNavigationState = (newViewDate) => {
@@ -1800,6 +1804,7 @@ export const Calendar = React.memo(
                 props.onMonthChange && props.onMonthChange({ month: month + 1, year: currentYear });
 
                 updateViewDate(event, currentDate);
+                onViewDateSelect({ event, date: currentDate });
             }
         };
 
@@ -3068,7 +3073,10 @@ export const Calendar = React.memo(
             }
 
             if (props.viewDate) {
-                updateViewDate(null, getViewDate(props.viewDate));
+                const date = getViewDate(props.viewDate);
+
+                updateViewDate(null, date);
+                onViewDateSelect({ event: null, date });
             }
         }, [props.onViewDateChange, props.value, props.viewDate]);
 
