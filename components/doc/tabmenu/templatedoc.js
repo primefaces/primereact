@@ -35,7 +35,7 @@ export function TemplateDoc(props) {
 <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
         `,
         javascript: `
-import React from 'react'; 
+import { useState } from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 
 export default function TemplateDemo() {
@@ -74,9 +74,8 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import { useState } from 'react';
 import { TabMenu } from 'primereact/tabmenu';
-import { MenuItem } from 'primereact/menuitem';
 
 export default function TemplateDemo() {
     const [activeIndex, setActiveIndex] = useState<number>(0);
