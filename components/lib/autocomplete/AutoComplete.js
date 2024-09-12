@@ -407,11 +407,16 @@ export const AutoComplete = React.memo(
                 return;
             }
 
-            const inputValue = ObjectUtils.trim(event.target.value);
-            const item = (props.suggestions || []).find((it) => {
-                const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+            const inputValue = ObjectUtils.trim(event.target.value).toLowerCase();
+            const allItems = (props.suggestions || []).flatMap((group) => {
+                return group.items ? group.items : [group];
+            });
 
-                return value && inputValue === ObjectUtils.trim(value);
+            const item = allItems.find((it) => {
+                const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+                const trimmedValue = value ? ObjectUtils.trim(value).toLowerCase() : '';
+
+                return trimmedValue && inputValue === trimmedValue;
             });
 
             if (item) {
