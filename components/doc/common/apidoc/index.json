@@ -5032,7 +5032,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | \"success\" | \"warning\" | \"info\" | \"danger\"",
+                            "type": "null | \"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "null",
                             "description": "Severity type of the badge."
                         },
@@ -49344,7 +49344,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | \"success\" | \"warning\" | \"info\" | \"danger\"",
+                            "type": "null | \"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "null",
                             "description": "Severity type of the tag."
                         },
