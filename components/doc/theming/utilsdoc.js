@@ -28,7 +28,7 @@ export function UtilsDoc(props) {
                             <td>Applies an opacity to display as disabled.</td>
                         </tr>
                         <tr>
-                            <td>p-sr-only</td>
+                            <td>p-hidden-accessible</td>
                             <td>Element becomes visually hidden however accessibility is still available.</td>
                         </tr>
                         <tr>
