@@ -390,11 +390,18 @@ export const Dropdown = React.memo(
         const changeFocusedOptionIndex = (event, index) => {
             if (focusedOptionIndex !== index) {
                 setFocusedOptionIndex(index);
+                focusOnItem(index);
 
                 if (props.selectOnFocus) {
                     onOptionSelect(event, visibleOptions[index], false);
                 }
             }
+        };
+
+        const focusOnItem = (index) => {
+            const focusedItem = DomHandler.findSingle(overlayRef.current, `li[id="dropdownItem_${index}"]`);
+
+            focusedItem && focusedItem.focus();
         };
 
         const onArrowDownKey = (event) => {
@@ -1167,7 +1174,8 @@ export const Dropdown = React.memo(
                 onContextMenu: props.onContextMenu,
                 onFocus: onFocus,
                 'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState
+                'data-p-focus': focusedState,
+                'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined
             },
             otherProps,
             ptm('root')
@@ -1238,6 +1246,7 @@ export const Dropdown = React.memo(
                         onFilterInputChange={onFilterInputChange}
                         onFilterInputKeyDown={onFilterInputKeyDown}
                         onOptionClick={onOptionClick}
+                        onInputKeyDown={onInputKeyDown}
                         ptm={ptm}
                         resetFilter={resetFilter}
                         changeFocusedOptionIndex={changeFocusedOptionIndex}
