@@ -1175,7 +1175,7 @@ export const Dropdown = React.memo(
                 onFocus: onFocus,
                 'data-p-disabled': props.disabled,
                 'data-p-focus': focusedState,
-                'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined,
+                'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined
             },
             otherProps,
             ptm('root')
