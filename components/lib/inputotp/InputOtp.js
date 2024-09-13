@@ -171,7 +171,7 @@ export const InputOtp = React.memo(
 
                 default: {
                     //Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
-                    if ((props?.integerOnly && !(Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
+                    if ((props?.integerOnly && !(event.code !== 'Space' && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
                         event.preventDefault();
                     }
 
