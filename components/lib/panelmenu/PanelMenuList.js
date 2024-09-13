@@ -48,9 +48,6 @@ export const PanelMenuList = React.memo((props) => {
 
     const onFocus = (event) => {
         setFocused(true);
-        const _focusedItem = focusedItem || (isElementInPanel(event, event.relatedTarget) ? findFirstItem() : findLastItem());
-
-        setFocusedItem(_focusedItem);
     };
 
     const onBlur = () => {
