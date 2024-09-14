@@ -126,6 +126,7 @@ import React from 'react';
 import { Menu } from 'primereact/menu';
 import { Badge } from 'primereact/badge';
 import { Avatar } from 'primereact/avatar';
+import { classNames } from 'primereact/utils';
 
 export default function TemplateDemo() {
     const itemRenderer = (item) => (
@@ -247,6 +248,7 @@ import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 import { Badge } from 'primereact/badge';
 import { MenuItem } from 'primereact/menuitem';
+import { classNames } from 'primereact/utils';
 
 export default function TemplateDemo() {
     const itemRenderer = (item) => (
