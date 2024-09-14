@@ -124,7 +124,7 @@ export function TemplateDoc(props) {
         javascript: `
 import React from 'react'; 
 import { Menu } from 'primereact/menu';
-import { badge } from 'primereact/badge';
+import { Badge } from 'primereact/badge';
 import { Avatar } from 'primereact/avatar';
 
 export default function TemplateDemo() {
