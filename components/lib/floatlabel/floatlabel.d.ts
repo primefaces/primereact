@@ -83,4 +83,4 @@ export interface FloatLabelProps {
  * @group Component
  *
  */
-export declare const FloatLabel: React.ForwardRefExoticComponent<FloatLabelProps & React.RefAttributes<HTMLSpanElement>>;
+export declare const FloatLabel: React.ForwardRefExoticComponent<FloatLabelProps & React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>>;
