@@ -7117,4 +7117,39 @@
   .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
     box-shadow: inset 0 -2px 0 0 #0078d4;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: #005a9e;
+    color: #ffffff;
+    border-color: #005a9e;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: #aa4a00;
+    color: #ffffff;
+    border-color: #aa4a00;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: #3a6804;
+    color: #ffffff;
+    border-color: #3a6804;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: #00929c;
+    color: #ffffff;
+    border-color: #00929c;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: #ff8d03;
+    color: #323130;
+    border-color: #ff8d03;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: #5141d1;
+    color: #ffffff;
+    border-color: #5141d1;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: #aa272a;
+    color: #ffffff;
+    border-color: #aa272a;
+  }
 }

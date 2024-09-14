@@ -16,11 +16,13 @@ export const InputNumber = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const [keyPressed, setKeyPressed] = React.useState(0);
         const metaData = {
             props,
             ...props.__parentMetadata,
             state: {
-                focused: focusedState
+                focused: focusedState,
+                pressed: keyPressed
             }
         };
         const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData(metaData);
@@ -265,12 +267,15 @@ export const InputNumber = React.memo(
         const onUpButtonKeyUp = () => {
             if (!props.disabled && !props.readOnly) {
                 clearTimer();
+                setKeyPressed(0);
             }
         };
 
         const onUpButtonKeyDown = (event) => {
             if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
                 repeat(event, null, 1);
+                event.preventDefault();
+                setKeyPressed(1);
             }
         };
 
@@ -297,12 +302,15 @@ export const InputNumber = React.memo(
         const onDownButtonKeyUp = () => {
             if (!props.disabled && !props.readOnly) {
                 clearTimer();
+                setKeyPressed(0);
             }
         };
 
         const onDownButtonKeyDown = (event) => {
             if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
                 repeat(event, null, -1);
+                event.preventDefault();
+                setKeyPressed(-1);
             }
         };
 
@@ -1211,7 +1219,7 @@ export const InputNumber = React.memo(
             const incrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
+                    className: classNames(props.incrementButtonClassName, cx('incrementButton', { keyPressed })),
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
                     onPointerUp: onUpButtonMouseUp,
@@ -1244,7 +1252,7 @@ export const InputNumber = React.memo(
             const decrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
+                    className: classNames(props.decrementButtonClassName, cx('decrementButton', { keyPressed })),
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
                     onPointerUp: onDownButtonMouseUp,

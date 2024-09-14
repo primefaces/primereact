@@ -7075,4 +7075,39 @@
     background: #3b82f6;
     color: #ffffff;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: #1d4ed8;
+    color: #ffffff;
+    border-color: #1d4ed8;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: #334155;
+    color: #ffffff;
+    border-color: #334155;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: #15803d;
+    color: #ffffff;
+    border-color: #15803d;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: #0369a1;
+    color: #ffffff;
+    border-color: #0369a1;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: #c2410c;
+    color: #ffffff;
+    border-color: #c2410c;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: #7e22ce;
+    color: #ffffff;
+    border-color: #7e22ce;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: #b91c1c;
+    color: #ffffff;
+    border-color: #b91c1c;
+  }
 }

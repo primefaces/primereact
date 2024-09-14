@@ -7044,6 +7044,41 @@
     background-color: #dc3545;
     color: #ffffff;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: rgb(104, 50, 158);
+    color: rgb(255, 255, 255);
+    border-color: rgb(104, 50, 158);
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: rgb(84, 91, 98);
+    color: rgb(255, 255, 255);
+    border-color: rgb(78, 85, 91);
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: rgb(30, 126, 52);
+    color: rgb(255, 255, 255);
+    border-color: rgb(28, 116, 48);
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: rgb(19, 132, 150);
+    color: rgb(255, 255, 255);
+    border-color: rgb(17, 122, 139);
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: rgb(211, 158, 0);
+    color: rgb(33, 37, 41);
+    border-color: rgb(198, 149, 0);
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: rgb(88, 52, 154);
+    color: rgb(255, 255, 255);
+    border-color: rgb(77, 46, 135);
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: rgb(189, 33, 48);
+    color: rgb(255, 255, 255);
+    border-color: rgb(178, 31, 45);
+  }
 }
 /* Vendor extensions to the designer enhanced bootstrap compatibility */
 @layer primereact {

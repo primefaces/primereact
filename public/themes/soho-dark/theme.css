@@ -7026,4 +7026,39 @@
   .p-togglebutton.p-button {
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: #9378f4;
+    color: hsl(234, 15%, 13%);
+    border-color: #9378f4;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: #bbde53;
+    color: #1d1e27;
+    border-color: #bbde53;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: #5acd81;
+    color: #1d1e27;
+    border-color: #5acd81;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: #499fff;
+    color: #1d1e27;
+    border-color: #499fff;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: #ffac41;
+    color: #1d1e27;
+    border-color: #ffac41;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: #49d0db;
+    color: #1d1e27;
+    border-color: #49d0db;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: #de595c;
+    color: #1d1e27;
+    border-color: #de595c;
+  }
 }

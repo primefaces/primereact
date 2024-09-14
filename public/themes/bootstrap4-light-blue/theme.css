@@ -7044,6 +7044,41 @@
     background-color: #dc3545;
     color: #ffffff;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: #0062cc;
+    color: #ffffff;
+    border-color: #0062cc;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: #545b62;
+    color: #ffffff;
+    border-color: #4e555b;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: #1e7e34;
+    color: #ffffff;
+    border-color: #1c7430;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: #138496;
+    color: #ffffff;
+    border-color: #117a8b;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: #d39e00;
+    color: #212529;
+    border-color: #c69500;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: #58349a;
+    color: #ffffff;
+    border-color: #4d2e87;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: #bd2130;
+    color: #ffffff;
+    border-color: #b21f2d;
+  }
 }
 /* Vendor extensions to the designer enhanced bootstrap compatibility */
 @layer primereact {

@@ -6987,6 +6987,41 @@
     background-color: #d8222f;
     color: #ffffff;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: #0e5d9a;
+    color: #ffffff;
+    border-color: #0e5d9a;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: #545a5f;
+    color: #ffffff;
+    border-color: #545a5f;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: #1a662f;
+    color: #ffffff;
+    border-color: #1a662f;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: #0d6461;
+    color: #ffffff;
+    border-color: #0d6461;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: #daa710;
+    color: #212529;
+    border-color: #daa710;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: #610bf6;
+    color: #ffffff;
+    border-color: #610bf6;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: #ad1b26;
+    color: #ffffff;
+    border-color: #ad1b26;
+  }
 }
 .p-selectbutton > .p-button,
 .p-togglebutton.p-button {

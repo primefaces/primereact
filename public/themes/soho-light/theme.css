@@ -7078,4 +7078,39 @@
   .p-togglebutton.p-button {
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: #5935f1;
+    color: #ffffff;
+    border-color: #5935f1;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: #819c0a;
+    color: #ffffff;
+    border-color: #819c0a;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: #219f59;
+    color: #ffffff;
+    border-color: #219f59;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: #175bef;
+    color: #ffffff;
+    border-color: #175bef;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: #ff7e02;
+    color: #ffffff;
+    border-color: #ff7e02;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: #27aab6;
+    color: #ffffff;
+    border-color: #27aab6;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: #e31c1d;
+    color: #ffffff;
+    border-color: #e31c1d;
+  }
 }

@@ -16,14 +16,16 @@ const classes = {
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
         }),
     buttonGroup: 'p-inputnumber-button-group',
-    incrementButton: ({ props }) =>
+    incrementButton: ({ props, keyPressed }) =>
         classNames('p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component', {
-            'p-disabled': props.disabled
+            'p-disabled': props.disabled,
+            [`${props.incrementButtonClassName}-keypressed`]: keyPressed === 1
         }),
     incrementIcon: 'p-button-icon',
-    decrementButton: ({ props }) =>
+    decrementButton: ({ props, keyPressed }) =>
         classNames('p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component', {
-            'p-disabled': props.disabled
+            'p-disabled': props.disabled,
+            [`${props.decrementButtonClassName}-keypressed`]: keyPressed === -1
         }),
     decrementIcon: 'p-button-icon'
 };

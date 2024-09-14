@@ -8508,5 +8508,40 @@
     background: #d9d8d9;
     border-color: #d9d8d9;
   }
+  .p-inputnumber .p-button.null-keypressed {
+    background: rgba(103, 58, 183, 0.68);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .p-inputnumber .p-button.p-button-secondary-keypressed {
+    background: rgba(76, 175, 80, 0.68);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .p-inputnumber .p-button.p-button-success-keypressed {
+    background: rgba(104, 159, 56, 0.68);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .p-inputnumber .p-button.p-button-info-keypressed {
+    background: rgba(33, 150, 243, 0.68);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .p-inputnumber .p-button.p-button-warning-keypressed {
+    background: rgba(251, 192, 45, 0.68);
+    color: #212529;
+    border-color: transparent;
+  }
+  .p-inputnumber .p-button.p-button-help-keypressed {
+    background: rgba(156, 39, 176, 0.68);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .p-inputnumber .p-button.p-button-danger-keypressed {
+    background: rgba(211, 47, 47, 0.68);
+    color: #ffffff;
+    border-color: transparent;
+  }
 }
 /* Customizations to the designer theme should be defined here */
