@@ -100,7 +100,7 @@ export function CommandDoc(props) {
 import { ContextMenu } from 'primereact/contextmenu';
 import { useState, useRef } from 'react';
 import { Toast } from 'primereact/toast';
-import { Tag } from 'primerea/tag';
+import { Tag } from 'primereact/tag';
 
 export default function CommandDemo() {
     const cm = useRef(null);
@@ -196,7 +196,7 @@ export default function CommandDemo() {
 import { ContextMenu } from 'primereact/contextmenu';
 import { useState, useRef } from 'react';
 import { Toast } from 'primereact/toast';
-import { Tag } from 'primerea/tag';
+import { Tag } from 'primereact/tag';
 
 export default function CommandDemo() {
     const cm = useRef<ContextMenuRef | null>(null);
