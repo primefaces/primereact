@@ -349,7 +349,6 @@ export const Chips = React.memo(
             const icon = createRemoveIcon(value, index);
             const tokenProps = mergeProps(
                 {
-                    key: `${index}_${value}`,
                     id: props.inputId + '_chips_item_' + index,
                     role: 'option',
                     'aria-label': value,
@@ -364,7 +363,7 @@ export const Chips = React.memo(
             );
 
             return (
-                <li {...tokenProps}>
+                <li {...tokenProps} key={`${index}_${value}`}>
                     {label}
                     {icon}
                 </li>

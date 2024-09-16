@@ -64,6 +64,7 @@ export const MentionBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Mention',
         autoHighlight: true,
+        autoResize: false,
         className: null,
         delay: 0,
         field: null,

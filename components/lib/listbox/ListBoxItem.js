@@ -66,7 +66,6 @@ export const ListBoxItem = React.memo((props) => {
             onMouseDown: (event) => props.onOptionMouseDown(event, props.index),
             onMouseMove: (event) => props.onOptionMouseMove(event, props.index),
             'aria-label': props.label,
-            key: props.optionKey,
             role: 'option',
             'aria-selected': props.selected,
             'aria-disabled': props.disabled,
@@ -76,7 +75,7 @@ export const ListBoxItem = React.memo((props) => {
     );
 
     return (
-        <li {...itemProps}>
+        <li {...itemProps} key={props.optionKey}>
             {content}
             <Ripple />
         </li>

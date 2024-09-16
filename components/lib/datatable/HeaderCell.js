@@ -108,7 +108,7 @@ export const HeaderCell = React.memo((props) => {
                 let right = 0;
                 let next = elementRef.current.nextElementSibling;
 
-                if (next) {
+                if (next && next.classList.contains('p-frozen-column')) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
 
@@ -117,7 +117,7 @@ export const HeaderCell = React.memo((props) => {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
 
-                if (prev) {
+                if (prev && prev.classList.contains('p-frozen-column')) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
 
@@ -304,7 +304,9 @@ export const HeaderCell = React.memo((props) => {
         if (props.showSelectAll && getColumnProp('selectionMode') === 'multiple' && props.filterDisplay !== 'row') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} unstyled={props.unstyled} />;
+            return (
+                <HeaderCheckbox hostName={props.hostName} column={props.column} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} unstyled={props.unstyled} />
+            );
         }
 
         return null;

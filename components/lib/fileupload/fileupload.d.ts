@@ -137,13 +137,18 @@ export interface FileUploadPassThroughOptions {
 }
 
 /**
+ * Defines a custom File type extended with objectURL
+ */
+type FileUploadFile = File & { objectURL: string };
+
+/**
  * Defines current inline state in FileUpload component.
  */
 export interface FileUploadState {
     /**
      * Current files.
      */
-    files: any[];
+    files: FileUploadFile[];
     /**
      * Current uplaoding state as a boolean.
      * @defaultValue false
@@ -162,7 +167,7 @@ export interface FileUploadState {
     /**
      * Current uploaded files.
      */
-    uploadedFiles: any[];
+    uploadedFiles: FileUploadFile[];
 }
 
 /**
@@ -270,7 +275,7 @@ interface ItemTemplateOptions {
     /**
      * Array of files.
      */
-    files: File[];
+    files: FileUploadFile[];
     /**
      * Index of the file.
      */
@@ -317,7 +322,7 @@ interface FileUploadFilesEvent {
     /**
      * Uploaded files.
      */
-    files: File[];
+    files: FileUploadFile[];
 }
 
 /**
@@ -676,22 +681,22 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public getInput(): HTMLInputElement;
     /**
      * Gets the current files list.
-     * @return {File[]} Current files.
+     * @return {FileUploadFile[]} Current files.
      */
-    public getFiles(): File[];
+    public getFiles(): FileUploadFile[];
     /**
      * Sets the current files list.
-     * @param {File[]} files - Current files.
+     * @param {FileUploadFile[]} files - Current files.
      */
-    public setFiles(files: File[]): void;
+    public setFiles(files: FileUploadFile[]): void;
     /**
      * Gets the current uploaded files list.
-     * @return {File[]} Current uploaded files.
+     * @return {FileUploadFile[]} Current uploaded files.
      */
-    public getUploadedFiles(): File[];
+    public getUploadedFiles(): FileUploadFile[];
     /**
      * Sets the current uploaded files list.
-     * @param {File[]} files - Current uploaded files.
+     * @param {FileUploadFile[]} files - Current uploaded files.
      */
-    public setUploadedFiles(files: File[]): void;
+    public setUploadedFiles(files: FileUploadFile[]): void;
 }

@@ -38,10 +38,12 @@ import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { EditorPassThroughOptions } from '../editor/editor';
 import { FieldsetPassThroughOptions } from '../fieldset/fieldset';
 import { FileUploadPassThroughOptions } from '../fileupload/fileupload';
+import { FloatLabelPassThroughOptions } from '../floatlabel/floatlabel';
 import { GalleriaPassThroughOptions } from '../galleria/galleria';
 import { ImagePassThroughOptions } from '../image/image';
 import { InplacePassThroughOptions } from '../inplace/inplace';
 import { InputNumberPassThroughOptions } from '../inputnumber/inputnumber';
+import { InputOtpPassThroughOptions } from '../inputotp/inputotp';
 import { InputSwitchPassThroughOptions } from '../inputswitch/inputswitch';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { InputTextareaPassThroughOptions } from '../inputtextarea/inputtextarea';
@@ -428,6 +430,10 @@ export interface PrimeReactPTOptions {
      */
     fileupload?: FileUploadPassThroughOptions;
     /**
+     * Custom passthrough(pt) options for FloatLabel.
+     */
+    floatlabel?: FloatLabelPassThroughOptions;
+    /**
      * Custom passthrough(pt) options for FullCalendar.
      */
     galleria?: GalleriaPassThroughOptions;
@@ -447,6 +453,10 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for InputNumber.
      */
     inputnumber?: InputNumberPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for InputOtp.
+     */
+    inputotp?: InputOtpPassThroughOptions;
     /**
      * Custom passthrough(pt) options for InputSwitch.
      */

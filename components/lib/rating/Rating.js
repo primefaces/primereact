@@ -141,7 +141,6 @@ export const Rating = React.memo(
 
                 const itemProps = mergeProps(
                     {
-                        key: value,
                         className: cx('item', { active, focusedOptionIndex, isFocusVisibleItem, value }),
                         'data-p-focused': value === focusedOptionIndex,
                         tabIndex: tabIndex,
@@ -154,7 +153,7 @@ export const Rating = React.memo(
                 );
 
                 return (
-                    <div key={value} {...itemProps}>
+                    <div {...itemProps} key={value}>
                         {content}
                     </div>
                 );

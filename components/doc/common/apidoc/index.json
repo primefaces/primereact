@@ -1236,6 +1236,13 @@
                             "description": "Custom passthrough(pt) options for FileUpload."
                         },
                         {
+                            "name": "floatlabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FloatLabelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for FloatLabel."
+                        },
+                        {
                             "name": "galleria",
                             "optional": true,
                             "readonly": false,
@@ -1269,6 +1276,13 @@
                             "readonly": false,
                             "type": "InputNumberPassThroughOptions",
                             "description": "Custom passthrough(pt) options for InputNumber."
+                        },
+                        {
+                            "name": "inputotp",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputOtpPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputOtp."
                         },
                         {
                             "name": "inputswitch",
@@ -5018,7 +5032,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | \"success\" | \"warning\" | \"info\" | \"danger\"",
+                            "type": "null | \"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "null",
                             "description": "Severity type of the badge."
                         },
@@ -5946,7 +5960,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -7120,7 +7134,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the InputText component."
                         },
                         {
@@ -9145,7 +9159,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -9845,7 +9859,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
@@ -14413,6 +14427,14 @@
                             "description": "Footer content of the confirm dialog."
                         },
                         {
+                            "name": "group",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Optional key to match the key of the confirmation, useful to target a specific confirm dialog instance."
+                        },
+                        {
                             "name": "header",
                             "optional": true,
                             "readonly": false,
@@ -14931,14 +14953,14 @@
                             "name": "rejectButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
                             "name": "acceptButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -21270,16 +21292,17 @@
                                 {
                                     "name": "items",
                                     "optional": false,
-                                    "type": "any[]"
+                                    "type": "any[]",
+                                    "description": "Array of items to be rendered."
                                 },
                                 {
                                     "name": "layout",
                                     "optional": true,
                                     "type": "\"grid\" | \"list\" | string & Record<string, unknown>",
-                                    "description": "Current layout."
+                                    "description": "Current layout mode."
                                 }
                             ],
-                            "returnType": "undefined | ReactNode[]",
+                            "returnType": "ReactNode | ReactNode[]",
                             "description": "Function that gets the options along with the layout mode and returns the content."
                         },
                         {
@@ -23142,6 +23165,14 @@
                             "description": "Icon of the dropdown."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DropdownProps>",
+                            "default": "",
+                            "description": "Icon of collapse action."
+                        },
+                        {
                             "name": "dataKey",
                             "optional": true,
                             "readonly": false,
@@ -23565,6 +23596,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "useOptionAsValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the option should be used as the value for the select element."
                         },
                         {
                             "name": "value",
@@ -24743,7 +24782,7 @@
                         {
                             "name": "getFiles",
                             "parameters": [],
-                            "returnType": "File[]",
+                            "returnType": "FileUploadFile[]",
                             "description": "Gets the current files list."
                         },
                         {
@@ -24755,7 +24794,7 @@
                         {
                             "name": "getUploadedFiles",
                             "parameters": [],
-                            "returnType": "File[]",
+                            "returnType": "FileUploadFile[]",
                             "description": "Gets the current uploaded files list."
                         },
                         {
@@ -24775,7 +24814,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
-                                    "type": "File[]",
+                                    "type": "FileUploadFile[]",
                                     "description": "Current files."
                                 }
                             ],
@@ -24787,7 +24826,7 @@
                             "parameters": [
                                 {
                                     "name": "files",
-                                    "type": "File[]",
+                                    "type": "FileUploadFile[]",
                                     "description": "Current uploaded files."
                                 }
                             ],
@@ -25295,7 +25334,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25316,7 +25355,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25336,7 +25375,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25376,7 +25415,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         },
                         {
@@ -25615,7 +25654,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "FileUploadFile[]",
                             "description": "Current files."
                         },
                         {
@@ -25643,7 +25682,7 @@
                             "name": "uploadedFiles",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "FileUploadFile[]",
                             "description": "Current uploaded files."
                         }
                     ],
@@ -25804,7 +25843,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Array of files."
                         },
                         {
@@ -25853,7 +25892,7 @@
                             "name": "files",
                             "optional": false,
                             "readonly": false,
-                            "type": "File[]",
+                            "type": "FileUploadFile[]",
                             "description": "Uploaded files."
                         }
                     ],
@@ -25888,6 +25927,10 @@
             "values": {
                 "FileUploadPassThroughType": {
                     "values": "PassThroughType<T, FileUploadPassThroughMethodOptions>"
+                },
+                "FileUploadFile": {
+                    "values": "File & Object",
+                    "description": "Defines a custom File type extended with objectURL"
                 }
             }
         }
@@ -31588,7 +31631,7 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions",
+                            "type": "InputOtpPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the Tooltip component."
                         },
                         {
@@ -40981,12 +41024,28 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PanelMenuProps>",
+                            "default": "",
+                            "description": "Icon used when a submenu is expanded."
+                        },
+                        {
                             "name": "expandedKeys",
                             "optional": true,
                             "readonly": false,
                             "type": "PanelMenuExpandedKeys",
                             "default": "",
                             "description": "A map of keys to represent the expansion state in controlled mode."
+                        },
+                        {
+                            "name": "expandIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<PanelMenuProps>",
+                            "default": "",
+                            "description": "Icon used when a submenu is collapsed."
                         },
                         {
                             "name": "model",
@@ -41019,14 +41078,6 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
-                        },
-                        {
-                            "name": "submenuIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "IconType<PanelMenuProps>",
-                            "default": "",
-                            "description": "Icon of the submenu."
                         },
                         {
                             "name": "transitionOptions",
@@ -41160,11 +41211,18 @@
                             "description": "Uses to pass attributes to the header content's DOM element."
                         },
                         {
-                            "name": "submenuIcon",
+                            "name": "expandIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the submenuIcon's DOM element."
+                            "description": "Uses to pass attributes to the expand icon's DOM element."
+                        },
+                        {
+                            "name": "collapseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the collapse icon's DOM element."
                         },
                         {
                             "name": "headerIcon",
@@ -47309,6 +47367,22 @@
                             "description": "Active step index of stepper."
                         },
                         {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of end section."
+                        },
+                        {
+                            "name": "headerPosition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"top\" | \"bottom\" | \"right\"",
+                            "default": "",
+                            "description": "Position of the stepper panel header relative to the step number."
+                        },
+                        {
                             "name": "linear",
                             "optional": true,
                             "readonly": false,
@@ -47339,6 +47413,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of start section."
                         },
                         {
                             "name": "unstyled",
@@ -47424,6 +47506,20 @@
                             "description": "Used to pass attributes to the end handler's DOM element."
                         },
                         {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the start's DOM element."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepperPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the right's DOM element."
+                        },
+                        {
                             "name": "hooks",
                             "optional": true,
                             "readonly": false,
@@ -47488,6 +47584,9 @@
             "values": {
                 "StepperPassThroughOptionType": {
                     "values": "StepperPassThroughAttributes | Function | string | null | undefined"
+                },
+                "StepperPassThroughType": {
+                    "values": "PassThroughType<T, StepperPassThroughMethodOptions>"
                 }
             }
         }
@@ -47858,6 +47957,74 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "StepPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepsThroughMethodOptions"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "StepContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StepContext": {
+                    "description": "Defines current inline context in Steps component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Step index."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total number of steps"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the first step?"
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the last step?"
+                        },
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this step currently selected."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this step currently disabled."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "StepsThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
@@ -47900,28 +48067,28 @@
                             "name": "action",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
                             "description": "Uses to pass attributes to the action's DOM element."
                         },
                         {
                             "name": "step",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the step's DOM element."
                         },
                         {
                             "name": "label",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "StepPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
@@ -47941,6 +48108,9 @@
             "values": {
                 "StepsPassThroughType": {
                     "values": "PassThroughType<T, StepsThroughMethodOptions>"
+                },
+                "StepPassThroughType": {
+                    "values": "PassThroughType<T, StepPassThroughMethodOptions>"
                 }
             }
         }
@@ -49174,7 +49344,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | \"success\" | \"warning\" | \"info\" | \"danger\"",
+                            "type": "null | \"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "null",
                             "description": "Severity type of the tag."
                         },
@@ -50539,7 +50709,7 @@
                             "name": "content",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode",
+                            "type": "ReactNode | Function",
                             "description": "Custom content of the message. If enabled, summary and details properties are ignored."
                         },
                         {
@@ -52891,18 +53061,11 @@
                             "description": "Uses to pass attributes to the toggler icon's DOM element."
                         },
                         {
-                            "name": "checkboxContainer",
+                            "name": "nodeCheckbox",
                             "optional": true,
                             "readonly": false,
                             "type": "TreePassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox container's DOM element."
-                        },
-                        {
-                            "name": "checkbox",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TreePassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the checkbox's DOM element."
+                            "description": "Uses to pass attributes to the node checkbox's DOM element."
                         },
                         {
                             "name": "checkboxIcon",
@@ -55968,6 +56131,27 @@
                             "readonly": false,
                             "type": "TreeTablePassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
+                        },
+                        {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughOptions",
+                            "description": "Used to pass attributes to the Row helper components."
+                        },
+                        {
+                            "name": "column",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughOptions",
+                            "description": "Used to pass attributes to the Column helper components."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
                         },
                         {
                             "name": "hooks",

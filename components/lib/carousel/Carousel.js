@@ -741,7 +741,6 @@ export const Carousel = React.memo(
             const key = 'carousel-indicator-' + index;
             const indicatorProps = mergeProps(
                 {
-                    key,
                     className: cx('indicator', { isActive }),
                     'data-p-highlight': isActive
                 },
@@ -760,7 +759,7 @@ export const Carousel = React.memo(
             );
 
             return (
-                <li {...indicatorProps}>
+                <li {...indicatorProps} key={key}>
                     <button {...indicatorButtonProps}>
                         <Ripple />
                     </button>

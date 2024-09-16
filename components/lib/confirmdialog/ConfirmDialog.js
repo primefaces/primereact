@@ -154,18 +154,21 @@ export const ConfirmDialog = React.memo(
                 getPropValue('rejectClassName')
             );
 
-            const rejectButtonProps = {
-                label: rejectLabel,
-                autoFocus: defaultFocus === 'reject',
-                icon: getPropValue('rejectIcon'),
-                className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
-                onClick: reject,
-                pt: ptm('rejectButton'),
-                unstyled: props.unstyled,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            };
+            const rejectButtonProps = mergeProps(
+                {
+                    label: rejectLabel,
+                    autoFocus: defaultFocus === 'reject',
+                    icon: getPropValue('rejectIcon'),
+                    className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
+                    onClick: reject,
+                    pt: ptm('rejectButton'),
+                    unstyled: props.unstyled,
+                    __parentMetadata: {
+                        parent: metaData
+                    }
+                },
+                ptm('rejectButton')
+            );
 
             const acceptButtonProps = mergeProps(
                 {

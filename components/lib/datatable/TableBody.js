@@ -592,15 +592,12 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (!isUnstyled() && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) {
-                event.currentTarget.draggable = true;
-                event.target.draggable = false;
-            } else if (isUnstyled() && DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon') {
-                event.currentTarget.draggable = true;
-                event.target.draggable = false;
-            } else {
-                event.currentTarget.draggable = false;
-            }
+            const isDraggableHandle = isUnstyled()
+                ? DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]')
+                : DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
+
+            event.currentTarget.draggable = isDraggableHandle;
+            event.target.draggable = !isDraggableHandle;
 
             if (allowRowDrag(e)) {
                 enableDragSelection(event, 'row');
@@ -710,7 +707,7 @@ export const TableBody = React.memo(
                         !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
                     }
 
-                    droppedRowIndex.current = index + 1;
+                    if (index + 1 !== draggedRowIndex.current) droppedRowIndex.current = index + 1;
                     rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'true');
                     !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
                 }

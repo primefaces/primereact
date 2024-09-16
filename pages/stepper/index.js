@@ -8,6 +8,7 @@ import { Wireframe } from '@/components/doc/stepper/pt/wireframe';
 import { StyledDoc } from '@/components/doc/stepper/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/stepper/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/stepper/verticaldoc';
+import { HeaderDoc } from '@/components/doc/stepper/headerdoc';
 
 const StepperDemo = () => {
     const docs = [
@@ -30,6 +31,11 @@ const StepperDemo = () => {
             id: 'linear',
             label: 'Linear',
             component: LinearDoc
+        },
+        {
+            id: 'header',
+            label: 'Header',
+            component: HeaderDoc
         },
         {
             id: 'accessibility',

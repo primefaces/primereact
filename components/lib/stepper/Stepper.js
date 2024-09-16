@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { UniqueComponentId, classNames } from '../utils/Utils';
+import { UniqueComponentId, classNames, ObjectUtils } from '../utils/Utils';
 import { StepperBase } from './StepperBase';
 import { StepperContent } from './StepperContent';
 import { StepperHeader } from './StepperHeader';
@@ -14,6 +14,8 @@ export const Stepper = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = StepperBase.getProps(inProps, context);
+        const start = ObjectUtils.getJSXElement(props.start, props);
+        const end = ObjectUtils.getJSXElement(props.end, props);
         const { ptm, cx, isUnstyled, ptmo } = StepperBase.setMetaData({
             props
         });
@@ -22,6 +24,20 @@ export const Stepper = React.memo(
         const navRef = React.useRef();
 
         useHandleStyle(StepperBase.css.styles, isUnstyled, { name: 'stepper' });
+
+        const startProps = mergeProps(
+            {
+                className: cx('start')
+            },
+            ptm('start')
+        );
+
+        const endProps = mergeProps(
+            {
+                className: cx('end')
+            },
+            ptm('end')
+        );
 
         useMountEffect(() => {
             if (!idState) {
@@ -133,17 +149,15 @@ export const Stepper = React.memo(
 
         const createPanel = () => {
             return stepperPanels().map((step, index) => {
-                const panelProps = mergeProps(
-                    {
-                        className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index })),
-                        'aria-current': isStepActive(index) && 'step',
-                        role: 'presentation',
-                        'data-p-highlight': isStepActive(index),
-                        'data-p-disabled': isItemDisabled(index),
-                        'data-p-active': isStepActive(index)
-                    },
-                    ptm('stepperpanel')
-                );
+                const panelProps = mergeProps({
+                    className: classNames(cx('stepper.header', { isStepActive, isItemDisabled, step, index, headerPosition: props.headerPosition, orientation: props.orientation })),
+                    'aria-current': isStepActive(index) && 'step',
+                    role: 'presentation',
+                    'data-p-highlight': isStepActive(index),
+                    'data-p-disabled': isItemDisabled(index),
+                    'data-p-active': isStepActive(index),
+                    ...getStepPT(step, 'header', index)
+                });
 
                 return (
                     <li key={getStepKey(step, index)} {...panelProps}>
@@ -233,19 +247,16 @@ export const Stepper = React.memo(
             return stepperPanels().map((step, index) => {
                 const contentRef = React.createRef(null);
 
-                const navProps = mergeProps(
-                    {
-                        ref: navRef,
-                        className: cx('panel', { props, index, isStepActive }),
-                        'aria-current': isStepActive(index) && 'step',
-                        ...getStepPT(step, 'root', index),
-                        ...getStepPT(step, 'panel', index),
-                        'data-p-highlight': isStepActive(index),
-                        'data-p-disabled': isItemDisabled(index),
-                        'data-p-active': isStepActive(index)
-                    },
-                    ptm('nav')
-                );
+                const navProps = mergeProps({
+                    ref: navRef,
+                    className: cx('stepper.panel', { props, index, isStepActive }),
+                    'aria-current': isStepActive(index) && 'step',
+                    ...getStepPT(step, 'root', index),
+                    ...getStepPT(step, 'panel', index),
+                    'data-p-highlight': isStepActive(index),
+                    'data-p-disabled': isItemDisabled(index),
+                    'data-p-active': isStepActive(index)
+                });
 
                 const headerProps = mergeProps({
                     className: cx('stepper.header', { step, isStepActive, isItemDisabled, index }),
@@ -331,10 +342,10 @@ export const Stepper = React.memo(
 
         return (
             <div {...rootProps}>
-                {props.start && props.start()}
+                {start && <div {...startProps}>{start}</div>}
                 {props.orientation === 'horizontal' && createHorizontal()}
                 {props.orientation === 'vertical' && createVertical()}
-                {props.end && props.end()}
+                {end && <div {...endProps}>{end}</div>}
             </div>
         );
     })

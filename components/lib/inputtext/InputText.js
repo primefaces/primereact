@@ -17,7 +17,8 @@ export const InputText = React.memo(
             props,
             ...props.__parentMetadata,
             context: {
-                disabled: props.disabled
+                disabled: props.disabled,
+                iconPosition: props.iconPosition
             }
         });
 

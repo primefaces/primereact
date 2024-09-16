@@ -847,7 +847,15 @@ export const UITreeNode = React.memo((props) => {
         const contentProps = mergeProps(
             {
                 ref: contentRef,
-                className: classNames(props.node.className, cx('content', { checked, selected, nodeProps: props, isCheckboxSelectionMode })),
+                className: classNames(
+                    props.node.className,
+                    cx('content', {
+                        checked,
+                        selected,
+                        nodeProps: props,
+                        isCheckboxSelectionMode
+                    })
+                ),
                 style: props.node.style,
                 onClick: onClick,
                 onDoubleClick: onDoubleClick,
@@ -961,7 +969,6 @@ export const UITreeNode = React.memo((props) => {
                 'aria-setsize': props.node.children ? props.node.children.length : 0,
                 'aria-posinset': props.index + 1,
                 onKeyDown: onKeyDown,
-                'aria-expanded': expanded,
                 'aria-selected': checked || selected
             },
             getPTOptions('node')
@@ -977,7 +984,7 @@ export const UITreeNode = React.memo((props) => {
 
     const node = createNode();
 
-    if (props.dragdropScope && !props.disabled && props.node.droppable) {
+    if (props.dragdropScope && !props.disabled && (!props.parent || props.parent.droppable !== false)) {
         const beforeDropPoint = createDropPoint(-1);
         const afterDropPoint = props.last ? createDropPoint(1) : null;
 

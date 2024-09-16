@@ -75,7 +75,6 @@ export const PanelMenuBase = ComponentBase.extend({
         id: null,
         model: null,
         style: null,
-        submenuIcon: null,
         expandedKeys: null,
         className: null,
         onExpandedKeysChange: null,
@@ -83,6 +82,8 @@ export const PanelMenuBase = ComponentBase.extend({
         onClose: null,
         multiple: false,
         transitionOptions: null,
+        expandIcon: null,
+        collapseIcon: null,
         children: undefined
     },
     css: {

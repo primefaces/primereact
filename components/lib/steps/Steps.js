@@ -12,17 +12,43 @@ export const Steps = React.memo(
         const props = StepsBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
+        const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
+        const count = React.Children.count(props.children);
 
-        const { ptm, cx, isUnstyled } = StepsBase.setMetaData({
+        const metaData = {
             props,
             state: {
-                id: idState
+                id: idState,
+                activeIndex: activeIndexState
             }
+        };
+
+        const { ptm, ptmo, cx, isUnstyled } = StepsBase.setMetaData({
+            ...metaData
         });
 
         useHandleStyle(StepsBase.css.styles, isUnstyled, { name: 'steps' });
+
+        const getStepPT = (step, key, index) => {
+            const stepMetaData = {
+                // props: step.props,
+                parent: metaData,
+                context: {
+                    index,
+                    count,
+                    first: index === 0,
+                    last: index === count - 1,
+                    active: index === activeIndexState,
+                    disabled: getStepProp(step, 'disabled')
+                }
+            };
+
+            return mergeProps(ptm(`step.${key}`, { step: stepMetaData }), ptm(`steps.${key}`, { steps: stepMetaData }), ptm(`steps.${key}`, stepMetaData), ptmo(getStepProp(step, 'pt'), key, stepMetaData));
+        };
+
+        const getStepProp = (step, name) => StepsBase.getCProp(step, name);
 
         const itemClick = (event, item, index) => {
             if (props.readOnly || item.disabled) {
@@ -46,6 +72,8 @@ export const Steps = React.memo(
                     index
                 });
             }
+
+            setActiveIndexState(index);
 
             if (!item.url) {
                 event.preventDefault();
@@ -163,15 +191,15 @@ export const Steps = React.memo(
             }
 
             const key = item.id || idState + '_' + index;
-            const active = index === props.activeIndex;
-            const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
+            const active = index === activeIndexState;
+            const disabled = item.disabled || (index !== activeIndexState && props.readOnly);
 
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
                     className: cx('icon', { item })
                 },
-                ptm('icon')
+                getStepPT(item, 'icon', index)
             );
 
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
@@ -180,7 +208,7 @@ export const Steps = React.memo(
                 {
                     className: cx('label')
                 },
-                ptm('label')
+                getStepPT(item, 'label', index)
             );
 
             const label = item.label && <span {...labelProps}>{item.label}</span>;
@@ -189,7 +217,7 @@ export const Steps = React.memo(
                 {
                     className: cx('step')
                 },
-                ptm('step')
+                getStepPT(item, 'step', index)
             );
 
             const actionProps = mergeProps(
@@ -202,7 +230,7 @@ export const Steps = React.memo(
                     onKeyDown: (event) => onItemKeyDown(event, item, index),
                     onClick: (event) => itemClick(event, item, index)
                 },
-                ptm('action')
+                getStepPT(item, 'action', index)
             );
 
             let content = (
@@ -232,7 +260,6 @@ export const Steps = React.memo(
 
             const menuItemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     className: cx('menuitem', { active, disabled, item }),
                     style: item.style
@@ -240,7 +267,11 @@ export const Steps = React.memo(
                 ptm('menuitem')
             );
 
-            return <li {...menuItemProps}>{content}</li>;
+            return (
+                <li {...menuItemProps} key={key}>
+                    {content}
+                </li>
+            );
         };
 
         const createItems = () => {

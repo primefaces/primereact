@@ -111,7 +111,6 @@ export const MultiSelectPanel = React.memo(
                 const optionLabel = props.getOptionLabel(option);
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
-                const tabIndex = disabled ? null : props.tabIndex || 0;
                 const selected = props.isSelected(option);
 
                 return (
@@ -127,7 +126,6 @@ export const MultiSelectPanel = React.memo(
                         selected={selected}
                         onClick={props.onOptionSelect}
                         onMouseMove={changeFocusedItemOnHover}
-                        tabIndex={tabIndex}
                         disabled={disabled}
                         className={props.itemClassName}
                         checkboxIcon={props.checkboxIcon}
@@ -149,7 +147,11 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('emptyMessage')
             );
 
-            return <li {...emptyMessageProps}>{emptyFilterMessage}</li>;
+            return (
+                <li {...emptyMessageProps} key="emptyFilterMessage">
+                    {emptyFilterMessage}
+                </li>
+            );
         };
 
         const createEmptyContent = () => {
@@ -162,7 +164,11 @@ export const MultiSelectPanel = React.memo(
                 getPTOptions('emptyMessage')
             );
 
-            return <li {...emptyMessageProps}>{emptyMessage}</li>;
+            return (
+                <li {...emptyMessageProps} key="emptyMessage">
+                    {emptyMessage}
+                </li>
+            );
         };
 
         const createItem = (option, index, scrollerOptions = {}) => {
@@ -182,7 +188,9 @@ export const MultiSelectPanel = React.memo(
 
                 return (
                     <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{groupContent}</li>
+                        <li {...itemGroupProps} key={key}>
+                            {groupContent}
+                        </li>
                         {groupChildrenContent}
                     </React.Fragment>
                 );
@@ -191,7 +199,6 @@ export const MultiSelectPanel = React.memo(
             const optionLabel = props.getOptionLabel(option);
             const optionKey = index + '_' + props.getOptionRenderKey(option);
             const disabled = props.isOptionDisabled(option);
-            const tabIndex = disabled ? null : props.tabIndex || 0;
             const selected = props.isSelected(option);
 
             return (
@@ -207,7 +214,6 @@ export const MultiSelectPanel = React.memo(
                     selected={selected}
                     onClick={props.onOptionSelect}
                     onMouseMove={changeFocusedItemOnHover}
-                    tabIndex={tabIndex}
                     disabled={disabled}
                     className={props.itemClassName}
                     checkboxIcon={props.checkboxIcon}

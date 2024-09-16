@@ -491,7 +491,7 @@ export const Menubar = React.memo(
             }
         };
 
-        const createProcessedItems = React.useCallback((items, level = 0, parent = {}, parentKey = '') => {
+        const createProcessedItems = (items, level = 0, parent = {}, parentKey = '') => {
             const _processedItems = [];
 
             items &&
@@ -511,7 +511,7 @@ export const Menubar = React.memo(
                 });
 
             return _processedItems;
-        }, []);
+        };
 
         useMountEffect(() => {
             if (!idState) {
@@ -536,7 +536,8 @@ export const Menubar = React.memo(
             const processed = createProcessedItems(itemsToProcess, 0, null, '');
 
             setProcessedItems(processed);
-        }, [props.model, createProcessedItems]);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props.model]);
 
         useUpdateEffect(() => {
             const processedItem = activeItemPath.find((p) => p.key === focusedItemInfo.parentKey);

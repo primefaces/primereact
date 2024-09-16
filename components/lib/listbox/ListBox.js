@@ -749,7 +749,7 @@ export const ListBox = React.memo(
                 );
 
                 return (
-                    <li key={key} {...itemGroupProps}>
+                    <li {...itemGroupProps} key={key}>
                         {groupContent}
                     </li>
                 );

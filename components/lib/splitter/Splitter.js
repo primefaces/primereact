@@ -449,7 +449,8 @@ export const Splitter = React.memo(
                     className: panelClassName,
                     style: { ...getPanelProp(panel, 'style'), flexBasis },
                     role: 'presentation',
-                    'data-p-splitter-panel-nested': false
+                    'data-p-splitter-panel-nested': false,
+                    onClick: getPanelProp(panel, 'onClick')
                 },
                 getPanelPT('splitterpanel.root')
             );
