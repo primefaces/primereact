@@ -1025,9 +1025,9 @@ export const MultiSelect = React.memo(
             if (props.optionLabel && Array.isArray(value)) {
                 return value.map((val) => getLabelByValue(val)).join(', ');
             }
-            
+
             return value;
-        }
+        };
 
         const visibleOptions = getVisibleOptions();
 
