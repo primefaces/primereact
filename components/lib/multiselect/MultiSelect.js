@@ -813,7 +813,7 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             event.stopPropagation();
 
-            if (!isVisible(event.target)) return;
+            if (!isVisible(event.currentTarget)) return;
 
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
