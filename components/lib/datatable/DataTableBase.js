@@ -59,6 +59,10 @@ const styles = `
         z-index: 1;
     }
 
+    .p-datatable.p-datatable-gridlines .p-datatable-scrollable-table > .p-datatable-thead {
+        top: -1px;
+    }
+
     .p-datatable-scrollable-table > .p-datatable-frozen-tbody {
         position: sticky;
         z-index: 1;

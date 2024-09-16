@@ -17,6 +17,7 @@ export const DropdownPanel = React.memo(
 
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
+        const ariaSetSize = props.visibleOptions ? props.visibleOptions.length : 0;
         const filterOptions = {
             filter: (e) => onFilterInputChange(e),
             reset: () => props.resetFilter()
@@ -129,6 +130,8 @@ export const DropdownPanel = React.memo(
                     index={index}
                     focusedOptionIndex={props.focusedOptionIndex}
                     option={option}
+                    ariaSetSize={ariaSetSize}
+                    onInputKeyDown={props.onInputKeyDown}
                     style={style}
                     template={props.itemTemplate}
                     selected={props.isSelected(option)}

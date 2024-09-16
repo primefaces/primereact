@@ -891,6 +891,23 @@ const Tailwind = {
         optionGroupIcon: 'ml-auto',
         transition: TRANSITIONS.overlay
     },
+    floatlabel: {
+        root: {
+            className: classNames(
+                'block relative', // root component style
+                '[&>label]:absolute [&>label]:pointer-events-none [&>label]:left-2 [&>label]:top-1/2 [&>label]:-mt-2 [&>label]:leading-none [&>label]:transition-all [&>label]:ease-in-out', // label style
+                '[&>textarea~label]:top-4', // textarea
+                '[&>input:focus~label]:-top-3 [&>input:focus~label]:text-xs', // input focus
+                '[&>input:autofill~label]:-top-3 [&>input:autofill~label]:text-xs', // input autofill
+                '[&>input.p-filled~label]:-top-3 [&>input.p-filled~label]:text-xs', // input filled
+                '[&>textarea:focus~label]:-top-3 [&>textarea:focus~label]:text-xs', // textarea focus
+                '[&>textarea.p-filled~label]:-top-3 [&>textarea.p-filled~label]:text-xs', // textarea filled
+                '[&>div[data-pc-name="dropdown"][data-p-focus="false"]~label]:-top-3 [&>div[data-pc-name="dropdown"][data-p-focus="false"]~label]:text-xs', // dropdown focus
+                '[&>input::placeholder]:opacity-0 [&>input::placeholder]:transition-all [&>input::placeholder]:ease-in-out', // placeholder
+                '[&>input::placeholder:focus]:opacity-100 [&>input::placeholder:focus]:transition-all [&>input::placeholder:focus]:ease-in-out' // placeholder focus
+            )
+        }
+    },
     iconfield: {
         root: {
             className: classNames('relative')
@@ -1207,9 +1224,9 @@ const Tailwind = {
             })
         },
         panel: ({ props }) => ({
-            className: classNames('bg-white dark:bg-gray-900', 'min-w-full', {
+            className: classNames('bg-white dark:bg-gray-900', 'top-0 left-0 w-auto min-w-min p-2 rounded-lg', {
                 'shadow-md border-0 absolute': !props.inline,
-                'inline-block overflow-x-auto border border-gray-300 dark:border-blue-900/40 p-2 rounded-lg': props.inline
+                'inline-block overflow-x-auto border border-gray-300 dark:border-blue-900/40': props.inline
             })
         }),
         header: {
@@ -1237,7 +1254,7 @@ const Tailwind = {
             )
         },
         table: {
-            className: classNames('border-collapse w-full', 'my-2')
+            className: classNames('border-collapse w-full', 'my-2 mx-0')
         },
         tableHeaderCell: 'p-2',
         weekDay: 'text-gray-600 dark:text-white/70',
@@ -1252,7 +1269,7 @@ const Tailwind = {
                     'cursor-pointer': !context.disabled
                 },
                 {
-                    'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
+                    'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
                 }
             )
@@ -1263,7 +1280,7 @@ const Tailwind = {
                 'w-1/3 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
-                { 'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
+                { 'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled, 'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled }
             )
         }),
         yearPicker: {
@@ -1275,7 +1292,7 @@ const Tailwind = {
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
-                    'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
+                    'text-gray-600 dark:text-white/70 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
                 }
             )
@@ -1302,10 +1319,8 @@ const Tailwind = {
                 'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
             )
         },
-        groupContainer: 'flex',
-        group: {
-            className: classNames('flex-1', 'border-l border-gray-300 pr-0.5 pl-0.5 pt-0 pb-0', 'first:pl-0 first:border-l-0')
-        },
+        groupContainer: '',
+        group: '',
         transition: TRANSITIONS.overlay
     },
     listbox: {
@@ -2109,12 +2124,19 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        step: {
-            className: classNames('flex items-center justify-center', 'text-gray-700 dark:text-white/80 border border-gray-300 dark:border-blue-900/40  bg-white dark:bg-gray-900 w-[2rem] h-[2rem] leading-2rem text-sm z-10 rounded-full')
-        },
-        label: {
-            className: classNames('block', 'whitespace-nowrap overflow-hidden overflow-ellipsis max-w-full', 'mt-2 text-gray-500 dark:text-white/60')
-        }
+        step: ({ parent, context }) => ({
+            className: classNames('flex items-center justify-center', 'text-gray-700 dark:text-white/80 border border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900 w-[2rem] h-[2rem] leading-2rem text-sm z-10 rounded-full', {
+                'bg-white': parent.state.activeIndex !== context.index, // unselected item.
+                'bg-blue-500': parent.state.activeIndex === context.index // Selected item.
+            })
+        }),
+        label: ({ parent, context }) => ({
+            className: classNames('block', 'whitespace-nowrap overflow-hidden overflow-ellipsis max-w-full', 'mt-2 text-gray-500 dark:text-white/60', {
+                'font-normal': parent.state.activeIndex !== context.index, // unselected item.
+                'font-bold': parent.state.activeIndex === context.index, // Selected item.
+                'text-gray-500/60': context.disabled
+            })
+        })
     },
     tabmenu: {
         root: 'overflow-x-auto',

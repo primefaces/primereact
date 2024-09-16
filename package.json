@@ -1,7 +1,7 @@
 {
     "name": "primereact",
     "private": false,
-    "version": "10.8.2",
+    "version": "10.8.3",
     "scripts": {
         "dev": "next dev",
         "start": "next start",
@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@docsearch/react": "3.6.1",
-        "chart.js": "4.4.3",
+        "chart.js": "4.4.4",
         "file-saver": "2.0.5",
         "fs-extra": "^11.2.0",
         "jspdf": "2.5.1",
@@ -55,10 +55,10 @@
         "@rollup/plugin-replace": "^5.0.7",
         "@stackblitz/sdk": "1.11.0",
         "@svgr/webpack": "^8.1.0",
-        "@testing-library/jest-dom": "^6.4.8",
+        "@testing-library/jest-dom": "^6.5.0",
         "@testing-library/react": "^14.1.2",
         "@testing-library/user-event": "^14.5.2",
-        "@types/node": "^20.14.2",
+        "@types/node": "^22.5.2",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "@types/react-transition-group": "^4.4.10",

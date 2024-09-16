@@ -244,7 +244,10 @@ export const InputNumber = React.memo(
 
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                DomHandler.focus(inputRef.current, props.autoFocus);
+                if (!DomHandler.isTouchDevice()) {
+                    DomHandler.focus(inputRef.current, props.autoFocus);
+                }
+
                 repeat(event, null, 1);
                 event.preventDefault();
             }
@@ -276,7 +279,10 @@ export const InputNumber = React.memo(
 
         const onDownButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                DomHandler.focus(inputRef.current, props.autoFocus);
+                if (!DomHandler.isTouchDevice()) {
+                    DomHandler.focus(inputRef.current, props.autoFocus);
+                }
+
                 repeat(event, null, -1);
                 event.preventDefault();
             }
@@ -367,7 +373,12 @@ export const InputNumber = React.memo(
             }
 
             if (event.altKey || event.ctrlKey || event.metaKey) {
-                isSpecialChar.current = true;
+                // #7039 Treat cut as normal character
+                if (event.key.toLowerCase() === 'x' && (event.ctrlKey || event.metaKey)) {
+                    isSpecialChar.current = false;
+                } else {
+                    isSpecialChar.current = true;
+                }
 
                 return;
             }
