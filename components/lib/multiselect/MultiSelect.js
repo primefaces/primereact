@@ -1021,6 +1021,14 @@ export const MultiSelect = React.memo(
             );
         };
 
+        const getInputValue = (value = []) => {
+            if (props.optionLabel && Array.isArray(value)) {
+                return value.map((val) => getLabelByValue(val)).join(', ');
+            }
+            
+            return value;
+        }
+
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
@@ -1082,7 +1090,7 @@ export const MultiSelect = React.memo(
                 'aria-expanded': overlayVisibleState,
                 disabled: props.disabled,
                 tabIndex: !props.disabled ? props.tabIndex : -1,
-                value: JSON.stringify(props.value),
+                value: getInputValue(props.value),
                 ...ariaProps
             },
             ptm('input')
