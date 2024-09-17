@@ -326,7 +326,7 @@ export const MultiSelectPanel = React.memo(
                     onEnter,
                     onEntered,
                     onExit: props.onExit,
-                    onExited: props.onExited,
+                    onExited: props.onExited
                 },
                 getPTOptions('transition')
             );
