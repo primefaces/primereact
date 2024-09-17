@@ -25,7 +25,7 @@ const styles = `
     }
     
     .p-overlaypanel-flipped {
-        margin-top: 0;
+        margin-top: -10px;
         margin-bottom: 10px;
     }
     
