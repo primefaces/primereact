@@ -63,7 +63,7 @@ export const CSSTransition = React.forwardRef((inProps, ref) => {
         return props.in ? props.children : null;
     }
 
-    const immutableProps = { nodeRef: props.nodeRef, in: props.in, onEnter: onEnter, onEntering: onEntering, onEntered: onEntered, onExit: onExit, onExiting: onExiting, onExited: onExited };
+    const immutableProps = { nodeRef: props.nodeRef, in: props.in, appear: props.appear, onEnter: onEnter, onEntering: onEntering, onEntered: onEntered, onExit: onExit, onExiting: onExiting, onExited: onExited };
     const mutableProps = { classNames: props.classNames, timeout: props.timeout, unmountOnExit: props.unmountOnExit };
     const mergedProps = { ...mutableProps, ...(props.options || {}), ...immutableProps };
 
