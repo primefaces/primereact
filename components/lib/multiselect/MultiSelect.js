@@ -961,9 +961,11 @@ export const MultiSelect = React.memo(
         }, [inputRef, props.inputRef]);
 
         React.useEffect(() => {
-            setTimeout(() => {
-                props.overlayVisible ? show() : hide();
-            }, 100);
+            if (props.overlayVisible) {
+                show();
+            } else {
+                hide();
+            }
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.overlayVisible]);
 
