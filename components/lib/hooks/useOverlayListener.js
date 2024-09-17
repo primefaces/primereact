@@ -71,10 +71,6 @@ export const useOverlayListener = ({ target, overlay, listener, when = true, typ
         }
     }, [target, overlay, when]);
 
-    React.useEffect(() => {
-        unbind();
-    }, [when]);
-
     useUnmountEffect(() => {
         unbind();
     });
