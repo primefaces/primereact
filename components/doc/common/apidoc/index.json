@@ -34682,6 +34682,13 @@
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
                             "name": "submenuHeader",
                             "optional": true,
                             "readonly": false,
@@ -34745,11 +34752,25 @@
                     "relatedProp": "",
                     "props": [
                         {
+                            "name": "id",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current element id."
+                        },
+                        {
                             "name": "visible",
                             "optional": false,
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current visible state as a boolean."
+                        },
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
                         }
                     ],
                     "callbacks": []

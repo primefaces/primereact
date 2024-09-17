@@ -59,6 +59,10 @@ export interface MenuPassThroughOptions {
      */
     menu?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the submenu header's DOM element.
      */
     submenuHeader?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
@@ -98,10 +102,20 @@ export interface MenuPassThroughOptions {
  */
 export interface MenuState {
     /**
+     * Current element id.
+     * @defaultValue false
+     */
+    id: string;
+    /**
      * Current visible state as a boolean.
      * @defaultValue true
      */
     visible: boolean;
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
 }
 
 /**
