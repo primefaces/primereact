@@ -356,7 +356,7 @@ export const MultiSelect = React.memo(
                     break;
 
                 default:
-                    if (event.code === 'KeyA' && metaKey) {
+                    if (event.key === 'a' && metaKey) {
                         const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
 
                         updateModel(event, value, value);
