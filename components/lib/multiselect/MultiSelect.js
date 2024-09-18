@@ -1024,7 +1024,7 @@ export const MultiSelect = React.memo(
         };
 
         const getInputValue = (value = []) => {
-            if (props.optionLabel && Array.isArray(value)) {
+            if (Array.isArray(value)) {
                 return value.map((val) => getLabelByValue(val)).join(', ');
             }
 
