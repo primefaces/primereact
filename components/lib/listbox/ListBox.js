@@ -454,7 +454,7 @@ export const ListBox = React.memo(
                     break;
 
                 default:
-                    if (props.multiple && event.code === 'KeyA' && metaKey) {
+                    if (props.multiple && event.key === 'a' && metaKey) {
                         const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
 
                         updateModel(event, value);
