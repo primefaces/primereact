@@ -448,10 +448,10 @@ import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
+import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import { Slider, SliderChangeEvent } from 'primereact/slider';
 import { Tag } from 'primereact/tag';
@@ -616,7 +616,7 @@ export default function CustomersDemo() {
     };
 
     const dateFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
-        return <Calendar value={options.value} onChange={(e: CalendarChangeEvent) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />;
+        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />;
     };
 
     const balanceBodyTemplate = (rowData: Customer) => {
@@ -624,7 +624,7 @@ export default function CustomersDemo() {
     };
 
     const balanceFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
-        return <InputNumber value={options.value} onChange={(e: InputNumberValueChangeEvent) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />;
+        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />;
     };
 
     const statusBodyTemplate = (rowData: Customer) => {
