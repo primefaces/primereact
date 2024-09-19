@@ -151,7 +151,7 @@ export const TableBody = React.memo(
         };
 
         const allowRowDrag = (event) => {
-            return (!allowCellSelection() && allowDrag(event)) || props.reorderableRows;
+            return (!allowCellSelection() && allowDrag({ originalEvent: event })) || props.reorderableRows;
         };
 
         const allowCellDrag = (event) => {
