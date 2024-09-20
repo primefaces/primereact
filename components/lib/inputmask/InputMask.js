@@ -641,6 +641,7 @@ export const InputMask = React.memo(
                 maxLength={props.maxLength}
                 tabIndex={props.tabIndex}
                 disabled={props.disabled}
+                invalid={props.invalid}
                 readOnly={props.readOnly}
                 onFocus={onFocus}
                 onBlur={onBlur}
