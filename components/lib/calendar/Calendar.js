@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -24,6 +24,8 @@ export const Calendar = React.memo(
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
         const [idState, setIdState] = React.useState(props.id);
+        const isCloseOnEscape = overlayVisibleState && props.closeOnEscape;
+        const overlayDisplayOrder = useDisplayOrder('overlay-panel', isCloseOnEscape);
 
         const metaData = {
             props,
@@ -39,8 +41,8 @@ export const Calendar = React.memo(
             callback: () => {
                 hide();
             },
-            when: overlayVisibleState,
-            priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, 0]
+            when: overlayVisibleState && overlayDisplayOrder,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayDisplayOrder]
         });
 
         useHandleStyle(CalendarBase.css.styles, isUnstyled, { name: 'calendar' });
@@ -1852,7 +1854,7 @@ export const Calendar = React.memo(
                 setOverlayVisibleState(true);
 
                 overlayEventListener.current = (e) => {
-                    if (!isOutsideClicked(e)) {
+                    if (!isOutsideClicked(e.target)) {
                         isOverlayClicked.current = true;
                     }
                 };
