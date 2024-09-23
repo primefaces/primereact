@@ -1854,7 +1854,7 @@ export const Calendar = React.memo(
                 setOverlayVisibleState(true);
 
                 overlayEventListener.current = (e) => {
-                    if (!isOutsideClicked(e)) {
+                    if (!isOutsideClicked(e) && visible) {
                         isOverlayClicked.current = true;
                     }
                 };
