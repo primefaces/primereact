@@ -678,7 +678,11 @@ export const TableBody = React.memo(
         const onRowDragOver = (e) => {
             const { originalEvent: event, index } = e;
 
-            if (rowDragging.current && draggedRowIndex.current !== index) {
+            if (!rowDragging.current) {
+                return;
+            }
+
+            if (draggedRowIndex.current !== index) {
                 const rowElement = event.currentTarget;
                 const rowY = DomHandler.getOffset(rowElement).top + DomHandler.getWindowScrollTop();
                 const pageY = event.pageY + window.scrollY;
