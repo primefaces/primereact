@@ -33887,6 +33887,18 @@
                             "parameters": [],
                             "returnType": "HTMLElement",
                             "description": "Used to get overlay element."
+                        },
+                        {
+                            "name": "hide",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Hide the mention."
+                        },
+                        {
+                            "name": "show",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Show the mention."
                         }
                     ]
                 },
