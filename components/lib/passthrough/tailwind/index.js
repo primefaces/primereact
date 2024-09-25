@@ -1073,6 +1073,9 @@ const Tailwind = {
         hideIcon: {
             className: classNames('absolute top-1/2 -mt-2', 'right-3 text-gray-600 dark:text-white/70')
         },
+        inputIcon: {
+            root: 'mt-0'
+        },
         transition: TRANSITIONS.overlay
     },
     togglebutton: {
