@@ -87,7 +87,7 @@ export declare class DomHandler {
     static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any };
     static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
     static isClickable(el: HTMLElement): boolean;
-    static applyStyle(el: HTMLElement, style: React.CSSProperties): void;
+    static applyStyle(el: HTMLElement, style: React.CSSProperties | string): void;
     static exportCSV(csv: any, filename: string): void;
     static saveAs(file: { name: string; url: any }): boolean;
     static createInlineStyle(nonce?: string, styleContainer?: ShadowRoot | HTMLElement): HTMLStyleElement;
