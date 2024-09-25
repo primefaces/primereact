@@ -32153,6 +32153,12 @@
                             "type": "InputTextProps"
                         },
                         {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputTextPassThroughMethodOptions"
+                        },
+                        {
                             "name": "context",
                             "optional": false,
                             "readonly": false,

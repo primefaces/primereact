@@ -483,7 +483,9 @@ export const Password = React.memo(
             input = (
                 <IconField className={cx('iconField')} pt={ptm('iconField')} __parentMetadata={{ parent: metaData }}>
                     {input}
-                    <InputIcon>{icon}</InputIcon>
+                    <InputIcon className={cx('inputIcon')} pt={ptm('inputIcon')} __parentMetadata={{ parent: metaData }}>
+                        {icon}
+                    </InputIcon>
                 </IconField>
             );
         }

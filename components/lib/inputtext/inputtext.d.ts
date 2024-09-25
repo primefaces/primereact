@@ -22,6 +22,7 @@ export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPa
  */
 export interface InputTextPassThroughMethodOptions {
     props: InputTextProps;
+    parent: InputTextPassThroughMethodOptions;
     context: InputTextContext;
 }
 
