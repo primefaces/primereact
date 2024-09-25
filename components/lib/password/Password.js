@@ -477,11 +477,15 @@ export const Password = React.memo(
             ptm('input')
         );
 
+        const iconFieldProps = mergeProps({
+            className: cx('iconField')
+        }, ptm('iconField'))
+
         let input = <InputText {...inputTextProps} />;
 
         if (icon) {
             input = (
-                <IconField className={cx('iconField')} pt={ptm('iconField')} __parentMetadata={{ parent: metaData }}>
+                <IconField {...iconFieldProps} __parentMetadata={{ parent: metaData }}>
                     {input}
                     <InputIcon>{icon}</InputIcon>
                 </IconField>
