@@ -45237,7 +45237,7 @@
                             "name": "closeIconRef",
                             "optional": false,
                             "readonly": false,
-                            "type": "RefObject<HTMLElement | HTMLButtonElement>",
+                            "type": "RefObject<HTMLElement | HTMLButtonElement | Button>",
                             "description": "Allows you to specify the close button of the sidebar."
                         }
                     ],
