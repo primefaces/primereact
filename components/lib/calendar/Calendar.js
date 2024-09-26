@@ -3342,7 +3342,7 @@ export const Calendar = React.memo(
         const createTitleYearElement = (metaYear) => {
             const viewDate = getViewDate();
             const viewYear = viewDate.getFullYear();
-            const displayYear = props.numberOfMonths > 1 ? metaYear : viewYear;
+            const displayYear = props.yearNavigator ? metaYear : currentYear;
 
             if (props.yearNavigator) {
                 let yearOptions = [];
