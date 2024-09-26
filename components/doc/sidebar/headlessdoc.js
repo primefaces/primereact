@@ -44,7 +44,7 @@ export function HeadlessDoc(props) {
                     <div className="overflow-y-auto">
                         <ul className="list-none p-3 m-0">
                             <li>
-                                <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                <StyleClass nodeRef={btnRef1} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                     <div ref={btnRef1} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                         <span className="font-medium">FAVORITES</span>
                                         <i className="pi pi-chevron-down"></i>
@@ -67,7 +67,7 @@ export function HeadlessDoc(props) {
                                         </a>
                                     </li>
                                     <li>
-                                        <StyleClass nodeRef={btnRef2} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                        <StyleClass nodeRef={btnRef2} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                             <a ref={btnRef2} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                 <i className="pi pi-chart-line mr-2"></i>
                                                 <span className="font-medium">Reports</span>
@@ -77,7 +77,7 @@ export function HeadlessDoc(props) {
                                         </StyleClass>
                                         <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                                             <li>
-                                                <StyleClass nodeRef={btnRef3} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                <StyleClass nodeRef={btnRef3} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                     <a ref={btnRef3} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                         <i className="pi pi-chart-line mr-2"></i>
                                                         <span className="font-medium">Revenue</span>
@@ -147,7 +147,7 @@ export function HeadlessDoc(props) {
                         </ul>
                         <ul className="list-none p-3 m-0">
                             <li>
-                                <StyleClass nodeRef={btnRef4} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                <StyleClass nodeRef={btnRef4} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                     <div ref={btnRef4} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                         <span className="font-medium">APPLICATION</span>
                                         <i className="pi pi-chevron-down"></i>
@@ -182,7 +182,7 @@ export function HeadlessDoc(props) {
                     </div>
                     <div className="mt-auto">
                         <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
-                        <a v-ripple className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                        <a  className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
                             <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                             <span className="font-bold">Amy Elsner</span>
                         </a>
@@ -248,7 +248,7 @@ export default function HeadlessDemo() {
                                 <div className="overflow-y-auto">
                                     <ul className="list-none p-3 m-0">
                                         <li>
-                                            <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                            <StyleClass nodeRef={btnRef1} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                 <div ref={btnRef1} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                                     <span className="font-medium">FAVORITES</span>
                                                     <i className="pi pi-chevron-down"></i>
@@ -271,7 +271,7 @@ export default function HeadlessDemo() {
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <StyleClass nodeRef={btnRef2} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                    <StyleClass nodeRef={btnRef2} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                         <a ref={btnRef2} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                             <i className="pi pi-chart-line mr-2"></i>
                                                             <span className="font-medium">Reports</span>
@@ -281,7 +281,7 @@ export default function HeadlessDemo() {
                                                     </StyleClass>
                                                     <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                                                         <li>
-                                                            <StyleClass nodeRef={btnRef3} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                            <StyleClass nodeRef={btnRef3} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                                 <a ref={btnRef3} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                                     <i className="pi pi-chart-line mr-2"></i>
                                                                     <span className="font-medium">Revenue</span>
@@ -351,7 +351,7 @@ export default function HeadlessDemo() {
                                     </ul>
                                     <ul className="list-none p-3 m-0">
                                         <li>
-                                            <StyleClass nodeRef={btnRef4} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                            <StyleClass nodeRef={btnRef4} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                 <div ref={btnRef4} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                                     <span className="font-medium">APPLICATION</span>
                                                     <i className="pi pi-chevron-down"></i>
@@ -386,7 +386,7 @@ export default function HeadlessDemo() {
                                 </div>
                                 <div className="mt-auto">
                                     <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
-                                    <a v-ripple className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                    <a  className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
                                         <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                                         <span className="font-bold">Amy Elsner</span>
                                     </a>
@@ -455,7 +455,7 @@ export default function HeadlessDemo() {
                                 <div className="overflow-y-auto">
                                     <ul className="list-none p-3 m-0">
                                         <li>
-                                            <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                            <StyleClass nodeRef={btnRef1} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                 <div ref={btnRef1} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                                     <span className="font-medium">FAVORITES</span>
                                                     <i className="pi pi-chevron-down"></i>
@@ -478,7 +478,7 @@ export default function HeadlessDemo() {
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <StyleClass nodeRef={btnRef2} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                    <StyleClass nodeRef={btnRef2} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                         <a ref={btnRef2} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                             <i className="pi pi-chart-line mr-2"></i>
                                                             <span className="font-medium">Reports</span>
@@ -488,7 +488,7 @@ export default function HeadlessDemo() {
                                                     </StyleClass>
                                                     <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                                                         <li>
-                                                            <StyleClass nodeRef={btnRef3} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                            <StyleClass nodeRef={btnRef3} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                                 <a ref={btnRef3} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                                     <i className="pi pi-chart-line mr-2"></i>
                                                                     <span className="font-medium">Revenue</span>
@@ -558,7 +558,7 @@ export default function HeadlessDemo() {
                                     </ul>
                                     <ul className="list-none p-3 m-0">
                                         <li>
-                                            <StyleClass nodeRef={btnRef4} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                            <StyleClass nodeRef={btnRef4} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                 <div ref={btnRef4} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                                     <span className="font-medium">APPLICATION</span>
                                                     <i className="pi pi-chevron-down"></i>
@@ -593,7 +593,7 @@ export default function HeadlessDemo() {
                                 </div>
                                 <div className="mt-auto">
                                     <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
-                                    <a v-ripple className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                    <a  className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
                                         <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                                         <span className="font-bold">Amy Elsner</span>
                                     </a>
@@ -665,7 +665,7 @@ export default function HeadlessDemo() {
                                     <div className="overflow-y-auto">
                                         <ul className="list-none p-3 m-0">
                                             <li>
-                                                <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                <StyleClass nodeRef={btnRef1} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                     <div ref={btnRef1} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                                         <span className="font-medium">FAVORITES</span>
                                                         <i className="pi pi-chevron-down" />
@@ -688,7 +688,7 @@ export default function HeadlessDemo() {
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <StyleClass nodeRef={btnRef2} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                        <StyleClass nodeRef={btnRef2} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                             <a ref={btnRef2} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                                 <i className="pi pi-chart-line mr-2" />
                                                                 <span className="font-medium">Reports</span>
@@ -698,7 +698,7 @@ export default function HeadlessDemo() {
                                                         </StyleClass>
                                                         <ul className="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                                                             <li>
-                                                                <StyleClass nodeRef={btnRef3} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                                <StyleClass nodeRef={btnRef3} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                                     <a ref={btnRef3} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                                         <i className="pi pi-chart-line mr-2" />
                                                                         <span className="font-medium">Revenue</span>
@@ -768,7 +768,7 @@ export default function HeadlessDemo() {
                                         </ul>
                                         <ul className="list-none p-3 m-0">
                                             <li>
-                                                <StyleClass nodeRef={btnRef4} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
+                                                <StyleClass nodeRef={btnRef4} selector="@next" enterFromClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                     <div ref={btnRef4} className="p-ripple p-3 flex align-items-center justify-content-between text-600 cursor-pointer">
                                                         <span className="font-medium">APPLICATION</span>
                                                         <i className="pi pi-chevron-down" />
@@ -803,7 +803,7 @@ export default function HeadlessDemo() {
                                     </div>
                                     <div className="mt-auto">
                                         <hr className="mb-3 mx-3 border-top-1 border-none surface-border" />
-                                        <a v-ripple className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <a className="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
                                             <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                                             <span className="font-bold">Amy Elsner</span>
                                         </a>
