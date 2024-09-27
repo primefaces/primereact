@@ -265,6 +265,10 @@ export const MenubarSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
+            if (processedItem.visible === false) {
+                return null;
+            }
+
             return getItemProp(processedItem, 'separator') ? createSeparator(processedItem, index) : createMenuitem(processedItem, index);
         };
 
