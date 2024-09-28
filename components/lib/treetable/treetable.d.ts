@@ -577,10 +577,10 @@ interface TreeTableColReorderEvent {
 }
 
 /**
- * Defines valid properties in TreeTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * Defines valid properties in TreeTable component.
  * @group Properties
  */
-export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
+export interface TreeTableProps {
     /**
      * Whether to show it even there is only one page.
      * @defaultValue true
