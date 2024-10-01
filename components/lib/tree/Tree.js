@@ -92,6 +92,7 @@ export const Tree = React.memo(
 
         React.useEffect(() => {
             if (props.filter) _filter();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [filteredValue, props.value, props.filter]);
 
         const onDragStart = (event) => {
