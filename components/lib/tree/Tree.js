@@ -17,7 +17,7 @@ export const Tree = React.memo(
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
-        const [filterExpandedKeys, setFilterExpandedKeys] = React.useState(null);
+        const [filterExpandedKeys, setFilterExpandedKeys] = React.useState({});
 
         const elementRef = React.useRef(null);
         const filteredNodes = React.useRef([]);
@@ -320,7 +320,6 @@ export const Tree = React.memo(
 
         const _filter = () => {
             if (!filterChanged.current) return;
-            currentFilterExpandedKeys = {};
 
             if (ObjectUtils.isEmpty(filteredValue)) {
                 filteredNodes.current = props.value;
