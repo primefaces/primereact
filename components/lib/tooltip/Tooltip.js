@@ -212,7 +212,7 @@ export const Tooltip = React.memo(
                 if (success) {
                     applyDelay('hideDelay', () => {
                         if (!isAutoHide() && allowHide.current === false) {
-                            re  turn;
+                            return;
                         }
 
                         ZIndexUtils.clear(elementRef.current);
