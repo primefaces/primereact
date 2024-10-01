@@ -29,6 +29,8 @@ export const Tooltip = React.memo(
             }
         };
 
+        const [isBothFocus, setIsBothFocus] = React.useState(false);
+
         const { ptm, cx, sx, isUnstyled } = TooltipBase.setMetaData(metaData);
 
         useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
@@ -110,7 +112,7 @@ export const Tooltip = React.memo(
 
                 if (event === 'both') {
                     showEvents = ['focus', 'mouseenter'];
-                    hideEvents = ['blur', 'mouseleave'];
+                    hideEvents = isBothFocus ? ['blur'] : ['mouseleave', 'blur'];
                 }
             }
 
@@ -172,6 +174,8 @@ export const Tooltip = React.memo(
         };
 
         const show = (e) => {
+            if(e.type && e.type==="focus") setIsBothFocus(true);
+          
             currentTargetRef.current = e.currentTarget;
             const disabled = isDisabled(currentTargetRef.current);
             const empty = isContentEmpty(isShowOnDisabled(currentTargetRef.current) && disabled ? currentTargetRef.current.firstChild : currentTargetRef.current);
@@ -198,6 +202,8 @@ export const Tooltip = React.memo(
         };
 
         const hide = (e) => {
+            if(e && e.type==="blur") setIsBothFocus(false);
+    
             clearTimeouts();
 
             if (visibleState) {
@@ -206,7 +212,7 @@ export const Tooltip = React.memo(
                 if (success) {
                     applyDelay('hideDelay', () => {
                         if (!isAutoHide() && allowHide.current === false) {
-                            return;
+                            re  turn;
                         }
 
                         ZIndexUtils.clear(elementRef.current);
