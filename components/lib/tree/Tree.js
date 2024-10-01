@@ -16,12 +16,18 @@ export const Tree = React.memo(
 
         const [filterValue, filterValueState, setFilterValueState] = useDebounce('', props.filterDelay || 0);
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
+        const [filterExpandedKeys, setFilterExpandedKeys] = React.useState(null);
+
         const elementRef = React.useRef(null);
         const filteredNodes = React.useRef([]);
         const dragState = React.useRef(null);
         const filterChanged = React.useRef(false);
+
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
-        const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const isFiltering = props.filter && filteredValue;
+        const expandedKeys = isFiltering ? filterExpandedKeys : props.onToggle ? props.expandedKeys : expandedKeysState;
+        const currentFilterExpandedKeys = {};
+
         const childFocusEvent = React.useRef(null);
         const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
             props,
@@ -52,7 +58,11 @@ export const Tree = React.memo(
                     childFocusEvent.current = originalEvent;
                 }
 
-                setExpandedKeysState(value);
+                if (isFiltering) {
+                    setFilterExpandedKeys(value);
+                } else {
+                    setExpandedKeysState(value);
+                }
             }
         };
 
@@ -79,6 +89,10 @@ export const Tree = React.memo(
                 childFocusEvent.current = null;
             }
         }, [expandedKeys]);
+
+        React.useEffect(() => {
+            if (props.filter) _filter();
+        }, [filteredValue, props.value, props.filter]);
 
         const onDragStart = (event) => {
             dragState.current = {
@@ -299,20 +313,19 @@ export const Tree = React.memo(
 
         const filter = (value) => {
             setFilterValueState(ObjectUtils.isNotEmpty(value) ? value : '');
-            _filter();
         };
 
         const childNodeFocus = (node) => {};
 
         const _filter = () => {
-            if (!filterChanged.current) {
-                return;
-            }
+            if (!filterChanged.current) return;
+            currentFilterExpandedKeys = {};
 
             if (ObjectUtils.isEmpty(filteredValue)) {
                 filteredNodes.current = props.value;
             } else {
                 filteredNodes.current = [];
+
                 const searchFields = props.filterBy.split(',');
                 const filterText = filteredValue.toLocaleLowerCase(props.filterLocale);
                 const isStrictMode = props.filterMode === 'strict';
@@ -330,6 +343,7 @@ export const Tree = React.memo(
                 }
             }
 
+            setFilterExpandedKeys(currentFilterExpandedKeys);
             filterChanged.current = false;
         };
 
@@ -353,6 +367,7 @@ export const Tree = React.memo(
                 }
 
                 if (matched) {
+                    currentFilterExpandedKeys[node.key] = true;
                     node.expanded = true;
 
                     return true;
@@ -475,10 +490,7 @@ export const Tree = React.memo(
 
         const createModel = () => {
             if (props.value) {
-                if (props.filter) {
-                    filterChanged.current = true;
-                    _filter();
-                }
+                if (props.filter) filterChanged.current = true;
 
                 const value = getRootNode();
 
