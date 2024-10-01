@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { getStorage } from '../../utils/utils';
 import PrimeReact, { FilterMatchMode, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useUpdateEffect, useMergeProps, useMountEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
@@ -13,7 +14,6 @@ import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
-import { getStorage } from '../../utils/utils';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const mergeProps = useMergeProps();
@@ -1439,7 +1439,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             style: props.style,
             'data-scrollselectors': '.p-treetable-wrapper'
         },
-        ObjectUtils.findDiffKeys(props, TreeTable.defaultProps),
+        TreeTableBase.getOtherProps(props),
         ptCallbacks.ptm('root')
     );
 

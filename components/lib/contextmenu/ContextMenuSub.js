@@ -293,6 +293,10 @@ export const ContextMenuSub = React.memo(
         };
 
         const createItem = (processedItem, index) => {
+            if (processedItem.visible === false) {
+                return null;
+            }
+
             return processedItem.separator ? createSeparator(index) : createMenuItem(processedItem, index);
         };
 

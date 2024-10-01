@@ -174,6 +174,10 @@ export const SlideMenuSub = React.memo((props) => {
     };
 
     const createItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
+
         return item.separator ? createSeparator(index) : createMenuitem(item, index);
     };
 

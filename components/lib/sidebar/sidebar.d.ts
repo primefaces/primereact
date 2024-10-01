@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { Button } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
@@ -92,7 +93,7 @@ interface ContentProps {
     /**
      * Allows you to specify the close button of the sidebar.
      */
-    closeIconRef: React.RefObject<HTMLButtonElement | HTMLElement>;
+    closeIconRef: React.RefObject<HTMLButtonElement | HTMLElement | Button>;
     /**
      * Callback for hiding the sidebar.
      * @param {React.SyntheticEvent} event - Used to get the event of the element.

@@ -56,7 +56,7 @@ const styles = `
     .p-datatable-scrollable-table > .p-datatable-thead {
         position: sticky;
         top: 0;
-        z-index: 1;
+        z-index: 2;
     }
 
     .p-datatable.p-datatable-gridlines .p-datatable-scrollable-table > .p-datatable-thead {
