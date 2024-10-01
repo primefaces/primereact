@@ -368,7 +368,6 @@ export const Tree = React.memo(
 
                 if (matched) {
                     currentFilterExpandedKeys[node.key] = true;
-                    node.expanded = true;
 
                     return true;
                 }
