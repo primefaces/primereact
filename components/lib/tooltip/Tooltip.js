@@ -173,8 +173,8 @@ export const Tooltip = React.memo(
         };
 
         const show = (e) => {
-            if(e.type && e.type==="focus") setMultipleFocusEvents(true);
-          
+            if (e.type && e.type === 'focus') setMultipleFocusEvents(true);
+
             currentTargetRef.current = e.currentTarget;
             const disabled = isDisabled(currentTargetRef.current);
             const empty = isContentEmpty(isShowOnDisabled(currentTargetRef.current) && disabled ? currentTargetRef.current.firstChild : currentTargetRef.current);
@@ -201,8 +201,8 @@ export const Tooltip = React.memo(
         };
 
         const hide = (e) => {
-            if(e && e.type==="blur") setMultipleFocusEvents(false);
-    
+            if (e && e.type === 'blur') setMultipleFocusEvents(false);
+
             clearTimeouts();
 
             if (visibleState) {
