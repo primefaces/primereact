@@ -846,7 +846,7 @@ export const Dropdown = React.memo(
         };
 
         const isOptionGroup = (option) => {
-            return props.optionGroupLabel && option.optionGroup && option.group;
+            return props.optionGroupLabel && option.group;
         };
 
         const isOptionDisabled = (option) => {
