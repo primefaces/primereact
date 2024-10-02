@@ -20,7 +20,7 @@ export const Slider = React.memo(
         const barWidth = React.useRef(0);
         const barHeight = React.useRef(0);
         const touchId = React.useRef();
-        const value = props.range ? props.value ?? [props.min, props.max] : props.value ?? props.min ?? 0;
+        const value = props.range ? (props.value ?? [props.min, props.max]) : (props.value ?? props.min ?? 0);
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
 
