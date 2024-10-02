@@ -1,10 +1,14 @@
-import AppContentContext from '@/components/layout/appcontentcontext';
 import { useMountEffect } from '@/components/lib/hooks/Hooks';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 import News from '@/data/news.json';
-import { useContext } from 'react';
 
 export default function NewsSection() {
-    const { newsActive, announcement, showNews, hideNews } = useContext(AppContentContext);
+    const {
+        announcement,
+        hideNews,
+        newsActive
+        // showNews,
+    } = useAppConfig();
     const storageKey = 'primereact-news';
 
     useMountEffect(() => {

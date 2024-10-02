@@ -1,8 +1,7 @@
-import AppContentContext from '@/components/layout/appcontentcontext';
-import { useContext } from 'react';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 
 const UsersSection = () => {
-    const { darkMode } = useContext(AppContentContext);
+    const { darkMode } = useAppConfig();
     const colorScheme = darkMode ? 'light' : 'dark';
     const usersData = ['fox', 'airbus', 'mercedes', 'ebay', 'ford', 'vw', 'intel', 'unicredit', 'lufthansa', 'nvidia', 'verizon', 'amex'];
 

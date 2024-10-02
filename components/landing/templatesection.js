@@ -1,10 +1,10 @@
-import AppContentContext from '@/components/layout/appcontentcontext';
+import { useAppConfig } from '@/components/context/AppConfigContext';
 import { classNames } from '@/components/lib/utils/ClassNames';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const TemplateSection = () => {
     const [animation, setAnimation] = useState(false);
-    const { darkMode } = useContext(AppContentContext);
+    const { darkMode } = useAppConfig();
 
     useEffect(() => {
         setAnimation(true);
