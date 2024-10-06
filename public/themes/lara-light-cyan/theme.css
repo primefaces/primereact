@@ -1374,10 +1374,16 @@
   .p-icon-field-left > .p-inputtext {
     padding-left: 2.5rem;
   }
+  .p-icon-field-left .p-inputnumber-input {
+    padding-left: 2.5rem;
+  }
   .p-icon-field-left.p-float-label > label {
     left: 2.5rem;
   }
   .p-icon-field-right > .p-inputtext {
+    padding-right: 2.5rem;
+  }
+  .p-icon-field-right .p-inputnumber-input {
     padding-right: 2.5rem;
   }
   ::-webkit-input-placeholder {
