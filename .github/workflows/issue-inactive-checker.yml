@@ -26,3 +26,9 @@ jobs:
           actions: "close-issues"
           labels: "Status: Needs Reproducer"
           inactive-day: 20
+      - name: Duplicate
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "close-issues"
+          labels: "Resolution: Duplicate"
+          inactive-day: 20

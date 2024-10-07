@@ -287,7 +287,6 @@ export const GalleriaItem = React.memo(
             const indicatorProps = mergeProps(
                 {
                     className: cx('indicator', { isActive }),
-                    key: key,
                     tabIndex: 0,
                     'aria-label': ariaPageLabel(index + 1),
                     'aria-selected': props.activeIndex === index,
@@ -308,7 +307,11 @@ export const GalleriaItem = React.memo(
                 );
             }
 
-            return <li {...indicatorProps}>{indicator}</li>;
+            return (
+                <li {...indicatorProps} key={key}>
+                    {indicator}
+                </li>
+            );
         };
 
         const createIndicators = () => {

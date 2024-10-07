@@ -106,14 +106,17 @@ export const BreadCrumb = React.memo(
                 const menuitemProps = mergeProps(
                     {
                         id: key,
-                        key,
                         className: cx('home', { _className, disabled }),
                         style
                     },
                     ptm('home')
                 );
 
-                return <li {...menuitemProps}>{content}</li>;
+                return (
+                    <li {...menuitemProps} key={key}>
+                        {content}
+                    </li>
+                );
             }
 
             return null;
@@ -133,14 +136,17 @@ export const BreadCrumb = React.memo(
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 ptm('separator')
             );
 
-            return <li {...separatorProps}>{separatorIcon}</li>;
+            return (
+                <li {...separatorProps} key={key}>
+                    {separatorIcon}
+                </li>
+            );
         };
 
         const createMenuitem = (item, index) => {
@@ -184,14 +190,17 @@ export const BreadCrumb = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('menuitem', { item }),
                     style: item.style
                 },
                 ptm('menuitem')
             );
 
-            return <li {...menuitemProps}>{content}</li>;
+            return (
+                <li {...menuitemProps} key={key}>
+                    {content}
+                </li>
+            );
         };
 
         const createMenuitems = () => {
@@ -254,7 +263,7 @@ export const BreadCrumb = React.memo(
             <nav {...rootProps}>
                 <ol {...menuProps}>
                     {home}
-                    {home && separator}
+                    {home && !!items?.length && separator}
                     {items}
                 </ol>
             </nav>

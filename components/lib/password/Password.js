@@ -307,7 +307,6 @@ export const Password = React.memo(
 
             const hideIconProps = mergeProps(
                 {
-                    key: 'hideIcon',
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('hideIcon'),
@@ -321,7 +320,6 @@ export const Password = React.memo(
 
             const showIconProps = mergeProps(
                 {
-                    key: 'showIcon',
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
                     className: cx('showIcon'),
@@ -466,6 +464,7 @@ export const Password = React.memo(
                 invalid: props.invalid,
                 variant: props.variant,
                 style: props.inputStyle,
+                unstyled: props.unstyled,
                 tabIndex: props.tabIndex || '0',
                 tooltip: props.tooltip,
                 tooltipOptions: props.tooltipOptions,
@@ -484,7 +483,9 @@ export const Password = React.memo(
             input = (
                 <IconField className={cx('iconField')} pt={ptm('iconField')} __parentMetadata={{ parent: metaData }}>
                     {input}
-                    <InputIcon>{icon}</InputIcon>
+                    <InputIcon className={cx('inputIcon')} pt={ptm('inputIcon')} __parentMetadata={{ parent: metaData }}>
+                        {icon}
+                    </InputIcon>
                 </IconField>
             );
         }

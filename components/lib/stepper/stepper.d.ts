@@ -11,8 +11,10 @@ import * as React from 'react';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { StepperPanelPassThroughOptionType } from '../stepperpanel/stepperpanel';
+import { PassThroughType } from '../utils';
 
 export declare type StepperPassThroughOptionType = StepperPassThroughAttributes | ((options: StepperPassThroughMethodOptions) => StepperPassThroughAttributes | string) | string | null | undefined;
+export declare type StepperPassThroughType<T> = PassThroughType<T, StepperPassThroughMethodOptions>;
 
 /**
  * Custom passthrough(pt) option method.
@@ -43,6 +45,14 @@ export interface StepperPassThroughOptions {
      * Used to pass attributes to the end handler's DOM element.
      */
     stepperpanel?: StepperPanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the start's DOM element.
+     */
+    start?: StepperPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the right's DOM element.
+     */
+    end?: StepperPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
@@ -110,6 +120,10 @@ export interface StepperProps {
      */
     orientation?: 'horizontal' | 'vertical' | undefined;
     /**
+     * Position of the stepper panel header relative to the step number.
+     */
+    headerPosition?: 'top' | 'right' | 'bottom' | 'left' | undefined;
+    /**
      * Whether the steps are clickable or not.
      * @defaultValue false
      */
@@ -118,6 +132,14 @@ export interface StepperProps {
      * Callback to invoke when an active panel is changed.
      */
     onChangeStep?(event: StepperChangeEvent): void;
+    /**
+     * The template of start section.
+     */
+    start?: React.ReactNode | ((props: StepperProps) => React.ReactNode);
+    /**
+     * The template of end section.
+     */
+    end?: React.ReactNode | ((props: StepperProps) => React.ReactNode);
     /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {StepperPassThroughOptions}

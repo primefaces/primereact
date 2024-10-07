@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
 
 export const Chip = React.memo(
@@ -41,7 +41,6 @@ export const Chip = React.memo(
 
             const removeIconProps = mergeProps(
                 {
-                    key: 'removeIcon',
                     role: 'button',
                     tabIndex: 0,
                     className: cx('removeIcon'),
@@ -51,12 +50,11 @@ export const Chip = React.memo(
                 ptm('removeIcon')
             );
 
-            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} />;
+            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} key={UniqueComponentId('removeIcon')} />;
 
             if (props.image) {
                 const imageProps = mergeProps(
                     {
-                        key: 'image',
                         src: props.image,
                         onError: props.onImageError
                     },
@@ -67,7 +65,6 @@ export const Chip = React.memo(
             } else if (props.icon) {
                 const chipIconProps = mergeProps(
                     {
-                        key: 'icon',
                         className: cx('icon')
                     },
                     ptm('icon')
@@ -79,13 +76,16 @@ export const Chip = React.memo(
             if (props.label) {
                 const labelProps = mergeProps(
                     {
-                        key: 'label',
                         className: cx('label')
                     },
                     ptm('label')
                 );
 
-                content.push(<span {...labelProps}>{props.label}</span>);
+                content.push(
+                    <span {...labelProps} key="label">
+                        {props.label}
+                    </span>
+                );
             }
 
             if (props.removable) {

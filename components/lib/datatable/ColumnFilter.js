@@ -559,7 +559,7 @@ export const ColumnFilter = React.memo((props) => {
                 'aria-haspopup': true,
                 'aria-expanded': overlayVisibleState,
                 'aria-label': label,
-                'aria-controls': overlayId.current,
+                'aria-controls': overlayVisibleState ? overlayId.current : undefined,
                 onClick: (e) => toggleMenu(e),
                 onKeyDown: (e) => onToggleButtonKeyDown(e)
             },

@@ -94,14 +94,13 @@ export const PanelMenuSub = React.memo(
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: cx('separator'),
                     role: 'separator'
                 },
                 _ptm('separator')
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createSubmenu = (processedItem, active) => {
@@ -138,7 +137,8 @@ export const PanelMenuSub = React.memo(
                                 onItemToggle={onItemToggle}
                                 menuProps={props.menuProps}
                                 model={processedItem.items}
-                                submenuIcon={props.submenuIcon}
+                                expandIcon={props.expandIcon}
+                                collapseIcon={props.collapseIcon}
                                 ptm={ptm}
                                 cx={cx}
                             />
@@ -184,7 +184,9 @@ export const PanelMenuSub = React.memo(
                 },
                 getPTOptions(processedItem, 'submenuicon', index)
             );
-            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
+
+            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.collapseIcon || <ChevronDownIcon {...submenuIconProps} /> : props.expandIcon || <ChevronRightIcon {...submenuIconProps} />);
+
             const submenu = createSubmenu(processedItem, active);
             const actionProps = mergeProps(
                 {
@@ -232,7 +234,6 @@ export const PanelMenuSub = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    key,
                     id: key,
                     className: cx('menuitem', { item, focused: itemFocused, disabled: disabled }),
                     style: item.style,
@@ -249,7 +250,7 @@ export const PanelMenuSub = React.memo(
             );
 
             return (
-                <li {...menuitemProps}>
+                <li {...menuitemProps} key={key}>
                     <div {...contentProps}>{content}</div>
                     {submenu}
                 </li>
@@ -257,6 +258,10 @@ export const PanelMenuSub = React.memo(
         };
 
         const createItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
+
             return getItemProp(item, 'separator') ? createSeparator(index) : createMenuItem(item, index);
         };
 

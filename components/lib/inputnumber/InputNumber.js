@@ -58,8 +58,8 @@ export const InputNumber = React.memo(
                 currency: props.currency,
                 currencyDisplay: props.currencyDisplay,
                 useGrouping: props.useGrouping,
-                minimumFractionDigits: props.minFractionDigits,
-                maximumFractionDigits: props.maxFractionDigits,
+                minimumFractionDigits: props.minFractionDigits ?? undefined,
+                maximumFractionDigits: props.maxFractionDigits ?? undefined,
                 roundingMode: props.roundingMode
             };
         };
@@ -244,7 +244,10 @@ export const InputNumber = React.memo(
 
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                DomHandler.focus(inputRef.current, props.autoFocus);
+                if (!DomHandler.isTouchDevice()) {
+                    DomHandler.focus(inputRef.current, props.autoFocus);
+                }
+
                 repeat(event, null, 1);
                 event.preventDefault();
             }
@@ -276,7 +279,10 @@ export const InputNumber = React.memo(
 
         const onDownButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                DomHandler.focus(inputRef.current, props.autoFocus);
+                if (!DomHandler.isTouchDevice()) {
+                    DomHandler.focus(inputRef.current, props.autoFocus);
+                }
+
                 repeat(event, null, -1);
                 event.preventDefault();
             }
@@ -367,7 +373,12 @@ export const InputNumber = React.memo(
             }
 
             if (event.altKey || event.ctrlKey || event.metaKey) {
-                isSpecialChar.current = true;
+                // #7039 Treat cut as normal character
+                if (event.key.toLowerCase() === 'x' && (event.ctrlKey || event.metaKey)) {
+                    isSpecialChar.current = false;
+                } else {
+                    isSpecialChar.current = true;
+                }
 
                 return;
             }
@@ -547,7 +558,7 @@ export const InputNumber = React.memo(
                         const _isDecimalSign = isDecimalSign(char);
                         const _isMinusSign = isMinusSign(char);
 
-                        if ((event.code && (event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
+                        if ((Number(char) >= 0 && Number(char) <= 9) || _isMinusSign || _isDecimalSign) {
                             insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
                         }
                     }
@@ -668,6 +679,7 @@ export const InputNumber = React.memo(
             const selectionEnd = inputRef.current.selectionEnd;
             let inputValue = inputRef.current.value.trim();
             const { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
+            const maxFractionDigits = numberFormat.current.resolvedOptions().maximumFractionDigits;
             let newValueStr;
 
             if (sign.isMinusSign) {
@@ -689,12 +701,11 @@ export const InputNumber = React.memo(
                 } else if (decimalCharIndex > selectionStart && decimalCharIndex < selectionEnd) {
                     newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
                     updateValue(event, newValueStr, text, 'insert');
-                } else if (decimalCharIndex === -1 && props.maxFractionDigits) {
+                } else if (decimalCharIndex === -1 && (maxFractionDigits || props.maxFractionDigits)) {
                     newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
                     updateValue(event, newValueStr, text, 'insert');
                 }
             } else {
-                const maxFractionDigits = numberFormat.current.resolvedOptions().maximumFractionDigits;
                 const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
 
                 if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
@@ -716,7 +727,7 @@ export const InputNumber = React.memo(
         };
 
         const insertText = (value, text, start, end) => {
-            let textSplit = text === '.' ? text : text.split('.');
+            let textSplit = isDecimalSign(text) ? text : text.split(_decimal.current);
 
             if (textSplit.length === 2) {
                 const decimalCharIndex = value.slice(start, end).search(_decimal.current);
@@ -724,6 +735,8 @@ export const InputNumber = React.memo(
                 _decimal.current.lastIndex = 0;
 
                 return decimalCharIndex > 0 ? value.slice(0, start) + formatValue(text) + replaceSuffix(value).slice(end) : value || formatValue(text);
+            } else if (isDecimalSign(text) && value.length === 0) {
+                return formatValue('0.');
             } else if (end - start === value.length) {
                 return formatValue(text);
             } else if (start === 0) {
@@ -917,7 +930,7 @@ export const InputNumber = React.memo(
                 inputEl.value = newValue;
                 inputEl.setSelectionRange(0, 0);
                 const index = initCursor();
-                const selectionEnd = index + insertedValueStr.length;
+                const selectionEnd = index + insertedValueStr.length + (isDecimalSign(insertedValueStr) ? 1 : 0);
 
                 inputEl.setSelectionRange(selectionEnd, selectionEnd);
             } else {
@@ -1188,6 +1201,7 @@ export const InputNumber = React.memo(
                     {...ariaProps}
                     {...dataProps}
                     pt={ptm('input')}
+                    unstyled={props.unstyled}
                     __parentMetadata={{ parent: metaData }}
                 />
             );

@@ -3,6 +3,7 @@ import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../a
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -30,7 +31,6 @@ export const Dropdown = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
-        const currentSearchChar = React.useRef(null);
         const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
         const hasFilter = ObjectUtils.isNotEmpty(filterState);
         const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
@@ -59,7 +59,7 @@ export const Dropdown = React.memo(
 
         const flatOptions = (options) => {
             return (options || []).reduce((result, option, index) => {
-                result.push({ optionGroup: option, group: true, index, code: option.code, label: option.label });
+                result.push({ ...option, group: true, index });
 
                 const optionGroupChildren = getOptionGroupChildren(option);
 
@@ -186,15 +186,16 @@ export const Dropdown = React.memo(
         };
 
         const onInputKeyDown = (event) => {
-            if (props.disabled || DomHandler.isAndroid()) {
+            if (props.disabled) {
                 event.preventDefault();
 
                 return;
             }
 
             const metaKey = event.metaKey || event.ctrlKey;
+            const code = DomHandler.isAndroid() ? event.key : event.code;
 
-            switch (event.code) {
+            switch (code) {
                 case 'ArrowDown':
                     onArrowDownKey(event);
                     break;
@@ -387,11 +388,18 @@ export const Dropdown = React.memo(
         const changeFocusedOptionIndex = (event, index) => {
             if (focusedOptionIndex !== index) {
                 setFocusedOptionIndex(index);
+                focusOnItem(index);
 
                 if (props.selectOnFocus) {
                     onOptionSelect(event, visibleOptions[index], false);
                 }
             }
+        };
+
+        const focusOnItem = (index) => {
+            const focusedItem = DomHandler.findSingle(overlayRef.current, `li[id="dropdownItem_${index}"]`);
+
+            focusedItem && focusedItem.focus();
         };
 
         const onArrowDownKey = (event) => {
@@ -507,7 +515,7 @@ export const Dropdown = React.memo(
         };
 
         const onBackspaceKey = (event, pressedInInputText = false) => {
-            if (pressedInInputText) {
+            if (event && pressedInInputText) {
                 !overlayVisibleState && show();
             }
         };
@@ -579,84 +587,11 @@ export const Dropdown = React.memo(
             return isOptionDisabled(option) ? findPrevOption(i) : option;
         };
 
-        const search = (event) => {
-            if (searchTimeout.current) {
-                clearTimeout(searchTimeout.current);
-            }
-
-            if (event.ctrlKey || event.metaKey || event.altKey) {
-                // ignore meta combinations like CTRL+F for browser search
-                return;
-            }
-
-            const char = event.key;
-
-            if (char.length !== 1 || props.editable) {
-                // only single character keys matter for searching
-                return;
-            }
-
-            if (currentSearchChar.current === char) {
-                searchValue.current = char;
-            } else {
-                searchValue.current = searchValue.current ? searchValue.current + char : char;
-            }
-
-            currentSearchChar.current = char;
-
-            if (searchValue.current) {
-                const searchIndex = getSelectedOptionIndex();
-
-                setFocusedOptionIndex(props.optionGroupLabel ? searchIndex : searchIndex + 1);
-            }
-
-            searchTimeout.current = setTimeout(() => {
-                searchValue.current = null;
-            }, 250);
-        };
-
-        const searchOptionInGroup = (index) => {
-            const searchIndex = index === -1 ? { group: 0, option: -1 } : index;
-
-            for (let i = searchIndex.group; i < visibleOptions.length; i++) {
-                let groupOptions = getOptionGroupChildren(visibleOptions[i]);
-
-                for (let j = searchIndex.group === i ? searchIndex.option + 1 : 0; j < groupOptions.length; j++) {
-                    if (matchesSearchValue(groupOptions[j])) {
-                        return groupOptions[j];
-                    }
-                }
-            }
-
-            for (let i = 0; i <= searchIndex.group; i++) {
-                let groupOptions = getOptionGroupChildren(visibleOptions[i]);
-
-                for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
-                    if (matchesSearchValue(groupOptions[j])) {
-                        return groupOptions[j];
-                    }
-                }
-            }
-
-            return null;
-        };
-
-        const matchesSearchValue = (option) => {
-            let label = getOptionLabel(option);
-
-            if (!label) {
-                return false;
-            }
-
-            label = label.toLocaleLowerCase(props.filterLocale);
-
-            return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
-        };
-
         const onEditableInputChange = (event) => {
+            !overlayVisibleState && show();
             let searchIndex = null;
 
-            if (event.target.value) {
+            if (event.target.value && visibleOptions) {
                 searchIndex = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
             }
 
@@ -885,11 +820,23 @@ export const Dropdown = React.memo(
         };
 
         const getOptionLabel = (option) => {
-            return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : ObjectUtils.resolveFieldData(option, 'label') || option;
+            if (ObjectUtils.isScalar(option)) {
+                return `${option}`;
+            }
+
+            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option['label'];
+
+            return `${optionLabel}`;
         };
 
         const getOptionValue = (option) => {
-            return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : ObjectUtils.resolveFieldData(option, 'value') || option;
+            if (props.useOptionAsValue) {
+                return option;
+            }
+
+            const optionValue = props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option ? option['value'] : ObjectUtils.resolveFieldData(option, 'value');
+
+            return props.optionValue || ObjectUtils.isNotEmpty(optionValue) ? optionValue : option;
         };
 
         const getOptionRenderKey = (option) => {
@@ -897,7 +844,7 @@ export const Dropdown = React.memo(
         };
 
         const isOptionGroup = (option) => {
-            return props.optionGroupLabel && option.optionGroup && option.group;
+            return props.optionGroupLabel && option.group;
         };
 
         const isOptionDisabled = (option) => {
@@ -977,6 +924,10 @@ export const Dropdown = React.memo(
                 alignOverlay();
             }
         }, [overlayVisibleState, filterState, props.filter]);
+
+        useUpdateEffect(() => {
+            virtualScrollerRef.current && virtualScrollerRef.current.scrollInView(0);
+        }, [filterState]);
 
         useUpdateEffect(() => {
             if (filterState && (!props.options || props.options.length === 0)) {
@@ -1129,7 +1080,7 @@ export const Dropdown = React.memo(
         };
 
         const createClearIcon = () => {
-            if (props.value != null && props.showClear && !props.disabled) {
+            if (props.value != null && props.showClear && !props.disabled && !ObjectUtils.isEmpty(props.options)) {
                 const clearIconProps = mergeProps(
                     {
                         className: cx('clearIcon'),
@@ -1181,7 +1132,7 @@ export const Dropdown = React.memo(
                 },
                 ptm('dropdownIcon')
             );
-            const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
+            const icon = !overlayVisibleState ? props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} /> : props.collapseIcon || <ChevronUpIcon {...dropdownIconProps} />;
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
 
             const ariaLabel = props.placeholder || props.ariaLabel;
@@ -1221,7 +1172,8 @@ export const Dropdown = React.memo(
                 onContextMenu: props.onContextMenu,
                 onFocus: onFocus,
                 'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState
+                'data-p-focus': focusedState,
+                'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined
             },
             otherProps,
             ptm('root')
@@ -1292,6 +1244,7 @@ export const Dropdown = React.memo(
                         onFilterInputChange={onFilterInputChange}
                         onFilterInputKeyDown={onFilterInputKeyDown}
                         onOptionClick={onOptionClick}
+                        onInputKeyDown={onInputKeyDown}
                         ptm={ptm}
                         resetFilter={resetFilter}
                         changeFocusedOptionIndex={changeFocusedOptionIndex}

@@ -36,7 +36,7 @@ export function TemplateDoc(props) {
             <path d="..." fill="var(--primary-color)" />
         </svg>
     </InputIcon>
-    <InputText v-model="value1" placeholder="Search" />
+    <InputText placeholder="Search" />
 </IconField>
         `,
         javascript: `
@@ -75,7 +75,7 @@ export default function TemplateDemo() {
                     <path d="..." fill="var(--primary-color)" />
                 </svg>
             </InputIcon>
-            <InputText v-model="value1" placeholder="Search" />
+            <InputText placeholder="Search" />
         </IconField>
     )
 }
@@ -116,7 +116,7 @@ export default function TemplateDemo() {
                     <path d="..." fill="var(--primary-color)" />
                 </svg>
             </InputIcon>
-            <InputText v-model="value1" placeholder="Search" />
+            <InputText placeholder="Search" />
         </IconField>
     )
 }
@@ -159,7 +159,7 @@ export default function TemplateDemo() {
                             <path d="M12.1762 10.1789L8.4462 9.794L10.8145 7.09967H13.5378L12.1762 10.1789Z" fill="var(--primary-color)" />
                         </svg>
                     </InputIcon>
-                    <InputText v-model="value1" placeholder="Search" />
+                    <InputText placeholder="Search" />
                 </IconField>
             </div>
             <DocSectionCode code={code} />

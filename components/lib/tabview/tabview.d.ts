@@ -346,7 +346,7 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the previous button's DOM element.
      */
-    previousButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    prevButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the previous button icon's DOM element.
      */

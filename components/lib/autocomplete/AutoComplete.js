@@ -193,12 +193,16 @@ export const AutoComplete = React.memo(
 
         const onOverlayEntering = () => {
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-                const element = getScrollableElement().firstChild.firstChild;
+                autoHighlightFirstOption();
+            }
+        };
 
-                if (element) {
-                    !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
-                    element.setAttribute('data-p-highlight', true);
-                }
+        const autoHighlightFirstOption = () => {
+            const element = getScrollableElement()?.firstChild?.firstChild;
+
+            if (element) {
+                !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
+                element.setAttribute('data-p-highlight', true);
             }
         };
 
@@ -403,11 +407,16 @@ export const AutoComplete = React.memo(
                 return;
             }
 
-            const inputValue = ObjectUtils.trim(event.target.value);
-            const item = (props.suggestions || []).find((it) => {
-                const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+            const inputValue = ObjectUtils.trim(event.target.value).toLowerCase();
+            const allItems = (props.suggestions || []).flatMap((group) => {
+                return group.items ? group.items : [group];
+            });
 
-                return value && inputValue === ObjectUtils.trim(value);
+            const item = allItems.find((it) => {
+                const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
+                const trimmedValue = value ? ObjectUtils.trim(value).toLowerCase() : '';
+
+                return trimmedValue && inputValue === trimmedValue;
             });
 
             if (item) {
@@ -453,7 +462,7 @@ export const AutoComplete = React.memo(
         };
 
         const getScrollableElement = () => {
-            return overlayRef.current.firstChild;
+            return overlayRef?.current?.firstChild;
         };
 
         const getOptionGroupLabel = (optionGroup) => {
@@ -483,6 +492,12 @@ export const AutoComplete = React.memo(
 
             alignOverlay();
         });
+
+        useUpdateEffect(() => {
+            if (searchingState && props.autoHighlight && props.suggestions && props.suggestions.length) {
+                autoHighlightFirstOption();
+            }
+        }, [searchingState]);
 
         useUpdateEffect(() => {
             if (searchingState) {
@@ -558,6 +573,7 @@ export const AutoComplete = React.memo(
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
                     pt={ptm('input')}
+                    unstyled={props.unstyled}
                     {...ariaProps}
                     __parentMetadata={{ parent: metaData }}
                 />

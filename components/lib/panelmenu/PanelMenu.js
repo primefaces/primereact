@@ -272,6 +272,7 @@ export const PanelMenu = React.memo(
 
             const key = item.id || idState + '_' + index;
             const active = isItemActive(item);
+
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const headerIconProps = mergeProps(
                 {
@@ -279,7 +280,9 @@ export const PanelMenu = React.memo(
                 },
                 getPTOptions(item, 'headerIcon', index)
             );
+
             const icon = IconUtils.getJSXIcon(item.icon, { ...headerIconProps }, { props });
+
             const submenuIconClassName = 'p-panelmenu-icon';
             const headerSubmenuIconProps = mergeProps(
                 {
@@ -287,7 +290,9 @@ export const PanelMenu = React.memo(
                 },
                 getPTOptions(item, 'headerSubmenuIcon', index)
             );
-            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...headerSubmenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...headerSubmenuIconProps} />);
+
+            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.collapseIcon || <ChevronDownIcon {...headerSubmenuIconProps} /> : props.expandIcon || <ChevronRightIcon {...headerSubmenuIconProps} />);
+
             const headerLabelProps = mergeProps(
                 {
                     className: cx('headerLabel')
@@ -331,7 +336,6 @@ export const PanelMenu = React.memo(
 
             const panelProps = mergeProps(
                 {
-                    key: key,
                     id: item?.id || generatePanelId(index),
                     className: cx('panel', { item }),
                     style: item.style
@@ -394,7 +398,7 @@ export const PanelMenu = React.memo(
             );
 
             return (
-                <div {...panelProps}>
+                <div {...panelProps} key={key}>
                     <div {...headerProps}>
                         <div {...headerContentProps}>{content}</div>
                     </div>

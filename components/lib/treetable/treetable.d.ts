@@ -9,11 +9,13 @@
  */
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import { ColumnProps } from '../column';
+import { Column, ColumnPassThroughOptions } from '../column';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
 import { PassThroughOptions } from '../passthrough';
+import { RowPassThroughOptions } from '../row/row';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -211,6 +213,19 @@ export interface TreeTablePassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: TreeTablePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the Row helper components.
+     */
+    row?: RowPassThroughOptions;
+    /**
+     * Used to pass attributes to the Column helper components.
+     */
+    column?: ColumnPassThroughOptions;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
     /**
      * Used to manage all lifecycle hooks
      * @see {@link ComponentHooks}
@@ -478,7 +493,7 @@ interface TreeTablePageEvent {
     /**
      * Total number of pages.
      */
-    pageCount: number;
+    totalPages: number;
 }
 
 /**
@@ -514,7 +529,7 @@ interface TreeTableSelectionEvent {
     /**
      * Selected node key.
      */
-    value: TreeTableSelectionKeysType;
+    value: TreeTableSelectionKeysType | string;
 }
 
 /**
@@ -530,7 +545,7 @@ interface TreeTableColumnResizeEndEvent {
     /**
      * Properties of the resized column.
      */
-    column: ColumnProps;
+    column: Column;
     /**
      * Change in column width.
      */
@@ -565,7 +580,7 @@ interface TreeTableColReorderEvent {
  * Defines valid properties in TreeTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
+export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
     /**
      * Whether to show it even there is only one page.
      * @defaultValue true
@@ -927,9 +942,9 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onExpand?(event: TreeTableEvent): void;
     /**
      * Callback to invoke on filtering.
-     * @param {TreeTableFilterMeta[]} filters - Custom treetable event.
+     * @param {TreeTableFilterMeta} filters - Custom treetable event.
      */
-    onFilter?(filters: TreeTableFilterMeta[]): void;
+    onFilter?(filters: TreeTableFilterMeta): void;
     /**
      * Callback to invoke on pagination.
      * @param {TreeTablePageEvent} event - Custom page event.

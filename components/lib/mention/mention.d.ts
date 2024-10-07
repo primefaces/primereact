@@ -306,6 +306,14 @@ export declare class Mention extends React.Component<MentionProps, any> {
      */
     public focus(): void;
     /**
+     * Show the mention.
+     */
+    public show(): void;
+    /**
+     * Hide the mention.
+     */
+    public hide(): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */

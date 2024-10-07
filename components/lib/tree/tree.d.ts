@@ -74,13 +74,9 @@ export interface TreePassThroughOptions {
      */
     togglerIcon?: TreePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Uses to pass attributes to the checkbox container's DOM element.
+     * Uses to pass attributes to the node checkbox's DOM element.
      */
-    checkboxContainer?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the checkbox's DOM element.
-     */
-    checkbox?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    nodeCheckbox?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the checkbox icon's DOM element.
      */

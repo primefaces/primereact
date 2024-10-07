@@ -10,12 +10,12 @@ export function BasicDoc(props) {
         basic: `
 <IconField iconPosition="left">
     <InputIcon className="pi pi-search"> </InputIcon>
-    <InputText v-model="value1" placeholder="Search" />
+    <InputText placeholder="Search" />
 </IconField>
 
 <IconField>
     <InputIcon className="pi pi-spin pi-spinner"> </InputIcon>
-    <InputText v-model="value2" />
+    <InputText />
 </IconField>
         `,
         javascript: `
@@ -29,12 +29,12 @@ export default function BasicDemo() {
         <div className="flex gap-3">
             <IconField iconPosition="left">
                 <InputIcon className="pi pi-search"> </InputIcon>
-                <InputText v-model="value1" placeholder="Search" />
+                <InputText placeholder="Search" />
             </IconField>
 
             <IconField>
                 <InputIcon className="pi pi-spin pi-spinner"> </InputIcon>
-                <InputText v-model="value2" />
+                <InputText />
             </IconField>
         </div>
     )
@@ -51,12 +51,12 @@ export default function BasicDemo() {
         <div className="flex gap-3">
             <IconField iconPosition="left">
                 <InputIcon className="pi pi-search"> </InputIcon>
-                <InputText v-model="value1" placeholder="Search" />
+                <InputText placeholder="Search" />
             </IconField>
 
             <IconField>
                 <InputIcon className="pi pi-spin pi-spinner"> </InputIcon>
-                <InputText v-model="value2" />
+                <InputText />
             </IconField>
         </div>
     )
@@ -75,12 +75,12 @@ export default function BasicDemo() {
                 <div className="flex gap-3">
                     <IconField iconPosition="left">
                         <InputIcon className="pi pi-search" />
-                        <InputText v-model="value1" placeholder="Search" />
+                        <InputText placeholder="Search" />
                     </IconField>
 
                     <IconField>
                         <InputIcon className="pi pi-spin pi-spinner" />
-                        <InputText v-model="value2" />
+                        <InputText />
                     </IconField>
                 </div>
             </div>

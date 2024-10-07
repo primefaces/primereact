@@ -39,12 +39,10 @@ export interface CalendarPassThroughOptions {
     root?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the InputText component.
-     * @see {@link CalendarPassThroughType}
      */
     input?: CalendarPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link CalendarPassThroughType}
      */
     dropdownButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**

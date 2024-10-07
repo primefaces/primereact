@@ -676,10 +676,16 @@
                     "href": "https://github.com/orgs/primefaces/discussions"
                 },
                 {
-                    "name": "PRO",
+                    "name": "PRO Support",
                     "to": "/support"
                 }
             ]
+        },
+        {
+            "name": "Contribution",
+            "to": "/contribution",
+            "icon": "pi pi-users",
+            "badge": "NEW"
         },
         {
             "name": "Discover",

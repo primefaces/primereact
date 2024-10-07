@@ -4,6 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, classNames } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
+import { useRef } from 'react';
 
 const QuillJS = (function () {
     try {
@@ -119,11 +120,20 @@ export const Editor = React.memo(
             }
         };
 
+        const initValue = useRef(props.value);
+
+        initValue.current = props.value;
+
         const initQuill = (quillInstance) => {
             quill.current = quillInstance;
 
-            if (props.value) {
-                quill.current.clipboard.dangerouslyPasteHTML(props.value);
+            if (initValue.current) {
+                quillInstance.setContents(
+                    quillInstance.clipboard.convert({
+                        html: initValue.current,
+                        text: ''
+                    })
+                );
             }
 
             setQuillCreated(true);
@@ -151,7 +161,16 @@ export const Editor = React.memo(
 
         useUpdateEffect(() => {
             if (quill.current && !quill.current.hasFocus()) {
-                props.value ? quill.current.clipboard.dangerouslyPasteHTML(props.value) : quill.current.setText('');
+                if (props.value) {
+                    quill.current.setContents(
+                        quill.current.clipboard.convert({
+                            html: props.value,
+                            text: ''
+                        })
+                    );
+                } else {
+                    quill.current.setText('');
+                }
             }
         }, [props.value]);
 

@@ -136,6 +136,7 @@ const styles = `
         position: absolute;
         top: 50%;
         margin-top: -.5rem;
+        right: 2rem;
     }
     
     .p-fluid .p-dropdown {
@@ -150,9 +151,9 @@ const styles = `
 
 const inlineStyles = {
     wrapper: ({ props }) => ({ maxHeight: props.scrollHeight || 'auto' }),
-    panel: ({ props }) => {
-        props.panelStyle;
-    }
+    panel: ({ props }) => ({
+        ...props.panelStyle
+    })
 };
 
 export const DropdownBase = ComponentBase.extend({
@@ -169,6 +170,7 @@ export const DropdownBase = ComponentBase.extend({
         dataKey: null,
         disabled: false,
         dropdownIcon: null,
+        collapseIcon: null,
         editable: false,
         emptyFilterMessage: null,
         highlightOnSelect: true,

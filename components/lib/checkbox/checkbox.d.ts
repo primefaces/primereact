@@ -23,6 +23,7 @@ export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPass
 export interface CheckboxPassThroughMethodOptions {
     props: CheckboxProps;
     context: CheckboxContext;
+    state: CheckboxState;
 }
 
 /**
@@ -72,6 +73,17 @@ export interface CheckboxContext {
      * @defaultValue false
      */
     disabled: boolean;
+}
+
+/**
+ * Defines current inline state in Checkbox component.
+ */
+export interface CheckboxState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
 }
 
 /**

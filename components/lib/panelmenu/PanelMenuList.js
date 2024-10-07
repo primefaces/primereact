@@ -48,9 +48,6 @@ export const PanelMenuList = React.memo((props) => {
 
     const onFocus = (event) => {
         setFocused(true);
-        const _focusedItem = focusedItem || (isElementInPanel(event, event.relatedTarget) ? findFirstItem() : findLastItem());
-
-        setFocusedItem(_focusedItem);
     };
 
     const onBlur = () => {
@@ -429,7 +426,8 @@ export const PanelMenuList = React.memo((props) => {
             onItemToggle={onItemToggle}
             level={0}
             className={cx('submenu')}
-            submenuIcon={props.submenuIcon}
+            expandIcon={props.expandIcon}
+            collapseIcon={props.collapseIcon}
             root
             ptm={ptm}
             cx={cx}

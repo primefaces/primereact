@@ -145,20 +145,8 @@ export const MultiSelect = React.memo(
             index !== -1 && setFocusedOptionIndex(index);
         };
 
-        const findNextItem = (item) => {
-            const nextItem = item.nextElementSibling;
-
-            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-p-disabled') === true || DomHandler.getAttribute(nextItem, 'data-pc-section') === 'itemgroup' ? findNextItem(nextItem) : nextItem) : null;
-        };
-
-        const findPrevItem = (item) => {
-            const prevItem = item.previousElementSibling;
-
-            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-p-disabled') === true || DomHandler.getAttribute(prevItem, 'data-pc-section') === 'itemgroup' ? findPrevItem(prevItem) : prevItem) : null;
-        };
-
         const onClick = (event) => {
-            if (!props.inline && !props.disabled && !props.loading && !isPanelClicked(event) && DomHandler.getAttribute(event.target, 'data-pc-section') !== 'removetokenicon' && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !props.loading && !isPanelClicked(event) && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -368,7 +356,7 @@ export const MultiSelect = React.memo(
                     break;
 
                 default:
-                    if (event.code === 'KeyA' && metaKey) {
+                    if (event.key === 'a' && metaKey) {
                         const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
 
                         updateModel(event, value, value);
@@ -449,6 +437,7 @@ export const MultiSelect = React.memo(
                         value
                     }
                 });
+                DomHandler.focus(inputRef.current);
             }
         };
 
@@ -730,10 +719,6 @@ export const MultiSelect = React.memo(
             return isValidOption(option) && isSelected(option);
         };
 
-        const checkValidity = () => {
-            return inputRef.current.checkValidity();
-        };
-
         const findSelectedOptionIndex = () => {
             if (hasSelectedOption()) {
                 for (let index = props.value.length - 1; index >= 0; index--) {
@@ -825,6 +810,8 @@ export const MultiSelect = React.memo(
         };
 
         const removeChip = (event, item) => {
+            event.stopPropagation();
+
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
             if (props.onRemove) {
@@ -897,7 +884,6 @@ export const MultiSelect = React.memo(
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
-                            key: i,
                             className: cx('removeTokenIcon'),
                             onClick: (e) => removeChip(e, val)
                         },
@@ -975,9 +961,11 @@ export const MultiSelect = React.memo(
         }, [inputRef, props.inputRef]);
 
         React.useEffect(() => {
-            setTimeout(() => {
-                props.overlayVisible ? show() : hide();
-            }, 100);
+            if (props.overlayVisible === true) {
+                show();
+            } else if (props.overlayVisible === false) {
+                hide();
+            }
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.overlayVisible]);
 
@@ -1030,9 +1018,17 @@ export const MultiSelect = React.memo(
 
             return (
                 <div {...labelContainerProps}>
-                    <div {...labelProps}>{content || props.placeholder || 'empty'}</div>
+                    <div {...labelProps}>{content || props.placeholder || props.emptyMessage || 'empty'}</div>
                 </div>
             );
+        };
+
+        const getInputValue = (value = []) => {
+            if (Array.isArray(value)) {
+                return value.map((val) => getLabelByValue(val)).join(', ');
+            }
+
+            return value;
         };
 
         const visibleOptions = getVisibleOptions();
@@ -1096,6 +1092,7 @@ export const MultiSelect = React.memo(
                 'aria-expanded': overlayVisibleState,
                 disabled: props.disabled,
                 tabIndex: !props.disabled ? props.tabIndex : -1,
+                value: getInputValue(props.value),
                 ...ariaProps
             },
             ptm('input')

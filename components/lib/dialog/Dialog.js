@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import FocusTrap from '../focustrap/FocusTrap';
@@ -430,7 +430,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const createCloseIcon = () => {
         if (props.closable) {
-            const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
+            const labelAria = props.ariaCloseIconLabel || ariaLabel('close');
 
             const closeButtonIconProps = mergeProps(
                 {
@@ -448,9 +448,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     ref: closeRef,
                     type: 'button',
                     className: cx('closeButton'),
-                    'aria-label': ariaLabel,
+                    'aria-label': labelAria,
                     onClick: onClose,
-                    onKeyDown: (ev) => ev.stopPropagation()
+                    onKeyDown: (ev) => {
+                        if (ev.key !== 'Escape') {
+                            ev.stopPropagation();
+                        }
+                    }
                 },
                 ptm('closeButton')
             );
@@ -699,7 +703,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             <div {...maskProps}>
                 <CSSTransition nodeRef={dialogRef} {...transitionProps}>
                     <div {...rootProps}>
-                        <FocusTrap autoFocus>{contentElement}</FocusTrap>
+                        <FocusTrap autoFocus={props.focusOnShow}>{contentElement}</FocusTrap>
                     </div>
                 </CSSTransition>
             </div>

@@ -454,7 +454,7 @@ export const ListBox = React.memo(
                     break;
 
                 default:
-                    if (props.multiple && event.code === 'KeyA' && metaKey) {
+                    if (props.multiple && event.key === 'a' && metaKey) {
                         const value = visibleOptions.filter((option) => isValidOption(option)).map((option) => getOptionValue(option));
 
                         updateModel(event, value);
@@ -474,6 +474,10 @@ export const ListBox = React.memo(
 
         const scrollInView = (index = -1) => {
             setTimeout(() => {
+                // As long as this is a timeout - there is not guarantee that listRef will still
+                // exist by the moment of calling that function. So, if list is already destroyed
+                // by this moment - do nothing:
+                if (!listRef.current) return;
                 const idx = index !== -1 ? `${id.current}_${index}` : focusedOptionId();
                 const element = listRef.current.querySelector(`li[id="${idx}"]`);
 
@@ -650,7 +654,21 @@ export const ListBox = React.memo(
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
         };
 
+        const flatOptions = (options) => {
+            return (options || []).reduce((result, option, index) => {
+                result.push({ optionGroup: option, group: true, index, code: option.code, label: option.label });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
+
+                return result;
+            }, []);
+        };
+
         const getVisibleOptions = () => {
+            const options = props.optionGroupLabel ? flatOptions(props.options) : props.options;
+
             if (hasFilter) {
                 const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
@@ -666,13 +684,13 @@ export const ListBox = React.memo(
                         }
                     }
 
-                    return filteredGroups;
+                    return flatOptions(filteredGroups);
                 }
 
-                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
-            return props.options;
+            return options;
         };
 
         const scrollToSelectedIndex = () => {
@@ -715,47 +733,12 @@ export const ListBox = React.memo(
             ) : null;
         };
 
-        const createGroupChildren = (optionGroup, style) => {
-            const groupChildren = getOptionGroupChildren(optionGroup);
-
-            return groupChildren.map((option, j) => {
-                const optionLabel = getOptionLabel(option);
-                const optionKey = j + '_' + getOptionRenderKey(option);
-                const disabled = isOptionDisabled(option);
-
-                return (
-                    <ListBoxItem
-                        id={id.current + '_' + j}
-                        hostName="ListBox"
-                        optionKey={optionKey}
-                        key={optionKey}
-                        label={optionLabel}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={isSelected(option)}
-                        onOptionMouseDown={onOptionMouseDown}
-                        onOptionMouseMove={onOptionMouseMove}
-                        onClick={onOptionSelect}
-                        index={j}
-                        focusedOptionIndex={focusedOptionIndex}
-                        onTouchEnd={onOptionTouchEnd}
-                        disabled={disabled}
-                        ptCallbacks={ptCallbacks}
-                        metaData={metaData}
-                    />
-                );
-            });
-        };
-
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
-            if (props.optionGroupLabel) {
+            if (option.group && option.optionGroup && props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + getOptionGroupRenderKey(option);
-
                 const itemGroupProps = mergeProps(
                     {
                         className: ptCallbacks.cx('itemGroup'),
@@ -766,10 +749,9 @@ export const ListBox = React.memo(
                 );
 
                 return (
-                    <React.Fragment key={key}>
-                        <li {...itemGroupProps}>{groupContent}</li>
-                        {groupChildrenContent}
-                    </React.Fragment>
+                    <li {...itemGroupProps} key={key}>
+                        {groupContent}
+                    </li>
                 );
             }
 

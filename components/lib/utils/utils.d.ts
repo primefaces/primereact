@@ -87,7 +87,7 @@ export declare class DomHandler {
     static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any };
     static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
     static isClickable(el: HTMLElement): boolean;
-    static applyStyle(el: HTMLElement, style: any): void;
+    static applyStyle(el: HTMLElement, style: React.CSSProperties | string): void;
     static exportCSV(csv: any, filename: string): void;
     static saveAs(file: { name: string; url: any }): boolean;
     static createInlineStyle(nonce?: string, styleContainer?: ShadowRoot | HTMLElement): HTMLStyleElement;
@@ -146,6 +146,7 @@ export declare class ObjectUtils {
     static isString(value: any): boolean;
     static isPrintableCharacter(char: string): boolean;
     static isLetter(char: string): boolean;
+    static isScalar(value: any): boolean;
     static findLast(value: any[], callback: () => any): any;
     static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
@@ -180,7 +181,7 @@ export declare namespace ZIndexUtils {
  * @template ComponentProps Props from the owning component.
  * @template AdditionalProps Any custom properties of an icon like SortIcon of the Datatable for example.
  */
-export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
+export type IconOptions<ComponentProps, AdditionalProps = NonNullable<unknown>> = AdditionalProps & {
     /**
      * Icon specific properties. Size property allows FontAwesome to work properly.
      * @type {(React.HTMLProps<unknown> & { size?: string }) | (React.SVGProps<unknown> & { size?: string })}

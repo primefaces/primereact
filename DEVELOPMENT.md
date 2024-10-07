@@ -23,8 +23,9 @@ C:\primereact> npm run dev:link:windows
 
 This will alter the bundler to only emit non-minified esm modules. The aliasing plugin has also been disabled for components. Once everything has been bundled (this can take a few minutes) you should keep this command running. It will allow for incremental builds as you develop in the `primereact/` directory.
 
-> [!NOTE]
-> It will be finished when the terminal displays: `[20xx-xx-xx 00:00:00] waiting for changes...`.
+> Note: if you get "Error: JavaScript heap out of memory", it may help to set the following node variable: `export NODE_OPTIONS=--max-old-space-size=8192`.
+
+> Note: The build will be finished when the terminal displays: `[20xx-xx-xx 00:00:00] waiting for changes...`.
 
 You will now `cd` into the `primereact/dist` directory and run:
 
@@ -42,7 +43,7 @@ This will create a symlink in your global npm scope so that other local packages
 ```
 
 > [!WARNING]
-> Reminder! the XX.X.XX version must be a valid [valid semantic version](https://docs.npmjs.com/about-semantic-versioning) that you are using in your local project
+> Reminder! The XX.X.XX version must be a [valid semantic version](https://docs.npmjs.com/about-semantic-versioning) that you are using in your local project
 
 ### Now change your directory to your local project you are developing on!
 
@@ -74,7 +75,7 @@ You can now live develop in the `primereact/` directory and your changes should 
 
 ### Cleanup
 
-Once done, you can cleanup with:
+Once done, you can clean up with:
 
 ```shell
 ~/primereact/ $ npm unlink

@@ -339,10 +339,11 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     itemTemplate?(item: any, layout?: 'list' | 'grid' | (string & Record<string, unknown>)): React.ReactNode | undefined;
     /**
      * Function that gets the options along with the layout mode and returns the content.
-     * @param {*} item - Current item.
-     * @param {'list' | 'grid' | (string & Record<string, unknown>)} layout - Current layout.
+     * @param {*} items - Array of items to be rendered.
+     * @param {'list' | 'grid' | (string & Record<string, unknown>)} [layout] - Current layout mode.
+     * @returns {React.ReactNode | React.ReactNode[] | undefined} The content to be rendered.
      */
-    listTemplate?(items: any[], layout?: 'list' | 'grid' | (string & Record<string, unknown>)): React.ReactNode[] | undefined;
+    listTemplate?(items: any[], layout?: 'list' | 'grid' | (string & Record<string, unknown>)): React.ReactNode | React.ReactNode[] | undefined;
     /**
      * Used to get the child elements of the component.
      * @readonly

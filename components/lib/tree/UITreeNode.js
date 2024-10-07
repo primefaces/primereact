@@ -355,8 +355,14 @@ export const UITreeNode = React.memo((props) => {
 
             case 'Enter':
             case 'NumpadEnter':
-            case 'Space':
                 onEnterKey(event);
+
+                break;
+
+            case 'Space':
+                if (!['INPUT'].includes(event.target.nodeName)) {
+                    onEnterKey(event);
+                }
 
                 break;
 
@@ -603,37 +609,35 @@ export const UITreeNode = React.memo((props) => {
     const onDropPoint = (event, position) => {
         event.preventDefault();
 
-        if (props.node.droppable !== false) {
-            DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
+        DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
 
-            if (props.onDropPoint) {
-                const dropIndex = position === -1 ? props.index : props.index + 1;
+        if (props.onDropPoint) {
+            const dropIndex = position === -1 ? props.index : props.index + 1;
 
-                props.onDropPoint({
-                    originalEvent: event,
-                    path: props.path,
-                    index: dropIndex,
-                    position
-                });
-            }
+            props.onDropPoint({
+                originalEvent: event,
+                path: props.path,
+                index: dropIndex,
+                position
+            });
         }
     };
 
     const onDropPointDragOver = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
     };
 
     const onDropPointDragEnter = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
     };
 
     const onDropPointDragLeave = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
     };
@@ -655,7 +659,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onDragOver = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
             event.stopPropagation();
@@ -663,13 +667,13 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onDragEnter = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             DomHandler.addClass(contentRef.current, 'p-treenode-dragover');
         }
     };
 
     const onDragLeave = (event) => {
-        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+        if (props.dragdropScope && event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
 
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
@@ -843,7 +847,15 @@ export const UITreeNode = React.memo((props) => {
         const contentProps = mergeProps(
             {
                 ref: contentRef,
-                className: classNames(props.node.className, cx('content', { checked, selected, nodeProps: props, isCheckboxSelectionMode })),
+                className: classNames(
+                    props.node.className,
+                    cx('content', {
+                        checked,
+                        selected,
+                        nodeProps: props,
+                        isCheckboxSelectionMode
+                    })
+                ),
                 style: props.node.style,
                 onClick: onClick,
                 onDoubleClick: onDoubleClick,
@@ -957,7 +969,6 @@ export const UITreeNode = React.memo((props) => {
                 'aria-setsize': props.node.children ? props.node.children.length : 0,
                 'aria-posinset': props.index + 1,
                 onKeyDown: onKeyDown,
-                'aria-expanded': expanded,
                 'aria-selected': checked || selected
             },
             getPTOptions('node')
@@ -973,7 +984,7 @@ export const UITreeNode = React.memo((props) => {
 
     const node = createNode();
 
-    if (props.dragdropScope && !props.disabled) {
+    if (props.dragdropScope && !props.disabled && (!props.parent || props.parent.droppable !== false)) {
         const beforeDropPoint = createDropPoint(-1);
         const afterDropPoint = props.last ? createDropPoint(1) : null;
 

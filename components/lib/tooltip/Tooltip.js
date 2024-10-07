@@ -14,6 +14,7 @@ export const Tooltip = React.memo(
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position || 'right');
         const [classNameState, setClassNameState] = React.useState('');
+        const [multipleFocusEvents, setMultipleFocusEvents] = React.useState(false);
         const metaData = {
             props,
             state: {
@@ -110,7 +111,7 @@ export const Tooltip = React.memo(
 
                 if (event === 'both') {
                     showEvents = ['focus', 'mouseenter'];
-                    hideEvents = ['blur', 'mouseleave'];
+                    hideEvents = multipleFocusEvents ? ['blur'] : ['mouseleave', 'blur'];
                 }
             }
 
@@ -172,6 +173,8 @@ export const Tooltip = React.memo(
         };
 
         const show = (e) => {
+            if (e.type && e.type === 'focus') setMultipleFocusEvents(true);
+
             currentTargetRef.current = e.currentTarget;
             const disabled = isDisabled(currentTargetRef.current);
             const empty = isContentEmpty(isShowOnDisabled(currentTargetRef.current) && disabled ? currentTargetRef.current.firstChild : currentTargetRef.current);
@@ -198,6 +201,8 @@ export const Tooltip = React.memo(
         };
 
         const hide = (e) => {
+            if (e && e.type === 'blur') setMultipleFocusEvents(false);
+
             clearTimeouts();
 
             if (visibleState) {
@@ -470,7 +475,9 @@ export const Tooltip = React.memo(
         }, [visibleState]);
 
         useUpdateEffect(() => {
-            if (visibleState) {
+            const position = getPosition(currentTargetRef.current);
+
+            if (visibleState && position !== 'mouse') {
                 applyDelay('updateDelay', () => {
                     updateText(currentTargetRef.current, () => {
                         align(currentTargetRef.current);

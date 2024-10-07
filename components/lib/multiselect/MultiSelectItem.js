@@ -46,14 +46,13 @@ export const MultiSelectItem = React.memo((props) => {
         {
             className: cx('checkboxIcon')
         },
-        getPTOptions('checkboxIcon')
+        getPTOptions('checkbox.icon')
     );
 
     const icon = props.checkboxIcon || <CheckIcon {...checkboxIconProps} />;
     const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { selected: props.selected }) : null;
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
-    const tabIndex = props.disabled ? -1 : props.tabIndex;
 
     const checkboxContainerProps = mergeProps(
         {
@@ -70,7 +69,6 @@ export const MultiSelectItem = React.memo((props) => {
             onFocus: onFocus,
             onBlur: onBlur,
             onMouseMove: (e) => props?.onMouseMove(e, props.index),
-            tabIndex: tabIndex,
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,
@@ -80,9 +78,9 @@ export const MultiSelectItem = React.memo((props) => {
     );
 
     return (
-        <li {...itemProps}>
+        <li {...itemProps} key={props.index + '_multiselectitem'}>
             <div {...checkboxContainerProps}>
-                <Checkbox ref={checkboxRef} checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} />
+                <Checkbox ref={checkboxRef} checked={props.selected} icon={checkboxIcon} pt={ptm('checkbox')} unstyled={isUnstyled()} tabIndex={-1} />
             </div>
             <span>{content}</span>
             <Ripple />

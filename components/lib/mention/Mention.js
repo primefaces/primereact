@@ -208,8 +208,10 @@ export const Mention = React.memo(
         };
 
         const selectItem = (event, suggestion) => {
-            const value = inputRef.current.value;
-            const selectionStart = event.target.selectionStart;
+            const input = inputRef.current;
+            const value = input.value;
+            const selectionStart = input.selectionStart;
+
             const spaceIndex = value.indexOf(' ', triggerState.index);
             const currentText = value.substring(triggerState.index, spaceIndex > -1 ? spaceIndex : selectionStart);
             const selectedText = formatValue(suggestion).replace(/\s+/g, '');
@@ -218,7 +220,8 @@ export const Mention = React.memo(
                 const prevText = value.substring(0, triggerState.index);
                 const nextText = value.substring(spaceIndex > -1 ? selectionStart : triggerState.index + currentText.length);
 
-                inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
+                inputRef.current.value = nextText[0] === ' ' ? `${prevText}${selectedText}${nextText}` : `${prevText}${selectedText} ${nextText}`;
+
                 event.target = inputRef.current;
                 props.onChange && props.onChange(event);
             }
@@ -533,6 +536,7 @@ export const Mention = React.memo(
                 className: cx('input'),
                 style: props.inputStyle,
                 ...inputProps,
+                unstyled: props.unstyled,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,

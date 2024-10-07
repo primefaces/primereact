@@ -190,15 +190,14 @@ export const DataScroller = React.memo(
         };
 
         const createItem = (_value, index) => {
-            const itemProps = mergeProps(
-                {
-                    key: index + '_datascrollitem'
-                },
-                ptm('item')
-            );
+            const itemProps = ptm('item');
             const content = props.itemTemplate ? props.itemTemplate(_value) : _value;
 
-            return <li {...itemProps}>{content}</li>;
+            return (
+                <li {...itemProps} key={index + '_datascrollitem'}>
+                    {content}
+                </li>
+            );
         };
 
         const createEmptyMessage = () => {

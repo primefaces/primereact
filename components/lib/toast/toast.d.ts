@@ -153,7 +153,7 @@ export interface ToastMessage {
     /**
      * Severity of the message.
      */
-    severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
+    severity?: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast' | undefined;
     /**
      * Summary content of the message.
      */
@@ -165,7 +165,7 @@ export interface ToastMessage {
     /**
      * Custom content of the message. If enabled, summary and details properties are ignored.
      */
-    content?: React.ReactNode | undefined;
+    content?: React.ReactNode | ((props: ContentProps) => React.ReactNode);
     /**
      * Whether the message can be closed manually using the close icon.
      * @defaultValue true

@@ -116,9 +116,13 @@ export const RadioButton = React.memo(
                 style: props.style,
                 'data-p-checked': props.checked
             },
-            RadioButtonBase.getOtherProps(props),
+            otherProps,
             ptm('root')
         );
+
+        delete rootProps.input;
+        delete rootProps.box;
+        delete rootProps.icon;
 
         const createInputElement = () => {
             const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
@@ -138,6 +142,7 @@ export const RadioButton = React.memo(
                     className: cx('input'),
                     ...ariaProps
                 },
+                inProps.input,
                 ptm('input')
             );
 
@@ -149,6 +154,7 @@ export const RadioButton = React.memo(
                 {
                     className: cx('box')
                 },
+                inProps.box,
                 ptm('box')
             );
 
@@ -156,6 +162,7 @@ export const RadioButton = React.memo(
                 {
                     className: cx('icon')
                 },
+                inProps.icon,
                 ptm('icon')
             );
 

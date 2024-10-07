@@ -57,7 +57,7 @@
   font-display: swap;
   font-style: normal;
   font-named-instance: "Regular";
-  src: url("./fonts/Inter-roman.var.woff2?v=3.19") format("woff2");
+  src: url("./fonts/InterVariable.woff2") format("woff2");
 }
 @font-face {
   font-family: "Inter var";
@@ -65,7 +65,7 @@
   font-display: swap;
   font-style: italic;
   font-named-instance: "Italic";
-  src: url("./fonts/Inter-italic.var.woff2?v=3.19") format("woff2");
+  src: url("./fonts/InterVariable-Italic.woff2") format("woff2");
 }
 :root {
   --blue-50:#f5f9ff;
@@ -4617,7 +4617,6 @@
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
   .p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
-    margin-left: 0.5rem;
     color: #6b7280;
     font-weight: 700;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
@@ -4626,6 +4625,24 @@
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #a7f3d0;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-top .p-stepper-title {
+    margin-bottom: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-top .p-stepper-separator {
+    margin-bottom: 1rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-right .p-stepper-title {
+    margin-left: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-left .p-stepper-title {
+    margin-right: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-bottom .p-stepper-title {
+    margin-top: 0.5rem;
+  }
+  .p-stepper .p-stepper-header.p-stepper-header-bottom .p-stepper-separator {
+    margin-top: 1rem;
   }
   .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
     background: #f0fdfa;
@@ -4678,6 +4695,9 @@
   .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-content {
     width: 100%;
     padding-left: 1rem;
+  }
+  .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-title {
+    margin-left: 0.5rem;
   }
   .p-stepper.p-stepper-vertical .p-stepper-panel .p-stepper-separator {
     flex: 0 0 auto;

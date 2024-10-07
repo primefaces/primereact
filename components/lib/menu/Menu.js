@@ -302,7 +302,6 @@ export const Menu = React.memo(
             const submenuHeaderProps = mergeProps(
                 {
                     id: key,
-                    key,
                     role: 'none',
                     className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: sx('submenuHeader', { submenu }),
@@ -313,32 +312,29 @@ export const Menu = React.memo(
 
             return (
                 <React.Fragment key={key}>
-                    <li {...submenuHeaderProps}>{submenu.label}</li>
+                    <li {...submenuHeaderProps} key={key}>
+                        {submenu.label}
+                    </li>
                     {items}
                 </React.Fragment>
             );
         };
 
-        const createSeparator = (index) => {
+        const createSeparator = (item, index) => {
             const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
                     id: key,
-                    key,
-                    className: cx('separator'),
+                    className: classNames(item.className, cx('separator')),
                     role: 'separator'
                 },
                 ptm('separator')
             );
 
-            return <li {...separatorProps} />;
+            return <li {...separatorProps} key={key} />;
         };
 
         const createMenuItem = (item, index, parentId = null) => {
-            if (item.visible === false) {
-                return null;
-            }
-
             const menuContext = { item, index, parentId };
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
@@ -408,7 +404,6 @@ export const Menu = React.memo(
             const menuitemProps = mergeProps(
                 {
                     id: key,
-                    key,
                     className: classNames(item.className, cx('menuitem', { focused: focusedOptionIndex === key })),
                     style: sx('menuitem', { item }),
                     role: 'menuitem',
@@ -420,11 +415,19 @@ export const Menu = React.memo(
                 getMenuItemPTOptions('menuitem', menuContext)
             );
 
-            return <li {...menuitemProps}>{content}</li>;
+            return (
+                <li {...menuitemProps} key={key}>
+                    {content}
+                </li>
+            );
         };
 
         const createItem = (item, index) => {
-            return item.separator ? createSeparator(index) : item.items ? createSubmenu(item, index) : createMenuItem(item, index);
+            if (item.visible === false) {
+                return null;
+            }
+
+            return item.separator ? createSeparator(item, index) : item.items ? createSubmenu(item, index) : createMenuItem(item, index);
         };
 
         const createMenu = () => {

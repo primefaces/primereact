@@ -171,7 +171,7 @@ export const InputOtp = React.memo(
 
                 default: {
                     //Prevent non-numeric characters from being entered if integerOnly is true or if the length of the input is greater than the specified length
-                    if ((props?.integerOnly && !((event.code.startsWith('Digit') || event.code.startsWith('Numpad')) && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
+                    if ((props?.integerOnly && !(event.code !== 'Space' && Number(event.key) >= 0 && Number(event.key) <= 9)) || (tokens.join('').length >= props.length && event.code !== 'Delete')) {
                         event.preventDefault();
                     }
 
@@ -199,25 +199,29 @@ export const InputOtp = React.memo(
                 onBlur,
                 onPaste
             };
-            const inputElementProps = mergeProps(
-                {
-                    id: inputElementIndex,
-                    key: inputElementIndex,
-                    value: tokens[inputElementIndex] || '',
-                    inputMode: props?.integerOnly ? 'numeric' : 'text',
-                    type: props?.mask ? 'password' : 'text',
-                    variant: props?.variant,
-                    readOnly: props?.readOnly,
-                    disabled: props?.disabled,
-                    invalid: props?.invalid,
-                    tabIndex: props?.tabIndex,
-                    unstyled: props?.unstyled,
-                    'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
-                    className: cx('input')
-                },
-                ptm('input')
+            const inputElementProps = {
+                id: inputElementIndex,
+                value: tokens[inputElementIndex] || '',
+                inputMode: props?.integerOnly ? 'numeric' : 'text',
+                type: props?.mask ? 'password' : 'text',
+                variant: props?.variant,
+                readOnly: props?.readOnly,
+                disabled: props?.disabled,
+                invalid: props?.invalid,
+                tabIndex: props?.tabIndex,
+                unstyled: props?.unstyled,
+                'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
+                className: cx('input'),
+                pt: ptm('input')
+            };
+            const inputElement = props?.inputTemplate ? (
+                ObjectUtils.getJSXElement(props?.inputTemplate, {
+                    events: inputElementEvents,
+                    props: inputElementProps
+                })
+            ) : (
+                <InputText {...inputElementProps} {...inputElementEvents} key={inputElementIndex} />
             );
-            const inputElement = props?.inputTemplate ? ObjectUtils.getJSXElement(props?.inputTemplate, { events: inputElementEvents, props: inputElementProps }) : <InputText {...inputElementProps} {...inputElementEvents} />;
             const inputElements = [inputElement, ...createInputElements(remainingInputs - 1)];
 
             return inputElements;

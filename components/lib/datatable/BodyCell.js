@@ -23,7 +23,6 @@ export const BodyCell = React.memo((props) => {
     const keyHelperRef = React.useRef(null);
     const overlayEventListener = React.useRef(null);
     const selfClick = React.useRef(false);
-    const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
     const editingRowDataStateRef = React.useRef(null);
     const { ptm, ptmo, cx } = props.ptCallbacks;
@@ -56,7 +55,7 @@ export const BodyCell = React.memo((props) => {
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
     const isEditable = () => {
-        return getColumnProp('editor');
+        return ObjectUtils.isNotEmpty(props.editMode) && getColumnProp('editor');
     };
 
     const cellEditValidateOnClose = () => {
@@ -229,16 +228,13 @@ export const BodyCell = React.memo((props) => {
     };
 
     const focusOnElement = () => {
-        clearTimeout(tabindexTimeout.current);
-        tabindexTimeout.current = setTimeout(() => {
-            if (editingState) {
-                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+        if (editingState) {
+            const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
 
-                focusableEl && focusableEl.focus();
-            }
+            focusableEl && focusableEl.focus();
+        }
 
-            keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
-        }, 1);
+        keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
     };
 
     const focusOnInit = () => {
@@ -259,7 +255,7 @@ export const BodyCell = React.memo((props) => {
                 let right = 0;
                 let next = elementRef.current && elementRef.current.nextElementSibling;
 
-                if (next) {
+                if (next && next.classList.contains('p-frozen-column')) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
 
@@ -268,7 +264,7 @@ export const BodyCell = React.memo((props) => {
                 let left = 0;
                 let prev = elementRef.current && elementRef.current.previousElementSibling;
 
-                if (prev) {
+                if (prev && prev.classList.contains('p-frozen-column')) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
 
@@ -520,15 +516,13 @@ export const BodyCell = React.memo((props) => {
 
     useUpdateEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
-            setEditingRowDataState(getEditingRowData());
+            const editingRowData = getEditingRowData();
+
+            setEditingRowDataState(editingRowData);
+
+            editingRowDataStateRef.current = editingRowData;
         }
     }, [props.editingMeta]);
-
-    React.useEffect(() => {
-        if (editingRowDataState) {
-            editingRowDataStateRef.current = editingRowDataState;
-        }
-    }, [editingRowDataState]);
 
     React.useEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
@@ -602,7 +596,7 @@ export const BodyCell = React.memo((props) => {
                 const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
                 const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
 
-                label = `${props.selected ? ariaLabel('unselectLabel') : ariaLabel('selectLabel')} ${ariaLabelText}`;
+                label = `${props.selected ? ariaLabel('unselectRow') : ariaLabel('selectRow')} ${ariaLabelText}`;
             }
 
             content = showSelection && (
@@ -619,6 +613,7 @@ export const BodyCell = React.memo((props) => {
                             ariaLabel={label}
                             ptCallbacks={props.ptCallbacks}
                             metaData={props.metaData}
+                            unstyled={props.unstyled}
                         />
                     )}
                     {selectionMode === 'multiple' && (
@@ -633,6 +628,7 @@ export const BodyCell = React.memo((props) => {
                             checkIcon={props.checkIcon}
                             ptCallbacks={props.ptCallbacks}
                             metaData={props.metaData}
+                            unstyled={props.unstyled}
                         />
                     )}
                 </>

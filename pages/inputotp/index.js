@@ -1,14 +1,15 @@
-import { ImportDoc } from '@/components/doc/inputotp/importdoc';
-import { BasicDoc } from '@/components/doc/inputotp/basicdoc';
-import { MaskDoc } from '@/components/doc/inputotp/maskdoc';
-import { IntegerOnlyDoc } from '@/components/doc/inputotp/integeronlydoc';
-import { TemplateDoc } from '@/components/doc/inputotp/templatedoc';
-import { SampleDoc } from '@/components/doc/inputotp/sampledoc';
-import { AccessibilityDoc } from '@/components/doc/inputotp/accessibilitydoc';
-import { Wireframe } from '@/components/doc/inputotp/pt/wireframe';
-import { StyledDoc } from '@/components/doc/inputotp/theming/styleddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
 import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputotp/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/inputotp/basicdoc';
+import { ImportDoc } from '@/components/doc/inputotp/importdoc';
+import { IntegerOnlyDoc } from '@/components/doc/inputotp/integeronlydoc';
+import { MaskDoc } from '@/components/doc/inputotp/maskdoc';
+import { Wireframe } from '@/components/doc/inputotp/pt/wireframe';
+import { SampleDoc } from '@/components/doc/inputotp/sampledoc';
+import { TemplateDoc } from '@/components/doc/inputotp/templatedoc';
+import { StyledDoc } from '@/components/doc/inputotp/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputotp/theming/tailwinddoc';
 
 const InputOtpDemo = () => {
     const docs = [
@@ -72,6 +73,18 @@ const InputOtpDemo = () => {
             id: 'styled',
             label: 'Styled',
             component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
         }
     ];
 

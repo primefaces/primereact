@@ -9,10 +9,7 @@
  */
 import * as React from 'react';
 import { ComponentHooks } from '../componentbase/componentbase';
-import { KeyFilterType } from '../keyfilter';
 import { PassThroughOptions } from '../passthrough';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
-import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { PassThroughType, TemplateType } from '../utils/utils';
 
 export declare type InputOtpPassThroughType<T> = PassThroughType<T, InputOtpPassThroughMethodOptions>;
@@ -36,7 +33,6 @@ export interface InputOtpPassThroughOptions {
     root?: InputOtpPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the Tooltip component.
-     * @see {@link TooltipPassThroughOptions}
      */
     input?: InputOtpPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**

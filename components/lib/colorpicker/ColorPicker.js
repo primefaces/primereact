@@ -97,13 +97,21 @@ export const ColorPicker = React.memo(
             !isUnstyled && DomHandler.addClass(elementRef.current, 'p-colorpicker-dragging');
         };
 
+        const getPositionY = (event) => {
+            if (event.pageY !== undefined) return event.pageY;
+            else if (event.changedTouches !== undefined) return event.changedTouches[0].pageY;
+            else return 0;
+        };
+
         const pickHue = (event) => {
-            const top = hueViewRef.current.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+            const top = hueViewRef.current.getBoundingClientRect().top + (window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0);
+            const yPos = getPositionY(event);
+            const hue = Math.floor((360 * (150 - Math.max(0, Math.min(150, yPos - top)))) / 150);
 
             hsbValue.current = validateHSB({
-                h: Math.floor((360 * (150 - Math.max(0, Math.min(150, (event.pageY || event.changedTouches[0].pageY) - top)))) / 150),
-                s: 100,
-                b: 100
+                h: hue,
+                s: hsbValue.current.s,
+                b: hsbValue.current.b
             });
 
             updateColorSelector();

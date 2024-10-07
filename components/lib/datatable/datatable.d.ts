@@ -943,7 +943,15 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the rowgroup footer's DOM element.
      */
-    rowgroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    rowGroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup toggler's DOM element.
+     */
+    rowGroupToggler?: DataTablePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup toggler icon's DOM element.
+     */
+    rowGroupTogglerIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
@@ -1002,6 +1010,34 @@ export interface DataTablePassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current options in DataTable bodyRow.
+ */
+export interface DataTableBodyRowContext {
+    selected: boolean;
+    selectable: boolean;
+    stripedRows: boolean;
+    index: number;
+}
+
+/**
+ * Defines current inline state in DataTable bodyRow.
+ */
+export interface DataTableBodyRowState {
+    editing: boolean;
+}
+
+/**
+ * Custom passthrough(pt) option method for bodyRow.
+ */
+export interface DataTableBodyRowPassThroughMethodOptions<TValue extends DataTableValueArray> {
+    hostName: string;
+    context: DataTableBodyRowContext;
+    parent: DataTablePassThroughMethodOptions<TValue>;
+    props: DataTableBaseProps<TValue>;
+    state: DataTableBodyRowState;
 }
 
 type SortOrder = 1 | 0 | -1 | null | undefined;
@@ -1068,7 +1104,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Name of the field that uniquely identifies a record in the data. Should be a unique business key to prevent re-rendering.
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
-    dataKey?: string | undefined;
+    dataKey?: string | undefined | ((data: any) => string);
     /**
      * Default sort order of an unsorted column.
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)

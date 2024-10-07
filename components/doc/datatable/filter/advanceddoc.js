@@ -237,7 +237,7 @@ export function AdvancedFilterDoc(props) {
         basic: `
 <DataTable value={customers} paginator showGridlines rows={10} loading={loading} dataKey="id" 
         filters={filters} globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header}
-        emptyMessage="No customers found.">
+        emptyMessage="No customers found." onFilter={(e) => setFilters(e.filters)}>
     <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
     <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate}
         filter filterPlaceholder="Search by country" filterClear={filterClearTemplate} 
@@ -488,7 +488,7 @@ export default function AdvancedFilterDemo() {
         <div className="card">
             <DataTable value={customers} paginator showGridlines rows={10} loading={loading} dataKey="id" 
                     filters={filters} globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header}
-                    emptyMessage="No customers found.">
+                    emptyMessage="No customers found." onFilter={(e) => setFilters(e.filters)}>
                 <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
                 <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate}
                     filter filterPlaceholder="Search by country" filterClear={filterClearTemplate} 
@@ -510,7 +510,7 @@ import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
+import { Column, ColumnFilterApplyTemplateOptions, ColumnFilterClearTemplateOptions, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
@@ -518,7 +518,7 @@ import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { InputNumber, InputNumberChangeEvent } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 import { Slider, SliderChangeEvent } from 'primereact/slider';
 import { Tag } from 'primereact/tag';
@@ -724,7 +724,7 @@ export default function AdvancedFilterDemo() {
     };
 
     const dateFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
-        return <Calendar value={options.value} onChange={(e: CalendarChangeEvent) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />;
+        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />;
     };
 
     const balanceBodyTemplate = (rowData: Customer) => {
@@ -784,7 +784,7 @@ export default function AdvancedFilterDemo() {
         <div className="card">
             <DataTable value={customers} paginator showGridlines rows={10} loading={loading} dataKey="id" 
                     filters={filters} globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} header={header}
-                    emptyMessage="No customers found.">
+                    emptyMessage="No customers found." onFilter={(e) => setFilters(e.filters)}>
                 <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
                 <Column header="Country" filterField="country.name" style={{ minWidth: '12rem' }} body={countryBodyTemplate}
                     filter filterPlaceholder="Search by country" filterClear={filterClearTemplate} 
@@ -844,6 +844,7 @@ export default function AdvancedFilterDemo() {
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
                         header={header}
                         emptyMessage="No customers found."
+                        onFilter={(e) => setFilters(e.filters)}
                     >
                         <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} />
                         <Column

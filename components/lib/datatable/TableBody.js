@@ -9,7 +9,7 @@ import { RowTogglerButton } from './RowTogglerButton';
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
         const mergeProps = useMergeProps();
-        const { ptm, ptmo, cx, isUnsyled } = props.ptCallbacks;
+        const { ptm, ptmo, cx, isUnstyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
 
@@ -334,29 +334,15 @@ export const TableBody = React.memo(
         const selectRange = (event) => {
             let rangeStart;
             let rangeEnd;
-            let selectedSize;
 
             const isAllowCellSelection = allowCellSelection();
-            const index = ObjectUtils.findIndexInList(event.data, props.value, props.dataKey);
 
             if (rangeRowIndex.current > anchorRowIndex.current) {
                 rangeStart = anchorRowIndex.current;
                 rangeEnd = rangeRowIndex.current;
-
-                if (!isAllowCellSelection) {
-                    selectedSize = rangeEnd - rangeStart;
-                    rangeEnd = index;
-                    rangeStart = index - selectedSize;
-                }
             } else if (rangeRowIndex.current < anchorRowIndex.current) {
                 rangeStart = rangeRowIndex.current;
                 rangeEnd = anchorRowIndex.current;
-
-                if (!isAllowCellSelection) {
-                    selectedSize = rangeEnd - rangeStart;
-                    rangeStart = index;
-                    rangeEnd = index + selectedSize;
-                }
             } else {
                 rangeStart = rangeEnd = rangeRowIndex.current;
             }
@@ -365,7 +351,7 @@ export const TableBody = React.memo(
         };
 
         const selectRangeOnRow = (event, rowRangeStart, rowRangeEnd) => {
-            const value = props.value;
+            const value = props.tableProps.value;
             let selection = [];
 
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
@@ -451,7 +437,7 @@ export const TableBody = React.memo(
             if (props.dragSelection && !dragSelectionHelper.current) {
                 dragSelectionHelper.current = document.createElement('div');
                 dragSelectionHelper.current.setAttribute('p-datatable-drag-selection-helper', 'true');
-                !isUnsyled && DomHandler.addClass(dragSelectionHelper.current, 'p-datatable-drag-selection-helper');
+                !isUnstyled() && DomHandler.addClass(dragSelectionHelper.current, 'p-datatable-drag-selection-helper');
 
                 initialDragPosition.current = { x: event.clientX, y: event.clientY };
                 dragSelectionHelper.current.style.top = `${event.pageY}px`;
@@ -606,12 +592,12 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) {
-                event.currentTarget.draggable = true;
-                event.target.draggable = false;
-            } else {
-                event.currentTarget.draggable = false;
-            }
+            const isDraggableHandle = isUnstyled()
+                ? DomHandler.getAttribute(event.target, 'data-pc-section') === 'rowreordericon' || event.target.closest('[data-pc-section="rowreordericon"]')
+                : DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
+
+            event.currentTarget.draggable = isDraggableHandle;
+            event.target.draggable = !isDraggableHandle;
 
             if (allowRowDrag(e)) {
                 enableDragSelection(event, 'row');
@@ -682,7 +668,7 @@ export const TableBody = React.memo(
         const onRowDragStart = (e) => {
             const { originalEvent: event, index } = e;
 
-            if (allowRowDrag(event)) {
+            if (allowRowDrag(e)) {
                 rowDragging.current = true;
                 draggedRowIndex.current = index;
                 event.dataTransfer.setData('text', 'b'); // For firefox
@@ -692,7 +678,11 @@ export const TableBody = React.memo(
         const onRowDragOver = (e) => {
             const { originalEvent: event, index } = e;
 
-            if (rowDragging.current && draggedRowIndex.current !== index) {
+            if (!rowDragging.current) {
+                return;
+            }
+
+            if (draggedRowIndex.current !== index) {
                 const rowElement = event.currentTarget;
                 const rowY = DomHandler.getOffset(rowElement).top + DomHandler.getWindowScrollTop();
                 const pageY = event.pageY + window.scrollY;
@@ -701,29 +691,29 @@ export const TableBody = React.memo(
 
                 if (pageY < rowMidY) {
                     rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
-                    !isUnsyled && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
+                    !isUnstyled() && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
 
                     droppedRowIndex.current = index;
 
                     if (prevRowElement) {
                         prevRowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'true');
-                        !isUnsyled && DomHandler.addClass(prevRowElement, 'p-datatable-dragpoint-bottom');
+                        !isUnstyled() && DomHandler.addClass(prevRowElement, 'p-datatable-dragpoint-bottom');
                     } else {
                         rowElement.setAttribute('data-p-datatable-dragpoint-top', 'true');
-                        !isUnsyled && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
+                        !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
                     }
                 } else {
                     if (prevRowElement) {
                         prevRowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
-                        !isUnsyled && DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
+                        !isUnstyled() && DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
                     } else {
                         rowElement.setAttribute('data-p-datatable-dragpoint-top', 'true');
-                        !isUnsyled && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
+                        !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
                     }
 
-                    droppedRowIndex.current = index + 1;
+                    if (index + 1 !== draggedRowIndex.current) droppedRowIndex.current = index + 1;
                     rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'true');
-                    !isUnsyled && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
+                    !isUnstyled() && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
                 }
             }
 
@@ -737,13 +727,13 @@ export const TableBody = React.memo(
 
             if (prevRowElement) {
                 prevRowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
-                !isUnsyled && DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
+                !isUnstyled() && DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
             }
 
             rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
-            !isUnsyled && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
+            !isUnstyled() && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
             rowElement.setAttribute('data-p-datatable-dragpoint-top', 'false');
-            !isUnsyled && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-top');
+            !isUnstyled() && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-top');
         };
 
         const onRowDragEnd = (e) => {
@@ -943,6 +933,7 @@ export const TableBody = React.memo(
                         collapsedRowIcon={props.collapsedRowIcon}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
+                        unstyled={isUnstyled()}
                     />
                 );
                 const options = { index: rowIndex, props: props.tableProps, customRendering: false };
@@ -1068,6 +1059,7 @@ export const TableBody = React.memo(
                         virtualScrollerOptions={props.virtualScrollerOptions}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
+                        unstyled={isUnstyled()}
                     />
                 );
             }

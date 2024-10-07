@@ -76,6 +76,7 @@ export const MultiSelectHeader = React.memo((props) => {
                         className="p-multiselect-filter"
                         placeholder={props.filterPlaceholder}
                         pt={ptm('filterInput')}
+                        unstyled={props.unstyled}
                         __parentMetadata={{ parent: props.metaData }}
                     />
                     {filterIcon}
@@ -116,7 +117,7 @@ export const MultiSelectHeader = React.memo((props) => {
         {
             className: cx('headerCheckboxIcon')
         },
-        getPTOptions('headerCheckboxIcon')
+        getPTOptions('headerCheckbox.icon')
     );
 
     const headerCheckboxContainerProps = mergeProps(

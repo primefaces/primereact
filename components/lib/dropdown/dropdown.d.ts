@@ -282,6 +282,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
+     * Icon of collapse action.
+     */
+    collapseIcon?: IconType<DropdownProps> | undefined;
+    /**
      * When present, custom value instead of predefined options can be entered using the editable input field.
      * @defaultValue false
      */
@@ -403,6 +407,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.
      */
     optionDisabled?: string | ((option: any) => boolean) | undefined;
+    /**
+     * Whether the option should be used as the value for the select element.
+     */
+    useOptionAsValue?: boolean;
     /**
      * Property name or getter function that refers to the children options of option group.
      * @defaultValue items
