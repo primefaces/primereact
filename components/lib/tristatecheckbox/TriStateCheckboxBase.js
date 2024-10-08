@@ -4,7 +4,7 @@ import { classNames } from '../utils/Utils';
 const classes = {
     root: ({ props, context }) =>
         classNames('p-tristatecheckbox p-checkbox p-component', {
-            'p-highlight': props.value !== null,
+            'p-highlight': props.value !== '' && props.value !== null,
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled'
@@ -31,7 +31,7 @@ export const TriStateCheckboxBase = ComponentBase.extend({
         tooltip: null,
         tooltipOptions: null,
         uncheckIcon: null,
-        value: null,
+        value: '',
         children: undefined
     },
     css: {
