@@ -59,7 +59,7 @@ export const Dropdown = React.memo(
 
         const flatOptions = (options) => {
             return (options || []).reduce((result, option, index) => {
-                result.push({ optionGroup: option, group: true, index, code: option.code, label: option.label });
+                result.push({ ...option, group: true, index });
 
                 const optionGroupChildren = getOptionGroupChildren(option);
 
@@ -847,7 +847,7 @@ export const Dropdown = React.memo(
         };
 
         const isOptionGroup = (option) => {
-            return props.optionGroupLabel && option.optionGroup && option.group;
+            return props.optionGroupLabel && option.group;
         };
 
         const isOptionDisabled = (option) => {

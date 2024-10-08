@@ -16,7 +16,7 @@ const classes = {
         }),
     button: 'p-splitbutton-defaultbutton',
     menuButton: 'p-splitbutton-menubutton',
-    menu: ({ subProps: props }) => classNames('p-menu p-menu-overlay p-component', props.menuClassName),
+    menu: ({ props }) => classNames('p-menu p-menu-overlay p-component', props.menuClassName),
     menuList: 'p-menu-list p-reset',
     separator: 'p-menu-separator',
     menuIcon: 'p-menuitem-icon',

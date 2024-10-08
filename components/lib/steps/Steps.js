@@ -12,7 +12,6 @@ export const Steps = React.memo(
         const props = StepsBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
-        const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
         const count = React.Children.count(props.children);
@@ -21,7 +20,7 @@ export const Steps = React.memo(
             props,
             state: {
                 id: idState,
-                activeIndex: activeIndexState
+                activeIndex: props.activeIndex
             }
         };
 
@@ -40,7 +39,7 @@ export const Steps = React.memo(
                     count,
                     first: index === 0,
                     last: index === count - 1,
-                    active: index === activeIndexState,
+                    active: index === props.activeIndex,
                     disabled: getStepProp(step, 'disabled')
                 }
             };
@@ -72,8 +71,6 @@ export const Steps = React.memo(
                     index
                 });
             }
-
-            setActiveIndexState(index);
 
             if (!item.url) {
                 event.preventDefault();
@@ -191,8 +188,8 @@ export const Steps = React.memo(
             }
 
             const key = item.id || idState + '_' + index;
-            const active = index === activeIndexState;
-            const disabled = item.disabled || (index !== activeIndexState && props.readOnly);
+            const active = index === props.activeIndex;
+            const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
 
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(

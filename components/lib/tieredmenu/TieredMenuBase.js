@@ -82,6 +82,7 @@ const styles = `
 export const TieredMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TieredMenu',
+        __parentMetadata: null,
         id: null,
         model: null,
         popup: false,

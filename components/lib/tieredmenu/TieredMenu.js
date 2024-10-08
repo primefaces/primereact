@@ -26,14 +26,16 @@ export const TieredMenu = React.memo(
         const [visibleItems, setVisibleItems] = React.useState([]);
         const [focusTrigger, setFocusTrigger] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm, cx, sx, isUnstyled } = TieredMenuBase.setMetaData({
+        const metaData = {
             props,
+            ...props.__parentMetadata,
             state: {
                 id: idState,
                 visible: visibleState,
                 attributeSelector: attributeSelectorState
             }
-        });
+        };
+        const { ptm, cx, sx, isUnstyled } = TieredMenuBase.setMetaData(metaData);
 
         useHandleStyle(TieredMenuBase.css.styles, isUnstyled, { name: 'tieredmenu' });
 
