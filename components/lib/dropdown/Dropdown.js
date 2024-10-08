@@ -117,7 +117,6 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            event.stopPropagation();
             props.onClick && props.onClick(event);
 
             // do not continue if the user defined click wants to prevent it
