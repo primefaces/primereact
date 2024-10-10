@@ -29,8 +29,9 @@ export const MultiSelect = React.memo(
         const firstHiddenFocusableElementOnOverlay = React.useRef(null);
         const lastHiddenFocusableElementOnOverlay = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
-        const labelRef = React.useRef(null);
+        const labelContainerRef = React.useRef(null);
         const overlayRef = React.useRef(null);
+        const labelRef = React.useRef(null);
         const hasFilter = filterState && filterState.trim().length > 0;
         const empty = ObjectUtils.isEmpty(props.value);
         const equalityKey = props.optionValue ? null : props.dataKey;
@@ -518,7 +519,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelContainerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const isClearClicked = (event) => {
@@ -812,6 +813,8 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             event.stopPropagation();
 
+            if (!isVisible(event.currentTarget)) return;
+
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
             if (props.onRemove) {
@@ -822,6 +825,22 @@ export const MultiSelect = React.memo(
             }
 
             updateModel(event, value, item);
+        };
+
+        const isVisible = (element) => {
+            const parentElement = labelRef.current;
+            const isOverflow = parentElement.clientWidth < parentElement.scrollWidth;
+
+            if (!isOverflow) return true;
+
+            const target = element.closest('[data-pc-section="token"]');
+            const parentStyles = window.getComputedStyle(parentElement);
+            const targetStyles = window.getComputedStyle(target);
+
+            const parentWidth = parentElement.clientWidth - parseFloat(parentStyles.paddingLeft) - parseFloat(parentStyles.paddingRight);
+            const targetRight = target.getBoundingClientRect().right + parseFloat(targetStyles.marginRight) - parentElement.getBoundingClientRect().left;
+
+            return targetRight <= parentWidth;
         };
 
         const getSelectedItemsLabel = () => {
@@ -1003,7 +1022,7 @@ export const MultiSelect = React.memo(
 
             const labelContainerProps = mergeProps(
                 {
-                    ref: labelRef,
+                    ref: labelContainerRef,
                     className: cx('labelContainer')
                 },
                 ptm('labelContainer')
@@ -1011,6 +1030,7 @@ export const MultiSelect = React.memo(
 
             const labelProps = mergeProps(
                 {
+                    ref: labelRef,
                     className: cx('label', { empty })
                 },
                 ptm('label')
