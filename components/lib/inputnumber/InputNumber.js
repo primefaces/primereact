@@ -1135,6 +1135,12 @@ export const InputNumber = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        React.useEffect(() => {
+            return () => {
+                clearTimer();
+            };
+        }, []);
+
         useMountEffect(() => {
             constructParser();
 
