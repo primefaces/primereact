@@ -78,14 +78,22 @@ export const AutoCompletePanel = React.memo(
             );
         };
 
+        const isOptionSelected = (item) => {
+            if (props.selectedItem && props.selectedItem.current && Array.isArray(props.selectedItem.current)) {
+                return props.selectedItem.current.some((selectedItem) => ObjectUtils.deepEquals(selectedItem, item));
+            } else {
+                return ObjectUtils.deepEquals(props.selectedItem.current, item);
+            }
+        };
+
         const createListItem = (item, key, index, listItemProps) => {
-            const selected = ObjectUtils.deepEquals(props.selectedItem, item);
+            const selected = isOptionSelected(item);
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, index) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
             const itemProps = mergeProps(
                 {
                     index: index,
                     role: 'option',
-                    className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
+                    className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item, selected: selected }),
                     onClick: (e) => props.onItemClick(e, item),
                     'aria-selected': selected,
                     ...listItemProps
