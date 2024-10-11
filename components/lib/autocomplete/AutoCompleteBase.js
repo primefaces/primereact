@@ -35,7 +35,7 @@ const classes = {
     list: ({ virtualScrollerOptions, options }) => (virtualScrollerOptions ? classNames('p-autocomplete-items', options.className) : 'p-autocomplete-items'),
     emptyMessage: 'p-autocomplete-item',
     item: ({ suggestion, optionGroupLabel, selected }) =>
-        optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }, { selected: selected }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }, { selected: selected }),
+        optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }, { selected: selected }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }, { 'p-highlight': selected }),
     itemGroup: 'p-autocomplete-item-group',
     footer: 'p-autocomplete-footer',
     transition: 'p-connected-overlay'
@@ -86,7 +86,7 @@ const styles = `
         list-style-type: none;
     }
 
-    .selected {
+    .p-highlight {
         background-color: rgba(6, 182, 212, 0.24) !important;
     }
     
