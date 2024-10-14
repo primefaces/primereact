@@ -1735,7 +1735,6 @@ export const Calendar = React.memo(
                     if (props.hideOnRangeSelection && endDate !== null) {
                         setTimeout(() => {
                             setOverlayVisibleState(false);
-                            isOverlayClicked.current = false;
                         }, 150);
                     }
                 } else {
