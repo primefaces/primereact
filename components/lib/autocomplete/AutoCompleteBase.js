@@ -85,10 +85,6 @@ const styles = `
         padding: 0;
         list-style-type: none;
     }
-
-    .p-highlight {
-        background-color: rgba(6, 182, 212, 0.24) !important;
-    }
     
     .p-autocomplete-item {
         cursor: pointer;
