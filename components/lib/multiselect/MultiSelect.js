@@ -519,7 +519,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelContainerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
+            !props.inline && DomHandler.alignOverlay(overlayRef.current, labelContainerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const isClearClicked = (event) => {
