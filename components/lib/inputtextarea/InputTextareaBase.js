@@ -43,7 +43,8 @@ export const InputTextareaBase = ComponentBase.extend({
         tooltip: null,
         tooltipOptions: null,
         validateOnly: false,
-        children: undefined
+        children: undefined,
+        className: null
     },
     css: {
         classes,
