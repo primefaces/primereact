@@ -70,6 +70,14 @@ export const InputText = React.memo(
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
+        React.useEffect(() => {
+            if (isFilled) {
+                DomHandler.addClass(elementRef.current, 'p-filled');
+            } else {
+                DomHandler.removeClass(elementRef.current, 'p-filled');
+            }
+        }, [props.disabled, isFilled]);
+
         const rootProps = mergeProps(
             {
                 className: classNames(props.className, cx('root', { context, isFilled })),
