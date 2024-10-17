@@ -37,8 +37,9 @@ export default function PanelDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    CSS modules allow importing a css file to your react component and refer the classes inside using a variable. To provide cascaded classes that is applied to external components, use <i>:global</i> selectors (check the <a href="https://github.com/css-modules/css-modules/blob/master/docs/composition.md#exceptions">CSS Modules documentation</a>). NextJS has built-in support for CSS modules allowing css files with <i>.module.css</i> suffix to be interpreted as
-                    modules.
+                    CSS modules allow importing a css file to your react component and refer the classes inside using a variable. To provide cascaded classes that is applied to external components, use <i>:global</i> selectors (check the{' '}
+                    <a href="https://github.com/css-modules/css-modules/blob/master/docs/composition.md#exceptions">CSS Modules documentation</a>). NextJS has built-in support for CSS modules allowing css files with <i>.module.css</i> suffix to be
+                    interpreted as modules.
                 </p>
             </DocSectionText>
             <div className="card">
