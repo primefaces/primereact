@@ -7,7 +7,7 @@ export function CSSModulesDoc(props) {
     const code1 = {
         basic: `
 /* paneldemo.module.css */
-.mypanel > [class~="p-panel-header"] {
+.mypanel :global(.p-panel-header) {
     background-color: #07c4e8;
     color: #ffffff;
 }
@@ -22,7 +22,7 @@ import panelDemoModule from './paneldemo.module.css';
 
 export default function PanelDemo() {
     return (
-        <Panel header="CSS Module" className={stylesModule.mypanel}>
+        <Panel header="CSS Module" className={panelDemoModule.mypanel}>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -37,9 +37,9 @@ export default function PanelDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    CSS modules allow importing a css file to your react component and refer the classes inside using a variable. Unfortunately CSS modules do not support cascaded classes to be applied to external components however attribute
-                    selectors can be used as a common workaround until PrimeReact exposes component internals via new properties. NextJS has built-in support for CSS modules allowing css files with <i>.module.css</i> suffix to be interpreted as
-                    modules.
+                    CSS modules allow importing a css file to your react component and refer the classes inside using a variable. To provide cascaded classes that is applied to external components, use <i>:global</i> selectors (check the{' '}
+                    <a href="https://github.com/css-modules/css-modules/blob/master/docs/composition.md#exceptions">CSS Modules documentation</a>). NextJS has built-in support for CSS modules allowing css files with <i>.module.css</i> suffix to be
+                    interpreted as modules.
                 </p>
             </DocSectionText>
             <div className="card">
