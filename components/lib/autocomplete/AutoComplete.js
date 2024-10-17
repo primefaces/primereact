@@ -152,24 +152,20 @@ export const AutoComplete = React.memo(
             selectedItem.current = ObjectUtils.isNotEmpty(value) ? value : null;
         };
 
-        const formatValue = (value) => {
-            if (ObjectUtils.isNotEmpty(value)) {
-                if (typeof value === 'string') {
-                    return value;
-                } else if (props.selectedItemTemplate) {
-                    const resolvedFieldData = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+        const formatValue = (value, useTemplate = false) => {
+            if (ObjectUtils.isEmpty(value)) return '';
 
-                    return resolvedFieldData ? resolvedFieldData : value;
-                } else if (props.field) {
-                    const resolvedFieldData = ObjectUtils.resolveFieldData(value, props.field);
+            if (typeof value === 'string') return value;
 
-                    return resolvedFieldData !== null && resolvedFieldData !== undefined ? resolvedFieldData : value;
-                }
-
-                return value;
+            if (useTemplate && props.selectedItemTemplate) {
+                return ObjectUtils.getJSXElement(props.selectedItemTemplate, value) || value;
             }
 
-            return '';
+            if (props.field) {
+                return ObjectUtils.resolveFieldData(value, props.field) ?? value;
+            }
+
+            return value;
         };
 
         const updateInputField = (value) => {
@@ -608,7 +604,7 @@ export const AutoComplete = React.memo(
 
                     return (
                         <li key={key} {...tokenProps}>
-                            <span {...tokenLabelProps}>{formatValue(val)}</span>
+                            <span {...tokenLabelProps}>{formatValue(val, true)}</span>
                             {removeTokenIcon}
                         </li>
                     );
