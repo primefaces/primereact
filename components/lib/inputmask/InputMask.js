@@ -635,6 +635,7 @@ export const InputMask = React.memo(
                 name={props.name}
                 style={props.style}
                 className={className}
+                value={props.value}
                 {...otherProps}
                 placeholder={props.placeholder}
                 size={props.size}
