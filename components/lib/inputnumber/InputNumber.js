@@ -1230,7 +1230,7 @@ export const InputNumber = React.memo(
                     onKeyDown: (e) => onUpButtonKeyDown(e),
                     onKeyUp: onUpButtonKeyUp,
                     disabled: props.disabled,
-                    tabIndex: -1,
+                    tabIndex: 0,
                     'aria-hidden': true
                 },
                 ptm('incrementButton')
@@ -1263,7 +1263,7 @@ export const InputNumber = React.memo(
                     onKeyDown: (e) => onDownButtonKeyDown(e),
                     onKeyUp: onDownButtonKeyUp,
                     disabled: props.disabled,
-                    tabIndex: -1,
+                    tabIndex: 0,
                     'aria-hidden': true
                 },
                 ptm('decrementButton')
