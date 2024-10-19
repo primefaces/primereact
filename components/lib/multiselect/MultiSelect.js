@@ -237,7 +237,7 @@ export const MultiSelect = React.memo(
                 const len = currentTarget.value.length;
 
                 currentTarget.setSelectionRange(event.shiftKey ? 0 : len, len);
-                focusedOptionIndex = -1;
+                setFocusedOptionIndex(-1);
             } else {
                 let metaKey = event.metaKey || event.ctrlKey;
                 let optionIndex = findLastOptionIndex();
@@ -502,7 +502,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            !props.inline && DomHandler.alignOverlay(overlayRef.current, labelContainerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelContainerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const isClearClicked = (event) => {
