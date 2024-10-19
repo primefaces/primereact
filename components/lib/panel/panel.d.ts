@@ -184,7 +184,7 @@ export interface PanelState {
  * Defines valid properties in Panel component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'onToggle'> {
     /**
      * Custom header template of the panel.
      */
