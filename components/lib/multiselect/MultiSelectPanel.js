@@ -104,39 +104,6 @@ export const MultiSelectPanel = React.memo(
             }
         };
 
-        const createGroupChildren = (optionGroup, style) => {
-            const groupChildren = props.getOptionGroupChildren(optionGroup);
-
-            return groupChildren.map((option, j) => {
-                const optionLabel = props.getOptionLabel(option);
-                const optionKey = j + '_' + props.getOptionRenderKey(option);
-                const disabled = props.isOptionDisabled(option);
-                const selected = props.isSelected(option);
-
-                return (
-                    <MultiSelectItem
-                        hostName={props.hostName}
-                        index={j}
-                        key={optionKey}
-                        focusedOptionIndex={props.focusedOptionIndex}
-                        label={optionLabel}
-                        option={option}
-                        style={style}
-                        template={props.itemTemplate}
-                        selected={selected}
-                        onClick={props.onOptionSelect}
-                        onMouseMove={changeFocusedItemOnHover}
-                        disabled={disabled}
-                        className={props.itemClassName}
-                        checkboxIcon={props.checkboxIcon}
-                        isUnstyled={isUnstyled}
-                        ptm={ptm}
-                        cx={cx}
-                    />
-                );
-            });
-        };
-
         const createEmptyFilter = () => {
             const emptyFilterMessage = ObjectUtils.getJSXElement(props.emptyFilterMessage, props) || localeOption('emptyFilterMessage');
 
@@ -174,9 +141,8 @@ export const MultiSelectPanel = React.memo(
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
-            if (props.optionGroupLabel) {
+            if (option.group && props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-                const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
@@ -187,12 +153,9 @@ export const MultiSelectPanel = React.memo(
                 );
 
                 return (
-                    <React.Fragment key={key}>
-                        <li {...itemGroupProps} key={key}>
-                            {groupContent}
-                        </li>
-                        {groupChildrenContent}
-                    </React.Fragment>
+                    <li key={key} {...itemGroupProps}>
+                        {groupContent}
+                    </li>
                 );
             }
 

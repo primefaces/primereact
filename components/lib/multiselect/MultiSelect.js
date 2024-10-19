@@ -386,28 +386,11 @@ export const MultiSelect = React.memo(
 
                 if (event.checked) {
                     value = [];
+                } else {
+                    const validOptions = visibleOptions.filter((option) => isValidOption(option) && !isOptionDisabled(option));
 
-                    if (visibleOptions) {
-                        const selectedOptions = visibleOptions.filter((option) => isOptionDisabled(option) && isSelected(option));
-
-                        value = selectedOptions.map((option) => getOptionValue(option));
-                    }
-                } else if (visibleOptions) {
-                    const options = visibleOptions.filter((option) => !isOptionDisabled(option) || isSelected(option));
-
-                    if (props.optionGroupLabel) {
-                        value = [];
-                        options.forEach(
-                            (optionGroup) =>
-                                (value = [
-                                    ...value,
-                                    ...getOptionGroupChildren(optionGroup)
-                                        .filter((option) => !isOptionDisabled(option))
-                                        .map((option) => getOptionValue(option))
-                                ])
-                        );
-                    } else {
-                        value = options.map((option) => getOptionValue(option));
+                    if (validOptions) {
+                        value = validOptions.map((option) => getOptionValue(option));
                     }
                 }
 
@@ -622,21 +605,7 @@ export const MultiSelect = React.memo(
                 return false;
             }
 
-            const options = visibleOptions.filter((option) => !isOptionDisabled(option));
-
-            if (props.optionGroupLabel) {
-                let areAllSelected = true;
-
-                for (let optionGroup of options) {
-                    const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
-
-                    if (visibleOptionsGroupChildren.some((option) => !isSelected(option)) === true) {
-                        areAllSelected = false;
-                    }
-                }
-
-                return areAllSelected;
-            }
+            const options = visibleOptions.filter((option) => !isOptionDisabled(option) && isValidOption(option));
 
             return !options.some((option) => !isSelected(option));
         };
@@ -697,7 +666,7 @@ export const MultiSelect = React.memo(
         };
 
         const isOptionGroup = (option) => {
-            return props.optionGroupLabel && option.optionGroup && option.group;
+            return props.optionGroupLabel && option.group;
         };
 
         const hasSelectedOption = () => {
@@ -937,12 +906,14 @@ export const MultiSelect = React.memo(
         };
 
         const getVisibleOptions = () => {
+            const options = props.optionGroupLabel ? flatOptions(props.options) : props.options;
+
             if (hasFilter) {
                 const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
 
                 if (props.optionGroupLabel) {
-                    let filteredGroups = [];
+                    const filteredGroups = [];
 
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -952,13 +923,25 @@ export const MultiSelect = React.memo(
                         }
                     }
 
-                    return filteredGroups;
+                    return flatOptions(filteredGroups);
                 }
 
-                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
-            return props.options;
+            return options;
+        };
+
+        const flatOptions = (options) => {
+            return (options || []).reduce((result, option, index) => {
+                result.push({ ...option, group: true, index });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
+
+                return result;
+            }, []);
         };
 
         React.useImperativeHandle(ref, () => ({
