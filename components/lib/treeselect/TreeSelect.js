@@ -398,7 +398,7 @@ export const TreeSelect = React.memo(
         };
 
         const setFocusToFocusableFirstNode = () => {
-            const treeNodeEl = DomHandler.find(treeRef.current.getElement(), '[data-pc-section="node"]');
+            const treeNodeEl = DomHandler.find(treeRef.current?.getElement(), '[data-pc-section="node"]');
             const focusedElement = [...treeNodeEl].find((item) => item.getAttribute('tabindex') === '0');
 
             DomHandler.focus(focusedElement);
