@@ -9,11 +9,13 @@ import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
 
 export const TreeTableHeader = React.memo((props) => {
     const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
     const filterTimeout = React.useRef(null);
+    const context = React.useContext(PrimeReactContext);
 
     const getColumnProp = (column, ...args) => {
         return column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(column, args[0]) : ColumnBase.getCProp(args[0] || column, args[1])) : null;
@@ -320,7 +322,7 @@ export const TreeTableHeader = React.memo((props) => {
                 className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, frozen, column, options, getColumnProp, sorted, align })),
                 style: getColumnProp(column, 'headerStyle') || getColumnProp(column, 'style'),
                 tabIndex: sortable ? props.tabIndex : null,
-                'aria-sort': ariaSort,
+                'aria-sort': ariaSort, //TODO: aria-sort is defined here two times (ariaSort, ariaSortData) ?
                 onClick: (e) => onHeaderClick(e, column),
                 onMouseDown: (e) => onHeaderMouseDown(e, column),
                 onKeyDown: (e) => onHeaderKeyDown(e, column),
@@ -376,7 +378,7 @@ export const TreeTableHeader = React.memo((props) => {
     const createHeaderRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowHeaderCells = rowColumns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: true }));
-        const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
+        const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }), RowBase.getProps(row.props, context));
 
         return (
             <tr role="row" {...headerRowProps} key={index}>
