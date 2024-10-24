@@ -513,7 +513,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         }
 
         if (props.onValueChange) {
-            props.onValueChange(processedData({ filters }));
+            props.onValueChange(processedData({ filters: newFilters }));
         }
     };
 
