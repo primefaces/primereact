@@ -4,10 +4,12 @@ import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
 import { ObjectUtils } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
 
 export const TreeTableFooter = React.memo((props) => {
     const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
+    const context = React.useContext(PrimeReactContext);
 
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
@@ -48,7 +50,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
-        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName, role: 'row' }));
+        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName, role: 'row' }), RowBase.getProps(row.props, context));
 
         return (
             <tr {...footerRowProps} key={index}>
