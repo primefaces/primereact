@@ -716,7 +716,7 @@ export const Dropdown = React.memo(
         const getSelectedOptionIndex = (options) => {
             options = options || visibleOptions;
 
-            if (props.value != null && options) {
+            if (options) {
                 if (props.optionGroupLabel) {
                     for (let i = 0; i < options.length; i++) {
                         let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(options[i]));
