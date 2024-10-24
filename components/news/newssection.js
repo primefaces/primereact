@@ -14,12 +14,12 @@ export default function NewsSection() {
             const item = JSON.parse(itemString);
 
             if (!item.hiddenNews || item.hiddenNews !== News.id) {
-                // showNews(News);
+                showNews(News);
             } else {
                 hideNews();
             }
         } else {
-            // showNews(News);
+            showNews(News);
         }
     });
 
