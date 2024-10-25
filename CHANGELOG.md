@@ -1,5 +1,28 @@
 # Changelog
 
+## [10.8.4](https://github.com/primefaces/primereact/tree/10.8.4) (2024-09-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.8.3...10.8.4)
+
+-    TriStateCheckbox: Warning: value prop on input should not be null. Consider using an empty string to clear the component or undefined for uncontrolled components. [#7313](https://github.com/primefaces/primereact/issues/7313)
+-    DataTable: onSelectionChange getting fired on column element click also [#7309](https://github.com/primefaces/primereact/issues/7309)
+-    DOCS: Theme switcher don't show Material design indigo themes. Shows purple instead [#7304](https://github.com/primefaces/primereact/issues/7304)
+-    Dialog : use the locale property aria.close [#7301](https://github.com/primefaces/primereact/issues/7301)
+-    Steps component: Unable to control the active step using activeIndex prop [#7298](https://github.com/primefaces/primereact/issues/7298)
+-    Dropdown: OptionGroup using optionGroupLabel is blank [#7285](https://github.com/primefaces/primereact/issues/7285)
+-    InputText: props.invalid does not work correctly in Passthrough (Tailwind) [#7275](https://github.com/primefaces/primereact/issues/7275)
+-    TreeTable: alignHeader takes no effect [#7270](https://github.com/primefaces/primereact/issues/7270)
+-    TreeTable: size prop not working, even in official StackBlitz example [#7269](https://github.com/primefaces/primereact/issues/7269)
+-    Menu: separators cannot be hidden [#7261](https://github.com/primefaces/primereact/issues/7261)
+-    Tooltip event="both" does not work if element get focus state by clicking on it [#7260](https://github.com/primefaces/primereact/issues/7260)
+-    SplitButton: menu pass-through not working [#7259](https://github.com/primefaces/primereact/issues/7259)
+-    DataTable: Select all checkbox on header row not working properly when scrollable is true [#7258](https://github.com/primefaces/primereact/issues/7258)
+-    Sidebar: closeIconRef parameter error [#7255](https://github.com/primefaces/primereact/issues/7255)
+-    Calendar: selecting a new year is not being reflected when transitioning to the month view. [#7254](https://github.com/primefaces/primereact/issues/7254)
+-    Mention: Add show/hide to typescript and docs [#7242](https://github.com/primefaces/primereact/pull/7242)
+-    DataTable incorrectly indicates drop functionality for unrelated draggable elements [#7239](https://github.com/primefaces/primereact/issues/7239)
+-    Calendar: The yearNavigator does not update the displayed year after selecting a new year. [#7234](https://github.com/primefaces/primereact/issues/7234)
+
 ## [10.8.3](https://github.com/primefaces/primereact/tree/10.8.3) (2024-09-16)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.8.2...10.8.3)
