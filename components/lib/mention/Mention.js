@@ -537,6 +537,7 @@ export const Mention = React.memo(
                 style: props.inputStyle,
                 ...inputProps,
                 unstyled: props.unstyled,
+                autoResize: props.autoResize,
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
@@ -560,6 +561,8 @@ export const Mention = React.memo(
             MentionBase.getOtherProps(props),
             ptm('root')
         );
+
+        console.log('MentionBase.js', rootProps);
 
         return (
             <div {...rootProps}>
