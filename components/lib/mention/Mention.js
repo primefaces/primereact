@@ -562,8 +562,6 @@ export const Mention = React.memo(
             ptm('root')
         );
 
-        console.log('MentionBase.js', rootProps);
-
         return (
             <div {...rootProps}>
                 <InputTextarea {...inputMentionProps} />
