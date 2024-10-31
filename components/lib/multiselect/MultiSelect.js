@@ -981,11 +981,28 @@ export const MultiSelect = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
+        const onClearIconKeyDown = (event) => {
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    updateModel(event, [], []);
+                    break;
+            }
+        };
+
         const createClearIcon = () => {
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, [], [])
+                    onClick: (e) => updateModel(e, [], []),
+                    tabIndex: props.tabIndex || '0',
+                    'aria-label': localeOption('clear'),
+                    onKeyDown: (e) => onClearIconKeyDown(e)
                 },
                 ptm('clearIcon')
             );
