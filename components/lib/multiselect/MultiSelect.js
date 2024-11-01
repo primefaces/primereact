@@ -982,6 +982,9 @@ export const MultiSelect = React.memo(
         });
 
         const onClearIconKeyDown = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
             switch (event.code) {
                 case 'Space':
                 case 'NumpadEnter':
