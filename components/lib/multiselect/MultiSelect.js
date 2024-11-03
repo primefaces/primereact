@@ -858,7 +858,7 @@ export const MultiSelect = React.memo(
                 return ObjectUtils.getJSXElement(props.selectedItemTemplate);
             }
 
-            const onremoveTokenIconKeyDown = (event, val) => {
+            const onRemoveTokenIconKeyDown = (event, val) => {
                 event.preventDefault();
                 event.stopPropagation();
 
@@ -891,7 +891,7 @@ export const MultiSelect = React.memo(
                         {
                             className: cx('removeTokenIcon'),
                             onClick: (e) => removeChip(e, val),
-                            onKeyDown: (e) => onremoveTokenIconKeyDown(e, val),
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, val),
                             tabIndex: props.tabIndex || '0',
                             'aria-label': localeOption('removeTokenIcon')
                         },
