@@ -858,23 +858,6 @@ export const MultiSelect = React.memo(
                 return ObjectUtils.getJSXElement(props.selectedItemTemplate);
             }
 
-            const onRemoveTokenIconKeyDown = (event, val) => {
-                event.preventDefault();
-                event.stopPropagation();
-
-                switch (event.code) {
-                    case 'Space':
-                    case 'NumpadEnter':
-                    case 'Enter':
-                        if (props.inline) {
-                            break;
-                        }
-
-                        removeChip(event, val);
-                        break;
-                }
-            };
-
             if (props.display === 'chip' && !empty) {
                 const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
 
@@ -889,11 +872,11 @@ export const MultiSelect = React.memo(
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
+                            'aria-label': localeOption('removeTokenIcon'),
                             className: cx('removeTokenIcon'),
                             onClick: (e) => removeChip(e, val),
                             onKeyDown: (e) => onRemoveTokenIconKeyDown(e, val),
-                            tabIndex: props.tabIndex || '0',
-                            'aria-label': localeOption('removeTokenIcon')
+                            tabIndex: props.tabIndex || '0'
                         },
                         ptm('removeTokenIcon', context)
                     );
@@ -964,6 +947,40 @@ export const MultiSelect = React.memo(
             }, []);
         };
 
+        const onClearIconKeyDown = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    updateModel(event, [], []);
+                    break;
+            }
+        };
+
+        const onRemoveTokenIconKeyDown = (event, val) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    removeChip(event, val);
+                    break;
+            }
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             show,
@@ -1001,31 +1018,14 @@ export const MultiSelect = React.memo(
             ZIndexUtils.clear(overlayRef.current);
         });
 
-        const onClearIconKeyDown = (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-
-            switch (event.code) {
-                case 'Space':
-                case 'NumpadEnter':
-                case 'Enter':
-                    if (props.inline) {
-                        break;
-                    }
-
-                    updateModel(event, [], []);
-                    break;
-            }
-        };
-
         const createClearIcon = () => {
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, [], []),
-                    tabIndex: props.tabIndex || '0',
                     'aria-label': localeOption('clear'),
-                    onKeyDown: (e) => onClearIconKeyDown(e)
+                    onClick: (e) => updateModel(e, [], []),
+                    onKeyDown: (e) => onClearIconKeyDown(e),
+                    tabIndex: props.tabIndex || '0'
                 },
                 ptm('clearIcon')
             );
