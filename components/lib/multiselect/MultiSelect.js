@@ -891,9 +891,9 @@ export const MultiSelect = React.memo(
                         {
                             className: cx('removeTokenIcon'),
                             onClick: (e) => removeChip(e, val),
+                            onKeyDown: (e) => onremoveTokenIconKeyDown(e, val),
                             tabIndex: props.tabIndex || '0',
-                            'aria-label': localeOption('removeTokenIcon'),
-                            onKeyDown: (e) => onremoveTokenIconKeyDown(e, val)
+                            'aria-label': localeOption('removeTokenIcon')
                         },
                         ptm('removeTokenIcon', context)
                     );
