@@ -858,6 +858,23 @@ export const MultiSelect = React.memo(
                 return ObjectUtils.getJSXElement(props.selectedItemTemplate);
             }
 
+            const onremoveTokenIconKeyDown = (event, val) => {
+                event.preventDefault();
+                event.stopPropagation();
+
+                switch (event.code) {
+                    case 'Space':
+                    case 'NumpadEnter':
+                    case 'Enter':
+                        if (props.inline) {
+                            break;
+                        }
+
+                        removeChip(event, val);
+                        break;
+                }
+            };
+
             if (props.display === 'chip' && !empty) {
                 const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
 
@@ -873,7 +890,10 @@ export const MultiSelect = React.memo(
                     const iconProps = mergeProps(
                         {
                             className: cx('removeTokenIcon'),
-                            onClick: (e) => removeChip(e, val)
+                            onClick: (e) => removeChip(e, val),
+                            onKeyDown: (e) => onremoveTokenIconKeyDown(e, val),
+                            tabIndex: props.tabIndex || '0',
+                            'aria-label': localeOption('removeTokenIcon')
                         },
                         ptm('removeTokenIcon', context)
                     );
