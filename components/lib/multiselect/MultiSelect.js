@@ -237,7 +237,7 @@ export const MultiSelect = React.memo(
                 const len = currentTarget.value.length;
 
                 currentTarget.setSelectionRange(event.shiftKey ? 0 : len, len);
-                setFocusedOptionIndex(-1);
+                focusedOptionIndex = -1;
             } else {
                 let metaKey = event.metaKey || event.ctrlKey;
                 let optionIndex = findLastOptionIndex();

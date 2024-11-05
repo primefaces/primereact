@@ -411,7 +411,7 @@ export const PickList = React.memo(
             event.preventDefault();
 
             const isSource = type === 'source';
-            let selection = isSource ? sourceSelectionState : targetSelectionState;
+            const selection = isSource ? sourceSelectionState : targetSelectionState;
 
             if (event.shiftKey && selection && selection.length > 0) {
                 const listItems = isSource ? sourceList : targetList;

@@ -89,7 +89,7 @@ interface InplaceToggleEvent {
  * Defines valid properties in Inplace component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'onToggle'> {
+export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * Whether the content is displayed or not. To use in controlled mode you must implement `onToggle` callback at a minimum.
      * @defaultValue false

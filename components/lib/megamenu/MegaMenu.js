@@ -422,7 +422,7 @@ export const MegaMenu = React.memo(
             event.preventDefault();
 
             if (horizontal) {
-                let _focusedItemInfo = focusedItemInfo;
+                const _focusedItemInfo = focusedItemInfo;
 
                 if (ObjectUtils.isNotEmpty(activeItemState) && activeItemState.key === focusedItemInfo.key) {
                     _focusedItemInfo = { index: -1, key: '', parentKey: activeItemState.key };
@@ -1159,7 +1159,7 @@ export const MegaMenu = React.memo(
                     'data-p-focused': isFocused,
                     style: category.style,
                     role: 'menuitem',
-                    'data-p-disabled': category.disabled || false //TODO: data-p-disabled is set twice here
+                    'data-p-disabled': category.disabled || false
                 },
                 getPTOptions(processedItem, 'menuitem', index)
             );
