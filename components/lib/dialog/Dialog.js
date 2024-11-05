@@ -67,7 +67,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
-        props.onHide();
+        props.onHide(event);
         event.preventDefault();
     };
 
