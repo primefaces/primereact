@@ -134,14 +134,22 @@ const UIKitPage = (props) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-column md:flex-row gap-4 md:gap-8 mb-5">
+                    <div className="flex flex-column md:flex-row gap-6 md:gap-6 mb-5">
                         <a
-                            href="https://www.figma.com/design/zSNx4gzCQBanAoT3fMRlhH/Preview-%7C-PrimeOne-%7C-3.0?node-id=806-36648&t=guCqX6GemTXw9rhG-1"
+                            href="https://www.figma.com/design/G855HjuSyK8viJr0a5ZjRG/Preview-%7C%C2%A0PrimeOne-%7C-3.0.1?node-id=830-41631&t=m1MbOTTqKsBSRBLS-1"
                             className="p-5 w-full md:w-6 bg-white flex flex-column align-items-center border-2 border-transparent hover:border-primary transition-colors transition-duration-300"
                             style={{ borderRadius: '50px' }}
                         >
                             <span className="text-gray-900 text-4xl font-bold mb-5">Preview</span>
                             <img alt="Figma Light" src="https://primefaces.org/cdn/primereact/images/uikit/logo-figma-light.svg" className="w-4rem" />
+                        </a>
+                        <a
+                            href="https://www.figma.com/design/XBQzDl4vDOO0pyxEGYcICt/Preview-%7C%C2%A0Dark-%7C-PrimeOne-%7C-3.0.1?node-id=806-36648&t=7AME0kw905t3PVVY-1"
+                            className="p-5 w-full md:w-6 bg-gray-900 flex flex-column align-items-center border-2 border-transparent hover:border-primary transition-colors transition-duration-300"
+                            style={{ borderRadius: '50px' }}
+                        >
+                            <span className="text-white text-4xl font-bold mb-5">Preview Dark</span>
+                            <img alt="Figma Dark" src="https://primefaces.org/cdn/primereact/images/uikit/logo-figma-dark.svg" className="w-4rem" />
                         </a>
                     </div>
 
