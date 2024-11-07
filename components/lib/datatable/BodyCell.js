@@ -23,6 +23,7 @@ export const BodyCell = React.memo((props) => {
     const keyHelperRef = React.useRef(null);
     const overlayEventListener = React.useRef(null);
     const selfClick = React.useRef(false);
+    const focusTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
     const editingRowDataStateRef = React.useRef(null);
     const { ptm, ptmo, cx } = props.ptCallbacks;
@@ -65,12 +66,13 @@ export const BodyCell = React.memo((props) => {
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
-            if (!selfClick.current && isOutsideClicked(e.target)) {
-                // #2666 for overlay components and outside is clicked
-                setTimeout(() => {
+            setTimeout(() => {
+                if (!selfClick.current && isOutsideClicked(e.target)) {
+                    // #2666 for overlay components and outside is clicked
+
                     switchCellToViewMode(e, true);
-                }, 0);
-            }
+                }
+            }, 0);
 
             selfClick.current = false;
         },
@@ -228,13 +230,16 @@ export const BodyCell = React.memo((props) => {
     };
 
     const focusOnElement = () => {
-        if (editingState) {
-            const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+        clearTimeout(focusTimeout.current);
+        focusTimeout.current = setTimeout(() => {
+            if (editingState) {
+                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
 
-            focusableEl && focusableEl.focus();
-        }
+                focusableEl && focusableEl.focus();
+            }
 
-        keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
+            keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
+        }, 1);
     };
 
     const focusOnInit = () => {
@@ -506,7 +511,7 @@ export const BodyCell = React.memo((props) => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             focusOnElement();
         }
-    });
+    }, [props.editMode, props.editing, editingState]);
 
     React.useEffect(() => {
         if (props.editMode === 'row' && props.editing !== editingState) {
