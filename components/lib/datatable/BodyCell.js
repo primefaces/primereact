@@ -511,7 +511,7 @@ export const BodyCell = React.memo((props) => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             focusOnElement();
         }
-    }, [props.editMode, props.editing, editingState]);
+    }, [props.editMode, props.editing, editingState]); // eslint-disable-line react-hooks/exhaustive-deps
 
     React.useEffect(() => {
         if (props.editMode === 'row' && props.editing !== editingState) {
