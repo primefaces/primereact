@@ -116,7 +116,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => sidebarRef.current,
-        gteMask: () => maskRef.current,
+        getMask: () => maskRef.current,
         getCloseIcon: () => closeIconRef.current
     }));
 
