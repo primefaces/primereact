@@ -776,7 +776,7 @@
     background: #ffffff;
     width: 22px;
     height: 22px;
-    color: #4b5563;
+    color: rgba(255, 255, 255, 0.87);
     border-radius: 6px;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     outline-color: transparent;
@@ -789,16 +789,6 @@
   .p-checkbox .p-checkbox-box .p-checkbox-icon.p-icon {
     width: 14px;
     height: 14px;
-  }
-  .p-checkbox .p-checkbox-box {
-    border: 2px solid #d1d5db;
-    background: #ffffff;
-    width: 22px;
-    height: 22px;
-    color: #4b5563;
-    border-radius: 6px;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    outline-color: transparent;
   }
   .p-checkbox .p-checkbox-box .p-checkbox-icon {
     transition-duration: 0.2s;
