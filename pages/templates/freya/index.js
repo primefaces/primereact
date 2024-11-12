@@ -144,17 +144,18 @@ const animationFeaturesData2 = [
 const license = {
     documentLink: 'https://freya.primereact.org/documentation',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    showDiscount: true,
     licenseDetails: [
         {
             title: 'Basic License',
             price: '$59',
-            discountPrice: '',
+            discountPrice: '$39',
             included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', '1 Year Free Updates']
         },
         {
             title: 'Extended License',
             price: '$590',
-            discountPrice: '',
+            discountPrice: '$390',
             included: ['Commercial Usage', 'Multiple End Products', '1 Year Free Updates']
         }
     ]
