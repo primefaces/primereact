@@ -407,56 +407,24 @@ export const BodyRow = React.memo((props) => {
                 const key = `${props.rowIndex}_${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
+
+
                 return (
                     <BodyCell
-                        hostName={props.hostName}
+                        {...props}
                         key={key}
-                        allowCellSelection={props.allowCellSelection}
-                        cellClassName={props.cellClassName}
-                        checkIcon={props.checkIcon}
-                        collapsedRowIcon={props.collapsedRowIcon}
                         column={col}
-                        compareSelectionBy={props.compareSelectionBy}
-                        dataKey={props.dataKey}
-                        editMode={props.editMode}
                         editing={editing}
-                        editingMeta={props.editingMeta}
-                        expanded={props.expanded}
-                        expandedRowIcon={props.expandedRowIcon}
-                        frozenRow={props.frozenRow}
                         index={i}
-                        isSelectable={props.isSelectable}
-                        onCheckboxChange={props.onCheckboxChange}
                         onClick={props.onCellClick}
-                        onEditingMetaChange={props.onEditingMetaChange}
                         onMouseDown={props.onCellMouseDown}
                         onMouseUp={props.onCellMouseUp}
                         onRadioChange={props.onRadioChange}
                         onRowEditCancel={onEditCancel}
                         onRowEditInit={onEditInit}
                         onRowEditSave={onEditSave}
-                        onRowToggle={props.onRowToggle}
-                        responsiveLayout={props.responsiveLayout}
-                        rowData={props.rowData}
-                        rowEditorCancelIcon={props.rowEditorCancelIcon}
-                        rowEditorInitIcon={props.rowEditorInitIcon}
-                        rowEditorSaveIcon={props.rowEditorSaveIcon}
-                        rowIndex={props.rowIndex}
                         rowSpan={rowSpan}
-                        selectOnEdit={props.selectOnEdit}
-                        selected={props.selected}
-                        selection={props.selection}
                         selectionAriaLabel={props.tableProps.selectionAriaLabel}
-                        showRowReorderElement={props.showRowReorderElement}
-                        showSelectionElement={props.showSelectionElement}
-                        tabIndex={props.tabIndex}
-                        tableProps={props.tableProps}
-                        tableSelector={props.tableSelector}
-                        value={props.value}
-                        virtualScrollerOptions={props.virtualScrollerOptions}
-                        ptCallbacks={props.ptCallbacks}
-                        metaData={props.metaData}
-                        unstyled={props.unstyled}
                     />
                 );
             }
