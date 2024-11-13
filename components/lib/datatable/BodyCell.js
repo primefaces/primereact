@@ -13,8 +13,10 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
+import isEqual from 'lodash/isEqual';
 
 export const BodyCell = React.memo((props) => {
+    console.log('BodyCell rendered')
     const mergeProps = useMergeProps();
     const [editingState, setEditingState] = React.useState(props.editing);
     const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
@@ -851,6 +853,43 @@ export const BodyCell = React.memo((props) => {
     };
 
     return getVirtualScrollerOption('loading') ? createLoading() : createElement();
-});
+}
+,
+ (prevProps, nextProps) => {
+    const hasRowDataChanged = !isEqual(prevProps.rowData, nextProps.rowData);
+    const hasEditingStateChanged = prevProps.editing !== nextProps.editing;
+    const hasSelectionChanged = prevProps.selected !== nextProps.selected;
+    const hasRowOrCellIndexChanged = prevProps.rowIndex !== nextProps.rowIndex || prevProps.index !== nextProps.index;
+
+    const hasExpandedChanged = prevProps.expanded !== nextProps.expanded;
+    const hasAllowSelectionChanged = prevProps.allowCellSelection !== nextProps.allowCellSelection || prevProps.allowRowSelection !== nextProps.allowRowSelection;
+    // const hasMetaDataChanged = !isEqual(prevProps.metaData, nextProps.metaData);
+    // const hasVirtualScrollerOptionsChanged = !isEqual(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions);
+    const hasEditModeChanged = prevProps.editMode !== nextProps.editMode;
+    const hasEditingMetaChanged = !isEqual(prevProps.editingMeta, nextProps.editingMeta);
+
+     // console.log(hasRowDataChanged, hasEditingStateChanged, hasSelectionChanged, hasRowOrCellIndexChanged, hasExpandedChanged, hasAllowSelectionChanged, hasMetaDataChanged, hasVirtualScrollerOptionsChanged, hasEditModeChanged, hasEditingMetaChanged);
+     // console.log(prevProps.metaData, nextProps.metaData)
+     // console.log(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions)
+
+     // console.log(isEqual(prevProps, nextProps));
+     // console.log(prevProps, nextProps);
+
+    return !(
+        hasRowDataChanged ||
+        hasEditingStateChanged ||
+        hasSelectionChanged ||
+        hasRowOrCellIndexChanged ||
+        hasExpandedChanged ||
+        hasAllowSelectionChanged ||
+        // hasMetaDataChanged ||
+        // hasVirtualScrollerOptionsChanged ||
+        hasEditModeChanged ||
+        hasEditingMetaChanged
+    );
+ }
+);
 
 BodyCell.displayName = 'BodyCell';
+
+
