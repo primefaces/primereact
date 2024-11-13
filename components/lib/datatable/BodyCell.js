@@ -79,10 +79,6 @@ function selectiveCompare(a, b, keysToCompare) {
     return true;
 }
 
-export function fastMemo(component) {
-  return React.memo(component, selectiveCompare);
-}
-
 export const BodyCell = React.memo((props) => {
     console.log('BodyCell rendered')
     const mergeProps = useMergeProps();
@@ -99,6 +95,7 @@ export const BodyCell = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
+
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
@@ -122,7 +119,6 @@ export const BodyCell = React.memo((props) => {
         return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
     };
 
-    const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
     const isEditable = () => {
@@ -150,18 +146,6 @@ export const BodyCell = React.memo((props) => {
         when: isEditable()
     });
 
-    const isSelected = () => {
-        return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false;
-    };
-
-    const equalsData = (data) => {
-        return props.compareSelectionBy === 'equals' ? data === props.rowData : ObjectUtils.equals(data, props.rowData, props.dataKey);
-    };
-
-    const equals = (selectedCell) => {
-        return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
-    };
-
     const isOutsideClicked = (target) => {
         return elementRef.current && !(elementRef.current.isSameNode(target) || elementRef.current.contains(target));
     };
@@ -180,11 +164,11 @@ export const BodyCell = React.memo((props) => {
     const getCellParams = () => {
         return {
             value: resolveFieldData(),
-            field: field,
+            field: props.field,
             rowData: props.rowData,
             rowIndex: props.rowIndex,
             cellIndex: props.index,
-            selected: isSelected(),
+            selected: props.isSelected,
             column: props.column,
             props
         };
@@ -200,7 +184,7 @@ export const BodyCell = React.memo((props) => {
     };
 
     const resolveFieldData = (data) => {
-        return ObjectUtils.resolveFieldData(data || props.rowData, field);
+        return ObjectUtils.resolveFieldData(data || props.rowData, props.field);
     };
 
     const getEditingRowData = () => {
@@ -209,10 +193,6 @@ export const BodyCell = React.memo((props) => {
 
     const getTabIndex = (cellSelected) => {
         return props.allowCellSelection ? (cellSelected ? 0 : props.rowIndex === 0 && props.index === 0 ? props.tabIndex : -1) : null;
-    };
-
-    const findIndex = (collection) => {
-        return (collection || []).findIndex((data) => equals(data));
     };
 
     const closeCell = (event) => {
@@ -355,14 +335,14 @@ export const BodyCell = React.memo((props) => {
     const editorCallback = (val) => {
         let editingRowData = { ...editingRowDataState };
 
-        ObjectUtils.mutateFieldData(editingRowData, field, val);
+        ObjectUtils.mutateFieldData(editingRowData, props.field, val);
         setEditingRowDataState(editingRowData);
 
         // update editing meta for complete methods on row mode
         const currentData = getEditingRowData();
 
         if (currentData) {
-            ObjectUtils.mutateFieldData(currentData, field, val);
+            ObjectUtils.mutateFieldData(currentData, props.field, val);
         }
 
         editingRowDataStateRef.current = editingRowData;
@@ -560,16 +540,16 @@ export const BodyCell = React.memo((props) => {
     };
 
     const onRowEditInit = (event) => {
-        props.onRowEditInit({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
+        props.onRowEditInit({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: props.field, index: props.rowIndex });
     };
 
     const onRowEditSave = (event) => {
-        props.onRowEditSave({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
+        props.onRowEditSave({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: props.field, index: props.rowIndex });
         focusOnInit();
     };
 
     const onRowEditCancel = (event) => {
-        props.onRowEditCancel({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
+        props.onRowEditCancel({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: props.field, index: props.rowIndex });
         focusOnInit();
     };
 
@@ -637,7 +617,7 @@ export const BodyCell = React.memo((props) => {
     const createElement = () => {
         let content;
         let editorKeyHelper;
-        const cellSelected = props.allowCellSelection && isSelected();
+        const cellSelected = props.allowCellSelection && props.isSelected;
         const isRowEditor = props.editMode === 'row';
         const tabIndex = getTabIndex(cellSelected);
         const selectionMode = getColumnProp('selectionMode');
@@ -648,7 +628,7 @@ export const BodyCell = React.memo((props) => {
         const frozen = getColumnProp('frozen');
         const align = getColumnProp('align');
         const value = resolveFieldData();
-        const columnBodyOptions = { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
+        const columnBodyOptions = { column: props.column, field: props.field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
         const rowEditor = ObjectUtils.getPropValue(getColumnProp('rowEditor'), props.rowData, columnBodyOptions);
         const expander = ObjectUtils.getPropValue(getColumnProp('expander'), props.rowData, columnBodyOptions);
         const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, columnBodyOptions);
@@ -761,7 +741,7 @@ export const BodyCell = React.memo((props) => {
 
             if (body) {
                 expanderProps.element = content;
-                content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, expander: expanderProps });
+                content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: props.field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, expander: expanderProps });
             }
         } else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
@@ -848,16 +828,16 @@ export const BodyCell = React.memo((props) => {
 
             if (body) {
                 rowEditorProps.element = content;
-                content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
+                content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: props.field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
             }
         } else if (body && (!editingState || !editor)) {
-            content = body ? ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps }) : value;
+            content = body ? ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: props.field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps }) : value;
         } else if (editor && editingState) {
             content = ObjectUtils.getJSXElement(editor, {
                 rowData: editingRowDataState,
                 value: resolveFieldData(editingRowDataState),
                 column: props.column,
-                field: field,
+                field: props.field,
                 rowIndex: props.rowIndex,
                 frozenRow: props.frozenRow,
                 props: props.tableProps,
@@ -924,17 +904,17 @@ export const BodyCell = React.memo((props) => {
 }
 ,
  (prevProps, nextProps) => {
-    const hasRowDataChanged = !isEqual(prevProps.rowData, nextProps.rowData);
-    const hasEditingStateChanged = prevProps.editing !== nextProps.editing;
-    const hasSelectionChanged = prevProps.selected !== nextProps.selected;
-    const hasRowOrCellIndexChanged = prevProps.rowIndex !== nextProps.rowIndex || prevProps.index !== nextProps.index;
-
-    const hasExpandedChanged = prevProps.expanded !== nextProps.expanded;
-    const hasAllowSelectionChanged = prevProps.allowCellSelection !== nextProps.allowCellSelection || prevProps.allowRowSelection !== nextProps.allowRowSelection;
-    const hasMetaDataChanged = !isEqual(prevProps.metaData, nextProps.metaData);
-    const hasVirtualScrollerOptionsChanged = !isEqual(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions);
-    const hasEditModeChanged = prevProps.editMode !== nextProps.editMode;
-    const hasEditingMetaChanged = !isEqual(prevProps.editingMeta, nextProps.editingMeta);
+    // const hasRowDataChanged = !isEqual(prevProps.rowData, nextProps.rowData);
+    // const hasEditingStateChanged = prevProps.editing !== nextProps.editing;
+    // const hasSelectionChanged = prevProps.selected !== nextProps.selected;
+    // const hasRowOrCellIndexChanged = prevProps.rowIndex !== nextProps.rowIndex || prevProps.index !== nextProps.index;
+    //
+    // const hasExpandedChanged = prevProps.expanded !== nextProps.expanded;
+    // const hasAllowSelectionChanged = prevProps.allowCellSelection !== nextProps.allowCellSelection || prevProps.allowRowSelection !== nextProps.allowRowSelection;
+    // const hasMetaDataChanged = !isEqual(prevProps.metaData, nextProps.metaData);
+    // const hasVirtualScrollerOptionsChanged = !isEqual(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions);
+    // const hasEditModeChanged = prevProps.editMode !== nextProps.editMode;
+    // const hasEditingMetaChanged = !isEqual(prevProps.editingMeta, nextProps.editingMeta);
 
      // console.log(hasRowDataChanged, hasEditingStateChanged, hasSelectionChanged, hasRowOrCellIndexChanged, hasExpandedChanged, hasAllowSelectionChanged, hasMetaDataChanged, hasVirtualScrollerOptionsChanged, hasEditModeChanged, hasEditingMetaChanged);
      // console.log(prevProps.metaData, nextProps.metaData)
@@ -943,24 +923,24 @@ export const BodyCell = React.memo((props) => {
      // console.log(isEqual(prevProps, nextProps));
      // console.log(prevProps, nextProps);
 
-     const keysToCompare = ['rowData', 'editing', 'selected', 'selection', 'rowIndex', 'index', 'expanded',
+     const keysToCompare = ['rowData', 'editing', 'selected', 'isSelected', 'rowIndex', 'index', 'expanded',
          'allowCellSelection', 'allowRowSelection', 'editMode', 'editingMeta'];
 
-    const selectiveCompareB = selectiveCompare(prevProps, nextProps, keysToCompare);
-    console.log(selectiveCompareB, !(
-        hasRowDataChanged ||
-        hasEditingStateChanged ||
-        hasSelectionChanged ||
-        hasRowOrCellIndexChanged ||
-        hasExpandedChanged ||
-        hasAllowSelectionChanged ||
-        // hasMetaDataChanged ||
-        // hasVirtualScrollerOptionsChanged ||
-        hasEditModeChanged ||
-        hasEditingMetaChanged
-    ));
+    // const selectiveCompareB = selectiveCompare(prevProps, nextProps, keysToCompare);
+    // console.log(selectiveCompareB, !(
+    //     hasRowDataChanged ||
+    //     hasEditingStateChanged ||
+    //     hasSelectionChanged ||
+    //     hasRowOrCellIndexChanged ||
+    //     hasExpandedChanged ||
+    //     hasAllowSelectionChanged ||
+    //     // hasMetaDataChanged ||
+    //     // hasVirtualScrollerOptionsChanged ||
+    //     hasEditModeChanged ||
+    //     hasEditingMetaChanged
+    // ));
 
-    return selectiveCompareB;
+    return selectiveCompare(prevProps, nextProps, keysToCompare);
  }
 );
 

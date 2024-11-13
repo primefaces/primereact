@@ -407,12 +407,29 @@ export const BodyRow = React.memo((props) => {
                 const key = `${props.rowIndex}_${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
+                const field = getColumnProp(col, 'field') || `field_${i}`;
 
+                const equalsDataCell = (data) => {
+                    return props.compareSelectionBy === 'equals' ? data === props.rowData : ObjectUtils.equals(data, props.rowData, props.dataKey);
+                };
+
+                const equalsCell = (selectedCell) => {
+                    return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsDataCell(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === i);
+                };
+
+                const findIndexCell = (collection) => {
+                    return (collection || []).findIndex((data) => equalsCell(data));
+                };
+
+                const isSelected = () => {
+                    return props.selection ? (props.selection instanceof Array ? findIndexCell(props.selection) > -1 : equalsCell(props.selection)) : false;
+                };
 
                 return (
                     <BodyCell
                         {...props}
                         key={key}
+                        field={field}
                         column={col}
                         editing={editing}
                         index={i}
@@ -425,6 +442,8 @@ export const BodyRow = React.memo((props) => {
                         onRowEditSave={onEditSave}
                         rowSpan={rowSpan}
                         selectionAriaLabel={props.tableProps.selectionAriaLabel}
+
+                        isSelected={isSelected()}
                     />
                 );
             }
