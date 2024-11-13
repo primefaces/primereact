@@ -15,6 +15,74 @@ import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 import isEqual from 'lodash/isEqual';
 
+function getNestedValue(obj, path) {
+    // This helper function takes an object and a dot-separated key path. It traverses the object based on the path,
+    // returning the value at the specified depth. If any part of the path is missing or undefined, it returns undefined.
+
+    return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
+}
+
+// Modified shallowEqual that skips object comparison
+function absoluteCompare(objA, objB, maxDepth = 1, currentDepth = 0) {
+  if (currentDepth > maxDepth) return true;
+
+  const aKeys = Object.keys(objA);
+  const bKeys = Object.keys(objB);
+
+  if (aKeys.length !== bKeys.length)
+      return false;
+
+  for (const key of aKeys) {
+    const aValue = objA[key];
+    const bValue = objB[key];
+
+    // Skip comparison if values are objects
+    const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
+    if (isObject && !absoluteCompare(aValue, bValue, maxDepth, currentDepth + 1))
+        return false;
+    if (!isObject && aValue !== bValue)
+        return false;
+  }
+
+  return true;
+}
+
+function selectiveCompare(a, b, keysToCompare) {
+    // Loops over each key in keysToCompare.
+    // Uses getNestedValue to extract values from both objects for each key path.
+    // Compares these values with strict equality (===). If any comparison fails, it returns false.
+    // If all specified properties are equal, it returns true. It performs a shallow comparison if no keys are provided.
+    // Example:
+    // const obj1 = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+    // const obj2 = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+    // const keysToCompare = ['name', 'address.city', 'address.zip'];
+    // console.log(selectiveCompare(obj1, obj2, keysToCompare)); // true
+
+    if (a === b) return true;
+    if (!a || !b || typeof a !== 'object' || typeof b !== 'object')
+        return false;
+    if (!keysToCompare)
+        return absoluteCompare(a, b, 1); // If no keys are provided, the comparison is limited to one depth level.
+
+    for (const key of keysToCompare) {
+      const aValue = getNestedValue(a, key);
+      const bValue = getNestedValue(b, key);
+
+      const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
+
+      // If the current key is an object, they are compared in one further level only.
+      if (isObject && !absoluteCompare(aValue, bValue, 1))
+          return false;
+      if (!isObject && aValue !== bValue)
+          return false;
+    }
+    return true;
+}
+
+export function fastMemo(component) {
+  return React.memo(component, selectiveCompare);
+}
+
 export const BodyCell = React.memo((props) => {
     console.log('BodyCell rendered')
     const mergeProps = useMergeProps();
@@ -863,8 +931,8 @@ export const BodyCell = React.memo((props) => {
 
     const hasExpandedChanged = prevProps.expanded !== nextProps.expanded;
     const hasAllowSelectionChanged = prevProps.allowCellSelection !== nextProps.allowCellSelection || prevProps.allowRowSelection !== nextProps.allowRowSelection;
-    // const hasMetaDataChanged = !isEqual(prevProps.metaData, nextProps.metaData);
-    // const hasVirtualScrollerOptionsChanged = !isEqual(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions);
+    const hasMetaDataChanged = !isEqual(prevProps.metaData, nextProps.metaData);
+    const hasVirtualScrollerOptionsChanged = !isEqual(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions);
     const hasEditModeChanged = prevProps.editMode !== nextProps.editMode;
     const hasEditingMetaChanged = !isEqual(prevProps.editingMeta, nextProps.editingMeta);
 
@@ -875,7 +943,11 @@ export const BodyCell = React.memo((props) => {
      // console.log(isEqual(prevProps, nextProps));
      // console.log(prevProps, nextProps);
 
-    return !(
+     const keysToCompare = ['rowData', 'editing', 'selected', 'selection', 'rowIndex', 'index', 'expanded',
+         'allowCellSelection', 'allowRowSelection', 'editMode', 'editingMeta'];
+
+    const selectiveCompareB = selectiveCompare(prevProps, nextProps, keysToCompare);
+    console.log(selectiveCompareB, !(
         hasRowDataChanged ||
         hasEditingStateChanged ||
         hasSelectionChanged ||
@@ -886,7 +958,9 @@ export const BodyCell = React.memo((props) => {
         // hasVirtualScrollerOptionsChanged ||
         hasEditModeChanged ||
         hasEditingMetaChanged
-    );
+    ));
+
+    return selectiveCompareB;
  }
 );
 
