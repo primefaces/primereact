@@ -12,7 +12,7 @@ export const PrimeReactProvider = (props) => {
     const [locale, setLocale] = useState(propsValue.locale || 'en');
     const [appendTo, setAppendTo] = useState(propsValue.appendTo || null);
     const [styleContainer, setStyleContainer] = useState(propsValue.styleContainer || null);
-    const [cssTransition, setCssTransition] = useState(propsValue.cssTransition || true);
+    const [cssTransition, setCssTransition] = useState(propsValue.cssTransition ?? true);
     const [autoZIndex, setAutoZIndex] = useState(propsValue.autoZIndex || true);
     const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(propsValue.hideOverlaysOnDocumentScrolling || false);
     const [nonce, setNonce] = useState(propsValue.nonce || null);
