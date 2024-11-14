@@ -1,4 +1,3 @@
-
 const TemplateLicense = ({ license }) => {
     return (
         <div className="template-license-wrapper">
