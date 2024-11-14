@@ -13,7 +13,6 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
-import isEqual from 'lodash/isEqual';
 
 function getNestedValue(obj, path) {
     // This helper function takes an object and a dot-separated key path. It traverses the object based on the path,
@@ -22,29 +21,30 @@ function getNestedValue(obj, path) {
     return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
 }
 
-// Modified shallowEqual that skips object comparison
 function absoluteCompare(objA, objB, maxDepth = 1, currentDepth = 0) {
-  if (currentDepth > maxDepth) return true;
+    if (!objA || !objB) return true;
+    if (currentDepth > maxDepth) return true;
 
-  const aKeys = Object.keys(objA);
-  const bKeys = Object.keys(objB);
+    if (typeof aValue !== typeof bValue) return false;
 
-  if (aKeys.length !== bKeys.length)
-      return false;
+    const aKeys = Object.keys(objA);
+    const bKeys = Object.keys(objB);
 
-  for (const key of aKeys) {
-    const aValue = objA[key];
-    const bValue = objB[key];
+    if (aKeys.length !== bKeys.length) return false;
 
-    // Skip comparison if values are objects
-    const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
-    if (isObject && !absoluteCompare(aValue, bValue, maxDepth, currentDepth + 1))
-        return false;
-    if (!isObject && aValue !== bValue)
-        return false;
-  }
+    for (const key of aKeys) {
+        const aValue = objA[key];
+        const bValue = objB[key];
 
-  return true;
+        // Skip comparison if values are objects
+        const isObject = ObjectUtils.isObject(aValue) && ObjectUtils.isObject(bValue);
+        const isFunction = ObjectUtils.isFunction(aValue) && ObjectUtils.isFunction(bValue);
+
+        if ((isObject || isFunction) && !absoluteCompare(aValue, bValue, maxDepth, currentDepth + 1)) return false;
+        if (!isObject && aValue !== bValue) return false;
+    }
+
+    return true;
 }
 
 function selectiveCompare(a, b, keysToCompare) {
@@ -56,31 +56,26 @@ function selectiveCompare(a, b, keysToCompare) {
     // const obj1 = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
     // const obj2 = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
     // const keysToCompare = ['name', 'address.city', 'address.zip'];
-    // console.log(selectiveCompare(obj1, obj2, keysToCompare)); // true
 
     if (a === b) return true;
-    if (!a || !b || typeof a !== 'object' || typeof b !== 'object')
-        return false;
-    if (!keysToCompare)
-        return absoluteCompare(a, b, 1); // If no keys are provided, the comparison is limited to one depth level.
+    if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
+    if (!keysToCompare) return absoluteCompare(a, b, 1); // If no keys are provided, the comparison is limited to one depth level.
 
     for (const key of keysToCompare) {
-      const aValue = getNestedValue(a, key);
-      const bValue = getNestedValue(b, key);
+        const aValue = getNestedValue(a, key);
+        const bValue = getNestedValue(b, key);
 
-      const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
+        const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
 
-      // If the current key is an object, they are compared in one further level only.
-      if (isObject && !absoluteCompare(aValue, bValue, 1))
-          return false;
-      if (!isObject && aValue !== bValue)
-          return false;
+        // If the current key is an object, they are compared in one further level only.
+        if (isObject && !absoluteCompare(aValue, bValue, 1)) return false;
+        if (!isObject && aValue !== bValue) return false;
     }
+
     return true;
 }
 
 export const BodyCell = React.memo((props) => {
-    console.log('BodyCell rendered')
     const mergeProps = useMergeProps();
     const [editingState, setEditingState] = React.useState(props.editing);
     const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
@@ -95,7 +90,6 @@ export const BodyCell = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
-
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
@@ -168,7 +162,7 @@ export const BodyCell = React.memo((props) => {
             rowData: props.rowData,
             rowIndex: props.rowIndex,
             cellIndex: props.index,
-            selected: props.isSelected,
+            selected: props.isCellSelected,
             column: props.column,
             props
         };
@@ -283,7 +277,8 @@ export const BodyCell = React.memo((props) => {
         clearTimeout(focusTimeout.current);
         focusTimeout.current = setTimeout(() => {
             if (editingState) {
-                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+                const focusableEl =
+                    props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
 
                 focusableEl && focusableEl.focus();
             }
@@ -351,7 +346,7 @@ export const BodyCell = React.memo((props) => {
     const onClick = (event) => {
         const params = getCellCallbackParams(event);
 
-        if (props.editMode !== 'row' && isEditable() && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
+        if (props.editMode !== 'row' && isEditable() && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.isRowSelected))) {
             selfClick.current = true;
 
             const onBeforeCellEditShow = getColumnProp('onBeforeCellEditShow');
@@ -521,14 +516,6 @@ export const BodyCell = React.memo((props) => {
         });
     };
 
-    const onCheckboxChange = (event) => {
-        props.onCheckboxChange({
-            originalEvent: event,
-            data: props.rowData,
-            index: props.rowIndex
-        });
-    };
-
     const onRowToggle = (event) => {
         props.onRowToggle({
             originalEvent: event,
@@ -617,7 +604,7 @@ export const BodyCell = React.memo((props) => {
     const createElement = () => {
         let content;
         let editorKeyHelper;
-        const cellSelected = props.allowCellSelection && props.isSelected;
+        const cellSelected = props.allowCellSelection && props.isCellSelected;
         const isRowEditor = props.editMode === 'row';
         const tabIndex = getTabIndex(cellSelected);
         const selectionMode = getColumnProp('selectionMode');
@@ -651,7 +638,7 @@ export const BodyCell = React.memo((props) => {
                 const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
                 const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
 
-                label = `${props.selected ? ariaLabel('unselectRow') : ariaLabel('selectRow')} ${ariaLabelText}`;
+                label = `${props.isRowSelected ? ariaLabel('unselectRow') : ariaLabel('selectRow')} ${ariaLabelText}`;
             }
 
             content = showSelection && (
@@ -660,7 +647,7 @@ export const BodyCell = React.memo((props) => {
                         <RowRadioButton
                             hostName={props.hostName}
                             column={props.column}
-                            checked={props.selected}
+                            checked={props.isRowSelected}
                             disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
                             onChange={onRadioChange}
                             tabIndex={props.tabIndex}
@@ -675,9 +662,9 @@ export const BodyCell = React.memo((props) => {
                         <RowCheckbox
                             hostName={props.hostName}
                             column={props.column}
-                            checked={props.selected}
+                            checked={props.isRowSelected}
                             disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
-                            onChange={onCheckboxChange}
+                            onChange={props.onCheckboxChange}
                             tabIndex={props.tabIndex}
                             ariaLabel={label}
                             checkIcon={props.checkIcon}
@@ -901,49 +888,12 @@ export const BodyCell = React.memo((props) => {
     };
 
     return getVirtualScrollerOption('loading') ? createLoading() : createElement();
-}
-,
- (prevProps, nextProps) => {
-    // const hasRowDataChanged = !isEqual(prevProps.rowData, nextProps.rowData);
-    // const hasEditingStateChanged = prevProps.editing !== nextProps.editing;
-    // const hasSelectionChanged = prevProps.selected !== nextProps.selected;
-    // const hasRowOrCellIndexChanged = prevProps.rowIndex !== nextProps.rowIndex || prevProps.index !== nextProps.index;
-    //
-    // const hasExpandedChanged = prevProps.expanded !== nextProps.expanded;
-    // const hasAllowSelectionChanged = prevProps.allowCellSelection !== nextProps.allowCellSelection || prevProps.allowRowSelection !== nextProps.allowRowSelection;
-    // const hasMetaDataChanged = !isEqual(prevProps.metaData, nextProps.metaData);
-    // const hasVirtualScrollerOptionsChanged = !isEqual(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions);
-    // const hasEditModeChanged = prevProps.editMode !== nextProps.editMode;
-    // const hasEditingMetaChanged = !isEqual(prevProps.editingMeta, nextProps.editingMeta);
-
-     // console.log(hasRowDataChanged, hasEditingStateChanged, hasSelectionChanged, hasRowOrCellIndexChanged, hasExpandedChanged, hasAllowSelectionChanged, hasMetaDataChanged, hasVirtualScrollerOptionsChanged, hasEditModeChanged, hasEditingMetaChanged);
-     // console.log(prevProps.metaData, nextProps.metaData)
-     // console.log(prevProps.virtualScrollerOptions, nextProps.virtualScrollerOptions)
-
-     // console.log(isEqual(prevProps, nextProps));
-     // console.log(prevProps, nextProps);
-
-     const keysToCompare = ['rowData', 'editing', 'selected', 'isSelected', 'rowIndex', 'index', 'expanded',
-         'allowCellSelection', 'allowRowSelection', 'editMode', 'editingMeta'];
-
-    // const selectiveCompareB = selectiveCompare(prevProps, nextProps, keysToCompare);
-    // console.log(selectiveCompareB, !(
-    //     hasRowDataChanged ||
-    //     hasEditingStateChanged ||
-    //     hasSelectionChanged ||
-    //     hasRowOrCellIndexChanged ||
-    //     hasExpandedChanged ||
-    //     hasAllowSelectionChanged ||
-    //     // hasMetaDataChanged ||
-    //     // hasVirtualScrollerOptionsChanged ||
-    //     hasEditModeChanged ||
-    //     hasEditingMetaChanged
-    // ));
+},
+(prevProps, nextProps) => {
+    const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'isRowSelected', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
 
     return selectiveCompare(prevProps, nextProps, keysToCompare);
- }
+}
 );
 
 BodyCell.displayName = 'BodyCell';
-
-

@@ -10,6 +10,8 @@ export const BodyRow = React.memo((props) => {
     const editing = props.onRowEditChange ? props.editing : editingState;
     const { ptm, cx } = props.ptCallbacks;
 
+    const isRowSelected = (!props.allowCellSelection && props.selected) || props.contextMenuSelected;
+
     const getBodyRowPTOptions = (key) => {
         return ptm(key, {
             parent: props.metaData,
@@ -20,7 +22,7 @@ export const BodyRow = React.memo((props) => {
             context: {
                 index: props.index,
                 selectable: props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
-                selected: (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
+                selected: isRowSelected,
                 stripedRows: props.metaData.props.stripedRows
             }
         });
@@ -421,29 +423,68 @@ export const BodyRow = React.memo((props) => {
                     return (collection || []).findIndex((data) => equalsCell(data));
                 };
 
-                const isSelected = () => {
+                const isCellSelected = () => {
                     return props.selection ? (props.selection instanceof Array ? findIndexCell(props.selection) > -1 : equalsCell(props.selection)) : false;
+                };
+
+                const onCheckboxChange = (event) => {
+                    props.onCheckboxChange({
+                        originalEvent: event,
+                        data: props.rowData,
+                        index: props.rowIndex
+                    });
                 };
 
                 return (
                     <BodyCell
-                        {...props}
+                        hostName={props.hostName}
                         key={key}
+                        allowCellSelection={props.allowCellSelection}
+                        cellClassName={props.cellClassName}
+                        checkIcon={props.checkIcon}
+                        collapsedRowIcon={props.collapsedRowIcon}
                         field={field}
                         column={col}
+                        dataKey={props.dataKey}
+                        editMode={props.editMode}
                         editing={editing}
+                        editingMeta={props.editingMeta}
+                        expanded={props.expanded}
+                        expandedRowIcon={props.expandedRowIcon}
+                        frozenRow={props.frozenRow}
                         index={i}
+                        isSelectable={props.isSelectable}
+                        onCheckboxChange={onCheckboxChange}
                         onClick={props.onCellClick}
+                        onEditingMetaChange={props.onEditingMetaChange}
                         onMouseDown={props.onCellMouseDown}
                         onMouseUp={props.onCellMouseUp}
                         onRadioChange={props.onRadioChange}
                         onRowEditCancel={onEditCancel}
                         onRowEditInit={onEditInit}
                         onRowEditSave={onEditSave}
+                        onRowToggle={props.onRowToggle}
+                        responsiveLayout={props.responsiveLayout}
+                        rowData={props.rowData}
+                        rowEditorCancelIcon={props.rowEditorCancelIcon}
+                        rowEditorInitIcon={props.rowEditorInitIcon}
+                        rowEditorSaveIcon={props.rowEditorSaveIcon}
+                        rowIndex={props.rowIndex}
                         rowSpan={rowSpan}
+                        selectOnEdit={props.selectOnEdit}
+                        isRowSelected={isRowSelected}
+                        isCellSelected={isCellSelected()}
                         selectionAriaLabel={props.tableProps.selectionAriaLabel}
-
-                        isSelected={isSelected()}
+                        showRowReorderElement={props.showRowReorderElement}
+                        showSelectionElement={props.showSelectionElement}
+                        tabIndex={props.tabIndex}
+                        tableProps={props.tableProps}
+                        tableSelector={props.tableSelector}
+                        value={props.value}
+                        virtualScrollerOptions={props.virtualScrollerOptions}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={props.metaData}
+                        unstyled={props.unstyled}
                     />
                 );
             }

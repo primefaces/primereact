@@ -251,30 +251,37 @@ export const TableBody = React.memo(
             }
         };
 
+        const selectionRef = React.useRef(props.selection);
+
+        React.useEffect(() => {
+            selectionRef.current = props.selection;
+        }, [props.selection]);
+
         const onSingleSelection = ({ originalEvent, data, index, toggleable, type }) => {
             if (!isSelectable({ data, index })) {
                 return;
             }
 
             let selected = isSelected(data);
-            let selection = props.selection;
+            let currentSelection = selectionRef.current || [];
+            let newSelection = currentSelection;
 
             if (selected) {
                 if (toggleable) {
-                    selection = null;
+                    newSelection = null;
                     onUnselect({ originalEvent, data, type });
                 }
             } else {
-                selection = data;
+                newSelection = data;
                 onSelect({ originalEvent, data, type });
             }
 
             focusOnElement(originalEvent, true);
 
-            if (props.onSelectionChange && selection !== props.selection) {
+            if (props.onSelectionChange && newSelection !== currentSelection) {
                 props.onSelectionChange({
                     originalEvent,
-                    value: selection,
+                    value: newSelection,
                     type
                 });
             }
@@ -286,29 +293,30 @@ export const TableBody = React.memo(
             }
 
             let selected = isSelected(data);
-            let selection = props.selection || [];
+            let currentSelection = selectionRef.current || [];
+            let newSelection = currentSelection;
 
             if (selected) {
                 if (toggleable) {
-                    let selectionIndex = findIndex(selection, data);
+                    let selectionIndex = findIndex(currentSelection, data);
 
-                    selection = props.selection.filter((val, i) => i !== selectionIndex);
+                    newSelection = currentSelection.filter((val, i) => i !== selectionIndex);
                     onUnselect({ originalEvent, data, type });
-                } else if (selection.length) {
-                    props.selection.forEach((d) => onUnselect({ originalEvent, data: d, type }));
-                    selection = [data];
+                } else if (currentSelection.length) {
+                    currentSelection.forEach((d) => onUnselect({ originalEvent, data: d, type }));
+                    newSelection = [data];
                     onSelect({ originalEvent, data, type });
                 }
             } else {
-                selection = ObjectUtils.isObject(selection) ? [selection] : selection;
-                selection = toggleable && isMultipleSelection() ? [...selection, data] : [data];
+                newSelection = ObjectUtils.isObject(currentSelection) ? [currentSelection] : currentSelection;
+                newSelection = toggleable && isMultipleSelection() ? [...newSelection, data] : [data];
                 onSelect({ originalEvent, data, type });
             }
 
-            if (props.onSelectionChange && selection !== props.selection) {
+            if (props.onSelectionChange && newSelection !== currentSelection) {
                 props.onSelectionChange({
                     originalEvent,
-                    value: selection,
+                    value: newSelection,
                     type
                 });
             }
