@@ -5,20 +5,20 @@ import PrimeReact from './PrimeReact';
 export const PrimeReactContext = React.createContext();
 
 export const PrimeReactProvider = (props) => {
-    const propsValue = props.value || {};
+    const propsValue = props.value ?? {};
 
-    const [ripple, setRipple] = useState(propsValue.ripple || false);
-    const [inputStyle, setInputStyle] = useState(propsValue.inputStyle || 'outlined');
-    const [locale, setLocale] = useState(propsValue.locale || 'en');
-    const [appendTo, setAppendTo] = useState(propsValue.appendTo || null);
-    const [styleContainer, setStyleContainer] = useState(propsValue.styleContainer || null);
+    const [ripple, setRipple] = useState(propsValue.ripple ?? false);
+    const [inputStyle, setInputStyle] = useState(propsValue.inputStyle ?? 'outlined');
+    const [locale, setLocale] = useState(propsValue.locale ?? 'en');
+    const [appendTo, setAppendTo] = useState(propsValue.appendTo ?? null);
+    const [styleContainer, setStyleContainer] = useState(propsValue.styleContainer ?? null);
     const [cssTransition, setCssTransition] = useState(propsValue.cssTransition ?? true);
-    const [autoZIndex, setAutoZIndex] = useState(propsValue.autoZIndex || true);
-    const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(propsValue.hideOverlaysOnDocumentScrolling || false);
-    const [nonce, setNonce] = useState(propsValue.nonce || null);
-    const [nullSortOrder, setNullSortOrder] = useState(propsValue.nullSortOrder || 1);
+    const [autoZIndex, setAutoZIndex] = useState(propsValue.autoZIndex ?? true);
+    const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(propsValue.hideOverlaysOnDocumentScrolling ?? false);
+    const [nonce, setNonce] = useState(propsValue.nonce ?? null);
+    const [nullSortOrder, setNullSortOrder] = useState(propsValue.nullSortOrder ?? 1);
     const [zIndex, setZIndex] = useState(
-        propsValue.zIndex || {
+        propsValue.zIndex ?? {
             modal: 1100,
             overlay: 1000,
             menu: 1000,
@@ -27,15 +27,15 @@ export const PrimeReactProvider = (props) => {
         }
     );
     const [ptOptions, setPtOptions] = useState(
-        propsValue.ptOptions || {
+        propsValue.ptOptions ?? {
             mergeSections: true,
             mergeProps: true
         }
     );
-    const [pt, setPt] = useState(propsValue.pt || undefined);
-    const [unstyled, setUnstyled] = useState(propsValue.unstyled || false);
+    const [pt, setPt] = useState(propsValue.pt ?? undefined);
+    const [unstyled, setUnstyled] = useState(propsValue.unstyled ?? false);
     const [filterMatchModeOptions, setFilterMatchModeOptions] = useState(
-        propsValue.filterMatchModeOptions || {
+        propsValue.filterMatchModeOptions ?? {
             text: [FilterMatchMode.STARTS_WITH, FilterMatchMode.CONTAINS, FilterMatchMode.NOT_CONTAINS, FilterMatchMode.ENDS_WITH, FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS],
             numeric: [FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS, FilterMatchMode.LESS_THAN, FilterMatchMode.LESS_THAN_OR_EQUAL_TO, FilterMatchMode.GREATER_THAN, FilterMatchMode.GREATER_THAN_OR_EQUAL_TO],
             date: [FilterMatchMode.DATE_IS, FilterMatchMode.DATE_IS_NOT, FilterMatchMode.DATE_BEFORE, FilterMatchMode.DATE_AFTER]
