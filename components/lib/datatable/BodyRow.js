@@ -416,7 +416,7 @@ export const BodyRow = React.memo((props) => {
     };
 
     const isCellSelected = (selection, field, colIndex) => {
-        return selection ? (selection instanceof Array ? findIndexCell(selection, field, colIndex) > -1 : equalsCell(selection, colIndex)) : false;
+        return selection ? (selection instanceof Array ? findIndexCell(selection, field, colIndex) > -1 : equalsCell(selection, field, colIndex)) : false;
     };
 
     const onCheckboxChange = (event) => {
