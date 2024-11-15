@@ -150,6 +150,9 @@ export declare class ObjectUtils {
     static findLast(value: any[], callback: () => any): any;
     static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
+    static getNestedValue(obj: object, path: string): any;
+    static absoluteCompare(objA: object, objB: object, maxDepth?: number, currentDepth?: number): boolean;
+    static selectiveCompare(a: object, b: object, keysToCompare?: string[]): boolean;
 }
 
 /**
