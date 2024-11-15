@@ -132,6 +132,7 @@ export const Dropdown = React.memo(
                 overlayVisibleState ? hide() : show();
             }
 
+            event.preventDefault();
             clickedRef.current = true;
         };
 
