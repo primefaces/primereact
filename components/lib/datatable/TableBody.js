@@ -597,7 +597,7 @@ export const TableBody = React.memo(
                 : DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
 
             event.currentTarget.draggable = isDraggableHandle;
-            event.target.draggable = !isDraggableHandle;
+            event.target.draggable = isDraggableHandle;
 
             if (allowRowDrag(e)) {
                 enableDragSelection(event, 'row');
