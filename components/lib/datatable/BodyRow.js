@@ -403,6 +403,30 @@ export const BodyRow = React.memo((props) => {
         event.preventDefault();
     };
 
+    const equalsDataCell = (data) => {
+        return props.compareSelectionBy === 'equals' ? data === props.rowData : ObjectUtils.equals(data, props.rowData, props.dataKey);
+    };
+
+    const equalsCell = (selectedCell, field, colIndex) => {
+        return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsDataCell(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === colIndex);
+    };
+
+    const findIndexCell = (collection, field, colIndex) => {
+        return (collection || []).findIndex((data) => equalsCell(data, field, colIndex));
+    };
+
+    const isCellSelected = (selection, field, colIndex) => {
+        return selection ? (selection instanceof Array ? findIndexCell(selection, field, colIndex) > -1 : equalsCell(selection, colIndex)) : false;
+    };
+
+    const onCheckboxChange = (event) => {
+        props.onCheckboxChange({
+            originalEvent: event,
+            data: props.rowData,
+            index: props.rowIndex
+        });
+    };
+
     const createContent = () => {
         return props.columns.map((col, i) => {
             if (shouldRenderBodyCell(props.value, col, props.index)) {
@@ -410,30 +434,6 @@ export const BodyRow = React.memo((props) => {
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
                 const field = getColumnProp(col, 'field') || `field_${i}`;
-
-                const equalsDataCell = (data) => {
-                    return props.compareSelectionBy === 'equals' ? data === props.rowData : ObjectUtils.equals(data, props.rowData, props.dataKey);
-                };
-
-                const equalsCell = (selectedCell) => {
-                    return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsDataCell(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === i);
-                };
-
-                const findIndexCell = (collection) => {
-                    return (collection || []).findIndex((data) => equalsCell(data));
-                };
-
-                const isCellSelected = () => {
-                    return props.selection ? (props.selection instanceof Array ? findIndexCell(props.selection) > -1 : equalsCell(props.selection)) : false;
-                };
-
-                const onCheckboxChange = (event) => {
-                    props.onCheckboxChange({
-                        originalEvent: event,
-                        data: props.rowData,
-                        index: props.rowIndex
-                    });
-                };
 
                 return (
                     <BodyCell
@@ -473,7 +473,7 @@ export const BodyRow = React.memo((props) => {
                         rowSpan={rowSpan}
                         selectOnEdit={props.selectOnEdit}
                         isRowSelected={isRowSelected}
-                        isCellSelected={isCellSelected()}
+                        isCellSelected={isCellSelected(props.selection, field, i)}
                         selectionAriaLabel={props.tableProps.selectionAriaLabel}
                         showRowReorderElement={props.showRowReorderElement}
                         showSelectionElement={props.showSelectionElement}
