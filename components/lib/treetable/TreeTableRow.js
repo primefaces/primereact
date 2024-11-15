@@ -521,7 +521,13 @@ export const TreeTableRow = React.memo((props) => {
         if (props.selectionMode === 'checkbox' && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
+            const checkboxIconProps = mergeProps(
+                {
+                    className: cx('checkIcon')
+                },
+                getColumnPTOptions('rowCheckbox.icon')
+            );
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
             const checkIcon = IconUtils.getJSXIcon(icon, {}, { props, checked, partialChecked });
             const rowCheckboxProps = mergeProps(
                 {
