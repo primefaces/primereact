@@ -162,8 +162,14 @@ export const TableBody = React.memo(
             return !DomHandler.isClickable(event.originalEvent.target);
         };
 
+        const metaKeySelectionRef = React.useRef(props.metaKeySelection);
+
+        React.useEffect(() => {
+            metaKeySelectionRef.current = props.metaKeySelection;
+        }, [props.metaKeySelection]);
+
         const allowMetaKeySelection = (event) => {
-            return !rowTouched.current && (!props.metaKeySelection || (props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey)));
+            return !rowTouched.current && (!metaKeySelectionRef.current || (metaKeySelectionRef.current && (event.originalEvent.metaKey || event.originalEvent.ctrlKey)));
         };
 
         const allowRangeSelection = (event) => {
