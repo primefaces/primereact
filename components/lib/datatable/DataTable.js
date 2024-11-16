@@ -16,6 +16,7 @@ import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
+    console.log('Datatable rendered in rowandcell branch')
     const context = React.useContext(PrimeReactContext);
     const mergeProps = useMergeProps();
     const props = DataTableBase.getProps(inProps, context);
