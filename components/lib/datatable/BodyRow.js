@@ -543,6 +543,7 @@ export const BodyRow = React.memo((props) => {
                         field={field}
                         resolveFieldData={resolveFieldData}
                         column={col}
+                        cProps={props.colsProps[i]}
                         dataKey={props.dataKey}
                         editMode={props.editMode}
                         editing={editing}

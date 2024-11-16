@@ -30,12 +30,10 @@ export const BodyCell = React.memo(
         const { ptm, ptmo, cx } = props.ptCallbacks;
 
         const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
-        const getColumnProps = () => ColumnBase.getCProps(props.column);
 
         const getColumnPTOptions = (key) => {
-            const cProps = getColumnProps();
             const columnMetaData = {
-                props: cProps,
+                props: props.cProps,
                 parent: props.metaData,
                 hostName: props.hostName,
                 state: {
@@ -50,7 +48,7 @@ export const BodyCell = React.memo(
                 }
             };
 
-            return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+            return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(props.cProps, key, columnMetaData));
         };
 
         const isEditable = () => {

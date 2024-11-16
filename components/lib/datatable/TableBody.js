@@ -12,9 +12,10 @@ export const TableBody = React.memo(
         const { ptm, ptmo, cx, isUnstyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
+        const cProps = getColumnProps(props.column);
+        const colsProps = props.columns? props.columns.map((col) => getColumnProps(col)) : [];
 
         const getColumnPTOptions = (key) => {
-            const cProps = getColumnProps(props.column);
             const columnMetaData = {
                 props: cProps,
                 parent: props.metaData,
@@ -1010,6 +1011,7 @@ export const TableBody = React.memo(
                         checkIcon={props.checkIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
                         columns={props.columns}
+                        colsProps={colsProps}
                         compareSelectionBy={props.compareSelectionBy}
                         contextMenuSelected={contextMenuSelected}
                         dataKey={props.dataKey}
