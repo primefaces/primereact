@@ -14,14 +14,34 @@ export const MultiSelectPanel = React.memo(
         const filterInputRef = React.useRef(null);
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
-        const { ptm, cx, sx, isUnstyled } = props;
+        const { ptm, cx, sx, isUnstyled, optionGroupCollapsable = false } = props;
+        const [groupVisibility, setGroupVisibility] = React.useState({});
 
+        const toggleGroupVisibility = (groupLabel) => {
+            setGroupVisibility((prev) => ({
+                ...prev,
+                [groupLabel]: !prev[groupLabel]
+            }));
+        };
         const getPTOptions = (key, options) => {
             return ptm(key, {
                 hostName: props.hostName,
                 ...options
             });
         };
+
+        React.useEffect(() => {
+            if (props.optionGroupLabel) {
+                const initialVisibility = {};
+                props.visibleOptions.forEach((option) => {
+                    if (option.group) {
+                        const groupLabel = props.getOptionGroupLabel(option);
+                        initialVisibility[groupLabel] = true;
+                    }
+                });
+                setGroupVisibility(initialVisibility);
+            }
+        }, []);
 
         const onEnter = () => {
             props.onEnter(() => {
@@ -189,9 +209,36 @@ export const MultiSelectPanel = React.memo(
 
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
-                return props.visibleOptions.map(createItem);
-            }
+                return props.visibleOptions.map((option, index) => {
+                    if (option.group && props.optionGroupLabel) {
+                        const groupLabel = props.getOptionGroupLabel(option);
+                        const isVisible = groupVisibility[groupLabel];
+                        const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
 
+                        const groupHeaderClass = classNames('p-multiselect-group-header');
+
+                        return (
+                            <div key={`group_${index}`} className="p-multiselect-group">
+                                <div onClick={() => toggleGroupVisibility(groupLabel)} className={groupHeaderClass} style={{ cursor: 'pointer' }}>
+                                    <span>{groupContent}</span>
+                                    {optionGroupCollapsable && (
+                                        <i
+                                            className={classNames('pi', {
+                                                'pi-chevron-right': !isVisible,
+                                                'pi-chevron-down': isVisible
+                                            })}
+                                        />
+                                    )}
+                                </div>
+                                {(isVisible || !optionGroupCollapsable) && props.getOptionGroupChildren(option).map((child, childIndex) => createItem(child, `${index}_${childIndex}`))}
+                            </div>
+                        );
+                    } else if (!props.optionGroupLabel) {
+                        return createItem(option, index);
+                    }
+                    return null;
+                });
+            }
             return props.hasFilter ? createEmptyFilter() : createEmptyContent();
         };
 
