@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { BodyCell } from './BodyCell';
+import { BodyCell, RadioCheckCell } from './BodyCell';
+import { OverlayService } from '../overlayservice/OverlayService';
 
 export const BodyRow = React.memo((props) => {
     const mergeProps = useMergeProps();
@@ -520,6 +521,61 @@ export const BodyRow = React.memo((props) => {
         }
     }, []);
 
+    const onCellClick =
+        (event, params, isEditable, editingState, setEditingState, selfClick, column, bindDocumentClickListener, overlayEventListener) => {
+        if (props.editMode !== 'row' && isEditable && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.isRowSelected))) {
+            selfClick.current = true;
+
+            const onBeforeCellEditShow = getColumnProp(column, 'onBeforeCellEditShow');
+            const onCellEditInit = getColumnProp(column,'onCellEditInit');
+            const cellEditValidatorEvent = getColumnProp(column, 'cellEditValidatorEvent');
+
+            if (onBeforeCellEditShow) {
+                // if user returns false do not show the editor
+                if (onBeforeCellEditShow(params) === false) {
+                    return;
+                }
+
+                // if user prevents default stop the editor
+                if (event && event.defaultPrevented) {
+                    return;
+                }
+            }
+
+            // If the data is sorted using sort icon, it has been added to wait for the sort operation when any cell is wanted to be opened.
+            setTimeout(() => {
+                setEditingState(true);
+
+                if (onCellEditInit) {
+                    if (onCellEditInit(params) === false) {
+                        return;
+                    }
+
+                    // if user prevents default stop the editor
+                    if (event && event.defaultPrevented) {
+                        return;
+                    }
+                }
+
+                if (cellEditValidatorEvent === 'click') {
+                    bindDocumentClickListener();
+
+                    overlayEventListener.current = (e) => {
+                        if (!isOutsideClicked(e.target)) {
+                            selfClick.current = true;
+                        }
+                    };
+
+                    OverlayService.on('overlay-click', overlayEventListener.current);
+                }
+            }, 1);
+        }
+
+        if (props.allowCellSelection && props.onCellClick) {
+            props.onCellClick(params);
+        }
+    };
+
     const createContent = () => {
         return props.columns.map((col, i) => {
             if (shouldRenderBodyCell(props.value, col, props.index)) {
@@ -532,69 +588,75 @@ export const BodyRow = React.memo((props) => {
                     return ObjectUtils.resolveFieldData(data || props.rowData, field);
                 };
 
+                const selectionMode = getColumnProp(col, 'selectionMode');
+
+                const cellProps = mergeProps({
+                    hostName: props.hostName,
+                    key: key,
+                    allowCellSelection: props.allowCellSelection,
+                    cellClassName: props.cellClassName,
+                    checkIcon: props.checkIcon,
+                    collapsedRowIcon: props.collapsedRowIcon,
+                    field: field,
+                    resolveFieldData: resolveFieldData,
+                    column: col,
+                    cProps: props.colsProps[i],
+                    dataKey: props.dataKey,
+                    editMode: props.editMode,
+                    editing: editing,
+                    editingMeta: props.editingMeta,
+                    onEditingMetaChange: props.onEditingMetaChange,
+                    editingKey: editingKey,
+                    getEditingRowData: getEditingRowData,
+                    expanded: props.expanded,
+                    expandedRowIcon: props.expandedRowIcon,
+                    frozenRow: props.frozenRow,
+                    index: i,
+                    isSelectable: props.isSelectable,
+                    onCheckboxChange: onCheckboxChange,
+                    onClick: onCellClick,
+                    onMouseDown: props.onCellMouseDown,
+                    onMouseUp: props.onCellMouseUp,
+                    onRadioChange: props.onRadioChange,
+                    onRowEditCancel: onEditCancel,
+                    onRowEditInit: onEditInit,
+                    onRowEditSave: onEditSave,
+                    onRowToggle: props.onRowToggle,
+                    responsiveLayout: props.responsiveLayout,
+                    rowData: props.rowData,
+                    rowEditorCancelIcon: props.rowEditorCancelIcon,
+                    rowEditorInitIcon: props.rowEditorInitIcon,
+                    rowEditorSaveIcon: props.rowEditorSaveIcon,
+                    rowIndex: props.rowIndex,
+                    rowSpan: rowSpan,
+                    selectOnEdit: props.selectOnEdit,
+                    isRowSelected: isRowSelected,
+                    isCellSelected: isCellSelected(props.selection, field, i),
+                    selectionAriaLabel: props.tableProps.selectionAriaLabel,
+                    showRowReorderElement: props.showRowReorderElement,
+                    showSelectionElement: props.showSelectionElement,
+                    tabIndex: props.tabIndex,
+                    getTabIndex: getTabIndexCell,
+                    tableProps: props.tableProps,
+                    tableSelector: props.tableSelector,
+                    value: props.value,
+                    getVirtualScrollerOption: getVirtualScrollerOption,
+                    ptCallbacks: props.ptCallbacks,
+                    metaData: props.metaData,
+                    unstyled: props.unstyled,
+                    findNextSelectableCell: findNextSelectableCell,
+                    findPrevSelectableCell: findPrevSelectableCell,
+                    findDownSelectableCell: findDownSelectableCell,
+                    findUpSelectableCell: findUpSelectableCell,
+                    focusOnElement: focusOnElement,
+                    focusOnInit: focusOnInit,
+                    updateStickyPosition: updateStickyPosition,
+                });
+
                 return (
-                    <BodyCell
-                        hostName={props.hostName}
-                        key={key}
-                        allowCellSelection={props.allowCellSelection}
-                        cellClassName={props.cellClassName}
-                        checkIcon={props.checkIcon}
-                        collapsedRowIcon={props.collapsedRowIcon}
-                        field={field}
-                        resolveFieldData={resolveFieldData}
-                        column={col}
-                        cProps={props.colsProps[i]}
-                        dataKey={props.dataKey}
-                        editMode={props.editMode}
-                        editing={editing}
-                        editingMeta={props.editingMeta}
-                        onEditingMetaChange={props.onEditingMetaChange}
-                        editingKey={editingKey}
-                        getEditingRowData={getEditingRowData}
-                        expanded={props.expanded}
-                        expandedRowIcon={props.expandedRowIcon}
-                        frozenRow={props.frozenRow}
-                        index={i}
-                        isSelectable={props.isSelectable}
-                        onCheckboxChange={onCheckboxChange}
-                        onClick={props.onCellClick}
-                        onMouseDown={props.onCellMouseDown}
-                        onMouseUp={props.onCellMouseUp}
-                        onRadioChange={props.onRadioChange}
-                        onRowEditCancel={onEditCancel}
-                        onRowEditInit={onEditInit}
-                        onRowEditSave={onEditSave}
-                        onRowToggle={props.onRowToggle}
-                        responsiveLayout={props.responsiveLayout}
-                        rowData={props.rowData}
-                        rowEditorCancelIcon={props.rowEditorCancelIcon}
-                        rowEditorInitIcon={props.rowEditorInitIcon}
-                        rowEditorSaveIcon={props.rowEditorSaveIcon}
-                        rowIndex={props.rowIndex}
-                        rowSpan={rowSpan}
-                        selectOnEdit={props.selectOnEdit}
-                        isRowSelected={isRowSelected}
-                        isCellSelected={isCellSelected(props.selection, field, i)}
-                        selectionAriaLabel={props.tableProps.selectionAriaLabel}
-                        showRowReorderElement={props.showRowReorderElement}
-                        showSelectionElement={props.showSelectionElement}
-                        tabIndex={props.tabIndex}
-                        getTabIndex={getTabIndexCell}
-                        tableProps={props.tableProps}
-                        tableSelector={props.tableSelector}
-                        value={props.value}
-                        getVirtualScrollerOption={getVirtualScrollerOption}
-                        ptCallbacks={props.ptCallbacks}
-                        metaData={props.metaData}
-                        unstyled={props.unstyled}
-                        findNextSelectableCell={findNextSelectableCell}
-                        findPrevSelectableCell={findPrevSelectableCell}
-                        findDownSelectableCell={findDownSelectableCell}
-                        findUpSelectableCell={findUpSelectableCell}
-                        focusOnElement={focusOnElement}
-                        focusOnInit={focusOnInit}
-                        updateStickyPosition={updateStickyPosition}
-                    />
+                    <>
+                        {selectionMode? <RadioCheckCell {...cellProps}/> : <BodyCell {...cellProps }/>}
+                    </>
                 );
             }
 

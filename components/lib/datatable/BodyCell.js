@@ -14,7 +14,7 @@ import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
-export const BodyCell = React.memo(
+export const Cell = React.memo(
     (props) => {
         const mergeProps = useMergeProps();
         const [editingState, setEditingState] = React.useState(props.editing);
@@ -176,61 +176,10 @@ export const BodyCell = React.memo(
             editingRowDataStateRef.current = editingRowData;
         }, [editingRowDataState, props.field, props.getEditingRowData]);
 
-        const onClick = React.useCallback((event) => {
-            const params = getCellCallbackParams(event);
-
-            if (props.editMode !== 'row' && isEditable() && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.isRowSelected))) {
-                selfClick.current = true;
-
-                const onBeforeCellEditShow = getColumnProp('onBeforeCellEditShow');
-                const onCellEditInit = getColumnProp('onCellEditInit');
-                const cellEditValidatorEvent = getColumnProp('cellEditValidatorEvent');
-
-                if (onBeforeCellEditShow) {
-                    // if user returns false do not show the editor
-                    if (onBeforeCellEditShow(params) === false) {
-                        return;
-                    }
-
-                    // if user prevents default stop the editor
-                    if (event && event.defaultPrevented) {
-                        return;
-                    }
-                }
-
-                // If the data is sorted using sort icon, it has been added to wait for the sort operation when any cell is wanted to be opened.
-                setTimeout(() => {
-                    setEditingState(true);
-
-                    if (onCellEditInit) {
-                        if (onCellEditInit(params) === false) {
-                            return;
-                        }
-
-                        // if user prevents default stop the editor
-                        if (event && event.defaultPrevented) {
-                            return;
-                        }
-                    }
-
-                    if (cellEditValidatorEvent === 'click') {
-                        bindDocumentClickListener();
-
-                        overlayEventListener.current = (e) => {
-                            if (!isOutsideClicked(e.target)) {
-                                selfClick.current = true;
-                            }
-                        };
-
-                        OverlayService.on('overlay-click', overlayEventListener.current);
-                    }
-                }, 1);
-            }
-
-            if (props.allowCellSelection && props.onClick) {
-                props.onClick(params);
-            }
-        }, [props.editMode, isEditable, editingState, props.selectOnEdit, props.isRowSelected, props.allowCellSelection, props.onClick, getCellCallbackParams]);
+        const onClick = (event) => {
+            props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, selfClick,
+                props.column, bindDocumentClickListener, overlayEventListener)
+        };
 
         const onMouseDown = (event) => {
             const params = getCellCallbackParams(event);
@@ -731,6 +680,33 @@ export const BodyCell = React.memo(
     },
     (prevProps, nextProps) => {
         const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'isRowSelected', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
+
+        return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
+    }
+);
+
+// RadioCheckCell is used for the Radio and Checkbox selection and has the isRowSelected dependency
+export const RadioCheckCell = React.memo(
+    (props) => {
+        return <Cell {...props} />
+    },
+    (prevProps, nextProps) => {
+        const keysToCompare = ['isRowSelected', 'field', 'allowCellSelection', 'isCellSelected', 'editMode',
+            'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
+
+        return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
+    }
+);
+
+RadioCheckCell.displayName = 'RadioCheckCell';
+
+export const BodyCell = React.memo(
+    (props) => {
+        return <Cell {...props} />
+    },
+    (prevProps, nextProps) => {
+        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex',
+            'editing', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }
