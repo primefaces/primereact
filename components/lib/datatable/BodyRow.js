@@ -56,10 +56,10 @@ export const BodyRow = React.memo((props) => {
         return (collection || []).findIndex((data) => equals(rowData, data));
     };
 
-    const changeTabIndex = (currentRow, nextRow) => {
-        if (currentRow && nextRow) {
-            currentRow.tabIndex = -1;
-            nextRow.tabIndex = props.tabIndex;
+    const changeTabIndex = (currentElement, nextElement) => {
+        if (currentElement && nextElement) {
+            currentElement.tabIndex = -1;
+            nextElement.tabIndex = props.tabIndex;
         }
     };
 
@@ -427,6 +427,99 @@ export const BodyRow = React.memo((props) => {
         });
     };
 
+    const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
+
+    const getVirtualScrollerOption = React.useCallback((option) => {
+        return props.virtualScrollerOptions ? props.virtualScrollerOptions[option] : null;
+    }, [props.virtualScrollerOptions]);
+
+    const getEditingRowData = () => {
+        return props.editingMeta && props.editingMeta[editingKey] ? props.editingMeta[editingKey].data : props.rowData;
+    };
+
+    const getTabIndexCell = React.useCallback((cellSelected, cellIndex) => {
+        return props.allowCellSelection ? (cellSelected ? 0 : props.rowIndex === 0 && cellIndex === 0 ? props.tabIndex : -1) : null;
+    }, [props.allowCellSelection, props.rowIndex, props.tabIndex]);
+
+    const findNextSelectableCell = React.useCallback((cell) => {
+        const nextCell = cell.nextElementSibling;
+
+        return nextCell ? (DomHandler.getAttribute(nextCell, 'data-p-selectable-cell') ? nextCell : findNextSelectableCell(nextCell)) : null;
+    }, []);
+
+    const findPrevSelectableCell = React.useCallback((cell) => {
+        const prevCell = cell.previousElementSibling;
+
+        return prevCell ? (DomHandler.getAttribute(prevCell, 'data-p-selectable-cell') ? prevCell : findPrevSelectableCell(prevCell)) : null;
+    }, []);
+
+    const findDownSelectableCell = React.useCallback((cell, cellIndex) => {
+        const downRow = cell.parentElement.nextElementSibling;
+        const downCell = downRow ? downRow.children[cellIndex] : null;
+
+        return downRow && downCell ? (DomHandler.getAttribute(downRow, 'data-p-selectable-row') && DomHandler.getAttribute(downCell, 'data-p-selectable-cell') ? downCell : findDownSelectableCell(downCell)) : null;
+    }, []);
+
+    const findUpSelectableCell = React.useCallback((cell, cellIndex) => {
+        const upRow = cell.parentElement.previousElementSibling;
+        const upCell = upRow ? upRow.children[cellIndex] : null;
+
+        return upRow && upCell ? (DomHandler.getAttribute(upRow, 'data-p-selectable-row') && DomHandler.getAttribute(upCell, 'data-p-selectable-cell') ? upCell : findUpSelectableCell(upCell)) : null;
+    }, []);
+
+    const focusOnElement = React.useCallback((focusTimeoutRef, editingState, elementRef, keyHelperRef) => {
+        clearTimeout(focusTimeoutRef.current);
+        focusTimeoutRef.current = setTimeout(() => {
+            if (editingState) {
+                const focusableEl =
+                    props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+
+                focusableEl && focusableEl.focus();
+            }
+
+            keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
+        }, 1);
+    }, [props.editMode]);
+
+    const focusOnInit = React.useCallback((initFocusTimeoutRef, elementRef) => {
+        clearTimeout(initFocusTimeoutRef.current);
+        initFocusTimeoutRef.current = setTimeout(() => {
+            const focusableEl = props.editMode === 'row' ? DomHandler.findSingle(elementRef.current, '[data-p-row-editor-init="true"]') : null;
+
+            focusableEl && focusableEl.focus();
+        }, 1);
+    }, [props.editMode]);
+
+    const updateStickyPosition = React.useCallback((elementRef, frozen, alignFrozen, styleObjectState, setStyleObjectState) => {
+        if (frozen) {
+            let styleObject = { ...styleObjectState };
+
+            if (alignFrozen === 'right') {
+                let right = 0;
+                let next = elementRef.current && elementRef.current.nextElementSibling;
+
+                if (next && next.classList.contains('p-frozen-column')) {
+                    right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
+                }
+
+                styleObject.right = right + 'px';
+            } else {
+                let left = 0;
+                let prev = elementRef.current && elementRef.current.previousElementSibling;
+
+                if (prev && prev.classList.contains('p-frozen-column')) {
+                    left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
+                }
+
+                styleObject.left = left + 'px';
+            }
+
+            const isSameStyle = styleObjectState.left === styleObject.left && styleObjectState.right === styleObject.right;
+
+            !isSameStyle && setStyleObjectState(styleObject);
+        }
+    }, []);
+
     const createContent = () => {
         return props.columns.map((col, i) => {
             if (shouldRenderBodyCell(props.value, col, props.index)) {
@@ -434,6 +527,10 @@ export const BodyRow = React.memo((props) => {
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
                 const field = getColumnProp(col, 'field') || `field_${i}`;
+
+                const resolveFieldData = (data) => {
+                    return ObjectUtils.resolveFieldData(data || props.rowData, field);
+                };
 
                 return (
                     <BodyCell
@@ -444,11 +541,15 @@ export const BodyRow = React.memo((props) => {
                         checkIcon={props.checkIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
                         field={field}
+                        resolveFieldData={resolveFieldData}
                         column={col}
                         dataKey={props.dataKey}
                         editMode={props.editMode}
                         editing={editing}
                         editingMeta={props.editingMeta}
+                        onEditingMetaChange={props.onEditingMetaChange}
+                        editingKey={editingKey}
+                        getEditingRowData={getEditingRowData}
                         expanded={props.expanded}
                         expandedRowIcon={props.expandedRowIcon}
                         frozenRow={props.frozenRow}
@@ -456,7 +557,6 @@ export const BodyRow = React.memo((props) => {
                         isSelectable={props.isSelectable}
                         onCheckboxChange={onCheckboxChange}
                         onClick={props.onCellClick}
-                        onEditingMetaChange={props.onEditingMetaChange}
                         onMouseDown={props.onCellMouseDown}
                         onMouseUp={props.onCellMouseUp}
                         onRadioChange={props.onRadioChange}
@@ -478,13 +578,21 @@ export const BodyRow = React.memo((props) => {
                         showRowReorderElement={props.showRowReorderElement}
                         showSelectionElement={props.showSelectionElement}
                         tabIndex={props.tabIndex}
+                        getTabIndex={getTabIndexCell}
                         tableProps={props.tableProps}
                         tableSelector={props.tableSelector}
                         value={props.value}
-                        virtualScrollerOptions={props.virtualScrollerOptions}
+                        getVirtualScrollerOption={getVirtualScrollerOption}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
                         unstyled={props.unstyled}
+                        findNextSelectableCell={findNextSelectableCell}
+                        findPrevSelectableCell={findPrevSelectableCell}
+                        findDownSelectableCell={findDownSelectableCell}
+                        findUpSelectableCell={findUpSelectableCell}
+                        focusOnElement={focusOnElement}
+                        focusOnInit={focusOnInit}
+                        updateStickyPosition={updateStickyPosition}
                     />
                 );
             }
