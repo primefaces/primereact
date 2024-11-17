@@ -13,7 +13,7 @@ export const TableBody = React.memo(
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
         const cProps = getColumnProps(props.column);
-        const colsProps = props.columns? props.columns.map((col) => getColumnProps(col)) : [];
+        const colsProps = props.columns ? props.columns.map((col) => getColumnProps(col)) : [];
 
         const getColumnPTOptions = (key) => {
             const columnMetaData = {

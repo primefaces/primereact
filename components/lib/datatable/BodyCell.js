@@ -128,57 +128,62 @@ export const Cell = React.memo(
             }, 1);
         };
 
-        const switchCellToViewMode = React.useCallback((event, submit) => {
-            const callbackParams = getCellCallbackParams(event);
-            const newRowData = { ...editingRowDataStateRef.current };
-            const newValue = props.resolveFieldData(newRowData);
-            const params = { ...callbackParams, newRowData, newValue };
-            const onCellEditCancel = getColumnProp('onCellEditCancel');
-            const cellEditValidator = getColumnProp('cellEditValidator');
-            const onCellEditComplete = getColumnProp('onCellEditComplete');
+        const switchCellToViewMode = React.useCallback(
+            (event, submit) => {
+                const callbackParams = getCellCallbackParams(event);
+                const newRowData = { ...editingRowDataStateRef.current };
+                const newValue = props.resolveFieldData(newRowData);
+                const params = { ...callbackParams, newRowData, newValue };
+                const onCellEditCancel = getColumnProp('onCellEditCancel');
+                const cellEditValidator = getColumnProp('cellEditValidator');
+                const onCellEditComplete = getColumnProp('onCellEditComplete');
 
-            if (!submit && onCellEditCancel) {
-                onCellEditCancel(params);
-            }
-
-            let valid = true;
-
-            if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
-                valid = cellEditValidator(params);
-            }
-
-            if (valid) {
-                if (submit && onCellEditComplete) {
-                    onCellEditComplete(params);
+                if (!submit && onCellEditCancel) {
+                    onCellEditCancel(params);
                 }
 
-                closeCell(event);
-            } else {
-                event.preventDefault();
-            }
+                let valid = true;
 
-            setEditingRowDataState(newRowData);
-        }, [getCellCallbackParams, props.resolveFieldData, getColumnProp, cellEditValidateOnClose, closeCell]);
+                if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
+                    valid = cellEditValidator(params);
+                }
 
-        const editorCallback = React.useCallback((val) => {
-            let editingRowData = { ...editingRowDataState };
+                if (valid) {
+                    if (submit && onCellEditComplete) {
+                        onCellEditComplete(params);
+                    }
 
-            ObjectUtils.mutateFieldData(editingRowData, props.field, val);
-            setEditingRowDataState(editingRowData);
+                    closeCell(event);
+                } else {
+                    event.preventDefault();
+                }
 
-            // update editing meta for complete methods on row mode
-            const currentData = props.getEditingRowData();
+                setEditingRowDataState(newRowData);
+            },
+            [getCellCallbackParams, props.resolveFieldData, getColumnProp, cellEditValidateOnClose, closeCell]
+        );
 
-            if (currentData) {
-                ObjectUtils.mutateFieldData(currentData, props.field, val);
-            }
+        const editorCallback = React.useCallback(
+            (val) => {
+                let editingRowData = { ...editingRowDataState };
 
-            editingRowDataStateRef.current = editingRowData;
-        }, [editingRowDataState, props.field, props.getEditingRowData]);
+                ObjectUtils.mutateFieldData(editingRowData, props.field, val);
+                setEditingRowDataState(editingRowData);
+
+                // update editing meta for complete methods on row mode
+                const currentData = props.getEditingRowData();
+
+                if (currentData) {
+                    ObjectUtils.mutateFieldData(currentData, props.field, val);
+                }
+
+                editingRowDataStateRef.current = editingRowData;
+            },
+            [editingRowDataState, props.field, props.getEditingRowData]
+        );
 
         const onClick = (event) => {
-            props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, selfClick,
-                props.column, bindDocumentClickListener, overlayEventListener)
+            props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, selfClick, props.column, bindDocumentClickListener, overlayEventListener);
         };
 
         const onMouseDown = (event) => {
@@ -193,90 +198,93 @@ export const Cell = React.memo(
             props.onMouseUp && props.onMouseUp(params);
         };
 
-        const onKeyDown = React.useCallback((event) => {
-            if (props.editMode !== 'row') {
-                if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Tab') {
-                    switchCellToViewMode(event, true);
+        const onKeyDown = React.useCallback(
+            (event) => {
+                if (props.editMode !== 'row') {
+                    if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Tab') {
+                        switchCellToViewMode(event, true);
+                    }
+
+                    if (event.code === 'Escape') {
+                        switchCellToViewMode(event, false);
+                    }
                 }
 
-                if (event.code === 'Escape') {
-                    switchCellToViewMode(event, false);
-                }
-            }
+                if (props.allowCellSelection) {
+                    const { target, currentTarget: cell } = event;
 
-            if (props.allowCellSelection) {
-                const { target, currentTarget: cell } = event;
+                    switch (event.code) {
+                        case 'ArrowLeft':
+                            let prevCell = props.findPrevSelectableCell(cell);
 
-                switch (event.code) {
-                    case 'ArrowLeft':
-                        let prevCell = props.findPrevSelectableCell(cell);
+                            if (prevCell) {
+                                changeTabIndex(cell, prevCell);
+                                prevCell.focus();
+                            }
 
-                        if (prevCell) {
-                            changeTabIndex(cell, prevCell);
-                            prevCell.focus();
-                        }
-
-                        event.preventDefault();
-                        break;
-
-                    case 'ArrowRight':
-                        let nextCell = props.findNextSelectableCell(cell);
-
-                        if (nextCell) {
-                            changeTabIndex(cell, nextCell);
-                            nextCell.focus();
-                        }
-
-                        event.preventDefault();
-                        break;
-
-                    case 'ArrowUp':
-                        let upCell = props.findUpSelectableCell(cell, index);
-
-                        if (upCell) {
-                            changeTabIndex(cell, upCell);
-                            upCell.focus();
-                        }
-
-                        event.preventDefault();
-                        break;
-
-                    case 'ArrowDown':
-                        let downCell = props.findDownSelectableCell(cell, index);
-
-                        if (downCell) {
-                            changeTabIndex(cell, downCell);
-                            downCell.focus();
-                        }
-
-                        event.preventDefault();
-                        break;
-
-                    case 'Enter':
-                    case 'NumpadEnter':
-                        if (event.shiftKey || event.ctrlKey) {
-                            // #5192 allow TextArea to add new lines
-                        } else if (!DomHandler.isClickable(target)) {
-                            onClick(event);
                             event.preventDefault();
-                        }
+                            break;
 
-                        break;
+                        case 'ArrowRight':
+                            let nextCell = props.findNextSelectableCell(cell);
 
-                    case 'Space':
-                        if (!DomHandler.isClickable(target) && !target.readOnly) {
-                            onClick(event);
+                            if (nextCell) {
+                                changeTabIndex(cell, nextCell);
+                                nextCell.focus();
+                            }
+
                             event.preventDefault();
-                        }
+                            break;
 
-                        break;
+                        case 'ArrowUp':
+                            let upCell = props.findUpSelectableCell(cell, index);
 
-                    default:
-                        //no op
-                        break;
+                            if (upCell) {
+                                changeTabIndex(cell, upCell);
+                                upCell.focus();
+                            }
+
+                            event.preventDefault();
+                            break;
+
+                        case 'ArrowDown':
+                            let downCell = props.findDownSelectableCell(cell, index);
+
+                            if (downCell) {
+                                changeTabIndex(cell, downCell);
+                                downCell.focus();
+                            }
+
+                            event.preventDefault();
+                            break;
+
+                        case 'Enter':
+                        case 'NumpadEnter':
+                            if (event.shiftKey || event.ctrlKey) {
+                                // #5192 allow TextArea to add new lines
+                            } else if (!DomHandler.isClickable(target)) {
+                                onClick(event);
+                                event.preventDefault();
+                            }
+
+                            break;
+
+                        case 'Space':
+                            if (!DomHandler.isClickable(target) && !target.readOnly) {
+                                onClick(event);
+                                event.preventDefault();
+                            }
+
+                            break;
+
+                        default:
+                            //no op
+                            break;
+                    }
                 }
-            }
-        }, [props.editMode, switchCellToViewMode, props.allowCellSelection]);
+            },
+            [props.editMode, switchCellToViewMode, props.allowCellSelection]
+        );
 
         const onBlur = (event) => {
             selfClick.current = false;
@@ -290,43 +298,55 @@ export const Cell = React.memo(
             onClick(event);
         };
 
-        const onRadioChange = React.useCallback((event) => {
-            props.onRadioChange({
-                originalEvent: event,
-                data: props.rowData,
-                index: props.rowIndex
-            });
-        }, [props.onRadioChange, props.rowData, props.rowIndex]);
+        const onRadioChange = React.useCallback(
+            (event) => {
+                props.onRadioChange({
+                    originalEvent: event,
+                    data: props.rowData,
+                    index: props.rowIndex
+                });
+            },
+            [props.onRadioChange, props.rowData, props.rowIndex]
+        );
 
-        const onRowToggle = React.useCallback((event) => {
-            props.onRowToggle({
-                originalEvent: event,
-                data: props.rowData
-            });
-            event.preventDefault();
-            event.stopPropagation();
-        }, [props.onRowToggle, props.rowData]);
+        const onRowToggle = React.useCallback(
+            (event) => {
+                props.onRowToggle({
+                    originalEvent: event,
+                    data: props.rowData
+                });
+                event.preventDefault();
+                event.stopPropagation();
+            },
+            [props.onRowToggle, props.rowData]
+        );
 
-        const onRowEditInit = React.useCallback((event) => {
-            props.onRowEditInit({
-                originalEvent: event,
-                data: props.rowData,
-                newData: props.getEditingRowData(),
-                field: props.field,
-                index: props.rowIndex
-            });
-        }, [props.onRowEditInit, props.rowData, props.getEditingRowData, props.field, props.rowIndex]);
+        const onRowEditInit = React.useCallback(
+            (event) => {
+                props.onRowEditInit({
+                    originalEvent: event,
+                    data: props.rowData,
+                    newData: props.getEditingRowData(),
+                    field: props.field,
+                    index: props.rowIndex
+                });
+            },
+            [props.onRowEditInit, props.rowData, props.getEditingRowData, props.field, props.rowIndex]
+        );
 
-        const onRowEditSave = React.useCallback((event) => {
-            props.onRowEditSave({
-                originalEvent: event,
-                data: props.rowData,
-                newData: props.getEditingRowData(),
-                field: props.field,
-                index: props.rowIndex
-            });
-            props.focusOnInit(initFocusTimeout, elementRef);
-        }, [props.onRowEditSave, props.rowData, props.getEditingRowData, props.field, props.rowIndex]);
+        const onRowEditSave = React.useCallback(
+            (event) => {
+                props.onRowEditSave({
+                    originalEvent: event,
+                    data: props.rowData,
+                    newData: props.getEditingRowData(),
+                    field: props.field,
+                    index: props.rowIndex
+                });
+                props.focusOnInit(initFocusTimeout, elementRef);
+            },
+            [props.onRowEditSave, props.rowData, props.getEditingRowData, props.field, props.rowIndex]
+        );
 
         const onRowEditCancel = (event) => {
             props.onRowEditCancel({ originalEvent: event, data: props.rowData, newData: props.getEditingRowData(), field: props.field, index: props.rowIndex });
@@ -688,11 +708,10 @@ export const Cell = React.memo(
 // RadioCheckCell is used for the Radio and Checkbox selection and has the isRowSelected dependency
 export const RadioCheckCell = React.memo(
     (props) => {
-        return <Cell {...props} />
+        return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
-        const keysToCompare = ['isRowSelected', 'field', 'allowCellSelection', 'isCellSelected', 'editMode',
-            'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
+        const keysToCompare = ['isRowSelected', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }
@@ -702,11 +721,10 @@ RadioCheckCell.displayName = 'RadioCheckCell';
 
 export const BodyCell = React.memo(
     (props) => {
-        return <Cell {...props} />
+        return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
-        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex',
-            'editing', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
+        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }

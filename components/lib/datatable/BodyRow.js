@@ -430,17 +430,23 @@ export const BodyRow = React.memo((props) => {
 
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
-    const getVirtualScrollerOption = React.useCallback((option) => {
-        return props.virtualScrollerOptions ? props.virtualScrollerOptions[option] : null;
-    }, [props.virtualScrollerOptions]);
+    const getVirtualScrollerOption = React.useCallback(
+        (option) => {
+            return props.virtualScrollerOptions ? props.virtualScrollerOptions[option] : null;
+        },
+        [props.virtualScrollerOptions]
+    );
 
     const getEditingRowData = () => {
         return props.editingMeta && props.editingMeta[editingKey] ? props.editingMeta[editingKey].data : props.rowData;
     };
 
-    const getTabIndexCell = React.useCallback((cellSelected, cellIndex) => {
-        return props.allowCellSelection ? (cellSelected ? 0 : props.rowIndex === 0 && cellIndex === 0 ? props.tabIndex : -1) : null;
-    }, [props.allowCellSelection, props.rowIndex, props.tabIndex]);
+    const getTabIndexCell = React.useCallback(
+        (cellSelected, cellIndex) => {
+            return props.allowCellSelection ? (cellSelected ? 0 : props.rowIndex === 0 && cellIndex === 0 ? props.tabIndex : -1) : null;
+        },
+        [props.allowCellSelection, props.rowIndex, props.tabIndex]
+    );
 
     const findNextSelectableCell = React.useCallback((cell) => {
         const nextCell = cell.nextElementSibling;
@@ -468,28 +474,34 @@ export const BodyRow = React.memo((props) => {
         return upRow && upCell ? (DomHandler.getAttribute(upRow, 'data-p-selectable-row') && DomHandler.getAttribute(upCell, 'data-p-selectable-cell') ? upCell : findUpSelectableCell(upCell)) : null;
     }, []);
 
-    const focusOnElement = React.useCallback((focusTimeoutRef, editingState, elementRef, keyHelperRef) => {
-        clearTimeout(focusTimeoutRef.current);
-        focusTimeoutRef.current = setTimeout(() => {
-            if (editingState) {
-                const focusableEl =
-                    props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+    const focusOnElement = React.useCallback(
+        (focusTimeoutRef, editingState, elementRef, keyHelperRef) => {
+            clearTimeout(focusTimeoutRef.current);
+            focusTimeoutRef.current = setTimeout(() => {
+                if (editingState) {
+                    const focusableEl =
+                        props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+
+                    focusableEl && focusableEl.focus();
+                }
+
+                keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
+            }, 1);
+        },
+        [props.editMode]
+    );
+
+    const focusOnInit = React.useCallback(
+        (initFocusTimeoutRef, elementRef) => {
+            clearTimeout(initFocusTimeoutRef.current);
+            initFocusTimeoutRef.current = setTimeout(() => {
+                const focusableEl = props.editMode === 'row' ? DomHandler.findSingle(elementRef.current, '[data-p-row-editor-init="true"]') : null;
 
                 focusableEl && focusableEl.focus();
-            }
-
-            keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
-        }, 1);
-    }, [props.editMode]);
-
-    const focusOnInit = React.useCallback((initFocusTimeoutRef, elementRef) => {
-        clearTimeout(initFocusTimeoutRef.current);
-        initFocusTimeoutRef.current = setTimeout(() => {
-            const focusableEl = props.editMode === 'row' ? DomHandler.findSingle(elementRef.current, '[data-p-row-editor-init="true"]') : null;
-
-            focusableEl && focusableEl.focus();
-        }, 1);
-    }, [props.editMode]);
+            }, 1);
+        },
+        [props.editMode]
+    );
 
     const updateStickyPosition = React.useCallback((elementRef, frozen, alignFrozen, styleObjectState, setStyleObjectState) => {
         if (frozen) {
@@ -521,13 +533,12 @@ export const BodyRow = React.memo((props) => {
         }
     }, []);
 
-    const onCellClick =
-        (event, params, isEditable, editingState, setEditingState, selfClick, column, bindDocumentClickListener, overlayEventListener) => {
+    const onCellClick = (event, params, isEditable, editingState, setEditingState, selfClick, column, bindDocumentClickListener, overlayEventListener) => {
         if (props.editMode !== 'row' && isEditable && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.isRowSelected))) {
             selfClick.current = true;
 
             const onBeforeCellEditShow = getColumnProp(column, 'onBeforeCellEditShow');
-            const onCellEditInit = getColumnProp(column,'onCellEditInit');
+            const onCellEditInit = getColumnProp(column, 'onCellEditInit');
             const cellEditValidatorEvent = getColumnProp(column, 'cellEditValidatorEvent');
 
             if (onBeforeCellEditShow) {
@@ -650,14 +661,10 @@ export const BodyRow = React.memo((props) => {
                     findUpSelectableCell: findUpSelectableCell,
                     focusOnElement: focusOnElement,
                     focusOnInit: focusOnInit,
-                    updateStickyPosition: updateStickyPosition,
+                    updateStickyPosition: updateStickyPosition
                 });
 
-                return (
-                    <>
-                        {selectionMode? <RadioCheckCell {...cellProps}/> : <BodyCell {...cellProps }/>}
-                    </>
-                );
+                return <>{selectionMode ? <RadioCheckCell {...cellProps} /> : <BodyCell {...cellProps} />}</>;
             }
 
             return null;
