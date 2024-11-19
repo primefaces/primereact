@@ -21,7 +21,7 @@ export const ToggleButton = React.memo(
 
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
         const hasIcon = props.onIcon && props.offIcon;
-        const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
+        const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '\u00A0';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
         const toggle = (e) => {
