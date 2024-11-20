@@ -63,9 +63,17 @@ export const BodyCell = React.memo((props) => {
         return getColumnProp('cellEditValidateOnClose');
     };
 
+    const isIgnoredElement = (element) => {
+        const isCellEditor = (el) => el.getAttribute && el.getAttribute('data-pr-is-overlay');
+        return isCellEditor(element) || DomHandler.getParents(element).find((el) => isCellEditor(el));
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
+            if (isIgnoredElement(e.target)) {
+                return
+            }
             setTimeout(() => {
                 if (!selfClick.current && isOutsideClicked(e.target)) {
                     // #2666 for overlay components and outside is clicked
