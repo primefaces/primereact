@@ -363,7 +363,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 className: cx('tab.closeIcon'),
                 onClick: (e) => onTabHeaderClose(e, index),
                 onKeyDown: (e) => onCloseIconKeyDown(e, index),
-                tabIndex: 0
+                tabIndex: 0,
+                'aria-label': ariaLabel('close') || 'Close'
             },
             getTabPT(tab, 'closeIcon', index)
         );
