@@ -72,7 +72,7 @@ export const BodyCell = React.memo((props) => {
         type: 'click',
         listener: (e) => {
             if (isIgnoredElement(e.target)) {
-                return
+                return;
             }
             setTimeout(() => {
                 if (!selfClick.current && isOutsideClicked(e.target)) {
