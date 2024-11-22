@@ -788,7 +788,7 @@ export const UITreeNode = React.memo((props) => {
                 type: 'button',
                 className: cx('toggler'),
                 tabIndex: -1,
-                'aria-hidden': true,
+                'aria-hidden': false,
                 onClick: onTogglerClick
             },
             getPTOptions('toggler')
