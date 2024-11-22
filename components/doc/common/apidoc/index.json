@@ -46777,9 +46777,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\", \"help\"."
                         },
                         {
                             "name": "size",
