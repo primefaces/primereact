@@ -214,7 +214,8 @@ export const AutoCompleteBase = ComponentBase.extend({
         type: 'text',
         value: null,
         virtualScrollerOptions: null,
-        children: undefined
+        children: undefined,
+        iconPosition: null
     },
     css: {
         classes,
