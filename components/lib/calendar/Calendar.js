@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -3539,10 +3539,12 @@ export const Calendar = React.memo(
                 const selected = isSelected(date);
                 const dateClassName = classNames({ 'p-highlight': selected, 'p-disabled': !date.selectable });
                 const content = date.otherMonth && !props.showOtherMonths ? null : createDateCellContent(date, dateClassName, groupIndex);
+                const formattedValue = formatDate(new Date(date.year, date.month, date.day), getDateFormat());
+
                 const dayProps = mergeProps(
                     {
                         className: cx('day', { date }),
-                        'aria-label': date.day,
+                        'aria-label': formattedValue,
                         'data-p-today': date.today,
                         'data-p-other-month': date.otherMonth
                     },
