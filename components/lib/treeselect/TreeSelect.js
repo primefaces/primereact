@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -770,7 +770,7 @@ export const TreeSelect = React.memo(
                     className: cx('closeButton'),
                     onKeyDown: (event) => onHeaderElementKeyDown(event, true),
                     onClick: hide,
-                    'aria-label': localeOption('close')
+                    'aria-label': ariaLabel('close')
                 },
                 ptm('closeButton')
             );
