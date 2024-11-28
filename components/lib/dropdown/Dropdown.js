@@ -117,7 +117,6 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            event.stopPropagation();
             props.onClick && props.onClick(event);
 
             // do not continue if the user defined click wants to prevent it
@@ -132,6 +131,7 @@ export const Dropdown = React.memo(
                 overlayVisibleState ? hide() : show();
             }
 
+            event.preventDefault();
             clickedRef.current = true;
         };
 
@@ -716,7 +716,7 @@ export const Dropdown = React.memo(
         const getSelectedOptionIndex = (options) => {
             options = options || visibleOptions;
 
-            if (props.value != null && options) {
+            if (options) {
                 if (props.optionGroupLabel) {
                     for (let i = 0; i < options.length; i++) {
                         let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(options[i]));

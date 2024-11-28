@@ -399,7 +399,7 @@ export const Chips = React.memo(
             );
 
             return (
-                <li {...inputTokenProps}>
+                <li {...inputTokenProps} key={props.inputId + '_chips_input'}>
                     <input {...inputProps} />
                 </li>
             );

@@ -173,15 +173,18 @@ const VeronaSeperator = () => {
 const license = {
     documentLink: 'https://verona.primereact.org/documentation',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
+    showDiscount: true,
     licenseDetails: [
         {
             title: 'Basic License',
             price: '$49',
+            discountPrice: '$29',
             included: ['Non Commercial Usage', 'Single End Product, No Multi-Use', '1 Year Free Updates']
         },
         {
             title: 'Extended License',
             price: '$490',
+            discountPrice: '$290',
             included: ['Commercial Usage', 'Multiple End Products', '1 Year Free Updates']
         }
     ]

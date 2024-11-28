@@ -1,5 +1,6 @@
 :root {
-  --font-family: Inter, sans-serif;
+  font-family: "Inter", sans-serif;
+  --font-family: "Inter", sans-serif;
   --surface-a: #ffffff;
   --surface-b: #eceff4;
   --surface-c: #d8dee9;

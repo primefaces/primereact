@@ -872,8 +872,11 @@ export const MultiSelect = React.memo(
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
+                            'aria-label': localeOption('removeTokenIcon'),
                             className: cx('removeTokenIcon'),
-                            onClick: (e) => removeChip(e, val)
+                            onClick: (e) => removeChip(e, val),
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, val),
+                            tabIndex: props.tabIndex || '0'
                         },
                         ptm('removeTokenIcon', context)
                     );
@@ -944,6 +947,40 @@ export const MultiSelect = React.memo(
             }, []);
         };
 
+        const onClearIconKeyDown = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    updateModel(event, [], []);
+                    break;
+            }
+        };
+
+        const onRemoveTokenIconKeyDown = (event, val) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    removeChip(event, val);
+                    break;
+            }
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             show,
@@ -985,7 +1022,10 @@ export const MultiSelect = React.memo(
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, [], [])
+                    'aria-label': localeOption('clear'),
+                    onClick: (e) => updateModel(e, [], []),
+                    onKeyDown: (e) => onClearIconKeyDown(e),
+                    tabIndex: props.tabIndex || '0'
                 },
                 ptm('clearIcon')
             );
