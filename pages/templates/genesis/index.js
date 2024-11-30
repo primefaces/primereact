@@ -11,17 +11,17 @@ import GenesisLogo from './GenesisLogo';
 const features1Data = [
     {
         title: 'Modern and Sleek Design',
-        description: 'Mail, File System, Tasks, Calendar, Blog and Chat are the sample applications to get started with ease.',
+        description: 'Enjoy a contemporary design that looks great on all devices.',
         src: '/images/templates/genesis/horizontal-features-img-1.png'
     },
     {
-        title: 'Seo & Performance',
-        description: 'Apollo offers E-commerce pages to kickstart your e-commerce project powered by PrimeBlocks.',
+        title: 'SEO & Performance',
+        description: 'Optimized for fast loading and high search engine rankings.',
         src: '/images/templates/genesis/horizontal-features-img-2.png',
     },
     {
         title: 'Animation / Effects',
-        description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
+        description: 'Enhance engagement with captivating animations and effects.',
         src: '/images/templates/genesis/horizontal-features-img-3.png'
     }
 ];
@@ -29,7 +29,7 @@ const features1Data = [
 const features2Data = [
     {
         title: 'Fully Responsive',
-        description: 'Diamond is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
+        description: 'Genesis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
         src: '/images/templates/genesis/fully-responsive.png'
     },
     {
@@ -51,11 +51,6 @@ const features2Data = [
         darkSrc: 'https://primefaces.org/cdn/primereact/images/templates/apollo/apollo-features2-customizable-dark.png'
     },
     {
-        title: 'Ready to Use Pages',
-        description: 'Landing, login, invoice, help, user management and error pages are provided as template pages to get started with building your app.',
-        src: 'https://primefaces.org/cdn/primereact/images/templates/diamond/diamond-features2-ready.png'
-    },
-    {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
         src: '/images/templates/genesis/mobile-experience.png'
@@ -66,7 +61,7 @@ const animationFeaturesData1 = [
     {
         id: 1,
         title: 'Tailwind',
-        description: 'PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more.',
+        description: 'Built with TailwindCSS, offering flexibility and efficiency for responsive design. Enjoy the power of Tailwind, a favorite among developers.',
         src: '/images/templates/genesis/animation-tailwind.png'
     },
     {
@@ -83,7 +78,7 @@ const animationFeaturesData1 = [
     {
         id: 3,
         title: 'PrimeIcons',
-        description: 'Diamond ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
+        description: 'Genesis ships with PrimeIcons, PrimeTek’s modern icon library including a wide range of icons for your applications.',
         src: 'https://primefaces.org/cdn/primereact/images/templates/apollo/features-animation-icons.png'
     },
     {
@@ -91,8 +86,8 @@ const animationFeaturesData1 = [
         title: 'Figma File',
         description: (
             <>
-                Diamond uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
-                <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Diamond Figma file as
+                Genesis uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
+                <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Genesis Figma file as
                 they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
@@ -104,25 +99,25 @@ const animationFeaturesData2 = [
     {
         id: 1,
         title: 'Various Landing Pages',
-        description: 'Apollo has 3 display modes to choose from; Light, Dim and Dark.',
+        description: 'Choose from 9 templates for industries like SaaS, Travel, and Real Estate, each tailored to specific business needs.',
         src: '/images/templates/genesis/animation-landing-pages.png'
     },
     {
         id: 2,
-        title: 'Component Themes',
-        description: 'Diamond offers 30 built-in component themes and creating your own theme is a matter of defining couple of sass variables.',
+        title: 'Secondary Pages',
+        description: 'Includes essential pages like About, Pricing, Blog, and Contact for a complete user experience.',
         src: '/images/templates/genesis/animation-second-pages.png'
     },
     {
         id: 3,
-        title: '7 Menu Orientations',
-        description: 'Static, Overlay, Slim, Compact, Horizontal, Reveal and Drawer are the available menu layouts depending on your preference.',
+        title: 'Dark & Light Modes',
+        description: 'Easily switch between Light and Dark modes to match your aesthetic preferences.',
         src: '/images/templates/genesis/animation-dark-light-modes.png'
     },
     {
         id: 4,
-        title: 'Menu Themes',
-        description: 'Stunning theming options for the main menu in light color scheme.',
+        title: 'Themes',
+        description: 'Customize with 17 color themes to align with your brand effortlessly.',
         src: '/images/templates/genesis/animation-menu-themes.png'
     }
 ];
@@ -175,7 +170,7 @@ const templateHeroData = {
     pattern: '/images/templates/genesis/hero-pattern.png',
     dashboard1: '/images/templates/genesis/dashboard-2.png',
     dashboard2: '/images/templates/genesis/dashboard-1.png',
-    description: 'Angular CLI template with mode options, menu layouts, sample apps, pre-made pages, and 24 PrimeNG themes.',
+    description: 'Genesis, crafted by Prime, is the ultimate multipurpose landing template built with React and Next.js. It offers unmatched versatility and performance with a suite of example pages to elevate your projects.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation'
 };
