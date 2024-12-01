@@ -114,6 +114,7 @@ export const PickList = React.memo(
                         });
                     }
 
+                    onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
                     break;
 
                 case 'allToTarget':
@@ -127,6 +128,7 @@ export const PickList = React.memo(
                     }
 
                     selectedValue = [];
+                    onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
 
                     break;
 
@@ -140,6 +142,7 @@ export const PickList = React.memo(
                         });
                     }
 
+                    onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
                     break;
 
                 case 'allToSource':
@@ -154,14 +157,13 @@ export const PickList = React.memo(
 
                     selectedValue = [];
 
+                    onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
                     break;
 
                 default:
                     break;
             }
 
-            onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
-            onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
             handleChange(event, source, target);
         };
 
