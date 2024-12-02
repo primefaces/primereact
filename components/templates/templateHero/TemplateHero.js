@@ -9,9 +9,9 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
             {!!light && <TemplateHeroLight />}
             {!!rectangle && <TemplateHeroRectangle />}
             <div className="template-hero-card">
-                <div className='template-hero-card-logo-row'>
+                <div className="template-hero-card-logo-row">
                     <div className="template-hero-card-logo">{logo}</div>
-                    {multipurpose&&<div className='template-hero-card-logo-row-multipurpose'>Multipurpose</div>}
+                    {multipurpose && <div className="template-hero-card-logo-row-multipurpose">Multipurpose</div>}
                 </div>
                 <p>{description}</p>
                 <div className="template-hero-card-buttons">

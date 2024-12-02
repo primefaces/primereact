@@ -15,7 +15,7 @@ const features1Data = [
     {
         title: 'SEO & Performance',
         description: 'Optimized for fast loading and high search engine rankings.',
-        src: '/images/templates/genesis/horizontal-features-img-2.png',
+        src: '/images/templates/genesis/horizontal-features-img-2.png'
     },
     {
         title: 'Animation / Effects',
@@ -151,7 +151,7 @@ const GenesisSeperator = () => {
                     />
                     <path
                         d="M17.566 13.6824C17.575 13.6397 17.5422 13.5996 17.4985 13.5996H14.0556C13.5275 13.5996 13.0994 14.0277 13.0994 14.5558V17.9985C13.0994 18.0422 13.1394 18.0751 13.1822 18.066C15.3753 17.6025 17.1023 15.8755 17.566 13.6824Z"
-                       fill="var(--surface-900)"
+                        fill="var(--surface-900)"
                     />
                     <path
                         d="M19.1544 13.5996C19.0879 13.5996 19.0315 13.6483 19.0203 13.7138C18.5118 16.6753 16.1751 19.0119 13.2136 19.5203C13.1481 19.5316 13.0994 19.588 13.0994 19.6544V23.5438C13.0994 24.0719 13.5275 24.5 14.0556 24.5H15.9679C16.496 24.5 16.9241 24.0719 16.9241 23.5438V19.889C16.9241 19.8642 16.954 19.8518 16.9715 19.8693L20.9704 23.8683C21.3438 24.2417 21.9492 24.2417 22.3227 23.8683L23.368 22.8229C23.7414 22.4495 23.7414 21.8441 23.368 21.4707L19.3691 17.4717C19.3516 17.4542 19.364 17.4243 19.3887 17.4243H23.0436C23.5717 17.4243 23.9998 16.9962 23.9998 16.4682V14.5558C23.9998 14.0277 23.5717 13.5996 23.0436 13.5996H19.1544Z"
@@ -171,7 +171,7 @@ const templateHeroData = {
     description: 'Genesis, crafted by Prime, is the ultimate multipurpose landing template built with React and Next.js. It offers unmatched versatility and performance with a suite of example pages to elevate your projects.',
     liveHref: 'https://diamond.primereact.org',
     docHref: 'https://diamond.primereact.org/documentation',
-    multipurpose:true
+    multipurpose: true
 };
 
 const GenesisPage = () => {
