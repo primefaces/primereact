@@ -1,8 +1,6 @@
-import TemplateConfiguration from '@/components/templates/TemplateConfiguration';
 import TemplateFeatures from '@/components/templates/TemplateFeatures';
 import TemplateLicense from '@/components/templates/TemplateLicense';
 import TemplateSeparator from '@/components/templates/TemplateSeparator';
-import TemplateYoutube from '@/components/templates/TemplateYoutube';
 import TemplateFeaturesAnimation from '@/components/templates/templateFeaturesAnimation';
 import TemplateHero from '@/components/templates/templateHero/TemplateHero';
 import Link from 'next/link';
@@ -125,7 +123,7 @@ const animationFeaturesData2 = [
 const license = {
     documentLink: 'https://diamond.primereact.org/documentation/',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
-    showDiscount: true,
+    showDiscount: false,
     licenseDetails: [
         {
             title: 'Basic License',
