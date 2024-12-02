@@ -2,14 +2,17 @@ import React from 'react';
 import TemplateHeroRectangle from './TemplateHeroRectangle';
 import TemplateHeroLight from './TemplateHeroLight';
 
-const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2, description, liveHref, docHref, supportHref, storeHref, free }) => {
+const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2, description, liveHref, docHref, supportHref, storeHref, free, multipurpose }) => {
     return (
         <div className="template-hero">
             {!!pattern && <img className="template-hero-pattern" src={pattern} alt="Template Hero Pattern" />}
             {!!light && <TemplateHeroLight />}
             {!!rectangle && <TemplateHeroRectangle />}
             <div className="template-hero-card">
-                <div className="template-hero-card-logo ">{logo}</div>
+                <div className='template-hero-card-logo-row'>
+                    <div className="template-hero-card-logo">{logo}</div>
+                    {multipurpose&&<div className='template-hero-card-logo-row-multipurpose'>Multipurpose</div>}
+                </div>
                 <p>{description}</p>
                 <div className="template-hero-card-buttons">
                     <a href={liveHref} target="_blank" className="template-hero-card-buttons-btn1 p-button ">

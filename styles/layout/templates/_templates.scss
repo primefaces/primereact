@@ -1031,6 +1031,19 @@
                     height: 100%;
                     width: auto;
                 }
+                &-row{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    &-multipurpose{
+                        padding: 0.25rem 0.5rem;
+                        font-weight: 500;
+                        color: var(--surface-900);
+                        background: var(--surface-0);
+                        border-radius: 0.5rem;
+                        line-height: 1.5rem;
+                    }
+                }
             }
 
             p {
