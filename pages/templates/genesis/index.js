@@ -172,7 +172,8 @@ const templateHeroData = {
     dashboard2: '/images/templates/genesis/dashboard-1.png',
     description: 'Genesis, crafted by Prime, is the ultimate multipurpose landing template built with React and Next.js. It offers unmatched versatility and performance with a suite of example pages to elevate your projects.',
     liveHref: 'https://diamond.primereact.org',
-    docHref: 'https://diamond.primereact.org/documentation'
+    docHref: 'https://diamond.primereact.org/documentation',
+    multipurpose:true
 };
 
 const GenesisPage = () => {
