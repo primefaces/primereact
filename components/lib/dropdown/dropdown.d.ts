@@ -302,12 +302,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     checkmark?: boolean;
     /**
      * Template to display when filtering does not return any results.
-     * @defaultValue No available options
+     * @defaultValue No results found
      */
     emptyFilterMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
      * Text to display when there are no options available.
-     * @defaultValue No results found
+     * @defaultValue No available options
      */
     emptyMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
