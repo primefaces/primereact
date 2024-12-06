@@ -74,7 +74,7 @@ exports[`Panel headerTemplate 1`] = `
     class="p-panel p-component p-panel-toggleable"
     data-pc-name="panel"
     data-pc-section="root"
-    id="pr_id_2"
+    id="pr_id_3"
   >
     <div
       class="p-panel-header justify-content-start"
@@ -93,10 +93,10 @@ exports[`Panel headerTemplate 1`] = `
       </span>
     </div>
     <div
-      aria-labelledby="pr_id_2_header"
+      aria-labelledby="pr_id_3_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_2_content"
+      id="pr_id_3_content"
       role="region"
     >
       <div
@@ -116,7 +116,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
     class="p-panel p-component p-panel-toggleable"
     data-pc-name="panel"
     data-pc-section="root"
-    id="pr_id_4"
+    id="pr_id_9"
   >
     <div
       class="p-panel-header"
@@ -125,7 +125,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
       <span
         class="p-panel-title"
         data-pc-section="title"
-        id="pr_id_4_header"
+        id="pr_id_9_header"
       >
         Expand/Collapse
       </span>
@@ -134,17 +134,16 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
         data-pc-section="icons"
       >
         <button
-          aria-controls="pr_id_4_content"
+          aria-controls="pr_id_9_content"
           aria-expanded="false"
           aria-label="Expand/Collapse"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
-          id="pr_id_4_label"
+          id="pr_id_9_label"
           role="button"
           type="button"
         >
           <svg
-            aria-hidden="true"
             class="p-icon"
             data-pc-section="togglericon"
             fill="none"
@@ -163,10 +162,10 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
     </div>
     <div
       aria-hidden="true"
-      aria-labelledby="pr_id_4_header"
+      aria-labelledby="pr_id_9_header"
       class="p-toggleable-content p-toggleable-content-exit p-toggleable-content-exit-active"
       data-pc-section="toggleablecontent"
-      id="pr_id_4_content"
+      id="pr_id_9_content"
       role="region"
     >
       <div
@@ -188,7 +187,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
     class="p-panel p-component p-panel-toggleable"
     data-pc-name="panel"
     data-pc-section="root"
-    id="pr_id_4"
+    id="pr_id_9"
   >
     <div
       class="p-panel-header"
@@ -197,7 +196,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
       <span
         class="p-panel-title"
         data-pc-section="title"
-        id="pr_id_4_header"
+        id="pr_id_9_header"
       >
         Expand/Collapse
       </span>
@@ -206,17 +205,16 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
         data-pc-section="icons"
       >
         <button
-          aria-controls="pr_id_4_content"
+          aria-controls="pr_id_9_content"
           aria-expanded="true"
           aria-label="Expand/Collapse"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
-          id="pr_id_4_label"
+          id="pr_id_9_label"
           role="button"
           type="button"
         >
           <svg
-            aria-hidden="true"
             class="p-icon"
             data-pc-section="togglericon"
             fill="none"
@@ -234,10 +232,10 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
       </div>
     </div>
     <div
-      aria-labelledby="pr_id_4_header"
+      aria-labelledby="pr_id_9_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_4_content"
+      id="pr_id_9_content"
       role="region"
     >
       <div
@@ -259,7 +257,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
     class="p-panel p-component p-panel-toggleable"
     data-pc-name="panel"
     data-pc-section="root"
-    id="pr_id_4"
+    id="pr_id_9"
   >
     <div
       class="p-panel-header"
@@ -268,7 +266,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
       <span
         class="p-panel-title"
         data-pc-section="title"
-        id="pr_id_4_header"
+        id="pr_id_9_header"
       >
         Expand/Collapse
       </span>
@@ -277,17 +275,16 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
         data-pc-section="icons"
       >
         <button
-          aria-controls="pr_id_4_content"
+          aria-controls="pr_id_9_content"
           aria-expanded="true"
           aria-label="Expand/Collapse"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
-          id="pr_id_4_label"
+          id="pr_id_9_label"
           role="button"
           type="button"
         >
           <svg
-            aria-hidden="true"
             class="p-icon"
             data-pc-section="togglericon"
             fill="none"
@@ -306,10 +303,10 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
     </div>
     <div
       aria-hidden="false"
-      aria-labelledby="pr_id_4_header"
+      aria-labelledby="pr_id_9_header"
       class="p-toggleable-content p-toggleable-content-enter p-toggleable-content-enter-active"
       data-pc-section="toggleablecontent"
-      id="pr_id_4_content"
+      id="pr_id_9_content"
       role="region"
     >
       <div
@@ -331,7 +328,7 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
     class="p-panel p-component p-panel-toggleable"
     data-pc-name="panel"
     data-pc-section="root"
-    id="pr_id_3"
+    id="pr_id_6"
   >
     <div
       class="p-panel-header"
@@ -340,7 +337,7 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
       <span
         class="p-panel-title"
         data-pc-section="title"
-        id="pr_id_3_header"
+        id="pr_id_6_header"
       >
         Toggleable
       </span>
@@ -349,17 +346,16 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
         data-pc-section="icons"
       >
         <button
-          aria-controls="pr_id_3_content"
+          aria-controls="pr_id_6_content"
           aria-expanded="true"
           aria-label="Toggleable"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
-          id="pr_id_3_label"
+          id="pr_id_6_label"
           role="button"
           type="button"
         >
           <svg
-            aria-hidden="true"
             class="p-icon"
             data-pc-section="togglericon"
             fill="none"
@@ -377,10 +373,10 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
       </div>
     </div>
     <div
-      aria-labelledby="pr_id_3_header"
+      aria-labelledby="pr_id_6_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_3_content"
+      id="pr_id_6_content"
       role="region"
     >
       <div
@@ -402,7 +398,7 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
     class="p-panel p-component p-panel-toggleable"
     data-pc-name="panel"
     data-pc-section="root"
-    id="pr_id_3"
+    id="pr_id_6"
   >
     <div
       class="p-panel-header"
@@ -411,7 +407,7 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
       <span
         class="p-panel-title"
         data-pc-section="title"
-        id="pr_id_3_header"
+        id="pr_id_6_header"
       >
         Toggleable
       </span>
@@ -420,17 +416,16 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
         data-pc-section="icons"
       >
         <button
-          aria-controls="pr_id_3_content"
+          aria-controls="pr_id_6_content"
           aria-expanded="true"
           aria-label="Toggleable"
           class="p-panel-header-icon p-panel-toggler p-link"
           data-pc-section="toggler"
-          id="pr_id_3_label"
+          id="pr_id_6_label"
           role="button"
           type="button"
         >
           <svg
-            aria-hidden="true"
             class="p-icon"
             data-pc-section="togglericon"
             fill="none"
@@ -448,10 +443,10 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
       </div>
     </div>
     <div
-      aria-labelledby="pr_id_3_header"
+      aria-labelledby="pr_id_6_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_3_content"
+      id="pr_id_6_content"
       role="region"
     >
       <div
