@@ -23209,7 +23209,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "No available options",
+                            "default": "No results found",
                             "description": "Template to display when filtering does not return any results."
                         },
                         {
@@ -23217,7 +23217,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "No results found",
+                            "default": "No available options",
                             "description": "Text to display when there are no options available."
                         },
                         {
