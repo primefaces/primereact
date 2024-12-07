@@ -12,9 +12,10 @@ export const TableBody = React.memo(
         const { ptm, ptmo, cx, isUnstyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
+        const cProps = getColumnProps(props.column);
+        const colsProps = props.columns ? props.columns.map((col) => getColumnProps(col)) : [];
 
         const getColumnPTOptions = (key) => {
-            const cProps = getColumnProps(props.column);
             const columnMetaData = {
                 props: cProps,
                 parent: props.metaData,
@@ -162,8 +163,14 @@ export const TableBody = React.memo(
             return !DomHandler.isClickable(event.originalEvent.target);
         };
 
+        const metaKeySelectionRef = React.useRef(props.metaKeySelection);
+
+        React.useEffect(() => {
+            metaKeySelectionRef.current = props.metaKeySelection;
+        }, [props.metaKeySelection]);
+
         const allowMetaKeySelection = (event) => {
-            return !rowTouched.current && (!props.metaKeySelection || (props.metaKeySelection && (event.originalEvent.metaKey || event.originalEvent.ctrlKey)));
+            return !rowTouched.current && (!metaKeySelectionRef.current || (metaKeySelectionRef.current && (event.originalEvent.metaKey || event.originalEvent.ctrlKey)));
         };
 
         const allowRangeSelection = (event) => {
@@ -251,30 +258,37 @@ export const TableBody = React.memo(
             }
         };
 
+        const selectionRef = React.useRef(props.selection);
+
+        React.useEffect(() => {
+            selectionRef.current = props.selection;
+        }, [props.selection]);
+
         const onSingleSelection = ({ originalEvent, data, index, toggleable, type }) => {
             if (!isSelectable({ data, index })) {
                 return;
             }
 
             let selected = isSelected(data);
-            let selection = props.selection;
+            let currentSelection = selectionRef.current || [];
+            let newSelection = currentSelection;
 
             if (selected) {
                 if (toggleable) {
-                    selection = null;
+                    newSelection = null;
                     onUnselect({ originalEvent, data, type });
                 }
             } else {
-                selection = data;
+                newSelection = data;
                 onSelect({ originalEvent, data, type });
             }
 
             focusOnElement(originalEvent, true);
 
-            if (props.onSelectionChange && selection !== props.selection) {
+            if (props.onSelectionChange && newSelection !== currentSelection) {
                 props.onSelectionChange({
                     originalEvent,
-                    value: selection,
+                    value: newSelection,
                     type
                 });
             }
@@ -286,29 +300,30 @@ export const TableBody = React.memo(
             }
 
             let selected = isSelected(data);
-            let selection = props.selection || [];
+            let currentSelection = selectionRef.current || [];
+            let newSelection = currentSelection;
 
             if (selected) {
                 if (toggleable) {
-                    let selectionIndex = findIndex(selection, data);
+                    let selectionIndex = findIndex(currentSelection, data);
 
-                    selection = props.selection.filter((val, i) => i !== selectionIndex);
+                    newSelection = currentSelection.filter((val, i) => i !== selectionIndex);
                     onUnselect({ originalEvent, data, type });
-                } else if (selection.length) {
-                    props.selection.forEach((d) => onUnselect({ originalEvent, data: d, type }));
-                    selection = [data];
+                } else if (currentSelection.length) {
+                    currentSelection.forEach((d) => onUnselect({ originalEvent, data: d, type }));
+                    newSelection = [data];
                     onSelect({ originalEvent, data, type });
                 }
             } else {
-                selection = ObjectUtils.isObject(selection) ? [selection] : selection;
-                selection = toggleable && isMultipleSelection() ? [...selection, data] : [data];
+                newSelection = ObjectUtils.isObject(currentSelection) ? [currentSelection] : currentSelection;
+                newSelection = toggleable && isMultipleSelection() ? [...newSelection, data] : [data];
                 onSelect({ originalEvent, data, type });
             }
 
-            if (props.onSelectionChange && selection !== props.selection) {
+            if (props.onSelectionChange && newSelection !== currentSelection) {
                 props.onSelectionChange({
                     originalEvent,
-                    value: selection,
+                    value: newSelection,
                     type
                 });
             }
@@ -996,6 +1011,7 @@ export const TableBody = React.memo(
                         checkIcon={props.checkIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
                         columns={props.columns}
+                        colsProps={colsProps}
                         compareSelectionBy={props.compareSelectionBy}
                         contextMenuSelected={contextMenuSelected}
                         dataKey={props.dataKey}
