@@ -15,7 +15,7 @@ export const UITreeNode = React.memo((props) => {
     const mergeProps = useMergeProps();
     const isLeaf = props.isNodeLeaf(props.node);
     const label = props.node.label;
-    const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
+    const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
