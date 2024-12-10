@@ -351,11 +351,10 @@ export const TableBody = React.memo(
         };
 
         const selectRangeOnRow = (event, rowRangeStart, rowRangeEnd) => {
-            const value = props.tableProps.value;
             let selection = [];
 
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
-                let rangeRowData = value[i];
+                let rangeRowData = props.value[i] ?? props.tableProps.value[i];
 
                 if (!isSelectable({ data: rangeRowData, index: i })) {
                     continue;
