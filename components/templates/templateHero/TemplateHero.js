@@ -27,10 +27,12 @@ const TemplateHero = ({ logo, pattern, rectangle, light, dashboard1, dashboard2,
                         <i className="pi pi-github " style={{ fontSize: '1rem' }} />
                         <span>{free ? 'Open Issues' : 'Community'}</span>
                     </a>
-                    <a href={docHref} target="_blank">
-                        <i className="pi pi-book " style={{ fontSize: '1rem' }} />
-                        <span>Documentation</span>
-                    </a>
+                    {docHref && (
+                        <a href={docHref} target="_blank">
+                            <i className="pi pi-book " style={{ fontSize: '1rem' }} />
+                            <span>Documentation</span>
+                        </a>
+                    )}
                 </div>
             </div>
             {!!dashboard1 && <img className="template-hero-dashboard1" src={dashboard1} alt="Template Dashboard Image 1" />}
