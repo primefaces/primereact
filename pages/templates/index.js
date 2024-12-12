@@ -8,6 +8,28 @@ const TemplatesPage = () => {
                 <p>Highly customizable application templates to get started in no time with style. Designed and implemented by PrimeTek.</p>
             </div>
 
+            <h2>Multi-Purpose Templates</h2>
+            <div className="grid">
+                <div className="col-12 lg:col-6 xl:col-4">
+                    <div className="card mb-0">
+                        <a href="https://genesis.primereact.org" rel="noopener noreferrer">
+                            <img alt="Genesis" src="https://primefaces.org/cdn/primereact/images/layouts/genesis-react.webp" className="w-full" />
+                        </a>
+                        <div className="flex gap-3 mt-3">
+                            <a href="https://genesis.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer">
+                                <span className="p-button-label white-space-nowrap">Preview</span>
+                            </a>
+                            <Link href="/templates/genesis" rel="noopener noreferrer">
+                                <a className="flex-1 p-button p-component p-button-outlined">
+                                    <span className="p-button-label white-space-nowrap">Learn More</span>
+                                </a>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Admin Templates</h2>
             <div className="grid">
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">

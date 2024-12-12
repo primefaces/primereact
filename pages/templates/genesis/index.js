@@ -10,17 +10,17 @@ const features1Data = [
     {
         title: 'Modern and Sleek Design',
         description: 'Enjoy a contemporary design that looks great on all devices.',
-        src: '/images/templates/genesis/horizontal-features-img-1.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/horizontal-features-img-1.png'
     },
     {
         title: 'SEO & Performance',
         description: 'Optimized for fast loading and high search engine rankings.',
-        src: '/images/templates/genesis/horizontal-features-img-2.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/horizontal-features-img-2.png'
     },
     {
         title: 'Animation / Effects',
         description: 'Enhance engagement with captivating animations and effects.',
-        src: '/images/templates/genesis/horizontal-features-img-3.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/horizontal-features-img-3.png'
     }
 ];
 
@@ -28,7 +28,7 @@ const features2Data = [
     {
         title: 'Fully Responsive',
         description: 'Genesis is crafted to provide optimal viewing and interaction experience for a wide range of devices.',
-        src: '/images/templates/genesis/fully-responsive.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/fully-responsive.png'
     },
     {
         title: 'Cross Browser Compatible',
@@ -51,7 +51,7 @@ const features2Data = [
     {
         title: 'Mobile Experience',
         description: 'Touch optimized enhanced mobile experience with responsive design.',
-        src: '/images/templates/genesis/mobile-experience.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/mobile-experience.png'
     }
 ];
 
@@ -60,7 +60,7 @@ const animationFeaturesData1 = [
         id: 1,
         title: 'Tailwind',
         description: 'Built with TailwindCSS, offering flexibility and efficiency for responsive design. Enjoy the power of Tailwind, a favorite among developers.',
-        src: '/images/templates/genesis/animation-tailwind.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/animation-tailwind.png'
     },
     {
         id: 2,
@@ -85,11 +85,11 @@ const animationFeaturesData1 = [
         description: (
             <>
                 Genesis uses Figma as the design tool. It will be possible to download the Figma file after your purchase. You can{' '}
-                <a href="https://www.figma.com/file/lKooXEoqqWz7PBYwJ7B8QS/Preview-%7C-Diamond-2022?node-id=271%3A12531">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Genesis Figma file as
-                they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
+                <a href="https://www.figma.com/design/bGujrJyznnSatJFMtkXbTN/Preview-%7C-Genesis?node-id=0-1&t=etuXAwkUAEuhJ3p0-1">preview the Figma file</a> before the purchase. Note that PrimeReact UI components are excluded from the Genesis Figma
+                file as they are available in <Link href="/uikit">PrimeOne for Figma</Link> only.
             </>
         ),
-        src: '/images/templates/genesis/animation-figma.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/animation-figma.png'
     }
 ];
 
@@ -98,30 +98,30 @@ const animationFeaturesData2 = [
         id: 1,
         title: 'Various Landing Pages',
         description: 'Choose from 9 templates for industries like SaaS, Travel, and Real Estate, each tailored to specific business needs.',
-        src: '/images/templates/genesis/animation-landing-pages.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/animation-landing-pages.png'
     },
     {
         id: 2,
         title: 'Secondary Pages',
         description: 'Includes essential pages like About, Pricing, Blog, and Contact for a complete user experience.',
-        src: '/images/templates/genesis/animation-second-pages.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/animation-second-pages.png'
     },
     {
         id: 3,
         title: 'Dark & Light Modes',
         description: 'Easily switch between Light and Dark modes to match your aesthetic preferences.',
-        src: '/images/templates/genesis/animation-dark-light-modes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/animation-dark-light-modes.png'
     },
     {
         id: 4,
         title: 'Themes',
         description: 'Customize with 17 color themes to align with your brand effortlessly.',
-        src: '/images/templates/genesis/animation-menu-themes.png'
+        src: 'https://primefaces.org/cdn/primereact/images/templates/genesis/animation-menu-themes.png'
     }
 ];
 
 const license = {
-    documentLink: 'https://diamond.primereact.org/documentation/',
+    documentLink: '',
     description: 'The download package is a NextJS-based project containing all application source codes deployed at the live demo. The project code is written in TypeScript.',
     showDiscount: false,
     licenseDetails: [
@@ -165,12 +165,12 @@ const GenesisSeperator = () => {
 
 const templateHeroData = {
     logo: <GenesisLogo />,
-    pattern: '/images/templates/genesis/hero-pattern.png',
-    dashboard1: '/images/templates/genesis/dashboard-2.png',
-    dashboard2: '/images/templates/genesis/dashboard-1.png',
-    description: 'Genesis, crafted by Prime, is the ultimate multipurpose landing template built with React and Next.js. It offers unmatched versatility and performance with a suite of example pages to elevate your projects.',
-    liveHref: 'https://diamond.primereact.org',
-    docHref: 'https://diamond.primereact.org/documentation',
+    pattern: 'https://primefaces.org/cdn/primereact/images/templates/genesis/hero-pattern.png',
+    dashboard1: 'https://primefaces.org/cdn/primereact/images/templates/genesis/dashboard-2.png',
+    dashboard2: 'https://primefaces.org/cdn/primereact/images/templates/genesis/dashboard-1.png',
+    description: 'Genesis, crafted by Prime, is the ultimate multi-purpose website template built with React and Next.js. It offers unmatched versatility and performance with a suite of example pages to elevate your projects.',
+    liveHref: 'https://genesis.primereact.org',
+    docHref: '',
     multipurpose: true
 };
 
@@ -178,7 +178,7 @@ const GenesisPage = () => {
     const featuresAnimationTitle = <h2>Features</h2>;
 
     return (
-        <div className="diamond template">
+        <div className="genesis template">
             <TemplateHero {...templateHeroData} />
             <GenesisSeperator />
             <TemplateLicense license={license} />
