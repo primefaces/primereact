@@ -507,10 +507,6 @@ export const Calendar = React.memo(
             return _currentYear;
         };
 
-        const getViewYear = () => {
-            return props.yearNavigator ? getViewDate().getFullYear() : currentYear;
-        };
-
         const onMonthDropdownChange = (event, value) => {
             const currentViewDate = getViewDate();
             let newViewDate = cloneDate(currentViewDate);
@@ -1813,6 +1809,10 @@ export const Calendar = React.memo(
                 updateViewDate(event, currentDate);
                 onViewDateSelect({ event, date: currentDate });
             }
+        };
+
+        const getViewYear = () => {
+            return props.yearNavigator ? getViewDate().getFullYear() : currentYear;
         };
 
         const onYearSelect = (event, year) => {
