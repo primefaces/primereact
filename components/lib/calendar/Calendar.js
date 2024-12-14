@@ -479,7 +479,8 @@ export const Calendar = React.memo(
         };
 
         const decrementYear = () => {
-            const _currentYear = currentYear - 1;
+            const year = getViewYear();
+            const _currentYear = year - 1;
 
             setCurrentYear(_currentYear);
 
@@ -493,7 +494,8 @@ export const Calendar = React.memo(
         };
 
         const incrementYear = () => {
-            const _currentYear = currentYear + 1;
+            const year = getViewYear();
+            const _currentYear = year + 1;
 
             setCurrentYear(_currentYear);
 
@@ -1789,7 +1791,9 @@ export const Calendar = React.memo(
 
         const onMonthSelect = (event, month) => {
             if (props.view === 'month') {
-                onDateSelect(event, { year: currentYear, month: month, day: 1, selectable: true });
+                const year = getViewYear();
+
+                onDateSelect(event, { year, month: month, day: 1, selectable: true });
                 event.preventDefault();
             } else {
                 setCurrentMonth(month);
@@ -1807,6 +1811,10 @@ export const Calendar = React.memo(
                 updateViewDate(event, currentDate);
                 onViewDateSelect({ event, date: currentDate });
             }
+        };
+
+        const getViewYear = () => {
+            return props.yearNavigator ? getViewDate().getFullYear() : currentYear;
         };
 
         const onYearSelect = (event, year) => {
