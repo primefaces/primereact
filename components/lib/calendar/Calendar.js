@@ -1789,7 +1789,8 @@ export const Calendar = React.memo(
 
         const onMonthSelect = (event, month) => {
             if (props.view === 'month') {
-                onDateSelect(event, { year: currentYear, month: month, day: 1, selectable: true });
+                const year = props.yearNavigator ? getViewDate().getFullYear() : currentYear;
+                onDateSelect(event, { year, month: month, day: 1, selectable: true });
                 event.preventDefault();
             } else {
                 setCurrentMonth(month);
@@ -1897,8 +1898,8 @@ export const Calendar = React.memo(
                       transform: 'translate(-50%, -50%)'
                   }
                 : !props.inline
-                  ? { position: 'absolute', top: '0', left: '0' }
-                  : undefined;
+                ? { position: 'absolute', top: '0', left: '0' }
+                : undefined;
 
             DomHandler.addStyles(overlayRef.current, styles);
 
