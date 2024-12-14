@@ -1903,8 +1903,8 @@ export const Calendar = React.memo(
                       transform: 'translate(-50%, -50%)'
                   }
                 : !props.inline
-                ? { position: 'absolute', top: '0', left: '0' }
-                : undefined;
+                  ? { position: 'absolute', top: '0', left: '0' }
+                  : undefined;
 
             DomHandler.addStyles(overlayRef.current, styles);
 
