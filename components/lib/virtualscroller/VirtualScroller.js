@@ -549,9 +549,13 @@ export const VirtualScroller = React.memo(
         };
 
         const isVisible = () => {
-            const rect = elementRef.current.getBoundingClientRect();
+            if (DomHandler.isVisible(elementRef.current)) {
+                const rect = elementRef.current.getBoundingClientRect();
 
-            return rect.width > 0 && rect.height > 0;
+                return rect.width > 0 && rect.height > 0;
+            }
+
+            return false;
         };
 
         React.useEffect(() => {
