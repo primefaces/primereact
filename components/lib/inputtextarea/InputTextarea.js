@@ -89,7 +89,7 @@ export const InputTextarea = React.memo(
         const resize = (initial) => {
             const inputEl = elementRef.current;
 
-            if (inputEl && DomHandler.isVisible(inputEl)) {
+            if (inputEl && isVisible(inputEl)) {
                 if (!cachedScrollHeight.current) {
                     cachedScrollHeight.current = inputEl.scrollHeight;
                     inputEl.style.overflow = 'hidden';
@@ -109,6 +109,16 @@ export const InputTextarea = React.memo(
                     cachedScrollHeight.current = inputEl.scrollHeight;
                 }
             }
+        };
+
+        const isVisible = () => {
+            if (DomHandler.isVisible(elementRef.current)) {
+                const rect = elementRef.current.getBoundingClientRect();
+
+                return rect.width > 0 && rect.height > 0;
+            }
+
+            return false;
         };
 
         React.useEffect(() => {
