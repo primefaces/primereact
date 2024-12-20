@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useEventListener, useMergeProps, useMountEffect, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMergeProps, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
 import { SpinnerIcon } from '../icons/spinner';
 import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
@@ -52,6 +52,7 @@ export const VirtualScroller = React.memo(
         const defaultContentHeight = React.useRef(null);
         const isItemRangeChanged = React.useRef(false);
         const lazyLoadState = React.useRef(null);
+        const viewInitialized = React.useRef(false);
 
         const [bindWindowResizeListener] = useResizeListener({ listener: (event) => onResize(event), when: !props.disabled });
         const [bindOrientationChangeListener] = useEventListener({ target: 'window', type: 'orientationchange', listener: (event) => onResize(event), when: !props.disabled });
@@ -540,15 +541,24 @@ export const VirtualScroller = React.memo(
         };
 
         const init = () => {
-            if (!props.disabled) {
+            if (!props.disabled && isVisible(elementRef.current)) {
                 setSize();
                 calculateOptions();
                 setSpacerSize();
             }
         };
 
-        useMountEffect(() => {
-            viewInit();
+        const isVisible = () => {
+            const rect = elementRef.current.getBoundingClientRect();
+
+            return rect.width > 0 && rect.height > 0;
+        };
+
+        React.useEffect(() => {
+            if (!viewInitialized.current && isVisible(elementRef.current)) {
+                viewInit();
+                viewInitialized.current = true;
+            }
         });
 
         useUpdateEffect(() => {
