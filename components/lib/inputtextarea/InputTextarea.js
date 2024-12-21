@@ -129,6 +129,7 @@ export const InputTextarea = React.memo(
             if (props.autoResize) {
                 resize(true);
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.autoResize]);
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
