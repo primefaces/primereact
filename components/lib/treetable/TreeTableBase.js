@@ -298,7 +298,8 @@ export const TreeTableBase = ComponentBase.extend({
         tableStyle: null,
         totalRecords: null,
         value: null,
-        children: undefined
+        children: undefined,
+        togglerTemplate: null
     },
     css: {
         classes,
