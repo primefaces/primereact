@@ -3966,7 +3966,7 @@
                             "name": "selectedItemTemplate",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | Function",
+                            "type": "null | string | Function",
                             "default": "",
                             "description": "Template of a selected item."
                         },
