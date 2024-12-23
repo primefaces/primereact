@@ -152,13 +152,15 @@ export const AutoComplete = React.memo(
             selectedItem.current = ObjectUtils.isNotEmpty(value) ? value : null;
         };
 
-        const formatValue = (value, useTemplate = false) => {
+        const formatValue = (value) => {
             if (ObjectUtils.isEmpty(value)) return '';
 
             if (typeof value === 'string') return value;
 
-            if (useTemplate && props.selectedItemTemplate) {
-                return ObjectUtils.getJSXElement(props.selectedItemTemplate, value) || value;
+            const valueFromTemplate = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+
+            if (typeof valueFromTemplate === 'string') {
+                return valueFromTemplate;
             }
 
             if (props.field) {
@@ -604,7 +606,7 @@ export const AutoComplete = React.memo(
 
                     return (
                         <li key={key} {...tokenProps}>
-                            <span {...tokenLabelProps}>{formatValue(val, true)}</span>
+                            <span {...tokenLabelProps}>{formatValue(val)}</span>
                             {removeTokenIcon}
                         </li>
                     );

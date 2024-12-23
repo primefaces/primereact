@@ -406,7 +406,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     /**
      * Template of a selected item.
      */
-    selectedItemTemplate?: React.ReactNode | ((value: any) => React.ReactNode);
+    selectedItemTemplate?: string | undefined | null | ((value: any) => string | undefined | null);
     /**
      * Whether to show the empty message or not.
      * @defaultValue false
