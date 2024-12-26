@@ -588,12 +588,24 @@ export const Dropdown = React.memo(
             return isOptionDisabled(option) ? findPrevOption(i) : option;
         };
 
+        const findInArray = (visibleOptions, searchText) => {
+            if (!searchText || !visibleOptions?.length) return -1;
+
+            const normalizedSearch = searchText.toLocaleLowerCase();
+
+            const exactMatch = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase() === normalizedSearch);
+
+            if (exactMatch !== -1) return exactMatch;
+
+            return visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(normalizedSearch));
+        };
+
         const onEditableInputChange = (event) => {
             !overlayVisibleState && show();
             let searchIndex = null;
 
             if (event.target.value && visibleOptions) {
-                searchIndex = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
+                searchIndex = findInArray(visibleOptions, event.target.value);
             }
 
             setFocusedOptionIndex(searchIndex);
