@@ -71,14 +71,14 @@ export const Checkbox = React.memo(
             }
         };
 
-        const onFocus = () => {
+        const onFocus = (event) => {
             setFocusedState(true);
-            props?.onFocus?.();
+            props?.onFocus?.(event);
         };
 
-        const onBlur = () => {
+        const onBlur = (event) => {
             setFocusedState(false);
-            props?.onBlur?.();
+            props?.onBlur?.(event);
         };
 
         React.useImperativeHandle(ref, () => ({
