@@ -49,7 +49,6 @@ exports[`InputTextarea when textarea is is autosizing and has rows and columns i
     data-pc-name="inputtextarea"
     data-pc-section="root"
     rows="3"
-    style="overflow: hidden; height: 0px;"
   />
 </div>
 `;

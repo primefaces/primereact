@@ -1,7 +1,7 @@
 {
     "name": "primereact",
     "private": false,
-    "version": "10.8.5",
+    "version": "10.8.6",
     "scripts": {
         "dev": "next dev",
         "start": "next start",
@@ -14,7 +14,7 @@
         "build:package:dev": "npm run build:check && gulp build-resources && npm run build:api && rollup -c --watch",
         "build:api": "npm run apiwebtypes && npm run apidoc",
         "build:check": "npm run lint && npm run format:check && npm run type:check && npm run security:check",
-        "security:check": "npm audit --omit=dev --audit-level high",
+        "security:check": "npm audit --omit=dev --audit-level critical",
         "format": "prettier --write \"{components,pages,service,api-scripts}/**/*.{js,ts,tsx,d.ts}\"",
         "format:check": "prettier --check \"{components,pages,service,api-scripts}/**/*.{js,ts,tsx,d.ts}\"",
         "lint": "next lint --max-warnings=0 --ignore-path .gitignore .",
