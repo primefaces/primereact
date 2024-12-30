@@ -1,6 +1,6 @@
 import PrimeReact from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState, overlayVisibleState, context }) =>
@@ -10,7 +10,7 @@ const classes = {
             'p-focus': focusedState,
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
             'p-dropdown-clearable': props.showClear && !props.disabled,
-            'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
+            'p-inputwrapper-filled': props.value !== undefined,
             'p-inputwrapper-focus': focusedState || overlayVisibleState
         }),
     input: ({ props, label }) =>
