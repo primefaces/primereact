@@ -357,7 +357,7 @@ export const Menu = React.memo(
                 {
                     onClick: (event) => onItemClick(event, item, key),
                     onMouseMove: (event) => onItemMouseMove(event, key),
-                    className: cx('content')
+                    className: classNames(cx('content'), { 'p-disabled': item.disabled })
                 },
                 getMenuItemPTOptions('content', menuContext)
             );
