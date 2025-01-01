@@ -138,7 +138,7 @@ export const TriStateCheckbox = React.memo(
 
         const srOnlyAriaProps = mergeProps(
             {
-                className: 'p-sr-only p-hidden-accessible',
+                className: 'p-hidden-accessible',
                 'aria-live': 'polite'
             },
             ptm('srOnlyAria')

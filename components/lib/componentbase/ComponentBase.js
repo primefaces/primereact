@@ -4,21 +4,10 @@ import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 const baseStyle = `
 .p-hidden-accessible {
-    border: 0;
-    padding: 0;
-    margin: -1px;
     position: absolute;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    clip-path: inset(50%);
+    pointer-events: none;
+    opacity: 0;
     white-space: nowrap;
-}
-
-.p-hidden-accessible input,
-.p-hidden-accessible select {
-    transform: scale(0);
 }
 
 .p-overflow-hidden {
@@ -385,19 +374,6 @@ const commonStyle = `
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
-    }
-
-    .p-sr-only {
-        border: 0;
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: inset(50%);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-        word-wrap: normal;
     }
 
     /* @todo Refactor */
