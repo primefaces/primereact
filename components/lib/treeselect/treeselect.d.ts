@@ -429,6 +429,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterBy?: string | undefined;
     /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
      * Icon of the filter.
      */
     filterIcon?: IconType<TreeSelectProps> | undefined;
