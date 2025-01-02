@@ -461,7 +461,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
     /**
-     * When filtering is enabled, the value of input field.
+     * When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.
      */
     filterValue?: string | undefined;
     /**
