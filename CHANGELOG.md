@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.9.1](https://github.com/primefaces/primereact/tree/10.9.1) (2024-01-02)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.9.0...10.9.1)
+
+**Fixed Bugs:**
+
+- All (with icons) - react is not defined [#7544](https://github.com/primefaces/primereact/issues/7544)
+
 ## [10.9.0](https://github.com/primefaces/primereact/tree/10.9.0) (2024-01-02)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.8.5...10.9.0)
