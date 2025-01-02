@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { classNames } from './ClassNames';
 import ObjectUtils from './ObjectUtils';
 import UniqueComponentId from './UniqueComponentId';
