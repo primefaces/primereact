@@ -552,7 +552,7 @@ export interface TreeProps {
      */
     filterIcon?: IconType<TreeProps> | string;
     /**
-     * When filtering is enabled, the value of input field.
+     * When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.
      */
     filterValue?: string | undefined;
     /**
