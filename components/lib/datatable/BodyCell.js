@@ -507,7 +507,9 @@ export const BodyCell = React.memo((props) => {
         if (getColumnProp('frozen')) {
             updateStickyPosition();
         }
+    });
 
+    React.useEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             focusOnElement();
         }
