@@ -219,6 +219,7 @@ export const MultiSelectBase = ComponentBase.extend({
         emptyMessage: null,
         filter: false,
         filterBy: null,
+        filterDelay: 300,
         filterInputAutoFocus: true,
         filterLocale: undefined,
         selectOnFocus: false,
