@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
-import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { useDebounce, useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
@@ -15,7 +14,7 @@ export const Tree = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TreeBase.getProps(inProps, context);
 
-        const [filterValueState, setFilterValueState] = React.useState('');
+        const [filterValue, filterValueState, setFilterValueState] = useDebounce('', props.filterDelay || 0);
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
         const elementRef = React.useRef(null);
         const filteredNodes = React.useRef([]);
@@ -523,7 +522,9 @@ export const Tree = React.memo(
 
         const createFilter = () => {
             if (props.filter) {
-                const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                let value = props.onFilterValueChange ? props.filterValue : filterValue;
+
+                value = ObjectUtils.isNotEmpty(value) ? value : '';
                 const searchIconProps = mergeProps(
                     {
                         className: cx('searchIcon')

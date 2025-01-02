@@ -150,6 +150,7 @@ export const TreeSelectBase = ComponentBase.extend({
         expandedKeys: null,
         filter: false,
         filterBy: 'label',
+        filterDelay: 300,
         filterIcon: null,
         filterInputAutoFocus: true,
         filterLocale: undefined,

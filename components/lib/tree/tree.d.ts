@@ -543,6 +543,11 @@ export interface TreeProps {
      */
     filter?: boolean | undefined;
     /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
      * Icon of the filter.
      */
     filterIcon?: IconType<TreeProps> | string;
