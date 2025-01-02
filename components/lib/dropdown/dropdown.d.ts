@@ -329,6 +329,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue false
      */

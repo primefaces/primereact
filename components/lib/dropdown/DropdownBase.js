@@ -179,6 +179,7 @@ export const DropdownBase = ComponentBase.extend({
         filter: false,
         filterBy: null,
         filterClearIcon: null,
+        filterDelay: 300,
         filterIcon: null,
         filterInputAutoFocus: false,
         filterLocale: undefined,
