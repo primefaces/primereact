@@ -52557,7 +52557,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "When filtering is enabled, the value of input field."
+                            "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange."
                         },
                         {
                             "name": "footer",
@@ -53883,7 +53883,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "When filtering is enabled, the value of input field."
+                            "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange."
                         },
                         {
                             "name": "inputId",
