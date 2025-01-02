@@ -580,6 +580,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     optionLabel?: string | undefined;
     /**
+     * Collapsable option group item.
+     */
+    optionGroupCollapsable?: boolean;
+    /**
      * Property name or getter function to use as the value of an option, defaults to the option itself when not defined.
      */
     optionValue?: string | undefined;
