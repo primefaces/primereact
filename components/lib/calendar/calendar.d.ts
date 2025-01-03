@@ -965,76 +965,30 @@ interface CalendarBaseProps {
      */
     unstyled?: boolean;
 }
-/**
- * Defines valid properties in single Calendar component.
- * @group Properties
- */
-interface CalendarPropsSingle extends CalendarBaseProps {
-    /**
-     * Specifies the selection mode either "single", "range", or "multiple";
-     * @defaultValue single
-     */
-    selectionMode?: 'single' | undefined;
-    /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Nullable<Date>;
-    /**
-     * Callback to invoke when value changes.
-     * @param { FormEvent<Date>} event - Custom change event
-     */
-    onChange?(event: FormEvent<Date>): void;
-}
-/**
- * Defines valid properties in range Calendar component.
- * @group Properties
- */
-interface CalendarPropsRange extends CalendarBaseProps {
-    /**
-     * Specifies the selection mode either "single", "range", or "multiple";
-     * @defaultValue single
-     */
-    selectionMode: 'range';
-    /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Nullable<(Date | null)[]>;
-    /**
-     * Callback to invoke when value changes.
-     * @param { FormEvent<(Date | null)[]>} event - Custom change event
-     */
-    onChange?(event: FormEvent<(Date | null)[]>): void;
-}
 
-/**
- * Defines valid properties in multiple Calendar component.
- * @group Properties
- */
-interface CalendarPropsMultiple extends CalendarBaseProps {
-    /**
-     * Specifies the selection mode either "single", "range", or "multiple";
-     * @defaultValue single
-     */
-    selectionMode: 'multiple';
-    /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Nullable<Date[]>;
-    /**
-     * Callback to invoke when value changes.
-     * @param {FormEvent<Date[]>} event - Custom change event
-     */
-    onChange?(event: FormEvent<Date[]>): void;
-}
+export type CalendarSelectionMode = 'single' | 'range' | 'multiple';
 
 /**
  * Defines valid properties in Calendar component.
  * @group Properties
  */
-export type CalendarProps = CalendarPropsRange | CalendarPropsMultiple | CalendarPropsSingle;
+export interface CalendarProps<TMode extends CalendarSelectionMode = 'single', TValue = TMode extends 'multiple' ? Date[] : TMode extends 'range' ? (Date | null)[] : Date> extends CalendarBaseProps {
+    /**
+     * Specifies the selection mode either "single", "range", or "multiple";
+     * @defaultValue single
+     */
+    selectionMode?: TMode;
+    /**
+     * Value of the component.
+     * @defaultValue null
+     */
+    value?: Nullable<TValue>;
+    /**
+     * Callback to invoke when value changes.
+     * @param {FormEvent<TValue>} event - Custom change event
+     */
+    onChange?(event: FormEvent<TValue>): void;
+}
 
 /**
  * **PrimeReact - Calendar**
@@ -1047,7 +1001,7 @@ export type CalendarProps = CalendarPropsRange | CalendarPropsMultiple | Calenda
  *
  * @group Component
  */
-export declare class Calendar extends React.Component<CalendarProps, any> {
+export declare class Calendar<TMode extends CalendarSelectionMode = 'single', TValue = TMode extends 'multiple' ? Date[] : TMode extends 'range' ? (Date | null)[] : Date> extends React.Component<CalendarProps<TMode>, any> {
     /**
      * Used to show the overlay.
      */
@@ -1062,14 +1016,14 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
     public focus(): void;
     /**
      * Used to get the current date.
-     * @return {Date | Date[]} Current Date
+     * @return {TValue} Current Date
      */
-    public getCurrentDateTime(): Date | Date[];
+    public getCurrentDateTime(): TValue;
     /**
      * Used to get the view date.
-     * @return {Date | Date[]} View Date
+     * @return {TValue} View Date
      */
-    public getViewDate(): Date | Date[];
+    public getViewDate(): TValue;
     /**
      * Used to get container element.
      * @return {HTMLSpanElement} Container element
@@ -1088,7 +1042,7 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
     /**
      * Used to update the current view date.
      * @param {React.SyntheticEvent | null} event - Browser event.
-     * @param {Date | Date[] | null} value - New date.
+     * @param {TValue | null} value - New date.
      */
-    public updateViewDate(event: React.SyntheticEvent | null, value: Nullable<Date | Date[]>): void;
+    public updateViewDate(event: React.SyntheticEvent | null, value: Nullable<TValue>): void;
 }
