@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { Checkbox } from '../checkbox/Checkbox';
 import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
@@ -9,7 +10,6 @@ import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
-import { Checkbox } from '../checkbox/Checkbox';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);
