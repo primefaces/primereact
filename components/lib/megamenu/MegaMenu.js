@@ -831,8 +831,7 @@ export const MegaMenu = React.memo(
                     href: item.url || '#',
                     className: cx('action', { item }),
                     target: item.target,
-                    tabIndex: '-1',
-                    'aria-hidden': true
+                    tabIndex: '-1'
                 },
                 getPTOptions(processedItem, 'action', index)
             );

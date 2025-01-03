@@ -370,7 +370,6 @@ export const Menu = React.memo(
                     target: item.target,
                     tabIndex: '-1',
                     'aria-label': item.label,
-                    'aria-hidden': true,
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },
