@@ -354,7 +354,7 @@ export const TableBody = React.memo(
             let selection = [];
 
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
-                let rangeRowData = props.value[i] ?? props.tableProps.value[i];
+                let rangeRowData = props.processedData[i];
 
                 if (!isSelectable({ data: rangeRowData, index: i })) {
                     continue;

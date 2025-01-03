@@ -1642,7 +1642,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         );
     };
 
-    const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled) => {
+    const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled, processedData) => {
         const first = getFirst();
         const { rows, columns, contentRef, style, className, spacerStyle, itemSize } = options;
 
@@ -1700,6 +1700,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onRowUnselect={props.onRowUnselect}
                 onSelectionChange={props.onSelectionChange}
                 paginator={props.paginator}
+                // pass processedData #7546
+                processedData={processedData}
                 reorderableRows={props.reorderableRows}
                 responsiveLayout={props.responsiveLayout}
                 rowClassName={props.rowClassName}
@@ -1784,6 +1786,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onRowUnselect={props.onRowUnselect}
                 onSelectionChange={props.onSelectionChange}
                 paginator={props.paginator}
+                // pass processedData #7546
+                processedData={processedData}
                 reorderableRows={props.reorderableRows}
                 responsiveLayout={props.responsiveLayout}
                 rowClassName={props.rowClassName}
@@ -1873,7 +1877,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         };
 
                         const tableHeader = createTableHeader(options, empty, _isVirtualScrollerDisabled);
-                        const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
+                        const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled, processedData);
                         const tableFooter = createTableFooter(options);
                         const tableProps = mergeProps(
                             {
@@ -2020,6 +2024,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const footer = createFooter();
     const resizeHelper = createResizeHelper();
     const reorderIndicators = createReorderIndicators();
+
     const rootProps = mergeProps(
         {
             id: props.id,
