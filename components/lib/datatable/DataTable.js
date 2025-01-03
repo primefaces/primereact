@@ -2024,7 +2024,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const footer = createFooter();
     const resizeHelper = createResizeHelper();
     const reorderIndicators = createReorderIndicators();
-
     const rootProps = mergeProps(
         {
             id: props.id,
