@@ -193,7 +193,6 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            const metaKey = event.metaKey || event.ctrlKey;
             const code = DomHandler.isAndroid() ? event.key : event.code;
 
             switch (code) {
@@ -253,6 +252,9 @@ export const Dropdown = React.memo(
                     break;
 
                 default:
+                    const metaKey = event.metaKey || event.ctrlKey || event.altKey;
+
+                    // Only handle printable characters when no meta keys are pressed
                     if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
                         !overlayVisibleState && !props.editable && show();
                         !props.editable && searchOptions(event, event.key);
