@@ -222,7 +222,6 @@ export const ContextMenuSub = React.memo(
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    'aria-hidden': true,
                     tabIndex: -1,
                     className: cx('action', { item }),
                     target: item.target
