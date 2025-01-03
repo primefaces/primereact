@@ -71,11 +71,10 @@ export const KeyFilter = {
             return;
         }
 
+        const value = e.target.value;
         const regex = this.getRegex(keyfilter);
 
-        if (!regex.test(key)) {
-            e.preventDefault();
-        }
+        this.validateSpecialKey(e, key, keyfilter, regex, value)
     },
 
     validate(e, keyfilter) {
@@ -89,5 +88,24 @@ export const KeyFilter = {
         }
 
         return validatePattern;
+    },
+
+    validateSpecialKey(e, key, keyfilter, regex, value) {
+        if (['int', 'num'].includes(keyfilter)) {
+            const isDash = key === '-';
+            const isDot = key === '.';
+
+            if (
+                (isDash && (value.includes('-') || value.length > 0)) ||
+                (keyfilter === 'num' && isDot && value.includes('.')) ||
+                !regex.test(key)
+            ) {
+                e.preventDefault();
+            }
+        } else {
+            if (!regex.test(key)) {
+                e.preventDefault();
+            }
+        }
     }
 };
