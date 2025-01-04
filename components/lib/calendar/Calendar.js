@@ -162,7 +162,6 @@ export const Calendar = React.memo(
                     const date = value.length ? value[0] : value;
 
                     updateViewDate(event, date);
-                    onViewDateSelect({ event, date });
                 }
             } catch (err) {
                 //invalid date
