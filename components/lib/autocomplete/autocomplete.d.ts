@@ -404,9 +404,9 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      */
     scrollHeight?: string | undefined;
     /**
-     * Template of a selected item.
+     * Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string.
      */
-    selectedItemTemplate?: string | undefined | null | ((value: any) => string | undefined | null);
+    selectedItemTemplate?: React.ReactNode | string | undefined | null | ((value: any) => React.ReactNode | string | undefined | null);
     /**
      * Whether to show the empty message or not.
      * @defaultValue false
