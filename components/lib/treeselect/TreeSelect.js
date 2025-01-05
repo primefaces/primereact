@@ -697,7 +697,7 @@ export const TreeSelect = React.memo(
 
         const createFilterElement = () => {
             if (props.filter) {
-                let filterValue = props.onFilterValueChange ? props.filterValue : filterValue;
+                let filterValue = props.onFilterValueChange ? props.filterValue : filteredValue;
 
                 filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
                 const filterContainerProps = mergeProps(

@@ -632,7 +632,7 @@ export default class DomHandler {
             };
 
             for (let parent of parents) {
-                let scrollSelectors = parent.nodeType === 1 && parent.dataset.scrollselectors;
+                let scrollSelectors = parent.nodeType === 1 && parent.dataset?.scrollselectors;
 
                 if (scrollSelectors) {
                     let selectors = scrollSelectors.split(',');
