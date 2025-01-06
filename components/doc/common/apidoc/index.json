@@ -3966,9 +3966,9 @@
                             "name": "selectedItemTemplate",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | string | Function",
+                            "type": "ReactNode | Function",
                             "default": "",
-                            "description": "Template of a selected item."
+                            "description": "Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string."
                         },
                         {
                             "name": "selectionLimit",
