@@ -72,26 +72,61 @@ export default function ExpandModeDemo() {
         data: `
 {
     key: '0',
-    label: 'Documents',
-    data: 'Documents Folder',
-    icon: 'pi pi-fw pi-inbox',
+    data: {
+        name: 'Applications',
+        size: '100kb',
+        type: 'Folder'
+    },
     children: [
         {
             key: '0-0',
-            label: 'Work',
-            data: 'Work Folder',
-            icon: 'pi pi-fw pi-cog',
+            data: {
+                name: 'React',
+                size: '25kb',
+                type: 'Folder'
+            },
             children: [
-                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+                {
+                    key: '0-0-0',
+                    data: {
+                        name: 'react.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-1',
+                    data: {
+                        name: 'native.app',
+                        size: '10kb',
+                        type: 'Application'
+                    }
+                },
+                {
+                    key: '0-0-2',
+                    data: {
+                        name: 'mobile.app',
+                        size: '5kb',
+                        type: 'Application'
+                    }
+                }
             ]
         },
         {
             key: '0-1',
-            label: 'Home',
-            data: 'Home Folder',
-            icon: 'pi pi-fw pi-home',
-            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+            data: {
+                name: 'editor.app',
+                size: '25kb',
+                type: 'Application'
+            }
+        },
+        {
+            key: '0-2',
+            data: {
+                name: 'settings.app',
+                size: '50kb',
+                type: 'Application'
+            }
         }
     ]
 },
