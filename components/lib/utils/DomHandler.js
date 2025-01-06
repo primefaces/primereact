@@ -607,13 +607,26 @@ export default class DomHandler {
         return element.parentNode === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
+    /**
+     * Gets all scrollable parent elements of a given element
+     * @param {HTMLElement} element - The element to find scrollable parents for
+     * @param {boolean} hideOverlaysOnDocumentScrolling - Whether to include window/document level scrolling
+     * @returns {Array} Array of scrollable parent elements
+     */
     static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
         let scrollableParents = [];
 
         if (element) {
+            // Get all parent elements
             let parents = this.getParents(element);
+            // Regex to match auto or scroll overflow values
             const overflowRegex = /(auto|scroll)/;
 
+            /**
+             * Checks if an element has overflow scroll/auto in any direction
+             * @param {HTMLElement} node - Element to check
+             * @returns {boolean} True if element has overflow scroll/auto
+             */
             const overflowCheck = (node) => {
                 let styleDeclaration = node ? getComputedStyle(node) : null;
 
@@ -622,21 +635,26 @@ export default class DomHandler {
                 );
             };
 
+            /**
+             * Adds a scrollable parent element to the collection
+             * @param {HTMLElement} node - Element to add
+             */
             const addScrollableParent = (node) => {
                 if (hideOverlaysOnDocumentScrolling) {
-                    // nodeType 9 is for document element
+                    // For document/body/html elements, add window instead
                     scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
-                } else {
-                    scrollableParents.push(node);
                 }
             };
 
+            // Iterate through all parent elements
             for (let parent of parents) {
+                // Check for custom scroll selectors in data attribute
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset?.scrollselectors;
 
                 if (scrollSelectors) {
                     let selectors = scrollSelectors.split(',');
 
+                    // Check each selector
                     for (let selector of selectors) {
                         let el = this.findSingle(parent, selector);
 
@@ -646,16 +664,16 @@ export default class DomHandler {
                     }
                 }
 
-                // BODY
+                // Check if the parent itself is scrollable
                 if (parent.nodeType === 1 && overflowCheck(parent)) {
                     addScrollableParent(parent);
                 }
             }
         }
 
-        // we should always at least have the body or window
+        // Ensure window/body is always included as fallback
         if (!scrollableParents.some((node) => node === document.body || node === window)) {
-            scrollableParents.push(window);
+            scrollableParents.push(hideOverlaysOnDocumentScrolling ? window : document.body);
         }
 
         return scrollableParents;
