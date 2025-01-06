@@ -157,10 +157,10 @@ export const AutoComplete = React.memo(
 
             if (typeof value === 'string') return value;
 
-            const valueFromTemplate = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+            if (props.selectedItemTemplate) {
+                const valueFromTemplate = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
 
-            if (typeof valueFromTemplate === 'string') {
-                return valueFromTemplate;
+                return props.multiple || typeof valueFromTemplate === 'string' ? valueFromTemplate : value;
             }
 
             if (props.field) {
