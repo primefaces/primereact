@@ -114,7 +114,6 @@ export const PickList = React.memo(
                         });
                     }
 
-                    onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
                     break;
 
                 case 'allToTarget':
@@ -128,7 +127,6 @@ export const PickList = React.memo(
                     }
 
                     selectedValue = [];
-                    onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
 
                     break;
 
@@ -142,7 +140,6 @@ export const PickList = React.memo(
                         });
                     }
 
-                    onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
                     break;
 
                 case 'allToSource':
@@ -156,13 +153,17 @@ export const PickList = React.memo(
                     }
 
                     selectedValue = [];
-
-                    onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
                     break;
 
                 default:
                     break;
             }
+
+            onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
+            onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
+
+            setTargetSelectionState([]);
+            setSourceSelectionState([]);
 
             handleChange(event, source, target);
         };
@@ -184,12 +185,6 @@ export const PickList = React.memo(
 
             if (callback) {
                 callback(e);
-            }
-
-            if (ObjectUtils.isNotEmpty(sourceSelection) && stateKey === 'targetSelection') {
-                setSourceSelectionState([]);
-            } else if (ObjectUtils.isNotEmpty(targetSelection) && stateKey === 'sourceSelection') {
-                setTargetSelectionState([]);
             }
         };
 
@@ -359,10 +354,26 @@ export const PickList = React.memo(
                             setTargetSelectionState([...targetList]);
                         }
 
-                        onSelectionChange({ originalEvent: event, value: [...sourceList] }, isSource ? 'sourceSelection' : 'targetSelection', isSource ? props.onSourceSelectionChange : props.onTargetSelectionChange);
+                        onSelectionChange({ originalEvent: event, value: isSource ? [...sourceList] : [...targetList] }, isSource ? 'sourceSelection' : 'targetSelection', isSource ? props.onSourceSelectionChange : props.onTargetSelectionChange);
                         event.preventDefault();
                     }
 
+                    break;
+                case 'KeyD':
+                    if (event.ctrlKey) {
+                        const isSource = type === 'source';
+
+                        if (isSource) {
+                            setSourceSelectionState([]);
+                        } else {
+                            setTargetSelectionState([]);
+                        }
+
+                        onSelectionChange({ originalEvent: event, value: [] }, isSource ? 'sourceSelection' : 'targetSelection', isSource ? props.onSourceSelectionChange : props.onTargetSelectionChange);
+                        event.preventDefault();
+                    }
+
+                    break;
                 default:
                     break;
             }
