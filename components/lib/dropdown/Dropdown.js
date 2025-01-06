@@ -985,8 +985,7 @@ export const Dropdown = React.memo(
                     required: props.required,
                     defaultValue: option.value,
                     name: props.name,
-                    tabIndex: -1,
-                    'aria-hidden': 'true'
+                    tabIndex: -1
                 },
                 ptm('select')
             );
@@ -1198,7 +1197,6 @@ export const Dropdown = React.memo(
             {
                 ref: firstHiddenFocusableElementOnOverlay,
                 role: 'presentation',
-                'aria-hidden': 'true',
                 className: 'p-hidden-accessible p-hidden-focusable',
                 tabIndex: '0',
                 onFocus: onFirstHiddenFocus,
@@ -1212,7 +1210,6 @@ export const Dropdown = React.memo(
             {
                 ref: lastHiddenFocusableElementOnOverlay,
                 role: 'presentation',
-                'aria-hidden': 'true',
                 className: 'p-hidden-accessible p-hidden-focusable',
                 tabIndex: '0',
                 onFocus: onLastHiddenFocus,
