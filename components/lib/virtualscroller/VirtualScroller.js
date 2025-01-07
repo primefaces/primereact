@@ -541,7 +541,7 @@ export const VirtualScroller = React.memo(
         };
 
         const init = () => {
-            if (!props.disabled && isVisible(elementRef.current)) {
+            if (!props.disabled && DomHandler.isVisible(elementRef.current)) {
                 setSize();
                 calculateOptions();
                 setSpacerSize();
@@ -559,7 +559,7 @@ export const VirtualScroller = React.memo(
         };
 
         React.useEffect(() => {
-            if (!viewInitialized.current && isVisible(elementRef.current)) {
+            if (!viewInitialized.current && isVisible()) {
                 viewInit();
                 viewInitialized.current = true;
             }
