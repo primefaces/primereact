@@ -695,6 +695,7 @@ export const Dropdown = React.memo(
             }
 
             updateEditableLabel();
+            setFocusedOptionIndex(-1);
         };
 
         const selectItem = (event) => {
