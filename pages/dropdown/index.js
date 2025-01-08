@@ -12,6 +12,7 @@ import { FloatLabelDoc } from '@/components/doc/dropdown/floatlabeldoc';
 import { GroupDoc } from '@/components/doc/dropdown/groupdoc';
 import { ImportDoc } from '@/components/doc/dropdown/importdoc';
 import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
+import { LabelDoc } from '@/components/doc/dropdown/labeldoc';
 import { LazyVirtualScrollDoc } from '@/components/doc/dropdown/lazyvirtualscrolldoc';
 import { LoadingDoc } from '@/components/doc/dropdown/loadingdoc';
 import { Wireframe } from '@/components/doc/dropdown/pt/wireframe';
@@ -76,6 +77,11 @@ const DropdownDemo = () => {
             id: 'lazyvirtualscroll',
             label: 'Lazy Virtual Scroll',
             component: LazyVirtualScrollDoc
+        },
+        {
+            id: 'label',
+            label: 'Label',
+            component: LabelDoc
         },
         {
             id: 'floatlabel',

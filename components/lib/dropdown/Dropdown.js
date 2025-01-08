@@ -27,6 +27,7 @@ export const Dropdown = React.memo(
         const firstHiddenFocusableElementOnOverlay = React.useRef(null);
         const lastHiddenFocusableElementOnOverlay = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
+        const labelRef = React.useRef(props.labelRef);
         const focusInputRef = React.useRef(props.focusInputRef);
         const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
@@ -43,6 +44,10 @@ export const Dropdown = React.memo(
                 overlayVisible: overlayVisibleState
             }
         });
+        const ariaLabel = props.ariaLabel || props['aria-label'];
+        const ariaLabelledBy = props.ariaLabelledBy || props['aria-labelledby'];
+        const uniqueId = React.useId();
+        const panelId = props.pt?.list?.id || `p_panel_${uniqueId}`;
 
         useHandleStyle(DropdownBase.css.styles, isUnstyled, { name: 'dropdown' });
 
@@ -127,12 +132,16 @@ export const Dropdown = React.memo(
             if (isClearClicked(event) || event.target.tagName === 'INPUT') {
                 return;
             } else if (!overlayRef.current || !(overlayRef.current && overlayRef.current.contains(event.target))) {
-                DomHandler.focus(focusInputRef.current);
+                focus();
                 overlayVisibleState ? hide() : show();
             }
 
             event.preventDefault();
             clickedRef.current = true;
+        };
+
+        const onLabelFocus = () => {
+            focus();
         };
 
         const onInputFocus = (event) => {
@@ -148,25 +157,24 @@ export const Dropdown = React.memo(
             setFocusedState(false);
 
             if (props.onBlur) {
-                setTimeout(() => {
-                    const currentValue = inputRef.current ? inputRef.current.value : undefined;
+                const optionValue = getOptionValue(selectedOption);
+                const inputValue = getInputValue(selectedOption);
 
-                    props.onBlur({
-                        originalEvent: event.originalEvent,
-                        value: currentValue,
-                        stopPropagation: () => {
-                            event.originalEvent.stopPropagation();
-                        },
-                        preventDefault: () => {
-                            event.originalEvent.preventDefault();
-                        },
-                        target: {
-                            name: props.name,
-                            id: props.id,
-                            value: currentValue
-                        }
-                    });
-                }, 200);
+                props.onBlur({
+                    originalEvent: event.originalEvent,
+                    value: optionValue,
+                    stopPropagation: () => {
+                        event.originalEvent.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.originalEvent.preventDefault();
+                    },
+                    target: {
+                        name: props.name,
+                        id: props.inputId,
+                        value: inputValue
+                    }
+                });
             }
         };
 
@@ -491,6 +499,7 @@ export const Dropdown = React.memo(
                 }
 
                 hide();
+                focus();
             }
 
             event.preventDefault();
@@ -624,7 +633,7 @@ export const Dropdown = React.memo(
                     },
                     target: {
                         name: props.name,
-                        id: props.id,
+                        id: props.inputId,
                         value: event.target.value
                     }
                 });
@@ -642,7 +651,7 @@ export const Dropdown = React.memo(
 
             if (!option.disabled) {
                 selectItem(event);
-                DomHandler.focus(focusInputRef.current);
+                focus();
             }
 
             hide();
@@ -674,8 +683,8 @@ export const Dropdown = React.memo(
         const clear = (event) => {
             if (props.onChange) {
                 props.onChange({
-                    originalEvent: event,
-                    value: undefined,
+                    originalEvent: event.originalEvent,
+                    value: null,
                     stopPropagation: () => {
                         event?.stopPropagation();
                     },
@@ -684,7 +693,7 @@ export const Dropdown = React.memo(
                     },
                     target: {
                         name: props.name,
-                        id: props.id,
+                        id: props.inputId,
                         value: undefined
                     }
                 });
@@ -702,8 +711,9 @@ export const Dropdown = React.memo(
             if (selectedOption !== event.option) {
                 updateEditableLabel(event.option);
                 setFocusedOptionIndex(-1);
-                const optionValue = getOptionValue(event.option);
 
+                const optionValue = getOptionValue(event.option);
+                const inputValue = getInputValue(event.option);
                 const selectedOptionIndex = findOptionIndexInList(event.option, visibleOptions);
 
                 if (props.onChange) {
@@ -718,8 +728,8 @@ export const Dropdown = React.memo(
                         },
                         target: {
                             name: props.name,
-                            id: props.id,
-                            value: optionValue
+                            id: props.inputId,
+                            value: inputValue
                         }
                     });
                 }
@@ -772,9 +782,20 @@ export const Dropdown = React.memo(
             clickedRef.current = false;
         };
 
+        const focus = React.useCallback(
+            (autoFocus) => {
+                if (props.editable) {
+                    DomHandler.focus(inputRef.current, autoFocus);
+                } else {
+                    DomHandler.focus(focusInputRef.current, autoFocus);
+                }
+            },
+            [props.editable]
+        );
+
         const onFocus = () => {
             if (props.editable && !overlayVisibleState && clickedRef.current === false) {
-                DomHandler.focus(inputRef.current);
+                focus();
             }
         };
 
@@ -807,7 +828,7 @@ export const Dropdown = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, elementRef.current, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const scrollInView = () => {
@@ -840,7 +861,7 @@ export const Dropdown = React.memo(
                 return `${option}`;
             }
 
-            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option['label'];
+            const optionLabel = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option.label;
 
             return `${optionLabel}`;
         };
@@ -850,13 +871,24 @@ export const Dropdown = React.memo(
                 return option;
             }
 
-            const optionValue = props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option ? option['value'] : ObjectUtils.resolveFieldData(option, 'value');
+            const optionValue = props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option ? option.value : ObjectUtils.resolveFieldData(option, 'value');
 
             return props.optionValue || ObjectUtils.isNotEmpty(optionValue) ? optionValue : option;
         };
 
         const getOptionRenderKey = (option) => {
             return props.dataKey ? ObjectUtils.resolveFieldData(option, props.dataKey) : getOptionLabel(option);
+        };
+
+        const getInputValue = (option) => {
+            if (ObjectUtils.isNotEmpty(selectedOption)) {
+                const optionValue = getOptionValue(option);
+                const optionLabel = getOptionLabel(option);
+
+                return typeof optionValue === 'object' ? optionLabel : optionValue;
+            }
+
+            return '';
         };
 
         const isOptionGroup = (option) => {
@@ -908,9 +940,10 @@ export const Dropdown = React.memo(
             show,
             hide,
             clear,
-            focus: () => DomHandler.focus(focusInputRef.current),
+            focus,
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
+            getLabel: () => labelRef.current,
             getInput: () => inputRef.current,
             getFocusInput: () => focusInputRef.current,
             getVirtualScroller: () => virtualScrollerRef.current
@@ -919,11 +952,31 @@ export const Dropdown = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
             ObjectUtils.combinedRefs(focusInputRef, props.focusInputRef);
-        }, [inputRef, props.inputRef, focusInputRef, props.focusInputRef]);
+            ObjectUtils.combinedRefs(labelRef, props.labelRef);
+        }, [inputRef, props.inputRef, focusInputRef, props.focusInputRef, labelRef, props.labelRef]);
+
+        React.useEffect(() => {
+            const labelElement = ariaLabelledBy ? document.getElementById(ariaLabelledBy) : null;
+
+            const handleClick = () => {
+                focus();
+
+                if (!overlayVisibleState) {
+                    show();
+                }
+            };
+
+            labelElement?.addEventListener('click', handleClick);
+
+            return () => {
+                labelElement?.removeEventListener('click', handleClick);
+            };
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- show and focus are not required to be in the dependency array
+        }, [ariaLabelledBy, overlayVisibleState]);
 
         useMountEffect(() => {
             if (props.autoFocus) {
-                DomHandler.focus(focusInputRef.current, props.autoFocus);
+                focus(true);
             }
 
             alignOverlay();
@@ -951,67 +1004,17 @@ export const Dropdown = React.memo(
             }
 
             updateInputField();
-
-            if (inputRef.current) {
-                inputRef.current.selectedIndex = 1;
-            }
         });
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
         });
 
-        const createHiddenSelect = () => {
-            let option = { value: '', label: props.placeholder };
-
-            if (selectedOption) {
-                const optionValue = getOptionValue(selectedOption);
-
-                option = {
-                    value: typeof optionValue === 'object' ? props.options.findIndex((o) => o === optionValue) : optionValue,
-                    label: getOptionLabel(selectedOption)
-                };
-            }
-
-            const hiddenSelectedMessageProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible p-dropdown-hidden-select'
-                },
-                ptm('hiddenSelectedMessage')
-            );
-
-            const selectProps = mergeProps(
-                {
-                    ref: inputRef,
-                    required: props.required,
-                    defaultValue: option.value,
-                    name: props.name,
-                    tabIndex: -1
-                },
-                ptm('select')
-            );
-
-            const optionProps = mergeProps(
-                {
-                    value: option.value
-                },
-                ptm('option')
-            );
-
-            return (
-                <div {...hiddenSelectedMessageProps}>
-                    <select {...selectProps}>
-                        <option {...optionProps}>{option.label}</option>
-                    </select>
-                </div>
-            );
-        };
-
         const createKeyboardHelper = () => {
-            let value = ObjectUtils.isNotEmpty(selectedOption) ? getOptionLabel(selectedOption) : null;
+            const value = getInputValue(selectedOption);
 
             if (props.editable) {
-                value = value || props.value || '';
+                return null;
             }
 
             const hiddenSelectedMessageProps = mergeProps(
@@ -1021,33 +1024,29 @@ export const Dropdown = React.memo(
                 ptm('hiddenSelectedMessage')
             );
 
-            const inputProps = mergeProps(
-                {
-                    ref: focusInputRef,
-                    id: props.inputId,
-                    defaultValue: value,
-                    type: 'text',
-                    readOnly: true,
-                    'aria-haspopup': 'listbox',
-                    onFocus: onInputFocus,
-                    onBlur: onInputBlur,
-                    onKeyDown: onInputKeyDown,
-                    disabled: props.disabled,
-                    tabIndex: !props.disabled ? props.tabIndex || 0 : -1,
-                    ...ariaProps
-                },
-                ptm('input')
-            );
-
             return (
                 <div {...hiddenSelectedMessageProps}>
-                    <input {...inputProps} />
+                    <input ref={focusInputRef} name={props.name} value={value} type="text" onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown} tabIndex="-1" />
                 </div>
             );
         };
 
         const createLabel = () => {
             const label = ObjectUtils.isNotEmpty(selectedOption) ? getOptionLabel(selectedOption) : null;
+
+            const sharedAccessibilityProps = {
+                'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined,
+                'aria-controls': panelId,
+                'aria-expanded': overlayVisibleState,
+                'aria-haspopup': 'listbox',
+                'aria-invalid': props.invalid,
+                'aria-label': ariaLabel,
+                'aria-labelledby': ariaLabelledBy,
+                id: props.inputId,
+                role: 'combobox',
+                tabIndex: !props.disabled ? props.tabIndex || 0 : -1,
+                ...ariaProps
+            };
 
             if (props.editable) {
                 const value = label || props.value || '';
@@ -1057,16 +1056,16 @@ export const Dropdown = React.memo(
                         type: 'text',
                         defaultValue: value,
                         className: cx('input', { label }),
+                        name: props.name,
                         disabled: props.disabled,
+                        required: props.required,
                         placeholder: props.placeholder,
                         maxLength: props.maxLength,
                         onInput: onEditableInputChange,
                         onFocus: onEditableInputFocus,
                         onKeyDown: onInputKeyDown,
                         onBlur: onInputBlur,
-                        tabIndex: !props.disabled ? props.tabIndex || 0 : -1,
-                        'aria-haspopup': 'listbox',
-                        ...ariaProps
+                        ...sharedAccessibilityProps
                     },
                     ptm('input')
                 );
@@ -1075,16 +1074,19 @@ export const Dropdown = React.memo(
             }
 
             const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || props.emptyMessage || <>&nbsp;</>;
-            const inputProps = mergeProps(
+            const labelProps = mergeProps(
                 {
-                    ref: inputRef,
+                    ref: labelRef,
                     className: cx('input', { label }),
-                    tabIndex: '-1'
+                    'aria-disabled': props.disabled,
+                    'aria-required': props.required,
+                    onFocus: onLabelFocus,
+                    ...sharedAccessibilityProps
                 },
-                ptm('input')
+                ptm('label')
             );
 
-            return <span {...inputProps}>{content}</span>;
+            return <span {...labelProps}>{content}</span>;
         };
 
         const onClearIconKeyDown = (event) => {
@@ -1095,7 +1097,7 @@ export const Dropdown = React.memo(
         };
 
         const createClearIcon = () => {
-            if (props.value != null && props.showClear && !props.disabled && !ObjectUtils.isEmpty(props.options)) {
+            if (props.value !== null && props.showClear && !props.disabled && !ObjectUtils.isEmpty(props.options)) {
                 const clearIconProps = mergeProps(
                     {
                         className: cx('clearIcon'),
@@ -1124,14 +1126,13 @@ export const Dropdown = React.memo(
             );
             const icon = props.loadingIcon || <SpinnerIcon spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
-            const ariaLabel = props.placeholder || props.ariaLabel;
             const loadingButtonProps = mergeProps(
                 {
                     className: cx('trigger'),
                     role: 'button',
                     'aria-haspopup': 'listbox',
                     'aria-expanded': overlayVisibleState,
-                    'aria-label': ariaLabel
+                    'aria-label': props.placeholder || ariaLabel
                 },
                 ptm('trigger')
             );
@@ -1150,14 +1151,13 @@ export const Dropdown = React.memo(
             const icon = !overlayVisibleState ? props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} /> : props.collapseIcon || <ChevronUpIcon {...dropdownIconProps} />;
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
 
-            const ariaLabel = props.placeholder || props.ariaLabel;
             const triggerProps = mergeProps(
                 {
                     className: cx('trigger'),
                     role: 'button',
                     'aria-haspopup': 'listbox',
                     'aria-expanded': overlayVisibleState,
-                    'aria-label': ariaLabel
+                    'aria-label': props.placeholder || ariaLabel
                 },
                 ptm('trigger')
             );
@@ -1171,7 +1171,6 @@ export const Dropdown = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = DropdownBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const hiddenSelect = createHiddenSelect();
         const keyboardHelper = createKeyboardHelper();
         const labelElement = createLabel();
         const dropdownIcon = props.loading ? createLoadingIcon() : createDropdownIcon();
@@ -1187,8 +1186,7 @@ export const Dropdown = React.memo(
                 onContextMenu: props.onContextMenu,
                 onFocus: onFocus,
                 'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState,
-                'aria-activedescendant': focusedState ? `dropdownItem_${focusedOptionIndex}` : undefined
+                'data-p-focus': focusedState
             },
             otherProps,
             ptm('root')
@@ -1224,7 +1222,6 @@ export const Dropdown = React.memo(
             <>
                 <div {...rootProps}>
                     {keyboardHelper}
-                    {hiddenSelect}
                     {labelElement}
                     {clearIcon}
                     {dropdownIcon}
@@ -1245,6 +1242,7 @@ export const Dropdown = React.memo(
                         getOptionRenderKey={getOptionRenderKey}
                         getSelectedOptionIndex={getSelectedOptionIndex}
                         hasFilter={hasFilter}
+                        id={panelId}
                         in={overlayVisibleState}
                         isOptionDisabled={isOptionDisabled}
                         isSelected={isSelected}

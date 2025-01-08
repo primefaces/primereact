@@ -261,7 +261,8 @@ export const DropdownPanel = React.memo(
                                     ref: options.contentRef,
                                     style: options.style,
                                     className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
-                                    role: 'listbox'
+                                    role: 'listbox',
+                                    id: props.id
                                 },
                                 getPTOptions('list')
                             );
@@ -286,7 +287,8 @@ export const DropdownPanel = React.memo(
             const listProps = mergeProps(
                 {
                     className: cx('list'),
-                    role: 'listbox'
+                    role: 'listbox',
+                    id: props.id
                 },
                 getPTOptions('list')
             );
