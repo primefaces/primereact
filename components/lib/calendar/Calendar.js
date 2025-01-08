@@ -553,6 +553,7 @@ export const Calendar = React.memo(
 
             updateModel(event, null);
             updateInputfield(null);
+            setCurrentYear(new Date().getFullYear()); // #7581
             hide();
 
             props.onClearButtonClick && props.onClearButtonClick(event);
