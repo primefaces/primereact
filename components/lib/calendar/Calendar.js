@@ -1020,20 +1020,27 @@ export const Calendar = React.memo(
 
         const validateDate = (value) => {
             if (props.yearNavigator) {
+                const [minRangeYear, maxRangeYear] = props.yearRange ? props.yearRange.split(':').map((year) => parseInt(year, 10)) : [null, null];
+
                 let viewYear = value.getFullYear();
+                let minYear = null;
+                let maxYear = null;
 
-                const minRangeYear = props.yearRange ? parseInt(props.yearRange.split(':')[0], 10) : null;
-                const maxRangeYear = props.yearRange ? parseInt(props.yearRange.split(':')[1], 10) : null;
-                const minYear = props.minDate && minRangeYear != null ? Math.max(props.minDate.getFullYear(), minRangeYear) : props.minDate || minRangeYear;
-                const maxYear = props.maxDate && maxRangeYear != null ? Math.min(props.maxDate.getFullYear(), maxRangeYear) : props.maxDate || maxRangeYear;
-
-                if (minYear && minYear > viewYear) {
-                    viewYear = minYear;
+                if (minRangeYear !== null) {
+                    minYear = props.minDate ? Math.max(props.minDate.getFullYear(), minRangeYear) : minRangeYear;
+                } else {
+                    minYear = props.minDate?.getFullYear() || minRangeYear;
                 }
 
-                if (maxYear && maxYear < viewYear) {
-                    viewYear = maxYear;
+                if (maxRangeYear !== null) {
+                    maxYear = props.maxDate ? Math.min(props.maxDate.getFullYear(), maxRangeYear) : maxRangeYear;
+                } else {
+                    maxYear = props.maxDate?.getFullYear() || maxRangeYear;
                 }
+
+                if (minYear && minYear > viewYear) viewYear = minYear;
+
+                if (maxYear && maxYear < viewYear) viewYear = maxYear;
 
                 value.setFullYear(viewYear);
             }
