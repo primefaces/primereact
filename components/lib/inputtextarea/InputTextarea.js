@@ -130,7 +130,7 @@ export const InputTextarea = React.memo(
                 resize(true);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [props.autoResize]);
+        }, [props.autoResize, props.value]);
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
