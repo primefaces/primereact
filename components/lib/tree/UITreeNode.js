@@ -372,19 +372,21 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onArrowDown = (event) => {
-        const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
-        const listElement = nodeElement.children[1];
-        const nextElement = getNextElement(nodeElement);
-
-        if (listElement) {
-            focusRowChange(nodeElement, props.dragdropScope ? listElement.children[1] : listElement.children[0]);
-        } else if (nextElement) {
-            focusRowChange(nodeElement, nextElement);
-        } else {
-            let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
-
-            if (nextSiblingAncestor) {
-                focusRowChange(nodeElement, nextSiblingAncestor);
+        if(!props.disableKeyboardNavigation) {
+            const nodeElement = event.target.getAttribute('data-pc-section') === 'toggler' ? event.target.closest('[role="treeitem"]') : event.target;
+            const listElement = nodeElement.children[1];
+            const nextElement = getNextElement(nodeElement);
+    
+            if (listElement) {
+                focusRowChange(nodeElement, props.dragdropScope ? listElement.children[1] : listElement.children[0]);
+            } else if (nextElement) {
+                focusRowChange(nodeElement, nextElement);
+            } else {
+                let nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
+    
+                if (nextSiblingAncestor) {
+                    focusRowChange(nodeElement, nextSiblingAncestor);
+                }
             }
         }
 
@@ -412,16 +414,18 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onArrowUp = (event) => {
-        const nodeElement = event.target;
-        const previous = getPreviousElement(nodeElement);
-
-        if (previous) {
-            focusRowChange(nodeElement, previous, findLastVisibleDescendant(previous));
-        } else {
-            let parentNodeElement = getParentNodeElement(nodeElement);
-
-            if (parentNodeElement) {
-                focusRowChange(nodeElement, parentNodeElement);
+        if(!props.disableKeyboardNavigation) {
+            const nodeElement = event.target;
+            const previous = getPreviousElement(nodeElement);
+    
+            if (previous) {
+                focusRowChange(nodeElement, previous, findLastVisibleDescendant(previous));
+            } else {
+                let parentNodeElement = getParentNodeElement(nodeElement);
+    
+                if (parentNodeElement) {
+                    focusRowChange(nodeElement, parentNodeElement);
+                }
             }
         }
 
@@ -429,44 +433,52 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const onArrowRight = (event) => {
-        if (isLeaf || expanded) {
-            return;
+        if(!props.disableKeyboardNavigation) {
+            if (isLeaf || expanded) {
+                return;
+            }
+    
+            event.currentTarget.tabIndex = -1;
+    
+            expand(event, true);
         }
-
-        event.currentTarget.tabIndex = -1;
-
-        expand(event, true);
     };
 
     const onArrowLeft = (event) => {
-        const togglerElement = DomHandler.findSingle(event.currentTarget, '[data-pc-section="toggler"]');
-
-        if (props.level === 0 && !expanded) {
-            return false;
-        }
-
-        if (expanded && !isLeaf) {
-            togglerElement.click();
-
-            return false;
-        }
-
-        const target = findBeforeClickableNode(event.currentTarget);
-
-        if (target) {
-            focusRowChange(event.currentTarget, target);
+        if(!props.disableKeyboardNavigation) {
+            const togglerElement = DomHandler.findSingle(event.currentTarget, '[data-pc-section="toggler"]');
+    
+            if (props.level === 0 && !expanded) {
+                return false;
+            }
+    
+            if (expanded && !isLeaf) {
+                togglerElement.click();
+    
+                return false;
+            }
+    
+            const target = findBeforeClickableNode(event.currentTarget);
+    
+            if (target) {
+                focusRowChange(event.currentTarget, target);
+            }
         }
     };
 
     const onEnterKey = (event) => {
-        setTabIndexForSelectionMode(event, nodeTouched.current);
-        onClick(event);
+        if(!props.disableKeyboardNavigation) {
+            setTabIndexForSelectionMode(event, nodeTouched.current);
+            onClick(event);
+        }
 
         event.preventDefault();
     };
 
     const onTabKey = () => {
-        setAllNodesTabIndexes();
+        if(!props.disableKeyboardNavigation) {
+            setAllNodesTabIndexes();
+        }
     };
 
     const setAllNodesTabIndexes = () => {
