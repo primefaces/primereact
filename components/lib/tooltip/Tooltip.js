@@ -219,11 +219,13 @@ export const Tooltip = React.memo(
                         ZIndexUtils.clear(elementRef.current);
                         DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
-                        setVisibleState(false);
                         sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
                     });
                 }
             }
+
+            // handles the case when visibleState change from mouseenter was queued and mouseleave handler was called earlier than queued re-render
+            setVisibleState(false);
         };
 
         const align = (target, coordinate, position) => {
