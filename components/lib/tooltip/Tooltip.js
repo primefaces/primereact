@@ -207,8 +207,10 @@ export const Tooltip = React.memo(
 
             clearTimeouts();
 
+            let success = true;
+
             if (visibleState) {
-                const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
+                success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
 
                 if (success) {
                     applyDelay('hideDelay', () => {
@@ -225,7 +227,9 @@ export const Tooltip = React.memo(
             }
 
             // handles the case when visibleState change from mouseenter was queued and mouseleave handler was called earlier than queued re-render
-            setVisibleState(false);
+            if (success) {
+                setVisibleState(false);
+            }
         };
 
         const align = (target, coordinate, position) => {
