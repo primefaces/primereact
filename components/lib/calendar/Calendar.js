@@ -4213,20 +4213,14 @@ export const Calendar = React.memo(
         };
 
         const truncateToMinutes = (date) => {
-            return new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-            );
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
         };
 
         const createButtonBar = () => {
             if (props.showButtonBar) {
                 const { today, clear, now } = localeOptions(props.locale);
                 const nowDate = new Date();
-                const isHidden = (props.minDate && truncateToMinutes(props.minDate) > truncateToMinutes(nowDate) || (props.maxDate && truncateToMinutes(props.maxDate) < truncateToMinutes(nowDate)));
+                const isHidden = (props.minDate && truncateToMinutes(props.minDate) > truncateToMinutes(nowDate)) || (props.maxDate && truncateToMinutes(props.maxDate) < truncateToMinutes(nowDate));
                 const buttonbarProps = mergeProps(
                     {
                         className: cx('buttonbar')
