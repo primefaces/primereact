@@ -145,6 +145,11 @@ export interface TreeContext {
      * @defaultValue false
      */
     checked: boolean;
+    /**
+     * Whether the node is a leaf node.
+     * @defaultValue false
+     */
+    leaf: boolean;
 }
 
 /**
