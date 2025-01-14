@@ -4232,6 +4232,7 @@ export const Calendar = React.memo(
         const isTodayHiddenForMaxDate = () => {
             const nowDate = new Date();
             const propMaxDate = props.maxDate;
+
             // added a buffer of 10 sec in case component gets executed at diff times
             return propMaxDate < nowDate && Math.abs((nowDate().getTime() - propMaxDate.getTime()) / 1000) > 10;
         };
