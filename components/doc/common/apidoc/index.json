@@ -53237,6 +53237,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current checked state of the node as a boolean."
+                        },
+                        {
+                            "name": "leaf",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the node is a leaf node."
                         }
                     ],
                     "callbacks": []
