@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Checkbox } from '../checkbox/Checkbox';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -6,7 +7,6 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { Checkbox } from '../checkbox/Checkbox';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -25,7 +25,7 @@ export const UITreeNode = React.memo((props) => {
                 selected: !isCheckboxSelectionMode() ? isSelected() : false,
                 expanded: expanded || false,
                 checked: isCheckboxSelectionMode() ? isChecked() : false,
-                isLeaf
+                leaf: isLeaf
             }
         });
     };
@@ -958,7 +958,7 @@ export const UITreeNode = React.memo((props) => {
         const nodeProps = mergeProps(
             {
                 ref: elementRef,
-                className: classNames(props.node.className, cx('node', { isLeaf })),
+                className: classNames(props.node.className, cx('node', { leaf: isLeaf })),
                 style: props.node.style,
                 tabIndex,
                 role: 'treeitem',
