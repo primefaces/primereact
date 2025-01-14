@@ -4212,11 +4212,18 @@ export const Calendar = React.memo(
             );
         };
 
+        const isTodayHiddenForMaxDate = () => {
+            const nowDate = new Date();
+            const propMaxDate = props.maxDate;
+            // added a buffer of 10 sec in case component gets executed at diff times
+            return propMaxDate < nowDate && Math.abs((nowDate().getTime() - propMaxDate.getTime()) / 1000) > 10;
+        };
+
         const createButtonBar = () => {
             if (props.showButtonBar) {
                 const { today, clear, now } = localeOptions(props.locale);
                 const nowDate = new Date();
-                const isHidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && props.maxDate < nowDate);
+                const isHidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && isTodayHiddenForMaxDate());
                 const buttonbarProps = mergeProps(
                     {
                         className: cx('buttonbar')
