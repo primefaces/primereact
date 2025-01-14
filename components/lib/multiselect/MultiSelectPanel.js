@@ -298,7 +298,6 @@ export const MultiSelectPanel = React.memo(
                 {
                     ref: props.firstHiddenFocusableElementOnOverlay,
                     role: 'presentation',
-                    'aria-hidden': 'true',
                     className: 'p-hidden-accessible p-hidden-focusable',
                     tabIndex: '0',
                     onFocus: props.onFirstHiddenFocus,
@@ -312,7 +311,6 @@ export const MultiSelectPanel = React.memo(
                 {
                     ref: props.lastHiddenFocusableElementOnOverlay,
                     role: 'presentation',
-                    'aria-hidden': 'true',
                     className: 'p-hidden-accessible p-hidden-focusable',
                     tabIndex: '0',
                     onFocus: props.onLastHiddenFocus,

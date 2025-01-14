@@ -61,8 +61,8 @@ export function TemplateDoc(props) {
         javascript: `
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
-import { Avatar } from 'primereact/accordion';
-import { Badge } from 'primereact/accordion';
+import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
 
 export default function TemplateDemo() {
     return (
@@ -124,8 +124,8 @@ export default function TemplateDemo() {
         typescript: `
 import React from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
-import { Avatar } from 'primereact/accordion';
-import { Badge } from 'primereact/accordion';
+import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
 
 export default function TemplateDemo() {
     return (

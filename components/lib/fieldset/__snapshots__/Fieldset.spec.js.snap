@@ -68,23 +68,22 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
     class="p-fieldset p-component p-fieldset-toggleable"
     data-pc-name="fieldset"
     data-pc-section="root"
-    id="pr_id_3"
+    id="pr_id_6"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
       data-pc-section="legend"
     >
       <a
-        aria-controls="pr_id_3_content"
+        aria-controls="pr_id_6_content"
         aria-expanded="false"
         aria-label="Expand/Collapse"
         data-pc-section="toggler"
-        id="pr_id_3_header"
+        id="pr_id_6_header"
         role="button"
         tabindex="0"
       >
         <svg
-          aria-hidden="true"
           class="p-icon p-fieldset-toggler"
           data-pc-section="togglericon"
           fill="none"
@@ -107,10 +106,10 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
       </a>
     </legend>
     <div
-      aria-labelledby="pr_id_3_header"
+      aria-labelledby="pr_id_6_header"
       class="p-toggleable-content p-toggleable-content-exit p-toggleable-content-exit-active"
       data-pc-section="toggleablecontent"
-      id="pr_id_3_content"
+      id="pr_id_6_content"
       role="region"
     >
       <div
@@ -132,23 +131,22 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
     class="p-fieldset p-component p-fieldset-toggleable"
     data-pc-name="fieldset"
     data-pc-section="root"
-    id="pr_id_3"
+    id="pr_id_6"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
       data-pc-section="legend"
     >
       <a
-        aria-controls="pr_id_3_content"
+        aria-controls="pr_id_6_content"
         aria-expanded="true"
         aria-label="Expand/Collapse"
         data-pc-section="toggler"
-        id="pr_id_3_header"
+        id="pr_id_6_header"
         role="button"
         tabindex="0"
       >
         <svg
-          aria-hidden="true"
           class="p-icon p-fieldset-toggler"
           data-pc-section="togglericon"
           fill="none"
@@ -171,10 +169,10 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
       </a>
     </legend>
     <div
-      aria-labelledby="pr_id_3_header"
+      aria-labelledby="pr_id_6_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_3_content"
+      id="pr_id_6_content"
       role="region"
     >
       <div
@@ -196,23 +194,22 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
     class="p-fieldset p-component p-fieldset-toggleable"
     data-pc-name="fieldset"
     data-pc-section="root"
-    id="pr_id_3"
+    id="pr_id_6"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
       data-pc-section="legend"
     >
       <a
-        aria-controls="pr_id_3_content"
+        aria-controls="pr_id_6_content"
         aria-expanded="true"
         aria-label="Expand/Collapse"
         data-pc-section="toggler"
-        id="pr_id_3_header"
+        id="pr_id_6_header"
         role="button"
         tabindex="0"
       >
         <svg
-          aria-hidden="true"
           class="p-icon p-fieldset-toggler"
           data-pc-section="togglericon"
           fill="none"
@@ -235,10 +232,10 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
       </a>
     </legend>
     <div
-      aria-labelledby="pr_id_3_header"
+      aria-labelledby="pr_id_6_header"
       class="p-toggleable-content p-toggleable-content-enter p-toggleable-content-enter-active"
       data-pc-section="toggleablecontent"
-      id="pr_id_3_content"
+      id="pr_id_6_content"
       role="region"
     >
       <div
@@ -260,23 +257,22 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
     class="p-fieldset p-component p-fieldset-toggleable"
     data-pc-name="fieldset"
     data-pc-section="root"
-    id="pr_id_2"
+    id="pr_id_3"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
       data-pc-section="legend"
     >
       <a
-        aria-controls="pr_id_2_content"
+        aria-controls="pr_id_3_content"
         aria-expanded="true"
         aria-label="Toggleable"
         data-pc-section="toggler"
-        id="pr_id_2_header"
+        id="pr_id_3_header"
         role="button"
         tabindex="0"
       >
         <svg
-          aria-hidden="true"
           class="p-icon p-fieldset-toggler"
           data-pc-section="togglericon"
           fill="none"
@@ -299,10 +295,10 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
       </a>
     </legend>
     <div
-      aria-labelledby="pr_id_2_header"
+      aria-labelledby="pr_id_3_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_2_content"
+      id="pr_id_3_content"
       role="region"
     >
       <div
@@ -324,23 +320,22 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
     class="p-fieldset p-component p-fieldset-toggleable"
     data-pc-name="fieldset"
     data-pc-section="root"
-    id="pr_id_2"
+    id="pr_id_3"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
       data-pc-section="legend"
     >
       <a
-        aria-controls="pr_id_2_content"
+        aria-controls="pr_id_3_content"
         aria-expanded="true"
         aria-label="Toggleable"
         data-pc-section="toggler"
-        id="pr_id_2_header"
+        id="pr_id_3_header"
         role="button"
         tabindex="0"
       >
         <svg
-          aria-hidden="true"
           class="p-icon p-fieldset-toggler"
           data-pc-section="togglericon"
           fill="none"
@@ -363,10 +358,10 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
       </a>
     </legend>
     <div
-      aria-labelledby="pr_id_2_header"
+      aria-labelledby="pr_id_3_header"
       class="p-toggleable-content"
       data-pc-section="toggleablecontent"
-      id="pr_id_2_content"
+      id="pr_id_3_content"
       role="region"
     >
       <div

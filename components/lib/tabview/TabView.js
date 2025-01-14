@@ -330,6 +330,19 @@ export const TabView = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current
     }));
 
+    const onCloseIconKeyDown = (event, index) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        switch (event.code) {
+            case 'Space':
+            case 'NumpadEnter':
+            case 'Enter':
+                onTabHeaderClose(event, index);
+                break;
+        }
+    };
+
     const createTabHeader = (tab, index) => {
         const selected = isSelected(index);
         const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable, closeIcon } = TabPanelBase.getCProps(tab);
@@ -348,7 +361,10 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const closeIconProps = mergeProps(
             {
                 className: cx('tab.closeIcon'),
-                onClick: (e) => onTabHeaderClose(e, index)
+                onClick: (e) => onTabHeaderClose(e, index),
+                onKeyDown: (e) => onCloseIconKeyDown(e, index),
+                tabIndex: 0,
+                'aria-label': ariaLabel('close') || 'Close'
             },
             getTabPT(tab, 'closeIcon', index)
         );

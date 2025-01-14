@@ -201,7 +201,6 @@ export const TieredMenuSub = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    'aria-hidden': true,
                     tabIndex: '-1',
                     onFocus: (event) => event.stopPropagation(),
                     className: cx('action'),

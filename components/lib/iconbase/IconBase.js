@@ -22,7 +22,7 @@ export const IconBase = {
             ),
             role: !isLabelEmpty ? 'img' : undefined,
             'aria-label': !isLabelEmpty ? props.label : undefined,
-            'aria-hidden': isLabelEmpty
+            'aria-hidden': props.label ? isLabelEmpty : undefined
         };
 
         return ObjectUtils.getMergedProps(otherProps, ptiProps);

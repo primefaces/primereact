@@ -3968,7 +3968,7 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "Template of a selected item."
+                            "description": "Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string."
                         },
                         {
                             "name": "selectionLimit",
@@ -5948,7 +5948,7 @@
                         {
                             "name": "getCurrentDateTime",
                             "parameters": [],
-                            "returnType": "Date | Date[]",
+                            "returnType": "TValue",
                             "description": "Used to get the current date."
                         },
                         {
@@ -5972,7 +5972,7 @@
                         {
                             "name": "getViewDate",
                             "parameters": [],
-                            "returnType": "Date | Date[]",
+                            "returnType": "TValue",
                             "description": "Used to get the view date."
                         },
                         {
@@ -5997,7 +5997,7 @@
                                 },
                                 {
                                     "name": "value",
-                                    "type": "Nullable<Date | Date[]>",
+                                    "type": "Nullable<TValue>",
                                     "description": "New date."
                                 }
                             ],
@@ -6007,7 +6007,7 @@
                     ]
                 },
                 "props": {
-                    "description": "Defines valid properties in single Calendar component.",
+                    "description": "Defines valid properties in Calendar component.",
                     "values": [
                         {
                             "name": "appendTo",
@@ -6093,7 +6093,7 @@
                             "name": "decrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in each of the decrement buttons."
                         },
@@ -6157,7 +6157,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon of the calendar button."
                         },
@@ -6181,7 +6181,7 @@
                             "name": "incrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in each of the increment buttons."
                         },
@@ -6309,7 +6309,7 @@
                             "name": "nextIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in the next button."
                         },
@@ -6349,7 +6349,7 @@
                             "name": "prevIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in the previous button."
                         },
@@ -6389,7 +6389,7 @@
                             "name": "selectionMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"single\"",
+                            "type": "TMode",
                             "default": "single",
                             "description": "Specifies the selection mode either \"single\", \"range\", or \"multiple\";"
                         },
@@ -6589,7 +6589,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "Nullable<Date>",
+                            "type": "Nullable<TValue>",
                             "default": "null",
                             "description": "Value of the component."
                         },
@@ -6729,7 +6729,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent<Date, SyntheticEvent<Element, Event>>",
+                                    "type": "FormEvent<TValue, SyntheticEvent<Element, Event>>",
                                     "description": "Custom change event"
                                 }
                             ],
@@ -7036,7 +7036,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "CalendarProps",
+                            "type": "CalendarProps<\"single\", Date>",
                             "description": "The props of Calendar component"
                         }
                     ]
@@ -7084,7 +7084,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "CalendarProps",
+                            "type": "CalendarProps<\"single\", Date>",
                             "description": "The props of Calendar component"
                         }
                     ]
@@ -7102,7 +7102,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "CalendarProps"
+                            "type": "CalendarProps<\"single\", Date>"
                         },
                         {
                             "name": "state",
@@ -7757,7 +7757,7 @@
                             "name": "decrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in each of the decrement buttons."
                         },
                         {
@@ -7827,7 +7827,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon of the calendar button."
                         },
                         {
@@ -7841,7 +7841,7 @@
                             "name": "incrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in each of the increment buttons."
                         },
                         {
@@ -7946,7 +7946,7 @@
                             "name": "nextIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in the next button."
                         },
                         {
@@ -7981,7 +7981,7 @@
                             "name": "prevIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in the previous button."
                         },
                         {
@@ -8444,7 +8444,7 @@
                             "description": "Function that gets a navigator information and returns the navigator in header."
                         }
                     ],
-                    "extendedBy": "CalendarPropsSingle,CalendarPropsRange,CalendarPropsMultiple"
+                    "extendedBy": "CalendarProps"
                 }
             }
         },
@@ -8456,6 +8456,9 @@
                 },
                 "CalendarPassThroughTransitionType": {
                     "values": "ReactCSSTransitionProps | Function | undefined"
+                },
+                "CalendarSelectionMode": {
+                    "values": "\"single\" | \"range\" | \"multiple\""
                 }
             }
         }
@@ -23209,7 +23212,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "No available options",
+                            "default": "No results found",
                             "description": "Template to display when filtering does not return any results."
                         },
                         {
@@ -23217,7 +23220,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "No results found",
+                            "default": "No available options",
                             "description": "Text to display when there are no options available."
                         },
                         {
@@ -23243,6 +23246,14 @@
                             "type": "IconType<DropdownProps>",
                             "default": "",
                             "description": "Icon of the filter to clear."
+                        },
+                        {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
                         },
                         {
                             "name": "filterIcon",
@@ -36345,6 +36356,14 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
+                        },
+                        {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
@@ -46777,9 +46796,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\", \"help\"."
                         },
                         {
                             "name": "size",
@@ -52488,6 +52507,14 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
+                        },
+                        {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
@@ -52533,7 +52560,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "When filtering is enabled, the value of input field."
+                            "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange."
                         },
                         {
                             "name": "footer",
@@ -53798,6 +53825,14 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
+                        },
+                        {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
@@ -53851,7 +53886,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "When filtering is enabled, the value of input field."
+                            "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange."
                         },
                         {
                             "name": "inputId",

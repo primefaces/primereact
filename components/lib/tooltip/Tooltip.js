@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
@@ -15,6 +15,8 @@ export const Tooltip = React.memo(
         const [positionState, setPositionState] = React.useState(props.position || 'right');
         const [classNameState, setClassNameState] = React.useState('');
         const [multipleFocusEvents, setMultipleFocusEvents] = React.useState(false);
+        const isCloseOnEscape = visibleState && props.closeOnEscape;
+        const overlayDisplayOrder = useDisplayOrder('tooltip', isCloseOnEscape);
         const metaData = {
             props,
             state: {
@@ -37,8 +39,8 @@ export const Tooltip = React.memo(
             callback: () => {
                 hide();
             },
-            when: props.closeOnEscape,
-            priority: [ESC_KEY_HANDLING_PRIORITIES.TOOLTIP, 0]
+            when: isCloseOnEscape,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.TOOLTIP, overlayDisplayOrder]
         });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
@@ -205,8 +207,10 @@ export const Tooltip = React.memo(
 
             clearTimeouts();
 
+            let success = true;
+
             if (visibleState) {
-                const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
+                success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
 
                 if (success) {
                     applyDelay('hideDelay', () => {
@@ -217,10 +221,14 @@ export const Tooltip = React.memo(
                         ZIndexUtils.clear(elementRef.current);
                         DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
-                        setVisibleState(false);
                         sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
                     });
                 }
+            }
+
+            // handles the case when visibleState change from mouseenter was queued and mouseleave handler was called earlier than queued re-render
+            if (success) {
+                setVisibleState(false);
             }
         };
 

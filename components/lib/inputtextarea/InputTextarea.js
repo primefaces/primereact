@@ -89,7 +89,7 @@ export const InputTextarea = React.memo(
         const resize = (initial) => {
             const inputEl = elementRef.current;
 
-            if (inputEl && DomHandler.isVisible(inputEl)) {
+            if (inputEl && isVisible(inputEl)) {
                 if (!cachedScrollHeight.current) {
                     cachedScrollHeight.current = inputEl.scrollHeight;
                     inputEl.style.overflow = 'hidden';
@@ -111,6 +111,16 @@ export const InputTextarea = React.memo(
             }
         };
 
+        const isVisible = () => {
+            if (DomHandler.isVisible(elementRef.current)) {
+                const rect = elementRef.current.getBoundingClientRect();
+
+                return rect.width > 0 && rect.height > 0;
+            }
+
+            return false;
+        };
+
         React.useEffect(() => {
             ObjectUtils.combinedRefs(elementRef, ref);
         }, [elementRef, ref]);
@@ -119,7 +129,8 @@ export const InputTextarea = React.memo(
             if (props.autoResize) {
                 resize(true);
             }
-        }, [props.autoResize]);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props.autoResize, props.value]);
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);

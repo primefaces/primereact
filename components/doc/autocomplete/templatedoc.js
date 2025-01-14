@@ -35,6 +35,10 @@ export function TemplateDoc(props) {
         );
     };
 
+    const selectedItemTemplate = (item) => {
+        return `${item.name} (${item.code.toUpperCase()})`;
+    };
+
     const panelFooterTemplate = () => {
         const isCountrySelected = (filteredCountries || []).some((country) => country.name === selectedCountry);
 
@@ -58,7 +62,7 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries}  
-    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
+    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} selectedItemTemplate={selectedItemTemplate} />
         `,
         javascript: `
 import React, { useEffect, useState } from 'react';
@@ -117,6 +121,10 @@ export default function TemplateDemo() {
         );
     };
 
+    const selectedItemTemplate = (item) => {
+        return item.name + ' (' + item.code.toUpperCase() + ')';
+    };
+
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
     }, []);
@@ -124,7 +132,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-                completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
+                completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} selectedItemTemplate={selectedItemTemplate} />
         </div>
     )
 }
@@ -175,6 +183,10 @@ export default function TemplateDemo() {
             </div>
         );
     };
+
+    const selectedItemTemplate = (item: Country) => {
+        return item.name + ' (' + item.code.toUpperCase() + ')';
+    };
     
     const panelFooterTemplate = () => {
         const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
@@ -198,7 +210,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-                completeMethod={search} onChange={(e: AutoCompleteChangeEvent) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
+                completeMethod={search} onChange={(e: AutoCompleteChangeEvent) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} selectedItemTemplate={selectedItemTemplate} />
         </div>
     )
 }
@@ -217,11 +229,20 @@ export default function TemplateDemo() {
             <DocSectionText {...props}>
                 <p>
                     Custom content can be displayed as an option using <i>itemTemplate</i> property that references a function with a suggestion option as a parameter and returns an element. Similarly <i>selectedItemTemplate</i> property is available
-                    to customize the chips in multiple mode using the same approach. Note that <i>selectedItemTemplate</i> is only available in multiple mode at the moment.
+                    to customize the chips in <i>multiple</i> mode and the text in <i>single</i> mode using the same approach.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
+                <AutoComplete
+                    field="name"
+                    value={selectedCountry}
+                    suggestions={filteredCountries}
+                    completeMethod={search}
+                    onChange={(e) => setSelectedCountry(e.value)}
+                    itemTemplate={itemTemplate}
+                    panelFooterTemplate={panelFooterTemplate}
+                    selectedItemTemplate={selectedItemTemplate}
+                />
             </div>
             <DocSectionCode code={code} service={['CountryService']} />
         </>

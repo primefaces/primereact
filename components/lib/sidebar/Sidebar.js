@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -116,7 +116,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => sidebarRef.current,
-        gteMask: () => maskRef.current,
+        getMask: () => maskRef.current,
         getCloseIcon: () => closeIconRef.current
     }));
 
@@ -160,14 +160,13 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     });
 
     const createCloseIcon = () => {
-        const ariaLabel = props.ariaCloseLabel || localeOption('close');
         const closeButtonProps = mergeProps(
             {
                 type: 'button',
                 ref: closeIconRef,
                 className: cx('closeButton'),
                 onClick: (e) => onClose(e),
-                'aria-label': ariaLabel
+                'aria-label': props.ariaCloseLabel || ariaLabel('close')
             },
             ptm('closeButton')
         );

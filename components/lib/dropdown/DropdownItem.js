@@ -33,7 +33,6 @@ export const DropdownItem = React.memo((props) => {
         {
             id: `dropdownItem_${index}`,
             role: 'option',
-            key: props.label,
             className: classNames(option.className, cx('item', { selected, disabled, label, index, focusedOptionIndex, highlightOnSelect })),
             style: props.style,
             tabIndex: 0,
@@ -80,7 +79,7 @@ export const DropdownItem = React.memo((props) => {
     };
 
     return (
-        <li {...itemProps}>
+        <li key={props.label} {...itemProps}>
             {checkmark && iconRenderer()}
             <span {...itemGroupLabelProps}>{content}</span>
             <Ripple />

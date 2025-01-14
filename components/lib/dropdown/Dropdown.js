@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useDebounce, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { SpinnerIcon } from '../icons/spinner';
@@ -17,7 +17,7 @@ export const Dropdown = React.memo(
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = DropdownBase.getProps(inProps, context);
-        const [filterState, setFilterState] = React.useState('');
+        const [filterValue, filterState, setFilterState] = useDebounce('', props.filterDelay || 0);
         const [focusedState, setFocusedState] = React.useState(false);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -117,7 +117,6 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            event.stopPropagation();
             props.onClick && props.onClick(event);
 
             // do not continue if the user defined click wants to prevent it
@@ -132,6 +131,7 @@ export const Dropdown = React.memo(
                 overlayVisibleState ? hide() : show();
             }
 
+            event.preventDefault();
             clickedRef.current = true;
         };
 
@@ -193,7 +193,6 @@ export const Dropdown = React.memo(
                 return;
             }
 
-            const metaKey = event.metaKey || event.ctrlKey;
             const code = DomHandler.isAndroid() ? event.key : event.code;
 
             switch (code) {
@@ -253,6 +252,9 @@ export const Dropdown = React.memo(
                     break;
 
                 default:
+                    const metaKey = event.metaKey || event.ctrlKey || event.altKey;
+
+                    // Only handle printable characters when no meta keys are pressed
                     if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {
                         !overlayVisibleState && !props.editable && show();
                         !props.editable && searchOptions(event, event.key);
@@ -588,12 +590,24 @@ export const Dropdown = React.memo(
             return isOptionDisabled(option) ? findPrevOption(i) : option;
         };
 
+        const findInArray = (visibleOptions, searchText) => {
+            if (!searchText || !visibleOptions?.length) return -1;
+
+            const normalizedSearch = searchText.toLocaleLowerCase();
+
+            const exactMatch = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase() === normalizedSearch);
+
+            if (exactMatch !== -1) return exactMatch;
+
+            return visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(normalizedSearch));
+        };
+
         const onEditableInputChange = (event) => {
             !overlayVisibleState && show();
             let searchIndex = null;
 
             if (event.target.value && visibleOptions) {
-                searchIndex = visibleOptions.findIndex((item) => getOptionLabel(item).toLocaleLowerCase().startsWith(event.target.value.toLocaleLowerCase()));
+                searchIndex = findInArray(visibleOptions, event.target.value);
             }
 
             setFocusedOptionIndex(searchIndex);
@@ -681,6 +695,7 @@ export const Dropdown = React.memo(
             }
 
             updateEditableLabel();
+            setFocusedOptionIndex(-1);
         };
 
         const selectItem = (event) => {
@@ -971,8 +986,7 @@ export const Dropdown = React.memo(
                     required: props.required,
                     defaultValue: option.value,
                     name: props.name,
-                    tabIndex: -1,
-                    'aria-hidden': 'true'
+                    tabIndex: -1
                 },
                 ptm('select')
             );
@@ -1184,7 +1198,6 @@ export const Dropdown = React.memo(
             {
                 ref: firstHiddenFocusableElementOnOverlay,
                 role: 'presentation',
-                'aria-hidden': 'true',
                 className: 'p-hidden-accessible p-hidden-focusable',
                 tabIndex: '0',
                 onFocus: onFirstHiddenFocus,
@@ -1198,7 +1211,6 @@ export const Dropdown = React.memo(
             {
                 ref: lastHiddenFocusableElementOnOverlay,
                 role: 'presentation',
-                'aria-hidden': 'true',
                 className: 'p-hidden-accessible p-hidden-focusable',
                 tabIndex: '0',
                 onFocus: onLastHiddenFocus,
@@ -1224,7 +1236,7 @@ export const Dropdown = React.memo(
                         {...props}
                         appendTo={appendTo}
                         cx={cx}
-                        filterValue={filterState}
+                        filterValue={filterValue}
                         focusedOptionIndex={focusedOptionIndex}
                         getOptionGroupChildren={getOptionGroupChildren}
                         getOptionGroupLabel={getOptionGroupLabel}

@@ -543,11 +543,16 @@ export interface TreeProps {
      */
     filter?: boolean | undefined;
     /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
      * Icon of the filter.
      */
     filterIcon?: IconType<TreeProps> | string;
     /**
-     * When filtering is enabled, the value of input field.
+     * When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.
      */
     filterValue?: string | undefined;
     /**

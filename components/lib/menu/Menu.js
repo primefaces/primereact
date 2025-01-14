@@ -357,7 +357,7 @@ export const Menu = React.memo(
                 {
                     onClick: (event) => onItemClick(event, item, key),
                     onMouseMove: (event) => onItemMouseMove(event, key),
-                    className: cx('content')
+                    className: cx('content', { item })
                 },
                 getMenuItemPTOptions('content', menuContext)
             );
@@ -370,7 +370,6 @@ export const Menu = React.memo(
                     target: item.target,
                     tabIndex: '-1',
                     'aria-label': item.label,
-                    'aria-hidden': true,
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },

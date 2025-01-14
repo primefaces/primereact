@@ -193,7 +193,6 @@ export const Dock = React.memo(
                     href: url || '#',
                     onFocus: (event) => event.stopPropagation(),
                     className: cx('action', { disabled }),
-                    'aria-hidden': 'true',
                     tabIndex: -1,
                     target,
                     'data-pr-tooltip': label,

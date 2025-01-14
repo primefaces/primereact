@@ -129,6 +129,7 @@ export const TreeBase = ComponentBase.extend({
         expandedKeys: null,
         filter: false,
         filterBy: 'label',
+        filterDelay: 300,
         filterIcon: null,
         filterLocale: undefined,
         filterMode: 'lenient',

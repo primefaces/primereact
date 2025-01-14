@@ -194,8 +194,7 @@ export const PanelMenuSub = React.memo(
                     className: cx('action', { item }),
                     target: item.target,
                     onFocus: (event) => event.stopPropagation(),
-                    tabIndex: '-1',
-                    'aria-hidden': true
+                    tabIndex: '-1'
                 },
                 getPTOptions(processedItem, 'action', index)
             );

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TemplateLicense = ({ license }) => {
     return (
         <div className="template-license-wrapper">
@@ -9,8 +7,8 @@ const TemplateLicense = ({ license }) => {
                         <div key={i} className="template-license-card">
                             <span>{title}</span>
                             <div className="template-license-price flex gap-3">
-                                <h2 className={discountPrice && 'discount'}>{price}</h2>
-                                <h2 hidden={!discountPrice}>{discountPrice}</h2>
+                                <h2 className={license.showDiscount && 'discount'}>{price}</h2>
+                                {license.showDiscount && <h2>{discountPrice}</h2>}
                             </div>
                             <div className="template-license-card-included">
                                 {included.map((txt, j) => (
@@ -24,13 +22,15 @@ const TemplateLicense = ({ license }) => {
                     ))}
                 </div>
                 <p className="template-license-description">{license.description}</p>
-                <p className="template-license-visit">
-                    Visit the{' '}
-                    <a href={license.documentLink} target="_blank">
-                        official documentation
-                    </a>{' '}
-                    for more information.
-                </p>
+                {license.documentLink && (
+                    <p className="template-license-visit">
+                        Visit the{' '}
+                        <a href={license.documentLink} target="_blank">
+                            official documentation
+                        </a>{' '}
+                        for more information.
+                    </p>
+                )}
             </div>
         </div>
     );

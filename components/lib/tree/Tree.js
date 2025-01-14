@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
-import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { useDebounce, useMergeProps, useUpdateEffect } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
@@ -15,14 +14,20 @@ export const Tree = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TreeBase.getProps(inProps, context);
 
-        const [filterValueState, setFilterValueState] = React.useState('');
+        const [filterValue, filterValueState, setFilterValueState] = useDebounce('', props.filterDelay || 0);
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
+        const [filterExpandedKeys, setFilterExpandedKeys] = React.useState({});
+
         const elementRef = React.useRef(null);
         const filteredNodes = React.useRef([]);
         const dragState = React.useRef(null);
         const filterChanged = React.useRef(false);
+
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
-        const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const isFiltering = props.filter && filteredValue;
+        const expandedKeys = isFiltering ? filterExpandedKeys : props.onToggle ? props.expandedKeys : expandedKeysState;
+        const currentFilterExpandedKeys = {};
+
         const childFocusEvent = React.useRef(null);
         const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
             props,
@@ -53,7 +58,11 @@ export const Tree = React.memo(
                     childFocusEvent.current = originalEvent;
                 }
 
-                setExpandedKeysState(value);
+                if (isFiltering) {
+                    setFilterExpandedKeys(value);
+                } else {
+                    setExpandedKeysState(value);
+                }
             }
         };
 
@@ -80,6 +89,11 @@ export const Tree = React.memo(
                 childFocusEvent.current = null;
             }
         }, [expandedKeys]);
+
+        React.useEffect(() => {
+            if (props.filter) _filter();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [filteredValue, props.value, props.filter]);
 
         const onDragStart = (event) => {
             dragState.current = {
@@ -300,20 +314,18 @@ export const Tree = React.memo(
 
         const filter = (value) => {
             setFilterValueState(ObjectUtils.isNotEmpty(value) ? value : '');
-            _filter();
         };
 
         const childNodeFocus = (node) => {};
 
         const _filter = () => {
-            if (!filterChanged.current) {
-                return;
-            }
+            if (!filterChanged.current) return;
 
             if (ObjectUtils.isEmpty(filteredValue)) {
                 filteredNodes.current = props.value;
             } else {
                 filteredNodes.current = [];
+
                 const searchFields = props.filterBy.split(',');
                 const filterText = filteredValue.toLocaleLowerCase(props.filterLocale);
                 const isStrictMode = props.filterMode === 'strict';
@@ -331,6 +343,7 @@ export const Tree = React.memo(
                 }
             }
 
+            setFilterExpandedKeys(currentFilterExpandedKeys);
             filterChanged.current = false;
         };
 
@@ -354,7 +367,7 @@ export const Tree = React.memo(
                 }
 
                 if (matched) {
-                    node.expanded = true;
+                    currentFilterExpandedKeys[node.key] = true;
 
                     return true;
                 }
@@ -476,10 +489,7 @@ export const Tree = React.memo(
 
         const createModel = () => {
             if (props.value) {
-                if (props.filter) {
-                    filterChanged.current = true;
-                    _filter();
-                }
+                if (props.filter) filterChanged.current = true;
 
                 const value = getRootNode();
 
@@ -523,7 +533,9 @@ export const Tree = React.memo(
 
         const createFilter = () => {
             if (props.filter) {
-                const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                let value = props.onFilterValueChange ? props.filterValue : filterValue;
+
+                value = ObjectUtils.isNotEmpty(value) ? value : '';
                 const searchIconProps = mergeProps(
                     {
                         className: cx('searchIcon')

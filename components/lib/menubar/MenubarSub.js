@@ -193,7 +193,6 @@ export const MenubarSub = React.memo(
                 {
                     href: item.url || '#',
                     tabIndex: '-1',
-                    'aria-hidden': 'true',
                     className: cx('action', { disabled }),
                     onFocus: (event) => event.stopPropagation(),
                     target: getItemProp(processedItem, 'target'),

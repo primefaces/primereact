@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -162,7 +162,6 @@ export const Calendar = React.memo(
                     const date = value.length ? value[0] : value;
 
                     updateViewDate(event, date);
-                    onViewDateSelect({ event, date });
                 }
             } catch (err) {
                 //invalid date
@@ -479,7 +478,8 @@ export const Calendar = React.memo(
         };
 
         const decrementYear = () => {
-            const _currentYear = currentYear - 1;
+            const year = getViewYear();
+            const _currentYear = year - 1;
 
             setCurrentYear(_currentYear);
 
@@ -493,7 +493,8 @@ export const Calendar = React.memo(
         };
 
         const incrementYear = () => {
-            const _currentYear = currentYear + 1;
+            const year = getViewYear();
+            const _currentYear = year + 1;
 
             setCurrentYear(_currentYear);
 
@@ -552,6 +553,7 @@ export const Calendar = React.memo(
 
             updateModel(event, null);
             updateInputfield(null);
+            setCurrentYear(new Date().getFullYear()); // #7581
             hide();
 
             props.onClearButtonClick && props.onClearButtonClick(event);
@@ -1019,20 +1021,27 @@ export const Calendar = React.memo(
 
         const validateDate = (value) => {
             if (props.yearNavigator) {
+                const [minRangeYear, maxRangeYear] = props.yearRange ? props.yearRange.split(':').map((year) => parseInt(year, 10)) : [null, null];
+
                 let viewYear = value.getFullYear();
+                let minYear = null;
+                let maxYear = null;
 
-                const minRangeYear = props.yearRange ? parseInt(props.yearRange.split(':')[0], 10) : null;
-                const maxRangeYear = props.yearRange ? parseInt(props.yearRange.split(':')[1], 10) : null;
-                const minYear = props.minDate && minRangeYear != null ? Math.max(props.minDate.getFullYear(), minRangeYear) : props.minDate || minRangeYear;
-                const maxYear = props.maxDate && maxRangeYear != null ? Math.min(props.maxDate.getFullYear(), maxRangeYear) : props.maxDate || maxRangeYear;
-
-                if (minYear && minYear > viewYear) {
-                    viewYear = minYear;
+                if (minRangeYear !== null) {
+                    minYear = props.minDate ? Math.max(props.minDate.getFullYear(), minRangeYear) : minRangeYear;
+                } else {
+                    minYear = props.minDate?.getFullYear() || minRangeYear;
                 }
 
-                if (maxYear && maxYear < viewYear) {
-                    viewYear = maxYear;
+                if (maxRangeYear !== null) {
+                    maxYear = props.maxDate ? Math.min(props.maxDate.getFullYear(), maxRangeYear) : maxRangeYear;
+                } else {
+                    maxYear = props.maxDate?.getFullYear() || maxRangeYear;
                 }
+
+                if (minYear && minYear > viewYear) viewYear = minYear;
+
+                if (maxYear && maxYear < viewYear) viewYear = maxYear;
 
                 value.setFullYear(viewYear);
             }
@@ -1789,7 +1798,9 @@ export const Calendar = React.memo(
 
         const onMonthSelect = (event, month) => {
             if (props.view === 'month') {
-                onDateSelect(event, { year: currentYear, month: month, day: 1, selectable: true });
+                const year = getViewYear();
+
+                onDateSelect(event, { year, month: month, day: 1, selectable: true });
                 event.preventDefault();
             } else {
                 setCurrentMonth(month);
@@ -1807,6 +1818,10 @@ export const Calendar = React.memo(
                 updateViewDate(event, currentDate);
                 onViewDateSelect({ event, date: currentDate });
             }
+        };
+
+        const getViewYear = () => {
+            return props.yearNavigator ? getViewDate().getFullYear() : currentYear;
         };
 
         const onYearSelect = (event, year) => {
@@ -3539,10 +3554,12 @@ export const Calendar = React.memo(
                 const selected = isSelected(date);
                 const dateClassName = classNames({ 'p-highlight': selected, 'p-disabled': !date.selectable });
                 const content = date.otherMonth && !props.showOtherMonths ? null : createDateCellContent(date, dateClassName, groupIndex);
+                const formattedValue = formatDate(new Date(date.year, date.month, date.day), getDateFormat());
+
                 const dayProps = mergeProps(
                     {
                         className: cx('day', { date }),
-                        'aria-label': date.day,
+                        'aria-label': formattedValue,
                         'data-p-today': date.today,
                         'data-p-other-month': date.otherMonth
                     },

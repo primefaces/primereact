@@ -70,11 +70,6 @@ const TemplatesPage = () => {
                         <span>UI/UX Designer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/toprak.jpg" className="border-circle mb-4" alt="Toprak Koç" />
-                        <span className="mb-2 text-xl font-bold">Toprak Koç</span>
-                        <span>Front-End Developer</span>
-                    </div>
-                    <div className="flex flex-column align-items-center flex-auto">
                         <img src="https://primefaces.org/cdn/primereact/images/team/mehmet.jpg" className="border-circle mb-4" alt="Mehmet Çetin" />
                         <span className="mb-2 text-xl font-bold">Mehmet Çetin</span>
                         <span>Front-End Developer</span>
