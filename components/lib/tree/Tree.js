@@ -288,7 +288,7 @@ export const Tree = React.memo(
         };
 
         const isNodeLeaf = (node) => {
-            return node.leaf === false ? false : !(node.children && node.children.length);
+            return node.isLeaf === false ? false : !(node.children && node.children.length);
         };
 
         const onFilterInputKeyDown = (event) => {

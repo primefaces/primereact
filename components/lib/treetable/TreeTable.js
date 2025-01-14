@@ -1086,7 +1086,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const isNodeLeaf = (node) => {
-        return node.leaf === false ? false : !(node.children && node.children.length);
+        return node.isLeaf === false ? false : !(node.children && node.children.length);
     };
 
     const processedData = (localState) => {

@@ -62,7 +62,7 @@ export interface TreeNode {
     /**
      * Specifies if the node has children. Used in lazy loading.
      */
-    leaf?: boolean | undefined;
+    isLeaf?: boolean | undefined;
     /**
      * Visibility of node.
      */

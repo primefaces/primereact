@@ -12,17 +12,17 @@ export function LazyDoc(props) {
             {
                 key: '0',
                 label: 'Node 0',
-                leaf: false
+                isLeaf: false
             },
             {
                 key: '1',
                 label: 'Node 1',
-                leaf: false
+                isLeaf: false
             },
             {
                 key: '2',
                 label: 'Node 2',
-                leaf: false
+                isLeaf: false
             }
         ];
     };
@@ -76,17 +76,17 @@ export default function LazyDemo() {
             {
                 key: '0',
                 label: 'Node 0',
-                leaf: false
+                isLeaf: false
             },
             {
                 key: '1',
                 label: 'Node 1',
-                leaf: false
+                isLeaf: false
             },
             {
                 key: '2',
                 label: 'Node 2',
-                leaf: false
+                isLeaf: false
             }
         ];
     }
@@ -144,17 +144,17 @@ export default function LazyDemo() {
             {
                 key: '0',
                 label: 'Node 0',
-                leaf: false
+                isLeaf: false
             },
             {
                 key: '1',
                 label: 'Node 1',
-                leaf: false
+                isLeaf: false
             },
             {
                 key: '2',
                 label: 'Node 2',
-                leaf: false
+                isLeaf: false
             }
         ];
     }

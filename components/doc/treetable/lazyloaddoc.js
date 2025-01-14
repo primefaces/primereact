@@ -30,7 +30,7 @@ export function LazyLoadDoc(props) {
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + (first + i)
                 },
-                leaf: false
+                isLeaf: false
             };
 
             nodes.push(node);
@@ -130,7 +130,7 @@ export default function LazyLoadDemo() {
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + (first + i)
                 },
-                leaf: false
+                isLeaf: false
             };
 
             nodes.push(node);
@@ -234,7 +234,7 @@ export default function LazyLoadDemo() {
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                     type: 'Type ' + (first + i)
                 },
-                leaf: false
+                isLeaf: false
             };
 
             nodes.push(node);
