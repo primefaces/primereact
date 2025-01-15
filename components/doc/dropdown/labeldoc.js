@@ -1,10 +1,9 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Dropdown } from '@/components/lib/dropdown/Dropdown';
-import { FloatLabel } from '@/components/lib/floatlabel/FloatLabel';
 import { useState } from 'react';
 
-export function FloatLabelDoc(props) {
+export function LabelDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -16,15 +15,14 @@ export function FloatLabelDoc(props) {
 
     const code = {
         basic: `
-<FloatLabel>
-    <Dropdown inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
-    <label htmlFor="dd-city">Select a City</label>
-</FloatLabel>
+<div>
+    <label htmlFor="dd-city" id="dd-city-label">Select a City</label>
+    <Dropdown ariaLabelledBy="dd-city-label" inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
+</div>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import { FloatLabel } from 'primereact/floatlabel';
 
 export default function FloatLabelDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -38,10 +36,10 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <FloatLabel className="w-full md:w-14rem">
-                <Dropdown ariaLabelledBy="dd-city-label" inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
+            <div className="w-full md:w-14rem">
                 <label htmlFor="dd-city" id="dd-city-label">Select a City</label>
-            </FloatLabel>
+                <Dropdown ariaLabelledBy="dd-city-label" inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
+            </div>
         </div>
     )
 }
@@ -49,7 +47,7 @@ export default function FloatLabelDemo() {
         typescript: `
 import React, { useState } from "react";
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { FloatLabel } from 'primereact/floatlabel';
+import { div } from 'primereact/floatlabel';
 
 interface City {
     name: string;
@@ -68,10 +66,10 @@ export default function FloatLabelDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <FloatLabel className="w-full md:w-14rem">
-                <Dropdown ariaLabelledBy="dd-city-label" inputId="dd-city" value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
+            <div className="w-full md:w-14rem">
                 <label htmlFor="dd-city" id="dd-city-label">Select a City</label>
-            </FloatLabel>
+                <Dropdown ariaLabelledBy="dd-city-label" inputId="dd-city" value={selectedCity} onChange={(e: DropdownChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
+            </div>
         </div>
     )
 }
@@ -81,15 +79,17 @@ export default function FloatLabelDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A floating label appears on top of the input field when focused.</p>
+                <p>
+                    Dropdown associated with a label using the <i>aria-labelledby</i> property and the label element's <i>id</i> attribute.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <FloatLabel className="w-full md:w-14rem">
-                    <Dropdown ariaLabelledBy="dd-city-floatlabel" inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" showClear className="w-full" />
-                    <label htmlFor="dd-city" id="dd-city-floatlabel">
+                <div className="w-full md:w-14rem">
+                    <label className="px-2" htmlFor="dd-city" id="dd-city-label">
                         Select a City
                     </label>
-                </FloatLabel>
+                    <Dropdown ariaLabelledBy="dd-city-label" inputId="dd-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full" />
+                </div>
             </div>
             <DocSectionCode code={code} />
         </>

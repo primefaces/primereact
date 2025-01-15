@@ -5,9 +5,9 @@ export function AccessibilityDoc() {
     const code = {
         basic: `
 <span id="dd1">Options</span>
-<Dropdown aria-labelledby="dd1" />
+<Dropdown ariaLabelledby="dd1" />
 
-<Dropdown aria-label="Options" />
+<Dropdown ariaLabel="Options" />
     `
     };
 
