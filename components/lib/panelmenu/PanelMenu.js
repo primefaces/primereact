@@ -18,7 +18,6 @@ export const PanelMenu = React.memo(
         const [idState, setIdState] = React.useState(props.id);
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [activeItemsState, setActiveItemsState] = React.useState([]);
-        const [animationDisabled, setAnimationDisabled] = React.useState(false);
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = PanelMenuBase.setMetaData({
@@ -250,7 +249,6 @@ export const PanelMenu = React.memo(
         });
 
         React.useEffect(() => {
-            setAnimationDisabled(true);
 
             props.model &&
                 props.model.forEach((item) => {
@@ -260,10 +258,6 @@ export const PanelMenu = React.memo(
                 });
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [props.model]);
-
-        const onEnter = () => {
-            setAnimationDisabled(false);
-        };
 
         const createPanel = (item, index) => {
             if (!isItemVisible(item)) {
@@ -389,7 +383,6 @@ export const PanelMenu = React.memo(
                 {
                     classNames: cx('transition'),
                     timeout: { enter: 1000, exit: 450 },
-                    onEnter: onEnter,
                     in: active,
                     unmountOnExit: true,
                     options: props.transitionOptions
