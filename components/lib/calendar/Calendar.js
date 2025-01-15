@@ -1406,7 +1406,7 @@ export const Calendar = React.memo(
                     navigation.current = { backward: true };
                     navBackward(event);
                 } else {
-                    const prevMonthContainer = overlayRef.current.children[groupIndex - 1];
+                    const prevMonthContainer = overlayRef.current.children[0].children[groupIndex - 1];
                     const cells = DomHandler.find(prevMonthContainer, 'table td span:not([data-p-disabled="true"])');
                     const focusCell = cells[cells.length - 1];
 
@@ -1417,7 +1417,7 @@ export const Calendar = React.memo(
                 navigation.current = { backward: false };
                 navForward(event);
             } else {
-                const nextMonthContainer = overlayRef.current.children[groupIndex + 1];
+                const nextMonthContainer = overlayRef.current.children[0].children[groupIndex + 1];
                 const focusCell = DomHandler.findSingle(nextMonthContainer, 'table td span:not([data-p-disabled="true"])');
 
                 focusCell.tabIndex = '0';
