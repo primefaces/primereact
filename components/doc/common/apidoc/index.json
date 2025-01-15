@@ -52451,6 +52451,14 @@
                             "description": "A single key to control the selection with the context menu."
                         },
                         {
+                            "name": "disableKeyboardNavigation",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it disables keyboard navigation around the tree."
+                        },
+                        {
                             "name": "disabled",
                             "optional": true,
                             "readonly": false,

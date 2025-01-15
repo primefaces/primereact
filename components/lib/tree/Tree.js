@@ -417,6 +417,7 @@ export const Tree = React.memo(
                     collapseIcon={props.collapseIcon}
                     contextMenuSelectionKey={props.contextMenuSelectionKey}
                     cx={cx}
+                    disableKeyboardNavigation={props.disableKeyboardNavigation}
                     disabled={props.disabled}
                     dragdropScope={props.dragdropScope}
                     expandIcon={props.expandIcon}

@@ -122,6 +122,7 @@ export const TreeBase = ComponentBase.extend({
         contentClassName: null,
         contentStyle: null,
         contextMenuSelectionKey: null,
+        disableKeyboardNavigation: false,
         disabled: false,
         dragdropScope: null,
         emptyMessage: null,
