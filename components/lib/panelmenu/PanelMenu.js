@@ -249,7 +249,6 @@ export const PanelMenu = React.memo(
         });
 
         React.useEffect(() => {
-
             props.model &&
                 props.model.forEach((item) => {
                     if (item.expanded) {
