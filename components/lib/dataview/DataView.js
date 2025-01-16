@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMergeProps } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { SpinnerIcon } from '../icons/spinner';
 import { ThLargeIcon } from '../icons/thlarge';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { useMergeProps } from '../hooks/Hooks';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
@@ -286,7 +286,11 @@ export const DataView = React.memo(
             if (props.listTemplate) {
                 const items = getItems(value);
 
-                content = ObjectUtils.getJSXElement(props.listTemplate, items, props.layout);
+                if (ObjectUtils.isNotEmpty(value)) {
+                    content = ObjectUtils.getJSXElement(props.listTemplate, items, props.layout);
+                }
+
+                content = createEmptyMessage();
             } else {
                 const items = createItems(value);
                 const gridProps = mergeProps(
