@@ -286,11 +286,12 @@ export const DataView = React.memo(
             if (props.listTemplate) {
                 const items = getItems(value);
 
-                if (ObjectUtils.isNotEmpty(value)) {
+                if (ObjectUtils.isNotEmpty(items)) {
                     content = ObjectUtils.getJSXElement(props.listTemplate, items, props.layout);
                 }
-
-                content = createEmptyMessage();
+                else {
+                    content = createEmptyMessage();
+                }
             } else {
                 const items = createItems(value);
                 const gridProps = mergeProps(
