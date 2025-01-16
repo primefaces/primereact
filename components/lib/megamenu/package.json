@@ -1,7 +1,0 @@
-{
-    "main": "./megamenu.cjs.js",
-    "module": "./megamenu.esm.js",
-    "unpkg": "./megamenu.min.js",
-    "types": "./megamenu.d.ts",
-    "sideEffects": false
-}

@@ -1,7 +1,0 @@
-{
-    "main": "./button.cjs.js",
-    "module": "./button.esm.js",
-    "unpkg": "./button.min.js",
-    "types": "./button.d.ts",
-    "sideEffects": false
-}

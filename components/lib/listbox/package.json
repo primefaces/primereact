@@ -1,7 +1,0 @@
-{
-    "main": "./listbox.cjs.js",
-    "module": "./listbox.esm.js",
-    "unpkg": "./listbox.min.js",
-    "types": "./listbox.d.ts",
-    "sideEffects": false
-}

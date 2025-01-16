@@ -1,7 +1,0 @@
-{
-    "main": "./steps.cjs.js",
-    "module": "./steps.esm.js",
-    "unpkg": "./steps.min.js",
-    "types": "./steps.d.ts",
-    "sideEffects": false
-}

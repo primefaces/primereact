@@ -1,7 +1,0 @@
-{
-    "main": "./panel.cjs.js",
-    "module": "./panel.esm.js",
-    "unpkg": "./panel.min.js",
-    "types": "./panel.d.ts",
-    "sideEffects": false
-}

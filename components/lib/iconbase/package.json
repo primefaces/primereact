@@ -1,7 +1,0 @@
-{
-    "main": "./iconbase.cjs.js",
-    "module": "./iconbase.esm.js",
-    "unpkg": "./iconbase.min.js",
-    "types": "./iconbase.d.ts",
-    "sideEffects": false
-}

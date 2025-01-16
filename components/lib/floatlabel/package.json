@@ -1,7 +1,0 @@
-{
-    "main": "./floatlabel.cjs.js",
-    "module": "./floatlabel.esm.js",
-    "unpkg": "./floatlabel.min.js",
-    "types": "./floatlabel.d.ts",
-    "sideEffects": false
-}

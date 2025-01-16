@@ -1,7 +1,0 @@
-{
-    "main": "./avatar.cjs.js",
-    "module": "./avatar.esm.js",
-    "unpkg": "./avatar.min.js",
-    "types": "./avatar.d.ts",
-    "sideEffects": false
-}

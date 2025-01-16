@@ -1,7 +1,0 @@
-{
-    "main": "./dock.cjs.js",
-    "module": "./dock.esm.js",
-    "unpkg": "./dock.min.js",
-    "types": "./dock.d.ts",
-    "sideEffects": false
-}

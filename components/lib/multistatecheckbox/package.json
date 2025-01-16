@@ -1,7 +1,0 @@
-{
-    "main": "./multistatecheckbox.cjs.js",
-    "module": "./multistatecheckbox.esm.js",
-    "unpkg": "./multistatecheckbox.min.js",
-    "types": "./multistatecheckbox.d.ts",
-    "sideEffects": false
-}

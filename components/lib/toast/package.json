@@ -1,7 +1,0 @@
-{
-    "main": "./toast.cjs.js",
-    "module": "./toast.esm.js",
-    "unpkg": "./toast.min.js",
-    "types": "./toast.d.ts",
-    "sideEffects": false
-}

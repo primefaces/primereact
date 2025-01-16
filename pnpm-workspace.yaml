@@ -1,0 +1,14 @@
+packages:
+    - 'packages/*'
+    - 'apps/*'
+
+catalog:
+    '@primeuix/styled': ^0.3.2
+    '@primeuix/utils': ^0.3.2
+
+catalogs:
+    react19:
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "react": "^19",
+        "react-dom": "^19"

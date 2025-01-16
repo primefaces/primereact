@@ -1,7 +1,0 @@
-{
-    "main": "./scrollpanel.cjs.js",
-    "module": "./scrollpanel.esm.js",
-    "unpkg": "./scrollpanel.min.js",
-    "types": "./scrollpanel.d.ts",
-    "sideEffects": false
-}

@@ -1,7 +1,0 @@
-{
-    "main": "./ripple.cjs.js",
-    "module": "./ripple.esm.js",
-    "unpkg": "./ripple.min.js",
-    "types": "./ripple.d.ts",
-    "sideEffects": false
-}

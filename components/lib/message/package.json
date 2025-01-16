@@ -1,7 +1,0 @@
-{
-    "main": "./message.cjs.js",
-    "module": "./message.esm.js",
-    "unpkg": "./message.min.js",
-    "types": "./message.d.ts",
-    "sideEffects": false
-}

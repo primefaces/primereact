@@ -1,7 +1,0 @@
-{
-    "main": "./autocomplete.cjs.js",
-    "module": "./autocomplete.esm.js",
-    "unpkg": "./autocomplete.min.js",
-    "types": "./autocomplete.d.ts",
-    "sideEffects": false
-}

@@ -1,7 +1,0 @@
-{
-    "main": "./picklist.cjs.js",
-    "module": "./picklist.esm.js",
-    "unpkg": "./picklist.min.js",
-    "types": "./picklist.d.ts",
-    "sideEffects": false
-}

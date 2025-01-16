@@ -1,7 +1,0 @@
-{
-    "main": "./scrolltop.cjs.js",
-    "module": "./scrolltop.esm.js",
-    "unpkg": "./scrolltop.min.js",
-    "types": "./scrolltop.d.ts",
-    "sideEffects": false
-}

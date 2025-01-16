@@ -1,7 +1,0 @@
-{
-    "main": "./dialog.cjs.js",
-    "module": "./dialog.esm.js",
-    "unpkg": "./dialog.min.js",
-    "types": "./dialog.d.ts",
-    "sideEffects": false
-}

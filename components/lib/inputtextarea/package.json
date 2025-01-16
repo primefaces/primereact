@@ -1,7 +1,0 @@
-{
-    "main": "./inputtextarea.cjs.js",
-    "module": "./inputtextarea.esm.js",
-    "unpkg": "./inputtextarea.min.js",
-    "types": "./inputtextarea.d.ts",
-    "sideEffects": false
-}

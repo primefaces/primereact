@@ -1,7 +1,0 @@
-{
-    "main": "./radiobutton.cjs.js",
-    "module": "./radiobutton.esm.js",
-    "unpkg": "./radiobutton.min.js",
-    "types": "./radiobutton.d.ts",
-    "sideEffects": false
-}

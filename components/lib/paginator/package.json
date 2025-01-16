@@ -1,7 +1,0 @@
-{
-    "main": "./paginator.cjs.js",
-    "module": "./paginator.esm.js",
-    "unpkg": "./paginator.min.js",
-    "types": "./paginator.d.ts",
-    "sideEffects": false
-}

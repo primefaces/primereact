@@ -1,7 +1,0 @@
-{
-    "main": "./chip.cjs.js",
-    "module": "./chip.esm.js",
-    "unpkg": "./chip.min.js",
-    "types": "./chip.d.ts",
-    "sideEffects": false
-}

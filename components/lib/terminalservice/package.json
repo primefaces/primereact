@@ -1,7 +1,0 @@
-{
-  "main": "./terminalservice.cjs.js",
-  "module": "./terminalservice.esm.js",
-  "unpkg": "./terminalservice.min.js",
-  "types": "./terminalservice.d.ts",
-    "sideEffects": false
-}

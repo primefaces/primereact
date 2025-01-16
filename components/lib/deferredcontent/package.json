@@ -1,7 +1,0 @@
-{
-    "main": "./deferredcontent.cjs.js",
-    "module": "./deferredcontent.esm.js",
-    "unpkg": "./deferredcontent.min.js",
-    "types": "./deferredcontent.d.ts",
-    "sideEffects": false
-}

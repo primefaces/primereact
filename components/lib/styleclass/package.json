@@ -1,7 +1,0 @@
-{
-    "main": "./styleclass.cjs.js",
-    "module": "./styleclass.esm.js",
-    "unpkg": "./styleclass.min.js",
-    "types": "./styleclass.d.ts",
-    "sideEffects": false
-}
