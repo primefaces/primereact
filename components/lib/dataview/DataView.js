@@ -288,8 +288,7 @@ export const DataView = React.memo(
 
                 if (ObjectUtils.isNotEmpty(items)) {
                     content = ObjectUtils.getJSXElement(props.listTemplate, items, props.layout);
-                }
-                else {
+                } else {
                     content = createEmptyMessage();
                 }
             } else {
