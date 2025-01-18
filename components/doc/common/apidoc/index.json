@@ -37358,7 +37358,7 @@
                             "name": "checkboxElement",
                             "optional": false,
                             "readonly": false,
-                            "type": "HTMLElement",
+                            "type": "Element",
                             "description": "The checkbox element for selecting items."
                         },
                         {

@@ -225,7 +225,7 @@ interface MultiSelectPanelHeaderTemplateEvent {
     /**
      * The checkbox element for selecting items.
      */
-    checkboxElement: HTMLElement;
+    checkboxElement: JSX.Element;
     /**
      * Whether the checkbox is checked.
      */
