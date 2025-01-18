@@ -553,6 +553,7 @@ export const Calendar = React.memo(
 
             updateModel(event, null);
             updateInputfield(null);
+            setCurrentYear(new Date().getFullYear()); // #7581
             hide();
 
             props.onClearButtonClick && props.onClearButtonClick(event);
@@ -1020,20 +1021,27 @@ export const Calendar = React.memo(
 
         const validateDate = (value) => {
             if (props.yearNavigator) {
+                const [minRangeYear, maxRangeYear] = props.yearRange ? props.yearRange.split(':').map((year) => parseInt(year, 10)) : [null, null];
+
                 let viewYear = value.getFullYear();
+                let minYear = null;
+                let maxYear = null;
 
-                const minRangeYear = props.yearRange ? parseInt(props.yearRange.split(':')[0], 10) : null;
-                const maxRangeYear = props.yearRange ? parseInt(props.yearRange.split(':')[1], 10) : null;
-                const minYear = props.minDate && minRangeYear != null ? Math.max(props.minDate.getFullYear(), minRangeYear) : props.minDate || minRangeYear;
-                const maxYear = props.maxDate && maxRangeYear != null ? Math.min(props.maxDate.getFullYear(), maxRangeYear) : props.maxDate || maxRangeYear;
-
-                if (minYear && minYear > viewYear) {
-                    viewYear = minYear;
+                if (minRangeYear !== null) {
+                    minYear = props.minDate ? Math.max(props.minDate.getFullYear(), minRangeYear) : minRangeYear;
+                } else {
+                    minYear = props.minDate?.getFullYear() || minRangeYear;
                 }
 
-                if (maxYear && maxYear < viewYear) {
-                    viewYear = maxYear;
+                if (maxRangeYear !== null) {
+                    maxYear = props.maxDate ? Math.min(props.maxDate.getFullYear(), maxRangeYear) : maxRangeYear;
+                } else {
+                    maxYear = props.maxDate?.getFullYear() || maxRangeYear;
                 }
+
+                if (minYear && minYear > viewYear) viewYear = minYear;
+
+                if (maxYear && maxYear < viewYear) viewYear = maxYear;
 
                 value.setFullYear(viewYear);
             }
@@ -1398,7 +1406,7 @@ export const Calendar = React.memo(
                     navigation.current = { backward: true };
                     navBackward(event);
                 } else {
-                    const prevMonthContainer = overlayRef.current.children[groupIndex - 1];
+                    const prevMonthContainer = overlayRef.current.children[0].children[groupIndex - 1];
                     const cells = DomHandler.find(prevMonthContainer, 'table td span:not([data-p-disabled="true"])');
                     const focusCell = cells[cells.length - 1];
 
@@ -1409,7 +1417,7 @@ export const Calendar = React.memo(
                 navigation.current = { backward: false };
                 navForward(event);
             } else {
-                const nextMonthContainer = overlayRef.current.children[groupIndex + 1];
+                const nextMonthContainer = overlayRef.current.children[0].children[groupIndex + 1];
                 const focusCell = DomHandler.findSingle(nextMonthContainer, 'table td span:not([data-p-disabled="true"])');
 
                 focusCell.tabIndex = '0';
@@ -4221,11 +4229,18 @@ export const Calendar = React.memo(
             );
         };
 
+        const isPastMaxDateWithBuffer = (bufferInSeconds = 10) => {
+            const now = new Date();
+            const maxDate = props.maxDate;
+
+            return maxDate < now && Math.abs((now.getTime() - maxDate.getTime()) / 1000) > bufferInSeconds;
+        };
+
         const createButtonBar = () => {
             if (props.showButtonBar) {
                 const { today, clear, now } = localeOptions(props.locale);
                 const nowDate = new Date();
-                const isHidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && props.maxDate < nowDate);
+                const isHidden = (props.minDate && props.minDate > nowDate) || (props.maxDate && isPastMaxDateWithBuffer());
                 const buttonbarProps = mergeProps(
                     {
                         className: cx('buttonbar')

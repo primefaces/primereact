@@ -14,9 +14,9 @@ const classes = {
     input: 'p-tree-filter p-inputtext p-component',
     searchIcon: 'p-tree-filter-icon',
     container: 'p-tree-container',
-    node: ({ isLeaf }) =>
+    node: ({ leaf }) =>
         classNames('p-treenode', {
-            'p-treenode-leaf': isLeaf
+            'p-treenode-leaf': leaf
         }),
     content: ({ nodeProps: props, checked, selected, isCheckboxSelectionMode }) =>
         classNames('p-treenode-content', {
