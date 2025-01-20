@@ -948,9 +948,6 @@ export const MultiSelect = React.memo(
         };
 
         const onClearIconKeyDown = (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-
             switch (event.code) {
                 case 'Space':
                 case 'NumpadEnter':
@@ -960,6 +957,8 @@ export const MultiSelect = React.memo(
                     }
 
                     updateModel(event, [], []);
+                    event.preventDefault();
+                    event.stopPropagation();
                     break;
             }
         };
