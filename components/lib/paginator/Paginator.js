@@ -294,6 +294,7 @@ export const Paginator = React.memo(
             {
                 className: cx('left')
             },
+            props.ptm?.left,
             ptm('left')
         );
         const leftElement = leftContent && <div {...leftProps}>{leftContent}</div>;
@@ -301,6 +302,7 @@ export const Paginator = React.memo(
             {
                 className: cx('end')
             },
+            props.ptm?.end,
             ptm('end')
         );
         const rightElement = rightContent && <div {...endProps}>{rightContent}</div>;
@@ -311,6 +313,7 @@ export const Paginator = React.memo(
                 style: props.style
             },
             PaginatorBase.getOtherProps(props),
+            props.ptm?.root,
             ptm('root')
         );
 
