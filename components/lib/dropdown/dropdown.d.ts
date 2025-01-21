@@ -41,6 +41,10 @@ export interface DropdownPassThroughOptions {
      */
     root?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: DropdownPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the input's DOM element.
      */
     input?: DropdownPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
@@ -361,7 +365,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     focusInputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
-     * Unique identifier of the element.
+     * Unique identifier of the wrapper element.
      */
     id?: string | undefined;
     /**
@@ -380,17 +384,21 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     autoOptionFocus?: boolean;
     /**
-     * Identifier of the focusable input.
+     * Identifier of the combobox: label element or input if `editable={true}`.
      */
     inputId?: string | undefined;
     /**
      * Reference of the input element.
      */
-    inputRef?: React.Ref<HTMLSelectElement> | undefined;
+    inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
      * The template of items.
      */
     itemTemplate?: React.ReactNode | ((option: any) => React.ReactNode) | undefined;
+    /**
+     * Reference of the label element.
+     */
+    labelRef?: React.Ref<HTMLSpanElement> | undefined;
     /**
      * Displays a loader to indicate data load is in progress.
      * @defaultValue false
@@ -616,6 +624,11 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
      * @return {HTMLDivElement} Container element
      */
     public getElement(): HTMLDivElement;
+    /**
+     * Used to get label element.
+     * @return {HTMLInputElement} Input element
+     */
+    public getLabel(): HTMLSpanElement;
     /**
      * Used to get input element.
      * @return {HTMLInputElement} Input element
