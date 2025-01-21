@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
+import PrimeReact, { ariaLabel, localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -10,7 +10,7 @@ import { InputIcon } from '../inputicon/InputIcon';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
 
 export const Password = React.memo(
@@ -155,6 +155,7 @@ export const Password = React.memo(
 
         const toggleMask = () => {
             setUnmaskedState((prevUnmasked) => !prevUnmasked);
+            props.onToggleMaskClick?.(unmaskedState);
         };
 
         const show = () => {
@@ -309,7 +310,7 @@ export const Password = React.memo(
                 {
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
-                    className: cx('hideIcon'),
+                    className: classNames(props.iconClassNames?.className, props.iconClassNames?.hideIconClassName, cx('hideIcon')),
                     onClick: toggleMask,
                     onKeyDown: onToggleMaskKeyDown,
                     'aria-label': ariaLabel('passwordHide') || 'Hide Password',
@@ -322,7 +323,7 @@ export const Password = React.memo(
                 {
                     role: 'switch',
                     tabIndex: props.tabIndex || '0',
-                    className: cx('showIcon'),
+                    className: classNames(props.iconClassNames?.className, props.iconClassNames?.showIconClassName, cx('showIcon')),
                     onClick: toggleMask,
                     onKeyDown: onToggleMaskKeyDown,
                     'aria-label': ariaLabel('passwordShow') || 'Show Password',

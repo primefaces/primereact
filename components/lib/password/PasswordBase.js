@@ -29,31 +29,31 @@ const styles = `
         position: relative;
         display: inline-flex;
     }
-    
+
     .p-password-panel {
         position: absolute;
         top: 0;
         left: 0;
     }
-    
+
     .p-password .p-password-panel {
         min-width: 100%;
     }
-    
+
     .p-password-meter {
         height: 10px;
     }
-    
+
     .p-password-strength {
         height: 100%;
         width: 0%;
         transition: width 1s ease-in-out;
     }
-    
+
     .p-fluid .p-password {
         display: flex;
     }
-    
+
     .p-password-input::-ms-reveal,
     .p-password-input::-ms-clear {
         display: none;
@@ -81,6 +81,7 @@ export const PasswordBase = ComponentBase.extend({
         strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
         feedback: true,
         toggleMask: false,
+        onToggleMaskClick: null,
         appendTo: null,
         header: null,
         content: null,
@@ -92,6 +93,7 @@ export const PasswordBase = ComponentBase.extend({
         tooltipOptions: null,
         style: null,
         className: null,
+        iconClassNames: null,
         inputStyle: null,
         inputClassName: null,
         invalid: false,

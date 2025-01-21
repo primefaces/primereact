@@ -226,6 +226,28 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     toggleMask?: boolean | undefined;
     /**
+     * Callback to invoke when the mask toggle button is clicked.
+     * @param {boolean} state - Current state of the mask (true if unmasked, false if masked).
+     */
+    onToggleMaskClick?: (state: boolean) => void | undefined;
+    /**
+     * Object containing class names for icon elements in the Password component.
+     */
+    iconClassNames?: {
+        /**
+         * General style class applied to all icons.
+         */
+        className?: string | undefined;
+        /**
+         * Style class applied to the show icon (used to display the password).
+         */
+        showIconClassName?: string | undefined;
+        /**
+         * Style class applied to the hide icon (used to mask the password).
+         */
+        hideIconClassName?: string | undefined;
+    };
+    /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
