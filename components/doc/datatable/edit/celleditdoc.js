@@ -38,28 +38,31 @@ export function CellEditDoc(props) {
     };
 
     const onCellEditComplete = (e) => {
-        let { rowData, newValue, field, originalEvent: event } = e;
+        setProducts((products) => {
+            let { rowData, newValue, field, originalEvent: event } = e;
+            let newProducts = JSON.parse(JSON.stringify(products));
 
-        switch (field) {
-            case 'quantity':
-            case 'price':
-                if (isPositiveInteger(newValue)) {
-                    rowData[field] = newValue;
-                } else {
-                    event.preventDefault();
-                }
+            switch (field) {
+                case 'quantity':
+                case 'price':
+                    if (isPositiveInteger(newValue)) {
+                        newProducts.find((row) => row.id === rowData.id)[field] = newValue;
+                    } else {
+                        event.preventDefault();
+                    }
 
-                break;
+                    break;
 
-            default:
-                if (newValue.trim().length > 0) {
-                    rowData[field] = newValue;
-                } else {
-                    event.preventDefault();
-                }
+                default:
+                    if (newValue.trim().length > 0) {
+                        newProducts.find((row) => row.id === rowData.id)[field] = newValue;
+                    } else {
+                        event.preventDefault();
+                    }
 
-                break;
-        }
+                    break;
+            }
+        });
     };
 
     const cellEditor = (options) => {
@@ -71,11 +74,11 @@ export function CellEditDoc(props) {
     };
 
     const textEditor = (options) => {
-        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
     };
 
     const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -130,20 +133,31 @@ export default function CellEditingDemo() {
     };
 
     const onCellEditComplete = (e) => {
-        let { rowData, newValue, field, originalEvent: event } = e;
+        setProducts((products) => {
+            let { rowData, newValue, field, originalEvent: event } = e;
+            let newProducts = JSON.parse(JSON.stringify(products));
 
-        switch (field) {
-            case 'quantity':
-            case 'price':
-                if (isPositiveInteger(newValue)) rowData[field] = newValue;
-                else event.preventDefault();
-                break;
+            switch (field) {
+                case 'quantity':
+                case 'price':
+                    if (isPositiveInteger(newValue)) {
+                        newProducts.find((row) => row.id === rowData.id)[field] = newValue;
+                    } else {
+                        event.preventDefault();
+                    }
 
-            default:
-                if (newValue.trim().length > 0) rowData[field] = newValue;
-                else event.preventDefault();
-                break;
-        }
+                    break;
+
+                default:
+                    if (newValue.trim().length > 0) {
+                        newProducts.find((row) => row.id === rowData.id)[field] = newValue;
+                    } else {
+                        event.preventDefault();
+                    }
+
+                    break;
+            }
+        });
     };
 
     const cellEditor = (options) => {
@@ -152,11 +166,11 @@ export default function CellEditingDemo() {
     };
 
     const textEditor = (options) => {
-        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
     };
 
     const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -230,20 +244,31 @@ export default function CellEditingDemo() {
     };
 
     const onCellEditComplete = (e: ColumnEvent) => {
-        let { rowData, newValue, field, originalEvent: event } = e;
+        setProducts((products) => {
+            let { rowData, newValue, field, originalEvent: event } = e;
+            let newProducts = JSON.parse(JSON.stringify(products));
 
-        switch (field) {
-            case 'quantity':
-            case 'price':
-                if (isPositiveInteger(newValue)) rowData[field] = newValue;
-                else event.preventDefault();
-                break;
+            switch (field) {
+                case 'quantity':
+                case 'price':
+                    if (isPositiveInteger(newValue)) {
+                        newProducts.find((row) => row.id === rowData.id)[field] = newValue;
+                    } else {
+                        event.preventDefault();
+                    }
 
-            default:
-                if (newValue.trim().length > 0) rowData[field] = newValue;
-                else event.preventDefault();
-                break;
-        }
+                    break;
+
+                default:
+                    if (newValue.trim().length > 0) {
+                        newProducts.find((row) => row.id === rowData.id)[field] = newValue;
+                    } else {
+                        event.preventDefault();
+                    }
+
+                    break;
+            }
+        });
     };
 
     const cellEditor = (options: ColumnEditorOptions) => {
@@ -252,11 +277,11 @@ export default function CellEditingDemo() {
     };
 
     const textEditor = (options: ColumnEditorOptions) => {
-        return <InputText type="text" value={options.value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => options.editorCallback(e.target.value)} onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputText type="text" value={options.value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => options.editorCallback(e.target.value)} />;
     };
 
     const priceEditor = (options: ColumnEditorOptions) => {
-        return <InputNumber value={options.value} onValueChange={(e: InputNumberValueChangeEvent) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" onKeyDown={(e) => e.stopPropagation()} />;
+        return <InputNumber value={options.value} onValueChange={(e: InputNumberValueChangeEvent) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
     };
 
     const priceBodyTemplate = (rowData: Product) => {
@@ -295,7 +320,8 @@ export default function CellEditingDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Cell editing is enabled by setting <i>editMode</i> as <i>cell</i>, defining input elements with <i>editor</i> property of a Column and implementing <i>onCellEditComplete</i> to update the state.
+                    Cell editing is enabled by setting <i>editMode</i> as <i>cell</i>, defining input elements with <i>editor</i> property of a Column and implementing <i>onCellEditComplete</i> to update the state. When updating the state from
+                    React's useState hook, use a callback format to always work on the up-to-date state.
                 </p>
             </DocSectionText>
             <DeferredDemo onLoad={loadDemoData}>
