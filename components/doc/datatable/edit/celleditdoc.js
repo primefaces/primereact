@@ -62,6 +62,8 @@ export function CellEditDoc(props) {
 
                     break;
             }
+
+            return newProducts;
         });
     };
 
@@ -157,6 +159,8 @@ export default function CellEditingDemo() {
 
                     break;
             }
+   
+            return newProducts;
         });
     };
 
@@ -268,6 +272,8 @@ export default function CellEditingDemo() {
 
                     break;
             }
+
+            return newProducts;
         });
     };
 
