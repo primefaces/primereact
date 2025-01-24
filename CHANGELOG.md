@@ -1,6 +1,38 @@
 # Changelog
 
-## [10.9.1](https://github.com/primefaces/primereact/tree/10.9.1) (2024-01-02)
+## [10.9.2](https://github.com/primefaces/primereact/tree/10.9.2) (2025-01-24)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.9.1...10.9.2)
+
+**Fixed Bugs:**
+
+- className Prop Doesn't Apply to Button Element in ToggleButton [#7630](https://github.com/primefaces/primereact/issues/7630)
+- checkboxElement in MultiSelectPanelHeaderTemplateEvent has wrong interface [#7622](https://github.com/primefaces/primereact/issues/7622)
+- AutoComplete: Typo in the empty message pass through [#7618](https://github.com/primefaces/primereact/issues/7618)
+- MultiSelect showClear Keyboard Trap [#7613](https://github.com/primefaces/primereact/issues/7613)
+- Setting RowReorderIcon breaks drag styles [#7612](https://github.com/primefaces/primereact/issues/7612)
+- Calendar KeyBoard Accessibility Issue When Showed Two Months And Pressed the ArrowRight [#7604](https://github.com/primefaces/primereact/issues/7604)
+- Today Button not visible for maxDate [#7602](https://github.com/primefaces/primereact/issues/7602)
+- Tree: Incorrect props and types in documentation [#7599](https://github.com/primefaces/primereact/issues/7599)
+- Today Button is hidden for maxDate with value as new Date() [#7598](https://github.com/primefaces/primereact/issues/7598)
+- MultiSelect: it recognised the group options as standalone groups because of the “group“ key appearance [#7595](https://github.com/primefaces/primereact/issues/7595)
+- Calendar: year is not getting updated on Clear button [#7581](https://github.com/primefaces/primereact/issues/7581)
+- Dropdown: The selected option is not unselected from the list on clear action [#7576](https://github.com/primefaces/primereact/issues/7576)
+- ListBox: No item is displayed when virtualScrollerOptions is used [#7574](https://github.com/primefaces/primereact/issues/7574)
+- Core: Allow hideOverlaysOnDocumentScrolling to also work in dialogs [#7566](https://github.com/primefaces/primereact/issues/7566)
+- KeyFilter: Incorrect handling of dash and dot in numeric inputs [#7557](https://github.com/primefaces/primereact/issues/7557)
+- Calendar: Improve type declaration using generic types with default parameters [#7555](https://github.com/primefaces/primereact/issues/7555)
+- Calendar: onSelect is forcing date while typing [#7553](https://github.com/primefaces/primereact/issues/7553)
+- Fix #7180 Screenreader improve hidden accessible [#7180](https://github.com/primefaces/primereact/issues/7180)
+- Dropdown/MultiSelect: Add filterDelay property for debounce [#7547](https://github.com/primefaces/primereact/issues/7547)
+- Datatable: Sort with multiselect - wrong selection [#7546](https://github.com/primefaces/primereact/issues/7546)
+- DataTable: Frozen alignRight not working [#7545](https://github.com/primefaces/primereact/issues/7545)
+- How to format the selected item in Autocomplete [#7522](https://github.com/primefaces/primereact/issues/7522)
+- TreeTable using stripedRows: children rows are not striped correctly [#7513](https://github.com/primefaces/primereact/issues/7513)
+- TreeTable: Wrong data format in the docs [#7504](https://github.com/primefaces/primereact/issues/7504)
+- InputTextarea: autoResize not working when disabled [#7502](https://github.com/primefaces/primereact/issues/7502)
+
+## [10.9.1](https://github.com/primefaces/primereact/tree/10.9.1) (2025-01-02)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.9.0...10.9.1)
 
@@ -8,7 +40,7 @@
 
 - All (with icons) - react is not defined [#7544](https://github.com/primefaces/primereact/issues/7544)
 
-## [10.9.0](https://github.com/primefaces/primereact/tree/10.9.0) (2024-01-02)
+## [10.9.0](https://github.com/primefaces/primereact/tree/10.9.0) (2025-01-02)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.8.5...10.9.0)
 
