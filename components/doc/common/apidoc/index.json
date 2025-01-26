@@ -6439,7 +6439,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether to allow navigation past min/max dates."
+                            "description": "Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range."
                         },
                         {
                             "name": "showOnFocus",
@@ -8038,7 +8038,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "description": "Whether to allow navigation past min/max dates."
+                            "description": "Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range."
                         },
                         {
                             "name": "showOnFocus",
