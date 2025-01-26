@@ -93,18 +93,6 @@ export interface StepperChangeEvent {
 }
 
 /**
- * Defines custom RefAttributes methods
- * @group Methods
- */
-export interface StepperRefAttributes {
-    getElement: () => HTMLDivElement;
-    getActiveStep: () => number | undefined;
-    setActiveStep: (step: number) => void;
-    nextCallback: (e?: React.SyntheticEvent) => void;
-    prevCallback: (e?: React.SyntheticEvent) => void;
-}
-
-/**
  * Defines valid properties in Stepper component.
  * @group Properties
  */
@@ -168,4 +156,30 @@ export interface StepperProps {
  *
  * @group Component
  */
-export declare const Stepper: React.ForwardRefExoticComponent<React.PropsWithChildren<StepperProps> & React.RefAttributes<StepperRefAttributes>>;
+export declare class Stepper extends React.Component<StepperProps, any> {
+    /**
+     * Used to get container element.
+     * @return {HTMLDivElement} Container element
+     */
+    public getElement(): HTMLDivElement;
+    /**
+     * Used to get the current active step index.
+     * @return {number | undefined} Active step index
+     */
+    public getActiveStep(): number | undefined;
+    /**
+     * Used to set the active step index.
+     * @param {number} step - Index of step to set as active
+     */
+    public setActiveStep(step: number): void;
+    /**
+     * Used to navigate to the next step.
+     * @param {React.SyntheticEvent} [e] - Browser event
+     */
+    public nextCallback(e?: React.SyntheticEvent): void;
+    /**
+     * Used to navigate to the previous step.
+     * @param {React.SyntheticEvent} [e] - Browser event
+     */
+    public prevCallback(e?: React.SyntheticEvent): void;
+}
