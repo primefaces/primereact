@@ -737,7 +737,7 @@ interface CalendarBaseProps {
      */
     showMillisec?: boolean | undefined;
     /**
-     * Whether to allow navigation past min/max dates.
+     * Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range.
      * @defaultValue false
      */
     showMinMaxRange?: boolean | undefined;
