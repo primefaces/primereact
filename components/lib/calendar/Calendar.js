@@ -3547,7 +3547,7 @@ export const Calendar = React.memo(
                         'data-p-other-month': date.otherMonth,
                         'data-p-day': date.day,
                         'data-p-month': date.month,
-                        'data-p-year': date.year,
+                        'data-p-year': date.year
                     },
                     ptm('day', {
                         context: {
