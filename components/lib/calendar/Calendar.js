@@ -3544,7 +3544,10 @@ export const Calendar = React.memo(
                         className: cx('day', { date }),
                         'aria-label': date.day,
                         'data-p-today': date.today,
-                        'data-p-other-month': date.otherMonth
+                        'data-p-other-month': date.otherMonth,
+                        'data-p-day': date.day,
+                        'data-p-month': date.month,
+                        'data-p-year': date.year,
                     },
                     ptm('day', {
                         context: {
