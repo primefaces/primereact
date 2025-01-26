@@ -3588,7 +3588,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "typeof InputText",
                             "description": "Used to get input element."
                         },
                         {
@@ -30460,7 +30460,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "typeof InputText",
                             "description": "Used to get container element."
                         }
                     ]
@@ -30785,7 +30785,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "typeof InputText",
                             "description": "Used to get input element."
                         }
                     ]
@@ -32019,6 +32019,7 @@
         "description": "InputText is an extension to standard input element with theming and keyfiltering.\n\n[Live Demo](https://www.primereact.org/inputtext/)",
         "components": {
             "InputText": {
+                "description": "InputText is an extension to standard input element with theming and keyfiltering.",
                 "methods": {
                     "description": "Defines methods that can be accessed by the component's reference.",
                     "values": []
@@ -41550,7 +41551,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "typeof InputText",
                             "description": "Used to get input element."
                         },
                         {
@@ -47409,9 +47410,59 @@
         "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.\n\n[Live Demo](https://www.primereact.org/stepper/)",
         "components": {
             "Stepper": {
+                "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.",
                 "methods": {
                     "description": "Defines methods that can be accessed by the component's reference.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "getActiveStep",
+                            "parameters": [],
+                            "returnType": "undefined | number",
+                            "description": "Used to get the current active step index."
+                        },
+                        {
+                            "name": "getElement",
+                            "parameters": [],
+                            "returnType": "HTMLDivElement",
+                            "description": "Used to get container element."
+                        },
+                        {
+                            "name": "nextCallback",
+                            "parameters": [
+                                {
+                                    "name": "e",
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to navigate to the next step."
+                        },
+                        {
+                            "name": "prevCallback",
+                            "parameters": [
+                                {
+                                    "name": "e",
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to navigate to the previous step."
+                        },
+                        {
+                            "name": "setActiveStep",
+                            "parameters": [
+                                {
+                                    "name": "step",
+                                    "type": "number",
+                                    "description": "Index of step to set as active"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to set the active step index."
+                        }
+                    ]
                 },
                 "props": {
                     "description": "Defines valid properties in Stepper component.",
