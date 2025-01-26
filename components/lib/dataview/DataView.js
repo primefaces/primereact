@@ -125,7 +125,7 @@ export const DataView = React.memo(
                     rightContent={props.paginatorRight}
                     alwaysShow={props.alwaysShowPaginator}
                     dropdownAppendTo={props.paginatorDropdownAppendTo}
-                    ptm={ptm('paginator')}
+                    pt={ptm('paginator')}
                     unstyled={props.unstyled}
                     __parentMetadata={{ parent: metaData }}
                 />
