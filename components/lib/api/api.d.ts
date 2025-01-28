@@ -1205,6 +1205,10 @@ export interface LocaleOptions {
          * Rotate Left
          */
         rotateLeft?: string;
+        /**
+         * Options List Label
+         */
+        listLabel?: string;
     };
 }
 
