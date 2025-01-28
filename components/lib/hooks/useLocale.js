@@ -89,6 +89,7 @@ let locales = {
             jumpToPageDropdownLabel: 'Jump to Page Dropdown',
             jumpToPageInputLabel: 'Jump to Page Input',
             lastPageLabel: 'Last Page',
+            listLabel: 'Option List',
             listView: 'List View',
             moveAllToSource: 'Move All to Source',
             moveAllToTarget: 'Move All to Target',

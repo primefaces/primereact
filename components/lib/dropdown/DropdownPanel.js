@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption, PrimeReactContext } from '../api/Api';
+import { ariaLabel, localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps } from '../hooks/Hooks';
 import { SearchIcon } from '../icons/search';
@@ -158,11 +158,11 @@ export const DropdownPanel = React.memo(
 
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
-                const ariaLabel = localeOption('clear');
+                const ariaLabelFilterClear = localeOption('clear');
                 const clearIconProps = mergeProps(
                     {
                         className: cx('filterClearIcon'),
-                        'aria-label': ariaLabel,
+                        'aria-label': ariaLabelFilterClear,
                         onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
                     },
                     getPTOptions('filterClearIcon')
@@ -261,7 +261,8 @@ export const DropdownPanel = React.memo(
                                     ref: options.contentRef,
                                     style: options.style,
                                     className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
-                                    role: 'listbox'
+                                    role: 'listbox',
+                                    'aria-label': ariaLabel('listLabel')
                                 },
                                 getPTOptions('list')
                             );
@@ -286,7 +287,8 @@ export const DropdownPanel = React.memo(
             const listProps = mergeProps(
                 {
                     className: cx('list'),
-                    role: 'listbox'
+                    role: 'listbox',
+                    'aria-label': ariaLabel('listLabel')
                 },
                 getPTOptions('list')
             );
