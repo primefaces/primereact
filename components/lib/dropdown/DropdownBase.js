@@ -10,7 +10,7 @@ const classes = {
             'p-focus': focusedState,
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
             'p-dropdown-clearable': props.showClear && !props.disabled,
-            'p-inputwrapper-filled': props.value !== undefined,
+            'p-inputwrapper-filled': props.value !== undefined && props.value !== null,
             'p-inputwrapper-focus': focusedState || overlayVisibleState
         }),
     input: ({ props, label }) =>
