@@ -15,7 +15,8 @@ export const UITreeNode = React.memo((props) => {
     const mergeProps = useMergeProps();
     const isLeaf = props.isNodeLeaf(props.node);
     const label = props.node.label;
-    const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
+    const isFiltering = props.isFiltering;
+    const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || (!isFiltering && props.node.expanded);
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
@@ -908,6 +909,7 @@ export const UITreeNode = React.memo((props) => {
                                 dragdropScope={props.dragdropScope}
                                 expandIcon={props.expandIcon}
                                 expandedKeys={props.expandedKeys}
+                                isFiltering={props.isFiltering}
                                 index={index}
                                 isNodeLeaf={props.isNodeLeaf}
                                 last={index === props.node.children.length - 1}
