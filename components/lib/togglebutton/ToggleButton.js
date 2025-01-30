@@ -101,7 +101,7 @@ export const ToggleButton = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { hasIcon, hasLabel }),
+                className: classNames(props.className, cx('root', { hasIcon, hasLabel })),
                 'data-p-highlight': props.checked,
                 'data-p-disabled': props.disabled
             },
