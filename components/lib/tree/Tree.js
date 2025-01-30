@@ -421,6 +421,7 @@ export const Tree = React.memo(
                     dragdropScope={props.dragdropScope}
                     expandIcon={props.expandIcon}
                     expandedKeys={expandedKeys}
+                    isFiltering={isFiltering}
                     isNodeLeaf={isNodeLeaf}
                     metaKeySelection={props.metaKeySelection}
                     nodeTemplate={props.nodeTemplate}
