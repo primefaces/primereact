@@ -104,12 +104,12 @@ export default function SampleDemo() {
         `,
         typescript: `
 import React, { useState } from 'react';
-import { InputOtp } from 'primereact/inputotp';
+import { InputOtp, InputOtpProps } from 'primereact/inputotp';
 import { Button } from 'primereact/button';
 
-interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    events: any;
-    props: any;
+interface CustomInputProps extends InputOtpProps {
+    events?: any;
+    props?: any;
 }
 
 export default function SampleDemo() {
