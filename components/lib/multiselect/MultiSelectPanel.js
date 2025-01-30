@@ -140,8 +140,7 @@ export const MultiSelectPanel = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
-            const optionItems = props.getOptionGroupChildren(option);
-            const isItemGroup = option.group === true && props.optionGroupLabel && optionItems.length > 0;
+            const isItemGroup = option.group === true && props.optionGroupLabel;
 
             if (isItemGroup) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);

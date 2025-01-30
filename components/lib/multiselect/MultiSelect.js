@@ -939,12 +939,9 @@ export const MultiSelect = React.memo(
             return (options || []).reduce((result, option, index) => {
                 const optionGroupChildren = getOptionGroupChildren(option);
 
-                if (optionGroupChildren) {
-                    result.push({ ...option, group: true, index });
-                    optionGroupChildren.forEach((o) => result.push(o));
-                } else {
-                    result.push(option);
-                }
+                result.push({ ...option, group: true, index });
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
 
                 return result;
             }, []);
