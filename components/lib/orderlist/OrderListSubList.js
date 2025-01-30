@@ -255,7 +255,7 @@ export const OrderListSubList = React.memo(
                         value: props.filterValue,
                         onChange: props.onFilter,
                         onKeyDown: onFilterInputKeyDown,
-                        placeholder: props.placeholder,
+                        placeholder: props.filterPlaceholder,
                         className: cx('filterInput')
                     },
                     _ptm('filterInput')
