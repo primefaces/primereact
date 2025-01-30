@@ -937,9 +937,9 @@ export const MultiSelect = React.memo(
 
         const flatOptions = (options) => {
             return (options || []).reduce((result, option, index) => {
-                const optionGroupChildren = getOptionGroupChildren(option);
-
                 result.push({ ...option, group: true, index });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
 
                 optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
 
