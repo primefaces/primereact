@@ -61,7 +61,7 @@
         "@types/node": "^22.7.4",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.0",
-        "@types/react-transition-group": "^4.4.11",
+        "@types/react-transition-group": "^4.4.12",
         "@typescript-eslint/eslint-plugin": "^6.13.1",
         "eslint": "8.57.0",
         "eslint-config-next": "14.2.14",
