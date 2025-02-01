@@ -64,7 +64,7 @@
         "@types/react-transition-group": "^4.4.11",
         "@typescript-eslint/eslint-plugin": "^6.13.1",
         "eslint": "8.57.0",
-        "eslint-config-next": "14.2.14",
+        "eslint-config-next": "15.1.6",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-jest-dom": "^5.4.0",
         "gulp": "^5.0.0",
