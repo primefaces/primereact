@@ -422,7 +422,7 @@ export const MegaMenu = React.memo(
             event.preventDefault();
 
             if (horizontal) {
-                const _focusedItemInfo = focusedItemInfo;
+                let _focusedItemInfo = focusedItemInfo;
 
                 if (ObjectUtils.isNotEmpty(activeItemState) && activeItemState.key === focusedItemInfo.key) {
                     _focusedItemInfo = { index: -1, key: '', parentKey: activeItemState.key };
