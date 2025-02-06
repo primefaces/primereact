@@ -529,7 +529,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 ref: prevBtnRef,
                 type: 'button',
                 className: cx('prevbutton'),
-                'aria-label': ariaLabel('previousPageLabel'),
+                'aria-label': ariaLabel('prevPageLabel'),
                 onClick: (e) => navBackward(e)
             },
             ptm('prevbutton')

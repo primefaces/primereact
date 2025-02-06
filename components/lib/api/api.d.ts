@@ -1112,7 +1112,7 @@ export interface LocaleOptions {
         /**
          * Previous Page
          */
-        previousPageLabel?: string;
+        prevPageLabel?: string;
         /**
          * Rows per page
          */
