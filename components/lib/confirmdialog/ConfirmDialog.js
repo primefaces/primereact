@@ -94,7 +94,7 @@ export const ConfirmDialog = React.memo(
         const hide = (result = 'cancel') => {
             if (visibleState) {
                 setVisibleState(false);
-                callbackFromProp('onHide', { result });
+                callbackFromProp('onHide', result);
                 DomHandler.focus(focusElementOnHide.current);
                 focusElementOnHide.current = null;
             }
