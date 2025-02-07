@@ -47,6 +47,10 @@ const styles = `
         position: relative;
     }
 
+    .p-orderlist-item .p-ink {
+        pointer-events: none;
+    }
+
     .p-orderlist-filter {
         position: relative;
     }
