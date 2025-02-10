@@ -1,6 +1,7 @@
 {
-    "id": 48,
-    "content": "Sakai | Free Admin Template.",
-    "linkText": "Learn More",
-    "linkHref": "https://sakai.primereact.org"
+    "id": 52,
+    "content": "Introducing Genesis Template 🚀",
+    "linkText": "View Demo",
+    "linkHref": "https://genesis.primereact.org",
+    "target": "_blank"
 }

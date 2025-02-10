@@ -28,7 +28,6 @@ exports[`Message default 1`] = `
     role="alert"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-inline-message-icon"
       data-pc-section="icon"
       fill="none"
@@ -85,7 +84,6 @@ exports[`Message severity error 1`] = `
     role="alert"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-inline-message-icon"
       data-pc-section="icon"
       fill="none"
@@ -122,7 +120,6 @@ exports[`Message severity info 1`] = `
     role="alert"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-inline-message-icon"
       data-pc-section="icon"
       fill="none"
@@ -159,7 +156,6 @@ exports[`Message severity success 1`] = `
     role="alert"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-inline-message-icon"
       data-pc-section="icon"
       fill="none"
@@ -194,7 +190,6 @@ exports[`Message severity warn 1`] = `
     role="alert"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-inline-message-icon"
       data-pc-section="icon"
       fill="none"
@@ -237,7 +232,6 @@ exports[`Message templating 1`] = `
     role="alert"
   >
     <svg
-      aria-hidden="true"
       class="p-icon p-inline-message-icon"
       data-pc-section="icon"
       fill="none"

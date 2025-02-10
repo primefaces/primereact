@@ -429,6 +429,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterBy?: string | undefined;
     /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
      * Icon of the filter.
      */
     filterIcon?: IconType<TreeSelectProps> | undefined;
@@ -456,7 +461,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
     /**
-     * When filtering is enabled, the value of input field.
+     * When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange.
      */
     filterValue?: string | undefined;
     /**

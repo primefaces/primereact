@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
@@ -14,6 +15,7 @@ export const TriStateCheckbox = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TriStateCheckboxBase.getProps(inProps, context);
 
+        const [checkBoxValue, setCheckBoxValue] = useState('');
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = TriStateCheckboxBase.setMetaData({
@@ -22,6 +24,14 @@ export const TriStateCheckbox = React.memo(
 
         useHandleStyle(TriStateCheckboxBase.css.styles, isUnstyled, { name: 'tristatecheckbox' });
 
+        useEffect(() => {
+            if ([true, false, ''].includes(props.value)) {
+                setCheckBoxValue(props.value);
+            } else {
+                setCheckBoxValue('');
+            }
+        }, [props.value]);
+
         const onChange = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
@@ -29,12 +39,12 @@ export const TriStateCheckbox = React.memo(
 
             let newValue;
 
-            if (props.value === null || props.value === undefined) {
+            if (checkBoxValue === '') {
                 newValue = true;
-            } else if (props.value === true) {
+            } else if (checkBoxValue === true) {
                 newValue = false;
-            } else if (props.value === false) {
-                newValue = null;
+            } else if (checkBoxValue === false) {
+                newValue = '';
             }
 
             if (props.onChange) {
@@ -101,16 +111,16 @@ export const TriStateCheckbox = React.memo(
 
         let icon;
 
-        if (props.value === false) {
+        if (checkBoxValue === false) {
             icon = props.uncheckIcon || <TimesIcon {...uncheckIconProps} />;
-        } else if (props.value === true) {
+        } else if (checkBoxValue === true) {
             icon = props.checkIcon || <CheckIcon {...checkIconProps} />;
         }
 
         const checkIcon = IconUtils.getJSXIcon(icon, { ...checkIconProps }, { props });
 
-        const ariaValueLabel = props.value ? ariaLabel('trueLabel') : props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
-        const ariaChecked = props.value ? 'true' : 'false';
+        const ariaValueLabel = checkBoxValue ? ariaLabel('trueLabel') : checkBoxValue === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
+        const ariaChecked = checkBoxValue ? 'true' : 'false';
 
         const boxProps = mergeProps(
             {
@@ -128,7 +138,7 @@ export const TriStateCheckbox = React.memo(
 
         const srOnlyAriaProps = mergeProps(
             {
-                className: 'p-sr-only p-hidden-accessible',
+                className: 'p-hidden-accessible',
                 'aria-live': 'polite'
             },
             ptm('srOnlyAria')
@@ -152,8 +162,8 @@ export const TriStateCheckbox = React.memo(
                 'aria-invalid': props.invalid,
                 disabled: props.disabled,
                 readOnly: props.readOnly,
-                value: props.value,
-                checked: props.value,
+                value: checkBoxValue,
+                checked: checkBoxValue,
                 onChange: onChange
             },
             ptm('input')

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useDebounce, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
@@ -19,7 +19,7 @@ export const MultiSelect = React.memo(
         const props = MultiSelectBase.getProps(inProps, context);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
         const [clicked, setClicked] = React.useState(false);
-        const [filterState, setFilterState] = React.useState('');
+        const [filterValue, filterState, setFilterState] = useDebounce('', props.filterDelay || 0);
         const [startRangeIndex, setStartRangeIndex] = React.useState(-1);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(props.inline);
@@ -29,8 +29,9 @@ export const MultiSelect = React.memo(
         const firstHiddenFocusableElementOnOverlay = React.useRef(null);
         const lastHiddenFocusableElementOnOverlay = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
-        const labelRef = React.useRef(null);
+        const labelContainerRef = React.useRef(null);
         const overlayRef = React.useRef(null);
+        const labelRef = React.useRef(null);
         const hasFilter = filterState && filterState.trim().length > 0;
         const empty = ObjectUtils.isEmpty(props.value);
         const equalityKey = props.optionValue ? null : props.dataKey;
@@ -385,28 +386,11 @@ export const MultiSelect = React.memo(
 
                 if (event.checked) {
                     value = [];
+                } else {
+                    const validOptions = visibleOptions.filter((option) => isValidOption(option) && !isOptionDisabled(option));
 
-                    if (visibleOptions) {
-                        const selectedOptions = visibleOptions.filter((option) => isOptionDisabled(option) && isSelected(option));
-
-                        value = selectedOptions.map((option) => getOptionValue(option));
-                    }
-                } else if (visibleOptions) {
-                    const options = visibleOptions.filter((option) => !isOptionDisabled(option) || isSelected(option));
-
-                    if (props.optionGroupLabel) {
-                        value = [];
-                        options.forEach(
-                            (optionGroup) =>
-                                (value = [
-                                    ...value,
-                                    ...getOptionGroupChildren(optionGroup)
-                                        .filter((option) => !isOptionDisabled(option))
-                                        .map((option) => getOptionValue(option))
-                                ])
-                        );
-                    } else {
-                        value = options.map((option) => getOptionValue(option));
+                    if (validOptions) {
+                        value = validOptions.map((option) => getOptionValue(option));
                     }
                 }
 
@@ -518,7 +502,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
+            !props.inline && DomHandler.alignOverlay(overlayRef.current, labelContainerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const isClearClicked = (event) => {
@@ -621,21 +605,7 @@ export const MultiSelect = React.memo(
                 return false;
             }
 
-            const options = visibleOptions.filter((option) => !isOptionDisabled(option));
-
-            if (props.optionGroupLabel) {
-                let areAllSelected = true;
-
-                for (let optionGroup of options) {
-                    const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
-
-                    if (visibleOptionsGroupChildren.some((option) => !isSelected(option)) === true) {
-                        areAllSelected = false;
-                    }
-                }
-
-                return areAllSelected;
-            }
+            const options = visibleOptions.filter((option) => !isOptionDisabled(option) && isValidOption(option));
 
             return !options.some((option) => !isSelected(option));
         };
@@ -696,7 +666,7 @@ export const MultiSelect = React.memo(
         };
 
         const isOptionGroup = (option) => {
-            return props.optionGroupLabel && option.optionGroup && option.group;
+            return props.optionGroupLabel && option.group;
         };
 
         const hasSelectedOption = () => {
@@ -812,6 +782,8 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             event.stopPropagation();
 
+            if (!isVisible(event.currentTarget)) return;
+
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
             if (props.onRemove) {
@@ -822,6 +794,22 @@ export const MultiSelect = React.memo(
             }
 
             updateModel(event, value, item);
+        };
+
+        const isVisible = (element) => {
+            const parentElement = labelRef.current;
+            const isOverflow = parentElement.clientWidth < parentElement.scrollWidth;
+
+            if (!isOverflow) return true;
+
+            const target = element.closest('[data-pc-section="token"]');
+            const parentStyles = window.getComputedStyle(parentElement);
+            const targetStyles = window.getComputedStyle(target);
+
+            const parentWidth = parentElement.clientWidth - parseFloat(parentStyles.paddingLeft) - parseFloat(parentStyles.paddingRight);
+            const targetRight = target.getBoundingClientRect().right + parseFloat(targetStyles.marginRight) - parentElement.getBoundingClientRect().left;
+
+            return targetRight <= parentWidth;
         };
 
         const getSelectedItemsLabel = () => {
@@ -884,8 +872,11 @@ export const MultiSelect = React.memo(
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
+                            'aria-label': localeOption('removeTokenIcon'),
                             className: cx('removeTokenIcon'),
-                            onClick: (e) => removeChip(e, val)
+                            onClick: (e) => removeChip(e, val),
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, val),
+                            tabIndex: props.tabIndex || '0'
                         },
                         ptm('removeTokenIcon', context)
                     );
@@ -918,12 +909,14 @@ export const MultiSelect = React.memo(
         };
 
         const getVisibleOptions = () => {
+            const options = props.optionGroupLabel ? flatOptions(props.options) : props.options;
+
             if (hasFilter) {
                 const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale);
                 const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
 
                 if (props.optionGroupLabel) {
-                    let filteredGroups = [];
+                    const filteredGroups = [];
 
                     for (let optgroup of props.options) {
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
@@ -933,13 +926,58 @@ export const MultiSelect = React.memo(
                         }
                     }
 
-                    return filteredGroups;
+                    return flatOptions(filteredGroups);
                 }
 
-                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                return FilterService.filter(options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
 
-            return props.options;
+            return options;
+        };
+
+        const flatOptions = (options) => {
+            return (options || []).reduce((result, option, index) => {
+                result.push({ ...option, group: true, index });
+
+                const optionGroupChildren = getOptionGroupChildren(option);
+
+                optionGroupChildren && optionGroupChildren.forEach((o) => result.push(o));
+
+                return result;
+            }, []);
+        };
+
+        const onClearIconKeyDown = (event) => {
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    updateModel(event, [], []);
+                    event.preventDefault();
+                    event.stopPropagation();
+                    break;
+            }
+        };
+
+        const onRemoveTokenIconKeyDown = (event, val) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    removeChip(event, val);
+                    break;
+            }
         };
 
         React.useImperativeHandle(ref, () => ({
@@ -983,7 +1021,10 @@ export const MultiSelect = React.memo(
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, [], [])
+                    'aria-label': localeOption('clear'),
+                    onClick: (e) => updateModel(e, [], []),
+                    onKeyDown: (e) => onClearIconKeyDown(e),
+                    tabIndex: props.tabIndex || '0'
                 },
                 ptm('clearIcon')
             );
@@ -1003,7 +1044,7 @@ export const MultiSelect = React.memo(
 
             const labelContainerProps = mergeProps(
                 {
-                    ref: labelRef,
+                    ref: labelContainerRef,
                     className: cx('labelContainer')
                 },
                 ptm('labelContainer')
@@ -1011,6 +1052,7 @@ export const MultiSelect = React.memo(
 
             const labelProps = mergeProps(
                 {
+                    ref: labelRef,
                     className: cx('label', { empty })
                 },
                 ptm('label')
@@ -1119,7 +1161,7 @@ export const MultiSelect = React.memo(
                         {...props}
                         onClick={onPanelClick}
                         onOverlayHide={hide}
-                        filterValue={filterState}
+                        filterValue={filterValue}
                         focusedOptionIndex={focusedOptionIndex}
                         onFirstHiddenFocus={onFirstHiddenFocus}
                         onLastHiddenFocus={onLastHiddenFocus}

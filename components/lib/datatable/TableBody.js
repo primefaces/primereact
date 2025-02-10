@@ -351,11 +351,10 @@ export const TableBody = React.memo(
         };
 
         const selectRangeOnRow = (event, rowRangeStart, rowRangeEnd) => {
-            const value = props.tableProps.value;
             let selection = [];
 
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
-                let rangeRowData = value[i];
+                let rangeRowData = props.processedData[i];
 
                 if (!isSelectable({ data: rangeRowData, index: i })) {
                     continue;
@@ -597,7 +596,7 @@ export const TableBody = React.memo(
                 : DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') || event.target.closest('.p-datatable-reorderablerow-handle');
 
             event.currentTarget.draggable = isDraggableHandle;
-            event.target.draggable = !isDraggableHandle;
+            //event.target.draggable = isDraggableHandle;
 
             if (allowRowDrag(e)) {
                 enableDragSelection(event, 'row');

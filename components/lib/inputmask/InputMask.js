@@ -623,6 +623,10 @@ export const InputMask = React.memo(
             }
         }, [isValueUpdated]);
 
+        useUpdateEffect(() => {
+            updateFilledState();
+        }, [props.disabled]);
+
         const otherProps = InputMaskBase.getOtherProps(props);
         const className = classNames(props.className, cx('root', { context }));
 

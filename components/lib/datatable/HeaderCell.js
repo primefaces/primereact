@@ -173,7 +173,7 @@ export const HeaderCell = React.memo((props) => {
     };
 
     const onKeyDown = (event) => {
-        if ((event.code == 'Enter' || event.code === 'NumpadEnter' || event.code == 'Space') && event.currentTarget === elementRef.current && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column') === 'true') {
+        if ((event.code == 'Enter' || event.code === 'NumpadEnter' || event.code == 'Space') && event.target === elementRef.current && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column') === true) {
             onClick(event);
 
             event.preventDefault();

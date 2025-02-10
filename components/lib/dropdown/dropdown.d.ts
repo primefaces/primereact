@@ -302,12 +302,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     checkmark?: boolean;
     /**
      * Template to display when filtering does not return any results.
-     * @defaultValue No available options
+     * @defaultValue No results found
      */
     emptyFilterMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
      * Text to display when there are no options available.
-     * @defaultValue No results found
+     * @defaultValue No available options
      */
     emptyMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
@@ -328,6 +328,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Icon of the filter to clear.
      */
     filterClearIcon?: IconType<DropdownProps> | undefined;
+    /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue false

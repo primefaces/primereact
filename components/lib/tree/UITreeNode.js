@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Checkbox } from '../checkbox/Checkbox';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -6,7 +7,6 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { Checkbox } from '../checkbox/Checkbox';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -15,7 +15,8 @@ export const UITreeNode = React.memo((props) => {
     const mergeProps = useMergeProps();
     const isLeaf = props.isNodeLeaf(props.node);
     const label = props.node.label;
-    const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
+    const isFiltering = props.isFiltering;
+    const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || (!isFiltering && props.node.expanded);
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
@@ -25,7 +26,7 @@ export const UITreeNode = React.memo((props) => {
                 selected: !isCheckboxSelectionMode() ? isSelected() : false,
                 expanded: expanded || false,
                 checked: isCheckboxSelectionMode() ? isChecked() : false,
-                isLeaf
+                leaf: isLeaf
             }
         });
     };
@@ -788,7 +789,7 @@ export const UITreeNode = React.memo((props) => {
                 type: 'button',
                 className: cx('toggler'),
                 tabIndex: -1,
-                'aria-hidden': true,
+                'aria-hidden': false,
                 onClick: onTogglerClick
             },
             getPTOptions('toggler')
@@ -908,6 +909,7 @@ export const UITreeNode = React.memo((props) => {
                                 dragdropScope={props.dragdropScope}
                                 expandIcon={props.expandIcon}
                                 expandedKeys={props.expandedKeys}
+                                isFiltering={props.isFiltering}
                                 index={index}
                                 isNodeLeaf={props.isNodeLeaf}
                                 last={index === props.node.children.length - 1}
@@ -958,7 +960,7 @@ export const UITreeNode = React.memo((props) => {
         const nodeProps = mergeProps(
             {
                 ref: elementRef,
-                className: classNames(props.node.className, cx('node', { isLeaf })),
+                className: classNames(props.node.className, cx('node', { leaf: isLeaf })),
                 style: props.node.style,
                 tabIndex,
                 role: 'treeitem',

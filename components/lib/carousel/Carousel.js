@@ -672,7 +672,7 @@ export const Carousel = React.memo(
                         className: cx('previousButton', { isDisabled }),
                         onClick: (e) => navBackward(e),
                         disabled: isDisabled,
-                        'aria-label': localeOption('aria') ? localeOption('aria').previousPageLabel : undefined,
+                        'aria-label': localeOption('aria') ? localeOption('aria').prevPageLabel : undefined,
                         'data-pc-group-section': 'navigator'
                     },
                     ptm('previousButton')

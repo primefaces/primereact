@@ -494,27 +494,30 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const onFilter = (event) => {
-        let filters = getFilters();
-        let newFilters = filters ? { ...filters } : {};
+        setFiltersState((prevFilters) => {
+            const filters = props.onFilter ? props.filters : prevFilters;
+            const newFilters = filters ? { ...filters } : {};
 
-        if (!isFilterBlank(event.value)) {
-            newFilters[event.field] = { value: event.value, matchMode: event.matchMode };
-        } else if (newFilters[event.field]) {
-            delete newFilters[event.field];
-        }
+            if (!isFilterBlank(event.value)) {
+                newFilters[event.field] = { value: event.value, matchMode: event.matchMode };
+            } else if (newFilters[event.field]) {
+                delete newFilters[event.field];
+            }
 
-        if (props.onFilter) {
-            props.onFilter({
-                filters: newFilters
-            });
-        } else {
-            setFirstState(0);
-            setFiltersState(newFilters);
-        }
+            if (props.onFilter) {
+                props.onFilter({
+                    filters: newFilters
+                });
+            } else {
+                setFirstState(0);
+            }
 
-        if (props.onValueChange) {
-            props.onValueChange(processedData({ filters }));
-        }
+            if (props.onValueChange) {
+                props.onValueChange(processedData({ filters: newFilters }));
+            }
+
+            return newFilters;
+        });
     };
 
     const cloneFilters = (filters) => {
