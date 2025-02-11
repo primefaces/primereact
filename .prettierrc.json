@@ -6,11 +6,18 @@
     "singleQuote": true,
     "printWidth": 250,
     "bracketSameLine": false,
+    "endOfLine": "lf",
     "overrides": [
         {
             "files": ["*.ts", "*.tsx", "*.mts", "*.d.ts"],
             "options": {
                 "parser": "typescript"
+            }
+        },
+        {
+            "files": ["*.json"],
+            "options": {
+                "parser": "json"
             }
         }
     ]

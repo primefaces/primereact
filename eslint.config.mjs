@@ -1,9 +1,15 @@
-export default {
-    root: true,
-    ignorePatterns: ['**/dist/**'],
-    plugins: ['prettier'],
-    extends: ['prettier'],
+import eslint from '@eslint/js';
+import prettierConfig from 'eslint-config-prettier';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config({
+    files: ['**/*.{js,mjs,ts,mts,d.ts}'],
+    extends: [eslint.configs.recommended, tseslint.configs.recommended, prettierConfig],
+    ignores: ['**/dist/**', '**/node_modules/**'],
     rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-fallthrough': 'off',
         'padding-line-between-statements': [
             'error',
             { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
@@ -14,33 +20,8 @@ export default {
             { blankLine: 'always', prev: 'block', next: '*' },
             { blankLine: 'always', prev: '*', next: 'block' },
             { blankLine: 'always', prev: 'block-like', next: '*' },
-            { blankLine: 'always', prev: '*', next: 'block-like' }
+            { blankLine: 'always', prev: '*', next: 'block-like' },
+            { blankLine: 'always', prev: ['import'], next: ['const', 'let', 'var'] }
         ]
-    },
-    overrides: [
-        {
-            files: ['*.ts', '*.tsx'],
-            parserOptions: {
-                project: ['tsconfig.json'],
-                createDefaultProgram: true
-            },
-            extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
-            rules: {
-                '@typescript-eslint/no-explicit-any': 'off',
-                '@typescript-eslint/no-empty-function': 'off',
-                '@typescript-eslint/no-empty-interface': 'off',
-                '@typescript-eslint/no-unused-vars': 'off',
-                'arrow-body-style': ['error', 'as-needed'],
-                '@typescript-eslint/member-ordering': [
-                    'error',
-                    {
-                        default: ['public-static-field', 'static-field', 'instance-field', 'public-instance-method', 'public-static-field']
-                    }
-                ],
-                curly: 'error',
-                'no-console': 'error',
-                'prefer-const': 'error'
-            }
-        }
-    ]
-};
+    }
+});

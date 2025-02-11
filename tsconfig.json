@@ -30,15 +30,11 @@
         // "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
         "baseUrl": "./",                                     /* Specify the base directory to resolve non-relative module names. */
         "paths": {                                           /* (UPDATED) Specify a set of entries that re-map imports to additional lookup locations. */
-            "@primereact/base/*": ["./packages/base/src/*"],
             "@primereact/core/*": ["./packages/core/src/*"],
+            "@primereact/headless/*": ["./packages/headless/src/*"],
             "@primereact/hooks/*": ["./packages/hooks/src/*"],
             "@primereact/icons/*": ["./packages/icons/src/*"],
             "@primereact/metadata/*": ["./packages/metadata/src/*"],
-            "@primereact/props/*": ["./packages/props/src/*"],
-            "@primereact/styles/*": ["./packages/styles/src/*"],
-            "@primereact/themes/*": ["./packages/themes/src/*"],
-            "@primereact/types/*": ["./packages/types/src/*"],
             "primereact/*": ["./packages/primereact/src/*"]
         },
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
@@ -63,11 +59,11 @@
 
         /* Emit */
         // "declaration": true,                              /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
-        // "declarationMap": true,                           /* Create sourcemaps for d.ts files. */
+        "declarationMap": false,                             /* (UPDATED) Create sourcemaps for d.ts files. */
         // "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
         // "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
         // "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
-        // "noEmit": true,                                   /* Disable emitting files from a compilation. */
+        "noEmit": true,                                      /* (UPDATED) Disable emitting files from a compilation. */
         // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
         // "outDir": "./",                                   /* Specify an output folder for all emitted files. */
         // "removeComments": true,                           /* Disable emitting comments. */
@@ -119,6 +115,6 @@
         // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
         "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
     },
-    "include": ["**/src/**/*", "**/dist/**/*"],
-    "exclude": ["**/node_modules"]
+    "include": ["**/src/**/*"],
+    "exclude": ["**/node_modules", "**/dist/**/*"]
 }
