@@ -127,7 +127,7 @@ importers:
         specifier: 'catalog:'
         version: 0.4.1
       react:
-        specifier: '>=18.0.0'
+        specifier: '>=19.0.0'
         version: 19.0.0
     publishDirectory: dist
 
@@ -142,9 +142,6 @@ importers:
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.4.1
-      react:
-        specifier: '>=18.0.0'
-        version: 19.0.0
     publishDirectory: dist
 
   packages/hooks:
@@ -158,9 +155,6 @@ importers:
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.4.1
-      react:
-        specifier: '>=18.0.0'
-        version: 19.0.0
     publishDirectory: dist
 
   packages/icons:
@@ -174,9 +168,6 @@ importers:
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.4.1
-      react:
-        specifier: '>=18.0.0'
-        version: 19.0.0
     publishDirectory: dist
 
   packages/metadata:
@@ -190,9 +181,6 @@ importers:
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.4.1
-      react:
-        specifier: '>=18.0.0'
-        version: 19.0.0
     publishDirectory: dist
 
   packages/primereact:
@@ -206,9 +194,6 @@ importers:
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.4.1
-      react:
-        specifier: '>=18.0.0'
-        version: 19.0.0
     publishDirectory: dist
 
 packages:

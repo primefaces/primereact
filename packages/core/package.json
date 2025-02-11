@@ -48,6 +48,6 @@
         "@primereact/hooks": "workspace:*"
     },
     "peerDependencies": {
-        "react": ">=18.0.0"
+        "react": ">=19.0.0"
     }
 }
