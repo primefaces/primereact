@@ -7,7 +7,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/primefaces/primereact.git",
+        "url": "git+https://github.com/primefaces/primereact.git",
         "directory": "packages/core"
     },
     "bugs": {
@@ -45,8 +45,7 @@
     "dependencies": {
         "@primeuix/styled": "catalog:",
         "@primeuix/utils": "catalog:",
-        "@primereact/hooks": "workspace:*",
-        "@primereact/styles": "workspace:*"
+        "@primereact/hooks": "workspace:*"
     },
     "peerDependencies": {
         "react": ">=18.0.0"
