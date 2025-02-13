@@ -321,6 +321,10 @@ export const Menu = React.memo(
         };
 
         const createSeparator = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
+
             const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
@@ -335,6 +339,10 @@ export const Menu = React.memo(
         };
 
         const createMenuItem = (item, index, parentId = null) => {
+            if (item.visible === false) {
+                return null;
+            }
+
             const menuContext = { item, index, parentId };
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
