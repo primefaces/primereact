@@ -157,6 +157,7 @@ export const Calendar = React.memo(
                 const value = parseValueFromString(props.timeOnly ? rawValue.replace('_', '') : rawValue);
 
                 if (isValidSelection(value)) {
+                    validateDate(value);
                     updateModel(event, value);
 
                     const date = value.length ? value[0] : value;
