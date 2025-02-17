@@ -121,9 +121,10 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     onImageError?(event: React.SyntheticEvent): void;
     /**
      * Callback to invoke when a chip is removed.
-     * * @param {ChipRemoveEvent} event - Custom remove event
+     * @param {ChipRemoveEvent} event - Custom remove event
+     * @return {boolean} - Return false to prevent hiding the chip after removal
      */
-    onRemove?(event: ChipRemoveEvent): void;
+    onRemove?(event: ChipRemoveEvent): boolean;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -163,4 +164,14 @@ export declare class Chip extends React.Component<ChipProps, any> {
      * @return {HTMLDivElement} Container element
      */
     public getElement(): HTMLDivElement;
+    /**
+     * Used to set the visibility of the chip.
+     * @param {boolean} visible - Whether to show or hide the chip
+     */
+    public setVisible(visible: boolean): void;
+    /**
+     * Used to get the current visibility state of the chip.
+     * @return {boolean} Current visibility state
+     */
+    public getVisible(): boolean;
 }
