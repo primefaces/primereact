@@ -134,7 +134,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         if (props.visible !== visibleState && maskVisibleState) {
             setVisibleState(props.visible);
         }
-    }, [props.visible]);
+    }, [props.visible, maskVisibleState, visibleState]);
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
