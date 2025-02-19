@@ -690,7 +690,7 @@ export const FileUpload = React.memo(
                 ptm('label')
             );
             const chooseLabel = chooseOptions.iconOnly ? <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span {...labelProps}>{chooseButtonLabel}</span>;
-            const label = props.auto ? chooseLabel : <span {...labelProps}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
+            const label = props.auto ? chooseLabel : <span {...labelProps}>{hasFiles ? (props.selectedFileLabel || filesState[0].name) : chooseLabel}</span>;
             const chooseIconProps = mergeProps(
                 {
                     className: cx('chooseIcon', { iconOnly: chooseOptions.iconOnly })
