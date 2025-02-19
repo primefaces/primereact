@@ -502,6 +502,10 @@ interface FileUploadProps {
      */
     chooseLabel?: string | undefined;
     /**
+     * Label of the choose button after a file is selected.
+     */
+    selectedFileLabel?: string | undefined;
+    /**
      * Label of the upload button. Defaults to global value in Locale configuration.
      */
     uploadLabel?: string | undefined;
