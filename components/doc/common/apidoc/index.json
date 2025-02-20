@@ -25106,6 +25106,14 @@
                             "description": "Icon of the remove element."
                         },
                         {
+                            "name": "selectedFileLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Label of the choose button after a file is selected."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
