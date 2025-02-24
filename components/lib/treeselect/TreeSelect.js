@@ -37,7 +37,6 @@ export const TreeSelect = React.memo(
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const isValueEmpty = ObjectUtils.isEmpty(props.value);
-        const hasNoOptions = ObjectUtils.isEmpty(props.options);
         const isSingleSelectionMode = props.selectionMode === 'single';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
@@ -650,48 +649,36 @@ export const TreeSelect = React.memo(
         };
 
         const createContent = () => {
-            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
-            const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                ptm('emptyMessage')
-            );
-
-            return (
-                <>
-                    <Tree
-                        ref={treeRef}
-                        id={listId.current}
-                        emptyMessage={props.emptyMessage}
-                        expandedKeys={expandedKeys}
-                        filter={props.filter}
-                        filterBy={props.filterBy}
-                        filterDelay={props.filterDelay}
-                        filterLocale={props.filterLocale}
-                        filterMode={props.filterMode}
-                        filterPlaceholder={props.filterPlaceholder}
-                        filterValue={filteredValue}
-                        metaKeySelection={props.metaKeySelection}
-                        nodeTemplate={props.nodeTemplate}
-                        onCollapse={props.onNodeCollapse}
-                        onExpand={props.onNodeExpand}
-                        onFilterValueChange={onFilterValueChange}
-                        onSelect={onNodeSelect}
-                        onSelectionChange={onSelectionChange}
-                        onToggle={onNodeToggle}
-                        onUnselect={onNodeUnselect}
-                        selectionKeys={props.value}
-                        selectionMode={props.selectionMode}
-                        showHeader={false}
-                        togglerTemplate={props.togglerTemplate}
-                        value={props.options}
-                        pt={ptm('tree')}
-                        __parentMetadata={{ parent: metaData }}
-                    />
-
-                    {hasNoOptions && <div {...emptyMessageProps}>{message}</div>}
-                </>
+            return (         
+                <Tree
+                    ref={treeRef}
+                    id={listId.current}
+                    emptyMessage={props.emptyMessage}
+                    expandedKeys={expandedKeys}
+                    filter={props.filter}
+                    filterBy={props.filterBy}
+                    filterDelay={props.filterDelay}
+                    filterLocale={props.filterLocale}
+                    filterMode={props.filterMode}
+                    filterPlaceholder={props.filterPlaceholder}
+                    filterValue={filteredValue}
+                    metaKeySelection={props.metaKeySelection}
+                    nodeTemplate={props.nodeTemplate}
+                    onCollapse={props.onNodeCollapse}
+                    onExpand={props.onNodeExpand}
+                    onFilterValueChange={onFilterValueChange}
+                    onSelect={onNodeSelect}
+                    onSelectionChange={onSelectionChange}
+                    onToggle={onNodeToggle}
+                    onUnselect={onNodeUnselect}
+                    selectionKeys={props.value}
+                    selectionMode={props.selectionMode}
+                    showHeader={false}
+                    togglerTemplate={props.togglerTemplate}
+                    value={props.options}
+                    pt={ptm('tree')}
+                    __parentMetadata={{ parent: metaData }}
+                />              
             );
         };
 
