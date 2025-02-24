@@ -600,7 +600,7 @@ export const AutoComplete = React.memo(
                             onClick: (e) => removeItem(e, index),
                             tabIndex: props.tabIndex || '0',
                             'aria-label': localeOption('clear'),
-                            onKeyDown: (e) => onremoveTokenIconKeyDown(e, index)
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, index)
                         },
                         ptm('removeTokenIcon')
                     );
