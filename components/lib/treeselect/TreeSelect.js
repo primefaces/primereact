@@ -649,7 +649,7 @@ export const TreeSelect = React.memo(
         };
 
         const createContent = () => {
-            return (         
+            return (
                 <Tree
                     ref={treeRef}
                     id={listId.current}
@@ -678,7 +678,7 @@ export const TreeSelect = React.memo(
                     value={props.options}
                     pt={ptm('tree')}
                     __parentMetadata={{ parent: metaData }}
-                />              
+                />
             );
         };
 
