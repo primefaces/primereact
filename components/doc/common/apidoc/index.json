@@ -10635,6 +10635,24 @@
                             "parameters": [],
                             "returnType": "HTMLDivElement",
                             "description": "Used to get container element."
+                        },
+                        {
+                            "name": "getVisible",
+                            "parameters": [],
+                            "returnType": "boolean",
+                            "description": "Used to get the current visibility state of the chip."
+                        },
+                        {
+                            "name": "setVisible",
+                            "parameters": [
+                                {
+                                    "name": "visible",
+                                    "type": "boolean",
+                                    "description": "Whether to show or hide the chip"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to set the visibility of the chip."
                         }
                     ]
                 },
@@ -10757,8 +10775,8 @@
                                     "description": "Custom remove event"
                                 }
                             ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a chip is removed.\n*"
+                            "returnType": "boolean",
+                            "description": "Callback to invoke when a chip is removed."
                         }
                     ]
                 }
@@ -25086,6 +25104,14 @@
                             "type": "IconType<FileUploadProps>",
                             "default": "",
                             "description": "Icon of the remove element."
+                        },
+                        {
+                            "name": "selectedFileLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Label of the choose button after a file is selected."
                         },
                         {
                             "name": "style",

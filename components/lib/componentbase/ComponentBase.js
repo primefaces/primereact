@@ -596,7 +596,7 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
     const { load: loadBaseStyle } = useStyle(baseStyle, { name: 'base', manual: true });
     const { load: loadCommonStyle } = useStyle(commonStyle, { name: 'common', manual: true });
     const { load: loadGlobalStyle } = useStyle(globalCSS, { name: 'global', manual: true });
-    const { load } = useStyle(styles, { name: name, manual: true });
+    const { load: loadComponentStyle } = useStyle(styles, { name: name, manual: true });
 
     const hook = (hookName) => {
         if (!hostName) {
@@ -610,12 +610,19 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
 
     hook('useMountEffect');
     useMountEffect(() => {
+        // Load base and global styles first as they are always needed
         loadBaseStyle();
         loadGlobalStyle();
-        loadCommonStyle();
 
-        if (!styled) {
-            load();
+        // Only load additional styles if component is styled
+        if (!_isUnstyled()) {
+            // Load common styles shared across components
+            loadCommonStyle();
+
+            // Load component-specific styles if not explicitly styled
+            if (!styled) {
+                loadComponentStyle();
+            }
         }
     });
 
