@@ -578,7 +578,7 @@ export const AutoComplete = React.memo(
             );
         };
 
-        const onremoveTokenIconKeyDown = (event, val) => {
+        const onRemoveTokenIconKeyDown = (event, val) => {
             switch (event.code) {
                 case 'Space':
                 case 'NumpadEnter':
