@@ -578,6 +578,18 @@ export const AutoComplete = React.memo(
             );
         };
 
+        const onRemoveTokenIconKeyDown = (event, val) => {
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    removeItem(event, val);
+                    event.preventDefault();
+                    event.stopPropagation();
+                    break;
+            }
+        };
+
         const createChips = () => {
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
@@ -585,7 +597,10 @@ export const AutoComplete = React.memo(
                     const removeTokenIconProps = mergeProps(
                         {
                             className: cx('removeTokenIcon'),
-                            onClick: (e) => removeItem(e, index)
+                            onClick: (e) => removeItem(e, index),
+                            tabIndex: props.tabIndex || '0',
+                            'aria-label': localeOption('clear'),
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, index)
                         },
                         ptm('removeTokenIcon')
                     );
