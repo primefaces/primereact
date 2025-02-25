@@ -66,7 +66,7 @@ export const TableFooter = React.memo((props) => {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.footerColumnGroup, 'children'));
 
             return rows.map((row, i) => {
-                const { unstyled, __TYPE, ptOptions, ...rest } = RowBase.getProps(row.props, context)
+                const { unstyled, __TYPE, ptOptions, ...rest } = RowBase.getProps(row.props, context);
 
                 const rootProps = mergeProps(
                     {
