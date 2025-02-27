@@ -1418,6 +1418,12 @@
     font-size: 1.25rem;
     padding: 0.625rem 0.9375rem;
   }
+  .p-password > .p-icon-field {
+    width: 100%;
+  }
+  .p-password-input {
+    width: 100%;
+  }
   .p-icon-field {
     position: relative;
   }
