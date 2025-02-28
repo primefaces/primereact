@@ -740,7 +740,6 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
             if (draggedColumnEl.current !== dropHeader) {
                 let targetLeft = dropHeaderOffset.left - containerOffset.left;
-                //let targetTop =  containerOffset.top - dropHeaderOffset.top;
                 let columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
 
                 reorderIndicatorUpRef.current.style.top = dropHeaderOffset.top - containerOffset.top - (iconHeight.current - 1) + 'px';
