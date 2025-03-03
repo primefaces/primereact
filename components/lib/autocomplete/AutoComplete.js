@@ -479,6 +479,12 @@ export const AutoComplete = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        React.useEffect(() => {
+            if (ObjectUtils.isNotEmpty(props.value)) {
+                selectedItem.current = props.value;
+            }
+        }, [props.value]);
+
         useMountEffect(() => {
             if (!idState) {
                 setIdState(UniqueComponentId());
