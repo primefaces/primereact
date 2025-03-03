@@ -580,7 +580,14 @@ export const InputNumber = React.memo(
                 let filteredData = parseValue(data);
 
                 if (filteredData != null) {
-                    insert(event, filteredData.toString());
+                    if (isFloat(data)) {
+                        const formattedValue = formatValue(filteredData);
+
+                        inputRef.current.value = formattedValue;
+                        updateModel(event, filteredData);
+                    } else {
+                        insert(event, filteredData.toString());
+                    }
                 }
             }
         };
