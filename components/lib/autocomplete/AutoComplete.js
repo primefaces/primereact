@@ -480,7 +480,7 @@ export const AutoComplete = React.memo(
         }, [inputRef, props.inputRef]);
 
         React.useEffect(() => {
-            if (props.value) {
+            if (ObjectUtils.isNotEmpty(props.value)) {
                 selectedItem.current = props.value;
             }
         }, [props.value]);
