@@ -1,5 +1,5 @@
 {
-    "name": "primereact",
+    "name": "@primereact/styles",
     "version": "11.0.0",
     "author": "PrimeTek Informatics",
     "description": "",
@@ -8,12 +8,12 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/primefaces/primereact.git",
-        "directory": "packages/primereact"
+        "directory": "packages/styles"
     },
     "bugs": {
         "url": "https://github.com/primefaces/primereact/issues"
     },
-    "main": "./src/index.ts",
+    "main": "./src/index.js",
     "types": "./src/index.d.ts",
     "exports": {
         "./*": "./src/*/index.ts"
@@ -45,8 +45,6 @@
     "dependencies": {
         "@primeuix/styled": "catalog:",
         "@primeuix/utils": "catalog:",
-        "@primeuix/styles": "catalog:",
-        "@primereact/hooks": "workspace:*",
-        "@primereact/styles": "workspace:*"
+        "@primeuix/styles": "catalog:"
     }
 }
