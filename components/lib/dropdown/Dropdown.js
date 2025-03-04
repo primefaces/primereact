@@ -1100,7 +1100,7 @@ export const Dropdown = React.memo(
                     {
                         className: cx('clearIcon'),
                         onPointerUp: clear,
-                        tabIndex: props.tabIndex || '0',
+                        tabIndex: props.editable ? -1 : props.tabIndex || '0',
                         onKeyDown: onClearIconKeyDown,
                         'aria-label': localeOption('clear')
                     },

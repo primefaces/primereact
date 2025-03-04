@@ -26,13 +26,17 @@ export const Chip = React.memo(
         };
 
         const close = (event) => {
-            setVisibleState(false);
+            let result = true;
 
             if (props.onRemove) {
-                props.onRemove({
+                result = props.onRemove({
                     originalEvent: event,
                     value: props.label || props.image || props.icon
                 });
+            }
+
+            if (result !== false) {
+                setVisibleState(false);
             }
         };
 
@@ -118,6 +122,8 @@ export const Chip = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            getVisible: () => visibleState,
+            setVisible: (visible) => setVisibleState(visible),
             getElement: () => elementRef.current
         }));
 

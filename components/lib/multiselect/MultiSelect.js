@@ -620,9 +620,7 @@ export const MultiSelect = React.memo(
             }
 
             if (props.optionValue) {
-                const data = ObjectUtils.resolveFieldData(option, props.optionValue);
-
-                return data !== null ? data : option;
+                return ObjectUtils.resolveFieldData(option, props.optionValue);
             }
 
             return option && option.value !== undefined ? option.value : option;
@@ -1070,7 +1068,7 @@ export const MultiSelect = React.memo(
                 return value.map((val) => getLabelByValue(val)).join(', ');
             }
 
-            return value;
+            return value ? value : '';
         };
 
         const visibleOptions = getVisibleOptions();
