@@ -176,7 +176,10 @@ export const Dropdown = React.memo(
                 option
             });
 
-            isHide && hide(true);
+            if(isHide){
+                hide(true)
+                DomHandler.focus(focusInputRef.current);
+            }
         };
 
         const onPanelClick = (event) => {
@@ -490,7 +493,6 @@ export const Dropdown = React.memo(
                     onOptionSelect(event, visibleOptions[focusedOptionIndex]);
                 }
 
-                hide();
             }
 
             event.preventDefault();
