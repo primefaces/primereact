@@ -92,6 +92,16 @@ const buttonStyles = `
     position: relative;
     z-index: 1;
 }
+
+.p-button-group-single .p-button:first-of-type {
+    border-top-right-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius) !important;
+}
+
+.p-button-group-single .p-button:last-of-type {
+    border-top-left-radius: var(--border-radius) !important;
+    border-bottom-left-radius: var(--border-radius) !important;
+}
 `;
 const inputTextStyles = `
 .p-inputtext {
