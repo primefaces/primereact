@@ -5,7 +5,7 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 const classes = {
     root: ({ props, context, focusedState, overlayVisibleState }) =>
         classNames('p-multiselect p-component p-inputwrapper', {
-            'p-multiselect-chip': props.display === 'chip',
+            'p-multiselect-chip': props.display === 'chip' && (props.maxSelectedLabels == null ? true : props.value.length <= props.maxSelectedLabels),
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
