@@ -1670,6 +1670,8 @@ export const Calendar = React.memo(
             if (!props.inline && isSingleSelection() && (!props.showTime || props.hideOnDateTimeSelect) && !isUpdateViewDate) {
                 setTimeout(() => {
                     hide('dateselect');
+
+                    reFocusInputField()
                 }, 100);
 
                 if (touchUIMask.current) {
