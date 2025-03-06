@@ -177,7 +177,8 @@ export const Dropdown = React.memo(
             });
 
             if(isHide){
-                hide(true)
+                hide(true);
+
                 DomHandler.focus(focusInputRef.current);
             }
         };
