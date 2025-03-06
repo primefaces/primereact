@@ -24,7 +24,7 @@ export const PrimeReactProvider = (inProps: React.PropsWithChildren<PrimeReactPr
         <PrimeReactContext.Provider value={value}>
             <LocaleProvider lang={props.locale}>
                 <PassThroughProvider value={props.pt} {...props.ptOptions}>
-                    <ThemeProvider preset={props.theme?.preset} {...props.theme?.options}>
+                    <ThemeProvider preset={props.theme?.preset} stylesheet={props.theme?.stylesheet} {...props.theme?.options}>
                         {resolve(attrs.children, value)}
                     </ThemeProvider>
                 </PassThroughProvider>

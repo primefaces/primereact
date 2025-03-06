@@ -1,3 +1,4 @@
+import { createStyles } from '@primereact/styles/utils';
 import { style } from '@primeuix/styles/panel';
 
 export const classes = {
@@ -16,8 +17,8 @@ export const classes = {
     footer: 'p-panel-footer'
 };
 
-export const styles = {
+export const styles = createStyles({
     name: 'panel',
     style,
     classes
-};
+});

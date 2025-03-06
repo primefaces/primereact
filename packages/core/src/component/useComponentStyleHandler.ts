@@ -1,6 +1,6 @@
 import { ThemeContext } from '@primereact/core/theme';
 import { Theme, dt } from '@primeuix/styled';
-import { minifyCSS, resolve } from '@primeuix/utils';
+import { isNotEmpty, minifyCSS, resolve } from '@primeuix/utils';
 import * as React from 'react';
 
 export const useComponentStyleHandler = (styles?: any) => {
@@ -13,16 +13,18 @@ export const useComponentStyleHandler = (styles?: any) => {
     return {
         name: 'base',
         ...styles,
-        load: (style, options = {}, transform = (cs) => cs) => {
-            const computedStyle = transform(resolve(style, { dt }));
+        load: (style, options = {}, extendedStyle = '', enableThemeTransform = false) => {
+            const name = options.name || this.name;
+            const resolvedStyle = `${resolve(style, { dt })}${extendedStyle}`;
+            const computedStyle = enableThemeTransform ? Theme.transformCSS(name, resolvedStyle) : resolvedStyle;
 
-            return computedStyle ? _load(minifyCSS(computedStyle), { name: this.name, ...options }) : {};
+            return isNotEmpty(computedStyle) ? _load(minifyCSS(computedStyle), { name, ...options }) : {};
         },
-        loadCSS(options = {}) {
+        loadCSS(options) {
             return this.load(this.css, options);
         },
-        loadStyle(options = {}, style = '') {
-            return this.load(this.style, options, (computedStyle = '') => Theme.transformCSS(options.name || this.name, `${computedStyle}${style}`));
+        loadStyle(options, extendedStyle = '') {
+            return this.load(this.style, options, extendedStyle, true);
         },
         getCommonTheme(params) {
             return Theme.getCommon(this.name, params);

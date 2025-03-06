@@ -13,7 +13,7 @@ import { useComponent } from './useComponent';
 export type WithComponentCallback<P, R, S> = (props: P, ref: React.Ref<R>, state: S) => any;
 
 export const withComponent = (callback: WithComponentCallback<any, any, any>, defaultProps: Record<string, any>) => {
-    return <P, R, S extends Record<string, unknown>>(inProps: P, inRef: React.Ref<R>, state: S = {} as S) => {
+    return <P, R, S extends Record<string, unknown>>(inProps: P, inRef?: React.Ref<R>, state: S = {} as S) => {
         const config = React.useContext(PrimeReactContext);
         const locale = React.useContext(LocaleContext);
         const passthrough = React.useContext(PassThroughContext);

@@ -36,6 +36,7 @@
             "@primereact/icons/*": ["./packages/icons/src/*"],
             "@primereact/metadata/*": ["./packages/metadata/src/*"],
             "@primereact/styles/*": ["./packages/styles/src/*"],
+            "@primereact/types/*": ["./packages/types/src/*"],
             "primereact/*": ["./packages/primereact/src/*"]
         },
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
