@@ -176,7 +176,7 @@ export const Dropdown = React.memo(
                 option
             });
 
-            if(isHide){
+            if (isHide){
                 hide(true);
 
                 DomHandler.focus(focusInputRef.current);
