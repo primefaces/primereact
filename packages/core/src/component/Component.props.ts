@@ -15,5 +15,6 @@ export const globalProps = {
 
 /**
  * @alias globalProps
+ * @todo - update the globalProps object to include default values for any missing properties.
  */
 export const defaultProps = globalProps as Partial<ComponentProps>;

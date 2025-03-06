@@ -42,4 +42,8 @@ export declare type ThemeProps = {
      * @todo Define the type.
      */
     preset?: unknown | undefined;
+    /**
+     * Defines the stylesheet.
+     */
+    stylesheet?: unknown | undefined;
 } & ThemeOptions;

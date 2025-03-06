@@ -1,26 +1,14 @@
-import { PrimeReactContext } from '@primereact/core/config';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
 import { mergeProps } from '@primeuix/utils/mergeprops';
 import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase } from '@primeuix/utils/object';
 import * as React from 'react';
-import { ComponentContext } from './Component.context';
+import type { ComponentInstance } from './Component.types';
 
-export const useComponentPT = ({ props, attrs, state }, ref) => {
-    const config = React.useContext(PrimeReactContext);
-    const parent = React.useContext(ComponentContext);
-    const name = props.__TYPE;
-    // @todo
-    const instance = {
-        ref,
-        name,
-        props,
-        attrs,
-        state,
-        parent
-    };
-    // @todo
+export const useComponentPT = (instance: ComponentInstance) => {
+    const { id, name, props, attrs, state, parent, $primereact, $attrSelector } = instance || {};
+    // @todo: Add any additional parameters needed for the instance
     const $params = {
-        instance: ref,
+        instance,
         props,
         state,
         attrs,
@@ -28,7 +16,7 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
     };
 
     // methods
-    const _hook = (hookName) => {
+    const _hook = (hookName: string) => {
         const selfHook = _usePT(_getPT(props.pt, name), getKeyValue, `hooks.${hookName}`);
         const defaultHook = _useDefaultPT(getKeyValue, `hooks.${hookName}`);
 
@@ -36,13 +24,13 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
         defaultHook?.();
     };
 
-    const _mergeProps = (fn, ...args) => {
+    const _mergeProps = (fn: unknown, ...args: any[]) => {
         return isFunction(fn) ? fn(...args) : mergeProps(...args);
     };
 
     const _getPTValue = (obj = {}, key = '', params = {}, searchInDefaultPT = true) => {
         const searchOut = /./g.test(key) && !!params[key.split('.')[0]];
-        const { mergeSections = true, mergeProps: useMergeProps = false } = props.ptOptions || config?.ptOptions || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false } = props?.ptOptions || $primereact?.config?.ptOptions || {};
         const global = searchInDefaultPT ? (searchOut ? _useGlobalPT(_getPTClassValue, key, params) : _useDefaultPT(_getPTClassValue, key, params)) : undefined;
         const self = searchOut ? undefined : _getPTSelf(obj, _getPTClassValue, key, { ...params, global: global || {} });
         const datasets = _getPTDatasets(key);
@@ -50,7 +38,7 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
         return mergeSections || (!mergeSections && self) ? (useMergeProps ? _mergeProps(useMergeProps, global, self, datasets) : { ...global, ...self, ...datasets }) : { ...self, ...datasets };
     };
 
-    const _getPTSelf = (obj = {}, ...args) => {
+    const _getPTSelf = (obj = {}, ...args: any[]) => {
         return mergeProps(
             _usePT(_getPT(obj, name), ...args), // Exp; <component :pt="{}"
             _usePT($attrsPT, ...args) // Exp; <component :pt:[passthrough_key]:[attribute]="{value}" or <component :pt:[passthrough_key]="() =>{value}"
@@ -59,27 +47,28 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
 
     const _getPTDatasets = (key = '') => {
         const datasetPrefix = 'data-pc-';
-        const isExtended = key === 'root' && isNotEmpty(props.pt?.['data-pc-section']);
+        const isExtended = key === 'root' && isNotEmpty(props?.pt?.['data-pc-section']);
 
         return (
             key !== 'transition' && {
                 ...(key === 'root' && {
                     [`${datasetPrefix}name`]: toFlatCase(isExtended ? props.pt?.['data-pc-section'] : name),
-                    ...(isExtended && { [`${datasetPrefix}extend`]: toFlatCase(name) })
+                    ...(isExtended && { [`${datasetPrefix}extend`]: toFlatCase(name) }),
+                    [`${$attrSelector}`]: ''
                 }),
                 [`${datasetPrefix}section`]: toFlatCase(key)
             }
         );
     };
 
-    const _getPTClassValue = (...args) => {
+    const _getPTClassValue = (...args: any[]) => {
         const value = getKeyValue(...args);
 
         return isString(value) || isArray(value) ? { className: value } : value;
     };
 
-    const _getPT = (pt, key = '', callback) => {
-        const getValue = (value, checkSameKey = false) => {
+    const _getPT = (pt: any, key = '', callback?: (...args: any[]) => any) => {
+        const getValue = (value: any, checkSameKey = false) => {
             const computedValue = callback ? callback(value) : value;
             const _key = toFlatCase(key);
             const _cKey = toFlatCase(name);
@@ -87,7 +76,7 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
             return (checkSameKey ? (_key !== _cKey ? computedValue?.[_key] : undefined) : computedValue?.[_key]) ?? computedValue;
         };
 
-        return pt?.hasOwnProperty('_usept')
+        return pt && Object.hasOwn(pt, '_usept')
             ? {
                   _usept: pt['_usept'],
                   originalValue: getValue(pt.originalValue),
@@ -96,11 +85,11 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
             : getValue(pt, true);
     };
 
-    const _usePT = (pt, callback, key, params) => {
-        const fn = (value) => callback(value, key, params);
+    const _usePT = (pt: any, callback: (...args: any[]) => any, key: string, params?: any) => {
+        const fn = (value: any) => callback(value, key, params);
 
-        if (pt?.hasOwnProperty('_usept')) {
-            const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || config?.ptOptions || {};
+        if (pt && Object.hasOwn(pt, '_usept')) {
+            const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || $primereact.config?.ptOptions || {};
             const originalValue = fn(pt.originalValue);
             const value = fn(pt.value);
 
@@ -114,11 +103,11 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
         return fn(pt);
     };
 
-    const _useGlobalPT = (callback, key, params) => {
+    const _useGlobalPT = (callback: (...args: any[]) => any, key: string, params?: any) => {
         return _usePT($globalPT, callback, key, params);
     };
 
-    const _useDefaultPT = (callback, key, params) => {
+    const _useDefaultPT = (callback: (...args: any[]) => any, key: string, params?: any) => {
         return _usePT($defaultPT, callback, key, params);
     };
 
@@ -128,16 +117,22 @@ export const useComponentPT = ({ props, attrs, state }, ref) => {
     };
 
     const ptmi = (key = '', params = {}) => {
-        return mergeProps($attrsWithoutPT, ptm(key, params));
+        const _attrs = mergeProps($attrsWithoutPT, ptm(key, params)) as any;
+
+        if (_attrs && Object.hasOwn(_attrs, 'id')) {
+            _attrs.id ??= id;
+        }
+
+        return _attrs;
     };
 
     const ptmo = (obj = {}, key = '', params = {}) => {
-        return _getPTValue(obj, key, { instance: this, ...params }, false);
+        return _getPTValue(obj, key, { instance, ...params }, false);
     };
 
     // computed values
-    const $globalPT = React.useMemo(() => _getPT(config?.pt, undefined, (value) => resolve(value, { instance: this })), [config?.pt]);
-    const $defaultPT = React.useMemo(() => _getPT(config?.pt, undefined, (value) => getKeyValue(value, name, { ...$params }) || resolve(value, { ...$params })), [config?.pt]);
+    const $globalPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => resolve(value, { instance })), [$primereact?.config?.pt]);
+    const $defaultPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => getKeyValue(value, name, { ...$params }) || resolve(value, { ...$params })), [$primereact?.config?.pt]);
     const $attrsPT = React.useMemo(() => {
         return Object.entries(attrs || {})
             .filter(([key]) => key?.startsWith('pt:'))

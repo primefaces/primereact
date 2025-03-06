@@ -1,173 +1,104 @@
-import { PrimeReactContext } from '@primereact/core/config';
-import { style } from '@primereact/styles/base';
+import { ThemeContext } from '@primereact/core/theme';
 import { Theme, ThemeService } from '@primeuix/styled';
-import { classNames, setAttribute, uuid } from '@primeuix/utils';
+import { cn } from '@primeuix/utils';
 import { getKeyValue } from '@primeuix/utils/object';
 import * as React from 'react';
-import { ComponentContext } from './Component.context';
-import { withComponentStyle } from './withComponentStyle';
+import type { ComponentInstance } from './Component.types';
+import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-const Base = {
-    _loadedStyleNames: new Set(),
-    getLoadedStyleNames() {
-        return this._loadedStyleNames;
-    },
-    isStyleNameLoaded(name) {
-        return this._loadedStyleNames.has(name);
-    },
-    setLoadedStyleName(name) {
-        this._loadedStyleNames.add(name);
-    },
-    deleteLoadedStyleName(name) {
-        this._loadedStyleNames.delete(name);
-    },
-    clearLoadedStyleNames() {
-        this._loadedStyleNames.clear();
-    }
-};
+export const useComponentStyle = (instance: ComponentInstance, styles?: any, callback?: any) => {
+    const theme = React.useContext(ThemeContext);
+    const $style = useComponentStyleHandler(styles);
 
-// @todo: use @primereact/styles/base
-const BaseStyle = style;
+    const { props, attrs, state, parent, $primereact, $attrSelector } = instance || {};
 
-function useCSS(cssMap = {}) {
-    const config = React.useContext(PrimeReactContext);
-
-    if (typeof window === 'undefined') {
-        /*Object.entries(cssMap).forEach(([key, value]) => {
-            config?.sheet?.add(key, value.css);
-        });*/
-    }
-
-    React.useInsertionEffect(() => {
-        config?.sheet?._styles?.forEach((value, key) => {
-            const styleElement = document.head.querySelector(`style[data-primereact-style-id="${key}"]`) || document.createElement('style');
-
-            if (!styleElement.isConnected) {
-                //setAttributes(styleElement, value.styleOptions);
-                value.first ? document.head.prepend(styleElement) : document.head.appendChild(styleElement);
-                setAttribute(styleElement, 'data-primereact-style-id', key);
-                //styleRef.current.onload = (event: React.ReactEventHandler<HTMLStyleElement>) => onStyleLoaded?.(event, { name: styleNameRef.current });
-                //onStyleMounted?.(styleNameRef.current);
-            }
-
-            styleElement.textContent = value.css;
-        });
-    });
-    //return rule;
-}
-
-export const useComponentStyle = withComponentStyle(({ props, attrs, state, style, $style, ...rest }, ref) => {
-    const config = React.useContext(PrimeReactContext);
-    const parent = React.useContext(ComponentContext);
-    const name = props.__TYPE;
-    // @todo
-    const instance = {
-        ref,
-        name,
-        props,
-        attrs,
-        state,
-        parent,
-        $primereact: {
-            config
-        },
-        ...rest
-    };
     // @todo
     const $params = {
         instance,
         props,
         state,
         attrs,
-        parent,
-        $primereact: {
-            config
+        parent
+    };
+
+    // methods
+    const _load = () => {
+        if (!Base.isStyleNameLoaded('base')) {
+            $style.loadCSS(BaseStyle.css, { name: 'base' });
+
+            Base.setLoadedStyleName('base');
         }
     };
 
-    // computed values
-    const $isUnstyled = React.useMemo(() => (props.unstyled !== undefined ? props.unstyled : config?.unstyled), [props, config]);
-    const $attrSelector = React.useMemo(() => uuid('pc'), []);
-    const $styleOptions = React.useMemo(() => ({ nonce: config?.csp?.nonce }), [config]);
-
     const _loadStyles = () => {
-        const _load = () => {
-            _loadGlobalStyles();
-            _loadThemeStyles();
-        };
-
         _load();
-        //_themeChangeListener(_load);
+        _themeChangeListener(_load);
     };
 
     const _loadCoreStyles = () => {
-        const _load = () => {
-            if (!Base.isStyleNameLoaded('base')) {
-                $style.loadCSS(BaseStyle.css, { name: 'base' });
-                Base.setLoadedStyleName('base');
-            }
+        if (!Base.isStyleNameLoaded($style?.name) && $style?.name) {
+            BaseComponentStyle.loadCSS($styleOptions);
+            $options.style && $style.loadCSS($styleOptions);
 
-            if (!Base.isStyleNameLoaded(style?.name) && style?.name) {
-                $style.loadCSS(style.css);
-                Base.setLoadedStyleName(style.name);
-            }
-        };
-
-        _load();
-        //_themeChangeListener(_load);
-    };
-
-    const _loadGlobalStyles = () => {
-        /*
-         * @todo Add self custom css support;
-         * <Panel :pt="{ css: `...` }" .../>
-         *
-         * const selfCSS = this._getPTClassValue(this.pt, 'css', this.$params);
-         * const defaultCSS = this._getPTClassValue(this.defaultPT, 'css', this.$params);
-         * const mergedCSS = mergeProps(selfCSS, defaultCSS);
-         * isNotEmpty(mergedCSS?.class) && this.$css.loadCustomStyle(mergedCSS?.class);
-         */
-        //const globalCSS = this._useGlobalPT(this._getOptionValue, 'global.css', this.$params);
-        //isNotEmpty(globalCSS) && BaseStyle.load(globalCSS, { name: 'global', ...this.$styleOptions });
+            Base.setLoadedStyleName($style.name);
+        }
     };
 
     const _loadThemeStyles = () => {
-        if ($isUnstyled) return;
+        if ($isUnstyled || theme === 'none') return;
 
         // common
         if (!Theme.isStyleNameLoaded('common')) {
-            const { primitive, semantic } = $style?.getCommonTheme() || {}; // @todo
+            const { primitive, semantic, global, style } = $style?.getCommonTheme?.() || {};
 
-            $style.load(primitive?.css, { name: 'primitive-variables' });
-            $style.load(semantic?.css, { name: 'semantic-variables' });
-            $style._loadTheme(BaseStyle?.theme, { name: 'global-style' }); // @todo
+            BaseStyle.load(primitive?.css, { name: 'primitive-variables', ...$styleOptions });
+            BaseStyle.load(semantic?.css, { name: 'semantic-variables', ...$styleOptions });
+            BaseStyle.load(global?.css, { name: 'global-variables', ...$styleOptions });
+            BaseStyle.loadStyle({ name: 'global-style', ...$styleOptions }, style);
 
             Theme.setLoadedStyleName('common');
         }
 
         // component
-        if (!Theme.isStyleNameLoaded(style?.name) && style?.name) {
-            const { css } = $style?.getComponentTheme?.() || {};
+        if (!Theme.isStyleNameLoaded($style?.name) && $style?.name) {
+            const { css, style } = $style?.getComponentTheme?.() || {};
 
-            $style?.load(css, { name: `${style?.name}-variables` });
-            $style?.loadTheme({ name: `${style?.name}-style` });
+            $style?.load(css, { name: `${$style.name}-variables`, ...$styleOptions });
+            $style?.loadStyle({ name: `${$style.name}-style`, ...$styleOptions }, style);
 
-            Theme.setLoadedStyleName(style?.name);
+            Theme.setLoadedStyleName($style.name);
         }
 
         // layer order
         if (!Theme.isStyleNameLoaded('layer-order')) {
             const layerOrder = $style?.getLayerOrderThemeCSS?.();
 
-            $style.load(layerOrder, { name: 'layer-order', first: true });
+            BaseStyle.load(layerOrder, { name: 'layer-order', first: true, ...$styleOptions });
 
             Theme.setLoadedStyleName('layer-order');
         }
     };
 
+    const _loadScopedThemeStyles = (preset) => {
+        const { css } = $style?.getPresetTheme?.(preset, `[${$attrSelector}]`) || {};
+        const scopedStyle = $style?.load(css, { name: `${$attrSelector}-${$style.name}`, ...$styleOptions });
+
+        scopedStyleEl = scopedStyle.el;
+    };
+
+    const _unloadScopedThemeStyles = () => {
+        scopedStyleEl?.value?.remove();
+    };
+
     const _themeChangeListener = (callback = () => {}) => {
         Base.clearLoadedStyleNames();
         ThemeService.on('theme:change', callback);
+    };
+
+    const _removeThemeListeners = () => {
+        ThemeService.off('theme:change', _loadCoreStyles);
+        ThemeService.off('theme:change', _load);
+        ThemeService.off('theme:change', _themeScopedListener);
     };
 
     if (!$isUnstyled) {
@@ -179,13 +110,13 @@ export const useComponentStyle = withComponentStyle(({ props, attrs, state, styl
 
     // exposed methods
     const cx = (key = '', params = {}) => {
-        return !$isUnstyled ? classNames(getKeyValue(style.classes, key, { ...$params, ...params })) : undefined;
+        return !$isUnstyled ? cn(getKeyValue(styles.classes, key, { ...$params, ...params })) : undefined;
     };
 
     const sx = (key = '', when = true, params = {}) => {
         if (when) {
-            const self = getKeyValue(style.inlineStyles, key, { ...$params, ...params });
-            const base = {}; //getKeyValue(BaseComponentStyle.inlineStyles, key, { ...this.$params, ...params }); // @todo
+            const self = getKeyValue(styles.inlineStyles, key, { ...$params, ...params });
+            const base = getKeyValue(BaseComponentStyle.inlineStyles, key, { ...$params, ...params });
 
             return { ...base, ...self };
         }
@@ -193,9 +124,23 @@ export const useComponentStyle = withComponentStyle(({ props, attrs, state, styl
         return undefined;
     };
 
-    return {
+    // computed values
+    const $isUnstyled = React.useMemo(() => (props.unstyled !== undefined ? props.unstyled : $primereact?.config?.unstyled), [props, $primereact?.config]);
+    const $styleOptions = React.useMemo(() => ({ nonce: $primereact?.config?.csp?.nonce }), [$primereact?.config]);
+
+    const common = {
+        ...instance,
+        styles,
         cx,
         sx,
-        isUnstyled: $isUnstyled
+        isUnstyled: $isUnstyled,
+        $style,
+        $primereact: {
+            ...$primereact,
+            theme
+        }
     };
-});
+
+    // new instance
+    return { ...common, ...callback?.(common) };
+};

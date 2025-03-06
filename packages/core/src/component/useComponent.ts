@@ -1,25 +1,17 @@
-import { combinedRefs } from '@primereact/core/utils';
 import * as React from 'react';
+import { ComponentInstance } from './Component.types';
 import { useComponentPT } from './useComponentPT';
-import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = (inInstance, inRef, callback) => {
-    const ref = React.useRef(inRef);
-    const ptx = useComponentPT(inInstance, ref);
-    const stx = useComponentStyle(inInstance, ref);
+export const useComponent = (inInstance: ComponentInstance, ref?: any, callback?: any): ComponentInstance => {
+    const ptx = useComponentPT(inInstance);
     const common = {
         ...inInstance,
-        ...ptx,
-        ...stx
+        ...ptx
     };
 
     const instance = { ...common, ...callback?.(common) };
 
-    React.useImperativeHandle(ref, () => instance);
-
-    React.useEffect(() => {
-        combinedRefs(ref, inRef);
-    }, [ref, inRef]);
+    React.useImperativeHandle(ref, () => instance as any);
 
     return instance;
 };
