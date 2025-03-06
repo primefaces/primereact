@@ -493,7 +493,6 @@ export const Dropdown = React.memo(
                 if (focusedOptionIndex !== -1) {
                     onOptionSelect(event, visibleOptions[focusedOptionIndex]);
                 }
-
             }
 
             event.preventDefault();
