@@ -6,6 +6,8 @@ import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
 export const TreeTableBodyCell = (props) => {
     const [editingState, setEditingState] = React.useState(false);
+    const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
+    const editingRowDataStateRef = React.useRef(null);
     const elementRef = React.useRef(null);
     const keyHelperRef = React.useRef(null);
     const selfClick = React.useRef(false);
@@ -25,7 +27,8 @@ export const TreeTableBodyCell = (props) => {
             parent: props.metaData,
             hostName: props.hostName,
             state: {
-                editing: editingState
+                editing: editingState,
+                editingRowData: editingRowDataState
             },
             context: {
                 index: props.index,
@@ -71,9 +74,11 @@ export const TreeTableBodyCell = (props) => {
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
-            if (!selfClick.current && isOutsideClicked(e.target)) {
-                switchCellToViewMode(e);
-            }
+            setTimeout(() => {
+                if (!selfClick.current && isOutsideClicked(e.target)) {
+                    switchCellToViewMode(e, true);
+                }
+            }, 0);
 
             selfClick.current = false;
         },
@@ -100,6 +105,8 @@ export const TreeTableBodyCell = (props) => {
             }
 
             setEditingState(true);
+            setEditingRowDataState(props.rowData);
+            editingRowDataStateRef.current = props.rowData;
 
             const onCellEditInit = getColumnProp('onCellEditInit');
 
@@ -127,8 +134,16 @@ export const TreeTableBodyCell = (props) => {
     };
 
     const onKeyDown = (event) => {
-        if (event.which === 13 || event.which === 9) {
-            switchCellToViewMode(event);
+        if (editingState) {
+            event.stopPropagation();
+
+            if (event.which === 13 || event.which === 9) {
+                // Enter or Tab
+                switchCellToViewMode(event, true);
+            } else if (event.which === 27) {
+                // Escape
+                switchCellToViewMode(event, false);
+            }
         }
     };
 
@@ -142,7 +157,9 @@ export const TreeTableBodyCell = (props) => {
             setEditingState(false);
             unbindDocumentClickListener();
             OverlayService.off('overlay-click', overlayEventListener.current);
+            editingRowDataStateRef.current = null;
             overlayEventListener.current = null;
+            selfClick.current = false;
         }, 1);
     };
 
@@ -150,19 +167,44 @@ export const TreeTableBodyCell = (props) => {
         onClick(event);
     };
 
-    const switchCellToViewMode = (event) => {
-        if (props.cellEditValidator) {
-            let valid = props.cellEditValidator({
-                originalEvent: event,
-                columnProps: props
-            });
+    const switchCellToViewMode = (event, submit) => {
+        const onCellEditComplete = getColumnProp('onCellEditComplete');
+        const onCellEditCancel = getColumnProp('onCellEditCancel');
+        const cellEditValidator = getColumnProp('cellEditValidator');
+        const newRowData = { ...editingRowDataStateRef.current };
+        const newValue = resolveFieldData(newRowData);
+        const params = { ...getCellCallbackParams(event), newRowData, newValue };
 
-            if (valid) {
-                closeCell();
-            }
-        } else {
-            closeCell();
+        if (!submit && onCellEditCancel) {
+            onCellEditCancel(params);
         }
+
+        let valid = true;
+
+        if (submit && cellEditValidator) {
+            valid = cellEditValidator(params);
+        }
+
+        if (valid) {
+            if (submit && onCellEditComplete) {
+                onCellEditComplete(params);
+            }
+
+            closeCell();
+        } else {
+            event.preventDefault();
+        }
+
+        setEditingRowDataState(newRowData);
+    };
+
+    const editorCallback = (val) => {
+        let editingRowData = { ...editingRowDataState };
+
+        ObjectUtils.mutateFieldData(editingRowData, field, val);
+        setEditingRowDataState(editingRowData);
+
+        editingRowDataStateRef.current = editingRowData;
     };
 
     const isSelected = () => {
@@ -206,7 +248,15 @@ export const TreeTableBodyCell = (props) => {
 
     if (editingState) {
         if (columnEditor) {
-            content = ObjectUtils.getJSXElement(columnEditor, { node: props.node, rowData: props.rowData, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
+            content = ObjectUtils.getJSXElement(columnEditor, {
+                node: props.node,
+                rowData: editingRowDataState,
+                value: ObjectUtils.resolveFieldData(editingRowDataState, props.field),
+                field: props.field,
+                rowIndex: props.rowIndex,
+                props,
+                editorCallback
+            });
         } else {
             throw new Error('Editor is not found on column.');
         }
