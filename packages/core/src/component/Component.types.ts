@@ -24,9 +24,8 @@ export declare type ComponentInstance<R = unknown, E = HTMLElement> = {
     props?: Record<string, unknown> | undefined;
     attrs?: Record<string, unknown> | undefined;
     state?: Record<string, unknown> | undefined;
-    styles?: Record<string, unknown> | undefined;
+    $styles?: Record<string, unknown> | undefined;
     parent?: unknown;
-    $el?: E;
     $primereact?:
         | {
               config?: unknown;

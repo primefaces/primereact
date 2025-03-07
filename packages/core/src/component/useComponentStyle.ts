@@ -1,4 +1,3 @@
-import { ThemeContext } from '@primereact/core/theme';
 import { Theme, ThemeService } from '@primeuix/styled';
 import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
@@ -25,11 +24,9 @@ const Base = {
     }
 };
 
-export const useComponentStyle = (instance: ComponentInstance, styles?: any, callback?: any) => {
-    const theme = React.useContext(ThemeContext);
-    const $style = useComponentStyleHandler(styles);
-
+export const useComponentStyle = (instance: ComponentInstance, styles?: any) => {
     const { props, attrs, state, parent, $primereact, $attrSelector } = instance || {};
+    const $style = useComponentStyleHandler(styles);
 
     // @todo
     const $params = {
@@ -65,7 +62,7 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any, cal
     };
 
     const _loadThemeStyles = () => {
-        if ($isUnstyled || theme === 'none') return;
+        if ($isUnstyled || $primereact?.theme === 'none') return;
 
         // common
         if (!Theme.isStyleNameLoaded('common')) {
@@ -123,13 +120,13 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any, cal
 
     // exposed methods
     const cx = (key = '', params = {}) => {
-        return !$isUnstyled ? cn(getKeyValue(styles.classes, key, { ...$params, ...params })) : undefined;
+        return !$isUnstyled ? cn(getKeyValue($style?.classes, key, { ...$params, ...params })) : undefined;
     };
 
     const sx = (key = '', when = true, params = {}) => {
         if (when) {
-            const self = getKeyValue(styles.inlineStyles, key, { ...$params, ...params });
-            const base = getKeyValue(BaseComponentStyle.inlineStyles, key, { ...$params, ...params });
+            const self = getKeyValue($style?.inlineStyles, key, { ...$params, ...params });
+            const base = getKeyValue($style.baseStyles.inlineStyles, key, { ...$params, ...params });
 
             return { ...base, ...self };
         }
@@ -149,21 +146,11 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any, cal
 
     //useCSS();
 
-    const common = {
-        ...instance,
-        styles,
+    // new instance
+    return {
         cx,
         sx,
         isUnstyled: $isUnstyled,
-        $style,
-        $primereact: {
-            ...$primereact,
-            theme
-        }
+        $style
     };
-
-    debugger;
-
-    // new instance
-    return { ...common, ...callback?.(common) };
 };

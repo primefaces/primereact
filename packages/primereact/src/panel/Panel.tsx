@@ -1,28 +1,36 @@
 'use client';
-import { Component, ComponentProvider, withComponentStyle } from '@primereact/core/component';
+import { Component, ComponentProvider } from '@primereact/core/component';
 import { usePanel } from '@primereact/headless/panel';
+import { useProps } from '@primereact/hooks';
 import { styles } from '@primereact/styles/panel';
 import * as React from 'react';
 import { defaultProps } from './Panel.props';
 
-export const Panel = withComponentStyle(
-    ({ props }) => {
-        const panel = usePanel(props);
-        const {
-            // element refs
-            elementRef
-        } = panel;
+const getCurrentInstance = (inInstance, inProps, defaultProps) => {
+    const { props, attrs } = useProps(inProps, defaultProps);
 
-        console.log(panel);
+    return {
+        ...inInstance,
+        props,
+        attrs
+    };
+};
 
-        return (
-            <ComponentProvider pIf={props.pIf} instance={panel}>
-                <Component as={props.as || 'div'} ref={elementRef}>
-                    TESTTT
-                </Component>
-            </ComponentProvider>
-        );
-    },
-    defaultProps,
-    styles
-);
+export const Panel = (inProps) => {
+    const panel = usePanel({ props: inProps, styles });
+    const instance = getCurrentInstance(panel, inProps, defaultProps);
+
+    const {
+        props,
+        // element refs
+        elementRef
+    } = instance;
+
+    return (
+        <ComponentProvider pIf={props.pIf} instance={instance}>
+            <Component as={props.as || 'div'} ref={elementRef}>
+                TESTTT
+            </Component>
+        </ComponentProvider>
+    );
+};
