@@ -26785,11 +26785,11 @@
                         {
                             "name": "value",
                             "type": "V",
-                            "description": "The value to compare."
+                            "description": "The current value whose previous state is needed"
                         }
                     ],
                     "returnType": "V | undefined",
-                    "description": "Custom hook to get the previous value of a property. Returns undefined on first render."
+                    "description": "Custom hook to get the previous value of a property."
                 },
                 "useMountEffect": {
                     "name": "useMountEffect",
