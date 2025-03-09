@@ -397,7 +397,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         multiSortMeta = multiSortMeta.length > 0 ? multiSortMeta : null;
     };
 
-    const sortSingleNodes = ({ data, field, order }) => {
+    const sortSingle = ({ data, field, order }) => {
         let value = [...data];
 
         if (columnSortable.current && columnSortFunction.current) {
@@ -421,7 +421,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
             for (let i = 0; i < value.length; i++) {
                 if (value[i].children && value[i].children.length) {
-                    value[i].children = sortSingleNodes({ data: value[i].children, field, order });
+                    value[i].children = sortSingle({ data: value[i].children, field, order });
                 }
             }
         }
@@ -429,7 +429,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return value;
     };
 
-    const sortMultipleNodes = ({ data, multiSortMeta = [] }) => {
+    const sortMultiple = ({ data, multiSortMeta = [] }) => {
         let value = [...data];
 
         const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
@@ -440,7 +440,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
         for (let i = 0; i < value.length; i++) {
             if (value[i].children && value[i].children.length) {
-                value[i].children = sortMultipleNodes({ data: value[i].children, multiSortMeta });
+                value[i].children = sortMultiple({ data: value[i].children, multiSortMeta });
             }
         }
 
@@ -1094,9 +1094,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
                 if (sortField || ObjectUtils.isNotEmpty(multiSortMeta)) {
                     if (props.sortMode === 'single') {
-                        data = sortSingleNodes({ data, field: sortField, order: sortOrder });
+                        data = sortSingle({ data, field: sortField, order: sortOrder });
                     } else if (props.sortMode === 'multiple') {
-                        data = sortMultipleNodes({ data, multiSortMeta });
+                        data = sortMultiple({ data, multiSortMeta });
                     }
                 }
             }
