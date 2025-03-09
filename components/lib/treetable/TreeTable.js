@@ -397,39 +397,30 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         multiSortMeta = multiSortMeta.length > 0 ? multiSortMeta : null;
     };
 
-    const sortSingle = (data) => {
-        return sortNodes(data);
-    };
-
-    const sortNodes = (data) => {
+    const sortSingle = ({ data, field, order }) => {
         let value = [...data];
 
         if (columnSortable.current && columnSortFunction.current) {
-            value = columnSortFunction.current({
-                data,
-                field: getSortField(),
-                order: getSortOrder()
-            });
+            value = columnSortFunction.current({ data, field, order });
         } else {
             // performance optimization to prevent resolving field data in each loop
             const lookupMap = new Map();
-            const sortField = getSortField();
             const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
 
             for (let node of data) {
-                lookupMap.set(node.data, ObjectUtils.resolveFieldData(node.data, sortField));
+                lookupMap.set(node.data, ObjectUtils.resolveFieldData(node.data, field));
             }
 
             value.sort((node1, node2) => {
                 const value1 = lookupMap.get(node1.data);
                 const value2 = lookupMap.get(node2.data);
 
-                return compareValuesOnSort(value1, value2, comparator, getSortOrder());
+                return compareValuesOnSort(value1, value2, comparator, order);
             });
 
             for (let i = 0; i < value.length; i++) {
                 if (value[i].children && value[i].children.length) {
-                    value[i].children = sortNodes(value[i].children);
+                    value[i].children = sortSingle({ data: value[i].children, field, order });
                 }
             }
         }
@@ -437,17 +428,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return value;
     };
 
-    const sortMultiple = (data) => {
-        let multiSortMeta = getMultiSortMeta();
-
-        if (multiSortMeta) {
-            return sortMultipleNodes(data, multiSortMeta);
-        }
-
-        return data;
-    };
-
-    const sortMultipleNodes = (data, multiSortMeta) => {
+    const sortMultiple = ({ data, multiSortMeta = [] }) => {
         let value = [...data];
 
         const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
@@ -458,7 +439,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
         for (let i = 0; i < value.length; i++) {
             if (value[i].children && value[i].children.length) {
-                value[i].children = sortMultipleNodes(value[i].children, multiSortMeta);
+                value[i].children = sortMultiple({ data: value[i].children, multiSortMeta });
             }
         }
 
@@ -1096,6 +1077,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             if (data && data.length) {
                 const filters = (localState && localState.filters) || getFilters();
                 const sortField = (localState && localState.sortField) || getSortField();
+                const sortOrder = (localState && localState.sortOrder) || getSortOrder();
                 const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
                 const columns = getColumns();
                 const sortColumn = columns.find((col) => getColumnProp(col, 'field') === sortField);
@@ -1111,9 +1093,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
                 if (sortField || ObjectUtils.isNotEmpty(multiSortMeta)) {
                     if (props.sortMode === 'single') {
-                        data = sortSingle(data);
+                        data = sortSingle({ data, field: sortField, order: sortOrder });
                     } else if (props.sortMode === 'multiple') {
-                        data = sortMultiple(data);
+                        data = sortMultiple({ data, multiSortMeta });
                     }
                 }
             }
