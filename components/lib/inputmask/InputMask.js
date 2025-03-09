@@ -450,6 +450,11 @@ export const InputMask = React.memo(
             if (!isOnPaste) {
                 let pos = checkVal(true);
 
+                // Skip over any literal characters (like spaces)
+                while (pos < len.current && !tests.current[pos]) {
+                    pos++;
+                }
+
                 caret(pos);
             }
 
