@@ -405,11 +405,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         } else {
             // performance optimization to prevent resolving field data in each loop
             const lookupMap = new Map();
-            const sortField = getSortField();
             const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
 
             for (let node of data) {
-                lookupMap.set(node.data, ObjectUtils.resolveFieldData(node.data, sortField));
+                lookupMap.set(node.data, ObjectUtils.resolveFieldData(node.data, field));
             }
 
             value.sort((node1, node2) => {
