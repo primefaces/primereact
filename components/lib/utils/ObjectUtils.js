@@ -251,14 +251,14 @@ export default class ObjectUtils {
 
         // Handle function invocation
         if (params.length === 1) {
-            // For single parameter, unwrap array if needed
+            // For single parameter case, unwrap array if needed to avoid extra nesting
             const param = params[0];
 
             return obj(Array.isArray(param) ? param[0] : param);
         }
 
         // Pass all parameters to function
-        return obj(params);
+        return obj(...params);
     }
 
     static getComponentProp(component, prop = '', defaultProps = {}) {
