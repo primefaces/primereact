@@ -14,6 +14,7 @@ import * as React from 'react';
  */
 export const useAttrSelector = (prefix: string = '') => {
     const idx = React.useId();
+
     const uniqueSelector = `${prefix}${idx.replaceAll(':', '')}`.trim();
 
     return uniqueSelector;

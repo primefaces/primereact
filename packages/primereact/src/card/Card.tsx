@@ -1,14 +1,14 @@
 'use client';
 import { Component, ComponentProvider } from '@primereact/core/component';
 import { getCurrentInstance } from '@primereact/core/utils';
-import { usePanel } from '@primereact/headless/panel';
+import { useCard } from '@primereact/headless/card';
 import { styles } from '@primereact/styles/panel';
 import * as React from 'react';
-import { defaultProps } from './Panel.props';
+import { defaultProps } from './Card.props';
 
-export const Panel = (inProps) => {
-    const panel = usePanel(inProps, { styles });
-    const instance = getCurrentInstance(panel, inProps, defaultProps);
+export const Card = (inProps) => {
+    const card = useCard(inProps, { styles });
+    const instance = getCurrentInstance(card, inProps, defaultProps);
     const {
         id,
         props,
@@ -27,7 +27,7 @@ export const Panel = (inProps) => {
 
     return (
         <ComponentProvider pIf={props.pIf} instance={instance}>
-            <Component as={props.as || 'div'} ref={elementRef}>
+            <Component as={props.as || 'section'} ref={elementRef}>
                 {inProps.children}
             </Component>
         </ComponentProvider>

@@ -1,4 +1,3 @@
-import { omit } from '@primeuix/utils';
 import * as React from 'react';
 import { ComponentInstance } from './Component.types';
 import { useComponentPT } from './useComponentPT';
@@ -18,7 +17,7 @@ export const useComponent = (inInstance: ComponentInstance, ref?: any, styles?: 
         ...callback?.(common)
     };
 
-    React.useImperativeHandle(ref, () => omit(instance, 'ref') as any, []);
+    React.useImperativeHandle(ref, () => instance as any);
 
     return instance;
 };
