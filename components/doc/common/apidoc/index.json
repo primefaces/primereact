@@ -3588,7 +3588,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "typeof InputText",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
@@ -30486,7 +30486,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "typeof InputText",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get container element."
                         }
                     ]
@@ -30811,7 +30811,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "typeof InputText",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         }
                     ]
@@ -32045,7 +32045,6 @@
         "description": "InputText is an extension to standard input element with theming and keyfiltering.\n\n[Live Demo](https://www.primereact.org/inputtext/)",
         "components": {
             "InputText": {
-                "description": "InputText is an extension to standard input element with theming and keyfiltering.",
                 "methods": {
                     "description": "Defines methods that can be accessed by the component's reference.",
                     "values": []
@@ -41577,7 +41576,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "typeof InputText",
+                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
