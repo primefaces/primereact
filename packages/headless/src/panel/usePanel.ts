@@ -1,8 +1,8 @@
-import { withComponent } from '@primereact/core/component';
+import { withHeadless } from '@primereact/core/headless';
 import * as React from 'react';
 import { defaultProps } from './usePanel.props';
 
-export const usePanel = withComponent(({ props }) => {
+export const usePanel = withHeadless(({ props }) => {
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const state = {
