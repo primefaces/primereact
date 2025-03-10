@@ -143,4 +143,4 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
  *
  * @group Component
  */
-export declare class InputText extends React.Component<InputTextProps, any> {}
+export declare const InputText: React.ForwardRefExoticComponent<InputTextProps & React.RefAttributes<HTMLInputElement>>;
