@@ -96,7 +96,7 @@ export interface StepperChangeEvent {
  * Defines valid properties in Stepper component.
  * @group Properties
  */
-export interface StepperProps {
+export interface StepperProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * Active step index of stepper.
      * @defaultValue 0
@@ -143,6 +143,11 @@ export interface StepperProps {
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
 /**
