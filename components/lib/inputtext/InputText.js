@@ -71,7 +71,7 @@ export const InputText = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
         React.useEffect(() => {
-            if (isFilled) {
+            if (isFilled || elementRef.current?.value) {
                 DomHandler.addClass(elementRef.current, 'p-filled');
             } else {
                 DomHandler.removeClass(elementRef.current, 'p-filled');
