@@ -47501,6 +47501,14 @@
                             "description": "Active step index of stepper."
                         },
                         {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
                             "name": "end",
                             "optional": true,
                             "readonly": false,
