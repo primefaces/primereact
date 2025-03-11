@@ -24,7 +24,7 @@ import * as React from 'react';
  */
 export function useProps<P1 extends Record<string, unknown>, P2 extends Record<string, unknown>>(props1: P1 = {} as P1, props2: P2 = {} as P2) {
     type Props = Pick<P1 & P2, keyof P2>;
-    type Attrs = Omit<P1, keyof P2>;
+    type Attrs = Omit<P1, keyof P2> & Record<string, unknown>;
     type Result = { props: Props; attrs: Attrs };
 
     return React.useMemo(() => {

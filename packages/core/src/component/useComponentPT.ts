@@ -1,8 +1,8 @@
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
+import type { ComponentInstance } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils/mergeprops';
 import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase } from '@primeuix/utils/object';
 import * as React from 'react';
-import type { ComponentInstance } from './Component.types';
 
 export const useComponentPT = (instance: ComponentInstance) => {
     const { id, name, props, attrs, state, parent, $primereact, $attrSelector } = instance || {};

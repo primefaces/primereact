@@ -1,7 +1,7 @@
+import type { ComponentInstance } from '@primereact/types/core';
 import { Theme, ThemeService } from '@primeuix/styled';
 import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
-import type { ComponentInstance } from './Component.types';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
 // @todo - move to correct location

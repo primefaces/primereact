@@ -1,15 +1,14 @@
-import { useProps } from '@primereact/hooks';
+import type { ComponentInstance, ComponentProviderProps } from '@primereact/types/core';
+import { resolve } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './Component.props';
 
-export const ComponentContext = React.createContext(undefined);
+export const ComponentContext = React.createContext<ComponentInstance | undefined>(undefined);
 
-export const ComponentProvider = (inProps: Record<string, unknown> = {}) => {
+export const ComponentProvider = (inProps: ComponentProviderProps = {}) => {
     const parent = React.useContext(ComponentContext);
-    const { props } = useProps(inProps, defaultProps);
     const { pIf = true, instance: currentInstance, children } = inProps;
 
-    const instance = {
+    const instance: ComponentInstance = {
         ...currentInstance,
         $pc: {
             ...parent?.$pc,
@@ -17,7 +16,7 @@ export const ComponentProvider = (inProps: Record<string, unknown> = {}) => {
         }
     };
 
-    React.useImperativeHandle(instance.ref, () => instance as any);
+    React.useImperativeHandle(instance.ref, () => instance);
 
-    return pIf ? <ComponentContext.Provider value={instance}>{children}</ComponentContext.Provider> : null;
+    return pIf ? <ComponentContext.Provider value={instance}>{resolve(children, instance)}</ComponentContext.Provider> : null;
 };

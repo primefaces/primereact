@@ -1,8 +1,8 @@
-import type { ComponentProps } from './Component.types';
+import type { ComponentProps, GlobalComponentProps } from '@primereact/types/core';
 
 export const globalProps = {
-    pIf: true,
     ref: undefined,
+    pIf: true,
     as: undefined,
     asChild: false,
     pt: undefined,
@@ -11,10 +11,9 @@ export const globalProps = {
     dt: undefined,
     template: undefined,
     children: undefined
-} satisfies ComponentProps;
+} satisfies GlobalComponentProps;
 
-/**
- * @alias globalProps
- * @todo - update the globalProps object to include default values for any missing properties.
- */
-export const defaultProps = globalProps as Partial<ComponentProps>;
+export const defaultProps = {
+    instance: undefined,
+    options: undefined
+} satisfies ComponentProps;
