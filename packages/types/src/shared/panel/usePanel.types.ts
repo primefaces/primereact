@@ -1,7 +1,27 @@
+import * as React from 'react';
+
+/**
+ * Event object for the onToggle callback.
+ */
+export interface usePanelToggleEvent {
+    /**
+     * The original event that triggered the toggle.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * The new value of the panel's toggle state.
+     */
+    value: boolean;
+}
+
 /**
  * Props for the usePanel hook.
  */
 export interface usePanelProps {
+    /**
+     * The type of the hook.
+     */
+    readonly __TYPE: 'usePanel';
     /**
      * Whether the panel is collapsed.
      * @default false
@@ -15,13 +35,13 @@ export interface usePanelProps {
     /**
      * Callback triggered when the panel is collapsed.
      */
-    onCollapse?: () => void;
+    onCollapse?: (event: React.SyntheticEvent) => void;
     /**
      * Callback triggered when the panel is expanded.
      */
-    onExpand?: () => void;
+    onExpand?: ((event: React.SyntheticEvent) => void) | undefined;
     /**
      * Callback triggered when the panel's toggle state changes.
      */
-    onToggle?: () => void;
+    onToggle?: ((event: usePanelToggleEvent) => void) | undefined;
 }

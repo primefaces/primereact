@@ -7,7 +7,7 @@ import type { HeadlessInstance, WithHeadlessCallback } from '@primereact/types/c
 import * as React from 'react';
 import { useHeadless } from './useHeadless';
 
-export const withHeadless = <DP extends Record<string, unknown>>(callback: WithHeadlessCallback, defaultProps?: DP) => {
+export const withHeadless = <DP extends Record<string, unknown>>(callback: WithHeadlessCallback<unknown, DP>, defaultProps?: DP) => {
     return <P extends Record<string, unknown>, R = unknown>(inProps?: P, inRef?: React.Ref<R>): HeadlessInstance => {
         const config = React.useContext(PrimeReactContext);
         const locale = React.useContext(LocaleContext);

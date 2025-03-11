@@ -1,11 +1,11 @@
-import type { usePanelProps } from './usePanel.types';
+import type { usePanelProps } from '@primereact/types/shared/panel';
 
-export const defaultProps = {
-    __TYPE: 'Panel',
+export const defaultProps: usePanelProps = {
+    __TYPE: 'usePanel',
     collapsed: undefined,
     toggleable: undefined,
     // events
     onCollapse: undefined,
     onExpand: undefined,
     onToggle: undefined
-} as Partial<usePanelProps>;
+};

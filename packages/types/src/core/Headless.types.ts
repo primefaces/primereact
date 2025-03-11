@@ -20,7 +20,7 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
     /**
      * The base component props.
      */
-    props?: P | undefined;
+    props: P;
     /**
      * The base component attributes.
      */
@@ -48,4 +48,4 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
         | undefined;
 } & Record<string, unknown>;
 
-export declare type WithHeadlessCallback = (instance: HeadlessInstance) => Record<string, unknown> | undefined;
+export declare type WithHeadlessCallback<R, D> = (instance: HeadlessInstance<R, D>) => Record<string, unknown> | undefined;

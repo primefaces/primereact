@@ -12,7 +12,7 @@ import { globalProps } from './Component.props';
 import { useComponent } from './useComponent';
 
 export const withComponent = <DP extends Record<string, unknown>>(callback: WithComponentCallback, defaultProps: DP, styles?: StylesOptions) => {
-    return <P extends Record<string, unknown>>(inProps?: P): React.JSX.Element | undefined => {
+    return <P extends Record<string, unknown>>(inProps?: P): React.ReactNode => {
         const config = React.useContext(PrimeReactContext);
         const locale = React.useContext(LocaleContext);
         const passthrough = React.useContext(PassThroughContext);
