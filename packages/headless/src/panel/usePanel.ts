@@ -13,7 +13,7 @@ export const usePanel = withHeadless(({ props }) => {
     const contentRef = React.useRef(null);
 
     // methods
-    const toggle = (event) => {
+    const toggle = (event: React.SyntheticEvent) => {
         if (!props.toggleable) {
             return;
         }
@@ -27,7 +27,7 @@ export const usePanel = withHeadless(({ props }) => {
         });
     };
 
-    const expand = (event) => {
+    const expand = (event: React.SyntheticEvent) => {
         if (!props.onToggle) {
             setCollapsedState(false);
         }
@@ -35,7 +35,7 @@ export const usePanel = withHeadless(({ props }) => {
         props.onExpand?.(event);
     };
 
-    const collapse = (event) => {
+    const collapse = (event: React.SyntheticEvent) => {
         if (!props.onToggle) {
             setCollapsedState(true);
         }
@@ -43,7 +43,7 @@ export const usePanel = withHeadless(({ props }) => {
         props.onCollapse?.(event);
     };
 
-    const onButtonClick = (event) => {
+    const onButtonClick = (event: React.SyntheticEvent) => {
         toggle(event);
         event.preventDefault();
     };

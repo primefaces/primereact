@@ -1,4 +1,4 @@
-import type { PassThroughOptions, PassThroughProps } from '@primereact/core/passthrough';
+import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 
 /**
  * Defines the props of the component.

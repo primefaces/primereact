@@ -17,7 +17,7 @@ export const classes = {
     footer: 'p-panel-footer'
 };
 
-export const styles = createStyles({
+export const styles = createStyles<any, any>({
     name: 'panel',
     style,
     classes

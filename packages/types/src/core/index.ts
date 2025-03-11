@@ -1,6 +1,6 @@
 import type { FilterMatchModeType } from '@primereact/core/api';
-import type { PassThroughOptions, PassThroughProps } from '@primereact/core/passthrough';
-import type { ThemeOptions, ThemeProps } from '@primereact/core/theme';
+import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
+import type { ThemeOptions, ThemeProps } from './Theme.types';
 
 /**
  * Defines the Content Security Policy (CSP) configuration.
@@ -88,3 +88,9 @@ export declare type PrimeReactProps = {
      */
     zIndex?: ZIndex | undefined;
 };
+
+export * from './Component.types';
+export * from './Headless.types';
+export * from './Locale.types';
+export * from './PassThrough.types';
+export * from './Theme.types';
