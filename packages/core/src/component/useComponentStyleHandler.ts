@@ -7,13 +7,15 @@ export const useComponentStyleHandler = (styles?: any) => {
     const theme = React.useContext(ThemeContext);
 
     const _load = (css, options) => {
-        theme?.sheet?.add(options.name, css);
+        if (isNotEmpty(css)) {
+            theme?.stylesheet?.add(options.name, css);
+        }
     };
 
     return {
         name: 'base',
         ...styles,
-        load: (style, options = {}, extendedStyle = '', enableThemeTransform = false) => {
+        load: (style = '', options = {}, extendedStyle = '', enableThemeTransform = false) => {
             const name = options.name || this.name;
             const resolvedStyle = `${resolve(style, { dt })}${extendedStyle}`;
             const computedStyle = enableThemeTransform ? Theme.transformCSS(name, resolvedStyle) : resolvedStyle;

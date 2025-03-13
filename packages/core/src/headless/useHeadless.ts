@@ -2,15 +2,12 @@ import type { HeadlessInstance, WithHeadlessCallback } from '@primereact/types/c
 import * as React from 'react';
 
 export const useHeadless = (inInstance: HeadlessInstance, ref?: React.Ref<unknown>, callback?: WithHeadlessCallback): HeadlessInstance => {
-    const instance = React.useMemo(
-        () => ({
-            ...inInstance,
-            ...callback?.(inInstance)
-        }),
-        [inInstance, callback]
-    );
+    const instance = {
+        ...inInstance,
+        ...callback?.(inInstance)
+    };
 
-    React.useImperativeHandle(ref, () => instance);
+    React.useImperativeHandle(ref, () => instance, [instance]);
 
     return instance;
 };

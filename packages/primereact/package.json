@@ -47,6 +47,7 @@
         "@primeuix/utils": "catalog:",
         "@primeuix/styles": "catalog:",
         "@primereact/hooks": "workspace:*",
-        "@primereact/styles": "workspace:*"
+        "@primereact/styles": "workspace:*",
+        "@primereact/headless": "workspace:*"
     }
 }

@@ -80,6 +80,10 @@ export declare type PrimeReactProps = {
      */
     theme?: (Pick<ThemeProps, 'preset'> & { options?: ThemeOptions }) | undefined;
     /**
+     * Collects styles of the used components.
+     */
+    stylesheet?: Pick<ThemeProps, 'stylesheet'> | undefined;
+    /**
      * Defines whether the components should be unstyled.
      */
     unstyled?: boolean | undefined;

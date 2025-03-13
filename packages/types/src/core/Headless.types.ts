@@ -4,15 +4,15 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
     /**
      * The reference to the component.
      */
-    ref?: React.Ref<R> | undefined;
+    ref: React.Ref<R>;
     /**
      * The reference to the element.
      */
-    elementRef?: React.Ref<E> | undefined;
+    elementRef: React.Ref<E>;
     /**
      * The ID of the component.
      */
-    id?: string | undefined;
+    id: string;
     /**
      * The base component name.
      */
@@ -24,11 +24,11 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
     /**
      * The base component attributes.
      */
-    attrs?: Omit<Record<string, unknown>, keyof P> | undefined;
+    attrs: Omit<Record<string, unknown>, keyof P>;
     /**
      * The component state.
      */
-    state?: Record<string, unknown> | undefined;
+    state: Record<string, unknown>;
     /**
      * The parent component instance.
      */
@@ -40,12 +40,10 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
     /**
      * The PrimeReact configurations
      */
-    $primereact?:
-        | {
-              config?: unknown;
-              locale?: unknown;
-          }
-        | undefined;
-} & Record<string, unknown>;
+    $primereact: {
+        config: unknown;
+        locale: unknown;
+    };
+} & Record<PropertyKey, unknown>;
 
-export declare type WithHeadlessCallback<R, D> = (instance: HeadlessInstance<R, D>) => Record<string, unknown> | undefined;
+export declare type WithHeadlessCallback<R, D> = (instance: HeadlessInstance<R, D>) => Record<PropertyKey, unknown> | undefined;

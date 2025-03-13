@@ -1,7 +1,8 @@
 import type { ComponentInstance } from '@primereact/types/core';
 import { Theme, ThemeService } from '@primeuix/styled';
-import { cn, getKeyValue } from '@primeuix/utils';
+import { cn, getKeyValue, setAttribute } from '@primeuix/utils';
 import * as React from 'react';
+import { PrimeReactContext } from '../config';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
 // @todo - move to correct location
@@ -23,6 +24,34 @@ const Base = {
         this._loadedStyleNames.clear();
     }
 };
+
+// @todo - move to correct location
+function useCSS(cssMap = {}) {
+    const config = React.useContext(PrimeReactContext);
+
+    if (typeof window === 'undefined') {
+        /*Object.entries(cssMap).forEach(([key, value]) => {
+            config?.sheet?.add(key, value.css);
+        });*/
+    }
+
+    React.useInsertionEffect(() => {
+        config?.stylesheet?._styles?.forEach((value, key) => {
+            const styleElement = document.head.querySelector(`style[data-primereact-style-id="${key}"]`) || document.createElement('style');
+
+            if (!styleElement.isConnected) {
+                //setAttributes(styleElement, value.styleOptions);
+                value.first ? document.head.prepend(styleElement) : document.head.appendChild(styleElement);
+                setAttribute(styleElement, 'data-primereact-style-id', key);
+                //styleRef.current.onload = (event: React.ReactEventHandler<HTMLStyleElement>) => onStyleLoaded?.(event, { name: styleNameRef.current });
+                //onStyleMounted?.(styleNameRef.current);
+            }
+
+            styleElement.textContent = value.css;
+        });
+    });
+    //return rule;
+}
 
 export const useComponentStyle = (instance: ComponentInstance, styles?: any) => {
     const { props, attrs, state, parent, $primereact, $attrSelector } = instance || {};
@@ -46,6 +75,8 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
 
             Base.setLoadedStyleName('base');
         }
+
+        _loadThemeStyles();
     };
 
     const _loadStyles = () => {
@@ -71,7 +102,7 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
             $style.load(primitive?.css, { name: 'primitive-variables', ...$styleOptions });
             $style.load(semantic?.css, { name: 'semantic-variables', ...$styleOptions });
             $style.load(global?.css, { name: 'global-variables', ...$styleOptions });
-            $style.load($style.baseStyles.style, { name: 'global-style', ...$styleOptions }, style, true);
+            $style.load($style.baseStyles?.style, { name: 'global-style', ...$styleOptions }, style, true);
 
             Theme.setLoadedStyleName('common');
         }
@@ -140,11 +171,14 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
 
     // effects
     if (!$isUnstyled) {
+        // @todo - remove
+        Theme.clearLoadedStyleNames();
+        Base.clearLoadedStyleNames();
         _loadCoreStyles();
         _loadStyles();
     }
 
-    //useCSS();
+    useCSS();
 
     // new instance
     return {

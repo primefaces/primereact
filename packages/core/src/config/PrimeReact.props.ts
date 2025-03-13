@@ -15,6 +15,7 @@ export const defaultProps = {
     ptOptions: { mergeSections: true, mergeProps: false },
     ripple: false,
     theme: undefined,
+    stylesheet: undefined,
     unstyled: false,
     zIndex: { modal: 1100, overlay: 1000, menu: 1000, tooltip: 1100 }
 } as Partial<PrimeReactProps>;

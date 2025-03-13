@@ -16,7 +16,7 @@
     "main": "./src/index.js",
     "types": "./src/index.d.ts",
     "exports": {
-        "./*": "./src/*/index.js"
+        "./*": "./src/*/index.ts"
     },
     "publishConfig": {
         "main": "./index.mjs",

@@ -84,23 +84,23 @@ export interface ComponentProviderProps {
 /**
  * Defines the component instance.
  */
-export declare type ComponentInstance<R = unknown, P = Record<string, unknown>, E = HTMLElement> = {
+export declare type ComponentInstance<R = unknown, P = unknown, E = HTMLElement> = {
     /**
      * The reference to the component.
      */
-    ref?: React.Ref<R> | undefined;
+    ref: React.Ref<R>;
     /**
      * The component name.
      */
-    name?: string | undefined;
+    name: string | undefined;
     /**
      * The component props.
      */
-    props?: P | undefined;
+    props: P;
     /**
      * The component attributes.
      */
-    attrs?: Omit<Record<string, unknown>, keyof P> | undefined;
+    attrs: Omit<Record<string, unknown>, keyof P>;
     /**
      * The parent component instance.
      */
@@ -108,18 +108,16 @@ export declare type ComponentInstance<R = unknown, P = Record<string, unknown>, 
     /**
      * The component props that are passed by the user.
      */
-    inProps?: (P & Record<string, unknown>) | undefined;
+    inProps?: P | undefined;
     /**
      * The PrimeReact configurations
      */
-    $primereact?:
-        | {
-              config?: unknown;
-              locale?: unknown;
-              theme?: unknown;
-              passthrough?: unknown;
-          }
-        | undefined;
+    $primereact: {
+        config?: unknown;
+        locale?: unknown;
+        theme?: unknown;
+        passthrough?: unknown;
+    };
 } & {
     /**
      * Finds attributes of the component using the key in pass-through options.
@@ -177,4 +175,4 @@ export declare type ComponentInstance<R = unknown, P = Record<string, unknown>, 
     $pc?: Record<string, unknown>;
 };
 
-export declare type WithComponentCallback = (instance: ComponentInstance, ref?: React.Ref<unknown>) => React.JSX.Element | undefined;
+export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;

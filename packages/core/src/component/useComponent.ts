@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = (inInstance: ComponentInstance, ref?: React.Ref<unknown>, styles?: StylesOptions, callback?: WithComponentCallback): React.JSX.Element | undefined => {
+export const useComponent = (inInstance: ComponentInstance, ref?: React.Ref<unknown>, styles?: StylesOptions, callback?: WithComponentCallback) => {
     const ptx = useComponentPT(inInstance);
     const stx = useComponentStyle(inInstance, styles);
     const instance = React.useMemo(

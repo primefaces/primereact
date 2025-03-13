@@ -11,19 +11,19 @@ import { ComponentContext } from './Component.context';
 import { globalProps } from './Component.props';
 import { useComponent } from './useComponent';
 
-export const withComponent = <DP extends Record<string, unknown>>(callback: WithComponentCallback, defaultProps: DP, styles?: StylesOptions) => {
-    return <P extends Record<string, unknown>>(inProps?: P): React.ReactNode => {
+export const withComponent = <D>(callback: WithComponentCallback<unknown, D>, defaultProps: D, styles?: StylesOptions) => {
+    return <P>(inProps?: P) => {
         const config = React.useContext(PrimeReactContext);
         const locale = React.useContext(LocaleContext);
         const passthrough = React.useContext(PassThroughContext);
         const theme = React.useContext(ThemeContext);
         const parent = React.useContext(ComponentContext);
 
-        const { props, attrs } = useProps(inProps as Record<string, unknown>, { ...globalProps, ...defaultProps });
+        const { props, attrs } = useProps(inProps as Record<string, unknown>, { ...globalProps, ...defaultProps } as Record<string, unknown>);
         const ref = React.useRef(props.ref);
         const name = props?.__TYPE as string | undefined;
 
-        const instance: ComponentInstance<unknown> = {
+        const instance: ComponentInstance = {
             ref,
             name,
             props,
