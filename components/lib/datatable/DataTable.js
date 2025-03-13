@@ -28,6 +28,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [columnOrderState, setColumnOrderState] = React.useState([]);
     const [groupRowsSortMetaState, setGroupRowsSortMetaState] = React.useState(null);
     const [editingMetaState, setEditingMetaState] = React.useState({});
+    const [frozenEditingMetaState, setFrozenEditingMetaState] = React.useState({});
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
     const metaData = {
@@ -42,6 +43,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             columnOrder: columnOrderState,
             groupRowsSortMeta: groupRowsSortMetaState,
             editingMeta: editingMetaState,
+            frozenEditingMeta: frozenEditingMetaState,
             d_rows: d_rowsState,
             d_filters: d_filtersState
         },
@@ -506,6 +508,29 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const onFrozenEditingMetaChange = (e) => {
+        const { rowData, field, editingKey, editing } = e;
+        let frozenEditingMeta = { ...frozenEditingMetaState };
+        let meta = frozenEditingMeta[editingKey];
+
+        if (editing) {
+            !meta && (meta = frozenEditingMeta[editingKey] = { data: { ...rowData }, fields: [] });
+            meta.fields.push(field);
+        } else if (meta) {
+            const fields = meta.fields.filter((f) => f !== field);
+
+            !fields.length ? delete frozenEditingMeta[editingKey] : (meta.fields = fields);
+        }
+
+        setFrozenEditingMetaState(frozenEditingMeta);
+    };
+
+    const clearFrozenEditingMetaData = () => {
+        if (props.editMode && ObjectUtils.isNotEmpty(frozenEditingMetaState)) {
+            setFrozenEditingMetaState({});
+        }
+    };
+
     const onColumnResizeStart = (e) => {
         createBeforeResizeStyleElement();
         const { originalEvent: event, column } = e;
@@ -878,6 +903,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const onPageChange = (e) => {
         clearEditingMetaData();
+        clearFrozenEditingMetaData();
 
         if (props.onPage) {
             props.onPage(createEvent(e));
@@ -893,6 +919,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const onSortChange = (e) => {
         clearEditingMetaData();
+        clearFrozenEditingMetaData();
 
         const { originalEvent: event, column, sortableDisabledFields } = e;
         let sortField = getColumnProp(column, 'sortField') || getColumnProp(column, 'field');
@@ -1072,6 +1099,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const onFilterChange = (filters) => {
         clearEditingMetaData();
+        clearFrozenEditingMetaData();
 
         setD_filtersState(filters);
     };
@@ -1269,6 +1297,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         setD_filtersState(cloneFilters(props.filters));
         setGroupRowsSortMetaState(null);
         setEditingMetaState({});
+        setFrozenEditingMetaState({});
 
         if (!props.onPage) {
             setFirstState(props.first);
@@ -1661,7 +1690,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 dataKey={props.dataKey}
                 dragSelection={props.dragSelection}
                 editMode={props.editMode}
-                editingMeta={editingMetaState}
+                editingMeta={frozenEditingMetaState}
                 editingRows={props.editingRows}
                 emptyMessage={props.emptyMessage}
                 expandableRowGroups={props.expandableRowGroups}
@@ -1680,7 +1709,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onCellUnselect={props.onCellUnselect}
                 onContextMenu={props.onContextMenu}
                 onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                onEditingMetaChange={onEditingMetaChange}
+                onEditingMetaChange={onFrozenEditingMetaChange}
                 onRowClick={props.onRowClick}
                 onRowCollapse={props.onRowCollapse}
                 onRowDoubleClick={props.onRowDoubleClick}
