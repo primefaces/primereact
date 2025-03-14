@@ -204,17 +204,17 @@ export declare class Editor extends React.Component<EditorProps, any> {
     public getQuill(): any;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get content element.
-     * @return {HTMLDivElement} Content element
+     * @return {HTMLDivElement | null} Content element
      */
-    public getContent(): HTMLDivElement;
+    public getContent(): HTMLDivElement | null;
     /**
      * Used to get toolbar element.
-     * @return {HTMLDivElement} Toolbar element
+     * @return {HTMLDivElement | null} Toolbar element
      */
-    public getToolbar(): HTMLDivElement;
+    public getToolbar(): HTMLDivElement | null;
 }

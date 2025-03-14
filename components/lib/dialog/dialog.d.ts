@@ -452,32 +452,32 @@ export declare class Dialog extends React.Component<DialogProps, any> {
     public resetPosition(): void;
     /**
      * Used to get the container element of the dialog.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get mask element.
-     * @return {HTMLDivElement} Mask element
+     * @return {HTMLDivElement | null} Mask element
      */
-    public getMask(): HTMLDivElement;
+    public getMask(): HTMLDivElement | null;
     /**
      * Used to get the content element of the dialog
-     * @return {HTMLDivElement} Content element
+     * @return {HTMLDivElement | null} Content element
      */
-    public getContent(): HTMLDivElement;
+    public getContent(): HTMLDivElement | null;
     /**
      * Used to get the header element of the dialog
-     * @return {HTMLDivElement} Header element
+     * @return {HTMLDivElement | null} Header element
      */
-    public getHeader(): HTMLDivElement;
+    public getHeader(): HTMLDivElement | null;
     /**
      * Used to get the dialog's footer element.
-     * @return {HTMLDivElement} Footer element
+     * @return {HTMLDivElement | null} Footer element
      */
-    public getFooter(): HTMLDivElement;
+    public getFooter(): HTMLDivElement | null;
     /**
      * Used to get close button element.
-     * @return {HTMLButtonElement} CloseButton element
+     * @return {HTMLButtonElement | null} CloseButton element
      */
-    public getCloseButton(): HTMLButtonElement;
+    public getCloseButton(): HTMLButtonElement | null;
 }

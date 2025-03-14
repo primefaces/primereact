@@ -450,12 +450,12 @@ export declare class ListBox extends React.Component<ListBoxProps, any> {
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get the virtual scroller instance.
-     * @return {VirtualScroller} Virtual Scroller instance
+     * @return {VirtualScroller | null} Virtual Scroller instance
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

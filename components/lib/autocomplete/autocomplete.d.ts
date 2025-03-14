@@ -588,22 +588,22 @@ export declare class AutoComplete extends React.Component<AutoCompleteProps, any
     public search(event: React.SyntheticEvent, query: string, source?: 'dropdown' | 'input' | null | undefined): void;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLSpanElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get input element.
-     * @return {InputText} Input element
+     * @return {InputText | null} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): typeof InputText | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to get the options of inline virtualScroller component.
-     * @return {VirtualScroller} VirtualScroller component
+     * @return {VirtualScroller | null} VirtualScroller component
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

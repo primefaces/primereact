@@ -306,7 +306,7 @@ export declare class Carousel extends React.Component<CarouselProps, any> {
     public stopAutoplay(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

@@ -186,7 +186,7 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 export declare class Steps extends React.Component<StepsProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

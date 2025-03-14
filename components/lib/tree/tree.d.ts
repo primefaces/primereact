@@ -702,7 +702,7 @@ export declare class Tree extends React.Component<TreeProps, any> {
     public filter<T>(value: T): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

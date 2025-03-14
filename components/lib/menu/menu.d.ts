@@ -237,9 +237,9 @@ export declare class Menu extends React.Component<MenuProps, any> {
     public hide(event: React.SyntheticEvent): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get target element.
      * @return {EventTarget} Target element

@@ -164,9 +164,9 @@ export interface StepperProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Stepper extends React.Component<StepperProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get the current active step index.
      * @return {number | undefined} Active step index

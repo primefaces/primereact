@@ -164,9 +164,9 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Inplace extends React.Component<InplaceProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }
 
 /**

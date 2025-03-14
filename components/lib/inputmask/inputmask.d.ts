@@ -155,7 +155,7 @@ export declare class InputMask extends React.Component<InputMaskProps, any> {
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {InputText} Container element
+     * @return {InputText | null} Container element
      */
-    public getElement(): typeof InputText;
+    public getElement(): typeof InputText | null;
 }
