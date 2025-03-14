@@ -161,9 +161,9 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 export declare class Chip extends React.Component<ChipProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to set the visibility of the chip.
      * @param {boolean} visible - Whether to show or hide the chip

@@ -342,7 +342,7 @@ export declare class Toast extends React.Component<ToastProps, any> {
     public remove(message: ToastMessage | ToastMessage[]): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

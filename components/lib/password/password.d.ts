@@ -328,17 +328,17 @@ export declare class Password extends React.Component<PasswordProps, any> {
     public toggleMask(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): typeof InputText | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
 }

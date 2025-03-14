@@ -112,7 +112,7 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Toolbar extends React.Component<ToolbarProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

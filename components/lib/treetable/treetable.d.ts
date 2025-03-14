@@ -1046,7 +1046,7 @@ export declare class TreeTable extends React.Component<TreeTableProps, any> {
     ): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

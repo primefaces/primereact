@@ -158,7 +158,8 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
  */
 export declare class Slider extends React.Component<SliderProps, any> {
     /**
-     * Returns the reference of virtualScroller's container.
+     * Returns the reference of slider's container.
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

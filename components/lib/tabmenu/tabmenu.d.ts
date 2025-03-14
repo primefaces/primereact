@@ -164,7 +164,7 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class TabMenu extends React.Component<TabMenuProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

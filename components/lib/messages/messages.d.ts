@@ -219,7 +219,7 @@ export declare class Messages extends React.Component<MessagesProps, any> {
     public remove(message: MessagesMessage | MessagesMessage[]): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

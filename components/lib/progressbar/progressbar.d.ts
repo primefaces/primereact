@@ -117,7 +117,7 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
 export declare class ProgressBar extends React.Component<ProgressBarProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

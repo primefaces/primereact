@@ -517,7 +517,7 @@ export interface PickListProps {
 export declare class PickList extends React.Component<PickListProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

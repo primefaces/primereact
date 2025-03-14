@@ -250,7 +250,7 @@ export declare class SpeedDial extends React.Component<SpeedDialProps, any> {
     public hide(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

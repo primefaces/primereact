@@ -8,9 +8,9 @@
  *
  */
 import * as React from 'react';
-import { PassThroughType } from '../utils/utils';
-import { PassThroughOptions } from '../passthrough';
 import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils/utils';
 
 export declare type TimelinePassThroughType<T> = PassThroughType<T, TimelinePassThroughMethodOptions>;
 
@@ -132,7 +132,7 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 export declare class Timeline extends React.Component<TimelineProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }
