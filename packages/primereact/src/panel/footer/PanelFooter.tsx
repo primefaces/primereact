@@ -1,11 +1,14 @@
 'use client';
-import { Component, ComponentProvider, withComponent } from '@primereact/core/component';
+import { Component, ComponentProvider } from '@primereact/core/component';
+import { useComponent } from '@primereact/core/component/useComponent';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultFooterProps } from './PanelFooter.props';
 
-export const PanelFooter = withComponent((inInstance, ref) => {
-    const { props, parent: panel } = inInstance;
+export const PanelFooter = (inProps) => {
+    const instance = useComponent(inProps, defaultFooterProps);
+    const { props, getParent } = instance;
+    const panel = getParent('Panel');
 
     const footerProps = mergeProps(
         {
@@ -21,6 +24,6 @@ export const PanelFooter = withComponent((inInstance, ref) => {
             </Component>
         </ComponentProvider>
     );
-}, defaultFooterProps);
+};
 
 PanelFooter.displayName = 'PrimeReact.PanelFooter';

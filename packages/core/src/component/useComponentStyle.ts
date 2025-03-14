@@ -54,7 +54,7 @@ function useCSS(cssMap = {}) {
 }
 
 export const useComponentStyle = (instance: ComponentInstance, styles?: any) => {
-    const { props, attrs, state, parent, $primereact, $attrSelector } = instance || {};
+    const { props = {}, attrs, state, parent, $primereact, $attrSelector } = instance || {};
     const $style = useComponentStyleHandler(styles);
 
     // @todo

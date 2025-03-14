@@ -14,8 +14,11 @@ import * as React from 'react';
  */
 export const useAttrSelector = (prefix: string = '') => {
     const idx = React.useId();
+    const [uniqueSelector, setUniqueSelector] = React.useState(`${prefix}${idx.replaceAll(/:|«|»/g, '')}`);
 
-    const uniqueSelector = `${prefix}${idx.replaceAll(':', '')}`.trim();
+    React.useEffect(() => {
+        setUniqueSelector(`${prefix}${idx.replaceAll(/:|«|»/g, '')}`);
+    }, [idx, prefix]);
 
-    return uniqueSelector;
+    return uniqueSelector.trim().toLowerCase();
 };

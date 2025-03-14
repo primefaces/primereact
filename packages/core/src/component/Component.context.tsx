@@ -8,6 +8,7 @@ export const ComponentProvider = (inProps: ComponentProviderProps = {}) => {
     const parent = React.useContext(ComponentContext);
     const { pIf = true, instance: currentInstance, children } = inProps;
 
+    // @todo: This is a hack to get the parent component instance
     const instance: ComponentInstance = {
         ...currentInstance,
         $pc: {

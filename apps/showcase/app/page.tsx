@@ -27,8 +27,11 @@ export default function Home() {
 
                 <section>
                     <h1 className="text-4xl font-bold">Panel Component</h1>
-                    <Panel ref={panelRef}>
-                        <Panel.Header>Header Content</Panel.Header>
+                    <Panel ref={panelRef} toggleable>
+                        <Panel.Header>
+                            Header Content
+                            <Panel.Collapse>Collapse</Panel.Collapse>
+                        </Panel.Header>
                         <Panel.Content>
                             <div>Additional Content Here</div>
                         </Panel.Content>
@@ -36,6 +39,7 @@ export default function Home() {
                     </Panel>
                 </section>
             </main>
+            <span className="hidden">Hidden</span>
         </div>
     );
 }

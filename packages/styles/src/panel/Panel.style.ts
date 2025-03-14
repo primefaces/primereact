@@ -13,7 +13,12 @@ export const classes = {
     headerActions: 'p-panel-header-actions',
     pcToggleButton: 'p-panel-toggle-button',
     contentContainer: 'p-panel-content-container',
-    content: 'p-panel-content',
+    content: ({ state }) => [
+        'p-panel-content',
+        {
+            hidden: state?.collapsed
+        }
+    ],
     footer: 'p-panel-footer'
 };
 

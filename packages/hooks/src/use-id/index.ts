@@ -1,4 +1,3 @@
-import { isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
 
 /**
@@ -21,13 +20,11 @@ import * as React from 'react';
  */
 export const useId = (initialValue?: string) => {
     const idx = React.useId();
-    const [idState, setIdState] = React.useState(initialValue || `pr_id_${idx.replaceAll(':', '')}`);
+    const [idState, setIdState] = React.useState(initialValue || `pr_id_${idx.replaceAll(/:|«|»/g, '')}`);
 
     React.useEffect(() => {
-        if (isNotEmpty(initialValue)) {
-            setIdState(initialValue!);
-        }
-    }, [initialValue]);
+        setIdState(initialValue || `pr_id_${idx.replaceAll(/:|«|»/g, '')}`);
+    }, [initialValue, idx]);
 
     return idState;
 };

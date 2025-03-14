@@ -1,11 +1,14 @@
 'use client';
-import { Component, ComponentProvider, withComponent } from '@primereact/core/component';
+import { Component, ComponentProvider } from '@primereact/core/component';
+import { useComponent } from '@primereact/core/component/useComponent';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultHeaderProps } from './PanelHeader.props';
 
-export const PanelHeader = withComponent((inInstance, ref) => {
-    const { props, parent: panel } = inInstance;
+export const PanelHeader = (inProps) => {
+    const instance = useComponent(inProps, defaultHeaderProps);
+    const { props, getParent } = instance;
+    const panel = getParent('Panel');
 
     const headerProps = mergeProps(
         {
@@ -15,12 +18,12 @@ export const PanelHeader = withComponent((inInstance, ref) => {
     );
 
     return (
-        <ComponentProvider pIf={props.pIf}>
+        <ComponentProvider pIf={props.pIf} instance={instance}>
             <Component as={props.as || 'div'} {...headerProps}>
                 {props.children}
             </Component>
         </ComponentProvider>
     );
-}, defaultHeaderProps);
+};
 
 PanelHeader.displayName = 'PrimeReact.PanelHeader';
