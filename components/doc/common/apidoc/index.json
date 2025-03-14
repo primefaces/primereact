@@ -138,7 +138,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -3582,25 +3582,25 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the options of inline virtualScroller component."
                         },
                         {
@@ -4650,7 +4650,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -4896,7 +4896,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -4996,7 +4996,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -5132,7 +5132,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -5340,7 +5340,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -5954,19 +5954,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -8648,7 +8648,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -9156,25 +9156,25 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getLabel",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get label element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         }
                     ]
@@ -10015,7 +10015,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -10197,13 +10197,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         }
                     ]
@@ -10633,7 +10633,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -10920,7 +10920,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -11436,19 +11436,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -15675,7 +15675,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -16087,7 +16087,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -16431,7 +16431,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -16449,13 +16449,13 @@
                         {
                             "name": "getTable",
                             "parameters": [],
-                            "returnType": "HTMLTableElement",
+                            "returnType": "null | HTMLTableElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the virtual scroller."
                         },
                         {
@@ -21035,7 +21035,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -21673,7 +21673,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -21806,37 +21806,37 @@
                         {
                             "name": "getCloseButton",
                             "parameters": [],
-                            "returnType": "HTMLButtonElement",
+                            "returnType": "null | HTMLButtonElement",
                             "description": "Used to get close button element."
                         },
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the content element of the dialog"
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the container element of the dialog."
                         },
                         {
                             "name": "getFooter",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the dialog's footer element."
                         },
                         {
                             "name": "getHeader",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the header element of the dialog"
                         },
                         {
                             "name": "getMask",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get mask element."
                         },
                         {
@@ -22611,7 +22611,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -22749,7 +22749,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -23069,31 +23069,31 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getFocusInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get focusable input element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the options of inline virtualScroller component."
                         },
                         {
@@ -24143,13 +24143,13 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get content element."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -24161,7 +24161,7 @@
                         {
                             "name": "getToolbar",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get toolbar element."
                         }
                     ]
@@ -24480,13 +24480,13 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the content element of the fieldset."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLFieldSetElement",
+                            "returnType": "null | HTMLFieldSetElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -24805,7 +24805,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -24817,7 +24817,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -26090,7 +26090,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -29581,13 +29581,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getImage",
                             "parameters": [],
-                            "returnType": "HTMLImageElement",
+                            "returnType": "null | HTMLImageElement",
                             "description": "Used to get image element"
                         },
                         {
@@ -30080,7 +30080,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -30486,7 +30486,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get container element."
                         }
                     ]
@@ -30799,7 +30799,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -30811,7 +30811,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         }
                     ]
@@ -31723,13 +31723,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         }
                     ]
@@ -32469,7 +32469,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -32778,13 +32778,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the virtual scroller instance."
                         }
                     ]
@@ -33496,7 +33496,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -33916,19 +33916,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextareaProps & RefAttributes<HTMLTextAreaElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextareaProps & RefAttributes<HTMLTextAreaElement>>",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -34447,7 +34447,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -34855,19 +34855,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getMenuButton",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get menu button element."
                         },
                         {
                             "name": "getRootMenu",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get root menu element."
                         }
                     ]
@@ -35417,7 +35417,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -35576,7 +35576,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -36221,19 +36221,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -37586,7 +37586,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -37988,7 +37988,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -38519,7 +38519,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -38955,7 +38955,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -39342,7 +39342,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -40602,13 +40602,13 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get content of the panel."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -41091,7 +41091,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -41570,19 +41570,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -42109,7 +42109,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -43040,7 +43040,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -43221,7 +43221,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -43372,13 +43372,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -43678,7 +43678,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -44215,25 +44215,25 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get content of the scrollpanel."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getXBar",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get horizontal scrollbar of the panel."
                         },
                         {
                             "name": "getYBar",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get vertical scrollbar of the panel."
                         }
                     ]
@@ -44368,7 +44368,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLButtonElement",
+                            "returnType": "null | HTMLButtonElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -44587,7 +44587,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -44944,19 +44944,19 @@
                         {
                             "name": "getCloseIcon",
                             "parameters": [],
-                            "returnType": "HTMLButtonElement",
+                            "returnType": "null | HTMLButtonElement",
                             "description": "Used to get close icon element."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getMask",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get mask element."
                         }
                     ]
@@ -45327,7 +45327,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -45482,7 +45482,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -45960,8 +45960,8 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
-                            "description": "Returns the reference of virtualScroller's container."
+                            "returnType": "null | HTMLDivElement",
+                            "description": "Returns the reference of slider's container."
                         }
                     ]
                 },
@@ -46218,7 +46218,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -46630,7 +46630,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -47179,7 +47179,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -47448,7 +47448,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -47978,7 +47978,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -48268,13 +48268,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getTarget",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get target element."
                         }
                     ]
@@ -48408,7 +48408,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -48842,7 +48842,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -49434,7 +49434,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -49593,7 +49593,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -49888,7 +49888,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -50245,7 +50245,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -50456,7 +50456,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -51000,7 +51000,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -51330,7 +51330,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -51500,7 +51500,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -52454,7 +52454,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -53783,7 +53783,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -54906,7 +54906,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -56667,7 +56667,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
