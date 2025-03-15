@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
@@ -167,7 +167,7 @@ export const TableBody = React.memo(
         };
 
         const allowRangeSelection = (event) => {
-            return isMultipleSelection() && event.originalEvent.shiftKey && anchorRowIndex.current !== null;
+            return isMultipleSelection() && event.originalEvent.shiftKey && anchorRowIndex.current !== null && (anchorRowFirst.current === props.first || (props.multiPageRangeSelection && !props.lazy));
         };
 
         const allowRowSelection = () => {
@@ -190,6 +190,10 @@ export const TableBody = React.memo(
             options = options || props.virtualScrollerOptions;
 
             return options ? options[option] : null;
+        };
+
+        const getProcessedDataIndex = (rowIndex) => {
+            return props.lazy ? rowIndex - props.first : rowIndex;
         };
 
         const findIndex = (collection, rowData) => {
@@ -336,15 +340,17 @@ export const TableBody = React.memo(
             let rangeEnd;
 
             const isAllowCellSelection = allowCellSelection();
+            const rangeRowIndexInProcessedData = getProcessedDataIndex(rangeRowIndex.current);
+            const anchorRowIndexInProcessedData = getProcessedDataIndex(anchorRowIndex.current);
 
-            if (rangeRowIndex.current > anchorRowIndex.current) {
-                rangeStart = anchorRowIndex.current;
-                rangeEnd = rangeRowIndex.current;
-            } else if (rangeRowIndex.current < anchorRowIndex.current) {
-                rangeStart = rangeRowIndex.current;
-                rangeEnd = anchorRowIndex.current;
+            if (rangeRowIndexInProcessedData > anchorRowIndexInProcessedData) {
+                rangeStart = anchorRowIndexInProcessedData;
+                rangeEnd = rangeRowIndexInProcessedData;
+            } else if (rangeRowIndexInProcessedData < anchorRowIndexInProcessedData) {
+                rangeStart = rangeRowIndexInProcessedData;
+                rangeEnd = anchorRowIndexInProcessedData;
             } else {
-                rangeStart = rangeEnd = rangeRowIndex.current;
+                rangeStart = rangeEnd = rangeRowIndexInProcessedData;
             }
 
             return isAllowCellSelection ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
@@ -389,7 +395,7 @@ export const TableBody = React.memo(
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
                 let rowData = value[i];
                 let columns = props.columns;
-                let rowIndex = props.paginator ? i + props.first : i;
+                let rowIndex = props.lazy ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
                     let field = getColumnProp(columns[j], 'field');
@@ -876,12 +882,6 @@ export const TableBody = React.memo(
             }
         });
 
-        useUpdateEffect(() => {
-            if (props.paginator && isMultipleSelection()) {
-                anchorRowIndex.current = null;
-            }
-        }, [props.first]);
-
         useUnmountEffect(() => {
             if (props.dragSelection) {
                 unbindDragSelectionEvents();
@@ -920,7 +920,7 @@ export const TableBody = React.memo(
         };
 
         const createGroupHeader = (rowData, rowIndex, expanded, colSpan) => {
-            if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, rowIndex - props.first)) {
+            if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, getProcessedDataIndex(rowIndex))) {
                 const style = rowGroupHeaderStyle();
                 const toggler = props.expandableRowGroups && (
                     <RowTogglerButton
