@@ -1357,10 +1357,16 @@
   .p-icon-field-left > .p-inputtext {
     padding-left: 1.858rem;
   }
+  .p-icon-field-left > .p-autocomplete .p-inputtext {
+    padding-left: 1.858rem;
+  }
   .p-icon-field-left.p-float-label > label {
     left: 1.858rem;
   }
   .p-icon-field-right > .p-inputtext {
+    padding-right: 1.858rem;
+  }
+  .p-icon-field-right > .p-autocomplete .p-inputtext {
     padding-right: 1.858rem;
   }
   ::-webkit-input-placeholder {
@@ -1404,13 +1410,15 @@
   .p-fluid .p-icon-field-right {
     width: 100%;
   }
-  .p-icon-field-left > .p-input-icon:first-of-type {
+  .p-icon-field-left > .p-input-icon {
     left: 0.429rem;
     color: #848484;
+    z-index: 1;
   }
-  .p-icon-field-right > .p-input-icon:last-of-type {
+  .p-icon-field-right > .p-input-icon {
     right: 0.429rem;
     color: #848484;
+    z-index: 1;
   }
   .p-inputotp {
     display: flex;
