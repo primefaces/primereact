@@ -7,14 +7,15 @@ import { defaultHeaderProps } from './PanelHeader.props';
 
 export const PanelHeader = (inProps) => {
     const instance = useComponent(inProps, defaultHeaderProps);
-    const { props, getParent } = instance;
+    const { props, ptmi, getParent } = instance;
     const panel = getParent('Panel');
 
     const headerProps = mergeProps(
         {
             className: panel?.cx?.('header')
         },
-        panel?.ptm?.('header')
+        panel?.ptm?.('header'),
+        ptmi('root')
     );
 
     return (

@@ -13,3 +13,5 @@ export const Component = (inProps: ComponentProps = {}) => {
 
     return AsComponent ? <AsComponent {...rest}>{resolve(children, { ...rest, ...options }, instance)}</AsComponent> : null;
 };
+
+Component.displayName = 'PrimeReact.Component';

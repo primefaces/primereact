@@ -27,7 +27,7 @@ export default function Home() {
 
                 <section>
                     <h1 className="text-4xl font-bold">Panel Component</h1>
-                    <Panel ref={panelRef} toggleable>
+                    <Panel ref={panelRef} toggleable data-testid="panel">
                         <Panel.Header>
                             Header Content
                             <Panel.Collapse>Collapse</Panel.Collapse>
