@@ -1,4 +1,5 @@
 import { Instance } from '.';
+import { StylesOptions } from '../styles';
 import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 
 /**
@@ -39,6 +40,10 @@ export interface GlobalComponentProps<R = unknown, D = unknown> {
      * The design token to use for the component.
      */
     dt?: D | undefined;
+    /**
+     * The styles to use for the component.
+     */
+    styles?: StylesOptions | undefined;
     /**
      * The template to use for the component.
      */
@@ -90,9 +95,9 @@ export declare type ComponentInstance<D = unknown> = Instance<unknown, D> & {
      * Finds parent instance of the component.
      *
      * @param type - The type of the parent instance to find.
-     * @returns {Instance | Instance['parent'] | undefined} - The found parent instance or undefined if not found.
+     * @returns {Instance | undefined} - The found parent instance or undefined if not found.
      */
-    getParent: (type?: string) => Instance | Instance['parent'] | undefined;
+    getParent: (type?: string) => ComponentInstance | undefined;
 } & {
     /**
      * Finds attributes of the component using the key in pass-through options.
@@ -150,7 +155,7 @@ export declare type ComponentInstance<D = unknown> = Instance<unknown, D> & {
     /**
      * Defines parent components instances.
      */
-    $pc: Record<string, Instance>;
+    $pc: Record<string, ComponentInstance>;
 } & Record<PropertyKey, unknown>;
 
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;

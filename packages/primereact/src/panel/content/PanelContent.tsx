@@ -1,11 +1,12 @@
 'use client';
 import { Component, ComponentProvider } from '@primereact/core/component';
 import { useComponent } from '@primereact/core/component/useComponent';
+import type { PanelContentProps } from '@primereact/types/shared/panel';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultContentProps } from './PanelContent.props';
 
-export const PanelContent = (inProps) => {
+export const PanelContent = (inProps: PanelContentProps) => {
     const instance = useComponent(inProps, defaultContentProps);
     const { props, getParent } = instance;
     const panel = getParent('Panel');

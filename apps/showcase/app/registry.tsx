@@ -1,7 +1,7 @@
 'use client';
 import { PrimeReactProvider } from '@primereact/core/config';
 import { PrimeReactStyleSheet } from '@primereact/core/stylesheet';
-import Aura from '@primeuix/themes/aura';
+import Lara from '@primeuix/themes/lara';
 import { useServerInsertedHTML } from 'next/navigation';
 import React from 'react';
 
@@ -17,7 +17,7 @@ export default function StyleRegistry({ children }) {
     //if (typeof window !== 'undefined') return <>{children}</>;
 
     return (
-        <PrimeReactProvider theme={{ preset: Aura }} stylesheet={styledStyleSheet}>
+        <PrimeReactProvider theme={{ preset: Lara }} stylesheet={styledStyleSheet}>
             {children}
         </PrimeReactProvider>
     );

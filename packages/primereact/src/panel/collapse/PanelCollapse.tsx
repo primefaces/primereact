@@ -4,6 +4,9 @@ import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultCollapseProps } from './PanelCollapse.props';
 
+/**
+ * @todo - refactor to withComponent
+ */
 export const PanelCollapse = withComponent({
     render: ({ props, getParent }) => {
         const panel = getParent('Panel');
@@ -11,10 +14,10 @@ export const PanelCollapse = withComponent({
         const collapseProps = mergeProps(
             {
                 type: 'button',
-                className: panel?.cx?.('pcToggleButton'),
+                className: panel?.cx('pcToggleButton'),
                 onClick: panel?.onButtonClick
             },
-            panel?.ptm?.('pcToggleButton')
+            panel?.ptm('pcToggleButton')
         );
 
         return (

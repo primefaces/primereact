@@ -38,7 +38,7 @@ export const useComponent = <P, D, E>(inProps?: P, defaultProps?: D, styles?: St
     };
 
     const ptx = useComponentPT(computed);
-    const stx = useComponentStyle(computed, styles);
+    const stx = useComponentStyle(computed, props.styles || styles);
 
     const instance = {
         ...computed,
