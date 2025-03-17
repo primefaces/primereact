@@ -24,6 +24,8 @@
         "tailwindcss": "^4",
         "eslint": "^9",
         "eslint-config-next": "15.2.1",
-        "@eslint/eslintrc": "^3"
+        "@eslint/eslintrc": "^3",
+        "tailwind-merge": "^3.0.2",
+        "tailwindcss-primeui": "catalog:"
     }
 }

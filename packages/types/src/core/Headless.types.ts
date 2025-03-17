@@ -46,4 +46,4 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
     };
 } & Record<PropertyKey, unknown>;
 
-export declare type WithHeadlessCallback<R, D> = (instance: HeadlessInstance<R, D>) => Record<PropertyKey, unknown> | undefined;
+export declare type WithHeadlessCallback<R, D, S = Record<PropertyKey, unknown>> = (instance: HeadlessInstance<R, D>) => S | undefined;

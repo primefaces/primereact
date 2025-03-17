@@ -6,7 +6,7 @@ import type { HeadlessInstance } from '@primereact/types/core';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 
-export const useHeadless = (inProps?: any, defaultProps?: D, exposed?: HeadlessInstance): HeadlessInstance => {
+export const useHeadless = (inProps?: any, defaultProps?: D, exposed?: (instance: any) => any): HeadlessInstance => {
     const config = React.useContext(PrimeReactContext);
     const locale = React.useContext(LocaleContext);
 
