@@ -1,100 +1,60 @@
-import type { FilterMatchModeType } from '@primereact/core/api';
-import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
-import type { ThemeOptions, ThemeProps } from './Theme.types';
+export type * from './Component.types';
+export type * from './Config.types';
+export type * from './Headless.types';
+export type * from './Locale.types';
+export type * from './PassThrough.types';
+export type * from './Theme.types';
 
 /**
- * Defines the Content Security Policy (CSP) configuration.
+ * Global PrimeReact Context
+ * @todo - define more specific types for the configuration properties.
  */
-export interface CSP {
-    /**
-     * Defines nonce value to be used in the style tag.
-     */
-    nonce?: string | undefined;
+export interface Contexts {
+    config?: unknown;
+    locale?: unknown;
+    passthrough?: unknown;
+    theme?: unknown;
 }
 
 /**
- * Defines the z-index values.
+ * Global PrimeReact Instance
+ *
+ * @template R - The type of the component reference.
+ * @template P - The type of the component props.
+ * @template T - The type of the parent component instance.
+ * @template I - The type of the base component props that are passed by the user.
  */
-export interface ZIndex {
+export declare type Instance<R = unknown, P = Record<PropertyKey, unknown>, T = unknown, I = Record<PropertyKey, unknown>> = {
     /**
-     * Defines the base z-index value for the modals.
-     * @default 1100
+     * The reference to the component.
      */
-    modal?: number | undefined;
+    ref: React.Ref<R>;
     /**
-     * Defines the base z-index value for the overlays.
-     * @default 1000
+     * The base component name.
      */
-    overlay?: number | undefined;
+    name?: string | undefined;
     /**
-     * Defines the base z-index value for the menus.
-     * @default 1000
+     * The base component props.
      */
-    menu?: number | undefined;
+    props: P;
     /**
-     * Defines the base z-index value for the tooltip.
-     * @default 1100
+     * The base component attributes.
      */
-    tooltip?: number | undefined;
-}
-
-/**
- * Defines the PrimeReact props type.
- */
-export declare type PrimeReactProps = {
+    attrs: Omit<Record<PropertyKey, unknown>, keyof P>;
     /**
-     * Defines the Content Security Policy (CSP) configuration.
-     * @see {@link https://primereact.org/configuration/#csp}
+     * The component state.
      */
-    csp?: CSP | undefined;
+    state: Record<PropertyKey, unknown>;
     /**
-     * @todo Define the type.
+     * The parent component instance.
      */
-    defaults?: unknown;
+    parent?: T | undefined;
     /**
-     * Defines the filter match mode options.
+     * The base component props that are passed by the user.
      */
-    filterMatchModeOptions?: Record<string, FilterMatchModeType[]> | undefined;
+    inProps?: I | undefined;
     /**
-     * Defines the input variant.
+     * The PrimeReact contexts.
      */
-    inputVariant?: 'outlined' | 'filled' | undefined;
-    /**
-     * Defines the locale.
-     */
-    locale?: string | undefined;
-    /**
-     * Defines the passthrough options.
-     */
-    pt?: Pick<PassThroughProps, 'value'> | undefined;
-    /**
-     * Defines the passthrough options.
-     */
-    ptOptions?: PassThroughOptions | undefined;
-    /**
-     * Defines the ripple effect.
-     */
-    ripple?: boolean | undefined;
-    /**
-     * Defines the theme.
-     */
-    theme?: (Pick<ThemeProps, 'preset'> & { options?: ThemeOptions }) | undefined;
-    /**
-     * Collects styles of the used components.
-     */
-    stylesheet?: Pick<ThemeProps, 'stylesheet'> | undefined;
-    /**
-     * Defines whether the components should be unstyled.
-     */
-    unstyled?: boolean | undefined;
-    /**
-     * Defines the z-index values.
-     */
-    zIndex?: ZIndex | undefined;
+    $primereact?: Contexts;
 };
-
-export * from './Component.types';
-export * from './Headless.types';
-export * from './Locale.types';
-export * from './PassThrough.types';
-export * from './Theme.types';

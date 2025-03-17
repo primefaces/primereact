@@ -1,10 +1,11 @@
-import { ComponentInstance } from './Component.types';
+import type { Contexts, Instance } from '.';
 
-export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E = HTMLElement> = {
-    /**
-     * The reference to the component.
-     */
-    ref: React.Ref<R>;
+/**
+ * Headless Instance
+ *
+ * @template E - The type of the element reference.
+ */
+export declare type HeadlessInstance<D = unknown, E = HTMLElement> = Instance<unknown, D> & {
     /**
      * The reference to the element.
      */
@@ -14,36 +15,29 @@ export declare type HeadlessInstance<R = unknown, P = Record<string, unknown>, E
      */
     id: string;
     /**
-     * The base component name.
+     * The PrimeReact contexts in the headless mode.
      */
-    name?: string | undefined;
-    /**
-     * The base component props.
-     */
-    props: P;
-    /**
-     * The base component attributes.
-     */
-    attrs: Omit<Record<string, unknown>, keyof P>;
-    /**
-     * The component state.
-     */
-    state: Record<string, unknown>;
-    /**
-     * The parent component instance.
-     */
-    parent?: ComponentInstance<R, P, E> | undefined;
-    /**
-     * The base component props that are passed by the user.
-     */
-    inProps?: (P & Record<string, unknown>) | undefined;
-    /**
-     * The PrimeReact configurations
-     */
-    $primereact: {
-        config: unknown;
-        locale: unknown;
-    };
+    $primereact: Omit<Contexts, 'passthrough' | 'theme'>;
 } & Record<PropertyKey, unknown>;
 
-export declare type WithHeadlessCallback<R, D, S = Record<PropertyKey, unknown>> = (instance: HeadlessInstance<R, D>) => S | undefined;
+/**
+ * The setup callback function or options.
+ */
+export declare type withHeadlessSetup<S, D> = S | ((instance: HeadlessInstance<D>) => S) | undefined;
+
+/**
+ * The withHeadless options.
+ *
+ * @template D - The type of the default properties.
+ * @template S - The return type of the setup callback.
+ */
+export interface withHeadlessOptions<S, D> {
+    /**
+     * The setup callback function or options.
+     */
+    setup?: withHeadlessSetup<S, D>;
+    /**
+     * The default properties.
+     */
+    defaultProps?: D | undefined;
+}

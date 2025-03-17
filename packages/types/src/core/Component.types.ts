@@ -1,3 +1,4 @@
+import { Instance } from '.';
 import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 
 /**
@@ -82,42 +83,16 @@ export interface ComponentProviderProps {
 }
 
 /**
- * Defines the component instance.
+ * Component Instance.
  */
-export declare type ComponentInstance<R = unknown, P = unknown, E = HTMLElement> = {
+export declare type ComponentInstance = Instance & {
     /**
-     * The reference to the component.
+     * Finds parent instance of the component.
+     *
+     * @param type - The type of the parent instance to find.
+     * @returns {Instance | Instance['parent'] | undefined} - The found parent instance or undefined if not found.
      */
-    ref: React.Ref<R>;
-    /**
-     * The component name.
-     */
-    name: string | undefined;
-    /**
-     * The component props.
-     */
-    props: P;
-    /**
-     * The component attributes.
-     */
-    attrs: Omit<Record<string, unknown>, keyof P>;
-    /**
-     * The parent component instance.
-     */
-    parent?: ComponentInstance<R, P, E> | undefined;
-    /**
-     * The component props that are passed by the user.
-     */
-    inProps?: P | undefined;
-    /**
-     * The PrimeReact configurations
-     */
-    $primereact: {
-        config?: unknown;
-        locale?: unknown;
-        theme?: unknown;
-        passthrough?: unknown;
-    };
+    getParent: (type?: string) => Instance | Instance['parent'] | undefined;
 } & {
     /**
      * Finds attributes of the component using the key in pass-through options.
@@ -172,7 +147,10 @@ export declare type ComponentInstance<R = unknown, P = unknown, E = HTMLElement>
      */
     $styles?: Record<string, unknown> | undefined;
 } & {
-    $pc?: Record<string, unknown>;
-};
+    /**
+     * Defines parent components instances.
+     */
+    $pc: Record<string, Instance>;
+} & Record<PropertyKey, unknown>;
 
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;

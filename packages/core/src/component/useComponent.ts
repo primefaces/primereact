@@ -17,6 +17,7 @@ export const useComponent = <P, D>(inProps?: P, defaultProps?: D, styles?: Style
     const name = props?.__TYPE as string | undefined;
 
     const common = {
+        ref,
         name,
         props,
         attrs,
@@ -28,7 +29,7 @@ export const useComponent = <P, D>(inProps?: P, defaultProps?: D, styles?: Style
             passthrough,
             theme
         },
-        getParent: (type: string) => (isNotEmpty(type) ? instance.$pc?.[type] : instance.parent)
+        getParent: (type?: string) => (isNotEmpty(type) ? instance.$pc?.[type] : instance.parent)
     };
 
     const computed = {
