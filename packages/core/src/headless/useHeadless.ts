@@ -1,5 +1,4 @@
-import { PrimeReactContext } from '@primereact/core/config';
-import { LocaleContext } from '@primereact/core/locale';
+import { usePrimeReact } from '@primereact/core/config';
 import { combinedRefs } from '@primereact/core/utils';
 import { useAttrSelector, useId, useProps } from '@primereact/hooks';
 import type { HeadlessInstance } from '@primereact/types/core';
@@ -7,8 +6,7 @@ import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 
 export const useHeadless = (inProps?: any, defaultProps?: D, exposed?: (instance: any) => any): HeadlessInstance => {
-    const config = React.useContext(PrimeReactContext);
-    const locale = React.useContext(LocaleContext);
+    const { config, locale } = usePrimeReact();
 
     const { props, attrs } = useProps(inProps as Record<string, unknown>, defaultProps as Record<string, unknown>);
     const id = useId(inProps?.id as string | undefined);
