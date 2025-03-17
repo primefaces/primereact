@@ -85,7 +85,7 @@ export interface ComponentProviderProps {
 /**
  * Component Instance.
  */
-export declare type ComponentInstance = Instance & {
+export declare type ComponentInstance<D = unknown> = Instance<unknown, D> & {
     /**
      * Finds parent instance of the component.
      *
@@ -101,7 +101,7 @@ export declare type ComponentInstance = Instance & {
      * @param params - Additional parameters that can be passed for processing.
      * @returns {Record<string, unknown>} - The found attributes.
      */
-    ptm?: (key: string, params?: Record<string, unknown>) => Record<string, unknown>;
+    ptm: (key: string, params?: Record<string, unknown>) => Record<string, unknown>;
     /**
      * Finds root attributes of the component using the key in pass-through options.
      *
@@ -109,7 +109,7 @@ export declare type ComponentInstance = Instance & {
      * @param params - Additional parameters that can be passed for processing.
      * @returns {Record<string, unknown>} - The found attributes.
      */
-    ptmi?: (key: string, params?: Record<string, unknown>) => Record<string, unknown>;
+    ptmi: (key: string, params?: Record<string, unknown>) => Record<string, unknown>;
     /**
      * Finds attributes of the component using key in the custom object.
      *
@@ -118,7 +118,7 @@ export declare type ComponentInstance = Instance & {
      * @param params - Additional parameters that can be passed for processing.
      * @returns {Record<string, unknown>} - The found attributes.
      */
-    ptmo?: (obj: Record<string, unknown>, key: string, params?: Record<string, unknown>) => Record<string, unknown>;
+    ptmo: (obj: Record<string, unknown>, key: string, params?: Record<string, unknown>) => Record<string, unknown>;
 } & {
     /**
      * Finds class names using the key in styles options.
@@ -127,7 +127,7 @@ export declare type ComponentInstance = Instance & {
      * @param params - Additional parameters for processing.
      * @returns {string} - The processed class name.
      */
-    cx?: (key: string, params?: Record<string, unknown>) => string | undefined;
+    cx: (key: string, params?: Record<string, unknown>) => string | undefined;
     /**
      * A function that applies styles based on the key provided.
      *
@@ -136,16 +136,16 @@ export declare type ComponentInstance = Instance & {
      * @param params - Additional parameters for processing.
      * @returns {React.CSSProperties | undefined} - The processed styles.
      */
-    sx?: (key: string, when?: boolean, params?: Record<string, unknown>) => React.CSSProperties | undefined;
+    sx: (key: string, when?: boolean, params?: Record<string, unknown>) => React.CSSProperties | undefined;
     /**
      * Whether the component should be rendered without classes.
      * @default false
      */
-    isUnstyled?: boolean | undefined;
+    isUnstyled: boolean | undefined;
     /**
      * The instance to load styles.
      */
-    $styles?: Record<string, unknown> | undefined;
+    $styles: Record<string, unknown> | undefined;
 } & {
     /**
      * Defines parent components instances.
