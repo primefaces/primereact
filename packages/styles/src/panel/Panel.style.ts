@@ -16,13 +16,14 @@ export const classes = {
     content: ({ state }) => [
         'p-panel-content',
         {
+            // @todo: remove
             hidden: state?.collapsed
         }
     ],
     footer: 'p-panel-footer'
 };
 
-export const styles = createStyles<any, any>({
+export const styles = createStyles({
     name: 'panel',
     style,
     classes
