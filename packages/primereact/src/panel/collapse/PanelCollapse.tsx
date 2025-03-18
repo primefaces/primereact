@@ -8,7 +8,7 @@ import { defaultCollapseProps } from './PanelCollapse.props';
  * @todo - refactor to withComponent
  */
 export const PanelCollapse = withComponent({
-    render: ({ props, getParent }) => {
+    render: ({ props, ptmi, getParent }) => {
         const panel = getParent('Panel');
         console.log(panel);
         const collapseProps = mergeProps(
@@ -17,7 +17,8 @@ export const PanelCollapse = withComponent({
                 className: panel?.cx('pcToggleButton'),
                 onClick: panel?.onButtonClick
             },
-            panel?.ptm('pcToggleButton')
+            panel?.ptm('pcToggleButton'),
+            ptmi('root')
         );
 
         return (

@@ -9,6 +9,14 @@ export interface PanelHeaderProps extends GlobalComponentProps {
     readonly __TYPE?: 'PanelHeader';
 }
 
+export interface PanelTitleProps extends GlobalComponentProps {
+    readonly __TYPE?: 'PanelTitle';
+}
+
+export interface PanelHeaderActionsProps extends GlobalComponentProps {
+    readonly __TYPE?: 'PanelHeaderActions';
+}
+
 export interface PanelContentProps extends GlobalComponentProps {
     readonly __TYPE?: 'PanelContent';
 }

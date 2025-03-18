@@ -1,7 +1,7 @@
 import { usePrimeReact } from '@primereact/core/config';
 import { combinedRefs } from '@primereact/core/utils';
-import { useProps } from '@primereact/hooks';
-import { ComponentInstance } from '@primereact/types/core';
+import { useAttrSelector, useProps } from '@primereact/hooks';
+import type { ComponentInstance, withComponentSetup } from '@primereact/types/core';
 import type { StylesOptions } from '@primereact/types/styles';
 import { isNotEmpty, resolve } from '@primeuix/utils';
 import * as React from 'react';
@@ -9,7 +9,7 @@ import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <P, D, E>(inProps?: P, defaultProps?: D, styles?: StylesOptions, exposed?: E): ComponentInstance<D> => {
+export const useComponent = <P, D, S>(inProps?: P, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<S, D>): ComponentInstance<D> => {
     const { config, locale, passthrough, theme, parent } = usePrimeReact();
 
     const { props, attrs } = useProps(inProps as Record<string, unknown>, { ...globalProps, ...defaultProps } as Record<string, unknown>);
@@ -32,8 +32,11 @@ export const useComponent = <P, D, E>(inProps?: P, defaultProps?: D, styles?: St
         getParent: (type?: string) => (isNotEmpty(type) ? instance.$pc?.[type!] : instance.parent)
     };
 
+    const $attrSelector = useAttrSelector('pc_');
+
     const computed = {
-        ...resolve(exposed, common),
+        $attrSelector,
+        ...resolve(setup, common),
         ...common
     };
 

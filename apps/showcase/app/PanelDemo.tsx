@@ -44,8 +44,10 @@ export default function PanelDemo() {
 
                 <Panel toggleable>
                     <Panel.Header>
-                        Header Content
-                        <Panel.Collapse>Collapse</Panel.Collapse>
+                        <Panel.Title>Header Content</Panel.Title>
+                        <Panel.HeaderActions>
+                            <Panel.Collapse>Collapse</Panel.Collapse>
+                        </Panel.HeaderActions>
                     </Panel.Header>
                     <Panel.Content>
                         <div>Additional Content Here</div>

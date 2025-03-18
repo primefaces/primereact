@@ -11,6 +11,8 @@ import { PanelCollapse } from './collapse';
 import { PanelContent } from './content';
 import { PanelFooter } from './footer';
 import { PanelHeader } from './header';
+import { PanelHeaderActions } from './headeractions';
+import { PanelTitle } from './title';
 
 export const Panel = (inProps: PanelProps) => {
     const panel = usePanel(inProps);
@@ -44,6 +46,8 @@ export const Panel = (inProps: PanelProps) => {
 
 Panel.displayName = 'PrimeReact.Panel';
 Panel.Header = PanelHeader;
+Panel.Title = PanelTitle;
+Panel.HeaderActions = PanelHeaderActions;
 Panel.Content = PanelContent;
 Panel.Footer = PanelFooter;
 Panel.Collapse = PanelCollapse;

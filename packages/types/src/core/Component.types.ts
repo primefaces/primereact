@@ -158,4 +158,9 @@ export declare type ComponentInstance<D = unknown> = Instance<unknown, D> & {
     $pc: Record<string, ComponentInstance>;
 } & Record<PropertyKey, unknown>;
 
+/**
+ * The setup callback function or options.
+ */
+export declare type withComponentSetup<S, D> = S | ((instance: ComponentInstance<D>) => S) | undefined;
+
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;

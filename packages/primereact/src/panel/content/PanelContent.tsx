@@ -8,14 +8,15 @@ import { defaultContentProps } from './PanelContent.props';
 
 export const PanelContent = (inProps: PanelContentProps) => {
     const instance = useComponent(inProps, defaultContentProps);
-    const { props, getParent } = instance;
+    const { props, ptmi, getParent } = instance;
     const panel = getParent('Panel');
 
     const contentProps = mergeProps(
         {
             className: panel?.cx?.('content')
         },
-        panel?.ptm?.('content')
+        panel?.ptm?.('content'),
+        ptmi('root')
     );
 
     return (
