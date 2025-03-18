@@ -1,5 +1,7 @@
 'use client';
 import { usePanel } from '@primereact/headless/panel';
+import { MinusIcon, PlusIcon } from '@primereact/icons';
+import { ComponentInstance } from '@primereact/types/core';
 import { cn } from '@primeuix/utils';
 import { Panel } from 'primereact/panel';
 import { twMerge } from 'tailwind-merge';
@@ -20,6 +22,11 @@ export default function PanelDemo() {
         footer: 'pt-0 pb-[1.125rem] px-[1.125rem]'
     };
 
+    const toggleIcon = (instance: ComponentInstance) => {
+        const { state } = instance.getParent('Panel') || {};
+        return state?.collapsed ? <PlusIcon aria-label="Expand panel" /> : <MinusIcon aria-label="Collapse panel" />;
+    };
+
     return (
         <>
             <section className="w-full">
@@ -29,7 +36,7 @@ export default function PanelDemo() {
                     <div className={classNames.header}>
                         Header Content
                         <button type="button" onClick={onButtonClick}>
-                            Collapse
+                            {state.collapsed ? 'Expand' : 'Collapse'}
                         </button>
                     </div>
                     <div className={classNames.content}>
@@ -46,7 +53,7 @@ export default function PanelDemo() {
                     <Panel.Header>
                         <Panel.Title>Header Content</Panel.Title>
                         <Panel.HeaderActions>
-                            <Panel.Collapse>Collapse</Panel.Collapse>
+                            <Panel.Collapse>{toggleIcon}</Panel.Collapse>
                         </Panel.HeaderActions>
                     </Panel.Header>
                     <Panel.Content>

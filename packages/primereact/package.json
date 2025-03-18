@@ -43,11 +43,12 @@
         "dev:link": "pnpm link --global && npm link"
     },
     "dependencies": {
-        "@primeuix/styled": "catalog:",
-        "@primeuix/utils": "catalog:",
-        "@primeuix/styles": "catalog:",
+        "@primereact/headless": "workspace:*",
         "@primereact/hooks": "workspace:*",
+        "@primereact/icons": "workspace:*",
         "@primereact/styles": "workspace:*",
-        "@primereact/headless": "workspace:*"
+        "@primeuix/styled": "catalog:",
+        "@primeuix/styles": "catalog:",
+        "@primeuix/utils": "catalog:"
     }
 }

@@ -11,7 +11,7 @@ export const Component = (inProps: ComponentProps = {}) => {
     const { as, asChild, pIf, instance = context, children, options, ...rest } = inProps;
     const AsComponent = asChild ? React.Fragment : as;
 
-    return AsComponent ? <AsComponent {...rest}>{resolve(children, { ...rest, ...options }, instance)}</AsComponent> : null;
+    return AsComponent ? <AsComponent {...rest}>{resolve(children, { ...rest, ...options, ...instance })}</AsComponent> : null;
 };
 
 Component.displayName = 'PrimeReact.Component';

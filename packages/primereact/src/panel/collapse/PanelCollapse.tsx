@@ -10,7 +10,7 @@ import { defaultCollapseProps } from './PanelCollapse.props';
 export const PanelCollapse = withComponent({
     render: ({ props, ptmi, getParent }) => {
         const panel = getParent('Panel');
-        console.log(panel);
+
         const collapseProps = mergeProps(
             {
                 type: 'button',

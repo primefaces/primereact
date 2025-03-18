@@ -1,6 +1,6 @@
 import type { ComponentProps, GlobalComponentProps } from '@primereact/types/core';
 
-export const globalProps = {
+export const globalProps: GlobalComponentProps = {
     ref: undefined,
     pIf: true,
     as: undefined,
@@ -11,9 +11,9 @@ export const globalProps = {
     dt: undefined,
     template: undefined,
     children: undefined
-} satisfies GlobalComponentProps;
+};
 
-export const defaultProps = {
+export const defaultProps: ComponentProps = {
     instance: undefined,
     options: undefined
-} satisfies ComponentProps;
+};

@@ -1,6 +1,5 @@
 'use client';
-import { Component, ComponentProvider } from '@primereact/core/component';
-import { useComponent } from '@primereact/core/component/useComponent';
+import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
 import { useButton } from '@primereact/headless/button';
 import { styles } from '@primereact/styles/panel';
 import type { ButtonProps } from '@primereact/types/shared/button';

@@ -1,6 +1,5 @@
 'use client';
-import { Component, ComponentProvider } from '@primereact/core/component';
-import { useComponent } from '@primereact/core/component/useComponent';
+import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
 import type { PanelTitleProps } from '@primereact/types/shared/panel';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
