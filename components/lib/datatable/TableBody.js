@@ -1096,7 +1096,7 @@ export const TableBody = React.memo(
                         className: cx('rowExpansion'),
                         role: 'row'
                     },
-                    getColumnPTOptions('rowExpansion')
+                    ptm('rowExpansion')
                 );
 
                 return <tr {...rowExpansionProps}>{content}</tr>;
