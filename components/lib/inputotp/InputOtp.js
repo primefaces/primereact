@@ -91,7 +91,7 @@ export const InputOtp = React.memo(
 
             if (event.nativeEvent.inputType === 'deleteContentBackward') {
                 moveToPrevInput(event);
-            } else if (event.nativeEvent.inputType === 'insertText' || event.nativeEvent.inputType === 'deleteContentForward') {
+            } else if (event.nativeEvent.inputType === 'insertText') {
                 moveToNextInput(event);
             }
         };
@@ -147,6 +147,18 @@ export const InputOtp = React.memo(
                     break;
                 }
 
+                case 'Delete': {
+                    event.preventDefault();
+                    const idx = Number(event.target.id);
+
+                    if (!Number.isNaN(idx) && !isAllEmpty(tokens, props.length)) {
+                        updateTokens({ ...event, target: { ...event.target, value: '' } }, idx);
+                        moveToPrevInput(event);
+                    }
+
+                    break;
+                }
+
                 case 'Backspace': {
                     if (event.target?.value?.length === 0) {
                         moveToPrevInput(event);
@@ -178,6 +190,10 @@ export const InputOtp = React.memo(
                     break;
                 }
             }
+        };
+
+        const isAllEmpty = (arr, n) => {
+            return arr.length === n && arr.every((item) => item === '' || item == null);
         };
 
         useUpdateEffect(() => {
