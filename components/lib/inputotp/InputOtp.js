@@ -153,7 +153,7 @@ export const InputOtp = React.memo(
 
                     if (!Number.isNaN(idx) && !isAllEmpty(tokens, props.length)) {
                         updateTokens({ ...event, target: { ...event.target, value: '' } }, idx);
-                        moveToPrevInput(event);
+                        moveToNextInput(event);
                     }
 
                     break;
