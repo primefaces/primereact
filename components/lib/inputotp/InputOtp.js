@@ -151,7 +151,7 @@ export const InputOtp = React.memo(
                     event.preventDefault();
                     const idx = Number(event.target.id);
 
-                    if (!Number.isNaN(idx)) {
+                    if (!Number.isNaN(idx) && !isAllEmpty(tokens, props.length)) {
                         updateTokens({ ...event, target: { ...event.target, value: '' } }, idx);
                         moveToPrevInput(event);
                     }
@@ -190,6 +190,10 @@ export const InputOtp = React.memo(
                     break;
                 }
             }
+        };
+
+        const isAllEmpty = (arr, n) => {
+            return arr.length === n && arr.every((item) => item === '' || item == null);
         };
 
         useUpdateEffect(() => {
