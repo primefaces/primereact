@@ -18,13 +18,13 @@ import * as React from 'react';
  * console.log(defaultId); // e.g., 'pr_id_0'
  * ```
  */
-export const useId = (initialValue?: string) => {
+export function useId(initialValue?: string): string {
     const idx = React.useId();
-    const [idState, setIdState] = React.useState(initialValue || `pr_id_${idx.replaceAll(/:|«|»/g, '')}`);
+    const [idState, setIdState] = React.useState<string>(initialValue || `pr_id_${idx.replaceAll(/:|«|»/g, '')}`);
 
     React.useEffect(() => {
         setIdState(initialValue || `pr_id_${idx.replaceAll(/:|«|»/g, '')}`);
     }, [initialValue, idx]);
 
     return idState;
-};
+}

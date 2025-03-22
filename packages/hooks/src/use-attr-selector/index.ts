@@ -12,13 +12,13 @@ import * as React from 'react';
  * console.log(selector); // e.g., 'foo0'
  * ```
  */
-export const useAttrSelector = (prefix: string = '') => {
+export function useAttrSelector(prefix: string = ''): string {
     const idx = React.useId();
-    const [uniqueSelector, setUniqueSelector] = React.useState(`${prefix}${idx.replaceAll(/:|«|»/g, '')}`);
+    const [uniqueSelector, setUniqueSelector] = React.useState<string>(`${prefix}${idx.replaceAll(/:|«|»/g, '')}`);
 
     React.useEffect(() => {
         setUniqueSelector(`${prefix}${idx.replaceAll(/:|«|»/g, '')}`);
     }, [idx, prefix]);
 
     return uniqueSelector.trim().toLowerCase();
-};
+}

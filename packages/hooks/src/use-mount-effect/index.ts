@@ -16,7 +16,7 @@ import * as React from 'react';
  * };
  * ```
  */
-export const useMountEffect = (effect: React.EffectCallback): void => {
+export function useMountEffect(effect: React.EffectCallback): void {
     const mounted = React.useRef<boolean>(false);
 
     React.useEffect(() => {
@@ -26,4 +26,4 @@ export const useMountEffect = (effect: React.EffectCallback): void => {
             effect?.();
         }
     }, []);
-};
+}

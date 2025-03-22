@@ -9,13 +9,15 @@ export const ThemeContext = React.createContext<ThemeProps | null>(null);
 
 export const ThemeProvider = (inProps: React.PropsWithChildren<ThemeProps> = {}) => {
     const { props, attrs } = useProps(inProps, defaultProps);
+    const { stylesheet, preset, ...rest } = props;
 
     const value = {
-        preset: props.preset,
-        stylesheet: props.stylesheet
+        preset,
+        stylesheet,
+        ...rest
     };
 
-    Theme.setTheme({ preset: props.preset });
+    Theme.setTheme({ preset, options: rest });
 
     return <ThemeContext.Provider value={value}>{resolve(attrs.children, value)}</ThemeContext.Provider>;
 };

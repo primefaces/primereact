@@ -1,0 +1,18 @@
+:root[class="p-dark"] {
+    --home-box-ring-color: color-mix(in srgb, var(--primary-color), transparent 70%);
+    --home-card-shadow:0px 50px 100px rgba(0, 0, 0, 0.25);
+    --home-templates-block-shadow:0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    --home-templates-line:rgba(255,255,255,.1);
+    --home-templates-block-hover-bg:var(--p-mask-background);
+    --home-blocks-block-shadow:0px 5px 10px 0px rgba(0, 0, 0, 0.25) , 0px 4px 25px rgba(0, 0, 0, 0.25);
+    --home-blocks-sidebar-bg:var(--p-surface-900);
+    --home-blocks-list-bg:var(--p-surface-800);
+    --home-blocks-main-bg:var(--p-surface-950);
+    --home-blocks-item-bg:var(--p-surface-900);
+    --home-blocks-image-bg:var(--p-surface-800);
+    --home-blocks-text-color:var(--p-surface-600);
+    --home-blocks-tablebar-bg:var(--p-surface-700);
+    --home-blocks-bar-bg:var(--p-surface-700);
+    --home-blocks-bar-button-bg:var(--p-surface-700);
+    --home-blocks-circle-bg:var(--p-surface-800);
+}

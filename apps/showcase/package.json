@@ -14,7 +14,8 @@
         "next": "15.2.1",
         "primereact": "workspace:*",
         "@primereact/icons": "workspace:*",
-        "@primeuix/themes": "catalog:"
+        "@primeuix/themes": "catalog:",
+        "primeicons": "catalog:"
     },
     "devDependencies": {
         "@types/node": "^20",
@@ -27,6 +28,7 @@
         "eslint-config-next": "15.2.1",
         "@eslint/eslintrc": "^3",
         "tailwind-merge": "^3.0.2",
-        "tailwindcss-primeui": "catalog:"
+        "tailwindcss-primeui": "catalog:",
+        "sass": "1.86.0"
     }
 }

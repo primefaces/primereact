@@ -9,15 +9,17 @@ import * as React from 'react';
  *
  * @example
  * ```tsx
- * const MyComponent = () => {
+ * const Component = () => {
  *     useUnmountEffect(() => {
  *         console.log('Unmounted');
  *     });
  * };
  * ```
  */
-export const useUnmountEffect = (effect: React.EffectCallback): void => {
+export function useUnmountEffect(effect: React.EffectCallback): void {
     React.useEffect(() => {
-        return (() => effect?.()) as unknown as void;
+        return () => {
+            effect?.();
+        };
     }, []);
-};
+}

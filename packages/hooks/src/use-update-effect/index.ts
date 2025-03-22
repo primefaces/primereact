@@ -5,19 +5,19 @@ import * as React from 'react';
  * This is similar to `useEffect`, but it does not run on mount.
  *
  * @param {React.EffectCallback} effect the callback function
- * @param {React.DependencyList} deps the dependencies
+ * @param {React.DependencyList} dependencies the dependencies
  * @returns {void}
  *
  * @example
  * ```tsx
- * const MyComponent = ({ value }) => {
+ * const Component = ({ value }) => {
  *     useUpdateEffect(() => {
  *         console.log('Updated');
  *     }, [value]);
  * };
  * ```
  */
-export const useUpdateEffect = (effect: React.EffectCallback, deps?: React.DependencyList): void => {
+export function useUpdateEffect(effect: React.EffectCallback, dependencies?: React.DependencyList): void {
     const mounted = React.useRef<boolean>(false);
 
     React.useEffect(() => {
@@ -28,5 +28,5 @@ export const useUpdateEffect = (effect: React.EffectCallback, deps?: React.Depen
         }
 
         return effect?.();
-    }, deps);
-};
+    }, dependencies);
+}
