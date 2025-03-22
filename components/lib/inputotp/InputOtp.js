@@ -91,7 +91,7 @@ export const InputOtp = React.memo(
 
             if (event.nativeEvent.inputType === 'deleteContentBackward') {
                 moveToPrevInput(event);
-            } else if (event.nativeEvent.inputType === 'insertText' || event.nativeEvent.inputType === 'deleteContentForward') {
+            } else if (event.nativeEvent.inputType === 'insertText') {
                 moveToNextInput(event);
             }
         };
@@ -144,6 +144,21 @@ export const InputOtp = React.memo(
                 case 'ArrowRight': {
                     moveToNextInput(event);
                     event.preventDefault();
+                    break;
+                }
+
+                case 'Delete': {
+                    event.preventDefault();
+                    const idx = Number(event.target.id);
+                    const newTokens = [...tokens];
+
+                    if (!Number.isNaN(idx)) {
+                        newTokens.splice(idx, 1);
+                        setTokens(newTokens);
+                        onChange(event, newTokens);
+                        moveToPrevInput(event);
+                    }
+
                     break;
                 }
 
