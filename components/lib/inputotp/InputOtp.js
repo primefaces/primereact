@@ -150,12 +150,9 @@ export const InputOtp = React.memo(
                 case 'Delete': {
                     event.preventDefault();
                     const idx = Number(event.target.id);
-                    const newTokens = [...tokens];
 
                     if (!Number.isNaN(idx)) {
-                        newTokens.splice(idx, 1);
-                        setTokens(newTokens);
-                        onChange(event, newTokens);
+                        updateTokens({ ...event, target: { ...event.target, value: '' } }, idx);
                         moveToPrevInput(event);
                     }
 
