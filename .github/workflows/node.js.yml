@@ -45,11 +45,10 @@ jobs:
       run: |
         npm run type:check
 
-    # Next.js needs to be upgraded from 12.x as it has many critical CVEs
-    #- name: Security Check
-    #  if: ${{ success() }}
-    #  run: |
-    #    npm run security:check
+    - name: Security Check
+      if: ${{ success() }}
+      run: |
+        npm run security:check
   
     - name: Unit Tests Check
       if: ${{ success() }}
