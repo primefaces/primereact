@@ -2,6 +2,7 @@ import { useApp } from '@/hooks/useApp';
 import type { AppTopbarProps } from '@/types/App.types';
 import { cn } from '@primeuix/utils';
 import Link from 'next/link';
+import { StyleClass } from 'primereact/styleclass';
 import AppConfigurator from './AppConfigurator';
 
 export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
@@ -50,9 +51,21 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
                         </button>
                     </li>
                     <li>
-                        <button type="button" className="topbar-item config-item" aria-label="App Configurator">
+                        <StyleClass
+                            as="button"
+                            type="button"
+                            className="topbar-item config-item"
+                            aria-label="App Configurator"
+                            selector="@next"
+                            enterFromClassName="hidden"
+                            enterActiveClassName="animate-scalein"
+                            leaveToClassName="hidden"
+                            leaveActiveClassName="animate-fadeout"
+                            hideOnOutsideClick
+                        >
                             <i className="pi pi-palette"></i>
-                        </button>
+                        </StyleClass>
+
                         <AppConfigurator />
                     </li>
                     <li>
@@ -68,7 +81,35 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
                             <i className="pi pi-cog z-10"></i>
                         </button>
                     </li>
-                    <li>Versions</li>
+                    <li>
+                        <StyleClass
+                            as="button"
+                            type="button"
+                            style={{ maxWidth: '8rem' }}
+                            className="topbar-item version-item"
+                            selector="@next"
+                            enterFromClassName="hidden"
+                            enterActiveClassName="animate-scalein"
+                            leaveToClassName="hidden"
+                            leaveActiveClassName="animate-fadeout"
+                            hideOnOutsideClick
+                        >
+                            <span className="version-text">{app.config.versions?.[0].name}</span>
+                            <span className="version-icon pi pi-angle-down"></span>
+                        </StyleClass>
+
+                        <div className="versions-panel hidden">
+                            <ul>
+                                {app.config.versions?.map((version) => (
+                                    <li key={version.name} role="none">
+                                        <a href={version.url}>
+                                            <span>PrimeReact {version.name}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </li>
                     {showMenuButton && (
                         <li className="menu-button">
                             <button type="button" className="topbar-item menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">

@@ -69,7 +69,7 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
     // methods
     const _load = () => {
         if (!Base.isStyleNameLoaded('base')) {
-            const { name, css } = $style.baseStyles;
+            const { name, css } = $style.baseStyles || {};
 
             $style.load(css, { name });
 

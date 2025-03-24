@@ -18,17 +18,18 @@
         "primeicons": "catalog:"
     },
     "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@tailwindcss/postcss": "^4",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
-        "@tailwindcss/postcss": "^4",
-        "postcss": "^8",
-        "tailwindcss": "^4",
         "eslint": "^9",
         "eslint-config-next": "15.2.1",
-        "@eslint/eslintrc": "^3",
+        "postcss": "^8",
+        "sass": "1.86.0",
+        "shiki": "3.2.1",
         "tailwind-merge": "^3.0.2",
-        "tailwindcss-primeui": "catalog:",
-        "sass": "1.86.0"
+        "tailwindcss": "^4",
+        "tailwindcss-primeui": "catalog:"
     }
 }
