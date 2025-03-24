@@ -948,10 +948,6 @@ export const Dropdown = React.memo(
         }, [filterState]);
 
         useUpdateEffect(() => {
-            if (filterState && (!props.options || props.options.length === 0)) {
-                setFilterState('');
-            }
-
             updateInputField();
 
             if (inputRef.current) {
