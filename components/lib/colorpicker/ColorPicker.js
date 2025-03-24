@@ -95,6 +95,7 @@ export const ColorPicker = React.memo(
             hueDragging.current = true;
             pickHue(event);
             !isUnstyled && DomHandler.addClass(elementRef.current, 'p-colorpicker-dragging');
+            event.preventDefault();
         };
 
         const getPositionY = (event) => {
