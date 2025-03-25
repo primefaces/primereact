@@ -292,7 +292,7 @@ export interface AutoCompleteProps<
     /**
      * Icon of the dropdown.
      */
-    dropdownIcon?: IconType<AutoCompleteProps> | undefined;
+    dropdownIcon?: IconType<AutoCompleteProps<T>> | undefined;
     /**
      * Specifies the behavior dropdown button. Default "blank" mode sends an empty string and "current" mode sends the input value.
      * @defaultValue blank
@@ -568,7 +568,7 @@ export interface AutoCompleteProps<
  *
  * @group Component
  */
-export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
+export declare class AutoComplete<T = any> extends React.Component<AutoCompleteProps<T>, any> {
     /**
      * Used to show the overlay.
      */
