@@ -38,14 +38,14 @@ export interface AutoCompletePassThroughMethodOptions {
  * @extends {FormEvent}
  * @event
  */
-interface AutoCompleteChangeEvent extends FormEvent {}
+interface AutoCompleteChangeEvent extends FormEvent { }
 
 /**
- * Custom select event.
+ * Custom select event with generic type support
  * @see {@link AutoCompleteProps.onSelect}
  * @event
  */
-interface AutoCompleteSelectEvent {
+interface AutoCompleteSelectEvent<T = any> {
     /**
      * Browser event
      */
@@ -53,16 +53,16 @@ interface AutoCompleteSelectEvent {
     /**
      * Selected option value
      */
-    value: any;
+    value: T;
 }
 
 /**
- * Custom unselect event.
+ * Custom unselect event extending the select event
  * @see {@link AutoCompleteProps.onUnselect}
  * @extends {AutoCompleteSelectEvent}
  * @event
  */
-interface AutoCompleteUnselectEvent extends AutoCompleteSelectEvent {}
+interface AutoCompleteUnselectEvent<T = any> extends AutoCompleteSelectEvent<T> { }
 
 /**
  * Custom click event.
@@ -228,7 +228,9 @@ export interface AutoCompleteContext {
  * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
+export interface AutoCompleteProps<
+    T = any
+> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
     /**
      * Unique identifier of the element.
      */
@@ -469,7 +471,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      * Callback to invoke when autocomplete value changes.
      * @param {AutoCompleteChangeEvent} event - Custom change event.
      */
-    onChange?(event: AutoCompleteChangeEvent): void;
+    onChange?(event: AutoCompleteChangeEvent<T>): void;
     /**
      * Callback to invoke when input is cleared by the user.
      * @param {React.SyntheticEvent} event - Browser event.
@@ -523,7 +525,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      * Callback to invoke when a suggestion is selected.
      * @param {AutoCompleteSelectEvent} event - Custom select event.
      */
-    onSelect?(event: AutoCompleteSelectEvent): void;
+    onSelect?(event: AutoCompleteSelectEvent<T>): void;
     /**
      * Callback to invoke when overlay panel becomes visible.
      */
@@ -532,7 +534,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      * Callback to invoke when a selected value is removed.
      * @param {AutoCompleteUnselectEvent} event - Custom unselect event.
      */
-    onUnselect?(event: AutoCompleteUnselectEvent): void;
+    onUnselect?(event: AutoCompleteUnselectEvent<T>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
