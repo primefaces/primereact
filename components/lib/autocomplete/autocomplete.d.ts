@@ -335,7 +335,7 @@ export interface AutoCompleteProps<
     /**
      * Template of a list item.
      */
-    itemTemplate?: React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+    itemTemplate?: React.ReactNode | ((suggestion: T, index: number) => React.ReactNode);
     /**
      * Maximum number of characters to initiate a search.
      */
@@ -369,7 +369,7 @@ export interface AutoCompleteProps<
     /**
      * Template of an option group item.
      */
-    optionGroupTemplate?: React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+    optionGroupTemplate?: React.ReactNode | ((suggestion: T, index: number) => React.ReactNode);
     /**
      * Style class of the overlay panel element.
      */
@@ -425,7 +425,7 @@ export interface AutoCompleteProps<
     /**
      * An array of suggestions to display.
      */
-    suggestions?: any[];
+    suggestions?: T[];
     /**
      * Index of the element in tabbing order.
      */
