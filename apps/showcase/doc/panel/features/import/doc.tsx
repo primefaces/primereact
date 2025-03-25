@@ -1,3 +1,5 @@
+import { CodeViewer } from '@primereact/code-viewer';
+
 export default function ImportDoc() {
-    return <div>Import Document Content</div>;
+    return <CodeViewer source={`import { Panel } from 'primereact/panel';`} />;
 }

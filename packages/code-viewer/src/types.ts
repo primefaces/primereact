@@ -34,5 +34,5 @@ export interface CommonCodeProps {
     /**
      * The online editors to use for generating the code.
      */
-    editors: EditorTypes[];
+    editors?: EditorTypes[];
 }

@@ -10,7 +10,7 @@ export function CodeViewer(props: CodeViewerProps) {
             //const codeString = `const Demo = () => { return <div>Hello, world!</div>; }`;
 
             //const highlighter = await createHighlighter({ langs: ['tsx'], themes: ['github-dark'] });
-            const html = await codeToHtml(props.source.code, { lang: 'tsx', theme: 'github-dark' });
+            const html = await codeToHtml(props.source?.code || props.source, { lang: 'tsx', theme: 'github-dark' });
 
             setHighlightedCode(html);
         }
