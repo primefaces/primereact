@@ -5,7 +5,7 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 const classes = {
     root: ({ props, context, focusedState, overlayVisibleState }) =>
         classNames('p-multiselect p-component p-inputwrapper', {
-            'p-multiselect-chip': props.display === 'chip' && (props.maxSelectedLabels == null ? true : props.value.length <= props.maxSelectedLabels),
+            'p-multiselect-chip': props.display === 'chip' && (props.maxSelectedLabels == null ? true : props.value?.length <= props.maxSelectedLabels),
             'p-disabled': props.disabled,
             'p-invalid': props.invalid,
             'p-variant-filled': props.variant ? props.variant === 'filled' : context && context.inputStyle === 'filled',
@@ -18,7 +18,7 @@ const classes = {
         classNames('p-multiselect-label', {
             'p-placeholder': empty && props.placeholder,
             'p-multiselect-label-empty': empty && !props.placeholder && !props.selectedItemTemplate,
-            'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value.length > props.maxSelectedLabels
+            'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value?.length > props.maxSelectedLabels
         }),
     panel: ({ panelProps: props, context, allowOptionSelect }) =>
         classNames('p-multiselect-panel p-component', {
@@ -271,7 +271,7 @@ export const MultiSelectBase = ComponentBase.extend({
         selectAll: false,
         selectAllLabel: null,
         selectedItemTemplate: null,
-        selectedItemsLabel: '{0} items selected',
+        selectedItemsLabel: undefined,
         selectionLimit: null,
         showClear: false,
         showSelectAll: true,
