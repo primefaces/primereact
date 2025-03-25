@@ -1,4 +1,7 @@
+import { CodeViewer } from '@primereact/code-viewer';
 import BasicDemo from './demo';
+
+import { source } from './source.auto';
 
 export default function BasicDoc() {
     return (
@@ -8,6 +11,8 @@ export default function BasicDoc() {
             <p>It can be used to create a visual separation between different sections of a page.</p>
 
             <BasicDemo />
+
+            <CodeViewer source={source} />
         </div>
     );
 }
