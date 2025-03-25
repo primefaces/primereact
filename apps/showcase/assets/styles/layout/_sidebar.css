@@ -4,7 +4,9 @@
     top: 6rem;
     height: calc(100vh - 9rem);
     user-select: none;
-    transition: transform .4s cubic-bezier(.05, .74, .2, .99), opacity .3s;
+    transition:
+        transform 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99),
+        opacity 0.3s;
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -29,15 +31,15 @@
         margin: 0;
         padding: 0;
 
-        >li {
-            margin-bottom: .25rem;
+        > li {
+            margin-bottom: 0.25rem;
 
-            >button,
-            >a {
+            > button,
+            > a {
                 display: flex;
                 width: 100%;
                 align-items: center;
-                padding-block: .5rem;
+                padding-block: 0.5rem;
                 padding-inline: 1px;
                 color: var(--text-color);
                 font-weight: 600;
@@ -52,24 +54,28 @@
                 cursor: pointer;
                 user-select: none;
                 --p-focus-ring-offset: -1px;
-                @include focus-visible();
+
+                &:focus-visible {
+                    outline: 1px solid var(--primary-color);
+                    outline-offset: var(--p-focus-ring-offset);
+                }
 
                 .menu-icon {
                     width: 2rem;
                     height: 2rem;
                     border-radius: 6px;
-                    margin-inline-end: .5rem;
+                    margin-inline-end: 0.5rem;
                     border: 1px solid var(--border-color);
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    transition: all .2s;
+                    transition: all 0.2s;
                     position: relative;
                     background-color: transparent;
 
                     i {
                         color: var(--text-color);
-                        transition: all .2s;
+                        transition: all 0.2s;
                     }
                 }
 
@@ -95,7 +101,7 @@
                 &.router-link-active {
                     color: var(--primary-text-color);
 
-                    >.menu-icon {
+                    > .menu-icon {
                         i {
                             color: var(--primary-text-color);
                         }
@@ -103,30 +109,36 @@
                 }
             }
 
-            >div {
+            > div {
                 overflow: hidden;
 
                 ol {
                     margin-block: 0;
                     margin-inline: 0 1rem;
-                    padding: .25rem 0;
+                    padding: 0.25rem 0;
                     list-style: none;
 
                     li {
                         a {
                             border-inline-start: 1px solid var(--border-color);
-                            transition: all .2s;
+                            transition: all 0.2s;
                             font-weight: 450;
                             display: flex;
                             align-items: center;
-                            padding: .5rem;
+                            padding: 0.5rem;
                             padding-inline-start: 1rem;
                             color: var(--text-secondary-color);
-                            transition: outline-color 0.2s, border-color .2s;
+                            transition:
+                                outline-color 0.2s,
+                                border-color 0.2s;
                             outline-color: transparent;
                             position: relative;
                             --p-focus-ring-offset: -1px;
-                            @include focus-visible();
+
+                            &:focus-visible {
+                                outline: 1px solid var(--primary-color);
+                                outline-offset: var(--p-focus-ring-offset);
+                            }
 
                             &:hover {
                                 border-inline-start-color: var(--hover-border-color);
@@ -169,13 +181,13 @@
 
         .menu-child-category {
             display: flex;
-            padding: .5rem;
+            padding: 0.5rem;
             padding-inline-start: 0;
-            font-size: .875rem;
+            font-size: 0.875rem;
             font-weight: 600;
             letter-spacing: 1px;
             color: var(--text-secondary-color);
-            margin-bottom: .25rem;
+            margin-bottom: 0.25rem;
         }
     }
 }

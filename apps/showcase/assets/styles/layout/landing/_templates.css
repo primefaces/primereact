@@ -5,7 +5,7 @@
         transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg);
         position: relative;
         z-index: 1;
-        
+
         .template-block {
             width: 504px;
             height: 257px;
@@ -18,7 +18,7 @@
             position: relative;
             z-index: 1;
             transition: 1.5s;
-            opacity:0;
+            opacity: 0;
             visibility: hidden;
 
             &.block-1 {
@@ -28,7 +28,7 @@
             &.block-2 {
                 animation: animated-block-2 2s 0.2s ease-in-out alternate infinite;
             }
-            
+
             &.block-middle {
                 transform: scale(0.9);
             }
@@ -62,7 +62,7 @@
             }
 
             &:before {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -147,7 +147,7 @@
                     background: var(--home-templates-line);
                 }
             }
-            
+
             .left {
                 position: absolute;
                 top: 50%;
@@ -172,20 +172,21 @@
 
         &.templates-animation {
             .template-block {
-                opacity:1;
+                opacity: 1;
                 visibility: visible;
                 transition: none !important;
             }
 
             .block-middle {
-                .theme-mode, img {
+                .theme-mode,
+                img {
                     opacity: 1;
                     visibility: visible;
                     transform: scale(1);
                     transition: none !important;
                 }
             }
-            
+
             .lines {
                 opacity: 0.5;
                 width: 100%;
@@ -193,7 +194,7 @@
         }
     }
 }
-@media screen and (max-width: $landingBreakpointXL) {
+@media screen and (max-width: 1199px) {
     .landing-templates {
         .templates {
             .template-block {
@@ -205,7 +206,7 @@
     }
 }
 
-@media screen and (max-width: $landingBreakpointLG) {
+@media screen and (max-width: 991px) {
     .landing-templates {
         .templates {
             transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
@@ -223,29 +224,26 @@
         }
     }
 }
-@media screen and (max-width: $landingBreakpointMD) {
+@media screen and (max-width: 767px) {
     .landing-templates {
         .templates {
             transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
             .template-block {
                 width: 354px;
                 height: 180px;
-                
             }
         }
     }
 }
 
-
 @keyframes animated-block-1 {
     to {
-        transform:  translateX(-10px);
+        transform: translateX(-10px);
     }
 }
 
 @keyframes animated-block-2 {
     to {
-        transform:  translateX(10px);
+        transform: translateX(10px);
     }
 }
-

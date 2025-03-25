@@ -19,7 +19,7 @@
             right: -2px;
             bottom: -2px;
             border: 2px solid var(--home-box-ring-color);
-            transition: all .5s;
+            transition: all 0.5s;
             animation: clippath 3s infinite linear;
             border-radius: 10px;
             opacity: 0;
@@ -39,7 +39,10 @@
     }
 
     .linkbox {
-        transition: background-color .2s, border-color .2s, outline-color .2s;
+        transition:
+            background-color 0.2s,
+            border-color 0.2s,
+            outline-color 0.2s;
         display: inline-flex;
         align-items: center;
         color: var(--text-color);
@@ -49,7 +52,11 @@
         font-weight: 600;
         padding: 1rem 1.5rem;
         cursor: pointer;
-        @include focus-visible();
+
+        &:focus-visible {
+            outline: 1px solid var(--primary-color);
+            outline-offset: var(--p-focus-ring-offset);
+        }
 
         &:hover {
             background: var(--hover-background);
@@ -101,7 +108,6 @@
     }
 }
 
-
 .landing-footer-container {
     max-width: 1250px !important;
     margin-left: auto !important;
@@ -126,7 +132,12 @@
         height: 1.5rem;
         position: absolute;
         z-index: 0;
-        background-image: linear-gradient(-225deg, var(--p-blue-400) 30%, var(--p-cyan-400) 60%, var(--p-purple-400) 80%);
+        background-image: linear-gradient(
+            -225deg,
+            var(--p-blue-400) 30%,
+            var(--p-cyan-400) 60%,
+            var(--p-purple-400) 80%
+        );
         filter: blur(24px);
         opacity: 0.6;
     }
@@ -134,7 +145,12 @@
     > span {
         position: relative;
         z-index: 3;
-        background-image: linear-gradient(-225deg, var(--p-blue-400) 30%, var(--p-cyan-400) 60%, var(--p-purple-400) 80%);
+        background-image: linear-gradient(
+            -225deg,
+            var(--p-blue-400) 30%,
+            var(--p-cyan-400) 60%,
+            var(--p-purple-400) 80%
+        );
         animation: color-animation 2s linear infinite;
         background-size: auto auto;
         background-clip: border-box;

@@ -1,4 +1,4 @@
-import '@/assets/styles/global.scss';
+import '@/assets/styles/global.css';
 import Body from './body';
 
 export default function Html({

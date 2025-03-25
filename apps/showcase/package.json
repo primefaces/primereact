@@ -27,7 +27,6 @@
         "eslint": "^9",
         "eslint-config-next": "15.2.1",
         "postcss": "^8",
-        "sass": "1.86.0",
         "tailwind-merge": "^3.0.2",
         "tailwindcss": "^4",
         "tailwindcss-primeui": "catalog:",

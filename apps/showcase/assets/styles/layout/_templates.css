@@ -1,4 +1,3 @@
-// TEMPLATE FEATURES ANIMATION
 .template-features-animation-card {
     &:hover &-order {
         div {
@@ -20,18 +19,31 @@
 }
 
 .template-features a {
-    @include doc-link();
+    color: var(--primary-text-color);
+    font-weight: 500;
+    transition:
+        outline-color 0.2s,
+        border-color 0.2s;
+    outline-color: transparent;
+    border-radius: 6px;
+
+    &:focus-visible {
+        outline: 1px solid var(--primary-color);
+        outline-offset: var(--p-focus-ring-offset);
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 @keyframes p-features-order-animation {
     0% {
-        clip-path: polygon(0% 100%, 15% 100%, 32% 100%, 54% 100%, 70% 100%, 84% 100%, 100% 100%,
-                100% 100%, 0% 100%);
+        clip-path: polygon(0% 100%, 15% 100%, 32% 100%, 54% 100%, 70% 100%, 84% 100%, 100% 100%, 100% 100%, 0% 100%);
     }
 
     20% {
-        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%,
-                100% 100%, 0% 100%);
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
     }
 
     40% {

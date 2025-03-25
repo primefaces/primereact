@@ -4,7 +4,9 @@
     left: 0;
     width: calc(100% - var(--p-scrollbar-width, 0px));
     z-index: 1100;
-    transition: background-color .5s, border-color .5s;
+    transition:
+        background-color 0.5s,
+        border-color 0.5s;
     border-bottom: 1px solid transparent;
 
     &.layout-topbar-sticky {
@@ -28,9 +30,13 @@
 
     .layout-topbar-logo,
     .layout-topbar-icon {
-        transition: outline-color .2s;
+        transition: outline-color 0.2s;
         outline-color: transparent;
-        @include focus-visible();
+
+        &:focus-visible {
+            outline: 1px solid var(--primary-color);
+            outline-offset: var(--p-focus-ring-offset);
+        }
 
         svg {
             width: 120px;
@@ -77,7 +83,9 @@
             border: 1px solid var(--border-color);
             width: 2rem;
             height: 2rem;
-            transition: outline-color .2s, border-color .2s;
+            transition:
+                outline-color 0.2s,
+                border-color 0.2s;
             border-radius: 6px;
             margin: 0;
             padding: 0;
@@ -85,7 +93,10 @@
             background-color: var(--card-background);
             cursor: pointer;
 
-            @include focus-visible();
+            &:focus-visible {
+                outline: 1px solid var(--primary-color);
+                outline-offset: var(--p-focus-ring-offset);
+            }
 
             &:hover {
                 border-color: var(--primary-color);
@@ -110,12 +121,14 @@
             top: calc(100% + 2px);
             inset-inline-end: 0;
             width: 18rem;
-            padding: .75rem;
+            padding: 0.75rem;
             background-color: var(--overlay-background);
             border-radius: 6px;
             border: 1px solid var(--border-color);
             transform-origin: top;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow:
+                0 4px 6px -1px rgb(0 0 0 / 0.1),
+                0 2px 4px -2px rgb(0 0 0 / 0.1);
 
             .config-panel-content {
                 display: flex;
@@ -124,17 +137,17 @@
             }
 
             .config-panel-label {
-                font-size: .875rem;
+                font-size: 0.875rem;
                 color: var(--text-secondary-color);
                 font-weight: 600;
                 line-height: 1;
             }
 
             .config-panel-colors {
-                >div {
-                    padding-top: .5rem;
+                > div {
+                    padding-top: 0.5rem;
                     display: flex;
-                    gap: .5rem;
+                    gap: 0.5rem;
                     flex-wrap: wrap;
 
                     button {
@@ -163,7 +176,6 @@
             }
         }
 
-
         .version-item {
             width: auto;
             padding: 0.5rem;
@@ -175,20 +187,22 @@
             }
 
             .version-icon {
-                margin-inline-start: .25rem;
+                margin-inline-start: 0.25rem;
                 color: var(--text-secondary-color);
             }
         }
 
         .versions-panel {
-            padding: .25rem;
+            padding: 0.25rem;
             background-color: var(--overlay-background);
             position: absolute;
             inset-inline-end: 0;
             top: calc(100% + 2px);
             border-radius: 6px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            box-shadow:
+                0 4px 6px -1px rgb(0 0 0 / 0.1),
+                0 2px 4px -2px rgb(0 0 0 / 0.1);
             transform-origin: top;
 
             ul {
@@ -201,12 +215,11 @@
 
                 li {
                     margin: 2px;
-
                 }
 
                 a {
                     display: inline-flex;
-                    padding: 0.5rem .75rem;
+                    padding: 0.5rem 0.75rem;
                     border-radius: 6px;
                     width: 100%;
                     overflow: hidden;

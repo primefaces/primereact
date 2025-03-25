@@ -4,10 +4,16 @@
     height: 2rem;
     background-color: var(--card-background);
     margin: 0;
-    transition: outline-color .2s, border-color .2s;
+    transition:
+        outline-color 0.2s,
+        border-color 0.2s;
     outline-color: transparent;
-    padding: 0 .5rem;
-    @include focus-visible();
+    padding: 0 0.5rem;
+
+    &:focus-visible {
+        outline: 1px solid var(--primary-color);
+        outline-offset: var(--p-focus-ring-offset);
+    }
 
     &:hover {
         border-color: var(--primary-color);
@@ -53,22 +59,21 @@
                 align-items: center;
                 font-size: 0.75rem;
                 position: relative;
-                
+
                 &::before {
                     content: "\e90d";
                     display: flex;
                     color: var(--text-color);
                     font-family: "primeicons";
-                    font-size: .4rem;
-                    opacity: .7;
+                    font-size: 0.4rem;
+                    opacity: 0.7;
                     margin-right: 2px;
                     height: 13.5px;
                     align-items: center;
                     font-weight: 700;
-
                 }
             }
-        }        
+        }
     }
 }
 
@@ -92,13 +97,14 @@
     box-shadow: none;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    transition: border-color .3s;
+    transition: border-color 0.3s;
 
     &:hover {
         border-color: var(--primary-color);
     }
 
-    .DocSearch-MagnifierLabel, .DocSearch-Reset {
+    .DocSearch-MagnifierLabel,
+    .DocSearch-Reset {
         color: var(--text-color);
     }
 }
@@ -106,14 +112,15 @@
 .DocSearch-Hit {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0;
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
 }
 
 .DocSearch-Hit-source {
     color: var(--primary-text-color);
 }
 
-.DocSearch-Logo .cls-1, .DocSearch-Logo .cls-2 {
+.DocSearch-Logo .cls-1,
+.DocSearch-Logo .cls-2 {
     fill: var(--primary-text-color);
 }
 
@@ -124,7 +131,7 @@
 .DocSearch-Button-Placeholder {
     text-align: center;
     display: inline-block;
-    font-size: .875rem;
+    font-size: 0.875rem;
 }
 
 :root {
@@ -145,4 +152,3 @@
     --docsearch-hit-active-color: var(--primary-contrast-color);
     --docsearch-searchbox-shadow: none;
 }
-
