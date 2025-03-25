@@ -38,7 +38,9 @@ export interface AutoCompletePassThroughMethodOptions {
  * @extends {FormEvent}
  * @event
  */
-interface AutoCompleteChangeEvent extends FormEvent { }
+interface AutoCompleteChangeEvent<T = any> extends FormEvent<T> {
+    value: T;
+}
 
 /**
  * Custom select event with generic type support
@@ -53,7 +55,7 @@ interface AutoCompleteSelectEvent<T = any> {
     /**
      * Selected option value
      */
-    value: T;
+    value: T extends any[] ? T[number] : T;
 }
 
 /**
@@ -62,7 +64,7 @@ interface AutoCompleteSelectEvent<T = any> {
  * @extends {AutoCompleteSelectEvent}
  * @event
  */
-interface AutoCompleteUnselectEvent<T = any> extends AutoCompleteSelectEvent<T> { }
+interface AutoCompleteUnselectEvent<T = any> extends AutoCompleteSelectEvent<T> {}
 
 /**
  * Custom click event.
@@ -228,9 +230,7 @@ export interface AutoCompleteContext {
  * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface AutoCompleteProps<
-    T = any
-> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
+export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref' | 'value'> {
     /**
      * Unique identifier of the element.
      */
@@ -408,7 +408,7 @@ export interface AutoCompleteProps<
     /**
      * Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string.
      */
-    selectedItemTemplate?: React.ReactNode | string | undefined | null | ((value: any) => React.ReactNode | string | undefined | null);
+    selectedItemTemplate?: React.ReactNode | string | undefined | null | ((value: T) => React.ReactNode | string | undefined | null);
     /**
      * Whether to show the empty message or not.
      * @defaultValue false
@@ -425,7 +425,7 @@ export interface AutoCompleteProps<
     /**
      * An array of suggestions to display.
      */
-    suggestions?: T[];
+    suggestions?: (T extends any[] ? T[number] : T)[];
     /**
      * Index of the element in tabbing order.
      */
@@ -451,7 +451,7 @@ export interface AutoCompleteProps<
     /**
      * Value of the component.
      */
-    value?: any;
+    value?: this['multiple'] extends true ? T[] : T | string | number | readonly string[] | undefined;
     /**
      * Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.
      * @type {VirtualScrollerProps}
