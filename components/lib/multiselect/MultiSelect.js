@@ -813,9 +813,10 @@ export const MultiSelect = React.memo(
         const getSelectedItemsLabel = () => {
             const pattern = /{(.*?)}/;
             const selectedItemsLabel = props.selectedItemsLabel || localeOption('selectionMessage');
+            const valueLength = props.value ? props.value.length : 0;
 
             if (pattern.test(selectedItemsLabel)) {
-                return selectedItemsLabel.replace(selectedItemsLabel.match(pattern)[0], props.value.length + '');
+                return selectedItemsLabel.replace(selectedItemsLabel.match(pattern)[0], valueLength + '');
             }
 
             return selectedItemsLabel;
@@ -825,7 +826,7 @@ export const MultiSelect = React.memo(
             let label;
 
             if (!empty && !props.fixedPlaceholder) {
-                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
+                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value?.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 }
 
@@ -840,7 +841,9 @@ export const MultiSelect = React.memo(
         };
 
         const getLabelContent = () => {
-            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
+            const valueLength = props.value ? props.value.length : 0;
+
+            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && valueLength > props.maxSelectedLabels) {
                 return getSelectedItemsLabel();
             }
 
@@ -857,7 +860,7 @@ export const MultiSelect = React.memo(
             }
 
             if (props.display === 'chip' && !empty) {
-                const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
+                const value = props.value.slice(0, props.maxSelectedLabels || valueLength);
 
                 return value.map((val, i) => {
                     const context = {

@@ -3726,7 +3726,7 @@
                             "name": "dropdownIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps>",
+                            "type": "IconType<AutoCompleteProps<T>>",
                             "default": "",
                             "description": "Icon of the dropdown."
                         },
@@ -3822,7 +3822,7 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps>",
+                            "type": "IconType<AutoCompleteProps<any>>",
                             "default": "",
                             "description": "Icon of the loader."
                         },
@@ -3942,7 +3942,7 @@
                             "name": "removeTokenIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps>",
+                            "type": "IconType<AutoCompleteProps<any>>",
                             "default": "",
                             "description": "Icon of the remove chip element in multiple mode."
                         },
@@ -4006,7 +4006,7 @@
                             "name": "suggestions",
                             "optional": true,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "(T extends any[] ? T[number] : T)[]",
                             "default": "",
                             "description": "An array of suggestions to display."
                         },
@@ -4062,7 +4062,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "any",
+                            "type": "string | number | readonly string[] | T",
                             "default": "",
                             "description": "Value of the component."
                         },
@@ -4119,7 +4119,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteChangeEvent",
+                                    "type": "AutoCompleteChangeEvent<T>",
                                     "description": "Custom change event."
                                 }
                             ],
@@ -4255,7 +4255,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteSelectEvent",
+                                    "type": "AutoCompleteSelectEvent<T>",
                                     "description": "Custom select event."
                                 }
                             ],
@@ -4274,7 +4274,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteUnselectEvent",
+                                    "type": "AutoCompleteUnselectEvent<T>",
                                     "description": "Custom unselect event."
                                 }
                             ],
@@ -4293,16 +4293,16 @@
                     "relatedProp": "onChange",
                     "props": [
                         {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "T"
+                        },
+                        {
                             "name": "originalEvent",
                             "optional": true,
                             "readonly": false,
                             "type": "SyntheticEvent<Element, Event>"
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
                         },
                         {
                             "name": "checked",
@@ -4314,12 +4314,12 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any>"
+                            "type": "FormTarget<T>"
                         }
                     ]
                 },
                 "AutoCompleteSelectEvent": {
-                    "description": "Custom select event.",
+                    "description": "Custom select event with generic type support",
                     "relatedProp": "onSelect",
                     "props": [
                         {
@@ -4333,14 +4333,14 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "T extends any[] ? T[number] : T",
                             "description": "Selected option value"
                         }
                     ],
                     "extendedBy": "AutoCompleteUnselectEvent"
                 },
                 "AutoCompleteUnselectEvent": {
-                    "description": "Custom unselect event.",
+                    "description": "Custom unselect event extending the select event",
                     "relatedProp": "onUnselect",
                     "props": [
                         {
@@ -4354,7 +4354,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "T extends any[] ? T[number] : T",
                             "description": "Selected option value"
                         }
                     ]
@@ -4412,7 +4412,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "AutoCompleteProps"
+                            "type": "AutoCompleteProps<any>"
                         },
                         {
                             "name": "state",
