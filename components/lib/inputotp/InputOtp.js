@@ -177,6 +177,8 @@ export const InputOtp = React.memo(
 
                 case 'Tab':
 
+                case 'NumpadEnter':
+
                 case 'Enter': {
                     break;
                 }
