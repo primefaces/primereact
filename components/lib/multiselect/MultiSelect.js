@@ -965,9 +965,6 @@ export const MultiSelect = React.memo(
         };
 
         const onRemoveTokenIconKeyDown = (event, val) => {
-            event.preventDefault();
-            event.stopPropagation();
-
             switch (event.code) {
                 case 'Space':
                 case 'NumpadEnter':
@@ -977,6 +974,8 @@ export const MultiSelect = React.memo(
                     }
 
                     removeChip(event, val);
+                    event.preventDefault();
+                    event.stopPropagation();
                     break;
             }
         };
