@@ -66,13 +66,11 @@ export const BodyCell = React.memo((props) => {
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
-            setTimeout(() => {
-                if (!selfClick.current && isOutsideClicked(e.target)) {
-                    // #2666 for overlay components and outside is clicked
+            if (!selfClick.current && isOutsideClicked(e.target)) {
+                // #2666 for overlay components and outside is clicked
 
-                    switchCellToViewMode(e, true);
-                }
-            }, 0);
+                switchCellToViewMode(e, true);
+            }
 
             selfClick.current = false;
         },
@@ -179,7 +177,7 @@ export const BodyCell = React.memo((props) => {
 
         let valid = true;
 
-        if ((!submit || cellEditValidateOnClose()) && cellEditValidator) {
+        if ((submit || cellEditValidateOnClose()) && cellEditValidator) {
             valid = cellEditValidator(params);
         }
 
@@ -193,7 +191,7 @@ export const BodyCell = React.memo((props) => {
             event.preventDefault();
         }
 
-        setEditingRowDataState(newRowData);
+        setEditingRowDataState(valid && submit ? newRowData : props.rowData);
     };
 
     const findNextSelectableCell = (cell) => {
@@ -367,17 +365,19 @@ export const BodyCell = React.memo((props) => {
     };
 
     const onKeyDown = (event) => {
-        if (props.editMode !== 'row') {
-            if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Tab') {
-                switchCellToViewMode(event, true);
-            }
+        if (editingState) {
+            event.stopPropagation();
 
-            if (event.code === 'Escape') {
-                switchCellToViewMode(event, false);
-            }
-        }
+            if (props.editMode !== 'row') {
+                if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Tab') {
+                    switchCellToViewMode(event, true);
+                }
 
-        if (props.allowCellSelection) {
+                if (event.code === 'Escape') {
+                    switchCellToViewMode(event, false);
+                }
+            }
+        } else if (props.allowCellSelection) {
             const { target, currentTarget: cell } = event;
 
             switch (event.code) {
