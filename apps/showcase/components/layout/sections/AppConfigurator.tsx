@@ -80,8 +80,8 @@ export default function AppConfigurator() {
         return palettes;
     }, [app.preset]);
 
-    const getPresetExt = () => {
-        const color = primaryColors.find((c) => c.name === selectedPrimaryColor);
+    const getPresetExt = (_color) => {
+        const color = primaryColors.find((c) => c.name === _color.name);
 
         if (color.name === 'noir') {
             document.documentElement.style.setProperty('--logo-color', 'var(--text-secondary-color)');
@@ -258,7 +258,7 @@ export default function AppConfigurator() {
     };
     const applyTheme = (type, color) => {
         if (type === 'primary') {
-            updatePreset(getPresetExt());
+            updatePreset(getPresetExt(color));
         } else if (type === 'surface') {
             updateSurfacePalette(color.palette);
         }

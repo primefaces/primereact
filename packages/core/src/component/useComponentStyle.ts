@@ -2,7 +2,7 @@ import type { ComponentInstance } from '@primereact/types/core';
 import { Theme, ThemeService } from '@primeuix/styled';
 import { cn, getKeyValue, setAttribute } from '@primeuix/utils';
 import * as React from 'react';
-import { PrimeReactContext } from '../config';
+import { usePrimeReact } from '../config';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
 // @todo - move to correct location
@@ -27,7 +27,7 @@ const Base = {
 
 // @todo - move to correct location
 function useCSS(cssMap = {}) {
-    const config = React.useContext(PrimeReactContext);
+    const { theme } = usePrimeReact();
 
     if (typeof window === 'undefined') {
         /*Object.entries(cssMap).forEach(([key, value]) => {
@@ -36,7 +36,7 @@ function useCSS(cssMap = {}) {
     }
 
     React.useInsertionEffect(() => {
-        config?.stylesheet?._styles?.forEach((value, key) => {
+        theme.stylesheet?._styles?.forEach((value, key) => {
             const styleElement = document.head.querySelector(`style[data-primereact-style-id="${key}"]`) || document.createElement('style');
 
             if (!styleElement.isConnected) {
@@ -178,7 +178,7 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
         _loadStyles();
     }
 
-    useCSS();
+    //useCSS();
 
     // new instance
     return {
