@@ -903,7 +903,7 @@ export const TableBody = React.memo(
                         className: cx('emptyMessage'),
                         role: 'row'
                     },
-                    getColumnPTOptions('emptyMessage')
+                    ptm('emptyMessage')
                 );
 
                 const bodyCellProps = mergeProps(
@@ -958,7 +958,7 @@ export const TableBody = React.memo(
                         {
                             className: cx('rowGroupHeaderName')
                         },
-                        getColumnPTOptions('rowGroupHeaderName')
+                        ptm('rowGroupHeaderName')
                     );
 
                     content = (
@@ -975,7 +975,7 @@ export const TableBody = React.memo(
                         style,
                         role: 'row'
                     },
-                    getColumnPTOptions('rowGroupHeader')
+                    ptm('rowGroupHeader')
                 );
 
                 return <tr {...rowGroupHeaderProps}>{content}</tr>;
@@ -1113,7 +1113,7 @@ export const TableBody = React.memo(
                         className: cx('rowGroupFooter'),
                         role: 'row'
                     },
-                    getColumnPTOptions('rowGroupFooter')
+                    ptm('rowGroupFooter')
                 );
 
                 return <tr {...rowGroupFooterProps}>{content}</tr>;
