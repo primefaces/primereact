@@ -66,7 +66,7 @@ export const PickListSubList = React.memo(
         const createItems = () => {
             if (props.list) {
                 return props.list.map((item, index) => {
-                    const key = props.parentId + '_' + index;
+                    const key = props.parentId + '_' + props.type + '_' + index;
                     const selected = isSelected(item);
 
                     return (
