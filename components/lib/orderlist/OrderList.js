@@ -24,6 +24,7 @@ export const OrderList = React.memo(
         const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
         const listElementRef = React.useRef(null);
+        const reorderedListElementRef = React.useRef(null);
         const metaData = {
             props,
             state: {
@@ -292,15 +293,48 @@ export const OrderList = React.memo(
 
             setFocusedOptionIndex(_focusedOptionIndex);
 
-            scrollInView(_focusedOptionIndex);
+            scrollInViewWithFocus(_focusedOptionIndex);
         };
 
-        const scrollInView = (id) => {
+        const scrollInViewWithFocus = (id) => {
             const listElement = getListElement();
             const element = DomHandler.findSingle(listElement, `[data-pc-section="item"][id="${id}"]`);
 
             if (element) {
                 element.scrollIntoView && element.scrollIntoView({ block: 'nearest', inline: 'start' });
+            }
+        };
+
+        const scrollInView = (listContainer, direction = 1) => {
+            let selectedItems = listContainer.getElementsByClassName('p-highlight');
+
+            if (ObjectUtils.isNotEmpty(selectedItems)) {
+                DomHandler.scrollInView(listContainer, direction === -1 ? selectedItems[0] : selectedItems[selectedItems.length - 1]);
+            }
+        };
+
+        const handleScrollPosition = (listElement, direction) => {
+            if (listElement) {
+                switch (direction) {
+                    case 'up':
+                        scrollInView(listElement, -1);
+                        break;
+
+                    case 'top':
+                        listElement.scrollTop = 0;
+                        break;
+
+                    case 'down':
+                        scrollInView(listElement, 1);
+                        break;
+
+                    case 'bottom':
+                        setTimeout(() => (listElement.scrollTop = listElement.scrollHeight), 100);
+                        break;
+
+                    default:
+                        break;
+                }
             }
         };
 
@@ -356,6 +390,7 @@ export const OrderList = React.memo(
             }
 
             reorderDirection.current = event.direction;
+            reorderedListElementRef.current = getListElement();
         };
 
         const createStyle = () => {
@@ -419,7 +454,9 @@ export const OrderList = React.memo(
         }, [focusedOptionIndex]);
 
         useUpdateEffect(() => {
-            if (reorderDirection.current) {
+            if (reorderedListElementRef.current) {
+                handleScrollPosition(reorderedListElementRef.current, reorderDirection.current);
+                reorderedListElementRef.current = null;
                 reorderDirection.current = null;
             }
         });
