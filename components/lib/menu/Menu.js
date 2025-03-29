@@ -397,6 +397,7 @@ export const Menu = React.memo(
             if (item.template) {
                 const defaultContentOptions = {
                     onClick: (event) => onItemClick(event, item, key),
+                    onMouseMove: (event) => onItemMouseMove(event, key),
                     className: linkClassName,
                     tabIndex: '-1',
                     labelClassName: 'p-menuitem-text',
