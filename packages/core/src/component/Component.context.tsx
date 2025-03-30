@@ -10,14 +10,14 @@ export const ComponentProvider = (inProps: ComponentProviderProps = {}) => {
 
     // @todo: This is a hack to get the parent component instance
     const instance: ComponentInstance = {
-        ...currentInstance,
-        $pc: {
+        ...currentInstance
+        /*$pc: {
             ...parent?.$pc,
             [`${currentInstance?.name}`]: currentInstance
-        }
+        }*/
     };
 
-    React.useImperativeHandle(instance.ref, () => instance);
+    //React.useImperativeHandle(instance.ref, () => instance);
 
     return pIf ? <ComponentContext.Provider value={instance}>{resolve(children, instance)}</ComponentContext.Provider> : null;
 };

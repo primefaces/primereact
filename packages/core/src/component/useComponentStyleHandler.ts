@@ -1,15 +1,15 @@
 import { ThemeContext } from '@primereact/core/theme';
 import { useStyle } from '@primereact/core/use-style';
 import { Theme, dt } from '@primeuix/styled';
-import { isNotEmpty, minifyCSS, resolve } from '@primeuix/utils';
+import { isNotEmpty, minifyCSS, resolve, toElement } from '@primeuix/utils';
 import * as React from 'react';
 
-export const useComponentStyleHandler = (styles?: any) => {
+export const useComponentStyleHandler = (styles?: any, elementRef?: any) => {
     const theme = React.useContext(ThemeContext);
     const { load } = useStyle();
 
     const _load = (css, options) => {
-        load({ name: options.name, css });
+        load({ name: options.name, css, element: toElement(elementRef) });
     };
 
     return {

@@ -40,8 +40,8 @@ export const useComponentPT = (instance: ComponentInstance) => {
 
     const _getPTSelf = (obj = {}, ...args: any[]) => {
         return mergeProps(
-            _usePT(_getPT(obj, name), ...args), // Exp; <component :pt="{}"
-            _usePT($attrsPT, ...args) // Exp; <component :pt:[passthrough_key]:[attribute]="{value}" or <component :pt:[passthrough_key]="() =>{value}"
+            _usePT(_getPT(obj, name), ...args), // Exp; <PRComponent :pt="{}"
+            _usePT($attrsPT, ...args) // Exp; <PRComponent :pt:[passthrough_key]:[attribute]="{value}" or <PRComponent :pt:[passthrough_key]="() =>{value}"
         );
     };
 

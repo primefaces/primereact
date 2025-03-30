@@ -1,61 +1,13 @@
+import { StyleRegistry } from '@primereact/core/utils';
 import type { ComponentInstance } from '@primereact/types/core';
 import { Theme, ThemeService } from '@primeuix/styled';
-import { cn, getKeyValue, setAttribute } from '@primeuix/utils';
+import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
-import { usePrimeReact } from '../config';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-// @todo - move to correct location
-const Base = {
-    _loadedStyleNames: new Set(),
-    getLoadedStyleNames() {
-        return this._loadedStyleNames;
-    },
-    isStyleNameLoaded(name) {
-        return this._loadedStyleNames.has(name);
-    },
-    setLoadedStyleName(name) {
-        this._loadedStyleNames.add(name);
-    },
-    deleteLoadedStyleName(name) {
-        this._loadedStyleNames.delete(name);
-    },
-    clearLoadedStyleNames() {
-        this._loadedStyleNames.clear();
-    }
-};
-
-// @todo - move to correct location
-function useCSS(cssMap = {}) {
-    const { theme } = usePrimeReact();
-
-    if (typeof window === 'undefined') {
-        /*Object.entries(cssMap).forEach(([key, value]) => {
-            config?.sheet?.add(key, value.css);
-        });*/
-    }
-
-    React.useInsertionEffect(() => {
-        theme.stylesheet?._styles?.forEach((value, key) => {
-            const styleElement = document.head.querySelector(`style[data-primereact-style-id="${key}"]`) || document.createElement('style');
-
-            if (!styleElement.isConnected) {
-                //setAttributes(styleElement, value.styleOptions);
-                value.first ? document.head.prepend(styleElement) : document.head.appendChild(styleElement);
-                setAttribute(styleElement, 'data-primereact-style-id', key);
-                //styleRef.current.onload = (event: React.ReactEventHandler<HTMLStyleElement>) => onStyleLoaded?.(event, { name: styleNameRef.current });
-                //onStyleMounted?.(styleNameRef.current);
-            }
-
-            styleElement.textContent = value.css;
-        });
-    });
-    //return rule;
-}
-
 export const useComponentStyle = (instance: ComponentInstance, styles?: any) => {
-    const { props = {}, attrs, state, parent, $primereact, $attrSelector } = instance || {};
-    const $style = useComponentStyleHandler(styles);
+    const { props = {}, attrs, state, parent, $primereact, $attrSelector, elementRef } = instance || {};
+    const $style = useComponentStyleHandler(styles, elementRef);
 
     // @todo
     const $params = {
@@ -68,12 +20,12 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
 
     // methods
     const _load = () => {
-        if (!Base.isStyleNameLoaded('base')) {
+        if (!StyleRegistry.isStyleNameLoaded('base')) {
             const { name, css } = $style.baseStyles || {};
 
             $style.load(css, { name });
 
-            Base.setLoadedStyleName('base');
+            StyleRegistry.setLoadedStyleName('base');
         }
 
         _loadThemeStyles();
@@ -85,10 +37,10 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
     };
 
     const _loadCoreStyles = () => {
-        if (!Base.isStyleNameLoaded($style?.name) && $style?.name) {
+        if (!StyleRegistry.isStyleNameLoaded($style?.name) && $style?.name) {
             $style.loadCSS($styleOptions);
 
-            Base.setLoadedStyleName($style.name);
+            StyleRegistry.setLoadedStyleName($style.name);
         }
     };
 
@@ -139,7 +91,7 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
     };*/
 
     const _themeChangeListener = (callback = () => {}) => {
-        Base.clearLoadedStyleNames();
+        StyleRegistry.clearLoadedStyleNames();
         ThemeService.on('theme:change', callback);
     };
 
@@ -173,12 +125,10 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
     if (!$isUnstyled) {
         // @todo - remove
         Theme.clearLoadedStyleNames();
-        Base.clearLoadedStyleNames();
+        StyleRegistry.clearLoadedStyleNames();
         _loadCoreStyles();
         _loadStyles();
     }
-
-    //useCSS();
 
     // new instance
     return {

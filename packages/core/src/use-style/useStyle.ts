@@ -6,12 +6,17 @@ export function useStyle() {
     const theme = React.useContext(ThemeContext);
 
     const _load = React.useCallback(
-        (name, css) => {
+        (name, css, element) => {
             if (isClient() && isNotEmpty(css)) {
-                const styleElement = document.head.querySelector(`style[data-primereact-style-id="${name}"]`) || document.createElement('style');
+                let root = element?.getRootNode();
+
+                if (!root || root === document) root = document.head;
+
+                const styleElement = root.querySelector(`style[data-primereact-style-id="${name}"]`) || document.createElement('style');
 
                 if (!styleElement.isConnected) {
-                    document.head.appendChild(styleElement);
+                    // @todo - add attributes and prepend
+                    root.appendChild(styleElement);
                     styleElement.setAttribute('data-primereact-style-id', name);
                 }
 
@@ -22,10 +27,10 @@ export function useStyle() {
     );
 
     const load = React.useCallback(
-        ({ name, css }) => {
+        ({ name, css, element }) => {
             if (isNotEmpty(css)) {
                 !theme?.stylesheet?.has(name) && theme?.stylesheet?.add(name, css);
-                _load(name, css);
+                _load(name, css, element);
             }
         },
         [theme]
@@ -49,3 +54,31 @@ export function useStyle() {
 
     return { load, unload };
 }
+
+// @todo - Remove this
+/*function useCSS(cssMap = {}) {
+    const { theme } = usePrimeReact();
+
+    if (typeof window === 'undefined') {
+        Object.entries(cssMap).forEach(([key, value]) => {
+            config?.sheet?.add(key, value.css);
+        });
+    }
+
+    React.useInsertionEffect(() => {
+        theme.stylesheet?._styles?.forEach((value, key) => {
+            const styleElement = document.head.querySelector(`style[data-primereact-style-id="${key}"]`) || document.createElement('style');
+
+            if (!styleElement.isConnected) {
+                //setAttributes(styleElement, value.styleOptions);
+                value.first ? document.head.prepend(styleElement) : document.head.appendChild(styleElement);
+                setAttribute(styleElement, 'data-primereact-style-id', key);
+                //styleRef.current.onload = (event: React.ReactEventHandler<HTMLStyleElement>) => onStyleLoaded?.(event, { name: styleNameRef.current });
+                //onStyleMounted?.(styleNameRef.current);
+            }
+
+            styleElement.textContent = value.css;
+        });
+    });
+    //return rule;
+}*/
