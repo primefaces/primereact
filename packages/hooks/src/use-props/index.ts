@@ -22,16 +22,16 @@ import * as React from 'react';
  * console.log(attrs); // { id: 'foo' }
  * ```
  */
-export function useProps<P1 extends Record<string, unknown>, P2 extends Record<string, unknown>>(props1: P1 = {} as P1, props2: P2 = {} as P2) {
+export function useProps<P1, P2>(props1: P1 = {} as P1, props2: P2 = {} as P2) {
     type Props = Pick<P1 & P2, keyof P2>;
-    type Attrs = Omit<P1, keyof P2> & Record<string, unknown>;
+    type Attrs = Omit<P1, keyof P2>;
     type Result = { props: Props; attrs: Attrs };
 
     return React.useMemo(() => {
         const result: Result = { props: { ...props2 } as Props, attrs: {} as Attrs };
 
-        Object.entries(props1).forEach(([key, value]) => {
-            if (key in props2) {
+        Object.entries(props1 as Record<string, unknown>).forEach(([key, value]) => {
+            if (key in (props2 as Record<string, unknown>)) {
                 (result.props as Record<string, unknown>)[key] = value;
             } else {
                 (result.attrs as Record<string, unknown>)[key] = value;
