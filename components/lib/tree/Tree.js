@@ -133,7 +133,7 @@ export const Tree = React.memo(
 
         const onDrop = (event) => {
             if (validateDropNode(dragState.current?.path, event.path)) {
-                const value = cloneValue(props.value);
+                const value = cloneValue(getRootNode());
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -168,7 +168,7 @@ export const Tree = React.memo(
 
         const onDropPoint = (event) => {
             if (validateDropPoint(event)) {
-                const value = cloneValue(props.value);
+                const value = cloneValue(getRootNode());
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
