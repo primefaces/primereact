@@ -1,6 +1,8 @@
-export const defaultViewerProps = {
+import { CodeViewerProps } from './CodeViewer.types';
+
+export const defaultViewerProps: CodeViewerProps = {
     source: undefined,
-    sectionOrder: [],
+    //sectionOrder: [], toolbarOrder
     lang: 'tsx',
     theme: 'github-dark',
     langs: ['tsx'],
@@ -8,7 +10,7 @@ export const defaultViewerProps = {
     highlighterOptions: undefined,
     codeOptions: undefined,
     toggleableOrder: [],
-    toggleable: false,
+    toggleable: true,
     copy: true,
     editors: ['stackblitz']
 };

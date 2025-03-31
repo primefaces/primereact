@@ -1,6 +1,5 @@
 import { CodeViewer } from '@primereact/code-viewer';
 import BasicDemo from './demo';
-
 import { source } from './source.auto';
 
 export default function BasicDoc() {

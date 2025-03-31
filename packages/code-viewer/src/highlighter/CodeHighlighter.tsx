@@ -10,13 +10,13 @@ export function CodeHighlighter(props: CodeHighlighterProps) {
             //const codeString = `const Demo = () => { return <div>Hello, world!</div>; }`;
 
             //const highlighter = await createHighlighter({ langs: ['tsx'], themes: ['github-dark'] });
-            const html = await codeToHtml(props.source?.code || props.source, { lang: 'tsx', theme: 'github-dark' });
+            const html = await codeToHtml(props.code || '', { lang: 'tsx', theme: 'github-dark' });
 
             setHighlightedCode(html);
         }
 
         highlightCode();
-    }, [props.source]);
+    }, [props.code]);
 
     return <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />;
 }

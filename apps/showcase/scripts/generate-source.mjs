@@ -2,6 +2,7 @@ import chokidar from 'chokidar';
 import fs from 'fs/promises';
 import { globSync } from 'glob';
 import path from 'path';
+import * as prettier from 'prettier';
 
 const INPUT_DIR = 'doc/**/demo.tsx';
 const OUTPUT_FILE = 'source.auto.ts';
@@ -54,13 +55,22 @@ async function generate(filePath) {
         const OUTPUT_PATH = path.join(path.dirname(filePath), OUTPUT_FILE);
         const regex = /{\s*\/\*\s*(@code-section-start|@code-section-end):\s*([\w-]+)\s*\*\/\s*}/g;
 
-        const source = {
-            ...extractCodeSections(content),
-            code: content
-                .replaceAll(regex, (_, code) => code.trim())
-                .replaceAll(/\n?\s*(@code-section-start|@code-section-end)/g, '')
-                .trim()
-        };
+        const prettierConfig = await prettier.resolveConfig(__dirname);
+
+        const source = Object.fromEntries(
+            await Promise.all(
+                Object.entries({
+                    ...extractCodeSections(content),
+                    code: content
+                        .replaceAll(regex, (_, code) => code.trim())
+                        .replaceAll(/\n?\s*(@code-section-start|@code-section-end)/g, '')
+                        .trim()
+                }).map(async ([name, code]) => {
+                    const formattedCode = await prettier.format(code, { ...prettierConfig, parser: 'babel-ts' });
+                    return [name, formattedCode.replaceAll(/>;/g, '>')];
+                })
+            )
+        );
 
         const sourceContent = `/****************************************************************************
 ****************** PrimeReact Demo Source (Auto-Generated) ******************

@@ -45,6 +45,7 @@
     },
     "dependencies": {
         "@primeuix/utils": "catalog:",
+        "@primereact/hooks": "workspace:*",
         "shiki": "3.2.1"
     }
 }

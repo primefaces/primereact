@@ -1,4 +1,5 @@
 export const defaultHighlighterProps = {
+    code: undefined,
     lang: 'tsx',
     theme: 'github-dark',
     langs: ['tsx'],

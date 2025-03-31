@@ -153,6 +153,9 @@ importers:
 
   packages/code-viewer:
     dependencies:
+      '@primereact/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@primeuix/utils':
         specifier: 'catalog:'
         version: 0.5.2
