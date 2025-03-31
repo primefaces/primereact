@@ -89,15 +89,19 @@ export interface ComponentProviderProps {
 
 /**
  * Component Instance.
+ *
+ * @template P - The type of the component props.
+ * @template I - The type of the base component props that are passed by the user.
+ * @template T - The type of the parent component instance.
  */
-export declare type ComponentInstance<D = unknown> = Instance<unknown, D> & {
+export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, T = unknown> = Instance<P, I, T> & {
     /**
      * Finds parent instance of the component.
      *
      * @param type - The type of the parent instance to find.
-     * @returns {Instance | undefined} - The found parent instance or undefined if not found.
+     * @returns {ComponentInstance | undefined} - The found parent instance or undefined if not found.
      */
-    getParent: (type?: string) => ComponentInstance | undefined;
+    getParent: <U extends ComponentInstance>(type?: string) => U extends ComponentInstance<infer PParent, infer IParent, infer TParent> ? ComponentInstance<PParent, IParent, TParent> | undefined : undefined;
 } & {
     /**
      * Finds attributes of the component using the key in pass-through options.
@@ -161,6 +165,6 @@ export declare type ComponentInstance<D = unknown> = Instance<unknown, D> & {
 /**
  * The setup callback function or options.
  */
-export declare type withComponentSetup<S, D> = S | ((instance: ComponentInstance<D>) => S) | undefined;
+export declare type withComponentSetup<S, I> = S | ((instance: I) => S) | undefined;
 
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;

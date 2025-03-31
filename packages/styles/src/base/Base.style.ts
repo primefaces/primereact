@@ -1,7 +1,7 @@
-import type { StylesOptions, StyleType } from '@primereact/types/styles';
+import type { StyleOptions, StylesOptions } from '@primereact/types/styles';
 import { style } from '@primeuix/styles/base';
 
-const css = ({ dt }: StyleType) => `
+const css = ({ dt }: StyleOptions) => `
 .p-hidden-accessible {
     border: 0;
     clip: rect(0 0 0 0);

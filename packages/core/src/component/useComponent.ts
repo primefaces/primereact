@@ -9,14 +9,14 @@ import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <P, D, S>(inProps?: P, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<S, D>): ComponentInstance<D> => {
+export const useComponent = <I, D extends { __TYPE: string }, S>(inProps?: I, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<S, unknown>) => {
     const { config, locale, passthrough, theme, parent } = usePrimeReact();
 
-    const { props, attrs } = useProps(inProps as Record<string, unknown>, { ...globalProps, ...defaultProps } as Record<string, unknown>);
-    const ref = React.useRef(props.ref);
+    const { props, attrs } = useProps(inProps, { ...globalProps, ...defaultProps });
+    const ref = React.useRef<typeof props.ref>(props.ref ?? null);
     const name = props?.__TYPE as string | undefined;
 
-    const common: ComponentInstance = {
+    const common: Partial<ComponentInstance<typeof props, I, typeof parent>> = {
         ref,
         name,
         props,
@@ -61,5 +61,5 @@ export const useComponent = <P, D, S>(inProps?: P, defaultProps?: D, styles?: St
 
     React.useImperativeHandle(ref, () => instance, [instance]);
 
-    return instance;
+    return instance as ComponentInstance<typeof props, I, typeof parent>;
 };

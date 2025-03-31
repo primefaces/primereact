@@ -256,6 +256,10 @@ importers:
     publishDirectory: dist
 
   packages/types:
+    dependencies:
+      '@primeuix/styled':
+        specifier: 'catalog:'
+        version: 0.5.0
     publishDirectory: dist
 
 packages:

@@ -20,12 +20,12 @@ export interface Contexts {
 /**
  * Global PrimeReact Instance
  *
- * @template R - The type of the component reference.
  * @template P - The type of the component props.
- * @template T - The type of the parent component instance.
  * @template I - The type of the base component props that are passed by the user.
+ * @template T - The type of the parent component instance.
+ * @template R - The type of the component reference.
  */
-export declare type Instance<R = unknown, P = Record<PropertyKey, unknown>, T = unknown, I = Record<PropertyKey, unknown>> = {
+export declare type Instance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, T = unknown, R = unknown> = {
     /**
      * The reference to the component.
      */

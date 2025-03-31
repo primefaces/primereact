@@ -13,10 +13,11 @@
     "bugs": {
         "url": "https://github.com/primefaces/primereact/issues"
     },
-    "main": "./src/index.js",
-    "types": "./src/index.d.ts",
+    "main": "./src/index.ts",
+    "types": "./src/index.ts",
     "exports": {
-        "./*": "./src/*/index.js"
+        ".": "./src/index.ts",
+        "./*": "./src/*/index.ts"
     },
     "publishConfig": {
         "main": "./index.mjs",
@@ -41,5 +42,8 @@
         "build:prebuild": "node ./scripts/prebuild.mjs",
         "build:postbuild": "node ./scripts/postbuild.mjs",
         "dev:link": "pnpm link --global && npm link"
+    },
+    "dependencies": {
+        "@primeuix/styled": "catalog:"
     }
 }
