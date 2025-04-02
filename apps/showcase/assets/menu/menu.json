@@ -5,6 +5,15 @@
             "icon": "pi pi-compass",
             "children": [
                 {
+                    "name": "Form",
+                    "children": [
+                        {
+                            "name": "Checkbox",
+                            "to": "/checkbox"
+                        }
+                    ]
+                },
+                {
                     "name": "Button",
                     "children": [
                         {
