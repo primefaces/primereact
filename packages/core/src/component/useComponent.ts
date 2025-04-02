@@ -9,7 +9,7 @@ import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <I, D extends { __TYPE: string }, S>(inProps?: I, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<S, unknown>) => {
+export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<S, unknown>) => {
     const { config, locale, passthrough, theme, parent } = usePrimeReact();
 
     const { props, attrs } = useProps(inProps, { ...globalProps, ...defaultProps });
