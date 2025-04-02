@@ -6,7 +6,7 @@ import { defaultProps } from './useCheckbox.props';
 export const useCheckbox = withHeadless({
     setup: ({ props }) => {
         const [indeterminateState, setIndeterminateState] = React.useState<boolean | undefined>(props.indeterminate);
-        const checked = indeterminateState ? false : props.binary ? props.checked === props.trueValue : contains(props.value, props.checked as any);
+        const [checked, setChecked] = React.useState<boolean>(false);
 
         const state = {
             checked,
@@ -37,6 +37,8 @@ export const useCheckbox = withHeadless({
                     value: props.value,
                     checked: value
                 });
+
+                setChecked(value);
             }
         };
 
@@ -47,6 +49,11 @@ export const useCheckbox = withHeadless({
         const onBlur = (event: React.FocusEventHandler<HTMLInputElement>) => {
             props.onBlur?.(event);
         };
+
+        // effects
+        React.useEffect(() => {
+            setChecked(indeterminateState ? false : props.binary ? props.checked === props.trueValue : contains(props.value, props.checked as any));
+        }, [indeterminateState, props.checked, props.binary, props.value, props.trueValue]);
 
         return {
             state,
