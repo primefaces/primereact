@@ -74,8 +74,9 @@ export interface ComponentProps<R = unknown, D = unknown> extends GlobalComponen
 export interface ComponentProviderProps {
     /**
      * The component instance.
+     * @todo - Update this to use the ComponentInstance type.
      */
-    instance?: ComponentInstance | undefined;
+    instance?: ComponentInstance<any, any> | undefined;
     /**
      * Whether the provider should be rendered.
      * @default true
