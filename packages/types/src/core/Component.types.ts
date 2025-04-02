@@ -8,8 +8,9 @@ import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 export interface GlobalComponentProps<R = unknown, D = unknown> {
     /**
      * The reference to the component instance.
+     * @todo - React.Ref<R> | undefined;
      */
-    ref?: React.Ref<R> | undefined;
+    ref?: any;
     /**
      * Whether the component should be rendered.
      * @default true

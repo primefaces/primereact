@@ -4,17 +4,17 @@ import { useAttrSelector, useId, useProps } from '@primereact/hooks';
 import type { HeadlessInstance, withHeadlessSetup } from '@primereact/types/core';
 import * as React from 'react';
 
-export const useHeadless = <P, D, S>(inProps?: P, defaultProps?: D, setup?: withHeadlessSetup<S, D>): HeadlessInstance & S => {
+export const useHeadless = <I, D, S>(inProps?: I, defaultProps?: D, setup?: withHeadlessSetup<S, unknown>) => {
     const { config, locale } = usePrimeReact();
 
-    const { props, attrs } = useProps(inProps as Record<string, unknown>, defaultProps as Record<string, unknown>);
+    const { props, attrs } = useProps(inProps, defaultProps);
     const id = useId(inProps?.id as string | undefined);
     const $attrSelector = useAttrSelector('pc_');
     const elementRef = React.useRef<HTMLElement>(null);
     const ref = React.useRef(inProps?.ref);
     const name = props?.__TYPE as string | undefined;
 
-    const common: HeadlessInstance = {
+    const common: Partial<HeadlessInstance<typeof props, I>> = {
         ref,
         elementRef,
         id,

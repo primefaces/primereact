@@ -5,7 +5,7 @@ import type { Contexts, Instance } from '.';
  *
  * @template E - The type of the element reference.
  */
-export declare type HeadlessInstance<D = unknown, E = HTMLElement> = Instance<unknown, D> & {
+export declare type HeadlessInstance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, E = HTMLElement> = Instance<P, I> & {
     /**
      * The reference to the element.
      */

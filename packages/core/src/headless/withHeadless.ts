@@ -13,7 +13,7 @@ import { useHeadless } from './useHeadless';
  * @returns The Headless instance.
  */
 export const withHeadless = <S, D>({ setup, defaultProps }: withHeadlessOptions<S, D>) => {
-    return <P>(inProps?: P): HeadlessInstance<D> & S => {
-        return useHeadless(inProps, defaultProps, setup) as HeadlessInstance<D> & S;
+    return <P>(inProps?: P): HeadlessInstance<P> & S => {
+        return useHeadless(inProps, defaultProps, setup) as HeadlessInstance<P> & S;
     };
 };
