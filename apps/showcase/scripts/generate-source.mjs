@@ -7,6 +7,17 @@ import * as prettier from 'prettier';
 const INPUT_DIR = 'doc/**/demo.tsx';
 const OUTPUT_FILE = 'source.auto.ts';
 
+/**
+ * @example
+ * ```ts
+ *  @code-section-start: preview
+ *       @code-section-start: basic
+ *       ...
+ *      @code-section-end: basic
+ *  @code-section-end: preview
+ * ```
+ */
+
 function extractCodeSections(content) {
     const sections = {};
     let stack = [];

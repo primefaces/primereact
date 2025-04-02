@@ -34,7 +34,7 @@ function ToggleableToolbarItem({ orders, onCodeChange }: { orders: string[]; onC
                 <div className="pcv-toggleable-items">
                     {orders.map((order) => (
                         <button type="button" className={`pcv-toggleable-${order} pcv-toolbar-item`} key={order} onClick={() => onItemClick(order)}>
-                            {order}
+                            {order} |
                         </button>
                     ))}
                 </div>
