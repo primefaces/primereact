@@ -26,13 +26,17 @@ export const Chip = React.memo(
         };
 
         const close = (event) => {
-            setVisibleState(false);
+            let result = true;
 
             if (props.onRemove) {
-                props.onRemove({
+                result = props.onRemove({
                     originalEvent: event,
                     value: props.label || props.image || props.icon
                 });
+            }
+
+            if (result !== false) {
+                setVisibleState(false);
             }
         };
 
@@ -61,7 +65,7 @@ export const Chip = React.memo(
                     ptm('image')
                 );
 
-                content.push(<img alt={props.imageAlt} {...imageProps} />);
+                content.push(<img alt={props.imageAlt} {...imageProps} key={UniqueComponentId('image')} />);
             } else if (props.icon) {
                 const chipIconProps = mergeProps(
                     {
@@ -82,7 +86,7 @@ export const Chip = React.memo(
                 );
 
                 content.push(
-                    <span {...labelProps} key="label">
+                    <span {...labelProps} key={UniqueComponentId('label')}>
                         {props.label}
                     </span>
                 );
@@ -109,11 +113,17 @@ export const Chip = React.memo(
                 ptm('root')
             );
 
-            return <div {...rootProps}>{content}</div>;
+            return (
+                <div {...rootProps} key={UniqueComponentId('chip')}>
+                    {content}
+                </div>
+            );
         };
 
         React.useImperativeHandle(ref, () => ({
             props,
+            getVisible: () => visibleState,
+            setVisible: (visible) => setVisibleState(visible),
             getElement: () => elementRef.current
         }));
 

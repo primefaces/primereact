@@ -502,6 +502,10 @@ interface FileUploadProps {
      */
     chooseLabel?: string | undefined;
     /**
+     * Label of the choose button after a file is selected.
+     */
+    selectedFileLabel?: string | undefined;
+    /**
      * Label of the upload button. Defaults to global value in Locale configuration.
      */
     uploadLabel?: string | undefined;
@@ -671,14 +675,14 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public onFileSelect(event: FileUploadSelectEvent): void;
     /**
      * Used to get container element.
-     * @return {HTMLElement} Container element
+     * @return {HTMLElement | null} Container element
      */
-    public getElement(): HTMLElement;
+    public getElement(): HTMLElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Gets the current files list.
      * @return {FileUploadFile[]} Current files.

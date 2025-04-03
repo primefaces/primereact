@@ -1,4 +1,3 @@
-
 const TemplateLicense = ({ license }) => {
     return (
         <div className="template-license-wrapper">
@@ -23,13 +22,15 @@ const TemplateLicense = ({ license }) => {
                     ))}
                 </div>
                 <p className="template-license-description">{license.description}</p>
-                <p className="template-license-visit">
-                    Visit the{' '}
-                    <a href={license.documentLink} target="_blank">
-                        official documentation
-                    </a>{' '}
-                    for more information.
-                </p>
+                {license.documentLink && (
+                    <p className="template-license-visit">
+                        Visit the{' '}
+                        <a href={license.documentLink} target="_blank">
+                            official documentation
+                        </a>{' '}
+                        for more information.
+                    </p>
+                )}
             </div>
         </div>
     );

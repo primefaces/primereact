@@ -94,22 +94,22 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
 export declare class ScrollPanel extends React.Component<ScrollPanelProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get content of the scrollpanel.
-     * @return {HTMLDivElement} Content element
+     * @return {HTMLDivElement | null} Content element
      */
-    public getContent(): HTMLDivElement;
+    public getContent(): HTMLDivElement | null;
     /**
      * Used to get horizontal scrollbar of the panel.
-     * @return {HTMLDivElement} Horizontal bar element
+     * @return {HTMLDivElement | null} Horizontal bar element
      */
-    public getXBar(): HTMLDivElement;
+    public getXBar(): HTMLDivElement | null;
     /**
      * Used to get vertical scrollbar of the panel.
-     * @return {HTMLDivElement} Vertical bar element
+     * @return {HTMLDivElement | null} Vertical bar element
      */
-    public getYBar(): HTMLDivElement;
+    public getYBar(): HTMLDivElement | null;
 }

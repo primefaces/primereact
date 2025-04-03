@@ -8,10 +8,10 @@
  *
  */
 import * as React from 'react';
-import { MenuItem } from '../menuitem';
-import { IconType, PassThroughType } from '../utils/utils';
 import { ComponentHooks } from '../componentbase/componentbase';
+import { MenuItem } from '../menuitem';
 import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type MenubarPassThroughType<T> = PassThroughType<T, MenubarPassThroughMethodOptions>;
 
@@ -196,19 +196,19 @@ export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Menubar extends React.Component<MenubarProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 
     /**
      * Used to get root menu element.
-     * @return {HTMLElement} Root menu element
+     * @return {HTMLElement | null} Root menu element
      */
-    public getRootMenu(): HTMLElement;
+    public getRootMenu(): HTMLElement | null;
 
     /**
      * Used to get menu button element.
-     * @return {HTMLElement} Menu button element
+     * @return {HTMLElement | null} Menu button element
      */
-    public getMenuButton(): HTMLElement;
+    public getMenuButton(): HTMLElement | null;
 }

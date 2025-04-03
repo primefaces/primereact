@@ -336,7 +336,7 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 export declare class Accordion extends React.Component<AccordionProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

@@ -148,6 +148,7 @@ const classes = {
     loadingWrapper: 'p-treetable-loading',
     loadingOverlay: 'p-treetable-loading-overlay p-component-overlay',
     header: 'p-treetable-header',
+    checkIcon: 'p-checkbox-icon',
     footer: 'p-treetable-footer',
     resizeHelper: 'p-column-resizer-helper',
     reorderIndicatorUp: 'p-treetable-reorder-indicator-up',
@@ -189,7 +190,7 @@ const classes = {
     row: ({ isSelected, rowProps: props }) => ({
         'p-highlight': isSelected(),
         'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
-        'p-row-odd': props.rowIndex % 2 !== 0
+        'p-row-odd': parseInt(String(props.rowIndex).split('_').pop(), 10) % 2 !== 0
     }),
     rowCheckbox: ({ partialChecked }) => classNames('p-treetable-checkbox', { 'p-indeterminate': partialChecked }),
     rowToggler: 'p-treetable-toggler p-link p-unselectable-text',
@@ -297,7 +298,8 @@ export const TreeTableBase = ComponentBase.extend({
         tableStyle: null,
         totalRecords: null,
         value: null,
-        children: undefined
+        children: undefined,
+        togglerTemplate: null
     },
     css: {
         classes,

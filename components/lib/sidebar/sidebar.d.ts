@@ -238,17 +238,17 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Sidebar extends React.Component<SidebarProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get mask element.
-     * @return {HTMLElement} Mask element
+     * @return {HTMLElement | null} Mask element
      */
-    public getMask(): HTMLElement;
+    public getMask(): HTMLElement | null;
     /**
      * Used to get close icon element.
-     * @return {HTMLButtonElement} Close icon element
+     * @return {HTMLButtonElement | null} Close icon element
      */
-    public getCloseIcon(): HTMLButtonElement;
+    public getCloseIcon(): HTMLButtonElement | null;
 }

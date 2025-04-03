@@ -107,7 +107,7 @@ export function RowExpansionDoc(props) {
     };
 
     const allowExpansion = (rowData) => {
-        return rowData.orders.length > 0;
+        return rowData.orders?.length > 0;
     };
 
     const rowExpansionTemplate = (data) => {

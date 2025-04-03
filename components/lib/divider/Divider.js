@@ -2,7 +2,6 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
-import { classNames } from '../utils/Utils';
 import { DividerBase } from './DividerBase';
 
 export const Divider = React.forwardRef((inProps, ref) => {
@@ -29,7 +28,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
         {
             ref: elementRef,
             style: sx('root'),
-            className: classNames(props.className, cx('root', { horizontal, vertical })),
+            className: cx('root', { horizontal, vertical }),
             'aria-orientation': props.layout,
             role: 'separator'
         },

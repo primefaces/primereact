@@ -11,7 +11,7 @@ export function LazyLoadDoc(props) {
     const [customers, setCustomers] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [lazyState, setlazyState] = useState({
+    const [lazyState, setLazyState] = useState({
         first: 0,
         rows: 10,
         page: 1,
@@ -52,16 +52,16 @@ export function LazyLoadDoc(props) {
     };
 
     const onPage = (event) => {
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onSort = (event) => {
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onFilter = (event) => {
         event.first = 0;
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onSelectionChange = (event) => {
@@ -129,7 +129,7 @@ export default function LazyLoadDemo() {
     const [customers, setCustomers] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [lazyState, setlazyState] = useState({
+    const [lazyState, setLazyState] = useState({
         first: 0,
         rows: 10,
         page: 1,
@@ -167,16 +167,16 @@ export default function LazyLoadDemo() {
     };
 
     const onPage = (event) => {
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onSort = (event) => {
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onFilter = (event) => {
         event['first'] = 0;
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onSelectionChange = (event) => {
@@ -280,7 +280,7 @@ export default function LazyLoadDemo() {
     const [customers, setCustomers] = useState<Customer[] | null>(null);
     const [selectAll, setSelectAll] = useState<boolean>(false);
     const [selectedCustomers, setSelectedCustomers] = useState<Customer[] | null>(null);
-    const [lazyState, setlazyState] = useState<LazyTableState>({
+    const [lazyState, setLazyState] = useState<LazyTableState>({
         first: 0,
         rows: 10,
         page: 1,
@@ -318,16 +318,16 @@ export default function LazyLoadDemo() {
     };
 
     const onPage = (event: DataTablePageEvent) => {
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onSort = (event: DataTableSortEvent) => {
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onFilter = (event: DataTableFilterEvent) => {
         event['first'] = 0;
-        setlazyState(event);
+        setLazyState(event);
     };
 
     const onSelectionChange = (event: DataTableSelectionChangeEvent) => {

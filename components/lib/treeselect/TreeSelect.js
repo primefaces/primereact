@@ -1,7 +1,7 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, ariaLabel, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useDebounce, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
@@ -22,7 +22,7 @@ export const TreeSelect = React.memo(
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
-        const [filterValueState, setFilterValueState] = React.useState('');
+        const [filterValue, filterValueState, setFilterValueState] = useDebounce('', props.filterDelay || 0);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
@@ -37,7 +37,6 @@ export const TreeSelect = React.memo(
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const isValueEmpty = ObjectUtils.isEmpty(props.value);
-        const hasNoOptions = ObjectUtils.isEmpty(props.options);
         const isSingleSelectionMode = props.selectionMode === 'single';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
@@ -650,53 +649,44 @@ export const TreeSelect = React.memo(
         };
 
         const createContent = () => {
-            const message = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
-            const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                ptm('emptyMessage')
-            );
-
             return (
-                <>
-                    <Tree
-                        ref={treeRef}
-                        id={listId.current}
-                        emptyMessage={props.emptyMessage}
-                        expandedKeys={expandedKeys}
-                        filter={props.filter}
-                        filterBy={props.filterBy}
-                        filterLocale={props.filterLocale}
-                        filterMode={props.filterMode}
-                        filterPlaceholder={props.filterPlaceholder}
-                        filterValue={filteredValue}
-                        metaKeySelection={props.metaKeySelection}
-                        nodeTemplate={props.nodeTemplate}
-                        onCollapse={props.onNodeCollapse}
-                        onExpand={props.onNodeExpand}
-                        onFilterValueChange={onFilterValueChange}
-                        onSelect={onNodeSelect}
-                        onSelectionChange={onSelectionChange}
-                        onToggle={onNodeToggle}
-                        onUnselect={onNodeUnselect}
-                        selectionKeys={props.value}
-                        selectionMode={props.selectionMode}
-                        showHeader={false}
-                        togglerTemplate={props.togglerTemplate}
-                        value={props.options}
-                        pt={ptm('tree')}
-                        __parentMetadata={{ parent: metaData }}
-                    />
-
-                    {hasNoOptions && <div {...emptyMessageProps}>{message}</div>}
-                </>
+                <Tree
+                    ref={treeRef}
+                    id={listId.current}
+                    emptyMessage={props.emptyMessage}
+                    expandedKeys={expandedKeys}
+                    filter={props.filter}
+                    filterBy={props.filterBy}
+                    filterDelay={props.filterDelay}
+                    filterLocale={props.filterLocale}
+                    filterMode={props.filterMode}
+                    filterPlaceholder={props.filterPlaceholder}
+                    filterValue={filteredValue}
+                    metaKeySelection={props.metaKeySelection}
+                    nodeTemplate={props.nodeTemplate}
+                    onCollapse={props.onNodeCollapse}
+                    onExpand={props.onNodeExpand}
+                    onFilterValueChange={onFilterValueChange}
+                    onSelect={onNodeSelect}
+                    onSelectionChange={onSelectionChange}
+                    onToggle={onNodeToggle}
+                    onUnselect={onNodeUnselect}
+                    selectionKeys={props.value}
+                    selectionMode={props.selectionMode}
+                    showHeader={false}
+                    togglerTemplate={props.togglerTemplate}
+                    value={props.options}
+                    pt={ptm('tree')}
+                    __parentMetadata={{ parent: metaData }}
+                />
             );
         };
 
         const createFilterElement = () => {
             if (props.filter) {
-                const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                let filterValue = props.onFilterValueChange ? props.filterValue : filteredValue;
+
+                filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
                 const filterContainerProps = mergeProps(
                     {
                         className: cx('filterContainer')
@@ -770,7 +760,7 @@ export const TreeSelect = React.memo(
                     className: cx('closeButton'),
                     onKeyDown: (event) => onHeaderElementKeyDown(event, true),
                     onClick: hide,
-                    'aria-label': localeOption('close')
+                    'aria-label': ariaLabel('close')
                 },
                 ptm('closeButton')
             );

@@ -189,7 +189,7 @@ export const AutoCompletePanel = React.memo(
                     {
                         className: cx('emptyMessage')
                     },
-                    _ptm('emptyMesage')
+                    _ptm('emptyMessage')
                 );
 
                 const listProps = mergeProps(

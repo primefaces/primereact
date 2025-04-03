@@ -106,7 +106,7 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 export declare class Skeleton extends React.Component<SkeletonProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

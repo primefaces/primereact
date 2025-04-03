@@ -236,8 +236,29 @@ export default class ObjectUtils {
         return this.findDiffKeys(props, defaultProps);
     }
 
+    /**
+     * Gets the value of a property which can be a function or a direct value.
+     * If the property is a function, it will be invoked with the provided parameters.
+     * @param {*} obj - The object to get the value from
+     * @param {...*} params - Parameters to pass to the function if obj is a function
+     * @returns {*} The resolved value
+     */
     static getPropValue(obj, ...params) {
-        return this.isFunction(obj) ? obj(...params) : obj;
+        // If obj is not a function, return it directly
+        if (!this.isFunction(obj)) {
+            return obj;
+        }
+
+        // Handle function invocation
+        if (params.length === 1) {
+            // For single parameter case, unwrap array if needed to avoid extra nesting
+            const param = params[0];
+
+            return obj(Array.isArray(param) ? param[0] : param);
+        }
+
+        // Pass all parameters to function
+        return obj(...params);
     }
 
     static getComponentProp(component, prop = '', defaultProps = {}) {

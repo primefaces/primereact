@@ -347,22 +347,22 @@ export declare class CascadeSelect extends React.Component<CascadeSelectProps, a
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to get label element.
-     * @return {HTMLSpanElement} Label element
+     * @return {HTMLSpanElement | null} Label element
      */
-    public getLabel(): HTMLSpanElement;
+    public getLabel(): HTMLSpanElement | null;
 }

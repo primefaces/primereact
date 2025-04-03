@@ -21,10 +21,12 @@ export const ButtonGroup = React.memo(
             ObjectUtils.combinedRefs(elementRef, ref);
         }, [elementRef, ref]);
 
+        const isSingleButton = React.Children.count(props.children) === 1;
+
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: classNames(cx('root')),
+                className: classNames(cx('root'), { 'p-button-group-single': isSingleButton }),
                 role: 'group'
             },
             ButtonGroupBase.getOtherProps(props),

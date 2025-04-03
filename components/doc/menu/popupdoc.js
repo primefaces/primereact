@@ -22,6 +22,18 @@ export function PopupDoc(props) {
                 {
                     label: 'Export',
                     icon: 'pi pi-upload'
+                },
+                {
+                    label: 'Custom template',
+                    template: (item, options) => {
+                        return (
+                            <div className="p-menuitem-content" data-pc-section="content" onMouseMove={(e) => options.onMouseMove(e)}>
+                                <a href="#" className="p-menuitem-link">
+                                    Lorem ipsum
+                                </a>
+                            </div>
+                        );
+                    }
                 }
             ]
         }
@@ -56,6 +68,18 @@ export default function PopupDoc() {
                 {
                     label: 'Export',
                     icon: 'pi pi-upload'
+                },
+                {
+                    label: 'Custom template',
+                    template: (item, options) => {
+                        return (
+                            <div className="p-menuitem-content" data-pc-section="content" onMouseMove={(e) => options.onMouseMove(e)}>
+                                <a href="#" className="p-menuitem-link">
+                                    Lorem ipsum
+                                </a>
+                            </div>
+                        );
+                    }
                 }
             ]
         }
@@ -94,6 +118,18 @@ export default function PopupDoc() {
                 {
                     label: 'Export',
                     icon: 'pi pi-upload'
+                },
+                {
+                    label: 'Custom template',
+                    template: (item, options) => {
+                        return (
+                            <div className="p-menuitem-content" data-pc-section="content" onMouseMove={(e) => options.onMouseMove(e)}>
+                                <a href="#" className="p-menuitem-link">
+                                    Lorem ipsum
+                                </a>
+                            </div>
+                        );
+                    }
                 }
             ]
         }

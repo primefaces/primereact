@@ -4,7 +4,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
@@ -21,7 +21,7 @@ export const ToggleButton = React.memo(
 
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
         const hasIcon = props.onIcon && props.offIcon;
-        const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
+        const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '\u00A0';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
         const toggle = (e) => {
@@ -133,7 +133,7 @@ export const ToggleButton = React.memo(
 
         const boxProps = mergeProps(
             {
-                className: cx('box', { hasIcon, hasLabel })
+                className: classNames(props.className, cx('box', { hasIcon, hasLabel }))
             },
             ptm('box')
         );

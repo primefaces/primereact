@@ -263,7 +263,7 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
 export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> {
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
 }

@@ -138,7 +138,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -3582,25 +3582,25 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the options of inline virtualScroller component."
                         },
                         {
@@ -3726,7 +3726,7 @@
                             "name": "dropdownIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps>",
+                            "type": "IconType<AutoCompleteProps<T>>",
                             "default": "",
                             "description": "Icon of the dropdown."
                         },
@@ -3822,7 +3822,7 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps>",
+                            "type": "IconType<AutoCompleteProps<any>>",
                             "default": "",
                             "description": "Icon of the loader."
                         },
@@ -3942,7 +3942,7 @@
                             "name": "removeTokenIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps>",
+                            "type": "IconType<AutoCompleteProps<any>>",
                             "default": "",
                             "description": "Icon of the remove chip element in multiple mode."
                         },
@@ -3968,7 +3968,7 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "Template of a selected item."
+                            "description": "Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string."
                         },
                         {
                             "name": "selectionLimit",
@@ -4006,7 +4006,7 @@
                             "name": "suggestions",
                             "optional": true,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "(T extends any[] ? T[number] : T)[]",
                             "default": "",
                             "description": "An array of suggestions to display."
                         },
@@ -4062,7 +4062,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "any",
+                            "type": "string | number | readonly string[] | T",
                             "default": "",
                             "description": "Value of the component."
                         },
@@ -4119,7 +4119,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteChangeEvent",
+                                    "type": "AutoCompleteChangeEvent<T>",
                                     "description": "Custom change event."
                                 }
                             ],
@@ -4255,7 +4255,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteSelectEvent",
+                                    "type": "AutoCompleteSelectEvent<T>",
                                     "description": "Custom select event."
                                 }
                             ],
@@ -4274,7 +4274,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteUnselectEvent",
+                                    "type": "AutoCompleteUnselectEvent<T>",
                                     "description": "Custom unselect event."
                                 }
                             ],
@@ -4293,16 +4293,16 @@
                     "relatedProp": "onChange",
                     "props": [
                         {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "T"
+                        },
+                        {
                             "name": "originalEvent",
                             "optional": true,
                             "readonly": false,
                             "type": "SyntheticEvent<Element, Event>"
-                        },
-                        {
-                            "name": "value",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
                         },
                         {
                             "name": "checked",
@@ -4314,12 +4314,12 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any>"
+                            "type": "FormTarget<T>"
                         }
                     ]
                 },
                 "AutoCompleteSelectEvent": {
-                    "description": "Custom select event.",
+                    "description": "Custom select event with generic type support",
                     "relatedProp": "onSelect",
                     "props": [
                         {
@@ -4333,14 +4333,14 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "T extends any[] ? T[number] : T",
                             "description": "Selected option value"
                         }
                     ],
                     "extendedBy": "AutoCompleteUnselectEvent"
                 },
                 "AutoCompleteUnselectEvent": {
-                    "description": "Custom unselect event.",
+                    "description": "Custom unselect event extending the select event",
                     "relatedProp": "onUnselect",
                     "props": [
                         {
@@ -4354,7 +4354,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "T extends any[] ? T[number] : T",
                             "description": "Selected option value"
                         }
                     ]
@@ -4412,7 +4412,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "AutoCompleteProps"
+                            "type": "AutoCompleteProps<any>"
                         },
                         {
                             "name": "state",
@@ -4650,7 +4650,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -4896,7 +4896,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -4996,7 +4996,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -5132,7 +5132,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -5340,7 +5340,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -5948,31 +5948,31 @@
                         {
                             "name": "getCurrentDateTime",
                             "parameters": [],
-                            "returnType": "Date | Date[]",
+                            "returnType": "TValue",
                             "description": "Used to get the current date."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
                             "name": "getViewDate",
                             "parameters": [],
-                            "returnType": "Date | Date[]",
+                            "returnType": "TValue",
                             "description": "Used to get the view date."
                         },
                         {
@@ -5997,7 +5997,7 @@
                                 },
                                 {
                                     "name": "value",
-                                    "type": "Nullable<Date | Date[]>",
+                                    "type": "Nullable<TValue>",
                                     "description": "New date."
                                 }
                             ],
@@ -6007,7 +6007,7 @@
                     ]
                 },
                 "props": {
-                    "description": "Defines valid properties in single Calendar component.",
+                    "description": "Defines valid properties in Calendar component.",
                     "values": [
                         {
                             "name": "appendTo",
@@ -6093,7 +6093,7 @@
                             "name": "decrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in each of the decrement buttons."
                         },
@@ -6157,7 +6157,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon of the calendar button."
                         },
@@ -6181,7 +6181,7 @@
                             "name": "incrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in each of the increment buttons."
                         },
@@ -6309,7 +6309,7 @@
                             "name": "nextIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in the next button."
                         },
@@ -6349,7 +6349,7 @@
                             "name": "prevIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "default": "",
                             "description": "Icon to show in the previous button."
                         },
@@ -6389,7 +6389,7 @@
                             "name": "selectionMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"single\"",
+                            "type": "TMode",
                             "default": "single",
                             "description": "Specifies the selection mode either \"single\", \"range\", or \"multiple\";"
                         },
@@ -6439,7 +6439,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether to allow navigation past min/max dates."
+                            "description": "Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range."
                         },
                         {
                             "name": "showOnFocus",
@@ -6589,7 +6589,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "Nullable<Date>",
+                            "type": "Nullable<TValue>",
                             "default": "null",
                             "description": "Value of the component."
                         },
@@ -6729,7 +6729,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "FormEvent<Date, SyntheticEvent<Element, Event>>",
+                                    "type": "FormEvent<TValue, SyntheticEvent<Element, Event>>",
                                     "description": "Custom change event"
                                 }
                             ],
@@ -7036,7 +7036,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "CalendarProps",
+                            "type": "CalendarProps<\"single\", Date>",
                             "description": "The props of Calendar component"
                         }
                     ]
@@ -7084,7 +7084,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "CalendarProps",
+                            "type": "CalendarProps<\"single\", Date>",
                             "description": "The props of Calendar component"
                         }
                     ]
@@ -7102,7 +7102,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "CalendarProps"
+                            "type": "CalendarProps<\"single\", Date>"
                         },
                         {
                             "name": "state",
@@ -7757,7 +7757,7 @@
                             "name": "decrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in each of the decrement buttons."
                         },
                         {
@@ -7827,7 +7827,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon of the calendar button."
                         },
                         {
@@ -7841,7 +7841,7 @@
                             "name": "incrementIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in each of the increment buttons."
                         },
                         {
@@ -7946,7 +7946,7 @@
                             "name": "nextIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in the next button."
                         },
                         {
@@ -7981,7 +7981,7 @@
                             "name": "prevIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<CalendarProps>",
+                            "type": "IconType<CalendarProps<\"single\", Date>>",
                             "description": "Icon to show in the previous button."
                         },
                         {
@@ -8038,7 +8038,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "description": "Whether to allow navigation past min/max dates."
+                            "description": "Controls whether navigation beyond minimum and maximum dates is restricted. When true, navigation is limited to the min/max date range."
                         },
                         {
                             "name": "showOnFocus",
@@ -8444,7 +8444,7 @@
                             "description": "Function that gets a navigator information and returns the navigator in header."
                         }
                     ],
-                    "extendedBy": "CalendarPropsSingle,CalendarPropsRange,CalendarPropsMultiple"
+                    "extendedBy": "CalendarProps"
                 }
             }
         },
@@ -8456,6 +8456,9 @@
                 },
                 "CalendarPassThroughTransitionType": {
                     "values": "ReactCSSTransitionProps | Function | undefined"
+                },
+                "CalendarSelectionMode": {
+                    "values": "\"single\" | \"range\" | \"multiple\""
                 }
             }
         }
@@ -8645,7 +8648,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -9153,25 +9156,25 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getLabel",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get label element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         }
                     ]
@@ -10012,7 +10015,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -10194,13 +10197,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         }
                     ]
@@ -10630,8 +10633,26 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
+                        },
+                        {
+                            "name": "getVisible",
+                            "parameters": [],
+                            "returnType": "boolean",
+                            "description": "Used to get the current visibility state of the chip."
+                        },
+                        {
+                            "name": "setVisible",
+                            "parameters": [
+                                {
+                                    "name": "visible",
+                                    "type": "boolean",
+                                    "description": "Whether to show or hide the chip"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to set the visibility of the chip."
                         }
                     ]
                 },
@@ -10754,8 +10775,8 @@
                                     "description": "Custom remove event"
                                 }
                             ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a chip is removed.\n*"
+                            "returnType": "boolean",
+                            "description": "Callback to invoke when a chip is removed."
                         }
                     ]
                 }
@@ -10899,7 +10920,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -11415,19 +11436,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -15654,7 +15675,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -16066,7 +16087,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -16410,7 +16431,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -16428,13 +16449,13 @@
                         {
                             "name": "getTable",
                             "parameters": [],
-                            "returnType": "HTMLTableElement",
+                            "returnType": "null | HTMLTableElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the virtual scroller."
                         },
                         {
@@ -21014,7 +21035,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -21652,7 +21673,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -21785,37 +21806,37 @@
                         {
                             "name": "getCloseButton",
                             "parameters": [],
-                            "returnType": "HTMLButtonElement",
+                            "returnType": "null | HTMLButtonElement",
                             "description": "Used to get close button element."
                         },
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the content element of the dialog"
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the container element of the dialog."
                         },
                         {
                             "name": "getFooter",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the dialog's footer element."
                         },
                         {
                             "name": "getHeader",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the header element of the dialog"
                         },
                         {
                             "name": "getMask",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get mask element."
                         },
                         {
@@ -22590,7 +22611,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -22728,7 +22749,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -23048,31 +23069,31 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getFocusInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get focusable input element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the options of inline virtualScroller component."
                         },
                         {
@@ -23209,7 +23230,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "No available options",
+                            "default": "No results found",
                             "description": "Template to display when filtering does not return any results."
                         },
                         {
@@ -23217,7 +23238,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
-                            "default": "No results found",
+                            "default": "No available options",
                             "description": "Text to display when there are no options available."
                         },
                         {
@@ -23243,6 +23264,14 @@
                             "type": "IconType<DropdownProps>",
                             "default": "",
                             "description": "Icon of the filter to clear."
+                        },
+                        {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
                         },
                         {
                             "name": "filterIcon",
@@ -24114,13 +24143,13 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get content element."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -24132,7 +24161,7 @@
                         {
                             "name": "getToolbar",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get toolbar element."
                         }
                     ]
@@ -24451,13 +24480,13 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get the content element of the fieldset."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLFieldSetElement",
+                            "returnType": "null | HTMLFieldSetElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -24776,7 +24805,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -24788,7 +24817,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -25075,6 +25104,14 @@
                             "type": "IconType<FileUploadProps>",
                             "default": "",
                             "description": "Icon of the remove element."
+                        },
+                        {
+                            "name": "selectedFileLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Label of the choose button after a file is selected."
                         },
                         {
                             "name": "style",
@@ -26053,7 +26090,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -26747,11 +26784,11 @@
                     "parameters": [
                         {
                             "name": "value",
-                            "type": "any",
-                            "description": "The value to compare."
+                            "type": "V",
+                            "description": "The current value whose previous state is needed"
                         }
                     ],
-                    "returnType": "any",
+                    "returnType": "V | undefined",
                     "description": "Custom hook to get the previous value of a property."
                 },
                 "useMountEffect": {
@@ -29544,13 +29581,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getImage",
                             "parameters": [],
-                            "returnType": "HTMLImageElement",
+                            "returnType": "null | HTMLImageElement",
                             "description": "Used to get image element"
                         },
                         {
@@ -30043,7 +30080,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -30449,7 +30486,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get container element."
                         }
                     ]
@@ -30762,7 +30799,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -30774,7 +30811,7 @@
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         }
                     ]
@@ -31686,13 +31723,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         }
                     ]
@@ -32432,7 +32469,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -32741,13 +32778,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getVirtualScroller",
                             "parameters": [],
-                            "returnType": "VirtualScroller",
+                            "returnType": "null | VirtualScroller",
                             "description": "Used to get the virtual scroller instance."
                         }
                     ]
@@ -33459,7 +33496,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -33879,19 +33916,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextareaProps & RefAttributes<HTMLTextAreaElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextareaProps & RefAttributes<HTMLTextAreaElement>>",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -34410,7 +34447,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -34818,19 +34855,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getMenuButton",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get menu button element."
                         },
                         {
                             "name": "getRootMenu",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get root menu element."
                         }
                     ]
@@ -35380,7 +35417,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -35539,7 +35576,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -36184,19 +36221,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -36343,6 +36380,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
                         },
                         {
                             "name": "filterIcon",
@@ -37339,7 +37384,7 @@
                             "name": "checkboxElement",
                             "optional": false,
                             "readonly": false,
-                            "type": "HTMLElement",
+                            "type": "Element",
                             "description": "The checkbox element for selecting items."
                         },
                         {
@@ -37541,7 +37586,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -37943,7 +37988,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -38474,7 +38519,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -38910,7 +38955,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -39297,7 +39342,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -40557,13 +40602,13 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get content of the panel."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -41046,7 +41091,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -41525,19 +41570,19 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
+                            "returnType": "null | ForwardRefExoticComponent<InputTextProps & RefAttributes<HTMLInputElement>>",
                             "description": "Used to get input element."
                         },
                         {
                             "name": "getOverlay",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get overlay element."
                         },
                         {
@@ -42064,7 +42109,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -42995,7 +43040,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -43176,7 +43221,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -43327,13 +43372,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getInput",
                             "parameters": [],
-                            "returnType": "HTMLInputElement",
+                            "returnType": "null | HTMLInputElement",
                             "description": "Used to get input element."
                         },
                         {
@@ -43633,7 +43678,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -44170,25 +44215,25 @@
                         {
                             "name": "getContent",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get content of the scrollpanel."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getXBar",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get horizontal scrollbar of the panel."
                         },
                         {
                             "name": "getYBar",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get vertical scrollbar of the panel."
                         }
                     ]
@@ -44323,7 +44368,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLButtonElement",
+                            "returnType": "null | HTMLButtonElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -44542,7 +44587,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -44899,19 +44944,19 @@
                         {
                             "name": "getCloseIcon",
                             "parameters": [],
-                            "returnType": "HTMLButtonElement",
+                            "returnType": "null | HTMLButtonElement",
                             "description": "Used to get close icon element."
                         },
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getMask",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get mask element."
                         }
                     ]
@@ -45282,7 +45327,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -45437,7 +45482,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -45915,8 +45960,8 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
-                            "description": "Returns the reference of virtualScroller's container."
+                            "returnType": "null | HTMLDivElement",
+                            "description": "Returns the reference of slider's container."
                         }
                     ]
                 },
@@ -46173,7 +46218,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -46585,7 +46630,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -46777,9 +46822,9 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\" | \"contrast\"",
                             "default": "",
-                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\"."
+                            "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"contrast\", \"help\"."
                         },
                         {
                             "name": "size",
@@ -47134,7 +47179,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -47390,9 +47435,59 @@
         "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.\n\n[Live Demo](https://www.primereact.org/stepper/)",
         "components": {
             "Stepper": {
+                "description": "Stepper is a component that streamlines a wizard-like workflow, organizing content into coherent steps and visually guiding users through a numbered progression in a multi-step process.",
                 "methods": {
                     "description": "Defines methods that can be accessed by the component's reference.",
-                    "values": []
+                    "values": [
+                        {
+                            "name": "getActiveStep",
+                            "parameters": [],
+                            "returnType": "undefined | number",
+                            "description": "Used to get the current active step index."
+                        },
+                        {
+                            "name": "getElement",
+                            "parameters": [],
+                            "returnType": "null | HTMLDivElement",
+                            "description": "Used to get container element."
+                        },
+                        {
+                            "name": "nextCallback",
+                            "parameters": [
+                                {
+                                    "name": "e",
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to navigate to the next step."
+                        },
+                        {
+                            "name": "prevCallback",
+                            "parameters": [
+                                {
+                                    "name": "e",
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to navigate to the previous step."
+                        },
+                        {
+                            "name": "setActiveStep",
+                            "parameters": [
+                                {
+                                    "name": "step",
+                                    "type": "number",
+                                    "description": "Index of step to set as active"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Used to set the active step index."
+                        }
+                    ]
                 },
                 "props": {
                     "description": "Defines valid properties in Stepper component.",
@@ -47404,6 +47499,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Active step index of stepper."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
                         },
                         {
                             "name": "end",
@@ -47875,7 +47978,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -48165,13 +48268,13 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         },
                         {
                             "name": "getTarget",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get target element."
                         }
                     ]
@@ -48305,7 +48408,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -48739,7 +48842,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -49331,7 +49434,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLSpanElement",
+                            "returnType": "null | HTMLSpanElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -49490,7 +49593,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -49785,7 +49888,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -50142,7 +50245,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -50353,7 +50456,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -50897,7 +51000,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -51227,7 +51330,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -51397,7 +51500,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLElement",
+                            "returnType": "null | HTMLElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -52351,7 +52454,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -52488,6 +52591,14 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
+                        },
+                        {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
@@ -52533,7 +52644,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "When filtering is enabled, the value of input field."
+                            "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange."
                         },
                         {
                             "name": "footer",
@@ -53210,6 +53321,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current checked state of the node as a boolean."
+                        },
+                        {
+                            "name": "leaf",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the node is a leaf node."
                         }
                     ],
                     "callbacks": []
@@ -53665,7 +53783,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         },
                         {
@@ -53798,6 +53916,14 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterDelay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "300",
+                            "description": "Delay in milliseconds before filtering the data."
+                        },
+                        {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
@@ -53851,7 +53977,7 @@
                             "readonly": false,
                             "type": "string",
                             "default": "",
-                            "description": "When filtering is enabled, the value of input field."
+                            "description": "When filtering is enabled, the value of input field. To control the value externally, use with onFilterValueChange."
                         },
                         {
                             "name": "inputId",
@@ -54780,7 +54906,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]
@@ -56541,7 +56667,7 @@
                         {
                             "name": "getElement",
                             "parameters": [],
-                            "returnType": "HTMLDivElement",
+                            "returnType": "null | HTMLDivElement",
                             "description": "Used to get container element."
                         }
                     ]

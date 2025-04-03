@@ -239,11 +239,13 @@ export const TableHeader = React.memo((props) => {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
             return rows.map((row, i) => {
+                const { unstyled, __TYPE, ptOptions, ...rest } = RowBase.getProps(row.props, context);
+
                 const headerRowProps = mergeProps(
                     {
                         role: 'row'
                     },
-                    RowBase.getProps(row.props, context),
+                    unstyled ? { unstyled, ...rest } : rest,
                     getRowPTOptions(row, 'root')
                 );
 

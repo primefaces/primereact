@@ -2517,7 +2517,7 @@ const Tailwind = {
                     'text-blue-600 hover:bg-white/30': context.selected
                 },
                 {
-                    invisible: context.isLeaf
+                    invisible: context.leaf
                 }
             )
         }),

@@ -69,9 +69,9 @@ import { VirtualScroller, VirtualScrollerTemplateOptions } from 'primereact/virt
 import { classNames } from 'primereact/utils';
 
 export default function GridDemo() {
-    const [items] = useState<string[]>(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
+    const [items] = useState<string[][]>(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
 
-    const itemTemplate = (items: string, options: VirtualScrollerTemplateOptions) => {
+    const itemTemplate = (items: string[], options: VirtualScrollerTemplateOptions) => {
         const className = classNames('flex align-items-center p-2', {
             'surface-hover': options.odd
         });

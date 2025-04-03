@@ -142,6 +142,8 @@ export const DataScroller = React.memo(
         useUpdateEffect(() => {
             if (props.loader) {
                 unbindScrollListener();
+            } else {
+                bindScrollListener();
             }
         }, [props.loader]);
 
