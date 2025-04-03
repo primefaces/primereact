@@ -466,7 +466,6 @@ export const BodyCell = React.memo(
             event.stopPropagation();
         };
 
-
         const onRowEditInit = (event) => {
             props.onRowEditInit({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: props.field, index: props.rowIndex });
         };
