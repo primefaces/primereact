@@ -10,6 +10,8 @@ export const BodyRow = React.memo((props) => {
     const editing = props.onRowEditChange ? props.editing : editingState;
     const { ptm, cx } = props.ptCallbacks;
 
+    const isRowSelected = (!props.allowCellSelection && props.selected) || props.contextMenuSelected;
+
     const getBodyRowPTOptions = (key) => {
         return ptm(key, {
             parent: props.metaData,
@@ -20,7 +22,7 @@ export const BodyRow = React.memo((props) => {
             context: {
                 index: props.index,
                 selectable: props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
-                selected: (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
+                selected: isRowSelected,
                 stripedRows: props.metaData.props.stripedRows
             }
         });
@@ -401,11 +403,37 @@ export const BodyRow = React.memo((props) => {
         event.preventDefault();
     };
 
+    const equalsDataCell = (data) => {
+        return props.compareSelectionBy === 'equals' ? data === props.rowData : ObjectUtils.equals(data, props.rowData, props.dataKey);
+    };
+
+    const equalsCell = (selectedCell, field, colIndex) => {
+        return selectedCell && (selectedCell.rowIndex === props.rowIndex || equalsDataCell(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === colIndex);
+    };
+
+    const findIndexCell = (collection, field, colIndex) => {
+        return (collection || []).findIndex((data) => equalsCell(data, field, colIndex));
+    };
+
+    const isCellSelected = (selection, field, colIndex) => {
+        return selection ? (selection instanceof Array ? findIndexCell(selection, field, colIndex) > -1 : equalsCell(selection, field, colIndex)) : false;
+    };
+
+    const onCheckboxChange = (event) => {
+        props.onCheckboxChange({
+            originalEvent: event,
+            data: props.rowData,
+            index: props.rowIndex
+        });
+    };
+
     const createContent = () => {
         return props.columns.map((col, i) => {
             if (shouldRenderBodyCell(props.value, col, props.index)) {
                 const key = `${props.rowIndex}_${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
+
+                const field = getColumnProp(col, 'field') || `field_${i}`;
 
                 return (
                     <BodyCell
@@ -415,8 +443,8 @@ export const BodyRow = React.memo((props) => {
                         cellClassName={props.cellClassName}
                         checkIcon={props.checkIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
+                        field={field}
                         column={col}
-                        compareSelectionBy={props.compareSelectionBy}
                         dataKey={props.dataKey}
                         editMode={props.editMode}
                         editing={editing}
@@ -426,7 +454,7 @@ export const BodyRow = React.memo((props) => {
                         frozenRow={props.frozenRow}
                         index={i}
                         isSelectable={props.isSelectable}
-                        onCheckboxChange={props.onCheckboxChange}
+                        onCheckboxChange={onCheckboxChange}
                         onClick={props.onCellClick}
                         onEditingMetaChange={props.onEditingMetaChange}
                         onMouseDown={props.onCellMouseDown}
@@ -444,8 +472,8 @@ export const BodyRow = React.memo((props) => {
                         rowIndex={props.rowIndex}
                         rowSpan={rowSpan}
                         selectOnEdit={props.selectOnEdit}
-                        selected={props.selected}
-                        selection={props.selection}
+                        isRowSelected={isRowSelected}
+                        isCellSelected={isCellSelected(props.selection, field, i)}
                         selectionAriaLabel={props.tableProps.selectionAriaLabel}
                         showRowReorderElement={props.showRowReorderElement}
                         showSelectionElement={props.showSelectionElement}

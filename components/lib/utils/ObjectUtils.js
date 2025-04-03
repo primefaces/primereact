@@ -550,4 +550,109 @@ export default class ObjectUtils {
             obj = obj[fields[i]];
         }
     }
+
+    /**
+     * This helper function takes an object and a dot-separated key path. It traverses the object based on the path,
+     * returning the value at the specified depth. If any part of the path is missing or undefined, it returns undefined.
+     *
+     * Example:
+     * const obj = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const path = 'address.city';
+     * const result = ObjectUtils.getNestedValue(obj, path);
+     * console.log(result); // Output: "Wonderland"
+     *
+     * @param {object} obj - The object to traverse.
+     * @param {string} path - The dot-separated key path.
+     * @returns {*} The value at the specified depth, or undefined if any part of the path is missing or undefined.
+     */
+    static getNestedValue(obj, path) {
+        return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
+    }
+
+    /**
+     * This function takes an object and a dot-separated key path. It traverses the object based on the path,
+     * returning the value at the specified depth. If any part of the path is missing or undefined, it returns undefined.
+     *
+     * Example:
+     * const objA = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const objB = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const result = ObjectUtils.absoluteCompare(objA, objB);
+     * console.log(result); // Output: true
+     *
+     * const objC = { name: 'Alice', address: { city: 'Wonderland', zip: 12346 } };
+     * const result2 = ObjectUtils.absoluteCompare(objA, objC);
+     * console.log(result2); // Output: false
+     *
+     * @param {object} objA - The first object to compare.
+     * @param {object} objB - The second object to compare.
+     * @param {number} [maxDepth=1] - The maximum depth to compare.
+     * @param {number} [currentDepth=0] - The current depth (used internally for recursion).
+     * @returns {boolean} True if the objects are equal within the specified depth, false otherwise.
+     *
+     */
+    static absoluteCompare(objA, objB, maxDepth = 1, currentDepth = 0) {
+        if (!objA || !objB) return true;
+        if (currentDepth > maxDepth) return true;
+
+        if (typeof aValue !== typeof bValue) return false;
+
+        const aKeys = Object.keys(objA);
+        const bKeys = Object.keys(objB);
+
+        if (aKeys.length !== bKeys.length) return false;
+
+        for (const key of aKeys) {
+            const aValue = objA[key];
+            const bValue = objB[key];
+
+            // Skip comparison if values are objects
+            const isObject = ObjectUtils.isObject(aValue) && ObjectUtils.isObject(bValue);
+            const isFunction = ObjectUtils.isFunction(aValue) && ObjectUtils.isFunction(bValue);
+
+            if ((isObject || isFunction) && !this.absoluteCompare(aValue, bValue, maxDepth, currentDepth + 1)) return false;
+            if (!isObject && aValue !== bValue) return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * This helper function takes two objects and a list of keys to compare. It compares the values of the specified keys
+     * in both objects. If any comparison fails, it returns false. If all specified properties are equal, it returns true.
+     * It performs a shallow comparison using absoluteCompare if no keys are provided.
+     *
+     * Example:
+     * const objA = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const objB = { name: 'Alice', address: { city: 'Wonderland', zip: 12345 } };
+     * const keysToCompare = ['name', 'address.city', 'address.zip'];
+     * const result = ObjectUtils.selectiveCompare(objA, objB, keysToCompare);
+     * console.log(result); // Output: true
+     *
+     * const objC = { name: 'Alice', address: { city: 'Wonderland', zip: 12346 } };
+     * const result2 = ObjectUtils.selectiveCompare(objA, objC, keysToCompare);
+     * console.log(result2); // Output: false
+     *
+     * @param {object} a - The first object to compare.
+     * @param {object} b - The second object to compare.
+     * @param {string[]} [keysToCompare] - The keys to compare. If not provided, performs a shallow comparison using absoluteCompare.
+     * @returns {boolean} True if all specified properties are equal, false otherwise.
+     */
+    static selectiveCompare(a, b, keysToCompare) {
+        if (a === b) return true;
+        if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
+        if (!keysToCompare) return this.absoluteCompare(a, b, 1); // If no keys are provided, the comparison is limited to one depth level.
+
+        for (const key of keysToCompare) {
+            const aValue = this.getNestedValue(a, key);
+            const bValue = this.getNestedValue(b, key);
+
+            const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
+
+            // If the current key is an object, they are compared in one further level only.
+            if (isObject && !this.absoluteCompare(aValue, bValue, 1)) return false;
+            if (!isObject && aValue !== bValue) return false;
+        }
+
+        return true;
+    }
 }
