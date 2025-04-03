@@ -1,4 +1,5 @@
 import { withHeadless } from '@primereact/core/headless';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { contains } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useCheckbox.props';
@@ -6,7 +7,18 @@ import { defaultProps } from './useCheckbox.props';
 export const useCheckbox = withHeadless({
     setup: ({ props }) => {
         const [indeterminateState, setIndeterminateState] = React.useState<boolean | undefined>(props.indeterminate);
-        const [checked, setChecked] = React.useState<boolean>(false);
+        const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
+            value: props.checked,
+            defaultValue: props.defaultChecked ?? false,
+            onChange: props.onChange
+        });
+
+        const checked = indeterminateState ? false : props.binary ? checkedState === props.trueValue : contains(props.value, checkedState as any);
+
+        /*const [checkedState, setCheckedState] = React.useState<boolean | undefined>(props.defaultChecked ?? props.checked);
+        const _checked = props?.onChange ? props.checked : checkedState;
+        const checked = indeterminateState ? false : props.binary ? _checked === props.trueValue : contains(props.value, _checked as any);
+        */
 
         const state = {
             checked,
@@ -32,13 +44,25 @@ export const useCheckbox = withHeadless({
                     //this.$emit('update:indeterminate', this.d_indeterminate);
                 }
 
-                props.onChange?.({
-                    originalEvent: event,
-                    value: props.value,
-                    checked: value
-                });
+                setCheckedState((_, controlled) =>
+                    controlled
+                        ? {
+                              originalEvent: event,
+                              value,
+                              checked: value
+                          }
+                        : value
+                );
 
-                setChecked(value);
+                /*if (props?.onChange) {
+                    props.onChange({
+                        originalEvent: event,
+                        value,
+                        checked: value
+                    });
+                } else {
+                    setCheckedState(value);
+                }*/
             }
         };
 
@@ -51,9 +75,6 @@ export const useCheckbox = withHeadless({
         };
 
         // effects
-        React.useEffect(() => {
-            setChecked(indeterminateState ? false : props.binary ? props.checked === props.trueValue : contains(props.value, props.checked as any));
-        }, [indeterminateState, props.checked, props.binary, props.value, props.trueValue]);
 
         return {
             state,

@@ -27,6 +27,7 @@ export interface useCheckboxProps {
      * Value of the checkbox.
      */
     value?: any;
+    defaultChecked?: boolean | undefined;
     checked?: boolean | undefined;
     /**
      * When present, it specifies input state as indeterminate.
