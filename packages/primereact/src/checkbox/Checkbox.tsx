@@ -42,7 +42,7 @@ export const Checkbox = (inProps: CheckboxProps) => {
     const createInputElement = () => {
         const inputProps = mergeProps(
             {
-                id: id + '_input',
+                id: props.inputId,
                 type: 'checkbox',
                 className: cx('input'),
                 value: props.value,

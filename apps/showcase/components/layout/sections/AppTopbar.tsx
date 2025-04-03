@@ -8,7 +8,14 @@ import AppConfigurator from './AppConfigurator';
 export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
     const app = useApp();
 
-    const toggleDarkMode = () => {};
+    const toggleDarkMode = () => {
+        const isDark = !app.isDarkTheme;
+
+        if (isDark) document.documentElement.classList.add('p-dark');
+        else document.documentElement.classList.remove('p-dark');
+
+        app.setDarkTheme(isDark);
+    };
 
     const toggleDesigner = () => {};
 

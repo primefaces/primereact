@@ -35,15 +35,10 @@ export interface useCheckboxProps {
      */
     indeterminate?: boolean | undefined;
     /**
-     * Allows to select a boolean value instead of multiple values.
-     * @default false
-     */
-    binary?: boolean;
-    /**
      * When present, it specifies that an input field is read-only.
      * @default false
      */
-    readonly?: boolean | undefined;
+    readOnly?: boolean | undefined;
     disabled?: boolean | undefined;
     /**
      * Value in checked state.
@@ -55,7 +50,7 @@ export interface useCheckboxProps {
      * @default false
      */
     falseValue?: any;
-    onChange?: (event: useCheckboxChangeEvent) => void;
+    onCheckedChange?: (event: useCheckboxChangeEvent) => void;
     onFocus?: (event: React.FocusEventHandler<HTMLInputElement>) => void;
     onBlur?: (event: React.FocusEventHandler<HTMLInputElement>) => void;
 }

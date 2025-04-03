@@ -38,7 +38,7 @@ export const useComponentStyle = (instance: ComponentInstance, styles?: any) => 
 
     const _loadCoreStyles = () => {
         if (!StyleRegistry.isStyleNameLoaded($style?.name) && $style?.name) {
-            $style.loadCSS($styleOptions);
+            $style.loadCSS({ name: $style.name, ...$styleOptions });
 
             StyleRegistry.setLoadedStyleName($style.name);
         }

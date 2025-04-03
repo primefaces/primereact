@@ -5,13 +5,23 @@ export const defaultProps: useCheckboxProps = {
     value: undefined,
     defaultChecked: undefined,
     checked: false,
+
     indeterminate: false,
-    binary: false,
     trueValue: true,
     falseValue: false,
-    readonly: false,
+    readOnly: false,
+    required: false,
+    tabIndex: undefined,
+    inputId: undefined,
+    inputClassName: undefined,
+    inputStyle: undefined,
+    ariaLabelledby: undefined,
+    ariaLabel: undefined,
+    invalid: false,
+    variant: undefined,
     disabled: false,
-    onChange: undefined,
+
+    onCheckedChange: undefined,
     onFocus: undefined,
     onBlur: undefined
 };

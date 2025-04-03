@@ -2,8 +2,23 @@ import type { CheckboxProps } from '@primereact/types/shared/checkbox';
 
 export const defaultProps: CheckboxProps = {
     __TYPE: 'Checkbox',
+    name: undefined,
+    value: undefined,
     defaultChecked: undefined,
-    binary: false,
-    onChange: undefined,
-    size: undefined
+    indeterminate: false,
+    trueValue: true,
+    falseValue: false,
+    readOnly: false,
+    required: false,
+    tabIndex: undefined,
+    inputId: undefined,
+    inputClassName: undefined,
+    inputStyle: undefined,
+    ariaLabelledby: undefined,
+    ariaLabel: undefined,
+    invalid: false,
+    variant: undefined,
+    disabled: false,
+    size: undefined,
+    onCheckedChange: undefined
 };

@@ -14,10 +14,13 @@ export const PrimeReactProvider = (inProps: React.PropsWithChildren<PrimeReactPr
 
     // states
     const [ripple, setRipple] = React.useState(props.ripple);
+    const [inputVariant, setInputVariant] = React.useState(props.inputVariant);
 
     const value = {
         ripple,
-        setRipple
+        setRipple,
+        inputVariant,
+        setInputVariant
     };
 
     return (

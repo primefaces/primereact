@@ -5,7 +5,7 @@ export interface CheckboxProps extends GlobalComponentProps {
     readonly __TYPE?: 'Checkbox';
     defaultChecked?: boolean | undefined;
     checked?: boolean | undefined;
-    binary?: boolean;
     size?: 'small' | 'normal' | 'large' | undefined;
-    onChange?: (event: useCheckboxChangeEvent) => void;
+    onCheckedChange?: (event: useCheckboxChangeEvent) => void;
+    indeterminate?: boolean | undefined;
 }
