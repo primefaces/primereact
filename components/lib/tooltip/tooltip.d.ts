@@ -158,12 +158,12 @@ export declare class Tooltip extends React.Component<TooltipProps, any> {
     public unloadTargetEvents(target?: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to get container element.
-     * @return {HTMLElement} Container element
+     * @return {HTMLElement | null} Container element
      */
-    public getElement(): HTMLElement;
+    public getElement(): HTMLElement | null;
     /**
      * Used to get target element.
-     * @return {HTMLElement} Target element
+     * @return {HTMLElement | null} Target element
      */
     public getTarget(): HTMLElement | null;
     /**

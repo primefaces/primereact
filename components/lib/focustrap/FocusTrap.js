@@ -88,10 +88,10 @@ export const FocusTrap = React.memo(
         const createHiddenFocusableElements = () => {
             const { tabIndex = 0 } = props || {};
 
-            const createFocusableElement = (onFocus, section) => {
+            const createFocusableElement = (inRef, onFocus, section) => {
                 return (
                     <span
-                        ref={section === 'firstfocusableelement' ? firstFocusableElementRef : lastFocusableElementRef}
+                        ref={inRef}
                         className={'p-hidden-accessible p-hidden-focusable'}
                         tabIndex={tabIndex}
                         role={'presentation'}
@@ -104,12 +104,12 @@ export const FocusTrap = React.memo(
                 );
             };
 
-            const firstFocusableElement = createFocusableElement(onFirstHiddenElementFocus, 'firstfocusableelement');
-            const lastFocusableElement = createFocusableElement(onLastHiddenElementFocus, 'lastfocusableelement');
+            const firstFocusableElement = createFocusableElement(firstFocusableElementRef, onFirstHiddenElementFocus, 'firstfocusableelement');
+            const lastFocusableElement = createFocusableElement(lastFocusableElementRef, onLastHiddenElementFocus, 'lastfocusableelement');
 
-            if (firstFocusableElement.ref.current && lastFocusableElement.ref.current) {
-                firstFocusableElement.ref.current.$_pfocustrap_lasthiddenfocusableelement = lastFocusableElement.ref.current;
-                lastFocusableElement.ref.current.$_pfocustrap_firsthiddenfocusableelement = firstFocusableElement.ref.current;
+            if (firstFocusableElementRef.current && lastFocusableElementRef.current) {
+                firstFocusableElementRef.current.$_pfocustrap_lasthiddenfocusableelement = lastFocusableElementRef.current;
+                lastFocusableElementRef.current.$_pfocustrap_firsthiddenfocusableelement = firstFocusableElementRef.current;
             }
 
             return (

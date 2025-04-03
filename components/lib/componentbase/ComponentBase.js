@@ -5,20 +5,16 @@ import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 const baseStyle = `
 .p-hidden-accessible {
     border: 0;
-    padding: 0;
-    margin: -1px;
-    position: absolute;
+    clip: rect(0 0 0 0);
     height: 1px;
-    width: 1px;
+    margin: -1px;
+    opacity: 0;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    clip-path: inset(50%);
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
     white-space: nowrap;
-}
-
-.p-hidden-accessible input,
-.p-hidden-accessible select {
-    transform: scale(0);
+    width: 1px;
 }
 
 .p-overflow-hidden {
@@ -95,6 +91,16 @@ const buttonStyles = `
 .p-button-group .p-button:focus {
     position: relative;
     z-index: 1;
+}
+
+.p-button-group-single .p-button:first-of-type {
+    border-top-right-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius) !important;
+}
+
+.p-button-group-single .p-button:last-of-type {
+    border-top-left-radius: var(--border-radius) !important;
+    border-bottom-left-radius: var(--border-radius) !important;
 }
 `;
 const inputTextStyles = `
@@ -387,19 +393,6 @@ const commonStyle = `
         transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
     }
 
-    .p-sr-only {
-        border: 0;
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: inset(50%);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-        word-wrap: normal;
-    }
-
     /* @todo Refactor */
     .p-menu .p-menuitem-link {
         cursor: pointer;
@@ -613,7 +606,7 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
     const { load: loadBaseStyle } = useStyle(baseStyle, { name: 'base', manual: true });
     const { load: loadCommonStyle } = useStyle(commonStyle, { name: 'common', manual: true });
     const { load: loadGlobalStyle } = useStyle(globalCSS, { name: 'global', manual: true });
-    const { load } = useStyle(styles, { name: name, manual: true });
+    const { load: loadComponentStyle } = useStyle(styles, { name: name, manual: true });
 
     const hook = (hookName) => {
         if (!hostName) {
@@ -627,12 +620,19 @@ export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
 
     hook('useMountEffect');
     useMountEffect(() => {
+        // Load base and global styles first as they are always needed
         loadBaseStyle();
         loadGlobalStyle();
-        loadCommonStyle();
 
-        if (!styled) {
-            load();
+        // Only load additional styles if component is styled
+        if (!_isUnstyled()) {
+            // Load common styles shared across components
+            loadCommonStyle();
+
+            // Load component-specific styles if not explicitly styled
+            if (!styled) {
+                loadComponentStyle();
+            }
         }
     });
 

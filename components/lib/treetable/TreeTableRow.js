@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { Checkbox } from '../checkbox/Checkbox';
 import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
@@ -9,12 +10,9 @@ import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
-import { Checkbox } from '../checkbox/Checkbox';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);
-    const checkboxRef = React.useRef(null);
-    const checkboxBoxRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
     const mergeProps = useMergeProps();
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
@@ -455,11 +453,13 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const isSelected = () => {
-        if (props.selectionMode === 'single' || (props.selectionMode === 'multiple' && props.selectionKeys)) {
-            return props.selectionMode === 'single' ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
+        if (props.selectionMode === 'single') {
+            return props.selectionKeys === props.node.key;
+        } else if ((props.selectionMode === 'multiple' || props.selectionMode === 'checkbox') && props.selectionKeys) {
+            return props.selectionKeys[props.node.key] !== undefined;
+        } else {
+            return false;
         }
-
-        return false;
     };
 
     const isChecked = () => {
@@ -521,7 +521,13 @@ export const TreeTableRow = React.memo((props) => {
         if (props.selectionMode === 'checkbox' && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const icon = checked ? props.checkboxIcon || <CheckIcon /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
+            const checkboxIconProps = mergeProps(
+                {
+                    className: cx('checkIcon')
+                },
+                getColumnPTOptions(column, 'rowCheckbox.icon')
+            );
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon /> : null;
             const checkIcon = IconUtils.getJSXIcon(icon, {}, { props, checked, partialChecked });
             const rowCheckboxProps = mergeProps(
                 {

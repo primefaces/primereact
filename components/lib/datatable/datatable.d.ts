@@ -1918,16 +1918,17 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
     public setSortMeta(sorts: DataTableSortMeta[]): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLTableElement | null} Container element
      */
-    public getTable(): HTMLTableElement;
+    public getTable(): HTMLTableElement | null;
     /**
      * Used to get the virtual scroller.
+     * @return {VirtualScroller | null} Virtual scroller instance
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

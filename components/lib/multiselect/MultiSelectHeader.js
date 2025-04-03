@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { ariaLabel } from '../api/Api';
 import { Checkbox } from '../checkbox/Checkbox';
 import { useMergeProps } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
@@ -158,7 +158,7 @@ export const MultiSelectHeader = React.memo((props) => {
         {
             type: 'button',
             className: cx('closeButton'),
-            'aria-label': localeOption('close'),
+            'aria-label': ariaLabel('close'),
             onClick: props.onClose
         },
         getPTOptions('closeButton')

@@ -45,6 +45,7 @@ export const KnobBase = ComponentBase.extend({
             .p-knob-range {
                 fill: none;
                 transition: stroke .1s ease-in;
+                cursor: pointer;
             }
             .p-knob-value {
                 animation-name: dash-frame;

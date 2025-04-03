@@ -152,13 +152,15 @@ export const AutoComplete = React.memo(
             selectedItem.current = ObjectUtils.isNotEmpty(value) ? value : null;
         };
 
-        const formatValue = (value, useTemplate = false) => {
+        const formatValue = (value) => {
             if (ObjectUtils.isEmpty(value)) return '';
 
             if (typeof value === 'string') return value;
 
-            if (useTemplate && props.selectedItemTemplate) {
-                return ObjectUtils.getJSXElement(props.selectedItemTemplate, value) || value;
+            if (props.selectedItemTemplate) {
+                const valueFromTemplate = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
+
+                return props.multiple || typeof valueFromTemplate === 'string' ? valueFromTemplate : value;
             }
 
             if (props.field) {
@@ -477,6 +479,12 @@ export const AutoComplete = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        React.useEffect(() => {
+            if (ObjectUtils.isNotEmpty(props.value)) {
+                selectedItem.current = props.value;
+            }
+        }, [props.value]);
+
         useMountEffect(() => {
             if (!idState) {
                 setIdState(UniqueComponentId());
@@ -576,6 +584,18 @@ export const AutoComplete = React.memo(
             );
         };
 
+        const onRemoveTokenIconKeyDown = (event, val) => {
+            switch (event.code) {
+                case 'Space':
+                case 'NumpadEnter':
+                case 'Enter':
+                    removeItem(event, val);
+                    event.preventDefault();
+                    event.stopPropagation();
+                    break;
+            }
+        };
+
         const createChips = () => {
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
@@ -583,7 +603,10 @@ export const AutoComplete = React.memo(
                     const removeTokenIconProps = mergeProps(
                         {
                             className: cx('removeTokenIcon'),
-                            onClick: (e) => removeItem(e, index)
+                            onClick: (e) => removeItem(e, index),
+                            tabIndex: props.tabIndex || '0',
+                            'aria-label': localeOption('clear'),
+                            onKeyDown: (e) => onRemoveTokenIconKeyDown(e, index)
                         },
                         ptm('removeTokenIcon')
                     );
@@ -604,7 +627,7 @@ export const AutoComplete = React.memo(
 
                     return (
                         <li key={key} {...tokenProps}>
-                            <span {...tokenLabelProps}>{formatValue(val, true)}</span>
+                            <span {...tokenLabelProps}>{formatValue(val)}</span>
                             {removeTokenIcon}
                         </li>
                     );

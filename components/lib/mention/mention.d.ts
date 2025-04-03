@@ -315,17 +315,17 @@ export declare class Mention extends React.Component<MentionProps, any> {
     public hide(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {InputTextarea} Input element
+     * @return {InputTextarea | null} Input element
      */
-    public getInput(): typeof InputTextarea;
+    public getInput(): typeof InputTextarea | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
 }

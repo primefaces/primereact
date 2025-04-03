@@ -1,5 +1,7 @@
 :root {
-  --font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+  font-family: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  --font-family: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica,
+  	Arial, "Lucida Grande", sans-serif;
   --surface-a: #ffffff;
   --surface-b: #fafafa;
   --surface-c: rgba(0, 0, 0, 0.04);

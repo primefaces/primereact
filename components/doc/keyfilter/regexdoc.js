@@ -19,7 +19,7 @@ export default function RegexDemo() {
                 <label htmlFor="spacekey" className="font-bold block mb-2">
                     Block Space
                 </label>
-                <InputText id="spacekey" keyfilter={/[^\s]/} className="w-full" />
+                <InputText id="spacekey" keyfilter={/[^\\s]/} className="w-full" />
             </div>
             <div className="flex-auto">
                 <label htmlFor="chars" className="font-bold block mb-2">
@@ -42,7 +42,7 @@ export default function RegexDemo() {
                 <label htmlFor="spacekey" className="font-bold block mb-2">
                     Block Space
                 </label>
-                <InputText id="spacekey" keyfilter={/[^\s]/} className="w-full" />
+                <InputText id="spacekey" keyfilter={/[^\\s]/} className="w-full" />
             </div>
             <div className="flex-auto">
                 <label htmlFor="chars" className="font-bold block mb-2">

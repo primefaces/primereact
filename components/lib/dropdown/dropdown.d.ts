@@ -302,12 +302,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     checkmark?: boolean;
     /**
      * Template to display when filtering does not return any results.
-     * @defaultValue No available options
+     * @defaultValue No results found
      */
     emptyFilterMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
      * Text to display when there are no options available.
-     * @defaultValue No results found
+     * @defaultValue No available options
      */
     emptyMessage?: React.ReactNode | ((props: DropdownProps) => React.ReactNode) | undefined;
     /**
@@ -328,6 +328,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Icon of the filter to clear.
      */
     filterClearIcon?: IconType<DropdownProps> | undefined;
+    /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue false
@@ -608,27 +613,27 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
     public hide(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Used to get focusable input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getFocusInput(): HTMLInputElement;
+    public getFocusInput(): HTMLInputElement | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to get the options of inline virtualScroller component.
-     * @return {VirtualScroller} VirtualScroller component
+     * @return {VirtualScroller | null} VirtualScroller component
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

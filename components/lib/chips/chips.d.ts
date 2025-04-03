@@ -309,9 +309,9 @@ export declare class Chips extends React.Component<ChipsProps, any> {
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
      * @return {HTMLInputElement} Input element

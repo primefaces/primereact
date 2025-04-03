@@ -1009,13 +1009,14 @@
         border-radius: 2rem;
         position: relative;
         overflow: hidden;
-
+        display: flex;
+        align-items: center;
         &-card {
             position: relative;
             z-index: 15;
             width: 29rem;
             margin-left: 10rem;
-            margin-top: 9.81rem;
+            
             border-radius: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.24);
             background: linear-gradient(180deg, rgba(170, 140, 255, 0.00) 0%, var(--primary-400)/0.8 100%), rgba(255, 255, 255, 0.10);
@@ -1030,6 +1031,19 @@
                 svg {
                     height: 100%;
                     width: auto;
+                }
+                &-row{
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    &-multipurpose{
+                        padding: 0.25rem 0.5rem;
+                        font-weight: 500;
+                        color: var(--surface-900);
+                        background: var(--surface-0);
+                        border-radius: 0.5rem;
+                        line-height: 1.5rem;
+                    }
                 }
             }
 
@@ -1132,7 +1146,7 @@
             top: 2.02rem;
             left: 60rem;
             width: 37.875rem;
-            box-shadow: 0px 0px 43.64997px 0px rgba(0, 0, 0, 0.12);
+            filter: drop-shadow(0px 0px 43.65px rgba(0, 0, 0, 0.12));
             border-radius: 0.25rem;
         }
 
@@ -1142,7 +1156,7 @@
             top: 2.02rem;
             left: 42rem;
             width: 37.875rem;
-            box-shadow: 0px 0px 43.64997px 0px rgba(0, 0, 0, 0.12);
+            filter: drop-shadow(0px 0px 43.65px rgba(0, 0, 0, 0.12));
             border-radius: 0.25rem;
         }
     }
@@ -1156,7 +1170,6 @@
 
             &-card {
                 margin-left: 3.5rem;
-                margin-top: 7.81rem;
                 padding: 2rem 1.5rem;
                 border-radius: 1.25rem;
                 width: 26.25rem;
@@ -1191,14 +1204,13 @@
             height: 53.25rem;
             padding: 7.5rem 1.25rem 1.25rem;
             border-radius: 1rem;
-
+            align-items: baseline;
             &-card {
                 width: 100%;
                 margin-left: 0rem;
-                margin-top: 0rem;
                 padding: 2rem 1.5rem;
                 border-radius: 1.25rem;
-
+                margin-top: -4rem;
                 &-links {
                     justify-content: center;
                 }
@@ -1226,6 +1238,7 @@
                 left: 1.5rem;
                 width: 80%;
             }
+
         }
 
     }

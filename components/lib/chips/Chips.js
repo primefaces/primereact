@@ -328,7 +328,7 @@ export const Chips = React.memo(
                     },
                     ptm('removeTokenIcon')
                 );
-                const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+                const icon = props.removeIcon || <TimesCircleIcon {...iconProps} key={`${index}_icon`} />;
                 const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                 return removeIcon;
@@ -345,7 +345,11 @@ export const Chips = React.memo(
                 },
                 ptm('label')
             );
-            const label = <span {...labelProps}>{content}</span>;
+            const label = (
+                <span {...labelProps} key={`${index}_${value}_span`}>
+                    {content}
+                </span>
+            );
             const icon = createRemoveIcon(value, index);
             const tokenProps = mergeProps(
                 {
@@ -456,7 +460,9 @@ export const Chips = React.memo(
 
         return (
             <>
-                <div {...rootProps}>{list}</div>
+                <div {...rootProps} key="chips">
+                    {list}
+                </div>
                 {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
             </>
         );

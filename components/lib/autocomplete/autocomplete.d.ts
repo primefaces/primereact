@@ -38,14 +38,16 @@ export interface AutoCompletePassThroughMethodOptions {
  * @extends {FormEvent}
  * @event
  */
-interface AutoCompleteChangeEvent extends FormEvent {}
+interface AutoCompleteChangeEvent<T = any> extends FormEvent<T> {
+    value: T;
+}
 
 /**
- * Custom select event.
+ * Custom select event with generic type support
  * @see {@link AutoCompleteProps.onSelect}
  * @event
  */
-interface AutoCompleteSelectEvent {
+interface AutoCompleteSelectEvent<T = any> {
     /**
      * Browser event
      */
@@ -53,16 +55,16 @@ interface AutoCompleteSelectEvent {
     /**
      * Selected option value
      */
-    value: any;
+    value: T extends any[] ? T[number] : T;
 }
 
 /**
- * Custom unselect event.
+ * Custom unselect event extending the select event
  * @see {@link AutoCompleteProps.onUnselect}
  * @extends {AutoCompleteSelectEvent}
  * @event
  */
-interface AutoCompleteUnselectEvent extends AutoCompleteSelectEvent {}
+interface AutoCompleteUnselectEvent<T = any> extends AutoCompleteSelectEvent<T> {}
 
 /**
  * Custom click event.
@@ -228,7 +230,7 @@ export interface AutoCompleteContext {
  * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
+export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref' | 'value'> {
     /**
      * Unique identifier of the element.
      */
@@ -290,7 +292,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     /**
      * Icon of the dropdown.
      */
-    dropdownIcon?: IconType<AutoCompleteProps> | undefined;
+    dropdownIcon?: IconType<AutoCompleteProps<T>> | undefined;
     /**
      * Specifies the behavior dropdown button. Default "blank" mode sends an empty string and "current" mode sends the input value.
      * @defaultValue blank
@@ -333,7 +335,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     /**
      * Template of a list item.
      */
-    itemTemplate?: React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+    itemTemplate?: React.ReactNode | ((suggestion: T, index: number) => React.ReactNode);
     /**
      * Maximum number of characters to initiate a search.
      */
@@ -367,7 +369,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     /**
      * Template of an option group item.
      */
-    optionGroupTemplate?: React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+    optionGroupTemplate?: React.ReactNode | ((suggestion: T, index: number) => React.ReactNode);
     /**
      * Style class of the overlay panel element.
      */
@@ -404,9 +406,9 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      */
     scrollHeight?: string | undefined;
     /**
-     * Template of a selected item.
+     * Template of a selected item. In multiple mode, it is used to customize the chips using a ReactNode. In single mode, it is used to customize the text using a string.
      */
-    selectedItemTemplate?: React.ReactNode | ((value: any) => React.ReactNode);
+    selectedItemTemplate?: React.ReactNode | string | undefined | null | ((value: T) => React.ReactNode | string | undefined | null);
     /**
      * Whether to show the empty message or not.
      * @defaultValue false
@@ -423,7 +425,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     /**
      * An array of suggestions to display.
      */
-    suggestions?: any[];
+    suggestions?: (T extends any[] ? T[number] : T)[];
     /**
      * Index of the element in tabbing order.
      */
@@ -449,7 +451,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     /**
      * Value of the component.
      */
-    value?: any;
+    value?: this['multiple'] extends true ? T[] : T | string | number | readonly string[] | undefined;
     /**
      * Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.
      * @type {VirtualScrollerProps}
@@ -469,7 +471,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      * Callback to invoke when autocomplete value changes.
      * @param {AutoCompleteChangeEvent} event - Custom change event.
      */
-    onChange?(event: AutoCompleteChangeEvent): void;
+    onChange?(event: AutoCompleteChangeEvent<T>): void;
     /**
      * Callback to invoke when input is cleared by the user.
      * @param {React.SyntheticEvent} event - Browser event.
@@ -523,7 +525,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      * Callback to invoke when a suggestion is selected.
      * @param {AutoCompleteSelectEvent} event - Custom select event.
      */
-    onSelect?(event: AutoCompleteSelectEvent): void;
+    onSelect?(event: AutoCompleteSelectEvent<T>): void;
     /**
      * Callback to invoke when overlay panel becomes visible.
      */
@@ -532,7 +534,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
      * Callback to invoke when a selected value is removed.
      * @param {AutoCompleteUnselectEvent} event - Custom unselect event.
      */
-    onUnselect?(event: AutoCompleteUnselectEvent): void;
+    onUnselect?(event: AutoCompleteUnselectEvent<T>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -566,7 +568,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
  *
  * @group Component
  */
-export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
+export declare class AutoComplete<T = any> extends React.Component<AutoCompleteProps<T>, any> {
     /**
      * Used to show the overlay.
      */
@@ -588,22 +590,22 @@ export declare class AutoComplete extends React.Component<AutoCompleteProps, any
     public search(event: React.SyntheticEvent, query: string, source?: 'dropdown' | 'input' | null | undefined): void;
     /**
      * Used to get container element.
-     * @return {HTMLSpanElement} Container element
+     * @return {HTMLSpanElement | null} Container element
      */
-    public getElement(): HTMLSpanElement;
+    public getElement(): HTMLSpanElement | null;
     /**
      * Used to get input element.
-     * @return {InputText} Input element
+     * @return {InputText | null} Input element
      */
-    public getInput(): typeof InputText;
+    public getInput(): typeof InputText | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
     /**
      * Used to get the options of inline virtualScroller component.
-     * @return {VirtualScroller} VirtualScroller component
+     * @return {VirtualScroller | null} VirtualScroller component
      */
-    public getVirtualScroller(): VirtualScroller;
+    public getVirtualScroller(): VirtualScroller | null;
 }

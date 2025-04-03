@@ -140,8 +140,9 @@ export const MultiSelectPanel = React.memo(
 
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+            const isItemGroup = option.group === true && props.optionGroupLabel;
 
-            if (option.group && props.optionGroupLabel) {
+            if (isItemGroup) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
@@ -298,7 +299,6 @@ export const MultiSelectPanel = React.memo(
                 {
                     ref: props.firstHiddenFocusableElementOnOverlay,
                     role: 'presentation',
-                    'aria-hidden': 'true',
                     className: 'p-hidden-accessible p-hidden-focusable',
                     tabIndex: '0',
                     onFocus: props.onFirstHiddenFocus,
@@ -312,7 +312,6 @@ export const MultiSelectPanel = React.memo(
                 {
                     ref: props.lastHiddenFocusableElementOnOverlay,
                     role: 'presentation',
-                    'aria-hidden': 'true',
                     className: 'p-hidden-accessible p-hidden-focusable',
                     tabIndex: '0',
                     onFocus: props.onLastHiddenFocus,

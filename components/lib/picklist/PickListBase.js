@@ -55,6 +55,10 @@ const styles = `
         position: relative;
     }
 
+    .p-picklist-item .p-ink {
+        pointer-events: none;
+    }
+
     .p-picklist-filter {
         position: relative;
     }

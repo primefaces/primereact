@@ -17,6 +17,7 @@ const styles = `
 @layer primereact {
     .p-breadcrumb {
         overflow-x: auto;
+        display: flex;
     }
 
     .p-breadcrumb ol {

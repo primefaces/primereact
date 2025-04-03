@@ -225,7 +225,7 @@ interface MultiSelectPanelHeaderTemplateEvent {
     /**
      * The checkbox element for selecting items.
      */
-    checkboxElement: HTMLElement;
+    checkboxElement: JSX.Element;
     /**
      * Whether the checkbox is checked.
      */
@@ -476,6 +476,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue label
      */
     filterBy?: string | undefined;
+    /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true
@@ -796,17 +801,17 @@ export declare class MultiSelect extends React.Component<MultiSelectProps, any> 
     public focus(): void;
     /**
      * Used to get container element.
-     * @return {HTMLDivElement} Container element
+     * @return {HTMLDivElement | null} Container element
      */
-    public getElement(): HTMLDivElement;
+    public getElement(): HTMLDivElement | null;
     /**
      * Used to get input element.
-     * @return {HTMLInputElement} Input element
+     * @return {HTMLInputElement | null} Input element
      */
-    public getInput(): HTMLInputElement;
+    public getInput(): HTMLInputElement | null;
     /**
      * Used to get overlay element.
-     * @return {HTMLElement} Overlay element
+     * @return {HTMLElement | null} Overlay element
      */
-    public getOverlay(): HTMLElement;
+    public getOverlay(): HTMLElement | null;
 }

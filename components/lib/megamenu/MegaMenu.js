@@ -422,7 +422,7 @@ export const MegaMenu = React.memo(
             event.preventDefault();
 
             if (horizontal) {
-                const _focusedItemInfo = focusedItemInfo;
+                let _focusedItemInfo = focusedItemInfo;
 
                 if (ObjectUtils.isNotEmpty(activeItemState) && activeItemState.key === focusedItemInfo.key) {
                     _focusedItemInfo = { index: -1, key: '', parentKey: activeItemState.key };
@@ -831,8 +831,7 @@ export const MegaMenu = React.memo(
                     href: item.url || '#',
                     className: cx('action', { item }),
                     target: item.target,
-                    tabIndex: '-1',
-                    'aria-hidden': true
+                    tabIndex: '-1'
                 },
                 getPTOptions(processedItem, 'action', index)
             );

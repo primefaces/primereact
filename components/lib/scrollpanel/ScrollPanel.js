@@ -51,6 +51,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     };
 
     const moveBar = () => {
+        if (!contentRef.current) return;
         // horizontal scroll
         const totalWidth = contentRef.current.scrollWidth;
         const ownWidth = contentRef.current.clientWidth;

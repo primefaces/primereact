@@ -321,6 +321,10 @@ export const Menu = React.memo(
         };
 
         const createSeparator = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
+
             const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
@@ -335,6 +339,10 @@ export const Menu = React.memo(
         };
 
         const createMenuItem = (item, index, parentId = null) => {
+            if (item.visible === false) {
+                return null;
+            }
+
             const menuContext = { item, index, parentId };
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
@@ -357,7 +365,7 @@ export const Menu = React.memo(
                 {
                     onClick: (event) => onItemClick(event, item, key),
                     onMouseMove: (event) => onItemMouseMove(event, key),
-                    className: cx('content')
+                    className: cx('content', { item })
                 },
                 getMenuItemPTOptions('content', menuContext)
             );
@@ -370,7 +378,6 @@ export const Menu = React.memo(
                     target: item.target,
                     tabIndex: '-1',
                     'aria-label': item.label,
-                    'aria-hidden': true,
                     'aria-disabled': item.disabled,
                     'data-p-disabled': item.disabled
                 },
@@ -390,6 +397,7 @@ export const Menu = React.memo(
             if (item.template) {
                 const defaultContentOptions = {
                     onClick: (event) => onItemClick(event, item, key),
+                    onMouseMove: (event) => onItemMouseMove(event, key),
                     className: linkClassName,
                     tabIndex: '-1',
                     labelClassName: 'p-menuitem-text',

@@ -1112,7 +1112,7 @@ export interface LocaleOptions {
         /**
          * Previous Page
          */
-        previousPageLabel?: string;
+        prevPageLabel?: string;
         /**
          * Rows per page
          */
@@ -1205,6 +1205,10 @@ export interface LocaleOptions {
          * Rotate Left
          */
         rotateLeft?: string;
+        /**
+         * Options List Label
+         */
+        listLabel?: string;
     };
 }
 

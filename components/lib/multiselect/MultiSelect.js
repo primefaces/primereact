@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useDebounce, useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SpinnerIcon } from '../icons/spinner';
 import { TimesIcon } from '../icons/times';
@@ -19,7 +19,7 @@ export const MultiSelect = React.memo(
         const props = MultiSelectBase.getProps(inProps, context);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(null);
         const [clicked, setClicked] = React.useState(false);
-        const [filterState, setFilterState] = React.useState('');
+        const [filterValue, filterState, setFilterState] = useDebounce('', props.filterDelay || 0);
         const [startRangeIndex, setStartRangeIndex] = React.useState(-1);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(props.inline);
@@ -620,9 +620,7 @@ export const MultiSelect = React.memo(
             }
 
             if (props.optionValue) {
-                const data = ObjectUtils.resolveFieldData(option, props.optionValue);
-
-                return data !== null ? data : option;
+                return ObjectUtils.resolveFieldData(option, props.optionValue);
             }
 
             return option && option.value !== undefined ? option.value : option;
@@ -815,9 +813,10 @@ export const MultiSelect = React.memo(
         const getSelectedItemsLabel = () => {
             const pattern = /{(.*?)}/;
             const selectedItemsLabel = props.selectedItemsLabel || localeOption('selectionMessage');
+            const valueLength = props.value ? props.value.length : 0;
 
             if (pattern.test(selectedItemsLabel)) {
-                return selectedItemsLabel.replace(selectedItemsLabel.match(pattern)[0], props.value.length + '');
+                return selectedItemsLabel.replace(selectedItemsLabel.match(pattern)[0], valueLength + '');
             }
 
             return selectedItemsLabel;
@@ -827,7 +826,7 @@ export const MultiSelect = React.memo(
             let label;
 
             if (!empty && !props.fixedPlaceholder) {
-                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
+                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value?.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 }
 
@@ -842,12 +841,14 @@ export const MultiSelect = React.memo(
         };
 
         const getLabelContent = () => {
+            const valueLength = props.value ? props.value.length : 0;
+
+            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && valueLength > props.maxSelectedLabels) {
+                return getSelectedItemsLabel();
+            }
+
             if (props.selectedItemTemplate) {
                 if (!empty) {
-                    if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
-                        return getSelectedItemsLabel();
-                    }
-
                     return props.value.map((val, index) => {
                         const item = ObjectUtils.getJSXElement(props.selectedItemTemplate, val);
 
@@ -859,7 +860,7 @@ export const MultiSelect = React.memo(
             }
 
             if (props.display === 'chip' && !empty) {
-                const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
+                const value = props.value.slice(0, props.maxSelectedLabels || valueLength);
 
                 return value.map((val, i) => {
                     const context = {
@@ -948,9 +949,6 @@ export const MultiSelect = React.memo(
         };
 
         const onClearIconKeyDown = (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-
             switch (event.code) {
                 case 'Space':
                 case 'NumpadEnter':
@@ -960,14 +958,13 @@ export const MultiSelect = React.memo(
                     }
 
                     updateModel(event, [], []);
+                    event.preventDefault();
+                    event.stopPropagation();
                     break;
             }
         };
 
         const onRemoveTokenIconKeyDown = (event, val) => {
-            event.preventDefault();
-            event.stopPropagation();
-
             switch (event.code) {
                 case 'Space':
                 case 'NumpadEnter':
@@ -977,6 +974,8 @@ export const MultiSelect = React.memo(
                     }
 
                     removeChip(event, val);
+                    event.preventDefault();
+                    event.stopPropagation();
                     break;
             }
         };
@@ -1066,14 +1065,6 @@ export const MultiSelect = React.memo(
             );
         };
 
-        const getInputValue = (value = []) => {
-            if (Array.isArray(value)) {
-                return value.map((val) => getLabelByValue(val)).join(', ');
-            }
-
-            return value;
-        };
-
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
@@ -1135,7 +1126,7 @@ export const MultiSelect = React.memo(
                 'aria-expanded': overlayVisibleState,
                 disabled: props.disabled,
                 tabIndex: !props.disabled ? props.tabIndex : -1,
-                value: getInputValue(props.value),
+                value: getLabel(),
                 ...ariaProps
             },
             ptm('input')
@@ -1162,7 +1153,7 @@ export const MultiSelect = React.memo(
                         {...props}
                         onClick={onPanelClick}
                         onOverlayHide={hide}
-                        filterValue={filterState}
+                        filterValue={filterValue}
                         focusedOptionIndex={focusedOptionIndex}
                         onFirstHiddenFocus={onFirstHiddenFocus}
                         onLastHiddenFocus={onLastHiddenFocus}

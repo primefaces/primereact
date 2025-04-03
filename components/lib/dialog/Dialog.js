@@ -116,7 +116,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             dragging.current = true;
             lastPageX.current = event.pageX;
             lastPageY.current = event.pageY;
-            dialogRef.current.style.margin = '0';
             DomHandler.addClass(document.body, 'p-unselectable-text');
 
             props.onDragStart && props.onDragStart(event);
