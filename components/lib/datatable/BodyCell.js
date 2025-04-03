@@ -335,7 +335,6 @@ export const Cell = (props) => {
         if (getColumnProp('frozen')) props.updateStickyPosition(elementRef, getColumnProp('frozen'), getColumnProp('alignFrozen'), styleObjectState, setStyleObjectState);
 
         if (props.editMode === 'cell' || props.editMode === 'row') props.focusOnElement(focusTimeout, editingState, elementRef, keyHelperRef);
-
     }, [props.editMode, props.editing, editingState]); // eslint-disable-line react-hooks/exhaustive-deps
 
     React.useEffect(() => {
@@ -684,8 +683,7 @@ export const RadioCheckCell = React.memo(
         return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
-        const keysToCompare = ['isRowSelected', 'field', 'allowCellSelection', 'isCellSelected', 'editMode',
-          'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData'];
+        const keysToCompare = ['isRowSelected', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }
@@ -698,8 +696,7 @@ export const BodyCell = React.memo(
         return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
-        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected',
-          'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData'];
+        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }
