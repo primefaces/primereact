@@ -3,6 +3,7 @@ import BasicDoc from './basic/doc';
 import DisabledDoc from './disabled/doc';
 import DynamicDoc from './dynamic/doc';
 import FilledDoc from './filled/doc';
+import GroupDoc from './group/doc';
 import ImportDoc from './import/doc';
 import IndeterminateDoc from './indeterminate/doc';
 import InvalidDoc from './invalid/doc';
@@ -19,11 +20,11 @@ const features = [
         label: 'Basic',
         component: BasicDoc
     },
-    /*{
+    {
         id: 'group',
         label: 'Group',
         component: GroupDoc
-    },*/
+    },
     {
         id: 'dynamic',
         label: 'Dynamic',

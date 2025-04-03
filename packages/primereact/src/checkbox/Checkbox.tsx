@@ -8,6 +8,7 @@ import type { CheckboxProps } from '@primereact/types/shared/checkbox';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './Checkbox.props';
+import { CheckboxGroup } from './group';
 
 export const Checkbox = (inProps: CheckboxProps) => {
     const checkbox = useCheckbox(inProps);
@@ -19,6 +20,7 @@ export const Checkbox = (inProps: CheckboxProps) => {
         ptmi,
         ptm,
         cx,
+        getParent,
         // element refs
         elementRef,
         // methods
@@ -26,6 +28,10 @@ export const Checkbox = (inProps: CheckboxProps) => {
         onFocus,
         onBlur
     } = instance;
+
+    const checkboxGroup = getParent('CheckboxGroup');
+
+    checkbox.setCheckboxGroup(checkboxGroup);
 
     const getPTOptions = (key: string) => {
         const _ptm = key === 'root' ? ptmi : ptm;
@@ -108,3 +114,4 @@ export const Checkbox = (inProps: CheckboxProps) => {
 };
 
 Checkbox.displayName = 'PrimeReact.Checkbox';
+Checkbox.Group = CheckboxGroup;

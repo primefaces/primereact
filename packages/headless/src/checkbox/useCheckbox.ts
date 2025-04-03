@@ -19,9 +19,23 @@ export const useCheckbox = withHeadless({
             indeterminate: indeterminateState
         };
 
+        const checkboxGroupRef = React.useRef<any>(null);
+
         // element refs
 
         // methods
+        const setCheckboxGroup = (checkboxGroup: any) => {
+            if (!checkboxGroupRef.current && checkboxGroup) {
+                const { defaultValue, value, onValueChange } = checkboxGroup.props;
+                const computedValue = onValueChange ? value : defaultValue;
+                const isChecked = computedValue ? computedValue.includes(props.value) : false;
+
+                setCheckedState(isChecked);
+            }
+
+            checkboxGroupRef.current = checkboxGroup;
+        };
+
         const onChange = (event: React.FormEventHandler<HTMLInputElement>) => {
             if (!props.disabled && !props.readOnly) {
                 const computedChecked = indeterminateState ? props.trueValue : checked ? props.falseValue : props.trueValue;
@@ -39,6 +53,19 @@ export const useCheckbox = withHeadless({
                           }
                         : computedChecked
                 );
+
+                if (checkboxGroupRef.current) {
+                    const { value, onValueChange } = checkboxGroupRef.current.props;
+
+                    if (onValueChange) {
+                        const newValue = value.includes(props.value) ? (value || []).filter((v: any) => v !== props.value) : [...(value || []), props.value];
+
+                        onValueChange({
+                            originalEvent: event,
+                            value: newValue
+                        });
+                    }
+                }
             }
         };
 
@@ -57,6 +84,7 @@ export const useCheckbox = withHeadless({
             // element refs
 
             // methods
+            setCheckboxGroup,
             onChange,
             onFocus,
             onBlur

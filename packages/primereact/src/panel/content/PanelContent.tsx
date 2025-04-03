@@ -19,7 +19,7 @@ export const PanelContent = (inProps: PanelContentProps) => {
     );
 
     return (
-        <ComponentProvider pIf={props.pIf}>
+        <ComponentProvider pIf={props.pIf} instance={instance}>
             <Component as={props.as || 'div'} {...contentProps}>
                 {props.children}
             </Component>
