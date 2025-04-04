@@ -35,10 +35,13 @@
                 {
                     "name": "Misc",
                     "children": [
-
                         {
                             "name": "Avatar",
                             "to": "/avatar"
+                        },
+                        {
+                            "name": "Badge",
+                            "to": "/badge"
                         }
                     ]
                 }
