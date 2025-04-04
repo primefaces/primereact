@@ -83,7 +83,7 @@ export const Cell = (props) => {
         const bodyStyle = getColumnProp('bodyStyle');
         const columnStyle = getColumnProp('style');
 
-        return getColumnProp('frozen') ? Object.assign({}, columnStyle, bodyStyle, styleObjectState) : Object.assign({}, columnStyle, bodyStyle);
+        return props.frozenCol ? Object.assign({}, columnStyle, bodyStyle, styleObjectState) : Object.assign({}, columnStyle, bodyStyle);
     };
 
     const getCellParams = () => {
@@ -332,10 +332,10 @@ export const Cell = (props) => {
     };
 
     React.useEffect(() => {
-        if (getColumnProp('frozen')) props.updateStickyPosition(elementRef, getColumnProp('frozen'), getColumnProp('alignFrozen'), styleObjectState, setStyleObjectState);
+        if (props.frozenCol) props.updateStickyPosition(elementRef, props.frozenCol, props.alignFrozenCol, styleObjectState, setStyleObjectState);
 
         if (props.editMode === 'cell' || props.editMode === 'row') props.focusOnElement(focusTimeout, editingState, elementRef, keyHelperRef);
-    }, [props.editMode, props.editing, editingState]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [props.editMode, props.editing, editingState, props.frozenCol, props.alignFrozenCol]); // eslint-disable-line react-hooks/exhaustive-deps
 
     React.useEffect(() => {
         if (props.editMode === 'row' && props.editing !== editingState) {
@@ -399,7 +399,7 @@ export const Cell = (props) => {
         const header = getColumnProp('header');
         const body = getColumnProp('body');
         const editor = getColumnProp('editor');
-        const frozen = getColumnProp('frozen');
+        const frozen = props.frozenCol;
         const align = getColumnProp('align');
         const value = props.resolveFieldData();
         const columnBodyOptions = { column: props.column, field: props.field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
