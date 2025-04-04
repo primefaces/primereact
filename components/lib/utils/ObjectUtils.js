@@ -594,7 +594,7 @@ export default class ObjectUtils {
         if (!objA || !objB) return true;
         if (currentDepth > maxDepth) return true;
 
-        if (typeof aValue !== typeof bValue) return false;
+        if (typeof objA !== typeof objB) return false;
 
         const aKeys = Object.keys(objA);
         const bKeys = Object.keys(objB);
