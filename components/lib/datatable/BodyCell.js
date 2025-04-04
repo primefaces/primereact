@@ -92,7 +92,7 @@ export const BodyCell = React.memo(
             const bodyStyle = getColumnProp('bodyStyle');
             const columnStyle = getColumnProp('style');
 
-            return getColumnProp('frozen') ? Object.assign({}, columnStyle, bodyStyle, styleObjectState) : Object.assign({}, columnStyle, bodyStyle);
+            return props.frozenCol ? Object.assign({}, columnStyle, bodyStyle, styleObjectState) : Object.assign({}, columnStyle, bodyStyle);
         };
 
         const getCellParams = () => {
@@ -237,9 +237,9 @@ export const BodyCell = React.memo(
         };
 
         const updateStickyPosition = () => {
-            if (getColumnProp('frozen')) {
+            if (props.frozenCol) {
                 let styleObject = { ...styleObjectState };
-                let align = getColumnProp('alignFrozen');
+                let align = props.alignFrozenCol;
 
                 if (align === 'right') {
                     let right = 0;
@@ -481,16 +481,14 @@ export const BodyCell = React.memo(
         };
 
         React.useEffect(() => {
-            if (getColumnProp('frozen')) {
+            if (props.frozenCol) {
                 updateStickyPosition();
             }
-        });
 
-        React.useEffect(() => {
             if (props.editMode === 'cell' || props.editMode === 'row') {
                 focusOnElement();
             }
-        }, [props.editMode, props.editing, editingState]); // eslint-disable-line react-hooks/exhaustive-deps
+        }, [props.editMode, props.editing, editingState, props.frozenCol]); // eslint-disable-line react-hooks/exhaustive-deps
 
         React.useEffect(() => {
             if (props.editMode === 'row' && props.editing !== editingState) {
@@ -554,7 +552,7 @@ export const BodyCell = React.memo(
             const header = getColumnProp('header');
             const body = getColumnProp('body');
             const editor = getColumnProp('editor');
-            const frozen = getColumnProp('frozen');
+            const frozen = props.frozenCol;
             const align = getColumnProp('align');
             const value = resolveFieldData();
             const columnBodyOptions = { column: props.column, field: props.field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps };
@@ -832,7 +830,7 @@ export const BodyCell = React.memo(
         return getVirtualScrollerOption('loading') ? createLoading() : createElement();
     },
     (prevProps, nextProps) => {
-        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'isRowSelected', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode'];
+        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'isRowSelected', 'expanded', 'editingMeta', 'rowData', 'column.selectionMode', 'frozenCol', 'alignFrozenCol'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }

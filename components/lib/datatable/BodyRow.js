@@ -452,6 +452,8 @@ export const BodyRow = React.memo((props) => {
                         expanded={props.expanded}
                         expandedRowIcon={props.expandedRowIcon}
                         frozenRow={props.frozenRow}
+                        frozenCol={getColumnProp(col, 'frozen')}
+                        alignFrozenCol={getColumnProp(col, 'alignFrozen')}
                         index={i}
                         isSelectable={props.isSelectable}
                         onCheckboxChange={onCheckboxChange}
