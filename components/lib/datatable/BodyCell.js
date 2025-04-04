@@ -696,7 +696,7 @@ export const BodyCell = React.memo(
         return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
-        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData'];
+        const keysToCompare = ['field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData', 'frozenCol', 'alignFrozenCol'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
     }
