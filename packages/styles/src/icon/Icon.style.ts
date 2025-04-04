@@ -1,5 +1,4 @@
 import { createStyles } from '@primereact/styles/utils';
-import { style } from '@primeuix/styles/base';
 
 const css = `
 .p-icon {
@@ -47,6 +46,5 @@ export const classes = {
 export const styles = createStyles({
     name: 'icon',
     css,
-    style,
     classes
 });

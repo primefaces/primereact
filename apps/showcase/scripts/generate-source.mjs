@@ -102,20 +102,20 @@ export function run() {
 
         watcher
             .on('add', async function (path) {
-                console.info('✅File\x1b[32m', path, '\x1b[0m has been added');
+                //console.info('✅File\x1b[32m', path, '\x1b[0m has been added');
 
                 await generate(path);
             })
             .on('change', async function (path) {
-                console.info('🔄File\x1b[34m', path, '\x1b[0m has been changed');
+                //console.info('🔄File\x1b[34m', path, '\x1b[0m has been changed');
 
                 await generate(path);
             })
             .on('unlink', function (path) {
-                console.warn('🈁File\x1b[90m', path, '\x1b[0m has been removed');
+                //console.warn('🈁File\x1b[90m', path, '\x1b[0m has been removed');
             })
             .on('error', function (error) {
-                console.error('⛔Error happened', error);
+                //console.error('⛔Error happened', error);
             });
     });
 }
