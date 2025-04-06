@@ -285,13 +285,15 @@ export const Dropdown = React.memo(
                     onArrowLeftKey(event, true);
                     break;
 
-                case 'Escape':
                 case 'Enter':
                 case 'NumpadEnter':
                     onEnterKey(event);
                     event.preventDefault();
                     break;
 
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
                 default:
                     break;
             }
