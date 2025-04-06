@@ -537,6 +537,7 @@ export const Mention = React.memo(
                 style: props.inputStyle,
                 ...inputProps,
                 unstyled: props.unstyled,
+                variant: props.variant,
                 autoResize: props.autoResize,
                 onFocus: onFocus,
                 onBlur: onBlur,

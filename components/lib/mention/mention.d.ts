@@ -235,6 +235,11 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      */
     trigger?: string | string[] | undefined;
     /**
+     * Specifies the input variant of the component.
+     * @defaultValue outlined
+     */
+    variant?: 'outlined' | 'filled' | undefined;
+    /**
      * Uses to pass attributes to DOM elements inside the component.
      * @type {MentionPassThroughOptions}
      */
