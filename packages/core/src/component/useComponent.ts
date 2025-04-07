@@ -13,10 +13,13 @@ export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, d
     const { config, locale, passthrough, theme, parent } = usePrimeReact();
 
     const { props, attrs } = useProps(inProps, { ...globalProps, ...defaultProps });
-    const ref = React.useRef<typeof props.ref>(props.ref ?? null);
-    const name = props?.__TYPE as string | undefined;
+    const ref = React.useRef(props.ref ?? null);
+    const name = props?.__TYPE;
 
-    const common: Partial<ComponentInstance<typeof props, I, typeof parent>> = {
+    type CommonKeys = 'ref' | 'name' | 'props' | 'attrs' | 'parent' | 'inProps' | '$primereact' | 'getParent';
+    type CommonComponentInstance = Pick<ComponentInstance<typeof props, I, typeof parent>, CommonKeys>;
+
+    const common: CommonComponentInstance = {
         ref,
         name,
         props,
@@ -36,23 +39,24 @@ export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, d
 
     const computed = {
         $attrSelector,
-        ...resolve(setup, common),
+        ...(resolve(setup, common) as S),
         ...common
     };
 
     const ptx = useComponentPT(computed);
     const stx = useComponentStyle(computed, props.styles || styles);
 
-    const instance = {
+    const instance: ComponentInstance<typeof props, I, typeof parent> & S = {
         ...computed,
         ...ptx,
-        ...stx
+        ...stx,
+        $pc: {}
     };
 
     // Inject parent component instances and self instance
     instance.$pc = {
         ...parent?.$pc,
-        [`${name}`]: instance
+        [`${name}`]: instance as ComponentInstance
     };
 
     React.useEffect(() => {
@@ -61,5 +65,5 @@ export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, d
 
     React.useImperativeHandle(ref, () => instance, [instance]);
 
-    return instance as ComponentInstance<typeof props, I, typeof parent>;
+    return instance;
 };

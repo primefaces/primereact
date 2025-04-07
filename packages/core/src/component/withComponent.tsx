@@ -1,16 +1,16 @@
-import type { StylesOptions } from '@primereact/types/styles';
+import { ComponentInstance, withComponentProps } from '@primereact/types/core';
 import * as React from 'react';
 import { ComponentProvider } from './Component.context';
 import { useComponent } from './useComponent';
 
-export const withComponent = <P,>({ setup, render, defaultProps, styles }: { setup?: any; render?: any; defaultProps?: any; styles?: StylesOptions }): React.FC<React.PropsWithChildren<P>> => {
-    return (inProps?: P) => {
+export const withComponent = <I, D extends { __TYPE?: string }, S>({ setup, render, defaultProps, styles }: withComponentProps<D, S>): React.FC<React.PropsWithChildren<I>> => {
+    return (inProps?: I) => {
         const instance = useComponent(inProps, defaultProps, styles, setup);
         const { props } = instance;
 
         return (
             <ComponentProvider pIf={props.pIf} instance={instance}>
-                {render?.(instance)}
+                {render?.(instance as ComponentInstance)}
             </ComponentProvider>
         );
     };

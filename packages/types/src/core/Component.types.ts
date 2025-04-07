@@ -103,7 +103,7 @@ export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Reco
      * @param type - The type of the parent instance to find.
      * @returns {ComponentInstance | undefined} - The found parent instance or undefined if not found.
      */
-    getParent: <U extends ComponentInstance>(type?: string) => U extends ComponentInstance<infer PParent, infer IParent, infer TParent> ? ComponentInstance<PParent, IParent, TParent> | undefined : undefined;
+    getParent: (type?: string) => ComponentInstance | undefined;
 } & {
     /**
      * Finds attributes of the component using the key in pass-through options.
@@ -156,7 +156,7 @@ export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Reco
     /**
      * The instance to load styles.
      */
-    $styles: Record<string, unknown> | undefined;
+    $style: Record<string, unknown> | undefined;
 } & {
     /**
      * Defines parent components instances.
@@ -168,5 +168,12 @@ export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Reco
  * The setup callback function or options.
  */
 export declare type withComponentSetup<S, I> = S | ((instance: I) => S) | undefined;
+
+export declare type withComponentProps<D, S> = {
+    setup?: withComponentSetup<S, unknown>;
+    render?: (instance: ComponentInstance) => React.ReactNode;
+    defaultProps?: D;
+    styles?: StylesOptions;
+};
 
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;
