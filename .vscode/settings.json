@@ -5,6 +5,7 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "javascript.referencesCodeLens.enabled": true,
+    "eslint.useFlatConfig": true,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true

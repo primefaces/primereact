@@ -31,10 +31,11 @@
         "build:showcase": "pnpm --filter showcase build",
         "build:apidoc": "pnpm --filter showcase build:docs",
         "dev": "pnpm --filter showcase dev",
+        "dev:scan": "pnpm --filter showcase scan",
         "type:check": "pnpm --filter './packages/*' typecheck",
         "security:check": "pnpm audit --prod --audit-level high",
-        "format": "prettier --write \"**/*.{js,mjs,ts,tsx,mts,d.ts}\" --cache",
-        "format:check": "prettier --check \"**/*.{js,mjs,ts,tsx,mts,d.ts}\"",
+        "format": "prettier --write \"**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}\" --cache",
+        "format:check": "prettier --check \"**/*.{js,jsx,mjs,ts,tsx,mts,d.ts\"",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
         "test:unit": "pnpm --filter primereact test:unit"
@@ -53,6 +54,7 @@
         "lint-staged": "^15.4.3",
         "pnpm": "9.6.0",
         "prettier": "^3.4.2",
+        "react-scan": "0.3.3",
         "rimraf": "^6.0.1",
         "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
@@ -65,6 +67,6 @@
     },
     "packageManager": "pnpm@9.6.0",
     "lint-staged": {
-        "**/*.{js,mjs,ts,tsx,mts,d.ts}": ["prettier --write"]
+        "**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}": ["prettier --write"]
     }
 }

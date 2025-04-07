@@ -7,6 +7,7 @@ import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './Avatar.props';
 import { AvatarGroup } from './group';
+
 export const Avatar = (inProps: AvatarProps) => {
     const avatar = useAvatar(inProps);
     const instance = useComponent(inProps, defaultProps, styles, avatar);
@@ -22,6 +23,7 @@ export const Avatar = (inProps: AvatarProps) => {
         // methods
         onError
     } = instance;
+
     const getPTOptions = (key: string) => {
         const _ptm = key === 'root' ? ptmi : ptm;
 
@@ -29,22 +31,27 @@ export const Avatar = (inProps: AvatarProps) => {
             context: {}
         });
     };
+
     const createLabelElement = () => {
         if (!props?.label) return;
+
         const labelProps = mergeProps(
             {
                 className: cx('label')
             },
             getPTOptions('label')
         );
+
         return (
             <span data-taner {...labelProps}>
                 {props.label}
             </span>
         );
     };
+
     const createImageElement = () => {
         if (!props?.image) return;
+
         const imageProps = mergeProps(
             {
                 className: cx('image'),
@@ -52,11 +59,13 @@ export const Avatar = (inProps: AvatarProps) => {
             },
             getPTOptions('image')
         );
+
         return <img {...imageProps} />;
     };
 
     const createIconElement = () => {
         if (!props?.icon) return;
+
         const isString = typeof props.icon === 'string';
         const iconProps = mergeProps(
             {
@@ -64,6 +73,7 @@ export const Avatar = (inProps: AvatarProps) => {
             },
             getPTOptions('icon')
         );
+
         return <span {...iconProps}>{isString ? null : props.icon}</span>;
     };
 
@@ -78,7 +88,9 @@ export const Avatar = (inProps: AvatarProps) => {
         },
         ptmi('root')
     );
+
     console.log(rootProps);
+
     return (
         <ComponentProvider pIf={props.pIf} instance={instance}>
             <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>

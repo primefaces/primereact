@@ -25,7 +25,6 @@
                 {
                     "name": "Panel",
                     "children": [
-
                         {
                             "name": "Panel",
                             "to": "/panel"
@@ -35,7 +34,6 @@
                 {
                     "name": "Misc",
                     "children": [
-
                         {
                             "name": "Avatar",
                             "to": "/avatar"
