@@ -684,9 +684,9 @@ export const TreeSelect = React.memo(
 
         const createFilterElement = () => {
             if (props.filter) {
-                let filterValue = props.onFilterValueChange ? props.filterValue : filteredValue;
+                let newValue = props.onFilterValueChange ? props.filterValue : filterValue;
 
-                filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
+                newValue = ObjectUtils.isNotEmpty(newValue) ? newValue : '';
                 const filterContainerProps = mergeProps(
                     {
                         className: cx('filterContainer')
@@ -697,7 +697,7 @@ export const TreeSelect = React.memo(
                     {
                         ref: filterInputRef,
                         type: 'text',
-                        value: filterValue,
+                        value: newValue,
                         autoComplete: 'off',
                         className: cx('filter'),
                         placeholder: props.filterPlaceholder,
