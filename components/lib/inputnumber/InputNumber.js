@@ -709,8 +709,12 @@ export const InputNumber = React.memo(
                     newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
                     updateValue(event, newValueStr, text, 'insert');
                 } else if (decimalCharIndex === -1 && (maxFractionDigits || props.maxFractionDigits)) {
-                    newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
-                    updateValue(event, newValueStr, text, 'insert');
+                    const allowedDecimal = inputMode !== 'numeric' || (inputMode === 'numeric' && (props.min || props.max));
+
+                    if (allowedDecimal) {
+                        newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
+                        updateValue(event, newValueStr, text, 'insert');
+                    }
                 }
             } else {
                 const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
