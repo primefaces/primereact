@@ -710,6 +710,7 @@ export const InputNumber = React.memo(
                     updateValue(event, newValueStr, text, 'insert');
                 } else if (decimalCharIndex === -1 && (maxFractionDigits || props.maxFractionDigits)) {
                     const allowedDecimal = inputMode !== 'numeric' || (inputMode === 'numeric' && (props.min || props.max));
+
                     if (allowedDecimal) {
                         newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
                         updateValue(event, newValueStr, text, 'insert');
