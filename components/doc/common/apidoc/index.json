@@ -43487,7 +43487,7 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
-                            "name": "readonly",
+                            "name": "readOnly",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
