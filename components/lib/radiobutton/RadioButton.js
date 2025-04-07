@@ -26,7 +26,7 @@ export const RadioButton = React.memo(
         };
 
         const onChange = (event) => {
-            if (props.disabled || props.readonly) {
+            if (props.disabled || props.readOnly) {
                 return;
             }
 
@@ -136,7 +136,7 @@ export const RadioButton = React.memo(
                     onBlur: onBlur,
                     onChange: onChange,
                     disabled: props.disabled,
-                    readOnly: props.readonly,
+                    readOnly: props.readOnly,
                     required: props.required,
                     tabIndex: props.tabIndex,
                     className: cx('input'),
