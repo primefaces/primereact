@@ -37,6 +37,10 @@
                         {
                             "name": "Avatar",
                             "to": "/avatar"
+                        },
+                        {
+                            "name": "Badge",
+                            "to": "/badge"
                         }
                     ]
                 }
