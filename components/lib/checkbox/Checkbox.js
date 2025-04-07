@@ -34,7 +34,7 @@ export const Checkbox = React.memo(
         };
 
         const onChange = (event) => {
-            if (props.disabled || props.readonly) {
+            if (props.disabled || props.readOnly) {
                 return;
             }
 
