@@ -1,6 +1,8 @@
+import * as HeadlessCheckbox from '@primereact/headless/checkbox';
 import type { CheckboxProps } from '@primereact/types/shared/checkbox';
 
 export const defaultProps: CheckboxProps = {
+    ...HeadlessCheckbox.defaultProps,
     __TYPE: 'Checkbox',
     name: undefined,
     value: undefined,

@@ -69,14 +69,6 @@ export const useCheckbox = withHeadless({
             }
         };
 
-        const onFocus = (event: React.FocusEventHandler<HTMLInputElement>) => {
-            props.onFocus?.(event);
-        };
-
-        const onBlur = (event: React.FocusEventHandler<HTMLInputElement>) => {
-            props.onBlur?.(event);
-        };
-
         // effects
 
         return {
@@ -85,9 +77,7 @@ export const useCheckbox = withHeadless({
 
             // methods
             setCheckboxGroup,
-            onChange,
-            onFocus,
-            onBlur
+            onChange
         };
     },
     defaultProps

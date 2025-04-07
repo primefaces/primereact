@@ -1,11 +1,26 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
-import { useCheckboxChangeEvent } from './useCheckbox.types';
+import { BaseComponentProps } from '..';
+import { useCheckboxProps } from './useCheckbox.types';
 
-export interface CheckboxProps extends GlobalComponentProps {
+/**
+ * Checkbox component props.
+ *
+ * @extends {BaseComponentProps<useCheckboxProps, 'div'>}
+ */
+export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'Checkbox';
-    defaultChecked?: boolean | undefined;
-    checked?: boolean | undefined;
+    /**
+     * Defines the size of the checkbox.
+     */
     size?: 'small' | 'normal' | 'large' | undefined;
-    onCheckedChange?: (event: useCheckboxChangeEvent) => void;
-    indeterminate?: boolean | undefined;
+    /**
+     * Callback function that is called when the checkbox is focused.
+     */
+    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Callback function that is called when the checkbox loses focus.
+     */
+    onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }

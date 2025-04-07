@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+/**
+ * Event fired when the checkbox's checked state changes.
+ */
 export interface useCheckboxChangeEvent {
     /**
      * The original event that triggered the change.
@@ -8,7 +11,7 @@ export interface useCheckboxChangeEvent {
     /**
      * The value of the checkbox.
      */
-    value: any;
+    value: unknown;
     /**
      * The checked state of the checkbox.
      */
@@ -26,8 +29,14 @@ export interface useCheckboxProps {
     /**
      * Value of the checkbox.
      */
-    value?: any;
+    value?: unknown;
+    /**
+     * The default value for the input when not controlled by `checked` and `onCheckedChange`.
+     */
     defaultChecked?: boolean | undefined;
+    /**
+     * When present, it specifies the input's checked state.
+     */
     checked?: boolean | undefined;
     /**
      * When present, it specifies input state as indeterminate.
@@ -39,18 +48,23 @@ export interface useCheckboxProps {
      * @default false
      */
     readOnly?: boolean | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
     disabled?: boolean | undefined;
     /**
      * Value in checked state.
      * @default true
      */
-    trueValue?: any;
+    trueValue?: boolean | string | number | undefined;
     /**
      * Value in unchecked state.
      * @default false
      */
-    falseValue?: any;
+    falseValue?: boolean | string | number | undefined;
+    /**
+     * Callback fired when the checkbox's checked state changes.
+     */
     onCheckedChange?: (event: useCheckboxChangeEvent) => void;
-    onFocus?: (event: React.FocusEventHandler<HTMLInputElement>) => void;
-    onBlur?: (event: React.FocusEventHandler<HTMLInputElement>) => void;
 }

@@ -24,9 +24,7 @@ export const Checkbox = (inProps: CheckboxProps) => {
         // element refs
         elementRef,
         // methods
-        onChange,
-        onFocus,
-        onBlur
+        onChange
     } = instance;
 
     const checkboxGroup = getParent('CheckboxGroup');
@@ -62,8 +60,8 @@ export const Checkbox = (inProps: CheckboxProps) => {
                 'aria-label': props.ariaLabel,
                 'aria-invalid': props.invalid || undefined,
                 'aria-checked': state.indeterminate ? 'mixed' : undefined,
-                onFocus,
-                onBlur,
+                onFocus: props.onFocus,
+                onBlur: props.onBlur,
                 onChange
             },
             getPTOptions('input')
