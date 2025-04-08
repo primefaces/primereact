@@ -44,16 +44,6 @@ export interface useCheckboxProps {
      */
     indeterminate?: boolean | undefined;
     /**
-     * When present, it specifies that an input field is read-only.
-     * @default false
-     */
-    readOnly?: boolean | undefined;
-    /**
-     * When present, it specifies that the element should be disabled.
-     * @default false
-     */
-    disabled?: boolean | undefined;
-    /**
      * Value in checked state.
      * @default true
      */
@@ -63,6 +53,16 @@ export interface useCheckboxProps {
      * @default false
      */
     falseValue?: boolean | string | number | undefined;
+    /**
+     * When present, it specifies that an input field is read-only.
+     * @default false
+     */
+    readOnly?: boolean | undefined;
+    /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
     /**
      * Callback fired when the checkbox's checked state changes.
      */

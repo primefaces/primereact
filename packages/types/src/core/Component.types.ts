@@ -96,7 +96,7 @@ export interface ComponentProviderProps {
  * @template I - The type of the base component props that are passed by the user.
  * @template T - The type of the parent component instance.
  */
-export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, T = unknown> = Instance<P, I, T> & {
+export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, T = unknown, S = Record<PropertyKey, unknown>> = Instance<P, I, T> & {
     /**
      * Finds parent instance of the component.
      *
@@ -162,16 +162,19 @@ export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Reco
      * Defines parent components instances.
      */
     $pc: Record<string, ComponentInstance>;
-} & Record<PropertyKey, unknown>;
+} & S;
+
+export declare type CommonKeys = 'ref' | 'name' | 'props' | 'attrs' | 'parent' | 'inProps' | '$primereact' | 'getParent';
+export declare type CommonComponentInstance<P, I, T> = Pick<ComponentInstance<P, I, T>, CommonKeys>;
 
 /**
  * The setup callback function or options.
  */
-export declare type withComponentSetup<S, I> = S | ((instance: I) => S) | undefined;
+export declare type withComponentSetup<D, I, S> = S | ((instance: CommonComponentInstance<D, I, unknown>) => S) | undefined;
 
-export declare type withComponentProps<D, S> = {
-    setup?: withComponentSetup<S, unknown>;
-    render?: (instance: ComponentInstance) => React.ReactNode;
+export declare type withComponentProps<D, I, S> = {
+    setup?: withComponentSetup<D, I, S>;
+    render?: (instance: ComponentInstance<D, I, unknown, S>) => React.ReactNode;
     defaultProps?: D;
     styles?: StylesOptions;
 };

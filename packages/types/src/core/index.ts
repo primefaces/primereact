@@ -45,7 +45,7 @@ export declare type Instance<P = Record<PropertyKey, unknown>, I = Record<Proper
     /**
      * The component state.
      */
-    state?: Record<PropertyKey, unknown>;
+    state: Record<PropertyKey, unknown>;
     /**
      * The parent component instance.
      */
