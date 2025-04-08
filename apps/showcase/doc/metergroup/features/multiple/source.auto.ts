@@ -1,0 +1,7 @@
+/****************************************************************************
+****************** PrimeReact Demo Source (Auto-Generated) ******************
+*****************************************************************************/
+
+export const source = {
+    "code": "import { MeterGroup } from 'primereact/metergroup';\n\nexport default function MultipleDemo() {\n    const values = [\n        { label: 'Apps', color: '#34d399', value: 16 },\n        { label: 'Messages', color: '#fbbf24', value: 8 },\n        { label: 'Media', color: '#60a5fa', value: 24 },\n        { label: 'System', color: '#c084fc', value: 10 }\n    ];\n\n    return (\n        <div className=\"card\">\n            <MeterGroup>\n                <MeterGroup.Meters>\n                    {values.map((value, index) => (\n                        <MeterGroup.Meter key={`meter_${index}`} value={value} />\n                    ))}\n                </MeterGroup.Meters>\n                <MeterGroup.Labels>\n                    {values.map((value, index) => (\n                        <MeterGroup.Label key={`legend_${index}`}>\n                            <MeterGroup.Marker color={value.color} />\n                            <MeterGroup.Text>\n                                {value.label} ({value.value}%)\n                            </MeterGroup.Text>\n                        </MeterGroup.Label>\n                    ))}\n                </MeterGroup.Labels>\n            </MeterGroup>\n        </div>\n    );\n}\n"
+};
