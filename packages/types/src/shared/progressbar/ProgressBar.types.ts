@@ -1,11 +1,15 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import { BaseComponentProps } from '..';
+import { useProgressBarProps } from './useProgressBar.types';
 
-export interface ProgressBarProps extends GlobalComponentProps {
-    readonly __TYPE?: 'ProgressBar';
+/**
+ * ProgressBar component props.
+ */
+export interface ProgressBarProps extends BaseComponentProps<useProgressBarProps, 'div'> {
     /**
-     * Current value of the progress.
+     * The type of the component.
      */
-    value?: number | undefined;
+    readonly __TYPE?: 'ProgressBar';
+
     /**
      * Defines the mode of the progress
      * @defaultValue determinate
@@ -17,6 +21,9 @@ export interface ProgressBarProps extends GlobalComponentProps {
     style?: React.CSSProperties | undefined;
 }
 
-export interface ProgressBarLabelProps extends GlobalComponentProps {
+export interface ProgressBarLabelProps extends BaseComponentProps<{ readonly __TYPE: 'ProgressBarLabel' }, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'ProgressBarLabel';
 }

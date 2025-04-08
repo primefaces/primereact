@@ -1,32 +1,29 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
-import type { MeterGroupMarkerProps } from '@primereact/types/shared/metergroup';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultLabelProps } from './MeterGroupMarker.props';
+import { defaultProps } from './MeterGroupMarker.props';
 
-export const MeterGroupMarker = (inProps: MeterGroupMarkerProps) => {
-    const instance = useComponent(inProps, defaultLabelProps);
-    const { props, getParent } = instance;
-    const metergroup = getParent('MeterGroup');
+export const MeterGroupMarker = withComponent({
+    defaultProps,
+    render: (instance) => {
+        const { props, getParent } = instance;
+        const metergroup = getParent('MeterGroup');
 
-    const markerProps = mergeProps(
-        {
-            className: metergroup?.cx('labelmarker'),
-            style: {
-                backgroundColor: props.color
-            }
-        },
-        metergroup?.ptm('labelmarker')
-    );
+        const markerProps = mergeProps(
+            {
+                className: metergroup?.cx('labelmarker'),
+                style: {
+                    backgroundColor: props.color
+                }
+            },
+            metergroup?.ptm('labelmarker')
+        );
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
+        return (
             <Component as={props.as || 'span'} {...markerProps}>
                 {props.children}
             </Component>
-        </ComponentProvider>
-    );
-};
-
-MeterGroupMarker.displayName = 'PrimeReact.MeterGroupMarker';
+        );
+    }
+});

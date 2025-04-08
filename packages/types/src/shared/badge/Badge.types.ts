@@ -1,11 +1,14 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import { BaseComponentProps } from '..';
+import { useBadgeProps } from './useBadge.types';
 
-export interface BadgeProps extends GlobalComponentProps {
-    readonly __TYPE?: 'Badge';
+/**
+ * Badge component props.
+ */
+export interface BadgeProps extends BaseComponentProps<useBadgeProps, 'span'> {
     /**
-     * Value to display inside the badge.
+     * The type of the component.
      */
-    value?: string | number | undefined;
+    readonly __TYPE?: 'Badge';
     /**
      * Severity type of the badge.
      */

@@ -1,11 +1,8 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import { BaseComponentProps } from '..';
+import { useOverlayBadgeProps } from './useOverlayBadge.types';
 
-export interface OverlayBadgeProps extends GlobalComponentProps {
+export interface OverlayBadgeProps extends BaseComponentProps<useOverlayBadgeProps, 'div'> {
     readonly __TYPE?: 'OverlayBadge';
-    /**
-     * Value to display inside the badge.
-     */
-    value?: string | number | undefined;
     /**
      * Severity type of the badge.
      */
