@@ -113,8 +113,8 @@ export const Checkbox = withComponent({
                 {box}
             </Component>
         );
+    },
+    components: {
+        Group: CheckboxGroup
     }
 });
-
-Checkbox.displayName = 'PrimeReact.Checkbox';
-Checkbox.Group = CheckboxGroup;

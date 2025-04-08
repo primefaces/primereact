@@ -3,8 +3,6 @@ import { useCheckboxProps } from './useCheckbox.types';
 
 /**
  * Checkbox component props.
- *
- * @extends {BaseComponentProps<useCheckboxProps, 'div'>}
  */
 export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div'> {
     /**

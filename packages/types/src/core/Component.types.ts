@@ -172,11 +172,13 @@ export declare type CommonComponentInstance<P, I, T> = Pick<ComponentInstance<P,
  */
 export declare type withComponentSetup<D, I, S> = S | ((instance: CommonComponentInstance<D, I, unknown>) => S) | undefined;
 
-export declare type withComponentProps<D, I, S> = {
+export declare type withComponentProps<D, I, S, C = Record<string, unknown>> = {
+    name?: string | undefined;
+    defaultProps?: D | undefined;
+    styles?: StylesOptions | undefined;
+    components?: C | undefined;
     setup?: withComponentSetup<D, I, S>;
     render?: (instance: ComponentInstance<D, I, unknown, S>) => React.ReactNode;
-    defaultProps?: D;
-    styles?: StylesOptions;
 };
 
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;
