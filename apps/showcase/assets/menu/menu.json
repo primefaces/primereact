@@ -41,6 +41,14 @@
                         {
                             "name": "Badge",
                             "to": "/badge"
+                        },
+                        {
+                            "name": "MeterGroup",
+                            "to": "/metergroup"
+                        },
+                        {
+                            "name": "ProgressBar",
+                            "to": "/progressbar"
                         }
                     ]
                 }
