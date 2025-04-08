@@ -1,4 +1,5 @@
-export const defaultProps: any = {
-    __TYPE: 'AvatarGroup',
-    children: undefined
+import { AvatarGroupProps } from '@primereact/types/shared/avatar';
+
+export const defaultProps: AvatarGroupProps = {
+    __TYPE: 'AvatarGroup'
 };

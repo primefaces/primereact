@@ -5,6 +5,12 @@ import ImageDoc from './image/doc';
 import ImportDoc from './import/doc';
 import LabelDoc from './label/doc';
 const features = [
+    ,
+    {
+        id: 'group',
+        label: 'Group',
+        component: GroupDoc
+    },
     {
         id: 'import',
         label: 'Import',
@@ -24,11 +30,6 @@ const features = [
         id: 'image',
         label: 'Image',
         component: ImageDoc
-    },
-    {
-        id: 'group',
-        label: 'Group',
-        component: GroupDoc
     }
 ];
 

@@ -1,12 +1,19 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
-import * as React from 'react';
-export interface AvatarProps extends GlobalComponentProps {
+import { BaseComponentProps } from '..';
+import { useAvatarProps } from './useAvatar.types';
+
+export interface AvatarProps extends BaseComponentProps<useAvatarProps, 'div'> {
     readonly __TYPE?: 'Avatar';
-    label?: string | undefined;
-    icon?: string | React.ReactNode | undefined;
-    image?: string | undefined;
     size?: string | undefined;
+    /**
+     * Defines the shape of the avatar.
+     */
     shape?: string | undefined;
-    ariaLabelledBy?: string | undefined;
+    /**
+     * Establishes a string value that labels the component.
+     */
     ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledby?: string | undefined;
 }

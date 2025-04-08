@@ -5,9 +5,15 @@ export default function ImageDemo() {
             <div className="flex flex-wrap gap-8">
                 <div className="flex-auto">
                     <h5>Image</h5>
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" shape="circle" />
+                    <Avatar className="mr-2" size="xlarge" shape="circle">
+                        <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
+                    </Avatar>
+                    <Avatar className="mr-2" size="large" shape="circle">
+                        <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png" />
+                    </Avatar>
+                    <Avatar shape="circle">
+                        <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
+                    </Avatar>
                 </div>
 
                 {/* <div className="flex-auto">
@@ -19,7 +25,9 @@ export default function ImageDemo() {
 
                 <div className="flex-auto">
                     <h5>Gravatar</h5>
-                    <Avatar image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp" className="flex items-center justify-center mr-2" size="xlarge" />
+                    <Avatar className="flex items-center justify-center mr-2" size="xlarge">
+                        <Avatar.Image src="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp" />
+                    </Avatar>
                 </div>
             </div>
         </div>

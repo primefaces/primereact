@@ -8,5 +8,6 @@ export const defaultProps: AvatarProps = {
     size: 'normal',
     shape: 'square',
     ariaLabelledBy: undefined,
-    ariaLabel: undefined
+    ariaLabel: undefined,
+    delayDuration: 0
 };
