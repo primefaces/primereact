@@ -17,11 +17,6 @@ export interface MeterGroupProps extends GlobalComponentProps {
      * @defaultValue horizontal
      */
     orientation?: 'horizontal' | 'vertical' | undefined;
-    /**
-     * Specifies the label orientation of the component, valid values are 'horizontal' and 'vertical'.
-     * @defaultValue horizontal
-     */
-    labelOrientation?: 'horizontal' | 'vertical' | undefined;
 }
 
 export interface MeterGroupMetersProps extends GlobalComponentProps {
@@ -35,6 +30,11 @@ export interface MeterGroupMeterProps extends GlobalComponentProps {
 
 export interface MeterGroupLabelsProps extends GlobalComponentProps {
     readonly __TYPE?: 'MeterGroupLabels';
+    /**
+     * Specifies the label orientation of the component, valid values are 'horizontal' and 'vertical'.
+     * @defaultValue horizontal
+     */
+    orientation?: 'horizontal' | 'vertical' | undefined;
 }
 
 export interface MeterGroupLabelProps extends GlobalComponentProps {

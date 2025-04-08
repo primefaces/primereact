@@ -18,7 +18,7 @@ export default function IconDemo() {
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
                     {values.map((value, index) => (
-                        <MeterGroup.Label key={`legend_${index}`}>
+                        <MeterGroup.Label key={`label_${index}`}>
                             <MeterGroup.Icon color={value.color}>
                                 <i className={value.icon}></i>
                             </MeterGroup.Icon>

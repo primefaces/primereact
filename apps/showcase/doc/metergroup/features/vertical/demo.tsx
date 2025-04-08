@@ -10,15 +10,15 @@ export default function VerticalDemo() {
 
     return (
         <div className="card flex justify-center" style={{ height: '360px' }}>
-            <MeterGroup orientation="vertical" labelOrientation="vertical">
+            <MeterGroup orientation="vertical">
                 <MeterGroup.Meters>
                     {values.map((item, index) => (
                         <MeterGroup.Meter key={index} value={item} />
                     ))}
                 </MeterGroup.Meters>
-                <MeterGroup.Labels>
+                <MeterGroup.Labels orientation="vertical">
                     {values.map((value, index) => (
-                        <MeterGroup.Label key={`legend_${index}`}>
+                        <MeterGroup.Label key={`label_${index}`}>
                             <MeterGroup.Marker color={value.color} />
                             <MeterGroup.Text>
                                 {value.label} ({value.value}%)

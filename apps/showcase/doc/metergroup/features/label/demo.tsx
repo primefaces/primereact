@@ -10,10 +10,10 @@ export default function LabelDemo() {
 
     return (
         <div className="card">
-            <MeterGroup labelOrientation="vertical">
-                <MeterGroup.Labels>
+            <MeterGroup>
+                <MeterGroup.Labels orientation="vertical">
                     {values.map((value, index) => (
-                        <MeterGroup.Label key={`legend_${index}`}>
+                        <MeterGroup.Label key={`label_${index}`}>
                             <MeterGroup.Marker color={value.color} />
                             <MeterGroup.Text>
                                 {value.label} ({value.value}%)

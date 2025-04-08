@@ -8,7 +8,7 @@ export default function LabelDoc() {
             <h2>Label</h2>
             <p>
                 The default orientation of the labels is horizontal, and the vertical alternative is available through the
-                <i>labelOrientation</i> option.
+                <i>orientation</i> option.
             </p>
 
             <LabelDemo />

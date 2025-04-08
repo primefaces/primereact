@@ -1,7 +1,7 @@
 'use client';
 import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
 import type { MeterGroupLabelsProps } from '@primereact/types/shared/metergroup';
-import { mergeProps } from '@primeuix/utils';
+import { cn, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultLabelProps } from './MeterGroupLabels.props';
 
@@ -12,7 +12,7 @@ export const MeterGroupLabels = (inProps: MeterGroupLabelsProps) => {
 
     const labelsProps = mergeProps(
         {
-            className: metergroup?.cx('labellist')
+            className: cn(metergroup?.cx('labellist'), inProps.orientation === 'vertical' ? 'p-metergroup-label-list-vertical' : 'p-metergroup-label-list-horizontal')
         },
         metergroup?.ptm('labellist')
     );

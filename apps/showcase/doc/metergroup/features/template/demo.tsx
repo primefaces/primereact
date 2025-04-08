@@ -19,7 +19,7 @@ export default function TemplateDemo() {
             <MeterGroup max={200}>
                 <MeterGroup.Labels>
                     {values.map((value, index) => (
-                        <MeterGroup.Label key={`legend_${index}`}>
+                        <MeterGroup.Label key={`label_${index}`}>
                             {/* <Card className="flex-1 border border-surface shadow-none">
                                 <div className="flex justify-between gap-8">
                                     <div className="flex flex-col gap-1">

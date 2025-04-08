@@ -22,7 +22,7 @@ export default function MinMaxDemo() {
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
                     {values.map((value, index) => (
-                        <MeterGroup.Label key={`legend_${index}`}>
+                        <MeterGroup.Label key={`label_${index}`}>
                             <MeterGroup.Marker color={value.color} />
                             <MeterGroup.Text>
                                 {value.label} ({percent(value.value)})
