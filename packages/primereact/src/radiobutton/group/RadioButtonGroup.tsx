@@ -1,14 +1,20 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/avatar';
+import { styles } from '@primereact/styles/radiobutton';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './AvatarGroup.props';
+import { defaultProps } from './RadioButtonGroup.props';
 
-export const AvatarGroup = withComponent({
+export const RadioButtonGroup = withComponent({
     defaultProps,
     styles,
-    render: ({ props, ptmi, cx }) => {
+    render: ({
+        props,
+        ptmi,
+        cx
+        // element refs
+        // methods
+    }) => {
         const rootProps = mergeProps(
             {
                 className: cx('group')
