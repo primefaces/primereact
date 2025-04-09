@@ -23923,6 +23923,13 @@
                             "description": "Uses to pass attributes to the filter icon's DOM element."
                         },
                         {
+                            "name": "filterClearIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the filter clear icon's DOM element."
+                        },
+                        {
                             "name": "wrapper",
                             "optional": true,
                             "readonly": false,
