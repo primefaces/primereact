@@ -27,6 +27,7 @@ export const MeterGroup = withComponent({
             props,
             ptmi,
             cx,
+            totalPercent,
             // element refs
             elementRef
         } = instance;
@@ -38,7 +39,7 @@ export const MeterGroup = withComponent({
                 style: props.style,
                 role: 'meter',
                 'aria-valuemin': props.min,
-                'aria-valuenow': props.max, // TODO:
+                'aria-valuenow': totalPercent,
                 'aria-valuemax': props.max
             },
             ptmi('root')
