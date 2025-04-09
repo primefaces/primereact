@@ -43,6 +43,10 @@
                             "to": "/badge"
                         },
                         {
+                            "name": "Chip",
+                            "to": "/chip"
+                        },
+                        {
                             "name": "MeterGroup",
                             "to": "/metergroup"
                         },

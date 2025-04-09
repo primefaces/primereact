@@ -1,0 +1,7 @@
+/****************************************************************************
+****************** PrimeReact Demo Source (Auto-Generated) ******************
+*****************************************************************************/
+
+export const source = {
+    "code": "// import { useChip } from '@primereact/headless/chip';\nimport { Chip } from 'primereact/chip';\n// import * as React from 'react';\n\nexport default function IconDemo() {\n    // const headlessRemoveIcon = useChip({});\n    // const { close, visibleState } = headlessRemoveIcon;\n\n    return (\n        <div className=\"card flex flex-wrap gap-2\">\n            <Chip>\n                <Chip.Icon className=\"pi pi-apple\" />\n                <Chip.Label>Apple</Chip.Label>\n            </Chip>\n            <Chip>\n                <Chip.Icon className=\"pi pi-facebook\" />\n                <Chip.Label>Facebook</Chip.Label>\n            </Chip>\n            <Chip>\n                <Chip.Icon className=\"pi pi-google\" />\n                <Chip.Label>Google</Chip.Label>\n            </Chip>\n            <Chip removable>\n                <Chip.Icon className=\"pi pi-microsoft\" />\n                <Chip.Label>Microsoft</Chip.Label>\n            </Chip>\n            {/* {visibleState && (\n                <Chip>\n                    <Chip.Label>GitHub</Chip.Label>\n                    <i className=\"pi pi-minus-circle\" onClick={(e: React.MouseEvent<HTMLElement>) => close(e)} />\n                </Chip>\n            )} */}\n        </div>\n    );\n}\n"
+};
