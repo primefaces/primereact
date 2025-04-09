@@ -785,6 +785,7 @@ export const AutoComplete = React.memo(
                         listId={listId}
                         onItemClick={selectItem}
                         selectedItem={selectedItem}
+                        onOverlayHide={hide}
                         onClick={onPanelClick}
                         getOptionGroupLabel={getOptionGroupLabel}
                         getOptionGroupChildren={getOptionGroupChildren}
