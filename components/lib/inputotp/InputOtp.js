@@ -228,6 +228,7 @@ export const InputOtp = React.memo(
                 invalid: props?.invalid,
                 tabIndex: props?.tabIndex,
                 unstyled: props?.unstyled,
+                autoFocus: props?.autoFocus && inputElementIndex === 0,
                 'aria-label': ariaLabel('otpLabel', { 0: inputElementIndex + 1 }),
                 className: cx('input'),
                 pt: ptm('input')
