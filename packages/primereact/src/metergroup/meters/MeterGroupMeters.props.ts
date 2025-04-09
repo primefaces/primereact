@@ -1,5 +1,5 @@
 import type { MeterGroupMetersProps } from '@primereact/types/shared/metergroup';
 
-export const defaultLabelProps: MeterGroupMetersProps = {
+export const defaultProps: MeterGroupMetersProps = {
     __TYPE: 'MeterGroupMeters'
 };

@@ -1,6 +1,6 @@
 import type { MeterGroupMarkerProps } from '@primereact/types/shared/metergroup';
 
-export const defaultLabelProps: MeterGroupMarkerProps = {
+export const defaultProps: MeterGroupMarkerProps = {
     __TYPE: 'MeterGroupMarker',
     color: ''
 };

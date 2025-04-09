@@ -1,8 +1,7 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useMeterGroup } from '@primereact/headless/metergroup';
 import { styles } from '@primereact/styles/metergroup';
-import type { MeterGroupProps } from '@primereact/types/shared/metergroup';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './MeterGroup.props';
@@ -14,45 +13,51 @@ import { MeterGroupMeter } from './meter';
 import { MeterGroupMeters } from './meters';
 import { MeterGroupText } from './text';
 
-export const MeterGroup = (inProps: MeterGroupProps) => {
-    const metergroup = useMeterGroup(inProps);
-    const instance = useComponent(inProps, defaultProps, styles, metergroup);
-    const {
-        id,
-        props,
-        ptmi,
-        cx,
-        // element refs
-        elementRef
-    } = instance;
+export const MeterGroup = withComponent({
+    defaultProps,
+    styles,
+    setup: (instance) => {
+        const metergroup = useMeterGroup(instance.inProps);
 
-    const rootProps = mergeProps(
-        {
+        return metergroup;
+    },
+    render: (instance) => {
+        const {
             id,
-            className: cx('root'),
-            style: props.style,
-            role: 'meter',
-            'aria-valuemin': props.min,
-            'aria-valuenow': props.max, // TODO:
-            'aria-valuemax': props.max
-        },
-        ptmi('root')
-    );
+            props,
+            ptmi,
+            cx,
+            totalPercent,
+            // element refs
+            elementRef
+        } = instance;
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
+        const rootProps = mergeProps(
+            {
+                id,
+                className: cx('root'),
+                style: props.style,
+                role: 'meter',
+                'aria-valuemin': props.min,
+                'aria-valuenow': totalPercent,
+                'aria-valuemax': props.max
+            },
+            ptmi('root')
+        );
+
+        return (
             <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
                 {props.children}
             </Component>
-        </ComponentProvider>
-    );
-};
-
-MeterGroup.displayName = 'PrimeReact.MeterGroup';
-MeterGroup.Meters = MeterGroupMeters;
-MeterGroup.Meter = MeterGroupMeter;
-MeterGroup.Labels = MeterGroupLabels;
-MeterGroup.Label = MeterGroupLabel;
-MeterGroup.Marker = MeterGroupMarker;
-MeterGroup.Text = MeterGroupText;
-MeterGroup.Icon = MeterGroupIcon;
+        );
+    },
+    components: {
+        Meters: MeterGroupMeters,
+        Meter: MeterGroupMeter,
+        Labels: MeterGroupLabels,
+        Label: MeterGroupLabel,
+        Marker: MeterGroupMarker,
+        Text: MeterGroupText,
+        Icon: MeterGroupIcon
+    }
+});
