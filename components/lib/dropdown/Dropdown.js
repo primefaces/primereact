@@ -1248,6 +1248,7 @@ export const Dropdown = React.memo(
                         in={overlayVisibleState}
                         isOptionDisabled={isOptionDisabled}
                         isSelected={isSelected}
+                        onOverlayHide={hide}
                         onClick={onPanelClick}
                         onEnter={onOverlayEnter}
                         onEntered={onOverlayEntered}
