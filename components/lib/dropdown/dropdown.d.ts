@@ -77,6 +77,10 @@ export interface DropdownPassThroughOptions {
      */
     filterIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the filter clear icon's DOM element.
+     */
+    filterClearIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the wrapper's DOM element.
      */
     wrapper?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
