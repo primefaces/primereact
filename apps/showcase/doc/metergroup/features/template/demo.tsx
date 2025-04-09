@@ -41,19 +41,23 @@ export default function TemplateDemo() {
                     </span>
                     <span className="font-medium">1TB</span>
                 </div>
+
                 <MeterGroup.Meters>
                     {values.map((value, index) => (
-                        <span
-                            key={`meter_${index}`}
-                            style={{
-                                background: `linear-gradient(to right, ${value.color1}, ${value.color2})`,
-                                width: percent(value.value),
-                                borderTopLeftRadius: index === 0 ? '6px' : undefined,
-                                borderBottomLeftRadius: index === 0 ? '6px' : undefined,
-                                borderBottomRightRadius: index === values.length - 1 ? '6px' : undefined,
-                                borderTopRightRadius: index === values.length - 1 ? '6px' : undefined
+                        <MeterGroup.Meter asChild key={`meter_${index}`}>
+                            {(instance) => {
+                                return (
+                                    <span
+                                        key={`meter_${index}`}
+                                        className={instance.className}
+                                        style={{
+                                            background: `linear-gradient(to right, ${value.color1}, ${value.color2})`,
+                                            width: percent(value.value)
+                                        }}
+                                    />
+                                );
                             }}
-                        />
+                        </MeterGroup.Meter>
                     ))}
                 </MeterGroup.Meters>
                 {/* <div className="flex justify-between mt-4">
