@@ -38,11 +38,11 @@ export const MeterGroupMeter = withComponent({
                 }
             },
             metergroup?.ptm('meter')
-            //   props
+            // props
         );
 
         return (
-            <Component as={props.as || 'div'} {...meterProps}>
+            <Component as={props.as || 'div'} asChild={props.asChild} {...meterProps}>
                 {props.children}
             </Component>
         );

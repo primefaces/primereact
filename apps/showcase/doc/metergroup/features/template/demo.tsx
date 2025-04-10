@@ -16,7 +16,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <MeterGroup max={200}>
+            <MeterGroup max={200} aria-valuenow={totalPercent}>
                 <MeterGroup.Labels>
                     {values.map((value, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
