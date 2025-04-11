@@ -5,7 +5,7 @@ import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 /**
  * Defines the global props of the components.
  */
-export interface GlobalComponentProps<R = unknown, D = unknown> {
+export interface GlobalComponentProps<T extends React.ElementType = React.ElementType, R = unknown, D = unknown> {
     /**
      * The reference to the component instance.
      * @todo - React.Ref<R> | undefined;
@@ -19,7 +19,7 @@ export interface GlobalComponentProps<R = unknown, D = unknown> {
     /**
      * The component type to render.
      */
-    as?: React.ElementType | undefined;
+    as?: T | undefined;
     /**
      * Whether the component should be rendered as a child component.
      * @default false
@@ -58,7 +58,7 @@ export interface GlobalComponentProps<R = unknown, D = unknown> {
 /**
  * Defines the props of the component.
  */
-export interface ComponentProps<R = unknown, D = unknown> extends GlobalComponentProps<R, D> {
+export interface ComponentProps<R = unknown, D = unknown> extends GlobalComponentProps<React.ElementType, R, D> {
     /**
      * The component instance
      */
@@ -162,17 +162,24 @@ export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Reco
      * Defines parent components instances.
      */
     $pc: Record<string, ComponentInstance>;
+    /**
+     * Defines unique component selector.
+     */
+    $attrSelector: string;
 } & S;
 
 export declare type CommonKeys = 'ref' | 'name' | 'props' | 'attrs' | 'parent' | 'inProps' | '$primereact' | 'getParent';
 export declare type CommonComponentInstance<P, I, T> = Pick<ComponentInstance<P, I, T>, CommonKeys>;
+
+export declare type ComputedKeys = CommonKeys | '$attrSelector' | 'state';
+export declare type ComputedComponentInstance<P, I, T, S> = Pick<ComponentInstance<P, I, T>, ComputedKeys> & S;
 
 /**
  * The setup callback function or options.
  */
 export declare type withComponentSetup<D, I, S> = S | ((instance: CommonComponentInstance<D, I, unknown>) => S) | undefined;
 
-export declare type withComponentProps<D, I, S, C = Record<string, unknown>> = {
+export declare type withComponentOptions<D, I, S, C = Record<string, unknown>> = {
     name?: string | undefined;
     defaultProps?: D | undefined;
     styles?: StylesOptions | undefined;
@@ -180,5 +187,12 @@ export declare type withComponentProps<D, I, S, C = Record<string, unknown>> = {
     setup?: withComponentSetup<D, I, S>;
     render?: (instance: ComponentInstance<D, I, unknown, S>) => React.ReactNode;
 };
+
+export interface useComponentOptions<I, D, S> {
+    inProps?: I;
+    defaultProps?: D;
+    styles?: StylesOptions;
+    setup?: withComponentSetup<D, I, S>;
+}
 
 export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;

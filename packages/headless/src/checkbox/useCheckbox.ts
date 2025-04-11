@@ -4,6 +4,8 @@ import * as React from 'react';
 import { defaultProps } from './useCheckbox.props';
 
 export const useCheckbox = withHeadless({
+    name: 'useCheckbox',
+    defaultProps,
     setup: ({ props }) => {
         const [indeterminateState, setIndeterminateState] = React.useState<boolean | undefined>(props.indeterminate);
         const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
@@ -79,6 +81,5 @@ export const useCheckbox = withHeadless({
             setCheckboxGroup,
             onChange
         };
-    },
-    defaultProps
+    }
 });

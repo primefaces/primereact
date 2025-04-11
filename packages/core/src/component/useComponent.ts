@@ -1,20 +1,19 @@
 import { usePrimeReact } from '@primereact/core/config';
 import { combinedRefs } from '@primereact/core/utils';
 import { useAttrSelector, useProps } from '@primereact/hooks';
-import type { CommonComponentInstance, ComponentInstance, withComponentSetup } from '@primereact/types/core';
-import type { StylesOptions } from '@primereact/types/styles';
+import type { CommonComponentInstance, ComponentInstance, ComputedComponentInstance, useComponentOptions, withComponentSetup } from '@primereact/types/core';
 import { isNotEmpty, resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<D, I, S>) => {
+export const useComponent = <I, D, S>(name: string = 'UnknownComponent', options: useComponentOptions<I, D, S> = {}) => {
     const { config, locale, passthrough, theme, parent } = usePrimeReact();
+    const { inProps, defaultProps, styles, setup } = options;
 
     const { props, attrs } = useProps(inProps, { ...globalProps, ...defaultProps });
     const ref = React.useRef(props.ref ?? null);
-    const name = props?.__TYPE;
 
     const common: CommonComponentInstance<typeof props, I, typeof parent> = {
         ref,
@@ -34,7 +33,7 @@ export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, d
 
     const $attrSelector = useAttrSelector('pc_');
 
-    const computed = {
+    const computed: ComputedComponentInstance<typeof props, I, typeof parent, S> = {
         state: {},
         $attrSelector,
         ...(resolve(setup as withComponentSetup<typeof props, I, S>, common) as S),
@@ -54,7 +53,7 @@ export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, d
     // Inject parent component instances and self instance
     instance.$pc = {
         ...parent?.$pc,
-        [`${name}`]: instance as ComponentInstance
+        [name]: instance as ComponentInstance // @todo - update type
     };
 
     React.useEffect(() => {

@@ -23,10 +23,6 @@ export interface useCheckboxChangeEvent {
  */
 export interface useCheckboxProps {
     /**
-     * The type of the hook.
-     */
-    readonly __TYPE?: 'useCheckbox';
-    /**
      * Value of the checkbox.
      */
     value?: unknown;

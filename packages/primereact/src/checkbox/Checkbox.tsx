@@ -10,6 +10,7 @@ import { defaultProps } from './Checkbox.props';
 import { CheckboxGroup } from './group';
 
 export const Checkbox = withComponent({
+    name: 'Checkbox',
     defaultProps,
     styles,
     setup: (instance) => {
@@ -108,7 +109,7 @@ export const Checkbox = withComponent({
         );
 
         return (
-            <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
+            <Component as={props.as} {...rootProps} ref={elementRef}>
                 {input}
                 {box}
             </Component>

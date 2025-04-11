@@ -33,6 +33,10 @@ export declare type withHeadlessSetup<S, D> = S | ((instance: HeadlessInstance<D
  */
 export interface withHeadlessOptions<S, D> {
     /**
+     * The name of headless component.
+     */
+    name?: string | undefined;
+    /**
      * The setup callback function or options.
      */
     setup?: withHeadlessSetup<S, D>;
@@ -40,4 +44,10 @@ export interface withHeadlessOptions<S, D> {
      * The default properties.
      */
     defaultProps?: D | undefined;
+}
+
+export interface useHeadlessOptions<I, D, S> {
+    inProps?: I;
+    defaultProps?: D;
+    setup?: withHeadlessSetup<S, unknown>;
 }

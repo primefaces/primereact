@@ -1,11 +1,12 @@
-import { ComponentInstance, withComponentProps } from '@primereact/types/core';
+import type { ComponentInstance, withComponentOptions } from '@primereact/types/core';
+import type { BaseComponentProps } from '@primereact/types/shared';
 import * as React from 'react';
 import { ComponentProvider } from './Component.context';
 import { useComponent } from './useComponent';
 
-export const withComponent = <I, D extends { __TYPE?: string }, S, C>({ name, defaultProps, styles, components, setup, render }: withComponentProps<D, I, S, C>) => {
-    const ComponentBase: React.FC<React.PropsWithChildren<I & D>> = (inProps?: I) => {
-        const instance = useComponent(inProps, defaultProps, styles, setup);
+export const withComponent = <I, D, S, C>({ name = 'UnknownComponent', defaultProps, styles, components, setup, render }: withComponentOptions<D, I, S, C>) => {
+    const BaseComponent = <T extends React.ElementType>(inProps?: BaseComponentProps<I, T> & D) => {
+        const instance = useComponent(name, { inProps, defaultProps, styles, setup });
         const { props } = instance;
 
         return (
@@ -15,9 +16,9 @@ export const withComponent = <I, D extends { __TYPE?: string }, S, C>({ name, de
         );
     };
 
-    const Component = ComponentBase as typeof ComponentBase & C;
+    const Component = BaseComponent as typeof BaseComponent & C & React.FC;
 
-    Component.displayName = `PrimeReact.${name || defaultProps?.__TYPE || 'UnknownComponent'}`;
+    Component.displayName = `PrimeReact.${name}`;
     Object.entries(components || {}).forEach(([key, value]) => {
         (Component as Record<string, unknown>)[key] = value;
     });

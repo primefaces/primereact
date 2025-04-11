@@ -12,8 +12,8 @@ import { useHeadless } from './useHeadless';
  * @param {D} [options.defaultProps] - The default properties.
  * @returns The Headless instance.
  */
-export const withHeadless = <S, D>({ setup, defaultProps }: withHeadlessOptions<S, D>) => {
+export const withHeadless = <S, D>({ name, setup, defaultProps }: withHeadlessOptions<S, D>) => {
     return <P>(inProps?: P): HeadlessInstance<P> & S => {
-        return useHeadless(inProps, defaultProps, setup) as HeadlessInstance<P> & S;
+        return useHeadless(name, { inProps, defaultProps, setup }) as HeadlessInstance<P> & S;
     };
 };

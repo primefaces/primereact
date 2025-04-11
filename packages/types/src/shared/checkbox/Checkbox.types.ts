@@ -4,11 +4,7 @@ import { useCheckboxProps } from './useCheckbox.types';
 /**
  * Checkbox component props.
  */
-export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div'> {
-    /**
-     * The type of the component.
-     */
-    readonly __TYPE?: 'Checkbox';
+export interface CheckboxProps extends BaseComponentProps<useCheckboxProps> {
     /**
      * The name of the checkbox.
      */

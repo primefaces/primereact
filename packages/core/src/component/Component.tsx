@@ -5,13 +5,14 @@ import { ComponentContext } from './Component.context';
 
 export const Component = (inProps: ComponentProps = {}) => {
     const context = React.useContext(ComponentContext);
+    const { pIf = true, ...props } = inProps;
 
-    if (inProps.pIf === false) return null;
+    if (pIf === false || (!props.asChild && !props.as)) return null;
 
-    const { as, asChild, pIf, instance = context, children, options, ...rest } = inProps;
-    const AsComponent = asChild ? React.Fragment : as;
+    const { as: AsComponent, asChild, instance = context, children, options, ...rest } = props;
+    const content = resolve(children, { ...rest, ...options, ...instance }) as React.ReactNode;
 
-    return AsComponent ? <AsComponent {...rest}>{resolve(children, { ...rest, ...options, ...instance })}</AsComponent> : null;
+    return asChild ? <React.Fragment>{content}</React.Fragment> : AsComponent ? <AsComponent {...rest}>{content}</AsComponent> : null;
 };
 
 Component.displayName = 'PrimeReact.Component';

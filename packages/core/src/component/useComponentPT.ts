@@ -1,19 +1,11 @@
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
-import type { ComponentInstance } from '@primereact/types/core';
+import type { ComputedComponentInstance, GlobalComponentProps } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils/mergeprops';
 import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase } from '@primeuix/utils/object';
 import * as React from 'react';
 
-export const useComponentPT = (instance: ComponentInstance) => {
-    const { id, name, props, attrs, state, parent, $primereact, $attrSelector } = instance || {};
-    // @todo: Add any additional parameters needed for the instance
-    const $params = {
-        instance,
-        props,
-        state,
-        attrs,
-        parent
-    };
+export const useComponentPT = <P extends GlobalComponentProps, I, T, S extends { id?: string }>(instance: ComputedComponentInstance<P, I, T, S>) => {
+    const { id, name, props, attrs, $primereact, $attrSelector } = instance;
 
     // methods
     const _hook = (hookName: string) => {
@@ -24,24 +16,24 @@ export const useComponentPT = (instance: ComponentInstance) => {
         defaultHook?.();
     };
 
-    const _mergeProps = (fn: unknown, ...args: any[]) => {
-        return isFunction(fn) ? fn(...args) : mergeProps(...args);
+    const _mergeProps = <A extends unknown[] = unknown[]>(fn: ((...args: A) => object | undefined) | boolean, ...args: A) => {
+        return isFunction(fn) ? fn(...args) : fn ? mergeProps(...args) : Object.assign({}, ...args);
     };
 
-    const _getPTValue = (obj = {}, key = '', params = {}, searchInDefaultPT = true) => {
+    const _getPTValue = (obj = {}, key = '', params: Record<string, unknown> = {}, searchInDefaultPT = true) => {
         const searchOut = /./g.test(key) && !!params[key.split('.')[0]];
         const { mergeSections = true, mergeProps: useMergeProps = false } = props?.ptOptions || $primereact?.config?.ptOptions || {};
         const global = searchInDefaultPT ? (searchOut ? _useGlobalPT(_getPTClassValue, key, params) : _useDefaultPT(_getPTClassValue, key, params)) : undefined;
         const self = searchOut ? undefined : _getPTSelf(obj, _getPTClassValue, key, { ...params, global: global || {} });
         const datasets = _getPTDatasets(key);
 
-        return mergeSections || (!mergeSections && self) ? (useMergeProps ? _mergeProps(useMergeProps, global, self, datasets) : { ...global, ...self, ...datasets }) : { ...self, ...datasets };
+        return mergeSections || (!mergeSections && self) ? _mergeProps(useMergeProps, global, self, datasets) : { ...self, ...datasets };
     };
 
-    const _getPTSelf = (obj = {}, ...args: any[]) => {
+    const _getPTSelf = (obj = {}, ...args: unknown[]) => {
         return mergeProps(
-            _usePT(_getPT(obj, name), ...args), // Exp; <PRComponent :pt="{}"
-            _usePT($attrsPT, ...args) // Exp; <PRComponent :pt:[passthrough_key]:[attribute]="{value}" or <PRComponent :pt:[passthrough_key]="() =>{value}"
+            _usePT(_getPT(obj, name), ...args), // Exp; <PRComponent pt={{ [passthrough_key]: { [attribute]: value } }}>
+            _usePT($attrsPT, ...args) // Exp; <PRComponent pt:[passthrough_key]:[attribute]={value}> or <PRComponent pt:[passthrough_key]={() =>{value}}>
         );
     };
 
@@ -53,7 +45,7 @@ export const useComponentPT = (instance: ComponentInstance) => {
             key !== 'transition' && {
                 ...(key === 'root' && {
                     [`${datasetPrefix}name`]: toFlatCase(isExtended ? props.pt?.['data-pc-section'] : name),
-                    ...(isExtended && { [`${datasetPrefix}extend`]: toFlatCase(name) }),
+                    ...(isExtended && { [`${datasetPrefix}extend`]: toFlatCase(name!) }),
                     [`${$attrSelector}`]: ''
                 }),
                 [`${datasetPrefix}section`]: toFlatCase(key)
@@ -61,7 +53,7 @@ export const useComponentPT = (instance: ComponentInstance) => {
         );
     };
 
-    const _getPTClassValue = (...args: any[]) => {
+    const _getPTClassValue = (...args: unknown[]) => {
         const value = getKeyValue(...args);
 
         return isString(value) || isArray(value) ? { className: value } : value;
@@ -85,7 +77,8 @@ export const useComponentPT = (instance: ComponentInstance) => {
             : getValue(pt, true);
     };
 
-    const _usePT = (pt: any, callback: (...args: any[]) => any, key: string, params?: any) => {
+    const _usePT = (pt: any, ...args: unknown[]) => {
+        const [callback, key, params] = args as [(...args: unknown[]) => unknown, string, unknown];
         const fn = (value: any) => callback(value, key, params);
 
         if (pt && Object.hasOwn(pt, '_usept')) {
@@ -97,7 +90,7 @@ export const useComponentPT = (instance: ComponentInstance) => {
             else if (isString(value)) return value;
             else if (isString(originalValue)) return originalValue;
 
-            return mergeSections || (!mergeSections && value) ? (useMergeProps ? _mergeProps(useMergeProps, originalValue, value) : { ...originalValue, ...value }) : value;
+            return mergeSections || (!mergeSections && value) ? _mergeProps(useMergeProps, originalValue, value) : value;
         }
 
         return fn(pt);
@@ -113,7 +106,7 @@ export const useComponentPT = (instance: ComponentInstance) => {
 
     // exposed methods
     const ptm = (key = '', params = {}) => {
-        return _getPTValue(props.pt, key, { ...$params, ...params });
+        return _getPTValue(props.pt, key, { ...instance, ...params });
     };
 
     const ptmi = (key = '', params = {}) => {
@@ -131,8 +124,8 @@ export const useComponentPT = (instance: ComponentInstance) => {
     };
 
     // computed values
-    const $globalPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => resolve(value, { instance })), [$primereact?.config?.pt]);
-    const $defaultPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => getKeyValue(value, name, { ...$params }) || resolve(value, { ...$params })), [$primereact?.config?.pt]);
+    const $globalPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => resolve(value, instance)), [$primereact?.config?.pt]);
+    const $defaultPT = React.useMemo(() => _getPT($primereact?.config?.pt, undefined, (value) => getKeyValue(value, name, instance) || resolve(value, instance)), [$primereact?.config?.pt]);
     const $attrsPT = React.useMemo(() => {
         return Object.entries(attrs || {})
             .filter(([key]) => key?.startsWith('pt:'))

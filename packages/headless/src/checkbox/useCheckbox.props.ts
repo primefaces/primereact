@@ -1,7 +1,6 @@
 import type { useCheckboxProps } from '@primereact/types/shared/checkbox';
 
 export const defaultProps: useCheckboxProps = {
-    __TYPE: 'useCheckbox',
     value: undefined,
     defaultChecked: undefined,
     checked: false,
