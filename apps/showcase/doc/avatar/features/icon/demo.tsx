@@ -6,13 +6,13 @@ export default function IconDemo() {
             <div className="flex flex-wrap gap-8">
                 <div className="flex-auto">
                     <h5>Icon</h5>
-                    <Avatar icon="pi pi-user" className="mr-2" size="xlarge">
+                    <Avatar className="mr-2" size="xlarge">
                         <Avatar.Fallback icon="pi pi-user" />
                     </Avatar>
-                    <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }}>
+                    <Avatar className="mr-2" size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }}>
                         <Avatar.Fallback icon="pi pi-user" />
                     </Avatar>
-                    <Avatar icon="pi pi-user" style={{ backgroundColor: '#dee9fc', color: '#1a2551' }}>
+                    <Avatar style={{ backgroundColor: '#dee9fc', color: '#1a2551' }}>
                         <Avatar.Fallback icon="pi pi-user" />
                     </Avatar>
                 </div>
