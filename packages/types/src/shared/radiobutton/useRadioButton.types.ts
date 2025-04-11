@@ -10,7 +10,7 @@ export interface useRadioButtonChangeEvent {
     /**
      * The value of the radio button.
      */
-    value: unknown;
+    value: string | undefined;
 }
 /**
  * Props for the useAvatar hook.
@@ -23,7 +23,7 @@ export interface useRadioButtonProps {
     /**
      * The value of the radio button.
      */
-    value?: undefined;
+    value?: string | undefined;
     /**
      * When present, it specifies that the element should be disabled.
      * @default false

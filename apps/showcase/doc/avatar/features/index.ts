@@ -5,7 +5,6 @@ import ImageDoc from './image/doc';
 import ImportDoc from './import/doc';
 import LabelDoc from './label/doc';
 const features = [
-    ,
     {
         id: 'group',
         label: 'Group',

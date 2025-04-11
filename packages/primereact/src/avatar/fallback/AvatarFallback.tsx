@@ -1,24 +1,23 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/avatar';
 import { cn, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './AvatarFallback.props';
 
 export const AvatarFallback = withComponent({
     defaultProps,
-    styles,
-    render: ({ props, ptm, cx, getParent }) => {
-        const parentAvatar = getParent('Avatar');
+    render: ({ props, ptmi, getParent }) => {
+        const avatar = getParent('Avatar');
 
         const createLabelProps = () => {
             if (!props?.label) return;
 
             const labelProps = mergeProps(
                 {
-                    className: cn(cx('label'), props.className)
+                    className: avatar?.cx('label')
                 },
-                ptm('label')
+                avatar?.ptm('label'),
+                ptmi('root')
             );
 
             return labelProps;
@@ -29,9 +28,10 @@ export const AvatarFallback = withComponent({
 
             const iconProps = mergeProps(
                 {
-                    className: cn(cx('icon'), props.icon, props.className)
+                    className: cn(avatar?.cx('icon'), props.icon)
                 },
-                ptm('icon')
+                avatar?.ptm('icon'),
+                ptmi('root')
             );
 
             return iconProps;
@@ -40,7 +40,7 @@ export const AvatarFallback = withComponent({
         const labelProps = createLabelProps();
         const iconProps = createIconProps();
 
-        return !parentAvatar?.state.onImageLoaded ? (
+        return !avatar?.state.onImageLoaded ? (
             <Component as={props.as || 'span'} {...(labelProps ?? iconProps ?? props)}>
                 {props.label ?? props.children}
             </Component>
