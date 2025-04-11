@@ -43,12 +43,20 @@
                             "to": "/badge"
                         },
                         {
+                            "name": "Chip",
+                            "to": "/chip"
+                        },
+                        {
                             "name": "MeterGroup",
                             "to": "/metergroup"
                         },
                         {
                             "name": "ProgressBar",
                             "to": "/progressbar"
+                        },
+                        {
+                            "name": "ProgressSpinner",
+                            "to": "/progressspinner"
                         }
                     ]
                 }
