@@ -39,7 +39,7 @@ export const Calendar = React.memo(
 
         useGlobalOnEscapeKey({
             callback: () => {
-                hide();
+                hide(null, reFocusInputField);
             },
             when: overlayVisibleState && overlayDisplayOrder,
             priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayDisplayOrder]
