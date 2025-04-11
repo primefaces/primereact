@@ -1,28 +1,27 @@
 import { RadioButton } from 'primereact/radiobutton';
-import { RadioButtonGroup } from 'primereact/radiobutton/group';
 import * as React from 'react';
 export default function GroupDemo() {
-    const [ingredient, setIngredient] = React.useState('Mushroom');
+    const [ingredient, setIngredient] = React.useState();
     return (
-        <div className="card ">
-            <RadioButtonGroup className="flex flex-wrap gap-2" defaultValue={'Cheese'} value={ingredient} onValueChange={(e) => setIngredient(e.value)}>
+        <div className="card flex items-center justify-center">
+            <RadioButton.Group className="flex flex-wrap gap-4" value={ingredient} onValueChange={(e) => setIngredient(e.value)}>
                 <div className="flex items-center gap-2">
-                    <RadioButton inputId="ingredient1" name="pizza" value="Cheese" variant="filled" invalid />
+                    <RadioButton inputId="ingredient1" name="pizza" value="cheese" />
                     <label htmlFor="ingredient1">Cheese</label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" size="large" disabled />
+                    <RadioButton inputId="ingredient2" name="pizza" value="mushroom" />
                     <label htmlFor="ingredient2">Mushroom</label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <RadioButton inputId="ingredient3" name="pizza" value="Pepper" variant="outlined" />
+                    <RadioButton inputId="ingredient3" name="pizza" value="pepper" />
                     <label htmlFor="ingredient3">Pepper</label>
                 </div>
                 <div className="flex items-center gap-2">
-                    <RadioButton inputId="ingredient4" name="pizza" value="Onion" />
+                    <RadioButton inputId="ingredient4" name="pizza" value="onion" />
                     <label htmlFor="ingredient4">Onion</label>
                 </div>
-            </RadioButtonGroup>
+            </RadioButton.Group>
         </div>
     );
 }
