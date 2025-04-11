@@ -1,17 +1,14 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import { BaseComponentProps } from '..';
+import { useMeterGroupProps } from './useMeterGroup.types';
 
-export interface MeterGroupProps extends GlobalComponentProps {
+/**
+ * MeterGroup component props.
+ */
+export interface MeterGroupProps extends BaseComponentProps<useMeterGroupProps, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroup';
-    /**
-     * Mininum boundary value.
-     * @defaultValue 0
-     */
-    min?: number | undefined;
-    /**
-     * Maximum boundary value.
-     * @defaultValue 100
-     */
-    max?: number | undefined;
     /**
      * Specifies the layout of the component, valid values are 'horizontal' and 'vertical'.
      * @defaultValue horizontal
@@ -19,16 +16,28 @@ export interface MeterGroupProps extends GlobalComponentProps {
     orientation?: 'horizontal' | 'vertical' | undefined;
 }
 
-export interface MeterGroupMetersProps extends GlobalComponentProps {
+export interface MeterGroupMetersProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupMeters' }, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupMeters';
 }
 
-export interface MeterGroupMeterProps extends GlobalComponentProps {
+export interface MeterGroupMeterProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupMeter' }, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupMeter';
+    /**
+     * The value of the meter.
+     */
     value: any;
 }
 
-export interface MeterGroupLabelsProps extends GlobalComponentProps {
+export interface MeterGroupLabelsProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupLabels' }, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupLabels';
     /**
      * Specifies the label orientation of the component, valid values are 'horizontal' and 'vertical'.
@@ -37,20 +46,38 @@ export interface MeterGroupLabelsProps extends GlobalComponentProps {
     orientation?: 'horizontal' | 'vertical' | undefined;
 }
 
-export interface MeterGroupLabelProps extends GlobalComponentProps {
+export interface MeterGroupLabelProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupLabel' }, 'div'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupLabel';
 }
 
-export interface MeterGroupMarkerProps extends GlobalComponentProps {
+export interface MeterGroupMarkerProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupMarker' }, 'span'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupMarker';
+    /**
+     * The color of the marker.
+     */
     color: string;
 }
 
-export interface MeterGroupIconProps extends GlobalComponentProps {
+export interface MeterGroupIconProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupIcon' }, 'span'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupIcon';
+    /**
+     * The color of the marker.
+     */
     color: string;
 }
 
-export interface MeterGroupTextProps extends GlobalComponentProps {
+export interface MeterGroupTextProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupText' }, 'span'> {
+    /**
+     * The type of the component.
+     */
     readonly __TYPE?: 'MeterGroupText';
 }

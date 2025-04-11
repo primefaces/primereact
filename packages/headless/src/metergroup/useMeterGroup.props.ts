@@ -1,4 +1,4 @@
-import type { useMeterGroupProps } from '@primereact/types/shared/meterGroup';
+import type { useMeterGroupProps } from '@primereact/types/shared/metergroup';
 
 export const defaultProps: useMeterGroupProps = {
     __TYPE: 'useMeterGroup',
