@@ -282,6 +282,15 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     scrollHeight?: string | undefined;
     /**
+     * Display loading icon.
+     * @defaultValue false
+     */
+    loading?: boolean | undefined;
+    /**
+     * Name of the loading icon or JSX.Element for loading icon.
+     */
+    loadingIcon?: IconType<CascadeSelectProps> | undefined;
+    /**
      * Callback to invoke on value change
      * @param {CascadeSelectChangeEvent} event - Custom change event
      */
