@@ -15,9 +15,10 @@ export default function ImageDemo() {
                 <Chip.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
                 <Chip.Label>Onyama Limba</Chip.Label>
             </Chip>
-            <Chip removable>
+            <Chip>
                 <Chip.Image src="https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png" />
                 <Chip.Label>Xuxue Feng</Chip.Label>
+                <Chip.RemoveIcon />
             </Chip>
         </div>
     );

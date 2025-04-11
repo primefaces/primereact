@@ -19,11 +19,6 @@ export interface useChipProps {
      */
     readonly __TYPE?: 'useChip';
     /**
-     * Whether to display a remove icon.
-     * @defaultValue false
-     */
-    removable?: boolean;
-    /**
      * Callback to invoke when a chip is removed.
      * @param {ChipRemoveEvent} event - Custom remove event
      * @return {boolean} - Return false to prevent hiding the chip after removal

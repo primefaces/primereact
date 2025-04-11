@@ -12,8 +12,9 @@ export default function BasicDemo() {
             <Chip>
                 <Chip.Label>Mystery</Chip.Label>
             </Chip>
-            <Chip removable>
+            <Chip>
                 <Chip.Label>Thriller</Chip.Label>
+                <Chip.RemoveIcon />
             </Chip>
         </div>
     );

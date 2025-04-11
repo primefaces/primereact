@@ -1,11 +1,6 @@
-// import { useChip } from '@primereact/headless/chip';
 import { Chip } from 'primereact/chip';
-// import * as React from 'react';
 
 export default function IconDemo() {
-    // const headlessRemoveIcon = useChip({});
-    // const { close, visibleState } = headlessRemoveIcon;
-
     return (
         <div className="card flex flex-wrap gap-2">
             <Chip>
@@ -20,16 +15,18 @@ export default function IconDemo() {
                 <Chip.Icon className="pi pi-google" />
                 <Chip.Label>Google</Chip.Label>
             </Chip>
-            <Chip removable>
+            <Chip>
                 <Chip.Icon className="pi pi-microsoft" />
                 <Chip.Label>Microsoft</Chip.Label>
+                <Chip.RemoveIcon />
             </Chip>
-            {/* {visibleState && (
-                <Chip>
-                    <Chip.Label>GitHub</Chip.Label>
-                    <i className="pi pi-minus-circle" onClick={(e: React.MouseEvent<HTMLElement>) => close(e)} />
-                </Chip>
-            )} */}
+            <Chip>
+                <Chip.Icon className="pi pi-github" />
+                <Chip.Label>GitHub</Chip.Label>
+                <Chip.RemoveIcon asChild>
+                    <i className="pi pi-minus-circle" />
+                </Chip.RemoveIcon>
+            </Chip>
         </div>
     );
 }
