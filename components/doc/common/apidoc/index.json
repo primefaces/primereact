@@ -9295,6 +9295,22 @@
                             "description": "The template of items."
                         },
                         {
+                            "name": "loading",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Display loading icon."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<CascadeSelectProps>",
+                            "default": "",
+                            "description": "Name of the loading icon or JSX.Element for loading icon."
+                        },
+                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
