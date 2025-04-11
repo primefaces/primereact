@@ -252,6 +252,10 @@ export const AutoComplete = React.memo(
         };
 
         const removeItem = (event, index) => {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
             const removedValue = props.value[index];
             const newValue = props.value.filter((_, i) => index !== i);
 

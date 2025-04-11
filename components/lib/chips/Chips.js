@@ -30,7 +30,7 @@ export const Chips = React.memo(
         const inputRef = React.useRef(props.inputRef);
 
         const removeItem = (event, index) => {
-            if (props.disabled && props.readOnly) {
+            if (props.disabled || props.readOnly) {
                 return;
             }
 
