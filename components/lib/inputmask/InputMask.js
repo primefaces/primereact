@@ -511,7 +511,7 @@ export const InputMask = React.memo(
             let pos;
 
             if (elementRef.current) {
-                if (props.value == null) {
+                if (ObjectUtils.isEmpty(props.value)) {
                     elementRef.current.value = '';
                 } else {
                     elementRef.current.value = props.value;
