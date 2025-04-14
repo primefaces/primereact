@@ -43,6 +43,10 @@
                             "to": "/badge"
                         },
                         {
+                            "name": "BlockUI",
+                            "to": "/blockui"
+                        },
+                        {
                             "name": "Chip",
                             "to": "/chip"
                         },
