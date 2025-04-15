@@ -647,10 +647,8 @@ export default class DomHandler {
              * @param {HTMLElement} node - Element to add
              */
             const addScrollableParent = (node) => {
-                if (hideOverlaysOnDocumentScrolling) {
-                    // For document/body/html elements, add window instead
-                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
-                }
+                // For document/body/html elements, add window instead
+                scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
             };
 
             // Iterate through all parent elements
