@@ -57,6 +57,10 @@
                         {
                             "name": "ProgressSpinner",
                             "to": "/progressspinner"
+                        },
+                        {
+                            "name": "Terminal",
+                            "to": "/terminal"
                         }
                     ]
                 }
