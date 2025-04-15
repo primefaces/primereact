@@ -379,12 +379,19 @@ export default class DomHandler {
             }
 
             const targetOffsetPx = targetOffset.left;
-            const alignOffset = align === 'left' ? 0 : elementOuterWidth - targetOuterWidth;
 
-            if (targetOffsetPx + targetOuterWidth + elementOuterWidth > viewport.width) {
-                left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+            if (align === 'left') {
+                if (targetOffsetPx + elementOuterWidth > viewport.width) {
+                    left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+                } else {
+                    left = targetOffsetPx + windowScrollLeft;
+                }
             } else {
-                left = targetOffsetPx - alignOffset + windowScrollLeft;
+                if (targetOffsetPx + targetOuterWidth - elementOuterWidth < 0) {
+                    left = windowScrollLeft;
+                } else {
+                    left = targetOffsetPx + targetOuterWidth - elementOuterWidth + windowScrollLeft;
+                }
             }
 
             element.style.top = top + 'px';
