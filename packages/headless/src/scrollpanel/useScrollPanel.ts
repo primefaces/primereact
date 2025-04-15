@@ -119,9 +119,11 @@ export const useScrollPanel = withHeadless({
 
             if (yBarRef.current) {
                 addClass(yBarRef.current, 'p-scrollpanel-grabbed');
+                yBarRef.current.setAttribute('data-p-scrollpanel-grabbed', 'true');
             }
 
             addClass(document.body, 'p-scrollpanel-grabbed');
+            document.body.setAttribute('data-p-scrollpanel-grabbed', 'true');
 
             document.addEventListener('mousemove', onDocumentMouseMove);
             document.addEventListener('mouseup', onDocumentMouseUp);
@@ -134,9 +136,11 @@ export const useScrollPanel = withHeadless({
 
             if (xBarRef.current) {
                 addClass(xBarRef.current, 'p-scrollpanel-grabbed');
+                addClass(xBarRef.current, 'p-scrollpanel-grabbed');
             }
 
             addClass(document.body, 'p-scrollpanel-grabbed');
+            document.body.setAttribute('data-p-scrollpanel-grabbed', 'true');
 
             document.addEventListener('mousemove', onDocumentMouseMove);
             document.addEventListener('mouseup', onDocumentMouseUp);
@@ -185,13 +189,16 @@ export const useScrollPanel = withHeadless({
         const onDocumentMouseUp = () => {
             if (yBarRef.current) {
                 removeClass(yBarRef.current, 'p-scrollpanel-grabbed');
+                yBarRef.current.setAttribute('data-p-scrollpanel-grabbed', 'false');
             }
 
             if (xBarRef.current) {
                 removeClass(xBarRef.current, 'p-scrollpanel-grabbed');
+                xBarRef.current.setAttribute('data-p-scrollpanel-grabbed', 'false');
             }
 
             removeClass(document.body, 'p-scrollpanel-grabbed');
+            document.body.setAttribute('data-p-scrollpanel-grabbed', 'false');
 
             document.removeEventListener('mousemove', onDocumentMouseMove);
             document.removeEventListener('mouseup', onDocumentMouseUp);

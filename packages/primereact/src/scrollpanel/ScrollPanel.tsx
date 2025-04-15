@@ -6,7 +6,6 @@ import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './ScrollPanel.props';
 import { ScrollPanelContent } from './content';
-import { ScrollPanelContentContainer } from './contentcontainer';
 
 export const ScrollPanel = withComponent({
     defaultProps,
@@ -36,6 +35,17 @@ export const ScrollPanel = withComponent({
             },
             ptmi('root')
         );
+
+        const createContentContainer = () => {
+            const contentContainerProps = mergeProps(
+                {
+                    className: cx('contentContainer')
+                },
+                ptm('contentContainer')
+            );
+
+            return <div {...contentContainerProps}>{props.children}</div>;
+        };
 
         const createXBar = () => {
             const xBarProps = mergeProps(
@@ -81,19 +91,19 @@ export const ScrollPanel = withComponent({
             return <div ref={yBarRef} {...yBarProps} />;
         };
 
+        const contentContainer = createContentContainer();
         const xBar = createXBar();
         const yBar = createYBar();
 
         return (
             <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
-                {props.children}
+                {contentContainer}
                 {xBar}
                 {yBar}
             </Component>
         );
     },
     components: {
-        Content: ScrollPanelContent,
-        ContentContainer: ScrollPanelContentContainer
+        Content: ScrollPanelContent
     }
 });
