@@ -26,6 +26,10 @@
                     "name": "Panel",
                     "children": [
                         {
+                            "name": "Divider",
+                            "to": "/divider"
+                        },
+                        {
                             "name": "Panel",
                             "to": "/panel"
                         }
