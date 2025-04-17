@@ -7,7 +7,7 @@ import { defaultProps } from './MeterGroupIcon.props';
 export const MeterGroupIcon = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const metergroup = getParent('MeterGroup');
 
         const iconProps = mergeProps(
@@ -17,7 +17,8 @@ export const MeterGroupIcon = withComponent({
                     color: props.color
                 }
             },
-            metergroup?.ptm('labelicon')
+            metergroup?.ptm('labelicon'),
+            ptmi('root')
         );
 
         return (

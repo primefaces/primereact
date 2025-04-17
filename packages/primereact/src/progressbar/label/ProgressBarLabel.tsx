@@ -7,14 +7,15 @@ import { defaultProps } from './ProgressBarLabel.props';
 export const ProgressBarLabel = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const progressbar = getParent('ProgressBar');
 
         const labelProps = mergeProps(
             {
                 className: progressbar?.cx('label')
             },
-            progressbar?.ptm('label')
+            progressbar?.ptm('label'),
+            ptmi('root')
         );
 
         return (

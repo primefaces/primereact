@@ -7,14 +7,15 @@ import { defaultProps } from './ChipLabel.props';
 export const ChipLabel = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const chip = getParent('Chip');
 
         const labelProps = mergeProps(
             {
                 className: chip?.cx('label')
             },
-            chip?.ptm('label')
+            chip?.ptm('label'),
+            ptmi('root')
         );
 
         return (

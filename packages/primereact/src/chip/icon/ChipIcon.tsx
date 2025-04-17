@@ -7,14 +7,15 @@ import { defaultProps } from './ChipIcon.props';
 export const ChipIcon = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const chip = getParent('Chip');
 
         const iconProps = mergeProps(
             {
                 className: cn(props.className, chip?.cx('icon'))
             },
-            chip?.ptm('icon')
+            chip?.ptm('icon'),
+            ptmi('root')
         );
 
         return (

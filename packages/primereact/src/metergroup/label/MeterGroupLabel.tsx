@@ -7,14 +7,15 @@ import { defaultProps } from './MeterGroupLabel.props';
 export const MeterGroupLabel = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const metergroup = getParent('MeterGroup');
 
         const labelProps = mergeProps(
             {
                 className: metergroup?.cx('label')
             },
-            metergroup?.ptm('label')
+            metergroup?.ptm('label'),
+            ptmi('root')
         );
 
         return (

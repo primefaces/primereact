@@ -7,14 +7,15 @@ import { defaultProps } from './MeterGroupLabels.props';
 export const MeterGroupLabels = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const metergroup = getParent('MeterGroup');
 
         const labelsProps = mergeProps(
             {
                 className: cn(metergroup?.cx('labellist'), props.orientation === 'vertical' ? 'p-metergroup-label-list-vertical' : 'p-metergroup-label-list-horizontal')
             },
-            metergroup?.ptm('labellist')
+            metergroup?.ptm('labellist'),
+            ptmi('root')
         );
 
         return (

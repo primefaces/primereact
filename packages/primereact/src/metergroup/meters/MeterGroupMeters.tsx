@@ -7,14 +7,15 @@ import { defaultProps } from './MeterGroupMeters.props';
 export const MeterGroupMeters = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const metergroup = getParent('MeterGroup');
 
         const metersProps = mergeProps(
             {
                 className: metergroup?.cx('meters')
             },
-            metergroup?.ptm('meters')
+            metergroup?.ptm('meters'),
+            ptmi('root')
         );
 
         return (
