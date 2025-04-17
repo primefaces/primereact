@@ -65,7 +65,7 @@ export const Password = React.memo(
                 if (valid) {
                     if (type === 'outside' || context.hideOverlaysOnDocumentScrolling) {
                         hide();
-                    } else if (event.target.nodeType !== 9){
+                    } else if (event.target.nodeType !== 9) {
                         alignOverlay();
                     }
                 }
