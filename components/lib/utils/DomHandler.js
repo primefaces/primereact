@@ -617,7 +617,6 @@ export default class DomHandler {
     /**
      * Gets all scrollable parent elements of a given element
      * @param {HTMLElement} element - The element to find scrollable parents for
-     * @param {boolean} hideOverlaysOnDocumentScrolling - Whether to include window/document level scrolling
      * @returns {Array} Array of scrollable parent elements
      */
     static getScrollableParents(element) {
