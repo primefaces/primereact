@@ -1,11 +1,5 @@
-import type { usePanelProps } from './useCard.types';
+import type { useCardProps } from '@primereact/types/shared/card';
 
-export const defaultProps = {
-    __TYPE: 'Card',
-    collapsed: undefined,
-    toggleable: undefined,
-    // events
-    onCollapse: undefined,
-    onExpand: undefined,
-    onToggle: undefined
-} as Partial<usePanelProps>;
+export const defaultProps: useCardProps = {
+    __TYPE: 'useCard'
+};
