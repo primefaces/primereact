@@ -7,7 +7,7 @@ import { defaultProps } from './ScrollPanelContent.props';
 export const ScrollPanelContent = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const scrollpanel = getParent('ScrollPanel');
 
         const contentProps = mergeProps(
@@ -17,7 +17,8 @@ export const ScrollPanelContent = withComponent({
                 onScroll: scrollpanel?.onScroll,
                 onMouseEnter: scrollpanel?.moveBar
             },
-            scrollpanel?.ptm('content')
+            scrollpanel?.ptm('content'),
+            ptmi('root')
         );
 
         return (
