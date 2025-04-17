@@ -11,6 +11,7 @@ export const BlockUIMask = withComponent({
         const {
             props,
             getParent,
+            ptmi,
             parent: { props: parentProps, maskRef, visibleState, onPortalMounted }
         } = instance;
         const blockUI = getParent('BlockUI');
@@ -33,7 +34,8 @@ export const BlockUIMask = withComponent({
                     height: '100%'
                 }
             },
-            blockUI?.ptm('mask')
+            blockUI?.ptm('mask'),
+            ptmi('root')
         );
 
         const mask = (
