@@ -7,14 +7,15 @@ import { defaultProps } from './TerminalWelcomeMessage.props';
 export const TerminalWelcomeMessage = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const terminal = getParent('Terminal');
 
         const welcomeMessageProps = mergeProps(
             {
                 className: terminal?.cx('welcomeMessage')
             },
-            terminal?.ptm('welcomeMessage')
+            terminal?.ptm('welcomeMessage'),
+            ptmi('root')
         );
 
         return (
