@@ -25,7 +25,6 @@ export const useOverlayListener = ({ target, overlay, listener, when = true, typ
         when
     });
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
-        target: 'window',
         listener: (event) => {
             listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
         },

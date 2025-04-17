@@ -52,9 +52,13 @@ export const MultiSelect = React.memo(
             listener: (event, { type, valid }) => {
                 if (valid) {
                     if (type === 'outside') {
-                        !isClearClicked(event) && !isSelectAllClicked(event) && hide();
-                    } else {
+                        if (!isClearClicked(event) && !isSelectAllClicked(event)) {
+                            hide();
+                        }
+                    } else if (context.hideOverlaysOnDocumentScrolling) {
                         hide();
+                    } else if (event.target.nodeType !== 9) {
+                        alignOverlay();
                     }
                 }
             },

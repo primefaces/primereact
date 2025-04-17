@@ -55,10 +55,18 @@ export const ColumnFilter = React.memo((props) => {
         overlay: overlayRef,
         listener: (event, { type, valid }) => {
             if (valid) {
-                type === 'outside' ? !selfClick.current && !isTargetClicked(event.target) && hide() : hide();
-            }
+                if (type === 'outside') {
+                    if (!selfClick.current && !isTargetClicked(event.target)) {
+                        hide();
+                    }
 
-            selfClick.current = false;
+                    selfClick.current = false;
+                } else if (context.hideOverlaysOnDocumentScrolling) {
+                    hide();
+                } else if (event.target.nodeType !== 9) {
+                    DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
+                }
+            }
         },
         when: overlayVisibleState
     });

@@ -54,8 +54,14 @@ export const Mention = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
-            listener: (event, { valid }) => {
-                valid && hide();
+            listener: (event, { valid, type }) => {
+                if (valid) {
+                    if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
+                        hide();
+                    } else if (event.target.nodeType !== 9) {
+                        alignOverlay();
+                    }
+                }
             },
             when: overlayVisibleState
         });

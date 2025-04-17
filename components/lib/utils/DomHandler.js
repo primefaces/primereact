@@ -620,7 +620,7 @@ export default class DomHandler {
      * @param {boolean} hideOverlaysOnDocumentScrolling - Whether to include window/document level scrolling
      * @returns {Array} Array of scrollable parent elements
      */
-    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
+    static getScrollableParents(element) {
         let scrollableParents = [];
 
         if (element) {
@@ -674,11 +674,6 @@ export default class DomHandler {
                     addScrollableParent(parent);
                 }
             }
-        }
-
-        // Ensure window/body is always included as fallback
-        if (!scrollableParents.some((node) => node === document.body || node === window)) {
-            scrollableParents.push(hideOverlaysOnDocumentScrolling ? window : document.body);
         }
 
         return scrollableParents;

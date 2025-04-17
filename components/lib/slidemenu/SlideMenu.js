@@ -48,8 +48,14 @@ export const SlideMenu = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
             overlay: menuRef,
-            listener: (event, { valid }) => {
-                valid && hide(event);
+            listener: (event, { valid, type }) => {
+                if (valid) {
+                    if (type === 'outside' || context.hideOverlaysOnDocumentScrolling) {
+                        hide(event);
+                    } else if (event.target.nodeType !== 9){
+                        DomHandler.absolutePosition(menuRef.current, targetRef.current);
+                    }
+                }
             },
             when: visibleState
         });
