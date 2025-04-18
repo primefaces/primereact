@@ -78,7 +78,15 @@ export const Calendar = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? !isOverlayClicked.current && !isNavIconClicked(event.target) && hide('outside') : hide();
+                    if (type === 'outside') {
+                        if (!isOverlayClicked.current && !isNavIconClicked(event.target)) {
+                            hide('outside');
+                        }
+                    } else if (context.hideOverlaysOnDocumentScrolling) {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
                 }
 
                 isOverlayClicked.current = false;

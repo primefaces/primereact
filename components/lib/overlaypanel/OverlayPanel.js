@@ -37,19 +37,18 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         overlay: overlayRef,
         listener: (event, { type, valid }) => {
             if (valid) {
-                switch (type) {
-                    case 'outside':
-                        props.dismissable && !isPanelClicked.current && hide();
-                        break;
-                    case 'resize':
-                    case 'scroll':
-                    case 'orientationchange':
-                        align();
-                        break;
+                if (type === 'outside') {
+                    if (props.dismissable && !isPanelClicked.current) {
+                        hide();
+                    }
+
+                    isPanelClicked.current = false;
+                } else if (context.hideOverlaysOnDocumentScrolling) {
+                    hide();
+                } else if (!DomHandler.isDocument(event.target)) {
+                    align();
                 }
             }
-
-            isPanelClicked.current = false;
         },
         when: visibleState
     });

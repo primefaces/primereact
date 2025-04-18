@@ -51,10 +51,14 @@ export const Menu = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
             overlay: menuRef,
-            listener: (event, { valid }) => {
+            listener: (event, { valid, type }) => {
                 if (valid) {
-                    hide(event);
-                    setFocusedOptionIndex(-1);
+                    if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
+                        hide(event);
+                        setFocusedOptionIndex(-1);
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
+                    }
                 }
             },
             when: visibleState

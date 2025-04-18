@@ -61,8 +61,14 @@ export const Password = React.memo(
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
-            listener: (event, { valid }) => {
-                valid && hide();
+            listener: (event, { valid, type }) => {
+                if (valid) {
+                    if (type === 'outside' || context.hideOverlaysOnDocumentScrolling) {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
+                }
             },
             when: overlayVisibleState
         });

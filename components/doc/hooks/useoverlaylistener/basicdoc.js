@@ -3,16 +3,20 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Button } from '@/components/lib/button/Button';
 import { useOverlayListener } from '@/components/lib/hooks/Hooks';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
 
 export function BasicDoc(props) {
+    const context = useContext(PrimeReactContext);
     const [visible, setVisible] = useState(false);
     const buttonRef = useRef(null);
     const overlayRef = useRef(null);
 
     const handleEvents = (event, options) => {
         if (options.valid) {
-            setVisible(false);
+            if (context.hideOverlaysOnDocumentScrolling || options.type === 'outside') {
+                setVisible(false);
+            }
         }
     };
 

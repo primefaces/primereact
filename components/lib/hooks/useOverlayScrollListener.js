@@ -20,7 +20,12 @@ export const useOverlayScrollListener = ({ target, listener, options, when = tru
 
         if (!listenerRef.current && targetRef.current) {
             const hideOnScroll = context ? context.hideOverlaysOnDocumentScrolling : PrimeReact.hideOverlaysOnDocumentScrolling;
-            const nodes = (scrollableParentsRef.current = DomHandler.getScrollableParents(targetRef.current, hideOnScroll));
+            const nodes = (scrollableParentsRef.current = DomHandler.getScrollableParents(targetRef.current));
+
+            // Ensure window/body is always included as fallback
+            if (!nodes.some((node) => node === document.body || node === window)) {
+                nodes.push(hideOnScroll ? window : document.body);
+            }
 
             listenerRef.current = (event) => listener && listener(event);
             nodes.forEach((node) => node.addEventListener('scroll', listenerRef.current, options));

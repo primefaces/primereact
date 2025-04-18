@@ -51,7 +51,15 @@ export const Dropdown = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? !isClearClicked(event) && hide() : hide();
+                    if (type === 'outside') {
+                        if (!isClearClicked(event)) {
+                            hide();
+                        }
+                    } else if (context.hideOverlaysOnDocumentScrolling) {
+                        hide();
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        alignOverlay();
+                    }
                 }
             },
             when: overlayVisibleState

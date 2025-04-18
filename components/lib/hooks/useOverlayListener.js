@@ -21,26 +21,29 @@ export const useOverlayListener = ({ target, overlay, listener, when = true, typ
         type: type,
         listener: (event) => {
             listener && listener(event, { type: 'outside', valid: event.which !== 3 && isOutsideClicked(event) });
-        }
+        },
+        when
     });
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
-        target: 'window',
         listener: (event) => {
             listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
-        }
+        },
+        when
     });
     const [bindWindowOrientationChangeListener, unbindWindowOrientationChangeListener] = useEventListener({
         target: 'window',
         type: 'orientationchange',
         listener: (event) => {
             listener && listener(event, { type: 'orientationchange', valid: true });
-        }
+        },
+        when
     });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
         target,
         listener: (event) => {
             listener && listener(event, { type: 'scroll', valid: true });
-        }
+        },
+        when
     });
 
     const isOutsideClicked = (event) => {

@@ -617,10 +617,9 @@ export default class DomHandler {
     /**
      * Gets all scrollable parent elements of a given element
      * @param {HTMLElement} element - The element to find scrollable parents for
-     * @param {boolean} hideOverlaysOnDocumentScrolling - Whether to include window/document level scrolling
      * @returns {Array} Array of scrollable parent elements
      */
-    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
+    static getScrollableParents(element) {
         let scrollableParents = [];
 
         if (element) {
@@ -647,10 +646,8 @@ export default class DomHandler {
              * @param {HTMLElement} node - Element to add
              */
             const addScrollableParent = (node) => {
-                if (hideOverlaysOnDocumentScrolling) {
-                    // For document/body/html elements, add window instead
-                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
-                }
+                // For document/body/html elements, add window instead
+                scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || this.isDocument(node) ? window : node);
             };
 
             // Iterate through all parent elements
@@ -676,11 +673,6 @@ export default class DomHandler {
                     addScrollableParent(parent);
                 }
             }
-        }
-
-        // Ensure window/body is always included as fallback
-        if (!scrollableParents.some((node) => node === document.body || node === window)) {
-            scrollableParents.push(hideOverlaysOnDocumentScrolling ? window : document.body);
         }
 
         return scrollableParents;
@@ -821,6 +813,10 @@ export default class DomHandler {
 
     static isElement(obj) {
         return typeof HTMLElement === 'object' ? obj instanceof HTMLElement : obj && typeof obj === 'object' && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === 'string';
+    }
+
+    static isDocument(obj) {
+        return typeof Document === 'object' ? obj instanceof Document : obj && typeof obj === 'object' && obj !== null && obj.nodeType === 9;
     }
 
     static scrollInView(container, item) {
@@ -1182,7 +1178,7 @@ export default class DomHandler {
         const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
         const element = isFunction(target) ? target() : target;
 
-        return (element && element.nodeType === 9) || this.isExist(element) ? element : null;
+        return this.isDocument(element) || this.isExist(element) ? element : null;
     }
 
     /**

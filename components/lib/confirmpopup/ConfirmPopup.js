@@ -73,10 +73,18 @@ export const ConfirmPopup = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? props.dismissable && !isPanelClicked.current && hide('hide') : hide('hide');
-                }
+                    if (type === 'outside') {
+                        if (props.dismissable && !isPanelClicked.current) {
+                            hide('hide');
+                        }
 
-                isPanelClicked.current = false;
+                        isPanelClicked.current = false;
+                    } else if (context.hideOverlaysOnDocumentScrolling) {
+                        hide('hide');
+                    } else if (!DomHandler.isDocument(event.target)) {
+                        align();
+                    }
+                }
             },
             when: visibleState
         });
