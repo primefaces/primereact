@@ -63,7 +63,7 @@ export const ColumnFilter = React.memo((props) => {
                     selfClick.current = false;
                 } else if (context.hideOverlaysOnDocumentScrolling) {
                     hide();
-                } else if (event.target.nodeType !== 9) {
+                } else if (!DomHandler.isDocument(event.target)) {
                     DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
                 }
             }

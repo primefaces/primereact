@@ -45,7 +45,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
                     isPanelClicked.current = false;
                 } else if (context.hideOverlaysOnDocumentScrolling) {
                     hide();
-                } else if (event.target.nodeType !== 9) {
+                } else if (!DomHandler.isDocument(event.target)) {
                     align();
                 }
             }

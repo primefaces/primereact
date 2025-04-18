@@ -647,7 +647,7 @@ export default class DomHandler {
              */
             const addScrollableParent = (node) => {
                 // For document/body/html elements, add window instead
-                scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
+                scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || this.isDocument(node) ? window : node);
             };
 
             // Iterate through all parent elements
@@ -813,6 +813,10 @@ export default class DomHandler {
 
     static isElement(obj) {
         return typeof HTMLElement === 'object' ? obj instanceof HTMLElement : obj && typeof obj === 'object' && obj !== null && obj.nodeType === 1 && typeof obj.nodeName === 'string';
+    }
+
+    static isDocument(obj) {
+        return typeof Document === 'object' ? obj instanceof Document : obj && typeof obj === 'object' && obj !== null && obj.nodeType === 9;
     }
 
     static scrollInView(container, item) {
@@ -1174,7 +1178,7 @@ export default class DomHandler {
         const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
         const element = isFunction(target) ? target() : target;
 
-        return (element && element.nodeType === 9) || this.isExist(element) ? element : null;
+        return this.isDocument(element) || this.isExist(element) ? element : null;
     }
 
     /**

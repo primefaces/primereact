@@ -81,7 +81,7 @@ export const ConfirmPopup = React.memo(
                         isPanelClicked.current = false;
                     } else if (context.hideOverlaysOnDocumentScrolling) {
                         hide('hide');
-                    } else if (event.target.nodeType !== 9) {
+                    } else if (!DomHandler.isDocument(event.target)) {
                         align();
                     }
                 }

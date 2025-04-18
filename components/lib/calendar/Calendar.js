@@ -84,7 +84,7 @@ export const Calendar = React.memo(
                         }
                     } else if (context.hideOverlaysOnDocumentScrolling) {
                         hide();
-                    } else if (event.target.nodeType !== 9) {
+                    } else if (!DomHandler.isDocument(event.target)) {
                         alignOverlay();
                     }
                 }

@@ -56,7 +56,7 @@ export const Menu = React.memo(
                     if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
                         hide(event);
                         setFocusedOptionIndex(-1);
-                    } else if (event.target.nodeType !== 9) {
+                    } else if (!DomHandler.isDocument(event.target)) {
                         DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
                     }
                 }

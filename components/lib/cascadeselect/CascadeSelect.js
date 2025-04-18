@@ -48,7 +48,7 @@ export const CascadeSelect = React.memo(
                 if (valid) {
                     if (context.hideOverlaysOnDocumentScrolling || type === 'outside') {
                         hide();
-                    } else if (event.target.nodeType !== 9) {
+                    } else if (!DomHandler.isDocument(event.target)) {
                         alignOverlay();
                     }
                 }

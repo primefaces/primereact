@@ -70,6 +70,7 @@ export declare class DomHandler {
     static appendChild(el: HTMLElement, target: HTMLElement): void;
     static removeChild(el: HTMLElement, target: HTMLElement): void;
     static isElement(obj: any): boolean;
+    static isDocument(obj: any): boolean;
     static scrollInView(container: HTMLElement, item: HTMLElement): void;
     static clearSelection(): void;
     static calculateScrollbarWidth(el: HTMLElement): number;

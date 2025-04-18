@@ -52,7 +52,7 @@ export const SlideMenu = React.memo(
                 if (valid) {
                     if (type === 'outside' || context.hideOverlaysOnDocumentScrolling) {
                         hide(event);
-                    } else if (event.target.nodeType !== 9) {
+                    } else if (!DomHandler.isDocument(event.target)) {
                         DomHandler.absolutePosition(menuRef.current, targetRef.current);
                     }
                 }
