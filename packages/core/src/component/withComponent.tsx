@@ -11,7 +11,7 @@ export const withComponent = <I, D, S, C>({ name = 'UnknownComponent', defaultPr
 
         return (
             <ComponentProvider pIf={props.pIf} instance={instance}>
-                {render?.(instance as ComponentInstance<D, I, unknown, S>)}
+                {render?.(instance as ComponentInstance<D, I, ComponentInstance, S>)}
             </ComponentProvider>
         );
     };

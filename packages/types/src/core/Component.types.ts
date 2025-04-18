@@ -185,7 +185,7 @@ export declare type withComponentOptions<D, I, S, C = Record<string, unknown>> =
     styles?: StylesOptions | undefined;
     components?: C | undefined;
     setup?: withComponentSetup<D, I, S>;
-    render?: (instance: ComponentInstance<D, I, unknown, S>) => React.ReactNode;
+    render?: (instance: ComponentInstance<D, I, ComponentInstance, S>) => React.ReactNode;
 };
 
 export interface useComponentOptions<I, D, S> {
