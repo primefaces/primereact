@@ -6,9 +6,11 @@ export function createSafeContext<T>(defaultValue: T) {
 
     const useContext = () => {
         const context = React.useContext(Context);
+
         if (context === undefined) {
             throw new Error('Context must be used within a Provider');
         }
+
         return context;
     };
 
