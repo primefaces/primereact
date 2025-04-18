@@ -9,10 +9,10 @@ export default function LabelDemo() {
                         <Avatar size="xlarge">
                             <Avatar.Fallback label="P" />
                         </Avatar>
-                        <Avatar label="V" size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }}>
+                        <Avatar size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }}>
                             <Avatar.Fallback label="V" />
                         </Avatar>
-                        <Avatar label="U" style={{ backgroundColor: '#dee9fc', color: '#1a2551' }}>
+                        <Avatar style={{ backgroundColor: '#dee9fc', color: '#1a2551' }}>
                             <Avatar.Fallback label="U" />
                         </Avatar>
                     </div>

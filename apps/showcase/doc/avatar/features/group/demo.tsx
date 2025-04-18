@@ -4,8 +4,8 @@ export default function GroupDemo() {
     return (
         <div className="card flex justify-center">
             <Avatar.Group>
-                <Avatar data-taner shape="circle">
-                    <Avatar.Image data-taner alt="asdasd" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
+                <Avatar shape="circle">
+                    <Avatar.Image className="w-2" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
                     <Avatar.Fallback className="w-full h-full flex items-center justify-center bg-gray-200 animate-pulse rounded-full text-sm font-semibold text-gray-600">TE</Avatar.Fallback>
                 </Avatar>
                 <Avatar shape="circle" delayDuration={1000}>

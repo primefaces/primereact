@@ -19,7 +19,7 @@ export const RadioButtonGroup = withComponent({
             {
                 className: cx('group')
             },
-            ptmi('group')
+            ptmi('root')
         );
 
         return (
