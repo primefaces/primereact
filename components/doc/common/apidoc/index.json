@@ -56806,7 +56806,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "string | boolean",
+                            "type": "null | boolean",
                             "default": "",
                             "description": "Value of the TriStateCheckbox."
                         },
