@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMergeProps } from '../hooks/Hooks';
+import { useMergeProps, useMountEffect } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
@@ -13,6 +13,7 @@ export const Chip = React.memo(
         const props = ChipBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
+        const [idState, setIdState] = React.useState(props.id);
         const { ptm, cx, isUnstyled } = ChipBase.setMetaData({
             props
         });
@@ -54,7 +55,7 @@ export const Chip = React.memo(
                 ptm('removeIcon')
             );
 
-            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} key={UniqueComponentId('removeIcon')} />;
+            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} key={`${idState}-removeIcon`} />;
 
             if (props.image) {
                 const imageProps = mergeProps(
@@ -65,7 +66,7 @@ export const Chip = React.memo(
                     ptm('image')
                 );
 
-                content.push(<img alt={props.imageAlt} {...imageProps} key={UniqueComponentId('image')} />);
+                content.push(<img alt={props.imageAlt} {...imageProps} key={`${idState}-image`} />);
             } else if (props.icon) {
                 const chipIconProps = mergeProps(
                     {
@@ -126,6 +127,16 @@ export const Chip = React.memo(
             setVisible: (visible) => setVisibleState(visible),
             getElement: () => elementRef.current
         }));
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
+
+        if (!idState) {
+            return null;
+        }
 
         return visibleState && createElement();
     })
