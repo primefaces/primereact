@@ -31,7 +31,7 @@ export const TriStateCheckboxBase = ComponentBase.extend({
         tooltip: null,
         tooltipOptions: null,
         uncheckIcon: null,
-        value: '',
+        value: null,
         children: undefined
     },
     css: {

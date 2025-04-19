@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect } from '../hooks/Hooks';
@@ -15,7 +15,7 @@ export const TriStateCheckbox = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TriStateCheckboxBase.getProps(inProps, context);
 
-        const [checkBoxValue, setCheckBoxValue] = useState('');
+        const [checkBoxValue, setCheckBoxValue] = useState(null);
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = TriStateCheckboxBase.setMetaData({
@@ -25,10 +25,10 @@ export const TriStateCheckbox = React.memo(
         useHandleStyle(TriStateCheckboxBase.css.styles, isUnstyled, { name: 'tristatecheckbox' });
 
         useEffect(() => {
-            if ([true, false, ''].includes(props.value)) {
+            if ([true, false, null].includes(props.value)) {
                 setCheckBoxValue(props.value);
             } else {
-                setCheckBoxValue('');
+                setCheckBoxValue(null);
             }
         }, [props.value]);
 
@@ -39,12 +39,12 @@ export const TriStateCheckbox = React.memo(
 
             let newValue;
 
-            if (checkBoxValue === '') {
+            if (checkBoxValue === null) {
                 newValue = true;
             } else if (checkBoxValue === true) {
                 newValue = false;
             } else if (checkBoxValue === false) {
-                newValue = '';
+                newValue = null;
             }
 
             if (props.onChange) {
