@@ -243,7 +243,6 @@ export const MenubarSub = React.memo(
                     'aria-disabled': disabled,
                     'aria-expanded': group ? active : undefined,
                     'aria-haspopup': group && !item.url ? 'menu' : undefined,
-                    'aria-level': props.level + 1,
                     'aria-setsize': getAriaSetSize(),
                     'aria-posinset': getAriaPosInset(index),
                     'data-p-highlight': active,
