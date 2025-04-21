@@ -6,7 +6,7 @@ import * as React from 'react';
 import { defaultTitleProps } from './PanelTitle.props';
 
 export const PanelTitle = (inProps: PanelTitleProps) => {
-    const instance = useComponent(inProps, defaultTitleProps);
+    const instance = useComponent('PanelTitle', { inProps, defaultProps: defaultTitleProps });
     const { props, ptmi, getParent } = instance;
     const panel = getParent('Panel');
 

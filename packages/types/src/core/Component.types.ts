@@ -1,4 +1,4 @@
-import { Instance } from '.';
+import { Instance, useBaseOptions } from '.';
 import { StylesOptions } from '../styles';
 import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 
@@ -10,7 +10,7 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
      * The reference to the component instance.
      * @todo - React.Ref<R> | undefined;
      */
-    ref?: any;
+    ref?: unknown;
     /**
      * Whether the component should be rendered.
      * @default true
@@ -96,14 +96,11 @@ export interface ComponentProviderProps {
  * @template I - The type of the base component props that are passed by the user.
  * @template T - The type of the parent component instance.
  */
-export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, T = unknown, S = Record<PropertyKey, unknown>> = Instance<P, I, T> & {
+export declare type ComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, RData = Record<PropertyKey, unknown>> = Instance<Props, IProps, PInstance, RData> & {
     /**
-     * Finds parent instance of the component.
-     *
-     * @param type - The type of the parent instance to find.
-     * @returns {ComponentInstance | undefined} - The found parent instance or undefined if not found.
+     * Defines parent components instances.
      */
-    getParent: (type?: string) => ComponentInstance | undefined;
+    $pc: Record<string, ComponentInstance>;
 } & {
     /**
      * Finds attributes of the component using the key in pass-through options.
@@ -157,42 +154,37 @@ export declare type ComponentInstance<P = Record<PropertyKey, unknown>, I = Reco
      * The instance to load styles.
      */
     $style: Record<string, unknown> | undefined;
-} & {
-    /**
-     * Defines parent components instances.
-     */
-    $pc: Record<string, ComponentInstance>;
-    /**
-     * Defines unique component selector.
-     */
-    $attrSelector: string;
-} & S;
+};
 
-export declare type CommonKeys = 'ref' | 'name' | 'props' | 'attrs' | 'parent' | 'inProps' | '$primereact' | 'getParent';
+/*export declare type CommonKeys = 'ref' | 'name' | 'props' | 'attrs' | 'parent' | 'inProps' | '$primereact' | 'getParent';
 export declare type CommonComponentInstance<P, I, T> = Pick<ComponentInstance<P, I, T>, CommonKeys>;
 
 export declare type ComputedKeys = CommonKeys | '$attrSelector' | 'state';
-export declare type ComputedComponentInstance<P, I, T, S> = Pick<ComponentInstance<P, I, T>, ComputedKeys> & S;
+export declare type ComputedComponentInstance<P, I, T, S> = Pick<ComponentInstance<P, I, T>, ComputedKeys> & S;*/
 
 /**
  * The setup callback function or options.
  */
-export declare type withComponentSetup<D, I, S> = S | ((instance: CommonComponentInstance<D, I, unknown>) => S) | undefined;
+//export declare type withComponentSetup<D, I, S> = S | ((instance: CommonComponentInstance<D, I, unknown>) => S) | undefined;
 
-export declare type withComponentOptions<D, I, S, C = Record<string, unknown>> = {
+/*export declare type withComponentOptions<D, I, S, C = Record<string, unknown>> = {
     name?: string | undefined;
     defaultProps?: D | undefined;
     styles?: StylesOptions | undefined;
     components?: C | undefined;
     setup?: withComponentSetup<D, I, S>;
-    render?: (instance: ComponentInstance<D, I, ComponentInstance, S>) => React.ReactNode;
+    render?: React.FC<ComponentInstance<D, I, ComponentInstance, S>>;
+};*/
+
+export declare type withComponentOptions<IProps, DProps, RData, CData = Record<string, unknown>> = {
+    name?: string | undefined;
+    defaultProps?: DProps | undefined;
+    styles?: StylesOptions | undefined;
+    components?: CData | undefined;
+    setup?: useComponentOptions<IProps, DProps, unknown, RData>['setup'];
+    render?: React.FC<ComponentInstance<DProps, IProps, ComponentInstance, RData>>;
 };
 
-export interface useComponentOptions<I, D, S> {
-    inProps?: I;
-    defaultProps?: D;
-    styles?: StylesOptions;
-    setup?: withComponentSetup<D, I, S>;
-}
-
-export declare type WithComponentCallback<R, D> = (instance: ComponentInstance<R, D>, ref?: React.Ref<R>) => unknown | undefined;
+export declare type useComponentOptions<IProps, DProps, PInstance, RData> = useBaseOptions<IProps, DProps, PInstance, RData> & {
+    styles?: StylesOptions | undefined;
+};

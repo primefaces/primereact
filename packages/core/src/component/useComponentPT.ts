@@ -1,11 +1,11 @@
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '@primereact/hooks';
-import type { ComputedComponentInstance, GlobalComponentProps } from '@primereact/types/core';
+import type { GlobalComponentProps, Instance } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils/mergeprops';
 import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase } from '@primeuix/utils/object';
 import * as React from 'react';
 
-export const useComponentPT = <P extends GlobalComponentProps, I, T, S extends { id?: string }>(instance: ComputedComponentInstance<P, I, T, S>) => {
-    const { id, name, props, attrs, $primereact, $attrSelector } = instance;
+export const useComponentPT = <Props extends GlobalComponentProps, IProps, PInstance>(instance: Instance<Props, IProps, PInstance>) => {
+    const { id, name, props, attrs, $primereact, $attrSelector } = instance || {};
 
     // methods
     const _hook = (hookName: string) => {
@@ -22,7 +22,7 @@ export const useComponentPT = <P extends GlobalComponentProps, I, T, S extends {
 
     const _getPTValue = (obj = {}, key = '', params: Record<string, unknown> = {}, searchInDefaultPT = true) => {
         const searchOut = /./g.test(key) && !!params[key.split('.')[0]];
-        const { mergeSections = true, mergeProps: useMergeProps = false } = props?.ptOptions || $primereact?.config?.ptOptions || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false } = props?.ptOptions || $primereact.config?.ptOptions || {};
         const global = searchInDefaultPT ? (searchOut ? _useGlobalPT(_getPTClassValue, key, params) : _useDefaultPT(_getPTClassValue, key, params)) : undefined;
         const self = searchOut ? undefined : _getPTSelf(obj, _getPTClassValue, key, { ...params, global: global || {} });
         const datasets = _getPTDatasets(key);
@@ -144,7 +144,7 @@ export const useComponentPT = <P extends GlobalComponentProps, I, T, S extends {
     const $attrsWithoutPT = React.useMemo(() => {
         return Object.entries(attrs || {})
             .filter(([key]) => !key?.startsWith('pt:'))
-            .reduce((acc, [key, value]) => {
+            .reduce<Record<string, unknown>>((acc, [key, value]) => {
                 acc[key] = value;
 
                 return acc;

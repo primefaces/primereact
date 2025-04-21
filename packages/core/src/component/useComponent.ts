@@ -1,50 +1,26 @@
-import { usePrimeReact } from '@primereact/core/config';
-import { combinedRefs } from '@primereact/core/utils';
-import { useAttrSelector, useProps } from '@primereact/hooks';
-import type { CommonComponentInstance, ComponentInstance, ComputedComponentInstance, useComponentOptions, withComponentSetup } from '@primereact/types/core';
-import { isNotEmpty, resolve } from '@primeuix/utils';
+import { useBase } from '@primereact/core/base';
+import type { ComponentInstance, useBaseOptions, useComponentOptions } from '@primereact/types/core';
 import * as React from 'react';
 import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <I, D, S>(name: string = 'UnknownComponent', options: useComponentOptions<I, D, S> = {}) => {
-    const { config, locale, passthrough, theme, parent } = usePrimeReact();
-    const { inProps, defaultProps, styles, setup } = options;
+export const useComponent = <IProps, DProps, PInstance, RData>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, PInstance, RData> = {}) => {
+    const defaultProps = { ...globalProps, ...options.defaultProps };
+    const baseInstance = useBase(name, {
+        inProps: options.inProps,
+        defaultProps,
+        setup: options.setup
+    } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, PInstance, RData>);
 
-    const { props, attrs } = useProps(inProps, { ...globalProps, ...defaultProps });
-    const ref = React.useRef(props.ref ?? null);
+    const { ref, props, parent } = baseInstance;
+    const { styles } = options;
 
-    const common: CommonComponentInstance<typeof props, I, typeof parent> = {
-        ref,
-        name,
-        props,
-        attrs,
-        parent,
-        inProps,
-        $primereact: {
-            config,
-            locale,
-            passthrough,
-            theme
-        },
-        getParent: (type?: string) => (isNotEmpty(type) ? instance.$pc?.[type!] : instance.parent)
-    };
+    const ptx = useComponentPT(baseInstance);
+    const stx = useComponentStyle(baseInstance, props.styles || styles);
 
-    const $attrSelector = useAttrSelector('pc_');
-
-    const computed: ComputedComponentInstance<typeof props, I, typeof parent, S> = {
-        state: {},
-        $attrSelector,
-        ...(resolve(setup as withComponentSetup<typeof props, I, S>, common) as S),
-        ...common
-    };
-
-    const ptx = useComponentPT(computed);
-    const stx = useComponentStyle(computed, props.styles || styles);
-
-    const instance: ComponentInstance<typeof props, I, typeof parent, S> = {
-        ...computed,
+    const instance: ComponentInstance<typeof props, IProps, typeof parent> = {
+        ...baseInstance,
         ...ptx,
         ...stx,
         $pc: {}
@@ -55,10 +31,6 @@ export const useComponent = <I, D, S>(name: string = 'UnknownComponent', options
         ...parent?.$pc,
         [name]: instance as ComponentInstance // @todo - update type
     };
-
-    React.useEffect(() => {
-        combinedRefs(ref, props.ref);
-    }, [ref, props.ref]);
 
     React.useImperativeHandle(ref, () => instance, [instance]);
 

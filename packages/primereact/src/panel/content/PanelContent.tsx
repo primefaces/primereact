@@ -6,7 +6,7 @@ import * as React from 'react';
 import { defaultContentProps } from './PanelContent.props';
 
 export const PanelContent = (inProps: PanelContentProps) => {
-    const instance = useComponent(inProps, defaultContentProps);
+    const instance = useComponent('PanelContent', { inProps, defaultProps: defaultContentProps });
     const { props, ptmi, getParent } = instance;
     const panel = getParent('Panel');
 

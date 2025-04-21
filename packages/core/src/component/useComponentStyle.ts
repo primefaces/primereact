@@ -1,11 +1,11 @@
 import { StyleRegistry } from '@primereact/core/utils';
-import type { ComputedComponentInstance } from '@primereact/types/core';
+import type { Instance } from '@primereact/types/core';
 import { Theme, ThemeService } from '@primeuix/styled';
 import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-export const useComponentStyle = <P, I, T, S>(instance: ComputedComponentInstance<P, I, T, S>, styles?: any) => {
+export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<Props, IProps, PInstance>, styles?: any) => {
     const { props = {}, attrs, state, parent, $primereact, $attrSelector, elementRef } = instance || {};
     const $style = useComponentStyleHandler(styles, elementRef);
 

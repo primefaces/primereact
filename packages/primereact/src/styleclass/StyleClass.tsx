@@ -7,7 +7,7 @@ import { defaultProps } from './StyleClass.props';
 
 export const StyleClass = (inProps: StyleClassProps) => {
     const styleclass = useStyleClass(inProps);
-    const instance = useComponent(inProps, defaultProps, {}, styleclass);
+    const instance = useComponent('StyleClass', { inProps, defaultProps, setup: styleclass });
     const {
         props,
         ptmi,

@@ -6,7 +6,7 @@ import * as React from 'react';
 import { defaultHeaderProps } from './PanelHeader.props';
 
 export const PanelHeader = (inProps: PanelHeaderProps) => {
-    const instance = useComponent(inProps, defaultHeaderProps);
+    const instance = useComponent('PanelHeader', { inProps, defaultProps: defaultHeaderProps });
     const { props, ptmi, getParent } = instance;
     const panel = getParent('Panel');
 

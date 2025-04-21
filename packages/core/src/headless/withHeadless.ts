@@ -1,4 +1,4 @@
-import type { HeadlessInstance, withHeadlessOptions } from '@primereact/types/core';
+import type { withHeadlessOptions } from '@primereact/types/core';
 import { useHeadless } from './useHeadless';
 
 /**
@@ -12,8 +12,8 @@ import { useHeadless } from './useHeadless';
  * @param {D} [options.defaultProps] - The default properties.
  * @returns The Headless instance.
  */
-export const withHeadless = <S, D>({ name, setup, defaultProps }: withHeadlessOptions<S, D>) => {
-    return <P>(inProps?: P): HeadlessInstance<P> & S => {
-        return useHeadless(name, { inProps, defaultProps, setup }) as HeadlessInstance<P> & S;
+export const withHeadless = <IProps, DProps, RData>({ name, defaultProps, setup }: withHeadlessOptions<IProps, DProps, RData>) => {
+    return (inProps?: IProps) => {
+        return useHeadless(name, { inProps, defaultProps, setup });
     };
 };
