@@ -123,6 +123,10 @@ export const Menu = React.memo(
         };
 
         const onListBlur = (event) => {
+            const { currentTarget, relatedTarget } = event;
+
+            if (relatedTarget && currentTarget.contains(relatedTarget)) return;
+
             setFocused(false);
             setFocusedOptionIndex(-1);
             props.onBlur && props.onBlur(event);
