@@ -30,6 +30,7 @@ export const Chip = React.memo(
             let result = true;
 
             if (props.onRemove) {
+                event.stopPropagation();
                 result = props.onRemove({
                     originalEvent: event,
                     value: props.label || props.image || props.icon
