@@ -43,7 +43,7 @@ export const Menubar = React.memo(
             type: 'click',
             listener: (event) => {
                 const isOutsideButton = menuButtonRef.current && !menuButtonRef.current.contains(event.target);
-                
+
                 if (isOutsideButton) {
                     hide();
                 }
