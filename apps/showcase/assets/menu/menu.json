@@ -28,6 +28,10 @@
                         {
                             "name": "Panel",
                             "to": "/panel"
+                        },
+                        {
+                            "name": "Splitter",
+                            "to": "/splitter"
                         }
                     ]
                 },
