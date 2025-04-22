@@ -31,9 +31,12 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
         getParent: (type?: string) => (isNotEmpty(type) ? instance.$pc?.[type!] : instance.parent)
     };
 
+    const $computedSetup = resolve(setup as BaseSetup<typeof props, IProps, typeof parent, RData>, common) as RData;
+
     const computed: ComputedInstance<typeof props, IProps, typeof parent, RData> = {
         state: {},
-        ...(resolve(setup as BaseSetup<typeof props, IProps, typeof parent, RData>, common) as RData),
+        $computedSetup,
+        ...$computedSetup,
         ...common
     };
 

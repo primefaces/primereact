@@ -10,7 +10,7 @@ export interface Contexts {
     parent?: unknown;
 }
 
-export declare type BaseSetup<Props, IProps, PInstance, RData> = RData | ((instance: CommonInstance<Props, IProps, PInstance>) => RData);
+export declare type BaseSetup<Props, IProps, PInstance, RData> = RData | ((instance?: CommonInstance<Props, IProps, PInstance>) => RData);
 
 export interface useBaseOptions<IProps, DProps, PInstance, RData> {
     inProps?: IProps;
@@ -79,6 +79,10 @@ export declare type ComputedInstance<Props = Record<PropertyKey, unknown>, IProp
      * The component state.
      */
     state: Record<PropertyKey, unknown>;
+    /**
+     * The computed setup data.
+     */
+    $computedSetup: RData;
 } & RData;
 
 /**

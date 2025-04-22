@@ -3,8 +3,9 @@ import { styles } from '@primereact/styles/icon';
 import { IconProps } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils';
 
-export const withBaseIcon = (callback: any) => {
+export const withBaseIcon = ({ name, render }) => {
     return withIcon({
+        name,
         render: ({ id, ptmi, pti, cx }) => {
             const rootProps = mergeProps(
                 {
@@ -15,7 +16,7 @@ export const withBaseIcon = (callback: any) => {
                 ptmi('root')
             );
 
-            return callback?.({ rootProps });
+            return render?.({ rootProps });
         },
         defaultProps: {} as IconProps,
         styles
