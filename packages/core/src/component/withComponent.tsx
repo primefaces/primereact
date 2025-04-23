@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ComponentProvider } from './Component.context';
 import { useComponent } from './useComponent';
 
-export const withComponent = <IProps, DProps, RData, CData>({ name = 'UnknownComponent', defaultProps, styles, components, setup, render }: withComponentOptions<IProps, DProps, RData, CData>) => {
+export const withComponent = <IProps, DProps, RData extends Record<PropertyKey, unknown>, CData>({ name = 'UnknownComponent', defaultProps, styles, components, setup, render }: withComponentOptions<IProps, DProps, RData, CData>) => {
     const BaseComponent = <T extends React.ElementType>(inProps?: BaseComponentProps<IProps, T> & DProps) => {
         const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useBaseOptions<BaseComponentProps<IProps, T> & DProps, DProps, ComponentInstance, RData>);
         const { props } = instance;

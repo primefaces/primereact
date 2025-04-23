@@ -96,7 +96,12 @@ export interface ComponentProviderProps {
  * @template I - The type of the base component props that are passed by the user.
  * @template T - The type of the parent component instance.
  */
-export declare type ComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, RData = Record<PropertyKey, unknown>> = Instance<Props, IProps, PInstance, RData> & {
+export declare type ComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>> = Instance<
+    Props,
+    IProps,
+    PInstance,
+    RData
+> & {
     /**
      * Defines parent components instances.
      */
@@ -176,7 +181,7 @@ export declare type ComputedComponentInstance<P, I, T, S> = Pick<ComponentInstan
     render?: React.FC<ComponentInstance<D, I, ComponentInstance, S>>;
 };*/
 
-export declare type withComponentOptions<IProps, DProps, RData, CData = Record<string, unknown>> = {
+export declare type withComponentOptions<IProps, DProps, RData extends Record<PropertyKey, unknown>, CData = Record<string, unknown>> = {
     name?: string | undefined;
     defaultProps?: DProps | undefined;
     styles?: StylesOptions | undefined;
@@ -185,6 +190,6 @@ export declare type withComponentOptions<IProps, DProps, RData, CData = Record<s
     render?: React.FC<ComponentInstance<DProps, IProps, ComponentInstance, RData>>;
 };
 
-export declare type useComponentOptions<IProps, DProps, PInstance, RData> = useBaseOptions<IProps, DProps, PInstance, RData> & {
+export declare type useComponentOptions<IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>> = useBaseOptions<IProps, DProps, PInstance, RData> & {
     styles?: StylesOptions | undefined;
 };

@@ -5,7 +5,7 @@ import type { BaseSetup, CommonInstance, ComputedInstance, Instance, useBaseOpti
 import { isNotEmpty, resolve } from '@primeuix/utils';
 import * as React from 'react';
 
-export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }, DProps, PInstance, RData>(name: string = 'UnknownBase', options: useBaseOptions<IProps, DProps, PInstance, RData>) => {
+export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }, DProps, PInstance, RData extends Record<PropertyKey, unknown>>(name: string = 'UnknownBase', options: useBaseOptions<IProps, DProps, PInstance, RData>) => {
     const $primereact = usePrimeReact();
     const { parent } = $primereact;
     const { inProps, defaultProps, setup } = options || {};

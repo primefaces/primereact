@@ -14,7 +14,7 @@ export const Checkbox = withComponent({
     defaultProps,
     styles,
     setup: (instance) => {
-        const checkbox = useCheckbox(instance.inProps);
+        const checkbox = useCheckbox(instance?.inProps);
 
         return checkbox;
     },

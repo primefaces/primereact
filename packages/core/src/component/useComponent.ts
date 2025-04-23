@@ -5,7 +5,7 @@ import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <IProps, DProps, PInstance, RData>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, PInstance, RData> = {}) => {
+export const useComponent = <IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, PInstance, RData> = {}) => {
     const defaultProps = { ...globalProps, ...options.defaultProps };
     const baseInstance = useBase(name, {
         inProps: options.inProps,
@@ -19,7 +19,7 @@ export const useComponent = <IProps, DProps, PInstance, RData>(name: string = 'U
     const ptx = useComponentPT(baseInstance);
     const stx = useComponentStyle(baseInstance, props.styles || styles);
 
-    const instance: ComponentInstance<typeof props, IProps, typeof parent> = {
+    const instance: ComponentInstance<typeof props, IProps, typeof parent, RData> = {
         ...baseInstance,
         ...ptx,
         ...stx,

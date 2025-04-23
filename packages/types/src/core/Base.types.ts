@@ -10,9 +10,9 @@ export interface Contexts {
     parent?: unknown;
 }
 
-export declare type BaseSetup<Props, IProps, PInstance, RData> = RData | ((instance?: CommonInstance<Props, IProps, PInstance>) => RData);
+export declare type BaseSetup<Props, IProps, PInstance, RData extends Record<PropertyKey, unknown>> = RData | ((instance: CommonInstance<Props, IProps, PInstance>) => RData) | (() => RData);
 
-export interface useBaseOptions<IProps, DProps, PInstance, RData> {
+export interface useBaseOptions<IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>> {
     inProps?: IProps;
     defaultProps?: DProps;
     setup?: BaseSetup<DProps, IProps, PInstance, RData>;
@@ -68,13 +68,14 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
     getParent: (type?: string) => Instance | undefined;
 };
 
-export declare type ComputedInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, RData = Record<PropertyKey, unknown>, Ref = unknown, ERef = HTMLElement> = CommonInstance<
-    Props,
-    IProps,
-    PInstance,
-    Ref,
-    ERef
-> & {
+export declare type ComputedInstance<
+    Props = Record<PropertyKey, unknown>,
+    IProps = Record<PropertyKey, unknown>,
+    PInstance = unknown,
+    RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+    Ref = unknown,
+    ERef = HTMLElement
+> = CommonInstance<Props, IProps, PInstance, Ref, ERef> & {
     /**
      * The component state.
      */
@@ -95,14 +96,14 @@ export declare type ComputedInstance<Props = Record<PropertyKey, unknown>, IProp
  * @template Ref - The type of the component reference.
  * @template ERef - The type of the element reference.
  */
-export declare type Instance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, RData = Record<PropertyKey, unknown>, Ref = unknown, ERef = HTMLElement> = ComputedInstance<
-    Props,
-    IProps,
-    PInstance,
-    RData,
-    Ref,
-    ERef
-> & {
+export declare type Instance<
+    Props = Record<PropertyKey, unknown>,
+    IProps = Record<PropertyKey, unknown>,
+    PInstance = unknown,
+    RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+    Ref = unknown,
+    ERef = HTMLElement
+> = ComputedInstance<Props, IProps, PInstance, RData, Ref, ERef> & {
     /**
      * The parent component instances.
      */
