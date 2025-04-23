@@ -1,8 +1,7 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { usePanel } from '@primereact/headless/panel';
 import { styles } from '@primereact/styles/panel';
-import type { PanelProps } from '@primereact/types/shared/panel';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './Panel.props';
@@ -13,39 +12,41 @@ import { PanelHeader } from './header';
 import { PanelHeaderActions } from './headeractions';
 import { PanelTitle } from './title';
 
-export const Panel = (inProps: PanelProps) => {
-    const panel = usePanel(inProps);
-    const instance = useComponent(inProps, defaultProps, styles, panel);
-    const {
-        id,
-        props,
-        ptmi,
-        cx,
-        // element refs
-        elementRef
-    } = instance;
+export const Panel = withComponent({
+    name: 'Panel',
+    defaultProps,
+    styles,
+    setup: (instance) => {
+        const panel = usePanel(instance?.inProps);
 
-    const rootProps = mergeProps(
-        {
+        return panel;
+    },
+    render: (instance) => {
+        const {
             id,
-            className: cx('root')
-        },
-        ptmi('root')
-    );
+            props,
+            ptmi,
+            cx,
+            // element refs
+            elementRef
+        } = instance;
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
-            <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
-                {props.children}
-            </Component>
-        </ComponentProvider>
-    );
-};
+        const rootProps = mergeProps(
+            {
+                id,
+                className: cx('root')
+            },
+            ptmi('root')
+        );
 
-Panel.displayName = 'PrimeReact.Panel';
-Panel.Header = PanelHeader;
-Panel.Title = PanelTitle;
-Panel.HeaderActions = PanelHeaderActions;
-Panel.Content = PanelContent;
-Panel.Footer = PanelFooter;
-Panel.Collapse = PanelCollapse;
+        return <Component as={props.as} {...rootProps} ref={elementRef} children={props.children} />;
+    },
+    components: {
+        Header: PanelHeader,
+        Title: PanelTitle,
+        HeaderActions: PanelHeaderActions,
+        Content: PanelContent,
+        Footer: PanelFooter,
+        Collapse: PanelCollapse
+    }
+});

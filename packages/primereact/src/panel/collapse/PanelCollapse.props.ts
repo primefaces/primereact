@@ -1,3 +1,5 @@
+import { PanelCollapseProps } from '@primereact/types/shared/panel';
+
 export const defaultCollapseProps: PanelCollapseProps = {
-    __TYPE: 'PanelCollapse'
+    as: 'div'
 };

@@ -1,30 +1,18 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import { BaseComponentProps } from '..';
+import { usePanelProps } from './usePanel.types';
 
-export interface PanelProps extends GlobalComponentProps {
-    readonly __TYPE?: 'Panel';
+export interface PanelProps extends BaseComponentProps<usePanelProps> {
     toggleable?: boolean;
 }
 
-export interface PanelHeaderProps extends GlobalComponentProps {
-    readonly __TYPE?: 'PanelHeader';
-}
+export interface PanelHeaderProps extends BaseComponentProps {}
 
-export interface PanelTitleProps extends GlobalComponentProps {
-    readonly __TYPE?: 'PanelTitle';
-}
+export interface PanelTitleProps extends BaseComponentProps {}
 
-export interface PanelHeaderActionsProps extends GlobalComponentProps {
-    readonly __TYPE?: 'PanelHeaderActions';
-}
+export interface PanelHeaderActionsProps extends BaseComponentProps {}
 
-export interface PanelContentProps extends GlobalComponentProps {
-    readonly __TYPE?: 'PanelContent';
-}
+export interface PanelContentProps extends BaseComponentProps {}
 
-export interface PanelFooterProps extends GlobalComponentProps {
-    readonly __TYPE?: 'PanelFooter';
-}
+export interface PanelFooterProps extends BaseComponentProps {}
 
-export interface PanelCollapseProps extends GlobalComponentProps {
-    readonly __TYPE?: 'PanelCollapse';
-}
+export interface PanelCollapseProps extends BaseComponentProps {}

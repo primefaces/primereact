@@ -19,10 +19,6 @@ export interface usePanelToggleEvent {
  */
 export interface usePanelProps {
     /**
-     * The type of the hook.
-     */
-    readonly __TYPE?: 'usePanel';
-    /**
      * Whether the panel is collapsed.
      * @default false
      */

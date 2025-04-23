@@ -1,30 +1,24 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
-import type { PanelContentProps } from '@primereact/types/shared/panel';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultContentProps } from './PanelContent.props';
 
-export const PanelContent = (inProps: PanelContentProps) => {
-    const instance = useComponent('PanelContent', { inProps, defaultProps: defaultContentProps });
-    const { props, ptmi, getParent } = instance;
-    const panel = getParent('Panel');
+export const PanelContent = withComponent({
+    name: 'PanelContent',
+    defaultProps: defaultContentProps,
+    render: (instance) => {
+        const { props, ptmi, getParent } = instance;
+        const panel = getParent('Panel');
 
-    const contentProps = mergeProps(
-        {
-            className: panel?.cx?.('content')
-        },
-        panel?.ptm?.('content'),
-        ptmi('root')
-    );
+        const rootProps = mergeProps(
+            {
+                className: panel?.cx('content')
+            },
+            panel?.ptm('content'),
+            ptmi('root')
+        );
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
-            <Component as={props.as || 'div'} {...contentProps}>
-                {props.children}
-            </Component>
-        </ComponentProvider>
-    );
-};
-
-PanelContent.displayName = 'PrimeReact.PanelContent';
+        return <Component as={props.as} {...rootProps} children={props.children} />;
+    }
+});

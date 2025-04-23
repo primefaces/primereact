@@ -23,4 +23,4 @@ export declare type CommonComponentProps<H, T extends React.ElementType> = H & G
  * @template T - The element type of the component.
  * @template O - The properties to omit from the component.
  */
-export declare type BaseComponentProps<H, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<H, T> & Omit<ExtractProps<T>, keyof CommonComponentProps<H, T> | O[number]>;
+export declare type BaseComponentProps<H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<H, T> & Omit<ExtractProps<T>, keyof CommonComponentProps<H, T> | O[number]>;

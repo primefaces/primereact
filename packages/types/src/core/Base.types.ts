@@ -1,3 +1,5 @@
+import { ComponentInstance } from '.';
+
 /**
  * PrimeReact Contexts
  * @todo - define more specific types for the configuration properties.
@@ -65,7 +67,7 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
      * @param type - The type of the parent instance to find.
      * @returns {Instance | undefined} - The found parent instance or undefined if not found.
      */
-    getParent: (type?: string) => Instance | undefined;
+    getParent: (type?: string) => ComponentInstance | undefined;
 };
 
 export declare type ComputedInstance<
@@ -107,5 +109,5 @@ export declare type Instance<
     /**
      * The parent component instances.
      */
-    $pc: Record<string, Instance>;
+    $pc: Record<string, ComponentInstance>;
 };

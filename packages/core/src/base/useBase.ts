@@ -1,7 +1,7 @@
 import { usePrimeReact } from '@primereact/core/config';
 import { combinedRefs } from '@primereact/core/utils';
 import { useAttrSelector, useId, useProps } from '@primereact/hooks';
-import type { BaseSetup, CommonInstance, ComputedInstance, Instance, useBaseOptions } from '@primereact/types/core';
+import type { BaseSetup, CommonInstance, ComponentInstance, ComputedInstance, Instance, useBaseOptions } from '@primereact/types/core';
 import { isNotEmpty, resolve } from '@primeuix/utils';
 import * as React from 'react';
 
@@ -49,7 +49,7 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
     // Inject parent component instances and self instance
     instance.$pc = {
         ...parent?.$pc,
-        [name]: instance as Instance // @todo - update type
+        [name]: instance as ComponentInstance // @todo - update type
     };
 
     React.useEffect(() => {
