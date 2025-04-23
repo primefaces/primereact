@@ -37,7 +37,8 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
         state: {},
         $computedSetup,
         ...$computedSetup,
-        ...common
+        ...common,
+        elementRef: ($computedSetup?.elementRef ?? elementRef) as React.RefObject<HTMLElement> // @todo - update type and add for styleclass elementRef
     };
 
     const instance: Instance<typeof props, IProps, typeof parent, RData> = {
