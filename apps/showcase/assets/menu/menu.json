@@ -10,15 +10,10 @@
                         {
                             "name": "Checkbox",
                             "to": "/checkbox"
-                        }
-                    ]
-                },
-                {
-                    "name": "Button",
-                    "children": [
+                        },
                         {
-                            "name": "Button",
-                            "to": "/button"
+                            "name": "Radio",
+                            "to": "/radio"
                         }
                     ]
                 },
@@ -57,6 +52,14 @@
                         {
                             "name": "ProgressSpinner",
                             "to": "/progressspinner"
+                        },
+                        {
+                            "name": "Skeleton",
+                            "to": "/skeleton"
+                        },
+                        {
+                            "name": "StyleClass",
+                            "to": "/styleclass"
                         }
                     ]
                 }
