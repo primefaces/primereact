@@ -7,7 +7,7 @@ import { defaultProps } from './MeterGroupMeter.props';
 export const MeterGroupMeter = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const metergroup = getParent('MeterGroup');
 
         React.useEffect(() => {
@@ -37,8 +37,8 @@ export const MeterGroupMeter = withComponent({
                     height: metergroup?.props.orientation === 'vertical' && percentValue(props.value?.value)
                 }
             },
-            metergroup?.ptm('meter')
-            // props
+            metergroup?.ptm('meter'),
+            ptmi('root')
         );
 
         return (

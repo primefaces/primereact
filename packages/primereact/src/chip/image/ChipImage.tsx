@@ -7,7 +7,7 @@ import { defaultProps } from './ChipImage.props';
 export const ChipImage = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const chip = getParent('Chip');
 
         const imageProps = mergeProps(
@@ -15,7 +15,8 @@ export const ChipImage = withComponent({
                 className: chip?.cx('image'),
                 src: props.src
             },
-            chip?.ptm('image')
+            chip?.ptm('image'),
+            ptmi('root')
         );
 
         return <Component as={props.as || 'img'} {...imageProps}></Component>;

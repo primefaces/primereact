@@ -8,7 +8,7 @@ import { defaultProps } from './ChipRemoveIcon.props';
 export const ChipRemoveIcon = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const chip = getParent('Chip');
 
         const removeIconProps = mergeProps(
@@ -18,7 +18,8 @@ export const ChipRemoveIcon = withComponent({
                 onClick: chip?.close,
                 onKeyDown: chip?.onKeyDown
             },
-            chip?.ptm('removeIcon')
+            chip?.ptm('removeIcon'),
+            ptmi('root')
         );
 
         return props.asChild ? (

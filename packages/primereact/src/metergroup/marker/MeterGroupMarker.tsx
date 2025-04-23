@@ -7,7 +7,7 @@ import { defaultProps } from './MeterGroupMarker.props';
 export const MeterGroupMarker = withComponent({
     defaultProps,
     render: (instance) => {
-        const { props, getParent } = instance;
+        const { props, getParent, ptmi } = instance;
         const metergroup = getParent('MeterGroup');
 
         const markerProps = mergeProps(
@@ -17,7 +17,8 @@ export const MeterGroupMarker = withComponent({
                     backgroundColor: props.color
                 }
             },
-            metergroup?.ptm('labelmarker')
+            metergroup?.ptm('labelmarker'),
+            ptmi('root')
         );
 
         return (
