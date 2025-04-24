@@ -25097,6 +25097,14 @@
                             "description": "Width of the image thumbnail in pixels."
                         },
                         {
+                            "name": "filenameTruncateLength",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "40",
+                            "description": "Length of the maximum file name characters that can be displayed."
+                        },
+                        {
                             "name": "progressBarTemplate",
                             "optional": true,
                             "readonly": false,
