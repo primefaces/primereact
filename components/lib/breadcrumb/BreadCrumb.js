@@ -168,7 +168,8 @@ export const BreadCrumb = React.memo(
                     target: item.target,
                     'aria-current': isCurrent(item.url),
                     onClick: (event) => itemClick(event, item),
-                    'aria-disabled': item.disabled
+                    'aria-disabled': item.disabled,
+                    tabIndex: item.disabled ? -1 : undefined
                 },
                 ptm('action')
             );
