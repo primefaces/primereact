@@ -1,31 +1,29 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useEventListener } from '@primereact/hooks/use-event-listener';
-import { find, getHeight, getOuterHeight, getOuterWidth, getWidth, isRTL } from '@primeuix/utils/dom';
-import { isArray } from '@primeuix/utils/object';
+import { getHeight, getOuterHeight, getOuterWidth, getWidth, isRTL } from '@primeuix/utils/dom';
+import { isArray, isNotEmpty } from '@primeuix/utils/object';
 import * as React from 'react';
 import { defaultProps } from './useSplitter.props';
 
 export const useSplitter = withHeadless({
     setup: ({ props, elementRef, inProps }) => {
-        const gutterRef = React.useRef(null);
-        const gutterRefs = React.useRef({});
-        const size = React.useRef(null);
+        const gutterRef = React.useRef<HTMLElement | null>(null);
+        const gutterRefs = React.useRef<Record<string, HTMLElement>>({});
+        const size = React.useRef<number | null>(null);
         const dragging = React.useRef(false);
         const startPos = React.useRef<number | null>(null);
-        const prevPanelElement = React.useRef(null);
-        const nextPanelElement = React.useRef(null);
-        const prevPanelSize = React.useRef(null);
-        const prevSize = React.useRef(null);
-        const prevPanelSizeNew = React.useRef(null);
-        const nextPanelSize = React.useRef(null);
-        const nextPanelSizeNew = React.useRef(null);
-        const prevPanelIndex = React.useRef(null);
-        const timer = React.useRef(null);
-        const [panelSizes, setPanelSizes] = React.useState([]);
-        const [nested, setNested] = React.useState(false);
-        const [panels, setPanels] = React.useState([]);
+        const prevPanelElement = React.useRef<HTMLElement | null>(null);
+        const nextPanelElement = React.useRef<HTMLElement | null>(null);
+        const prevPanelSize = React.useRef<number | null>(null);
+        const [prevSize, setPrevSize] = React.useState<number | null>(null);
+        const nextPanelSize = React.useRef<number | null>(null);
+        const prevPanelIndex = React.useRef<number | null>(null);
+        const timer = React.useRef<ReturnType<typeof setInterval> | null>(null);
+        const [panelSizes, setPanelSizes] = React.useState<number[]>([]);
+        const [panels, setPanels] = React.useState<React.ReactNode[]>([]);
         const horizontal = props.layout === 'horizontal';
         const gutterCounter = React.useRef(0);
+        const panelCounter = React.useRef(0);
 
         const registerGutter = React.useCallback(() => {
             const index = gutterCounter.current;
@@ -35,44 +33,60 @@ export const useSplitter = withHeadless({
             return index;
         }, []);
 
+        const registerPanel = React.useCallback(() => {
+            const index = panelCounter.current;
+
+            panelCounter.current += 1;
+
+            return index;
+        }, []);
+
         React.useEffect(() => {
             gutterCounter.current = 0;
+            panelCounter.current = 0;
 
             return () => {
                 gutterCounter.current = 0;
+                panelCounter.current = 0;
             };
         }, []);
 
         const onResizeStart = (event: React.MouseEvent | React.TouchEvent | KeyboardEvent, index: number, isKeyDown = false) => {
-            //TODO:
-            // gutterRef.current = event.currentTarget || event.target.parentElement;
             gutterRef.current = gutterRefs.current[index];
             size.current = horizontal ? getWidth(elementRef.current) : getHeight(elementRef.current);
 
             if (!isKeyDown) {
                 dragging.current = true;
-                startPos.current = props.layout === 'horizontal' ? (event as React.MouseEvent).pageX || (event as React.TouchEvent).changedTouches[0].pageX : (event as React.MouseEvent).pageY || (event as React.TouchEvent).changedTouches[0].pageY;
+                startPos.current =
+                    props.layout === 'horizontal' ? (event as React.MouseEvent).pageX || (event as React.TouchEvent).changedTouches?.[0]?.pageX : (event as React.MouseEvent).pageY || (event as React.TouchEvent).changedTouches?.[0]?.pageY;
             }
 
-            prevPanelElement.current = gutterRef.current.previousElementSibling;
-            nextPanelElement.current = gutterRef.current.nextElementSibling;
+            if (gutterRef.current) {
+                prevPanelElement.current = gutterRef.current.previousElementSibling as HTMLElement;
+                nextPanelElement.current = gutterRef.current.nextElementSibling as HTMLElement;
 
-            if (isKeyDown) {
-                prevPanelSize.current = horizontal ? getOuterWidth(prevPanelElement.current, true) : getOuterHeight(prevPanelElement.current, true);
-                nextPanelSize.current = horizontal ? getOuterWidth(nextPanelElement.current, true) : getOuterHeight(nextPanelElement.current, true);
-            } else {
-                prevPanelSize.current = (100 * (horizontal ? getOuterWidth(prevPanelElement.current, true) : getOuterHeight(prevPanelElement.current, true))) / size.current;
-                nextPanelSize.current = (100 * (horizontal ? getOuterWidth(nextPanelElement.current, true) : getOuterHeight(nextPanelElement.current, true))) / size.current;
+                if (prevPanelElement.current && nextPanelElement.current) {
+                    if (isKeyDown) {
+                        prevPanelSize.current = horizontal ? getOuterWidth(prevPanelElement.current, true) : getOuterHeight(prevPanelElement.current, true);
+                        nextPanelSize.current = horizontal ? getOuterWidth(nextPanelElement.current, true) : getOuterHeight(nextPanelElement.current, true);
+                    } else {
+                        prevPanelSize.current = (100 * (horizontal ? getOuterWidth(prevPanelElement.current, true) : getOuterHeight(prevPanelElement.current, true))) / (size.current || 1);
+                        nextPanelSize.current = (100 * (horizontal ? getOuterWidth(nextPanelElement.current, true) : getOuterHeight(nextPanelElement.current, true))) / (size.current || 1);
+                    }
+
+                    prevPanelIndex.current = index;
+                    gutterRefs.current[index].setAttribute('data-p-gutter-resizing', 'true');
+                    elementRef.current.setAttribute('data-p-resizing', 'true');
+                }
             }
-
-            prevPanelIndex.current = index;
-            //TODO:
-            // this.$refs.gutter[index].setAttribute('data-p-gutter-resizing', true);
-            // this.$el.setAttribute('data-p-resizing', true);
         };
 
-        const onResize = (event: React.MouseEvent | React.TouchEvent | KeyboardEvent, step?: number, isKeyDown = false) => {
-            let newPos, newPrevPanelSize, newNextPanelSize;
+        const onResize = (event: React.MouseEvent | React.TouchEvent | KeyboardEvent, step = 5, isKeyDown = false) => {
+            if (!prevPanelElement.current || !nextPanelElement.current || size.current === null || prevPanelSize.current === null || nextPanelSize.current === null) {
+                return;
+            }
+
+            let newPos: number, newPrevPanelSize: number, newNextPanelSize: number;
 
             if (isKeyDown) {
                 if (horizontal) {
@@ -83,6 +97,10 @@ export const useSplitter = withHeadless({
                     newNextPanelSize = (100 * (nextPanelSize.current + step)) / size.current;
                 }
             } else {
+                if (startPos.current === null) {
+                    return;
+                }
+
                 if (horizontal) {
                     if (isRTL(elementRef.current)) {
                         newPos = ((startPos.current - (event as React.MouseEvent).pageX) * 100) / size.current;
@@ -97,17 +115,20 @@ export const useSplitter = withHeadless({
                 newNextPanelSize = nextPanelSize.current - newPos;
             }
 
-            //TODO:
-            // if (!validateResize(newPrevPanelSize, newNextPanelSize)) {
-            //     newPrevPanelSize = Math.min(Math.max(prevPanelMinSize, newPrevPanelSize), 100 - this.nextPanelMinSize);
-            //     newNextPanelSize = Math.min(Math.max(this.nextPanelMinSize, newNextPanelSize), 100 - prevPanelMinSize);
-            // }
+            if (!validateResize(newPrevPanelSize, newNextPanelSize)) {
+                newPrevPanelSize = Math.min(Math.max(prevPanelMinSize(), newPrevPanelSize), 100 - nextPanelMinSize());
+                newNextPanelSize = Math.min(Math.max(nextPanelMinSize(), newNextPanelSize), 100 - prevPanelMinSize());
+            }
 
-            prevPanelElement.current.style.flexBasis = 'calc(' + newPrevPanelSize + '% - ' + (panels.length - 1) * props.gutterSize + 'px)';
-            nextPanelElement.current.style.flexBasis = 'calc(' + newNextPanelSize + '% - ' + (panels.length - 1) * props.gutterSize + 'px)';
-            panelSizes[prevPanelIndex.current] = newPrevPanelSize;
-            panelSizes[prevPanelIndex.current + 1] = newNextPanelSize;
-            prevSize.current = parseFloat(newPrevPanelSize).toFixed(4);
+            prevPanelElement.current.style.flexBasis = 'calc(' + newPrevPanelSize + '% - ' + (panels.length - 1) * (props.gutterSize ?? 4) + 'px)';
+            nextPanelElement.current.style.flexBasis = 'calc(' + newNextPanelSize + '% - ' + (panels.length - 1) * (props.gutterSize ?? 4) + 'px)';
+
+            if (prevPanelIndex.current !== null) {
+                panelSizes[prevPanelIndex.current] = newPrevPanelSize;
+                panelSizes[prevPanelIndex.current + 1] = newNextPanelSize;
+            }
+
+            setPrevSize(Number(newPrevPanelSize.toFixed(4)));
         };
 
         const onResizeEnd = () => {
@@ -115,17 +136,20 @@ export const useSplitter = withHeadless({
                 saveState();
             }
 
-            gutterRefs.current && Object.keys(gutterRefs.current).forEach((key) => gutterRefs.current[key].setAttribute('data-p-splitter-gutter-resizing', false));
-            elementRef.current.setAttribute('data-p-splitter-resizing', false);
+            if (gutterRefs.current) {
+                Object.keys(gutterRefs.current).forEach((key) => gutterRefs.current[key].setAttribute('data-p-gutter-resizing', 'false'));
+            }
+
+            elementRef.current.setAttribute('data-p-resizing', 'false');
             clear();
         };
 
-        const repeat = (event: React.KeyboardEvent | React.MouseEvent | React.TouchEvent, index: number, step: number) => {
+        const repeat = (event: React.MouseEvent | React.TouchEvent | KeyboardEvent, index: number, step: number) => {
             onResizeStart(event, index, true);
             onResize(event, step, true);
         };
 
-        const setTimer = (event: React.KeyboardEvent | React.MouseEvent | React.TouchEvent, index: number, step: number) => {
+        const setTimer = (event: React.MouseEvent | React.TouchEvent | KeyboardEvent, index: number, step: number) => {
             if (!timer.current) {
                 timer.current = setInterval(() => {
                     repeat(event, index, step);
@@ -149,7 +173,7 @@ export const useSplitter = withHeadless({
             switch (event.code) {
                 case 'ArrowLeft': {
                     if (props.layout === 'horizontal') {
-                        setTimer(event, index, (props.step as number) * -1);
+                        setTimer(event as unknown as KeyboardEvent, index, (props.step as number) * -1);
                     }
 
                     event.preventDefault();
@@ -158,7 +182,7 @@ export const useSplitter = withHeadless({
 
                 case 'ArrowRight': {
                     if (props.layout === 'horizontal') {
-                        setTimer(event, index, props.step as number);
+                        setTimer(event as unknown as KeyboardEvent, index, props.step as number);
                     }
 
                     event.preventDefault();
@@ -167,7 +191,7 @@ export const useSplitter = withHeadless({
 
                 case 'ArrowDown': {
                     if (props.layout === 'vertical') {
-                        setTimer(event, index, (props.step as number) * -1);
+                        setTimer(event as unknown as KeyboardEvent, index, (props.step as number) * -1);
                     }
 
                     event.preventDefault();
@@ -176,7 +200,7 @@ export const useSplitter = withHeadless({
 
                 case 'ArrowUp': {
                     if (props.layout === 'vertical') {
-                        setTimer(event, index, props.step as number);
+                        setTimer(event as unknown as KeyboardEvent, index, props.step as number);
                     }
 
                     event.preventDefault();
@@ -211,24 +235,26 @@ export const useSplitter = withHeadless({
             event.preventDefault();
         };
 
-        const validateResize = (newPrevPanelSize, newNextPanelSize) => {
+        const validateResize = (newPrevPanelSize: number, newNextPanelSize: number) => {
             if (newPrevPanelSize > 100 || newPrevPanelSize < 0) return false;
 
             if (newNextPanelSize > 100 || newNextPanelSize < 0) return false;
 
-            //TODO:
-            // if (this.prevPanelMinSize > newPrevPanelSize) {
-            //     return false;
-            // }
+            if (prevPanelMinSize() > newPrevPanelSize) {
+                return false;
+            }
 
-            // if (this.nextPanelMinSize > newNextPanelSize) {
-            //     return false;
-            // }
+            if (nextPanelMinSize() > newNextPanelSize) {
+                return false;
+            }
 
             return true;
         };
 
-        const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event: React.TouchEvent) => onResize(event) });
+        const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
+            type: 'mousemove',
+            listener: (event: Event) => onResize(event as unknown as React.MouseEvent)
+        });
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
             type: 'mouseup',
             listener: () => {
@@ -247,7 +273,10 @@ export const useSplitter = withHeadless({
             unbindDocumentMouseUpListener();
         };
 
-        const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({ type: 'touchmove', listener: (event: React.TouchEvent) => onResize(event) });
+        const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({
+            type: 'touchmove',
+            listener: (event: Event) => onResize(event as unknown as React.TouchEvent)
+        });
         const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({
             type: 'touchend',
             listener: () => {
@@ -301,7 +330,6 @@ export const useSplitter = withHeadless({
             }
         };
 
-        //TODO:
         const restoreState = React.useCallback(() => {
             const stateString = getStorage().getItem(props.stateKey as string);
 
@@ -318,7 +346,7 @@ export const useSplitter = withHeadless({
 
         const findPanels = () => {
             const childrenArray = inProps.children ? (Array.isArray(inProps.children) ? inProps.children : [inProps.children]) : [];
-            const panelsArray = [];
+            const panelsArray: React.ReactNode[] = [];
 
             childrenArray.forEach((child) => {
                 if (child && child.type && child.type.displayName === 'PrimeReact.SplitterPanel') {
@@ -333,27 +361,54 @@ export const useSplitter = withHeadless({
             findPanels();
         }, [inProps.children]);
 
-        console.log(panels);
+        React.useEffect(() => {
+            if (!panels.length) return;
+
+            const _panelSizes: number[] = [];
+
+            panels.forEach((panel, i) => {
+                const panelInitialSize = panel?.props && isNotEmpty(panel?.props?.size) ? panel.props.size : null;
+                const panelSize = panelInitialSize || 100 / panels.length;
+
+                _panelSizes[i] = panelSize;
+            });
+
+            setPrevSize(Number(_panelSizes[0].toFixed(4)));
+            setPanelSizes(_panelSizes);
+        }, [panels]);
 
         const prevPanelMinSize = () => {
-            // const prevPanelMinSize = getVNodeProp(this.panels[this.prevPanelIndex], 'minSize');
+            const index = prevPanelIndex.current;
 
-            // if (this.panels[this.prevPanelIndex].props && prevPanelMinSize) {
-            //     return prevPanelMinSize;
-            // }
+            if (index !== null && typeof index === 'number' && panels[index]?.props && panels[index]?.props?.minSize) {
+                return panels[index].props.minSize;
+            }
 
-            const panel = find(elementRef.current, '[data-pc-section="panel"]')[prevPanelIndex.current];
+            return 0;
+        };
 
-            console.log(panel);
+        const nextPanelMinSize = () => {
+            const index = prevPanelIndex.current;
+
+            if (index !== null && typeof index === 'number') {
+                const nextIndex = index + 1;
+
+                if (panels[nextIndex]?.props && panels[nextIndex]?.props?.minSize) {
+                    return panels[nextIndex].props.minSize;
+                }
+            }
 
             return 0;
         };
 
         return {
             registerGutter,
+            registerPanel,
+            panelCounter,
             gutterRef,
             gutterRefs,
-            panels,
+            panelSizes,
+            prevSize,
             // methods
             onResizeStart,
             onResize,

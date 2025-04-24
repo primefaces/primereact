@@ -10,12 +10,19 @@ export const SplitterGutter = withComponent({
         const { props, getParent, ptmi } = instance;
         const splitter = getParent('Splitter');
         const indexRef = React.useRef<number | null>(null);
+        const [currentSize, setCurrentSize] = React.useState(splitter?.prevSize?.current);
 
         if (indexRef.current === null && splitter?.registerGutter) {
             indexRef.current = splitter?.registerGutter();
         }
 
         const index = indexRef.current ?? 0;
+
+        React.useEffect(() => {
+            if (splitter?.prevSize !== undefined) {
+                setCurrentSize(splitter.prevSize);
+            }
+        }, [splitter?.prevSize]);
 
         const gutterProps = mergeProps(
             {
@@ -46,7 +53,7 @@ export const SplitterGutter = withComponent({
                         height: splitter?.props.layout === 'vertical' ? size : undefined
                     },
                     'aria-orientation': splitter?.props.layout,
-                    // 'aria-valuenow':  //TODO:
+                    'aria-valuenow': currentSize,
                     onKeyUp: () => splitter?.onGutterKeyUp(),
                     onKeyDown: (e: React.KeyboardEvent) => splitter?.onGutterKeyDown(e, index)
                 },
