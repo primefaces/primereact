@@ -5,6 +5,7 @@ import * as React from 'react';
 import { defaultProps } from './CheckboxGroup.props';
 
 export const CheckboxGroup = withComponent({
+    name: 'CheckboxGroup',
     defaultProps,
     render: (instance) => {
         const { props, ptmi, cx } = instance;

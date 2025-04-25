@@ -6,7 +6,7 @@ import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
 export const useComponent = <IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, PInstance, RData> = {}) => {
-    const defaultProps = { ...globalProps, ...options.defaultProps };
+    const defaultProps = React.useMemo(() => ({ ...globalProps, ...options.defaultProps }), [options.defaultProps]);
     const baseInstance = useBase(name, {
         inProps: options.inProps,
         defaultProps,
@@ -14,25 +14,26 @@ export const useComponent = <IProps, DProps, PInstance, RData extends Record<Pro
     } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, PInstance, RData>);
 
     const { ref, props, parent } = baseInstance;
-    const { styles } = options;
 
     const ptx = useComponentPT(baseInstance);
-    const stx = useComponentStyle(baseInstance, props.styles || styles);
+    const stx = useComponentStyle(baseInstance, props.styles || options.styles);
 
-    const instance: ComponentInstance<typeof props, IProps, typeof parent, RData> = {
-        ...baseInstance,
-        ...ptx,
-        ...stx,
-        $pc: {}
-    };
+    const instance = React.useMemo<ComponentInstance<typeof props, IProps, typeof parent, RData>>(
+        () => ({
+            ...baseInstance,
+            ...ptx,
+            ...stx,
+            $pc: parent
+                ? {
+                      ...parent.$pc,
+                      [parent.name!]: parent
+                  }
+                : {}
+        }),
+        [baseInstance, ptx, stx, parent]
+    );
 
-    // Inject parent component instances and self instance
-    instance.$pc = {
-        ...parent?.$pc,
-        [name]: instance as ComponentInstance // @todo - update type
-    };
-
-    React.useImperativeHandle(ref, () => instance, [instance]);
+    React.useImperativeHandle(ref as React.Ref<ComponentInstance<typeof props, IProps, typeof parent, RData>>, () => instance, [instance]);
 
     return instance;
 };

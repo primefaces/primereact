@@ -1,3 +1,5 @@
+import { ComponentInstance } from '.';
+
 /**
  * PrimeReact Contexts
  * @todo - define more specific types for the configuration properties.
@@ -65,26 +67,8 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
      * @param type - The type of the parent instance to find.
      * @returns {Instance | undefined} - The found parent instance or undefined if not found.
      */
-    getParent: (type?: string) => Instance | undefined;
+    getParent: <R = unknown>(type?: string) => ComponentInstance | R | undefined;
 };
-
-export declare type ComputedInstance<
-    Props = Record<PropertyKey, unknown>,
-    IProps = Record<PropertyKey, unknown>,
-    PInstance = unknown,
-    RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-    Ref = unknown,
-    ERef = HTMLElement
-> = CommonInstance<Props, IProps, PInstance, Ref, ERef> & {
-    /**
-     * The component state.
-     */
-    state: Record<PropertyKey, unknown>;
-    /**
-     * The computed setup data.
-     */
-    $computedSetup: RData;
-} & RData;
 
 /**
  * Base PrimeReact Instance
@@ -103,9 +87,13 @@ export declare type Instance<
     RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
     Ref = unknown,
     ERef = HTMLElement
-> = ComputedInstance<Props, IProps, PInstance, RData, Ref, ERef> & {
+> = CommonInstance<Props, IProps, PInstance, Ref, ERef> & {
     /**
-     * The parent component instances.
+     * The component state.
      */
-    $pc: Record<string, Instance>;
-};
+    state: Record<PropertyKey, unknown>;
+    /**
+     * The computed setup data.
+     */
+    $computedSetup: RData;
+} & RData;
