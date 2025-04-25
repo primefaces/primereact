@@ -1,5 +1,37 @@
 # Changelog
 
+## [10.9.5](https://github.com/primefaces/primereact/tree/10.9.5) (2025-04-25)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.9.4...10.9.5)
+
+**Fixed Bugs:**
+
+- OrderList: Scroll Not Updating with Item Movement [#7229](https://github.com/primefaces/primereact/issues/7229)
+- Dropdown component: onLazyLoad triggers on every open, and onFilter re-renders with empty search results, clearing typed input [#7337](https://github.com/primefaces/primereact/issues/7337)
+- InputNumber: No possibility to prevent decimal values [#7455](https://github.com/primefaces/primereact/issues/7455)
+- TreeSelect: Delayed character display when typing [#7805](https://github.com/primefaces/primereact/issues/7805)
+- InputOtp: autoFocus prop on InputOtp doesn't do anything [#7806](https://github.com/primefaces/primereact/issues/7806)
+- Dropdown: selecting the option when esc key pressed [#7828](https://github.com/primefaces/primereact/issues/7828)
+- TriStateCheckbox: spurious empty string given as value [#7844](https://github.com/primefaces/primereact/issues/7844)
+- Accessibility Issue: Readonly Components React to Keyboard Control [#7849](https://github.com/primefaces/primereact/issues/7849)
+- InputMask: Value not displayed when set directly in state [#7851](https://github.com/primefaces/primereact/issues/7851)
+- Mention: Component does not accept variant prop [#7864](https://github.com/primefaces/primereact/issues/7864)
+- TreeSelect: filterDelay issue [#7867](https://github.com/primefaces/primereact/issues/7867)
+- Dropdown - missing typescript definition for filterClearIcon pt options [#7887](https://github.com/primefaces/primereact/issues/7887)
+- AutoComplete/Dropdown: in props panelFooterTemplate, the hide() method is not being called as expected [#7881](https://github.com/primefaces/primereact/issues/7881)
+- Calendar (Accessibility issue): Component loses focus when closing popup using escape key [#7890](https://github.com/primefaces/primereact/issues/7890)
+- CascadeSelect: Problem with loading prop in typescript [#7892](https://github.com/primefaces/primereact/issues/7892)
+- Autocomplete: Can still remove values when readOnly is enabled [#7894](https://github.com/primefaces/primereact/issues/7894)
+- OverlayPanel: invalid position when on the edge [#7901](https://github.com/primefaces/primereact/issues/7901)
+- OverlayPanel: Position is not updated on scroll from wrapper element [#7903](https://github.com/primefaces/primereact/issues/7903)
+- Chip: When I use a React component as the value in the template prop of the Chip component, the template component unmounts and remounts whenever the state updates [#7911](https://github.com/primefaces/primereact/issues/7911)
+- Chip: Chip close icon click is not working properly in Menu component [#7912](https://github.com/primefaces/primereact/issues/7912)
+- TriStateCheckbox: 'null' state is an empty string, not null [#7914](https://github.com/primefaces/primereact/issues/7914)
+- MenuBar : remove aria-level attribute from list item [#7922](https://github.com/primefaces/primereact/issues/7922)
+- Datatable: takes long time to response upon grid selection on 1000+ rows [#7926](https://github.com/primefaces/primereact/issues/7926)
+- Breadcrumb: disabled item receives keyboard focus [#7929](https://github.com/primefaces/primereact/issues/7929)
+- Menubar: Clicking on different Menubar component items doesn't close Menu itself [#7931](https://github.com/primefaces/primereact/issues/7931)
+
 ## [10.9.2](https://github.com/primefaces/primereact/tree/10.9.2) (2025-01-24)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.9.1...10.9.2)
