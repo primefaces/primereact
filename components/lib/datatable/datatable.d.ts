@@ -1013,33 +1013,70 @@ export interface DataTablePassThroughOptions {
 }
 
 /**
- * Defines current options in DataTable bodyRow.
+ * Defines current options in DataTable BodyRow which is the table <TR> element.
  */
 export interface DataTableBodyRowContext {
+    /**
+     * Whether the row is selected.
+     */
     selected: boolean;
+    /**
+     * Whether the row is selectable.
+     */
     selectable: boolean;
+    /**
+     * Whether the rows have striped styling.
+     */
     stripedRows: boolean;
+    /**
+     * Index of the row. Note: this is not the index of the value array its the index of the row <TR in the table.
+     */
     index: number;
 }
 
 /**
- * Defines current inline state in DataTable bodyRow.
+ * Defines current inline state in DataTable BodyRow which is the table <TR> element.
  */
 export interface DataTableBodyRowState {
+    /**
+     * Whether the row is in editing mode.
+     */
     editing: boolean;
 }
 
 /**
- * Custom passthrough(pt) option method for bodyRow.
+ * Custom passthrough(pt) option method for BodyRow which is the table <TR> element.
  */
 export interface DataTableBodyRowPassThroughMethodOptions<TValue extends DataTableValueArray> {
+    /**
+     * Name of the component.
+     */
     hostName: string;
+    /**
+     * Current context of the bodyRow.
+     */
     context: DataTableBodyRowContext;
+    /**
+     * Parent options.
+     */
     parent: DataTablePassThroughMethodOptions<TValue>;
+    /**
+     * Component props.
+     */
     props: DataTableBaseProps<TValue>;
+    /**
+     * Current state of the bodyRow.
+     */
     state: DataTableBodyRowState;
 }
 
+/**
+ * Type for sort order values.
+ * - 1: Ascending order
+ * - 0: No sorting
+ * - -1: Descending order
+ * - null or undefined: No sorting
+ */
 type SortOrder = 1 | 0 | -1 | null | undefined;
 
 /**
