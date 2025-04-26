@@ -99,8 +99,8 @@ interface Product {
 }
 
 export default function BasicDemo() {
-    const [source, setSource] = useState<Product>([]);
-    const [target, setTarget] = useState<Product>([]);
+    const [source, setSource] = useState<Product[]>([]);
+    const [target, setTarget] = useState<Product[]>([]);
 
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setSource(data));
