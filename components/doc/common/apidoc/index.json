@@ -19518,82 +19518,92 @@
                     "callbacks": []
                 },
                 "DataTableBodyRowContext": {
-                    "description": "Defines current options in DataTable bodyRow.",
+                    "description": "Defines current options in DataTable BodyRow which is the table <TR> element.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "selected",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Whether the row is selected."
                         },
                         {
                             "name": "selectable",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Whether the row is selectable."
                         },
                         {
                             "name": "stripedRows",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Whether the rows have striped styling."
                         },
                         {
                             "name": "index",
                             "optional": false,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Index of the row. Note: this is not the index of the value array its the index of the row <TR in the table."
                         }
                     ],
                     "callbacks": []
                 },
                 "DataTableBodyRowState": {
-                    "description": "Defines current inline state in DataTable bodyRow.",
+                    "description": "Defines current inline state in DataTable BodyRow which is the table <TR> element.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "editing",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Whether the row is in editing mode."
                         }
                     ],
                     "callbacks": []
                 },
                 "DataTableBodyRowPassThroughMethodOptions": {
-                    "description": "Custom passthrough(pt) option method for bodyRow.",
+                    "description": "Custom passthrough(pt) option method for BodyRow which is the table <TR> element.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "hostName",
                             "optional": false,
                             "readonly": false,
-                            "type": "string"
+                            "type": "string",
+                            "description": "Name of the component."
                         },
                         {
                             "name": "context",
                             "optional": false,
                             "readonly": false,
-                            "type": "DataTableBodyRowContext"
+                            "type": "DataTableBodyRowContext",
+                            "description": "Current context of the bodyRow."
                         },
                         {
                             "name": "parent",
                             "optional": false,
                             "readonly": false,
-                            "type": "DataTablePassThroughMethodOptions<TValue>"
+                            "type": "DataTablePassThroughMethodOptions<TValue>",
+                            "description": "Parent options."
                         },
                         {
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "DataTableBaseProps<TValue>"
+                            "type": "DataTableBaseProps<TValue>",
+                            "description": "Component props."
                         },
                         {
                             "name": "state",
                             "optional": false,
                             "readonly": false,
-                            "type": "DataTableBodyRowState"
+                            "type": "DataTableBodyRowState",
+                            "description": "Current state of the bodyRow."
                         }
                     ],
                     "callbacks": []
@@ -21035,7 +21045,8 @@
                     "values": "PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>"
                 },
                 "SortOrder": {
-                    "values": "1 | 0 | -1 | null | undefined"
+                    "values": "1 | 0 | -1 | null | undefined",
+                    "description": "Type for sort order values.\n- 1: Ascending order\n- 0: No sorting\n- -1: Descending order\n- null or undefined: No sorting"
                 }
             }
         }
