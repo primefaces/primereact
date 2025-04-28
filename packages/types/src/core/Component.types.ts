@@ -28,7 +28,7 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
     /**
      * The pass-through props to pass to the component
      */
-    pt?: Pick<PassThroughProps, 'value'> | undefined;
+    pt?: PassThroughProps['value'] | undefined;
     /**
      * The pass-through options to pass to the component
      */

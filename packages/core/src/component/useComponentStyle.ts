@@ -1,25 +1,17 @@
 import { StyleRegistry } from '@primereact/core/utils';
-import type { Instance } from '@primereact/types/core';
+import type { GlobalComponentProps, Instance } from '@primereact/types/core';
+import type { StylesOptions } from '@primereact/types/styles';
 import { Theme, ThemeService } from '@primeuix/styled';
 import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<Props, IProps, PInstance>, styles?: any) => {
-    const { props = {}, attrs, state, parent, $primereact, $attrSelector, elementRef } = instance || {};
+export const useComponentStyle = <Props extends GlobalComponentProps, IProps, PInstance, Params>(instance: Instance<Props, IProps, PInstance>, styles?: StylesOptions, $params?: Params) => {
+    const { props = { unstyled: false }, $primereact, elementRef } = instance || {};
     const $style = useComponentStyleHandler(styles, elementRef);
 
-    // @todo
-    const $params = {
-        instance,
-        props,
-        state,
-        attrs,
-        parent
-    };
-
     // methods
-    const _load = () => {
+    const _load = React.useCallback(() => {
         if (!StyleRegistry.isStyleNameLoaded('base')) {
             const { name, css } = $style.baseStyles || {};
 
@@ -29,22 +21,27 @@ export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<P
         }
 
         _loadThemeStyles();
-    };
+    }, [$style]);
 
-    const _loadStyles = () => {
+    const _loadStyles = React.useCallback(() => {
         _load();
         _themeChangeListener(_load);
-    };
+    }, [_load]);
 
-    const _loadCoreStyles = () => {
+    // computed values
+    const $isUnstyled = React.useMemo(() => (props.unstyled !== undefined ? props.unstyled : $primereact?.config?.unstyled), [props, $primereact?.config]);
+    const $styleOptions = React.useMemo(() => ({ nonce: $primereact?.config?.csp?.nonce }), [$primereact?.config]);
+
+    // helpers
+    const _loadCoreStyles = React.useCallback(() => {
         if (!StyleRegistry.isStyleNameLoaded($style?.name) && $style?.name) {
             $style.loadCSS({ name: $style.name, ...$styleOptions });
 
             StyleRegistry.setLoadedStyleName($style.name);
         }
-    };
+    }, [$style, $styleOptions]);
 
-    const _loadThemeStyles = () => {
+    const _loadThemeStyles = React.useCallback(() => {
         if ($isUnstyled || $primereact?.theme === 'none') return;
 
         // common
@@ -77,7 +74,7 @@ export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<P
 
             Theme.setLoadedStyleName('layer-order');
         }
-    };
+    }, [$isUnstyled, $style, $styleOptions]);
 
     /*const _loadScopedThemeStyles = (preset) => {
         const { css } = $style?.getPresetTheme?.(preset, `[${$attrSelector}]`) || {};
@@ -90,10 +87,10 @@ export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<P
         scopedStyleEl?.value?.remove();
     };*/
 
-    const _themeChangeListener = (callback = () => {}) => {
+    const _themeChangeListener = React.useCallback((callback = () => {}) => {
         StyleRegistry.clearLoadedStyleNames();
         ThemeService.on('theme:change', callback);
-    };
+    }, []);
 
     /*const _removeThemeListeners = () => {
         ThemeService.off('theme:change', _loadCoreStyles);
@@ -102,24 +99,26 @@ export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<P
     };*/
 
     // exposed methods
-    const cx = (key = '', params = {}) => {
-        return !$isUnstyled ? cn(getKeyValue($style?.classes, key, { ...$params, ...params })) : undefined;
-    };
+    const cx = React.useCallback(
+        (key = '', params = {}) => {
+            return !$isUnstyled ? cn(getKeyValue($style.classes, key, { ...$params, ...params })) : undefined;
+        },
+        [$isUnstyled, instance, $style.classes]
+    );
 
-    const sx = (key = '', when = true, params = {}) => {
-        if (when) {
-            const self = getKeyValue($style?.inlineStyles, key, { ...$params, ...params });
-            const base = getKeyValue($style.baseStyles.inlineStyles, key, { ...$params, ...params });
+    const sx = React.useCallback(
+        (key = '', when = true, params = {}) => {
+            if (when) {
+                const self = getKeyValue($style.inlineStyles, key, { ...$params, ...params }) as React.CSSProperties;
+                const base = getKeyValue($style.baseStyles?.inlineStyles, key, { ...$params, ...params }) as React.CSSProperties;
 
-            return { ...base, ...self };
-        }
+                return { ...base, ...self };
+            }
 
-        return undefined;
-    };
-
-    // computed values
-    const $isUnstyled = React.useMemo(() => (props.unstyled !== undefined ? props.unstyled : $primereact?.config?.unstyled), [props, $primereact?.config]);
-    const $styleOptions = React.useMemo(() => ({ nonce: $primereact?.config?.csp?.nonce }), [$primereact?.config]);
+            return undefined;
+        },
+        [$style.inlineStyles, $style.baseStyles?.inlineStyles, instance]
+    );
 
     // effects
     if (!$isUnstyled) {
@@ -130,11 +129,13 @@ export const useComponentStyle = <Props, IProps, PInstance>(instance: Instance<P
         _loadStyles();
     }
 
-    // new instance
-    return {
-        cx,
-        sx,
-        isUnstyled: $isUnstyled,
-        $style
-    };
+    return React.useMemo(
+        () => ({
+            cx,
+            sx,
+            isUnstyled: $isUnstyled,
+            $style
+        }),
+        [cx, sx, $isUnstyled, $style]
+    );
 };

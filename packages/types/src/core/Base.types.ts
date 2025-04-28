@@ -5,7 +5,20 @@ import { ComponentInstance } from '.';
  * @todo - define more specific types for the configuration properties.
  */
 export interface Contexts {
-    config?: unknown;
+    config?: {
+        pt?: Record<string, unknown>;
+        ptOptions?: {
+            mergeSections?: boolean;
+            mergeProps?: boolean;
+        };
+        csp?: {
+            nonce?: string;
+        };
+        ripple?: boolean;
+        unstyled?: boolean;
+        inputVariant?: string;
+        stylesheet?: unknown;
+    };
     locale?: unknown;
     passthrough?: unknown;
     theme?: unknown;

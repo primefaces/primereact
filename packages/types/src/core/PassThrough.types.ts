@@ -3,6 +3,7 @@
  */
 export declare type PassThroughOptions = {
     /**
+     * @todo Define the type.
      * Defines whether the props should be merged.
      * @default false
      * @type {(boolean | (() => void))}
@@ -11,11 +12,11 @@ export declare type PassThroughOptions = {
      * ...
      * ```
      */
-    mergeProps?: boolean | (() => void);
+    mergeProps?: boolean | ((global: unknown, self: unknown, datasets?: unknown) => unknown);
     /**
      * Defines whether the sections should be merged.
      * @default true
-     * @type {(boolean | (() => void))}
+     * @type {(boolean | (() => void) | undefined)}
      * @example
      * ```tsx
      * ...

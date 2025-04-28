@@ -14,9 +14,20 @@ export const useComponent = <IProps, DProps, PInstance, RData extends Record<Pro
     } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, PInstance, RData>);
 
     const { ref, props, parent } = baseInstance;
+    const $params = React.useMemo(() => {
+        const { props, attrs, state, parent } = baseInstance || {};
 
-    const ptx = useComponentPT(baseInstance);
-    const stx = useComponentStyle(baseInstance, props.styles || options.styles);
+        return {
+            instance: baseInstance,
+            props,
+            attrs,
+            state,
+            parent
+        };
+    }, [baseInstance]);
+
+    const ptx = useComponentPT(baseInstance, $params);
+    const stx = useComponentStyle(baseInstance, props.styles || options.styles, $params);
 
     const instance = React.useMemo<ComponentInstance<typeof props, IProps, typeof parent, RData>>(
         () => ({
