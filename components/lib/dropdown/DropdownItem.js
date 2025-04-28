@@ -47,7 +47,7 @@ export const DropdownItem = React.memo((props) => {
             'data-p-focused': focusedOptionIndex === index,
             'data-p-disabled': disabled
         },
-        getPTOptions('item', { selected, disabled, option, label })
+        getPTOptions('item', { selected, disabled, label, index, focusedOptionIndex, highlightOnSelect })
     );
     const itemGroupLabelProps = mergeProps(
         {
