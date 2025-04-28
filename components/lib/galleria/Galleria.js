@@ -317,6 +317,7 @@ export const Galleria = React.memo(
                         timeout: { enter: 150, exit: 150 },
                         options: props.transitionOptions,
                         unmountOnExit: true,
+                        appear: true,
                         onEnter,
                         onEntering,
                         onEntered,
