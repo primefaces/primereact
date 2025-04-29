@@ -1,23 +1,30 @@
+import { ComponentInstance } from '@primereact/types/core';
 import { BaseComponentProps } from '..';
 
 /**
- * Checkbox component props.
+ * Checkbox Group component instance.
  */
-export interface CheckboxGroupProps extends BaseComponentProps<{ readonly __TYPE: 'CheckboxGroup' }, 'div', ['defaultValue']> {
+export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps>;
+
+export interface CheckboxGroupValueChangeEvent {
+    originalEvent: React.FormEventHandler;
+    value: unknown[];
+}
+
+/**
+ * Checkbox Group component props.
+ */
+export interface CheckboxGroupProps extends BaseComponentProps {
     /**
-     * The type of the component.
+     * The name of the checkbox group.
      */
-    readonly __TYPE?: 'CheckboxGroup';
+    value?: unknown[];
     /**
-     * The name of the checkbox.
+     * The default value of the checkbox group.
      */
-    value?: unknown;
+    defaultValue?: unknown[];
     /**
-     * The default value of the checkbox.
+     * Callback function that is called when the checkbox group value changes.
      */
-    defaultValue?: unknown;
-    /**
-     * Callback function that is called when the checkbox value changes.
-     */
-    onValueChange?: (event: { value: unknown }) => void;
+    onValueChange?: (event: CheckboxGroupValueChangeEvent) => void;
 }

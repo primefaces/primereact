@@ -1,12 +1,15 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
+import { CheckboxGroupInstance } from '@primereact/types/shared/checkbox';
 import * as React from 'react';
 import { defaultProps } from './useCheckbox.props';
 
 export const useCheckbox = withHeadless({
     name: 'useCheckbox',
     defaultProps,
-    setup: ({ props }) => {
+    setup: ({ props, getParent }) => {
+        const checkboxGroup = getParent<CheckboxGroupInstance>('CheckboxGroup');
+
         const [indeterminateState, setIndeterminateState] = React.useState<boolean | undefined>(props.indeterminate);
         const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
             value: props.checked,
@@ -14,31 +17,18 @@ export const useCheckbox = withHeadless({
             onChange: props.onCheckedChange
         });
 
-        const checked = indeterminateState ? false : checkedState === props.trueValue;
+        const checked = React.useMemo(() => (indeterminateState ? false : checkedState === props.trueValue), [indeterminateState, checkedState, props.trueValue]);
 
-        const state = {
-            checked,
-            indeterminate: indeterminateState
-        };
-
-        const checkboxGroupRef = React.useRef<any>(null);
-
-        // element refs
+        const state = React.useMemo(
+            () => ({
+                checked,
+                indeterminate: indeterminateState
+            }),
+            [checked, indeterminateState]
+        );
 
         // methods
-        const setCheckboxGroup = (checkboxGroup: any) => {
-            if (!checkboxGroupRef.current && checkboxGroup) {
-                const { defaultValue, value, onValueChange } = checkboxGroup.props;
-                const computedValue = onValueChange ? value : defaultValue;
-                const isChecked = computedValue ? computedValue.includes(props.value) : false;
-
-                setCheckedState(isChecked);
-            }
-
-            checkboxGroupRef.current = checkboxGroup;
-        };
-
-        const onChange = (event: React.FormEventHandler<HTMLInputElement>) => {
+        const onChange = (event: React.FormEventHandler) => {
             if (!props.disabled && !props.readOnly) {
                 const computedChecked = indeterminateState ? props.trueValue : checked ? props.falseValue : props.trueValue;
 
@@ -56,11 +46,11 @@ export const useCheckbox = withHeadless({
                         : computedChecked
                 );
 
-                if (checkboxGroupRef.current) {
-                    const { value, onValueChange } = checkboxGroupRef.current.props;
+                if (checkboxGroup) {
+                    const { value, onValueChange } = checkboxGroup.props;
 
                     if (onValueChange) {
-                        const newValue = value.includes(props.value) ? (value || []).filter((v: any) => v !== props.value) : [...(value || []), props.value];
+                        const newValue = value?.includes(props.value) ? (value || []).filter((v: unknown) => v !== props.value) : [...(value || []), props.value];
 
                         onValueChange({
                             originalEvent: event,
@@ -72,13 +62,20 @@ export const useCheckbox = withHeadless({
         };
 
         // effects
+        React.useEffect(() => {
+            if (checkboxGroup) {
+                const { defaultValue, value, onValueChange } = checkboxGroup.props;
+
+                const computedValue = onValueChange ? value : defaultValue;
+                const isChecked = computedValue ? computedValue.includes(props.value) : false;
+
+                setCheckedState(isChecked);
+            }
+        }, [checkboxGroup]);
 
         return {
             state,
-            // element refs
-
             // methods
-            setCheckboxGroup,
             onChange
         };
     }

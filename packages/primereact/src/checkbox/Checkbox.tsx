@@ -26,29 +26,11 @@ export const Checkbox = withComponent({
             ptmi,
             ptm,
             cx,
-            getParent,
             // element refs
             elementRef,
             // methods
-            onChange,
-            setCheckboxGroup
+            onChange
         } = instance;
-
-        const checkboxGroup = getParent('CheckboxGroup');
-
-        setCheckboxGroup(checkboxGroup);
-
-        const getPTOptions = (key: string) => {
-            const _ptm = key === 'root' ? ptmi : ptm;
-
-            return _ptm(key, {
-                context: {
-                    checked: state.checked,
-                    indeterminate: state.indeterminate,
-                    disabled: props.disabled
-                }
-            });
-        };
 
         const createInputElement = () => {
             const inputProps = mergeProps(
@@ -71,7 +53,7 @@ export const Checkbox = withComponent({
                     onBlur: props.onBlur,
                     onChange
                 },
-                getPTOptions('input')
+                ptm('input')
             );
 
             return <input {...inputProps} />;
@@ -82,14 +64,14 @@ export const Checkbox = withComponent({
                 {
                     className: cx('box')
                 },
-                getPTOptions('box')
+                ptm('box')
             );
 
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                getPTOptions('icon')
+                ptm('icon')
             );
 
             const icon = state.checked ? <CheckIcon {...iconProps} /> : state.indeterminate ? <MinusIcon {...iconProps} /> : null;
@@ -109,7 +91,7 @@ export const Checkbox = withComponent({
         );
 
         return (
-            <Component as={props.as} {...rootProps} ref={elementRef}>
+            <Component as={props.as} asChild={props.asChild} {...rootProps} ref={elementRef}>
                 {input}
                 {box}
             </Component>

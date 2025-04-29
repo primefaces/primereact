@@ -1,5 +1,11 @@
+import { ComponentInstance } from '@primereact/types/core';
 import { BaseComponentProps } from '..';
 import { useCheckboxProps } from './useCheckbox.types';
+
+/**
+ * Checkbox component instance.
+ */
+export type CheckboxInstance = ComponentInstance<CheckboxProps>;
 
 /**
  * Checkbox component props.

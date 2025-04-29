@@ -8,7 +8,7 @@ export const CheckboxGroup = withComponent({
     name: 'CheckboxGroup',
     defaultProps,
     render: (instance) => {
-        const { props, ptmi, cx } = instance;
+        const { props, ptmi, cx, elementRef } = instance;
 
         const rootProps = mergeProps(
             {
@@ -18,7 +18,7 @@ export const CheckboxGroup = withComponent({
         );
 
         return (
-            <Component as={props.as || 'div'} {...rootProps}>
+            <Component as={props.as || 'div'} asChild={props.asChild} {...rootProps} ref={elementRef}>
                 {props.children}
             </Component>
         );

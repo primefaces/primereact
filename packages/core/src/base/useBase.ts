@@ -17,7 +17,7 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
     const ref = React.useRef(inProps?.ref ?? null);
     const elementRef = React.useRef<HTMLElement>(null);
 
-    const getParent = React.useCallback((type?: string) => (isNotEmpty(type) ? parent?.$pc?.[type!] : parent), [parent]);
+    const getParent = React.useCallback(<R>(type?: string) => (isNotEmpty(type) && parent?.type !== type ? parent?.$pc?.[type!] : parent) as R, [parent]);
 
     const common = React.useMemo<CommonInstance<typeof props, IProps, typeof parent>>(
         () => ({

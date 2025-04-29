@@ -33,7 +33,7 @@ export interface useBaseOptions<IProps, DProps, PInstance, RData extends Record<
     setup?: BaseSetup<DProps, IProps, PInstance, RData>;
 }
 
-export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, Ref = unknown, ERef = HTMLElement> = {
+export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props, PInstance = unknown, Ref = unknown, ERef = HTMLElement> = {
     /**
      * The reference to the component.
      */
@@ -80,7 +80,7 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
      * @param type - The type of the parent instance to find.
      * @returns {Instance | undefined} - The found parent instance or undefined if not found.
      */
-    getParent: <R = unknown>(type?: string) => ComponentInstance | R | undefined;
+    getParent: <R = ComponentInstance>(type?: string) => R | undefined;
 };
 
 /**
