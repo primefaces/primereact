@@ -99,7 +99,7 @@ export const FileUpload = React.memo(
             const dm = 3;
             const sizes = localeOption('fileSizeTypes');
 
-            if (bytes === 0) {
+            if (bytes <= 0) {
                 return `0 ${sizes[0]}`;
             }
 
