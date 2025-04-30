@@ -308,7 +308,8 @@ export const DropdownPanel = React.memo(
                 {
                     className: classNames(props.panelClassName, cx('panel', { context })),
                     style: sx('panel'),
-                    onClick: props.onClick
+                    onClick: props.onClick,
+                    'data-pr-is-overlay': true
                 },
                 getPTOptions('panel')
             );
