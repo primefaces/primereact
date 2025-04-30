@@ -27,7 +27,6 @@ export const Cell = (props) => {
     const initFocusTimeout = React.useRef(null);
     const editingRowDataStateRef = React.useRef(null);
     const { ptm, ptmo, cx } = props.ptCallbacks;
-
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
 
     const getColumnPTOptions = (key) => {
@@ -58,16 +57,18 @@ export const Cell = (props) => {
         return getColumnProp('cellEditValidateOnClose');
     };
 
+    const isIgnoredElement = (element) => {
+        const isCellEditor = (el) => el.getAttribute && el.getAttribute('data-pr-is-overlay');
+
+        return isCellEditor(element) || DomHandler.getParents(element).find((el) => isCellEditor(el));
+    };
+
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (e) => {
-            setTimeout(() => {
-                if (!selfClick.current && isOutsideClicked(e.target)) {
-                    // #2666 for overlay components and outside is clicked
-
-                    switchCellToViewMode(e, true);
-                }
-            }, 0);
+            if (!isIgnoredElement(e.target) && isOutsideClicked(e.target)) {
+                switchCellToViewMode(e, true);
+            }
 
             selfClick.current = false;
         },
