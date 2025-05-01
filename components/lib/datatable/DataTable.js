@@ -1347,7 +1347,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const exportCSV = (options) => {
         let data;
         let csv = '\ufeff';
-        let columns = getColumns();
 
         if (options && options.selectionOnly) {
             data = props.selection || [];
@@ -1355,48 +1354,58 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             data = [...(props.frozenValue || []), ...(processedData() || [])];
         }
 
-        //headers
-        columns.forEach((column, i) => {
-            const [field, header, exportHeader, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader'), getColumnProp(column, 'exportable')];
+        // First build collection of exportable columns
+        const exportableColumns = getColumns().filter((column) => {
+            const exportable = getColumnProp(column, 'exportable');
+            const field = getColumnProp(column, 'field');
 
-            if (exportable && field) {
-                const columnHeader = String(exportHeader || header || field)
-                    .replace(/"/g, '""')
-                    .replace(/\n/g, '\u2028');
+            // Column must be exportable (or undefined/not set) and have a field defined
+            return exportable !== false && field;
+        });
 
-                csv = csv + ('"' + columnHeader + '"');
+        // headers
+        exportableColumns.forEach((column, i) => {
+            const [field, header, exportHeader] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader')];
 
-                if (i < columns.length - 1) {
-                    csv = csv + props.csvSeparator;
-                }
+            const columnHeader = String(exportHeader || header || field)
+                .replace(/"/g, '""')
+                .replace(/\n/g, '\u2028');
+
+            csv = csv + ('"' + columnHeader + '"');
+
+            if (i < exportableColumns.length - 1) {
+                csv = csv + props.csvSeparator;
             }
         });
 
-        //body
+        // body
         data.forEach((record) => {
             csv = csv + '\n';
-            columns.forEach((column, i) => {
-                const [colField, exportField, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'exportField'), getColumnProp(column, 'exportable')];
+            exportableColumns.forEach((column, i) => {
+                const [colField, exportField] = [getColumnProp(column, 'field'), getColumnProp(column, 'exportField')];
                 const field = exportField || colField;
 
-                if (exportable && field) {
-                    let cellData = ObjectUtils.resolveFieldData(record, field);
+                let cellData = ObjectUtils.resolveFieldData(record, field);
 
-                    if (cellData != null) {
-                        if (props.exportFunction) {
-                            cellData = props.exportFunction({ data: cellData, field, rowData: record, column });
-                        } else {
-                            cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
-                        }
+                if (cellData != null) {
+                    if (props.exportFunction) {
+                        cellData = props.exportFunction({
+                            data: cellData,
+                            field,
+                            rowData: record,
+                            column
+                        });
                     } else {
-                        cellData = '';
+                        cellData = String(cellData).replace(/"/g, '""').replace(/\n/g, '\u2028');
                     }
+                } else {
+                    cellData = '';
+                }
 
-                    csv = csv + ('"' + cellData + '"');
+                csv = csv + ('"' + cellData + '"');
 
-                    if (i < columns.length - 1) {
-                        csv = csv + props.csvSeparator;
-                    }
+                if (i < exportableColumns.length - 1) {
+                    csv = csv + props.csvSeparator;
                 }
             });
         });
