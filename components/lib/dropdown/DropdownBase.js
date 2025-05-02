@@ -200,6 +200,7 @@ export const DropdownBase = ComponentBase.extend({
         name: null,
         onBlur: null,
         onChange: null,
+        onClick: null,
         onContextMenu: null,
         onFilter: null,
         onFocus: null,
