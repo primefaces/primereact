@@ -720,7 +720,7 @@ export declare function addLocale(locale: string, options: LocaleOptions): void;
  * @param {*} value - Option value.
  * @param {string} locale - Locale string.
  */
-export declare function updateLocaleOption(key: keyof LocaleOptions, value: any, locale: string): void;
+export declare function updateLocaleOption<Key extends keyof LocaleOptions>(key: Key, value: LocaleOptions[Key], locale: string): void;
 /**
  * Changes the option values of a locale.
  * @param {LocaleOptions} options - Locale options.
