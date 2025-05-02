@@ -603,12 +603,12 @@
                     "parameters": [
                         {
                             "name": "key",
-                            "type": "string",
+                            "type": "Key",
                             "description": "Option key."
                         },
                         {
                             "name": "value",
-                            "type": "any",
+                            "type": "Key extends keyof LocaleOptions ? LocaleOptions[Key] : any",
                             "description": "Option value."
                         },
                         {
@@ -642,7 +642,7 @@
                     "parameters": [
                         {
                             "name": "key",
-                            "type": "string",
+                            "type": "Key",
                             "description": "Option key."
                         },
                         {
@@ -651,7 +651,7 @@
                             "description": "Locale string."
                         }
                     ],
-                    "returnType": "any",
+                    "returnType": "LocaleOptions[Key]",
                     "description": "Return the value of a specific locale option."
                 },
                 "localeOptions": {
