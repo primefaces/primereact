@@ -733,7 +733,8 @@ export declare function updateLocaleOptions(options: object, locale: string): vo
  * @param {string} key - Option key.
  * @param {string} locale - Locale string.
  */
-export declare function localeOption(key: keyof LocaleOptions, locale: string): any;
+export declare function localeOption<Key extends keyof LocaleOptions>(key: Key, locale: string): LocaleOptions[Key];
+export declare function localeOption(key: string, locale: string): any;
 /**
  * Returns the values of locale options.
  * @param {string} locale - Locale string.
