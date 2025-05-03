@@ -2744,14 +2744,37 @@ export const Calendar = React.memo(
             }
 
             let date;
-            let parts = text.split(' ');
 
             if (props.timeOnly) {
                 date = new Date();
-                populateTime(date, parts[0], parts[1]);
+                const match = text.match(/(\d{1,2}:\d{2})(?:\s?(AM|PM))?/i);
+
+                if (match) {
+                    populateTime(date, match[1], match[2]);
+                } else {
+                    return null;
+                }
             } else if (props.showTime) {
-                date = parseDate(parts[0], getDateFormat());
-                populateTime(date, parts[1], parts[2]);
+                const time12 = /(\d{1,2}:\d{2})\s?(AM|PM)/i;
+                const time24 = /(\d{1,2}:\d{2})$/;
+
+                let match, datePart, timePart, ampm;
+
+                if (props.hourFormat === '12' && (match = text.match(time12))) {
+                    timePart = match[1];
+                    ampm = match[2];
+                    datePart = text.replace(time12, '').trim();
+                } else if (props.hourFormat === '24' && (match = text.match(time24))) {
+                    timePart = match[1];
+                    datePart = text.replace(time24, '').trim();
+                }
+
+                if (datePart && timePart) {
+                    date = parseDate(datePart, getDateFormat());
+                    populateTime(date, timePart, ampm);
+                } else {
+                    date = parseDate(text, getDateFormat());
+                }
             } else {
                 date = parseDate(text, getDateFormat());
             }
