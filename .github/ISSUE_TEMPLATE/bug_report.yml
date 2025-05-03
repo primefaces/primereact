@@ -20,9 +20,9 @@ body:
       id: reproducer
       attributes:
           label: Reproducer
-          placeholder: https://stackblitz.com/edit/vitejs-vite-daiajq
+          placeholder: https://stackblitz.com/edit/vitejs-vite-pekean1c
           description: |
-              Please fork [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-daiajq?file=src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
+              Please fork [Stackblitz project](https://stackblitz.com/edit/vitejs-vite-pekean1c?file=src%2FApp.tsx) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
       validations:
           required: false
     - type: textarea
