@@ -2747,7 +2747,7 @@ export const Calendar = React.memo(
 
             if (props.timeOnly) {
                 date = new Date();
-                const match = text.match(/(\d{1,2}:\d{2})(?:\s?(AM|PM))?/i);
+                const match = text.match(/(\d{1,2}:\d{2}(?::\d{2})?(?:\.\d{1,3})?)\s?(AM|PM)?/i);
 
                 if (match) {
                     populateTime(date, match[1], match[2]);
@@ -2755,8 +2755,8 @@ export const Calendar = React.memo(
                     return null;
                 }
             } else if (props.showTime) {
-                const time12 = /(\d{1,2}:\d{2})\s?(AM|PM)/i;
-                const time24 = /(\d{1,2}:\d{2})$/;
+                const time12 = /(\d{1,2}:\d{2}(?::\d{2})?(?:\.\d{1,3})?)\s?(AM|PM)/i;
+                const time24 = /(\d{1,2}:\d{2}(?::\d{2})?(?:\.\d{1,3})?)$/;
 
                 let match, datePart, timePart, ampm;
 
