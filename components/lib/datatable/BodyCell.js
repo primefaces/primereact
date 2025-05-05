@@ -176,7 +176,7 @@ export const Cell = (props) => {
     };
 
     const onClick = (event) => {
-        props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, selfClick, props.column, bindDocumentClickListener, overlayEventListener);
+        props.onClick(event, getCellCallbackParams(event), isEditable(), editingState, setEditingState, selfClick, props.column, bindDocumentClickListener, overlayEventListener, isOutsideClicked);
     };
 
     const onMouseDown = (event) => {
