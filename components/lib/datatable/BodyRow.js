@@ -534,7 +534,7 @@ export const BodyRow = React.memo((props) => {
         }
     }, []);
 
-    const onCellClick = (event, params, isEditable, editingState, setEditingState, selfClick, column, bindDocumentClickListener, overlayEventListener) => {
+    const onCellClick = (event, params, isEditable, editingState, setEditingState, selfClick, column, bindDocumentClickListener, overlayEventListener, isOutsideClicked) => {
         if (props.editMode !== 'row' && isEditable && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.isRowSelected))) {
             selfClick.current = true;
 
