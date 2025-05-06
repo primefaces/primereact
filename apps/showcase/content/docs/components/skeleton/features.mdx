@@ -1,0 +1,51 @@
+---
+title: "Skeleton"
+description: "Skeleton is a placeholder to display instead of the actual content."
+component: "skeleton"
+tokens:
+    - "Skeleton"
+styles:
+    - "Skeleton"
+pts:
+    - "Skeleton"
+---
+
+## Import
+
+```tsx
+import { Skeleton } from 'primereact/skeleton';
+```
+
+## Shapes
+
+Various shapes and sizes can be created using styling properties like shape, width, height, borderRadius and class.
+
+<DocComponentViewer name="skeleton-shapes-demo" filePath="demo/skeleton/skeleton-shapes-demo.tsx"/>
+
+## Card
+
+Sample Card implementation using different Skeleton components and Tailwind CSS utilities.
+
+<DocComponentViewer name="skeleton-card-demo" filePath="demo/skeleton/skeleton-card-demo.tsx"/>
+
+## List
+
+Sample List implementation using different Skeleton components and Tailwind CSS utilities.
+
+<DocComponentViewer name="skeleton-list-demo" filePath="demo/skeleton/skeleton-list-demo.tsx"/>
+
+## DataTable
+
+Sample DataTable implementation using different Skeleton components and Tailwind CSS utilities.
+
+<DocComponentViewer name="skeleton-datatable-demo" filePath="demo/skeleton/skeleton-datatable-demo.tsx"/>
+
+## Accessibility
+
+### Screen Reader
+
+Skeleton uses aria-hidden as "true" so that it gets ignored by screen readers, any valid attribute is passed to the root element so you may customize it further if required. If multiple skeletons are grouped inside a container, you may use aria-busy on the container element as well to indicate the loading process.
+
+### Keyboard Support
+
+Component does not include any interactive elements.

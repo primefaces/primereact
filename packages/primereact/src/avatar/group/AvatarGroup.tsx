@@ -4,7 +4,6 @@ import { styles } from '@primereact/styles/avatar';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './AvatarGroup.props';
-
 export const AvatarGroup = withComponent({
     defaultProps,
     styles,
@@ -13,7 +12,7 @@ export const AvatarGroup = withComponent({
             {
                 className: cx('group')
             },
-            ptmi('group')
+            ptmi('root')
         );
 
         return (

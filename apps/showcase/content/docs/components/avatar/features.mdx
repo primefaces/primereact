@@ -1,0 +1,53 @@
+---
+title: "Avatar"
+description: "Avatar represents people using icons, labels and images."
+component: "avatar"
+tokens: 
+    - "Avatar"
+pts:
+    - "Avatar"
+    - "AvatarGroup"
+styles: 
+    - "Avatar"
+---
+
+## Import
+
+```tsx
+import { Avatar } from 'primereact/avatar';
+```
+
+## Label
+
+A letter Avatar is defined with the _label_ property. 
+
+<DocComponentViewer name="avatar-label-demo" filePath="demo/avatar/avatar-label-demo.tsx" />
+
+## Icon
+
+A font icon is displayed as an Avatar with the _icon_ property.
+
+<DocComponentViewer name="avatar-icon-demo" filePath="demo/avatar/avatar-icon-demo.tsx" />
+
+## Image
+
+Use the _image_ property to display an image as an Avatar.
+
+<DocComponentViewer name="avatar-image-demo" filePath="demo/avatar/avatar-image-demo.tsx" />
+
+## AvatarGroup
+
+Grouping is available by wrapping multiple Avatar components inside an AvatarGroup.
+
+<DocComponentViewer name="avatar-group-demo" filePath="demo/avatar/avatar-group-demo.tsx" />
+
+
+## Accessibility
+
+### Screen Reader
+
+Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like img along with aria-labelledby or aria-label to describe the component. In case avatars need to be tabbable, tabindex can be added as well to implement custom key handlers.
+
+### Keyboard Support 
+
+Component does not include any interactive elements.
