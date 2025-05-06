@@ -360,6 +360,29 @@ interface TreeSelectFilterOptions {
 }
 
 /**
+ * Custom click event
+ * @see {@link TreeSelectProps.onNodeClick}
+ */
+interface TreeSelectNodeClickEvent {
+    /**
+     * Browser event
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * The current node
+     */
+    node: TreeNode;
+}
+
+/**
+ * Custom double click event.
+ * @see {@link TreeSelectProps.onNodeDoubleClick}
+ * @extends {TreeSelectNodeClickEvent}
+ * @event
+ */
+interface TreeSelectNodeDoubleClickEvent extends TreeSelectNodeClickEvent {}
+
+/**
  * Defines valid properties in TreeSelect component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -596,10 +619,20 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     onHide?(): void;
     /**
+     * Callback to invoke when the node is clicked.
+     * @param {TreeSelectNodeClickEvent} event - Custom click event.
+     */
+    onNodeClick?(event: TreeSelectNodeClickEvent): void;
+    /**
      * Callback to invoke when a node is collapsed.
      * @param {TreeSelectEventNodeEvent} event - Custom change event.
      */
     onNodeCollapse?(event: TreeSelectEventNodeEvent): void;
+    /**
+     * Callback to invoke when the node is double-clicked.
+     * @param {TreeSelectNodeDoubleClickEvent} event - Custom doubleclick event.
+     */
+    onNodeDoubleClick?(event: TreeSelectNodeDoubleClickEvent): void;
     /**
      * Callback to invoke when a node is expanded.
      * @param {TreeSelectEventNodeEvent} event - Custom change event.

@@ -54267,6 +54267,19 @@
                             "description": "Used to hide the overlay."
                         },
                         {
+                            "name": "onNodeClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TreeSelectNodeClickEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the node is clicked."
+                        },
+                        {
                             "name": "onNodeCollapse",
                             "parameters": [
                                 {
@@ -54278,6 +54291,19 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a node is collapsed."
+                        },
+                        {
+                            "name": "onNodeDoubleClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TreeSelectNodeDoubleClickEvent",
+                                    "description": "Custom doubleclick event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the node is double-clicked."
                         },
                         {
                             "name": "onNodeExpand",
@@ -54431,6 +54457,26 @@
                             "readonly": false,
                             "type": "string",
                             "description": "The filtered value"
+                        }
+                    ]
+                },
+                "TreeSelectNodeDoubleClickEvent": {
+                    "description": "Custom double click event.",
+                    "relatedProp": "onNodeDoubleClick",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "node",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeNode",
+                            "description": "The current node"
                         }
                     ]
                 }
@@ -54900,6 +54946,28 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "TreeSelectNodeClickEvent": {
+                    "description": "Custom click event",
+                    "relatedProp": "onNodeClick",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "node",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeNode",
+                            "description": "The current node"
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedBy": "TreeSelectNodeDoubleClickEvent"
                 }
             }
         },
