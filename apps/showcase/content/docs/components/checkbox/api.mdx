@@ -1,0 +1,56 @@
+---
+title: Checkbox API
+description: API documentation for checkbox component
+component: checkbox
+---
+
+
+## CheckboxGroup
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _value_ | `unknown` | undefined | The name of the checkbox. |
+| _defaultValue_ | `unknown` | undefined | The default value of the checkbox. |
+| _onValueChange_ | `(event: { value: unknown }) => void` | undefined | Callback function that is called when the checkbox value changes. |
+
+## Checkbox
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _name_ | `string \| undefined` | undefined | The name of the checkbox. |
+| _size_ | `'small' \| 'normal' \| 'large' \| undefined` | undefined | Defines the size of the checkbox. |
+| _variant_ | `'outlined' \| 'filled' \| undefined` | undefined | Specifies the input variant of the component. |
+| _required_ | `boolean \| undefined` | undefined | When present, it specifies that the element is required. |
+| _invalid_ | `boolean \| undefined` | false | When present, it specifies that the component should have invalid state style. |
+| _inputId_ | `string \| undefined` | undefined | Identifier of the underlying input element. |
+| _inputStyle_ | `string \| object \| undefined` | undefined | Inline style of the input field. |
+| _inputClassName_ | `object \| undefined` | undefined | Style class of the input field. |
+| _ariaLabel_ | `string \| undefined` | undefined | Establishes a string value that labels the component. |
+| _ariaLabelledby_ | `string \| undefined` | undefined | Establishes relationships between the component and label(s) where its value should be one or more element IDs. |
+| _onFocus_ | `(event: React.FocusEvent<HTMLInputElement>) => void` | undefined | Callback function that is called when the checkbox is focused. |
+| _onBlur_ | `(event: React.FocusEvent<HTMLInputElement>) => void` | undefined | Callback function that is called when the checkbox loses focus. |
+
+
+## Headless
+
+### useCheckboxChangeEvent
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _originalEvent_ | `React.FormEventHandler<HTMLInputElement>` | undefined | The original event that triggered the change. |
+| _value_ | `unknown` | undefined | The value of the checkbox. |
+| _checked_ | `boolean` | undefined | The checked state of the checkbox. |
+
+### useCheckboxProps
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _value_ | `unknown` | undefined | Value of the checkbox. |
+| _defaultChecked_ | `boolean \| undefined` | undefined | The default value for the input when not controlled by `checked` and `onCheckedChange`. |
+| _checked_ | `boolean \| undefined` | undefined | When present, it specifies the input's checked state. |
+| _indeterminate_ | `boolean \| undefined` | undefined | When present, it specifies input state as indeterminate. |
+| _trueValue_ | `boolean \| string \| number \| undefined` | undefined | Value in checked state. |
+| _falseValue_ | `boolean \| string \| number \| undefined` | undefined | Value in unchecked state. |
+| _readOnly_ | `boolean \| undefined` | undefined | When present, it specifies that an input field is read-only. |
+| _disabled_ | `boolean \| undefined` | undefined | When present, it specifies that the element should be disabled. |
+| _onCheckedChange_ | `(event: useCheckboxChangeEvent) => void` | undefined | Callback fired when the checkbox's checked state changes. |

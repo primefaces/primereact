@@ -10,6 +10,10 @@
                         {
                             "name": "Checkbox",
                             "to": "/checkbox"
+                        },
+                        {
+                            "name": "RadioButton",
+                            "to": "/docs/components/radiobutton"
                         }
                     ]
                 },
@@ -36,27 +40,39 @@
                     "children": [
                         {
                             "name": "Avatar",
-                            "to": "/avatar"
+                            "to": "/docs/components/avatar"
+                        },
+                        {
+                            "name": "Inplace",
+                            "to": "/docs/components/inplace"
                         },
                         {
                             "name": "Badge",
-                            "to": "/badge"
+                            "to": "/docs/components/badge"
                         },
                         {
                             "name": "Chip",
-                            "to": "/chip"
+                            "to": "/docs/components/chip"
                         },
                         {
                             "name": "MeterGroup",
-                            "to": "/metergroup"
+                            "to": "/docs/components/metergroup"
                         },
                         {
                             "name": "ProgressBar",
-                            "to": "/progressbar"
+                            "to": "/docs/components/progressbar"
                         },
                         {
                             "name": "ProgressSpinner",
-                            "to": "/progressspinner"
+                            "to": "/docs/components/progressspinner"
+                        },
+                        {
+                            "name": "Skeleton",
+                            "to": "/docs/components/skeleton"
+                        },
+                        {
+                            "name": "Tag",
+                            "to": "/docs/components/tag"
                         }
                     ]
                 }

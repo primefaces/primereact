@@ -64,6 +64,7 @@ export function CodeViewer(inProps: CodeViewerProps) {
                 if (acc.indexOf(section) === -1) {
                     acc.push(section);
                 }
+
                 return acc;
             }, props.toggleableOrder || []);
 
