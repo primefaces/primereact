@@ -687,6 +687,7 @@ export const InputNumber = React.memo(
             let inputValue = inputRef.current.value.trim();
             const { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
             const maxFractionDigits = numberFormat.current.resolvedOptions().maximumFractionDigits;
+            const hasBoundOrAffix = props.min || props.max || props.suffix || props.prefix; //only exception
             let newValueStr;
 
             if (sign.isMinusSign) {
@@ -709,7 +710,7 @@ export const InputNumber = React.memo(
                     newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
                     updateValue(event, newValueStr, text, 'insert');
                 } else if (decimalCharIndex === -1 && (maxFractionDigits || props.maxFractionDigits)) {
-                    const allowedDecimal = inputMode !== 'numeric' || (inputMode === 'numeric' && (props.min || props.max));
+                    const allowedDecimal = inputMode !== 'numeric' || (inputMode === 'numeric' && hasBoundOrAffix);
 
                     if (allowedDecimal) {
                         newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
