@@ -877,7 +877,6 @@ export const MultiSelect = React.memo(
                     const labelKey = label + '_' + i;
                     const iconProps = mergeProps(
                         {
-                            'aria-label': localeOption('removeTokenIcon'),
                             className: cx('removeTokenIcon'),
                             onClick: (e) => removeChip(e, val),
                             onKeyDown: (e) => onRemoveTokenIconKeyDown(e, val),
@@ -1025,7 +1024,6 @@ export const MultiSelect = React.memo(
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    'aria-label': localeOption('clear'),
                     onClick: (e) => updateModel(e, [], []),
                     onKeyDown: (e) => onClearIconKeyDown(e),
                     tabIndex: props.tabIndex || '0'
@@ -1194,6 +1192,7 @@ export const MultiSelect = React.memo(
                         isUnstyled={isUnstyled}
                         metaData={metaData}
                         changeFocusedOptionIndex={changeFocusedOptionIndex}
+                        optionGroupCollapsable={props.optionGroupCollapsable}
                     />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} pt={ptm('tooltip')} {...props.tooltipOptions} />}
