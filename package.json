@@ -30,7 +30,7 @@
         "build:lib": "pnpm --filter primereact build",
         "build:showcase": "pnpm --filter showcase build",
         "build:apidoc": "pnpm --filter showcase build:docs",
-        "dev": "pnpm --filter showcase dev && contentlayer2 build",
+        "dev": "pnpm --filter showcase dev",
         "dev:scan": "pnpm --filter showcase scan",
         "type:check": "pnpm --filter './packages/*' typecheck",
         "security:check": "pnpm audit --prod --audit-level high",
@@ -57,7 +57,6 @@
         "react-scan": "0.3.3",
         "rimraf": "^6.0.1",
         "ts-jest": "^29.2.5",
-        "ts-morph": "^25.0.1",
         "tsup": "^8.3.6",
         "typescript": "^5.8.2",
         "typescript-eslint": "^8.24.0"
@@ -67,11 +66,6 @@
     },
     "packageManager": "pnpm@9.6.0",
     "lint-staged": {
-        "**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}": [
-            "prettier --write"
-        ]
-    },
-    "dependencies": {
-        "gray-matter": "^4.0.3"
+        "**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}": ["prettier --write"]
     }
 }
