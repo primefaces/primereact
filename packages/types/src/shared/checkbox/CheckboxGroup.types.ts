@@ -34,19 +34,14 @@ export interface CheckboxGroupValueChangeEvent {
     /**
      * The value of the checkbox group.
      */
-    value: string[] | number[] | undefined;
+    value: unknown[] | undefined;
 }
 
 /**
  * Used to update the checkbox group value.
  * @extends CheckboxChangeEvent
  */
-export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {
-    /**
-     * The value of a checkbox.
-     */
-    value: string | number | undefined;
-}
+export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {}
 
 /**
  * Defines valid properties in CheckboxGroup component.
@@ -55,11 +50,11 @@ export interface CheckboxGroupProps extends BaseComponentProps {
     /**
      * Value of the checkbox group.
      */
-    value?: string[] | number[] | undefined;
+    value?: unknown[] | undefined;
     /**
      * The default value of the checkbox group.
      */
-    defaultValue?: string[] | number[] | undefined;
+    defaultValue?: unknown[] | undefined;
     /**
      * Callback function that is called when the checkbox group value changes.
      */

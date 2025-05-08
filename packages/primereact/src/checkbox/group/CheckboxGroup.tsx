@@ -12,7 +12,7 @@ export const CheckboxGroup = withComponent({
     defaultProps,
     setup(instance) {
         const { value, defaultValue, onValueChange: onChange } = instance.props;
-        const [valueState, setValueState] = useControlledState<(string | number)[]>({
+        const [valueState, setValueState] = useControlledState({
             value,
             defaultValue,
             onChange
@@ -20,7 +20,7 @@ export const CheckboxGroup = withComponent({
 
         const updateChange = React.useCallback(
             (event: CheckboxGroupUpdateChangeEvent) => {
-                const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v: string | number) => v !== event.value);
+                const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v) => v !== event.value);
 
                 setValueState?.([newValue, { originalEvent: event.originalEvent, value: newValue }]);
             },

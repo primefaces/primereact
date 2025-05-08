@@ -1,4 +1,4 @@
-import { useCheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import { Checkbox } from 'primereact/checkbox';
 import * as React from 'react';
 
@@ -16,8 +16,8 @@ export default function DynamicDemo() {
         return selectedCategories.some((category) => category.key === value.key);
     };
 
-    const onCategoryChange = (event: useCheckboxChangeEvent) => {
-        const { value } = event;
+    const onCategoryChange = (event: CheckboxChangeEvent) => {
+        const { value } = event as { value: { name: string; key: string } };
         let selectedValues = [...selectedCategories];
 
         if (event.checked) {

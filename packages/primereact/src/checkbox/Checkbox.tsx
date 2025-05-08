@@ -22,11 +22,14 @@ export const Checkbox = withComponent({
         const useCheckboxProps = group
             ? {
                   ...inProps,
-                  checked: (group.props.value as unknown[])?.includes(props.value),
-                  defaultChecked: (group.props.defaultValue as unknown[])?.includes(props.value),
+                  checked: group.props.value?.includes(props.value),
+                  defaultChecked: group.props.defaultValue?.includes(props.value),
                   onCheckedChange: React.useCallback((event: CheckboxChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
               }
-            : inProps;
+            : {
+                  ...inProps,
+                  onCheckedChange: React.useCallback((event: CheckboxChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }), [props.onCheckedChange])
+              };
 
         const checkbox = useCheckbox(useCheckboxProps);
 

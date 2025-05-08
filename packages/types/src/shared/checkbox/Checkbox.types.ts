@@ -43,7 +43,12 @@ export interface CheckboxPassThroughOptions {
  * Event fired when the checkbox's checked state changes.
  * @extends useCheckboxChangeEvent
  */
-export interface CheckboxChangeEvent extends useCheckboxChangeEvent<React.ChangeEvent<HTMLInputElement>> {}
+export interface CheckboxChangeEvent extends useCheckboxChangeEvent<React.ChangeEvent<HTMLInputElement>> {
+    /**
+     * Value of the checkbox.
+     */
+    value?: unknown | undefined;
+}
 
 /**
  * Defines valid properties in Checkbox component.
@@ -52,7 +57,7 @@ export interface CheckboxProps extends BaseComponentProps<Omit<useCheckboxProps,
     /**
      * Value of the checkbox.
      */
-    value?: string | number | undefined;
+    value?: unknown | undefined;
     /**
      * The name of the checkbox.
      */
