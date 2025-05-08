@@ -17,12 +17,13 @@ export const Checkbox = withComponent({
     setup(instance) {
         const { props, inProps } = instance;
         const group = useCheckboxGroupContext();
+
         const useCheckboxProps = group
             ? {
                   ...inProps,
                   checked: group.props.value?.includes(props.value),
                   defaultChecked: group.props.defaultValue?.includes(props.value),
-                  onCheckedChange: group.updateChange
+                  onCheckedChange: React.useCallback((event) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
               }
             : inProps;
 

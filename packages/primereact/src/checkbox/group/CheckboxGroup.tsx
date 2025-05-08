@@ -20,7 +20,7 @@ export const CheckboxGroup = withComponent({
 
         const updateChange = React.useCallback(
             (event: useCheckboxChangeEvent) => {
-                const newValue = valueState?.includes(event.value) ? (valueState || []).filter((v: unknown) => v !== event.value) : [...(valueState || []), event.value];
+                const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v: unknown) => v !== event.value);
 
                 setValueState?.([newValue, { originalEvent: event.originalEvent, value: newValue }]);
             },
