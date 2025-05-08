@@ -22,6 +22,7 @@ export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey
     };
 
     const Component = React.memo(BaseComponent, (prevProps, nextProps) => {
+        // @ts-expect-error prop types are not compatible
         return prevProps === nextProps && Object.keys(defaultProps || {}).every((key) => prevProps?.[key] === nextProps?.[key]);
     }) as unknown as typeof BaseComponent & CData & React.FC;
 
