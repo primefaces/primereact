@@ -1,5 +1,6 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
+import { useCheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import * as React from 'react';
 import { defaultProps } from './useCheckbox.props';
 
@@ -22,7 +23,7 @@ export const useCheckbox = withHeadless({
         };
 
         // methods
-        const onChange = (event: React.SyntheticEvent) => {
+        const onChange = (event: useCheckboxChangeEvent) => {
             const computedChecked = indeterminateState ? props.trueValue : checked ? props.falseValue : props.trueValue;
 
             if (indeterminateState) {

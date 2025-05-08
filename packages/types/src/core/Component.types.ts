@@ -54,7 +54,7 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
     children?: React.ReactNode | undefined;
 }
 
-export declare type withComponentOptions<IProps, DProps, Exposes, CData = Record<string, unknown>> = {
+export declare type withComponentOptions<IProps, DProps, Exposes, CData> = {
     name?: string | undefined;
     defaultProps?: DProps | undefined;
     styles?: StylesOptions | undefined;

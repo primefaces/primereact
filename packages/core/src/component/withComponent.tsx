@@ -3,7 +3,14 @@ import type { BaseComponentProps } from '@primereact/types/shared';
 import * as React from 'react';
 import { useComponent } from './useComponent';
 
-export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown>, CData>({ name = 'UnknownComponent', defaultProps, styles, components, setup, render }: withComponentOptions<IProps, DProps, Exposes, CData>) => {
+export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, CData = Record<string, unknown>>({
+    name = 'UnknownComponent',
+    defaultProps,
+    styles,
+    components,
+    setup,
+    render
+}: withComponentOptions<IProps, DProps, Exposes, CData>) => {
     const BaseComponent = <T extends React.ElementType>(inProps?: BaseComponentProps<IProps, T> & DProps) => {
         const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useBaseOptions<BaseComponentProps<IProps, T> & DProps, DProps, Exposes>);
 

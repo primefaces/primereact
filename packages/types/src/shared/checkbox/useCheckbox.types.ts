@@ -74,11 +74,11 @@ export interface useCheckboxState {
     /**
      * The checked state of the useCheckbox.
      */
-    checked: boolean;
+    checked: boolean | undefined;
     /**
      * The indeterminate state of the useCheckbox.
      */
-    indeterminate: boolean;
+    indeterminate: boolean | undefined;
 }
 
 /**

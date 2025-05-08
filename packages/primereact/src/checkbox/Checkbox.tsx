@@ -4,6 +4,7 @@ import { useCheckbox } from '@primereact/headless/checkbox';
 import { CheckIcon } from '@primereact/icons/check';
 import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
+import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { CheckboxProvider } from './Checkbox.context';
@@ -21,9 +22,9 @@ export const Checkbox = withComponent({
         const useCheckboxProps = group
             ? {
                   ...inProps,
-                  checked: group.props.value?.includes(props.value),
-                  defaultChecked: group.props.defaultValue?.includes(props.value),
-                  onCheckedChange: React.useCallback((event) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
+                  checked: (group.props.value as unknown[])?.includes(props.value),
+                  defaultChecked: (group.props.defaultValue as unknown[])?.includes(props.value),
+                  onCheckedChange: React.useCallback((event: CheckboxChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
               }
             : inProps;
 

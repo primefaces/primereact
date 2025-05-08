@@ -58,7 +58,7 @@ export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props,
     /**
      * The headless/component props that are passed by the user.
      */
-    inProps?: IProps | undefined;
+    inProps?: (IProps & Record<PropertyKey, unknown>) | undefined;
     /**
      * The unique attribute selector.
      */

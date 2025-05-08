@@ -28,13 +28,24 @@ export interface CheckboxGroupPassThroughOptions {
 }
 
 /**
- * Event fired when the checkboxes's checked state changes.
+ * Event fired when the checkbox group's value changes.
  */
 export interface CheckboxGroupValueChangeEvent {
     /**
-     * The value of the checked checkboxes.
+     * The value of the checkbox group.
      */
     value: string[] | number[] | undefined;
+}
+
+/**
+ * Used to update the checkbox group value.
+ * @extends CheckboxChangeEvent
+ */
+export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {
+    /**
+     * The value of a checkbox.
+     */
+    value: string | number | undefined;
 }
 
 /**
@@ -71,7 +82,7 @@ export interface CheckboxGroupExposes {
      * @param event.value The new value of the checkbox group.
      * @returns void
      */
-    updateChange: (event: CheckboxChangeEvent) => void;
+    updateChange: (event: CheckboxGroupUpdateChangeEvent) => void;
 }
 
 /**

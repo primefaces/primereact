@@ -1,7 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import type { useCheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import type { CheckboxGroupUpdateChangeEvent } from '@primereact/types/shared/checkbox';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { CheckboxGroupProvider } from './CheckboxGroup.context';
@@ -12,15 +12,15 @@ export const CheckboxGroup = withComponent({
     defaultProps,
     setup(instance) {
         const { value, defaultValue, onValueChange: onChange } = instance.props;
-        const [valueState, setValueState] = useControlledState<unknown[]>({
+        const [valueState, setValueState] = useControlledState<(string | number)[]>({
             value,
             defaultValue,
             onChange
         });
 
         const updateChange = React.useCallback(
-            (event: useCheckboxChangeEvent) => {
-                const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v: unknown) => v !== event.value);
+            (event: CheckboxGroupUpdateChangeEvent) => {
+                const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v: string | number) => v !== event.value);
 
                 setValueState?.([newValue, { originalEvent: event.originalEvent, value: newValue }]);
             },
