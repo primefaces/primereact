@@ -2,14 +2,19 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { usePanelContext } from '../Panel.context';
 import { defaultHeaderProps } from './PanelHeader.props';
 
 export const PanelHeader = withComponent({
     name: 'PanelHeader',
     defaultProps: defaultHeaderProps,
-    render: (instance) => {
-        const { props, ptmi, getParent } = instance;
-        const panel = getParent('Panel');
+    setup() {
+        const panel = usePanelContext();
+
+        return { panel };
+    },
+    render(instance) {
+        const { props, ptmi, panel } = instance;
 
         const rootProps = mergeProps(
             {
@@ -19,6 +24,6 @@ export const PanelHeader = withComponent({
             ptmi('root')
         );
 
-        return <Component as={props.as} {...rootProps} children={props.children} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

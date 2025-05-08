@@ -23,7 +23,7 @@ export interface UseControlledStateOptions<T = unknown> {
  * The return type of the `useControlledState` hook.
  * A tuple containing the current value and a function to update it.
  */
-export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue: T | ((prev?: T, controlled?: boolean) => any)) => void];
+export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue: any | ((prev?: T, controlled?: boolean) => any)) => void];
 
 /**
  * A custom hook that manages controlled and uncontrolled state.
@@ -51,19 +51,22 @@ export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue
 export function useControlledState<T = unknown>({ value, defaultValue, onChange }: UseControlledStateOptions<T>): UseControlledStateReturnType<T | undefined> {
     const [valueState, setValueState] = React.useState<T | undefined>(defaultValue ?? value);
 
-    const isControlled = onChange !== undefined;
+    const isControlled = value !== undefined;
     const computedValue = isControlled ? (value as T) : valueState;
 
-    const setValue = (inValue: T | ((prev: T) => any)) => {
-        // @todo - update resolve to accept multiple parameters
-        const newValue = resolve(inValue, computedValue, isControlled);
+    const setValue = React.useCallback(
+        (inValue: any | ((prev?: T) => any)) => {
+            // @todo - update resolve to accept multiple parameters
+            const [newValue, onChangeParam] = resolve(inValue, computedValue, isControlled);
 
-        onChange?.(newValue);
+            onChange?.(onChangeParam);
 
-        if (!isControlled) {
-            setValueState(newValue);
-        }
-    };
+            if (!isControlled) {
+                setValueState(newValue);
+            }
+        },
+        [computedValue, isControlled, onChange]
+    );
 
     return [computedValue, setValue];
 }

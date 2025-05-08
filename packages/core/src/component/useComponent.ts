@@ -1,50 +1,43 @@
 import { useBase } from '@primereact/core/base';
-import type { ComponentInstance, useBaseOptions, useComponentOptions } from '@primereact/types/core';
+import type { InComponentInstance, useBaseOptions, useComponentOptions } from '@primereact/types/core';
 import * as React from 'react';
 import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, PInstance, RData> = {}) => {
+export const useComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown>>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, Exposes> = {}) => {
     const defaultProps = React.useMemo(() => ({ ...globalProps, ...options.defaultProps }), [options.defaultProps]);
     const baseInstance = useBase(name, {
         inProps: options.inProps,
         defaultProps,
         setup: options.setup
-    } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, PInstance, RData>);
+    } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, Exposes>);
 
-    const { ref, props, parent } = baseInstance;
+    const { ref, props, state } = baseInstance;
     const $params = React.useMemo(() => {
-        const { props, attrs, state, parent } = baseInstance || {};
+        const { props, attrs, state } = baseInstance || {};
 
         return {
             instance: baseInstance,
             props,
             attrs,
-            state,
-            parent
+            state
         };
-    }, [baseInstance]);
+    }, [baseInstance, state]);
 
     const ptx = useComponentPT(baseInstance, $params);
     const stx = useComponentStyle(baseInstance, props.styles || options.styles, $params);
 
-    const instance = React.useMemo<ComponentInstance<typeof props, IProps, typeof parent, RData>>(
+    const instance = React.useMemo<InComponentInstance<typeof props, IProps, typeof state, Exposes>>(
         () => ({
             ...baseInstance,
             ...ptx,
-            ...stx,
-            $pc: parent
-                ? {
-                      ...parent.$pc,
-                      [parent.name!]: parent
-                  }
-                : {}
+            ...stx
         }),
-        [baseInstance, ptx, stx, parent]
+        [baseInstance, ptx, stx]
     );
 
-    React.useImperativeHandle(ref as React.Ref<ComponentInstance<typeof props, IProps, typeof parent, RData>>, () => instance, [instance]);
+    React.useImperativeHandle(ref as React.Ref<InComponentInstance<typeof props, IProps, typeof state, Exposes>>, () => instance, [instance]);
 
     return instance;
 };

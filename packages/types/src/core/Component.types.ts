@@ -8,9 +8,8 @@ import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 export interface GlobalComponentProps<T extends React.ElementType = React.ElementType, R = unknown, D = unknown> {
     /**
      * The reference to the component instance.
-     * @todo - React.Ref<R> | undefined;
      */
-    ref?: unknown;
+    ref?: React.Ref<R> | undefined;
     /**
      * Whether the component should be rendered.
      * @default true
@@ -55,58 +54,20 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
     children?: React.ReactNode | undefined;
 }
 
-/**
- * Defines the props of the component.
- */
-export interface ComponentProps<R = unknown, D = unknown> extends GlobalComponentProps<React.ElementType, R, D> {
-    /**
-     * The component instance
-     */
-    instance?: ComponentInstance | undefined;
-    /**
-     * The options to pass to the component.
-     */
-    options?: Record<string, unknown> | undefined;
-}
+export declare type withComponentOptions<IProps, DProps, Exposes, CData = Record<string, unknown>> = {
+    name?: string | undefined;
+    defaultProps?: DProps | undefined;
+    styles?: StylesOptions | undefined;
+    components?: CData | undefined;
+    setup?: useComponentOptions<IProps, DProps, Exposes>['setup'];
+    render?: React.FC<InComponentInstance<DProps, IProps, Record<PropertyKey, unknown>, Exposes>>;
+};
 
-/**
- * Defines the props of the component context.
- */
-export interface ComponentProviderProps {
-    /**
-     * The component instance.
-     * @todo - Update this to use the ComponentInstance type.
-     */
-    instance?: ComponentInstance<any, any> | undefined;
-    /**
-     * Whether the provider should be rendered.
-     * @default true
-     */
-    pIf?: boolean | undefined;
-    /**
-     * The children to render.
-     */
-    children?: React.ReactNode | undefined;
-}
+export declare type useComponentOptions<IProps, DProps, Exposes> = useBaseOptions<IProps, DProps, Exposes> & {
+    styles?: StylesOptions | undefined;
+};
 
-/**
- * Component Instance.
- *
- * @template P - The type of the component props.
- * @template I - The type of the base component props that are passed by the user.
- * @template T - The type of the parent component instance.
- */
-export declare type ComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, PInstance = unknown, RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>> = Instance<
-    Props,
-    IProps,
-    PInstance,
-    RData
-> & {
-    /**
-     * Defines parent components instances.
-     */
-    $pc: Record<string, ComponentInstance>;
-} & {
+export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = Instance<Props, IProps, State, Exposes> & {
     /**
      * Finds attributes of the component using the key in pass-through options.
      *
@@ -161,35 +122,26 @@ export declare type ComponentInstance<Props = Record<PropertyKey, unknown>, IPro
     $style: Record<string, unknown> | undefined;
 };
 
-/*export declare type CommonKeys = 'ref' | 'name' | 'props' | 'attrs' | 'parent' | 'inProps' | '$primereact' | 'getParent';
-export declare type CommonComponentInstance<P, I, T> = Pick<ComponentInstance<P, I, T>, CommonKeys>;
+export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<Props, Props, State, Exposes>;
 
-export declare type ComputedKeys = CommonKeys | '$attrSelector' | 'state';
-export declare type ComputedComponentInstance<P, I, T, S> = Pick<ComponentInstance<P, I, T>, ComputedKeys> & S;*/
-
-/**
- * The setup callback function or options.
- */
-//export declare type withComponentSetup<D, I, S> = S | ((instance: CommonComponentInstance<D, I, unknown>) => S) | undefined;
-
-/*export declare type withComponentOptions<D, I, S, C = Record<string, unknown>> = {
-    name?: string | undefined;
-    defaultProps?: D | undefined;
-    styles?: StylesOptions | undefined;
-    components?: C | undefined;
-    setup?: withComponentSetup<D, I, S>;
-    render?: React.FC<ComponentInstance<D, I, ComponentInstance, S>>;
-};*/
-
-export declare type withComponentOptions<IProps, DProps, RData extends Record<PropertyKey, unknown>, CData = Record<string, unknown>> = {
-    name?: string | undefined;
-    defaultProps?: DProps | undefined;
-    styles?: StylesOptions | undefined;
-    components?: CData | undefined;
-    setup?: useComponentOptions<IProps, DProps, unknown, RData>['setup'];
-    render?: React.FC<ComponentInstance<DProps, IProps, ComponentInstance, RData>>;
-};
-
-export declare type useComponentOptions<IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>> = useBaseOptions<IProps, DProps, PInstance, RData> & {
-    styles?: StylesOptions | undefined;
-};
+export type InferComponentInstance<I> =
+    I extends ComponentInstance<infer Props, infer State, infer Exposes>
+        ? {
+              /**
+               * Defines valid properties.
+               */
+              props: Props | undefined;
+              /**
+               * Defines current inline state.
+               */
+              state: State;
+              /**
+               * Defines valid attributes.
+               */
+              attrs: Exposes | undefined;
+          }
+        : {
+              props: undefined;
+              state: undefined;
+              attrs: undefined;
+          };

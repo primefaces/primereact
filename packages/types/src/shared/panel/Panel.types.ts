@@ -1,5 +1,11 @@
+import { ComponentInstance } from '@primereact/types/core';
 import { BaseComponentProps } from '..';
 import { usePanelProps } from './usePanel.types';
+
+/**
+ * Panel component instance.
+ */
+export type PanelInstance = ComponentInstance<PanelProps>;
 
 export interface PanelProps extends BaseComponentProps<usePanelProps> {
     toggleable?: boolean;

@@ -12,7 +12,7 @@ import { useHeadless } from './useHeadless';
  * @param {D} [options.defaultProps] - The default properties.
  * @returns The Headless instance.
  */
-export const withHeadless = <IProps, DProps, RData extends Record<PropertyKey, unknown>>({ name, defaultProps, setup }: withHeadlessOptions<IProps, DProps, RData>) => {
+export const withHeadless = <IProps, DProps, Exposes extends Record<PropertyKey, unknown>>({ name, defaultProps, setup }: withHeadlessOptions<IProps, DProps, Exposes>) => {
     return (inProps?: IProps) => {
         return useHeadless(name, { inProps, defaultProps, setup });
     };

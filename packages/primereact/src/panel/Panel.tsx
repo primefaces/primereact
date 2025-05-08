@@ -4,6 +4,7 @@ import { usePanel } from '@primereact/headless/panel';
 import { styles } from '@primereact/styles/panel';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { PanelProvider } from './Panel.context';
 import { defaultProps } from './Panel.props';
 import { PanelCollapse } from './collapse';
 import { PanelContent } from './content';
@@ -22,14 +23,7 @@ export const Panel = withComponent({
         return panel;
     },
     render: (instance) => {
-        const {
-            id,
-            props,
-            ptmi,
-            cx,
-            // element refs
-            elementRef
-        } = instance;
+        const { id, props, ptmi, cx } = instance;
 
         const rootProps = mergeProps(
             {
@@ -39,7 +33,11 @@ export const Panel = withComponent({
             ptmi('root')
         );
 
-        return <Component as={props.as} {...rootProps} ref={elementRef} children={props.children} />;
+        return (
+            <PanelProvider value={instance}>
+                <Component instance={instance} attrs={rootProps} children={props.children} />
+            </PanelProvider>
+        );
     },
     components: {
         Header: PanelHeader,

@@ -6,19 +6,31 @@ import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { CheckboxProvider } from './Checkbox.context';
 import { defaultProps } from './Checkbox.props';
-import { CheckboxGroup } from './group';
+import { CheckboxGroup, useCheckboxGroupContext } from './group';
 
 export const Checkbox = withComponent({
     name: 'Checkbox',
     defaultProps,
     styles,
-    setup: (instance) => {
-        const checkbox = useCheckbox(instance?.inProps);
+    setup(instance) {
+        const { props, inProps } = instance;
+        const group = useCheckboxGroupContext();
+        const useCheckboxProps = group
+            ? {
+                  ...inProps,
+                  checked: group.props.value?.includes(props.value),
+                  defaultChecked: group.props.defaultValue?.includes(props.value),
+                  onCheckedChange: group.updateChange
+              }
+            : inProps;
+
+        const checkbox = useCheckbox(useCheckboxProps);
 
         return checkbox;
     },
-    render: (instance) => {
+    render(instance) {
         const {
             id,
             props,
@@ -26,8 +38,6 @@ export const Checkbox = withComponent({
             ptmi,
             ptm,
             cx,
-            // element refs
-            elementRef,
             // methods
             onChange
         } = instance;
@@ -91,10 +101,12 @@ export const Checkbox = withComponent({
         );
 
         return (
-            <Component as={props.as} asChild={props.asChild} {...rootProps} ref={elementRef}>
-                {input}
-                {box}
-            </Component>
+            <CheckboxProvider value={instance}>
+                <Component instance={instance} attrs={rootProps}>
+                    {input}
+                    {box}
+                </Component>
+            </CheckboxProvider>
         );
     },
     components: {

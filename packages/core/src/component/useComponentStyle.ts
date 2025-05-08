@@ -6,7 +6,7 @@ import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-export const useComponentStyle = <Props extends GlobalComponentProps, IProps, PInstance, Params>(instance: Instance<Props, IProps, PInstance>, styles?: StylesOptions, $params?: Params) => {
+export const useComponentStyle = <Props extends GlobalComponentProps, IProps, Params>(instance: Instance<Props, IProps>, styles?: StylesOptions, $params?: Params) => {
     const { props = { unstyled: false }, $primereact, elementRef } = instance || {};
     const $style = useComponentStyleHandler(styles, elementRef);
 

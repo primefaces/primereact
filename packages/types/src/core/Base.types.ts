@@ -1,4 +1,4 @@
-import { ComponentInstance } from '.';
+import { PassThroughOptions } from './PassThrough.types';
 
 /**
  * PrimeReact Contexts
@@ -7,10 +7,7 @@ import { ComponentInstance } from '.';
 export interface Contexts {
     config?: {
         pt?: Record<string, unknown>;
-        ptOptions?: {
-            mergeSections?: boolean;
-            mergeProps?: boolean;
-        };
+        ptOptions?: PassThroughOptions;
         csp?: {
             nonce?: string;
         };
@@ -25,15 +22,15 @@ export interface Contexts {
     parent?: unknown;
 }
 
-export declare type BaseSetup<Props, IProps, PInstance, RData extends Record<PropertyKey, unknown>> = RData | ((instance: CommonInstance<Props, IProps, PInstance>) => RData) | (() => RData);
+export type BaseSetup<Props, IProps, Exposes> = Exposes | ((instance: CommonInstance<Props, IProps>) => Exposes) | (() => Exposes);
 
-export interface useBaseOptions<IProps, DProps, PInstance, RData extends Record<PropertyKey, unknown>> {
+export interface useBaseOptions<IProps, DProps, Exposes> {
     inProps?: IProps;
     defaultProps?: DProps;
-    setup?: BaseSetup<DProps, IProps, PInstance, RData>;
+    setup?: BaseSetup<DProps, IProps, Exposes>;
 }
 
-export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props, PInstance = unknown, Ref = unknown, ERef = HTMLElement> = {
+export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props, Ref = unknown, ERef = HTMLElement> = {
     /**
      * The reference to the component.
      */
@@ -59,10 +56,6 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
      */
     attrs: Omit<IProps & Record<PropertyKey, unknown>, keyof Props>;
     /**
-     * The parent component instance.
-     */
-    parent?: PInstance | undefined;
-    /**
      * The headless/component props that are passed by the user.
      */
     inProps?: IProps | undefined;
@@ -74,13 +67,6 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
      * The PrimeReact contexts.
      */
     $primereact: Contexts;
-    /**
-     * Finds parent instance of the component.
-     *
-     * @param type - The type of the parent instance to find.
-     * @returns {Instance | undefined} - The found parent instance or undefined if not found.
-     */
-    getParent: <R = ComponentInstance>(type?: string) => R | undefined;
 };
 
 /**
@@ -93,20 +79,18 @@ export declare type CommonInstance<Props = Record<PropertyKey, unknown>, IProps 
  * @template Ref - The type of the component reference.
  * @template ERef - The type of the element reference.
  */
-export declare type Instance<
-    Props = Record<PropertyKey, unknown>,
-    IProps = Record<PropertyKey, unknown>,
-    PInstance = unknown,
-    RData extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-    Ref = unknown,
-    ERef = HTMLElement
-> = CommonInstance<Props, IProps, PInstance, Ref, ERef> & {
+export type Instance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>, Ref = unknown, ERef = HTMLElement> = CommonInstance<
+    Props,
+    IProps,
+    Ref,
+    ERef
+> & {
     /**
      * The component state.
      */
-    state: Record<PropertyKey, unknown>;
+    state: State;
     /**
      * The computed setup data.
      */
-    $computedSetup: RData;
-} & RData;
+    $computedSetup: Exposes;
+} & Exposes;

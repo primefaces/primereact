@@ -4,7 +4,7 @@ import { mergeProps } from '@primeuix/utils/mergeprops';
 import { getKeyValue, isArray, isFunction, isNotEmpty, isString, resolve, toFlatCase } from '@primeuix/utils/object';
 import * as React from 'react';
 
-export const useComponentPT = <Props extends GlobalComponentProps, IProps, PInstance, Params>(instance: Instance<Props, IProps, PInstance>, $params?: Params) => {
+export const useComponentPT = <Props extends GlobalComponentProps, IProps, Params>(instance: Instance<Props, IProps>, $params?: Params) => {
     const { id, name, props, attrs, $primereact, $attrSelector } = instance || {};
 
     // methods

@@ -1,4 +1,4 @@
-import { CheckboxGroupProps } from '@primereact/types/shared/checkbox';
+import type { CheckboxGroupProps } from '@primereact/types/shared/checkbox';
 
 export const defaultProps: CheckboxGroupProps = {
     as: 'div',

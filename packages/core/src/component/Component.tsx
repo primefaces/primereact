@@ -1,18 +1,27 @@
 import type { ComponentProps } from '@primereact/types/core';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
-import { ComponentContext } from './Component.context';
 
 export const Component = (inProps: ComponentProps = {}) => {
-    const context = React.useContext(ComponentContext);
-    const { pIf = true, ...props } = inProps;
+    const { pIf = true, as, asChild, instance, ...props } = inProps;
 
-    if (pIf === false || (!props.asChild && !props.as)) return null;
+    if (pIf === false) return null;
 
-    const { as: AsComponent, asChild, instance = context, children, options, ...rest } = props;
-    const content = resolve(children, { ...rest, ...options, ...instance }) as React.ReactNode;
+    const AsComponent = (instance?.props?.as || as) as React.ElementType;
+    const renderAsChild = instance?.props?.asChild || asChild;
 
-    return asChild ? <React.Fragment>{content}</React.Fragment> : AsComponent ? <AsComponent {...rest}>{content}</AsComponent> : null;
+    if (!renderAsChild && !AsComponent) return null;
+
+    const { ref = instance?.elementRef, children, attrs: inAttrs, ...attrs } = props;
+    const content = resolve(children, { ...inAttrs, ...attrs }) as React.ReactNode;
+
+    return renderAsChild ? (
+        <React.Fragment>{content}</React.Fragment>
+    ) : AsComponent ? (
+        <AsComponent {...inAttrs} {...attrs} ref={ref}>
+            {content}
+        </AsComponent>
+    ) : null;
 };
 
 Component.displayName = 'PrimeReact.Component';

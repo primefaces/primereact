@@ -1,4 +1,4 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import type { GlobalComponentProps, InferComponentInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
@@ -24,3 +24,19 @@ export declare type CommonComponentProps<H, T extends React.ElementType> = H & G
  * @template O - The properties to omit from the component.
  */
 export declare type BaseComponentProps<H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<H, T> & Omit<ExtractProps<T>, keyof CommonComponentProps<H, T> | O[number]>;
+
+export type PassThroughOptionType<I, Attrs = React.HTMLAttributes<HTMLElement>> = Attrs | ((options: PassThroughMethodOptions<I>) => Attrs | string) | string | null | undefined;
+
+/**
+ * Defines passthrough(pt) options for method type.
+ */
+export type PassThroughMethodOptions<I> = InferComponentInstance<I> & {
+    /**
+     * Defines instance.
+     */
+    instance: I;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: Record<PropertyKey, unknown> | undefined;
+};
