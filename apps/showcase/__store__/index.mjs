@@ -1,6 +1,6 @@
 /****************************************************************************
-****************** PrimeReact MDX Content (Auto-Generated) ******************
-*****************************************************************************/
+ ****************** PrimeReact MDX Content (Auto-Generated) ******************
+ *****************************************************************************/
 
 import * as React from 'react';
 
@@ -184,5 +184,5 @@ export const Store = {
     'tag-template-demo': {
         component: React.lazy(() => import('@/demo/tag/tag-template-demo.tsx')),
         filePath: '@/demo/tag/tag-template-demo.tsx'
-    },
+    }
 };
