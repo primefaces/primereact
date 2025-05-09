@@ -1,76 +1,39 @@
 import { withHeadless } from '@primereact/core/headless';
-import * as React from 'react';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
+import type { useRadioButtonChangeEvent } from '@primereact/types/shared/radiobutton';
 import { defaultProps } from './useRadioButton.props';
 
 export const useRadioButton = withHeadless({
+    name: 'useRadioButton',
+    defaultProps,
     setup: ({ props }) => {
-        const [checked, setChecked] = React.useState<boolean>(false);
+        const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
+            value: props.checked,
+            defaultValue: props.defaultChecked ?? false,
+            onChange: props.onCheckedChange
+        });
+
         const state = {
-            checked
+            checked: checkedState
         };
-
-        const radioButtonGroupRef = React.useRef<any>(null);
-
-        // element refs
 
         // methods
-        const setRadioButtonGroup = (radioButtonGroup: any) => {
-            if (!radioButtonGroupRef.current && radioButtonGroup) {
-                const { defaultValue, value, onValueChange } = radioButtonGroup.props;
-                const computedValue = onValueChange ? value : defaultValue;
-                const isChecked = computedValue === props.value;
+        const onChange = (event: useRadioButtonChangeEvent) => {
+            const computedChecked = !checkedState;
 
-                setChecked(isChecked);
-            }
-
-            radioButtonGroupRef.current = radioButtonGroup;
-        };
-
-        const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-            if (!props.disabled && !props.readOnly) {
-                setChecked(true);
-
-                if (radioButtonGroupRef.current) {
-                    const { onValueChange } = radioButtonGroupRef.current.props;
-
-                    if (onValueChange) {
-                        onValueChange({
-                            originalEvent: event,
-                            value: props.value
-                        });
-                    }
+            setCheckedState([
+                computedChecked,
+                {
+                    originalEvent: event,
+                    checked: computedChecked
                 }
-            }
+            ]);
         };
-
-        const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-            props.onFocus?.(event);
-        };
-
-        const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-            props.onBlur?.(event);
-        };
-
-        // effects
-        React.useEffect(() => {
-            if (radioButtonGroupRef.current) {
-                const { value, defaultValue, onValueChange } = radioButtonGroupRef.current.props;
-                const isChecked = onValueChange ? value === props.value : defaultValue === props.value;
-
-                setChecked(isChecked);
-            }
-        }, [radioButtonGroupRef.current, props.value]);
 
         return {
             state,
-            // element refs
-
             // methods
-            setRadioButtonGroup,
-            onChange,
-            onFocus,
-            onBlur
+            onChange
         };
-    },
-    defaultProps
+    }
 });

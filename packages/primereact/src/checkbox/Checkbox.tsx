@@ -5,7 +5,7 @@ import { CheckIcon } from '@primereact/icons/check';
 import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
-import { mergeProps } from '@primeuix/utils';
+import { cn, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { CheckboxProvider } from './Checkbox.context';
 import { defaultProps } from './Checkbox.props';
@@ -33,7 +33,10 @@ export const Checkbox = withComponent({
 
         const checkbox = useCheckbox(useCheckboxProps);
 
-        return checkbox;
+        return {
+            ...checkbox,
+            groupName: group?.props.name
+        };
     },
     render(instance) {
         const {
@@ -43,6 +46,7 @@ export const Checkbox = withComponent({
             ptmi,
             ptm,
             cx,
+            groupName,
             // methods
             onChange
         } = instance;
@@ -52,9 +56,10 @@ export const Checkbox = withComponent({
                 {
                     id: props.inputId,
                     type: 'checkbox',
-                    className: cx('input'),
+                    style: props.inputStyle,
+                    className: cn(cx('input'), props.inputClassName),
                     value: props.value,
-                    name: props.name,
+                    name: props.name ?? groupName,
                     checked: state.checked,
                     tabIndex: props.tabIndex,
                     disabled: props.disabled,

@@ -1,20 +1,22 @@
+import * as HeadlessRadioButton from '@primereact/headless/radiobutton';
 import type { RadioButtonProps } from '@primereact/types/shared/radiobutton';
 
 export const defaultProps: RadioButtonProps = {
-    __TYPE: 'RadioButton',
+    ...HeadlessRadioButton.defaultProps,
+    as: 'div',
     value: undefined,
     name: undefined,
     size: undefined,
-    invalid: false,
+    variant: undefined,
     disabled: false,
-    variant: 'outlined',
     readOnly: false,
-    tabIndex: undefined,
+    required: false,
+    invalid: false,
     inputId: undefined,
     inputStyle: undefined,
     inputClassName: undefined,
-    ariaLabelledby: undefined,
     ariaLabel: undefined,
+    ariaLabelledby: undefined,
     onFocus: undefined,
     onBlur: undefined
 };

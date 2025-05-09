@@ -2,69 +2,75 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
 import { styles } from '@primereact/styles/radiobutton';
-import { cn, mergeProps } from '@primeuix/utils';
+import type { RadioButtonChangeEvent } from '@primereact/types/shared/radiobutton';
+import { cn, equals, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { RadioButtonGroup, useRadioButtonGroupContext } from './group';
+import { RadioButtonProvider } from './RadioButton.context';
 import { defaultProps } from './RadioButton.props';
-import { RadioButtonGroup } from './group';
 
 export const RadioButton = withComponent({
+    name: 'RadioButton',
     defaultProps,
     styles,
-    setup: (instance) => {
-        const radioButton = useRadioButton(instance.inProps);
+    setup(instance) {
+        const { props, inProps } = instance;
+        const group = useRadioButtonGroupContext();
 
-        return radioButton;
-    },
-    render: ({
-        props,
-        state,
-        ptmi,
-        ptm,
-        cx,
-        getParent,
-        // element refs
-        elementRef,
-        // methods
-        onFocus,
-        onBlur,
-        onChange,
-        setRadioButtonGroup
-    }) => {
-        const radioButtonGroup = getParent('RadioButtonGroup');
+        const useRadioButtonProps = group
+            ? {
+                  ...inProps,
+                  checked: equals(group.props.value, props.value),
+                  defaultChecked: equals(group.props.defaultValue, props.value),
+                  onCheckedChange: React.useCallback((event: RadioButtonChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
+              }
+            : {
+                  ...inProps,
+                  onCheckedChange: React.useCallback((event: RadioButtonChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }), [props.onCheckedChange])
+              };
 
-        setRadioButtonGroup(radioButtonGroup);
+        const radioButton = useRadioButton(useRadioButtonProps);
 
-        const getPTOptions = (key: string) => {
-            const _ptm = key === 'root' ? ptmi : ptm;
-
-            return _ptm(key, {
-                context: {
-                    checked: state.checked,
-                    disabled: props.disabled
-                }
-            });
+        return {
+            ...radioButton,
+            groupName: group?.props.name
         };
+    },
+    render(instance) {
+        const {
+            id,
+            props,
+            state,
+            ptmi,
+            ptm,
+            cx,
+            groupName,
+            // methods
+            onChange
+        } = instance;
 
         const createInputElement = () => {
             const inputProps = mergeProps(
                 {
                     id: props.inputId,
                     type: 'radio',
+                    style: props.inputStyle,
                     className: cn(cx('input'), props.inputClassName),
                     value: props.value,
-                    name: props.name,
+                    name: props.name ?? groupName,
                     checked: state.checked,
                     tabIndex: props.tabIndex,
                     disabled: props.disabled,
                     readOnly: props.readOnly,
+                    required: props.required,
                     'aria-labelledby': props.ariaLabelledby,
                     'aria-label': props.ariaLabel,
                     'aria-invalid': props.invalid || undefined,
-                    onFocus,
-                    onBlur,
+                    onFocus: props.onFocus,
+                    onBlur: props.onBlur,
                     onChange
                 },
-                getPTOptions('input')
+                ptm('input')
             );
 
             return <input {...inputProps} />;
@@ -75,13 +81,14 @@ export const RadioButton = withComponent({
                 {
                     className: cx('box')
                 },
-                getPTOptions('box')
+                ptm('box')
             );
+
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                getPTOptions('icon')
+                ptm('icon')
             );
 
             return (
@@ -91,18 +98,24 @@ export const RadioButton = withComponent({
             );
         };
 
+        const input = createInputElement();
+        const box = createBoxElement();
+
         const rootProps = mergeProps(
             {
+                id,
                 className: cx('root')
             },
             ptmi('root')
         );
 
         return (
-            <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
-                {createInputElement()}
-                {createBoxElement()}
-            </Component>
+            <RadioButtonProvider value={instance}>
+                <Component instance={instance} attrs={rootProps}>
+                    {input}
+                    {box}
+                </Component>
+            </RadioButtonProvider>
         );
     },
     components: {

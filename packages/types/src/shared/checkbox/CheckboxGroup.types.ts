@@ -1,6 +1,6 @@
 /**
  *
- * Checkbox is an extension to standard checkbox element with theming.
+ * CheckboxGroup allows to select multiple options from a set of choices.
  *
  * [Live Demo](https://www.primereact.org/checkbox/)
  *
@@ -55,6 +55,10 @@ export interface CheckboxGroupProps extends BaseComponentProps {
      * The default value of the checkbox group.
      */
     defaultValue?: unknown[] | undefined;
+    /**
+     * The name of the checkboxes.
+     */
+    name?: string | undefined;
     /**
      * Callback function that is called when the checkbox group value changes.
      */

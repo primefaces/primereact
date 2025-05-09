@@ -1,47 +1,82 @@
-import * as React from 'react';
 /**
- * Event fired when the checkbox's checked state changes.
+ *
+ * The useRadioButton manages the state and functionality of a radio button component.
+ *
+ * [Live Demo](https://www.primereact.org/radiobutton/)
+ *
+ * @module useradiobutton
+ * @group headless
+ *
  */
-export interface useRadioButtonChangeEvent {
+import type { HeadlessInstance } from '@primereact/types/core';
+import * as React from 'react';
+
+/**
+ * Instance of useRadioButton headless.
+ */
+export type useRadioButtonInstance = HeadlessInstance<useRadioButtonProps, useRadioButtonState, useRadioButtonExposes>;
+
+/**
+ * Event fired when the radio button's checked state changes.
+ */
+export interface useRadioButtonChangeEvent<E = React.SyntheticEvent> {
     /**
      * The original event that triggered the change.
      */
-    originalEvent: React.FormEventHandler<HTMLInputElement>;
+    originalEvent: E;
     /**
-     * The value of the radio button.
+     * The checked state of the radio button.
      */
-    value: unknown;
+    checked: boolean;
 }
+
 /**
- * Props for the useAvatar hook.
+ * Defines valid properties in useRadioButton.
  */
 export interface useRadioButtonProps {
     /**
-     * The type of the hook.
+     * When present, it specifies the input's checked state.
      */
-    readonly __TYPE?: 'useRadioButton';
+    checked?: boolean | undefined;
     /**
-     * The value of the radio button.
+     * The default value for the input when not controlled by `checked` and `onCheckedChange`.
      */
-    value?: undefined;
+    defaultChecked?: boolean | undefined;
     /**
-     * When present, it specifies that the element should be disabled.
-     * @default false
+     * Callback fired when the radio button's checked state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.checked The checked state of the radio button.
+     * @returns void
      */
-    disabled?: boolean | undefined;
+    onCheckedChange?: (event: useRadioButtonChangeEvent) => void;
+}
+
+/**
+ * Defines valid state in useRadioButton.
+ */
+export interface useRadioButtonState {
     /**
-     * When present, it specifies that an input field is read-only.
-     * @default false
+     * The checked state of the useRadioButton.
      */
-    readOnly?: boolean | undefined;
+    checked: boolean | undefined;
+}
+
+/**
+ * Defines the methods and properties exposed by useRadioButton.
+ */
+export interface useRadioButtonExposes {
     /**
-     * Establishes a string value that labels the component.
+     * The state of the useRadioButton.
      */
-    ariaLabel?: string | undefined;
+    state: useRadioButtonState;
     /**
-     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     * Callback fired when the useRadioButton's checked state changes.
+     *
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.checked The checked state of the radio button.
+     * @returns void
      */
-    ariaLabelledby?: string | undefined;
-    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
-    onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    onChange: (event: useRadioButtonChangeEvent) => void;
 }

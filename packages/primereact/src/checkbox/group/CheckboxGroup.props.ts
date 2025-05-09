@@ -4,5 +4,6 @@ export const defaultProps: CheckboxGroupProps = {
     as: 'div',
     value: undefined,
     defaultValue: undefined,
+    name: undefined,
     onValueChange: undefined
 };

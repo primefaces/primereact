@@ -1,6 +1,7 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
+import { groupStyles } from '@primereact/styles/checkbox';
 import type { CheckboxGroupUpdateChangeEvent } from '@primereact/types/shared/checkbox';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
@@ -10,6 +11,7 @@ import { defaultProps } from './CheckboxGroup.props';
 export const CheckboxGroup = withComponent({
     name: 'CheckboxGroup',
     defaultProps,
+    styles: groupStyles,
     setup(instance) {
         const { value, defaultValue, onValueChange: onChange } = instance.props;
         const [valueState, setValueState] = useControlledState({
