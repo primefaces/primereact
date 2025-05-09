@@ -52,14 +52,13 @@ async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {
     if (!doc) {
         notFound();
     }
-
     const toc = await getTableOfContents(doc.body.raw);
 
     return (
         <>
             {doc.component && <DocTabs componentName={doc.component} />}
-            <div className="flex items-start justify-between">
-                <div className="flex-1 max-w-6xl">
+            <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
+                <div className="flex-1 overflow-hidden">
                     <h1>{doc.title}</h1>
                     <p>{doc.description}</p>
                     <DocMdx code={doc.body.code} />

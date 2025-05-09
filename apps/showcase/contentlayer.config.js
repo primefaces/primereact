@@ -7,6 +7,7 @@ import { codeImport } from 'remark-code-import';
 import remarkGfm from 'remark-gfm';
 import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
+import { Store } from './__store__/index.mjs';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
@@ -48,10 +49,23 @@ export default makeSource({
             () => (tree) => {
                 visit(tree, (node) => {
                     if (node.name === 'DocComponentViewer') {
-                        const filePath = getNodeAttributeByName(node, 'filePath')?.value;
-                        if (!filePath) {
+                        const name = getNodeAttributeByName(node, 'name')?.value;
+                        if (!name) {
                             return null;
                         }
+
+                        let filePath;
+                        if (name.includes(':')) {
+                            const [component, demo] = name.split(':');
+                            if (!Store[component]?.[demo]) return null;
+                            filePath = Store[component][demo].filePath;
+                        } else {
+                            if (!Store[name]) return null;
+                            filePath = Store[name].filePath;
+                        }
+
+                        if (!filePath) return null;
+
                         try {
                             const source = fs.readFileSync(filePath, 'utf8');
                             node.children?.push(
@@ -77,7 +91,7 @@ export default makeSource({
                                 })
                             );
                         } catch (error) {
-                            console.error(error);
+                            console.error(`Error reading file ${filePath}:`, error);
                         }
                     }
                 });

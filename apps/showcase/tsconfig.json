@@ -24,6 +24,6 @@
             "contentlayer/generated": ["./.contentlayer/generated"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".contentlayer/generated", "contentlayer.config.js", "lib/utils/getComponentOptions.js"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".contentlayer/generated", "contentlayer.config.js"],
     "exclude": ["node_modules"]
 }
