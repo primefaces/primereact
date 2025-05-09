@@ -230,7 +230,7 @@ export interface AutoCompleteContext {
  * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref' | 'value'> {
+export interface AutoCompleteProps<T = any, M extends boolean = false> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref' | 'value'> {
     /**
      * Unique identifier of the element.
      */
@@ -349,7 +349,7 @@ export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps
      * Specifies if multiple values can be selected.
      * @defaultValue false
      */
-    multiple?: boolean | undefined;
+    multiple?: M;
     /**
      * Number of maximum options that can be selected.
      */
@@ -451,7 +451,7 @@ export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps
     /**
      * Value of the component.
      */
-    value?: this['multiple'] extends true ? T[] : T | string | number | readonly string[] | undefined;
+    value?: M extends true ? T[] : T | string | number | readonly string[] | undefined;
     /**
      * Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.
      * @type {VirtualScrollerProps}
@@ -471,7 +471,7 @@ export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps
      * Callback to invoke when autocomplete value changes.
      * @param {AutoCompleteChangeEvent} event - Custom change event.
      */
-    onChange?(event: AutoCompleteChangeEvent<T>): void;
+    onChange?(event: AutoCompleteChangeEvent<M extends true ? T[] : T>): void;
     /**
      * Callback to invoke when input is cleared by the user.
      * @param {React.SyntheticEvent} event - Browser event.
@@ -568,7 +568,7 @@ export interface AutoCompleteProps<T = any> extends Omit<React.DetailedHTMLProps
  *
  * @group Component
  */
-export declare class AutoComplete<T = any> extends React.Component<AutoCompleteProps<T>, any> {
+export declare class AutoComplete<T = any, M extends boolean = false> extends React.Component<AutoCompleteProps<T, M>, any> {
     /**
      * Used to show the overlay.
      */
