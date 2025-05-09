@@ -3726,7 +3726,7 @@
                             "name": "dropdownIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps<T>>",
+                            "type": "IconType<AutoCompleteProps<T, false>>",
                             "default": "",
                             "description": "Icon of the dropdown."
                         },
@@ -3822,7 +3822,7 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps<any>>",
+                            "type": "IconType<AutoCompleteProps<any, false>>",
                             "default": "",
                             "description": "Icon of the loader."
                         },
@@ -3846,7 +3846,7 @@
                             "name": "multiple",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean",
+                            "type": "M",
                             "default": "false",
                             "description": "Specifies if multiple values can be selected."
                         },
@@ -3942,7 +3942,7 @@
                             "name": "removeTokenIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<AutoCompleteProps<any>>",
+                            "type": "IconType<AutoCompleteProps<any, false>>",
                             "default": "",
                             "description": "Icon of the remove chip element in multiple mode."
                         },
@@ -4062,7 +4062,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "string | number | readonly string[] | T",
+                            "type": "M extends true ? T[] : undefined | string | number | readonly string[] | T",
                             "default": "",
                             "description": "Value of the component."
                         },
@@ -4119,7 +4119,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "AutoCompleteChangeEvent<T>",
+                                    "type": "AutoCompleteChangeEvent<M extends true ? T[] : T>",
                                     "description": "Custom change event."
                                 }
                             ],
@@ -4412,7 +4412,7 @@
                             "name": "props",
                             "optional": false,
                             "readonly": false,
-                            "type": "AutoCompleteProps<any>"
+                            "type": "AutoCompleteProps<any, false>"
                         },
                         {
                             "name": "state",
