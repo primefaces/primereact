@@ -10,13 +10,29 @@ const demoDir = path.join(projectRoot, 'demo');
 const storeDir = path.join(projectRoot, '__store__');
 
 let storeContent = `/****************************************************************************
-****************** PrimeReact MDX Content (Auto-Generated) ******************
+****************** PrimeReact Store (Auto-Generated) ******************
 *****************************************************************************/
 
 import * as React from 'react';
 
 export const Store = {
 `;
+
+function createNestedObject(obj, path, value) {
+    const parts = path.split('/');
+    let current = obj;
+
+    for (let i = 0; i < parts.length - 1; i++) {
+        const part = parts[i];
+        if (!current[part]) {
+            current[part] = {};
+        }
+        current = current[part];
+    }
+
+    const lastPart = parts[parts.length - 1];
+    current[lastPart] = value;
+}
 
 function findDemoFiles(dir, baseDir = demoDir) {
     const files = fs.readdirSync(dir);
@@ -28,17 +44,18 @@ function findDemoFiles(dir, baseDir = demoDir) {
 
         if (stat.isDirectory()) {
             demoFiles.push(...findDemoFiles(filePath, baseDir));
-        } else if (file.endsWith('-demo.tsx') || file.endsWith('-pt.tsx')) {
+        } else if (file.endsWith('.tsx')) {
             const relativePath = path.relative(baseDir, filePath);
             const importPath = relativePath.replace(/\\/g, '/').replace('.tsx', '');
             const key = path.basename(file, '.tsx');
 
-            const aliasPath = `@/demo/${importPath}`;
+            const aliasPath = `demo/${importPath}`;
             const aliasFilePath = `${aliasPath}.tsx`;
 
             demoFiles.push({
                 key,
-                filePath: aliasFilePath
+                filePath: aliasFilePath,
+                relativePath: importPath
             });
         }
     }
@@ -47,14 +64,36 @@ function findDemoFiles(dir, baseDir = demoDir) {
 }
 
 const demoFiles = findDemoFiles(demoDir);
+const storeObject = {};
 
-for (const { key, filePath } of demoFiles) {
-    storeContent += `    '${key}': {
-        component: React.lazy(() => import('${filePath}')),
-        filePath: '${filePath}'
-    },\n`;
+for (const { filePath, relativePath } of demoFiles) {
+    const value = {
+        component: `React.lazy(() => import('${filePath}'))`,
+        filePath: `'${filePath}'`
+    };
+
+    createNestedObject(storeObject, relativePath, value);
 }
 
+// Convert the object to a string representation
+function objectToString(obj, indent = 4) {
+    const entries = Object.entries(obj);
+    let result = '';
+
+    for (const [key, value] of entries) {
+        if (typeof value === 'object' && value !== null) {
+            result += `${' '.repeat(indent)}'${key}': {\n`;
+            result += objectToString(value, indent + 4);
+            result += `${' '.repeat(indent)}},\n`;
+        } else {
+            result += `${' '.repeat(indent)}'${key}': ${value},\n`;
+        }
+    }
+
+    return result;
+}
+
+storeContent += objectToString(storeObject);
 storeContent += `};
 `;
 

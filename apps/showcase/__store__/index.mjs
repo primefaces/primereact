@@ -1,188 +1,208 @@
 /****************************************************************************
-****************** PrimeReact MDX Content (Auto-Generated) ******************
+****************** PrimeReact Store (Auto-Generated) ******************
 *****************************************************************************/
 
 import * as React from 'react';
 
 export const Store = {
-    'avatar-group-demo': {
-        component: React.lazy(() => import('@/demo/avatar/avatar-group-demo.tsx')),
-        filePath: '@/demo/avatar/avatar-group-demo.tsx'
+    'avatar': {
+        'avatar-pt': {
+            'component': React.lazy(() => import('demo/avatar/avatar-pt.tsx')),
+            'filePath': 'demo/avatar/avatar-pt.tsx',
+        },
+        'group-demo': {
+            'component': React.lazy(() => import('demo/avatar/group-demo.tsx')),
+            'filePath': 'demo/avatar/group-demo.tsx',
+        },
+        'icon-demo': {
+            'component': React.lazy(() => import('demo/avatar/icon-demo.tsx')),
+            'filePath': 'demo/avatar/icon-demo.tsx',
+        },
+        'image-demo': {
+            'component': React.lazy(() => import('demo/avatar/image-demo.tsx')),
+            'filePath': 'demo/avatar/image-demo.tsx',
+        },
+        'label-demo': {
+            'component': React.lazy(() => import('demo/avatar/label-demo.tsx')),
+            'filePath': 'demo/avatar/label-demo.tsx',
+        },
     },
-    'avatar-icon-demo': {
-        component: React.lazy(() => import('@/demo/avatar/avatar-icon-demo.tsx')),
-        filePath: '@/demo/avatar/avatar-icon-demo.tsx'
+    'badge': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/badge/basic-demo.tsx')),
+            'filePath': 'demo/badge/basic-demo.tsx',
+        },
+        'button-demo': {
+            'component': React.lazy(() => import('demo/badge/button-demo.tsx')),
+            'filePath': 'demo/badge/button-demo.tsx',
+        },
+        'overlay-demo': {
+            'component': React.lazy(() => import('demo/badge/overlay-demo.tsx')),
+            'filePath': 'demo/badge/overlay-demo.tsx',
+        },
+        'severity-demo': {
+            'component': React.lazy(() => import('demo/badge/severity-demo.tsx')),
+            'filePath': 'demo/badge/severity-demo.tsx',
+        },
+        'size-demo': {
+            'component': React.lazy(() => import('demo/badge/size-demo.tsx')),
+            'filePath': 'demo/badge/size-demo.tsx',
+        },
     },
-    'avatar-image-demo': {
-        component: React.lazy(() => import('@/demo/avatar/avatar-image-demo.tsx')),
-        filePath: '@/demo/avatar/avatar-image-demo.tsx'
+    'chip': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/chip/basic-demo.tsx')),
+            'filePath': 'demo/chip/basic-demo.tsx',
+        },
+        'icon-demo': {
+            'component': React.lazy(() => import('demo/chip/icon-demo.tsx')),
+            'filePath': 'demo/chip/icon-demo.tsx',
+        },
+        'image-demo': {
+            'component': React.lazy(() => import('demo/chip/image-demo.tsx')),
+            'filePath': 'demo/chip/image-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/chip/template-demo.tsx')),
+            'filePath': 'demo/chip/template-demo.tsx',
+        },
     },
-    'avatar-label-demo': {
-        component: React.lazy(() => import('@/demo/avatar/avatar-label-demo.tsx')),
-        filePath: '@/demo/avatar/avatar-label-demo.tsx'
+    'inplace': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/inplace/basic-demo.tsx')),
+            'filePath': 'demo/inplace/basic-demo.tsx',
+        },
+        'image-demo': {
+            'component': React.lazy(() => import('demo/inplace/image-demo.tsx')),
+            'filePath': 'demo/inplace/image-demo.tsx',
+        },
+        'input-demo': {
+            'component': React.lazy(() => import('demo/inplace/input-demo.tsx')),
+            'filePath': 'demo/inplace/input-demo.tsx',
+        },
     },
-    'avatar-pt': {
-        component: React.lazy(() => import('@/demo/avatar/avatar-pt.tsx')),
-        filePath: '@/demo/avatar/avatar-pt.tsx'
+    'metergroup': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/metergroup/basic-demo.tsx')),
+            'filePath': 'demo/metergroup/basic-demo.tsx',
+        },
+        'icon-demo': {
+            'component': React.lazy(() => import('demo/metergroup/icon-demo.tsx')),
+            'filePath': 'demo/metergroup/icon-demo.tsx',
+        },
+        'label-demo': {
+            'component': React.lazy(() => import('demo/metergroup/label-demo.tsx')),
+            'filePath': 'demo/metergroup/label-demo.tsx',
+        },
+        'minmax-demo': {
+            'component': React.lazy(() => import('demo/metergroup/minmax-demo.tsx')),
+            'filePath': 'demo/metergroup/minmax-demo.tsx',
+        },
+        'multiple-demo': {
+            'component': React.lazy(() => import('demo/metergroup/multiple-demo.tsx')),
+            'filePath': 'demo/metergroup/multiple-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/metergroup/template-demo.tsx')),
+            'filePath': 'demo/metergroup/template-demo.tsx',
+        },
+        'vertical-demo': {
+            'component': React.lazy(() => import('demo/metergroup/vertical-demo.tsx')),
+            'filePath': 'demo/metergroup/vertical-demo.tsx',
+        },
     },
-    'badge-basic-demo': {
-        component: React.lazy(() => import('@/demo/badge/badge-basic-demo.tsx')),
-        filePath: '@/demo/badge/badge-basic-demo.tsx'
+    'progressbar': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/progressbar/basic-demo.tsx')),
+            'filePath': 'demo/progressbar/basic-demo.tsx',
+        },
+        'dynamic-demo': {
+            'component': React.lazy(() => import('demo/progressbar/dynamic-demo.tsx')),
+            'filePath': 'demo/progressbar/dynamic-demo.tsx',
+        },
+        'indeterminate-demo': {
+            'component': React.lazy(() => import('demo/progressbar/indeterminate-demo.tsx')),
+            'filePath': 'demo/progressbar/indeterminate-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/progressbar/template-demo.tsx')),
+            'filePath': 'demo/progressbar/template-demo.tsx',
+        },
     },
-    'badge-button-demo': {
-        component: React.lazy(() => import('@/demo/badge/badge-button-demo.tsx')),
-        filePath: '@/demo/badge/badge-button-demo.tsx'
+    'progressspinner': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/progressspinner/basic-demo.tsx')),
+            'filePath': 'demo/progressspinner/basic-demo.tsx',
+        },
+        'custom-demo': {
+            'component': React.lazy(() => import('demo/progressspinner/custom-demo.tsx')),
+            'filePath': 'demo/progressspinner/custom-demo.tsx',
+        },
     },
-    'badge-overlay-demo': {
-        component: React.lazy(() => import('@/demo/badge/badge-overlay-demo.tsx')),
-        filePath: '@/demo/badge/badge-overlay-demo.tsx'
+    'radiobutton': {
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/disabled-demo.tsx')),
+            'filePath': 'demo/radiobutton/disabled-demo.tsx',
+        },
+        'dynamic-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/dynamic-demo.tsx')),
+            'filePath': 'demo/radiobutton/dynamic-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/filled-demo.tsx')),
+            'filePath': 'demo/radiobutton/filled-demo.tsx',
+        },
+        'group-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/group-demo.tsx')),
+            'filePath': 'demo/radiobutton/group-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/invalid-demo.tsx')),
+            'filePath': 'demo/radiobutton/invalid-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/sizes-demo.tsx')),
+            'filePath': 'demo/radiobutton/sizes-demo.tsx',
+        },
     },
-    'badge-severity-demo': {
-        component: React.lazy(() => import('@/demo/badge/badge-severity-demo.tsx')),
-        filePath: '@/demo/badge/badge-severity-demo.tsx'
+    'skeleton': {
+        'card-demo': {
+            'component': React.lazy(() => import('demo/skeleton/card-demo.tsx')),
+            'filePath': 'demo/skeleton/card-demo.tsx',
+        },
+        'datatable-demo': {
+            'component': React.lazy(() => import('demo/skeleton/datatable-demo.tsx')),
+            'filePath': 'demo/skeleton/datatable-demo.tsx',
+        },
+        'list-demo': {
+            'component': React.lazy(() => import('demo/skeleton/list-demo.tsx')),
+            'filePath': 'demo/skeleton/list-demo.tsx',
+        },
+        'shapes-demo': {
+            'component': React.lazy(() => import('demo/skeleton/shapes-demo.tsx')),
+            'filePath': 'demo/skeleton/shapes-demo.tsx',
+        },
     },
-    'badge-size-demo': {
-        component: React.lazy(() => import('@/demo/badge/badge-size-demo.tsx')),
-        filePath: '@/demo/badge/badge-size-demo.tsx'
-    },
-    'chip-basic-demo': {
-        component: React.lazy(() => import('@/demo/chip/chip-basic-demo.tsx')),
-        filePath: '@/demo/chip/chip-basic-demo.tsx'
-    },
-    'chip-icon-demo': {
-        component: React.lazy(() => import('@/demo/chip/chip-icon-demo.tsx')),
-        filePath: '@/demo/chip/chip-icon-demo.tsx'
-    },
-    'chip-image-demo': {
-        component: React.lazy(() => import('@/demo/chip/chip-image-demo.tsx')),
-        filePath: '@/demo/chip/chip-image-demo.tsx'
-    },
-    'chip-template-demo': {
-        component: React.lazy(() => import('@/demo/chip/chip-template-demo.tsx')),
-        filePath: '@/demo/chip/chip-template-demo.tsx'
-    },
-    'inplace-basic-demo': {
-        component: React.lazy(() => import('@/demo/inplace/inplace-basic-demo.tsx')),
-        filePath: '@/demo/inplace/inplace-basic-demo.tsx'
-    },
-    'inplace-image-demo': {
-        component: React.lazy(() => import('@/demo/inplace/inplace-image-demo.tsx')),
-        filePath: '@/demo/inplace/inplace-image-demo.tsx'
-    },
-    'inplace-input-demo': {
-        component: React.lazy(() => import('@/demo/inplace/inplace-input-demo.tsx')),
-        filePath: '@/demo/inplace/inplace-input-demo.tsx'
-    },
-    'metergroup-basic-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-basic-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-basic-demo.tsx'
-    },
-    'metergroup-icon-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-icon-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-icon-demo.tsx'
-    },
-    'metergroup-label-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-label-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-label-demo.tsx'
-    },
-    'metergroup-minmax-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-minmax-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-minmax-demo.tsx'
-    },
-    'metergroup-multiple-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-multiple-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-multiple-demo.tsx'
-    },
-    'metergroup-template-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-template-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-template-demo.tsx'
-    },
-    'metergroup-vertical-demo': {
-        component: React.lazy(() => import('@/demo/metergroup/metergroup-vertical-demo.tsx')),
-        filePath: '@/demo/metergroup/metergroup-vertical-demo.tsx'
-    },
-    'progressbar-basic-demo': {
-        component: React.lazy(() => import('@/demo/progressbar/progressbar-basic-demo.tsx')),
-        filePath: '@/demo/progressbar/progressbar-basic-demo.tsx'
-    },
-    'progressbar-dynamic-demo': {
-        component: React.lazy(() => import('@/demo/progressbar/progressbar-dynamic-demo.tsx')),
-        filePath: '@/demo/progressbar/progressbar-dynamic-demo.tsx'
-    },
-    'progressbar-indeterminate-demo': {
-        component: React.lazy(() => import('@/demo/progressbar/progressbar-indeterminate-demo.tsx')),
-        filePath: '@/demo/progressbar/progressbar-indeterminate-demo.tsx'
-    },
-    'progressbar-template-demo': {
-        component: React.lazy(() => import('@/demo/progressbar/progressbar-template-demo.tsx')),
-        filePath: '@/demo/progressbar/progressbar-template-demo.tsx'
-    },
-    'progressspinner-basic-demo': {
-        component: React.lazy(() => import('@/demo/progressspinner/progressspinner-basic-demo.tsx')),
-        filePath: '@/demo/progressspinner/progressspinner-basic-demo.tsx'
-    },
-    'progressspinner-custom-demo': {
-        component: React.lazy(() => import('@/demo/progressspinner/progressspinner-custom-demo.tsx')),
-        filePath: '@/demo/progressspinner/progressspinner-custom-demo.tsx'
-    },
-    'radiobutton-disabled-demo': {
-        component: React.lazy(() => import('@/demo/radiobutton/radiobutton-disabled-demo.tsx')),
-        filePath: '@/demo/radiobutton/radiobutton-disabled-demo.tsx'
-    },
-    'radiobutton-dynamic-demo': {
-        component: React.lazy(() => import('@/demo/radiobutton/radiobutton-dynamic-demo.tsx')),
-        filePath: '@/demo/radiobutton/radiobutton-dynamic-demo.tsx'
-    },
-    'radiobutton-filled-demo': {
-        component: React.lazy(() => import('@/demo/radiobutton/radiobutton-filled-demo.tsx')),
-        filePath: '@/demo/radiobutton/radiobutton-filled-demo.tsx'
-    },
-    'radiobutton-group-demo': {
-        component: React.lazy(() => import('@/demo/radiobutton/radiobutton-group-demo.tsx')),
-        filePath: '@/demo/radiobutton/radiobutton-group-demo.tsx'
-    },
-    'radiobutton-invalid-demo': {
-        component: React.lazy(() => import('@/demo/radiobutton/radiobutton-invalid-demo.tsx')),
-        filePath: '@/demo/radiobutton/radiobutton-invalid-demo.tsx'
-    },
-    'radiobutton-sizes-demo': {
-        component: React.lazy(() => import('@/demo/radiobutton/radiobutton-sizes-demo.tsx')),
-        filePath: '@/demo/radiobutton/radiobutton-sizes-demo.tsx'
-    },
-    'skeleton-card-demo': {
-        component: React.lazy(() => import('@/demo/skeleton/skeleton-card-demo.tsx')),
-        filePath: '@/demo/skeleton/skeleton-card-demo.tsx'
-    },
-    'skeleton-datatable-demo': {
-        component: React.lazy(() => import('@/demo/skeleton/skeleton-datatable-demo.tsx')),
-        filePath: '@/demo/skeleton/skeleton-datatable-demo.tsx'
-    },
-    'skeleton-list-demo': {
-        component: React.lazy(() => import('@/demo/skeleton/skeleton-list-demo.tsx')),
-        filePath: '@/demo/skeleton/skeleton-list-demo.tsx'
-    },
-    'skeleton-shapes-demo': {
-        component: React.lazy(() => import('@/demo/skeleton/skeleton-shapes-demo.tsx')),
-        filePath: '@/demo/skeleton/skeleton-shapes-demo.tsx'
-    },
-    'tag-basic-demo': {
-        component: React.lazy(() => import('@/demo/tag/tag-basic-demo.tsx')),
-        filePath: '@/demo/tag/tag-basic-demo.tsx'
-    },
-    'tag-icon-demo': {
-        component: React.lazy(() => import('@/demo/tag/tag-icon-demo.tsx')),
-        filePath: '@/demo/tag/tag-icon-demo.tsx'
-    },
-    'tag-pill-demo': {
-        component: React.lazy(() => import('@/demo/tag/tag-pill-demo.tsx')),
-        filePath: '@/demo/tag/tag-pill-demo.tsx'
-    },
-    'tag-severity-demo': {
-        component: React.lazy(() => import('@/demo/tag/tag-severity-demo.tsx')),
-        filePath: '@/demo/tag/tag-severity-demo.tsx'
-    },
-    'tag-template-demo': {
-        component: React.lazy(() => import('@/demo/tag/tag-template-demo.tsx')),
-        filePath: '@/demo/tag/tag-template-demo.tsx'
+    'tag': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/tag/basic-demo.tsx')),
+            'filePath': 'demo/tag/basic-demo.tsx',
+        },
+        'icon-demo': {
+            'component': React.lazy(() => import('demo/tag/icon-demo.tsx')),
+            'filePath': 'demo/tag/icon-demo.tsx',
+        },
+        'pill-demo': {
+            'component': React.lazy(() => import('demo/tag/pill-demo.tsx')),
+            'filePath': 'demo/tag/pill-demo.tsx',
+        },
+        'severity-demo': {
+            'component': React.lazy(() => import('demo/tag/severity-demo.tsx')),
+            'filePath': 'demo/tag/severity-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/tag/template-demo.tsx')),
+            'filePath': 'demo/tag/template-demo.tsx',
+        },
     },
 };
