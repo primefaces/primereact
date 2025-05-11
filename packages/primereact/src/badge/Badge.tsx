@@ -6,6 +6,7 @@ import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { BadgeProvider } from './Badge.context';
 import { defaultProps } from './Badge.props';
+import { OverlayBadge } from './overlay';
 
 export const Badge = withComponent({
     name: 'Badge',
@@ -32,5 +33,8 @@ export const Badge = withComponent({
                 <Component instance={instance} attrs={rootProps} children={props.children} />
             </BadgeProvider>
         );
+    },
+    components: {
+        Overlay: OverlayBadge
     }
 });

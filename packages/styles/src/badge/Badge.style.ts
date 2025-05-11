@@ -7,7 +7,7 @@ export const classes = {
         'p-badge p-component',
         {
             'p-badge-circle': props.circle && isNotEmpty(props.children),
-            'p-badge-dot': isEmpty(props.value),
+            'p-badge-dot': isEmpty(props.children),
             'p-badge-sm': props.size === 'small',
             'p-badge-lg': props.size === 'large',
             'p-badge-xl': props.size === 'xlarge',

@@ -6,11 +6,11 @@ import type { CheckboxGroupUpdateChangeEvent } from '@primereact/types/shared/ch
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { CheckboxGroupProvider } from './CheckboxGroup.context';
-import { defaultProps } from './CheckboxGroup.props';
+import { defaultGroupProps } from './CheckboxGroup.props';
 
 export const CheckboxGroup = withComponent({
     name: 'CheckboxGroup',
-    defaultProps,
+    defaultProps: defaultGroupProps,
     styles: groupStyles,
     setup(instance) {
         const { value, defaultValue, onValueChange: onChange } = instance.props;

@@ -1,12 +1,12 @@
 import { createStyles } from '@primereact/styles/utils';
 import { style } from '@primeuix/styles/overlaybadge';
 
-export const classes = {
+export const overlayClasses = {
     root: 'p-overlaybadge'
 };
 
-export const styles = createStyles({
+export const overlayStyles = createStyles({
     name: 'overlaybadge',
     style,
-    classes
+    classes: overlayClasses
 });
