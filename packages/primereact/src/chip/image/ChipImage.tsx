@@ -2,23 +2,28 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './ChipImage.props';
+import { useChipContext } from '../Chip.context';
+import { defaultImageProps } from './ChipImage.props';
 
 export const ChipImage = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const chip = getParent('Chip');
+    name: 'ChipImage',
+    defaultProps: defaultImageProps,
+    setup() {
+        const chip = useChipContext();
 
-        const imageProps = mergeProps(
+        return { chip };
+    },
+    render(instance) {
+        const { props, ptmi, chip } = instance;
+
+        const rootProps = mergeProps(
             {
-                className: chip?.cx('image'),
-                src: props.src
+                className: chip?.cx('image')
             },
             chip?.ptm('image'),
             ptmi('root')
         );
 
-        return <Component as={props.as || 'img'} {...imageProps}></Component>;
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

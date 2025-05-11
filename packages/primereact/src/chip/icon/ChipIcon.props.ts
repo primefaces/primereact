@@ -1,6 +1,5 @@
-import { ChipIconProps } from '@primereact/types/shared/chip';
+import type { ChipIconProps } from '@primereact/types/shared/chip';
 
-export const defaultProps: ChipIconProps = {
-    __TYPE: 'ChipIcon',
-    className: undefined
+export const defaultIconProps: ChipIconProps = {
+    as: 'span'
 };

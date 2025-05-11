@@ -1,27 +1,74 @@
+/**
+ *
+ * The useChip manages the state and functionality of a chip component.
+ *
+ * [Live Demo](https://www.primereact.org/chip/)
+ *
+ * @module usechip
+ * @group headless
+ *
+ */
+import type { HeadlessInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
- * Custom remove event.
+ * Instance of useChip headless.
  */
-interface useChipRemoveEvent {
+export type useChipInstance = HeadlessInstance<useChipProps, useChipState, useChipExposes>;
+
+/**
+ * Event fired when the chip's remove icon is clicked.
+ */
+export interface useChipRemoveEvent<E = React.SyntheticEvent> {
     /**
-     * Browser event
+     * The original event that triggered the change.
      */
-    originalEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
+    originalEvent: E;
 }
 
 /**
- * Props for the useChip hook.
+ * Defines valid properties in useChip.
  */
 export interface useChipProps {
     /**
-     * The type of the hook.
-     */
-    readonly __TYPE?: 'useChip';
-    /**
-     * Callback to invoke when a chip is removed.
-     * @param {ChipRemoveEvent} event - Custom remove event
-     * @return {boolean} - Return false to prevent hiding the chip after removal
+     * Callback fired when the chip is removed.
+     * @param event The event that triggered the remove.
+     * @param event.originalEvent The original event that triggered the remove.
+     * @returns void
      */
     onRemove?: (event: useChipRemoveEvent) => void;
+}
+
+/**
+ * Defines valid state in useChip.
+ */
+export interface useChipState {
+    /**
+     * The visibility state of the chip.
+     */
+    visible: boolean | undefined;
+}
+
+/**
+ * Defines the methods and properties exposed by useChip.
+ */
+export interface useChipExposes {
+    /**
+     * The state of the useChip.
+     */
+    state: useChipState;
+    /**
+     * Closes the chip.
+     * @param event The event that triggered the close.
+     */
+    close: (event: React.SyntheticEvent<HTMLElement>) => void;
+    /**
+     * Props for the remove icon.
+     */
+    removeIconProps: {
+        /**
+         * The keydown event handler for the remove icon.
+         */
+        onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
+    };
 }

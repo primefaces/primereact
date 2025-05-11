@@ -1,13 +1,13 @@
 import { withHeadless } from '@primereact/core/headless';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
-import { useCheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import type { useCheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import * as React from 'react';
 import { defaultProps } from './useCheckbox.props';
 
 export const useCheckbox = withHeadless({
     name: 'useCheckbox',
     defaultProps,
-    setup: ({ props }) => {
+    setup({ props }) {
         const [indeterminateState, setIndeterminateState] = React.useState<boolean | undefined>(props.indeterminate);
         const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
             value: props.checked,
