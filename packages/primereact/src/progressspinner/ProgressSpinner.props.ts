@@ -3,7 +3,7 @@ import type { ProgressSpinnerProps } from '@primereact/types/shared/progressspin
 
 export const defaultProps: ProgressSpinnerProps = {
     ...HeadlessProgressSpinner.defaultProps,
-    __TYPE: 'ProgressSpinner',
+    as: 'div',
     strokeWidth: '2',
     fill: 'none',
     animationDuration: '2s'
