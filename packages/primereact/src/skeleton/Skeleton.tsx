@@ -4,28 +4,22 @@ import { useSkeleton } from '@primereact/headless/skeleton';
 import { styles } from '@primereact/styles/skeleton';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { SkeletonProvider } from './Skeleton.context';
 import { defaultProps } from './Skeleton.props';
 
 export const Skeleton = withComponent({
+    name: 'Skeleton',
     defaultProps,
     styles,
-    setup: (instance) => {
+    setup(instance) {
         const skeleton = useSkeleton(instance.inProps);
 
         return skeleton;
     },
-    render: (instance) => {
-        const {
-            id,
-            props,
-            ptmi,
-            cx,
-            sx,
-            // element refs
-            elementRef
-        } = instance;
+    render(instance) {
+        const { id, props, ptmi, cx, sx } = instance;
 
-        const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
+        const style = { width: props.size ?? props.width, height: props.size ?? props.height, borderRadius: props.borderRadius };
 
         const rootProps = mergeProps(
             {
@@ -37,6 +31,10 @@ export const Skeleton = withComponent({
             ptmi('root')
         );
 
-        return <Component as={props.as || 'div'} {...rootProps} ref={elementRef} />;
+        return (
+            <SkeletonProvider value={instance}>
+                <Component instance={instance} attrs={rootProps} children={props.children} />
+            </SkeletonProvider>
+        );
     }
 });

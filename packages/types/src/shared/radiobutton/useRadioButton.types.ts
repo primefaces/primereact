@@ -12,11 +12,6 @@ import type { HeadlessInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
- * Instance of useRadioButton headless.
- */
-export type useRadioButtonInstance = HeadlessInstance<useRadioButtonProps, useRadioButtonState, useRadioButtonExposes>;
-
-/**
  * Event fired when the radio button's checked state changes.
  */
 export interface useRadioButtonChangeEvent<E = React.SyntheticEvent> {
@@ -80,3 +75,8 @@ export interface useRadioButtonExposes {
      */
     onChange: (event: useRadioButtonChangeEvent) => void;
 }
+
+/**
+ * Instance of useRadioButton headless.
+ */
+export type useRadioButtonInstance = HeadlessInstance<useRadioButtonProps, useRadioButtonState, useRadioButtonExposes>;

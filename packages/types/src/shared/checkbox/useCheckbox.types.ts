@@ -12,11 +12,6 @@ import type { HeadlessInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
- * Instance of useCheckbox headless.
- */
-export type useCheckboxInstance = HeadlessInstance<useCheckboxProps, useCheckboxState, useCheckboxExposes>;
-
-/**
  * Event fired when the checkbox's checked state changes.
  */
 export interface useCheckboxChangeEvent<E = React.SyntheticEvent> {
@@ -99,3 +94,8 @@ export interface useCheckboxExposes {
      */
     onChange: (event: useCheckboxChangeEvent) => void;
 }
+
+/**
+ * Instance of useCheckbox headless.
+ */
+export type useCheckboxInstance = HeadlessInstance<useCheckboxProps, useCheckboxState, useCheckboxExposes>;

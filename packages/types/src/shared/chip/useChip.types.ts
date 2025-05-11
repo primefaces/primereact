@@ -12,11 +12,6 @@ import type { HeadlessInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
- * Instance of useChip headless.
- */
-export type useChipInstance = HeadlessInstance<useChipProps, useChipState, useChipExposes>;
-
-/**
  * Event fired when the chip's remove icon is clicked.
  */
 export interface useChipRemoveEvent<E = React.SyntheticEvent> {
@@ -72,3 +67,8 @@ export interface useChipExposes {
         onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => void;
     };
 }
+
+/**
+ * Instance of useChip headless.
+ */
+export type useChipInstance = HeadlessInstance<useChipProps, useChipState, useChipExposes>;

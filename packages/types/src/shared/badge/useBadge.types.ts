@@ -11,11 +11,11 @@
 import type { HeadlessInstance } from '@primereact/types/core';
 
 /**
- * Instance of useBadge headless.
- */
-export type useBadgeInstance = HeadlessInstance<useBadgeProps>;
-
-/**
  * Defines valid properties in useBadge.
  */
 export interface useBadgeProps {}
+
+/**
+ * Instance of useBadge headless.
+ */
+export type useBadgeInstance = HeadlessInstance<useBadgeProps>;
