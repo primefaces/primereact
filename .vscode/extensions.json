@@ -2,6 +2,7 @@
     "recommendations": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "sibiraj-s.vscode-scss-formatter"
+        "sibiraj-s.vscode-scss-formatter",
+        "unifiedjs.vscode-mdx"
     ]
 }
