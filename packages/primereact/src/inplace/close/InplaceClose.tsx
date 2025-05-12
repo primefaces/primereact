@@ -2,23 +2,28 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './InplaceClose.props';
+import { useInplaceContext } from '../Inplace.context';
+import { defaultCloseProps } from './InplaceClose.props';
 
+// @todo
 export const InplaceClose = withComponent({
-    defaultProps,
-    render: ({ props, ptmi, getParent }) => {
-        const inplace = getParent('Inplace');
-        const closeProps = mergeProps(
+    name: 'InplaceClose',
+    defaultProps: defaultCloseProps,
+    setup() {
+        const inplace = useInplaceContext();
+
+        return { inplace };
+    },
+    render(instance) {
+        const { props, ptmi, inplace } = instance;
+
+        const rootProps = mergeProps(
             {
                 onClick: inplace?.close
             },
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'div'} {...closeProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

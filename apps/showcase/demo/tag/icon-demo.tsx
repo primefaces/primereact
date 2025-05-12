@@ -1,15 +1,16 @@
+import { dt } from '@primeuix/themes';
 import { Tag } from 'primereact/tag';
 
 export default function IconDemo() {
     return (
         <div className="card flex flex-wrap justify-center gap-2">
             <Tag>
-                <Tag.Icon icon="pi pi-user" />
-                <Tag.Label>Primary</Tag.Label>
+                <i className="pi pi-tag" style={{ fontSize: dt('tag.icon.size') }} />
+                <span>Primary</span>
             </Tag>
             <Tag severity="secondary">
                 <Tag.Icon icon="pi pi-user" />
-                <Tag.Label>Secondary</Tag.Label>
+                Secondary
             </Tag>
             <Tag severity="success">
                 <Tag.Icon icon="pi pi-check" />

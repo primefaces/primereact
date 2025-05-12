@@ -1,19 +1,21 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
 import { cn, mergeProps } from '@primeuix/utils';
+import { defaultIconProps } from 'primereact/chip';
 import * as React from 'react';
-import { defaultProps } from './TagIcon.props';
+import { useTagContext } from '../Tag.context';
 
 export const TagIcon = withComponent({
-    defaultProps,
-    render: ({
-        props,
-        ptmi,
-        getParent
-        // element refs
-        // methods
-    }) => {
-        const tag = getParent('Tag');
+    name: 'TagIcon',
+    defaultProps: defaultIconProps,
+    setup() {
+        const tag = useTagContext();
+
+        return { tag };
+    },
+    render(instance) {
+        const { props, ptmi, tag } = instance;
+
         const rootProps = mergeProps(
             {
                 className: cn(tag?.cx('icon'), props.children ? null : props.icon)
@@ -22,10 +24,6 @@ export const TagIcon = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'span'} {...rootProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

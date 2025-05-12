@@ -2,14 +2,21 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './InplaceContent.props';
+import { useInplaceContext } from '../Inplace.context';
+import { defaultContentProps } from './InplaceContent.props';
 
 export const InplaceContent = withComponent({
-    defaultProps,
-    render: ({ props, ptmi, getParent }) => {
-        const inplace = getParent('Inplace');
+    name: 'InplaceContent',
+    defaultProps: defaultContentProps,
+    setup() {
+        const inplace = useInplaceContext();
 
-        const contentProps = mergeProps(
+        return { inplace };
+    },
+    render(instance) {
+        const { props, ptmi, inplace } = instance;
+
+        const rootProps = mergeProps(
             {
                 className: inplace?.cx('content')
             },
@@ -17,10 +24,6 @@ export const InplaceContent = withComponent({
             ptmi('root')
         );
 
-        return inplace?.state.isActive ? (
-            <Component as={props.as || 'div'} {...contentProps}>
-                {props.children}
-            </Component>
-        ) : null;
+        return <Component pIf={inplace?.state.active} instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

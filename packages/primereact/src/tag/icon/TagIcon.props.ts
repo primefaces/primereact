@@ -1,6 +1,5 @@
 import type { TagIconProps } from '@primereact/types/shared/tag';
 
-export const defaultProps: TagIconProps = {
-    __TYPE: 'TagIcon',
+export const defaultIconProps: TagIconProps = {
     icon: undefined
 };

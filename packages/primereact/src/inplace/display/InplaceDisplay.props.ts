@@ -1,4 +1,5 @@
-import { InplaceDisplayProps } from '@primereact/types/shared/inplace';
-export const defaultProps: InplaceDisplayProps = {
-    __TYPE: 'InplaceDisplay'
+import type { InplaceDisplayProps } from '@primereact/types/shared/inplace';
+
+export const defaultDisplayProps: InplaceDisplayProps = {
+    as: 'div'
 };

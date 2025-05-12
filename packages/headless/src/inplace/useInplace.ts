@@ -3,16 +3,21 @@ import * as React from 'react';
 import { defaultProps } from './useInplace.props';
 
 export const useInplace = withHeadless({
+    name: 'useInplace',
+    defaultProps,
     setup: ({ props }) => {
-        const [isActive, setIsActive] = React.useState<boolean>(props.active as boolean);
+        const [activeState, setActiveState] = React.useState<boolean | undefined>(props.active);
+
         const state = {
-            isActive
+            active: activeState
         };
-        const open = () => setIsActive(true);
-        const close = () => setIsActive(false);
+
+        // methods
+        const open = () => setActiveState(true);
+        const close = () => setActiveState(false);
 
         const onActiveChange = () => {
-            props?.onActiveChange?.(isActive);
+            props?.onActiveChange?.(state.active);
         };
 
         return {
@@ -21,6 +26,5 @@ export const useInplace = withHeadless({
             close,
             onActiveChange
         };
-    },
-    defaultProps
+    }
 });

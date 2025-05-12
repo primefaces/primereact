@@ -4,29 +4,23 @@ import { useTag } from '@primereact/headless/tag';
 import { styles } from '@primereact/styles/tag';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './Tag.props';
 import { TagIcon } from './icon';
 import { TagLabel } from './label';
+import { TagProvider } from './Tag.context';
+import { defaultProps } from './Tag.props';
 
 export const Tag = withComponent({
+    name: 'Tag',
     defaultProps,
     styles,
-    setup: (instance) => {
+    setup(instance) {
         const tag = useTag(instance.inProps);
 
         return tag;
     },
-    render: ({
-        id,
-        props,
-        state,
-        ptmi,
-        ptm,
-        cx,
-        // element refs
-        elementRef
-        // methods
-    }) => {
+    render(instance) {
+        const { id, props, ptmi, cx } = instance;
+
         const rootProps = mergeProps(
             {
                 id,
@@ -35,10 +29,10 @@ export const Tag = withComponent({
             ptmi('root')
         );
 
-        return state.isRemoved ? null : (
-            <Component as={props.as || 'span'} {...rootProps} ref={elementRef}>
-                {props.children}
-            </Component>
+        return (
+            <TagProvider value={instance}>
+                <Component instance={instance} attrs={rootProps} children={props.children}></Component>
+            </TagProvider>
         );
     },
     components: {

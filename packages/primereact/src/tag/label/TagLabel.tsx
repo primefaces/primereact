@@ -1,21 +1,21 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/tag';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './TagLabel.props';
+import { useTagContext } from '../Tag.context';
+import { defaultLabelProps } from './TagLabel.props';
 
 export const TagLabel = withComponent({
-    defaultProps,
-    styles,
-    render: ({
-        props,
-        ptmi,
-        getParent
-        // element refs
-        // methods
-    }) => {
-        const tag = getParent('Tag');
+    name: 'TagLabel',
+    defaultProps: defaultLabelProps,
+    setup() {
+        const tag = useTagContext();
+
+        return { tag };
+    },
+    render(instance) {
+        const { props, ptmi, tag } = instance;
+
         const rootProps = mergeProps(
             {
                 className: tag?.cx('label')
@@ -24,10 +24,6 @@ export const TagLabel = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'span'} {...rootProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });
