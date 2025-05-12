@@ -7,7 +7,10 @@ import * as React from 'react';
 
 export default React.memo(
     function AppMenuItem({ root = true, menu = [] }: AppMenuItemProps) {
-        const pathname = usePathname();
+        let pathname = usePathname();
+        if (pathname.startsWith('/docs/components/')) {
+            pathname = pathname.replace(/\/api$|\/pt$|\/theming$/, '');
+        }
         const btnRef = React.useRef(null);
 
         const isActiveRootmenuItem = (menuitem: AppMenuItemData) => {

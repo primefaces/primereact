@@ -7,6 +7,7 @@ import { useMDXComponent } from 'next-contentlayer2/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
+import DocApiTable from './DocApiTable';
 import DocCopyClipboard from './DocCopyClipboard';
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('font-heading mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />,
@@ -51,6 +52,7 @@ const components = {
     em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <em className={cn('relative rounded-md bg-[var(--mark-background)] font-semibold text-[var(--mark-text)] not-italic py-0.5 px-1.5 text-base', className)} {...props} />,
     DocComponentViewer,
     DocPTViewer,
+    DocApiTable,
     pre: ({ className, children, __rawString__, ...props }: React.HTMLAttributes<HTMLPreElement> & { __rawString__?: string }) => {
         return (
             <div className="group/pre relative">
@@ -75,9 +77,5 @@ interface DocMdxProps {
 export function DocMdx({ code }: DocMdxProps) {
     const Component = useMDXComponent(code);
 
-    return (
-        <div className="w-full">
-            <Component components={components} />
-        </div>
-    );
+    return <Component components={components} />;
 }
