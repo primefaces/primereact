@@ -13,7 +13,7 @@ export const PanelCollapse = withComponent({
 
         return { panel };
     },
-    render: (instance) => {
+    render(instance) {
         const { props, ptmi, panel } = instance;
 
         const rootProps = mergeProps(

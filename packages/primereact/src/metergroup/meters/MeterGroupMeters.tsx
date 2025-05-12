@@ -2,15 +2,21 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './MeterGroupMeters.props';
+import { useMeterGroupContext } from '../MeterGroup.context';
+import { defaultMetersProps } from './MeterGroupMeters.props';
 
 export const MeterGroupMeters = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const metergroup = getParent('MeterGroup');
+    name: 'MeterGroupMeters',
+    defaultProps: defaultMetersProps,
+    setup() {
+        const metergroup = useMeterGroupContext();
 
-        const metersProps = mergeProps(
+        return { metergroup };
+    },
+    render(instance) {
+        const { props, ptmi, metergroup } = instance;
+
+        const rootProps = mergeProps(
             {
                 className: metergroup?.cx('meters')
             },
@@ -18,10 +24,6 @@ export const MeterGroupMeters = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'div'} {...metersProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

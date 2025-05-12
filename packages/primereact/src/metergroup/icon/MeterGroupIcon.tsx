@@ -2,29 +2,31 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './MeterGroupIcon.props';
+import { useMeterGroupContext } from '../MeterGroup.context';
+import { defaultIconProps } from './MeterGroupIcon.props';
 
 export const MeterGroupIcon = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const metergroup = getParent('MeterGroup');
+    name: 'MeterGroupIcon',
+    defaultProps: defaultIconProps,
+    setup() {
+        const metergroup = useMeterGroupContext();
 
-        const iconProps = mergeProps(
+        return { metergroup };
+    },
+    render(instance) {
+        const { props, ptmi, metergroup } = instance;
+
+        const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelicon'),
+                className: metergroup?.cx('labelIcon'),
                 style: {
                     color: props.color
                 }
             },
-            metergroup?.ptm('labelicon'),
+            metergroup?.ptm('labelIcon'),
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'span'} {...iconProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });
