@@ -1,27 +1,25 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useStyleClass } from '@primereact/headless/styleclass';
-import { StyleClassProps } from '@primereact/types/shared/styleclass';
 import * as React from 'react';
+import { StyleClassProvider } from './StyleClass.context';
 import { defaultProps } from './StyleClass.props';
 
-export const StyleClass = (inProps: StyleClassProps) => {
-    const styleclass = useStyleClass(inProps);
-    const instance = useComponent(inProps, defaultProps, {}, styleclass);
-    const {
-        props,
-        ptmi,
-        // element refs
-        elementRef
-    } = instance;
+export const StyleClass = withComponent({
+    name: 'StyleClass',
+    defaultProps,
+    setup(instance) {
+        const styleclass = useStyleClass(instance?.inProps);
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
-            <Component as={props.as} {...ptmi('root')} ref={elementRef}>
-                {props.children}
-            </Component>
-        </ComponentProvider>
-    );
-};
+        return styleclass;
+    },
+    render(instance) {
+        const { props, ptmi } = instance;
 
-StyleClass.displayName = 'PrimeReact.StyleClass';
+        return (
+            <StyleClassProvider value={instance}>
+                <Component instance={instance} attrs={ptmi('root')} children={props.children} />
+            </StyleClassProvider>
+        );
+    }
+});

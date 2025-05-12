@@ -3,7 +3,8 @@ import type { BadgeProps } from '@primereact/types/shared/badge';
 
 export const defaultProps: BadgeProps = {
     ...HeadlessBadge.defaultProps,
-    __TYPE: 'Badge',
-    severity: undefined,
-    size: undefined
+    as: 'span',
+    circle: false,
+    size: undefined,
+    severity: undefined
 };

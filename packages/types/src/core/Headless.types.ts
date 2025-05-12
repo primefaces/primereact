@@ -1,29 +1,12 @@
-import type { Contexts, Instance } from '.';
+import type { Instance, useBaseOptions } from '.';
 
 /**
  * Headless Instance
  *
  * @template E - The type of the element reference.
+ * @template T - The type of additional properties.
  */
-export declare type HeadlessInstance<P = Record<PropertyKey, unknown>, I = Record<PropertyKey, unknown>, E = HTMLElement> = Instance<P, I> & {
-    /**
-     * The reference to the element.
-     */
-    elementRef: React.Ref<E>;
-    /**
-     * The ID of the component.
-     */
-    id: string;
-    /**
-     * The PrimeReact contexts in the headless mode.
-     */
-    $primereact: Omit<Contexts, 'passthrough' | 'theme'>;
-} & Record<PropertyKey, unknown>;
-
-/**
- * The setup callback function or options.
- */
-export declare type withHeadlessSetup<S, D> = S | ((instance: HeadlessInstance<D>) => S) | undefined;
+export type HeadlessInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>, Ref = unknown, ERef = HTMLElement> = Instance<Props, Props, State, Exposes, Ref, ERef>;
 
 /**
  * The withHeadless options.
@@ -31,13 +14,20 @@ export declare type withHeadlessSetup<S, D> = S | ((instance: HeadlessInstance<D
  * @template D - The type of the default properties.
  * @template S - The return type of the setup callback.
  */
-export interface withHeadlessOptions<S, D> {
+
+export type withHeadlessOptions<IProps, DProps, Exposes> = {
     /**
-     * The setup callback function or options.
+     * The name of headless component.
      */
-    setup?: withHeadlessSetup<S, D>;
+    name?: string | undefined;
     /**
      * The default properties.
      */
-    defaultProps?: D | undefined;
-}
+    defaultProps?: DProps | undefined;
+    /**
+     * The setup callback function or options.
+     */
+    setup?: useHeadlessOptions<IProps, DProps, Exposes>['setup'];
+};
+
+export type useHeadlessOptions<IProps, DProps, Exposes> = useBaseOptions<IProps, DProps, Exposes>;

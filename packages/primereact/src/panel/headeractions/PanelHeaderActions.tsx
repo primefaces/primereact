@@ -1,30 +1,29 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
-import type { PanelHeaderActionsProps } from '@primereact/types/shared/panel';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { usePanelContext } from '../Panel.context';
 import { defaultHeaderActionsProps } from './PanelHeaderActions.props';
 
-export const PanelHeaderActions = (inProps: PanelHeaderActionsProps) => {
-    const instance = useComponent(inProps, defaultHeaderActionsProps);
-    const { props, ptmi, getParent } = instance;
-    const panel = getParent('Panel');
+export const PanelHeaderActions = withComponent({
+    name: 'PanelHeaderActions',
+    defaultProps: defaultHeaderActionsProps,
+    setup() {
+        const panel = usePanelContext();
 
-    const headerProps = mergeProps(
-        {
-            className: panel?.cx('headerActions')
-        },
-        panel?.ptm('headerActions'),
-        ptmi('root')
-    );
+        return { panel };
+    },
+    render: (instance) => {
+        const { props, ptmi, panel } = instance;
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
-            <Component as={props.as || 'div'} {...headerProps}>
-                {props.children}
-            </Component>
-        </ComponentProvider>
-    );
-};
+        const rootProps = mergeProps(
+            {
+                className: panel?.cx('headerActions')
+            },
+            panel?.ptm('headerActions'),
+            ptmi('root')
+        );
 
-PanelHeaderActions.displayName = 'PrimeReact.PanelHeaderActions';
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+    }
+});

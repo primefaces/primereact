@@ -1,23 +1,32 @@
-import { ComponentInstance, withComponentProps } from '@primereact/types/core';
+import type { InComponentInstance, useBaseOptions, withComponentOptions } from '@primereact/types/core';
+import type { BaseComponentProps } from '@primereact/types/shared';
 import * as React from 'react';
-import { ComponentProvider } from './Component.context';
 import { useComponent } from './useComponent';
 
-export const withComponent = <I, D extends { __TYPE?: string }, S, C>({ name, defaultProps, styles, components, setup, render }: withComponentProps<D, I, S, C>) => {
-    const ComponentBase: React.FC<React.PropsWithChildren<I & D>> = (inProps?: I) => {
-        const instance = useComponent(inProps, defaultProps, styles, setup);
-        const { props } = instance;
+export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, CData = Record<string, unknown>>({
+    name = 'UnknownComponent',
+    defaultProps,
+    styles,
+    components,
+    setup,
+    render
+}: withComponentOptions<IProps, DProps, Exposes, CData>) => {
+    const BaseComponent = <T extends React.ElementType>(inProps?: BaseComponentProps<IProps, T> & DProps) => {
+        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useBaseOptions<BaseComponentProps<IProps, T> & DProps, DProps, Exposes>);
 
-        return (
-            <ComponentProvider pIf={props.pIf} instance={instance}>
-                {render?.(instance as ComponentInstance<D, I, unknown, S>)}
-            </ComponentProvider>
-        );
+        type RenderedComponentProps = InComponentInstance<typeof instance.props, BaseComponentProps<IProps, T> & DProps, typeof instance.state, Exposes>;
+
+        const RenderedComponent = (render as React.FC<RenderedComponentProps>) ?? (() => null);
+
+        return instance.props.pIf ? <RenderedComponent {...(instance as RenderedComponentProps)} /> : null;
     };
 
-    const Component = ComponentBase as typeof ComponentBase & C;
+    const Component = React.memo(BaseComponent, (prevProps, nextProps) => {
+        // @ts-expect-error prop types are not compatible
+        return prevProps === nextProps && Object.keys(defaultProps || {}).every((key) => prevProps?.[key] === nextProps?.[key]);
+    }) as unknown as typeof BaseComponent & CData & React.FC;
 
-    Component.displayName = `PrimeReact.${name || defaultProps?.__TYPE || 'UnknownComponent'}`;
+    Component.displayName = `PrimeReact.${name}`;
     Object.entries(components || {}).forEach(([key, value]) => {
         (Component as Record<string, unknown>)[key] = value;
     });

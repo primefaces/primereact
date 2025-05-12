@@ -2,29 +2,31 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './MeterGroupMarker.props';
+import { useMeterGroupContext } from '../MeterGroup.context';
+import { defaultMarkerProps } from './MeterGroupMarker.props';
 
 export const MeterGroupMarker = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const metergroup = getParent('MeterGroup');
+    name: 'MeterGroupMarker',
+    defaultProps: defaultMarkerProps,
+    setup() {
+        const metergroup = useMeterGroupContext();
 
-        const markerProps = mergeProps(
+        return { metergroup };
+    },
+    render(instance) {
+        const { props, ptmi, metergroup } = instance;
+
+        const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelmarker'),
+                className: metergroup?.cx('labelMarker'),
                 style: {
                     backgroundColor: props.color
                 }
             },
-            metergroup?.ptm('labelmarker'),
+            metergroup?.ptm('labelMarker'),
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'span'} {...markerProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

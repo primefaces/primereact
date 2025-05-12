@@ -1,14 +1,69 @@
-import { BaseComponentProps } from '..';
-import { useRadioButtonProps } from './useRadioButton.types';
+/**
+ *
+ * RadioButton is an extension to standard radio button element with theming.
+ *
+ * [Live Demo](https://www.primereact.org/radiobutton/)
+ *
+ * @module radiobutton
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { useRadioButtonChangeEvent, useRadioButtonExposes, useRadioButtonProps, useRadioButtonState } from './useRadioButton.types';
 
-export interface RadioButtonProps extends BaseComponentProps<useRadioButtonProps, 'div'> {
-    readonly __TYPE?: 'RadioButton';
+/**
+ * Defines passthrough(pt) options type in RadioButton component.
+ */
+export type RadioButtonPassThroughOptionType<E> = PassThroughOptionType<RadioButtonInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of RadioButton component.
+ */
+export interface RadioButtonPassThroughOptions {
     /**
-     * The name of the checkbox.
+     * Used to pass attributes to the root's DOM element.
+     */
+    root?: RadioButtonPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the input's DOM element.
+     */
+    input?: RadioButtonPassThroughOptionType<React.InputHTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the box's DOM element.
+     */
+    box?: RadioButtonPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the icon's DOM element.
+     */
+    icon?: RadioButtonPassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Event fired when the radio button's checked state changes.
+ * @extends useRadioButtonChangeEvent
+ */
+export interface RadioButtonChangeEvent extends useRadioButtonChangeEvent<React.ChangeEvent<HTMLInputElement>> {
+    /**
+     * Value of the radio button.
+     */
+    value?: unknown | undefined;
+}
+
+/**
+ * Defines valid properties in RadioButton component.
+ */
+export interface RadioButtonProps extends BaseComponentProps<Omit<useRadioButtonProps, 'onCheckedChange'>> {
+    /**
+     * Value of the radio button.
+     */
+    value?: unknown | undefined;
+    /**
+     * The name of the radio button.
      */
     name?: string | undefined;
     /**
-     * Defines the size of the checkbox.
+     * Defines the size of the radio button.
      */
     size?: 'small' | 'normal' | 'large' | undefined;
     /**
@@ -16,8 +71,23 @@ export interface RadioButtonProps extends BaseComponentProps<useRadioButtonProps
      */
     variant?: 'outlined' | 'filled' | undefined;
     /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that an input field is read-only.
+     * @default false
+     */
+    readOnly?: boolean | undefined;
+    /**
+     * When present, it specifies that the element is required.
+     * @default false
+     */
+    required?: boolean | undefined;
+    /**
      * When present, it specifies that the component should have invalid state style.
-     * @defaultValue false
+     * @default false
      */
     invalid?: boolean | undefined;
     /**
@@ -27,11 +97,11 @@ export interface RadioButtonProps extends BaseComponentProps<useRadioButtonProps
     /**
      * Inline style of the input field.
      */
-    inputStyle?: string | object | undefined;
+    inputStyle?: React.CSSProperties | undefined;
     /**
      * Style class of the input field.
      */
-    inputClassName?: object | undefined;
+    inputClassName?: string | undefined;
     /**
      * Establishes a string value that labels the component.
      */
@@ -48,4 +118,29 @@ export interface RadioButtonProps extends BaseComponentProps<useRadioButtonProps
      * Callback function that is called when the checkbox loses focus.
      */
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Callback fired when the radio button's checked state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.checked The checked state of the radio button.
+     * @returns void
+     */
+    onCheckedChange?: (event: RadioButtonChangeEvent) => void;
 }
+
+/**
+ * Defines valid state in RadioButton component.
+ * @extends useRadioButtonState
+ */
+export interface RadioButtonState extends useRadioButtonState {}
+
+/**
+ * Defines the methods and properties exposed by RadioButton component.
+ * @extends useRadioButtonExposes
+ */
+export interface RadioButtonExposes extends useRadioButtonExposes {}
+
+/**
+ * Instance of RadioButton component.
+ */
+export type RadioButtonInstance = ComponentInstance<RadioButtonProps, RadioButtonState, RadioButtonExposes>;

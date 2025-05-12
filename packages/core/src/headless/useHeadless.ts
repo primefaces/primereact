@@ -1,45 +1,8 @@
-import { usePrimeReact } from '@primereact/core/config';
-import { combinedRefs } from '@primereact/core/utils';
-import { useAttrSelector, useId, useProps } from '@primereact/hooks';
-import type { HeadlessInstance, withHeadlessSetup } from '@primereact/types/core';
-import * as React from 'react';
+import { useBase } from '@primereact/core/base';
+import type { HeadlessInstance, useHeadlessOptions } from '@primereact/types/core';
 
-export const useHeadless = <I, D, S>(inProps?: I, defaultProps?: D, setup?: withHeadlessSetup<S, unknown>) => {
-    const { config, locale } = usePrimeReact();
+export const useHeadless = <IProps, DProps, Exposes extends Record<PropertyKey, unknown>>(name: string = 'UnknownHeadless', options: useHeadlessOptions<IProps, DProps, Exposes> = {}) => {
+    const baseInstance = useBase(name, options as useHeadlessOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof options.defaultProps & DProps, Exposes>);
 
-    const { props, attrs } = useProps(inProps, defaultProps);
-    const id = useId(inProps?.id as string | undefined);
-    const $attrSelector = useAttrSelector('pc_');
-    const elementRef = React.useRef<HTMLElement>(null);
-    const ref = React.useRef(inProps?.ref);
-    const name = props?.__TYPE as string | undefined;
-
-    const common: Partial<HeadlessInstance<typeof props, I>> = {
-        ref,
-        elementRef,
-        id,
-        name,
-        props,
-        attrs,
-        state: {},
-        inProps,
-        $attrSelector,
-        $primereact: {
-            config,
-            locale
-        }
-    };
-
-    const instance: HeadlessInstance & S = {
-        ...common,
-        ...setup?.(common)
-    };
-
-    React.useEffect(() => {
-        combinedRefs(ref, inProps?.ref);
-    }, [ref, inProps?.ref]);
-
-    React.useImperativeHandle(ref, () => instance, [instance]);
-
-    return instance;
+    return baseInstance as HeadlessInstance<DProps, IProps, Exposes>;
 };

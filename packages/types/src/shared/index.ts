@@ -1,19 +1,42 @@
-import type { GlobalComponentProps } from '@primereact/types/core';
+import type { GlobalComponentProps, InferComponentInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
- * Defines the common props of the PrimeReact components.
+ * Extracts the properties of a given React element type.
  *
- * @template H - The type of the component's headless props.
+ * @template T - The React element type to extract properties from.
  */
-export declare type CommonComponentProps<H> = Omit<H, '__TYPE'> & GlobalComponentProps;
+export type ExtractProps<T extends React.ElementType> = T extends keyof React.JSX.IntrinsicElements ? React.JSX.IntrinsicElements[T] : T extends React.ComponentType<infer P> ? P : never;
 
 /**
- * Defines the base props of the components.
+ * Defines the common properties of the PrimeReact components.
  *
- * @template H - The type of the component's headless props.
- * @template T - The tag of the component's HTML element.
- * @template O - The omit props of the component.
+ * @template H - The properties of the headless component.
+ * @template T - The element type of the component.
  */
-export declare type BaseComponentProps<H, T extends keyof React.JSX.IntrinsicElements, O extends string[] = []> = CommonComponentProps<H> &
-    Omit<T extends keyof React.JSX.IntrinsicElements ? React.JSX.IntrinsicElements[T] : never, keyof CommonComponentProps<H> | O[number]>;
+export declare type CommonComponentProps<H, T extends React.ElementType> = H & GlobalComponentProps<T>;
+
+/**
+ * Defines the base properties of the components.
+ *
+ * @template H - The properties of the headless component.
+ * @template T - The element type of the component.
+ * @template O - The properties to omit from the component.
+ */
+export declare type BaseComponentProps<H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<H, T> & Omit<ExtractProps<T>, keyof CommonComponentProps<H, T> | O[number]>;
+
+export type PassThroughOptionType<I, Attrs = React.HTMLAttributes<HTMLElement>> = Attrs | ((options: PassThroughMethodOptions<I>) => Attrs | string) | string | null | undefined;
+
+/**
+ * Defines passthrough(pt) options for method type.
+ */
+export type PassThroughMethodOptions<I> = InferComponentInstance<I> & {
+    /**
+     * Defines instance.
+     */
+    instance: I;
+    /**
+     * Defines passthrough(pt) options in global config.
+     */
+    global: Record<PropertyKey, unknown> | undefined;
+};

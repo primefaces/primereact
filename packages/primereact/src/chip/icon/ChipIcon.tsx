@@ -1,27 +1,29 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { cn, mergeProps } from '@primeuix/utils';
+import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './ChipIcon.props';
+import { useChipContext } from '../Chip.context';
+import { defaultIconProps } from './ChipIcon.props';
 
 export const ChipIcon = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const chip = getParent('Chip');
+    name: 'ChipIcon',
+    defaultProps: defaultIconProps,
+    setup() {
+        const chip = useChipContext();
 
-        const iconProps = mergeProps(
+        return { chip };
+    },
+    render(instance) {
+        const { props, ptmi, chip } = instance;
+
+        const rootProps = mergeProps(
             {
-                className: cn(props.className, chip?.cx('icon'))
+                className: chip?.cx('icon')
             },
             chip?.ptm('icon'),
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'span'} {...iconProps}>
-                {!props.className && props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

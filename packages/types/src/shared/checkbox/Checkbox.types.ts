@@ -1,14 +1,63 @@
-import { BaseComponentProps } from '..';
-import { useCheckboxProps } from './useCheckbox.types';
+/**
+ *
+ * Checkbox is an extension to standard checkbox element with theming.
+ *
+ * [Live Demo](https://www.primereact.org/checkbox/)
+ *
+ * @module checkbox
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { useCheckboxChangeEvent, useCheckboxExposes, useCheckboxProps, useCheckboxState } from './useCheckbox.types';
 
 /**
- * Checkbox component props.
+ * Defines passthrough(pt) options type in Checkbox component.
  */
-export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div'> {
+export type CheckboxPassThroughOptionType<E> = PassThroughOptionType<CheckboxInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of Checkbox component.
+ */
+export interface CheckboxPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'Checkbox';
+    root?: CheckboxPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the input's DOM element.
+     */
+    input?: CheckboxPassThroughOptionType<React.InputHTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to pass attributes to the box's DOM element.
+     */
+    box?: CheckboxPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the icon's DOM element.
+     */
+    icon?: CheckboxPassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Event fired when the checkbox's checked state changes.
+ * @extends useCheckboxChangeEvent
+ */
+export interface CheckboxChangeEvent extends useCheckboxChangeEvent<React.ChangeEvent<HTMLInputElement>> {
+    /**
+     * Value of the checkbox.
+     */
+    value?: unknown | undefined;
+}
+
+/**
+ * Defines valid properties in Checkbox component.
+ */
+export interface CheckboxProps extends BaseComponentProps<Omit<useCheckboxProps, 'onCheckedChange'>> {
+    /**
+     * Value of the checkbox.
+     */
+    value?: unknown | undefined;
     /**
      * The name of the checkbox.
      */
@@ -22,13 +71,23 @@ export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div
      */
     variant?: 'outlined' | 'filled' | undefined;
     /**
+     * When present, it specifies that the element should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that an input field is read-only.
+     * @default false
+     */
+    readOnly?: boolean | undefined;
+    /**
      * When present, it specifies that the element is required.
      * @default false
      */
     required?: boolean | undefined;
     /**
      * When present, it specifies that the component should have invalid state style.
-     * @defaultValue false
+     * @default false
      */
     invalid?: boolean | undefined;
     /**
@@ -38,11 +97,11 @@ export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div
     /**
      * Inline style of the input field.
      */
-    inputStyle?: string | object | undefined;
+    inputStyle?: React.CSSProperties | undefined;
     /**
      * Style class of the input field.
      */
-    inputClassName?: object | undefined;
+    inputClassName?: string | undefined;
     /**
      * Establishes a string value that labels the component.
      */
@@ -59,4 +118,29 @@ export interface CheckboxProps extends BaseComponentProps<useCheckboxProps, 'div
      * Callback function that is called when the checkbox loses focus.
      */
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /**
+     * Callback fired when the checkbox's checked state changes.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.checked The checked state of the checkbox.
+     * @returns void
+     */
+    onCheckedChange?: (event: CheckboxChangeEvent) => void;
 }
+
+/**
+ * Defines valid state in Checkbox component.
+ * @extends useCheckboxState
+ */
+export interface CheckboxState extends useCheckboxState {}
+
+/**
+ * Defines the methods and properties exposed by Checkbox component.
+ * @extends useCheckboxExposes
+ */
+export interface CheckboxExposes extends useCheckboxExposes {}
+
+/**
+ * Instance of Checkbox component.
+ */
+export type CheckboxInstance = ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes>;

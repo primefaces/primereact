@@ -1,67 +1,43 @@
-import { usePrimeReact } from '@primereact/core/config';
-import { combinedRefs } from '@primereact/core/utils';
-import { useAttrSelector, useProps } from '@primereact/hooks';
-import type { CommonComponentInstance, ComponentInstance, withComponentSetup } from '@primereact/types/core';
-import type { StylesOptions } from '@primereact/types/styles';
-import { isNotEmpty, resolve } from '@primeuix/utils';
+import { useBase } from '@primereact/core/base';
+import type { InComponentInstance, useBaseOptions, useComponentOptions } from '@primereact/types/core';
 import * as React from 'react';
 import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <I, D extends { __TYPE?: string }, S>(inProps?: I, defaultProps?: D, styles?: StylesOptions, setup?: withComponentSetup<D, I, S>) => {
-    const { config, locale, passthrough, theme, parent } = usePrimeReact();
+export const useComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown>>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, Exposes> = {}) => {
+    const defaultProps = React.useMemo(() => ({ ...globalProps, ...options.defaultProps }), [options.defaultProps]);
+    const baseInstance = useBase(name, {
+        inProps: options.inProps,
+        defaultProps,
+        setup: options.setup
+    } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, Exposes>);
 
-    const { props, attrs } = useProps(inProps, { ...globalProps, ...defaultProps });
-    const ref = React.useRef(props.ref ?? null);
-    const name = props?.__TYPE;
+    const { ref, props, state } = baseInstance;
+    const $params = React.useMemo(() => {
+        const { props, attrs, state } = baseInstance || {};
 
-    const common: CommonComponentInstance<typeof props, I, typeof parent> = {
-        ref,
-        name,
-        props,
-        attrs,
-        parent,
-        inProps,
-        $primereact: {
-            config,
-            locale,
-            passthrough,
-            theme
-        },
-        getParent: (type?: string) => (isNotEmpty(type) ? instance.$pc?.[type!] : instance.parent)
-    };
+        return {
+            instance: baseInstance,
+            props,
+            attrs,
+            state
+        };
+    }, [baseInstance, state]);
 
-    const $attrSelector = useAttrSelector('pc_');
+    const ptx = useComponentPT(baseInstance, $params);
+    const stx = useComponentStyle(baseInstance, props.styles || options.styles, $params);
 
-    const computed = {
-        state: {},
-        $attrSelector,
-        ...(resolve(setup as withComponentSetup<typeof props, I, S>, common) as S),
-        ...common
-    };
+    const instance = React.useMemo<InComponentInstance<typeof props, IProps, typeof state, Exposes>>(
+        () => ({
+            ...baseInstance,
+            ...ptx,
+            ...stx
+        }),
+        [baseInstance, ptx, stx]
+    );
 
-    const ptx = useComponentPT(computed);
-    const stx = useComponentStyle(computed, props.styles || styles);
-
-    const instance: ComponentInstance<typeof props, I, typeof parent, S> = {
-        ...computed,
-        ...ptx,
-        ...stx,
-        $pc: {}
-    };
-
-    // Inject parent component instances and self instance
-    instance.$pc = {
-        ...parent?.$pc,
-        [`${name}`]: instance as ComponentInstance
-    };
-
-    React.useEffect(() => {
-        combinedRefs(ref, props.ref);
-    }, [ref, props.ref]);
-
-    React.useImperativeHandle(ref, () => instance, [instance]);
+    React.useImperativeHandle(ref as React.Ref<InComponentInstance<typeof props, IProps, typeof state, Exposes>>, () => instance, [instance]);
 
     return instance;
 };

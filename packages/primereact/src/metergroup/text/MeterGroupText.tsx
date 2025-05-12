@@ -2,26 +2,28 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './MeterGroupText.props';
+import { useMeterGroupContext } from '../MeterGroup.context';
+import { defaultTextProps } from './MeterGroupText.props';
 
 export const MeterGroupText = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const metergroup = getParent('MeterGroup');
+    name: 'MeterGroupText',
+    defaultProps: defaultTextProps,
+    setup() {
+        const metergroup = useMeterGroupContext();
 
-        const textProps = mergeProps(
+        return { metergroup };
+    },
+    render(instance) {
+        const { props, ptmi, metergroup } = instance;
+
+        const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labeltext')
+                className: metergroup?.cx('labelText')
             },
-            metergroup?.ptm('labeltext'),
+            metergroup?.ptm('labelText'),
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'span'} {...textProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

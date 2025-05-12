@@ -1,11 +1,47 @@
-import { BaseComponentProps } from '..';
+/**
+ *
+ * MeterGroupText is a component that displays text inside a MeterGroup.
+ *
+ * [Live Demo](https://www.primereact.org/metergroup/)
+ *
+ * @module metergrouptext
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
 
 /**
- * MeterGroupText component props.
+ * Defines passthrough(pt) options type in MeterGroupText component.
  */
-export interface MeterGroupTextProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupText' }, 'span'> {
+export type MeterGroupTextPassThroughOptionType<E> = PassThroughOptionType<MeterGroupTextInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of MeterGroupText component.
+ */
+export interface MeterGroupTextPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'MeterGroupText';
+    root?: MeterGroupTextPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
 }
+
+/**
+ * Defines valid properties in MeterGroupText component.
+ */
+export interface MeterGroupTextProps extends BaseComponentProps {}
+
+/**
+ * Defines valid state in MeterGroupText component.
+ */
+export interface MeterGroupTextState {}
+
+/**
+ * Defines the methods and properties exposed by MeterGroupText component.
+ */
+export interface MeterGroupTextExposes {}
+
+/**
+ * Instance of MeterGroupText component.
+ */
+export type MeterGroupTextInstance = ComponentInstance<MeterGroupTextProps, MeterGroupTextState, MeterGroupTextExposes>;

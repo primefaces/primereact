@@ -18,15 +18,6 @@
                     ]
                 },
                 {
-                    "name": "Button",
-                    "children": [
-                        {
-                            "name": "Button",
-                            "to": "/button"
-                        }
-                    ]
-                },
-                {
                     "name": "Panel",
                     "children": [
                         {

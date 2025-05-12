@@ -1,20 +1,51 @@
-import { BaseComponentProps } from '..';
-import { useBadgeProps } from './useBadge.types';
+/**
+ *
+ * Badge is a small status indicator for another element.
+ *
+ * [Live Demo](https://www.primereact.org/badge/)
+ *
+ * @module badge
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { useBadgeProps } from './useBadge.types';
 
 /**
- * Badge component props.
+ * Defines passthrough(pt) options type in Badge component.
  */
-export interface BadgeProps extends BaseComponentProps<useBadgeProps, 'span'> {
+export type BadgePassThroughOptionType<E> = PassThroughOptionType<BadgeInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of Badge component.
+ */
+export interface BadgePassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'Badge';
+    root?: BadgePassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Defines valid properties in Badge component.
+ */
+export interface BadgeProps extends BaseComponentProps<useBadgeProps> {
+    /**
+     * Whether to show the badge with a circle shape.
+     */
+    circle?: boolean | undefined;
+    /**
+     * Size of the badge.
+     */
+    size?: 'small' | 'large' | 'xlarge' | undefined;
     /**
      * Severity type of the badge.
      */
     severity?: 'secondary' | 'info' | 'success' | 'warn' | 'danger' | 'contrast' | undefined;
-    /**
-     * Size of the badge, valid options are 'small', 'large', and 'xlarge'.
-     */
-    size?: 'small' | 'large' | 'xlarge' | undefined;
 }
+
+/**
+ * Instance of Badge component.
+ */
+export type BadgeInstance = ComponentInstance<BadgeProps>;

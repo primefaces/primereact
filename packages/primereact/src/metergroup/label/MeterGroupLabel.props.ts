@@ -1,6 +1,6 @@
 import type { MeterGroupLabelProps } from '@primereact/types/shared/metergroup';
 
-export const defaultProps: MeterGroupLabelProps = {
-    __TYPE: 'MeterGroupLabel',
-    color: ''
+export const defaultLabelProps: MeterGroupLabelProps = {
+    as: 'li',
+    color: undefined
 };

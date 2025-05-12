@@ -11,7 +11,13 @@ export const classes = {
     ],
     meters: 'p-metergroup-meters',
     meter: 'p-metergroup-meter',
-    labelList: 'p-metergroup-label-list',
+    labelList: ({ orientation }) => [
+        'p-metergroup-label-list',
+        {
+            'p-metergroup-label-list-horizontal': orientation === 'horizontal',
+            'p-metergroup-label-list-vertical': orientation === 'vertical'
+        }
+    ],
     label: 'p-metergroup-label',
     labelIcon: 'p-metergroup-label-icon',
     labelMarker: 'p-metergroup-label-marker',

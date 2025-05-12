@@ -1,16 +1,53 @@
-import { BaseComponentProps } from '..';
+/**
+ *
+ * MeterGroupLabels is a component that displays a group of labels.
+ *
+ * [Live Demo](https://www.primereact.org/metergroup/)
+ *
+ * @module metergrouplabels
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
 
 /**
- * MeterGroupLabels component props.
+ * Defines passthrough(pt) options type in MeterGroupLabels component.
  */
-export interface MeterGroupLabelsProps extends BaseComponentProps<{ readonly __TYPE: 'MeterGroupLabels' }, 'div'> {
+export type MeterGroupLabelsPassThroughOptionType<E> = PassThroughOptionType<MeterGroupLabelsInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of MeterGroupLabels component.
+ */
+export interface MeterGroupLabelsPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'MeterGroupLabels';
+    root?: MeterGroupLabelsPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines valid properties in MeterGroupLabels component.
+ */
+export interface MeterGroupLabelsProps extends BaseComponentProps {
     /**
-     * Specifies the label orientation of the component, valid values are 'horizontal' and 'vertical'.
-     * @defaultValue horizontal
+     * Specifies the label orientation of the component.
+     * @default horizontal
      */
     orientation?: 'horizontal' | 'vertical' | undefined;
 }
+
+/**
+ * Defines valid state in MeterGroupLabels component.
+ */
+export interface MeterGroupLabelsState {}
+
+/**
+ * Defines the methods and properties exposed by MeterGroupLabels component.
+ */
+export interface MeterGroupLabelsExposes {}
+
+/**
+ * Instance of MeterGroupLabels component.
+ */
+export type MeterGroupLabelsInstance = ComponentInstance<MeterGroupLabelsProps, MeterGroupLabelsState, MeterGroupLabelsExposes>;

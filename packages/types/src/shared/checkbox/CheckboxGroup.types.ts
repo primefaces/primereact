@@ -1,23 +1,90 @@
-import { BaseComponentProps } from '..';
+/**
+ *
+ * CheckboxGroup allows to select multiple options from a set of choices.
+ *
+ * [Live Demo](https://www.primereact.org/checkbox/)
+ *
+ * @module checkboxgroup
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { CheckboxChangeEvent } from './Checkbox.types';
 
 /**
- * Checkbox component props.
+ * Defines passthrough(pt) options type in Checkbox component.
  */
-export interface CheckboxGroupProps extends BaseComponentProps<{ readonly __TYPE: 'CheckboxGroup' }, 'div', ['defaultValue']> {
+export type CheckboxGroupPassThroughOptionType<E> = PassThroughOptionType<CheckboxGroupInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of Checkbox component.
+ */
+export interface CheckboxGroupPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'CheckboxGroup';
-    /**
-     * The name of the checkbox.
-     */
-    value?: unknown;
-    /**
-     * The default value of the checkbox.
-     */
-    defaultValue?: unknown;
-    /**
-     * Callback function that is called when the checkbox value changes.
-     */
-    onValueChange?: (event: { value: unknown }) => void;
+    root?: CheckboxGroupPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
 }
+
+/**
+ * Event fired when the checkbox group's value changes.
+ */
+export interface CheckboxGroupValueChangeEvent {
+    /**
+     * The value of the checkbox group.
+     */
+    value: unknown[] | undefined;
+}
+
+/**
+ * Used to update the checkbox group value.
+ * @extends CheckboxChangeEvent
+ */
+export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {}
+
+/**
+ * Defines valid properties in CheckboxGroup component.
+ */
+export interface CheckboxGroupProps extends BaseComponentProps {
+    /**
+     * Value of the checkbox group.
+     */
+    value?: unknown[] | undefined;
+    /**
+     * The default value of the checkbox group.
+     */
+    defaultValue?: unknown[] | undefined;
+    /**
+     * The name of the checkboxes.
+     */
+    name?: string | undefined;
+    /**
+     * Callback function that is called when the checkbox group value changes.
+     */
+    onValueChange?: (event: CheckboxGroupValueChangeEvent) => void;
+}
+
+/**
+ * Defines valid state in CheckboxGroup component.
+ */
+export interface CheckboxGroupState {}
+
+/**
+ * Defines the methods and properties exposed by CheckboxGroup component.
+ */
+export interface CheckboxGroupExposes {
+    /**
+     * Updates the value of the checkbox group.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The new value of the checkbox group.
+     * @returns void
+     */
+    updateChange: (event: CheckboxGroupUpdateChangeEvent) => void;
+}
+
+/**
+ * Instance of CheckboxGroup component.
+ */
+export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes>;

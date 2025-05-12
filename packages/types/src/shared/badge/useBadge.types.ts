@@ -1,13 +1,21 @@
 /**
- * Props for the useBadge hook.
+ *
+ * The useBadge manages the state and functionality of a badge component.
+ *
+ * [Live Demo](https://www.primereact.org/badge/)
+ *
+ * @module usebadge
+ * @group headless
+ *
  */
-export interface useBadgeProps {
-    /**
-     * The type of the hook.
-     */
-    readonly __TYPE?: 'useBadge';
-    /**
-     * Value of the badge.
-     */
-    value?: string | number | undefined;
-}
+import type { HeadlessInstance } from '@primereact/types/core';
+
+/**
+ * Defines valid properties in useBadge.
+ */
+export interface useBadgeProps {}
+
+/**
+ * Instance of useBadge headless.
+ */
+export type useBadgeInstance = HeadlessInstance<useBadgeProps>;

@@ -1,12 +1,39 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
+import { useControlledState } from '@primereact/hooks/use-controlled-state';
+import { groupStyles } from '@primereact/styles/checkbox';
+import type { CheckboxGroupUpdateChangeEvent } from '@primereact/types/shared/checkbox';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './CheckboxGroup.props';
+import { CheckboxGroupProvider } from './CheckboxGroup.context';
+import { defaultGroupProps } from './CheckboxGroup.props';
 
 export const CheckboxGroup = withComponent({
-    defaultProps,
-    render: (instance) => {
+    name: 'CheckboxGroup',
+    defaultProps: defaultGroupProps,
+    styles: groupStyles,
+    setup(instance) {
+        const { value, defaultValue, onValueChange: onChange } = instance.props;
+        const [valueState, setValueState] = useControlledState({
+            value,
+            defaultValue,
+            onChange
+        });
+
+        const updateChange = React.useCallback(
+            (event: CheckboxGroupUpdateChangeEvent) => {
+                const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v) => v !== event.value);
+
+                setValueState?.([newValue, { originalEvent: event.originalEvent, value: newValue }]);
+            },
+            [valueState, setValueState]
+        );
+
+        return {
+            updateChange
+        };
+    },
+    render(instance) {
         const { props, ptmi, cx } = instance;
 
         const rootProps = mergeProps(
@@ -17,9 +44,9 @@ export const CheckboxGroup = withComponent({
         );
 
         return (
-            <Component as={props.as || 'div'} {...rootProps}>
-                {props.children}
-            </Component>
+            <CheckboxGroupProvider value={instance}>
+                <Component instance={instance} attrs={rootProps} children={props.children} />
+            </CheckboxGroupProvider>
         );
     }
 });

@@ -3,7 +3,9 @@ import * as React from 'react';
 import { defaultProps } from './usePanel.props';
 
 export const usePanel = withHeadless({
-    setup: ({ props }) => {
+    name: 'usePanel',
+    defaultProps,
+    setup({ props }) {
         const [collapsedState, setCollapsedState] = React.useState<boolean | undefined>(props.collapsed);
         const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
         const state = {
@@ -59,6 +61,5 @@ export const usePanel = withHeadless({
             collapse,
             onButtonClick
         };
-    },
-    defaultProps
+    }
 });

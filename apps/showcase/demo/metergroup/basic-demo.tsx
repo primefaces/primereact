@@ -7,7 +7,7 @@ export default function BasicDemo() {
         <div className="card">
             <MeterGroup>
                 <MeterGroup.Meters>
-                    <MeterGroup.Meter value={value} />
+                    <MeterGroup.Meter value={value.value} color={value.color} />
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
                     <MeterGroup.Label>

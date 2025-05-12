@@ -2,15 +2,21 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './MeterGroupLabel.props';
+import { useMeterGroupContext } from '../MeterGroup.context';
+import { defaultLabelProps } from './MeterGroupLabel.props';
 
 export const MeterGroupLabel = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const metergroup = getParent('MeterGroup');
+    name: 'MeterGroupLabel',
+    defaultProps: defaultLabelProps,
+    setup() {
+        const metergroup = useMeterGroupContext();
 
-        const labelProps = mergeProps(
+        return { metergroup };
+    },
+    render(instance) {
+        const { props, ptmi, metergroup } = instance;
+
+        const rootProps = mergeProps(
             {
                 className: metergroup?.cx('label')
             },
@@ -18,10 +24,6 @@ export const MeterGroupLabel = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'li'} {...labelProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

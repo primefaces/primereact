@@ -1,22 +1,64 @@
-import { BaseComponentProps } from '..';
-import { useProgressBarProps } from './useProgressBar.types';
+/**
+ *
+ * ProgressBar is a process status indicator.
+ *
+ * [Live Demo](https://www.primereact.org/progressbar/)
+ *
+ * @module progressbar
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { useProgressBarExposes, useProgressBarProps, useProgressBarState } from './useProgressBar.types';
 
 /**
- * ProgressBar component props.
+ * Defines passthrough(pt) options type in ProgressBar component.
  */
-export interface ProgressBarProps extends BaseComponentProps<useProgressBarProps, 'div'> {
-    /**
-     * The type of the component.
-     */
-    readonly __TYPE?: 'ProgressBar';
+export type ProgressBarPassThroughOptionType<E> = PassThroughOptionType<ProgressBarInstance, E>;
 
+/**
+ * Defines passthrough(pt) options of ProgressBar component.
+ */
+export interface ProgressBarPassThroughOptions {
+    /**
+     * Used to pass attributes to the root's DOM element.
+     */
+    root?: ProgressBarPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the value's DOM element.
+     */
+    value?: ProgressBarPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines valid properties in ProgressBar component.
+ */
+export interface ProgressBarProps extends BaseComponentProps<useProgressBarProps> {
+    /**
+     * Current value of the progress.
+     */
+    value?: number | undefined;
     /**
      * Defines the mode of the progress
-     * @defaultValue determinate
+     * @default determinate
      */
     mode?: 'determinate' | 'indeterminate' | undefined;
-    /**
-     * Style of the progressbar.
-     */
-    style?: React.CSSProperties | undefined;
 }
+
+/**
+ * Defines valid state in ProgressBar component.
+ * @extends useProgressBarState
+ */
+export interface ProgressBarState extends useProgressBarState {}
+
+/**
+ * Defines the methods and properties exposed by ProgressBar component.
+ * @extends useProgressBarExposes
+ */
+export interface ProgressBarExposes extends useProgressBarExposes {}
+
+/**
+ * Instance of ProgressBar component.
+ */
+export type ProgressBarInstance = ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes>;

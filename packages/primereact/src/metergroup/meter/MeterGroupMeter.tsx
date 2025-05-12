@@ -2,49 +2,43 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './MeterGroupMeter.props';
+import { useMeterGroupContext } from '../MeterGroup.context';
+import { defaultMeterProps } from './MeterGroupMeter.props';
 
 export const MeterGroupMeter = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const metergroup = getParent('MeterGroup');
+    name: 'MeterGroupMeter',
+    defaultProps: defaultMeterProps,
+    setup(instance) {
+        const { props } = instance;
+        const metergroup = useMeterGroupContext();
 
+        // effects
         React.useEffect(() => {
-            metergroup.setPercent(props.value?.value);
+            metergroup?.updateTotalPercent(props.value ?? 0);
 
             return () => {
-                metergroup.setPercent(-props.value?.value);
+                metergroup?.updateTotalPercent(-(props.value ?? 0));
             };
-        }, [props.value?.value]);
+        }, [props.value]);
 
-        const percent = (meter = 0) => {
-            const percentOfItem = ((meter - metergroup?.props.min) / (metergroup?.props.max - metergroup?.props.min)) * 100;
+        return { metergroup };
+    },
+    render(instance) {
+        const { props, ptmi, metergroup } = instance;
 
-            return Math.round(Math.max(0, Math.min(100, percentOfItem)));
-        };
-
-        const percentValue = (meter: number) => {
-            return percent(meter) + '%';
-        };
-
-        const meterProps = mergeProps(
+        const rootProps = mergeProps(
             {
                 className: metergroup?.cx('meter'),
                 style: {
-                    backgroundColor: props.value?.color,
-                    width: metergroup?.props.orientation === 'horizontal' && percentValue(props.value?.value),
-                    height: metergroup?.props.orientation === 'vertical' && percentValue(props.value?.value)
+                    backgroundColor: props.color,
+                    width: metergroup?.props.orientation === 'horizontal' && metergroup?.percentAsString(props.value ?? 0),
+                    height: metergroup?.props.orientation === 'vertical' && metergroup?.percentAsString(props.value ?? 0)
                 }
             },
             metergroup?.ptm('meter'),
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'div'} asChild={props.asChild} {...meterProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

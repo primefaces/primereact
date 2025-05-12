@@ -3,5 +3,6 @@ import type { ChipProps } from '@primereact/types/shared/chip';
 
 export const defaultProps: ChipProps = {
     ...HeadlessChip.defaultProps,
-    __TYPE: 'Chip'
+    as: 'div',
+    onRemove: undefined
 };

@@ -1,26 +1,73 @@
-import { BaseComponentProps } from '..';
-import { useProgressSpinnerProps } from './useProgressSpinner.types';
+/**
+ *
+ * ProgressSpinner is a process status indicator.
+ *
+ * [Live Demo](https://www.primereact.org/progressspinner/)
+ *
+ * @module progressspinner
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { useProgressSpinnerExposes, useProgressSpinnerProps, useProgressSpinnerState } from './useProgressSpinner.types';
 
 /**
- * ProgressSpinner component props.
+ * Defines passthrough(pt) options type in ProgressSpinner component.
  */
-export interface ProgressSpinnerProps extends BaseComponentProps<useProgressSpinnerProps, 'span'> {
+export type ProgressSpinnerPassThroughOptionType<E> = PassThroughOptionType<ProgressSpinnerInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of ProgressSpinner component.
+ */
+export interface ProgressSpinnerPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'ProgressSpinner';
+    root?: ProgressSpinnerPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the spin's DOM element.
+     */
+    spin?: ProgressSpinnerPassThroughOptionType<React.HTMLAttributes<SVGElement>>;
+    /**
+     * Used to pass attributes to the circle's DOM element.
+     */
+    circle?: ProgressSpinnerPassThroughOptionType<React.HTMLAttributes<SVGCircleElement>>;
+}
+
+/**
+ * Defines valid properties in ProgressSpinner component.
+ */
+export interface ProgressSpinnerProps extends BaseComponentProps<useProgressSpinnerProps> {
     /**
      * Width of the circle stroke.
-     * @defaultValue 2
+     * @default 2
      */
-    strokeWidth?: string | undefined;
+    strokeWidth?: number | string | undefined;
     /**
      * Color for the background of the circle.
      */
     fill?: string | undefined;
     /**
      * Duration of the rotate animation.
-     * @defaultValue 2s
+     * @default 2s
      */
     animationDuration?: string | undefined;
 }
+
+/**
+ * Defines valid state in ProgressSpinner component.
+ * @extends useProgressSpinnerState
+ */
+export interface ProgressSpinnerState extends useProgressSpinnerState {}
+
+/**
+ * Defines the methods and properties exposed by ProgressSpinner component.
+ * @extends useProgressSpinnerExposes
+ */
+export interface ProgressSpinnerExposes extends useProgressSpinnerExposes {}
+
+/**
+ * Instance of ProgressSpinner component.
+ */
+export type ProgressSpinnerInstance = ComponentInstance<ProgressSpinnerProps, ProgressSpinnerState, ProgressSpinnerExposes>;

@@ -1,30 +1,29 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
-import type { PanelTitleProps } from '@primereact/types/shared/panel';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { usePanelContext } from '../Panel.context';
 import { defaultTitleProps } from './PanelTitle.props';
 
-export const PanelTitle = (inProps: PanelTitleProps) => {
-    const instance = useComponent(inProps, defaultTitleProps);
-    const { props, ptmi, getParent } = instance;
-    const panel = getParent('Panel');
+export const PanelTitle = withComponent({
+    name: 'PanelTitle',
+    defaultProps: defaultTitleProps,
+    setup() {
+        const panel = usePanelContext();
 
-    const headerProps = mergeProps(
-        {
-            className: panel?.cx('title')
-        },
-        panel?.ptm('title'),
-        ptmi('root')
-    );
+        return { panel };
+    },
+    render(instance) {
+        const { props, ptmi, panel } = instance;
 
-    return (
-        <ComponentProvider pIf={props.pIf} instance={instance}>
-            <Component as={props.as || 'div'} {...headerProps}>
-                {props.children}
-            </Component>
-        </ComponentProvider>
-    );
-};
+        const rootProps = mergeProps(
+            {
+                className: panel?.cx('title')
+            },
+            panel?.ptm('title'),
+            ptmi('root')
+        );
 
-PanelTitle.displayName = 'PrimeReact.PanelTitle';
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+    }
+});

@@ -2,15 +2,21 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './ChipLabel.props';
+import { useChipContext } from '../Chip.context';
+import { defaultLabelProps } from './ChipLabel.props';
 
 export const ChipLabel = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const chip = getParent('Chip');
+    name: 'ChipLabel',
+    defaultProps: defaultLabelProps,
+    setup() {
+        const chip = useChipContext();
 
-        const labelProps = mergeProps(
+        return { chip };
+    },
+    render(instance) {
+        const { props, ptmi, chip } = instance;
+
+        const rootProps = mergeProps(
             {
                 className: chip?.cx('label')
             },
@@ -18,10 +24,6 @@ export const ChipLabel = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'div'} {...labelProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

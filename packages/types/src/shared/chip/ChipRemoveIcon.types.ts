@@ -1,11 +1,47 @@
-import { BaseComponentProps } from '..';
+/**
+ *
+ * ChipRemoveIcon component is a part of the Chip component.
+ *
+ * [Live Demo](https://www.primereact.org/chip/)
+ *
+ * @module chipremoveicon
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
 
 /**
- * ChipRemoveIcon component props.
+ * Defines passthrough(pt) options type in ChipRemoveIcon component.
  */
-export interface ChipRemoveIconProps extends BaseComponentProps<{ readonly __TYPE: 'ChipRemoveIcon' }, 'span'> {
+export type ChipRemoveIconPassThroughOptionType<E> = PassThroughOptionType<ChipRemoveIconInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of ChipRemoveIcon component.
+ */
+export interface ChipRemoveIconPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'ChipRemoveIcon';
+    root?: ChipRemoveIconPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
 }
+
+/**
+ * Defines valid properties in ChipRemoveIcon component.
+ */
+export interface ChipRemoveIconProps extends BaseComponentProps {}
+
+/**
+ * Defines valid state in ChipRemoveIcon component.
+ */
+export interface ChipRemoveIconState {}
+
+/**
+ * Defines the methods and properties exposed by ChipRemoveIcon component.
+ */
+export interface ChipRemoveIconExposes {}
+
+/**
+ * Instance of ChipRemoveIcon component.
+ */
+export type ChipRemoveIconInstance = ComponentInstance<ChipRemoveIconProps, ChipRemoveIconState, ChipRemoveIconExposes>;

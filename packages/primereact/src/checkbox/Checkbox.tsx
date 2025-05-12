@@ -4,20 +4,41 @@ import { useCheckbox } from '@primereact/headless/checkbox';
 import { CheckIcon } from '@primereact/icons/check';
 import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
-import { mergeProps } from '@primeuix/utils';
+import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import { cn, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { CheckboxProvider } from './Checkbox.context';
 import { defaultProps } from './Checkbox.props';
-import { CheckboxGroup } from './group';
+import { CheckboxGroup, useCheckboxGroupContext } from './group';
 
 export const Checkbox = withComponent({
+    name: 'Checkbox',
     defaultProps,
     styles,
-    setup: (instance) => {
-        const checkbox = useCheckbox(instance.inProps);
+    setup(instance) {
+        const { props, inProps } = instance;
+        const group = useCheckboxGroupContext();
 
-        return checkbox;
+        const useCheckboxProps = group
+            ? {
+                  ...inProps,
+                  checked: group.props.value?.includes(props.value),
+                  defaultChecked: group.props.defaultValue?.includes(props.value),
+                  onCheckedChange: React.useCallback((event: CheckboxChangeEvent) => group.updateChange({ ...event, value: props.value }), [group.updateChange])
+              }
+            : {
+                  ...inProps,
+                  onCheckedChange: React.useCallback((event: CheckboxChangeEvent) => props.onCheckedChange?.({ ...event, value: props.value }), [props.onCheckedChange])
+              };
+
+        const checkbox = useCheckbox(useCheckboxProps);
+
+        return {
+            ...checkbox,
+            groupName: group?.props.name
+        };
     },
-    render: (instance) => {
+    render(instance) {
         const {
             id,
             props,
@@ -25,38 +46,20 @@ export const Checkbox = withComponent({
             ptmi,
             ptm,
             cx,
-            getParent,
-            // element refs
-            elementRef,
+            groupName,
             // methods
-            onChange,
-            setCheckboxGroup
+            onChange
         } = instance;
-
-        const checkboxGroup = getParent('CheckboxGroup');
-
-        setCheckboxGroup(checkboxGroup);
-
-        const getPTOptions = (key: string) => {
-            const _ptm = key === 'root' ? ptmi : ptm;
-
-            return _ptm(key, {
-                context: {
-                    checked: state.checked,
-                    indeterminate: state.indeterminate,
-                    disabled: props.disabled
-                }
-            });
-        };
 
         const createInputElement = () => {
             const inputProps = mergeProps(
                 {
                     id: props.inputId,
                     type: 'checkbox',
-                    className: cx('input'),
+                    style: props.inputStyle,
+                    className: cn(cx('input'), props.inputClassName),
                     value: props.value,
-                    name: props.name,
+                    name: props.name ?? groupName,
                     checked: state.checked,
                     tabIndex: props.tabIndex,
                     disabled: props.disabled,
@@ -70,7 +73,7 @@ export const Checkbox = withComponent({
                     onBlur: props.onBlur,
                     onChange
                 },
-                getPTOptions('input')
+                ptm('input')
             );
 
             return <input {...inputProps} />;
@@ -81,14 +84,14 @@ export const Checkbox = withComponent({
                 {
                     className: cx('box')
                 },
-                getPTOptions('box')
+                ptm('box')
             );
 
             const iconProps = mergeProps(
                 {
                     className: cx('icon')
                 },
-                getPTOptions('icon')
+                ptm('icon')
             );
 
             const icon = state.checked ? <CheckIcon {...iconProps} /> : state.indeterminate ? <MinusIcon {...iconProps} /> : null;
@@ -108,10 +111,12 @@ export const Checkbox = withComponent({
         );
 
         return (
-            <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
-                {input}
-                {box}
-            </Component>
+            <CheckboxProvider value={instance}>
+                <Component instance={instance} attrs={rootProps}>
+                    {input}
+                    {box}
+                </Component>
+            </CheckboxProvider>
         );
     },
     components: {

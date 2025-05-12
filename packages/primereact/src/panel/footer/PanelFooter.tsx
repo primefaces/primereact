@@ -1,29 +1,29 @@
 'use client';
-import { Component, ComponentProvider, useComponent } from '@primereact/core/component';
-import type { PanelFooterProps } from '@primereact/types/shared/panel';
+import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { usePanelContext } from '../Panel.context';
 import { defaultFooterProps } from './PanelFooter.props';
 
-export const PanelFooter = (inProps: PanelFooterProps) => {
-    const instance = useComponent(inProps, defaultFooterProps);
-    const { props, getParent } = instance;
-    const panel = getParent('Panel');
+export const PanelFooter = withComponent({
+    name: 'PanelFooter',
+    defaultProps: defaultFooterProps,
+    setup() {
+        const panel = usePanelContext();
 
-    const footerProps = mergeProps(
-        {
-            className: panel?.cx('footer')
-        },
-        panel?.ptm('footer')
-    );
+        return { panel };
+    },
+    render: (instance) => {
+        const { props, ptmi, panel } = instance;
 
-    return (
-        <ComponentProvider pIf={props.pIf}>
-            <Component as={props.as || 'div'} {...footerProps}>
-                {props.children}
-            </Component>
-        </ComponentProvider>
-    );
-};
+        const rootProps = mergeProps(
+            {
+                className: panel?.cx('footer')
+            },
+            panel?.ptm('footer'),
+            ptmi('root')
+        );
 
-PanelFooter.displayName = 'PrimeReact.PanelFooter';
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+    }
+});

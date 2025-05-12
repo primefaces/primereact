@@ -1,17 +1,39 @@
-import { BaseComponentProps } from '..';
-import { useSkeletonProps } from './useSkeleton.types';
+/**
+ *
+ * Skeleton is a placeholder to display instead of the actual content.
+ *
+ * [Live Demo](https://www.primereact.org/skeleton/)
+ *
+ * @module skeleton
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { useSkeletonExposes, useSkeletonProps, useSkeletonState } from './useSkeleton.types';
 
 /**
- * Skeleton component props.
+ * Defines passthrough(pt) options type in Skeleton component.
  */
-export interface SkeletonProps extends BaseComponentProps<useSkeletonProps, 'div'> {
+export type SkeletonPassThroughOptionType<E> = PassThroughOptionType<SkeletonInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of Skeleton component.
+ */
+export interface SkeletonPassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'Skeleton';
+    root?: SkeletonPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines valid properties in Skeleton component.
+ */
+export interface SkeletonProps extends BaseComponentProps<useSkeletonProps> {
     /**
      * Shape of the element.
-     * @defaultValue rectangle
+     * @default rectangle
      */
     shape?: 'rectangle' | 'circle' | undefined;
     /**
@@ -20,12 +42,12 @@ export interface SkeletonProps extends BaseComponentProps<useSkeletonProps, 'div
     size?: string | undefined;
     /**
      * Width of the element.
-     * @defaultValue 100%
+     * @default 100%
      */
     width?: string | undefined;
     /**
      * Height of the element.
-     * @defaultValue 1rem
+     * @default 1rem
      */
     height?: string | undefined;
     /**
@@ -34,7 +56,24 @@ export interface SkeletonProps extends BaseComponentProps<useSkeletonProps, 'div
     borderRadius?: string | undefined;
     /**
      * Type of the animation.
-     * @defaultValue wave
+     * @default wave
      */
     animation?: 'wave' | 'none' | undefined;
 }
+
+/**
+ * Defines valid state in Skeleton component.
+ * @extends useSkeletonState
+ */
+export interface SkeletonState extends useSkeletonState {}
+
+/**
+ * Defines the methods and properties exposed by Skeleton component.
+ * @extends useSkeletonExposes
+ */
+export interface SkeletonExposes extends useSkeletonExposes {}
+
+/**
+ * Instance of Skeleton component.
+ */
+export type SkeletonInstance = ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes>;

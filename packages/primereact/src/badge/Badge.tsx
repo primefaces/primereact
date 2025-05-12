@@ -4,25 +4,21 @@ import { useBadge } from '@primereact/headless/badge';
 import { styles } from '@primereact/styles/badge';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
+import { BadgeProvider } from './Badge.context';
 import { defaultProps } from './Badge.props';
+import { OverlayBadge } from './overlay';
 
 export const Badge = withComponent({
+    name: 'Badge',
     defaultProps,
     styles,
-    setup: (instance) => {
+    setup(instance) {
         const badge = useBadge(instance.inProps);
 
         return badge;
     },
-    render: (instance) => {
-        const {
-            id,
-            props,
-            ptmi,
-            cx,
-            // element refs
-            elementRef
-        } = instance;
+    render(instance) {
+        const { id, props, ptmi, cx } = instance;
 
         const rootProps = mergeProps(
             {
@@ -33,9 +29,12 @@ export const Badge = withComponent({
         );
 
         return (
-            <Component as={props.as || 'span'} {...rootProps} ref={elementRef}>
-                {props.value}
-            </Component>
+            <BadgeProvider value={instance}>
+                <Component instance={instance} attrs={rootProps} children={props.children} />
+            </BadgeProvider>
         );
+    },
+    components: {
+        Overlay: OverlayBadge
     }
 });

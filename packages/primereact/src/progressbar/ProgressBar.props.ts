@@ -3,7 +3,7 @@ import type { ProgressBarProps } from '@primereact/types/shared/progressbar';
 
 export const defaultProps: ProgressBarProps = {
     ...HeadlessProgressBar.defaultProps,
-    __TYPE: 'ProgressBar',
-    mode: 'determinate',
-    style: undefined
+    as: 'div',
+    value: undefined,
+    mode: 'determinate'
 };

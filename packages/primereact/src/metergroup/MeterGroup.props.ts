@@ -3,6 +3,6 @@ import type { MeterGroupProps } from '@primereact/types/shared/metergroup';
 
 export const defaultProps: MeterGroupProps = {
     ...HeadlessMeterGroup.defaultProps,
-    __TYPE: 'MeterGroup',
+    as: 'div',
     orientation: 'horizontal'
 };

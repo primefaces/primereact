@@ -1,15 +1,47 @@
-import { BaseComponentProps } from '..';
+/**
+ *
+ * ChipImage component is a part of the Chip component.
+ *
+ * [Live Demo](https://www.primereact.org/chip/)
+ *
+ * @module chipimage
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
 
 /**
- * ChipImage component props.
+ * Defines passthrough(pt) options type in ChipImage component.
  */
-export interface ChipImageProps extends BaseComponentProps<{ readonly __TYPE: 'ChipImage' }, 'img'> {
+export type ChipImagePassThroughOptionType<E> = PassThroughOptionType<ChipImageInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of ChipImage component.
+ */
+export interface ChipImagePassThroughOptions {
     /**
-     * The type of the component.
+     * Used to pass attributes to the root's DOM element.
      */
-    readonly __TYPE?: 'ChipImage';
-    /**
-     * Defines the image to display.
-     */
-    src?: string | undefined;
+    root?: ChipImagePassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
 }
+
+/**
+ * Defines valid properties in ChipImage component.
+ */
+export interface ChipImageProps extends BaseComponentProps {}
+
+/**
+ * Defines valid state in ChipImage component.
+ */
+export interface ChipImageState {}
+
+/**
+ * Defines the methods and properties exposed by ChipImage component.
+ */
+export interface ChipImageExposes {}
+
+/**
+ * Instance of ChipImage component.
+ */
+export type ChipImageInstance = ComponentInstance<ChipImageProps, ChipImageState, ChipImageExposes>;
