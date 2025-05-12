@@ -2,15 +2,23 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './ProgressBarLabel.props';
+import { useProgressBarContext } from '../ProgressBar.context';
+import { defaultLabelProps } from './ProgressBarLabel.props';
 
 export const ProgressBarLabel = withComponent({
-    defaultProps,
-    render: (instance) => {
-        const { props, getParent, ptmi } = instance;
-        const progressbar = getParent('ProgressBar');
+    name: 'ProgressBarLabel',
+    defaultProps: defaultLabelProps,
+    setup() {
+        const progressbar = useProgressBarContext();
 
-        const labelProps = mergeProps(
+        return {
+            progressbar
+        };
+    },
+    render(instance) {
+        const { props, ptmi, progressbar } = instance;
+
+        const rootProps = mergeProps(
             {
                 className: progressbar?.cx('label')
             },
@@ -18,10 +26,6 @@ export const ProgressBarLabel = withComponent({
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'div'} {...labelProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

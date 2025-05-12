@@ -4,40 +4,21 @@ import { useProgressBar } from '@primereact/headless/progressbar';
 import { styles } from '@primereact/styles/progressbar';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './ProgressBar.props';
 import { ProgressBarLabel } from './label';
+import { ProgressBarProvider } from './ProgressBar.context';
+import { defaultProps } from './ProgressBar.props';
 
 export const ProgressBar = withComponent({
+    name: 'ProgressBar',
     defaultProps,
     styles,
-    setup: (instance) => {
+    setup(instance) {
         const progressBar = useProgressBar(instance.inProps);
 
         return progressBar;
     },
-    render: (instance) => {
-        const {
-            id,
-            props,
-            ptmi,
-            ptm,
-            cx,
-            // element refs
-            elementRef
-        } = instance;
-
-        const rootProps = mergeProps(
-            {
-                id,
-                className: cx('root'),
-                style: props.style,
-                role: 'progressbar',
-                'aria-valuemin': 0,
-                'aria-valuenow': props.value,
-                'aria-valuemax': 100
-            },
-            ptmi('root')
-        );
+    render(instance) {
+        const { id, props, ptmi, ptm, cx } = instance;
 
         const createDeterminate = () => {
             const valueProps = mergeProps(
@@ -65,10 +46,26 @@ export const ProgressBar = withComponent({
             return <div {...valueProps}></div>;
         };
 
+        const value = props.mode === 'determinate' ? createDeterminate() : props.mode === 'indeterminate' ? createIndeterminate() : null;
+
+        const rootProps = mergeProps(
+            {
+                id,
+                className: cx('root'),
+                role: 'progressbar',
+                'aria-valuemin': 0,
+                'aria-valuenow': props.value,
+                'aria-valuemax': 100
+            },
+            ptmi('root')
+        );
+
         return (
-            <Component as={props.as || 'div'} {...rootProps} ref={elementRef}>
-                {props.mode === 'determinate' ? createDeterminate() : createIndeterminate()}
-            </Component>
+            <ProgressBarProvider value={instance}>
+                <Component instance={instance} attrs={rootProps}>
+                    {value}
+                </Component>
+            </ProgressBarProvider>
         );
     },
     components: {
