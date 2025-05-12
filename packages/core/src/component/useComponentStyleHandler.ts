@@ -1,7 +1,7 @@
 import { ThemeContext } from '@primereact/core/theme';
 import { useStyle } from '@primereact/core/use-style';
 import type { StylesOptions, StyleType } from '@primereact/types/styles';
-import { dt, Theme } from '@primeuix/styled';
+import { css as Css, dt, Theme } from '@primeuix/styled';
 import { isNotEmpty, minifyCSS, resolve, toElement } from '@primeuix/utils';
 import * as React from 'react';
 
@@ -22,7 +22,7 @@ export const useComponentStyleHandler = (styles?: StylesOptions, elementRef?: Re
             ...styles,
             load: (style: StyleType = '', options: Record<PropertyKey, unknown> & { name?: string } = {}, extendedStyle = '', enableThemeTransform = false) => {
                 const name = options.name || handler.name;
-                const resolvedStyle = `${resolve(style, { dt })}${extendedStyle}`;
+                const resolvedStyle = Css`${style}${extendedStyle}` as string;
                 const computedStyle = enableThemeTransform ? Theme.transformCSS(name, resolvedStyle) : resolvedStyle;
 
                 return isNotEmpty(computedStyle) ? _load(minifyCSS(computedStyle), { name, ...options }) : {};
@@ -48,8 +48,8 @@ export const useComponentStyleHandler = (styles?: StylesOptions, elementRef?: Re
             },
             getStyleSheet(extendedCSS = '', props = {}) {
                 if (this.css) {
-                    const _css = resolve(this.css, { dt });
-                    const _style = minifyCSS(`${_css}${extendedCSS}`);
+                    const _css = resolve(this.css, { dt }) as string;
+                    const _style = minifyCSS(Css`${_css}${extendedCSS}`);
                     const _props = Object.entries(props)
                         .reduce<string[]>((acc, [k, v]) => {
                             acc.push(`${k}="${v}"`);
@@ -71,7 +71,7 @@ export const useComponentStyleHandler = (styles?: StylesOptions, elementRef?: Re
 
                 if (theme) {
                     const _name = this.name === 'base' ? 'global-style' : `${this.name}-style`;
-                    const _css = resolve(theme, { dt }) as string;
+                    const _css = Css`${resolve(theme, { dt })}` as string;
                     const _style = minifyCSS(Theme.transformCSS(this.name, _css));
                     const _props = Object.entries(props)
                         .reduce<string[]>((acc, [k, v]) => {

@@ -1,7 +1,7 @@
-import type { StyleOptions, StylesOptions } from '@primereact/types/styles';
+import type { StylesOptions } from '@primereact/types/styles';
 import { style } from '@primeuix/styles/base';
 
-const css = ({ dt }: StyleOptions) => `
+const css = /*css*/ `
 .p-hidden-accessible {
     border: 0;
     clip: rect(0 0 0 0);
@@ -18,7 +18,7 @@ const css = ({ dt }: StyleOptions) => `
 
 .p-overflow-hidden {
     overflow: hidden;
-    padding-right: ${dt('scrollbar.width')};
+    padding-right: dt('scrollbar.width');
 }
 `;
 

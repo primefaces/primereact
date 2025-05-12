@@ -3,6 +3,7 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "sibiraj-s.vscode-scss-formatter",
-        "unifiedjs.vscode-mdx"
+        "unifiedjs.vscode-mdx",
+        "pushqrdx.inline-html"
     ]
 }
