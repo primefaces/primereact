@@ -1,0 +1,62 @@
+---
+title: "MeterGroup"
+description: "MeterGroup displays scalar measurements within a known range."
+component: "metergroup"
+---
+
+## Import
+
+```tsx
+import { MeterGroup } from 'primereact/metergroup';
+```
+
+## Basic 
+
+MeterGroup requires a _value_ as the data to display where each item in the collection should be a type of <i>MeterItem</i>.
+
+<DocComponentViewer name="metergroup:basic-demo" />
+
+## Multiple
+
+Adding more items to the array displays the meters in a group.
+
+<DocComponentViewer name="metergroup:multiple-demo" />
+
+## Icon
+
+Icons can be displayed next to the labels instead of the default marker.
+
+<DocComponentViewer name="metergroup:icon-demo" />
+
+## Label
+
+The default orientation of the labels is horizontal, and the vertical alternative is available through the _orientation_ option.
+
+<DocComponentViewer name="metergroup:label-demo" />
+
+## Vertical
+
+Layout of the MeterGroup is configured with the _orientation_ property that accepts either _horizontal_ or _vertical_ as available options.
+
+<DocComponentViewer name="metergroup:vertical-demo" />
+
+## Min-Max
+
+Boundaries are configured with the _min_ and _max_ values whose defaults are 0 and 100 respectively.
+
+<DocComponentViewer name="metergroup:minmax-demo" />
+
+## Template
+
+MeterGroup provides templating support for labels, meter items, and content around the meters.
+
+<DocComponentViewer name="metergroup:template-demo" />
+
+## Accessibility
+### Screen Reader
+
+MeterGroup component uses meter role in addition to the aria-valuemin, aria-valuemax and aria-valuenow attributes. Value to describe the component can be defined using aria-labelledby prop.
+
+### Keyboard Support
+
+Component does not include any interactive elements.

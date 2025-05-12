@@ -1,0 +1,52 @@
+---
+title: "ProgressBar"
+description: "ProgressBar is a process status indicator."
+component: "progressbar"
+---
+
+## Import
+
+```tsx
+import { ProgressBar } from 'primereact/progressbar';
+```
+
+## Basic
+
+Content to display is defined with the _value_ property or the default slot.
+
+<DocComponentViewer name="progressbar:basic-demo" />
+
+## Dynamic
+
+Value is reactive so updating it dynamically changes the bar as well.
+
+<DocComponentViewer name="progressbar:dynamic-demo" />
+
+## Template
+
+Content to display is defined with the _value_ property.
+
+<DocComponentViewer name="progressbar:template-demo" />
+
+## Indeterminate
+
+For progresses with no value to track, set the _mode_ property to _indeterminate_.
+
+<DocComponentViewer name="progressbar:indeterminate-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+ProgressBar components uses progressbar role along with aria-valuemin, aria-valuemax and aria-valuenow attributes. Value to describe the component can be defined using aria-labelledby and aria-label props.
+
+```tsx
+<span id="label_status" />
+<ProgressBar aria-labelledby="label_status" />
+
+<ProgressBar aria-label="Status" />
+```
+
+### Keyboard Support
+
+Not applicable.

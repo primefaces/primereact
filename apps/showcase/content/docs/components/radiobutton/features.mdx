@@ -1,0 +1,63 @@
+---
+title: "RadioButton"
+description: "RadioButton is an extension to standard radio button element with theming."
+component: "radiobutton"
+---
+
+## Import
+
+```tsx
+import { RadioButton } from 'primereact/radiobutton';
+```
+
+## Group
+
+RadioButton is used with the _v-model_ property for two-way value binding.
+
+<DocComponentViewer name="radiobutton:group-demo" />
+
+## Dynamic
+
+RadioButtons can be generated using a list of values.
+
+<DocComponentViewer name="radiobutton:dynamic-demo" />
+
+## Filled
+
+Specify the variant property as filled to display the component with a higher visual emphasis than the default outlined style.
+
+<DocComponentViewer name="radiobutton:filled-demo" />
+
+## Sizes
+
+RadioButton provides small and large sizes as alternatives to the base.
+
+<DocComponentViewer name="radiobutton:sizes-demo" />
+
+## Invalid
+
+Invalid state is displayed using the invalid prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocComponentViewer name="radiobutton:invalid-demo" />
+
+## Disabled
+
+When disabled is present, the element cannot be edited and focused.
+
+<DocComponentViewer name="radiobutton:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+RadioButton component uses a hidden native radio button element internally that is only visible to screen readers. Value to describe the component can either be provided via label tag combined with id prop or using aria-labelledby, aria-label props.
+
+```tsx
+<label for="rb1">One</label>
+<RadioButton inputId="rb1" />
+
+<span id="rb2">Two</span>
+<RadioButton aria-labelledby="rb2" />
+
+<RadioButton aria-label="Three" />
+```

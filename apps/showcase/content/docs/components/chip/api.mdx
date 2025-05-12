@@ -1,0 +1,33 @@
+---
+title: Chip API
+description: API documentation for chip component
+component: chip
+---
+
+
+## ChipImage
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _src_ | `string \| undefined` | undefined | Defines the image to display. |
+
+## ChipIcon
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _className_ | `string \| undefined` | undefined | Style class of the icon. |
+
+
+## Headless
+
+### useChipRemoveEvent
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _originalEvent_ | `React.MouseEvent<HTMLElement> \| React.KeyboardEvent<HTMLElement>` | undefined | Browser event |
+
+### useChipProps
+
+| Name | Type | Default | Description |
+|----------|------|---------|-------------|
+| _onRemove_ | `(event: useChipRemoveEvent) => void` | undefined | Callback to invoke when a chip is removed. |

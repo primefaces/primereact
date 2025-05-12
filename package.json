@@ -57,7 +57,6 @@
         "react-scan": "0.3.3",
         "rimraf": "^6.0.1",
         "ts-jest": "^29.2.5",
-        "ts-node": "^10.9.2",
         "tsup": "^8.3.6",
         "typescript": "^5.8.2",
         "typescript-eslint": "^8.24.0"

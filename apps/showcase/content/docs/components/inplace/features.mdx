@@ -1,0 +1,41 @@
+---
+title: "Inplace"
+description: "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content."
+component: "inplace"
+---
+
+## Import
+
+```tsx
+import { Inplace } from 'primevue/inplace';
+```
+
+## Basic 
+
+_Inplace_ component requires _display_ and _content_ templates to define the content of each state.
+
+<DocComponentViewer name="inplace:basic-demo" />
+
+## Input
+
+The __closeCallback__ switches the state back to display mode when called from an event.
+
+<DocComponentViewer name="inplace:input-demo" />
+
+## Image
+
+Any content such as an image can be placed inside an Inplace.
+
+<DocComponentViewer name="inplace:image-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Inplace component defines _aria-live_ as "polite" by default, since any valid attribute is passed to the main container aria roles and attributes of the root element can be customized easily.
+
+### View Mode Keyboard Support
+
+| Key | Function |
+|-----|----------|
+| _enter_ | Switches to content. |

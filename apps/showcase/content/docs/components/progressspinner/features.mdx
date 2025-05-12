@@ -1,0 +1,37 @@
+---
+title: "ProgressSpinner"
+description: "ProgressSpinner is a process status indicator."
+component: "progressspinner"
+---
+
+## Import
+
+```tsx
+import { ProgressSpinner } from 'primereact/progressspinner';
+```
+
+## Basic
+
+Content to display is defined with the _value_ property or the default slot.
+
+<DocComponentViewer name="progressspinner:basic-demo" />
+
+## Custom
+
+ProgressSpinner can be customized with styling property like _style_, _strokeWidth_ _fill_ and _animationDuration_.
+
+<DocComponentViewer name="progressspinner:custom-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+ProgressSpinner components uses progressbar role. Value to describe the component can be defined using aria-labelledby and aria-label props.
+
+```tsx
+<ProgressSpinner aria-label="Loading" />
+```
+
+### Keyboard Support
+
+Component does not include any interactive elements.

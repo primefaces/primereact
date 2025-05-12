@@ -1,0 +1,51 @@
+---
+title: "Tag"
+description: "Tag component is used to categorize content."
+component: "tag"
+---
+
+## Import
+
+```tsx
+import { Tag } from 'primereact/tag';
+```
+
+## Basic
+
+Label of the tag is defined with the value property.
+
+<DocComponentViewer name="tag:basic-demo" />
+
+## Severity
+
+Severity defines the variant of a tag.
+
+<DocComponentViewer name="tag:severity-demo" />
+
+## Pill
+
+Enabling _rounded_, displays a tag as a pill.
+
+<DocComponentViewer name="tag:pill-demo" />
+
+## Icon
+
+A font icon next to the value can be displayed with the icon property.
+
+<DocComponentViewer name="tag:icon-demo" />
+
+## Template
+
+Children of the component are passed as the content for templating.
+
+<DocComponentViewer name="tag:template-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Tag does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the tags are dynamic, aria-live may be utilized as well. In case badges need to be tabbable, tabindex can be added to implement custom key handlers.
+
+### Keyboard Support
+
+Component does not include any interactive elements.
