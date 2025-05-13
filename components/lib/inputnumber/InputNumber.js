@@ -555,6 +555,11 @@ export const InputNumber = React.memo(
                     let char = event.key;
 
                     if (char) {
+                        // get decimal separator in current locale
+                        if (char === '.') {
+                            char = _decimalSeparator.current;
+                        }
+
                         const _isDecimalSign = isDecimalSign(char);
                         const _isMinusSign = isMinusSign(char);
 
