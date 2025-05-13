@@ -1,4 +1,3 @@
-import { getHighlighter } from '@shikijs/compat';
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 import fs from 'fs';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -8,10 +7,12 @@ import remarkGfm from 'remark-gfm';
 import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
 import { Store } from './__store__/index.mjs';
+import { getPTOptions, getStyleOptions, getTokenOptions } from './lib/utils/getComponentOptions';
+import { getTableOfContents } from './lib/utils/getTableOfContents';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
-    filePathPattern: 'docs/components/**/*.mdx',
+    filePathPattern: 'components/**/*.mdx',
     contentType: 'mdx',
     fields: {
         title: { type: 'string', required: true },
@@ -27,20 +28,36 @@ export const Docs = defineDocumentType(() => ({
         slug: {
             type: 'string',
             resolve: (doc) => {
-                return `/${doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath}`;
+                return `/docs/${doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath}`;
             }
         },
         componentSlug: {
             type: 'string',
             resolve: (doc) => {
-                return `${(doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath).split('/').slice(1).join('/')}`;
+                return `${doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath}`;
+            }
+        },
+        llm: {
+            type: 'string',
+            resolve: async (doc) => {
+                let content = doc.body.raw;
+                content = replaceComponentViewer(content);
+                content = replaceApiTable(content);
+                return content;
+            }
+        },
+        toc: {
+            type: 'list',
+            of: { type: 'object' },
+            resolve: (doc) => {
+                return getTableOfContents(doc.body.raw);
             }
         }
     }
 }));
 
 export default makeSource({
-    contentDirPath: './content',
+    contentDirPath: './docs',
     documentTypes: [Docs],
     mdx: {
         remarkPlugins: [remarkGfm, codeImport],
@@ -123,7 +140,6 @@ export default makeSource({
                 rehypePrettyCode,
                 {
                     theme: 'github-dark-default',
-                    getHighlighter,
                     onVisitLine(node) {
                         if (node.children.length === 0) {
                             node.children = [{ type: 'text', value: ' ' }];
@@ -171,4 +187,100 @@ export default makeSource({
 
 function getNodeAttributeByName(node, name) {
     return node.attributes?.find((attribute) => attribute.name === name);
+}
+
+function replaceComponentViewer(content) {
+    const matches = content.match(/<DocComponentViewer\s+name=\\?"([^"]+)\\?"[^>]*\/>/g);
+
+    if (!matches) return content;
+
+    for (const match of matches) {
+        try {
+            const nameMatch = match.match(/name=\\?"([^"]+)\\?"/);
+            if (!nameMatch) continue;
+
+            const [component, demo] = nameMatch[1].split(':');
+
+            if (!Store[component]?.[demo]) continue;
+
+            const filePath = Store[component][demo].filePath;
+            const source = fs.readFileSync(filePath, 'utf8');
+
+            content = content.replace(match, `\`\`\`tsx\n${source}\n\`\`\``);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    return content;
+}
+
+function replaceApiTable(content) {
+    const matches = content.match(/<DocApiTable\s+name=\\?"([^"]+)\\?"[^>]*\/>/g);
+
+    if (!matches) return content;
+
+    for (const match of matches) {
+        const nameMatch = match.match(/name=\\?"([^"]+)\\?"/);
+        const typeMatch = match.match(/type=\\?"([^"]+)\\?"/);
+        if (!nameMatch || !typeMatch) continue;
+
+        let data = [];
+        switch (typeMatch[1]) {
+            case 'token':
+                data = getTokenOptions(nameMatch[1]);
+                break;
+            case 'pt':
+                data = getPTOptions(nameMatch[1]);
+                break;
+            case 'style':
+                data = getStyleOptions(nameMatch[1]);
+                break;
+            default:
+                continue;
+        }
+
+        if (data[0]?.data) {
+            data = data[0].data;
+        }
+
+        if (!data.length) continue;
+
+        const headers = Object.keys(data[0]).filter((header) => !['readonly', 'optional', 'deprecated'].includes(header));
+
+        // Capitalize headers and create table header
+        let mdxTable = '| ' + headers.map((h) => h.charAt(0).toUpperCase() + h.slice(1)).join(' | ') + ' |\n';
+        mdxTable += '|:' + headers.map(() => '------').join('|:') + '|\n';
+
+        data.forEach((prop) => {
+            const row = headers.map((header) => {
+                let value = prop[header];
+
+                if (header === 'type') {
+                    value = value
+                        .split('|')
+                        .map((t) => t.trim())
+                        .join(' \\| ');
+                } else if (header === 'options') {
+                    if (Array.isArray(value)) {
+                        value = value.map((opt) => `${opt.name}: ${opt.type}`).join(', ');
+                    }
+                } else if (header === 'parameters') {
+                    if (value.name && value.type) {
+                        value = `${value.name}: ${value.type}`;
+                    }
+                } else if (header === 'default') {
+                    value = value === '' || value === undefined ? 'null' : value;
+                }
+
+                return (value || '').toString().replace(/\|/g, '\\|');
+            });
+
+            mdxTable += '| ' + row.join(' | ') + ' |\n';
+        });
+
+        content = content.replace(match, mdxTable);
+    }
+
+    return content;
 }
