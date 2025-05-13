@@ -3562,6 +3562,7 @@ export const Calendar = React.memo(
                     className: cx('dayLabel', { className }),
                     'aria-selected': selected,
                     'aria-disabled': !date.selectable,
+                    onMouseDown: (e) => e.preventDefault(),
                     onClick: (e) => onDateSelect(e, date),
                     onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex),
                     'data-p-highlight': selected,
