@@ -1,5 +1,6 @@
 import { CheckIcon } from '@primereact/icons';
 import { Avatar } from 'primereact/avatar';
+
 export default function IconDemo() {
     return (
         <div className="card">

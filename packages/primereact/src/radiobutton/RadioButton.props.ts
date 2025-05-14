@@ -1,5 +1,6 @@
 import * as HeadlessRadioButton from '@primereact/headless/radiobutton';
 import type { RadioButtonProps } from '@primereact/types/shared/radiobutton';
+
 export const defaultProps: RadioButtonProps = {
     ...HeadlessRadioButton.defaultProps,
     as: 'div',

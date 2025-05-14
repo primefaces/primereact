@@ -2741,4 +2741,5 @@ const o = {
         ]
     }
 };
+
 export default o; //# sourceMappingURL=index.mjs.map

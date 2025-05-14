@@ -1,7 +1,9 @@
 import { RadioButton } from 'primereact/radiobutton';
 import * as React from 'react';
+
 export default function GroupDemo() {
     const [ingredient, setIngredient] = React.useState();
+
     return (
         <div className="card flex items-center justify-center">
             <RadioButton.Group className="flex flex-wrap gap-4" value={ingredient} onValueChange={(e) => setIngredient(e.value)}>

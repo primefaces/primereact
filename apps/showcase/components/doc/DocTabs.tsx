@@ -13,6 +13,7 @@ const tabs = [
 const DocTabs = ({ componentName }: { componentName: string }) => {
     const pathname = usePathname();
     const tab = pathname.split('/')?.[4] ?? 'features';
+
     return (
         <ul className="doc-tabmenu">
             {tabs.map((doc, index) => (

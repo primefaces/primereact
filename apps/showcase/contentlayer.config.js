@@ -50,17 +50,22 @@ export default makeSource({
                 visit(tree, (node) => {
                     if (node.name === 'DocComponentViewer') {
                         const name = getNodeAttributeByName(node, 'name')?.value;
+
                         if (!name) {
                             return null;
                         }
 
                         let filePath;
+
                         if (name.includes(':')) {
                             const [component, demo] = name.split(':');
+
                             if (!Store[component]?.[demo]) return null;
+
                             filePath = Store[component][demo].filePath;
                         } else {
                             if (!Store[name]) return null;
+
                             filePath = Store[name].filePath;
                         }
 
@@ -68,6 +73,7 @@ export default makeSource({
 
                         try {
                             const source = fs.readFileSync(filePath, 'utf8');
+
                             node.children?.push(
                                 u('element', {
                                     tagName: 'pre',
@@ -91,6 +97,7 @@ export default makeSource({
                                 })
                             );
                         } catch (error) {
+                            // eslint-disable-next-line no-console
                             console.error(`Error reading file ${filePath}:`, error);
                         }
                     }
@@ -100,6 +107,7 @@ export default makeSource({
                 visit(tree, (node) => {
                     if (node?.type === 'element' && node?.tagName === 'pre') {
                         const [codeEl] = node.children;
+
                         if (codeEl.tagName !== 'code') {
                             return;
                         }
@@ -107,6 +115,7 @@ export default makeSource({
                         if (codeEl.data?.meta) {
                             const regex = /event="([^"]*)"/;
                             const match = codeEl.data?.meta.match(regex);
+
                             if (match) {
                                 node.__event__ = match ? match[1] : null;
                                 codeEl.data.meta = codeEl.data.meta.replace(regex, '');
@@ -143,7 +152,9 @@ export default makeSource({
                         if (!('data-rehype-pretty-code-figure' in node.properties)) {
                             return;
                         }
+
                         const preElement = node.children.at(-1);
+
                         if (preElement.tagName !== 'pre') {
                             return;
                         }

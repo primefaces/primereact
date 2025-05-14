@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 
 async function getDocFromParams({ slug }: { slug: string[] }) {
     const doc = allDocs.find((doc) => doc.componentSlug === slug.join('/'));
+
     if (!doc) {
         return null;
     }
@@ -52,6 +53,7 @@ async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {
     if (!doc) {
         notFound();
     }
+
     const toc = await getTableOfContents(doc.body.raw);
 
     return (

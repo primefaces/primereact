@@ -22,6 +22,7 @@ const DocApiTable = ({ name, type, ...props }: DocApiTableProps) => {
 
     const isLinkType = (value: string) => {
         if (value.includes('SharedPassThroughOption') || value.includes('PassThrough<')) return false;
+
         const validValues = ['confirmationoptions', 'toastmessageoptions'];
 
         return validValues.includes(value.toLowerCase());
@@ -31,7 +32,9 @@ const DocApiTable = ({ name, type, ...props }: DocApiTableProps) => {
         if (props.data) {
             return props.data;
         }
+
         if (!type || !name) return [];
+
         if (type === 'pt') {
             return getPTOptions(name);
         } else if (type === 'style') {
@@ -82,7 +85,7 @@ const DocApiTable = ({ name, type, ...props }: DocApiTableProps) => {
                                             {k === 'options' &&
                                                 v.map((val, valIndex) => (
                                                     <div key={'prop-options-' + valIndex} className="doc-option-type-options-container">
-                                                        {val.name}: <span className="doc-option-type-options doc-option-type">{val.type === 'T' || (val.type.includes('\<T') && !val.type.includes('\<Tr')) ? 'any' : val.type}</span>
+                                                        {val.name}: <span className="doc-option-type-options doc-option-type">{val.type === 'T' || (val.type.includes('\\<T') && !val.type.includes('\\<Tr')) ? 'any' : val.type}</span>
                                                     </div>
                                                 ))}
                                             {k === 'parameters' && (

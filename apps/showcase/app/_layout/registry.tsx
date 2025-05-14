@@ -14,7 +14,9 @@ export default function StyleRegistry({
 
     useServerInsertedHTML(() => {
         const styleElements = styledStyleSheet.getAllElements();
+
         styledStyleSheet.clear();
+
         return <>{styleElements}</>;
     });
 

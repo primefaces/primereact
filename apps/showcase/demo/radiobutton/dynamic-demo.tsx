@@ -1,6 +1,7 @@
 import { RadioButton } from 'primereact/radiobutton';
 import { RadioButtonGroup } from 'primereact/radiobutton/group';
 import * as React from 'react';
+
 export default function DynamicDemo() {
     const [ingredient, setIngredient] = React.useState();
     const categories = [
@@ -9,6 +10,7 @@ export default function DynamicDemo() {
         { name: 'Production', key: 'P' },
         { name: 'Research', key: 'R' }
     ];
+
     return (
         <div className="card flex items-center justify-center">
             <RadioButtonGroup className="flex flex-wrap gap-4" value={ingredient} onValueChange={(e) => setIngredient(e.value)}>

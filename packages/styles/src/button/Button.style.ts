@@ -30,7 +30,7 @@ const classes = {
     label: 'p-button-label'
 };
 
-export const styles = createStyles<any, any>({
+export const styles = createStyles({
     name: 'button',
     style,
     classes

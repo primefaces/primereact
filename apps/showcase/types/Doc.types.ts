@@ -8,9 +8,9 @@ export interface DocComponentProps {
             label: string;
             component: React.ComponentType;
         }[];
-        api?: any;
-        theming?: any;
-        pt?: any;
+        api?: unknown;
+        theming?: unknown;
+        pt?: unknown;
     };
     apiKeys?: string[];
 }

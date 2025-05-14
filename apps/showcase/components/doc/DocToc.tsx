@@ -8,6 +8,7 @@ function useActiveItem(itemIds: string[]) {
     const [activeId, setActiveId] = React.useState<string | null>(null);
     const [activeTop, setActiveTop] = React.useState<number>(0);
     const [activeHeight, setActiveHeight] = React.useState<number>(20);
+
     React.useEffect(() => {
         setActiveId(itemIds?.[0] ?? null);
     }, [itemIds]);
@@ -18,6 +19,7 @@ function useActiveItem(itemIds: string[]) {
                     if (entry.isIntersecting) {
                         setActiveId(entry.target.id);
                         const tocElement = document.getElementById('toc-' + entry.target.id);
+
                         if (tocElement) {
                             setActiveTop(tocElement.offsetTop - 1);
                             setActiveHeight(tocElement.offsetHeight + 2);
@@ -27,8 +29,10 @@ function useActiveItem(itemIds: string[]) {
             },
             { rootMargin: `0% 0% -80% 0%` }
         );
+
         itemIds?.forEach((id) => {
             const element = document.getElementById(id);
+
             if (element) {
                 observer.observe(element);
             }
@@ -37,18 +41,22 @@ function useActiveItem(itemIds: string[]) {
         return () => {
             itemIds?.forEach((id) => {
                 const element = document.getElementById(id);
+
                 if (element) {
                     observer.unobserve(element);
                 }
             });
         };
     }, [itemIds]);
+
     const onItemClick = (id: string) => {
         const element = document.getElementById(id);
+
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
             setActiveId(id);
             const tocElement = document.getElementById('toc-' + id);
+
             if (tocElement) {
                 setActiveTop(tocElement.offsetTop - 1);
                 setActiveHeight(tocElement.offsetHeight + 2);
@@ -98,9 +106,11 @@ export default function DocToc({ toc }: DocTocProps) {
         const getAllUrls = (items: TableOfContents['items'] = []): string[] => {
             return items.flatMap((item) => {
                 const urls = [item.url];
+
                 if (item.items?.length) {
                     urls.push(...getAllUrls(item.items));
                 }
+
                 return urls;
             });
         };

@@ -13,11 +13,14 @@ const DocComponentViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocCom
     const Codes = React.Children.toArray(children) as React.ReactElement[];
     const Component = useMemo(() => {
         const [component, demo] = name.split(':');
+
         return (Store as Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element> }>>)[component]?.[demo]?.component ?? null;
     }, [name]);
+
     const toggleExpanded = () => {
         setIsCodeExpanded(!isCodeExpanded);
     };
+
     return (
         <div {...props}>
             {Component && <Component />}
@@ -41,4 +44,5 @@ const DocComponentViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocCom
         </div>
     );
 };
+
 export default DocComponentViewer;
