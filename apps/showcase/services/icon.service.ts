@@ -1,4 +1,4 @@
-let icons = [];
+const icons = [];
 let selectedIcon = null;
 
 export const IconService = {

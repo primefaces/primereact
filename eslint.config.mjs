@@ -24,7 +24,7 @@ export default tseslint.config(
                 { blankLine: 'always', prev: '*', next: 'block' },
                 { blankLine: 'always', prev: 'block-like', next: '*' },
                 { blankLine: 'always', prev: '*', next: 'block-like' },
-                { blankLine: 'always', prev: ['import'], next: ['const', 'let', 'var'] },
+                { blankLine: 'always', prev: ['import'], next: ['const', 'let', 'var', 'export'] },
                 { blankLine: 'always', prev: 'if', next: '*' }
             ],
             '@typescript-eslint/no-empty-object-type': 'off'
