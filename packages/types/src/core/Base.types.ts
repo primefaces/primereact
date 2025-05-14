@@ -38,7 +38,7 @@ export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props,
     /**
      * The reference to the element.
      */
-    elementRef: React.Ref<ERef>;
+    elementRef: React.RefObject<ERef | null>;
     /**
      * The component id.
      */
