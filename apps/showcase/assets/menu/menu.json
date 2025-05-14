@@ -42,6 +42,10 @@
                             "to": "/docs/components/badge"
                         },
                         {
+                            "name": "BlockUI",
+                            "to": "/blockui"
+                        },
+                        {
                             "name": "Chip",
                             "to": "/docs/components/chip"
                         },
