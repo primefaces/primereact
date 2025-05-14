@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import { ChipInstance } from './Chip.types';
 
 /**
  * Defines passthrough(pt) options type in ChipRemoveIcon component.
@@ -39,7 +40,12 @@ export interface ChipRemoveIconState {}
 /**
  * Defines the methods and properties exposed by ChipRemoveIcon component.
  */
-export interface ChipRemoveIconExposes {}
+export interface ChipRemoveIconExposes {
+    /**
+     * The Chip component instance.
+     */
+    chip: ChipInstance | undefined | null;
+}
 
 /**
  * Instance of ChipRemoveIcon component.

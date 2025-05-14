@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import { MeterGroupInstance } from './MeterGroup.types';
 
 /**
  * Defines passthrough(pt) options type in MeterGroupText component.
@@ -39,7 +40,12 @@ export interface MeterGroupTextState {}
 /**
  * Defines the methods and properties exposed by MeterGroupText component.
  */
-export interface MeterGroupTextExposes {}
+export interface MeterGroupTextExposes {
+    /**
+     * The MeterGroup component instance.
+     */
+    metergroup: MeterGroupInstance | undefined | null;
+}
 
 /**
  * Instance of MeterGroupText component.

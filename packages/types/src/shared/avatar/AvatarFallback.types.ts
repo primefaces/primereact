@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import { AvatarInstance } from './Avatar.types';
 
 /**
  * Defines passthrough(pt) options type in AvatarFallback component.
@@ -39,7 +40,12 @@ export interface AvatarFallbackState {}
 /**
  * Defines the methods and properties exposed by AvatarFallback component.
  */
-export interface AvatarFallbackExposes {}
+export interface AvatarFallbackExposes {
+    /**
+     * The Avatar component instance.
+     */
+    avatar: AvatarInstance | undefined | null;
+}
 
 /**
  * Instance of AvatarFallback component.

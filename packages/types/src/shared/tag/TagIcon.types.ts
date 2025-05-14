@@ -41,7 +41,10 @@ export interface TagIconState {}
  * Defines the methods and properties exposed by TagIcon component.
  */
 export interface TagIconExposes {
-    tag: TagInstance | null;
+    /**
+     * The Tag component instance.
+     */
+    tag: TagInstance | undefined | null;
 }
 
 /**
