@@ -1,49 +1,64 @@
 import { withHeadless } from '@primereact/core/headless';
 import * as React from 'react';
 import { defaultProps } from './useAvatar.props';
+
 export const useAvatar = withHeadless({
-    setup: ({ props }) => {
-        const [onImageLoaded, setOnImageLoaded] = React.useState<boolean>(false);
+    name: 'useAvatar',
+    defaultProps,
+    setup({ props }) {
+        const [loadState, setLoadState] = React.useState<boolean>(false);
+        const imageRef = React.useRef<HTMLImageElement | null>(null);
 
         const state = {
-            onImageLoaded
+            load: loadState
         };
-
-        // element refs
 
         // methods
+        const onImageLoad = React.useCallback(() => {
+            setTimeout(() => {
+                setLoadState(true);
+            }, props.delayDuration ?? 0);
+        }, [props.delayDuration]);
 
-        const handleImageLoad = (src: string) => {
-            if (!src) {
-                setOnImageLoaded(false);
+        const onImageError = React.useCallback(() => {
+            setLoadState(false);
+        }, []);
 
-                return;
-            }
+        const handleImageLoad = React.useCallback(
+            (src?: string) => {
+                if (!src) {
+                    setLoadState(false);
 
-            const image = new window.Image();
+                    return;
+                }
 
-            image.src = src;
+                imageRef.current = new window.Image();
+                imageRef.current.src = src;
+                imageRef.current.addEventListener('load', onImageLoad);
+                imageRef.current.addEventListener('error', onImageError);
+            },
+            [imageRef, onImageLoad, onImageError]
+        );
 
-            image.onload = () => {
-                setTimeout(() => {
-                    setOnImageLoaded(true);
-                }, props.delayDuration ?? 0);
-            };
-
-            image.onerror = () => {
-                setOnImageLoaded(false);
-            };
-        };
+        const handleImageUnload = React.useCallback(() => {
+            setLoadState(false);
+            imageRef.current?.removeEventListener('load', onImageLoad);
+            imageRef.current?.removeEventListener('error', onImageError);
+            imageRef.current = null;
+        }, [onImageLoad, onImageError]);
 
         // effects
+        React.useEffect(() => {
+            return () => {
+                handleImageUnload();
+            };
+        }, []);
 
         return {
             state,
-            // element refs
-
             // methods
-            handleImageLoad
+            handleImageLoad,
+            handleImageUnload
         };
-    },
-    defaultProps
+    }
 });

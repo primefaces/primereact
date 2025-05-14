@@ -11,10 +11,8 @@ export default function InputDemo() {
                 <Inplace.Content>
                     <span className="inline-flex items-center gap-2">
                         <input autoFocus />
-                        <Inplace.Close>
-                            <button>
-                                <i className="pi pi-times"></i>
-                            </button>
+                        <Inplace.Close as="button" role="button">
+                            Close
                         </Inplace.Close>
                     </span>
                 </Inplace.Content>

@@ -1,4 +1,6 @@
-import { AvatarImageProps } from '@primereact/types/shared/avatar';
-export const defaultProps: AvatarImageProps = {
-    __TYPE: 'AvatarImage'
+import type { AvatarImageProps } from '@primereact/types/shared/avatar';
+
+export const defaultImageProps: AvatarImageProps = {
+    as: 'img',
+    src: undefined
 };

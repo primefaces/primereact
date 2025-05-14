@@ -8,13 +8,13 @@ export default function LabelDemo() {
                     <h5>Label</h5>
                     <div className="space-x-2">
                         <Avatar size="xlarge">
-                            <Avatar.Fallback label="P" />
+                            <Avatar.Fallback>P</Avatar.Fallback>
                         </Avatar>
                         <Avatar size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }}>
-                            <Avatar.Fallback label="V" />
+                            <Avatar.Fallback>V</Avatar.Fallback>
                         </Avatar>
                         <Avatar style={{ backgroundColor: '#dee9fc', color: '#1a2551' }}>
-                            <Avatar.Fallback label="U" />
+                            <Avatar.Fallback>U</Avatar.Fallback>
                         </Avatar>
                     </div>
                 </div>
@@ -23,13 +23,13 @@ export default function LabelDemo() {
                     <h5>Circle</h5>
                     <div className="space-x-2">
                         <Avatar size="xlarge" shape="circle">
-                            <Avatar.Fallback label="P" />
+                            <Avatar.Fallback>P</Avatar.Fallback>
                         </Avatar>
                         <Avatar size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }} shape="circle">
-                            <Avatar.Fallback label="V" />
+                            <Avatar.Fallback>V</Avatar.Fallback>
                         </Avatar>
                         <Avatar style={{ backgroundColor: '#dee9fc', color: '#1a2551' }} shape="circle">
-                            <Avatar.Fallback label="U" />
+                            <Avatar.Fallback>U</Avatar.Fallback>
                         </Avatar>
                     </div>
                 </div>

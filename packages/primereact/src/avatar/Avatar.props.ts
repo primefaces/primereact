@@ -1,10 +1,9 @@
+import * as HeadlessAvatar from '@primereact/headless/avatar';
 import type { AvatarProps } from '@primereact/types/shared/avatar';
 
 export const defaultProps: AvatarProps = {
-    __TYPE: 'Avatar',
+    ...HeadlessAvatar.defaultProps,
+    as: 'div',
     size: 'normal',
-    shape: 'square',
-    ariaLabel: undefined,
-    ariaLabelledby: undefined,
-    delayDuration: 0
+    shape: 'square'
 };

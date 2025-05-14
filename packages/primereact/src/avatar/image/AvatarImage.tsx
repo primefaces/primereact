@@ -2,29 +2,38 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './AvatarImage.props';
+import { useAvatarContext } from '../Avatar.context';
+import { defaultImageProps } from './AvatarImage.props';
 
 export const AvatarImage = withComponent({
-    defaultProps,
-    render: ({ props, attrs, ptmi, getParent }) => {
-        const avatar = getParent('Avatar');
+    name: 'AvatarImage',
+    defaultProps: defaultImageProps,
+    setup(instance) {
+        const { props } = instance;
+        const avatar = useAvatarContext();
 
         React.useLayoutEffect(() => {
-            avatar?.handleImageLoad?.(attrs.src);
+            avatar?.handleImageLoad?.(props.src);
 
             return () => {
-                avatar?.handleImageLoad?.(attrs.src);
+                avatar?.handleImageUnload?.();
             };
-        }, [attrs.src]);
+        }, [props.src]);
 
-        const imageProps = mergeProps(
+        return { avatar };
+    },
+    render(instance) {
+        const { props, ptmi, avatar } = instance;
+
+        const rootProps = mergeProps(
             {
+                src: props.src,
                 className: avatar?.cx('image')
             },
             avatar?.ptm('image'),
             ptmi('root')
         );
 
-        return avatar?.state.onImageLoaded ? <Component as={props.as || 'img'} {...imageProps} /> : null;
+        return <Component pIf={avatar?.state.load} instance={instance} as="img" attrs={rootProps} children={props.children} />;
     }
 });

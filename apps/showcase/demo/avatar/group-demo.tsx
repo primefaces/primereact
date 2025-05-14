@@ -25,7 +25,7 @@ export default function GroupDemo() {
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png" />
                 </Avatar>
                 <Avatar shape="circle">
-                    <Avatar.Fallback label="+2" className="" />
+                    <Avatar.Fallback className="">+2</Avatar.Fallback>
                 </Avatar>
             </Avatar.Group>
         </div>
