@@ -9367,6 +9367,22 @@
                             "description": "Property name or getter function to use as the value of an option, defaults to the option itself when not defined."
                         },
                         {
+                            "name": "panelClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Style class of the cascadeselect panel."
+                        },
+                        {
+                            "name": "panelStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties",
+                            "default": "",
+                            "description": "Inline style of the cascadeselect panel."
+                        },
+                        {
                             "name": "placeholder",
                             "optional": true,
                             "readonly": false,
