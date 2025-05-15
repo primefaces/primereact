@@ -18,6 +18,15 @@
                     ]
                 },
                 {
+                    "name": "Button",
+                    "children": [
+                        {
+                            "name": "Button",
+                            "to": "/docs/components/button"
+                        }
+                    ]
+                },
+                {
                     "name": "Panel",
                     "children": [
                         {

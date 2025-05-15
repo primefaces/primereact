@@ -49,6 +49,68 @@ export const Store = {
             filePath: 'demo/badge/size-demo.tsx'
         }
     },
+    button: {
+        'badge-demo': {
+            component: React.lazy(() => import('demo/button/badge-demo.tsx')),
+            filePath: 'demo/button/badge-demo.tsx'
+        },
+        'basic-demo': {
+            component: React.lazy(() => import('demo/button/basic-demo.tsx')),
+            filePath: 'demo/button/basic-demo.tsx'
+        },
+        'disabled-demo': {
+            component: React.lazy(() => import('demo/button/disabled-demo.tsx')),
+            filePath: 'demo/button/disabled-demo.tsx'
+        },
+        'group-demo': {
+            component: React.lazy(() => import('demo/button/group-demo.tsx')),
+            filePath: 'demo/button/group-demo.tsx'
+        },
+        'icon-demo': {
+            component: React.lazy(() => import('demo/button/icon-demo.tsx')),
+            filePath: 'demo/button/icon-demo.tsx'
+        },
+        'icon-only-demo': {
+            component: React.lazy(() => import('demo/button/icon-only-demo.tsx')),
+            filePath: 'demo/button/icon-only-demo.tsx'
+        },
+        'link-demo': {
+            component: React.lazy(() => import('demo/button/link-demo.tsx')),
+            filePath: 'demo/button/link-demo.tsx'
+        },
+        'loading-demo': {
+            component: React.lazy(() => import('demo/button/loading-demo.tsx')),
+            filePath: 'demo/button/loading-demo.tsx'
+        },
+        'outlined-demo': {
+            component: React.lazy(() => import('demo/button/outlined-demo.tsx')),
+            filePath: 'demo/button/outlined-demo.tsx'
+        },
+        'raised-demo': {
+            component: React.lazy(() => import('demo/button/raised-demo.tsx')),
+            filePath: 'demo/button/raised-demo.tsx'
+        },
+        'raised-text-demo': {
+            component: React.lazy(() => import('demo/button/raised-text-demo.tsx')),
+            filePath: 'demo/button/raised-text-demo.tsx'
+        },
+        'rounded-demo': {
+            component: React.lazy(() => import('demo/button/rounded-demo.tsx')),
+            filePath: 'demo/button/rounded-demo.tsx'
+        },
+        'severity-demo': {
+            component: React.lazy(() => import('demo/button/severity-demo.tsx')),
+            filePath: 'demo/button/severity-demo.tsx'
+        },
+        'size-demo': {
+            component: React.lazy(() => import('demo/button/size-demo.tsx')),
+            filePath: 'demo/button/size-demo.tsx'
+        },
+        'text-demo': {
+            component: React.lazy(() => import('demo/button/text-demo.tsx')),
+            filePath: 'demo/button/text-demo.tsx'
+        }
+    },
     chip: {
         'basic-demo': {
             component: React.lazy(() => import('demo/chip/basic-demo.tsx')),

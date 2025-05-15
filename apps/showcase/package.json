@@ -2,10 +2,12 @@
     "name": "showcase",
     "version": "11.0.0",
     "scripts": {
-        "dev": "npm run build:content && next dev --turbopack",
+        "dev": "npm run dev:init && next dev --turbopack",
+        "dev:init": "npm run build:store && npm run build:content",
         "scan": "npm run dev && react-scan localhost:3000",
         "build": "npm run build:content && next build",
         "build:content": "contentlayer2 build",
+        "build:store": "node scripts/generate-store.mjs",
         "start": "next start",
         "lint": "next lint"
     },
