@@ -513,7 +513,7 @@ export const Dropdown = React.memo(
                     hide();
                     resetFilter();
                     updateEditableLabel(selectedOption);
-                    
+
                     return;
                 }
 
