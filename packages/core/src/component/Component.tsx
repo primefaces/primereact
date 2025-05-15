@@ -7,8 +7,8 @@ export const Component = (inProps: ComponentProps = {}) => {
 
     if (pIf === false) return null;
 
-    const AsComponent = (instance?.props?.as || as) as React.ElementType;
-    const renderAsChild = instance?.props?.asChild || asChild;
+    const AsComponent = (as || instance?.props?.as) as React.ElementType;
+    const renderAsChild = asChild || instance?.props?.asChild;
 
     if (!renderAsChild && !AsComponent) return null;
 

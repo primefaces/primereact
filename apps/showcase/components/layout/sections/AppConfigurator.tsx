@@ -1,6 +1,5 @@
 import { useApp } from '@/hooks/useApp';
-import { usePrimeReact } from '@primereact/core/config';
-import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
+import { updatePreset, updateSurfacePalette } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Material from '@primeuix/themes/material';
@@ -15,12 +14,12 @@ const presets = {
     Nora
 };
 
-const presetOptions = [
+/*const presetOptions = [
     { label: 'Aura', value: 'Aura' },
     { label: 'Material', value: 'Material' },
     { label: 'Lara', value: 'Lara' },
     { label: 'Nora', value: 'Nora' }
-];
+];*/
 
 const surfaces = [
     {
@@ -59,10 +58,10 @@ const surfaces = [
 
 export default function AppConfigurator() {
     const app = useApp();
-    const primereact = usePrimeReact();
+    //const primereact = usePrimeReact();
 
-    const [isRTL, setIsRTL] = React.useState(false);
-    const rippleActive = primereact.config.ripple;
+    //const [isRTL, setIsRTL] = React.useState(false);
+    //const rippleActive = primereact.config.ripple;
     const selectedPrimaryColor = app.primary;
     const selectedSurfaceColor = app.surface;
     const primaryColors = React.useMemo(() => {
@@ -247,6 +246,7 @@ export default function AppConfigurator() {
             }
         }
     };
+
     const updateColors = (type, color) => {
         if (type === 'primary') {
             app.setPrimary(color.name);
@@ -256,6 +256,7 @@ export default function AppConfigurator() {
 
         applyTheme(type, color);
     };
+
     const applyTheme = (type, color) => {
         if (type === 'primary') {
             updatePreset(getPresetExt(color));
@@ -265,9 +266,11 @@ export default function AppConfigurator() {
 
         //EventBus.emit('theme-palette-change');
     };
-    const onRippleChange = (value) => {
+
+    /*const onRippleChange = (value) => {
         primereact.config.ripple = value;
     };
+
     const onPresetChange = (value) => {
         app.setPreset(value);
         const preset = presets[value];
@@ -275,6 +278,7 @@ export default function AppConfigurator() {
 
         $t().preset(preset).preset(getPresetExt()).surfacePalette(surfacePalette).use({ useDefaultOptions: true });
     };
+
     const onRTLChange = (value) => {
         if (!document.startViewTransition) {
             toggleRTL(value);
@@ -284,6 +288,7 @@ export default function AppConfigurator() {
 
         document.startViewTransition(() => toggleRTL(value));
     };
+
     const toggleRTL = (value) => {
         const htmlElement = document.documentElement;
 
@@ -292,7 +297,7 @@ export default function AppConfigurator() {
         } else {
             htmlElement.removeAttribute('dir');
         }
-    };
+    };*/
 
     return (
         <div className="config-panel hidden">

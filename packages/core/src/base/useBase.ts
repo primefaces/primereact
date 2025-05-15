@@ -14,7 +14,7 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
     const $attrSelector = useAttrSelector('pc_');
 
     const ref = React.useRef(inProps?.ref ?? null);
-    const elementRef = React.useRef<HTMLElement>(null);
+    const elementRef = React.useRef<HTMLElement | null>(null);
 
     const common = React.useMemo<CommonInstance<typeof props, IProps>>(
         () => ({
@@ -39,7 +39,7 @@ export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }
             $computedSetup,
             ...$computedSetup,
             ...common,
-            elementRef: ($computedSetup?.elementRef ?? elementRef) as React.RefObject<HTMLElement>
+            elementRef: ($computedSetup?.elementRef ?? elementRef) as React.RefObject<HTMLElement | null>
         }),
         [$computedSetup, common]
     );

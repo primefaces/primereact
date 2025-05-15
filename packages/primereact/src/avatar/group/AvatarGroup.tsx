@@ -1,24 +1,24 @@
 'use client';
 import { Component, withComponent } from '@primereact/core/component';
-import { styles } from '@primereact/styles/avatar';
+import { groupStyles } from '@primereact/styles/avatar';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './AvatarGroup.props';
+import { defaultGroupProps } from './AvatarGroup.props';
+
 export const AvatarGroup = withComponent({
-    defaultProps,
-    styles,
-    render: ({ props, ptmi, cx }) => {
+    name: 'AvatarGroup',
+    defaultProps: defaultGroupProps,
+    styles: groupStyles,
+    render(instance) {
+        const { props, ptmi, cx } = instance;
+
         const rootProps = mergeProps(
             {
-                className: cx('group')
+                className: cx('root')
             },
             ptmi('root')
         );
 
-        return (
-            <Component as={props.as || 'div'} {...rootProps}>
-                {props.children}
-            </Component>
-        );
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });

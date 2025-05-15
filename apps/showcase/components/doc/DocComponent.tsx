@@ -25,11 +25,11 @@ function ApiTab(props: DocComponentProps) {
     return <DocApiSection doc={props.docs?.api} header={props.header} />;
 }
 
-function ThemingTab(props: DocComponentProps) {
+function ThemingTab() {
     return <div>Theming</div>;
 }
 
-function PtTab(props: DocComponentProps) {
+function PtTab() {
     return <div>PT</div>;
 }
 

@@ -1,5 +1,6 @@
 import { CheckIcon } from '@primereact/icons';
 import { Avatar } from 'primereact/avatar';
+
 export default function GroupDemo() {
     return (
         <div className="card flex justify-center">
@@ -25,7 +26,7 @@ export default function GroupDemo() {
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png" />
                 </Avatar>
                 <Avatar shape="circle">
-                    <Avatar.Fallback label="+2" className="" />
+                    <Avatar.Fallback className="">+2</Avatar.Fallback>
                 </Avatar>
             </Avatar.Group>
         </div>

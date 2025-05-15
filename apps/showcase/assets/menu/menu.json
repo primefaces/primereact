@@ -9,7 +9,7 @@
                     "children": [
                         {
                             "name": "Checkbox",
-                            "to": "/checkbox"
+                            "to": "/docs/components/checkbox"
                         },
                         {
                             "name": "RadioButton",
@@ -18,11 +18,20 @@
                     ]
                 },
                 {
+                    "name": "Button",
+                    "children": [
+                        {
+                            "name": "Button",
+                            "to": "/docs/components/button"
+                        }
+                    ]
+                },
+                {
                     "name": "Panel",
                     "children": [
                         {
                             "name": "Panel",
-                            "to": "/panel"
+                            "to": "/docs/components/panel"
                         }
                     ]
                 },

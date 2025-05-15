@@ -1,13 +1,20 @@
+/**
+ *
+ * The useStyleClass manages the state and functionality of a StyleClass component.
+ *
+ * [Live Demo](https://www.primereact.org/styleclass/)
+ *
+ * @module usestyleclass
+ * @group headless
+ *
+ */
+import type { HeadlessInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
- * Props for the useStyleClass hook.
+ * Defines valid properties in useStyleClass.
  */
 export interface useStyleClassProps {
-    /**
-     * The type of the hook.
-     */
-    readonly __TYPE?: 'useStyleClass';
     /**
      * A React reference to DOM element that need to specify.
      */
@@ -46,7 +53,7 @@ export interface useStyleClassProps {
     hiddenClassName?: string | undefined;
     /**
      * Whether to trigger leave animation when outside of the element is clicked.
-     * @defaultValue false
+     * @default false
      */
     hideOnOutsideClick?: boolean | undefined;
     /**
@@ -54,3 +61,37 @@ export interface useStyleClassProps {
      */
     toggleClassName?: string | undefined;
 }
+
+/**
+ * Defines valid state in useStyleClass.
+ */
+export interface useStyleClassState {}
+
+/**
+ * Defines the methods and properties exposed by useStyleClass.
+ */
+export interface useStyleClassExposes {
+    /**
+     * The state of the useStyleClass.
+     */
+    state: useStyleClassState;
+    /**
+     * The target element.
+     */
+    targetRef: React.RefObject<React.ReactNode>;
+    /**
+     * The method to trigger the enter animation.
+     * @returns void
+     */
+    enter: () => void;
+    /**
+     * The method to trigger the leave animation.
+     * @returns void
+     */
+    leave: () => void;
+}
+
+/**
+ * Instance of useStyleClass headless.
+ */
+export type useStyleClassInstance = HeadlessInstance<useStyleClassProps, useStyleClassState, useStyleClassExposes>;

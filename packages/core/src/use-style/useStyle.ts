@@ -29,7 +29,10 @@ export function useStyle() {
     const load = React.useCallback(
         ({ name, css, element }) => {
             if (isNotEmpty(css)) {
-                !theme?.stylesheet?.has(name) && theme?.stylesheet?.add(name, css);
+                if (!theme?.stylesheet?.has(name)) {
+                    theme?.stylesheet?.add(name, css);
+                }
+
                 _load(name, css, element);
             }
         },

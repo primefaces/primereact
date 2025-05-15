@@ -35,7 +35,7 @@ export interface UseEventListenerOptions<T = keyof HTMLElementEventMap> {
  * 1. `bind` function is used to bind the event listener.
  * 2. `unbind` function is used to unbind the event listener.
  */
-export type UseEventListenerReturnType = [(options?: Partial<UseEventListenerOptions>) => void, () => void];
+export type UseEventListenerReturnType = [(options?: Partial<Omit<UseEventListenerOptions, 'target'>> & { target?: UseEventListenerOptions['target'] | Document | null }) => void, () => void];
 
 /**
  * Listens for the specified event type on the target element.
@@ -81,7 +81,7 @@ export function useEventListener({ target = 'document', type, listener, options,
     let prevListener = usePrevious(listener);
     let prevOptions = usePrevious(options);
 
-    const bind = (bindOptions: Partial<UseEventListenerOptions> = {}) => {
+    const bind = (bindOptions: Partial<Omit<UseEventListenerOptions, 'target'>> & { target?: UseEventListenerOptions['target'] | Document | null } = {}) => {
         const { target: bindTarget } = bindOptions;
 
         if (isNotEmpty(bindTarget)) {

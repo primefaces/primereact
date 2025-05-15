@@ -1,7 +1,6 @@
 import type { useStyleClassProps } from '@primereact/types/shared/styleclass';
 
 export const defaultProps: useStyleClassProps = {
-    __TYPE: 'useStyleClass',
     nodeRef: undefined,
     selector: undefined,
     enterFromClassName: undefined,

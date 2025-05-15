@@ -5,8 +5,7 @@ const classes = {
     root: ({ instance, props }) => [
         'p-button p-component',
         {
-            'p-button-icon-only': instance.hasIcon && !props.label && !props.badge,
-            'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
+            'p-button-icon-only': props.iconOnly,
             'p-button-loading': props.loading,
             'p-button-link': props.link || props.variant === 'link',
             [`p-button-${props.severity}`]: props.severity,
@@ -30,7 +29,7 @@ const classes = {
     label: 'p-button-label'
 };
 
-export const styles = createStyles<any, any>({
+export const styles = createStyles({
     name: 'button',
     style,
     classes

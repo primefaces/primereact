@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import { ProgressBarInstance } from './ProgressBar.types';
 
 /**
  * Defines passthrough(pt) options type in ProgressBarLabel component.
@@ -39,7 +40,12 @@ export interface ProgressBarLabelState {}
 /**
  * Defines the methods and properties exposed by ProgressBarLabel component.
  */
-export interface ProgressBarLabelExposes {}
+export interface ProgressBarLabelExposes {
+    /**
+     * The ProgressBar component instance.
+     */
+    progressbar: ProgressBarInstance | undefined | null;
+}
 
 /**
  * Instance of ProgressBarLabel component.

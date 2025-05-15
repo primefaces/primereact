@@ -7,7 +7,7 @@ import type { PassThroughProps } from './PassThrough.types';
 export const PassThroughContext = React.createContext(null);
 
 export const PassThroughProvider = (inProps: React.PropsWithChildren<PassThroughProps> = {}) => {
-    const { props, attrs } = useProps(inProps, defaultProps);
+    const { attrs } = useProps(inProps, defaultProps);
     const value = null;
 
     return <PassThroughContext.Provider value={value}>{resolve(attrs.children, value)}</PassThroughContext.Provider>;

@@ -1,7 +1,5 @@
-import DocSectionText from './DocSectionText';
-
-export default function DocSections(props: any) {
-    return props.docs.map((doc: any, index: number) => (
+export default function DocSections() {
+    /*return props.docs.map((doc: any, index: number) => (
         <section className="py-6" key={doc.label + '_' + index}>
             {doc.children ? (
                 <div id={doc.id}>
@@ -14,5 +12,5 @@ export default function DocSections(props: any) {
             ) : null}
             {doc.children && doc.children.map((comp: any) => <comp.component id={comp.id} label={comp.label} data={comp.data} badge={comp.badge} description={comp.description} level={2} />)}
         </section>
-    ));
+    ));*/
 }

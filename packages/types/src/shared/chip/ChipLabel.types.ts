@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import { ChipInstance } from './Chip.types';
 
 /**
  * Defines passthrough(pt) options type in ChipLabel component.
@@ -39,7 +40,12 @@ export interface ChipLabelState {}
 /**
  * Defines the methods and properties exposed by ChipLabel component.
  */
-export interface ChipLabelExposes {}
+export interface ChipLabelExposes {
+    /**
+     * The Chip component instance.
+     */
+    chip: ChipInstance | undefined | null;
+}
 
 /**
  * Instance of ChipLabel component.

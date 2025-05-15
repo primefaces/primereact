@@ -1,5 +1,6 @@
 import { CheckIcon } from '@primereact/icons';
 import { Avatar } from 'primereact/avatar';
+
 export default function IconDemo() {
     return (
         <div className="card">
@@ -7,7 +8,9 @@ export default function IconDemo() {
                 <div className="flex-auto">
                     <h5>Icon</h5>
                     <Avatar className="mr-2" size="xlarge">
-                        <Avatar.Fallback icon="pi pi-user" />
+                        <Avatar.Fallback>
+                            <i className="pi pi-user" />
+                        </Avatar.Fallback>
                     </Avatar>
                     <Avatar className="mr-2" size="large" style={{ backgroundColor: '#ece9fc', color: '#2a1261' }}>
                         <Avatar.Fallback icon="pi pi-user" />

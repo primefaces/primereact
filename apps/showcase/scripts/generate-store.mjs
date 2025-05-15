@@ -24,13 +24,16 @@ function createNestedObject(obj, path, value) {
 
     for (let i = 0; i < parts.length - 1; i++) {
         const part = parts[i];
+
         if (!current[part]) {
             current[part] = {};
         }
+
         current = current[part];
     }
 
     const lastPart = parts[parts.length - 1];
+
     current[lastPart] = value;
 }
 
@@ -102,6 +105,3 @@ if (!fs.existsSync(storeDir)) {
 }
 
 fs.writeFileSync(path.join(storeDir, 'index.mjs'), storeContent);
-
-console.log(`Store oluşturuldu: ${path.join(storeDir, 'index.mjs')}`);
-console.log(`Toplam ${demoFiles.length} demo dosyası işlendi.`);

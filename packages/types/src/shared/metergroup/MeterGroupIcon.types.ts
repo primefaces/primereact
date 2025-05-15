@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import { MeterGroupInstance } from './MeterGroup.types';
 
 /**
  * Defines passthrough(pt) options type in MeterGroupIcon component.
@@ -44,7 +45,12 @@ export interface MeterGroupIconState {}
 /**
  * Defines the methods and properties exposed by MeterGroupIcon component.
  */
-export interface MeterGroupIconExposes {}
+export interface MeterGroupIconExposes {
+    /**
+     * The MeterGroup component instance.
+     */
+    metergroup: MeterGroupInstance | undefined | null;
+}
 
 /**
  * Instance of MeterGroupIcon component.

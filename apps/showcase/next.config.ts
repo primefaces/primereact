@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 import { withContentlayer } from 'next-contentlayer2';
-import './scripts/generate-source.mjs';
+//import './scripts/generate-source.mjs';
 
 const nextConfig: NextConfig = {
     transpilePackages: ['primeicons']

@@ -3,29 +3,32 @@ import { useEventListener } from '@primereact/hooks/use-event-listener';
 import { useMountEffect } from '@primereact/hooks/use-mount-effect';
 import { useUnmountEffect } from '@primereact/hooks/use-unmount-effect';
 import { useUpdateEffect } from '@primereact/hooks/use-update-effect';
-import { addClass, hasClass, removeClass, toElement } from '@primeuix/utils';
+import { addClass, getTargetElement, hasClass, isVisible, removeClass, setAttribute, toElement } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './useStyleClass.props';
 
 export const useStyleClass = withHeadless({
-    setup: ({ props, elementRef }) => {
-        // element refs
-        const targetRef = React.useRef(null);
+    name: 'useStyleClass',
+    defaultProps,
+    setup({ props, elementRef }) {
         const animating = React.useRef(false);
+
+        // element refs
+        const targetRef = React.useRef<HTMLElement | null>(null);
 
         // events
         const [bindTargetEnterListener, unbindTargetEnterListener] = useEventListener({
             type: 'animationend',
-            listener: () => {
-                removeClass(targetRef.current, props.enterActiveClassName);
+            listener() {
+                removeClass(targetRef.current as Element, props.enterActiveClassName ?? '');
 
                 if (props.enterToClassName) {
-                    addClass(targetRef.current, props.enterToClassName);
+                    addClass(targetRef.current as Element, props.enterToClassName);
                 }
 
                 unbindTargetEnterListener();
 
-                if (props.enterActiveClassName?.includes('slidedown')) {
+                if (targetRef.current && props.enterActiveClassName?.includes('slidedown')) {
                     targetRef.current.style.maxHeight = '';
                 }
 
@@ -35,11 +38,11 @@ export const useStyleClass = withHeadless({
 
         const [bindTargetLeaveListener, unbindTargetLeaveListener] = useEventListener({
             type: 'animationend',
-            listener: () => {
-                removeClass(targetRef.current, props.leaveActiveClassName);
+            listener() {
+                removeClass(targetRef.current as Element, props.leaveActiveClassName ?? '');
 
                 if (props.leaveToClassName) {
-                    addClass(targetRef.current, props.leaveToClassName);
+                    addClass(targetRef.current as Element, props.leaveToClassName);
                 }
 
                 unbindTargetLeaveListener();
@@ -49,10 +52,10 @@ export const useStyleClass = withHeadless({
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
-            listener: (event) => {
-                if (!isVisible(targetRef.current) || getComputedStyle(targetRef.current).getPropertyValue('position') === 'static') {
+            listener(event) {
+                if (!isVisible(targetRef.current as HTMLElement) || getComputedStyle(targetRef.current as Element).getPropertyValue('position') === 'static') {
                     unbindDocumentClickListener();
-                } else if (isOutsideClick(event)) {
+                } else if (isOutsideClick(event as MouseEvent)) {
                     leave();
                 }
             },
@@ -61,8 +64,8 @@ export const useStyleClass = withHeadless({
 
         const [bindClickListener, unbindClickListener] = useEventListener({
             type: 'click',
-            listener: () => {
-                targetRef.current = resolveTarget();
+            listener() {
+                targetRef.current = resolveTarget() as HTMLElement;
 
                 if (props.toggleClassName) {
                     if (hasClass(targetRef.current, props.toggleClassName)) {
@@ -71,20 +74,26 @@ export const useStyleClass = withHeadless({
                         addClass(targetRef.current, props.toggleClassName);
                     }
                 } else {
-                    isVisible(targetRef.current) ? leave() : enter();
+                    if (isVisible(targetRef.current)) {
+                        leave();
+                    } else {
+                        enter();
+                    }
                 }
             }
         });
 
         // methods
-        const enter = () => {
+        const enter = React.useCallback(() => {
+            if (!targetRef.current) return;
+
             if (props.enterActiveClassName) {
                 if (!animating.current) {
                     animating.current = true;
 
                     if (props.enterActiveClassName.includes('slidedown')) {
                         targetRef.current.style.height = '0px';
-                        removeClass(targetRef.current, props.hiddenClassName || props.enterFromClassName);
+                        removeClass(targetRef.current, (props.hiddenClassName || props.enterFromClassName) ?? '');
                         targetRef.current.style.maxHeight = targetRef.current.scrollHeight + 'px';
                         addClass(targetRef.current, props.hiddenClassName || props.enterActiveClassName);
                         targetRef.current.style.height = '';
@@ -108,98 +117,78 @@ export const useStyleClass = withHeadless({
                 }
             }
 
-            bindDocumentClickListener({ target: elementRef.current && elementRef.current.ownerDocument });
-        };
+            bindDocumentClickListener({ target: elementRef.current?.ownerDocument });
+        }, [bindDocumentClickListener, bindTargetEnterListener, elementRef, props]);
 
-        const leave = () => {
+        const leave = React.useCallback(() => {
             if (props.leaveActiveClassName) {
                 if (!animating.current) {
                     animating.current = true;
-                    addClass(targetRef.current, props.leaveActiveClassName);
+                    addClass(targetRef.current as Element, props.leaveActiveClassName);
 
                     if (props.leaveFromClassName) {
-                        removeClass(targetRef.current, props.leaveFromClassName);
+                        removeClass(targetRef.current as Element, props.leaveFromClassName);
                     }
 
                     bindTargetLeaveListener({ target: targetRef.current });
                 }
             } else {
                 if (props.leaveFromClassName) {
-                    removeClass(targetRef.current, props.leaveFromClassName);
+                    removeClass(targetRef.current as Element, props.leaveFromClassName);
                 }
 
                 if (props.leaveToClassName) {
-                    addClass(targetRef.current, props.leaveToClassName);
+                    addClass(targetRef.current as Element, props.leaveToClassName);
                 }
             }
 
             if (props.hideOnOutsideClick) {
                 unbindDocumentClickListener();
             }
-        };
+        }, [bindTargetLeaveListener, props, unbindDocumentClickListener]);
 
-        const resolveTarget = () => {
-            if (targetRef.current) {
-                return targetRef.current;
-            }
+        const resolveTarget = React.useCallback(() => {
+            return targetRef.current || getTargetElement(props.selector, elementRef.current);
+        }, [elementRef, props.selector]);
 
-            switch (props.selector) {
-                case '@next':
-                    return elementRef.current && elementRef.current.nextElementSibling;
-
-                case '@prev':
-                    return elementRef.current && elementRef.current.previousElementSibling;
-
-                case '@parent':
-                    return elementRef.current && elementRef.current.parentElement;
-
-                case '@grandparent':
-                    return elementRef.current && elementRef.current.parentElement.parentElement;
-
-                default:
-                    return document.querySelector(props.selector);
-            }
-        };
-
-        const init = () => {
+        const init = React.useCallback(() => {
             Promise.resolve().then(() => {
-                // @todo: refactor useImperativeHandle method in useComponent
-                elementRef.current = toElement(props.nodeRef);
-                elementRef.current?.setAttribute('data-pd-styleclass', true);
+                if (props.nodeRef?.current) {
+                    elementRef.current = toElement(props.nodeRef) as HTMLElement;
+                }
+
+                setAttribute(elementRef.current, 'data-pd-styleclass', true);
                 bindClickListener({ target: elementRef.current });
             });
-        };
+        }, [bindClickListener, elementRef, props.nodeRef]);
 
-        const destroy = () => {
+        const destroy = React.useCallback(() => {
             unbindClickListener();
             unbindDocumentClickListener();
             targetRef.current = null;
-        };
+        }, []);
 
-        const isVisible = (target) => {
-            return target && target.offsetParent !== null;
-        };
+        const isOutsideClick = (event: MouseEvent) => {
+            const target = event?.target as Node;
 
-        const isOutsideClick = (event) => {
-            return !elementRef.current.isSameNode(event.target) && !elementRef.current.contains(event.target) && !targetRef.current.contains(event.target);
+            return !elementRef.current.isSameNode(target) && !elementRef.current.contains(target) && !targetRef.current?.contains(target);
         };
 
         // effects
         useMountEffect(() => {
-            bindClickListener({ target: elementRef.current });
-            //init();
+            init();
         });
 
         useUpdateEffect(() => {
-            //init();
+            init();
 
             return () => {
-                //unbindClickListener();
+                unbindClickListener();
             };
         });
 
         useUnmountEffect(() => {
-            //destroy();
+            destroy();
         });
 
         return {
@@ -209,6 +198,5 @@ export const useStyleClass = withHeadless({
             enter,
             leave
         };
-    },
-    defaultProps
+    }
 });

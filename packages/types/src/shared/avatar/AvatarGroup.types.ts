@@ -1,5 +1,47 @@
-import { BaseComponentProps } from '..';
+/**
+ *
+ * AvatarGroup is a component that displays a group of avatars, typically used to represent multiple users or items in a compact way.
+ *
+ * [Live Demo](https://www.primereact.org/avatar/)
+ *
+ * @module avatargroup
+ * @group components
+ *
+ */
+import type { ComponentInstance } from '@primereact/types/core';
+import type { BaseComponentProps, PassThroughOptionType } from '..';
 
-export interface AvatarGroupProps extends BaseComponentProps<null, 'div'> {
-    readonly __TYPE?: 'AvatarGroup';
+/**
+ * Defines passthrough(pt) options type in AvatarGroup component.
+ */
+export type AvatarGroupPassThroughOptionType<E> = PassThroughOptionType<AvatarGroupInstance, E>;
+
+/**
+ * Defines passthrough(pt) options of AvatarGroup component.
+ */
+export interface AvatarGroupPassThroughOptions {
+    /**
+     * Used to pass attributes to the root's DOM element.
+     */
+    root?: AvatarGroupPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
 }
+
+/**
+ * Defines valid properties in AvatarGroup component.
+ */
+export interface AvatarGroupProps extends BaseComponentProps {}
+
+/**
+ * Defines valid state in AvatarGroup component.
+ */
+export interface AvatarGroupState {}
+
+/**
+ * Defines the methods and properties exposed by AvatarGroup component.
+ */
+export interface AvatarGroupExposes {}
+
+/**
+ * Instance of AvatarGroup component.
+ */
+export type AvatarGroupInstance = ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes>;

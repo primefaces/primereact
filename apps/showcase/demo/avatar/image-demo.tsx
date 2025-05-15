@@ -1,4 +1,6 @@
 import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
+
 export default function ImageDemo() {
     return (
         <div className="card">
@@ -22,6 +24,18 @@ export default function ImageDemo() {
                     <Avatar className="p-overlay-badge" image="https://primefaces.org/cdn/primevue/images/organization/walter.jpg" size="xlarge" />
                 </OverlayBadge>
             </div> */}
+
+                <div className="flex-auto">
+                    <h5>Badge</h5>
+                    <Badge.Overlay className="inline-flex">
+                        <Avatar size="xlarge" shape="circle">
+                            <Avatar.Image src="https://primefaces.org/cdn/primevue/images/organization/walter.jpg" />
+                        </Avatar>
+                        <Badge severity="danger" circle>
+                            4
+                        </Badge>
+                    </Badge.Overlay>
+                </div>
 
                 <div className="flex-auto">
                     <h5>Gravatar</h5>

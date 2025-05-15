@@ -12,6 +12,7 @@ export default function DynamicDemo() {
 
                 if (newValue >= 100) {
                     clearInterval(interval.current);
+
                     return 100;
                 }
 
@@ -26,6 +27,7 @@ export default function DynamicDemo() {
             }
         };
     }, []);
+
     return (
         <div className="card">
             <ProgressBar value={value}>

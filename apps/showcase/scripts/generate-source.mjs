@@ -20,7 +20,7 @@ const OUTPUT_FILE = 'source.auto.ts';
 
 function extractCodeSections(content) {
     const sections = {};
-    let stack = [];
+    const stack = [];
     let currentCode = '';
 
     const regex = /{\s*\/\*\s*@code-section-(start|end):\s*([\w-]+)\s*\*\/\s*}\s*\n?/g;
@@ -44,6 +44,7 @@ function extractCodeSections(content) {
             currentCode = '';
         } else if (type === 'end' && stack.length > 0) {
             const section = stack.pop();
+
             if (section && section.name === name) {
                 sections[section.name] = (section.code + currentCode).trim();
                 currentCode = '';
@@ -78,6 +79,7 @@ async function generate(filePath) {
                         .trim()
                 }).map(async ([name, code]) => {
                     const formattedCode = await prettier.format(code, { ...prettierConfig, parser: 'babel-ts' });
+
                     return [name, formattedCode.replaceAll(/>;/g, '>')];
                 })
             )
@@ -92,6 +94,7 @@ export const source = ${JSON.stringify(source, null, 4)};
 
         await fs.writeFile(OUTPUT_PATH, sourceContent, 'utf8');
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(`\x1b[31m🛑${error}`, '\x1b[0m');
     }
 }
@@ -102,19 +105,19 @@ export function run() {
 
         watcher
             .on('add', async function (path) {
-                //console.info('✅File\x1b[32m', path, '\x1b[0m has been added');
+                // console.info('✅File\x1b[32m', path, '\x1b[0m has been added');
 
                 await generate(path);
             })
             .on('change', async function (path) {
-                //console.info('🔄File\x1b[34m', path, '\x1b[0m has been changed');
+                // console.info('🔄File\x1b[34m', path, '\x1b[0m has been changed');
 
                 await generate(path);
             })
-            .on('unlink', function (path) {
+            .on('unlink', function () {
                 //console.warn('🈁File\x1b[90m', path, '\x1b[0m has been removed');
             })
-            .on('error', function (error) {
+            .on('error', function () {
                 //console.error('⛔Error happened', error);
             });
     });

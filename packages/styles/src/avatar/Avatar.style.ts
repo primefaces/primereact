@@ -12,8 +12,7 @@ export const classes = {
         }
     ],
     label: 'p-avatar-label',
-    icon: 'p-avatar-icon',
-    group: 'p-avatar-group'
+    icon: 'p-avatar-icon'
 };
 
 export const styles = createStyles({
