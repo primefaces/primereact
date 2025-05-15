@@ -10,3 +10,4 @@ node_modules
 *.yml
 /tsconfig.json
 **/source.auto.ts
+**/__store__
