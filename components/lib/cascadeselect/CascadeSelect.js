@@ -415,7 +415,6 @@ export const CascadeSelect = React.memo(
         const panelProps = mergeProps(
             {
                 ref: overlayRef,
-                className: cx('panel'),
                 className: classNames(props.panelClassName, cx('panel')),
                 style: props.panelStyle,
                 onClick: (e) => onPanelClick(e)
