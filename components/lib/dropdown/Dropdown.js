@@ -496,13 +496,13 @@ export const Dropdown = React.memo(
         };
 
         const onEnterKey = (event) => {
+            event.preventDefault();
+
             if (!overlayVisibleState) {
                 setFocusedOptionIndex(-1);
                 onArrowDownKey(event);
             } else {
                 if (focusedOptionIndex === -1) {
-                    event.preventDefault();
-
                     return;
                 }
 
@@ -513,15 +513,12 @@ export const Dropdown = React.memo(
                     hide();
                     resetFilter();
                     updateEditableLabel(selectedOption);
-                    event.preventDefault();
-
+                    
                     return;
                 }
 
                 onOptionSelect(event, focusedOption);
             }
-
-            event.preventDefault();
         };
 
         const onEscapeKey = (event) => {
