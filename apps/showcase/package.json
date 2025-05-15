@@ -18,6 +18,8 @@
         "@shikijs/compat": "^2.5.0",
         "@types/unist": "^3.0.3",
         "contentlayer2": "0.5.8",
+        "gray-matter": "^4.0.3",
+        "hastscript": "^9.0.1",
         "mdast-util-toc": "^7.1.0",
         "next": "15.2.1",
         "next-contentlayer2": "0.5.8",
@@ -25,6 +27,7 @@
         "primereact": "workspace:*",
         "react": "^19",
         "react-dom": "^19",
+        "rehype-autolink-headings": "^7.1.0",
         "rehype-pretty-code": "^0.14.1",
         "rehype-slug": "^6.0.0",
         "remark": "^15.0.1",
@@ -33,11 +36,11 @@
         "remark-parse": "^11.0.0",
         "unified": "^11.0.5",
         "unist-builder": "^4.0.0",
-        "unist-util-visit": "^5.0.0",
-        "gray-matter": "^4.0.3"
+        "unist-util-visit": "^5.0.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@shikijs/rehype": "^3.4.0",
         "@tailwindcss/postcss": "^4",
         "@types/glob": "^8.1.0",
         "@types/mdast": "^4.0.4",

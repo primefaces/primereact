@@ -1,14 +1,15 @@
 import { DocMdx } from '@/components/doc/DocMdx';
 import DocTabs from '@/components/doc/DocTabs';
 import DocToc from '@/components/doc/DocToc';
-import { getTableOfContents } from '@/lib/utils/getTableOfContents';
+import { TableOfContents } from '@/lib/utils/getTableOfContents';
 import { allDocs } from 'contentlayer/generated';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 async function getDocFromParams({ slug }: { slug: string[] }) {
-    const doc = allDocs.find((doc) => doc.componentSlug === slug.join('/'));
-
+    const doc = allDocs.find((doc) => {
+        return doc.componentSlug === slug.join('/');
+    });
     if (!doc) {
         return null;
     }
@@ -54,8 +55,6 @@ async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {
         notFound();
     }
 
-    const toc = await getTableOfContents(doc.body.raw);
-
     return (
         <>
             {doc.component && <DocTabs componentName={doc.component} />}
@@ -65,7 +64,7 @@ async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {
                     <p>{doc.description}</p>
                     <DocMdx code={doc.body.code} />
                 </div>
-                <DocToc toc={toc} />
+                <DocToc toc={doc.toc as TableOfContents} />
             </div>
         </>
     );

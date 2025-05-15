@@ -1,17 +1,20 @@
-import { getHighlighter } from '@shikijs/compat';
+import rehypeShiki from '@shikijs/rehype';
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 import fs from 'fs';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { h } from 'hastscript';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { codeImport } from 'remark-code-import';
 import remarkGfm from 'remark-gfm';
 import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
 import { Store } from './__store__/index.mjs';
+import { getPTOptions, getStyleOptions, getTokenOptions } from './lib/utils/getComponentOptions';
+import { getTableOfContents } from './lib/utils/getTableOfContents';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
-    filePathPattern: 'docs/components/**/*.mdx',
+    filePathPattern: 'components/**/*.mdx',
     contentType: 'mdx',
     fields: {
         title: { type: 'string', required: true },
@@ -27,20 +30,36 @@ export const Docs = defineDocumentType(() => ({
         slug: {
             type: 'string',
             resolve: (doc) => {
-                return `/${doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath}`;
+                return `/docs/${doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath}`;
             }
         },
         componentSlug: {
             type: 'string',
             resolve: (doc) => {
-                return `${(doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath).split('/').slice(1).join('/')}`;
+                return `${doc._raw.flattenedPath.includes('features') ? doc._raw.sourceFileDir : doc._raw.flattenedPath}`;
+            }
+        },
+        llm: {
+            type: 'string',
+            resolve: async (doc) => {
+                let content = doc.body.raw;
+                content = replaceComponentViewer(content);
+                content = replaceApiTable(content);
+                return content;
+            }
+        },
+        toc: {
+            type: 'list',
+            of: { type: 'object' },
+            resolve: (doc) => {
+                return getTableOfContents(doc.body.raw);
             }
         }
     }
 }));
 
 export default makeSource({
-    contentDirPath: './content',
+    contentDirPath: './docs',
     documentTypes: [Docs],
     mdx: {
         remarkPlugins: [remarkGfm, codeImport],
@@ -50,22 +69,17 @@ export default makeSource({
                 visit(tree, (node) => {
                     if (node.name === 'DocComponentViewer') {
                         const name = getNodeAttributeByName(node, 'name')?.value;
-
                         if (!name) {
                             return null;
                         }
 
                         let filePath;
-
                         if (name.includes(':')) {
                             const [component, demo] = name.split(':');
-
                             if (!Store[component]?.[demo]) return null;
-
                             filePath = Store[component][demo].filePath;
                         } else {
                             if (!Store[name]) return null;
-
                             filePath = Store[name].filePath;
                         }
 
@@ -73,7 +87,6 @@ export default makeSource({
 
                         try {
                             const source = fs.readFileSync(filePath, 'utf8');
-
                             node.children?.push(
                                 u('element', {
                                     tagName: 'pre',
@@ -97,64 +110,62 @@ export default makeSource({
                                 })
                             );
                         } catch (error) {
-                            // eslint-disable-next-line no-console
                             console.error(`Error reading file ${filePath}:`, error);
                         }
                     }
                 });
             },
             () => (tree) => {
-                visit(tree, (node) => {
+                visit(tree, (node, index, parent) => {
                     if (node?.type === 'element' && node?.tagName === 'pre') {
                         const [codeEl] = node.children;
+                        if (!codeEl || codeEl.tagName !== 'code') return;
 
-                        if (codeEl.tagName !== 'code') {
-                            return;
-                        }
+                        const wrapper = u('element', {
+                            tagName: 'div',
+                            properties: {
+                                'data-rehype-shiki-code-wrapper': true
+                            },
+                            __rawString__: codeEl.children?.[0].value,
+                            __src__: node.properties?.__src__,
+                            __style__: node.properties?.__style__,
+                            children: [node]
+                        });
 
                         if (codeEl.data?.meta) {
                             const regex = /event="([^"]*)"/;
-                            const match = codeEl.data?.meta.match(regex);
-
+                            const match = codeEl.data.meta.match(regex);
                             if (match) {
-                                node.__event__ = match ? match[1] : null;
+                                wrapper.__event__ = match[1];
                                 codeEl.data.meta = codeEl.data.meta.replace(regex, '');
                             }
                         }
 
-                        node.__rawString__ = codeEl.children?.[0].value;
-                        node.__src__ = node.properties?.__src__;
-                        node.__style__ = node.properties?.__style__;
+                        if (parent) {
+                            parent.children[index] = wrapper;
+                        } else if (tree.children) {
+                            const treeIndex = tree.children.indexOf(node);
+                            if (treeIndex !== -1) {
+                                tree.children[treeIndex] = wrapper;
+                            }
+                        }
                     }
                 });
             },
             [
-                rehypePrettyCode,
+                rehypeShiki,
                 {
-                    theme: 'github-dark-default',
-                    getHighlighter,
-                    onVisitLine(node) {
-                        if (node.children.length === 0) {
-                            node.children = [{ type: 'text', value: ' ' }];
-                        }
-                    },
-                    onVisitHighlightedLine(node) {
-                        node.properties.className.push('line--highlighted');
-                    },
-                    onVisitHighlightedWord(node) {
-                        node.properties.className = ['word--highlighted'];
-                    }
+                    theme: 'github-dark-default'
                 }
             ],
             () => (tree) => {
                 visit(tree, (node) => {
-                    if (node?.type === 'element' && node?.tagName === 'figure') {
-                        if (!('data-rehype-pretty-code-figure' in node.properties)) {
+                    if (node?.type === 'element' && node?.tagName === 'div') {
+                        if (!('data-rehype-shiki-code-wrapper' in node.properties)) {
                             return;
                         }
 
-                        const preElement = node.children.at(-1);
-
+                        const preElement = node.children.at(-1).children.at(-1);
                         if (preElement.tagName !== 'pre') {
                             return;
                         }
@@ -162,24 +173,127 @@ export default makeSource({
                         preElement.properties['__withMeta__'] = node.children.at(0).tagName === 'div';
                         preElement.properties['__rawString__'] = node.__rawString__;
 
-                        if (node.__src__) {
+                        if (node.properties.__src__) {
                             preElement.properties['__src__'] = node.__src__;
                         }
 
-                        if (node.__event__) {
+                        if (node.properties.__event__) {
                             preElement.properties['__event__'] = node.__event__;
                         }
 
-                        if (node.__style__) {
+                        if (node.properties.__style__) {
                             preElement.properties['__style__'] = node.__style__;
                         }
                     }
                 });
-            }
+            },
+            [
+                rehypeAutolinkHeadings,
+                {
+                    behavior: 'append',
+                    content: () => h('span', { class: 'ml-4 opacity-0 group-hover:opacity-50 hover:opacity-100 transition-opacity duration-150' }, '#')
+                }
+            ]
         ]
     }
 });
 
 function getNodeAttributeByName(node, name) {
     return node.attributes?.find((attribute) => attribute.name === name);
+}
+
+function replaceComponentViewer(content) {
+    const matches = content.match(/<DocComponentViewer\s+name=\\?"([^"]+)\\?"[^>]*\/>/g);
+
+    if (!matches) return content;
+
+    for (const match of matches) {
+        try {
+            const nameMatch = match.match(/name=\\?"([^"]+)\\?"/);
+            if (!nameMatch) continue;
+
+            const [component, demo] = nameMatch[1].split(':');
+
+            if (!Store[component]?.[demo]) continue;
+
+            const filePath = Store[component][demo].filePath;
+            const source = fs.readFileSync(filePath, 'utf8');
+
+            content = content.replace(match, `\`\`\`tsx\n${source}\n\`\`\``);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    return content;
+}
+
+function replaceApiTable(content) {
+    const matches = content.match(/<DocApiTable\s+name=\\?"([^"]+)\\?"[^>]*\/>/g);
+
+    if (!matches) return content;
+
+    for (const match of matches) {
+        const nameMatch = match.match(/name=\\?"([^"]+)\\?"/);
+        const typeMatch = match.match(/type=\\?"([^"]+)\\?"/);
+        if (!nameMatch || !typeMatch) continue;
+
+        let data = [];
+        switch (typeMatch[1]) {
+            case 'token':
+                data = getTokenOptions(nameMatch[1]);
+                break;
+            case 'pt':
+                data = getPTOptions(nameMatch[1]);
+                break;
+            case 'style':
+                data = getStyleOptions(nameMatch[1]);
+                break;
+            default:
+                continue;
+        }
+
+        if (data[0]?.data) {
+            data = data[0].data;
+        }
+
+        if (!data.length) continue;
+
+        const headers = Object.keys(data[0]).filter((header) => !['readonly', 'optional', 'deprecated'].includes(header));
+
+        // Capitalize headers and create table header
+        let mdxTable = '| ' + headers.map((h) => h.charAt(0).toUpperCase() + h.slice(1)).join(' | ') + ' |\n';
+        mdxTable += '|:' + headers.map(() => '------').join('|:') + '|\n';
+
+        data.forEach((prop) => {
+            const row = headers.map((header) => {
+                let value = prop[header];
+
+                if (header === 'type') {
+                    value = value
+                        .split('|')
+                        .map((t) => t.trim())
+                        .join(' \\| ');
+                } else if (header === 'options') {
+                    if (Array.isArray(value)) {
+                        value = value.map((opt) => `${opt.name}: ${opt.type}`).join(', ');
+                    }
+                } else if (header === 'parameters') {
+                    if (value.name && value.type) {
+                        value = `${value.name}: ${value.type}`;
+                    }
+                } else if (header === 'default') {
+                    value = value === '' || value === undefined ? 'null' : value;
+                }
+
+                return (value || '').toString().replace(/\|/g, '\\|');
+            });
+
+            mdxTable += '| ' + row.join(' | ') + ' |\n';
+        });
+
+        content = content.replace(match, mdxTable);
+    }
+
+    return content;
 }
