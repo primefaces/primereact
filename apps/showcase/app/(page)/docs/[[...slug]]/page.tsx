@@ -10,6 +10,7 @@ async function getDocFromParams({ slug }: { slug: string[] }) {
     const doc = allDocs.find((doc) => {
         return doc.componentSlug === slug.join('/');
     });
+
     if (!doc) {
         return null;
     }
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export async function generateStaticParams() {
     return allDocs.map((doc) => ({
-        slug: doc.slug.split('/')
+        slug: doc.componentSlug.split('/')
     }));
 }
 

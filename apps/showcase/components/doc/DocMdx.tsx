@@ -8,7 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import DocApiTable from './DocApiTable';
-import DocCodeViewerConfig from './DocCodeViewerConfig';
+import DocCodeViewer from './DocCodeViewer';
+
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />,
     h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={cn('group font-heading mt-24 scroll-m-[8.5rem] text-2xl font-semibold first:mt-0', className)} {...props} />,
@@ -46,16 +47,7 @@ const components = {
     DocComponentViewer,
     DocPTViewer,
     DocApiTable,
-    pre: ({ className, children, __rawString__, ...props }: React.HTMLAttributes<HTMLPreElement> & { __rawString__?: string }) => {
-        return (
-            <div className="group/pre relative">
-                <pre className={cn('relative rounded-xl p-5 overflow-auto border border-surface-800 !bg-surface-950', className)} {...props}>
-                    {children}
-                </pre>
-                <DocCodeViewerConfig rawString={__rawString__} />
-            </div>
-        );
-    }
+    pre: DocCodeViewer
 };
 
 interface DocMdxProps {

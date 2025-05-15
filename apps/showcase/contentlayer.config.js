@@ -1,8 +1,8 @@
-import rehypeShiki from '@shikijs/rehype';
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 import fs from 'fs';
 import { h } from 'hastscript';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import { codeImport } from 'remark-code-import';
 import remarkGfm from 'remark-gfm';
@@ -43,8 +43,10 @@ export const Docs = defineDocumentType(() => ({
             type: 'string',
             resolve: async (doc) => {
                 let content = doc.body.raw;
+
                 content = replaceComponentViewer(content);
                 content = replaceApiTable(content);
+
                 return content;
             }
         },
@@ -69,17 +71,22 @@ export default makeSource({
                 visit(tree, (node) => {
                     if (node.name === 'DocComponentViewer') {
                         const name = getNodeAttributeByName(node, 'name')?.value;
+
                         if (!name) {
                             return null;
                         }
 
                         let filePath;
+
                         if (name.includes(':')) {
                             const [component, demo] = name.split(':');
+
                             if (!Store[component]?.[demo]) return null;
+
                             filePath = Store[component][demo].filePath;
                         } else {
                             if (!Store[name]) return null;
+
                             filePath = Store[name].filePath;
                         }
 
@@ -87,11 +94,13 @@ export default makeSource({
 
                         try {
                             const source = fs.readFileSync(filePath, 'utf8');
+
                             node.children?.push(
                                 u('element', {
                                     tagName: 'pre',
                                     properties: {
-                                        __src__: filePath
+                                        __src__: filePath,
+                                        __spec__: 'DocComponentViewer'
                                     },
                                     children: [
                                         u('element', {
@@ -116,72 +125,64 @@ export default makeSource({
                 });
             },
             () => (tree) => {
-                visit(tree, (node, index, parent) => {
+                visit(tree, (node) => {
                     if (node?.type === 'element' && node?.tagName === 'pre') {
                         const [codeEl] = node.children;
-                        if (!codeEl || codeEl.tagName !== 'code') return;
 
-                        const wrapper = u('element', {
-                            tagName: 'div',
-                            properties: {
-                                'data-rehype-shiki-code-wrapper': true
-                            },
-                            __rawString__: codeEl.children?.[0].value,
-                            __src__: node.properties?.__src__,
-                            __style__: node.properties?.__style__,
-                            children: [node]
-                        });
+                        if (codeEl.tagName !== 'code') {
+                            return;
+                        }
 
                         if (codeEl.data?.meta) {
+                            // Extract event from meta and pass it down the tree.
                             const regex = /event="([^"]*)"/;
-                            const match = codeEl.data.meta.match(regex);
+                            const match = codeEl.data?.meta.match(regex);
+
                             if (match) {
-                                wrapper.__event__ = match[1];
+                                node.__event__ = match ? match[1] : null;
                                 codeEl.data.meta = codeEl.data.meta.replace(regex, '');
                             }
                         }
 
-                        if (parent) {
-                            parent.children[index] = wrapper;
-                        } else if (tree.children) {
-                            const treeIndex = tree.children.indexOf(node);
-                            if (treeIndex !== -1) {
-                                tree.children[treeIndex] = wrapper;
-                            }
-                        }
+                        node.__rawString__ = codeEl.children?.[0].value;
+                        node.__src__ = node.properties?.__src__;
+                        node.__style__ = node.properties?.__style__;
+                        node.__spec__ = node.properties?.__spec__;
                     }
                 });
             },
             [
-                rehypeShiki,
+                rehypePrettyCode,
                 {
                     theme: 'github-dark-default'
                 }
             ],
             () => (tree) => {
                 visit(tree, (node) => {
-                    if (node?.type === 'element' && node?.tagName === 'div') {
-                        if (!('data-rehype-shiki-code-wrapper' in node.properties)) {
+                    if (node?.type === 'element' && node?.tagName === 'figure') {
+                        if (!('data-rehype-pretty-code-figure' in node.properties)) {
                             return;
                         }
 
-                        const preElement = node.children.at(-1).children.at(-1);
+                        const preElement = node.children.at(-1);
+
                         if (preElement.tagName !== 'pre') {
                             return;
                         }
 
                         preElement.properties['__withMeta__'] = node.children.at(0).tagName === 'div';
                         preElement.properties['__rawString__'] = node.__rawString__;
+                        preElement.properties['__spec__'] = node?.__spec__ ?? null;
 
-                        if (node.properties.__src__) {
+                        if (node.__src__) {
                             preElement.properties['__src__'] = node.__src__;
                         }
 
-                        if (node.properties.__event__) {
+                        if (node.__event__) {
                             preElement.properties['__event__'] = node.__event__;
                         }
 
-                        if (node.properties.__style__) {
+                        if (node.__style__) {
                             preElement.properties['__style__'] = node.__style__;
                         }
                     }
@@ -210,6 +211,7 @@ function replaceComponentViewer(content) {
     for (const match of matches) {
         try {
             const nameMatch = match.match(/name=\\?"([^"]+)\\?"/);
+
             if (!nameMatch) continue;
 
             const [component, demo] = nameMatch[1].split(':');
@@ -236,9 +238,11 @@ function replaceApiTable(content) {
     for (const match of matches) {
         const nameMatch = match.match(/name=\\?"([^"]+)\\?"/);
         const typeMatch = match.match(/type=\\?"([^"]+)\\?"/);
+
         if (!nameMatch || !typeMatch) continue;
 
         let data = [];
+
         switch (typeMatch[1]) {
             case 'token':
                 data = getTokenOptions(nameMatch[1]);
@@ -263,6 +267,7 @@ function replaceApiTable(content) {
 
         // Capitalize headers and create table header
         let mdxTable = '| ' + headers.map((h) => h.charAt(0).toUpperCase() + h.slice(1)).join(' | ') + ' |\n';
+
         mdxTable += '|:' + headers.map(() => '------').join('|:') + '|\n';
 
         data.forEach((prop) => {
