@@ -154,6 +154,8 @@ export const CascadeSelectBase = ComponentBase.extend({
         optionLabel: null,
         optionValue: null,
         options: null,
+        panelClassName: null,
+        panelStyle: null,
         placeholder: null,
         scrollHeight: '400px',
         style: null,
