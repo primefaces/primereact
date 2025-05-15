@@ -1,6 +1,8 @@
+import rehypeShiki from '@shikijs/rehype';
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 import fs from 'fs';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { h } from 'hastscript';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { codeImport } from 'remark-code-import';
 import remarkGfm from 'remark-gfm';
@@ -114,52 +116,56 @@ export default makeSource({
                 });
             },
             () => (tree) => {
-                visit(tree, (node) => {
+                visit(tree, (node, index, parent) => {
                     if (node?.type === 'element' && node?.tagName === 'pre') {
                         const [codeEl] = node.children;
-                        if (codeEl.tagName !== 'code') {
-                            return;
-                        }
+                        if (!codeEl || codeEl.tagName !== 'code') return;
+
+                        const wrapper = u('element', {
+                            tagName: 'div',
+                            properties: {
+                                'data-rehype-shiki-code-wrapper': true
+                            },
+                            __rawString__: codeEl.children?.[0].value,
+                            __src__: node.properties?.__src__,
+                            __style__: node.properties?.__style__,
+                            children: [node]
+                        });
 
                         if (codeEl.data?.meta) {
                             const regex = /event="([^"]*)"/;
-                            const match = codeEl.data?.meta.match(regex);
+                            const match = codeEl.data.meta.match(regex);
                             if (match) {
-                                node.__event__ = match ? match[1] : null;
+                                wrapper.__event__ = match[1];
                                 codeEl.data.meta = codeEl.data.meta.replace(regex, '');
                             }
                         }
 
-                        node.__rawString__ = codeEl.children?.[0].value;
-                        node.__src__ = node.properties?.__src__;
-                        node.__style__ = node.properties?.__style__;
+                        if (parent) {
+                            parent.children[index] = wrapper;
+                        } else if (tree.children) {
+                            const treeIndex = tree.children.indexOf(node);
+                            if (treeIndex !== -1) {
+                                tree.children[treeIndex] = wrapper;
+                            }
+                        }
                     }
                 });
             },
             [
-                rehypePrettyCode,
+                rehypeShiki,
                 {
-                    theme: 'github-dark-default',
-                    onVisitLine(node) {
-                        if (node.children.length === 0) {
-                            node.children = [{ type: 'text', value: ' ' }];
-                        }
-                    },
-                    onVisitHighlightedLine(node) {
-                        node.properties.className.push('line--highlighted');
-                    },
-                    onVisitHighlightedWord(node) {
-                        node.properties.className = ['word--highlighted'];
-                    }
+                    theme: 'github-dark-default'
                 }
             ],
             () => (tree) => {
                 visit(tree, (node) => {
-                    if (node?.type === 'element' && node?.tagName === 'figure') {
-                        if (!('data-rehype-pretty-code-figure' in node.properties)) {
+                    if (node?.type === 'element' && node?.tagName === 'div') {
+                        if (!('data-rehype-shiki-code-wrapper' in node.properties)) {
                             return;
                         }
-                        const preElement = node.children.at(-1);
+
+                        const preElement = node.children.at(-1).children.at(-1);
                         if (preElement.tagName !== 'pre') {
                             return;
                         }
@@ -167,20 +173,27 @@ export default makeSource({
                         preElement.properties['__withMeta__'] = node.children.at(0).tagName === 'div';
                         preElement.properties['__rawString__'] = node.__rawString__;
 
-                        if (node.__src__) {
+                        if (node.properties.__src__) {
                             preElement.properties['__src__'] = node.__src__;
                         }
 
-                        if (node.__event__) {
+                        if (node.properties.__event__) {
                             preElement.properties['__event__'] = node.__event__;
                         }
 
-                        if (node.__style__) {
+                        if (node.properties.__style__) {
                             preElement.properties['__style__'] = node.__style__;
                         }
                     }
                 });
-            }
+            },
+            [
+                rehypeAutolinkHeadings,
+                {
+                    behavior: 'append',
+                    content: () => h('span', { class: 'ml-4 opacity-0 group-hover:opacity-50 hover:opacity-100 transition-opacity duration-150' }, '#')
+                }
+            ]
         ]
     }
 });
