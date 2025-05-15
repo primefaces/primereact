@@ -336,6 +336,14 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Style class of the cascadeselect panel.
+     */
+    panelClassName?: string | undefined;
+    /**
+     * Inline style of the cascadeselect panel.
+     */
+    panelStyle?: React.CSSProperties | undefined;
 }
 
 /**

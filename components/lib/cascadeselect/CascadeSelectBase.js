@@ -160,7 +160,9 @@ export const CascadeSelectBase = ComponentBase.extend({
         tabIndex: null,
         transitionOptions: null,
         value: null,
-        children: undefined
+        children: undefined,
+        panelStyle: null,
+        panelClassName: null
     },
     css: {
         classes,
