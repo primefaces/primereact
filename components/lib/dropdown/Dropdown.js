@@ -496,16 +496,29 @@ export const Dropdown = React.memo(
         };
 
         const onEnterKey = (event) => {
+            event.preventDefault();
+
             if (!overlayVisibleState) {
                 setFocusedOptionIndex(-1);
                 onArrowDownKey(event);
             } else {
-                if (focusedOptionIndex !== -1) {
-                    onOptionSelect(event, visibleOptions[focusedOptionIndex]);
+                if (focusedOptionIndex === -1) {
+                    return;
                 }
-            }
 
-            event.preventDefault();
+                const focusedOption = visibleOptions[focusedOptionIndex];
+                const optionValue = getOptionValue(focusedOption);
+
+                if (optionValue == null || optionValue == undefined) {
+                    hide();
+                    resetFilter();
+                    updateEditableLabel(selectedOption);
+
+                    return;
+                }
+
+                onOptionSelect(event, focusedOption);
+            }
         };
 
         const onEscapeKey = (event) => {
