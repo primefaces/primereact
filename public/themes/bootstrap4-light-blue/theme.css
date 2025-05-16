@@ -1056,8 +1056,20 @@
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
     border-color: #007bff;
   }
+  .p-input-filled .p-dropdown {
+    background: #3f4b5b;
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled):hover {
+    background-color: #3f4b5b;
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
+    background-color: #3f4b5b;
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+    background-color: transparent;
+  }
   .p-dropdown.p-variant-filled {
-    background: #efefef;
+    background: #3f4b5b;
   }
   .p-dropdown.p-variant-filled:not(.p-disabled):hover {
     background-color: #efefef;

@@ -1073,6 +1073,18 @@
     box-shadow: none;
     border-color: #CE93D8;
   }
+  .p-input-filled .p-dropdown {
+    background: hsla(0, 0%, 100%, 0.06);
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled):hover {
+    background-color: hsla(0, 0%, 100%, 0.08);
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
+    background-color: hsla(0, 0%, 100%, 0.1);
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+    background-color: transparent;
+  }
   .p-dropdown.p-variant-filled {
     background: hsla(0, 0%, 100%, 0.06);
   }

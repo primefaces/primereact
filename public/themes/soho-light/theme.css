@@ -1072,6 +1072,18 @@
     box-shadow: 0 0 0 1px #c7bbfa;
     border-color: #7254f3;
   }
+  .p-input-filled .p-dropdown {
+    background: #f6f9fc;
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled):hover {
+    background-color: #f6f9fc;
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
+    background-color: #ffffff;
+  }
+  .p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+    background-color: transparent;
+  }
   .p-dropdown.p-variant-filled {
     background: #f6f9fc;
   }
