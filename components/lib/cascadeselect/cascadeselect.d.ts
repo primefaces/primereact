@@ -282,6 +282,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     scrollHeight?: string | undefined;
     /**
+     * When enabled, a clear icon is displayed to clear the value.
+     * @defaultValue false
+     */
+    showClear?: boolean;
+    /**
      * Display loading icon.
      * @defaultValue false
      */

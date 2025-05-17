@@ -25,6 +25,7 @@ const classes = {
             'p-cascadeselect-item-active p-highlight': isSelected
         }),
     dropdownIcon: 'p-cascadeselect-trigger-icon',
+    clearIcon: 'p-cascadeselect-clear-icon p-clickable',
     loadingIcon: 'p-cascadeselect-trigger-icon',
     dropdownButton: 'p-cascadeselect-trigger',
     loadingButton: 'p-cascadeselect-trigger',
@@ -118,6 +119,12 @@ const styles = `
         display: block;
         left: 100%;
         top: 0;
+    }
+    .p-cascadeselect-clear-icon {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5rem;
+        right: 3rem;
     }
 }
 `;
