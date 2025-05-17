@@ -12,6 +12,7 @@ import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
+import { Tooltip } from '../tooltip/Tooltip';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -41,6 +42,7 @@ export const FileUpload = React.memo(
         const fileInputRef = React.useRef(null);
         const messagesRef = React.useRef(null);
         const contentRef = React.useRef(null);
+        const fileNameRef = React.useRef(null);
         const uploadedFileCount = React.useRef(0);
         const hasFiles = ObjectUtils.isNotEmpty(filesState);
         const hasUploadedFiles = ObjectUtils.isNotEmpty(uploadedFilesState);
@@ -423,6 +425,12 @@ export const FileUpload = React.memo(
             }
         };
 
+        const truncateFilename = (filename) => {
+            const maxLength = props.filenameTruncateLength;
+
+            return filename.length > maxLength ? `${filename.substring(0, maxLength / 2)}...${filename.substring(filename.length - maxLength / 2)}` : filename;
+        };
+
         const createFile = (file, index, badgeOptions) => {
             const key = file.name + file.type + file.size;
             const thumbnailProps = mergeProps(
@@ -439,19 +447,27 @@ export const FileUpload = React.memo(
             const fileSizeProps = mergeProps(ptm('fileSize'));
             const fileNameProps = mergeProps(
                 {
-                    className: cx('fileName')
+                    className: cx('fileName'),
+                    ref: fileNameRef,
+                    style: {
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        maxWidth: '100%'
+                    }
                 },
                 ptm('fileName')
             );
             const actionsProps = mergeProps(ptm('actions'));
-            const fileName = <div {...fileNameProps}>{file.name}</div>;
+            const fileName = <div {...fileNameProps}>{truncateFilename(file.name)}</div>;
             const size = <div {...fileSizeProps}>{formatSize(file.size)}</div>;
 
             const contentBody = (
                 <div {...detailsProps}>
-                    <div {...fileNameProps}> {file.name}</div>
+                    <div {...fileNameProps}> {truncateFilename(file.name)}</div>
                     <span {...fileSizeProps}>{formatSize(file.size)}</span>
                     <Badge className="p-fileupload-file-badge" value={badgeOptions.value} severity={badgeOptions.severity} pt={ptm('badge')} __parentMetadata={{ parent: metaData }} />
+                    <Tooltip target={fileNameRef} content={file.name} pt={ptm('tooltip')} />
                 </div>
             );
             const removeButton = (
@@ -685,12 +701,22 @@ export const FileUpload = React.memo(
             const chooseOptions = props.chooseOptions;
             const labelProps = mergeProps(
                 {
-                    className: cx('label')
+                    className: cx('label'),
+                    ref: fileNameRef,
+                    style: hasFiles
+                        ? {
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              whiteSpace: 'nowrap',
+                              maxWidth: '100%'
+                          }
+                        : undefined
                 },
                 ptm('label')
             );
             const chooseLabel = chooseOptions.iconOnly ? <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span {...labelProps}>{chooseButtonLabel}</span>;
-            const label = props.auto ? chooseLabel : <span {...labelProps}>{hasFiles ? props.selectedFileLabel || filesState[0].name : chooseLabel}</span>;
+            const label = props.auto ? chooseLabel : <span {...labelProps}>{hasFiles ? truncateFilename(props.selectedFileLabel || filesState[0].name) : chooseLabel}</span>;
+            const tooltip = hasFiles ? <Tooltip target={fileNameRef} content={filesState[0].name} pt={ptm('tooltip')} /> : null;
             const chooseIconProps = mergeProps(
                 {
                     className: cx('chooseIcon', { iconOnly: chooseOptions.iconOnly })
@@ -741,6 +767,7 @@ export const FileUpload = React.memo(
                         {chooseIcon}
                         {label}
                         {input}
+                        {tooltip}
                         <Ripple />
                     </span>
                 </div>
