@@ -9415,6 +9415,14 @@
                             "description": "Maximum height of the options panel on responsive mode."
                         },
                         {
+                            "name": "showClear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, a clear icon is displayed to clear the value."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,

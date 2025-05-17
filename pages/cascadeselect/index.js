@@ -1,5 +1,6 @@
 import { AccessibilityDoc } from '@/components/doc/cascadeselect/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/cascadeselect/basicdoc';
+import { ClearIconDoc } from '@/components/doc/cascadeselect/clearicondoc';
 import { DisabledDoc } from '@/components/doc/cascadeselect/disableddoc';
 import { FilledDoc } from '@/components/doc/cascadeselect/filleddoc';
 import { FloatLabelDoc } from '@/components/doc/cascadeselect/floatlabeldoc';
@@ -34,6 +35,11 @@ const CascadeSelectDemo = () => {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
+        },
+        {
+            id: 'clearicon',
+            label: 'Clear Icon',
+            component: ClearIconDoc
         },
         {
             id: 'floatlabel',
