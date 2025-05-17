@@ -125,8 +125,9 @@ export const FileUpload = React.memo(
 
             for (let i = 0; i < selectedFiles.length; i++) {
                 let file = selectedFiles[i];
-
-                if (!isFileSelected(file) && validate(file)) {
+                const shouldAddFile = props.multiple ? !isFileSelected(file) && validate(file) : validate(file);
+                
+                if (shouldAddFile) {
                     file.objectURL = window.URL.createObjectURL(file);
 
                     currentFiles.push(file);
