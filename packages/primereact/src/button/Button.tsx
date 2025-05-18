@@ -40,9 +40,7 @@ export const Button = withComponent({
 
         return (
             <ButtonProvider value={instance}>
-                <Component instance={instance} attrs={rootProps}>
-                    {props.children}
-                </Component>
+                <Component instance={instance} attrs={rootProps} children={props.children} />
             </ButtonProvider>
         );
     },

@@ -8,6 +8,10 @@
                     "name": "Form",
                     "children": [
                         {
+                            "name": "InputText",
+                            "to": "/docs/components/inputtext"
+                        },
+                        {
                             "name": "Checkbox",
                             "to": "/docs/components/checkbox"
                         },
