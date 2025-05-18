@@ -13,22 +13,20 @@ export const useComponent = <IProps, DProps, Exposes extends Record<PropertyKey,
         setup: options.setup
     } as useBaseOptions<IProps & { id?: string; ref?: React.Ref<unknown> }, typeof defaultProps, Exposes>);
 
-    const { ref, props, state } = baseInstance;
+    const { ref, props } = baseInstance;
     const $params = React.useMemo(() => {
-        const { props, attrs, state } = baseInstance || {};
-
         return {
             instance: baseInstance,
-            props,
-            attrs,
-            state
+            props: baseInstance.props,
+            attrs: baseInstance.attrs,
+            state: baseInstance.state
         };
-    }, [baseInstance, state]);
+    }, [baseInstance.props, baseInstance.attrs, baseInstance.state]);
 
     const ptx = useComponentPT(baseInstance, $params);
     const stx = useComponentStyle(baseInstance, props.styles || options.styles, $params);
 
-    const instance = React.useMemo<InComponentInstance<typeof props, IProps, typeof state, Exposes>>(
+    const instance = React.useMemo<InComponentInstance<typeof props, IProps, typeof baseInstance.state, Exposes>>(
         () => ({
             ...baseInstance,
             ...ptx,
@@ -37,7 +35,7 @@ export const useComponent = <IProps, DProps, Exposes extends Record<PropertyKey,
         [baseInstance, ptx, stx]
     );
 
-    React.useImperativeHandle(ref as React.Ref<InComponentInstance<typeof props, IProps, typeof state, Exposes>>, () => instance, [instance]);
+    React.useImperativeHandle(ref as React.Ref<InComponentInstance<typeof props, IProps, typeof baseInstance.state, Exposes>>, () => instance, [instance]);
 
     return instance;
 };
