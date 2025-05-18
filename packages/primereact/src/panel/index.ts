@@ -1,3 +1,4 @@
+'use client';
 export * from './Panel';
 export * from './Panel.context';
 export * from './Panel.props';

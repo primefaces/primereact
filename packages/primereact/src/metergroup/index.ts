@@ -1,3 +1,4 @@
+'use client';
 export * from './MeterGroup';
 export * from './MeterGroup.context';
 export * from './MeterGroup.props';

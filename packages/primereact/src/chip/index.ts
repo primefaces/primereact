@@ -1,3 +1,4 @@
+'use client';
 export * from './Chip';
 export * from './Chip.context';
 export * from './Chip.props';

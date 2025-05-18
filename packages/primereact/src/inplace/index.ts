@@ -1,3 +1,4 @@
+'use client';
 export * from './Inplace';
 export * from './Inplace.context';
 export * from './Inplace.props';
