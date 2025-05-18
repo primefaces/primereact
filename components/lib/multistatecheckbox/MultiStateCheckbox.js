@@ -170,6 +170,7 @@ export const MultiStateCheckbox = React.memo(
 
         const checkboxProps = mergeProps(
             {
+                id: props.id,
                 className: classNames(props.className),
                 style: sx('checkbox', { selectedOption }),
                 tabIndex: props.tabIndex,
