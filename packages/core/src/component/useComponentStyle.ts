@@ -88,8 +88,10 @@ export const useComponentStyle = <Props extends GlobalComponentProps, IProps, Pa
     };*/
 
     const _themeChangeListener = React.useCallback((callback = () => {}) => {
-        StyleRegistry.clearLoadedStyleNames();
-        ThemeService.on('theme:change', callback);
+        if (!StyleRegistry.isStyleNameLoaded('base')) {
+            //StyleRegistry.clearLoadedStyleNames();
+            ThemeService.on('theme:change', callback);
+        }
     }, []);
 
     /*const _removeThemeListeners = () => {
@@ -123,8 +125,8 @@ export const useComponentStyle = <Props extends GlobalComponentProps, IProps, Pa
     // effects
     if (!$isUnstyled) {
         // @todo - remove
-        Theme.clearLoadedStyleNames();
-        StyleRegistry.clearLoadedStyleNames();
+        //Theme.clearLoadedStyleNames();
+        //StyleRegistry.clearLoadedStyleNames();
         _loadCoreStyles();
         _loadStyles();
     }
