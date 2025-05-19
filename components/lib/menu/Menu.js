@@ -421,6 +421,7 @@ export const Menu = React.memo(
                 {
                     id: key,
                     className: classNames(item.className, cx('menuitem', { focused: focusedOptionIndex === key })),
+                    onClick: (event) => onItemClick(event, item, key),
                     style: sx('menuitem', { item }),
                     role: 'menuitem',
                     'aria-label': item.label,
