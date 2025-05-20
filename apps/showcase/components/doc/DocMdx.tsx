@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 import DocComponentViewer from '@/components/doc/DocComponentViewer';
 import DocPTViewer from '@/components/doc/DocPTViewer';
@@ -7,8 +6,8 @@ import { useMDXComponent } from 'next-contentlayer2/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
-import DocApiTable from './DocApiTable';
 import DocCodeViewer from './DocCodeViewer';
+import DocTable from './DocTable';
 
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />,
@@ -24,10 +23,7 @@ const components = {
     ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => <ol className={cn('my-6 ml-6 list-decimal', className)} {...props} />,
     li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <li className={cn('mt-2', className)} {...props} />,
     blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <blockquote className={cn('mt-6 border-l-2 pl-6 italic', className)} {...props} />,
-    img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img className={cn('rounded-md', className)} alt={alt} {...props} />
-    ),
+    img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => <img className={cn('rounded-md', className)} alt={alt} {...props} />,
     hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => <hr className="my-4 md:my-8" {...props} />,
     table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
         <div className="mb-6 overflow-auto">
@@ -46,7 +42,7 @@ const components = {
     em: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <em className={cn('relative rounded-md bg-[var(--mark-background)] font-semibold text-[var(--mark-text)] not-italic py-0.5 px-1.5 text-base', className)} {...props} />,
     DocComponentViewer,
     DocPTViewer,
-    DocApiTable,
+    DocTable,
     pre: DocCodeViewer
 };
 

@@ -240,6 +240,10 @@ export const Store = {
             'component': React.lazy(() => import('demo/radiobutton/invalid-demo.tsx')),
             'filePath': 'demo/radiobutton/invalid-demo.tsx',
         },
+        'radiobutton-pt': {
+            'component': React.lazy(() => import('demo/radiobutton/radiobutton-pt.tsx')),
+            'filePath': 'demo/radiobutton/radiobutton-pt.tsx',
+        },
         'sizes-demo': {
             'component': React.lazy(() => import('demo/radiobutton/sizes-demo.tsx')),
             'filePath': 'demo/radiobutton/sizes-demo.tsx',

@@ -8,6 +8,7 @@
         "build": "npm run build:content && next build",
         "build:content": "contentlayer2 build",
         "build:store": "node scripts/generate-store.mjs",
+        "build:apidoc": "node ./scripts/build-apidoc.mjs",
         "start": "next start",
         "lint": "next lint"
     },
@@ -55,6 +56,7 @@
         "tailwind-merge": "^3.0.2",
         "tailwindcss": "^4",
         "tailwindcss-primeui": "catalog:",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.2",
+        "typedoc": "0.28.4"
     }
 }

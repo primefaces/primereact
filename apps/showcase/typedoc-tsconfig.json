@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "ES2017",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "esModuleInterop": true,
+        "skipLibCheck": true
+    },
+    "include": ["../../packages/types/src/shared/**/*.ts", "../../packages/types/src/core/**/*.ts"],
+    "exclude": ["node_modules/**/*", "**/*.spec.ts", "**/*.test.ts", "**/*.d.ts", "../../packages/types/src/!(shared|core)/**/*"]
+}

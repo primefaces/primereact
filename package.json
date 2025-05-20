@@ -29,7 +29,7 @@
         "build:metadata": "pnpm --filter metadata build",
         "build:lib": "pnpm --filter primereact build",
         "build:showcase": "pnpm --filter showcase build",
-        "build:apidoc": "pnpm --filter showcase build:docs",
+        "build:apidoc": "pnpm --filter showcase build:apidoc",
         "dev": "pnpm --filter showcase dev",
         "dev:scan": "pnpm --filter showcase scan",
         "type:check": "pnpm --filter './packages/*' typecheck",
