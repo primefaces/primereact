@@ -421,8 +421,7 @@
                         },
                         {
                             "name": "MeterGroup",
-                            "to": "/metergroup",
-                            "badge": "NEW"
+                            "to": "/metergroup"
                         },
                         {
                             "name": "ScrollTop",
@@ -508,8 +507,7 @@
         {
             "name": "Figma UI Kit",
             "icon": "pi pi-pencil",
-            "to": "/uikit",
-            "badge": "NEW"
+            "to": "/uikit"
         },
         {
             "name": "Icons",
@@ -635,9 +633,10 @@
             "to": "/templates"
         },
         {
-            "name": "PrimeBlocks",
+            "name": "New PrimeBlocks",
             "icon": "pi pi-server",
-            "href": "https://blocks.primereact.org"
+            "href": "https://primeblocks.org",
+            "badge": "Soon"
         },
         {
             "name": "PrimeFlex CSS",
@@ -685,8 +684,7 @@
         {
             "name": "Contribution",
             "to": "/contribution",
-            "icon": "pi pi-users",
-            "badge": "NEW"
+            "icon": "pi pi-users"
         },
         {
             "name": "Discover",

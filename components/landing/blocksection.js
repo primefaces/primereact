@@ -1,5 +1,6 @@
 import { classNames } from '@/components/lib/utils/ClassNames';
 import { useEffect, useState } from 'react';
+import { Tag } from '@/components/lib/tag/Tag';
 
 const BlockSection = () => {
     const [animation, setAnimation] = useState(false);
@@ -10,10 +11,13 @@ const BlockSection = () => {
 
     return (
         <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
-            <div className="section-header">PrimeBlocks</div>
-            <p className="section-detail">400+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
+            <div className="section-header" style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center', gap: '1rem' }}>
+                PrimeBlocks
+                <Tag value="Coming Soon" severity="warning"></Tag>
+            </div>
+            <p className="section-detail">490+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://blocks.primereact.org" className="font-semibold p-3 border-round flex align-items-center linkbox active z-2">
+                <a href="https://primeblocks.org" className="font-semibold p-3 border-round flex align-items-center linkbox active z-2">
                     <span>Explore All</span>
                     <i className="pi pi-arrow-right ml-2" />
                 </a>
