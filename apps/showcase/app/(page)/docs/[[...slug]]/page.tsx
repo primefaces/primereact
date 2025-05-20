@@ -62,7 +62,7 @@ async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {
             <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
                 <div className="flex-1 overflow-hidden">
                     <h1>{doc.title}</h1>
-                    <p>{doc.description}</p>
+                    <p className="text-xl">{doc.description}</p>
                     <DocMdx code={doc.body.code} />
                 </div>
                 <DocToc toc={doc.toc as TableOfContents} />

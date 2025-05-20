@@ -11,8 +11,8 @@ import DocTable from './DocTable';
 
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />,
-    h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={cn('group font-heading mt-24 scroll-m-[8.5rem] text-2xl font-semibold first:mt-0', className)} {...props} />,
-    h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className={cn('group font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
+    h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={cn('group font-heading mt-32 scroll-m-[8.5rem] text-2xl font-semibold first:mt-0', className)} {...props} />,
+    h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className={cn('group font-heading mt-16 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
     h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h4 className={cn('group font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
     h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h5 className={cn('group font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
     h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h6 className={cn('group font-heading mt-8 scroll-m-20 text-base font-semibold tracking-tight', className)} {...props} />,
@@ -43,7 +43,12 @@ const components = {
     DocComponentViewer,
     DocPTViewer,
     DocTable,
-    pre: DocCodeViewer
+    pre: DocCodeViewer,
+    code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
+        const isInlineCode = !className?.includes('language-');
+
+        return <code className={cn(isInlineCode ? 'bg-surface-200 dark:bg-surface-800 border border-surface-300 dark:border-surface-700 rounded-md px-1 py-0.25' : '', className)} {...props} />;
+    }
 };
 
 interface DocMdxProps {

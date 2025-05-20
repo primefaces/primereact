@@ -185,6 +185,14 @@ export default makeSource({
                         if (node.__style__) {
                             preElement.properties['__style__'] = node.__style__;
                         }
+
+                        const codeElement = preElement.children.at(-1);
+
+                        if (codeElement.tagName !== 'code') {
+                            return;
+                        }
+
+                        codeElement.properties['className'] = ['language-tsx'];
                     }
                 });
             },

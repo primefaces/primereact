@@ -17,7 +17,7 @@ const DocCodeViewer = ({ className, children, __rawString__, __spec__, ...props 
     };
 
     return (
-        <div className="group/pre relative scheme-dark">
+        <div className="group/pre relative scheme-dark mb-2">
             <pre className={cn('relative rounded-xl p-5 overflow-auto border border-surface-800 !bg-surface-950 transition-[max-height] duration-150', isExpanded ? 'max-h-[400px]' : 'max-h-[160px]', className)} {...props}>
                 {children}
             </pre>
