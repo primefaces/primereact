@@ -73,6 +73,7 @@ export const MultiSelectHeader = React.memo((props) => {
                         role="searchbox"
                         value={props.filterValue}
                         onChange={onFilter}
+                        onKeyDown={props.onFilterKeyDown}
                         className="p-multiselect-filter"
                         placeholder={props.filterPlaceholder}
                         pt={ptm('filterInput')}

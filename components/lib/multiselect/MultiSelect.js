@@ -382,6 +382,66 @@ export const MultiSelect = React.memo(
             setClicked(false);
         };
 
+        const onFilterKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowUp':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    onArrowUpKey(event);
+                    break;
+
+                case 'ArrowDown':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    onArrowDownKey(event);
+
+                    break;
+
+                case 'NumpadEnter':
+                case 'Enter':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    onEnterKey(event);
+                    break;
+
+                case 'Home':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    onHomeKey(event);
+                    event.preventDefault();
+                    break;
+
+                case 'End':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    onEndKey(event);
+                    event.preventDefault();
+                    break;
+
+                case 'Escape':
+                    if (props.inline) {
+                        break;
+                    }
+
+                    hide();
+                    break;
+
+                case 'Tab':
+                    onTabKey(event);
+                    break;
+            }
+        };
+
         const onSelectAll = (event) => {
             if (props.onSelectAll) {
                 props.onSelectAll(event);
@@ -1169,6 +1229,7 @@ export const MultiSelect = React.memo(
                         getOptionValue={getOptionValue}
                         updateModel={updateModel}
                         onFilterInputChange={onFilterInputChange}
+                        onFilterKeyDown={onFilterKeyDown}
                         resetFilter={resetFilter}
                         onCloseClick={onCloseClick}
                         onSelectAll={onSelectAll}
