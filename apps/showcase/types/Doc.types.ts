@@ -84,6 +84,13 @@ export type TypeDefinition = {
     description?: string;
 };
 
+export type VariableDefinition = {
+    variables?: Array<{
+        value: string;
+        description: string;
+    }>;
+};
+
 export type EventDefinition = {
     key: string;
     values: PropsDefinition;
@@ -98,15 +105,8 @@ export type APIDocsInterface = {
         types?: {
             values: Record<string, TypeDefinition>;
         };
-        enumerations?: {
-            values: {
-                [key: string]: {
-                    members: Array<{
-                        value: string;
-                        description: string;
-                    }>;
-                };
-            };
+        variables?: {
+            values: Record<string, VariableDefinition>;
         };
     };
 };

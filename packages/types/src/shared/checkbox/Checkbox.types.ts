@@ -141,6 +141,33 @@ export interface CheckboxState extends useCheckboxState {}
 export interface CheckboxExposes extends useCheckboxExposes {}
 
 /**
+ * Defines the CSS class names used in the Checkbox component.
+ */
+export const CheckboxClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-checkbox',
+    /**
+     * Class name of the box element
+     */
+    box: 'p-checkbox-box',
+    /**
+     * Class name of the input element
+     */
+    input: 'p-checkbox-input',
+    /**
+     * Class name of the icon element
+     */
+    icon: 'p-checkbox-icon'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type CheckboxClassNamesType = (typeof CheckboxClassNames)[keyof typeof CheckboxClassNames];
+
+/**
  * Instance of Checkbox component.
  */
 export type CheckboxInstance = ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes>;

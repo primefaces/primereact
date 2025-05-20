@@ -56,6 +56,29 @@ export interface AvatarState extends useAvatarState {}
 export interface AvatarExposes extends useAvatarExposes {}
 
 /**
+ * Defines the CSS class names used in the Avatar component.
+ */
+export const AvatarClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-avatar',
+    /**
+     * Class name of the box element
+     */
+    label: 'p-avatar-label',
+    /**
+     * Class name of the input element
+     */
+    icon: 'p-avatar-icon'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Avatar component.
+ */
+export type AvatarClassNamesType = (typeof AvatarClassNames)[keyof typeof AvatarClassNames];
+
+/**
  * Instance of Avatar component.
  */
 export type AvatarInstance = ComponentInstance<AvatarProps, AvatarState, AvatarExposes>;

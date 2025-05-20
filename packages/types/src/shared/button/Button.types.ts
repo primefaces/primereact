@@ -66,6 +66,33 @@ export interface ButtonProps extends BaseComponentProps<useButtonProps> {
 }
 
 /**
+ * Defines the CSS class names used in the Button component.
+ */
+export const ButtonClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-button',
+    /**
+     * Class name of the loading icon element
+     */
+    loadingIcon: 'p-button-loading-icon',
+    /**
+     * Class name of the icon element
+     */
+    icon: 'p-button-icon',
+    /**
+     * Class name of the label element
+     */
+    label: 'p-button-label'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type ButtonClassNamesType = (typeof ButtonClassNames)[keyof typeof ButtonClassNames];
+
+/**
  * Instance of Button component.
  */
 export type ButtonInstance = ComponentInstance<ButtonProps>;

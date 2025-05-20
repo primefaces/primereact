@@ -62,6 +62,29 @@ export interface InplaceState extends useInplaceState {}
 export interface InplaceExposes extends useInplaceExposes {}
 
 /**
+ * Defines the CSS class names used in the Inplace component.
+ */
+export const InplaceClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-inplace',
+    /**
+     * Class name of the display element
+     */
+    display: 'p-inplace-display',
+    /**
+     * Class name of the content element
+     */
+    content: 'p-inplace-content'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type InplaceClassNamesType = (typeof InplaceClassNames)[keyof typeof InplaceClassNames];
+
+/**
  * Instance of Inplace component.
  */
 export type InplaceInstance = ComponentInstance<InplaceProps, InplaceState, InplaceExposes>;

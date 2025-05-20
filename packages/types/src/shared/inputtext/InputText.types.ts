@@ -58,6 +58,21 @@ export interface InputTextState extends useInputTextState {}
 export interface InputTextExposes extends useInputTextExposes {}
 
 /**
+ * Defines the CSS class names used in the InputText component.
+ */
+export const InputTextClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-inputtext'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type InputTextClassNamesType = (typeof InputTextClassNames)[keyof typeof InputTextClassNames];
+
+/**
  * Instance of InputText component.
  */
 export type InputTextInstance = ComponentInstance<InputTextProps, InputTextState, InputTextExposes>;

@@ -68,6 +68,29 @@ export interface ProgressSpinnerState extends useProgressSpinnerState {}
 export interface ProgressSpinnerExposes extends useProgressSpinnerExposes {}
 
 /**
+ * Defines the CSS class names used in the ProgressSpinner component.
+ */
+export const ProgressSpinnerClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-progressspinner',
+    /**
+     * Class name of the spin element
+     */
+    spin: 'p-progressspinner-spin',
+    /**
+     * Class name of the circle element
+     */
+    circle: 'p-progressspinner-circle'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type ProgressSpinnerClassNamesType = (typeof ProgressSpinnerClassNames)[keyof typeof ProgressSpinnerClassNames];
+
+/**
  * Instance of ProgressSpinner component.
  */
 export type ProgressSpinnerInstance = ComponentInstance<ProgressSpinnerProps, ProgressSpinnerState, ProgressSpinnerExposes>;

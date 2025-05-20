@@ -74,6 +74,21 @@ export interface SkeletonState extends useSkeletonState {}
 export interface SkeletonExposes extends useSkeletonExposes {}
 
 /**
+ * Defines the CSS class names used in the Skeleton component.
+ */
+export const SkeletonClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-skeleton'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type SkeletonClassNamesType = (typeof SkeletonClassNames)[keyof typeof SkeletonClassNames];
+
+/**
  * Instance of Skeleton component.
  */
 export type SkeletonInstance = ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes>;

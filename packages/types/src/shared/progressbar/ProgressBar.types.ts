@@ -59,6 +59,29 @@ export interface ProgressBarState extends useProgressBarState {}
 export interface ProgressBarExposes extends useProgressBarExposes {}
 
 /**
+ * Defines the CSS class names used in the ProgressBar component.
+ */
+export const ProgressBarClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-progressbar',
+    /**
+     * Class name of the value element
+     */
+    value: 'p-progressbar-value',
+    /**
+     * Class name of the label element
+     */
+    label: 'p-progressbar-label'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type ProgressBarClassNamesType = (typeof ProgressBarClassNames)[keyof typeof ProgressBarClassNames];
+
+/**
  * Instance of ProgressBar component.
  */
 export type ProgressBarInstance = ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes>;

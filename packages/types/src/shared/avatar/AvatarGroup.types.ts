@@ -42,6 +42,21 @@ export interface AvatarGroupState {}
 export interface AvatarGroupExposes {}
 
 /**
+ * Defines the CSS class names used in the Avatar component.
+ */
+export const AvatarGroupClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-avatar-group'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Avatar component.
+ */
+export type AvatarGroupClassNamesType = (typeof AvatarGroupClassNames)[keyof typeof AvatarGroupClassNames];
+
+/**
  * Instance of AvatarGroup component.
  */
 export type AvatarGroupInstance = ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes>;

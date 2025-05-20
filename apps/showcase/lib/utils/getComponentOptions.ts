@@ -247,16 +247,17 @@ export const getPTOptions = (name: string): { data: unknown[]; description?: str
 };
 
 export const getStyleOptions = (name: string): { data: unknown[] } => {
-    const styleDoc = typedAPIDocs[name.toLowerCase() + 'style'];
-    const enumValues = styleDoc && styleDoc.enumerations && styleDoc.enumerations.values;
-    const { members = [] } = enumValues ? enumValues[`${name}ClassNames`] || {} : {};
+    const styleDoc = typedAPIDocs[name.toLowerCase()]?.variables;
+    const vars = styleDoc && styleDoc.values;
+    const classNames = vars ? vars[`${name}ClassNames`] : undefined;
+    const variables = classNames?.variables || [];
     const data = [];
 
-    for (const member of members) {
-        const { value, description } = member;
+    for (const variable of variables) {
+        const { value, description } = variable;
 
         data.push({
-            class: value.replaceAll('"', ''),
+            className: value,
             description
         });
     }

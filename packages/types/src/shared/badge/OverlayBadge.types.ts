@@ -42,6 +42,21 @@ export interface OverlayBadgeState {}
 export interface OverlayBadgeExposes {}
 
 /**
+ * Defines the CSS class names used in the OverlayBadge component.
+ */
+export const OverlayBadgeClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-overlaybadge'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the OverlayBadge component.
+ */
+export type OverlayBadgeClassNamesType = (typeof OverlayBadgeClassNames)[keyof typeof OverlayBadgeClassNames];
+
+/**
  * Instance of OverlayBadge component.
  */
 export type OverlayBadgeInstance = ComponentInstance<OverlayBadgeProps, OverlayBadgeState, OverlayBadgeExposes>;

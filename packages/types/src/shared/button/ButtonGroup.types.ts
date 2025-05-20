@@ -42,6 +42,21 @@ export interface ButtonGroupState {}
 export interface ButtonGroupExposes {}
 
 /**
+ * Defines the CSS class names used in the Button component.
+ */
+export const ButtonGroupClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-buttongroup'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type ButtonGroupClassNamesType = (typeof ButtonGroupClassNames)[keyof typeof ButtonGroupClassNames];
+
+/**
  * Instance of ButtonGroup component.
  */
 export type ButtonGroupInstance = ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes>;

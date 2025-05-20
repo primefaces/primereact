@@ -85,6 +85,21 @@ export interface CheckboxGroupExposes {
 }
 
 /**
+ * Defines the CSS class names used in the CheckboxGroup component.
+ */
+export const CheckboxGroupClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-checkbox-group'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type CheckboxGroupClassNamesType = (typeof CheckboxGroupClassNames)[keyof typeof CheckboxGroupClassNames];
+
+/**
  * Instance of CheckboxGroup component.
  */
 export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes>;

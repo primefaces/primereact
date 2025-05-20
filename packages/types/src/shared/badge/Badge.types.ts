@@ -46,6 +46,21 @@ export interface BadgeProps extends BaseComponentProps<useBadgeProps> {
 }
 
 /**
+ * Defines the CSS class names used in the Badge component.
+ */
+export const BadgeClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-badge'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Badge component.
+ */
+export type BadgeClassNamesType = (typeof BadgeClassNames)[keyof typeof BadgeClassNames];
+
+/**
  * Instance of Badge component.
  */
 export type BadgeInstance = ComponentInstance<BadgeProps>;

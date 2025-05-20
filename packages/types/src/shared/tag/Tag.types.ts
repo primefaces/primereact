@@ -55,6 +55,29 @@ export interface TagState extends useTagState {}
 export interface TagExposes extends useTagExposes {}
 
 /**
+ * Defines the CSS class names used in the Tag component.
+ */
+export const TagClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-tag',
+    /**
+     * Class name of the icon element
+     */
+    icon: 'p-tag-icon',
+    /**
+     * Class name of the label element
+     */
+    label: 'p-tag-label'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the Button component.
+ */
+export type TagClassNamesType = (typeof TagClassNames)[keyof typeof TagClassNames];
+
+/**
  * Instance of Tag component.
  */
 export type TagInstance = ComponentInstance<TagProps, TagState, TagExposes>;

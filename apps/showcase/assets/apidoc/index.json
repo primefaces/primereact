@@ -205,9 +205,44 @@
                     "values": "PassThroughOptionType<AvatarInstance, E>",
                     "description": "Defines passthrough(pt) options type in Avatar component."
                 },
+                "AvatarClassNamesType": {
+                    "values": "typeof AvatarClassNames[keyof typeof AvatarClassNames]",
+                    "description": "Type representing the CSS class names used in the Avatar component."
+                },
                 "AvatarInstance": {
                     "values": "ComponentInstance<AvatarProps, AvatarState, AvatarExposes>",
                     "description": "Instance of Avatar component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "AvatarClassNames": {
+                    "description": "Defines the CSS class names used in the Avatar component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-avatar",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "label",
+                            "value": "p-avatar-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the box element"
+                        },
+                        {
+                            "name": "icon",
+                            "value": "p-avatar-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the input element"
+                        }
+                    ]
                 }
             }
         }
@@ -520,9 +555,30 @@
                     "values": "PassThroughOptionType<AvatarGroupInstance, E>",
                     "description": "Defines passthrough(pt) options type in AvatarGroup component."
                 },
+                "AvatarGroupClassNamesType": {
+                    "values": "typeof AvatarGroupClassNames[keyof typeof AvatarGroupClassNames]",
+                    "description": "Type representing the CSS class names used in the Avatar component."
+                },
                 "AvatarGroupInstance": {
                     "values": "ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes>",
                     "description": "Instance of AvatarGroup component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "AvatarGroupClassNames": {
+                    "description": "Defines the CSS class names used in the Avatar component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-avatar-group",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -924,9 +980,30 @@
                     "values": "PassThroughOptionType<BadgeInstance, E>",
                     "description": "Defines passthrough(pt) options type in Badge component."
                 },
+                "BadgeClassNamesType": {
+                    "values": "typeof BadgeClassNames[keyof typeof BadgeClassNames]",
+                    "description": "Type representing the CSS class names used in the Badge component."
+                },
                 "BadgeInstance": {
                     "values": "ComponentInstance<BadgeProps>",
                     "description": "Instance of Badge component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "BadgeClassNames": {
+                    "description": "Defines the CSS class names used in the Badge component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-badge",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -1077,9 +1154,30 @@
                     "values": "PassThroughOptionType<OverlayBadgeInstance, E>",
                     "description": "Defines passthrough(pt) options type in OverlayBadge component."
                 },
+                "OverlayBadgeClassNamesType": {
+                    "values": "typeof OverlayBadgeClassNames[keyof typeof OverlayBadgeClassNames]",
+                    "description": "Type representing the CSS class names used in the OverlayBadge component."
+                },
                 "OverlayBadgeInstance": {
                     "values": "ComponentInstance<OverlayBadgeProps, OverlayBadgeState, OverlayBadgeExposes>",
                     "description": "Instance of OverlayBadge component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "OverlayBadgeClassNames": {
+                    "description": "Defines the CSS class names used in the OverlayBadge component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-overlaybadge",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -1320,9 +1418,51 @@
                     "values": "PassThroughOptionType<ButtonInstance, E>",
                     "description": "Defines passthrough(pt) options type in Button component."
                 },
+                "ButtonClassNamesType": {
+                    "values": "typeof ButtonClassNames[keyof typeof ButtonClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "ButtonInstance": {
                     "values": "ComponentInstance<ButtonProps>",
                     "description": "Instance of Button component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ButtonClassNames": {
+                    "description": "Defines the CSS class names used in the Button component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-button",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "value": "p-button-loading-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the loading icon element"
+                        },
+                        {
+                            "name": "icon",
+                            "value": "p-button-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the icon element"
+                        },
+                        {
+                            "name": "label",
+                            "value": "p-button-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label element"
+                        }
+                    ]
                 }
             }
         }
@@ -1473,9 +1613,30 @@
                     "values": "PassThroughOptionType<ButtonGroupInstance, E>",
                     "description": "Defines passthrough(pt) options type in Button component."
                 },
+                "ButtonGroupClassNamesType": {
+                    "values": "typeof ButtonGroupClassNames[keyof typeof ButtonGroupClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "ButtonGroupInstance": {
                     "values": "ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes>",
                     "description": "Instance of ButtonGroup component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ButtonGroupClassNames": {
+                    "description": "Defines the CSS class names used in the Button component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-buttongroup",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -1925,9 +2086,51 @@
                     "values": "PassThroughOptionType<CheckboxInstance, E>",
                     "description": "Defines passthrough(pt) options type in Checkbox component."
                 },
+                "CheckboxClassNamesType": {
+                    "values": "typeof CheckboxClassNames[keyof typeof CheckboxClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "CheckboxInstance": {
                     "values": "ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes>",
                     "description": "Instance of Checkbox component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "CheckboxClassNames": {
+                    "description": "Defines the CSS class names used in the Checkbox component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-checkbox",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "box",
+                            "value": "p-checkbox-box",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the box element"
+                        },
+                        {
+                            "name": "input",
+                            "value": "p-checkbox-input",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the input element"
+                        },
+                        {
+                            "name": "icon",
+                            "value": "p-checkbox-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the icon element"
+                        }
+                    ]
                 }
             }
         }
@@ -2166,9 +2369,30 @@
                     "values": "PassThroughOptionType<CheckboxGroupInstance, E>",
                     "description": "Defines passthrough(pt) options type in Checkbox component."
                 },
+                "CheckboxGroupClassNamesType": {
+                    "values": "typeof CheckboxGroupClassNames[keyof typeof CheckboxGroupClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "CheckboxGroupInstance": {
                     "values": "ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes>",
                     "description": "Instance of CheckboxGroup component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "CheckboxGroupClassNames": {
+                    "description": "Defines the CSS class names used in the CheckboxGroup component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-checkbox-group",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -2510,9 +2734,58 @@
                     "values": "PassThroughOptionType<ChipInstance, E>",
                     "description": "Defines passthrough(pt) options type in Chip component."
                 },
+                "ChipClassNamesType": {
+                    "values": "typeof ChipClassNames[keyof typeof ChipClassNames]",
+                    "description": "Type representing the CSS class names used in the Chip component."
+                },
                 "ChipInstance": {
                     "values": "ComponentInstance<ChipProps, ChipState, ChipExposes>",
                     "description": "Instance of Chip component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ChipClassNames": {
+                    "description": "Defines the CSS class names used in the Chip component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-chip",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "image",
+                            "value": "p-chip-image",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the image element"
+                        },
+                        {
+                            "name": "icon",
+                            "value": "p-chip-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the icon element"
+                        },
+                        {
+                            "name": "label",
+                            "value": "p-chip-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label element"
+                        },
+                        {
+                            "name": "removeIcon",
+                            "value": "p-chip-remove-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the remove icon element"
+                        }
+                    ]
                 }
             }
         }
@@ -3501,9 +3774,44 @@
                     "values": "PassThroughOptionType<InplaceInstance, E>",
                     "description": "Defines passthrough(pt) options type in Inplace component."
                 },
+                "InplaceClassNamesType": {
+                    "values": "typeof InplaceClassNames[keyof typeof InplaceClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "InplaceInstance": {
                     "values": "ComponentInstance<InplaceProps, InplaceState, InplaceExposes>",
                     "description": "Instance of Inplace component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InplaceClassNames": {
+                    "description": "Defines the CSS class names used in the Inplace component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-inplace",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "display",
+                            "value": "p-inplace-display",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the display element"
+                        },
+                        {
+                            "name": "content",
+                            "value": "p-inplace-content",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the content element"
+                        }
+                    ]
                 }
             }
         }
@@ -4281,9 +4589,30 @@
                     "values": "PassThroughOptionType<InputTextInstance, E>",
                     "description": "Defines passthrough(pt) options type in InputText component."
                 },
+                "InputTextClassNamesType": {
+                    "values": "typeof InputTextClassNames[keyof typeof InputTextClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "InputTextInstance": {
                     "values": "ComponentInstance<InputTextProps, InputTextState, InputTextExposes>",
                     "description": "Instance of InputText component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InputTextClassNames": {
+                    "description": "Defines the CSS class names used in the InputText component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-inputtext",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -4550,9 +4879,79 @@
                     "values": "PassThroughOptionType<MeterGroupInstance, E>",
                     "description": "Defines passthrough(pt) options type in MeterGroup component."
                 },
+                "MeterGroupClassNamesType": {
+                    "values": "typeof MeterGroupClassNames[keyof typeof MeterGroupClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "MeterGroupInstance": {
                     "values": "ComponentInstance<MeterGroupProps, MeterGroupState, MeterGroupExposes>",
                     "description": "Instance of MeterGroup component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MeterGroupClassNames": {
+                    "description": "Defines the CSS class names used in the MeterGroup component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-metergroup",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "meters",
+                            "value": "p-metergroup-meters",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the meters element"
+                        },
+                        {
+                            "name": "meter",
+                            "value": "p-metergroup-meter",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the meter element"
+                        },
+                        {
+                            "name": "labelList",
+                            "value": "p-metergroup-label-list",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label list element"
+                        },
+                        {
+                            "name": "label",
+                            "value": "p-metergroup-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label element"
+                        },
+                        {
+                            "name": "labelIcon",
+                            "value": "p-metergroup-label-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label icon element"
+                        },
+                        {
+                            "name": "labelMarker",
+                            "value": "p-metergroup-label-marker",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label marker element"
+                        },
+                        {
+                            "name": "labelText",
+                            "value": "p-metergroup-label-text",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label text element"
+                        }
+                    ]
                 }
             }
         }
@@ -6018,9 +6417,44 @@
                     "values": "PassThroughOptionType<ProgressBarInstance, E>",
                     "description": "Defines passthrough(pt) options type in ProgressBar component."
                 },
+                "ProgressBarClassNamesType": {
+                    "values": "typeof ProgressBarClassNames[keyof typeof ProgressBarClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "ProgressBarInstance": {
                     "values": "ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes>",
                     "description": "Instance of ProgressBar component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarClassNames": {
+                    "description": "Defines the CSS class names used in the ProgressBar component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-progressbar",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "value",
+                            "value": "p-progressbar-value",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the value element"
+                        },
+                        {
+                            "name": "label",
+                            "value": "p-progressbar-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label element"
+                        }
+                    ]
                 }
             }
         }
@@ -6415,9 +6849,44 @@
                     "values": "PassThroughOptionType<ProgressSpinnerInstance, E>",
                     "description": "Defines passthrough(pt) options type in ProgressSpinner component."
                 },
+                "ProgressSpinnerClassNamesType": {
+                    "values": "typeof ProgressSpinnerClassNames[keyof typeof ProgressSpinnerClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "ProgressSpinnerInstance": {
                     "values": "ComponentInstance<ProgressSpinnerProps, ProgressSpinnerState, ProgressSpinnerExposes>",
                     "description": "Instance of ProgressSpinner component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressSpinnerClassNames": {
+                    "description": "Defines the CSS class names used in the ProgressSpinner component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-progressspinner",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "spin",
+                            "value": "p-progressspinner-spin",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the spin element"
+                        },
+                        {
+                            "name": "circle",
+                            "value": "p-progressspinner-circle",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the circle element"
+                        }
+                    ]
                 }
             }
         }
@@ -6839,11 +7308,49 @@
                 },
                 "RadioButtonClassNamesType": {
                     "values": "typeof RadioButtonClassNames[keyof typeof RadioButtonClassNames]",
-                    "description": "Type representing the CSS class names for RadioButton components."
+                    "description": "Type representing the CSS class names used in the RadioButton component."
                 },
                 "RadioButtonInstance": {
                     "values": "ComponentInstance<RadioButtonProps, RadioButtonState, RadioButtonExposes>",
                     "description": "Instance of RadioButton component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "RadioButtonClassNames": {
+                    "description": "Defines the CSS class names used in the RadioButton component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-radiobutton",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "box",
+                            "value": "p-radiobutton-box",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the box element"
+                        },
+                        {
+                            "name": "input",
+                            "value": "p-radiobutton-input",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the input element"
+                        },
+                        {
+                            "name": "icon",
+                            "value": "p-radiobutton-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the icon element"
+                        }
+                    ]
                 }
             }
         }
@@ -7082,9 +7589,30 @@
                     "values": "PassThroughOptionType<RadioButtonGroupInstance, E>",
                     "description": "Defines passthrough(pt) options type in RadioButtonGroup component."
                 },
+                "RadioButtonGroupClassNamesType": {
+                    "values": "typeof RadioButtonGroupClassNames[keyof typeof RadioButtonGroupClassNames]",
+                    "description": "Type representing the CSS class names used in the RadioButton component."
+                },
                 "RadioButtonGroupInstance": {
                     "values": "ComponentInstance<RadioButtonGroupProps, RadioButtonGroupState, RadioButtonGroupExposes>",
                     "description": "Instance of RadioButtonGroup component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "RadioButtonGroupClassNames": {
+                    "description": "Defines the CSS class names used in the RadioButtonGroup component",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-radiobutton-group",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -7400,9 +7928,30 @@
                     "values": "PassThroughOptionType<SkeletonInstance, E>",
                     "description": "Defines passthrough(pt) options type in Skeleton component."
                 },
+                "SkeletonClassNamesType": {
+                    "values": "typeof SkeletonClassNames[keyof typeof SkeletonClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "SkeletonInstance": {
                     "values": "ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes>",
                     "description": "Instance of Skeleton component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "SkeletonClassNames": {
+                    "description": "Defines the CSS class names used in the Skeleton component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-skeleton",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
                 }
             }
         }
@@ -8040,9 +8589,44 @@
                     "values": "PassThroughOptionType<TagInstance, E>",
                     "description": "Defines passthrough(pt) options type in Tag component."
                 },
+                "TagClassNamesType": {
+                    "values": "typeof TagClassNames[keyof typeof TagClassNames]",
+                    "description": "Type representing the CSS class names used in the Button component."
+                },
                 "TagInstance": {
                     "values": "ComponentInstance<TagProps, TagState, TagExposes>",
                     "description": "Instance of Tag component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TagClassNames": {
+                    "description": "Defines the CSS class names used in the Tag component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-tag",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "icon",
+                            "value": "p-tag-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the icon element"
+                        },
+                        {
+                            "name": "label",
+                            "value": "p-tag-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the label element"
+                        }
+                    ]
                 }
             }
         }

@@ -135,6 +135,40 @@ const getTypeDoc = async (typeDocOptions) => {
                             };
                         });
                     }
+
+                    const module_variables_group = module.groups?.find((g) => g.title === 'Variables');
+
+                    if (module_variables_group) {
+                        module_variables_group.children.forEach((variable) => {
+                            const variable_props_description = variable.comment && variable.comment.summary.map((s) => s.text || '').join(' ');
+
+                            if (!doc[name]['variables']) {
+                                doc[name]['variables'] = {
+                                    description: staticMessages['types'],
+                                    values: {}
+                                };
+                            }
+
+                            const variables = [];
+
+                            if (variable.type.declaration) {
+                                variable.type.declaration.children.forEach((variableChild) => {
+                                    variables.push({
+                                        name: variableChild.name,
+                                        value: variableChild.type.value,
+                                        optional: variableChild.flags.isOptional,
+                                        readonly: variableChild.flags.isReadonly,
+                                        description: variableChild.comment && variableChild.comment.summary.map((s) => s.text || '').join(' ')
+                                    });
+                                });
+                            }
+
+                            doc[name]['variables'].values[variable.name] = {
+                                description: variable_props_description,
+                                variables
+                            };
+                        });
+                    }
                 }
             });
 

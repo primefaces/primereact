@@ -85,6 +85,21 @@ export interface RadioButtonGroupExposes {
 }
 
 /**
+ * Defines the CSS class names used in the RadioButtonGroup component
+ */
+export const RadioButtonGroupClassNames = {
+    /**
+     * Class name of the root element
+     */
+    root: 'p-radiobutton-group'
+} as const;
+
+/**
+ * Type representing the CSS class names used in the RadioButton component.
+ */
+export type RadioButtonGroupClassNamesType = (typeof RadioButtonGroupClassNames)[keyof typeof RadioButtonGroupClassNames];
+
+/**
  * Instance of RadioButtonGroup component.
  */
 export type RadioButtonGroupInstance = ComponentInstance<RadioButtonGroupProps, RadioButtonGroupState, RadioButtonGroupExposes>;
