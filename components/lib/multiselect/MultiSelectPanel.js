@@ -69,6 +69,7 @@ export const MultiSelectPanel = React.memo(
                     getOptionValue={props.getOptionValue}
                     updateModel={props.updateModel}
                     onFilter={onFilterInputChange}
+                    onFilterKeyDown={props.onFilterKeyDown}
                     filterPlaceholder={props.filterPlaceholder}
                     onClose={props.onCloseClick}
                     showSelectAll={props.showSelectAll}
