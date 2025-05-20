@@ -1,3 +1,4 @@
+'use client';
 import { RadioButton } from 'primereact/radiobutton';
 import { RadioButtonGroup } from 'primereact/radiobutton/group';
 import * as React from 'react';

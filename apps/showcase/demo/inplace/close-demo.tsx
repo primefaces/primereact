@@ -1,7 +1,6 @@
-// import { Badge } from 'primereact/badge';
-// import { Button } from 'primereact/button';
-
+import { Button } from 'primereact/button';
 import { Inplace } from 'primereact/inplace';
+import { InputText } from 'primereact/inputtext';
 
 export default function InputDemo() {
     return (
@@ -10,9 +9,9 @@ export default function InputDemo() {
                 <Inplace.Display>Click to Edit</Inplace.Display>
                 <Inplace.Content>
                     <span className="inline-flex items-center gap-2">
-                        <input autoFocus />
-                        <Inplace.Close as="button" role="button">
-                            Close
+                        <InputText autoFocus />
+                        <Inplace.Close as={Button} iconOnly role="button" text severity="danger">
+                            <i className="pi pi-times"></i>
                         </Inplace.Close>
                     </span>
                 </Inplace.Content>

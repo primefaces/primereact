@@ -10,21 +10,29 @@ export const Store = {
             'component': React.lazy(() => import('demo/avatar/avatar-pt.tsx')),
             'filePath': 'demo/avatar/avatar-pt.tsx',
         },
+        'badge-demo': {
+            'component': React.lazy(() => import('demo/avatar/badge-demo.tsx')),
+            'filePath': 'demo/avatar/badge-demo.tsx',
+        },
+        'fallback-demo': {
+            'component': React.lazy(() => import('demo/avatar/fallback-demo.tsx')),
+            'filePath': 'demo/avatar/fallback-demo.tsx',
+        },
         'group-demo': {
             'component': React.lazy(() => import('demo/avatar/group-demo.tsx')),
             'filePath': 'demo/avatar/group-demo.tsx',
-        },
-        'icon-demo': {
-            'component': React.lazy(() => import('demo/avatar/icon-demo.tsx')),
-            'filePath': 'demo/avatar/icon-demo.tsx',
         },
         'image-demo': {
             'component': React.lazy(() => import('demo/avatar/image-demo.tsx')),
             'filePath': 'demo/avatar/image-demo.tsx',
         },
-        'label-demo': {
-            'component': React.lazy(() => import('demo/avatar/label-demo.tsx')),
-            'filePath': 'demo/avatar/label-demo.tsx',
+        'shape-demo': {
+            'component': React.lazy(() => import('demo/avatar/shape-demo.tsx')),
+            'filePath': 'demo/avatar/shape-demo.tsx',
+        },
+        'size-demo': {
+            'component': React.lazy(() => import('demo/avatar/size-demo.tsx')),
+            'filePath': 'demo/avatar/size-demo.tsx',
         },
     },
     'badge': {
@@ -111,6 +119,44 @@ export const Store = {
             'filePath': 'demo/button/text-demo.tsx',
         },
     },
+    'checkbox': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/checkbox/basic-demo.tsx')),
+            'filePath': 'demo/checkbox/basic-demo.tsx',
+        },
+        'card-demo': {
+            'component': React.lazy(() => import('demo/checkbox/card-demo.tsx')),
+            'filePath': 'demo/checkbox/card-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/checkbox/disabled-demo.tsx')),
+            'filePath': 'demo/checkbox/disabled-demo.tsx',
+        },
+        'dynamic-demo': {
+            'component': React.lazy(() => import('demo/checkbox/dynamic-demo.tsx')),
+            'filePath': 'demo/checkbox/dynamic-demo.tsx',
+        },
+        'filled-demo': {
+            'component': React.lazy(() => import('demo/checkbox/filled-demo.tsx')),
+            'filePath': 'demo/checkbox/filled-demo.tsx',
+        },
+        'group-demo': {
+            'component': React.lazy(() => import('demo/checkbox/group-demo.tsx')),
+            'filePath': 'demo/checkbox/group-demo.tsx',
+        },
+        'indeterminate-demo': {
+            'component': React.lazy(() => import('demo/checkbox/indeterminate-demo.tsx')),
+            'filePath': 'demo/checkbox/indeterminate-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/checkbox/invalid-demo.tsx')),
+            'filePath': 'demo/checkbox/invalid-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/checkbox/sizes-demo.tsx')),
+            'filePath': 'demo/checkbox/sizes-demo.tsx',
+        },
+    },
     'chip': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/chip/basic-demo.tsx')),
@@ -134,13 +180,13 @@ export const Store = {
             'component': React.lazy(() => import('demo/inplace/basic-demo.tsx')),
             'filePath': 'demo/inplace/basic-demo.tsx',
         },
+        'close-demo': {
+            'component': React.lazy(() => import('demo/inplace/close-demo.tsx')),
+            'filePath': 'demo/inplace/close-demo.tsx',
+        },
         'image-demo': {
             'component': React.lazy(() => import('demo/inplace/image-demo.tsx')),
             'filePath': 'demo/inplace/image-demo.tsx',
-        },
-        'input-demo': {
-            'component': React.lazy(() => import('demo/inplace/input-demo.tsx')),
-            'filePath': 'demo/inplace/input-demo.tsx',
         },
     },
     'inputtext': {
@@ -220,6 +266,10 @@ export const Store = {
         },
     },
     'radiobutton': {
+        'card-demo': {
+            'component': React.lazy(() => import('demo/radiobutton/card-demo.tsx')),
+            'filePath': 'demo/radiobutton/card-demo.tsx',
+        },
         'disabled-demo': {
             'component': React.lazy(() => import('demo/radiobutton/disabled-demo.tsx')),
             'filePath': 'demo/radiobutton/disabled-demo.tsx',

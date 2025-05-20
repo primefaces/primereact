@@ -1,50 +1,65 @@
 ---
-title: "RadioButton"
-description: "RadioButton is an extension to standard radio button element with theming."
-component: "radiobutton"
+title: 'RadioButton'
+description: 'RadioButton is an extension to standard radio button element with theming.'
+component: 'radiobutton'
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { RadioButton } from 'primereact/radiobutton';
 ```
 
-## Group
+```tsx
+<RadioButton.Group>
+    <RadioButton inputId="id" />
+    <label htmlFor="id">Cheese</label>
+</RadioButton.Group>
+```
 
-RadioButton is used with the _v-model_ property for two-way value binding.
+## Examples
+
+### Group
+
+Use the `RadioButton.Group` component with `value` and `onValueChange` props to control the selected state of radio buttons.
 
 <DocComponentViewer name="radiobutton:group-demo" />
 
-## Dynamic
+### Dynamic
 
 RadioButtons can be generated using a list of values.
 
 <DocComponentViewer name="radiobutton:dynamic-demo" />
 
-## Filled
+### Card
 
-Specify the variant property as filled to display the component with a higher visual emphasis than the default outlined style.
+RadioButtons can be displayed in a card style.
 
-<DocComponentViewer name="radiobutton:filled-demo" />
+<DocComponentViewer name="radiobutton:card-demo" />
 
-## Sizes
+### Sizes
 
-RadioButton provides small and large sizes as alternatives to the base.
+Use the `size` property to change the size of a radio button.
 
 <DocComponentViewer name="radiobutton:sizes-demo" />
 
-## Invalid
+### Filled
 
-Invalid state is displayed using the invalid prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+Specify the `filled` property to display the component with a higher visual emphasis than the default outlined style.
 
-<DocComponentViewer name="radiobutton:invalid-demo" />
+<DocComponentViewer name="radiobutton:filled-demo" />
 
-## Disabled
+### Disabled
 
-When disabled is present, the element cannot be edited and focused.
+When the `disabled` property is present, the element cannot be edited and focused.
 
 <DocComponentViewer name="radiobutton:disabled-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` property to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocComponentViewer name="radiobutton:invalid-demo" />
 
 ## Accessibility
 

@@ -1,7 +1,7 @@
 ---
-title: "Badge"
-description: "Badge is a small status indicator for another element."
-component: "badge"
+title: 'Badge'
+description: 'Badge is a small status indicator for another element.'
+component: 'badge'
 ---
 
 ## Import
@@ -10,29 +10,35 @@ component: "badge"
 import { Badge } from 'primereact/badge';
 ```
 
-## Basic
+```tsx
+<Badge>Badge</Badge>
+```
+
+## Examples
+
+### Basic
 
 <DocComponentViewer name="badge:basic-demo" />
 
-## Severity
+### Severity
 
-Severity defines the variant of a badge.
+The `severity` property defines the visual style of a badge.
 
 <DocComponentViewer name="badge:severity-demo" />
 
-## Size
+### Size
 
-Use the _size_ property to customize the dimensions of a Badge.
+Use the `size` property to change the size of a badge.
 
 <DocComponentViewer name="badge:size-demo" />
 
-## Overlay
+### Overlay
 
-A badge can be added to any element by encapsulating the content with the _Overlay_ component.
+A badge can be added to any element by encapsulating the content with the `Badge.Overlay` component.
 
 <DocComponentViewer name="badge:overlay-demo" />
 
-## Button
+### Button
 
 Buttons have built-in support for badges to display a badge inline.
 
