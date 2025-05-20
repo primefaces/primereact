@@ -1249,7 +1249,6 @@ export const MultiSelect = React.memo(
                         onEntered={onOverlayEntered}
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
-                        onKeyDown={onKeyDown}
                         ptm={ptm}
                         cx={cx}
                         sx={sx}
