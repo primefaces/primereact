@@ -6,7 +6,7 @@ export const classes = {
     root: ({ props }) => [
         'p-badge p-component',
         {
-            'p-badge-circle': props.circle && isNotEmpty(props.children),
+            'p-badge-circle': props.shape === 'circle' && isNotEmpty(props.children),
             'p-badge-dot': isEmpty(props.children),
             'p-badge-sm': props.size === 'small',
             'p-badge-lg': props.size === 'large',

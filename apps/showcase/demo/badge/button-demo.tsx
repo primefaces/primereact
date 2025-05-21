@@ -1,15 +1,30 @@
-// import { Badge } from 'primereact/badge';
-// import { Button } from 'primereact/button';
+import { Badge } from 'primereact/badge';
+import { Button } from 'primereact/button';
 
 export default function ButtonDemo() {
     return (
-        <div className="card flex flex-wrap justify-content-center gap-2">
-            {/* <Button label="Emails">
-                <Badge value="8"></Badge>
+        <div className="card flex justify-center flex-wrap gap-4">
+            <Button type="button">
+                Emails
+                <Badge severity="secondary" shape="circle">
+                    8
+                </Badge>
             </Button>
-            <Button label="Messages" icon="pi pi-users" severity="secondary">
-                <Badge value="8" severity="contrast"></Badge>
-            </Button> */}
+
+            <Button type="button" variant="outlined">
+                <i className="pi pi-users" />
+                Messages
+                <Badge severity="contrast" shape="circle">
+                    2
+                </Badge>
+            </Button>
+
+            <Badge.Overlay>
+                <Button type="button" variant="outlined">
+                    <i className="pi pi-bell" />
+                </Button>
+                <Badge severity="info" className="animate-pulse" />
+            </Badge.Overlay>
         </div>
     );
 }

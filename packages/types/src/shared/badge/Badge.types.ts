@@ -32,9 +32,9 @@ export interface BadgePassThroughOptions {
  */
 export interface BadgeProps extends BaseComponentProps<useBadgeProps> {
     /**
-     * Whether to show the badge with a circle shape.
+     * Defines the shape of the badge.
      */
-    circle?: boolean | undefined;
+    shape?: 'circle' | undefined;
     /**
      * Size of the badge.
      */

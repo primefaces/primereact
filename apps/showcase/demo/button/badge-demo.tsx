@@ -6,7 +6,7 @@ export default function BadgeDemo() {
         <div className="card flex justify-center flex-wrap gap-4">
             <Button type="button">
                 Emails
-                <Badge severity="secondary" circle>
+                <Badge severity="secondary" shape="circle">
                     2
                 </Badge>
             </Button>
@@ -14,7 +14,7 @@ export default function BadgeDemo() {
             <Button type="button" variant="outlined">
                 <i className="pi pi-users" />
                 Messages
-                <Badge severity="contrast" circle>
+                <Badge severity="contrast" shape="circle">
                     2
                 </Badge>
             </Button>
