@@ -154,7 +154,6 @@ export const MultiStateCheckbox = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const icon = createIcon();
         const ariaValueLabel = selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
-        const ariaChecked = selectedOption ? 'true' : 'false';
 
         const rootProps = mergeProps(
             {
@@ -177,8 +176,6 @@ export const MultiStateCheckbox = React.memo(
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
-                role: 'checkbox',
-                'aria-checked': ariaChecked,
                 onChange: onClick,
                 checked: !!selectedOption,
                 disabled: props?.disabled,
