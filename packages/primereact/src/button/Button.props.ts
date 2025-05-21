@@ -11,8 +11,5 @@ export const defaultProps: ButtonProps = {
     rounded: false,
     raised: false,
     iconOnly: false,
-    fluid: false,
-    link: false,
-    text: false,
-    outlined: false
+    fluid: false
 };

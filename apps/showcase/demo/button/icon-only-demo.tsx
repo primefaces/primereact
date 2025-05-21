@@ -69,28 +69,28 @@ export default function IconOnlyDemo() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-4 mb-6">
-                <Button rounded outlined aria-label="Filter" size={size} iconOnly>
+                <Button rounded variant="outlined" aria-label="Filter" size={size} iconOnly>
                     <i className="pi pi-check" />
                 </Button>
-                <Button severity="secondary" rounded outlined aria-label="Bookmark" size={size} iconOnly>
+                <Button severity="secondary" rounded variant="outlined" aria-label="Bookmark" size={size} iconOnly>
                     <i className="pi pi-bookmark" />
                 </Button>
-                <Button severity="success" rounded outlined aria-label="Search" size={size} iconOnly>
+                <Button severity="success" rounded variant="outlined" aria-label="Search" size={size} iconOnly>
                     <i className="pi pi-search" />
                 </Button>
-                <Button severity="info" rounded outlined aria-label="User" size={size} iconOnly>
+                <Button severity="info" rounded variant="outlined" aria-label="User" size={size} iconOnly>
                     <i className="pi pi-user" />
                 </Button>
-                <Button severity="warn" rounded outlined aria-label="Notification" size={size} iconOnly>
+                <Button severity="warn" rounded variant="outlined" aria-label="Notification" size={size} iconOnly>
                     <i className="pi pi-bell" />
                 </Button>
-                <Button severity="help" rounded outlined aria-label="Favorite" size={size} iconOnly>
+                <Button severity="help" rounded variant="outlined" aria-label="Favorite" size={size} iconOnly>
                     <i className="pi pi-heart" />
                 </Button>
-                <Button severity="danger" rounded outlined aria-label="Cancel" size={size} iconOnly>
+                <Button severity="danger" rounded variant="outlined" aria-label="Cancel" size={size} iconOnly>
                     <i className="pi pi-times" />
                 </Button>
-                <Button severity="contrast" rounded outlined aria-label="Star" size={size} iconOnly>
+                <Button severity="contrast" rounded variant="outlined" aria-label="Star" size={size} iconOnly>
                     <i className="pi pi-star" />
                 </Button>
             </div>
@@ -123,28 +123,28 @@ export default function IconOnlyDemo() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-4">
-                <Button rounded text aria-label="Filter" size={size} iconOnly>
+                <Button rounded variant="text" aria-label="Filter" size={size} iconOnly>
                     <i className="pi pi-check" />
                 </Button>
-                <Button severity="secondary" rounded text aria-label="Bookmark" size={size} iconOnly>
+                <Button severity="secondary" rounded variant="text" aria-label="Bookmark" size={size} iconOnly>
                     <i className="pi pi-bookmark" />
                 </Button>
-                <Button severity="success" rounded text aria-label="Search" size={size} iconOnly>
+                <Button severity="success" rounded variant="text" aria-label="Search" size={size} iconOnly>
                     <i className="pi pi-search" />
                 </Button>
-                <Button severity="info" rounded text aria-label="User" size={size} iconOnly>
+                <Button severity="info" rounded variant="text" aria-label="User" size={size} iconOnly>
                     <i className="pi pi-user" />
                 </Button>
-                <Button severity="warn" rounded text aria-label="Notification" size={size} iconOnly>
+                <Button severity="warn" rounded variant="text" aria-label="Notification" size={size} iconOnly>
                     <i className="pi pi-bell" />
                 </Button>
-                <Button severity="help" rounded text aria-label="Favorite" size={size} iconOnly>
+                <Button severity="help" rounded variant="text" aria-label="Favorite" size={size} iconOnly>
                     <i className="pi pi-heart" />
                 </Button>
-                <Button severity="danger" rounded text aria-label="Cancel" size={size} iconOnly>
+                <Button severity="danger" rounded variant="text" aria-label="Cancel" size={size} iconOnly>
                     <i className="pi pi-times" />
                 </Button>
-                <Button severity="contrast" rounded text aria-label="Star" size={size} iconOnly>
+                <Button severity="contrast" rounded variant="text" aria-label="Star" size={size} iconOnly>
                     <i className="pi pi-star" />
                 </Button>
             </div>

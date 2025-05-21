@@ -42,7 +42,7 @@ export interface ButtonProps extends BaseComponentProps<useButtonProps> {
     /**
      * Variant of the Button.
      */
-    variant?: 'text' | 'outlined' | 'contained' | 'link' | undefined;
+    variant?: 'link' | 'text' | 'outlined' | undefined;
     /**
      * Whether to show the Button with a plain style.
      */

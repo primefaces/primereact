@@ -3,26 +3,26 @@ import { Button } from 'primereact/button';
 export default function OutlinedDemo() {
     return (
         <div className="card flex justify-center flex-wrap gap-4">
-            <Button outlined>Primary</Button>
-            <Button severity="secondary" outlined>
+            <Button variant="outlined">Primary</Button>
+            <Button severity="secondary" variant="outlined">
                 Secondary
             </Button>
-            <Button severity="success" outlined>
+            <Button severity="success" variant="outlined">
                 Success
             </Button>
-            <Button severity="info" outlined>
+            <Button severity="info" variant="outlined">
                 Info
             </Button>
-            <Button severity="warn" outlined>
+            <Button severity="warn" variant="outlined">
                 Warn
             </Button>
-            <Button severity="help" outlined>
+            <Button severity="help" variant="outlined">
                 Help
             </Button>
-            <Button severity="danger" outlined>
+            <Button severity="danger" variant="outlined">
                 Danger
             </Button>
-            <Button severity="contrast" outlined>
+            <Button severity="contrast" variant="outlined">
                 Contrast
             </Button>
         </div>
