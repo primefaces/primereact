@@ -12,7 +12,7 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
 
     const logoFillRef = React.useRef({
         primary: dt('primary.color'),
-        secondary: dt('surface.900')
+        secondary: dt('surface.600')
     });
 
     const toggleDarkMode = () => {
