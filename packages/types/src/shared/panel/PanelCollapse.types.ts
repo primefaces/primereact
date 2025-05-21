@@ -44,7 +44,7 @@ export interface PanelCollapseProps extends BaseComponentProps {
      * Variant of the PanelCollapse.
      * @default 'text'
      */
-    variant?: 'text' | 'outlined' | 'contained' | 'link' | undefined;
+    variant?: 'text' | 'outlined' | 'link' | undefined;
     /**
      * Whether to show the PanelCollapse with a rounded style.
      * @default true

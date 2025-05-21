@@ -6687,7 +6687,7 @@
                             "name": "variant",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"link\" | \"text\" | \"outlined\" | \"contained\"",
+                            "type": "\"link\" | \"text\" | \"outlined\"",
                             "default": "'text'",
                             "description": "Variant of the PanelCollapse."
                         },

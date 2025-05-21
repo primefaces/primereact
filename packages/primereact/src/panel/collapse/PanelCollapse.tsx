@@ -30,8 +30,7 @@ export const PanelCollapse = withComponent({
 
         return (
             <Button {...props} {...rootProps}>
-                {resolve(props.children, instance)}
-                {panel?.state.collapsed ? <PlusIcon /> : <MinusIcon />}
+                {props.children ? resolve(props.children, instance) : panel?.state.collapsed ? <PlusIcon /> : <MinusIcon />}
             </Button>
         );
     }
