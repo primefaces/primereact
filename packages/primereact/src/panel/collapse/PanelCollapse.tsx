@@ -1,6 +1,8 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
-import { mergeProps } from '@primeuix/utils';
+import { withComponent } from '@primereact/core/component';
+import { MinusIcon, PlusIcon } from '@primereact/icons';
+import { mergeProps, resolve } from '@primeuix/utils';
+import { Button } from 'primereact/button';
 import * as React from 'react';
 import { usePanelContext } from '../Panel.context';
 import { defaultCollapseProps } from './PanelCollapse.props';
@@ -26,6 +28,11 @@ export const PanelCollapse = withComponent({
             ptmi('root')
         );
 
-        return <Component as={props.as} asChild={props.asChild} {...rootProps} children={props.children} />;
+        return (
+            <Button {...props} {...rootProps}>
+                {resolve(props.children, instance)}
+                {panel?.state.collapsed ? <PlusIcon /> : <MinusIcon />}
+            </Button>
+        );
     }
 });

@@ -237,6 +237,24 @@ export const Store = {
             'filePath': 'demo/metergroup/vertical-demo.tsx',
         },
     },
+    'panel': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/panel/basic-demo.tsx')),
+            'filePath': 'demo/panel/basic-demo.tsx',
+        },
+        'panel-pt': {
+            'component': React.lazy(() => import('demo/panel/panel-pt.tsx')),
+            'filePath': 'demo/panel/panel-pt.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/panel/template-demo.tsx')),
+            'filePath': 'demo/panel/template-demo.tsx',
+        },
+        'toggleable-demo': {
+            'component': React.lazy(() => import('demo/panel/toggleable-demo.tsx')),
+            'filePath': 'demo/panel/toggleable-demo.tsx',
+        },
+    },
     'progressbar': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/progressbar/basic-demo.tsx')),

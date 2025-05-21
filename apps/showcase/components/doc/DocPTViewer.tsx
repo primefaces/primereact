@@ -11,8 +11,7 @@ type DocPTViewerProps = {
 };
 
 interface PTOption {
-    label?: string;
-    [key: string]: string | undefined;
+    data: Array<{ label: string }>;
 }
 
 const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerProps> = ({ name, components, ...props }) => {
@@ -29,7 +28,7 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
         const newPTNames: Array<{ name: string; item: string }> = [];
 
         components?.forEach((cmp) => {
-            const options = getPTOptions(cmp) as PTOption[];
+            const options = getPTOptions(cmp) as PTOption;
 
             options.data.forEach((option) => {
                 newPTNames.push({
@@ -38,6 +37,7 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
                 });
             });
         });
+
         setPTNames(newPTNames);
     }, [components]);
 
@@ -46,7 +46,12 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
         let selector = `[data-pc-section="${item.toLowerCase()}"]`;
         let elements: HTMLElement[] = [];
 
-        if (item === 'root') selector = `[data-pc-name="${name.toLowerCase()}"][data-pc-section="${item.toLowerCase()}"]`;
+        if (item === 'root') {
+            if (name === 'PanelCollapse') selector = `[data-pc-name="button"]`;
+            else {
+                selector = `[data-pc-name="${name.toLowerCase()}"][data-pc-section="${item.toLowerCase()}"]`;
+            }
+        }
 
         if (container.current) {
             elements = find(container.current, selector) as HTMLElement[];

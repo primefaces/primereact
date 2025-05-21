@@ -13,7 +13,7 @@ export const Component = (inProps: ComponentProps = {}) => {
     if (!renderAsChild && !AsComponent) return null;
 
     const { ref = instance?.elementRef, children, attrs: inAttrs, ...attrs } = props;
-    const content = resolve(children, { ...inAttrs, ...attrs }) as React.ReactNode;
+    const content = resolve(children, { ...inAttrs, ...attrs, ...instance }) as React.ReactNode;
 
     return renderAsChild ? (
         <React.Fragment>{content}</React.Fragment>

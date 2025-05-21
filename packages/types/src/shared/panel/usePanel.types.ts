@@ -1,3 +1,14 @@
+/**
+ *
+ * The usePanel manages the state and functionality of a panel component.
+ *
+ * [Live Demo](https://www.primereact.org/panel/)
+ *
+ * @module usepanel
+ * @group headless
+ *
+ */
+import type { HeadlessInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
@@ -41,3 +52,52 @@ export interface usePanelProps {
      */
     onToggle?: ((event: usePanelToggleEvent) => void) | undefined;
 }
+
+/**
+ * Defines valid state in usePanel.
+ */
+export interface usePanelState {
+    /**
+     * Whether the panel is collapsed.
+     */
+    collapsed?: boolean | undefined;
+}
+
+/**
+ * Defines the methods and properties exposed by usePanel.
+ */
+export interface usePanelExposes {
+    /**
+     * The state of the usePanel.
+     */
+    state: usePanelState;
+    /**
+     * Reference to the content element of the panel.
+     */
+    contentRef: React.RefObject<HTMLDivElement | null>;
+    /**
+     * Toggles the collapsed state of the panel.
+     * @param {React.SyntheticEvent} event - Browser event
+     */
+    toggle: (event: React.SyntheticEvent) => void;
+    /**
+     * Expands the panel.
+     * @param {React.SyntheticEvent} event - Browser event
+     */
+    expand: (event: React.SyntheticEvent) => void;
+    /**
+     * Collapses the panel.
+     * @param {React.SyntheticEvent} event - Browser event
+     */
+    collapse: (event: React.SyntheticEvent) => void;
+    /**
+     * Callback for when the toggle button is clicked.
+     * @param {React.SyntheticEvent} event - Browser event
+     */
+    onButtonClick: (event: React.SyntheticEvent) => void;
+}
+
+/**
+ * Instance of usePanel headless.
+ */
+export type usePanelInstance = HeadlessInstance<usePanelProps, usePanelState, usePanelExposes>;

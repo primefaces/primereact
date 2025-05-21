@@ -6245,6 +6245,1427 @@
             }
         }
     },
+    "panel": {
+        "description": "Panel is a grouping component providing with content toggle feature.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelPassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of Panel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelProps": {
+                    "description": "Defines valid properties in Panel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "toggleable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, the content of panel can be expanded and collapsed by clicking the header."
+                        },
+                        {
+                            "name": "collapsed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the panel is collapsed."
+                        },
+                        {
+                            "name": "onCollapse",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Callback triggered when the panel is collapsed."
+                        },
+                        {
+                            "name": "onExpand",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Callback triggered when the panel is expanded."
+                        },
+                        {
+                            "name": "onToggle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: usePanelToggleEvent) => void",
+                            "default": "",
+                            "description": "Callback triggered when the panel's toggle state changes."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<usePanelProps>"
+                },
+                "PanelState": {
+                    "description": "Defines valid state in Panel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "collapsed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the panel is collapsed."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "usePanelState"
+                },
+                "PanelExposes": {
+                    "description": "Defines the methods and properties exposed by Panel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "usePanelState",
+                            "default": "",
+                            "description": "The state of the usePanel."
+                        },
+                        {
+                            "name": "contentRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the content element of the panel."
+                        },
+                        {
+                            "name": "toggle",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Toggles the collapsed state of the panel."
+                        },
+                        {
+                            "name": "expand",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Expands the panel."
+                        },
+                        {
+                            "name": "collapse",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Collapses the panel."
+                        },
+                        {
+                            "name": "onButtonClick",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Callback for when the toggle button is clicked."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "usePanelExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelPassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Panel component."
+                },
+                "PanelClassNamesType": {
+                    "values": "typeof PanelClassNames[keyof typeof PanelClassNames]",
+                    "description": "Type representing the CSS class names used in the Panel component."
+                },
+                "PanelInstance": {
+                    "values": "ComponentInstance<PanelProps, PanelState, PanelExposes>",
+                    "description": "Instance of Panel component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "PanelClassNames": {
+                    "description": "Defines the CSS class names used in the Panel component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-panel",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "header",
+                            "value": "p-panel-header",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the header element"
+                        },
+                        {
+                            "name": "title",
+                            "value": "p-panel-title",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the title element"
+                        },
+                        {
+                            "name": "headerActions",
+                            "value": "p-panel-header-actions",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the header actions element"
+                        },
+                        {
+                            "name": "pcToggleButton",
+                            "value": "p-panel-toggle-button",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the toggle button element"
+                        },
+                        {
+                            "name": "content",
+                            "value": "p-panel-content",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the content element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "panelcollapse": {
+        "description": "PanelCollapse is a component that displays a collapse button.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelCollapsePassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of PanelCollapse component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelCollapsePassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelCollapseProps": {
+                    "description": "Defines valid properties in PanelCollapse component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "iconOnly",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to show the PanelCollapse with a borderless style."
+                        },
+                        {
+                            "name": "severity",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string & {} | \"secondary\" | \"info\" | \"success\" | \"warn\" | \"danger\" | \"contrast\" | \"help\"",
+                            "default": "'secondary'",
+                            "description": "Severity type of the PanelCollapse."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"link\" | \"text\" | \"outlined\" | \"contained\"",
+                            "default": "'text'",
+                            "description": "Variant of the PanelCollapse."
+                        },
+                        {
+                            "name": "rounded",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to show the PanelCollapse with a rounded style."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps"
+                },
+                "PanelCollapseState": {
+                    "description": "Defines valid state in PanelCollapse component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "PanelCollapseExposes": {
+                    "description": "Defines the methods and properties exposed by PanelCollapse component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelCollapsePassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelCollapseInstance, E>",
+                    "description": "Defines passthrough(pt) options type in PanelCollapse component."
+                },
+                "PanelCollapseInstance": {
+                    "values": "ComponentInstance<PanelCollapseProps, PanelCollapseState, PanelCollapseExposes>",
+                    "description": "Instance of PanelCollapse component."
+                }
+            }
+        }
+    },
+    "panelcontent": {
+        "description": "PanelContent is a component that displays a content.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelContentPassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of PanelContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelContentPassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelContentProps": {
+                    "description": "Defines valid properties in PanelContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps"
+                },
+                "PanelContentState": {
+                    "description": "Defines valid state in PanelContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "PanelContentExposes": {
+                    "description": "Defines the methods and properties exposed by PanelContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelContentPassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelContentInstance, E>",
+                    "description": "Defines passthrough(pt) options type in PanelContent component."
+                },
+                "PanelContentInstance": {
+                    "values": "ComponentInstance<PanelContentProps, PanelContentState, PanelContentExposes>",
+                    "description": "Instance of PanelContent component."
+                }
+            }
+        }
+    },
+    "panelfooter": {
+        "description": "PanelFooter is a component that displays a footer.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelFooterPassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of PanelFooter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelFooterPassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelFooterProps": {
+                    "description": "Defines valid properties in PanelFooter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps"
+                },
+                "PanelFooterState": {
+                    "description": "Defines valid state in PanelFooter component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "PanelFooterExposes": {
+                    "description": "Defines the methods and properties exposed by PanelFooter component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelFooterPassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelFooterInstance, E>",
+                    "description": "Defines passthrough(pt) options type in PanelFooter component."
+                },
+                "PanelFooterInstance": {
+                    "values": "ComponentInstance<PanelFooterProps, PanelFooterState, PanelFooterExposes>",
+                    "description": "Instance of PanelFooter component."
+                }
+            }
+        }
+    },
+    "panelheader": {
+        "description": "PanelHeader is a component that displays a header.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelHeaderPassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of PanelHeadercomponent.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelHeaderPassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelHeaderProps": {
+                    "description": "Defines valid properties in PanelHeadercomponent.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps"
+                },
+                "PanelHeaderState": {
+                    "description": "Defines valid state in PanelHeadercomponent.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "PanelHeaderExposes": {
+                    "description": "Defines the methods and properties exposed by PanelHeadercomponent.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelHeaderPassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelHeaderInstance, E>",
+                    "description": "Defines passthrough(pt) options type in PanelHeadercomponent."
+                },
+                "PanelHeaderInstance": {
+                    "values": "ComponentInstance<PanelHeaderProps, PanelHeaderState, PanelHeaderExposes>",
+                    "description": "Instance of PanelHeadercomponent."
+                }
+            }
+        }
+    },
+    "panelheaderactions": {
+        "description": "PanelHeaderActions is a component that displays a header actions.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelHeaderActionsPassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of PanelHeaderActions component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelHeaderActionsPassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelHeaderActionsProps": {
+                    "description": "Defines valid properties in PanelHeaderActions component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps"
+                },
+                "PanelHeaderActionsState": {
+                    "description": "Defines valid state in PanelHeaderActions component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "PanelHeaderActionsExposes": {
+                    "description": "Defines the methods and properties exposed by PanelHeaderActions component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelHeaderActionsPassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelHeaderActionsInstance, E>",
+                    "description": "Defines passthrough(pt) options type in PanelHeaderActions component."
+                },
+                "PanelHeaderActionsInstance": {
+                    "values": "ComponentInstance<PanelHeaderActionsProps, PanelHeaderActionsState, PanelHeaderActionsExposes>",
+                    "description": "Instance of PanelHeaderActions component."
+                }
+            }
+        }
+    },
+    "paneltitle": {
+        "description": "PanelTitle is a component that displays a title.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelTitlePassThroughOptions": {
+                    "description": "Defines passthrough(pt) options of PanelTitlecomponent.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelTitlePassThroughOptionType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "PanelTitleProps": {
+                    "description": "Defines valid properties in PanelTitlecomponent.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Record<string, unknown>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<Record<string, unknown>, unknown>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "template",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The template to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps"
+                },
+                "PanelTitleState": {
+                    "description": "Defines valid state in PanelTitlecomponent.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "PanelTitleExposes": {
+                    "description": "Defines the methods and properties exposed by PanelTitlecomponent.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "PanelTitlePassThroughOptionType": {
+                    "values": "PassThroughOptionType<PanelTitleInstance, E>",
+                    "description": "Defines passthrough(pt) options type in PanelTitlecomponent."
+                },
+                "PanelTitleInstance": {
+                    "values": "ComponentInstance<PanelTitleProps, PanelTitleState, PanelTitleExposes>",
+                    "description": "Instance of PanelTitlecomponent."
+                }
+            }
+        }
+    },
+    "usepanel": {
+        "description": "The usePanel manages the state and functionality of a panel component.\n\n[Live Demo](https://www.primereact.org/panel/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "usePanelToggleEvent": {
+                    "description": "Event object for the onToggle callback.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent",
+                            "default": "",
+                            "description": "The original event that triggered the toggle."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The new value of the panel's toggle state."
+                        }
+                    ],
+                    "methods": []
+                },
+                "usePanelProps": {
+                    "description": "Props for the usePanel hook.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "collapsed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the panel is collapsed."
+                        },
+                        {
+                            "name": "toggleable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Indicates if the panel can be toggled."
+                        },
+                        {
+                            "name": "onCollapse",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Callback triggered when the panel is collapsed."
+                        },
+                        {
+                            "name": "onExpand",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Callback triggered when the panel is expanded."
+                        },
+                        {
+                            "name": "onToggle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: usePanelToggleEvent) => void",
+                            "default": "",
+                            "description": "Callback triggered when the panel's toggle state changes."
+                        }
+                    ],
+                    "methods": []
+                },
+                "usePanelState": {
+                    "description": "Defines valid state in usePanel.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "collapsed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the panel is collapsed."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "PanelState"
+                },
+                "usePanelExposes": {
+                    "description": "Defines the methods and properties exposed by usePanel.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "usePanelState",
+                            "default": "",
+                            "description": "The state of the usePanel."
+                        },
+                        {
+                            "name": "contentRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the content element of the panel."
+                        },
+                        {
+                            "name": "toggle",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Toggles the collapsed state of the panel."
+                        },
+                        {
+                            "name": "expand",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Expands the panel."
+                        },
+                        {
+                            "name": "collapse",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Collapses the panel."
+                        },
+                        {
+                            "name": "onButtonClick",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: SyntheticEvent) => void",
+                            "default": "",
+                            "description": "Callback for when the toggle button is clicked."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "PanelExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "usePanelInstance": {
+                    "values": "HeadlessInstance<usePanelProps, usePanelState, usePanelExposes>",
+                    "description": "Instance of usePanel headless."
+                }
+            }
+        }
+    },
     "progressbar": {
         "description": "ProgressBar is a process status indicator.\n\n[Live Demo](https://www.primereact.org/progressbar/)",
         "interfaces": {

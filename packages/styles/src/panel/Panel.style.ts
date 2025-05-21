@@ -1,6 +1,12 @@
 import { createStyles } from '@primereact/styles/utils';
 import { style } from '@primeuix/styles/panel';
 
+export const inlineStyles = {
+    content: ({ state }) => ({
+        display: state?.collapsed ? 'none' : 'block'
+    })
+};
+
 export const classes = {
     root: ({ props }) => [
         'p-panel p-component',
@@ -13,18 +19,13 @@ export const classes = {
     headerActions: 'p-panel-header-actions',
     pcToggleButton: 'p-panel-toggle-button',
     contentContainer: 'p-panel-content-container',
-    content: ({ state }) => [
-        'p-panel-content',
-        {
-            // @todo: remove
-            hidden: state?.collapsed
-        }
-    ],
+    content: 'p-panel-content',
     footer: 'p-panel-footer'
 };
 
 export const styles = createStyles({
     name: 'panel',
     style,
-    classes
+    classes,
+    inlineStyles
 });

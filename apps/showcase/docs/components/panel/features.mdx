@@ -1,0 +1,46 @@
+---
+title: 'Panel'
+description: 'Panel is a grouping component providing with content toggle feature.'
+component: 'panel'
+---
+
+## Import
+
+```tsx
+import { Panel } from 'primereact/panel';
+```
+
+## Basic
+
+Panel is a container component with a header and content.
+
+<DocComponentViewer name="panel:basic-demo" />
+
+## Toggleable
+
+When the toggleable property is enabled, content can be expanded and collapsed using the header interaction.
+
+<DocComponentViewer name="panel:toggleable-demo" />
+
+## Template
+
+Header and footer sections of the panel can be customized using header template feature.
+
+<DocComponentViewer name="panel:template-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Toggleable panels use a content toggle button at the header that has _aria-controls_ to define the id of the content section along with _aria-expanded_ for the visibility state.
+
+The content uses _region_, defines an id that matches the _aria-controls_ of the content toggle button and _aria-labelledby_ referring to the id of the header.
+
+### Keyboard Support
+
+| Key         | Function                                                                    |
+| ----------- | --------------------------------------------------------------------------- |
+| tab         | Moves focus to the next the focusable element in the page tab sequence.     |
+| shift + tab | Moves focus to the previous the focusable element in the page tab sequence. |
+| enter       | Toggles the visibility of the content.                                      |
+| space       | Toggles the visibility of the content.                                      |

@@ -18,8 +18,8 @@ export const PanelContent = withComponent({
 
         const rootProps = mergeProps(
             {
-                style: panel?.sx('content'),
-                className: panel?.cx('content')
+                className: panel?.cx('content'),
+                style: panel?.sx('content')
             },
             panel?.ptm('content'),
             ptmi('root')
