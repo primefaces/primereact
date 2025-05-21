@@ -6,6 +6,7 @@ export const FilterMatchMode = Object.freeze({
     EQUALS: 'equals',
     NOT_EQUALS: 'notEquals',
     IN: 'in',
+    NOT_IN: 'notIn',
     LESS_THAN: 'lt',
     LESS_THAN_OR_EQUAL_TO: 'lte',
     GREATER_THAN: 'gt',
