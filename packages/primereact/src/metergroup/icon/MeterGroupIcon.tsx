@@ -1,5 +1,6 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { withComponent } from '@primereact/core/component';
+import { Icon } from '@primereact/core/icon';
 import { mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { useMeterGroupContext } from '../MeterGroup.context';
@@ -18,15 +19,12 @@ export const MeterGroupIcon = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelIcon'),
-                style: {
-                    color: props.color
-                }
+                className: metergroup?.cx('labelIcon')
             },
             metergroup?.ptm('labelIcon'),
             ptmi('root')
         );
 
-        return <Component instance={instance} attrs={rootProps} children={props.children} />;
+        return <Icon {...props} {...rootProps} />;
     }
 });

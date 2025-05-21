@@ -1,15 +1,19 @@
-import { withIcon } from '@primereact/core/icon';
-import { styles } from '@primereact/styles/icon';
-import { IconProps, withBaseIconOptions } from '@primereact/types/core';
+import { defaultProps, styles, withIcon } from '@primereact/core/icon';
+import type { withBaseIconOptions } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils';
 
-export const withBaseIcon = <IProps, RData extends Record<PropertyKey, unknown>>({ name, render }: withBaseIconOptions<IProps, RData>) => {
+export const withBaseIcon = <IProps, Exposes extends Record<PropertyKey, unknown>>({ name, render }: withBaseIconOptions<IProps, Exposes>) => {
     return withIcon({
         name,
-        render: ({ id, ptmi, pti, cx }) => {
+        styles,
+        defaultProps,
+        render(instance) {
+            const { id, ptmi, pti, cx, sx } = instance;
+
             const rootProps = mergeProps(
                 {
                     id,
+                    style: sx('root'),
                     className: cx('root')
                 },
                 pti(),
@@ -17,8 +21,6 @@ export const withBaseIcon = <IProps, RData extends Record<PropertyKey, unknown>>
             );
 
             return render?.({ rootProps });
-        },
-        defaultProps: {} as IconProps,
-        styles
+        }
     });
 };

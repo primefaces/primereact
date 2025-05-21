@@ -1,29 +1,34 @@
-import { useComponent } from '@primereact/core/component';
-import type { ComponentInstance, withIconOptions } from '@primereact/types/core';
+import { withComponent } from '@primereact/core/component';
+import type { BaseSetup, withComponentOptions } from '@primereact/types/core';
+import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { useIcon } from './useIcon';
 
-export const withIcon = <IProps, DProps, RData extends Record<PropertyKey, unknown>>({ name = 'UnknownIcon', defaultProps, styles, render }: withIconOptions<IProps, DProps, RData>) => {
-    const BaseIconComponent = (inProps?: IProps & DProps) => {
-        const instance = useComponent(name, {
-            inProps,
-            defaultProps,
-            styles,
-            setup: () => {
-                return useIcon(inProps);
-            }
-        });
+export const withIcon = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, CData = Record<string, unknown>>({
+    name,
+    defaultProps,
+    styles,
+    components,
+    setup,
+    render
+}: withComponentOptions<IProps, DProps, Exposes, CData>) => {
+    return withComponent<IProps, DProps, Exposes, CData>({
+        name: `${name ?? 'Unknown'}Icon`,
+        defaultProps,
+        styles,
+        components,
+        setup(instance) {
+            const icon = useIcon(instance?.inProps);
+            const computedSetup = resolve(setup as BaseSetup<typeof instance.props, IProps, Exposes>, instance) as Exposes;
 
-        type RenderedIconComponentProps = ComponentInstance<typeof instance.props, IProps & DProps, ComponentInstance, RData>;
-
-        const RenderedIconComponent = (render as React.FC<RenderedIconComponentProps>) ?? (() => null);
-
-        return <RenderedIconComponent {...(instance as RenderedIconComponentProps)} />;
-    };
-
-    const IconComponent = BaseIconComponent as typeof BaseIconComponent & React.FC;
-
-    IconComponent.displayName = `PrimeReact.Icon.${name}`;
-
-    return IconComponent;
+            return React.useMemo(
+                () => ({
+                    ...icon,
+                    ...computedSetup
+                }),
+                [icon, computedSetup]
+            );
+        },
+        render
+    });
 };

@@ -12,18 +12,16 @@ export default function IconDemo() {
         <div className="card">
             <MeterGroup>
                 <MeterGroup.Meters>
-                    {values.map((value, index) => (
-                        <MeterGroup.Meter key={`meter_${index}`} value={value} />
+                    {values.map(({ value, color }, index) => (
+                        <MeterGroup.Meter key={`meter_${index}`} value={value} color={color} />
                     ))}
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
-                    {values.map((value, index) => (
+                    {values.map(({ value, label, color, icon }, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
-                            <MeterGroup.Icon color={value.color}>
-                                <i className={value.icon}></i>
-                            </MeterGroup.Icon>
+                            <MeterGroup.Icon className={icon} style={{ color }} />
                             <MeterGroup.Text>
-                                {value.label} ({value.value}%)
+                                {label} ({value}%)
                             </MeterGroup.Text>
                         </MeterGroup.Label>
                     ))}
