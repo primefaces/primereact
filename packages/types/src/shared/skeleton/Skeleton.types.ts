@@ -84,7 +84,7 @@ export const SkeletonClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the Skeleton component.
  */
 export type SkeletonClassNamesType = (typeof SkeletonClassNames)[keyof typeof SkeletonClassNames];
 

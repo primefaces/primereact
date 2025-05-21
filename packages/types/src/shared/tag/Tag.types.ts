@@ -73,7 +73,7 @@ export const TagClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the Tag component.
  */
 export type TagClassNamesType = (typeof TagClassNames)[keyof typeof TagClassNames];
 

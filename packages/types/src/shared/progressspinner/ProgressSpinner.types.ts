@@ -86,7 +86,7 @@ export const ProgressSpinnerClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the ProgressSpinner component.
  */
 export type ProgressSpinnerClassNamesType = (typeof ProgressSpinnerClassNames)[keyof typeof ProgressSpinnerClassNames];
 

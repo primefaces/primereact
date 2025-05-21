@@ -52,7 +52,7 @@ export const ButtonGroupClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the ButtonGroup component.
  */
 export type ButtonGroupClassNamesType = (typeof ButtonGroupClassNames)[keyof typeof ButtonGroupClassNames];
 

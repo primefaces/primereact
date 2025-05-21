@@ -77,7 +77,7 @@ export const ProgressBarClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the ProgressBar component.
  */
 export type ProgressBarClassNamesType = (typeof ProgressBarClassNames)[keyof typeof ProgressBarClassNames];
 

@@ -95,7 +95,7 @@ export const CheckboxGroupClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the CheckboxGroup component.
  */
 export type CheckboxGroupClassNamesType = (typeof CheckboxGroupClassNames)[keyof typeof CheckboxGroupClassNames];
 

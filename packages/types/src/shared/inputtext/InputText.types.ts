@@ -68,7 +68,7 @@ export const InputTextClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the InputText component.
  */
 export type InputTextClassNamesType = (typeof InputTextClassNames)[keyof typeof InputTextClassNames];
 

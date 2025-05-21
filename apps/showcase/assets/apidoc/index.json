@@ -936,12 +936,12 @@
                             "description": "The children to render."
                         },
                         {
-                            "name": "circle",
+                            "name": "shape",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean",
+                            "type": "\"circle\"",
                             "default": "",
-                            "description": "Whether to show the badge with a circle shape."
+                            "description": "Defines the shape of the badge."
                         },
                         {
                             "name": "size",
@@ -1353,7 +1353,7 @@
                             "name": "variant",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"link\" | \"text\" | \"outlined\" | \"contained\"",
+                            "type": "\"link\" | \"text\" | \"outlined\"",
                             "default": "",
                             "description": "Variant of the Button."
                         },
@@ -1615,7 +1615,7 @@
                 },
                 "ButtonGroupClassNamesType": {
                     "values": "typeof ButtonGroupClassNames[keyof typeof ButtonGroupClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the ButtonGroup component."
                 },
                 "ButtonGroupInstance": {
                     "values": "ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes>",
@@ -2088,7 +2088,7 @@
                 },
                 "CheckboxClassNamesType": {
                     "values": "typeof CheckboxClassNames[keyof typeof CheckboxClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the Checkbox component."
                 },
                 "CheckboxInstance": {
                     "values": "ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes>",
@@ -2371,7 +2371,7 @@
                 },
                 "CheckboxGroupClassNamesType": {
                     "values": "typeof CheckboxGroupClassNames[keyof typeof CheckboxGroupClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the CheckboxGroup component."
                 },
                 "CheckboxGroupInstance": {
                     "values": "ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes>",
@@ -3776,7 +3776,7 @@
                 },
                 "InplaceClassNamesType": {
                     "values": "typeof InplaceClassNames[keyof typeof InplaceClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the Inplace component."
                 },
                 "InplaceInstance": {
                     "values": "ComponentInstance<InplaceProps, InplaceState, InplaceExposes>",
@@ -4591,7 +4591,7 @@
                 },
                 "InputTextClassNamesType": {
                     "values": "typeof InputTextClassNames[keyof typeof InputTextClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the InputText component."
                 },
                 "InputTextInstance": {
                     "values": "ComponentInstance<InputTextProps, InputTextState, InputTextExposes>",
@@ -4881,7 +4881,7 @@
                 },
                 "MeterGroupClassNamesType": {
                     "values": "typeof MeterGroupClassNames[keyof typeof MeterGroupClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the MeterGroup component."
                 },
                 "MeterGroupInstance": {
                     "values": "ComponentInstance<MeterGroupProps, MeterGroupState, MeterGroupExposes>",
@@ -7840,7 +7840,7 @@
                 },
                 "ProgressBarClassNamesType": {
                     "values": "typeof ProgressBarClassNames[keyof typeof ProgressBarClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the ProgressBar component."
                 },
                 "ProgressBarInstance": {
                     "values": "ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes>",
@@ -8272,7 +8272,7 @@
                 },
                 "ProgressSpinnerClassNamesType": {
                     "values": "typeof ProgressSpinnerClassNames[keyof typeof ProgressSpinnerClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the ProgressSpinner component."
                 },
                 "ProgressSpinnerInstance": {
                     "values": "ComponentInstance<ProgressSpinnerProps, ProgressSpinnerState, ProgressSpinnerExposes>",
@@ -9351,7 +9351,7 @@
                 },
                 "SkeletonClassNamesType": {
                     "values": "typeof SkeletonClassNames[keyof typeof SkeletonClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the Skeleton component."
                 },
                 "SkeletonInstance": {
                     "values": "ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes>",
@@ -10012,7 +10012,7 @@
                 },
                 "TagClassNamesType": {
                     "values": "typeof TagClassNames[keyof typeof TagClassNames]",
-                    "description": "Type representing the CSS class names used in the Button component."
+                    "description": "Type representing the CSS class names used in the Tag component."
                 },
                 "TagInstance": {
                     "values": "ComponentInstance<TagProps, TagState, TagExposes>",

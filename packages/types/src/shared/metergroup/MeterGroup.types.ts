@@ -89,7 +89,7 @@ export const MeterGroupClassNames = {
 } as const;
 
 /**
- * Type representing the CSS class names used in the Button component.
+ * Type representing the CSS class names used in the MeterGroup component.
  */
 export type MeterGroupClassNamesType = (typeof MeterGroupClassNames)[keyof typeof MeterGroupClassNames];
 
