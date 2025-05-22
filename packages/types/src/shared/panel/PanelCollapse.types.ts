@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { PanelInstance } from './Panel.types';
 
 /**
  * Defines passthrough(pt) options type in PanelCollapse component.
@@ -60,7 +61,12 @@ export interface PanelCollapseState {}
 /**
  * Defines the methods and properties exposed by PanelCollapse component.
  */
-export interface PanelCollapseExposes {}
+export interface PanelCollapseExposes {
+    /**
+     * Instance of the Panel component.
+     */
+    panel: PanelInstance | undefined | null;
+}
 
 /**
  * Instance of PanelCollapse component.

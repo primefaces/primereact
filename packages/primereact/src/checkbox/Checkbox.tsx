@@ -4,7 +4,7 @@ import { useCheckbox } from '@primereact/headless/checkbox';
 import { CheckIcon } from '@primereact/icons/check';
 import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
-import type { CheckboxChangeEvent, CheckboxInstance } from '@primereact/types/shared/checkbox';
+import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import { cn, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { CheckboxProvider } from './Checkbox.context';
@@ -38,7 +38,7 @@ export const Checkbox = withComponent({
             group
         };
     },
-    render(instance: CheckboxInstance) {
+    render(instance) {
         const {
             id,
             props,

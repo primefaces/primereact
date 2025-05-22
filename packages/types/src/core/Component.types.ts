@@ -45,28 +45,23 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
      */
     styles?: StylesOptions | undefined;
     /**
-     * The template to use for the component.
-     * @todo remove this
-     */
-    template?: unknown;
-    /**
      * The children to render.
-     * @todo update this to ReactNode
+     * @todo update the type to be more specific
      */
-    children?: React.ReactNode | undefined;
+    children?: React.ReactNode | ((instance?: unknown) => React.ReactNode) | undefined;
 }
 
-export declare type withComponentOptions<IProps, DProps, Exposes, CData> = {
+export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData> = {
     name?: string | undefined;
     defaultProps?: DProps | undefined;
-    styles?: StylesOptions | undefined;
+    styles?: Styles | undefined;
     components?: CData | undefined;
-    setup?: useComponentOptions<IProps, DProps, Exposes>['setup'];
+    setup?: useComponentOptions<IProps, DProps, Exposes, Styles>['setup'];
     render?: React.FC<InComponentInstance<DProps, IProps, Record<PropertyKey, unknown>, Exposes>>;
 };
 
-export declare type useComponentOptions<IProps, DProps, Exposes> = useBaseOptions<IProps, DProps, Exposes> & {
-    styles?: StylesOptions | undefined;
+export declare type useComponentOptions<IProps, DProps, Exposes, Styles> = useBaseOptions<IProps, DProps, Exposes> & {
+    styles?: Styles | undefined;
 };
 
 export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = Instance<Props, IProps, State, Exposes> & {

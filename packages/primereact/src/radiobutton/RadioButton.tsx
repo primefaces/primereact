@@ -2,7 +2,7 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
 import { styles } from '@primereact/styles/radiobutton';
-import type { RadioButtonChangeEvent, RadioButtonInstance } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonChangeEvent } from '@primereact/types/shared/radiobutton';
 import { cn, equals, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { RadioButtonGroup, useRadioButtonGroupContext } from './group';
@@ -47,7 +47,7 @@ export const RadioButton = withComponent({
             group,
             // methods
             onChange
-        } = instance as RadioButtonInstance;
+        } = instance;
 
         const createInputElement = () => {
             const inputProps = mergeProps(
