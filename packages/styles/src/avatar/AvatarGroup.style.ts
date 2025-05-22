@@ -1,10 +1,9 @@
 import { createStyles } from '@primereact/styles/utils';
+import type { AvatarGroupInstance } from '@primereact/types/shared/avatar';
 
-export const groupClasses = {
-    root: 'p-avatar-group'
-};
-
-export const groupStyles = createStyles({
+export const groupStyles = createStyles<AvatarGroupInstance>({
     name: 'avatargroup',
-    classes: groupClasses
+    classes: {
+        root: 'p-avatar-group'
+    }
 });

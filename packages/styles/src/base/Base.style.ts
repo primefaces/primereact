@@ -22,14 +22,10 @@ const css = /*css*/ `
 }
 `;
 
-const classes = {};
-
-const inlineStyles = {};
-
 export const styles = {
     name: 'base',
     css,
     style,
-    classes,
-    inlineStyles
+    classes: {},
+    inlineStyles: {}
 } satisfies StylesOptions;

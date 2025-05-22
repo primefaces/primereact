@@ -1,15 +1,24 @@
 import type { StyleType } from '@primeuix/styled';
 import type { CSSProperties } from 'react';
+import { ComponentInstance } from '../core';
 
 export type * from '@primeuix/styled';
 
-export declare type StyleKeyType<I, R> = string | ((instance: I) => R);
+export type StyleKeyTypeOptions<I extends ComponentInstance = ComponentInstance> = {
+    instance: I;
+    props: I['props'];
+    attrs: I['attrs'];
+    state: I['state'];
+    context: Record<string, unknown>;
+};
 
-export declare type ClassesType<K, I> = Record<keyof K, StyleKeyType<I, string | unknown[]>>;
+export type StyleKeyType<I extends ComponentInstance, Return> = string | Return | ((instance: StyleKeyTypeOptions<I>) => Return);
 
-export declare type InlineStylesType<K, I> = Record<keyof K, StyleKeyType<I, CSSProperties>>;
+export type ClassesType<I extends ComponentInstance> = Record<string, StyleKeyType<I, string | (string | object)[]>>;
 
-export interface StylesOptions<K = Record<string, unknown>, I = unknown> {
+export type InlineStylesType<I extends ComponentInstance> = Record<string, StyleKeyType<I, CSSProperties>>;
+
+export interface StylesOptions<I extends ComponentInstance = ComponentInstance> {
     /**
      * The name of the styles.
      */
@@ -25,13 +34,13 @@ export interface StylesOptions<K = Record<string, unknown>, I = unknown> {
     /**
      * The classes of the styles
      */
-    classes?: ClassesType<K, I> | undefined;
+    classes?: ClassesType<I> | undefined;
     /**
      * The inline styles of the styles
      */
-    inlineStyles?: InlineStylesType<K, I> | undefined;
+    inlineStyles?: InlineStylesType<I> | undefined;
     /**
      * The base styles for all components.
      */
-    baseStyles?: StylesOptions<unknown, unknown> | undefined;
+    baseStyles?: StylesOptions<I> | undefined;
 }

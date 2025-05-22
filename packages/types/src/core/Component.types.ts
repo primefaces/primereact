@@ -124,7 +124,12 @@ export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = R
     $style: Record<string, unknown> | undefined;
 };
 
-export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<Props, Props, State, Exposes>;
+export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<
+    Props,
+    Props,
+    State & Record<PropertyKey, unknown>,
+    Exposes & Record<PropertyKey, unknown>
+>;
 
 export type InferComponentInstance<I> =
     I extends ComponentInstance<infer Props, infer State, infer Exposes>

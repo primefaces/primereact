@@ -1,12 +1,11 @@
 import { createStyles } from '@primereact/styles/utils';
+import type { ButtonGroupInstance } from '@primereact/types/shared/button';
 import { style } from '@primeuix/styles/buttongroup';
 
-const classes = {
-    root: 'p-buttongroup p-component'
-};
-
-export const groupStyles = createStyles({
+export const groupStyles = createStyles<ButtonGroupInstance>({
     name: 'buttongroup',
     style,
-    classes
+    classes: {
+        root: 'p-buttongroup p-component'
+    }
 });

@@ -39,6 +39,12 @@ export const useCheckbox = withHeadless({
             ]);
         };
 
+        React.useEffect(() => {
+            if (props.indeterminate !== undefined) {
+                setIndeterminateState(props.indeterminate);
+            }
+        }, [props.indeterminate]);
+
         return {
             state,
             // methods
