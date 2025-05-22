@@ -4,7 +4,7 @@ import { useCheckbox } from '@primereact/headless/checkbox';
 import { CheckIcon } from '@primereact/icons/check';
 import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
-import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
+import type { CheckboxChangeEvent, CheckboxInstance } from '@primereact/types/shared/checkbox';
 import { cn, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { CheckboxProvider } from './Checkbox.context';
@@ -35,10 +35,10 @@ export const Checkbox = withComponent({
 
         return {
             ...checkbox,
-            groupName: group?.props.name
+            group
         };
     },
-    render(instance) {
+    render(instance: CheckboxInstance) {
         const {
             id,
             props,
@@ -46,7 +46,7 @@ export const Checkbox = withComponent({
             ptmi,
             ptm,
             cx,
-            groupName,
+            group,
             // methods
             onChange
         } = instance;
@@ -59,15 +59,15 @@ export const Checkbox = withComponent({
                     style: props.inputStyle,
                     className: cn(cx('input'), props.inputClassName),
                     value: props.value,
-                    name: props.name ?? groupName,
+                    name: props.name ?? group?.props.name,
                     checked: state.checked,
                     tabIndex: props.tabIndex,
-                    disabled: props.disabled,
+                    disabled: props.disabled || group?.props.disabled,
                     readOnly: props.readOnly,
                     required: props.required,
                     'aria-labelledby': props.ariaLabelledby,
                     'aria-label': props.ariaLabel,
-                    'aria-invalid': props.invalid || undefined,
+                    'aria-invalid': props.invalid || group?.props.invalid || undefined,
                     'aria-checked': state.indeterminate ? 'mixed' : undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,

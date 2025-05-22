@@ -2,7 +2,7 @@
 import { Component, withComponent } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
 import { styles } from '@primereact/styles/radiobutton';
-import type { RadioButtonChangeEvent } from '@primereact/types/shared/radiobutton';
+import type { RadioButtonChangeEvent, RadioButtonInstance } from '@primereact/types/shared/radiobutton';
 import { cn, equals, mergeProps } from '@primeuix/utils';
 import * as React from 'react';
 import { RadioButtonGroup, useRadioButtonGroupContext } from './group';
@@ -33,7 +33,7 @@ export const RadioButton = withComponent({
 
         return {
             ...radioButton,
-            groupName: group?.props.name
+            group
         };
     },
     render(instance) {
@@ -44,10 +44,10 @@ export const RadioButton = withComponent({
             ptmi,
             ptm,
             cx,
-            groupName,
+            group,
             // methods
             onChange
-        } = instance;
+        } = instance as RadioButtonInstance;
 
         const createInputElement = () => {
             const inputProps = mergeProps(
@@ -57,15 +57,15 @@ export const RadioButton = withComponent({
                     style: props.inputStyle,
                     className: cn(cx('input'), props.inputClassName),
                     value: props.value,
-                    name: props.name ?? groupName,
+                    name: props.name ?? group?.props.name,
                     checked: state.checked,
                     tabIndex: props.tabIndex,
-                    disabled: props.disabled,
+                    disabled: props.disabled || group?.props.disabled,
                     readOnly: props.readOnly,
                     required: props.required,
                     'aria-labelledby': props.ariaLabelledby,
                     'aria-label': props.ariaLabel,
-                    'aria-invalid': props.invalid || undefined,
+                    'aria-invalid': props.invalid || group?.props.invalid || undefined,
                     onFocus: props.onFocus,
                     onBlur: props.onBlur,
                     onChange

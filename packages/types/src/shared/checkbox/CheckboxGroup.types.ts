@@ -60,6 +60,16 @@ export interface CheckboxGroupProps extends BaseComponentProps {
      */
     name?: string | undefined;
     /**
+     * When present, it specifies that the checkbox group should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that the checkbox group is invalid.
+     * @default false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Callback function that is called when the checkbox group value changes.
      */
     onValueChange?: (event: CheckboxGroupValueChangeEvent) => void;

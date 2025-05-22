@@ -5,5 +5,7 @@ export const defaultGroupProps: CheckboxGroupProps = {
     value: undefined,
     defaultValue: undefined,
     name: undefined,
+    disabled: undefined,
+    invalid: undefined,
     onValueChange: undefined
 };

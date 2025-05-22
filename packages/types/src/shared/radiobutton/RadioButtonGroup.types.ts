@@ -60,6 +60,16 @@ export interface RadioButtonGroupProps extends BaseComponentProps {
      */
     name?: string | undefined;
     /**
+     * When present, it specifies that the radio button group should be disabled.
+     * @default false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * When present, it specifies that the radio button group is invalid.
+     * @default false
+     */
+    invalid?: boolean | undefined;
+    /**
      * Callback function that is called when the radio button group value changes.
      */
     onValueChange?: (event: RadioButtonGroupValueChangeEvent) => void;

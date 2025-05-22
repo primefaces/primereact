@@ -5,5 +5,7 @@ export const defaultProps: RadioButtonGroupProps = {
     value: undefined,
     defaultValue: undefined,
     name: undefined,
+    disabled: undefined,
+    invalid: undefined,
     onValueChange: undefined
 };
