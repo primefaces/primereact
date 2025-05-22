@@ -34,6 +34,10 @@
                     "name": "Panel",
                     "children": [
                         {
+                            "name": "Accordion",
+                            "to": "/accordion"
+                        },
+                        {
                             "name": "Panel",
                             "to": "/docs/components/panel"
                         }
