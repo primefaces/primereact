@@ -46,10 +46,12 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
     styles?: StylesOptions | undefined;
     /**
      * The template to use for the component.
+     * @todo remove this
      */
     template?: unknown;
     /**
      * The children to render.
+     * @todo update this to ReactNode
      */
     children?: React.ReactNode | undefined;
 }
