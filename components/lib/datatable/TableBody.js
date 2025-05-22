@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
-import { useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMergeProps, useUnmountEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
@@ -174,7 +174,7 @@ export const TableBody = React.memo(
         };
 
         const allowRangeSelection = (event) => {
-            return isMultipleSelection() && event.originalEvent.shiftKey && anchorRowIndex.current !== null;
+            return isMultipleSelection() && event.originalEvent.shiftKey && anchorRowIndex.current !== null && (anchorRowFirst.current === props.first || (props.multiPageRangeSelection && !props.lazy));
         };
 
         const allowRowSelection = () => {
@@ -890,12 +890,6 @@ export const TableBody = React.memo(
                 updateFrozenRowGroupHeaderStickyPosition();
             }
         });
-
-        useUpdateEffect(() => {
-            if (props.paginator && isMultipleSelection()) {
-                anchorRowIndex.current = null;
-            }
-        }, [props.first]);
 
         useUnmountEffect(() => {
             if (props.dragSelection) {
