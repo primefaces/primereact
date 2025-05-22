@@ -199,10 +199,6 @@ export const TableBody = React.memo(
             return options ? options[option] : null;
         };
 
-        const getProcessedDataIndex = (rowIndex) => {
-            return props.lazy ? rowIndex - props.first : rowIndex;
-        };
-
         const findIndex = (collection, rowData) => {
             return (collection || []).findIndex((data) => equals(rowData, data));
         };
@@ -355,17 +351,15 @@ export const TableBody = React.memo(
             let rangeEnd;
 
             const isAllowCellSelection = allowCellSelection();
-            const rangeRowIndexInProcessedData = getProcessedDataIndex(rangeRowIndex.current);
-            const anchorRowIndexInProcessedData = getProcessedDataIndex(anchorRowIndex.current);
 
-            if (rangeRowIndexInProcessedData > anchorRowIndexInProcessedData) {
-                rangeStart = anchorRowIndexInProcessedData;
-                rangeEnd = rangeRowIndexInProcessedData;
-            } else if (rangeRowIndexInProcessedData < anchorRowIndexInProcessedData) {
-                rangeStart = rangeRowIndexInProcessedData;
-                rangeEnd = anchorRowIndexInProcessedData;
+            if (rangeRowIndex.current > anchorRowIndex.current) {
+                rangeStart = anchorRowIndex.current;
+                rangeEnd = rangeRowIndex.current;
+            } else if (rangeRowIndex.current < anchorRowIndex.current) {
+                rangeStart = rangeRowIndex.current;
+                rangeEnd = anchorRowIndex.current;
             } else {
-                rangeStart = rangeEnd = rangeRowIndexInProcessedData;
+                rangeStart = rangeEnd = rangeRowIndex.current;
             }
 
             return isAllowCellSelection ? selectRangeOnCell(event, rangeStart, rangeEnd) : selectRangeOnRow(event, rangeStart, rangeEnd);
@@ -410,7 +404,7 @@ export const TableBody = React.memo(
             for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
                 let rowData = value[i];
                 let columns = props.columns;
-                let rowIndex = props.lazy ? i + props.first : i;
+                let rowIndex = props.paginator ? i + props.first : i;
 
                 for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
                     let field = getColumnProp(columns[j], 'field');
@@ -941,7 +935,7 @@ export const TableBody = React.memo(
         };
 
         const createGroupHeader = (rowData, rowIndex, expanded, colSpan) => {
-            if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, getProcessedDataIndex(rowIndex))) {
+            if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, rowIndex - props.first)) {
                 const style = rowGroupHeaderStyle();
                 const toggler = props.expandableRowGroups && (
                     <RowTogglerButton
