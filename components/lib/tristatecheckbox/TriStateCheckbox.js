@@ -124,6 +124,7 @@ export const TriStateCheckbox = React.memo(
 
         const boxProps = mergeProps(
             {
+                id: props.id + '_box'
                 className: cx('box'),
                 tabIndex: props.disabled ? '-1' : props.tabIndex,
                 onFocus: onFocus,
