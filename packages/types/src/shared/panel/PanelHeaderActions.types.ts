@@ -29,7 +29,7 @@ export interface PanelHeaderActionsPassThroughOptions {
 /**
  * Defines valid properties in PanelHeaderActions component.
  */
-export interface PanelHeaderActionsProps extends BaseComponentProps {}
+export interface PanelHeaderActionsProps extends BaseComponentProps<PanelHeaderActionsInstance> {}
 
 /**
  * Defines valid state in PanelHeaderActions component.

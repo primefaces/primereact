@@ -30,7 +30,7 @@ export interface BadgePassThroughOptions {
 /**
  * Defines valid properties in Badge component.
  */
-export interface BadgeProps extends BaseComponentProps<useBadgeProps> {
+export interface BadgeProps extends BaseComponentProps<BadgeInstance, useBadgeProps> {
     /**
      * Defines the shape of the badge.
      */

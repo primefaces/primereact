@@ -30,7 +30,7 @@ export interface ChipLabelPassThroughOptions {
 /**
  * Defines valid properties in ChipLabel component.
  */
-export interface ChipLabelProps extends BaseComponentProps {}
+export interface ChipLabelProps extends BaseComponentProps<ChipLabelInstance> {}
 
 /**
  * Defines valid state in ChipLabel component.

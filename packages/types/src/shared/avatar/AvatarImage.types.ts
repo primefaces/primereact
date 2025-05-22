@@ -30,7 +30,7 @@ export interface AvatarImagePassThroughOptions {
 /**
  * Defines valid properties in AvatarImage component.
  */
-export interface AvatarImageProps extends BaseComponentProps<unknown, 'img'> {}
+export interface AvatarImageProps extends BaseComponentProps<AvatarImageInstance, unknown, 'img'> {}
 
 /**
  * Defines valid state in AvatarImage component.

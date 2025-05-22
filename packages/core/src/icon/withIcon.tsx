@@ -1,18 +1,19 @@
 import { withComponent } from '@primereact/core/component';
 import type { BaseSetup, withComponentOptions } from '@primereact/types/core';
+import type { StylesOptions } from '@primereact/types/styles';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { useIcon } from './useIcon';
 
-export const withIcon = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, CData = Record<string, unknown>>({
+export const withIcon = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, Styles = StylesOptions, CData = Record<string, unknown>>({
     name,
     defaultProps,
     styles,
     components,
     setup,
     render
-}: withComponentOptions<IProps, DProps, Exposes, CData>) => {
-    return withComponent<IProps, DProps, Exposes, CData>({
+}: withComponentOptions<IProps, DProps, Exposes, Styles, CData>) => {
+    return withComponent<IProps, DProps, Exposes, Styles, CData>({
         name: `${name ?? 'Unknown'}Icon`,
         defaultProps,
         styles,

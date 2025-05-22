@@ -30,7 +30,7 @@ export interface InputTextPassThroughOptions {
 /**
  * Defines valid properties in InputText component.
  */
-export interface InputTextProps extends BaseComponentProps<useInputTextProps> {
+export interface InputTextProps extends BaseComponentProps<InputTextInstance, useInputTextProps> {
     /**
      * Defines the size of the InputText.
      */

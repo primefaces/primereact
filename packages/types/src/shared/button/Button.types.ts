@@ -30,7 +30,7 @@ export interface ButtonPassThroughOptions {
 /**
  * Defines valid properties in Button component.
  */
-export interface ButtonProps extends BaseComponentProps<useButtonProps> {
+export interface ButtonProps extends BaseComponentProps<ButtonInstance, useButtonProps> {
     /**
      * Size of the Button.
      */

@@ -1,11 +1,12 @@
 import { Instance, useBaseOptions } from '.';
+import { SafeRecord } from '..';
 import { StylesOptions } from '../styles';
 import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
 
 /**
  * Defines the global props of the components.
  */
-export interface GlobalComponentProps<T extends React.ElementType = React.ElementType, R = unknown, D = unknown> {
+export interface GlobalComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> {
     /**
      * The reference to the component instance.
      */
@@ -48,7 +49,7 @@ export interface GlobalComponentProps<T extends React.ElementType = React.Elemen
      * The children to render.
      * @todo update the type to be more specific
      */
-    children?: React.ReactNode | ((instance?: unknown) => React.ReactNode) | undefined;
+    children?: React.ReactNode | ((instance: I) => React.ReactNode) | undefined;
 }
 
 export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData> = {
@@ -119,12 +120,7 @@ export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = R
     $style: Record<string, unknown> | undefined;
 };
 
-export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<
-    Props,
-    Props,
-    State & Record<PropertyKey, unknown>,
-    Exposes & Record<PropertyKey, unknown>
->;
+export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<SafeRecord<Props>, SafeRecord<Props>, SafeRecord<State>, SafeRecord<Exposes>>;
 
 export type InferComponentInstance<I> =
     I extends ComponentInstance<infer Props, infer State, infer Exposes>

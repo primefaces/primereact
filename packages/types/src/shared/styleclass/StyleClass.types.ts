@@ -25,7 +25,7 @@ export interface StyleClassPassThroughOptions {}
 /**
  * Defines valid properties in StyleClass component.
  */
-export interface StyleClassProps extends BaseComponentProps<useStyleClassProps> {}
+export interface StyleClassProps extends BaseComponentProps<StyleClassInstance, useStyleClassProps> {}
 
 /**
  * Defines valid state in StyleClass component.

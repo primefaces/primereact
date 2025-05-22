@@ -30,7 +30,7 @@ export interface TagPassThroughOptions {
 /**
  * Defines valid properties in Tag component.
  */
-export interface TagProps extends BaseComponentProps<useTagProps> {
+export interface TagProps extends BaseComponentProps<TagInstance, useTagProps> {
     /**
      * Severity type of the tag.
      */

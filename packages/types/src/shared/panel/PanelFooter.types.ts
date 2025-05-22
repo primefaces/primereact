@@ -29,7 +29,7 @@ export interface PanelFooterPassThroughOptions {
 /**
  * Defines valid properties in PanelFooter component.
  */
-export interface PanelFooterProps extends BaseComponentProps {}
+export interface PanelFooterProps extends BaseComponentProps<PanelFooterInstance> {}
 
 /**
  * Defines valid state in PanelFooter component.

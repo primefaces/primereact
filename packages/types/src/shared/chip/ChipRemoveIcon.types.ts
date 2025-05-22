@@ -30,7 +30,7 @@ export interface ChipRemoveIconPassThroughOptions {
 /**
  * Defines valid properties in ChipRemoveIcon component.
  */
-export interface ChipRemoveIconProps extends BaseComponentProps {}
+export interface ChipRemoveIconProps extends BaseComponentProps<ChipRemoveIconInstance> {}
 
 /**
  * Defines valid state in ChipRemoveIcon component.

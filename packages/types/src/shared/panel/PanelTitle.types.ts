@@ -29,7 +29,7 @@ export interface PanelTitlePassThroughOptions {
 /**
  * Defines valid properties in PanelTitlecomponent.
  */
-export interface PanelTitleProps extends BaseComponentProps {}
+export interface PanelTitleProps extends BaseComponentProps<PanelTitleInstance> {}
 
 /**
  * Defines valid state in PanelTitlecomponent.

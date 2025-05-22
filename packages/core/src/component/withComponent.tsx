@@ -1,4 +1,4 @@
-import type { InComponentInstance, useBaseOptions, withComponentOptions } from '@primereact/types/core';
+import type { ComponentInstance, InComponentInstance, useBaseOptions, withComponentOptions } from '@primereact/types/core';
 import type { BaseComponentProps } from '@primereact/types/shared';
 import type { StylesOptions } from '@primereact/types/styles';
 import * as React from 'react';
@@ -12,10 +12,10 @@ export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey
     setup,
     render
 }: withComponentOptions<IProps, DProps, Exposes, Styles, CData>) => {
-    const BaseComponent = <T extends React.ElementType>(inProps?: BaseComponentProps<IProps, T> & DProps) => {
-        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useBaseOptions<BaseComponentProps<IProps, T> & DProps, DProps, Exposes>);
+    const BaseComponent = <I extends ComponentInstance, T extends React.ElementType>(inProps?: BaseComponentProps<I, IProps, T> & DProps) => {
+        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useBaseOptions<BaseComponentProps<I, IProps, T> & DProps, DProps, Exposes>);
 
-        type RenderedComponentProps = InComponentInstance<typeof instance.props, BaseComponentProps<IProps, T> & DProps, typeof instance.state, Exposes>;
+        type RenderedComponentProps = InComponentInstance<typeof instance.props, BaseComponentProps<I, IProps, T> & DProps, typeof instance.state, Exposes>;
 
         const RenderedComponent = (render as React.FC<RenderedComponentProps>) ?? (() => null);
 

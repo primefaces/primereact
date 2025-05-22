@@ -29,7 +29,7 @@ export interface PanelContentPassThroughOptions {
 /**
  * Defines valid properties in PanelContent component.
  */
-export interface PanelContentProps extends BaseComponentProps {}
+export interface PanelContentProps extends BaseComponentProps<PanelContentInstance> {}
 
 /**
  * Defines valid state in PanelContent component.

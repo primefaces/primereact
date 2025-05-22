@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { MeterGroupInstance } from './MeterGroup.types';
+import type { MeterGroupInstance } from './MeterGroup.types';
 
 /**
  * Defines passthrough(pt) options type in MeterGroupLabels component.
@@ -30,7 +30,7 @@ export interface MeterGroupLabelsPassThroughOptions {
 /**
  * Defines valid properties in MeterGroupLabels component.
  */
-export interface MeterGroupLabelsProps extends BaseComponentProps {
+export interface MeterGroupLabelsProps extends BaseComponentProps<MeterGroupLabelsInstance> {
     /**
      * Specifies the label orientation of the component.
      * @default horizontal

@@ -30,7 +30,7 @@ export interface AvatarPassThroughOptions {
 /**
  * Defines valid properties in Avatar component.
  */
-export interface AvatarProps extends BaseComponentProps<useAvatarProps> {
+export interface AvatarProps extends BaseComponentProps<AvatarInstance, useAvatarProps> {
     /**
      * Defines the size of the avatar.
      * @default normal

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { RadioButtonGroupInstance } from './RadioButtonGroup.types';
+import type { RadioButtonGroupInstance } from './RadioButtonGroup.types';
 import type { useRadioButtonChangeEvent, useRadioButtonExposes, useRadioButtonProps, useRadioButtonState } from './useRadioButton.types';
 
 /**
@@ -54,7 +54,7 @@ export interface RadioButtonChangeEvent extends useRadioButtonChangeEvent<React.
 /**
  * Defines valid properties in RadioButton component.
  */
-export interface RadioButtonProps extends BaseComponentProps<Omit<useRadioButtonProps, 'onCheckedChange'>> {
+export interface RadioButtonProps extends BaseComponentProps<RadioButtonInstance, Omit<useRadioButtonProps, 'onCheckedChange'>> {
     /**
      * Value of the radio button.
      */

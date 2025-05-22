@@ -30,7 +30,7 @@ export interface InplaceClosePassThroughOptions {
 /**
  * Defines valid properties in InplaceClose component.
  */
-export interface InplaceCloseProps extends BaseComponentProps {}
+export interface InplaceCloseProps extends BaseComponentProps<InplaceCloseInstance> {}
 
 /**
  * Defines valid state in InplaceClose component.

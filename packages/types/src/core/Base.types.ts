@@ -1,3 +1,4 @@
+import { SafeRecord } from '..';
 import { PassThroughOptions } from './PassThrough.types';
 
 /**
@@ -54,11 +55,11 @@ export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props,
     /**
      * The headless/component attributes.
      */
-    attrs: Omit<IProps & Record<PropertyKey, unknown>, keyof Props>;
+    attrs: Omit<SafeRecord<IProps>, keyof Props>;
     /**
      * The headless/component props that are passed by the user.
      */
-    inProps?: (IProps & Record<PropertyKey, unknown>) | undefined;
+    inProps?: SafeRecord<IProps> | undefined;
     /**
      * The unique attribute selector.
      */

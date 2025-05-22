@@ -30,7 +30,7 @@ export interface ChipPassThroughOptions {
 /**
  * Defines valid properties in Chip component.
  */
-export interface ChipProps extends BaseComponentProps<useChipProps> {}
+export interface ChipProps extends BaseComponentProps<ChipInstance, useChipProps> {}
 
 /**
  * Defines valid state in Chip component.

@@ -38,7 +38,7 @@ export interface ProgressSpinnerPassThroughOptions {
 /**
  * Defines valid properties in ProgressSpinner component.
  */
-export interface ProgressSpinnerProps extends BaseComponentProps<useProgressSpinnerProps> {
+export interface ProgressSpinnerProps extends BaseComponentProps<ProgressSpinnerInstance, useProgressSpinnerProps> {
     /**
      * Width of the circle stroke.
      * @default 2

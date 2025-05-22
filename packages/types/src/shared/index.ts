@@ -1,4 +1,4 @@
-import type { GlobalComponentProps, InferComponentInstance } from '@primereact/types/core';
+import type { ComponentInstance, GlobalComponentProps, InferComponentInstance } from '@primereact/types/core';
 import * as React from 'react';
 
 /**
@@ -14,7 +14,7 @@ export type ExtractProps<T extends React.ElementType> = T extends keyof React.JS
  * @template H - The properties of the headless component.
  * @template T - The element type of the component.
  */
-export declare type CommonComponentProps<H, T extends React.ElementType> = H & GlobalComponentProps<T>;
+export declare type CommonComponentProps<I extends ComponentInstance, H, T extends React.ElementType> = H & GlobalComponentProps<I, T>;
 
 /**
  * Defines the base properties of the components.
@@ -23,7 +23,8 @@ export declare type CommonComponentProps<H, T extends React.ElementType> = H & G
  * @template T - The element type of the component.
  * @template O - The properties to omit from the component.
  */
-export declare type BaseComponentProps<H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<H, T> & Omit<ExtractProps<T>, keyof CommonComponentProps<H, T> | O[number]>;
+export declare type BaseComponentProps<I extends ComponentInstance = ComponentInstance, H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<I, H, T> &
+    Omit<ExtractProps<T>, keyof CommonComponentProps<I, H, T> | O[number]>;
 
 export type PassThroughOptionType<I, Attrs = React.HTMLAttributes<HTMLElement>> = Attrs | ((options: PassThroughMethodOptions<I>) => Attrs | string) | string | null | undefined;
 

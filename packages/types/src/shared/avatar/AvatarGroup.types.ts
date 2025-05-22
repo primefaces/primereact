@@ -29,7 +29,7 @@ export interface AvatarGroupPassThroughOptions {
 /**
  * Defines valid properties in AvatarGroup component.
  */
-export interface AvatarGroupProps extends BaseComponentProps {}
+export interface AvatarGroupProps extends BaseComponentProps<AvatarGroupInstance> {}
 
 /**
  * Defines valid state in AvatarGroup component.

@@ -30,7 +30,7 @@ export interface InplaceDisplayPassThroughOptions {
 /**
  * Defines valid properties in InplaceDisplay component.
  */
-export interface InplaceDisplayProps extends BaseComponentProps {}
+export interface InplaceDisplayProps extends BaseComponentProps<InplaceDisplayInstance> {}
 
 /**
  * Defines valid state in InplaceDisplay component.

@@ -16,3 +16,5 @@ export declare type DeepPartial<T> = {
 export declare type DeepRequired<T> = {
     [K in keyof T]-?: DeepRequired<T[K]>;
 };
+
+export declare type SafeRecord<T> = T & Record<PropertyKey, unknown>;

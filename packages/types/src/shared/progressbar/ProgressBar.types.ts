@@ -34,7 +34,7 @@ export interface ProgressBarPassThroughOptions {
 /**
  * Defines valid properties in ProgressBar component.
  */
-export interface ProgressBarProps extends BaseComponentProps<useProgressBarProps> {
+export interface ProgressBarProps extends BaseComponentProps<ProgressBarInstance, useProgressBarProps> {
     /**
      * Current value of the progress.
      */

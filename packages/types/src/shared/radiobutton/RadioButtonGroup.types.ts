@@ -46,7 +46,7 @@ export interface RadioButtonGroupUpdateChangeEvent extends RadioButtonChangeEven
 /**
  * Defines valid properties in RadioButtonGroup component.
  */
-export interface RadioButtonGroupProps extends BaseComponentProps {
+export interface RadioButtonGroupProps extends BaseComponentProps<RadioButtonGroupInstance> {
     /**
      * Value of the radio button group.
      */

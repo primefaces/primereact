@@ -46,7 +46,7 @@ export interface CheckboxGroupUpdateChangeEvent extends CheckboxChangeEvent {}
 /**
  * Defines valid properties in CheckboxGroup component.
  */
-export interface CheckboxGroupProps extends BaseComponentProps {
+export interface CheckboxGroupProps extends BaseComponentProps<CheckboxGroupInstance> {
     /**
      * Value of the checkbox group.
      */

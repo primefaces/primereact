@@ -30,7 +30,7 @@ export interface InplaceContentPassThroughOptions {
 /**
  * Defines valid properties in InplaceContent component.
  */
-export interface InplaceContentProps extends BaseComponentProps {}
+export interface InplaceContentProps extends BaseComponentProps<InplaceContentInstance> {}
 
 /**
  * Defines valid state in InplaceContent component.

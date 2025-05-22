@@ -30,7 +30,7 @@ export interface MeterGroupPassThroughOptions {
 /**
  * Defines valid properties in MeterGroup component.
  */
-export interface MeterGroupProps extends BaseComponentProps<useMeterGroupProps> {
+export interface MeterGroupProps extends BaseComponentProps<MeterGroupInstance, useMeterGroupProps> {
     /**
      * Specifies the layout of the component.
      * @default horizontal

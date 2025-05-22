@@ -30,7 +30,7 @@ export interface PanelPassThroughOptions {
 /**
  * Defines valid properties in Panel component.
  */
-export interface PanelProps extends BaseComponentProps<usePanelProps> {
+export interface PanelProps extends BaseComponentProps<PanelInstance, usePanelProps> {
     /**
      * When enabled, the content of panel can be expanded and collapsed by clicking the header.
      * @default false

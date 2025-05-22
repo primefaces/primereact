@@ -29,7 +29,7 @@ export interface OverlayBadgePassThroughOptions {
 /**
  * Defines valid properties in OverlayBadge component.
  */
-export interface OverlayBadgeProps extends BaseComponentProps {}
+export interface OverlayBadgeProps extends BaseComponentProps<OverlayBadgeInstance> {}
 
 /**
  * Defines valid state in OverlayBadge component.

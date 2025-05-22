@@ -29,7 +29,7 @@ export interface ButtonGroupPassThroughOptions {
 /**
  * Defines valid properties in ButtonGroup component.
  */
-export interface ButtonGroupProps extends BaseComponentProps {}
+export interface ButtonGroupProps extends BaseComponentProps<ButtonGroupInstance> {}
 
 /**
  * Defines valid state in ButtonGroup component.

@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { TagInstance } from './Tag.types';
+import type { TagInstance } from './Tag.types';
 
 /**
  * Defines passthrough(pt) options type in TagIcon component.
@@ -30,7 +30,7 @@ export interface TagIconPassThroughOptions {
 /**
  * Defines valid properties in TagIcon component.
  */
-export interface TagIconProps extends BaseComponentProps {}
+export interface TagIconProps extends BaseComponentProps<TagIconInstance> {}
 
 /**
  * Defines valid state in TagIcon component.
