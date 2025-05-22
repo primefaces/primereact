@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useSkeletonExposes, useSkeletonProps, useSkeletonState } from './useSkeleton.types';
 
 /**
  * Defines passthrough(pt) options type in Skeleton component.
  */
-export type SkeletonPassThroughOptionType<E> = PassThroughOptionType<SkeletonInstance, E>;
+export type SkeletonPassThroughType<E> = PassThroughType<SkeletonInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Skeleton component.
  */
-export interface SkeletonPassThroughOptions {
+export interface SkeletonPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: SkeletonPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: SkeletonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -91,4 +91,4 @@ export type SkeletonClassNamesType = (typeof SkeletonClassNames)[keyof typeof Sk
 /**
  * Instance of Skeleton component.
  */
-export type SkeletonInstance = ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes>;
+export type SkeletonInstance = ComponentInstance<SkeletonProps, SkeletonState, SkeletonExposes, SkeletonPassThrough>;

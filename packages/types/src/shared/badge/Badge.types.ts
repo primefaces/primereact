@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import type { useBadgeProps } from './useBadge.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { useBadgeExposes, useBadgeProps, useBadgeState } from './useBadge.types';
 
 /**
  * Defines passthrough(pt) options type in Badge component.
  */
-export type BadgePassThroughOptionType<E> = PassThroughOptionType<BadgeInstance, E>;
+export type BadgePassThroughType<E> = PassThroughType<BadgeInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Badge component.
  */
-export interface BadgePassThroughOptions {
+export interface BadgePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: BadgePassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+    root?: BadgePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -46,6 +46,16 @@ export interface BadgeProps extends BaseComponentProps<BadgeInstance, useBadgePr
 }
 
 /**
+ * Defines valid state in Badge component.
+ */
+export interface BadgeState extends useBadgeState {}
+
+/**
+ * Defines the methods and properties exposed by Badge component.
+ */
+export interface BadgeExposes extends useBadgeExposes {}
+
+/**
  * Defines the CSS class names used in the Badge component.
  */
 export const BadgeClassNames = {
@@ -63,4 +73,4 @@ export type BadgeClassNamesType = (typeof BadgeClassNames)[keyof typeof BadgeCla
 /**
  * Instance of Badge component.
  */
-export type BadgeInstance = ComponentInstance<BadgeProps>;
+export type BadgeInstance = ComponentInstance<BadgeProps, BadgeState, BadgeExposes, BadgePassThrough>;

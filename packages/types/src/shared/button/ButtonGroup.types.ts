@@ -9,21 +9,21 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in Button component.
  */
-export type ButtonGroupPassThroughOptionType<E> = PassThroughOptionType<ButtonGroupInstance, E>;
+export type ButtonGroupPassThroughType<E> = PassThroughType<ButtonGroupInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Button component.
  */
-export interface ButtonGroupPassThroughOptions {
+export interface ButtonGroupPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ButtonGroupPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ButtonGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -59,4 +59,4 @@ export type ButtonGroupClassNamesType = (typeof ButtonGroupClassNames)[keyof typ
 /**
  * Instance of ButtonGroup component.
  */
-export type ButtonGroupInstance = ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes>;
+export type ButtonGroupInstance = ComponentInstance<ButtonGroupProps, ButtonGroupState, ButtonGroupExposes, ButtonGroupPassThrough>;

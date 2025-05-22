@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { InplaceInstance } from './Inplace.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { InplaceInstance } from './Inplace.types';
 
 /**
  * Defines passthrough(pt) options type in InplaceDisplay component.
  */
-export type InplaceDisplayPassThroughOptionType<E> = PassThroughOptionType<InplaceDisplayInstance, E>;
+export type InplaceDisplayPassThroughType<E> = PassThroughType<InplaceDisplayInstance, E>;
 
 /**
  * Defines passthrough(pt) options of InplaceDisplay component.
  */
-export interface InplaceDisplayPassThroughOptions {
+export interface InplaceDisplayPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: InplaceDisplayPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: InplaceDisplayPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface InplaceDisplayExposes {
 /**
  * Instance of InplaceDisplay component.
  */
-export type InplaceDisplayInstance = ComponentInstance<InplaceDisplayProps, InplaceDisplayState, InplaceDisplayExposes>;
+export type InplaceDisplayInstance = ComponentInstance<InplaceDisplayProps, InplaceDisplayState, InplaceDisplayExposes, InplaceDisplayPassThrough>;

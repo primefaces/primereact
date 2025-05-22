@@ -1,7 +1,7 @@
 import { Instance, useBaseOptions } from '.';
 import { SafeRecord } from '..';
 import { StylesOptions } from '../styles';
-import type { PassThroughOptions, PassThroughProps } from './PassThrough.types';
+import type { PassThroughOptions } from './PassThrough.types';
 
 /**
  * Defines the global props of the components.
@@ -28,7 +28,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     /**
      * The pass-through props to pass to the component
      */
-    pt?: PassThroughProps['value'] | undefined;
+    pt?: I['_dt_'] | undefined;
     /**
      * The pass-through options to pass to the component
      */
@@ -52,7 +52,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     children?: React.ReactNode | ((instance: I) => React.ReactNode) | undefined;
 }
 
-export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData> = {
+export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData = Record<PropertyKey, unknown>> = {
     name?: string | undefined;
     defaultProps?: DProps | undefined;
     styles?: Styles | undefined;
@@ -120,7 +120,14 @@ export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = R
     $style: Record<string, unknown> | undefined;
 };
 
-export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = InComponentInstance<SafeRecord<Props>, SafeRecord<Props>, SafeRecord<State>, SafeRecord<Exposes>>;
+export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>, PassThrough = Record<string, unknown>> = InComponentInstance<
+    SafeRecord<Props>,
+    SafeRecord<Props>,
+    SafeRecord<State>,
+    SafeRecord<Exposes>
+> & {
+    _dt_?: SafeRecord<PassThrough>;
+};
 
 export type InferComponentInstance<I> =
     I extends ComponentInstance<infer Props, infer State, infer Exposes>

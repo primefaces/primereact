@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import type { useButtonProps } from './useButton.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { useButtonExposes, useButtonProps, useButtonState } from './useButton.types';
 
 /**
  * Defines passthrough(pt) options type in Button component.
  */
-export type ButtonPassThroughOptionType<E> = PassThroughOptionType<ButtonInstance, E>;
+export type ButtonPassThroughType<E> = PassThroughType<ButtonInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Button component.
  */
-export interface ButtonPassThroughOptions {
+export interface ButtonPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ButtonPassThroughOptionType<React.HTMLAttributes<HTMLButtonElement>>;
+    root?: ButtonPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
 }
 
 /**
@@ -66,6 +66,18 @@ export interface ButtonProps extends BaseComponentProps<ButtonInstance, useButto
 }
 
 /**
+ * Defines valid state in Button component.
+ * @extends useButtonState
+ */
+export interface ButtonState extends useButtonState {}
+
+/**
+ * Defines the methods and properties exposed by Button component.
+ * @extends useButtonExposes
+ */
+export interface ButtonExposes extends useButtonExposes {}
+
+/**
  * Defines the CSS class names used in the Button component.
  */
 export const ButtonClassNames = {
@@ -95,4 +107,4 @@ export type ButtonClassNamesType = (typeof ButtonClassNames)[keyof typeof Button
 /**
  * Instance of Button component.
  */
-export type ButtonInstance = ComponentInstance<ButtonProps>;
+export type ButtonInstance = ComponentInstance<ButtonProps, ButtonState, ButtonExposes, ButtonPassThrough>;

@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { MeterGroupInstance } from './MeterGroup.types';
 
 /**
  * Defines passthrough(pt) options type in MeterGroupLabels component.
  */
-export type MeterGroupLabelsPassThroughOptionType<E> = PassThroughOptionType<MeterGroupLabelsInstance, E>;
+export type MeterGroupLabelsPassThroughType<E> = PassThroughType<MeterGroupLabelsInstance, E>;
 
 /**
  * Defines passthrough(pt) options of MeterGroupLabels component.
  */
-export interface MeterGroupLabelsPassThroughOptions {
+export interface MeterGroupLabelsPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: MeterGroupLabelsPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: MeterGroupLabelsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -56,4 +56,4 @@ export interface MeterGroupLabelsExposes {
 /**
  * Instance of MeterGroupLabels component.
  */
-export type MeterGroupLabelsInstance = ComponentInstance<MeterGroupLabelsProps, MeterGroupLabelsState, MeterGroupLabelsExposes>;
+export type MeterGroupLabelsInstance = ComponentInstance<MeterGroupLabelsProps, MeterGroupLabelsState, MeterGroupLabelsExposes, MeterGroupLabelsPassThrough>;

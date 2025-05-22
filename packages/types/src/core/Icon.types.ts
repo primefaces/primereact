@@ -9,21 +9,21 @@
  *
  */
 import type { ComponentInstance, withComponentOptions } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '../shared';
+import type { BaseComponentProps, PassThroughType } from '../shared';
 
 /**
  * Defines passthrough(pt) options type in Icon component.
  */
-export type IconPassThroughOptionType<E> = PassThroughOptionType<IconInstance, E>;
+export type IconPassThroughType<E> = PassThroughType<IconInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Icon component.
  */
-export interface IconPassThroughOptions {
+export interface IconPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: IconPassThroughOptionType<React.HTMLAttributes<HTMLElement>>;
+    root?: IconPassThroughType<HTMLElement>;
 }
 
 /**
@@ -84,6 +84,6 @@ export type IconClassNamesType = (typeof IconClassNames)[keyof typeof IconClassN
 /**
  * Instance of Icon component.
  */
-export type IconInstance = ComponentInstance<IconProps, IconState, IconExposes>;
+export type IconInstance = ComponentInstance<IconProps, IconState, IconExposes, IconPassThrough>;
 
-export declare type withBaseIconOptions<IProps, Exposes, Styles> = withComponentOptions<IProps, IconProps, Exposes, Styles, Record<PropertyKey, unknown>>;
+export declare type withBaseIconOptions<IProps, Exposes, Styles> = withComponentOptions<IProps, IconProps, Exposes, Styles>;

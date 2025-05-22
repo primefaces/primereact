@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { TagInstance } from './Tag.types';
 
 /**
  * Defines passthrough(pt) options type in TagLabel component.
  */
-export type TagLabelPassThroughOptionType<E> = PassThroughOptionType<TagLabelInstance, E>;
+export type TagLabelPassThroughType<E> = PassThroughType<TagLabelInstance, E>;
 
 /**
  * Defines passthrough(pt) options of TagLabel component.
  */
-export interface TagLabelPassThroughOptions {
+export interface TagLabelPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TagLabelPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: TagLabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface TagLabelExposes {
 /**
  * Instance of TagLabel component.
  */
-export type TagLabelInstance = ComponentInstance<TagLabelProps, TagLabelState, TagLabelExposes>;
+export type TagLabelInstance = ComponentInstance<TagLabelProps, TagLabelState, TagLabelExposes, TagLabelPassThrough>;

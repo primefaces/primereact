@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { ChipInstance } from './Chip.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { ChipInstance } from './Chip.types';
 
 /**
  * Defines passthrough(pt) options type in ChipLabel component.
  */
-export type ChipLabelPassThroughOptionType<E> = PassThroughOptionType<ChipLabelInstance, E>;
+export type ChipLabelPassThroughType<E> = PassThroughType<ChipLabelInstance, E>;
 
 /**
  * Defines passthrough(pt) options of ChipLabel component.
  */
-export interface ChipLabelPassThroughOptions {
+export interface ChipLabelPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ChipLabelPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ChipLabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface ChipLabelExposes {
 /**
  * Instance of ChipLabel component.
  */
-export type ChipLabelInstance = ComponentInstance<ChipLabelProps, ChipLabelState, ChipLabelExposes>;
+export type ChipLabelInstance = ComponentInstance<ChipLabelProps, ChipLabelState, ChipLabelExposes, ChipLabelPassThrough>;

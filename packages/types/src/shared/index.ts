@@ -26,7 +26,7 @@ export declare type CommonComponentProps<I extends ComponentInstance, H, T exten
 export declare type BaseComponentProps<I extends ComponentInstance = ComponentInstance, H = unknown, T extends React.ElementType = React.ElementType, O extends string[] = []> = CommonComponentProps<I, H, T> &
     Omit<ExtractProps<T>, keyof CommonComponentProps<I, H, T> | O[number]>;
 
-export type PassThroughOptionType<I, Attrs = React.HTMLAttributes<HTMLElement>> = Attrs | ((options: PassThroughMethodOptions<I>) => Attrs | string) | string | null | undefined;
+export type PassThroughType<I, Attrs = React.HTMLAttributes<HTMLElement>> = Attrs | ((options: PassThroughMethodOptions<I>) => Attrs | string) | string | null | undefined;
 
 /**
  * Defines passthrough(pt) options for method type.

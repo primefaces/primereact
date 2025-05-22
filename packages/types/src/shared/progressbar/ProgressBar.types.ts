@@ -9,26 +9,26 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useProgressBarExposes, useProgressBarProps, useProgressBarState } from './useProgressBar.types';
 
 /**
  * Defines passthrough(pt) options type in ProgressBar component.
  */
-export type ProgressBarPassThroughOptionType<E> = PassThroughOptionType<ProgressBarInstance, E>;
+export type ProgressBarPassThroughType<E> = PassThroughType<ProgressBarInstance, E>;
 
 /**
  * Defines passthrough(pt) options of ProgressBar component.
  */
-export interface ProgressBarPassThroughOptions {
+export interface ProgressBarPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ProgressBarPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the value's DOM element.
      */
-    value?: ProgressBarPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    value?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -84,4 +84,4 @@ export type ProgressBarClassNamesType = (typeof ProgressBarClassNames)[keyof typ
 /**
  * Instance of ProgressBar component.
  */
-export type ProgressBarInstance = ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes>;
+export type ProgressBarInstance = ComponentInstance<ProgressBarProps, ProgressBarState, ProgressBarExposes, ProgressBarPassThrough>;

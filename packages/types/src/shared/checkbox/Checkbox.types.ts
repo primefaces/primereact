@@ -9,35 +9,35 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { CheckboxGroupInstance } from './CheckboxGroup.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { CheckboxGroupInstance } from './CheckboxGroup.types';
 import type { useCheckboxChangeEvent, useCheckboxExposes, useCheckboxProps, useCheckboxState } from './useCheckbox.types';
 
 /**
  * Defines passthrough(pt) options type in Checkbox component.
  */
-export type CheckboxPassThroughOptionType<E> = PassThroughOptionType<CheckboxInstance, E>;
+export type CheckboxPassThroughType<E> = PassThroughType<CheckboxInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Checkbox component.
  */
-export interface CheckboxPassThroughOptions {
+export interface CheckboxPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: CheckboxPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    input?: CheckboxPassThroughOptionType<React.InputHTMLAttributes<HTMLInputElement>>;
+    input?: CheckboxPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
     /**
      * Used to pass attributes to the box's DOM element.
      */
-    box?: CheckboxPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    box?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the icon's DOM element.
      */
-    icon?: CheckboxPassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: CheckboxPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -176,4 +176,4 @@ export type CheckboxClassNamesType = (typeof CheckboxClassNames)[keyof typeof Ch
 /**
  * Instance of Checkbox component.
  */
-export type CheckboxInstance = ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes>;
+export type CheckboxInstance = ComponentInstance<CheckboxProps, CheckboxState, CheckboxExposes, CheckboxPassThrough>;

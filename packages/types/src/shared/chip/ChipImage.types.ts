@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { ChipInstance } from './Chip.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { ChipInstance } from './Chip.types';
 
 /**
  * Defines passthrough(pt) options type in ChipImage component.
  */
-export type ChipImagePassThroughOptionType<E> = PassThroughOptionType<ChipImageInstance, E>;
+export type ChipImagePassThroughType<E> = PassThroughType<ChipImageInstance, E>;
 
 /**
  * Defines passthrough(pt) options of ChipImage component.
  */
-export interface ChipImagePassThroughOptions {
+export interface ChipImagePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ChipImagePassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ChipImagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface ChipImageExposes {
 /**
  * Instance of ChipImage component.
  */
-export type ChipImageInstance = ComponentInstance<ChipImageProps, ChipImageState, ChipImageExposes>;
+export type ChipImageInstance = ComponentInstance<ChipImageProps, ChipImageState, ChipImageExposes, ChipImagePassThrough>;

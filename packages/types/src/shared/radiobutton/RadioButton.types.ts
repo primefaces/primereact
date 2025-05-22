@@ -9,35 +9,35 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { RadioButtonGroupInstance } from './RadioButtonGroup.types';
 import type { useRadioButtonChangeEvent, useRadioButtonExposes, useRadioButtonProps, useRadioButtonState } from './useRadioButton.types';
 
 /**
  * Defines passthrough(pt) options type in RadioButton component.
  */
-export type RadioButtonPassThroughOptionType<E> = PassThroughOptionType<RadioButtonInstance, E>;
+export type RadioButtonPassThroughType<E> = PassThroughType<RadioButtonInstance, E>;
 
 /**
  * Defines passthrough(pt) options of RadioButton component.
  */
-export interface RadioButtonPassThroughOptions {
+export interface RadioButtonPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: RadioButtonPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the input's DOM element.
      */
-    input?: RadioButtonPassThroughOptionType<React.InputHTMLAttributes<HTMLInputElement>>;
+    input?: RadioButtonPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
     /**
      * Used to pass attributes to the box's DOM element.
      */
-    box?: RadioButtonPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    box?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the icon's DOM element.
      */
-    icon?: RadioButtonPassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -176,4 +176,4 @@ export type RadioButtonClassNamesType = (typeof RadioButtonClassNames)[keyof typ
 /**
  * Instance of RadioButton component.
  */
-export type RadioButtonInstance = ComponentInstance<RadioButtonProps, RadioButtonState, RadioButtonExposes>;
+export type RadioButtonInstance = ComponentInstance<RadioButtonProps, RadioButtonState, RadioButtonExposes, RadioButtonPassThrough>;

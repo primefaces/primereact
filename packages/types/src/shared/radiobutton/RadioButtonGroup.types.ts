@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { RadioButtonChangeEvent } from './RadioButton.types';
 
 /**
  * Defines passthrough(pt) options type in RadioButtonGroup component.
  */
-export type RadioButtonGroupPassThroughOptionType<E> = PassThroughOptionType<RadioButtonGroupInstance, E>;
+export type RadioButtonGroupPassThroughType<E> = PassThroughType<RadioButtonGroupInstance, E>;
 
 /**
  * Defines passthrough(pt) options of RadioButtonGroup component.
  */
-export interface RadioButtonGroupPassThroughOptions {
+export interface RadioButtonGroupPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: RadioButtonGroupPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: RadioButtonGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -112,4 +112,4 @@ export type RadioButtonGroupClassNamesType = (typeof RadioButtonGroupClassNames)
 /**
  * Instance of RadioButtonGroup component.
  */
-export type RadioButtonGroupInstance = ComponentInstance<RadioButtonGroupProps, RadioButtonGroupState, RadioButtonGroupExposes>;
+export type RadioButtonGroupInstance = ComponentInstance<RadioButtonGroupProps, RadioButtonGroupState, RadioButtonGroupExposes, RadioButtonGroupPassThrough>;

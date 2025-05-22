@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { AvatarInstance } from './Avatar.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { AvatarInstance } from './Avatar.types';
 
 /**
  * Defines passthrough(pt) options type in AvatarFallback component.
  */
-export type AvatarFallbackPassThroughOptionType<E> = PassThroughOptionType<AvatarFallbackInstance, E>;
+export type AvatarFallbackPassThroughType<E> = PassThroughType<AvatarFallbackInstance, E>;
 
 /**
  * Defines passthrough(pt) options of AvatarFallback component.
  */
-export interface AvatarFallbackPassThroughOptions {
+export interface AvatarFallbackPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: AvatarFallbackPassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+    root?: AvatarFallbackPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface AvatarFallbackExposes {
 /**
  * Instance of AvatarFallback component.
  */
-export type AvatarFallbackInstance = ComponentInstance<AvatarFallbackProps, AvatarFallbackState, AvatarFallbackExposes>;
+export type AvatarFallbackInstance = ComponentInstance<AvatarFallbackProps, AvatarFallbackState, AvatarFallbackExposes, AvatarFallbackPassThrough>;

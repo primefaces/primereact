@@ -9,30 +9,30 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useProgressSpinnerExposes, useProgressSpinnerProps, useProgressSpinnerState } from './useProgressSpinner.types';
 
 /**
  * Defines passthrough(pt) options type in ProgressSpinner component.
  */
-export type ProgressSpinnerPassThroughOptionType<E> = PassThroughOptionType<ProgressSpinnerInstance, E>;
+export type ProgressSpinnerPassThroughType<E> = PassThroughType<ProgressSpinnerInstance, E>;
 
 /**
  * Defines passthrough(pt) options of ProgressSpinner component.
  */
-export interface ProgressSpinnerPassThroughOptions {
+export interface ProgressSpinnerPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: ProgressSpinnerPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: ProgressSpinnerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Used to pass attributes to the spin's DOM element.
      */
-    spin?: ProgressSpinnerPassThroughOptionType<React.HTMLAttributes<SVGElement>>;
+    spin?: ProgressSpinnerPassThroughType<React.HTMLAttributes<SVGElement>>;
     /**
      * Used to pass attributes to the circle's DOM element.
      */
-    circle?: ProgressSpinnerPassThroughOptionType<React.HTMLAttributes<SVGCircleElement>>;
+    circle?: ProgressSpinnerPassThroughType<React.HTMLAttributes<SVGCircleElement>>;
 }
 
 /**
@@ -93,4 +93,4 @@ export type ProgressSpinnerClassNamesType = (typeof ProgressSpinnerClassNames)[k
 /**
  * Instance of ProgressSpinner component.
  */
-export type ProgressSpinnerInstance = ComponentInstance<ProgressSpinnerProps, ProgressSpinnerState, ProgressSpinnerExposes>;
+export type ProgressSpinnerInstance = ComponentInstance<ProgressSpinnerProps, ProgressSpinnerState, ProgressSpinnerExposes, ProgressSpinnerPassThrough>;

@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { PanelInstance } from './Panel.types';
 
 /**
  * Defines passthrough(pt) options type in PanelCollapse component.
  */
-export type PanelCollapsePassThroughOptionType<E> = PassThroughOptionType<PanelCollapseInstance, E>;
+export type PanelCollapsePassThroughType<E> = PassThroughType<PanelCollapseInstance, E>;
 
 /**
  * Defines passthrough(pt) options of PanelCollapse component.
  */
-export interface PanelCollapsePassThroughOptions {
+export interface PanelCollapsePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PanelCollapsePassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: PanelCollapsePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -71,4 +71,4 @@ export interface PanelCollapseExposes {
 /**
  * Instance of PanelCollapse component.
  */
-export type PanelCollapseInstance = ComponentInstance<PanelCollapseProps, PanelCollapseState, PanelCollapseExposes>;
+export type PanelCollapseInstance = ComponentInstance<PanelCollapseProps, PanelCollapseState, PanelCollapseExposes, PanelCollapsePassThrough>;

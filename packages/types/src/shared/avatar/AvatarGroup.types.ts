@@ -9,21 +9,21 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in AvatarGroup component.
  */
-export type AvatarGroupPassThroughOptionType<E> = PassThroughOptionType<AvatarGroupInstance, E>;
+export type AvatarGroupPassThroughType<E> = PassThroughType<AvatarGroupInstance, E>;
 
 /**
  * Defines passthrough(pt) options of AvatarGroup component.
  */
-export interface AvatarGroupPassThroughOptions {
+export interface AvatarGroupPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: AvatarGroupPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: AvatarGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -59,4 +59,4 @@ export type AvatarGroupClassNamesType = (typeof AvatarGroupClassNames)[keyof typ
 /**
  * Instance of AvatarGroup component.
  */
-export type AvatarGroupInstance = ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes>;
+export type AvatarGroupInstance = ComponentInstance<AvatarGroupProps, AvatarGroupState, AvatarGroupExposes, AvatarGroupPassThrough>;

@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { TagInstance } from './Tag.types';
 
 /**
  * Defines passthrough(pt) options type in TagIcon component.
  */
-export type TagIconPassThroughOptionType<E> = PassThroughOptionType<TagIconInstance, E>;
+export type TagIconPassThroughType<E> = PassThroughType<TagIconInstance, E>;
 
 /**
  * Defines passthrough(pt) options of TagIcon component.
  */
-export interface TagIconPassThroughOptions {
+export interface TagIconPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TagIconPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: TagIconPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface TagIconExposes {
 /**
  * Instance of TagIcon component.
  */
-export type TagIconInstance = ComponentInstance<TagIconProps, TagIconState, TagIconExposes>;
+export type TagIconInstance = ComponentInstance<TagIconProps, TagIconState, TagIconExposes, TagIconPassThrough>;

@@ -9,21 +9,21 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in OverlayBadge component.
  */
-export type OverlayBadgePassThroughOptionType<E> = PassThroughOptionType<OverlayBadgeInstance, E>;
+export type OverlayBadgePassThroughType<E> = PassThroughType<OverlayBadgeInstance, E>;
 
 /**
  * Defines passthrough(pt) options of OverlayBadge component.
  */
-export interface OverlayBadgePassThroughOptions {
+export interface OverlayBadgePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: OverlayBadgePassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: OverlayBadgePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -59,4 +59,4 @@ export type OverlayBadgeClassNamesType = (typeof OverlayBadgeClassNames)[keyof t
 /**
  * Instance of OverlayBadge component.
  */
-export type OverlayBadgeInstance = ComponentInstance<OverlayBadgeProps, OverlayBadgeState, OverlayBadgeExposes>;
+export type OverlayBadgeInstance = ComponentInstance<OverlayBadgeProps, OverlayBadgeState, OverlayBadgeExposes, OverlayBadgePassThrough>;

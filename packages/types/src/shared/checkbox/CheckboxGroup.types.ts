@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { CheckboxChangeEvent } from './Checkbox.types';
 
 /**
  * Defines passthrough(pt) options type in Checkbox component.
  */
-export type CheckboxGroupPassThroughOptionType<E> = PassThroughOptionType<CheckboxGroupInstance, E>;
+export type CheckboxGroupPassThroughType<E> = PassThroughType<CheckboxGroupInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Checkbox component.
  */
-export interface CheckboxGroupPassThroughOptions {
+export interface CheckboxGroupPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: CheckboxGroupPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: CheckboxGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -112,4 +112,4 @@ export type CheckboxGroupClassNamesType = (typeof CheckboxGroupClassNames)[keyof
 /**
  * Instance of CheckboxGroup component.
  */
-export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes>;
+export type CheckboxGroupInstance = ComponentInstance<CheckboxGroupProps, CheckboxGroupState, CheckboxGroupExposes, CheckboxGroupPassThrough>;

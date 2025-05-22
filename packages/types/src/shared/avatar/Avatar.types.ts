@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useAvatarExposes, useAvatarProps, useAvatarState } from './useAvatar.types';
 
 /**
  * Defines passthrough(pt) options type in Avatar component.
  */
-export type AvatarPassThroughOptionType<E> = PassThroughOptionType<AvatarInstance, E>;
+export type AvatarPassThroughType<E> = PassThroughType<AvatarInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Avatar component.
  */
-export interface AvatarPassThroughOptions {
+export interface AvatarPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: AvatarPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: AvatarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -81,4 +81,4 @@ export type AvatarClassNamesType = (typeof AvatarClassNames)[keyof typeof Avatar
 /**
  * Instance of Avatar component.
  */
-export type AvatarInstance = ComponentInstance<AvatarProps, AvatarState, AvatarExposes>;
+export type AvatarInstance = ComponentInstance<AvatarProps, AvatarState, AvatarExposes, AvatarPassThrough>;

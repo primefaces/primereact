@@ -9,21 +9,21 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in PanelFooter component.
  */
-export type PanelFooterPassThroughOptionType<E> = PassThroughOptionType<PanelFooterInstance, E>;
+export type PanelFooterPassThroughType<E> = PassThroughType<PanelFooterInstance, E>;
 
 /**
  * Defines passthrough(pt) options of PanelFooter component.
  */
-export interface PanelFooterPassThroughOptions {
+export interface PanelFooterPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PanelFooterPassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: PanelFooterPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -44,4 +44,4 @@ export interface PanelFooterExposes {}
 /**
  * Instance of PanelFooter component.
  */
-export type PanelFooterInstance = ComponentInstance<PanelFooterProps, PanelFooterState, PanelFooterExposes>;
+export type PanelFooterInstance = ComponentInstance<PanelFooterProps, PanelFooterState, PanelFooterExposes, PanelFooterPassThrough>;

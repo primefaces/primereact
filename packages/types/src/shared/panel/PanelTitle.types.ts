@@ -9,21 +9,21 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 
 /**
  * Defines passthrough(pt) options type in PanelTitlecomponent.
  */
-export type PanelTitlePassThroughOptionType<E> = PassThroughOptionType<PanelTitleInstance, E>;
+export type PanelTitlePassThroughType<E> = PassThroughType<PanelTitleInstance, E>;
 
 /**
  * Defines passthrough(pt) options of PanelTitlecomponent.
  */
-export interface PanelTitlePassThroughOptions {
+export interface PanelTitlePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PanelTitlePassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: PanelTitlePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -44,4 +44,4 @@ export interface PanelTitleExposes {}
 /**
  * Instance of PanelTitlecomponent.
  */
-export type PanelTitleInstance = ComponentInstance<PanelTitleProps, PanelTitleState, PanelTitleExposes>;
+export type PanelTitleInstance = ComponentInstance<PanelTitleProps, PanelTitleState, PanelTitleExposes, PanelTitlePassThrough>;

@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
-import { InplaceInstance } from './Inplace.types';
+import type { BaseComponentProps, PassThroughType } from '..';
+import type { InplaceInstance } from './Inplace.types';
 
 /**
  * Defines passthrough(pt) options type in InplaceClose component.
  */
-export type InplaceClosePassThroughOptionType<E> = PassThroughOptionType<InplaceCloseInstance, E>;
+export type InplaceClosePassThroughType<E> = PassThroughType<InplaceCloseInstance, E>;
 
 /**
  * Defines passthrough(pt) options of InplaceClose component.
  */
-export interface InplaceClosePassThroughOptions {
+export interface InplaceClosePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: InplaceClosePassThroughOptionType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: InplaceClosePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -50,4 +50,4 @@ export interface InplaceCloseExposes {
 /**
  * Instance of InplaceClose component.
  */
-export type InplaceCloseInstance = ComponentInstance<InplaceCloseProps, InplaceCloseState, InplaceCloseExposes>;
+export type InplaceCloseInstance = ComponentInstance<InplaceCloseProps, InplaceCloseState, InplaceCloseExposes, InplaceClosePassThrough>;

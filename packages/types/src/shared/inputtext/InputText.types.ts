@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useInputTextExposes, useInputTextProps, useInputTextState } from './useInputText.types';
 
 /**
  * Defines passthrough(pt) options type in InputText component.
  */
-export type InputTextPassThroughOptionType<E> = PassThroughOptionType<InputTextInstance, E>;
+export type InputTextPassThroughType<E> = PassThroughType<InputTextInstance, E>;
 
 /**
  * Defines passthrough(pt) options of InputText component.
  */
-export interface InputTextPassThroughOptions {
+export interface InputTextPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: InputTextPassThroughOptionType<React.HTMLAttributes<HTMLInputElement>>;
+    root?: InputTextPassThroughType<React.InputHTMLAttributes<HTMLInputElement>>;
 }
 
 /**
@@ -75,4 +75,4 @@ export type InputTextClassNamesType = (typeof InputTextClassNames)[keyof typeof 
 /**
  * Instance of InputText component.
  */
-export type InputTextInstance = ComponentInstance<InputTextProps, InputTextState, InputTextExposes>;
+export type InputTextInstance = ComponentInstance<InputTextProps, InputTextState, InputTextExposes, InputTextPassThrough>;

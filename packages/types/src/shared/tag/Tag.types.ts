@@ -9,22 +9,22 @@
  *
  */
 import type { ComponentInstance } from '@primereact/types/core';
-import type { BaseComponentProps, PassThroughOptionType } from '..';
+import type { BaseComponentProps, PassThroughType } from '..';
 import type { useTagExposes, useTagProps, useTagState } from './useTag.types';
 
 /**
  * Defines passthrough(pt) options type in Tag component.
  */
-export type TagPassThroughOptionType<E> = PassThroughOptionType<TagInstance, E>;
+export type TagPassThroughType<E> = PassThroughType<TagInstance, E>;
 
 /**
  * Defines passthrough(pt) options of Tag component.
  */
-export interface TagPassThroughOptions {
+export interface TagPassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: TagPassThroughOptionType<React.HTMLAttributes<HTMLSpanElement>>;
+    root?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -80,4 +80,4 @@ export type TagClassNamesType = (typeof TagClassNames)[keyof typeof TagClassName
 /**
  * Instance of Tag component.
  */
-export type TagInstance = ComponentInstance<TagProps, TagState, TagExposes>;
+export type TagInstance = ComponentInstance<TagProps, TagState, TagExposes, TagPassThrough>;
