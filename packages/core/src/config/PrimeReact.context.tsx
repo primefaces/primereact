@@ -20,7 +20,8 @@ export const PrimeReactProvider = (inProps: React.PropsWithChildren<PrimeReactPr
         ripple,
         setRipple,
         inputVariant,
-        setInputVariant
+        setInputVariant,
+        zIndex: { modal: 1100, overlay: 1000, menu: 1000, tooltip: 1100 }
     };
 
     return (
