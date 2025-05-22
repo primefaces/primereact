@@ -1,21 +1,26 @@
 import { Skeleton } from 'primereact/skeleton';
 
-export default function CardDemo() {
+export default function ShapesDemo() {
     return (
-        <div className="card">
-            <div className="rounded border border-surface-200 dark:border-surface-700 p-6 bg-surface-0 dark:bg-surface-900">
-                <div className="flex mb-4">
-                    <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>
-                    <div>
-                        <Skeleton width="10rem" className="mb-2"></Skeleton>
-                        <Skeleton width="5rem" className="mb-2"></Skeleton>
-                        <Skeleton height=".5rem"></Skeleton>
+        <div className="card flex items-center justify-center">
+            <div className="max-w-md w-full space-y-4">
+                <div className="flex items-start gap-4">
+                    <Skeleton shape="circle" size="3.5rem" />
+                    <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                            <Skeleton width="40%" height="1.75rem" />
+                        </div>
+                        <div className="space-y-1.5 mt-3">
+                            <Skeleton width="100%" borderRadius="4px" />
+                            <Skeleton width="90%" borderRadius="4px" />
+                            <Skeleton width="30%" borderRadius="4px" />
+                        </div>
+                        <Skeleton className="mt-4" height="16rem" />
+                        <div className="flex items-center gap-4 mt-4">
+                            <Skeleton width="4rem" height="1.75rem" />
+                            <Skeleton width="4rem" height="1.75rem" />
+                        </div>
                     </div>
-                </div>
-                <Skeleton width="100%" height="150px"></Skeleton>
-                <div className="flex justify-between mt-4">
-                    <Skeleton width="4rem" height="2rem"></Skeleton>
-                    <Skeleton width="4rem" height="2rem"></Skeleton>
                 </div>
             </div>
         </div>

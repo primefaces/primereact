@@ -4,43 +4,55 @@ description: "Tag component is used to categorize content."
 component: "tag"
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Tag } from 'primereact/tag';
 ```
 
-## Basic
+````tsx
+<Tag></Tag>
+````
 
-Label of the tag is defined with the value property.
+## Examples
+
+### Basic
+
+`Tag.Label` is used to define the label of the tag.
 
 <DocComponentViewer name="tag:basic-demo" />
 
-## Severity
+### Icon
 
-Severity defines the variant of a tag.
-
-<DocComponentViewer name="tag:severity-demo" />
-
-## Pill
-
-Enabling _rounded_, displays a tag as a pill.
-
-<DocComponentViewer name="tag:pill-demo" />
-
-## Icon
-
-A font icon next to the value can be displayed with the icon property.
+Use `Tag.Icon` to display an icon next to the label. Place the icon left or right of the label.
 
 <DocComponentViewer name="tag:icon-demo" />
 
-## Template
+### Severity
+
+Use `severity` property to define the severity of the tag.
+
+<DocComponentViewer name="tag:severity-demo" />
+
+### Pill
+
+Use `rounded` property to display a tag as a pill.
+
+<DocComponentViewer name="tag:pill-demo" />
+
+### Template
 
 Children of the component are passed as the content for templating.
 
 <DocComponentViewer name="tag:template-demo" />
 
-## Accessibility
+### As button
+
+Use `as="button"` to display a tag as a button.
+
+<DocComponentViewer name="tag:button-demo" />
+
+## Accessibility
 
 ### Screen Reader
 

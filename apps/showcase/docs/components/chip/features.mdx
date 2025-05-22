@@ -1,34 +1,42 @@
 ---
-title: "Chip"
-description: "Chip represents entities using icons, labels and images."
-component: "chip"
+title: 'Chip'
+description: 'Chip represents entities using icons, labels and images.'
+component: 'chip'
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Chip } from 'primereact/chip';
 ```
 
-## Basic
+`````tsx
+<Chip>
+    <Chip.Label>Chip</Chip.Label>
+</Chip>
+`````
+
+## Examples
+
+### Basic
 
 A basic chip with a text is created with the _Chip.Label_ component. In addition when <i>Chip.RemoveIcon</i> is added, a delete icon is displayed to remove a chip.
 
 <DocComponentViewer name="chip:basic-demo" />
 
-## Icon
+### Icon
 
 A font icon next to the label can be displayed with the _className_ property.
 
 <DocComponentViewer name="chip:icon-demo" />
 
-## Image
+### Image
 
  The _Chip.Image_ is used to display an image like an avatar.
 
 <DocComponentViewer name="chip:image-demo" />
 
-## Template
+### Template
 
 Chip also allows displaying custom content inside a itself.
 
@@ -45,3 +53,4 @@ Chip uses the `label` property as the default `aria-label`. Any attribute passed
 | --- | --- |
 | backspace | Hides removable chip |
 | enter | Hides removable chip |
+

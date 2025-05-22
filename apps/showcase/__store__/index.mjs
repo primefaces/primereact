@@ -322,12 +322,16 @@ export const Store = {
             'component': React.lazy(() => import('demo/skeleton/card-demo.tsx')),
             'filePath': 'demo/skeleton/card-demo.tsx',
         },
+        'color-demo': {
+            'component': React.lazy(() => import('demo/skeleton/color-demo.tsx')),
+            'filePath': 'demo/skeleton/color-demo.tsx',
+        },
         'datatable-demo': {
             'component': React.lazy(() => import('demo/skeleton/datatable-demo.tsx')),
             'filePath': 'demo/skeleton/datatable-demo.tsx',
         },
         'list-demo': {
-            'component': React.lazy(() => import('demo/skeleton/list-demo.tsx')),
+            'component': React.lazy(() => import('@/demo/skeleton/grid-demo')),
             'filePath': 'demo/skeleton/list-demo.tsx',
         },
         'shapes-demo': {
@@ -339,6 +343,10 @@ export const Store = {
         'basic-demo': {
             'component': React.lazy(() => import('demo/tag/basic-demo.tsx')),
             'filePath': 'demo/tag/basic-demo.tsx',
+        },
+        'button-demo': {
+            'component': React.lazy(() => import('demo/tag/button-demo.tsx')),
+            'filePath': 'demo/tag/button-demo.tsx',
         },
         'icon-demo': {
             'component': React.lazy(() => import('demo/tag/icon-demo.tsx')),
