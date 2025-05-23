@@ -24,7 +24,7 @@ export interface PanelCollapsePassThrough {
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    root?: PanelCollapsePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: PanelCollapsePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
 }
 
 /**
