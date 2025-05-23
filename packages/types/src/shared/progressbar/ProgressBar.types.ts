@@ -36,14 +36,14 @@ export interface ProgressBarPassThrough {
  */
 export interface ProgressBarProps extends BaseComponentProps<ProgressBarInstance, useProgressBarProps> {
     /**
-     * Current value of the progress.
-     */
-    value?: number | undefined;
-    /**
      * Defines the mode of the progress
      * @default determinate
      */
     mode?: 'determinate' | 'indeterminate' | undefined;
+    /**
+     * Defines the children of the ProgressBar.
+     */
+    children?: React.ReactNode | undefined;
 }
 
 /**

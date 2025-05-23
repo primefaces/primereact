@@ -13,12 +13,39 @@ import type { HeadlessInstance } from '@primereact/types/core';
 /**
  * Defines valid properties in useProgressBar.
  */
-export interface useProgressBarProps {}
+export interface useProgressBarProps {
+    /**
+     * Current value of the progress.
+     */
+    value?: number | undefined;
+    /**
+     * Defines the mode of the progress
+     */
+    max?: number | undefined;
+    /**
+     * Defines the mode of the progress
+     */
+    min?: number | undefined;
+    /**
+     * Custom formatter function to format the display value
+     * @param {number} value - The calculated percentage value
+     */
+    formatter?: ((value: number) => string) | undefined;
+}
 
 /**
  * Defines valid state in useProgressBar.
  */
-export interface useProgressBarState {}
+export interface useProgressBarState {
+    /**
+     * Current value of the progress.
+     */
+    calculatedValue?: number | undefined;
+    /**
+     * Current value of the progress in percentage format and fixed to 2 decimal places.
+     */
+    formattedValue?: string | undefined;
+}
 
 /**
  * Defines the methods and properties exposed by useProgressBar.
