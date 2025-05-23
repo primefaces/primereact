@@ -288,6 +288,10 @@ export const Store = {
             'component': React.lazy(() => import('demo/progressbar/dynamic-demo.tsx')),
             'filePath': 'demo/progressbar/dynamic-demo.tsx',
         },
+        'formatter-demo': {
+            'component': React.lazy(() => import('demo/progressbar/formatter-demo.tsx')),
+            'filePath': 'demo/progressbar/formatter-demo.tsx',
+        },
         'indeterminate-demo': {
             'component': React.lazy(() => import('demo/progressbar/indeterminate-demo.tsx')),
             'filePath': 'demo/progressbar/indeterminate-demo.tsx',
@@ -295,6 +299,10 @@ export const Store = {
         'progressbar-pt': {
             'component': React.lazy(() => import('demo/progressbar/progressbar-pt.tsx')),
             'filePath': 'demo/progressbar/progressbar-pt.tsx',
+        },
+        'steps-demo': {
+            'component': React.lazy(() => import('demo/progressbar/steps-demo.tsx')),
+            'filePath': 'demo/progressbar/steps-demo.tsx',
         },
         'template-demo': {
             'component': React.lazy(() => import('demo/progressbar/template-demo.tsx')),

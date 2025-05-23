@@ -1,11 +1,9 @@
 import { ProgressBar } from 'primereact/progressbar';
 
-export default function BasicDemo() {
-    const value = 50;
-
+export default function FormatterDemo() {
     return (
         <div className="card">
-            <ProgressBar value={value}>
+            <ProgressBar value={50} formatter={(value: number) => `${value}/100`}>
                 <ProgressBar.Track>
                     <ProgressBar.Indicator>
                         <ProgressBar.Label>

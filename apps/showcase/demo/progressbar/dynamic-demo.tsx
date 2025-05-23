@@ -8,7 +8,7 @@ export default function DynamicDemo() {
     React.useEffect(() => {
         interval.current = setInterval(() => {
             setValue((prevValue) => {
-                const newValue = prevValue + Math.floor(Math.random() * 10) + 1;
+                const newValue = prevValue + Math.random() * 10 + 1;
 
                 if (newValue >= 100) {
                     clearInterval(interval.current);
@@ -31,7 +31,13 @@ export default function DynamicDemo() {
     return (
         <div className="card">
             <ProgressBar value={value}>
-                <ProgressBar.Label>{value}%</ProgressBar.Label>
+                <ProgressBar.Track>
+                    <ProgressBar.Indicator>
+                        <ProgressBar.Label>
+                            <ProgressBar.Value />
+                        </ProgressBar.Label>
+                    </ProgressBar.Indicator>
+                </ProgressBar.Track>
             </ProgressBar>
         </div>
     );

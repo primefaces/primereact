@@ -4,35 +4,61 @@ description: 'ProgressBar is a process status indicator.'
 component: 'progressbar'
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { ProgressBar } from 'primereact/progressbar';
 ```
 
-## Basic
+```tsx
+<ProgressBar value={50}>
+    <ProgressBar.Track>
+        <ProgressBar.Indicator>
+            <ProgressBar.Label>
+                <ProgressBar.Value />
+            </ProgressBar.Label>
+        </ProgressBar.Indicator>
+    </ProgressBar.Track>
+</ProgressBar>
+```
 
-ProgressBar is used with the _ProgressBar.Label_ property.
+## Examples
+
+### Basic
+
+Use the `value` property to define the progress.
 
 <DocComponentViewer name="progressbar:basic-demo" />
 
-## Dynamic
+### Dynamic
 
 Value is reactive so updating it dynamically changes the bar as well.
 
 <DocComponentViewer name="progressbar:dynamic-demo" />
 
-## Template
+### Formatter
 
-Content to display is defined with the _ProgressBar.Label_ component.
+Custom formatter function to format the display value.
+
+<DocComponentViewer name="progressbar:formatter-demo" />
+
+### Template
+
+Place `ProgressBar.Value` where you want the progress value to be displayed inside the `ProgressBar` and customize `formatter` prop to display in different format.
 
 <DocComponentViewer name="progressbar:template-demo" />
 
-## Indeterminate
+### Indeterminate
 
-For progresses with no value to track, set the _mode_ property to _indeterminate_.
+For progresses with no value to track, set the `mode` property to `indeterminate`.
 
 <DocComponentViewer name="progressbar:indeterminate-demo" />
+
+### As Steps
+
+Steps are used to display a progress with multiple steps.
+
+<DocComponentViewer name="progressbar:steps-demo" />
 
 ## Accessibility
 
