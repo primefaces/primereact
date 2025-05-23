@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { usePanelExposes, usePanelProps, usePanelState } from './usePanel.types';
+import type { usePanelExposes, usePanelProps, usePanelState, usePanelToggleEvent } from './usePanel.types';
 
 /**
  * Defines passthrough(pt) options type in Panel component.
@@ -28,6 +28,12 @@ export interface PanelPassThrough {
 }
 
 /**
+ * Event fired when the panel's toggle state changes.
+ * @extends usePanelToggleEvent
+ */
+export interface PanelToggleEvent extends usePanelToggleEvent {}
+
+/**
  * Defines valid properties in Panel component.
  */
 export interface PanelProps extends BaseComponentProps<PanelInstance, usePanelProps> {
@@ -36,6 +42,13 @@ export interface PanelProps extends BaseComponentProps<PanelInstance, usePanelPr
      * @default false
      */
     toggleable?: boolean | undefined;
+    /**
+     * Callback fired when the panel's toggle state changes.
+     * @param event.originalEvent The original event that triggered the toggle.
+     * @param event.value The new value of the panel's toggle state.
+     * @returns void
+     */
+    onToggle?: ((event: PanelToggleEvent) => void) | undefined;
 }
 
 /**
