@@ -1,5 +1,5 @@
 'use client';
-import Noir from '@/themes/noir';
+import appConfig from '@/app.config';
 import { PrimeReactProvider } from '@primereact/core/config';
 import { PrimeReactStyleSheet } from '@primereact/core/stylesheet';
 import { useServerInsertedHTML } from 'next/navigation';
@@ -23,7 +23,7 @@ export default function StyleRegistry({
     //if (typeof window !== 'undefined') return <>{children}</>;
 
     return (
-        <PrimeReactProvider theme={Noir} stylesheet={styledStyleSheet}>
+        <PrimeReactProvider {...appConfig.primereact} stylesheet={styledStyleSheet}>
             {children}
         </PrimeReactProvider>
     );

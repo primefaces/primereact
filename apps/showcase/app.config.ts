@@ -1,3 +1,4 @@
+import Noir from '@/themes/noir';
 import type { AppConfig } from '@/types/App.types';
 
 const appConfig: AppConfig = {
@@ -12,7 +13,14 @@ const appConfig: AppConfig = {
             url: 'https://primereact.org'
         }
     ],
-    primereact: {},
+    primereact: {
+        theme: {
+            preset: Noir,
+            options: {
+                darkModeSelector: '.p-dark'
+            }
+        }
+    },
     metadata: {
         title: 'PrimeReact - React UI Component Library',
         description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',

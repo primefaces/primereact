@@ -1,7 +1,7 @@
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 
-export const NoirPreset = definePreset(Aura, {
+const Noir = definePreset(Aura, {
     semantic: {
         primary: {
             50: '{surface.50}',
@@ -48,12 +48,5 @@ export const NoirPreset = definePreset(Aura, {
         }
     }
 });
-
-const Noir = {
-    preset: NoirPreset,
-    options: {
-        darkModeSelector: '.p-dark'
-    }
-};
 
 export default Noir;

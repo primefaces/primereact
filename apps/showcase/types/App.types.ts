@@ -12,6 +12,12 @@ export interface AppConfig {
         url: string;
     }[];
     primereact?: {
+        theme?: {
+            preset?: unknown;
+            options?: {
+                darkModeSelector?: string;
+            };
+        };
         ripple?: boolean;
         locale?: string;
     };
