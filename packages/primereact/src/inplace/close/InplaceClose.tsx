@@ -21,6 +21,7 @@ export const InplaceClose = withComponent({
             {
                 onClick: inplace?.close
             },
+            inplace?.ptm('close'),
             ptmi('root')
         );
 

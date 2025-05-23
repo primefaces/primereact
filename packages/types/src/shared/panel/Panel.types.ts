@@ -25,6 +25,30 @@ export interface PanelPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the header's DOM element.
+     */
+    header?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the header actions's DOM element.
+     */
+    headerActions?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the title's DOM element.
+     */
+    title?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the content's DOM element.
+     */
+    content?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the collapse's DOM element.
+     */
+    collapse?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the footer's DOM element.
+     */
+    footer?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -36,7 +60,7 @@ export interface PanelToggleEvent extends usePanelToggleEvent {}
 /**
  * Defines valid properties in Panel component.
  */
-export interface PanelProps extends BaseComponentProps<PanelInstance, usePanelProps> {
+export interface PanelProps extends BaseComponentProps<PanelInstance, Omit<usePanelProps, 'onToggle'>> {
     /**
      * When enabled, the content of panel can be expanded and collapsed by clicking the header.
      * @default false

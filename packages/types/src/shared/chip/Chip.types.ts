@@ -25,6 +25,22 @@ export interface ChipPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: ChipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the icon's DOM element.
+     */
+    icon?: ChipPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the image's DOM element.
+     */
+    image?: ChipPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    /**
+     * Used to pass attributes to the label's DOM element.
+     */
+    label?: ChipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the remove icon's DOM element.
+     */
+    removeIcon?: ChipPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

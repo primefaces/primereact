@@ -25,6 +25,14 @@ export interface TagPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the icon's DOM element.
+     */
+    icon?: TagPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    /**
+     * Used to pass attributes to the label's DOM element.
+     */
+    label?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

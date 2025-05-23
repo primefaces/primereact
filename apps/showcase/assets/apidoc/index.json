@@ -16,6 +16,22 @@
                             "type": "AvatarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "fallback",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AvatarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the fallback's DOM element."
+                        },
+                        {
+                            "name": "image",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AvatarPassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the image's DOM element."
                         }
                     ],
                     "methods": []
@@ -2537,6 +2553,38 @@
                             "type": "ChipPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "image",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipPassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the image's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "removeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the remove icon's DOM element."
                         }
                     ],
                     "methods": []
@@ -3489,6 +3537,30 @@
                             "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "display",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the display's DOM element."
+                        },
+                        {
+                            "name": "close",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the close's DOM element."
                         }
                     ],
                     "methods": []
@@ -4568,6 +4640,62 @@
                             "optional": true,
                             "readonly": false,
                             "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "meters",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the meters' DOM element."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the meter's DOM element."
+                        },
+                        {
+                            "name": "labels",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLOListElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the labels' DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "labelIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the label icon's DOM element."
+                        },
+                        {
+                            "name": "labelMarker",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the label marker's DOM element."
+                        },
+                        {
+                            "name": "labelText",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
                         }
@@ -6094,6 +6222,54 @@
                             "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerActions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the header actions's DOM element."
+                        },
+                        {
+                            "name": "title",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the title's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "collapse",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the collapse's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the footer's DOM element."
                         }
                     ],
                     "methods": []
@@ -6254,7 +6430,7 @@
                         }
                     ],
                     "methods": [],
-                    "extendedTypes": "BaseComponentProps<PanelInstance, usePanelProps>"
+                    "extendedTypes": "BaseComponentProps<PanelInstance, Omit<usePanelProps, \"onToggle\">>"
                 },
                 "PanelState": {
                     "description": "Defines valid state in Panel component.",
@@ -6416,7 +6592,7 @@
                             "name": "root",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelCollapsePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "PanelCollapsePassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
                         }
@@ -9641,6 +9817,22 @@
                             "type": "TagPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TagPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TagPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the label's DOM element."
                         }
                     ],
                     "methods": []

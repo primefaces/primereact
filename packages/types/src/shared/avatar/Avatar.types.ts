@@ -25,6 +25,14 @@ export interface AvatarPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: AvatarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the fallback's DOM element.
+     */
+    fallback?: AvatarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to pass attributes to the image's DOM element.
+     */
+    image?: AvatarPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
 }
 
 /**

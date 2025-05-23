@@ -198,46 +198,17 @@ const setEventsData = (moduleName: string, events: EventDefinition[]) => {
 };
 
 export const getPTOptions = (name: string): { data: unknown[]; description?: string } => {
-    const { props, description } = typedAPIDocs[name.toLowerCase()]?.interfaces?.values[`${name}PassThroughOptions`] as PropsDefinition;
+    const { props, description } = typedAPIDocs[name.toLowerCase()]?.interfaces?.values[`${name}PassThrough`] as PropsDefinition;
 
-    const options = typedAPIDocs[name.toLowerCase()]?.interfaces?.values[`${name}PassThroughMethodOptions`] as PropsDefinition | undefined;
     const data = [];
 
     for (const [, prop] of props.entries()) {
-        if (options) {
-            let subCompName: string | undefined;
-            let subOptions: PropsDefinition | undefined;
-            const hasSubComp = prop.name !== 'hooks' && prop.type.indexOf('TransitionType') === -1 && prop.type.indexOf('<') > -1 && name.toLowerCase() !== prop.type.slice(0, prop.type.indexOf('<')).toLowerCase();
-
-            if (hasSubComp) {
-                subCompName = prop.type.slice(0, prop.type.indexOf('<')).replace('PassThroughOptions', '').replace('PassThroughOptionType', '');
-                subOptions = typedAPIDocs[subCompName.toLowerCase()]?.interfaces?.values[`${subCompName}PassThroughMethodOptions`] as PropsDefinition;
-
-                if (subOptions && subOptions.props) {
-                    const objToReplace = subOptions.props.find((opt) => opt.name === 'parent');
-
-                    if (objToReplace) {
-                        objToReplace.type = prop.type;
-                    }
-                }
-            }
-
-            if (!prop.deprecated) {
-                data.push({
-                    // value: i + 1,
-                    label: prop.name,
-                    options: hasSubComp ? subOptions?.props : options?.props,
-                    description: prop.description
-                });
-            }
-        } else {
-            data.push({
-                // value: i + 1,
-                label: prop.name,
-                type: prop.type,
-                description: prop.description
-            });
-        }
+        data.push({
+            // value: i + 1,
+            label: prop.name,
+            type: prop.type,
+            description: prop.description
+        });
     }
 
     return {

@@ -43,14 +43,11 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
 
     const enterSection = (enteredItem: { name: string; item: string }) => {
         const { name, item } = enteredItem;
-        let selector = `[data-pc-section="${item.toLowerCase()}"]`;
         let elements: HTMLElement[] = [];
+        let selector = `[data-pc-name="${name.toLowerCase()}${item.toLowerCase()}"]`;
 
         if (item === 'root') {
-            if (name === 'PanelCollapse') selector = `[data-pc-name="button"]`;
-            else {
-                selector = `[data-pc-name="${name.toLowerCase()}"][data-pc-section="${item.toLowerCase()}"]`;
-            }
+            selector = `[data-pc-name="${name.toLowerCase()}"]`;
         }
 
         if (container.current) {

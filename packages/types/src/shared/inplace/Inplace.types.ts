@@ -25,6 +25,18 @@ export interface InplacePassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the content's DOM element.
+     */
+    content?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the display's DOM element.
+     */
+    display?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the close's DOM element.
+     */
+    close?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
