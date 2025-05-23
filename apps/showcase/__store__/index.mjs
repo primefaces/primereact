@@ -266,6 +266,10 @@ export const Store = {
             'component': React.lazy(() => import('demo/panel/basic-demo.tsx')),
             'filePath': 'demo/panel/basic-demo.tsx',
         },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/panel/controlled-demo.tsx')),
+            'filePath': 'demo/panel/controlled-demo.tsx',
+        },
         'panel-pt': {
             'component': React.lazy(() => import('demo/panel/panel-pt.tsx')),
             'filePath': 'demo/panel/panel-pt.tsx',
@@ -277,6 +281,10 @@ export const Store = {
         'toggleable-demo': {
             'component': React.lazy(() => import('demo/panel/toggleable-demo.tsx')),
             'filePath': 'demo/panel/toggleable-demo.tsx',
+        },
+        'uncontrolled-demo': {
+            'component': React.lazy(() => import('demo/panel/uncontrolled-demo.tsx')),
+            'filePath': 'demo/panel/uncontrolled-demo.tsx',
         },
     },
     'progressbar': {

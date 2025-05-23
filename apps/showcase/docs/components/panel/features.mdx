@@ -22,6 +22,18 @@ When the _toggleable_ property is enabled, content can be expanded and collapsed
 
 <DocComponentViewer name="panel:toggleable-demo" />
 
+## Controlled
+
+A controlled Panel requires managing the collapsed state with a state variable and handling the toggle event manually. This allows for complete control over the Panel's behavior.
+
+<DocComponentViewer name="panel:controlled-demo" />
+
+## Uncontrolled
+
+An uncontrolled Panel manages its own collapsed state internally. You can simply use the `toggleable` property without controlling the collapsed state, letting the component handle all toggle behavior automatically.
+
+<DocComponentViewer name="panel:uncontrolled-demo" />
+
 ## Template
 
 Header and footer sections of the panel can be customized using _Panel.Header_ and _Panel.Footer_ components.
