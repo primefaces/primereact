@@ -125,9 +125,8 @@ export const FileUpload = React.memo(
 
             for (let i = 0; i < selectedFiles.length; i++) {
                 let file = selectedFiles[i];
-                const shouldAddFile = props.multiple ? !isFileSelected(file) && validate(file) : validate(file);
 
-                if (shouldAddFile) {
+                if (!isFileSelected(file) && validate(file)) {
                     file.objectURL = window.URL.createObjectURL(file);
 
                     currentFiles.push(file);
@@ -140,12 +139,12 @@ export const FileUpload = React.memo(
                 upload(currentFiles);
             }
 
-            if (props.onSelect) {
+            if (props.onSelect) { 
                 props.onSelect({ originalEvent: event, files: currentFiles });
             }
 
             clearInput();
-
+            setFocusedState(false);
             if (props.mode === 'basic' && currentFiles.length > 0) {
                 fileInputRef.current.style.display = 'none';
             }
