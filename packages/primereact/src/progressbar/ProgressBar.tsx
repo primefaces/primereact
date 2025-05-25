@@ -1,8 +1,7 @@
 'use client';
-import { withComponent } from '@primereact/core/component';
+import { Component, withComponent } from '@primereact/core/component';
 import { useProgressBar } from '@primereact/headless/progressbar';
 import { styles } from '@primereact/styles/progressbar';
-import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { ProgressBarIndicator } from './indicator';
 import { ProgressBarLabel } from './label';
@@ -23,7 +22,11 @@ export const ProgressBar = withComponent({
     render(instance) {
         const { props } = instance;
 
-        return <ProgressBarProvider value={instance}>{resolve(props.children, instance)}</ProgressBarProvider>;
+        return (
+            <ProgressBarProvider value={instance}>
+                <Component instance={instance} children={props.children} />
+            </ProgressBarProvider>
+        );
     },
     components: {
         Label: ProgressBarLabel,
