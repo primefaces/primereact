@@ -145,7 +145,7 @@ export const FileUpload = React.memo(
             }
 
             clearInput();
-            
+
             setFocusedState(false);
 
             if (props.mode === 'basic' && currentFiles.length > 0) {
