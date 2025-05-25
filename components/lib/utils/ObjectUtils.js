@@ -635,9 +635,10 @@ export default class ObjectUtils {
      * @param {object} a - The first object to compare.
      * @param {object} b - The second object to compare.
      * @param {string[]} [keysToCompare] - The keys to compare. If not provided, performs a shallow comparison using absoluteCompare.
+     * @param {number} [maxDepth=1] - The maximum depth to compare if the variables are objects.
      * @returns {boolean} True if all specified properties are equal, false otherwise.
      */
-    static selectiveCompare(a, b, keysToCompare) {
+    static selectiveCompare(a, b, keysToCompare, maxDepth = 1) {
         if (a === b) return true;
         if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
         if (!keysToCompare) return this.absoluteCompare(a, b, 1); // If no keys are provided, the comparison is limited to one depth level.
@@ -649,7 +650,7 @@ export default class ObjectUtils {
             const isObject = typeof aValue === 'object' && aValue !== null && typeof bValue === 'object' && bValue !== null;
 
             // If the current key is an object, they are compared in one further level only.
-            if (isObject && !this.absoluteCompare(aValue, bValue, 1)) return false;
+            if (isObject && !this.absoluteCompare(aValue, bValue, maxDepth)) return false;
             if (!isObject && aValue !== bValue) return false;
         }
 
