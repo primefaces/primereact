@@ -1316,7 +1316,7 @@
                             "name": "listbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "ListboxPassThroughOptions",
+                            "type": "ListBoxPassThroughOptions",
                             "description": "Custom passthrough(pt) options for Listbox."
                         },
                         {
@@ -33131,7 +33131,7 @@
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
-                            "type": "ListboxPassThroughOptions",
+                            "type": "ListBoxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
@@ -33306,9 +33306,9 @@
                     ],
                     "callbacks": []
                 },
-                "ListboxPassThroughOptions": {
+                "ListBoxPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ListboxProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
