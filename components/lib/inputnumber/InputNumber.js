@@ -49,7 +49,7 @@ export const InputNumber = React.memo(
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
         const vertical = props.showButtons && props.buttonLayout === 'vertical';
-        const inputMode = props.inputMode || (props.mode === 'decimal' && !props.minFractionDigits ? 'numeric' : 'decimal');
+        const inputMode = props.inputMode || (props.mode === 'decimal' && !props.minFractionDigits && !props.maxFractionDigits ? 'numeric' : 'decimal');
 
         const getOptions = () => {
             return {
