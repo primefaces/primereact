@@ -30,9 +30,9 @@ export interface ListBoxPassThroughMethodOptions {
 
 /**
  * Custom passthrough(pt) options.
- * @see {@link ListboxProps.pt}
+ * @see {@link ListBoxProps.pt}
  */
-export interface ListboxPassThroughOptions {
+export interface ListBoxPassThroughOptions {
     /**
      * Uses to pass attributes to the root's DOM element.
      */
@@ -406,9 +406,9 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     focusOnHover?: boolean | undefined;
     /**
      * Uses to pass attributes to DOM elements inside the component.
-     * @type {ListboxPassThroughOptions}
+     * @type {ListBoxPassThroughOptions}
      */
-    pt?: ListboxPassThroughOptions;
+    pt?: ListBoxPassThroughOptions;
     /**
      * Used to configure passthrough(pt) options of the component.
      * @type {PassThroughOptions}
