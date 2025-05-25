@@ -3,6 +3,8 @@ import type { ComponentProps, GlobalComponentProps } from '@primereact/types/cor
 export const globalProps: GlobalComponentProps = {
     ref: undefined,
     pIf: true,
+    style: undefined,
+    className: undefined,
     as: undefined,
     asChild: false,
     pt: undefined,

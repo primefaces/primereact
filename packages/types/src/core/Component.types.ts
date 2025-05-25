@@ -17,6 +17,14 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
      */
     pIf?: boolean | undefined;
     /**
+     * The style to apply to the component.
+     */
+    style?: React.CSSProperties | ((instance?: I) => React.CSSProperties | undefined) | undefined;
+    /**
+     * The class name to apply to the component.
+     */
+    className?: string | ((instance?: I) => string | undefined) | undefined;
+    /**
      * The component type to render.
      */
     as?: T | undefined;
