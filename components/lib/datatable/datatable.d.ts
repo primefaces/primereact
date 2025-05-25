@@ -1102,6 +1102,45 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     breakpoint?: string | undefined;
     /**
+     * Whether to enable cell memoization.
+     *
+     * When the memoization is enabled, be sure to:
+     *      1- Update the value prop (i.e., row data) to trigger a re-render of the cells of a given row.
+     *      2- Where necessary, use the spread operator (...) when updating the value prop objs which creates new fresh
+     *      objects and avoids mutating the same objects.
+     *
+     * When the memoization is disabled, a re-render of the datatable will trigger a re-render of all cells, which can
+     * lead to performance issues with large datasets and is therefore not recommended.
+     * @defaultValue true
+     */
+    cellMemo?: boolean;
+    /**
+     * The cell props to be checked at memoization.
+     *
+     * Possible cell props are:
+     *     'hostName', 'allowCellSelection', 'cellMemo', 'cellMemoProps', 'cellMemoPropsDepth', 'cellClassName', 'checkIcon', 'collapsedRowIcon',
+     *     'field', 'resolveFieldData', 'column', 'cProps', 'dataKey', 'editMode', 'editing', 'editingMeta', 'onEditingMetaChange', 'editingKey',
+     *     'getEditingRowData', 'expanded', 'expandedRowIcon', 'frozenRow', 'frozenCol', 'alignFrozenCol', 'index', 'isSelectable', 'onCheckboxChange',
+     *     'onClick', 'onMouseDown', 'onMouseUp', 'onRadioChange', 'onRowEditCancel', 'onRowEditInit', 'onRowEditSave', 'onRowToggle', 'responsiveLayout',
+     *     'rowData', 'rowEditorCancelIcon', 'rowEditorInitIcon', 'rowEditorSaveIcon', 'rowIndex', 'rowSpan', 'selectOnEdit', 'isRowSelected', 'isCellSelected',
+     *     'selectionAriaLabel', 'showRowReorderElement', 'showSelectionElement', 'tabIndex', 'getTabIndex', 'tableProps', 'tableSelector', 'value',
+     *     'getVirtualScrollerOption', 'ptCallbacks', 'metaData', 'unstyled', 'findNextSelectableCell', 'findPrevSelectableCell', 'findDownSelectableCell',
+     *     'findUpSelectableCell', 'focusOnElement', 'focusOnInit', 'updateStickyPosition'
+     *
+     * IMPORTANT: Including a function to be checked will in general disable the memoization in practice, since functions are
+     * compared by reference.
+     *
+     * @defaultValue ['rowData', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex',
+     * 'editing', 'expanded', 'editingMeta', 'frozenCol', 'alignFrozenCol']
+     */
+    cellMemoProps?: string[];
+    /**
+     * The comparison depth when checking cell props (e.g., rowData) at memoization.
+     *
+     * @defaultValue 1
+     */
+    cellMemoPropsDepth?: number;
+    /**
      * Icon to display in the checkbox.
      */
     checkIcon?: IconType<DataTableProps<TValue>> | undefined;

@@ -605,6 +605,9 @@ export const BodyRow = React.memo((props) => {
                 const cellProps = mergeProps({
                     hostName: props.hostName,
                     allowCellSelection: props.allowCellSelection,
+                    cellMemo: props.cellMemo,
+                    cellMemoProps: props.cellMemoProps,
+                    cellMemoPropsDepth: props.cellMemoPropsDepth,
                     cellClassName: props.cellClassName,
                     checkIcon: props.checkIcon,
                     collapsedRowIcon: props.collapsedRowIcon,
