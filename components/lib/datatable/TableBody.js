@@ -629,6 +629,12 @@ export const TableBody = React.memo(
             }
         };
 
+        const expandedRowsRef = React.useRef(props.expandedRows);
+
+        React.useEffect(() => {
+            expandedRowsRef.current = props.expandedRows;
+        }, [props.expandedRows]);
+
         const onRowToggle = (event) => {
             let expandedRows;
             let dataKey = props.dataKey;
@@ -637,7 +643,7 @@ export const TableBody = React.memo(
             if (hasDataKey) {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(event.data, dataKey));
 
-                expandedRows = props.expandedRows ? { ...props.expandedRows } : {};
+                expandedRows = expandedRowsRef.current ? { ...expandedRowsRef.current } : {};
 
                 if (expandedRows[dataKeyValue] != null) {
                     delete expandedRows[dataKeyValue];
@@ -653,9 +659,9 @@ export const TableBody = React.memo(
                     }
                 }
             } else {
-                let expandedRowIndex = findIndex(props.expandedRows, event.data);
+                let expandedRowIndex = findIndex(expandedRowsRef.current, event.data);
 
-                expandedRows = props.expandedRows ? [...props.expandedRows] : [];
+                expandedRows = expandedRowsRef.current ? [...expandedRowsRef.current] : [];
 
                 if (expandedRowIndex !== -1) {
                     expandedRows = expandedRows.filter((_, i) => i !== expandedRowIndex);
