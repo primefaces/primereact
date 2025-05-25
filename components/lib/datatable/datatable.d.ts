@@ -1127,7 +1127,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      *     'getVirtualScrollerOption', 'ptCallbacks', 'metaData', 'unstyled', 'findNextSelectableCell', 'findPrevSelectableCell', 'findDownSelectableCell',
      *     'findUpSelectableCell', 'focusOnElement', 'focusOnInit', 'updateStickyPosition'
      *
-     * PS.: Including a function to be checked will in general disable the memoization in practice, since functions are
+     * IMPORTANT: Including a function to be checked will in general disable the memoization in practice, since functions are
      * compared by reference.
      *
      * @defaultValue ['rowData', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex',
