@@ -15,5 +15,14 @@ export const styles = createStyles<ProgressBarInstance>({
         ],
         value: 'p-progressbar-value',
         label: 'p-progressbar-label'
+    },
+    inlineStyles: {
+        value: ({ props, state }) =>
+            props.mode === 'determinate'
+                ? {
+                      width: state.computedValue + '%',
+                      display: 'flex'
+                  }
+                : undefined
     }
 });

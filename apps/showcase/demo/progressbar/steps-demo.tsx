@@ -1,8 +1,9 @@
+import { cn } from '@primeuix/utils';
 import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import * as React from 'react';
 
-const steps = [
+const orderProgress = [
     {
         status: 'Place Order'
     },
@@ -38,28 +39,34 @@ const steps = [
 
 export default function StepsDemo() {
     const [step, setStep] = React.useState(1);
-    const nextStep = () => setStep(Math.min(step + 1, steps.length));
+    const nextStep = () => setStep(Math.min(step + 1, orderProgress.length));
     const prevStep = () => setStep(Math.max(step - 1, 0));
 
     return (
         <div className="card">
             <div className="max-w-sm mx-auto">
-                <div className="mb-3 font-medium">{steps[step].status}</div>
-                <ProgressBar value={step} steps={steps} min={0} max={4}>
-                    <ProgressBar.Track className={steps[step]?.colors?.track + ' transition-all duration-300 ease-linear'}>
-                        <ProgressBar.Indicator className={steps[step]?.colors?.indicator + ' !transition-[width,_background-color] duration-300 ease-linear'}>
-                            <ProgressBar.Label>
-                                <ProgressBar.Value />
-                            </ProgressBar.Label>
-                        </ProgressBar.Indicator>
-                    </ProgressBar.Track>
+                <div className="mb-3 font-medium">{orderProgress[step].status}</div>
+                <ProgressBar value={step} min={0} max={4}>
+                    {() => {
+                        const { colors } = orderProgress[step] ?? {};
+
+                        return (
+                            <ProgressBar.Track className={cn(colors?.track, 'transition-all duration-300 ease-linear')}>
+                                <ProgressBar.Indicator className={cn(colors?.indicator, '!transition-[width,_background-color] duration-300 ease-linear')}>
+                                    <ProgressBar.Label>
+                                        <ProgressBar.Value />
+                                    </ProgressBar.Label>
+                                </ProgressBar.Indicator>
+                            </ProgressBar.Track>
+                        );
+                    }}
                 </ProgressBar>
 
                 <div className="flex items-center justify-between mt-6">
                     <Button onClick={prevStep} disabled={step === 0} rounded variant="text" severity="contrast">
                         Previous
                     </Button>
-                    <Button onClick={nextStep} disabled={step === steps.length - 1} rounded variant="text" severity="contrast">
+                    <Button onClick={nextStep} disabled={step === orderProgress.length - 1} rounded variant="text" severity="contrast">
                         Next
                     </Button>
                 </div>

@@ -1,10 +1,10 @@
-import type { ComponentInstance, InComponentInstance, useBaseOptions, withComponentOptions } from '@primereact/types/core';
+import type { ComponentInstance, InComponentInstance, useComponentOptions, withComponentOptions } from '@primereact/types/core';
 import type { BaseComponentProps } from '@primereact/types/shared';
 import type { StylesOptions } from '@primereact/types/styles';
 import * as React from 'react';
 import { useComponent } from './useComponent';
 
-export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, Styles = StylesOptions, CData = Record<string, unknown>>({
+export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, Styles extends StylesOptions = StylesOptions, CData = Record<string, unknown>>({
     name = 'UnknownComponent',
     defaultProps,
     styles,
@@ -13,7 +13,7 @@ export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey
     render
 }: withComponentOptions<IProps, DProps, Exposes, Styles, CData>) => {
     const BaseComponent = <I extends ComponentInstance, T extends React.ElementType>(inProps?: BaseComponentProps<I, IProps, T> & DProps) => {
-        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useBaseOptions<BaseComponentProps<I, IProps, T> & DProps, DProps, Exposes>);
+        const instance = useComponent(name, { inProps, defaultProps, styles, setup } as useComponentOptions<BaseComponentProps<I, IProps, T> & DProps, DProps, Exposes, Styles>);
 
         type RenderedComponentProps = InComponentInstance<typeof instance.props, BaseComponentProps<I, IProps, T> & DProps, typeof instance.state, Exposes>;
 

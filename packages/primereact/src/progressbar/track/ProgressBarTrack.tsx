@@ -24,7 +24,7 @@ export const ProgressBarTrack = withComponent({
                 className: progressbar?.cx('root'),
                 role: 'progressbar',
                 'aria-valuemin': progressbar?.props.min ?? 0,
-                'aria-valuenow': progressbar?.state.calculatedValue,
+                'aria-valuenow': progressbar?.state.computedValue,
                 'aria-valuemax': progressbar?.props.max ?? 100
             },
             progressbar?.ptm('root'),

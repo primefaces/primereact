@@ -18,28 +18,14 @@ export const ProgressBarIndicator = withComponent({
     render(instance) {
         const { props, ptmi, progressbar } = instance;
 
-        const rootProps =
-            progressbar?.props.mode === 'determinate'
-                ? mergeProps(
-                      {
-                          className: progressbar?.cx('value'),
-                          style: {
-                              width: progressbar?.state.calculatedValue + '%',
-                              display: 'flex'
-                          }
-                      },
-                      progressbar?.ptm('value'),
-                      ptmi('root')
-                  )
-                : progressbar?.props.mode === 'indeterminate'
-                  ? mergeProps(
-                        {
-                            className: progressbar?.cx('value')
-                        },
-                        progressbar?.ptm('value'),
-                        ptmi('root')
-                    )
-                  : null;
+        const rootProps = mergeProps(
+            {
+                style: progressbar?.sx('value'),
+                className: progressbar?.cx('value')
+            },
+            progressbar?.ptm('value'),
+            ptmi('root')
+        );
 
         return <Component instance={instance} attrs={rootProps} children={progressbar?.props.mode === 'determinate' ? props.children : null} />;
     }

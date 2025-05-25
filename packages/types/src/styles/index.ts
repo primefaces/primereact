@@ -12,9 +12,9 @@ export type StyleKeyTypeOptions<I extends ComponentInstance = ComponentInstance>
     context: Record<string, unknown>;
 };
 
-export type StyleKeyType<I extends ComponentInstance, Return> = string | Return | ((instance: StyleKeyTypeOptions<I>) => Return);
+export type StyleKeyType<I extends ComponentInstance, Return> = string | undefined | Return | ((instance: StyleKeyTypeOptions<I>) => string | undefined | Return);
 
-export type ClassesType<I extends ComponentInstance> = Record<string, StyleKeyType<I, string | (string | object)[]>>;
+export type ClassesType<I extends ComponentInstance> = Record<string, StyleKeyType<I, (string | object)[]>>;
 
 export type InlineStylesType<I extends ComponentInstance> = Record<string, StyleKeyType<I, CSSProperties>>;
 

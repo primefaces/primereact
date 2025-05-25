@@ -19,24 +19,22 @@ export const useProgressBar = withHeadless({
             }
 
             const clampedValue = Math.min(Math.max(value ?? minValue, minValue), maxValue);
-
             const newValue = ((clampedValue - minValue) / (maxValue - minValue)) * 100;
-
             const boundedValue = Math.min(Math.max(newValue, 0), 100);
 
             return boundedValue;
         };
 
-        const calculatedValue = React.useMemo(() => {
+        const computedValue = React.useMemo(() => {
             return handleProgressValue(props.value);
         }, [props.value, props.min, props.max]);
 
         const formattedValue = React.useMemo(() => {
-            return props.formatter?.(calculatedValue);
-        }, [calculatedValue, props.formatter]);
+            return props.formatter?.(computedValue);
+        }, [computedValue, props.formatter]);
 
         const state = {
-            calculatedValue,
+            computedValue,
             formattedValue
         };
 

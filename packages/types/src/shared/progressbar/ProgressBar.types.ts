@@ -40,10 +40,6 @@ export interface ProgressBarProps extends BaseComponentProps<ProgressBarInstance
      * @default determinate
      */
     mode?: 'determinate' | 'indeterminate' | undefined;
-    /**
-     * Defines the children of the ProgressBar.
-     */
-    children?: React.ReactNode | undefined;
 }
 
 /**

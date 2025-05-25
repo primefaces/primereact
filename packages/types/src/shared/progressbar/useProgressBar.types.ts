@@ -28,7 +28,7 @@ export interface useProgressBarProps {
     min?: number | undefined;
     /**
      * Custom formatter function to format the display value
-     * @param {number} value - The calculated percentage value
+     * @param {number} value - The computed percentage value
      */
     formatter?: ((value: number) => string) | undefined;
 }
@@ -40,7 +40,7 @@ export interface useProgressBarState {
     /**
      * Current value of the progress.
      */
-    calculatedValue?: number | undefined;
+    computedValue?: number | undefined;
     /**
      * Current value of the progress in percentage format and fixed to 2 decimal places.
      */

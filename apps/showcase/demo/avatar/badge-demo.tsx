@@ -9,7 +9,7 @@ const BadgeDemo = () => {
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png" />
                     <Avatar.Fallback>O</Avatar.Fallback>
                 </Avatar>
-                <Badge size="small" circle severity="success">
+                <Badge size="small" shape="circle" severity="success">
                     2
                 </Badge>
             </Badge.Overlay>
@@ -18,7 +18,7 @@ const BadgeDemo = () => {
                     <Avatar.Image src="https://primefaces.org/cdn/primevue/images/organization/walter.jpg" />
                     <Avatar.Fallback>W</Avatar.Fallback>
                 </Avatar>
-                <Badge circle severity="danger"></Badge>
+                <Badge shape="circle" severity="danger"></Badge>
             </Badge.Overlay>
         </div>
     );
