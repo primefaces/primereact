@@ -698,13 +698,13 @@ export const BodyCell = React.memo(
         return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
-        if (nextProps.cellMemo === false) return false
+        if (nextProps.cellMemo === false) return false;
 
-        const memoProps = nextProps.cellMemoProps
-        const keysToCompare = Array.isArray(memoProps) && memoProps.every(prop => typeof prop === 'string') ? memoProps : defaultKeysToCompare
+        const memoProps = nextProps.cellMemoProps;
+        const keysToCompare = Array.isArray(memoProps) && memoProps.every((prop) => typeof prop === 'string') ? memoProps : defaultKeysToCompare;
 
-        const memoPropsDepth = nextProps.cellMemoPropsDepth
-        const depth = typeof memoPropsDepth === 'number' && memoPropsDepth > 0 ? memoPropsDepth : 1
+        const memoPropsDepth = nextProps.cellMemoPropsDepth;
+        const depth = typeof memoPropsDepth === 'number' && memoPropsDepth > 0 ? memoPropsDepth : 1;
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare, depth);
     }
