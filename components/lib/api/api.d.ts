@@ -48,7 +48,7 @@ import { InputSwitchPassThroughOptions } from '../inputswitch/inputswitch';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { InputTextareaPassThroughOptions } from '../inputtextarea/inputtextarea';
 import { KnobPassThroughOptions } from '../knob/knob';
-import { ListboxPassThroughOptions } from '../listbox/listbox';
+import { ListBoxPassThroughOptions } from '../listbox/listbox';
 import { MegaMenuPassThroughOptions } from '../megamenu/megamenu';
 import { MentionPassThroughOptions } from '../mention/mention';
 import { MenuPassThroughOptions } from '../menu/menu';
@@ -476,7 +476,7 @@ export interface PrimeReactPTOptions {
     /**
      * Custom passthrough(pt) options for Listbox.
      */
-    listbox?: ListboxPassThroughOptions;
+    listbox?: ListBoxPassThroughOptions;
     /**
      * Custom passthrough(pt) options for MegaMenu.
      */
