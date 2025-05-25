@@ -4,7 +4,7 @@ import type { StylesOptions } from '@primereact/types/styles';
 import * as React from 'react';
 import { useComponent } from './useComponent';
 
-export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, Styles extends StylesOptions = StylesOptions, CData = Record<string, unknown>>({
+export const withComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>, Styles = StylesOptions, CData = Record<string, unknown>>({
     name = 'UnknownComponent',
     defaultProps,
     styles,

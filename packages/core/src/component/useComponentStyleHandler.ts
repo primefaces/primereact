@@ -5,7 +5,7 @@ import { css as Css, dt, Theme } from '@primeuix/styled';
 import { isNotEmpty, minifyCSS, resolve, toElement } from '@primeuix/utils';
 import * as React from 'react';
 
-export const useComponentStyleHandler = (styles?: StylesOptions, elementRef?: React.Ref<HTMLElement>) => {
+export const useComponentStyleHandler = <Styles>(styles?: Styles, elementRef?: React.Ref<HTMLElement>) => {
     const theme = React.useContext(ThemeContext);
     const { load } = useStyle();
 
@@ -19,7 +19,7 @@ export const useComponentStyleHandler = (styles?: StylesOptions, elementRef?: Re
     return React.useMemo(() => {
         const handler = {
             name: 'base',
-            ...styles,
+            ...(styles as StylesOptions),
             load: (style: StyleType = '', options: Record<PropertyKey, unknown> & { name?: string } = {}, extendedStyle = '', enableThemeTransform = false) => {
                 const name = options.name || handler.name;
                 const resolvedStyle = Css`${style}${extendedStyle}` as string;

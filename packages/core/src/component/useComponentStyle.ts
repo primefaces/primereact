@@ -1,12 +1,11 @@
 import { StyleRegistry } from '@primereact/core/utils';
 import type { GlobalComponentProps, Instance } from '@primereact/types/core';
-import { StylesOptions } from '@primereact/types/styles';
 import { Theme, ThemeService } from '@primeuix/styled';
 import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-export const useComponentStyle = <Props extends GlobalComponentProps, IProps, Styles extends StylesOptions, Params>(instance: Instance<Props, IProps>, styles?: Styles, $params?: Params) => {
+export const useComponentStyle = <Props extends GlobalComponentProps, IProps, Styles, Params>(instance: Instance<Props, IProps>, styles?: Styles, $params?: Params) => {
     const { props = { unstyled: false }, $primereact, elementRef } = instance || {};
     const $style = useComponentStyleHandler(styles, elementRef);
 

@@ -4,7 +4,7 @@ import * as React from 'react';
 /**
  * The options for the `useControlledState` hook.
  */
-export interface UseControlledStateOptions<T = unknown> {
+export interface UseControlledStateOptions<T = unknown, E = unknown> {
     /**
      * The value of the controlled state.
      */
@@ -16,7 +16,7 @@ export interface UseControlledStateOptions<T = unknown> {
     /**
      * Callback function that is called when the value changes.
      */
-    onChange?: (newValue: unknown) => void;
+    onChange?: (newValue: E) => void;
 }
 
 /**
@@ -48,7 +48,7 @@ export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue
  * };
  * ```
  */
-export function useControlledState<T = unknown>({ value, defaultValue, onChange }: UseControlledStateOptions<T>): UseControlledStateReturnType<T | undefined> {
+export function useControlledState<T = unknown, E = T>({ value, defaultValue, onChange }: UseControlledStateOptions<T, E>): UseControlledStateReturnType<T | undefined> {
     const [valueState, setValueState] = React.useState<T | undefined>(defaultValue ?? value);
 
     const isControlled = value !== undefined;
@@ -57,7 +57,7 @@ export function useControlledState<T = unknown>({ value, defaultValue, onChange 
     const setValue = React.useCallback(
         (inValue: unknown | ((prev?: T) => unknown)) => {
             // @todo - update resolve to accept multiple parameters
-            const [newValue, onChangeParam] = resolve(inValue, computedValue, isControlled) as [T, unknown];
+            const [newValue, onChangeParam] = resolve(inValue, computedValue, isControlled) as [T, E];
 
             onChange?.(onChangeParam);
 
