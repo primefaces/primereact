@@ -20,6 +20,10 @@ export const CheckboxGroup = withComponent({
             onChange
         });
 
+        const state = {
+            value: valueState
+        };
+
         const updateChange = React.useCallback(
             (event: CheckboxGroupUpdateChangeEvent) => {
                 const newValue = event.checked ? [...(valueState || []), event.value] : (valueState || []).filter((v) => v !== event.value);
@@ -30,6 +34,7 @@ export const CheckboxGroup = withComponent({
         );
 
         return {
+            state,
             updateChange
         };
     },

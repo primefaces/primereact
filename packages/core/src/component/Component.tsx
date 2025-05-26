@@ -1,5 +1,5 @@
 import type { ComponentProps } from '@primereact/types/core';
-import { resolve } from '@primeuix/utils';
+import { cn, resolve } from '@primeuix/utils';
 import * as React from 'react';
 
 export const Component = (inProps: ComponentProps = {}) => {
@@ -13,15 +13,16 @@ export const Component = (inProps: ComponentProps = {}) => {
 
     //if (!renderAsChild && !AsComponent) return null;
 
-    const { ref = instance?.elementRef, children, attrs: inAttrs, ...attrs } = props;
-    const content = resolve(children, instance, { ...inAttrs, ...attrs }) as React.ReactNode;
-    const styles = resolve(style, instance) as React.CSSProperties | undefined;
-    const classNames = resolve(className, instance) as string | undefined;
+    const { ref = instance?.elementRef, children, attrs: inAttrs, ...restAttrs } = props;
+    const attrs = { ...inAttrs, ...restAttrs };
+    const content = resolve(children, instance, attrs) as React.ReactNode;
+    const styles = resolve(style || instance?.props?.style, instance) as React.CSSProperties | undefined;
+    const classNames = resolve(className || instance?.props?.className, instance) as string | undefined;
 
     return renderAsChild || isFragment ? (
         <React.Fragment>{content}</React.Fragment>
     ) : (
-        <AsComponent {...inAttrs} {...attrs} ref={ref} style={styles} className={classNames}>
+        <AsComponent {...attrs} ref={ref} style={{ ...attrs.style, ...styles }} className={cn(attrs.className, classNames)}>
             {content}
         </AsComponent>
     );

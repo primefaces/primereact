@@ -1,6 +1,6 @@
 import { Tag } from 'primereact/tag';
 
-export default function PillDemo() {
+export default function BasicDemo() {
     return (
         <div className="card flex justify-center">
             <Tag>

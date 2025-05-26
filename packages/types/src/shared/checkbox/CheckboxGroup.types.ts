@@ -78,12 +78,21 @@ export interface CheckboxGroupProps extends BaseComponentProps<CheckboxGroupInst
 /**
  * Defines valid state in CheckboxGroup component.
  */
-export interface CheckboxGroupState {}
+export interface CheckboxGroupState {
+    /**
+     * Value of the checkbox group.
+     */
+    value: unknown[] | undefined;
+}
 
 /**
  * Defines the methods and properties exposed by CheckboxGroup component.
  */
 export interface CheckboxGroupExposes {
+    /**
+     * The state of the checkbox group.
+     */
+    state: CheckboxGroupState;
     /**
      * Updates the value of the checkbox group.
      * @param event The event that triggered the change.

@@ -417,4 +417,10 @@ export const Store = {
             'filePath': 'demo/tag/template-demo.tsx',
         },
     },
+    'togglebutton': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/togglebutton/basic-demo.tsx')),
+            'filePath': 'demo/togglebutton/basic-demo.tsx',
+        },
+    },
 };

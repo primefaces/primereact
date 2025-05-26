@@ -23,7 +23,7 @@ export interface UseControlledStateOptions<T = unknown, E = unknown> {
  * The return type of the `useControlledState` hook.
  * A tuple containing the current value and a function to update it.
  */
-export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue: unknown | ((prev?: T) => unknown)) => void];
+export type UseControlledStateReturnType<T = unknown> = [T | undefined, (inValue: unknown | ((prev?: T) => unknown)) => void, boolean];
 
 /**
  * A custom hook that manages controlled and uncontrolled state.
@@ -68,5 +68,5 @@ export function useControlledState<T = unknown, E = T>({ value, defaultValue, on
         [computedValue, isControlled, onChange]
     );
 
-    return [computedValue, setValue];
+    return [computedValue, setValue, isControlled];
 }
