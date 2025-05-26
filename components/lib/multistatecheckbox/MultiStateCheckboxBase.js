@@ -6,7 +6,14 @@ const classes = {
         classNames('p-checkbox-icon p-c', {
             [`${icon}`]: true
         }),
-    root: ({ props }) => classNames('p-multistatecheckbox p-checkbox p-component', props.classNames)
+    root: ({ props }) =>
+        classNames('p-multistatecheckbox p-checkbox p-component', props.classNames, {
+            'p-variant-filled': props.variant === 'filled'
+        }),
+    checkbox: ({ props }) =>
+        classNames(props.className, {
+            'p-invalid': props.invalid
+        })
 };
 
 const inlineStyles = {
@@ -34,7 +41,9 @@ export const MultiStateCheckboxBase = ComponentBase.extend({
         tooltip: null,
         tooltipOptions: null,
         value: null,
-        children: undefined
+        children: undefined,
+        invalid: false,
+        variant: null
     },
     css: {
         classes,
