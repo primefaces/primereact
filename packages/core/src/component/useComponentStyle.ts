@@ -87,10 +87,10 @@ export const useComponentStyle = <Props extends GlobalComponentProps, IProps, St
     };*/
 
     const _themeChangeListener = React.useCallback((callback = () => {}) => {
-        if (!StyleRegistry.isStyleNameLoaded('base')) {
-            //StyleRegistry.clearLoadedStyleNames();
-            ThemeService.on('theme:change', callback);
-        }
+        //if (!StyleRegistry.isStyleNameLoaded('base')) {
+        //StyleRegistry.clearLoadedStyleNames();
+        ThemeService.on('theme:change', callback);
+        //}
     }, []);
 
     /*const _removeThemeListeners = () => {

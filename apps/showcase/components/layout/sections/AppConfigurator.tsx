@@ -1,10 +1,12 @@
 import { useApp } from '@/hooks/useApp';
-import { updatePreset, updateSurfacePalette } from '@primeuix/themes';
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
+import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Material from '@primeuix/themes/material';
 import Nora from '@primeuix/themes/nora';
 import { cn } from '@primeuix/utils';
+import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
 const presets = {
@@ -12,14 +14,7 @@ const presets = {
     Material,
     Lara,
     Nora
-};
-
-/*const presetOptions = [
-    { label: 'Aura', value: 'Aura' },
-    { label: 'Material', value: 'Material' },
-    { label: 'Lara', value: 'Lara' },
-    { label: 'Nora', value: 'Nora' }
-];*/
+} as const;
 
 const surfaces = [
     {
@@ -64,8 +59,9 @@ export default function AppConfigurator() {
     //const rippleActive = primereact.config.ripple;
     const selectedPrimaryColor = app.primary;
     const selectedSurfaceColor = app.surface;
-    const primaryColors = React.useMemo(() => {
-        const presetPalette = presets[app.preset].primitive;
+
+    const getPalette = (preset = app.preset) => {
+        const presetPalette = preset ? presets[preset].primitive : {};
         const colors = ['emerald', 'green', 'lime', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
         const palettes = [{ name: 'noir', palette: {} }];
 
@@ -77,10 +73,14 @@ export default function AppConfigurator() {
         });
 
         return palettes;
+    };
+
+    const primaryColors = React.useMemo(() => {
+        return getPalette(app.preset);
     }, [app.preset]);
 
-    const getPresetExt = (_color) => {
-        const color = primaryColors.find((c) => c.name === _color.name);
+    const getPresetExt = (name, presetName) => {
+        const color = getPalette(presetName).find((c) => c.name === name);
 
         if (color.name === 'noir') {
             document.documentElement.style.setProperty('--logo-color', 'var(--text-secondary-color)');
@@ -135,7 +135,7 @@ export default function AppConfigurator() {
         } else {
             document.documentElement.style.setProperty('--logo-color', 'var(--primary-color)');
 
-            if (app.preset === 'Nora') {
+            if (presetName === 'Nora') {
                 return {
                     semantic: {
                         primary: color.palette,
@@ -171,7 +171,7 @@ export default function AppConfigurator() {
                         }
                     }
                 };
-            } else if (app.preset === 'Material') {
+            } else if (presetName === 'Material') {
                 return {
                     semantic: {
                         primary: color.palette,
@@ -259,7 +259,7 @@ export default function AppConfigurator() {
 
     const applyTheme = (type, color) => {
         if (type === 'primary') {
-            updatePreset(getPresetExt(color));
+            updatePreset(getPresetExt(color.name));
         } else if (type === 'surface') {
             updateSurfacePalette(color.palette);
         }
@@ -269,17 +269,17 @@ export default function AppConfigurator() {
 
     /*const onRippleChange = (value) => {
         primereact.config.ripple = value;
-    };
+    };*/
 
-    const onPresetChange = (value) => {
-        app.setPreset(value);
-        const preset = presets[value];
+    const onPresetChange = (e: ToggleButtonGroupValueChangeEvent) => {
+        app.setPreset(e.value as string);
+        const preset = presets[e.value];
         const surfacePalette = surfaces.find((s) => s.name === selectedSurfaceColor)?.palette;
 
-        $t().preset(preset).preset(getPresetExt()).surfacePalette(surfacePalette).use({ useDefaultOptions: true });
+        $t().preset(preset).preset(getPresetExt(selectedPrimaryColor, e.value)).surfacePalette(surfacePalette).use({ useDefaultOptions: true });
     };
 
-    const onRTLChange = (value) => {
+    /*const onRTLChange = (value) => {
         if (!document.startViewTransition) {
             toggleRTL(value);
 
@@ -312,7 +312,7 @@ export default function AppConfigurator() {
                                 title={primaryColor.name}
                                 onClick={() => updateColors('primary', primaryColor)}
                                 className={cn({ 'active-color': selectedPrimaryColor === primaryColor.name })}
-                                style={{ backgroundColor: `${primaryColor.name === 'noir' ? 'var(--text-color)' : primaryColor.palette['500']}` }}
+                                style={{ backgroundColor: `${primaryColor.name === 'noir' ? 'var(--text-color)' : primaryColor.palette?.['500']}` }}
                             ></button>
                         ))}
                     </div>
@@ -327,15 +327,22 @@ export default function AppConfigurator() {
                                 title={surface.name}
                                 onClick={() => updateColors('surface', surface)}
                                 className={cn({ 'active-color': selectedSurfaceColor ? selectedSurfaceColor === surface.name : app.isDarkTheme ? surface.name === 'zinc' : surface.name === 'slate' })}
-                                style={{ backgroundColor: `${surface.palette['500']}` }}
+                                style={{ backgroundColor: `${surface.palette?.['500']}` }}
                             ></button>
                         ))}
                     </div>
                 </div>
                 <div className="config-panel-settings">
                     <span className="config-panel-label">Theme</span>
+                    <ToggleButton.Group value={app.preset} onValueChange={onPresetChange} allowEmpty={false} size="small">
+                        {Object.keys(presets).map((label) => (
+                            <ToggleButton key={label} value={label}>
+                                <ToggleButton.Indicator>{label}</ToggleButton.Indicator>
+                            </ToggleButton>
+                        ))}
+                    </ToggleButton.Group>
                 </div>
-                <div className="flex">
+                {/*<div className="flex">
                     <div className="flex-1">
                         <div className="config-panel-settings">
                             <span className="config-panel-label">Ripple</span>
@@ -346,7 +353,7 @@ export default function AppConfigurator() {
                             <span className="config-panel-label">RTL</span>
                         </div>
                     </div>
-                </div>
+                </div>*/}
             </div>
         </div>
     );

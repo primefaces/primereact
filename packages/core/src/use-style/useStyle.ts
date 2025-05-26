@@ -29,8 +29,9 @@ export function useStyle() {
     const load = React.useCallback(
         ({ name, css, element }) => {
             if (isNotEmpty(css)) {
-                if (!theme?.stylesheet?.has(name)) {
-                    theme?.stylesheet?.add(name, css);
+                // @todo
+                if (!theme?.stylesheet?.has(name) && !isClient()) {
+                    //theme?.stylesheet?.add(name, css);
                 }
 
                 _load(name, css, element);
