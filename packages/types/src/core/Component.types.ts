@@ -26,6 +26,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     className?: string | ((instance?: I) => string | undefined) | undefined;
     /**
      * The component type to render.
+     * @todo update the type to be more specific
      */
     as?: T | React.ReactNode | undefined;
     /**
