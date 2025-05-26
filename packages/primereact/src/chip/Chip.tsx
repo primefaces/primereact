@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useChip } from '@primereact/headless/chip';
 import { styles } from '@primereact/styles/chip';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { ChipProvider } from './Chip.context';
 import { defaultProps } from './Chip.props';

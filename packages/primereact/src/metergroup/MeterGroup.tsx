@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useMeterGroup } from '@primereact/headless/metergroup';
 import { styles } from '@primereact/styles/metergroup';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { MeterGroupProvider } from './MeterGroup.context';
 import { defaultProps } from './MeterGroup.props';

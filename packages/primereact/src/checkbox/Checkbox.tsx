@@ -1,11 +1,12 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useCheckbox } from '@primereact/headless/checkbox';
 import { CheckIcon } from '@primereact/icons/check';
 import { MinusIcon } from '@primereact/icons/minus';
 import { styles } from '@primereact/styles/checkbox';
 import type { CheckboxChangeEvent } from '@primereact/types/shared/checkbox';
 import { cn, mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { CheckboxProvider } from './Checkbox.context';
 import { defaultProps } from './Checkbox.props';

@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useButton } from '@primereact/headless/button';
 import { styles } from '@primereact/styles/button';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { ButtonProvider } from './Button.context';
 import { defaultProps } from './Button.props';

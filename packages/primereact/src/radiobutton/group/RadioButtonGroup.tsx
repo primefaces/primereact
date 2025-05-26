@@ -1,9 +1,10 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { groupStyles } from '@primereact/styles/radiobutton';
 import { RadioButtonGroupUpdateChangeEvent } from '@primereact/types/shared/radiobutton';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { RadioButtonGroupProvider } from './RadioButtonGroup.context';
 import { defaultProps } from './RadioButtonGroup.props';

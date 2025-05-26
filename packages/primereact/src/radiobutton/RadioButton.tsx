@@ -1,9 +1,10 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useRadioButton } from '@primereact/headless/radiobutton';
 import { styles } from '@primereact/styles/radiobutton';
 import type { RadioButtonChangeEvent } from '@primereact/types/shared/radiobutton';
 import { cn, equals, mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { RadioButtonGroup, useRadioButtonGroupContext } from './group';
 import { RadioButtonProvider } from './RadioButton.context';

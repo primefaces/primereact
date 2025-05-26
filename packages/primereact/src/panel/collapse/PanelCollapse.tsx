@@ -1,8 +1,8 @@
 'use client';
-import { withComponent } from '@primereact/core/component';
 import { MinusIcon, PlusIcon } from '@primereact/icons';
 import type { ButtonProps } from '@primereact/types/shared/button';
 import { mergeProps, resolve } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import { Button } from 'primereact/button';
 import * as React from 'react';
 import { usePanelContext } from '../Panel.context';

@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { usePanel } from '@primereact/headless/panel';
 import { styles } from '@primereact/styles/panel';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { PanelProvider } from './Panel.context';
 import { defaultProps } from './Panel.props';

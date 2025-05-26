@@ -1,7 +1,8 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useProgressBar } from '@primereact/headless/progressbar';
 import { styles } from '@primereact/styles/progressbar';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { ProgressBarIndicator } from './indicator';
 import { ProgressBarLabel } from './label';

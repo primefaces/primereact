@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useTag } from '@primereact/headless/tag';
 import { styles } from '@primereact/styles/tag';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { TagIcon } from './icon';
 import { TagLabel } from './label';

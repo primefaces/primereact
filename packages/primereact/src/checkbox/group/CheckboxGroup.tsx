@@ -1,9 +1,10 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useControlledState } from '@primereact/hooks/use-controlled-state';
 import { groupStyles } from '@primereact/styles/checkbox';
 import type { CheckboxGroupUpdateChangeEvent } from '@primereact/types/shared/checkbox';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { CheckboxGroupProvider } from './CheckboxGroup.context';
 import { defaultGroupProps } from './CheckboxGroup.props';

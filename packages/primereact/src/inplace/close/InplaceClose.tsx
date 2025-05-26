@@ -1,6 +1,7 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { useInplaceContext } from '../Inplace.context';
 import { defaultCloseProps } from './InplaceClose.props';

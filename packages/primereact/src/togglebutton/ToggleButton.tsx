@@ -1,9 +1,10 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useToggleButton } from '@primereact/headless/togglebutton';
 import { styles } from '@primereact/styles/togglebutton';
 import type { ToggleButtonChangeEvent } from '@primereact/types/shared/togglebutton';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { ToggleButtonGroup, useToggleButtonGroupContext } from './group';
 import { ToggleButtonIndicator } from './indicator';

@@ -1,7 +1,8 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { groupStyles } from '@primereact/styles/avatar';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { defaultGroupProps } from './AvatarGroup.props';
 

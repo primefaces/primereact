@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useInplace } from '@primereact/headless/inplace';
 import { styles } from '@primereact/styles/inplace';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { InplaceClose } from './close';
 import { InplaceContent } from './content';

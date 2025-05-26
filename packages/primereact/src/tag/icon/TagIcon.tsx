@@ -1,6 +1,7 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { cn, mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import { defaultIconProps } from 'primereact/tag';
 import * as React from 'react';
 import { useTagContext } from '../Tag.context';

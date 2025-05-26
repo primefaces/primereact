@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useInputText } from '@primereact/headless/inputtext';
 import { styles } from '@primereact/styles/inputtext';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { InputTextProvider } from './InputText.context';
 import { defaultProps } from './InputText.props';

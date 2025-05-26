@@ -1,6 +1,7 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useStyleClass } from '@primereact/headless/styleclass';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { StyleClassProvider } from './StyleClass.context';
 import { defaultProps } from './StyleClass.props';

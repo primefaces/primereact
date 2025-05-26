@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useBadge } from '@primereact/headless/badge';
 import { styles } from '@primereact/styles/badge';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { BadgeProvider } from './Badge.context';
 import { defaultProps } from './Badge.props';

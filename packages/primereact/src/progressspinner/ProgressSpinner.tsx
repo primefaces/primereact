@@ -1,8 +1,9 @@
 'use client';
-import { Component, withComponent } from '@primereact/core/component';
+import { Component } from '@primereact/core/component';
 import { useProgressSpinner } from '@primereact/headless/progressspinner';
 import { styles } from '@primereact/styles/progressspinner';
 import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { ProgressSpinnerProvider } from './ProgressSpinner.context';
 import { defaultProps } from './ProgressSpinner.props';
