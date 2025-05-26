@@ -27,7 +27,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     /**
      * The component type to render.
      */
-    as?: T | undefined;
+    as?: T | React.ReactNode | undefined;
     /**
      * Whether the component should be rendered as a child component.
      * @default false

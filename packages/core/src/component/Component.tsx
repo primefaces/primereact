@@ -1,3 +1,4 @@
+import { isValidElement } from '@primereact/core/utils';
 import type { ComponentProps } from '@primereact/types/core';
 import { cn, resolve } from '@primeuix/utils';
 import * as React from 'react';
@@ -11,8 +12,6 @@ export const Component = (inProps: ComponentProps = {}) => {
     const renderAsChild = asChild || instance?.props?.asChild;
     const isFragment = AsComponent === React.Fragment;
 
-    //if (!renderAsChild && !AsComponent) return null;
-
     const { ref = instance?.elementRef, children, attrs: inAttrs, ...restAttrs } = props;
     const attrs = { ...inAttrs, ...restAttrs };
     const content = resolve(children, instance, attrs) as React.ReactNode;
@@ -21,6 +20,8 @@ export const Component = (inProps: ComponentProps = {}) => {
 
     return renderAsChild || isFragment ? (
         <React.Fragment>{content}</React.Fragment>
+    ) : isValidElement(AsComponent) ? (
+        resolve(AsComponent, instance)
     ) : (
         <AsComponent {...attrs} ref={ref} style={{ ...attrs.style, ...styles }} className={cn(attrs.className, classNames)}>
             {content}
