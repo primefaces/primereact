@@ -31,7 +31,7 @@ export function useStyle() {
             if (isNotEmpty(css)) {
                 // @todo
                 if (!theme?.stylesheet?.has(name) && !isClient()) {
-                    //theme?.stylesheet?.add(name, css);
+                    theme?.stylesheet?.add(name, css);
                 }
 
                 _load(name, css, element);

@@ -5,13 +5,13 @@ import { PrimeReactStyleSheet } from '@primereact/core/stylesheet';
 import { useServerInsertedHTML } from 'next/navigation';
 import * as React from 'react';
 
+const styledStyleSheet = new PrimeReactStyleSheet();
+
 export default function StyleRegistry({
     children
 }: Readonly<{
     children?: React.ReactNode;
 }>) {
-    const [styledStyleSheet] = React.useState(() => new PrimeReactStyleSheet());
-
     useServerInsertedHTML(() => {
         const styleElements = styledStyleSheet.getAllElements();
 

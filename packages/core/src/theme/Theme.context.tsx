@@ -1,6 +1,6 @@
 import { useProps } from '@primereact/hooks';
 import type { ThemeProps } from '@primereact/types/core';
-import { Theme, ThemeService } from '@primeuix/styled';
+import { Theme } from '@primeuix/styled';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './Theme.props';
@@ -18,10 +18,6 @@ export const ThemeProvider = (inProps: React.PropsWithChildren<ThemeProps> = {})
     };
 
     Theme.setTheme({ preset, options: rest });
-
-    ThemeService.on('theme:change', () => {
-        stylesheet.clear();
-    });
 
     return <ThemeContext.Provider value={value}>{resolve(attrs.children, value)}</ThemeContext.Provider>;
 };
