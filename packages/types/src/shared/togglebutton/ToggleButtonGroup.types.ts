@@ -34,7 +34,7 @@ export interface ToggleButtonGroupValueChangeEvent {
     /**
      * The value of the ToggleButton group.
      */
-    value: unknown[] | undefined;
+    value: unknown | unknown[] | undefined;
 }
 
 /**
@@ -55,6 +55,10 @@ export interface ToggleButtonGroupProps extends BaseComponentProps<ToggleButtonG
      * The default value of the ToggleButton group.
      */
     defaultValue?: unknown | unknown[] | undefined;
+    /**
+     * Defines the size of the ToggleButton components.
+     */
+    size?: 'small' | 'normal' | 'large' | undefined;
     /**
      * When present, it specifies that the ToggleButton group allows multiple selections.
      * @default false

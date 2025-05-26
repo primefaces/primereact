@@ -6,13 +6,13 @@ export const styles = createStyles<ToggleButtonInstance>({
     name: 'togglebutton',
     style,
     classes: {
-        root: ({ props, state }) => [
+        root: ({ instance, props, state }) => [
             'p-togglebutton p-component',
             {
                 'p-togglebutton-checked': state.pressed,
                 'p-invalid': props.invalid,
-                'p-togglebutton-sm p-inputfield-sm': props.size === 'small',
-                'p-togglebutton-lg p-inputfield-lg': props.size === 'large'
+                'p-togglebutton-sm p-inputfield-sm': (instance.group?.props.size ?? props.size) === 'small',
+                'p-togglebutton-lg p-inputfield-lg': (instance.group?.props.size ?? props.size) === 'large'
             }
         ],
         content: 'p-togglebutton-content',

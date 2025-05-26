@@ -4,6 +4,7 @@ export const defaultGroupProps: ToggleButtonGroupProps = {
     as: 'div',
     value: undefined,
     defaultValue: undefined,
+    size: undefined,
     multiple: false,
     allowEmpty: true,
     disabled: undefined,
