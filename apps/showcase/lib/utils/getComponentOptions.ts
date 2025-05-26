@@ -33,7 +33,7 @@ export const getApiDocs = (component: string): ApiDoc[] => {
         exposes = values[`${component}Exposes`];
         state = values[`${component}State`];
         events = findEvents(values);
-        passThrough = values[`${component}PassThroughOptions`];
+        passThrough = values[`${component}PassThrough`];
     }
 
     if (types) {

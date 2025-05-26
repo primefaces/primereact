@@ -57,6 +57,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: AvatarInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: AvatarInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -116,7 +132,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: AvatarInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: AvatarInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -297,6 +313,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: AvatarFallbackInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: AvatarFallbackInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -356,7 +388,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: AvatarFallbackInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: AvatarFallbackInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -451,6 +483,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: AvatarGroupInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: AvatarGroupInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -510,7 +558,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: AvatarGroupInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: AvatarGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -617,6 +665,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: AvatarImageInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: AvatarImageInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -676,7 +740,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: AvatarImageInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: AvatarImageInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         }
@@ -848,6 +912,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: BadgeInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: BadgeInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -907,7 +987,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: BadgeInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: BadgeInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1040,6 +1120,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: OverlayBadgeInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: OverlayBadgeInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -1099,7 +1195,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: OverlayBadgeInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: OverlayBadgeInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1246,6 +1342,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ButtonInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ButtonInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -1305,7 +1417,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ButtonInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ButtonInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1499,6 +1611,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ButtonGroupInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ButtonGroupInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -1558,7 +1686,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ButtonGroupInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ButtonGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1762,6 +1890,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CheckboxInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CheckboxInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -1821,7 +1965,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: CheckboxInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: CheckboxInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -2208,6 +2352,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CheckboxGroupInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CheckboxGroupInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -2267,7 +2427,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: CheckboxGroupInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: CheckboxGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -2610,6 +2770,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ChipInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ChipInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -2669,7 +2845,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ChipInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ChipInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -2848,6 +3024,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ChipIconInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ChipIconInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -2907,7 +3099,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ChipIconInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ChipIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3002,6 +3194,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ChipImageInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ChipImageInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -3061,7 +3269,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ChipImageInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ChipImageInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3156,6 +3364,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ChipLabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ChipLabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -3215,7 +3439,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ChipLabelInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ChipLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3310,6 +3534,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ChipRemoveIconInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ChipRemoveIconInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -3369,7 +3609,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ChipRemoveIconInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ChipRemoveIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3610,6 +3850,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: InplaceInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: InplaceInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -3669,7 +3925,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: InplaceInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: InplaceInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3858,6 +4114,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: InplaceCloseInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: InplaceCloseInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -3917,7 +4189,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: InplaceCloseInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: InplaceCloseInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4012,6 +4284,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: InplaceContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: InplaceContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -4071,7 +4359,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: InplaceContentInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: InplaceContentInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4166,6 +4454,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: InplaceDisplayInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: InplaceDisplayInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -4225,7 +4529,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: InplaceDisplayInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: InplaceDisplayInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4435,6 +4739,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: InputTextInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: InputTextInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -4494,7 +4814,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: InputTextInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: InputTextInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4676,7 +4996,7 @@
                             "description": "Used to pass attributes to the label's DOM element."
                         },
                         {
-                            "name": "labelIcon",
+                            "name": "icon",
                             "optional": true,
                             "readonly": false,
                             "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLElement>>",
@@ -4684,7 +5004,7 @@
                             "description": "Used to pass attributes to the label icon's DOM element."
                         },
                         {
-                            "name": "labelMarker",
+                            "name": "marker",
                             "optional": true,
                             "readonly": false,
                             "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLSpanElement>>",
@@ -4692,7 +5012,7 @@
                             "description": "Used to pass attributes to the label marker's DOM element."
                         },
                         {
-                            "name": "labelText",
+                            "name": "text",
                             "optional": true,
                             "readonly": false,
                             "type": "MeterGroupPassThroughType<HTMLAttributes<HTMLSpanElement>>",
@@ -4721,6 +5041,22 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
                         },
                         {
                             "name": "as",
@@ -4782,7 +5118,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5014,6 +5350,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupIconInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupIconInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -5073,7 +5425,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupIconInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5176,6 +5528,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupLabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupLabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -5235,7 +5603,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupLabelInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5338,6 +5706,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupLabelsInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupLabelsInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -5397,7 +5781,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupLabelsInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupLabelsInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5500,6 +5884,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupMarkerInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupMarkerInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -5559,7 +5959,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupMarkerInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupMarkerInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5662,6 +6062,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupMeterInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupMeterInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -5721,7 +6137,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupMeterInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupMeterInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5832,6 +6248,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupMetersInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupMetersInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -5891,7 +6323,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupMetersInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupMetersInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5986,6 +6418,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: MeterGroupTextInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: MeterGroupTextInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -6045,7 +6493,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: MeterGroupTextInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: MeterGroupTextInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6319,6 +6767,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -6378,7 +6842,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6620,6 +7084,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelCollapseInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelCollapseInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -6679,7 +7159,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelCollapseInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelCollapseInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6806,6 +7286,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -6865,7 +7361,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelContentInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelContentInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6951,6 +7447,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelFooterInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelFooterInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -7010,7 +7522,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelFooterInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelFooterInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7096,6 +7608,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelHeaderInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelHeaderInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -7155,7 +7683,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelHeaderInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelHeaderInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7241,6 +7769,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelHeaderActionsInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelHeaderActionsInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -7300,7 +7844,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelHeaderActionsInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelHeaderActionsInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7386,6 +7930,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: PanelTitleInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: PanelTitleInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -7445,7 +8005,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: PanelTitleInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: PanelTitleInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7702,6 +8262,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ProgressBarInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ProgressBarInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -7761,9 +8337,17 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ProgressBarInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ProgressBarInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
+                        },
+                        {
+                            "name": "mode",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"indeterminate\" | \"determinate\"",
+                            "default": "determinate",
+                            "description": "Defines the mode of the progress"
                         },
                         {
                             "name": "value",
@@ -7774,12 +8358,28 @@
                             "description": "Current value of the progress."
                         },
                         {
-                            "name": "mode",
+                            "name": "max",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"indeterminate\" | \"determinate\"",
-                            "default": "determinate",
+                            "type": "number",
+                            "default": "",
                             "description": "Defines the mode of the progress"
+                        },
+                        {
+                            "name": "min",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Defines the mode of the progress"
+                        },
+                        {
+                            "name": "formatter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(value: number) => string",
+                            "default": "",
+                            "description": "Custom formatter function to format the display value"
                         },
                         {
                             "name": "[key: string]",
@@ -7794,7 +8394,24 @@
                 "ProgressBarState": {
                     "description": "Defines valid state in ProgressBar component.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "computedValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current value of the progress."
+                        },
+                        {
+                            "name": "formattedValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Current value of the progress in percentage format and fixed to 2 decimal places."
+                        }
+                    ],
                     "methods": [],
                     "extendedTypes": "useProgressBarState"
                 },
@@ -7858,6 +8475,176 @@
             }
         }
     },
+    "progressbarindicator": {
+        "description": "ProgressBarIndicator component is used to display the indicator of ProgressBar.\n\n[Live Demo](https://www.primereact.org/progressbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarIndicatorPassThrough": {
+                    "description": "Defines passthrough(pt) options of ProgressBarIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarIndicatorPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ProgressBarIndicatorProps": {
+                    "description": "Defines valid properties in ProgressBarIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ProgressBarIndicatorInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ProgressBarIndicatorInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ProgressBarIndicatorPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance?: ProgressBarIndicatorInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ProgressBarIndicatorInstance>"
+                },
+                "ProgressBarIndicatorState": {
+                    "description": "Defines valid state in ProgressBarIndicator component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ProgressBarIndicatorExposes": {
+                    "description": "Defines the methods and properties exposed by ProgressBarIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "progressbar",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ProgressBarInstance",
+                            "default": "",
+                            "description": "The ProgressBar component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarIndicatorPassThroughType": {
+                    "values": "PassThroughType<ProgressBarIndicatorInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ProgressBarIndicator component."
+                },
+                "ProgressBarIndicatorInstance": {
+                    "values": "ComponentInstance<ProgressBarIndicatorProps, ProgressBarIndicatorState, ProgressBarIndicatorExposes, ProgressBarIndicatorPassThrough>",
+                    "description": "Instance of ProgressBarIndicator component."
+                }
+            }
+        }
+    },
     "progressbarlabel": {
         "description": "ProgressBarLabel component is used to display the label of ProgressBar.\n\n[Live Demo](https://www.primereact.org/progressbar/)",
         "interfaces": {
@@ -7898,6 +8685,22 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ProgressBarLabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ProgressBarLabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
                         },
                         {
                             "name": "as",
@@ -7959,7 +8762,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ProgressBarLabelInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ProgressBarLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8012,6 +8815,346 @@
             }
         }
     },
+    "progressbartrack": {
+        "description": "ProgressBarTrack component is used to display the track of ProgressBar.\n\n[Live Demo](https://www.primereact.org/progressbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarTrackPassThrough": {
+                    "description": "Defines passthrough(pt) options of ProgressBarTrack component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarTrackPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ProgressBarTrackProps": {
+                    "description": "Defines valid properties in ProgressBarTrack component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ProgressBarTrackInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ProgressBarTrackInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ProgressBarTrackPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance?: ProgressBarTrackInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ProgressBarTrackInstance>"
+                },
+                "ProgressBarTrackState": {
+                    "description": "Defines valid state in ProgressBarTrack component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ProgressBarTrackExposes": {
+                    "description": "Defines the methods and properties exposed by ProgressBarTrack component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "progressbar",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ProgressBarInstance",
+                            "default": "",
+                            "description": "The ProgressBar component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarTrackPassThroughType": {
+                    "values": "PassThroughType<ProgressBarTrackInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ProgressBarTrack component."
+                },
+                "ProgressBarTrackInstance": {
+                    "values": "ComponentInstance<ProgressBarTrackProps, ProgressBarTrackState, ProgressBarTrackExposes, ProgressBarTrackPassThrough>",
+                    "description": "Instance of ProgressBarTrack component."
+                }
+            }
+        }
+    },
+    "progressbarvalue": {
+        "description": "ProgressBarValue component is used to display the value of ProgressBar.\n\n[Live Demo](https://www.primereact.org/progressbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarValuePassThrough": {
+                    "description": "Defines passthrough(pt) options of ProgressBarValue component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarValuePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ProgressBarValueProps": {
+                    "description": "Defines valid properties in ProgressBarValue component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ProgressBarValueInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ProgressBarValueInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ProgressBarValuePassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance?: ProgressBarValueInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ProgressBarValueInstance>"
+                },
+                "ProgressBarValueState": {
+                    "description": "Defines valid state in ProgressBarValue component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ProgressBarValueExposes": {
+                    "description": "Defines the methods and properties exposed by ProgressBarValue component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "progressbar",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ProgressBarInstance",
+                            "default": "",
+                            "description": "The ProgressBar component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarValuePassThroughType": {
+                    "values": "PassThroughType<ProgressBarValueInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ProgressBarValue component."
+                },
+                "ProgressBarValueInstance": {
+                    "values": "ComponentInstance<ProgressBarValueProps, ProgressBarValueState, ProgressBarValueExposes, ProgressBarValuePassThrough>",
+                    "description": "Instance of ProgressBarValue component."
+                }
+            }
+        }
+    },
     "useprogressbar": {
         "description": "The useProgressBar manages the state and functionality of a progress bar component.\n\n[Live Demo](https://www.primereact.org/progressbar/)",
         "interfaces": {
@@ -8021,13 +9164,63 @@
                 "useProgressBarProps": {
                     "description": "Defines valid properties in useProgressBar.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current value of the progress."
+                        },
+                        {
+                            "name": "max",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Defines the mode of the progress"
+                        },
+                        {
+                            "name": "min",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Defines the mode of the progress"
+                        },
+                        {
+                            "name": "formatter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(value: number) => string",
+                            "default": "",
+                            "description": "Custom formatter function to format the display value"
+                        }
+                    ],
                     "methods": []
                 },
                 "useProgressBarState": {
                     "description": "Defines valid state in useProgressBar.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "computedValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current value of the progress."
+                        },
+                        {
+                            "name": "formattedValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Current value of the progress in percentage format and fixed to 2 decimal places."
+                        }
+                    ],
                     "methods": [],
                     "extendedBy": "ProgressBarState"
                 },
@@ -8110,6 +9303,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ProgressSpinnerInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ProgressSpinnerInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -8169,7 +9378,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: ProgressSpinnerInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: ProgressSpinnerInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8413,6 +9622,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: RadioButtonInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: RadioButtonInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -8472,7 +9697,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: RadioButtonInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: RadioButtonInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8827,6 +10052,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: RadioButtonGroupInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: RadioButtonGroupInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -8886,7 +10127,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: RadioButtonGroupInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: RadioButtonGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -9165,6 +10406,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: SkeletonInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: SkeletonInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -9224,7 +10481,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: SkeletonInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: SkeletonInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -9412,6 +10669,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: StyleClassInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: StyleClassInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -9471,7 +10744,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: StyleClassInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: StyleClassInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -9858,6 +11131,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TagInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TagInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -9917,7 +11206,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: TagInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: TagInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -10056,6 +11345,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TagIconInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TagIconInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -10115,7 +11420,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: TagIconInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: TagIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -10210,6 +11515,22 @@
                             "description": "Whether the component should be rendered."
                         },
                         {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TagLabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TagLabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
                             "name": "as",
                             "optional": true,
                             "readonly": false,
@@ -10269,7 +11590,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance: TagLabelInstance) => ReactNode)",
+                            "type": "ReactNode | ((instance?: TagLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
