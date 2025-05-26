@@ -18,9 +18,9 @@ export const MeterGroupText = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelText')
+                className: metergroup?.cx('text')
             },
-            metergroup?.ptm('labelText'),
+            metergroup?.ptm('text'),
             ptmi('root')
         );
 

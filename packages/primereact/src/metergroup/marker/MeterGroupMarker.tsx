@@ -18,12 +18,12 @@ export const MeterGroupMarker = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelMarker'),
+                className: metergroup?.cx('marker'),
                 style: {
                     backgroundColor: props.color
                 }
             },
-            metergroup?.ptm('labelMarker'),
+            metergroup?.ptm('marker'),
             ptmi('root')
         );
 

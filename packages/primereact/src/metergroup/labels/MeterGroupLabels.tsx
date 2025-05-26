@@ -18,9 +18,9 @@ export const MeterGroupLabels = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelList', { orientation: props.orientation })
+                className: metergroup?.cx('labels', { orientation: props.orientation })
             },
-            metergroup?.ptm('labelList'),
+            metergroup?.ptm('labels'),
             ptmi('root')
         );
 

@@ -15,8 +15,7 @@ export const styles = createStyles<PanelInstance>({
         header: 'p-panel-header',
         title: 'p-panel-title',
         headerActions: 'p-panel-header-actions',
-        pcToggleButton: 'p-panel-toggle-button',
-        contentContainer: 'p-panel-content-container',
+        collapse: 'p-panel-toggle-button',
         content: 'p-panel-content',
         footer: 'p-panel-footer'
     },

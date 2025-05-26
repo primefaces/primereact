@@ -18,9 +18,9 @@ export const AvatarFallback = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: avatar?.cx('label')
+                className: avatar?.cx('fallback')
             },
-            avatar?.ptm('label'),
+            avatar?.ptm('fallback'),
             ptmi('root')
         );
 

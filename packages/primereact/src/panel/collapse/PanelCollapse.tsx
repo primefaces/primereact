@@ -22,10 +22,10 @@ export const PanelCollapse = withComponent({
         const rootProps = mergeProps(
             {
                 type: 'button',
-                className: panel?.cx('pcToggleButton'),
+                className: panel?.cx('collapse'),
                 onClick: panel?.onButtonClick
             },
-            panel?.ptm('pcToggleButton'),
+            panel?.ptm('collapse'),
             ptmi('root')
         );
 

@@ -15,7 +15,7 @@ export const styles = createStyles<AvatarInstance>({
                 'p-avatar-xl': props.size === 'xlarge'
             }
         ],
-        label: 'p-avatar-label',
+        fallback: 'p-avatar-label',
         icon: 'p-avatar-icon'
     }
 });

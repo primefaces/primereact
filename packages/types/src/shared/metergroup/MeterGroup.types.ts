@@ -44,15 +44,15 @@ export interface MeterGroupPassThrough {
     /**
      * Used to pass attributes to the label icon's DOM element.
      */
-    labelIcon?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    icon?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
      * Used to pass attributes to the label marker's DOM element.
      */
-    labelMarker?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    marker?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Used to pass attributes to the root's DOM element.
      */
-    labelText?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    text?: MeterGroupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

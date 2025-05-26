@@ -19,9 +19,9 @@ export const MeterGroupIcon = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: metergroup?.cx('labelIcon')
+                className: metergroup?.cx('icon')
             },
-            metergroup?.ptm('labelIcon'),
+            metergroup?.ptm('icon'),
             ptmi('root')
         );
 

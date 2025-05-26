@@ -15,7 +15,7 @@ export const styles = createStyles<MeterGroupInstance>({
         ],
         meters: 'p-metergroup-meters',
         meter: 'p-metergroup-meter',
-        labelList: ({ props }) => [
+        labels: ({ props }) => [
             'p-metergroup-label-list',
             {
                 'p-metergroup-label-list-horizontal': props.orientation === 'horizontal',
@@ -23,8 +23,8 @@ export const styles = createStyles<MeterGroupInstance>({
             }
         ],
         label: 'p-metergroup-label',
-        labelIcon: 'p-metergroup-label-icon',
-        labelMarker: 'p-metergroup-label-marker',
-        labelText: 'p-metergroup-label-text'
+        icon: 'p-metergroup-label-icon',
+        marker: 'p-metergroup-label-marker',
+        text: 'p-metergroup-label-text'
     }
 });
