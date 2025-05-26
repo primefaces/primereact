@@ -12,16 +12,16 @@ export default function MultipleDemo() {
         <div className="card">
             <MeterGroup>
                 <MeterGroup.Meters>
-                    {values.map((value, index) => (
-                        <MeterGroup.Meter key={`meter_${index}`} value={value} />
+                    {values.map((item, index) => (
+                        <MeterGroup.Meter key={`meter_${index}`} value={item.value} color={item.color} />
                     ))}
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
-                    {values.map((value, index) => (
+                    {values.map((item, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
-                            <MeterGroup.Marker color={value.color} />
+                            <MeterGroup.Marker color={item.color} />
                             <MeterGroup.Text>
-                                {value.label} ({value.value}%)
+                                {item.label} ({item.value}%)
                             </MeterGroup.Text>
                         </MeterGroup.Label>
                     ))}

@@ -16,16 +16,16 @@ export default function MinMaxDemo() {
         <div className="card">
             <MeterGroup max={200}>
                 <MeterGroup.Meters>
-                    {values.map((value, index) => (
-                        <MeterGroup.Meter key={`meter_${index}`} value={value} />
+                    {values.map((item, index) => (
+                        <MeterGroup.Meter key={`meter_${index}`} value={item.value} color={item.color} />
                     ))}
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
-                    {values.map((value, index) => (
+                    {values.map((item, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
-                            <MeterGroup.Marker color={value.color} />
+                            <MeterGroup.Marker color={item.color} />
                             <MeterGroup.Text>
-                                {value.label} ({percent(value.value)})
+                                {item.label} ({percent(item.value)})
                             </MeterGroup.Text>
                         </MeterGroup.Label>
                     ))}

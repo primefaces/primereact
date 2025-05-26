@@ -1,58 +1,74 @@
 ---
-title: "MeterGroup"
-description: "MeterGroup displays scalar measurements within a known range."
-component: "metergroup"
+title: 'MeterGroup'
+description: 'MeterGroup displays scalar measurements within a known range.'
+component: 'metergroup'
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { MeterGroup } from 'primereact/metergroup';
 ```
 
-## Basic 
+```tsx
+<MeterGroup>
+    <MeterGroup.Meters>
+        <MeterGroup.Meter value={value} color={color} />
+    </MeterGroup.Meters>
+    <MeterGroup.Labels>
+        <MeterGroup.Label>
+            <MeterGroup.Marker color={color} />
+            <MeterGroup.Text>Value</MeterGroup.Text>
+        </MeterGroup.Label>
+    </MeterGroup.Labels>
+</MeterGroup>
+```
+## Examples
 
-MeterGroup requires a _value_ as the data to display where each item in the collection should be a type of <i>MeterItem</i>.
+### Basic
+
+`MeterGroup` consists of `MeterGroup.Meters` and `MeterGroup.Labels` components. Data is displayed in the `MeterGroup.Meter` component using the `value` and `color` properties.
 
 <DocComponentViewer name="metergroup:basic-demo" />
 
-## Multiple
+### Multiple
 
-Adding more items to the array displays the meters in a group.
+Adding more `MeterGroup.Meter` components displays the meters in a group.
 
 <DocComponentViewer name="metergroup:multiple-demo" />
 
-## Icon
+### Icon
 
-Icons can be displayed next to the labels instead of the default marker.
+Icons can be displayed next to the labels instead of the default `MeterGroup.Marker`.
 
 <DocComponentViewer name="metergroup:icon-demo" />
 
-## Label
+### Label
 
-The default orientation of the labels is horizontal, and the vertical alternative is available through the _orientation_ option.
+The default orientation of the labels is horizontal, and the vertical alternative is available through the `orientation` option.
 
 <DocComponentViewer name="metergroup:label-demo" />
 
-## Vertical
+### Vertical
 
-Layout of the MeterGroup is configured with the _orientation_ property that accepts either _horizontal_ or _vertical_ as available options.
+Layout of the MeterGroup is configured with the `orientation` property that accepts either `horizontal` or `vertical` as available options.
 
 <DocComponentViewer name="metergroup:vertical-demo" />
 
-## Min-Max
+### Min-Max
 
-Boundaries are configured with the _min_ and _max_ values whose defaults are 0 and 100 respectively.
+Boundaries are configured with the `min` and `max` values whose defaults are 0 and 100 respectively.
 
 <DocComponentViewer name="metergroup:minmax-demo" />
 
-## Template
+### Template
 
 MeterGroup provides templating support for labels, meter items, and content around the meters.
 
 <DocComponentViewer name="metergroup:template-demo" />
 
 ## Accessibility
+
 ### Screen Reader
 
 MeterGroup component uses meter role in addition to the aria-valuemin, aria-valuemax and aria-valuenow attributes. Value to describe the component can be defined using aria-labelledby prop.

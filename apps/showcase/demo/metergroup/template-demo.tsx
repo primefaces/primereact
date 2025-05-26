@@ -43,21 +43,15 @@ export default function TemplateDemo() {
                 </div>
 
                 <MeterGroup.Meters>
-                    {values.map((value, index) => (
-                        <MeterGroup.Meter asChild key={`meter_${index}`}>
-                            {(instance) => {
-                                return (
-                                    <span
-                                        key={`meter_${index}`}
-                                        className={instance.className}
-                                        style={{
-                                            background: `linear-gradient(to right, ${value.color1}, ${value.color2})`,
-                                            width: percent(value.value)
-                                        }}
-                                    />
-                                );
+                    {values.map((item, index) => (
+                        <MeterGroup.Meter
+                            key={`meter_${index}`}
+                            value={item.value}
+                            style={{
+                                background: `linear-gradient(to right, ${item.color1}, ${item.color2})`,
+                                width: percent(item.value)
                             }}
-                        </MeterGroup.Meter>
+                        ></MeterGroup.Meter>
                     ))}
                 </MeterGroup.Meters>
                 {/* <div className="flex justify-between mt-4">
