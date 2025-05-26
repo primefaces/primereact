@@ -1,3 +1,4 @@
+import { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
@@ -15,7 +16,7 @@ export default function BasicDemo() {
 
             <h2>States</h2>
             <ToggleButton>
-                <ToggleButton.Indicator>{({ togglebutton }) => (togglebutton.state.pressed ? 'On' : 'Off')}</ToggleButton.Indicator>
+                <ToggleButton.Indicator>{({ togglebutton }: ToggleButtonIndicatorInstance) => (togglebutton?.state.pressed ? 'On' : 'Off')}</ToggleButton.Indicator>
             </ToggleButton>
 
             <h2>Controlled</h2>
@@ -26,8 +27,8 @@ export default function BasicDemo() {
             <h2>Icon</h2>
             <ToggleButton>
                 <ToggleButton.Indicator>
-                    {({ togglebutton }) =>
-                        togglebutton.state.pressed ? (
+                    {({ togglebutton }: ToggleButtonIndicatorInstance) =>
+                        togglebutton?.state.pressed ? (
                             <>
                                 <i className="pi pi-lock"></i>Locked
                             </>

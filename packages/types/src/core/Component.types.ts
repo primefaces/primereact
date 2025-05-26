@@ -57,7 +57,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
      * The children to render.
      * @todo update the type to be more specific
      */
-    children?: React.ReactNode | ((instance?: I) => React.ReactNode) | undefined;
+    children?: React.ReactNode | ((instance: I) => React.ReactNode) | (() => React.ReactNode) | undefined;
 }
 
 export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData = Record<PropertyKey, unknown>> = {
