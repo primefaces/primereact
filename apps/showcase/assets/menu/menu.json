@@ -20,6 +20,10 @@
                             "to": "/docs/components/radiobutton"
                         },
                         {
+                            "name": "Switch",
+                            "to": "/docs/components/switch"
+                        },
+                        {
                             "name": "ToggleButton",
                             "to": "/docs/components/togglebutton"
                         }

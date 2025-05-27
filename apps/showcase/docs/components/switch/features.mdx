@@ -1,0 +1,78 @@
+---
+title: 'Switch'
+description: 'Switch is used to select a boolean value.'
+component: 'switch'
+---
+
+## Usage
+
+```tsx
+import { Switch } from 'primereact/switch';
+```
+
+```tsx
+<Switch>
+    <Switch.Thumb />
+</Switch>
+```
+
+## Examples
+
+### Basic
+
+Switch is used as a controlled input with `checked` and `onChange` properties.
+
+<DocComponentViewer name="switch:basic-demo" />
+
+### Controlled
+
+A controlled Switch requires managing the checked state with a state variable and handling the change event manually. This allows for complete control over the Switch's behavior.
+
+<DocComponentViewer name="switch:controlled-demo" />
+
+### Uncontrolled
+
+For an uncontrolled Switch component, `defaultChecked` is used to set the initial state, and the component manages its own state internally.
+
+<DocComponentViewer name="switch:uncontrolled-demo" />
+
+### Template
+
+`Switch.Thumb` also allows displaying custom content inside itself.
+
+<DocComponentViewer name="switch:template-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocComponentViewer name="switch:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused.
+
+<DocComponentViewer name="switch:disabled-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Switch component uses a hidden native checkbox element with switch role internally that is only visible to screen readers. Value to describe the component can either be provided via `label` tag combined with `id` prop or using `aria-labelledby`, `aria-label` props.
+
+```tsx
+<label htmlFor="switch1">Remember Me</label>
+<Switch inputId="switch1" />
+
+<span id="switch2">Remember Me</span>
+<Switch aria-labelledby="switch2" />
+
+<Switch aria-label="Remember Me" />
+```
+
+### Keyboard Support
+
+| Key   | Function                   |
+| ----- | -------------------------- |
+| tab   | Moves focus to the switch. |
+| space | Toggles the checked state. |

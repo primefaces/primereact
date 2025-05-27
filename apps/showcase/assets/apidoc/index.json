@@ -76,7 +76,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -132,7 +132,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: AvatarInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: AvatarInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -332,7 +332,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -388,7 +388,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: AvatarFallbackInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: AvatarFallbackInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -502,7 +502,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -558,7 +558,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: AvatarGroupInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: AvatarGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -684,7 +684,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"img\"",
+                            "type": "ReactNode",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -740,7 +740,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: AvatarImageInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: AvatarImageInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         }
@@ -931,7 +931,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -987,7 +987,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: BadgeInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: BadgeInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1139,7 +1139,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -1195,7 +1195,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: OverlayBadgeInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: OverlayBadgeInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1361,7 +1361,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -1417,7 +1417,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ButtonInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ButtonInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1630,7 +1630,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -1686,7 +1686,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ButtonGroupInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ButtonGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -1909,7 +1909,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -1965,7 +1965,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: CheckboxInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CheckboxInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -2371,7 +2371,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -2427,7 +2427,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: CheckboxGroupInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CheckboxGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -2492,13 +2492,30 @@
                 "CheckboxGroupState": {
                     "description": "Defines valid state in CheckboxGroup component.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "unknown[]",
+                            "default": "",
+                            "description": "Value of the checkbox group."
+                        }
+                    ],
                     "methods": []
                 },
                 "CheckboxGroupExposes": {
                     "description": "Defines the methods and properties exposed by CheckboxGroup component.",
                     "relatedProp": "",
                     "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CheckboxGroupState",
+                            "default": "",
+                            "description": "The state of the checkbox group."
+                        },
                         {
                             "name": "updateChange",
                             "optional": false,
@@ -2789,7 +2806,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -2845,7 +2862,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ChipInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ChipInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3043,7 +3060,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -3099,7 +3116,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ChipIconInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ChipIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3213,7 +3230,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -3269,7 +3286,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ChipImageInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ChipImageInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3383,7 +3400,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -3439,7 +3456,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ChipLabelInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ChipLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3553,7 +3570,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -3609,7 +3626,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ChipRemoveIconInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ChipRemoveIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -3869,7 +3886,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -3925,7 +3942,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: InplaceInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: InplaceInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4133,7 +4150,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -4189,7 +4206,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: InplaceCloseInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: InplaceCloseInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4303,7 +4320,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -4359,7 +4376,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: InplaceContentInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: InplaceContentInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4473,7 +4490,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -4529,7 +4546,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: InplaceDisplayInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: InplaceDisplayInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -4758,7 +4775,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -4814,7 +4831,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: InputTextInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: InputTextInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5062,7 +5079,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -5118,7 +5135,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5177,6 +5194,27 @@
                     "relatedProp": "",
                     "props": [
                         {
+                            "name": "colors",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Record<METERGROUP_DEFAULT_COLORS_TYPE, string>",
+                            "default": ""
+                        },
+                        {
+                            "name": "getNextColorIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "() => number",
+                            "default": ""
+                        },
+                        {
+                            "name": "getNextLabelIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "() => number",
+                            "default": ""
+                        },
+                        {
                             "name": "state",
                             "optional": false,
                             "readonly": false,
@@ -5230,6 +5268,9 @@
                 "MeterGroupPassThroughType": {
                     "values": "PassThroughType<MeterGroupInstance, E>",
                     "description": "Defines passthrough(pt) options type in MeterGroup component."
+                },
+                "METERGROUP_DEFAULT_COLORS_TYPE": {
+                    "values": "\"blue\" | \"emerald\" | \"violet\" | \"amber\" | \"gray\" | \"cyan\" | \"pink\" | \"lime\" | \"fuchsia\""
                 },
                 "MeterGroupClassNamesType": {
                     "values": "typeof MeterGroupClassNames[keyof typeof MeterGroupClassNames]",
@@ -5369,7 +5410,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -5425,7 +5466,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupIconInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5547,7 +5588,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -5603,7 +5644,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupLabelInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5725,7 +5766,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -5781,7 +5822,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupLabelsInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupLabelsInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5903,7 +5944,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -5959,7 +6000,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupMarkerInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupMarkerInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -5967,9 +6008,17 @@
                             "name": "color",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "string & {} | METERGROUP_DEFAULT_COLORS_TYPE",
                             "default": "",
                             "description": "Defines the color of the marker."
+                        },
+                        {
+                            "name": "index",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Defines the index of the marker."
                         },
                         {
                             "name": "[key: string]",
@@ -6081,7 +6130,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -6137,7 +6186,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupMeterInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupMeterInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6153,9 +6202,17 @@
                             "name": "color",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "string & {} | METERGROUP_DEFAULT_COLORS_TYPE",
                             "default": "",
                             "description": "Defines the color of the meter."
+                        },
+                        {
+                            "name": "index",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Defines the index of the meter."
                         },
                         {
                             "name": "[key: string]",
@@ -6267,7 +6324,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -6323,7 +6380,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupMetersInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupMetersInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6437,7 +6494,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -6493,7 +6550,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: MeterGroupTextInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: MeterGroupTextInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -6786,7 +6843,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -6842,7 +6899,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7103,7 +7160,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -7159,7 +7216,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelCollapseInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelCollapseInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7305,7 +7362,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -7361,7 +7418,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelContentInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelContentInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7466,7 +7523,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -7522,7 +7579,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelFooterInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelFooterInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7627,7 +7684,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -7683,7 +7740,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelHeaderInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelHeaderInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7788,7 +7845,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -7844,7 +7901,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelHeaderActionsInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelHeaderActionsInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -7949,7 +8006,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -8005,7 +8062,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: PanelTitleInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: PanelTitleInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8281,7 +8338,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -8337,7 +8394,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ProgressBarInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ProgressBarInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8536,7 +8593,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -8592,7 +8649,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ProgressBarIndicatorInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ProgressBarIndicatorInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8706,7 +8763,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -8762,7 +8819,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ProgressBarLabelInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ProgressBarLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -8876,7 +8933,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -8932,7 +8989,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ProgressBarTrackInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ProgressBarTrackInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -9046,7 +9103,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -9102,7 +9159,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ProgressBarValueInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ProgressBarValueInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -9322,7 +9379,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -9378,7 +9435,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: ProgressSpinnerInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ProgressSpinnerInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -9641,7 +9698,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -9697,7 +9754,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: RadioButtonInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: RadioButtonInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -10071,7 +10128,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -10127,7 +10184,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: RadioButtonGroupInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: RadioButtonGroupInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -10425,7 +10482,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -10481,7 +10538,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: SkeletonInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: SkeletonInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -10688,7 +10745,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -10744,7 +10801,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: StyleClassInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: StyleClassInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -11073,6 +11130,690 @@
             }
         }
     },
+    "switch": {
+        "description": "Switch component is used to select a boolean value.\n\n[Live Demo](https://www.primereact.org/switch/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchPassThrough": {
+                    "description": "Defines passthrough(pt) options of Switch component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "slider",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the slider's DOM element."
+                        },
+                        {
+                            "name": "thumb",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the thumb's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "SwitchChangeEvent": {
+                    "description": "Event fired when the switch's checked state changes.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the switch."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ChangeEvent",
+                            "default": "",
+                            "description": "The original event that triggered the change."
+                        },
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The checked state of the switch."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useSwitchChangeEvent<React.ChangeEvent<HTMLInputElement>>"
+                },
+                "SwitchProps": {
+                    "description": "Defines valid properties in Switch component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: SwitchInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: SwitchInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<SwitchPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: SwitchInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the switch."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the element should be disabled."
+                        },
+                        {
+                            "name": "required",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the element is required."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
+                            "name": "inputId",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Identifier of the underlying input element."
+                        },
+                        {
+                            "name": "inputStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties",
+                            "default": "",
+                            "description": "Inline style of the input field."
+                        },
+                        {
+                            "name": "inputClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Style class of the input field."
+                        },
+                        {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes a string value that labels the component."
+                        },
+                        {
+                            "name": "ariaLabelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
+                        },
+                        {
+                            "name": "onFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLInputElement>) => void",
+                            "default": "",
+                            "description": "Callback function that is called when the switch is focused."
+                        },
+                        {
+                            "name": "onBlur",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLInputElement>) => void",
+                            "default": "",
+                            "description": "Callback function that is called when the switch loses focus."
+                        },
+                        {
+                            "name": "onCheckedChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: SwitchChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the switch's checked state changes."
+                        },
+                        {
+                            "name": "checked",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies the input's checked state."
+                        },
+                        {
+                            "name": "defaultChecked",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The default value for the input when not controlled by  `checked`  and  `onCheckedChange` ."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<SwitchInstance, Omit<useSwitchProps, \"onCheckedChange\">>"
+                },
+                "SwitchState": {
+                    "description": "Defines valid state in Switch component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The checked state of the useSwitch."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useSwitchState"
+                },
+                "SwitchExposes": {
+                    "description": "Defines the methods and properties exposed by Switch component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "useSwitchState",
+                            "default": "",
+                            "description": "The state of the useSwitch."
+                        },
+                        {
+                            "name": "onChange",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: useSwitchChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the useSwitch's checked state changes."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useSwitchExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchPassThroughType": {
+                    "values": "PassThroughType<SwitchInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Switch component."
+                },
+                "SwitchClassNamesType": {
+                    "values": "typeof SwitchClassNames[keyof typeof SwitchClassNames]",
+                    "description": "Type representing the CSS class names used in the Switch component."
+                },
+                "SwitchInstance": {
+                    "values": "ComponentInstance<SwitchProps, SwitchState, SwitchExposes, SwitchPassThrough>",
+                    "description": "Instance of Switch component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchClassNames": {
+                    "description": "Defines the CSS class names used in the Switch component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-toggleswitch",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "input",
+                            "value": "p-toggleswitch-input",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the input element"
+                        },
+                        {
+                            "name": "slider",
+                            "value": "p-toggleswitch-slider",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the slider element"
+                        },
+                        {
+                            "name": "thumb",
+                            "value": "p-toggleswitch-handle",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the handle element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "switchthumb": {
+        "description": "SwitchThumb is a component that displays athumb.\n\n[Live Demo](https://www.primereact.org/switch/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchThumbPassThrough": {
+                    "description": "Defines passthrough(pt) options of SwitchThumb component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchThumbPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "SwitchThumbProps": {
+                    "description": "Defines valid properties in SwitchThumb component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: SwitchThumbInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: SwitchThumbInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<SwitchThumbPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: SwitchThumbInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<SwitchThumbInstance>"
+                },
+                "SwitchThumbState": {
+                    "description": "Defines valid state in SwitchThumb component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "SwitchThumbExposes": {
+                    "description": "Defines the methods and properties exposed by SwitchThumb component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "switchContext",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SwitchInstance",
+                            "default": "",
+                            "description": "The Switch component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchThumbPassThroughType": {
+                    "values": "PassThroughType<SwitchThumbInstance, E>",
+                    "description": "Defines passthrough(pt) options type in SwitchThumb component."
+                },
+                "SwitchThumbInstance": {
+                    "values": "ComponentInstance<SwitchThumbProps, SwitchThumbState, SwitchThumbExposes, SwitchThumbPassThrough>",
+                    "description": "Instance of SwitchThumb component."
+                }
+            }
+        }
+    },
+    "useswitch": {
+        "description": "The useSwitch manages the state and functionality of a switch component.\n\n[Live Demo](https://www.primereact.org/switch/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useSwitchChangeEvent": {
+                    "description": "Event fired when the switch's checked state changes.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "E",
+                            "default": "",
+                            "description": "The original event that triggered the change."
+                        },
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The checked state of the switch."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "SwitchChangeEvent"
+                },
+                "useSwitchProps": {
+                    "description": "Defines valid properties in useSwitch.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "checked",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies the input's checked state."
+                        },
+                        {
+                            "name": "defaultChecked",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The default value for the input when not controlled by  `checked`  and  `onCheckedChange` ."
+                        },
+                        {
+                            "name": "onCheckedChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: useSwitchChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the switch's checked state changes."
+                        }
+                    ],
+                    "methods": []
+                },
+                "useSwitchState": {
+                    "description": "Defines valid state in useSwitch.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The checked state of the useSwitch."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "SwitchState"
+                },
+                "useSwitchExposes": {
+                    "description": "Defines the methods and properties exposed by useSwitch.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "useSwitchState",
+                            "default": "",
+                            "description": "The state of the useSwitch."
+                        },
+                        {
+                            "name": "onChange",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: useSwitchChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the useSwitch's checked state changes."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "SwitchExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useSwitchInstance": {
+                    "values": "HeadlessInstance<useSwitchProps, useSwitchState, useSwitchExposes>",
+                    "description": "Instance of useSwitch headless."
+                }
+            }
+        }
+    },
     "tag": {
         "description": "Tag component is used to categorize content.\n\n[Live Demo](https://www.primereact.org/tag/)",
         "interfaces": {
@@ -11150,7 +11891,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -11206,7 +11947,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: TagInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: TagInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -11364,7 +12105,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -11420,7 +12161,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: TagIconInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: TagIconInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -11534,7 +12275,7 @@
                             "name": "as",
                             "optional": true,
                             "readonly": false,
-                            "type": "ElementType<any, keyof IntrinsicElements>",
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
                             "default": "",
                             "description": "The component type to render."
                         },
@@ -11590,7 +12331,7 @@
                             "name": "children",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode | ((instance?: TagLabelInstance) => ReactNode)",
+                            "type": "ReactNode | (() => ReactNode) | ((instance: TagLabelInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
                         },
@@ -11679,6 +12420,933 @@
                 "useTagInstance": {
                     "values": "HeadlessInstance<useTagProps, useTagState, useTagExposes>",
                     "description": "Instance of useTag headless."
+                }
+            }
+        }
+    },
+    "ToggleButton": {
+        "description": "ToggleButton is an extension to standard ToggleButton element with theming.\n\n[Live Demo](https://www.primereact.org/ToggleButton/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonPassThrough": {
+                    "description": "Defines passthrough(pt) options of ToggleButton component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the content's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToggleButtonChangeEvent": {
+                    "description": "Event fired when the ToggleButton's checked state changes.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the ToggleButton."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ChangeEvent",
+                            "default": "",
+                            "description": "The original event that triggered the change."
+                        },
+                        {
+                            "name": "pressed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The pressed state of the ToggleButton."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "ToggleButtonGroupUpdateChangeEvent",
+                    "extendedTypes": "useToggleButtonChangeEvent<React.ChangeEvent<HTMLButtonElement>>"
+                },
+                "ToggleButtonProps": {
+                    "description": "Defines valid properties in ToggleButton component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToggleButtonInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToggleButtonInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToggleButtonPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToggleButtonInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the ToggleButton."
+                        },
+                        {
+                            "name": "size",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"small\" | \"large\" | \"normal\"",
+                            "default": "",
+                            "description": "Defines the size of the ToggleButton."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the element should be disabled."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should have invalid state style."
+                        },
+                        {
+                            "name": "onPressedChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: ToggleButtonChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the ToggleButton's pressed state changes."
+                        },
+                        {
+                            "name": "pressed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies that the ToggleButton should be pressed."
+                        },
+                        {
+                            "name": "defaultPressed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The default pressed value when not controlled by  `pressed`  and  `onPressedChange` ."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToggleButtonInstance, Omit<useToggleButtonProps, \"onPressedChange\">>"
+                },
+                "ToggleButtonState": {
+                    "description": "Defines valid state in ToggleButton component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "pressed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The pressed state of the useToggleButton."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useToggleButtonState"
+                },
+                "ToggleButtonExposes": {
+                    "description": "Defines the methods and properties exposed by ToggleButton component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "group",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonGroupInstance",
+                            "default": "",
+                            "description": "The group instance of the ToggleButton."
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "useToggleButtonState",
+                            "default": "",
+                            "description": "The state of the useToggleButton."
+                        },
+                        {
+                            "name": "onChange",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: useToggleButtonChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the useToggleButton's pressed state changes."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useToggleButtonExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonPassThroughType": {
+                    "values": "PassThroughType<ToggleButtonInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ToggleButton component."
+                },
+                "ToggleButtonClassNamesType": {
+                    "values": "typeof ToggleButtonClassNames[keyof typeof ToggleButtonClassNames]",
+                    "description": "Type representing the CSS class names used in the ToggleButton component."
+                },
+                "ToggleButtonInstance": {
+                    "values": "ComponentInstance<ToggleButtonProps, ToggleButtonState, ToggleButtonExposes, ToggleButtonPassThrough>",
+                    "description": "Instance of ToggleButton component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonClassNames": {
+                    "description": "Defines the CSS class names used in the ToggleButton component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-togglebutton",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ToggleButtonGroup": {
+        "description": "ToggleButtonGroup is a component that allows users to select one or more options from a set of toggle buttons.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonGroupPassThrough": {
+                    "description": "Defines passthrough(pt) options of ToggleButton component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToggleButtonGroupValueChangeEvent": {
+                    "description": "Event fired when the ToggleButton group's value changes.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The value of the ToggleButton group."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToggleButtonGroupUpdateChangeEvent": {
+                    "description": "Used to update the ToggleButton group value.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the ToggleButton."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ChangeEvent",
+                            "default": "",
+                            "description": "The original event that triggered the change."
+                        },
+                        {
+                            "name": "pressed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The pressed state of the ToggleButton."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "ToggleButtonChangeEvent"
+                },
+                "ToggleButtonGroupProps": {
+                    "description": "Defines valid properties in ToggleButtonGroup component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToggleButtonGroupInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToggleButtonGroupInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToggleButtonGroupPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToggleButtonGroupInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the ToggleButton group."
+                        },
+                        {
+                            "name": "defaultValue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The default value of the ToggleButton group."
+                        },
+                        {
+                            "name": "size",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"small\" | \"large\" | \"normal\"",
+                            "default": "",
+                            "description": "Defines the size of the ToggleButton components."
+                        },
+                        {
+                            "name": "multiple",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the ToggleButton group allows multiple selections."
+                        },
+                        {
+                            "name": "allowEmpty",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When present, it specifies that the ToggleButton group allows empty selection."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the ToggleButton group should be disabled."
+                        },
+                        {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the ToggleButton group is invalid."
+                        },
+                        {
+                            "name": "onValueChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: ToggleButtonGroupValueChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback function that is called when the ToggleButton group value changes."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToggleButtonGroupInstance>"
+                },
+                "ToggleButtonGroupState": {
+                    "description": "Defines valid state in ToggleButtonGroup component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "Value of the ToggleButton group."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToggleButtonGroupExposes": {
+                    "description": "Defines the methods and properties exposed by ToggleButtonGroup component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToggleButtonGroupState",
+                            "default": "",
+                            "description": "The state of the ToggleButton group."
+                        },
+                        {
+                            "name": "updateChange",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: ToggleButtonGroupUpdateChangeEvent) => void",
+                            "default": "",
+                            "description": "Updates the value of the ToggleButton group."
+                        },
+                        {
+                            "name": "isPressed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(value: unknown, toggleButtonValue: unknown) => boolean",
+                            "default": "",
+                            "description": "Checks if a toggle button is pressed.\nReturns true if the toggle button is pressed, false if not pressed, or undefined if the value is undefined."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonGroupPassThroughType": {
+                    "values": "PassThroughType<ToggleButtonGroupInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ToggleButton component."
+                },
+                "ToggleButtonGroupClassNamesType": {
+                    "values": "typeof ToggleButtonGroupClassNames[keyof typeof ToggleButtonGroupClassNames]",
+                    "description": "Type representing the CSS class names used in the ToggleButtonGroup component."
+                },
+                "ToggleButtonGroupInstance": {
+                    "values": "ComponentInstance<ToggleButtonGroupProps, ToggleButtonGroupState, ToggleButtonGroupExposes, ToggleButtonGroupPassThrough>",
+                    "description": "Instance of ToggleButtonGroup component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonGroupClassNames": {
+                    "description": "Defines the CSS class names used in the ToggleButtonGroup component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-togglebutton-group",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ToggleButtonIndicator": {
+        "description": "ToggleButtonIndicator component is used to display the indicator of ToggleButton.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonIndicatorPassThrough": {
+                    "description": "Defines passthrough(pt) options of ToggleButtonIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonIndicatorPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToggleButtonIndicatorProps": {
+                    "description": "Defines valid properties in ToggleButtonIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToggleButtonIndicatorInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToggleButtonIndicatorInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToggleButtonIndicatorPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToggleButtonIndicatorInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToggleButtonIndicatorInstance>"
+                },
+                "ToggleButtonIndicatorState": {
+                    "description": "Defines valid state in ToggleButtonIndicator component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ToggleButtonIndicatorExposes": {
+                    "description": "Defines the methods and properties exposed by ToggleButtonIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "togglebutton",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToggleButtonInstance",
+                            "default": "",
+                            "description": "The ToggleButton component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToggleButtonIndicatorPassThroughType": {
+                    "values": "PassThroughType<ToggleButtonIndicatorInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ToggleButtonIndicator component."
+                },
+                "ToggleButtonIndicatorInstance": {
+                    "values": "ComponentInstance<ToggleButtonIndicatorProps, ToggleButtonIndicatorState, ToggleButtonIndicatorExposes, ToggleButtonIndicatorPassThrough>",
+                    "description": "Instance of ToggleButtonIndicator component."
+                }
+            }
+        }
+    },
+    "useToggleButton": {
+        "description": "The useToggleButton manages the state and functionality of a ToggleButton component.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useToggleButtonChangeEvent": {
+                    "description": "Event fired when the ToggleButton's checked state changes.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "E",
+                            "default": "",
+                            "description": "The original event that triggered the change."
+                        },
+                        {
+                            "name": "pressed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The pressed state of the ToggleButton."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "ToggleButtonChangeEvent"
+                },
+                "useToggleButtonProps": {
+                    "description": "Defines valid properties in useToggleButton.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "pressed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "When present, it specifies that the ToggleButton should be pressed."
+                        },
+                        {
+                            "name": "defaultPressed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The default pressed value when not controlled by  `pressed`  and  `onPressedChange` ."
+                        },
+                        {
+                            "name": "onPressedChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: useToggleButtonChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the ToggleButton's pressed state changes."
+                        }
+                    ],
+                    "methods": []
+                },
+                "useToggleButtonState": {
+                    "description": "Defines valid state in useToggleButton.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "pressed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "The pressed state of the useToggleButton."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "ToggleButtonState"
+                },
+                "useToggleButtonExposes": {
+                    "description": "Defines the methods and properties exposed by useToggleButton.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "useToggleButtonState",
+                            "default": "",
+                            "description": "The state of the useToggleButton."
+                        },
+                        {
+                            "name": "onChange",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: useToggleButtonChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the useToggleButton's pressed state changes."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "ToggleButtonExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useToggleButtonInstance": {
+                    "values": "HeadlessInstance<useToggleButtonProps, useToggleButtonState, useToggleButtonExposes>",
+                    "description": "Instance of useToggleButton headless."
                 }
             }
         }

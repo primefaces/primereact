@@ -395,6 +395,36 @@ export const Store = {
             'filePath': 'demo/skeleton/skeleton-pt.tsx',
         },
     },
+    'switch': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/switch/basic-demo.tsx')),
+            'filePath': 'demo/switch/basic-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/switch/controlled-demo.tsx')),
+            'filePath': 'demo/switch/controlled-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/switch/disabled-demo.tsx')),
+            'filePath': 'demo/switch/disabled-demo.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/switch/invalid-demo.tsx')),
+            'filePath': 'demo/switch/invalid-demo.tsx',
+        },
+        'switch-pt': {
+            'component': React.lazy(() => import('demo/switch/switch-pt.tsx')),
+            'filePath': 'demo/switch/switch-pt.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/switch/template-demo.tsx')),
+            'filePath': 'demo/switch/template-demo.tsx',
+        },
+        'uncontrolled-demo': {
+            'component': React.lazy(() => import('demo/switch/uncontrolled-demo.tsx')),
+            'filePath': 'demo/switch/uncontrolled-demo.tsx',
+        },
+    },
     'tag': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/tag/basic-demo.tsx')),
