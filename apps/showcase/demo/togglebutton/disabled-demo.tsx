@@ -1,10 +1,10 @@
 import { ToggleButton } from 'primereact/togglebutton';
 
-export default function BasicDemo() {
+export default function DisabledDemo() {
     return (
         <div className="card flex items-center justify-center">
-            <ToggleButton>
-                <ToggleButton.Indicator>Bold</ToggleButton.Indicator>
+            <ToggleButton disabled>
+                <ToggleButton.Indicator>Disabled</ToggleButton.Indicator>
             </ToggleButton>
         </div>
     );

@@ -1,7 +1,7 @@
 ---
-title: "ToggleButton"
-description: "ToggleButton component is used to create a button that can be toggled on or off."
-component: "togglebutton"
+title: 'ToggleButton'
+description: 'ToggleButton component is used to create a button that can be toggled on or off.'
+component: 'togglebutton'
 ---
 
 ## Usage
@@ -10,12 +10,80 @@ component: "togglebutton"
 import { ToggleButton } from 'primereact/togglebutton';
 ```
 
-````tsx
-<ToggleButton></ToggleButton>
-````
+```tsx
+<ToggleButton>
+    <ToggleButton.Indicator>Toggle</ToggleButton.Indicator>
+</ToggleButton>
+```
 
 ## Examples
 
 ### Basic
 
 <DocComponentViewer name="togglebutton:basic-demo" />
+
+### Render Props
+
+This is called the render prop pattern. It lets you use a function to customize what the component displays based on its internal state.
+
+<DocComponentViewer name="togglebutton:render-props-demo" />
+
+### Controlled
+
+Use `pressed` and `onPressedChange` properties to control the state of the ToggleButton.
+
+<DocComponentViewer name="togglebutton:controlled-demo" />
+
+### Size
+
+`ToggleButton` provides small and large sizes as alternatives to the base by using the `size` property.
+
+<DocComponentViewer name="togglebutton:sizes-demo" />
+
+### Invalid
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocComponentViewer name="togglebutton:invalid-demo" />
+
+### Disabled
+
+When `disabled` is present, the element cannot be edited and focused.
+
+<DocComponentViewer name="togglebutton:disabled-demo" />
+
+### Group
+
+The `allowEmpty` property is true by default. If set to false, the component ensures that at least one item remains selected at all times.
+
+<DocComponentViewer name="togglebutton:group-demo" />
+
+### Controlled Group
+
+Use `value` and `onValueChange` properties to control the state of the `ToggleButton.Group`.
+
+<DocComponentViewer name="togglebutton:controlled-group-demo" />
+
+### Multiple
+
+`ToggleButton.Group` allows selecting only one item by default and setting `multiple` option enables choosing more than one item. In multiple case, model property should be an array.
+
+<DocComponentViewer name="togglebutton:multiple-demo" />
+
+### Sizes of Group
+
+`ToggleButton.Group` provides small and large sizes as alternatives to the base by using the `size` property.
+
+<DocComponentViewer name="togglebutton:sizes-group-demo" />
+
+### Invalid Group
+
+Invalid state is displayed using the `invalid` prop to indicate a failed validation. You can use this style when integrating with form validation libraries.
+
+<DocComponentViewer name="togglebutton:invalid-group-demo" />
+
+### Disabled Group
+
+When `disabled` is present, the element cannot be edited and focused entirely. Certain options can also be disabled using their `disabled` properties.
+
+<DocComponentViewer name="togglebutton:disabled-group-demo" />

@@ -27,16 +27,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
 
     return {
-        title: doc.title,
+        title: doc.title + ' - PrimeReact',
         description: doc.description,
         openGraph: {
-            title: doc.title,
+            title: doc.title + ' - PrimeReact',
             description: doc.description,
             type: 'article'
         },
         twitter: {
             card: 'summary_large_image',
-            title: doc.title,
+            title: doc.title + ' - PrimeReact',
             description: doc.description
         }
     };
