@@ -23,6 +23,7 @@ import { MeterGroup } from 'primereact/metergroup';
     </MeterGroup.Labels>
 </MeterGroup>
 ```
+
 ## Examples
 
 ### Basic
@@ -33,9 +34,15 @@ import { MeterGroup } from 'primereact/metergroup';
 
 ### Multiple
 
-Adding more `MeterGroup.Meter` components displays the meters in a group.
+Adding more `MeterGroup.Meter` components displays the meters in a group. Pass `index` to `MeterGroup.Meter` and `MeterGroup.Marker` to identify the meter's and label's position to get the color.
 
 <DocComponentViewer name="metergroup:multiple-demo" />
+
+### Color
+
+`MeterGroup.Meter` and `MeterGroup.Marker` components supports custom color values. Use `color` property or pass color with className or style. `color` has custom color names like `blue`, `emerald`, `violet`, `amber`, etc. or hex, rgb, hsl, or hsla values.
+
+<DocComponentViewer name="metergroup:color-demo" />
 
 ### Icon
 

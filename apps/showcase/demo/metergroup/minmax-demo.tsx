@@ -2,10 +2,10 @@ import { MeterGroup } from 'primereact/metergroup';
 
 export default function MinMaxDemo() {
     const values = [
-        { label: 'Apps', color: '#34d399', value: 16 },
-        { label: 'Messages', color: '#fbbf24', value: 8 },
-        { label: 'Media', color: '#60a5fa', value: 24 },
-        { label: 'System', color: '#c084fc', value: 10 }
+        { label: 'Apps', value: 16 },
+        { label: 'Messages', value: 8 },
+        { label: 'Media', value: 24 },
+        { label: 'System', value: 10 }
     ];
 
     const percent = (meter: number) => {
@@ -17,13 +17,13 @@ export default function MinMaxDemo() {
             <MeterGroup max={200}>
                 <MeterGroup.Meters>
                     {values.map((item, index) => (
-                        <MeterGroup.Meter key={`meter_${index}`} value={item.value} color={item.color} />
+                        <MeterGroup.Meter key={`meter_${index}`} value={item.value} index={index} />
                     ))}
                 </MeterGroup.Meters>
                 <MeterGroup.Labels>
                     {values.map((item, index) => (
                         <MeterGroup.Label key={`label_${index}`}>
-                            <MeterGroup.Marker color={item.color} />
+                            <MeterGroup.Marker index={index} />
                             <MeterGroup.Text>
                                 {item.label} ({percent(item.value)})
                             </MeterGroup.Text>

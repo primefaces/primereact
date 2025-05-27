@@ -236,6 +236,10 @@ export const Store = {
             'component': React.lazy(() => import('demo/metergroup/basic-demo.tsx')),
             'filePath': 'demo/metergroup/basic-demo.tsx',
         },
+        'color-demo': {
+            'component': React.lazy(() => import('demo/metergroup/color-demo.tsx')),
+            'filePath': 'demo/metergroup/color-demo.tsx',
+        },
         'icon-demo': {
             'component': React.lazy(() => import('demo/metergroup/icon-demo.tsx')),
             'filePath': 'demo/metergroup/icon-demo.tsx',
