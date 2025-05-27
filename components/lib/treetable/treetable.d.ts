@@ -148,7 +148,7 @@ export interface TreeTablePassThroughOptions {
      * Uses to pass attributes to the checkbox partial icon's DOM element.
      */
     checkboxPartialIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-     /**
+    /**
      * Uses to pass attributes to the resize helper's DOM element.
      * @see {@link InputTextPassThroughOptions}
      */
