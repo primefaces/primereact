@@ -23,7 +23,7 @@ export default function LandingPage() {
                         <br />
                         UI <span className="italic font-light font-serif tracking-tight -ml-0.5 mr-1">Suite</span> for React
                     </div>
-                    <div className="mt-6 text-xl leading-normal text-center w-full">
+                    <div className="mt-6 text-xl leading-normal text-center w-full text-surface-700 dark:text-surface-400">
                         Enhance your web applications with <span className="underline underline-offset-4 decoration-blue-500 decoration-2">PrimeReact</span>&apos;s comprehensive suite of customizable, feature-rich UI components. With{' '}
                         <span className="underline underline-offset-4 decoration-blue-500 decoration-2">PrimeReact</span>, turning your development vision into reality has never been easier.{' '}
                     </div>
