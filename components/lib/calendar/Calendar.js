@@ -1886,6 +1886,9 @@ export const Calendar = React.memo(
 
                 OverlayService.on('overlay-click', overlayEventListener.current);
             }
+            setTimeout(() => {
+                DomHandler.focus(inputRef.current);
+            }, 0);
         };
 
         const hide = (type, callback) => {
