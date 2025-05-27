@@ -1,4 +1,6 @@
 import { useApp } from '@/hooks/useApp';
+import { useViewTransition } from '@primereact/hooks';
+import { SwitchChangeEvent } from '@primereact/types/shared/switch';
 import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { $t, updatePreset, updateSurfacePalette } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
@@ -6,6 +8,7 @@ import Lara from '@primeuix/themes/lara';
 import Material from '@primeuix/themes/material';
 import Nora from '@primeuix/themes/nora';
 import { cn } from '@primeuix/utils';
+import { Switch } from 'primereact/switch';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
@@ -53,10 +56,9 @@ const surfaces = [
 
 export default function AppConfigurator() {
     const app = useApp();
+
     //const primereact = usePrimeReact();
 
-    //const [isRTL, setIsRTL] = React.useState(false);
-    //const rippleActive = primereact.config.ripple;
     const selectedPrimaryColor = app.primary;
     const selectedSurfaceColor = app.surface;
 
@@ -267,10 +269,6 @@ export default function AppConfigurator() {
         //EventBus.emit('theme-palette-change');
     };
 
-    /*const onRippleChange = (value) => {
-        primereact.config.ripple = value;
-    };*/
-
     const onPresetChange = (e: ToggleButtonGroupValueChangeEvent) => {
         app.setPreset(e.value as string);
         const preset = presets[e.value];
@@ -279,25 +277,21 @@ export default function AppConfigurator() {
         $t().preset(preset).preset(getPresetExt(selectedPrimaryColor, e.value)).surfacePalette(surfacePalette).use({ useDefaultOptions: true });
     };
 
-    /*const onRTLChange = (value) => {
-        if (!document.startViewTransition) {
-            toggleRTL(value);
+    const onRTLChange = useViewTransition();
 
-            return;
-        }
+    const toggleRTL = (value: boolean) => {
+        onRTLChange(() => {
+            const htmlElement = document.documentElement;
 
-        document.startViewTransition(() => toggleRTL(value));
+            if (value) {
+                htmlElement.setAttribute('dir', 'rtl');
+            } else {
+                htmlElement.removeAttribute('dir');
+            }
+
+            app.setRTL(value);
+        });
     };
-
-    const toggleRTL = (value) => {
-        const htmlElement = document.documentElement;
-
-        if (value) {
-            htmlElement.setAttribute('dir', 'rtl');
-        } else {
-            htmlElement.removeAttribute('dir');
-        }
-    };*/
 
     return (
         <div className="config-panel hidden">
@@ -342,18 +336,21 @@ export default function AppConfigurator() {
                         ))}
                     </ToggleButton.Group>
                 </div>
-                {/*<div className="flex">
-                    <div className="flex-1">
-                        <div className="config-panel-settings">
-                            <span className="config-panel-label">Ripple</span>
-                        </div>
-                    </div>
+                <div className="flex">
                     <div className="flex-1">
                         <div className="config-panel-settings items-end">
                             <span className="config-panel-label">RTL</span>
+                            <Switch
+                                checked={app.isRTL}
+                                onCheckedChange={(e: SwitchChangeEvent) => {
+                                    toggleRTL(e.checked);
+                                }}
+                            >
+                                <Switch.Thumb />
+                            </Switch>
                         </div>
                     </div>
-                </div>*/}
+                </div>
             </div>
         </div>
     );

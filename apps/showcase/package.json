@@ -17,6 +17,7 @@
     "dependencies": {
         "@primereact/code-viewer": "workspace:*",
         "@primereact/icons": "workspace:*",
+        "@primereact/hooks": "workspace:*",
         "@primeuix/themes": "catalog:",
         "@shikijs/compat": "^2.5.0",
         "@types/unist": "^3.0.3",

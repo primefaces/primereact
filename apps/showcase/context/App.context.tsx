@@ -11,6 +11,7 @@ export function AppProvider(props: AppContextProps) {
     const [surface, setSurface] = React.useState(props.surface);
     const [isDarkTheme, setDarkTheme] = React.useState(props.isDarkTheme ?? false);
     const [isNewsActive, setNewsActive] = React.useState(props.isNewsActive ?? false);
+    const [isRTL, setRTL] = React.useState(props.isRTL ?? false);
     const storageKey = React.useRef(props.storageKey || '');
 
     const value = {
@@ -24,6 +25,8 @@ export function AppProvider(props: AppContextProps) {
         setDarkTheme,
         isNewsActive,
         setNewsActive,
+        isRTL,
+        setRTL,
         storageKey: toValue(storageKey) as string
     };
 

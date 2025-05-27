@@ -6,6 +6,7 @@ export interface AppConfig {
     surface?: string;
     isDarkTheme?: boolean;
     isNewsActive?: boolean;
+    isRTL?: boolean;
     storageKey?: string;
     versions?: {
         name: string;
@@ -40,6 +41,8 @@ export interface AppProviderProps {
     setDarkTheme: (isDarkTheme: boolean) => void;
     isNewsActive?: boolean;
     setNewsActive: (isNewsActive: boolean) => void;
+    isRTL?: boolean;
+    setRTL: (isNewsActive: boolean) => void;
     storageKey?: string;
 }
 

@@ -6,6 +6,7 @@ const appConfig: AppConfig = {
     primary: 'noir',
     isDarkTheme: false,
     isNewsActive: false,
+    isRTL: false,
     storageKey: 'primereact',
     versions: [
         {
