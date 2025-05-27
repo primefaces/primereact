@@ -735,7 +735,7 @@ export const UITreeNode = React.memo((props) => {
             const checkboxIconProps = mergeProps({
                 className: cx('checkIcon')
             });
-            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
+            const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxPartialIcon || <MinusIcon {...checkboxIconProps} /> : null;
             const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
             const checkboxProps = mergeProps(
                 {
@@ -902,6 +902,7 @@ export const UITreeNode = React.memo((props) => {
                                 key={childNode.key || childNode.label}
                                 node={childNode}
                                 checkboxIcon={props.checkboxIcon}
+                                checkboxPartialIcon={props.checkboxPartialIcon}
                                 collapseIcon={props.collapseIcon}
                                 contextMenuSelectionKey={props.contextMenuSelectionKey}
                                 cx={cx}
