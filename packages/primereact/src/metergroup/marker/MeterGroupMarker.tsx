@@ -1,5 +1,6 @@
 'use client';
 import { Component } from '@primereact/core/component';
+import { METERGROUP_DEFAULT_COLORS_TYPE } from '@primereact/types/shared/metergroup';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -16,12 +17,13 @@ export const MeterGroupMarker = withComponent({
     },
     render(instance) {
         const { props, ptmi, metergroup } = instance;
+        const color = props.color ? metergroup?.colors?.[props.color as METERGROUP_DEFAULT_COLORS_TYPE] || props.color : Object.values(metergroup?.colors ?? {})[props.index ?? 0];
 
         const rootProps = mergeProps(
             {
                 className: metergroup?.cx('marker'),
                 style: {
-                    backgroundColor: props.color
+                    backgroundColor: color
                 }
             },
             metergroup?.ptm('marker'),

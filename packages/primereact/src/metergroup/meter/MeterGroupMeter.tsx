@@ -1,5 +1,6 @@
 'use client';
 import { Component } from '@primereact/core/component';
+import { METERGROUP_DEFAULT_COLORS_TYPE } from '@primereact/types/shared/metergroup';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -26,12 +27,13 @@ export const MeterGroupMeter = withComponent({
     },
     render(instance) {
         const { props, ptmi, metergroup } = instance;
+        const color = props.color ? metergroup?.colors?.[props.color as METERGROUP_DEFAULT_COLORS_TYPE] || props.color : Object.values(metergroup?.colors ?? {})[props.index ?? 0];
 
         const rootProps = mergeProps(
             {
                 className: metergroup?.cx('meter'),
                 style: {
-                    backgroundColor: props.color,
+                    backgroundColor: color,
                     width: metergroup?.props.orientation === 'horizontal' && metergroup?.percentAsString(props.value ?? 0),
                     height: metergroup?.props.orientation === 'vertical' && metergroup?.percentAsString(props.value ?? 0)
                 }

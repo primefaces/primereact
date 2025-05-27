@@ -76,7 +76,11 @@ export interface MeterGroupState extends useMeterGroupState {}
  * Defines the methods and properties exposed by MeterGroup component.
  * @extends useMeterGroupExposes
  */
-export interface MeterGroupExposes extends useMeterGroupExposes {}
+export interface MeterGroupExposes extends useMeterGroupExposes {
+    colors: Record<METERGROUP_DEFAULT_COLORS_TYPE, string>;
+    getNextColorIndex: () => number;
+    getNextLabelIndex: () => number;
+}
 
 /**
  * Defines the CSS class names used in the MeterGroup component.
@@ -115,6 +119,8 @@ export const MeterGroupClassNames = {
      */
     labelText: 'p-metergroup-label-text'
 } as const;
+
+export type METERGROUP_DEFAULT_COLORS_TYPE = 'blue' | 'emerald' | 'violet' | 'amber' | 'gray' | 'cyan' | 'pink' | 'lime' | 'fuchsia';
 
 /**
  * Type representing the CSS class names used in the MeterGroup component.

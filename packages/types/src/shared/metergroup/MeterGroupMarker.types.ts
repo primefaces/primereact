@@ -10,7 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
-import type { MeterGroupInstance } from './MeterGroup.types';
+import type { METERGROUP_DEFAULT_COLORS_TYPE, MeterGroupInstance } from './MeterGroup.types';
 
 /**
  * Defines passthrough(pt) options type in MeterGroupMarker component.
@@ -34,7 +34,11 @@ export interface MeterGroupMarkerProps extends BaseComponentProps<MeterGroupMark
     /**
      * Defines the color of the marker.
      */
-    color?: string | undefined;
+    color?: METERGROUP_DEFAULT_COLORS_TYPE | (string & {}) | undefined;
+    /**
+     * Defines the index of the marker.
+     */
+    index?: number | undefined;
 }
 
 /**
