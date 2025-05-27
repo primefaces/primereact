@@ -3229,7 +3229,7 @@ export const Calendar = React.memo(
                 isClearClicked.current = false;
             }
 
-            if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
+            if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && prevPropValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
                 validateDate(viewDate);
             }
 
