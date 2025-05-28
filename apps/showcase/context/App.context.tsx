@@ -14,6 +14,31 @@ export function AppProvider(props: AppContextProps) {
     const [isRTL, setRTL] = React.useState(props.isRTL ?? false);
     const storageKey = React.useRef(props.storageKey || '');
 
+    const handleChangePrimary = (primary: string) => {
+        setPrimary(primary);
+        window.localStorage.setItem('primary', primary);
+    };
+
+    const handleChangeSurface = (surface: string) => {
+        setSurface(surface);
+        window.localStorage.setItem('surface', surface);
+    };
+
+    const handleChangeDarkTheme = () => {
+        const isDark = !isDarkTheme;
+
+        setDarkTheme(isDark);
+        window.localStorage.setItem('isDarkTheme', isDark.toString());
+    };
+
+    React.useEffect(() => {
+        const isDark = window.localStorage.getItem('isDarkTheme');
+
+        if (isDark) {
+            setDarkTheme(isDark === 'true');
+        }
+    }, []);
+
     const value = {
         preset,
         setPreset,
@@ -27,7 +52,10 @@ export function AppProvider(props: AppContextProps) {
         setNewsActive,
         isRTL,
         setRTL,
-        storageKey: toValue(storageKey) as string
+        storageKey: toValue(storageKey) as string,
+        handleChangePrimary,
+        handleChangeSurface,
+        handleChangeDarkTheme
     };
 
     return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;

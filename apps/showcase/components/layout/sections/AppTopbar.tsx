@@ -7,7 +7,7 @@ import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
 import AppConfigurator from './AppConfigurator';
 
-export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
+export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: AppTopbarProps) {
     const [isSticky, setIsSticky] = React.useState(false);
     const app = useApp();
 
@@ -49,12 +49,11 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
         if (isDark) document.documentElement.classList.add('p-dark');
         else document.documentElement.classList.remove('p-dark');
 
-        app.setDarkTheme(isDark);
+        app.handleChangeDarkTheme();
+        //app.setDarkTheme(isDark);
     };
 
     const toggleDesigner = () => {};
-
-    const onMenuButtonClick = () => {};
 
     return (
         <div className={cn('layout-topbar', isSticky && 'layout-topbar-sticky')}>
@@ -220,7 +219,7 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
                     </li>
                     {showMenuButton && (
                         <li className="menu-button">
-                            <button type="button" className="topbar-item menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
+                            <button type="button" className="topbar-item menu-button" onClick={() => onMenuButtonClick?.()} aria-haspopup aria-label="Menu">
                                 <i className="pi pi-bars"></i>
                             </button>
                         </li>

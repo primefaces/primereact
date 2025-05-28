@@ -44,6 +44,9 @@ export interface AppProviderProps {
     isRTL?: boolean;
     setRTL: (isNewsActive: boolean) => void;
     storageKey?: string;
+    handleChangePrimary: (primary: string) => void;
+    handleChangeSurface: (surface: string) => void;
+    handleChangeDarkTheme: () => void;
 }
 
 export interface AppTopbarProps {

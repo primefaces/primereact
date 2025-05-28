@@ -251,9 +251,11 @@ export default function AppConfigurator() {
 
     const updateColors = (type, color) => {
         if (type === 'primary') {
-            app.setPrimary(color.name);
+            app.handleChangePrimary(color.name);
+            //app.setPrimary(color.name);
         } else if (type === 'surface') {
-            app.setSurface(color.name);
+            app.handleChangeSurface(color.name);
+            //app.setSurface(color.name);
         }
 
         applyTheme(type, color);
