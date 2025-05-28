@@ -6,5 +6,6 @@ export const defaultProps: InputTextProps = {
     as: 'input',
     size: undefined,
     variant: undefined,
-    fluid: false
+    fluid: false,
+    invalid: false
 };
