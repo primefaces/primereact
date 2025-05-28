@@ -110,7 +110,7 @@ export const PanelClassNames = {
     /**
      * Class name of the toggle button element
      */
-    pcToggleButton: 'p-panel-toggle-button',
+    collapse: 'p-panel-toggle-button',
     /**
      * Class name of the content element
      */

@@ -508,5 +508,9 @@ export const Store = {
             'component': React.lazy(() => import('demo/togglebutton/sizes-group-demo.tsx')),
             'filePath': 'demo/togglebutton/sizes-group-demo.tsx',
         },
+        'togglebutton-pt': {
+            'component': React.lazy(() => import('demo/togglebutton/togglebutton-pt.tsx')),
+            'filePath': 'demo/togglebutton/togglebutton-pt.tsx',
+        },
     },
 };
