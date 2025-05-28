@@ -7081,7 +7081,7 @@
                             "description": "Class name of the header actions element"
                         },
                         {
-                            "name": "pcToggleButton",
+                            "name": "collapse",
                             "value": "p-panel-toggle-button",
                             "optional": false,
                             "readonly": true,
@@ -11529,6 +11529,516 @@
             }
         }
     },
+    "switchcontrol": {
+        "description": "SwitchControl is a component that displays a container for thumb.\n\n[Live Demo](https://www.primereact.org/switch/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchControlPassThrough": {
+                    "description": "Defines passthrough(pt) options of SwitchControl component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchControlPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "SwitchControlProps": {
+                    "description": "Defines valid properties in SwitchControl component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: SwitchControlInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: SwitchControlInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<SwitchControlPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: SwitchControlInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<SwitchControlInstance>"
+                },
+                "SwitchControlState": {
+                    "description": "Defines valid state in SwitchControl component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "SwitchControlExposes": {
+                    "description": "Defines the methods and properties exposed by SwitchControl component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "switch",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SwitchInstance",
+                            "default": "",
+                            "description": "The Switch component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchControlPassThroughType": {
+                    "values": "PassThroughType<SwitchControlInstance, E>",
+                    "description": "Defines passthrough(pt) options type in SwitchControl component."
+                },
+                "SwitchControlInstance": {
+                    "values": "ComponentInstance<SwitchControlProps, SwitchControlState, SwitchControlExposes, SwitchControlPassThrough>",
+                    "description": "Instance of SwitchControl component."
+                }
+            }
+        }
+    },
+    "switchendcontent": {
+        "description": "SwitchEndContent is a component that displays athumb.\n\n[Live Demo](https://www.primereact.org/switch/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchEndContentPassThrough": {
+                    "description": "Defines passthrough(pt) options of SwitchEndContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchEndContentPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "SwitchEndContentProps": {
+                    "description": "Defines valid properties in SwitchEndContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: SwitchEndContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: SwitchEndContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<SwitchEndContentPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: SwitchEndContentInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<SwitchEndContentInstance>"
+                },
+                "SwitchEndContentState": {
+                    "description": "Defines valid state in SwitchEndContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "SwitchEndContentExposes": {
+                    "description": "Defines the methods and properties exposed by SwitchEndContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "switch",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SwitchInstance",
+                            "default": "",
+                            "description": "The Switch component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchEndContentPassThroughType": {
+                    "values": "PassThroughType<SwitchEndContentInstance, E>",
+                    "description": "Defines passthrough(pt) options type in SwitchEndContent component."
+                },
+                "SwitchEndContentInstance": {
+                    "values": "ComponentInstance<SwitchEndContentProps, SwitchEndContentState, SwitchEndContentExposes, SwitchEndContentPassThrough>",
+                    "description": "Instance of SwitchEndContent component."
+                }
+            }
+        }
+    },
+    "switchstartcontent": {
+        "description": "SwitchStartContent is a component that displays athumb.\n\n[Live Demo](https://www.primereact.org/switch/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchStartContentPassThrough": {
+                    "description": "Defines passthrough(pt) options of SwitchStartContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SwitchStartContentPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "SwitchStartContentProps": {
+                    "description": "Defines valid properties in SwitchStartContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: SwitchStartContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: SwitchStartContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<SwitchStartContentPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: SwitchStartContentInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<SwitchStartContentInstance>"
+                },
+                "SwitchStartContentState": {
+                    "description": "Defines valid state in SwitchStartContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "SwitchStartContentExposes": {
+                    "description": "Defines the methods and properties exposed by SwitchStartContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "switch",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SwitchInstance",
+                            "default": "",
+                            "description": "The Switch component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "SwitchStartContentPassThroughType": {
+                    "values": "PassThroughType<SwitchStartContentInstance, E>",
+                    "description": "Defines passthrough(pt) options type in SwitchStartContent component."
+                },
+                "SwitchStartContentInstance": {
+                    "values": "ComponentInstance<SwitchStartContentProps, SwitchStartContentState, SwitchStartContentExposes, SwitchStartContentPassThrough>",
+                    "description": "Instance of SwitchStartContent component."
+                }
+            }
+        }
+    },
     "switchthumb": {
         "description": "SwitchThumb is a component that displays athumb.\n\n[Live Demo](https://www.primereact.org/switch/)",
         "interfaces": {
@@ -12424,7 +12934,7 @@
             }
         }
     },
-    "ToggleButton": {
+    "togglebutton": {
         "description": "ToggleButton is an extension to standard ToggleButton element with theming.\n\n[Live Demo](https://www.primereact.org/ToggleButton/)",
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
@@ -12443,12 +12953,12 @@
                             "description": "Used to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "content",
+                            "name": "indicator",
                             "optional": true,
                             "readonly": false,
                             "type": "ToggleButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "default": "",
-                            "description": "Used to pass attributes to the content's DOM element."
+                            "description": "Used to pass attributes to the indicator's DOM element."
                         }
                     ],
                     "methods": []
@@ -12733,13 +13243,20 @@
                             "optional": false,
                             "readonly": true,
                             "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "indicator",
+                            "value": "p-togglebutton-content",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the content element"
                         }
                     ]
                 }
             }
         }
     },
-    "ToggleButtonGroup": {
+    "togglebuttongroup": {
         "description": "ToggleButtonGroup is a component that allows users to select one or more options from a set of toggle buttons.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
@@ -13066,7 +13583,7 @@
             }
         }
     },
-    "ToggleButtonIndicator": {
+    "togglebuttonindicator": {
         "description": "ToggleButtonIndicator component is used to display the indicator of ToggleButton.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
@@ -13236,7 +13753,7 @@
             }
         }
     },
-    "useToggleButton": {
+    "usetogglebutton": {
         "description": "The useToggleButton manages the state and functionality of a ToggleButton component.\n\n[Live Demo](https://www.primereact.org/togglebutton/)",
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",

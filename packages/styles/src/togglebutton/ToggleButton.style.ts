@@ -15,7 +15,7 @@ export const styles = createStyles<ToggleButtonInstance>({
                 'p-togglebutton-lg p-inputfield-lg': (instance.group?.props.size ?? props.size) === 'large'
             }
         ],
-        content: 'p-togglebutton-content',
+        indicator: 'p-togglebutton-content',
         icon: 'p-togglebutton-icon',
         label: 'p-togglebutton-label'
     }

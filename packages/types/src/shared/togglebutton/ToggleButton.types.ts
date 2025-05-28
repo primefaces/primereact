@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/ToggleButton/)
  *
- * @module ToggleButton
+ * @module togglebutton
  * @group components
  *
  */
@@ -27,9 +27,9 @@ export interface ToggleButtonPassThrough {
      */
     root?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Used to pass attributes to the content's DOM element.
+     * Used to pass attributes to the indicator's DOM element.
      */
-    content?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    indicator?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -99,7 +99,11 @@ export const ToggleButtonClassNames = {
     /**
      * Class name of the root element
      */
-    root: 'p-togglebutton'
+    root: 'p-togglebutton',
+    /**
+     * Class name of the content element
+     */
+    indicator: 'p-togglebutton-content'
 } as const;
 
 /**

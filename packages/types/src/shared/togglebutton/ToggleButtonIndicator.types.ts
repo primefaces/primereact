@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/togglebutton/)
  *
- * @module ToggleButtonIndicator
+ * @module togglebuttonindicator
  * @group components
  *
  */

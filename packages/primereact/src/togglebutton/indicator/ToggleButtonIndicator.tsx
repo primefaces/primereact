@@ -21,9 +21,9 @@ export const ToggleButtonIndicator = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: togglebutton?.cx('content')
+                className: togglebutton?.cx('indicator')
             },
-            togglebutton?.ptm('content'),
+            togglebutton?.ptm('indicator'),
             ptmi('root')
         );
 

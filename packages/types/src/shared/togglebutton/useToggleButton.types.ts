@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/togglebutton/)
  *
- * @module useToggleButton
+ * @module usetogglebutton
  * @group headless
  *
  */
