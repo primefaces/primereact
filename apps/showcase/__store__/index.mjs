@@ -226,9 +226,13 @@ export const Store = {
             'component': React.lazy(() => import('demo/inputtext/inputtext-pt.tsx')),
             'filePath': 'demo/inputtext/inputtext-pt.tsx',
         },
-        'size-demo': {
-            'component': React.lazy(() => import('demo/inputtext/size-demo.tsx')),
-            'filePath': 'demo/inputtext/size-demo.tsx',
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/inputtext/invalid-demo.tsx')),
+            'filePath': 'demo/inputtext/invalid-demo.tsx',
+        },
+        'sizes-demo': {
+            'component': React.lazy(() => import('demo/inputtext/sizes-demo.tsx')),
+            'filePath': 'demo/inputtext/sizes-demo.tsx',
         },
     },
     'metergroup': {
