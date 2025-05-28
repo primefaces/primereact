@@ -1,5 +1,5 @@
-@import "primeicons/primeicons.css";
-@import "./demo/flags.css";
+@import 'primeicons/primeicons.css';
+@import './demo/flags.css';
 /*@import '@docsearch/css/dist/style.css';*/
-@import "./tailwind/main.css";
-@import "./layout/layout.css";
+@import './tailwind/main.css';
+@import './layout/layout.css';

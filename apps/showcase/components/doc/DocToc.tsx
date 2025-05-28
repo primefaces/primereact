@@ -125,7 +125,7 @@ export default function DocToc({ toc }: DocTocProps) {
 
     return (
         <div
-            className="w-64 sticky top-32 md:block hidden"
+            className="w-[200px] min-[1200px]:w-[250px] sticky top-34 lg:block hidden"
             style={
                 {
                     '--top': `${activeTop}px`,

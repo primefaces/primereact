@@ -2,7 +2,7 @@ import { Skeleton } from 'primereact/skeleton';
 
 export default function GridDemo() {
     return (
-        <div className="card grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="card grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8  !col-start-1 !col-span-3">
             {Array.from({ length: 6 }).map((_, index) => (
                 <div key={index} className="border rounded-md border-surface-200 dark:border-surface-700">
                     <Skeleton width="100%" height="10rem" className="!rounded-t-md !rounded-b-none" />

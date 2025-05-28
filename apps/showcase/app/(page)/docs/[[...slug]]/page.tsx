@@ -58,12 +58,14 @@ async function DocsPage({ params }: { params: Promise<{ slug: string[] }> }) {
 
     return (
         <>
-            {doc.component && <DocTabs componentName={doc.component} />}
-            <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
-                <div className="flex-1 overflow-hidden">
-                    <h1>{doc.title}</h1>
-                    <p className="text-xl">{doc.description}</p>
-                    <DocMdx code={doc.body.code} />
+            <div className="flex-1 flex items-start justify-between gap-16">
+                <div className="flex-1 max-w-7xl mx-auto w-full overflow-hidden">
+                    <div className="w-full grid grid-cols-[1fr_minmax(0,100%)_1fr] md:grid-cols-[1fr_minmax(0,80%)_1fr] lg:grid-cols-[1fr_minmax(0,85%)_1fr] 2xl:grid-cols-[1fr_minmax(0,65%)_1fr] [&>*]:col-start-2">
+                        {doc.component && <DocTabs componentName={doc.component} />}
+                        <h1 className="!text-4xl">{doc.title}</h1>
+                        <p className="text-xl">{doc.description}</p>
+                        <DocMdx code={doc.body.code} />
+                    </div>
                 </div>
                 <DocToc toc={doc.toc as TableOfContents} />
             </div>

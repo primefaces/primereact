@@ -1,13 +1,13 @@
 :root {
-    --primary-text-color:var(--p-primary-600);
+    --primary-text-color: var(--p-primary-600);
     --primary-color: var(--p-primary-color);
-    --primary-contrast-color:var(--p-primary-contrast-color);
+    --primary-contrast-color: var(--p-primary-contrast-color);
     --primary-hover-color: var(--p-primary-hover-color);
     --text-color: var(--p-surface-700);
     --text-secondary-color: var(--p-surface-500);
     --glow-image: url(https://www.primefaces.org/cdn/primevue/images/layout/pattern.png);
     --glow-blend: hard-light, multiply;
-    --topbar-sticky-background:rgba(255,255,255,.7);
+    --topbar-sticky-background: rgba(255, 255, 255, 0.7);
     --mobile-menu-background: #ffffff;
     --card-border: 1px solid var(--p-surface-200);
     --card-background: #ffffff;
