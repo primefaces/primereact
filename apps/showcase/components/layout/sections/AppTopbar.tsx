@@ -8,12 +8,40 @@ import * as React from 'react';
 import AppConfigurator from './AppConfigurator';
 
 export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
+    const [isSticky, setIsSticky] = React.useState(false);
     const app = useApp();
 
     const logoFillRef = React.useRef({
         primary: dt('primary.color'),
         secondary: dt('surface.600')
     });
+
+    React.useEffect(() => {
+        let ticking = false;
+        let rafId: number;
+
+        const handleScroll = () => {
+            if (!ticking) {
+                rafId = window.requestAnimationFrame(() => {
+                    const offset = window.scrollY;
+
+                    setIsSticky(offset > 100);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+
+            if (rafId) {
+                window.cancelAnimationFrame(rafId);
+            }
+        };
+    }, []);
 
     const toggleDarkMode = () => {
         const isDark = !app.isDarkTheme;
@@ -29,7 +57,7 @@ export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
     const onMenuButtonClick = () => {};
 
     return (
-        <div className="layout-topbar">
+        <div className={cn('layout-topbar', isSticky && 'layout-topbar-sticky')}>
             <div className="layout-topbar-inner">
                 <div className="layout-topbar-logo-container">
                     <Link href="/" className="layout-topbar-logo" aria-label="PrimeReact logo">
