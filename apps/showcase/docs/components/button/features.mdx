@@ -1,73 +1,101 @@
 ---
-title: "Button"
-description: "Button is an extension to standard input element with icons and theming."
-component: "button"
+title: 'Button'
+description: 'Button is an extension to standard input element with icons and theming.'
+component: 'button'
 ---
 
-## Import
+## Usage
 
 ```tsx
 import { Button } from 'primereact/button';
 ```
 
-## Basic
+```tsx
+<Button>Button</Button>
+```
 
-Text to display on a button is defined with the _label_ property.
+## Examples
+
+### Basic
 
 <DocComponentViewer name="button:basic-demo" />
 
-## Icon
+### Icons
 
 <DocComponentViewer name="button:icon-demo" />
 
-## Loading
+### Loading
 
 <DocComponentViewer name="button:loading-demo" />
 
-## Link
+### As Link
+
+Use `as="a"` to render a button as HTML anchor tag or use `as={Link}` to use Next.js Link.
 
 <DocComponentViewer name="button:link-demo" />
 
-## Severity
+### Severity
+
+The `severity` property defines the variant of a button.
 
 <DocComponentViewer name="button:severity-demo" />
 
-## Disabled
+### Disabled
+
+When `disabled` is present, the element cannot be used.
 
 <DocComponentViewer name="button:disabled-demo" />
 
-## Raised
+### Raised
+
+Raised buttons display a shadow to indicate elevation.
 
 <DocComponentViewer name="button:raised-demo" />
 
-## Rounded
+### Rounded
+
+Rounded buttons have a circular border radius.
 
 <DocComponentViewer name="button:rounded-demo" />
 
-## Text
+### Text
+
+Text buttons are displayed as textual elements.
 
 <DocComponentViewer name="button:text-demo" />
 
-## Raised Text
+### Raised Text
+
+Text buttons can be displayed elevated with the `raised` option.
 
 <DocComponentViewer name="button:raised-text-demo" />
 
-## Outlined
+### Outlined
+
+Outlined buttons display a border without a transparent background.
 
 <DocComponentViewer name="button:outlined-demo" />
 
-## Icon Only
+### Icon Only
+
+Buttons can have icons without labels. Use `iconOnly` to display only an icon.
 
 <DocComponentViewer name="button:icon-only-demo" />
 
-## Badge
+### Badge
+
+`Badge` component can be used to display a badge inside a button. `Badge.Overlay` is used to display a badge on a button.
 
 <DocComponentViewer name="button:badge-demo" />
 
-## Group
+### Button Group
+
+Multiple buttons are grouped when wrapped inside an element with `Button.Group` component.
 
 <DocComponentViewer name="button:group-demo" />
 
-## Size
+### Sizes
+
+Button provides `small` and `large` sizes as alternatives to the base.
 
 <DocComponentViewer name="button:size-demo" />
