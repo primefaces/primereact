@@ -10,12 +10,12 @@ import DocCodeViewer from './DocCodeViewer';
 import DocTable from './DocTable';
 
 const components = {
-    h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mt-2 scroll-m-20 text-4xl font-bold', className)} {...props} />,
-    h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={cn('group font-heading mt-32 scroll-m-[8.5rem] text-2xl font-semibold first:mt-0', className)} {...props} />,
-    h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className={cn('group font-heading mt-16 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
-    h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h4 className={cn('group font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
-    h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h5 className={cn('group font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight', className)} {...props} />,
-    h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h6 className={cn('group font-heading mt-8 scroll-m-20 text-base font-semibold tracking-tight', className)} {...props} />,
+    h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mt-2 scroll-m-32 text-4xl font-bold', className)} {...props} />,
+    h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={cn('group font-heading mt-20 scroll-m-32 text-2xl font-semibold first:mt-0', className)} {...props} />,
+    h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className={cn('group font-heading mt-16 scroll-m-32 text-lg font-semibold tracking-tight', className)} {...props} />,
+    h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h4 className={cn('group font-heading mt-8 scroll-m-32 text-lg font-semibold tracking-tight', className)} {...props} />,
+    h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h5 className={cn('group font-heading mt-8 scroll-m-32 text-lg font-semibold tracking-tight', className)} {...props} />,
+    h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h6 className={cn('group font-heading mt-8 scroll-m-32 text-base font-semibold tracking-tight', className)} {...props} />,
     a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => <a className={cn('font-medium underline underline-offset-4', className)} {...props} />,
     p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => <p className={cn('leading-[1.625rem] [&:not(:first-child)]:mt-6', className)} {...props} />,
     strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <strong className={cn('font-semibold', className)} {...props} />,

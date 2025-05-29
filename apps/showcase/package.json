@@ -40,7 +40,8 @@
         "remark-parse": "^11.0.0",
         "unified": "^11.0.5",
         "unist-builder": "^4.0.0",
-        "unist-util-visit": "^5.0.0"
+        "unist-util-visit": "^5.0.0",
+        "github-slugger": "^2.0.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",

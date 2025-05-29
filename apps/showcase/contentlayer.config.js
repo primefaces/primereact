@@ -1,5 +1,6 @@
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 import fs from 'fs';
+import GithubSlugger from 'github-slugger';
 import { h } from 'hastscript';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -10,7 +11,6 @@ import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
 import { Store } from './__store__/index.mjs';
 import { getPTOptions, getStyleOptions, getTokenOptions } from './lib/utils/getComponentOptions';
-import { getTableOfContents } from './lib/utils/getTableOfContents';
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
@@ -53,8 +53,22 @@ export const Docs = defineDocumentType(() => ({
         toc: {
             type: 'list',
             of: { type: 'object' },
-            resolve: (doc) => {
-                return getTableOfContents(doc.body.raw);
+            resolve: async (doc) => {
+                const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+                const slugger = new GithubSlugger();
+
+                const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(({ groups }) => {
+                    const flag = groups?.flag;
+                    const content = groups?.content;
+
+                    return {
+                        level: flag.length,
+                        text: content,
+                        slug: content ? slugger.slug(content) : undefined
+                    };
+                });
+
+                return headings;
             }
         }
     }

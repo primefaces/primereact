@@ -24,6 +24,19 @@ catalogs:
     tailwindcss-primeui:
       specifier: ^0.5.1
       version: 0.5.1
+  react19:
+    '@types/react':
+      specifier: ^19
+      version: 19.1.5
+    '@types/react-dom':
+      specifier: ^19
+      version: 19.1.5
+    react:
+      specifier: ^19
+      version: 19.1.0
+    react-dom:
+      specifier: ^19
+      version: 19.1.0
 
 importers:
 
@@ -70,7 +83,7 @@ importers:
         version: 3.5.3
       react-scan:
         specifier: 0.3.3
-        version: 0.3.3(@types/react@19.1.5)(next@15.2.1(@babel/core@7.27.1)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.41.1)
+        version: 0.3.3(@types/react@19.1.5)(next@15.2.1(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.41.1)
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -92,6 +105,9 @@ importers:
       '@primereact/code-viewer':
         specifier: workspace:*
         version: link:../../packages/code-viewer
+      '@primereact/hooks':
+        specifier: workspace:*
+        version: link:../../packages/hooks
       '@primereact/icons':
         specifier: workspace:*
         version: link:../../packages/icons
@@ -107,6 +123,9 @@ importers:
       contentlayer2:
         specifier: 0.5.8
         version: 0.5.8(acorn@8.14.1)(esbuild@0.25.4)
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -129,10 +148,10 @@ importers:
         specifier: workspace:*
         version: link:../../packages/primereact
       react:
-        specifier: ^19
+        specifier: catalog:react19
         version: 19.1.0
       react-dom:
-        specifier: ^19
+        specifier: catalog:react19
         version: 19.1.0(react@19.1.0)
       rehype-autolink-headings:
         specifier: ^7.1.0
@@ -184,10 +203,10 @@ importers:
         specifier: ^20.17.30
         version: 20.17.50
       '@types/react':
-        specifier: ^19
+        specifier: catalog:react19
         version: 19.1.5
       '@types/react-dom':
-        specifier: ^19
+        specifier: catalog:react19
         version: 19.1.5(@types/react@19.1.5)
       chokidar:
         specifier: ^4
@@ -7797,7 +7816,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.32.1(eslint@9.27.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.27.0(jiti@2.4.2)):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.32.1(eslint@9.27.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0)(eslint@9.27.0(jiti@2.4.2)))(eslint@9.27.0(jiti@2.4.2)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -7819,7 +7838,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.27.0(jiti@2.4.2)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.32.1(eslint@9.27.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.27.0(jiti@2.4.2))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.32.1(eslint@9.27.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0)(eslint@9.27.0(jiti@2.4.2)))(eslint@9.27.0(jiti@2.4.2))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -10114,7 +10133,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-scan@0.3.3(@types/react@19.1.5)(next@15.2.1(@babel/core@7.27.1)(@opentelemetry/api@1.9.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.41.1):
+  react-scan@0.3.3(@types/react@19.1.5)(next@15.2.1(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.41.1):
     dependencies:
       '@babel/core': 7.27.1
       '@babel/generator': 7.27.1
