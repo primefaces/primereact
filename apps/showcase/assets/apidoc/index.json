@@ -4962,6 +4962,420 @@
             }
         }
     },
+    "floatlabel": {
+        "description": "FloatLabel visually integrates a label with its form element.\n\n[Live Demo](https://www.primereact.org/label/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "FloatLabelPassThrough": {
+                    "description": "Defines passthrough(pt) options of FloatLabel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FloatLabelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "FloatLabelProps": {
+                    "description": "Defines valid properties in FloatLabel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: FloatLabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: FloatLabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<FloatLabelPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: FloatLabelInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"in\" | \"over\" | \"on\"",
+                            "default": "",
+                            "description": "Defines the positioning of the label relative to the input."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<FloatLabelInstance>"
+                },
+                "FloatLabelState": {
+                    "description": "Defines valid state in FloatLabel component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "FloatLabelExposes": {
+                    "description": "Defines the methods and properties exposed by FloatLabel component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "FloatLabelPassThroughType": {
+                    "values": "PassThroughType<FloatLabelInstance, E>",
+                    "description": "Defines passthrough(pt) options type in FloatLabel component."
+                },
+                "FloatLabelClassNamesType": {
+                    "values": "typeof FloatLabelClassNames[keyof typeof FloatLabelClassNames]",
+                    "description": "Type representing the CSS class names used in the FloatLabel component."
+                },
+                "FloatLabelInstance": {
+                    "values": "ComponentInstance<FloatLabelProps, FloatLabelState, FloatLabelExposes, FloatLabelPassThrough>",
+                    "description": "Instance of FloatLabel component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "FloatLabelClassNames": {
+                    "description": "Defines the CSS class names used in the FloatLabel component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-floatlabel",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "label": {
+        "description": "Label can be used standalone or in conjunction with form components to provide accessible labeling.\n\n[Live Demo](https://www.primereact.org/label/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "LabelPassThrough": {
+                    "description": "Defines passthrough(pt) options of Label component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "LabelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "LabelProps": {
+                    "description": "Defines valid properties in Label component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: LabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: LabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<LabelPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: LabelInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<LabelInstance, useLabelProps>"
+                },
+                "LabelState": {
+                    "description": "Defines valid state in Label component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useLabelState"
+                },
+                "LabelExposes": {
+                    "description": "Defines the methods and properties exposed by Label component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useLabelExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "LabelPassThroughType": {
+                    "values": "PassThroughType<LabelInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Label component."
+                },
+                "LabelClassNamesType": {
+                    "values": "typeof LabelClassNames[keyof typeof LabelClassNames]",
+                    "description": "Type representing the CSS class names used in the Label component."
+                },
+                "LabelInstance": {
+                    "values": "ComponentInstance<LabelProps, LabelState, LabelExposes, LabelPassThrough>",
+                    "description": "Instance of Label component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "LabelClassNames": {
+                    "description": "Defines the CSS class names used in the Label component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "uselabel": {
+        "description": "The useLabel manages the state and functionality of a label component.\n\n[Live Demo](https://www.primereact.org/label/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useLabelProps": {
+                    "description": "Defines valid properties in useLabel.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "useLabelState": {
+                    "description": "Defines valid state in useLabel.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "LabelState"
+                },
+                "useLabelExposes": {
+                    "description": "Defines the methods and properties exposed by useLabel.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "LabelExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useLabelInstance": {
+                    "values": "HeadlessInstance<useLabelProps, useLabelState, useLabelExposes>",
+                    "description": "Instance of useLabel headless."
+                }
+            }
+        }
+    },
     "metergroup": {
         "description": "MeterGroup displays scalar measurements within a known range.\n\n[Live Demo](https://www.primereact.org/metergroup/)",
         "interfaces": {
@@ -7924,7 +8338,16 @@
                 "PanelHeaderActionsExposes": {
                     "description": "Defines the methods and properties exposed by PanelHeaderActions component.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelInstance",
+                            "default": "",
+                            "description": "The panel instance that the header actions belong to."
+                        }
+                    ],
                     "methods": []
                 }
             }

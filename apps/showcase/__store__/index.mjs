@@ -191,6 +191,24 @@ export const Store = {
             'filePath': 'demo/chip/template-demo.tsx',
         },
     },
+    'floatlabel': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/floatlabel/basic-demo.tsx')),
+            'filePath': 'demo/floatlabel/basic-demo.tsx',
+        },
+        'floatlabel-pt': {
+            'component': React.lazy(() => import('demo/floatlabel/floatlabel-pt.tsx')),
+            'filePath': 'demo/floatlabel/floatlabel-pt.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/floatlabel/invalid-demo.tsx')),
+            'filePath': 'demo/floatlabel/invalid-demo.tsx',
+        },
+        'variants-demo': {
+            'component': React.lazy(() => import('demo/floatlabel/variants-demo.tsx')),
+            'filePath': 'demo/floatlabel/variants-demo.tsx',
+        },
+    },
     'inplace': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/inplace/basic-demo.tsx')),

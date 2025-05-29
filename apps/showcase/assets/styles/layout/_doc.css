@@ -588,7 +588,6 @@
         .doc-ptheader {
             padding: 0.5rem;
             font-weight: 600;
-            color: var(--primary-text-color);
         }
 
         .doc-ptoption {

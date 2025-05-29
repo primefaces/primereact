@@ -1,0 +1,48 @@
+---
+title: 'FloatLabel'
+description: 'FloatLabel visually integrates a label with its form element.'
+component: 'floatlabel'
+---
+
+## Usage
+
+```tsx
+import { Label } from 'primevue/label';
+```
+
+```tsx
+<Label.Float>
+    <InputText />
+    <Label></Label>
+</Label.Float>
+```
+
+## Examples
+
+### Basic
+
+FloatLabel is used by wrapping the input and its Label.
+
+<DocComponentViewer name="floatlabel:basic-demo" />
+
+### Variants
+
+The `variant` property defines the position of the label. Default value is `over`, whereas `in` and `on` are the alternatives.
+
+<DocComponentViewer name="floatlabel:variants-demo" />
+
+### Invalid
+
+When the form element is invalid, the label is also highlighted.
+
+<DocComponentViewer name="floatlabel:invalid-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+FloatLabel does not require any roles and attributes.
+
+### Keyboard Support
+
+Component does not include any interactive elements.

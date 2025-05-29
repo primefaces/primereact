@@ -8,12 +8,16 @@
                     "name": "Form",
                     "children": [
                         {
+                            "name": "Checkbox",
+                            "to": "/docs/components/checkbox"
+                        },
+                        {
                             "name": "InputText",
                             "to": "/docs/components/inputtext"
                         },
                         {
-                            "name": "Checkbox",
-                            "to": "/docs/components/checkbox"
+                            "name": "FloatLabel",
+                            "to": "/docs/components/floatlabel"
                         },
                         {
                             "name": "RadioButton",
