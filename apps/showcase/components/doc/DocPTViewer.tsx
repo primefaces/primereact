@@ -5,6 +5,11 @@ import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { Store } from '../../__store__/index.mjs';
 
+type PTNameType = {
+    name: string;
+    item: string;
+};
+
 type DocPTViewerProps = {
     name: string;
     components?: string[];
@@ -16,7 +21,7 @@ interface PTOption {
 
 const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerProps> = ({ name, components, ...props }) => {
     const container = React.useRef<HTMLDivElement | null>(null);
-    const [PTNames, setPTNames] = useState<Array<{ name: string; item: string }>>([]);
+    const [PTNames, setPTNames] = useState<Array<PTNameType>>([]);
     const [hoveredElements, setHoveredElements] = useState<HTMLElement[]>([]);
     const Component = useMemo(() => {
         const componentName = name.split('-')[0];
@@ -25,7 +30,7 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
     }, [name]);
 
     useEffect(() => {
-        const newPTNames: Array<{ name: string; item: string }> = [];
+        const newPTNames: Array<PTNameType> = [];
 
         components?.forEach((cmp) => {
             const options = getPTOptions(cmp) as PTOption;
@@ -41,7 +46,7 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
         setPTNames(newPTNames);
     }, [components]);
 
-    const enterSection = (enteredItem: { name: string; item: string }) => {
+    const enterSection = (enteredItem: PTNameType) => {
         const { name, item } = enteredItem;
         let elements: HTMLElement[] = [];
         let selector = `[data-pc-name="${name.toLowerCase()}${item.toLowerCase()}"]`;
@@ -82,11 +87,16 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
             {PTNames.length > 0 && (
                 <div className="doc-ptoptions">
                     {PTNames.map((item) => (
-                        <div className="doc-ptoption" key={`${item.name}-${item.item}`} onMouseEnter={() => enterSection(item)} onMouseLeave={leaveSection}>
-                            <span className="doc-ptoption-text">
-                                {item.item} | {item.name}
-                            </span>
-                        </div>
+                        <>
+                            {item.item === 'root' && (
+                                <div className="doc-ptheader" key={item.name}>
+                                    {item.name}
+                                </div>
+                            )}
+                            <div className="doc-ptoption" key={`${item.name}_${item.item}`} onMouseEnter={() => enterSection(item)} onMouseLeave={leaveSection}>
+                                <span className="doc-ptoption-text">{item.item}</span>
+                            </div>
+                        </>
                     ))}
                 </div>
             )}

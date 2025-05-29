@@ -44,9 +44,7 @@ Header and footer sections of the panel can be customized using _Panel.Header_ a
 
 ### Screen Reader
 
-Toggleable panels use a content toggle button at the header that has _aria-controls_ to define the id of the content section along with _aria-expanded_ for the visibility state.
-
-The content uses _region_, defines an id that matches the _aria-controls_ of the content toggle button and _aria-labelledby_ referring to the id of the header.
+Toggleable panels use a content toggle button at the header that has _aria-controls_ to define the id of the content section along with _aria-expanded_ for the visibility state. The value to read the button defaults to the value can be customized by defining an _aria-label_ or _aria-labelledby_ property.
 
 ### Keyboard Support
 
