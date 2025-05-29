@@ -44,7 +44,7 @@ export interface SwitchThumbExposes {
     /**
      * The Switch component instance.
      */
-    switchContext: SwitchInstance | undefined | null;
+    switch: SwitchInstance | undefined | null;
 }
 
 /**

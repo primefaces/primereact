@@ -15,7 +15,7 @@ export const styles = createStyles<SwitchInstance>({
             }
         ],
         input: 'p-toggleswitch-input',
-        slider: 'p-toggleswitch-slider',
+        control: 'p-toggleswitch-slider',
         thumb: 'p-toggleswitch-handle'
     },
     inlineStyles: {

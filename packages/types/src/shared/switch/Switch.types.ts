@@ -30,9 +30,9 @@ export interface SwitchPassThrough {
      */
     input?: SwitchPassThroughType<React.HTMLAttributes<HTMLElement>>;
     /**
-     * Used to pass attributes to the slider's DOM element.
+     * Used to pass attributes to the control's DOM element.
      */
-    slider?: SwitchPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    control?: SwitchPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Used to pass attributes to the thumb's DOM element.
      */
@@ -136,9 +136,9 @@ export const SwitchClassNames = {
      */
     input: 'p-toggleswitch-input',
     /**
-     * Class name of the slider element
+     * Class name of the control element
      */
-    slider: 'p-toggleswitch-slider',
+    control: 'p-toggleswitch-slider',
     /**
      * Class name of the handle element
      */

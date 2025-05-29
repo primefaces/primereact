@@ -6,6 +6,7 @@ import { SwitchChangeEvent } from '@primereact/types/shared/switch';
 import { cn, mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
+import { SwitchControl } from './control';
 import { SwitchProvider } from './Switch.context';
 import { defaultProps } from './Switch.props';
 import { SwitchThumb } from './thumb';
@@ -64,19 +65,7 @@ export const Switch = withComponent({
             return <input {...inputProps} />;
         };
 
-        const createSliderElement = () => {
-            const sliderProps = mergeProps(
-                {
-                    className: cx('slider')
-                },
-                ptm('slider')
-            );
-
-            return <Component as="div" instance={instance} attrs={sliderProps} children={props.children} />;
-        };
-
         const input = createInputElement();
-        const slider = createSliderElement();
 
         const rootProps = mergeProps(
             {
@@ -93,12 +82,13 @@ export const Switch = withComponent({
             <SwitchProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {input}
-                    {slider}
+                    {props.children}
                 </Component>
             </SwitchProvider>
         );
     },
     components: {
+        Control: SwitchControl,
         Thumb: SwitchThumb
     }
 });
