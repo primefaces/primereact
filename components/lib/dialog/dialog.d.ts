@@ -219,7 +219,7 @@ export interface DialogProps {
      */
     className?: string | undefined;
     /**
-     * Adds a close icon to the header to hide the dialog.
+     * When enabled, the dialog can be closed by clicking the close icon, pressing escape key or clicking the modal background.
      * @defaultValue true
      */
     closable?: boolean | undefined;
@@ -337,6 +337,11 @@ export interface DialogProps {
      * @defaultValue true
      */
     showHeader?: boolean | undefined;
+    /**
+     * When enabled, the close icon is displayed in the header.
+     * @defaultValue true
+     */
+    showCloseIcon?: boolean | undefined;
     /**
      * Icon to display in the dialog maximize button when dialog is not maximized.
      */

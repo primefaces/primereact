@@ -75,7 +75,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         let activeElement = document.activeElement;
         let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
 
-        if (!isActiveElementInDialog && props.closable && props.showHeader && closeRef.current) {
+        if (!isActiveElementInDialog && props.closable && props.showCloseIcon && props.showHeader && closeRef.current) {
             closeRef.current.focus();
         }
     };
@@ -428,7 +428,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     }));
 
     const createCloseIcon = () => {
-        if (props.closable) {
+        if (props.closable && props.showCloseIcon) {
             const labelAria = props.ariaCloseIconLabel || ariaLabel('close');
 
             const closeButtonIconProps = mergeProps(
