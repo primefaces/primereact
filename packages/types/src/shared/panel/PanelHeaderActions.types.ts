@@ -10,6 +10,7 @@
  */
 import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '..';
+import type { PanelInstance } from './Panel.types';
 
 /**
  * Defines passthrough(pt) options type in PanelHeaderActions component.
@@ -39,7 +40,12 @@ export interface PanelHeaderActionsState {}
 /**
  * Defines the methods and properties exposed by PanelHeaderActions component.
  */
-export interface PanelHeaderActionsExposes {}
+export interface PanelHeaderActionsExposes {
+    /**
+     * The panel instance that the header actions belong to.
+     */
+    panel?: PanelInstance | undefined;
+}
 
 /**
  * Instance of PanelHeaderActions component.
