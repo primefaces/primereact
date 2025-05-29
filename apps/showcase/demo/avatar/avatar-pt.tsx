@@ -9,7 +9,7 @@ export default function AvatarPT() {
                 </Avatar>
                 <Avatar size="xlarge" shape="circle">
                     <Avatar.Fallback>
-                        <i className="pi pi-user" />
+                        <i className="pi pi-user !text-2xl" />
                     </Avatar.Fallback>
                 </Avatar>
                 <Avatar className="flex items-center justify-center" size="xlarge" shape="circle">
