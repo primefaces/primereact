@@ -23,6 +23,8 @@ export const PanelCollapse = withComponent({
             {
                 type: 'button',
                 className: panel?.cx('collapse'),
+                'aria-controls': panel?.id + '_content',
+                'aria-expanded': !panel?.state.collapsed,
                 onClick: panel?.onButtonClick
             },
             panel?.ptm('collapse'),
