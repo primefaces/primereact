@@ -12,7 +12,9 @@ import { Switch } from 'primereact/switch';
 
 ```tsx
 <Switch>
-    <Switch.Thumb />
+    <Switch.Control>
+        <Switch.Thumb />
+    </Switch.Control>
 </Switch>
 ```
 
@@ -41,6 +43,12 @@ For an uncontrolled Switch component, `defaultChecked` is used to set the initia
 `Switch.Thumb` also allows displaying custom content inside itself.
 
 <DocComponentViewer name="switch:template-demo" />
+
+### Customization
+
+`Switch` component supports customization through CSS classes. The appearance, including colors and other visual properties, can be modified by applying custom classes to the component.
+
+<DocComponentViewer name="switch:customization-demo" />
 
 ### Invalid
 

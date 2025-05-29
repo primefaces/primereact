@@ -8,7 +8,9 @@ export default function InvalidDemo() {
     return (
         <div className="card flex justify-center ">
             <Switch checked={checked} onCheckedChange={(event: SwitchChangeEvent) => setChecked(event.checked)} invalid={!checked}>
-                <Switch.Thumb />
+                <Switch.Control>
+                    <Switch.Thumb />
+                </Switch.Control>
             </Switch>
         </div>
     );

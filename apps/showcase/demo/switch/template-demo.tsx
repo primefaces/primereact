@@ -5,11 +5,13 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-center">
             <Switch>
-                <Switch.Thumb>
-                    {({ switch: context }) => {
-                        return <>{context.state.checked ? <CheckIcon /> : <TimesIcon />}</>;
-                    }}
-                </Switch.Thumb>
+                <Switch.Control>
+                    <Switch.Thumb>
+                        {({ switch: context }) => {
+                            return <>{context.state.checked ? <CheckIcon /> : <TimesIcon />}</>;
+                        }}
+                    </Switch.Thumb>
+                </Switch.Control>
             </Switch>
         </div>
     );

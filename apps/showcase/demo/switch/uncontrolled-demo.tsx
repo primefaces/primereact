@@ -4,7 +4,9 @@ export default function UncontrolledDemo() {
     return (
         <div className="card flex justify-center">
             <Switch defaultChecked>
-                <Switch.Thumb />
+                <Switch.Control>
+                    <Switch.Thumb />
+                </Switch.Control>
             </Switch>
         </div>
     );

@@ -348,7 +348,9 @@ export default function AppConfigurator() {
                                     toggleRTL(e.checked);
                                 }}
                             >
-                                <Switch.Thumb />
+                                <Switch.Control>
+                                    <Switch.Thumb />
+                                </Switch.Control>
                             </Switch>
                         </div>
                     </div>

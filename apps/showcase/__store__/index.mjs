@@ -408,6 +408,10 @@ export const Store = {
             'component': React.lazy(() => import('demo/switch/controlled-demo.tsx')),
             'filePath': 'demo/switch/controlled-demo.tsx',
         },
+        'customization-demo': {
+            'component': React.lazy(() => import('demo/switch/customization-demo.tsx')),
+            'filePath': 'demo/switch/customization-demo.tsx',
+        },
         'disabled-demo': {
             'component': React.lazy(() => import('demo/switch/disabled-demo.tsx')),
             'filePath': 'demo/switch/disabled-demo.tsx',
