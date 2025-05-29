@@ -1,4 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@primereact/icons';
+import { PanelCollapseInstance } from '@primereact/types/shared/panel';
 import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 
@@ -10,10 +11,12 @@ export default function ToggleableDemo() {
                     <Panel.Title>Uncontrolled Panel</Panel.Title>
                     <Panel.HeaderActions>
                         <Panel.Collapse asChild>
-                            {({ panel }) => {
+                            {(instance: PanelCollapseInstance) => {
+                                const { panel } = instance;
+
                                 return (
-                                    <Button type="button" variant="text" onClick={panel.onButtonClick}>
-                                        {panel.state.collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                                    <Button type="button" variant="text" onClick={panel?.onButtonClick}>
+                                        {panel?.state.collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
                                     </Button>
                                 );
                             }}

@@ -17,7 +17,8 @@
     "module": "./src/index.ts",
     "types": "./src/index.ts",
     "exports": {
-        ".": "./src/index.ts"
+        ".": "./src/index.ts",
+        "./*": "./src/*/index.ts"
     },
     "publishConfig": {
         "main": "./index.mjs",
@@ -27,6 +28,10 @@
             ".": {
                 "types": "./index.d.mts",
                 "import": "./index.mjs"
+            },
+            "./*": {
+                "types": "./*/index.d.ts",
+                "import": "./*/index.mjs"
             }
         },
         "directory": "dist",

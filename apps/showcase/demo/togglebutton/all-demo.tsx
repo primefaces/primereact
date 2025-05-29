@@ -1,9 +1,9 @@
-import { ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
+import type { ToggleButtonChangeEvent, ToggleButtonGroupValueChangeEvent, ToggleButtonIndicatorInstance } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
 export default function BasicDemo() {
-    const [pressedState, setPressedState] = React.useState(false);
+    const [pressedState, setPressedState] = React.useState<boolean>(false);
     const [singleState, setSingleState] = React.useState<string | null>(null);
     const [multipleState, setMultipleState] = React.useState<string[]>([]);
 
@@ -20,7 +20,7 @@ export default function BasicDemo() {
             </ToggleButton>
 
             <h2>Controlled</h2>
-            <ToggleButton pressed={pressedState} onPressedChange={(e) => setPressedState(e.pressed)}>
+            <ToggleButton pressed={pressedState} onPressedChange={(e: ToggleButtonChangeEvent) => setPressedState(e.pressed)}>
                 <ToggleButton.Indicator>New</ToggleButton.Indicator>
             </ToggleButton>
 
@@ -68,7 +68,7 @@ export default function BasicDemo() {
             </ToggleButton.Group>
 
             <h2>Group with Controlled</h2>
-            <ToggleButton.Group value={singleState} onValueChange={(e) => setSingleState(e.value)}>
+            <ToggleButton.Group value={singleState} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setSingleState(e.value as string)}>
                 <ToggleButton value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
                 </ToggleButton>
@@ -81,7 +81,7 @@ export default function BasicDemo() {
             </ToggleButton.Group>
 
             <h2>Multiple</h2>
-            <ToggleButton.Group allowEmpty={false} multiple value={multipleState} onValueChange={(e) => setMultipleState(e.value)}>
+            <ToggleButton.Group allowEmpty={false} multiple value={multipleState} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setMultipleState(e.value as string[])}>
                 <ToggleButton value="1">
                     <ToggleButton.Indicator>Option 1</ToggleButton.Indicator>
                 </ToggleButton>

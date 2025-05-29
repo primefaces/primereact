@@ -9,6 +9,7 @@ export async function GET() {
 
     for (const doc of componentDocs) {
         if (!doc.llm || doc.llm?.length === 0) continue;
+
         content += `# ${doc.title}\n\n${doc.llm}\n\n`;
     }
 

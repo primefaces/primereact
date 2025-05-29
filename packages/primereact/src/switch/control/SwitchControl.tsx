@@ -2,9 +2,9 @@
 import { Component } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
-import { defaultControlProps } from 'primereact/switch';
 import * as React from 'react';
 import { useSwitchContext } from '../Switch.context';
+import { defaultControlProps } from './SwitchControl.props';
 
 export const SwitchControl = withComponent({
     name: 'SwitchControl',

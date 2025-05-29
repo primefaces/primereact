@@ -2,9 +2,9 @@
 import { Component } from '@primereact/core/component';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
-import { defaultThumbProps } from 'primereact/switch';
 import * as React from 'react';
 import { useSwitchContext } from '../Switch.context';
+import { defaultThumbProps } from './SwitchThumb.props';
 
 export const SwitchThumb = withComponent({
     name: 'SwitchThumb',

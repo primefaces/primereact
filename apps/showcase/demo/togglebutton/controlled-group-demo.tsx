@@ -1,3 +1,4 @@
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
@@ -6,7 +7,7 @@ export default function ControlledGroupDemo() {
 
     return (
         <div className="card flex items-center justify-center">
-            <ToggleButton.Group allowEmpty={false} value={value} onValueChange={(e) => setValue(e.value)}>
+            <ToggleButton.Group allowEmpty={false} value={value} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string[])}>
                 <ToggleButton value="left">
                     <ToggleButton.Indicator>
                         <i className="pi pi-align-left"></i>

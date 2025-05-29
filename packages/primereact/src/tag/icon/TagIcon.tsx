@@ -2,9 +2,9 @@
 import { Component } from '@primereact/core/component';
 import { cn, mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
-import { defaultIconProps } from 'primereact/tag';
 import * as React from 'react';
 import { useTagContext } from '../Tag.context';
+import { defaultIconProps } from './TagIcon.props';
 
 export const TagIcon = withComponent({
     name: 'TagIcon',

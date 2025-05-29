@@ -1,3 +1,4 @@
+import type { ToggleButtonGroupValueChangeEvent } from '@primereact/types/shared/togglebutton';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
@@ -6,7 +7,7 @@ export default function InvalidGroupDemo() {
 
     return (
         <div className="card flex items-center justify-center">
-            <ToggleButton.Group value={value} onValueChange={(e) => setValue(e.value)} invalid={value === null}>
+            <ToggleButton.Group value={value} onValueChange={(e: ToggleButtonGroupValueChangeEvent) => setValue(e.value as string[])} invalid={value === null}>
                 <ToggleButton value="monthly">
                     <ToggleButton.Indicator>Monthly</ToggleButton.Indicator>
                 </ToggleButton>

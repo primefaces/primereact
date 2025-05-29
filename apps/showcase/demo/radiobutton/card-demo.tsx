@@ -1,9 +1,10 @@
 'use client';
+import type { RadioButtonGroupValueChangeEvent } from '@primereact/types/shared/radiobutton';
 import { RadioButton } from 'primereact/radiobutton';
 import React from 'react';
 
 const CardDemo = () => {
-    const [selectedCard, setSelectedCard] = React.useState();
+    const [selectedCard, setSelectedCard] = React.useState<string | undefined>();
 
     const cards = [
         { id: 'card1', name: '💳 Credit Card', description: 'Pay with Visa, Mastercard, or AMEX.' },
@@ -15,7 +16,7 @@ const CardDemo = () => {
         <div className="card flex items-center justify-center">
             <div>
                 <span className="font-semibold">Payment Method</span>
-                <RadioButton.Group value={selectedCard} onValueChange={(e) => setSelectedCard(e.value)} className="mt-4 !grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <RadioButton.Group value={selectedCard} onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelectedCard(e.value as string)} className="mt-4 !grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {cards.map((card) => (
                         <label
                             key={card.id}
