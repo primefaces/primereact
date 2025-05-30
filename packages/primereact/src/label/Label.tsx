@@ -8,6 +8,7 @@ import * as React from 'react';
 import { LabelProvider } from './Label.context';
 import { defaultProps } from './Label.props';
 import { FloatLabel } from './float';
+import { IftaLabel } from './ifta';
 
 export const Label = withComponent({
     name: 'Label',
@@ -36,6 +37,7 @@ export const Label = withComponent({
         );
     },
     components: {
-        Float: FloatLabel
+        Float: FloatLabel,
+        Ifta: IftaLabel
     }
 });
