@@ -52614,6 +52614,14 @@
                             "description": "Icon to display in the checkbox."
                         },
                         {
+                            "name": "checkboxPartialIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon to display in the partially selected checkbox."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -53350,6 +53358,13 @@
                             "readonly": false,
                             "type": "TreePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the checkbox icon's DOM element."
+                        },
+                        {
+                            "name": "checkboxPartialIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the checkbox partial icon's DOM element."
                         },
                         {
                             "name": "nodeIcon",
@@ -55126,6 +55141,14 @@
                             "description": "Icon of the checkbox when checked."
                         },
                         {
+                            "name": "checkboxPartialIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeProps>",
+                            "default": "",
+                            "description": "Icon to display in the partially selected checkbox."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -56372,6 +56395,13 @@
                             "readonly": false,
                             "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the checkbox icon's DOM element."
+                        },
+                        {
+                            "name": "checkboxPartialIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the checkbox partial icon's DOM element."
                         },
                         {
                             "name": "filterInput",
