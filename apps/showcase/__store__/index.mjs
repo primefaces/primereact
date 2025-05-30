@@ -209,6 +209,20 @@ export const Store = {
             'filePath': 'demo/floatlabel/variants-demo.tsx',
         },
     },
+    'iftalabel': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/iftalabel/basic-demo.tsx')),
+            'filePath': 'demo/iftalabel/basic-demo.tsx',
+        },
+        'iftalabel-pt': {
+            'component': React.lazy(() => import('demo/iftalabel/iftalabel-pt.tsx')),
+            'filePath': 'demo/iftalabel/iftalabel-pt.tsx',
+        },
+        'invalid-demo': {
+            'component': React.lazy(() => import('demo/iftalabel/invalid-demo.tsx')),
+            'filePath': 'demo/iftalabel/invalid-demo.tsx',
+        },
+    },
     'inplace': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/inplace/basic-demo.tsx')),

@@ -5152,6 +5152,188 @@
             }
         }
     },
+    "iftalabel": {
+        "description": "IftaLabel is used to create infield top aligned labels.\n\n[Live Demo](https://www.primereact.org/label/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "IftaLabelPassThrough": {
+                    "description": "Defines passthrough(pt) options of IftaLabel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IftaLabelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "IftaLabelProps": {
+                    "description": "Defines valid properties in IftaLabel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: IftaLabelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: IftaLabelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<IftaLabelPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: IftaLabelInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<IftaLabelInstance>"
+                },
+                "IftaLabelState": {
+                    "description": "Defines valid state in IftaLabel component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "IftaLabelExposes": {
+                    "description": "Defines the methods and properties exposed by IftaLabel component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "IftaLabelPassThroughType": {
+                    "values": "PassThroughType<IftaLabelInstance, E>",
+                    "description": "Defines passthrough(pt) options type in IftaLabel component."
+                },
+                "IftaLabelClassNamesType": {
+                    "values": "typeof IftaLabelClassNames[keyof typeof IftaLabelClassNames]",
+                    "description": "Type representing the CSS class names used in the IftaLabel component."
+                },
+                "IftaLabelInstance": {
+                    "values": "ComponentInstance<IftaLabelProps, IftaLabelState, IftaLabelExposes, IftaLabelPassThrough>",
+                    "description": "Instance of IftaLabel component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "IftaLabelClassNames": {
+                    "description": "Defines the CSS class names used in the IftaLabel component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-iftalabel",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
     "label": {
         "description": "Label can be used standalone or in conjunction with form components to provide accessible labeling.\n\n[Live Demo](https://www.primereact.org/label/)",
         "interfaces": {

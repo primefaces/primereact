@@ -20,6 +20,10 @@
                             "to": "/docs/components/floatlabel"
                         },
                         {
+                            "name": "IftaLabel",
+                            "to": "/docs/components/iftalabel"
+                        },
+                        {
                             "name": "RadioButton",
                             "to": "/docs/components/radiobutton"
                         },
