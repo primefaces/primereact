@@ -1,4 +1,5 @@
 import { useApp } from '@/hooks/useApp';
+import useScroll from '@/hooks/useScroll';
 import type { AppTopbarProps } from '@/types/App.types';
 import { dt } from '@primeuix/themes';
 import { cn } from '@primeuix/utils';
@@ -8,7 +9,6 @@ import * as React from 'react';
 import AppConfigurator from './AppConfigurator';
 
 export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: AppTopbarProps) {
-    const [isSticky, setIsSticky] = React.useState(false);
     const app = useApp();
 
     const logoFillRef = React.useRef({
@@ -16,32 +16,7 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
         secondary: dt('surface.600')
     });
 
-    React.useEffect(() => {
-        let ticking = false;
-        let rafId: number;
-
-        const handleScroll = () => {
-            if (!ticking) {
-                rafId = window.requestAnimationFrame(() => {
-                    const offset = window.scrollY;
-
-                    setIsSticky(offset > 100);
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-
-            if (rafId) {
-                window.cancelAnimationFrame(rafId);
-            }
-        };
-    }, []);
+    const { y } = useScroll();
 
     const toggleDarkMode = () => {
         const isDark = !app.isDarkTheme;
@@ -56,7 +31,7 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
     const toggleDesigner = () => {};
 
     return (
-        <div className={cn('layout-topbar', isSticky && 'layout-topbar-sticky')}>
+        <div className={cn('layout-topbar', y > 10 && 'layout-topbar-sticky')}>
             <div className="layout-topbar-inner">
                 <div className="layout-topbar-logo-container">
                     <Link href="/" className="layout-topbar-logo" aria-label="PrimeReact logo">

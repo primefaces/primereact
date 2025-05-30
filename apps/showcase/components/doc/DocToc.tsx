@@ -1,5 +1,6 @@
 'use client';
 
+import useScroll from '@/hooks/useScroll';
 import { cn } from '@primeuix/utils';
 import { Button } from 'primereact/button';
 import * as React from 'react';
@@ -82,6 +83,7 @@ type TableOfContentsItem = {
 type TableOfContents = TableOfContentsItem[];
 
 function DocTocList({ toc }: { toc: TableOfContents }) {
+    const tocListRef = React.useRef<HTMLDivElement>(null);
     const itemIds = React.useMemo(() => {
         return toc.map((item) => {
             if (item.slug) {
@@ -93,16 +95,27 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
     }, [toc]);
 
     const { activeId, activeTop, activeHeight, onItemClick } = useActiveItem(itemIds);
+    const { y } = useScroll(tocListRef);
+
+    React.useEffect(() => {
+        if (activeId) {
+            tocListRef.current?.scrollTo({ top: Math.max(activeTop - 60, 0), behavior: 'smooth' });
+        }
+    }, [activeId, activeTop]);
 
     return (
         <div
+            ref={tocListRef}
             style={
                 {
                     '--top': `${activeTop}px`,
                     '--height': `${activeHeight}px`
                 } as React.CSSProperties
             }
-            className="max-h-[calc(100vh-300px)] overflow-y-auto"
+            className={cn(
+                'max-h-[calc(90vh-300px)] overflow-y-auto pb-16 mb-2',
+                y < 5 ? '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_80px,rgb(0,0,0)_100%,_transparent_100%)]' : '[mask-image:linear-gradient(to_top,transparent_0%,rgb(0,0,0)_80px,rgb(0,0,0)_90%,_transparent_100%)]'
+            )}
         >
             <div className="flex items-center gap-2 ">
                 <i className="pi pi-align-left opacity-50 !text-sm !leading-none"></i>
@@ -110,7 +123,7 @@ function DocTocList({ toc }: { toc: TableOfContents }) {
             </div>
             <div
                 className="relative mt-4 pl-4
-    after:content-[''] after:absolute after:rounded-full after:left-0 after:transition-all after:duration-200 after:top-(--top) after:h-(--height) after:bg-primary after:w-px
+    after:content-[''] after:absolute after:rounded-full after:left-0 after:transition-[top,height] after:duration-300 after:top-(--top) after:h-(--height) after:bg-primary after:w-px
     before:content-[''] before:absolute before:rounded-full before:left-0 before:top-0 before:h-full before:bg-surface-200 dark:before:bg-surface-800 before:w-px"
             >
                 <ul className="mt-2">
@@ -150,7 +163,7 @@ export default function DocToc({ toc }: DocTocProps) {
 
 function DocTocAd() {
     return (
-        <div className="mt-8 rounded-lg border border-surface-200 dark:border-surface-800 px-4 py-6 bg-surface-0 dark:bg-surface-900">
+        <div className="rounded-lg border border-surface-200 dark:border-surface-800 px-4 py-6 bg-surface-0 dark:bg-surface-900">
             <div className="text-2xl font-semibold flex flex-col gap-2 text-center">
                 <span className="leading-none">Build Faster </span>
                 <span className="leading-none  text-primary">Design Better</span>
