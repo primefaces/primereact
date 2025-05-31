@@ -17,8 +17,13 @@ async function getDocFromParams({ slug }: { slug: string[] }) {
     return doc;
 }
 
-export async function generateMetadata({ params }: { params: { slug: string[] } }): Promise<Metadata> {
-    const { slug } = params;
+type PageProps = {
+    params: Promise<{ slug: string[] }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
     const doc = await getDocFromParams({ slug });
 
     if (!doc) {
@@ -47,8 +52,8 @@ export async function generateStaticParams() {
     }));
 }
 
-async function DocsPage({ params }: { params: { slug: string[] } }) {
-    const { slug } = params;
+async function DocsPage({ params }: PageProps) {
+    const { slug } = await params;
     const doc = await getDocFromParams({ slug });
 
     if (!doc) {
