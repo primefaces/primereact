@@ -18,7 +18,7 @@ export default function DynamicDemo() {
             <RadioButtonGroup className="flex flex-wrap gap-4" value={ingredient} onValueChange={(e: RadioButtonGroupValueChangeEvent) => setIngredient(e.value as string)}>
                 {categories.map((item) => (
                     <div key={item.key} className="flex items-center gap-2">
-                        <RadioButton inputId={item.key} name="pizza" value={item.key} />
+                        <RadioButton inputId={item.key} name="category" value={item.key} />
                         <label htmlFor={item.key}>{item.name}</label>
                     </div>
                 ))}
