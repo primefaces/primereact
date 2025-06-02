@@ -1,13 +1,12 @@
 import { withHeadless } from '@primereact/core/headless';
 import type { useMotionProps } from '@primereact/types/shared/motion';
+import { createMotion, type MotionInstance, type MotionOptions } from '@primeuix/motion';
 import * as React from 'react';
-import { createMotion } from './api';
-import type { MotionInstance, MotionOptions } from './api/types';
-import { defaultProps } from './useMotion.props';
+import { defaultUseMotionProps } from './useMotion.props';
 
 export const useMotion = withHeadless({
     name: 'useMotion',
-    defaultProps,
+    defaultProps: defaultUseMotionProps,
     setup({ props, elementRef }) {
         const motionRef = React.useRef<MotionInstance | null>(null);
 

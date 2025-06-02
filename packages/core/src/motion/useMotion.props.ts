@@ -1,6 +1,6 @@
 import type { useMotionProps } from '@primereact/types/shared/motion';
 
-export const defaultProps: useMotionProps = {
+export const defaultUseMotionProps: useMotionProps = {
     name: undefined,
     type: undefined,
     safe: false,
