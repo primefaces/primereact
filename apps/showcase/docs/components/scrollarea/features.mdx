@@ -1,0 +1,57 @@
+---
+title: 'ScrollArea'
+description: 'ScrollArea is a cross browser, lightweight and themable alternative to native browser scrollbar.'
+component: 'scrollarea'
+---
+
+## Usage
+
+```tsx
+import { ScrollArea } from 'primereact/scrollarea';
+```
+
+```tsx
+<ScrollArea>
+    <ScrollArea.Viewport>
+        <ScrollArea.Content />
+    </ScrollArea.Viewport>
+    <ScrollArea.ThumbX />
+    <ScrollArea.ThumbY />
+</ScrollArea>
+```
+
+## Examples
+
+### Basic
+
+ScrollPanel is defined using dimensions for the scrollable viewport.
+
+<DocComponentViewer name="scrollarea:basic-demo" />
+
+### Horizontal
+
+ScrollArea supports horizontal scrolling for content that extends beyond the horizontal viewport.
+
+<DocComponentViewer name="scrollarea:horizontal-demo" />
+
+### Custom
+
+Scrollbar visuals can be styled for a unified look across different platforms.
+
+<DocComponentViewer name="scrollarea:custom-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Scrollbars of the ScrollArea has a `scrollbar` role along with the `aria-controls` attribute that refers to the `id` of the scrollable content container and the `aria-orientation` to indicate the orientation of scrolling.
+
+### Keyboard Support
+
+| Key        | Function                                                      |
+| ---------- | ------------------------------------------------------------- |
+| tab        | Moves focus through the bar.                                  |
+| down arrow | Scrolls content down when vertical scrolling is available.    |
+| up arrow   | Scrolls content up when vertical scrolling is available.      |
+| left       | Scrolls content left when horizontal scrolling is available.  |
+| right      | Scrolls content right when horizontal scrolling is available. |

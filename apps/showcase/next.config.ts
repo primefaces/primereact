@@ -4,6 +4,9 @@ import { withContentlayer } from 'next-contentlayer2';
 
 const nextConfig: NextConfig = {
     transpilePackages: ['primeicons'],
+    images: {
+        domains: ['primefaces.org']
+    },
     async redirects() {
         return [
             {
