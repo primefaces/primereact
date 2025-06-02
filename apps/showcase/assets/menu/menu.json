@@ -52,6 +52,10 @@
                         {
                             "name": "Panel",
                             "to": "/docs/components/panel"
+                        },
+                        {
+                            "name": "Card",
+                            "to": "/docs/components/card"
                         }
                     ]
                 },

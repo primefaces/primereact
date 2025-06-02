@@ -127,6 +127,16 @@ export const Store = {
             'filePath': 'demo/button/text-demo.tsx',
         },
     },
+    'card': {
+        'advanced-demo': {
+            'component': React.lazy(() => import('demo/card/advanced-demo.tsx')),
+            'filePath': 'demo/card/advanced-demo.tsx',
+        },
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/card/basic-demo.tsx')),
+            'filePath': 'demo/card/basic-demo.tsx',
+        },
+    },
     'checkbox': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/checkbox/basic-demo.tsx')),
