@@ -1,77 +1,91 @@
+'use client';
+import { Component } from '@primereact/core/component';
+import { mergeProps } from '@primeuix/utils';
+import { withComponent } from 'primereact/base';
 import * as React from 'react';
-import { createTransition, type TransitionOptions } from './api/createTransition';
+import { nextFrame } from './api/utils';
+import { MotionProvider } from './Motion.context';
+import { defaultProps } from './Motion.props';
+import { useMotion } from './useMotion';
 
-type MotionProps = TransitionOptions & {
-    in: boolean;
-    children: React.ReactNode;
-    mountOnEnter?: boolean;
-    unmountOnLeave?: boolean;
-};
+export const Motion = withComponent({
+    name: 'Motion',
+    defaultProps,
+    setup(instance) {
+        const { props } = instance;
 
-function usePrevious<T>(value: T) {
-    const ref = React.useRef<T>(value);
+        const [rendered, setRendered] = React.useState(() => props.in || !props.mountOnEnter);
+        const isInitialMount = React.useRef(true);
+        const motion = useMotion(props);
 
-    React.useEffect(() => {
-        ref.current = value;
-    }, [value]);
+        React.useEffect(() => {
+            if (props.in && !rendered) {
+                setRendered(true);
+            }
+        }, [props.in]);
 
-    return ref.current;
-}
+        React.useLayoutEffect(() => {
+            const element = motion?.elementRef?.current;
 
-export function Motion({ in: inProp, children, mountOnEnter = true, unmountOnLeave = true, ...transitionOptions }: MotionProps) {
-    const [rendered, setRendered] = React.useState(() => inProp || !mountOnEnter);
-    const elementRef = React.useRef<HTMLDivElement>(null);
-    const transitionRef = React.useRef<ReturnType<typeof createTransition> | null>(null);
-    const prevIn = usePrevious(inProp);
+            if (!element || !rendered) {
+                isInitialMount.current = false;
 
-    React.useEffect(() => {
-        if (inProp && !rendered) setRendered(true);
-    }, [inProp, rendered, mountOnEnter]);
+                return;
+            }
 
-    React.useLayoutEffect(() => {
-        const el = elementRef.current;
+            let cancelled = false;
+            const shouldAppear = isInitialMount.current && props.in && props.appear;
 
-        if (!el) return;
+            element.style.display = '';
+            motion.update?.(element, props);
 
-        let cancelled = false;
+            if (props.in) {
+                if (shouldAppear || !isInitialMount.current) {
+                    motion.enter?.();
+                }
+            } else {
+                motion.leave?.()?.then(() => {
+                    if (!element || cancelled || props.in) return;
 
-        el.style.display = '';
-
-        if (!rendered) {
-            return;
-        }
-
-        const transition = createTransition(el, transitionOptions);
-
-        transitionRef.current = transition;
-        transition.update?.(transitionOptions);
-
-        if (inProp) {
-            transition.enter?.();
-        } else {
-            transition.leave?.().then(() => {
-                if (cancelled || inProp) return;
-
-                if (unmountOnLeave) {
-                    el.style.display = 'none';
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
+                    if (props.unmountOnLeave) {
+                        element.style.display = 'none';
+                        nextFrame().then(() => {
                             if (!cancelled) setRendered(false);
                         });
-                    });
-                } else {
-                    el.style.display = 'none';
-                }
-            });
-        }
+                    } else {
+                        element.style.display = 'none';
+                    }
+                });
+            }
 
-        return () => {
-            cancelled = true;
-            transition.cancel?.();
+            isInitialMount.current = false;
+
+            return () => {
+                cancelled = true;
+                isInitialMount.current = true;
+                motion.cancel?.();
+            };
+        }, [props.in, rendered, props.unmountOnLeave, props.appear]);
+
+        return {
+            ...motion,
+            rendered
         };
-    }, [inProp, rendered, transitionOptions, unmountOnLeave, prevIn]);
+    },
+    render(instance) {
+        const { id, props, ptmi, rendered } = instance;
 
-    if (!rendered) return null;
+        const rootProps = mergeProps(
+            {
+                id
+            },
+            ptmi('root')
+        );
 
-    return <div ref={elementRef}>{children}</div>;
-}
+        return (
+            <MotionProvider value={instance}>
+                <Component pIf={rendered} instance={instance} attrs={rootProps} children={props.children} />
+            </MotionProvider>
+        );
+    }
+});

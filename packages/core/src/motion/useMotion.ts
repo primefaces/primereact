@@ -1,23 +1,59 @@
+import { withHeadless } from '@primereact/core/headless';
+import type { useMotionProps } from '@primereact/types/shared/motion';
 import * as React from 'react';
-import { createMotion, MotionInstance, type MotionOptions } from './api/index';
+import { createMotion } from './api';
+import type { MotionInstance, MotionOptions } from './api/types';
+import { defaultProps } from './useMotion.props';
 
-export function useMotion<T extends HTMLElement = HTMLElement>(options?: MotionOptions) {
-    const ref = React.useRef<T>(null);
-    const motion = React.useRef<MotionInstance | null>(null);
+export const useMotion = withHeadless({
+    name: 'useMotion',
+    defaultProps,
+    setup({ props, elementRef }) {
+        const motionRef = React.useRef<MotionInstance | null>(null);
 
-    React.useEffect(() => {
-        if (ref.current) {
-            motion.current = createMotion(ref.current, options);
-        }
-    }, [options, ref.current]);
+        // methods
+        const enter = React.useCallback(() => motionRef.current?.enter(), [motionRef.current]);
+        const leave = React.useCallback(() => motionRef.current?.leave(), [motionRef.current]);
+        const cancel = React.useCallback(() => motionRef.current?.cancel(), [motionRef.current]);
+        const update = React.useCallback(
+            (element: Element, motionProps?: useMotionProps) => {
+                const options: MotionOptions = {
+                    ...motionProps,
+                    name: motionProps?.name,
+                    enterClass: {
+                        from: motionProps?.enterFromClassName,
+                        to: motionProps?.enterToClassName,
+                        active: motionProps?.enterActiveClassName
+                    },
+                    leaveClass: {
+                        from: motionProps?.leaveFromClassName,
+                        to: motionProps?.leaveToClassName,
+                        active: motionProps?.leaveActiveClassName
+                    }
+                };
 
-    return {
-        ref,
-        enter: () => motion.current?.enter(),
-        leave: () => motion.current?.leave(),
-        cancel: () => motion.current?.cancel(),
-        update: (newOptions: MotionOptions) => {
-            motion.current?.update(newOptions);
-        }
-    };
-}
+                if (!motionRef.current) {
+                    motionRef.current = createMotion(element, options);
+                } else {
+                    motionRef.current?.update(element, options);
+                }
+            },
+            [motionRef.current]
+        );
+
+        React.useLayoutEffect(() => {
+            if (elementRef.current) {
+                update(elementRef.current, props);
+            }
+        }, []);
+
+        return {
+            motionRef,
+            // methods
+            enter,
+            leave,
+            cancel,
+            update
+        };
+    }
+});

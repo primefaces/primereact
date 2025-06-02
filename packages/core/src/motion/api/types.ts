@@ -1,9 +1,8 @@
-export type Instance<Options> = {
-    enter: () => Promise<(() => void) | void>;
-    leave: () => Promise<(() => void) | void>;
-    cancel: () => void;
-    update: (options: Options) => void;
-};
+export type MotionType = 'transition' | 'animation';
+export type MotionPhase = 'enter' | 'leave';
+export type MotionStage = 'Before' | 'Start' | 'After' | 'Cancelled';
+
+export type MotionDuration = number | { [P in MotionPhase]?: number } | undefined;
 
 export type ClassNameOptions = {
     from?: string | undefined;
@@ -11,50 +10,52 @@ export type ClassNameOptions = {
     active?: string | undefined;
 };
 
-export type ClassNames = {
-    enterClass: ClassNameOptions;
-    leaveClass: ClassNameOptions;
+export interface MotionClassNames {
+    enterClass?: ClassNameOptions | undefined;
+    leaveClass?: ClassNameOptions | undefined;
+}
+
+export interface MotionHooks {
+    onBeforeEnter?: (el?: Element) => void;
+    onEnter?: (el?: Element) => void;
+    onAfterEnter?: (el?: Element) => void;
+    onEnterCancelled?: (el?: Element) => void;
+    onBeforeLeave?: (el?: Element) => void;
+    onLeave?: (el?: Element) => void;
+    onAfterLeave?: (el?: Element) => void;
+    onLeaveCancelled?: (el?: Element) => void;
+}
+
+export type MotionHooksWithPhase = {
+    [P in MotionPhase]?: {
+        [S in MotionStage as `on${S}`]?: (MotionHooks & { [key: string]: unknown })[`on${S extends 'Start' | 'Cancelled' ? '' : S}${Capitalize<P>}${S extends 'Cancelled' ? S : ''}`];
+    };
 };
 
-export type Duration = number | { enter?: number; leave?: number } | undefined;
+export type MotionClassNamesWithPhase = {
+    [P in MotionPhase]: Required<ClassNameOptions>;
+};
 
-export interface CommonOptions {
+export interface MotionOptions extends MotionClassNames, MotionHooks {
     name?: string | undefined;
-    motionSafe?: boolean | undefined;
+    type?: MotionType | undefined;
+    safe?: boolean | undefined;
     appear?: boolean | undefined;
     enter?: boolean | undefined;
-    enterClass?: ClassNameOptions | undefined;
-    //enterFromClass?: string | undefined;
-    //enterToClass?: string | undefined;
-    //enterActiveClass?: string | undefined;
     leave?: boolean | undefined;
-    leaveClass?: ClassNameOptions | undefined;
-    //leaveFromClass?: string | undefined;
-    //leaveToClass?: string | undefined;
-    //leaveActiveClass?: string | undefined;
-    duration?: Duration | undefined;
-    onBeforeEnter?: (el?: HTMLElement) => void;
-    onEnter?: (el?: HTMLElement) => void;
-    onAfterEnter?: (el?: HTMLElement) => void;
-    onEnterCancelled?: (el?: HTMLElement) => void;
-    onBeforeLeave?: (el?: HTMLElement) => void;
-    onLeave?: (el?: HTMLElement) => void;
-    onAfterLeave?: (el?: HTMLElement) => void;
-    onLeaveCancelled?: (el?: HTMLElement) => void;
+    duration?: MotionDuration | undefined;
 }
 
-export interface MotionOptions extends CommonOptions {
-    type?: 'transition' | 'animation';
-}
-
-export interface TransitionOptions extends CommonOptions {}
-
-/**
- * @todo - it is not ready yet, it is just a placeholder
- */
-export interface AnimationOptions extends CommonOptions {}
+export type MotionMetadata = {
+    type: MotionType | undefined;
+    timeout: number | 0;
+    count: number | 0;
+};
 
 /** INSTANCE TYPES **/
-export type MotionInstance = Instance<MotionOptions>;
-export type TransitionInstance = Instance<TransitionOptions>;
-export type AnimationInstance = Instance<AnimationOptions>;
+export type MotionInstance = {
+    enter: () => Promise<(() => void) | void>;
+    leave: () => Promise<(() => void) | void>;
+    cancel: () => void;
+    update: (element: Element, options?: MotionOptions) => void;
+};

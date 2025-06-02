@@ -1,22 +1,10 @@
-export const defaultProps = {
+import type { MotionProps } from '@primereact/types/shared/motion';
+import * as HeadlessMotion from './useMotion.props';
+
+export const defaultProps: MotionProps = {
+    ...HeadlessMotion.defaultProps,
     as: 'div',
     in: false,
-    mountOnEnter: false,
-    unmountOnLeave: false,
-    name: undefined,
-    type: 'transition', // 'transition' | 'animation'
-    appear: false,
-    enter: true,
-    leave: true,
-    duration: undefined,
-    enterClassName: undefined,
-    leaveClassName: undefined,
-    onBeforeEnter: undefined,
-    onEnter: undefined,
-    onAfterEnter: undefined,
-    onEnterCancelled: undefined,
-    onBeforeLeave: undefined,
-    onLeave: undefined,
-    onAfterLeave: undefined,
-    onLeaveCancelled: undefined
+    mountOnEnter: true,
+    unmountOnLeave: true
 };
