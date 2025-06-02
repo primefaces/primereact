@@ -1791,6 +1791,1427 @@
             }
         }
     },
+    "card": {
+        "description": "Card is a flexible container component.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardPassThrough": {
+                    "description": "Defines passthrough(pt) options of Card component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardProps": {
+                    "description": "Defines valid properties in Card component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardInstance, useCardProps>"
+                },
+                "CardState": {
+                    "description": "Defines valid state in Card component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useCardState"
+                },
+                "CardExposes": {
+                    "description": "Defines the methods and properties exposed by Card component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useCardExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardPassThroughType": {
+                    "values": "PassThroughType<CardInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Card component."
+                },
+                "CardClassNamesType": {
+                    "values": "typeof CardClassNames[keyof typeof CardClassNames]",
+                    "description": "Type representing the CSS class names used in the Card component."
+                },
+                "CardInstance": {
+                    "values": "ComponentInstance<CardProps, CardState, CardExposes, CardPassThrough>",
+                    "description": "Instance of Card component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "CardClassNames": {
+                    "description": "Defines the CSS class names used in the Card component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-card",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "header",
+                            "value": "p-card-header",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the header element"
+                        },
+                        {
+                            "name": "body",
+                            "value": "p-card-body",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the body element"
+                        },
+                        {
+                            "name": "caption",
+                            "value": "p-card-caption",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the caption element"
+                        },
+                        {
+                            "name": "title",
+                            "value": "p-card-title",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the title element"
+                        },
+                        {
+                            "name": "subtitle",
+                            "value": "p-card-subtitle",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the subtitle element"
+                        },
+                        {
+                            "name": "content",
+                            "value": "p-card-content",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the content element"
+                        },
+                        {
+                            "name": "footer",
+                            "value": "p-card-footer",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the footer element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "cardbody": {
+        "description": "CardBody is a component that displays a body inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardBodyPassThrough": {
+                    "description": "Defines passthrough(pt) options of CardBody component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardBodyPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardBodyProps": {
+                    "description": "Defines valid properties in CardBody component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardBodyInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardBodyInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardBodyPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardBodyInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardBodyInstance, unknown, \"div\">"
+                },
+                "CardBodyState": {
+                    "description": "Defines valid state in CardBody component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardBodyExposes": {
+                    "description": "Defines the methods and properties exposed by CardBody component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardBodyPassThroughType": {
+                    "values": "PassThroughType<CardBodyInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardBody component."
+                },
+                "CardBodyInstance": {
+                    "values": "ComponentInstance<CardBodyProps, CardBodyState, CardBodyExposes, CardBodyPassThrough>",
+                    "description": "Instance of CardBody component."
+                }
+            }
+        }
+    },
+    "cardcaption": {
+        "description": "CardCaption is a component that displays a caption inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardCaptionPassThrough": {
+                    "description": "Defines passthrough(pt) options of CardCaption component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardCaptionPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardCaptionProps": {
+                    "description": "Defines valid properties in CardCaption component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardCaptionInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardCaptionInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardCaptionPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardCaptionInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardCaptionInstance, unknown, \"div\">"
+                },
+                "CardCaptionState": {
+                    "description": "Defines valid state in CardCaption component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardCaptionExposes": {
+                    "description": "Defines the methods and properties exposed by CardCaption component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardCaptionPassThroughType": {
+                    "values": "PassThroughType<CardCaptionInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardCaption component."
+                },
+                "CardCaptionInstance": {
+                    "values": "ComponentInstance<CardCaptionProps, CardCaptionState, CardCaptionExposes, CardCaptionPassThrough>",
+                    "description": "Instance of CardCaption component."
+                }
+            }
+        }
+    },
+    "cardcontent": {
+        "description": "CardContent is a component that displays a content inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardContentPassThrough": {
+                    "description": "Defines passthrough(pt) options of CardContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardContentPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardContentProps": {
+                    "description": "Defines valid properties in CardContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardContentPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardContentInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardContentInstance, unknown, \"div\">"
+                },
+                "CardContentState": {
+                    "description": "Defines valid state in CardContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardContentExposes": {
+                    "description": "Defines the methods and properties exposed by CardContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardContentPassThroughType": {
+                    "values": "PassThroughType<CardContentInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardContent component."
+                },
+                "CardContentInstance": {
+                    "values": "ComponentInstance<CardContentProps, CardContentState, CardContentExposes, CardContentPassThrough>",
+                    "description": "Instance of CardContent component."
+                }
+            }
+        }
+    },
+    "cardfooter": {
+        "description": "CardFooter is a component that displays a footer inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardFooterPassThrough": {
+                    "description": "Defines passthrough(pt) options of CardFooter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardFooterPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardFooterProps": {
+                    "description": "Defines valid properties in CardFooter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardFooterInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardFooterInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardFooterPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardFooterInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardFooterInstance, unknown, \"div\">"
+                },
+                "CardFooterState": {
+                    "description": "Defines valid state in CardFooter component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardFooterExposes": {
+                    "description": "Defines the methods and properties exposed by CardFooter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardFooterPassThroughType": {
+                    "values": "PassThroughType<CardFooterInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardFooter component."
+                },
+                "CardFooterInstance": {
+                    "values": "ComponentInstance<CardFooterProps, CardFooterState, CardFooterExposes, CardFooterPassThrough>",
+                    "description": "Instance of CardFooter component."
+                }
+            }
+        }
+    },
+    "cardheader": {
+        "description": "CardHeader is a component that displays a header inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardHeaderPassThrough": {
+                    "description": "Defines passthrough(pt) options of CardHeader component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardHeaderPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardHeaderProps": {
+                    "description": "Defines valid properties in CardHeader component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardHeaderInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardHeaderInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardHeaderPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardHeaderInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardHeaderInstance, unknown, \"div\">"
+                },
+                "CardHeaderState": {
+                    "description": "Defines valid state in CardHeader component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardHeaderExposes": {
+                    "description": "Defines the methods and properties exposed by CardHeader component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardHeaderPassThroughType": {
+                    "values": "PassThroughType<CardHeaderInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardHeader component."
+                },
+                "CardHeaderInstance": {
+                    "values": "ComponentInstance<CardHeaderProps, CardHeaderState, CardHeaderExposes, CardHeaderPassThrough>",
+                    "description": "Instance of CardHeader component."
+                }
+            }
+        }
+    },
+    "cardsubtitle": {
+        "description": "CardSubtitle is a component that displays a subtitle inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardSubtitlePassThrough": {
+                    "description": "Defines passthrough(pt) options of CardSubtitle component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardSubtitlePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardSubtitleProps": {
+                    "description": "Defines valid properties in CardSubtitle component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardSubtitleInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardSubtitleInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardSubtitlePassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardSubtitleInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardSubtitleInstance, unknown, \"div\">"
+                },
+                "CardSubtitleState": {
+                    "description": "Defines valid state in CardSubtitle component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardSubtitleExposes": {
+                    "description": "Defines the methods and properties exposed by CardSubtitle component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardSubtitlePassThroughType": {
+                    "values": "PassThroughType<CardSubtitleInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardSubtitle component."
+                },
+                "CardSubtitleInstance": {
+                    "values": "ComponentInstance<CardSubtitleProps, CardSubtitleState, CardSubtitleExposes, CardSubtitlePassThrough>",
+                    "description": "Instance of CardSubtitle component."
+                }
+            }
+        }
+    },
+    "cardtitle": {
+        "description": "CardTitle is a component that displays a title inside a Card.\n\n[Live Demo](https://www.primereact.org/card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardTitlePassThrough": {
+                    "description": "Defines passthrough(pt) options of CardTitle component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardTitlePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "CardTitleProps": {
+                    "description": "Defines valid properties in CardTitle component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: CardTitleInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: CardTitleInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<CardTitlePassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: CardTitleInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<CardTitleInstance, unknown, \"div\">"
+                },
+                "CardTitleState": {
+                    "description": "Defines valid state in CardTitle component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "CardTitleExposes": {
+                    "description": "Defines the methods and properties exposed by CardTitle component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "card",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CardInstance",
+                            "default": "",
+                            "description": "The Card component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "CardTitlePassThroughType": {
+                    "values": "PassThroughType<CardTitleInstance, E>",
+                    "description": "Defines passthrough(pt) options type in CardTitle component."
+                },
+                "CardTitleInstance": {
+                    "values": "ComponentInstance<CardTitleProps, CardTitleState, CardTitleExposes, CardTitlePassThrough>",
+                    "description": "Instance of CardTitle component."
+                }
+            }
+        }
+    },
+    "usecard": {
+        "description": "The useCard manages the state and functionality of a Card component.\n\n[Live Demo](https://www.primereact.org/Card/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useCardProps": {
+                    "description": "Defines valid properties in useCard.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "useCardState": {
+                    "description": "Defines valid state in useCard.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "CardState"
+                },
+                "useCardExposes": {
+                    "description": "Defines the methods and properties exposed by useCard.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "CardExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useCardInstance": {
+                    "values": "HeadlessInstance<useCardProps, useCardState, useCardExposes>",
+                    "description": "Instance of useCard headless."
+                }
+            }
+        }
+    },
     "checkbox": {
         "description": "Checkbox is an extension to standard checkbox element with theming.\n\n[Live Demo](https://www.primereact.org/checkbox/)",
         "interfaces": {
@@ -3777,6 +5198,439 @@
             }
         }
     },
+    "divider": {
+        "description": "Divider is used to separate contents.\n\n[Live Demo](https://www.primereact.org/divider/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "DividerPassThrough": {
+                    "description": "Defines passthrough(pt) options of Divider component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DividerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DividerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the content's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "DividerProps": {
+                    "description": "Defines valid properties in Divider component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: DividerInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: DividerInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<DividerPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: DividerInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "align",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"center\" | \"left\" | \"right\" | \"top\" | \"bottom\"",
+                            "default": "",
+                            "description": "Alignment of the content."
+                        },
+                        {
+                            "name": "layout",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"horizontal\" | \"vertical\"",
+                            "default": "horizontal",
+                            "description": "Specifies the orientation, valid values are 'horizontal' and 'vertical'."
+                        },
+                        {
+                            "name": "type",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"solid\" | \"dashed\" | \"dotted\"",
+                            "default": "solid",
+                            "description": "Border style type."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<DividerInstance, useDividerProps>"
+                },
+                "DividerState": {
+                    "description": "Defines valid state in Divider component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useDividerState"
+                },
+                "DividerExposes": {
+                    "description": "Defines the methods and properties exposed by Divider component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useDividerExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "DividerPassThroughType": {
+                    "values": "PassThroughType<DividerInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Divider component."
+                },
+                "DividerClassNamesType": {
+                    "values": "typeof DividerClassNames[keyof typeof DividerClassNames]",
+                    "description": "Type representing the CSS class names used in the Divider component."
+                },
+                "DividerInstance": {
+                    "values": "ComponentInstance<DividerProps, DividerState, DividerExposes, DividerPassThrough>",
+                    "description": "Instance of Divider component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "DividerClassNames": {
+                    "description": "Defines the CSS class names used in the Divider component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-divider",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "content",
+                            "value": "p-divider-content",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the content element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "dividercontent": {
+        "description": "DividerContent is a component that displays the content.\n\n[Live Demo](https://www.primereact.org/divider/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "DividerContentPassThrough": {
+                    "description": "Defines passthrough(pt) options of DividerContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DividerContentPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "DividerContentProps": {
+                    "description": "Defines valid properties in DividerContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: DividerContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: DividerContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<DividerContentPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: DividerContentInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<DividerContentInstance>"
+                },
+                "DividerContentState": {
+                    "description": "Defines valid state in DividerContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "DividerContentExposes": {
+                    "description": "Defines the methods and properties exposed by DividerContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "divider",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DividerInstance",
+                            "default": "",
+                            "description": "Instance of the Divider component."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "DividerContentPassThroughType": {
+                    "values": "PassThroughType<DividerContentInstance, E>",
+                    "description": "Defines passthrough(pt) options type in DividerContent component."
+                },
+                "DividerContentInstance": {
+                    "values": "ComponentInstance<DividerContentProps, DividerContentState, DividerContentExposes, DividerContentPassThrough>",
+                    "description": "Instance of DividerContent component."
+                }
+            }
+        }
+    },
+    "usedivider": {
+        "description": "The useDivider manages the state and functionality of a divider component.\n\n[Live Demo](https://www.primereact.org/divider/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useDividerProps": {
+                    "description": "Defines valid properties in useDivider.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "useDividerState": {
+                    "description": "Defines valid state in useDivider.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "DividerState"
+                },
+                "useDividerExposes": {
+                    "description": "Defines the methods and properties exposed by useDivider.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "DividerExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useDividerInstance": {
+                    "values": "HeadlessInstance<useDividerProps, useDividerState, useDividerExposes>",
+                    "description": "Instance of useDivider headless."
+                }
+            }
+        }
+    },
     "inplace": {
         "description": "Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.\n\n[Live Demo](https://www.primereact.org/inplace/)",
         "interfaces": {
@@ -5351,6 +7205,22 @@
                             "type": "LabelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "ifta",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "LabelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the ifta's DOM element."
+                        },
+                        {
+                            "name": "float",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "LabelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the float's DOM element."
                         }
                     ],
                     "methods": []
@@ -5509,6 +7379,20 @@
                         {
                             "name": "root",
                             "value": "p-label",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "ifta",
+                            "value": "p-iftalabel",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "float",
+                            "value": "p-floatlabel",
                             "optional": false,
                             "readonly": true,
                             "description": "Class name of the root element"
@@ -11026,6 +12910,1215 @@
             }
         }
     },
+    "scrollarea": {
+        "description": "ScrollArea is a cross browser, lightweight and themable alternative to native browser scrollbar.\n\n[Live Demo](https://www.primereact.org/scrollarea/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaPassThrough": {
+                    "description": "Defines passthrough(pt) options of ScrollArea component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "viewport",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the viewport's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "thumbY",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the thumbY's DOM element."
+                        },
+                        {
+                            "name": "thumbX",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the thumbX's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ScrollAreaProps": {
+                    "description": "Defines valid properties in ScrollArea component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ScrollAreaInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ScrollAreaInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ScrollAreaPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ScrollAreaInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "step",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "5",
+                            "description": "Step factor to scroll the content while pressing the arrow keys."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ScrollAreaInstance, useScrollAreaProps>"
+                },
+                "ScrollAreaState": {
+                    "description": "Defines valid state in ScrollArea component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "orientationState",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Current orientation of scrolling, either \"vertical\" or \"horizontal\"."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useScrollAreaState"
+                },
+                "ScrollAreaExposes": {
+                    "description": "Defines the methods and properties exposed by ScrollArea component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "useScrollAreaState",
+                            "default": "",
+                            "description": "The state of the useScrollArea."
+                        },
+                        {
+                            "name": "contentRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the scroll content element."
+                        },
+                        {
+                            "name": "thumbXRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the horizontal scrollbar thumb element."
+                        },
+                        {
+                            "name": "thumbYRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the vertical scrollbar thumb element."
+                        },
+                        {
+                            "name": "lastScrollLeft",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current horizontal scroll position."
+                        },
+                        {
+                            "name": "lastScrollTop",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current vertical scroll position."
+                        },
+                        {
+                            "name": "onScroll",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: UIEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for content scrolling to update thumb positions."
+                        },
+                        {
+                            "name": "onXBarMouseDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: MouseEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for horizontal scrollbar thumb drag interactions."
+                        },
+                        {
+                            "name": "onYBarMouseDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: MouseEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for vertical scrollbar thumb drag interactions."
+                        },
+                        {
+                            "name": "onFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler when the scrollbar thumb receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "() => void",
+                            "default": "",
+                            "description": "Event handler when the scrollbar thumb loses focus."
+                        },
+                        {
+                            "name": "onKeyDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: KeyboardEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for keyboard navigation to scroll content."
+                        },
+                        {
+                            "name": "onKeyUp",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "() => void",
+                            "default": "",
+                            "description": "Event handler to stop continuous scrolling when key is released."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useScrollAreaExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaPassThroughType": {
+                    "values": "PassThroughType<ScrollAreaInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ScrollArea component."
+                },
+                "ScrollAreaClassNamesType": {
+                    "values": "typeof ScrollAreaClassNames[keyof typeof ScrollAreaClassNames]",
+                    "description": "Type representing the CSS class names used in the ScrollArea component."
+                },
+                "ScrollAreaInstance": {
+                    "values": "ComponentInstance<ScrollAreaProps, ScrollAreaState, ScrollAreaExposes, ScrollAreaPassThrough>",
+                    "description": "Instance of ScrollArea component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaClassNames": {
+                    "description": "Defines the CSS class names used in the ScrollArea component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-scrollarea",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "viewport",
+                            "value": "p-scrollpanel-content-container",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the viewport element"
+                        },
+                        {
+                            "name": "content",
+                            "value": "p-scrollpanel-content",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the content element"
+                        },
+                        {
+                            "name": "thumbX",
+                            "value": "p-scrollpanel-bar-x",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the thumb x element"
+                        },
+                        {
+                            "name": "thumbY",
+                            "value": "p-scrollpanel-bar-y",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the thumb y element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "scrollareacontent": {
+        "description": "ScrollAreaContent is a component that displays the content.\n\n[Live Demo](https://www.primereact.org/scrollarea/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaContentPassThrough": {
+                    "description": "Defines passthrough(pt) options of ScrollAreaContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaContentPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ScrollAreaContentProps": {
+                    "description": "Defines valid properties in ScrollAreaContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ScrollAreaContentInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ScrollAreaContentInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ScrollAreaContentPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ScrollAreaContentInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ScrollAreaContentInstance>"
+                },
+                "ScrollAreaContentState": {
+                    "description": "Defines valid state in ScrollAreaContent component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ScrollAreaContentExposes": {
+                    "description": "Defines the methods and properties exposed by ScrollAreaContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "scrollarea",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollAreaInstance",
+                            "default": "",
+                            "description": "Instance of the ScrollArea component."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaContentPassThroughType": {
+                    "values": "PassThroughType<ScrollAreaContentInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ScrollAreaContent component."
+                },
+                "ScrollAreaContentInstance": {
+                    "values": "ComponentInstance<ScrollAreaContentProps, ScrollAreaContentState, ScrollAreaContentExposes, ScrollAreaContentPassThrough>",
+                    "description": "Instance of ScrollAreaContent component."
+                }
+            }
+        }
+    },
+    "scrollareathumbx": {
+        "description": "ScrollAreaThumbX is a component that displays the content.\n\n[Live Demo](https://www.primereact.org/scrollarea/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaThumbXPassThrough": {
+                    "description": "Defines passthrough(pt) options of ScrollAreaThumbX component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaThumbXPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ScrollAreaThumbXProps": {
+                    "description": "Defines valid properties in ScrollAreaThumbX component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ScrollAreaThumbXInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ScrollAreaThumbXInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ScrollAreaThumbXPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ScrollAreaThumbXInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ScrollAreaThumbXInstance>"
+                },
+                "ScrollAreaThumbXState": {
+                    "description": "Defines valid state in ScrollAreaThumbX component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ScrollAreaThumbXExposes": {
+                    "description": "Defines the methods and properties exposed by ScrollAreaThumbX component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "scrollarea",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollAreaInstance",
+                            "default": "",
+                            "description": "Instance of the ScrollArea component."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaThumbXPassThroughType": {
+                    "values": "PassThroughType<ScrollAreaThumbXInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ScrollAreaThumbX component."
+                },
+                "ScrollAreaThumbXInstance": {
+                    "values": "ComponentInstance<ScrollAreaThumbXProps, ScrollAreaThumbXState, ScrollAreaThumbXExposes, ScrollAreaThumbXPassThrough>",
+                    "description": "Instance of ScrollAreaThumbX component."
+                }
+            }
+        }
+    },
+    "scrollareathumby": {
+        "description": "ScrollAreaThumbY is a component that displays the content.\n\n[Live Demo](https://www.primereact.org/scrollarea/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaThumbYPassThrough": {
+                    "description": "Defines passthrough(pt) options of ScrollAreaThumbY component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaThumbYPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ScrollAreaThumbYProps": {
+                    "description": "Defines valid properties in ScrollAreaThumbY component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ScrollAreaThumbYInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ScrollAreaThumbYInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ScrollAreaThumbYPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ScrollAreaThumbYInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ScrollAreaThumbYInstance>"
+                },
+                "ScrollAreaThumbYState": {
+                    "description": "Defines valid state in ScrollAreaThumbY component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ScrollAreaThumbYExposes": {
+                    "description": "Defines the methods and properties exposed by ScrollAreaThumbY component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "scrollarea",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollAreaInstance",
+                            "default": "",
+                            "description": "Instance of the ScrollArea component."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaThumbYPassThroughType": {
+                    "values": "PassThroughType<ScrollAreaThumbYInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ScrollAreaThumbY component."
+                },
+                "ScrollAreaThumbYInstance": {
+                    "values": "ComponentInstance<ScrollAreaThumbYProps, ScrollAreaThumbYState, ScrollAreaThumbYExposes, ScrollAreaThumbYPassThrough>",
+                    "description": "Instance of ScrollAreaThumbY component."
+                }
+            }
+        }
+    },
+    "scrollareaviewport": {
+        "description": "ScrollAreaViewport is a component that displays a viewport for the content.\n\n[Live Demo](https://www.primereact.org/scrollarea/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaViewportPassThrough": {
+                    "description": "Defines passthrough(pt) options of ScrollAreaViewport component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollAreaViewportPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ScrollAreaViewportProps": {
+                    "description": "Defines valid properties in ScrollAreaViewport component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ScrollAreaViewportInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ScrollAreaViewportInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ScrollAreaViewportPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ScrollAreaViewportInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ScrollAreaViewportInstance>"
+                },
+                "ScrollAreaViewportState": {
+                    "description": "Defines valid state in ScrollAreaViewport component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ScrollAreaViewportExposes": {
+                    "description": "Defines the methods and properties exposed by ScrollAreaViewport component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "scrollarea",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollAreaInstance",
+                            "default": "",
+                            "description": "Instance of the ScrollArea component."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollAreaViewportPassThroughType": {
+                    "values": "PassThroughType<ScrollAreaViewportInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ScrollAreaViewport component."
+                },
+                "ScrollAreaViewportInstance": {
+                    "values": "ComponentInstance<ScrollAreaViewportProps, ScrollAreaViewportState, ScrollAreaViewportExposes, ScrollAreaViewportPassThrough>",
+                    "description": "Instance of ScrollAreaViewport component."
+                }
+            }
+        }
+    },
+    "usescrollarea": {
+        "description": "The useScrollArea manages the state and functionality of a scrollarea component.\n\n[Live Demo](https://www.primereact.org/scrollarea/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useScrollAreaProps": {
+                    "description": "Defines valid properties in useScrollArea.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "step",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "5",
+                            "description": "Step factor to scroll the content while pressing the arrow keys."
+                        }
+                    ],
+                    "methods": []
+                },
+                "useScrollAreaState": {
+                    "description": "Defines valid state in useScrollArea.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "orientationState",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Current orientation of scrolling, either \"vertical\" or \"horizontal\"."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "ScrollAreaState"
+                },
+                "useScrollAreaExposes": {
+                    "description": "Defines the methods and properties exposed by useScrollArea.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "useScrollAreaState",
+                            "default": "",
+                            "description": "The state of the useScrollArea."
+                        },
+                        {
+                            "name": "contentRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the scroll content element."
+                        },
+                        {
+                            "name": "thumbXRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the horizontal scrollbar thumb element."
+                        },
+                        {
+                            "name": "thumbYRef",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<HTMLDivElement>",
+                            "default": "",
+                            "description": "Reference to the vertical scrollbar thumb element."
+                        },
+                        {
+                            "name": "lastScrollLeft",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current horizontal scroll position."
+                        },
+                        {
+                            "name": "lastScrollTop",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "",
+                            "description": "Current vertical scroll position."
+                        },
+                        {
+                            "name": "onScroll",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: UIEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for content scrolling to update thumb positions."
+                        },
+                        {
+                            "name": "onXBarMouseDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: MouseEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for horizontal scrollbar thumb drag interactions."
+                        },
+                        {
+                            "name": "onYBarMouseDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: MouseEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for vertical scrollbar thumb drag interactions."
+                        },
+                        {
+                            "name": "onFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler when the scrollbar thumb receives focus."
+                        },
+                        {
+                            "name": "onBlur",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "() => void",
+                            "default": "",
+                            "description": "Event handler when the scrollbar thumb loses focus."
+                        },
+                        {
+                            "name": "onKeyDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: KeyboardEvent<HTMLDivElement>) => void",
+                            "default": "",
+                            "description": "Event handler for keyboard navigation to scroll content."
+                        },
+                        {
+                            "name": "onKeyUp",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "() => void",
+                            "default": "",
+                            "description": "Event handler to stop continuous scrolling when key is released."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "ScrollAreaExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useScrollAreaInstance": {
+                    "values": "HeadlessInstance<useScrollAreaProps, useScrollAreaState, useScrollAreaExposes>",
+                    "description": "Instance of useScrollArea headless."
+                }
+            }
+        }
+    },
     "skeleton": {
         "description": "Skeleton is a placeholder to display instead of the actual content.\n\n[Live Demo](https://www.primereact.org/skeleton/)",
         "interfaces": {
@@ -14129,6 +17222,776 @@
                 "useToggleButtonInstance": {
                     "values": "HeadlessInstance<useToggleButtonProps, useToggleButtonState, useToggleButtonExposes>",
                     "description": "Instance of useToggleButton headless."
+                }
+            }
+        }
+    },
+    "toolbar": {
+        "description": "Toolbar is a grouping component for buttons and other content.\n\n[Live Demo](https://www.primereact.org/toolbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarPassThrough": {
+                    "description": "Defines passthrough(pt) options of Toolbar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToolbarProps": {
+                    "description": "Defines valid properties in Toolbar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToolbarInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToolbarInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToolbarPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToolbarInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToolbarInstance, useToolbarProps>"
+                },
+                "ToolbarState": {
+                    "description": "Defines valid state in Toolbar component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useToolbarState"
+                },
+                "ToolbarExposes": {
+                    "description": "Defines the methods and properties exposed by Toolbar component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedTypes": "useToolbarExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarPassThroughType": {
+                    "values": "PassThroughType<ToolbarInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Toolbar component."
+                },
+                "ToolbarClassNamesType": {
+                    "values": "typeof ToolbarClassNames[keyof typeof ToolbarClassNames]",
+                    "description": "Type representing the CSS class names used in the Toolbar component."
+                },
+                "ToolbarInstance": {
+                    "values": "ComponentInstance<ToolbarProps, ToolbarState, ToolbarExposes, ToolbarPassThrough>",
+                    "description": "Instance of Toolbar component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarClassNames": {
+                    "description": "Defines the CSS class names used in the Toolbar component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-toolbar",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "toolbarcenter": {
+        "description": "ToolbarCenter is a container component that displays content at the center  of a Toolbar.\n\n[Live Demo](https://www.primereact.org/toolbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarCenterPassThrough": {
+                    "description": "Defines passthrough(pt) options of ToolbarCenter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarCenterPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToolbarCenterProps": {
+                    "description": "Defines valid properties in ToolbarCenter component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToolbarCenterInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToolbarCenterInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToolbarCenterPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToolbarCenterInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToolbarCenterInstance>"
+                },
+                "ToolbarCenterState": {
+                    "description": "Defines valid state in ToolbarCenter component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ToolbarCenterExposes": {
+                    "description": "Defines the methods and properties exposed by ToolbarCenter component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarCenterPassThroughType": {
+                    "values": "PassThroughType<ToolbarCenterInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ToolbarCenter component."
+                },
+                "ToolbarCenterClassNamesType": {
+                    "values": "typeof ToolbarCenterClassNames[keyof typeof ToolbarCenterClassNames]",
+                    "description": "Type representing the CSS class names used in the ToolbarCenter component."
+                },
+                "ToolbarCenterInstance": {
+                    "values": "ComponentInstance<ToolbarCenterProps, ToolbarCenterState, ToolbarCenterExposes, ToolbarCenterPassThrough>",
+                    "description": "Instance of ToolbarCenter component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarCenterClassNames": {
+                    "description": "Defines the CSS class names used in the ToolbarCenter component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-toolbar-center",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "toolbarend": {
+        "description": "ToolbarEnd is a container component that displays content at the end  of a Toolbar.\n\n[Live Demo](https://www.primereact.org/toolbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarEndPassThrough": {
+                    "description": "Defines passthrough(pt) options of ToolbarEnd component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarEndPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToolbarEndProps": {
+                    "description": "Defines valid properties in ToolbarEnd component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToolbarEndInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToolbarEndInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToolbarEndPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToolbarEndInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToolbarEndInstance>"
+                },
+                "ToolbarEndState": {
+                    "description": "Defines valid state in ToolbarEnd component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ToolbarEndExposes": {
+                    "description": "Defines the methods and properties exposed by ToolbarEnd component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarEndPassThroughType": {
+                    "values": "PassThroughType<ToolbarEndInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ToolbarEnd component."
+                },
+                "ToolbarEndClassNamesType": {
+                    "values": "typeof ToolbarEndClassNames[keyof typeof ToolbarEndClassNames]",
+                    "description": "Type representing the CSS class names used in the ToolbarEnd component."
+                },
+                "ToolbarEndInstance": {
+                    "values": "ComponentInstance<ToolbarEndProps, ToolbarEndState, ToolbarEndExposes, ToolbarEndPassThrough>",
+                    "description": "Instance of ToolbarEnd component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarEndClassNames": {
+                    "description": "Defines the CSS class names used in the ToolbarEnd component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-toolbar-end",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "toolbarstart": {
+        "description": "ToolbarStart is a container component that displays content at the start  of a Toolbar.\n\n[Live Demo](https://www.primereact.org/toolbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarStartPassThrough": {
+                    "description": "Defines passthrough(pt) options of ToolbarStart component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarStartPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "ToolbarStartProps": {
+                    "description": "Defines valid properties in ToolbarStart component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: ToolbarStartInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: ToolbarStartInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<ToolbarStartPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | (() => ReactNode) | ((instance: ToolbarStartInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<ToolbarStartInstance>"
+                },
+                "ToolbarStartState": {
+                    "description": "Defines valid state in ToolbarStart component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "ToolbarStartExposes": {
+                    "description": "Defines the methods and properties exposed by ToolbarStart component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarStartPassThroughType": {
+                    "values": "PassThroughType<ToolbarStartInstance, E>",
+                    "description": "Defines passthrough(pt) options type in ToolbarStart component."
+                },
+                "ToolbarStartClassNamesType": {
+                    "values": "typeof ToolbarStartClassNames[keyof typeof ToolbarStartClassNames]",
+                    "description": "Type representing the CSS class names used in the ToolbarStart component."
+                },
+                "ToolbarStartInstance": {
+                    "values": "ComponentInstance<ToolbarStartProps, ToolbarStartState, ToolbarStartExposes, ToolbarStartPassThrough>",
+                    "description": "Instance of ToolbarStart component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToolbarStartClassNames": {
+                    "description": "Defines the CSS class names used in the ToolbarStart component.",
+                    "variables": [
+                        {
+                            "name": "root",
+                            "value": "p-toolbar-start",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the root element"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "usetoolbar": {
+        "description": "The useToolbar manages the state and functionality of a toolbar component.\n\n[Live Demo](https://www.primereact.org/toolbar/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useToolbarProps": {
+                    "description": "Defines valid properties in useToolbar.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "useToolbarState": {
+                    "description": "Defines valid state in useToolbar.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "ToolbarState"
+                },
+                "useToolbarExposes": {
+                    "description": "Defines the methods and properties exposed by useToolbar.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": [],
+                    "extendedBy": "ToolbarExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useToolbarInstance": {
+                    "values": "HeadlessInstance<useToolbarProps, useToolbarState, useToolbarExposes>",
+                    "description": "Instance of useToolbar headless."
                 }
             }
         }
