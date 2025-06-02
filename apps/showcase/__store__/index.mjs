@@ -201,6 +201,32 @@ export const Store = {
             'filePath': 'demo/chip/template-demo.tsx',
         },
     },
+    'divider': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/divider/basic-demo.tsx')),
+            'filePath': 'demo/divider/basic-demo.tsx',
+        },
+        'content-demo': {
+            'component': React.lazy(() => import('demo/divider/content-demo.tsx')),
+            'filePath': 'demo/divider/content-demo.tsx',
+        },
+        'divider-pt': {
+            'component': React.lazy(() => import('demo/divider/divider-pt.tsx')),
+            'filePath': 'demo/divider/divider-pt.tsx',
+        },
+        'login-demo': {
+            'component': React.lazy(() => import('demo/divider/login-demo.tsx')),
+            'filePath': 'demo/divider/login-demo.tsx',
+        },
+        'type-demo': {
+            'component': React.lazy(() => import('demo/divider/type-demo.tsx')),
+            'filePath': 'demo/divider/type-demo.tsx',
+        },
+        'vertical-demo': {
+            'component': React.lazy(() => import('demo/divider/vertical-demo.tsx')),
+            'filePath': 'demo/divider/vertical-demo.tsx',
+        },
+    },
     'floatlabel': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/floatlabel/basic-demo.tsx')),
@@ -413,6 +439,24 @@ export const Store = {
         'sizes-demo': {
             'component': React.lazy(() => import('demo/radiobutton/sizes-demo.tsx')),
             'filePath': 'demo/radiobutton/sizes-demo.tsx',
+        },
+    },
+    'scrollarea': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/scrollarea/basic-demo.tsx')),
+            'filePath': 'demo/scrollarea/basic-demo.tsx',
+        },
+        'custom-demo': {
+            'component': React.lazy(() => import('demo/scrollarea/custom-demo.tsx')),
+            'filePath': 'demo/scrollarea/custom-demo.tsx',
+        },
+        'horizontal-demo': {
+            'component': React.lazy(() => import('demo/scrollarea/horizontal-demo.tsx')),
+            'filePath': 'demo/scrollarea/horizontal-demo.tsx',
+        },
+        'scrollarea-pt': {
+            'component': React.lazy(() => import('demo/scrollarea/scrollarea-pt.tsx')),
+            'filePath': 'demo/scrollarea/scrollarea-pt.tsx',
         },
     },
     'skeleton': {
