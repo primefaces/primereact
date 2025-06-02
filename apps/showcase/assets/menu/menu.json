@@ -50,12 +50,20 @@
                     "name": "Panel",
                     "children": [
                         {
+                            "name": "Card",
+                            "to": "/docs/components/card"
+                        },
+                        {
+                            "name": "Divider",
+                            "to": "/docs/components/divider"
+                        },
+                        {
                             "name": "Panel",
                             "to": "/docs/components/panel"
                         },
                         {
-                            "name": "Card",
-                            "to": "/docs/components/card"
+                            "name": "ScrollArea",
+                            "to": "/docs/components/scrollarea"
                         }
                     ]
                 },
