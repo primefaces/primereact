@@ -25,6 +25,14 @@ export interface LabelPassThrough {
      * Used to pass attributes to the root's DOM element.
      */
     root?: LabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the ifta's DOM element.
+     */
+    ifta?: LabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the float's DOM element.
+     */
+    float?: LabelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -51,7 +59,15 @@ export const LabelClassNames = {
     /**
      * Class name of the root element
      */
-    root: 'p-label'
+    root: 'p-label',
+    /**
+     * Class name of the root element
+     */
+    ifta: 'p-iftalabel',
+    /**
+     * Class name of the root element
+     */
+    float: 'p-floatlabel'
 } as const;
 
 /**
