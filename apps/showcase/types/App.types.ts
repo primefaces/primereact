@@ -16,6 +16,7 @@ export interface AppConfig {
         theme?: {
             preset?: unknown;
             options?: {
+                cssLayer?: unknown;
                 darkModeSelector?: string;
             };
         };

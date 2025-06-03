@@ -133,6 +133,7 @@ export default makeSource({
                                 })
                             );
                         } catch (error) {
+                            // eslint-disable-next-line no-console
                             console.error(`Error reading file ${filePath}:`, error);
                         }
                     }
@@ -245,6 +246,7 @@ function replaceComponentViewer(content) {
 
             content = content.replace(match, `\`\`\`tsx\n${source}\n\`\`\``);
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.error(e);
         }
     }
