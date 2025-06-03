@@ -25,7 +25,7 @@ export default function CustomDemo() {
                         </p>
                     </ScrollArea.Content>
                 </ScrollArea.Viewport>
-                <ScrollArea.ThumbY className="!bg-primary" />
+                <ScrollArea.ThumbY className="bg-primary" />
             </ScrollArea>
         </div>
     );

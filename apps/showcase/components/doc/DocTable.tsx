@@ -91,7 +91,7 @@ const DocTable = ({ name, category, type, ...props }: DocTableProps) => {
                         return (
                             <React.Fragment key={`child-data-${childDataIndex}`}>
                                 {childData.label && (
-                                    <h4 className="doc-section-label" id={`${type}.${String(childData.label)}`}>
+                                    <h4 className="doc-section-label mb-2 mt-2 scroll-m-32 text-lg leading-[1.2] font-semibold text-(--high-contrast-text-color)" id={`${type}.${String(childData.label)}`}>
                                         {String(childData.label)}
                                         <Link href={`#${type}.${String(childData.label)}`}>
                                             <i className="pi pi-link"></i>

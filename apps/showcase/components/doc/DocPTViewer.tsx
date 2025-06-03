@@ -81,25 +81,27 @@ const DocPTViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocPTViewerPr
 
     return (
         <div ref={container} className="doc-ptviewerwrapper card" {...props}>
-            <div id="doc-ptviewer" className="doc-ptviewer">
-                {Component && <Component />}
-            </div>
-            {PTNames.length > 0 && (
-                <div className="doc-ptoptions">
-                    {PTNames.map((item) => (
-                        <>
-                            {item.item === 'root' && (
-                                <div className="doc-ptheader" key={item.name}>
-                                    {item.name}
-                                </div>
-                            )}
-                            <div className="doc-ptoption" key={`${item.name}_${item.item}`} onMouseEnter={() => enterSection(item)} onMouseLeave={leaveSection}>
-                                <span className="doc-ptoption-text">{item.item}</span>
-                            </div>
-                        </>
-                    ))}
+            <React.Suspense fallback={<div className="py-24 w-full h-full flex items-center justify-center text-surface-500">Loading...</div>}>
+                <div id="doc-ptviewer" className="doc-ptviewer">
+                    {Component && <Component />}
                 </div>
-            )}
+                {PTNames.length > 0 && (
+                    <div className="doc-ptoptions">
+                        {PTNames.map((item) => (
+                            <>
+                                {item.item === 'root' && (
+                                    <div className="doc-ptheader" key={item.name}>
+                                        {item.name}
+                                    </div>
+                                )}
+                                <div className="doc-ptoption" key={`${item.name}_${item.item}`} onMouseEnter={() => enterSection(item)} onMouseLeave={leaveSection}>
+                                    <span className="doc-ptoption-text">{item.item}</span>
+                                </div>
+                            </>
+                        ))}
+                    </div>
+                )}
+            </React.Suspense>
         </div>
     );
 };

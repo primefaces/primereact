@@ -12,13 +12,13 @@ export default function AdvancedDemo() {
                     alt="user header"
                     src="https://images.unsplash.com/photo-1513649718256-1a7162666bad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 />
-                <Avatar shape="circle" className="!w-28 !h-28 border-3 border-surface-0 dark:border-surface-900 absolute -bottom-14 left-4 z-10">
+                <Avatar shape="circle" className="w-28 h-28 border-3 border-surface-0 dark:border-surface-900 absolute -bottom-14 left-4 z-10">
                     <Avatar.Image className="object-cover" src="https://images.unsplash.com/photo-1722495178488-c8056c4ec2c0?q=80&w=2081&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
                 </Avatar>
             </Card.Header>
-            <Card.Body className="!pt-16">
+            <Card.Body className="pt-16">
                 <Card.Caption>
-                    <Card.Title className="!font-bold !text-2xl">Sakura Fresh Market</Card.Title>
+                    <Card.Title className="font-bold text-2xl">Sakura Fresh Market</Card.Title>
                     <div className="flex items-center gap-2">
                         <Tag className="w-fit" severity="info">
                             Daily

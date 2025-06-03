@@ -28,7 +28,7 @@ export default function CardDemo() {
         <div className="card flex items-center justify-center">
             <div className="max-w-3xl ">
                 <div className=" font-semibold leading-none">Select your interests</div>
-                <Checkbox.Group value={value} onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])} className="!grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+                <Checkbox.Group value={value} onValueChange={(e: CheckboxGroupValueChangeEvent) => setValue(e.value as string[])} className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
                     {interests.map((interest) => (
                         <label
                             key={interest.id}

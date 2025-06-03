@@ -24,8 +24,8 @@ export default function LoginDemo() {
                     </div>
                 </div>
                 <div className="w-full md:w-2/12">
-                    <Divider layout="vertical" className="!hidden md:!flex" />
-                    <Divider layout="horizontal" className="!flex md:!hidden" align="center">
+                    <Divider layout="vertical" className="hidden md:flex" />
+                    <Divider layout="horizontal" className="flex md:hidden" align="center">
                         <Divider.Content>
                             <b>OR</b>
                         </Divider.Content>

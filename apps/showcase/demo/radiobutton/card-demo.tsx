@@ -16,7 +16,7 @@ const CardDemo = () => {
         <div className="card flex items-center justify-center">
             <div>
                 <span className="font-semibold">Payment Method</span>
-                <RadioButton.Group value={selectedCard} onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelectedCard(e.value as string)} className="mt-4 !grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <RadioButton.Group value={selectedCard} onValueChange={(e: RadioButtonGroupValueChangeEvent) => setSelectedCard(e.value as string)} className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {cards.map((card) => (
                         <label
                             key={card.id}

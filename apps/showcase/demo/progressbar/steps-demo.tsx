@@ -10,29 +10,29 @@ const orderProgress = [
     {
         status: 'Order Placed',
         colors: {
-            track: '!bg-blue-500/20',
-            indicator: '!bg-blue-600 dark:!bg-blue-400'
+            track: 'bg-blue-500/20',
+            indicator: 'bg-blue-600 dark:bg-blue-400'
         }
     },
     {
         status: 'Processing',
         colors: {
-            track: '!bg-yellow-500/20',
-            indicator: '!bg-amber-600 dark:!bg-amber-400'
+            track: 'bg-yellow-500/20',
+            indicator: 'bg-amber-600 dark:bg-amber-400'
         }
     },
     {
         status: 'Shipped',
         colors: {
-            track: '!bg-purple-500/20',
-            indicator: '!bg-violet-600 dark:!bg-violet-400'
+            track: 'bg-purple-500/20',
+            indicator: 'bg-violet-600 dark:bg-violet-400'
         }
     },
     {
         status: 'Delivered',
         colors: {
-            track: '!bg-green-500/20',
-            indicator: '!bg-green-600 dark:!bg-green-400'
+            track: 'bg-green-500/20',
+            indicator: 'bg-green-600 dark:bg-green-400'
         }
     }
 ];
@@ -52,7 +52,7 @@ export default function StepsDemo() {
 
                         return (
                             <ProgressBar.Track className={cn(colors?.track, 'transition-all duration-300 ease-linear')}>
-                                <ProgressBar.Indicator className={cn(colors?.indicator, '!transition-[width,_background-color] duration-300 ease-linear')}>
+                                <ProgressBar.Indicator className={cn(colors?.indicator, 'transition-[width,_background-color] duration-300 ease-linear')}>
                                     <ProgressBar.Label>
                                         <ProgressBar.Value />
                                     </ProgressBar.Label>

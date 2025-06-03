@@ -32,8 +32,8 @@ export default function TemplateDemo() {
                         <span className="font-medium">Basic Percentage</span>
                         <ProgressBar.Value />
                     </div>
-                    <ProgressBar.Track className="!rounded-full !h-1.5">
-                        <ProgressBar.Indicator className="!bg-blue-600 !rounded-full" />
+                    <ProgressBar.Track className="rounded-full h-1.5">
+                        <ProgressBar.Indicator className="bg-blue-600 rounded-full" />
                     </ProgressBar.Track>
                 </ProgressBar>
 
@@ -51,8 +51,8 @@ export default function TemplateDemo() {
                         <span className="font-medium">File Size Progress</span>
                         <ProgressBar.Value />
                     </div>
-                    <ProgressBar.Track className="!rounded-full !h-1.5">
-                        <ProgressBar.Indicator className="!bg-emerald-600 !rounded-full" />
+                    <ProgressBar.Track className="rounded-full h-1.5">
+                        <ProgressBar.Indicator className="bg-emerald-600 rounded-full" />
                     </ProgressBar.Track>
                 </ProgressBar>
 
@@ -70,8 +70,8 @@ export default function TemplateDemo() {
                         <span className="font-medium">Time Remaining</span>
                         <ProgressBar.Value />
                     </div>
-                    <ProgressBar.Track className="!rounded-full !h-1.5">
-                        <ProgressBar.Indicator className="!bg-purple-600 !rounded-full" />
+                    <ProgressBar.Track className="rounded-full h-1.5">
+                        <ProgressBar.Indicator className="bg-purple-600 rounded-full" />
                     </ProgressBar.Track>
                 </ProgressBar>
 
@@ -90,8 +90,8 @@ export default function TemplateDemo() {
                         <span className="font-medium">Upload Status Steps</span>
                         <ProgressBar.Value />
                     </div>
-                    <ProgressBar.Track className="!rounded-full !h-1.5">
-                        <ProgressBar.Indicator className="!bg-orange-600 !rounded-full" />
+                    <ProgressBar.Track className="rounded-full h-1.5">
+                        <ProgressBar.Indicator className="bg-orange-600 rounded-full" />
                     </ProgressBar.Track>
                 </ProgressBar>
             </div>

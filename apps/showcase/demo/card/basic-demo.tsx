@@ -23,7 +23,7 @@ export default function BasicDemo() {
                                 <Label htmlFor="password" className="flex-1">
                                     Password
                                 </Label>
-                                <Button as={Link} href="/forgot-password" variant="link" className="!p-0">
+                                <Button as={Link} href="/forgot-password" variant="link" className="p-0">
                                     Forgot password?
                                 </Button>
                             </div>
@@ -38,7 +38,7 @@ export default function BasicDemo() {
                     </Button>
                     <div className="mt-2 text-center text-surface-500">
                         Don’t have an account?{' '}
-                        <Button as={Link} href="/signup" variant="link" className="!p-0">
+                        <Button as={Link} href="/signup" variant="link" className="p-0">
                             Sign up
                         </Button>
                     </div>
