@@ -81,13 +81,13 @@ h5 {
 
 h6 {
     font-size: .875rem;
-}
+}*/
 
 p {
     line-height: 1.625;
-    margin-block: 0 1rem;
-    margin-inline: 0;
-}*/
+    /*margin-block: 0 1rem;
+    margin-inline: 0;*/
+}
 
 .p-toast.p-toast-top-right,
 .p-toast.p-toast-top-left {

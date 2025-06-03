@@ -26,6 +26,6 @@ export const PanelContent = withComponent({
             ptmi('root')
         );
 
-        return <Component as={props.as} asChild={props.asChild} {...rootProps} children={props.children} />;
+        return <Component instance={instance} attrs={rootProps} children={props.children} />;
     }
 });
