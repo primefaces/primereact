@@ -6,7 +6,7 @@ export function useStyle() {
     const theme = React.useContext(ThemeContext);
 
     const _load = React.useCallback(
-        (name, css, element) => {
+        (name, css, element, options) => {
             if (isClient() && isNotEmpty(css)) {
                 let root = element?.getRootNode();
 
@@ -16,7 +16,12 @@ export function useStyle() {
 
                 if (!styleElement.isConnected) {
                     // @todo - add attributes and prepend
-                    root.appendChild(styleElement);
+                    if (options?.first) {
+                        root.prepend(styleElement);
+                    } else {
+                        root.appendChild(styleElement);
+                    }
+
                     styleElement.setAttribute('data-primereact-style-id', name);
                 }
 
@@ -27,14 +32,14 @@ export function useStyle() {
     );
 
     const load = React.useCallback(
-        ({ name, css, element }) => {
+        ({ name, css, element, options }) => {
             if (isNotEmpty(css)) {
-                // @todo
-                if (!theme?.stylesheet?.has(name) && !isClient()) {
+                // @todo - implement
+                if (!theme?.stylesheet?.has(name) && !isClient() && name !== 'layer-order') {
                     theme?.stylesheet?.add(name, css);
                 }
 
-                _load(name, css, element);
+                _load(name, css, element, options);
             }
         },
         [theme]

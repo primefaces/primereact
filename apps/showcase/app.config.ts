@@ -18,6 +18,10 @@ const appConfig: AppConfig = {
         theme: {
             preset: Noir,
             options: {
+                cssLayer: {
+                    name: 'primereact',
+                    order: 'theme, base, primereact'
+                },
                 darkModeSelector: '.p-dark'
             }
         }

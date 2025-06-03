@@ -1,4 +1,11 @@
-const icons = [];
+type IconType = {
+    properties: {
+        id: string;
+        name: string;
+    };
+};
+
+const icons: IconType[] = [] as IconType[];
 let selectedIcon = null;
 
 export const IconService = {
@@ -8,7 +15,7 @@ export const IconService = {
             .then((d) => d.icons);
     },
 
-    getIcon(id) {
+    getIcon(id: string) {
         if (icons) {
             selectedIcon = icons.find((x) => x.properties.id === id);
 

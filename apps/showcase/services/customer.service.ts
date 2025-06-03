@@ -9020,7 +9020,7 @@ export const CustomerService = {
         return Promise.resolve(this.getData());
     },
 
-    getCustomers(params) {
+    getCustomers(params: Record<string, string | number | boolean>) {
         const queryParams = params
             ? Object.keys(params)
                   .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
