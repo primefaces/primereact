@@ -3883,6 +3883,14 @@
                             "description": "Template of an option group item."
                         },
                         {
+                            "name": "optionGroupCollapsable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Option to collapse group items."
+                        },
+                        {
                             "name": "panelClassName",
                             "optional": true,
                             "readonly": false,
@@ -23563,6 +23571,14 @@
                             "description": "Template of an option group item."
                         },
                         {
+                            "name": "optionGroupCollapsable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Option to collapse group items."
+                        },
+                        {
                             "name": "optionLabel",
                             "optional": true,
                             "readonly": false,
@@ -33120,6 +33136,14 @@
                             "description": "Template of an option group item."
                         },
                         {
+                            "name": "optionGroupCollapsable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Option to collapse group items."
+                        },
+                        {
                             "name": "optionLabel",
                             "optional": true,
                             "readonly": false,
@@ -36715,6 +36739,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Template of an option group item."
+                        },
+                        {
+                            "name": "optionGroupCollapsable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Option to collapse group items."
                         },
                         {
                             "name": "optionLabel",
