@@ -12,7 +12,7 @@ export default function HorizontalDemo() {
 
     return (
         <div className="card flex justify-center">
-            <ScrollArea className="border border-surface-200 dark:border-surface-700 rounded-md" style={{ width: '632px', height: '250px' }}>
+            <ScrollArea className="border border-surface-200 dark:border-surface-700 rounded-md" style={{ width: '632px', height: '200px' }}>
                 <ScrollArea.Viewport className="p-4">
                     <ScrollArea.Content>
                         <div className="flex w-max gap-4" style={{ minWidth: '3000px' }}>
