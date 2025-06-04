@@ -125,7 +125,8 @@ export const ToggleButton = React.memo(
                 readOnly: props.readonly,
                 value: props.checked,
                 checked: props.checked,
-                'aria-label': label
+                'aria-label': props['aria-label'],
+                'aria-labelledby': props['aria-labelledby']
             },
             ptm('input')
         );
