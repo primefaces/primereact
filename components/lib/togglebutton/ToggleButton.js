@@ -119,14 +119,13 @@ export const ToggleButton = React.memo(
                 onBlur: onBlur,
                 onKeyDown: onKeyDown,
                 tabIndex: tabIndex,
-                role: 'switch',
                 type: 'checkbox',
-                'aria-pressed': props.checked,
                 'aria-invalid': props.invalid,
                 disabled: props.disabled,
                 readOnly: props.readonly,
                 value: props.checked,
-                checked: props.checked
+                checked: props.checked,
+                'aria-label': label
             },
             ptm('input')
         );
