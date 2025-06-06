@@ -5,6 +5,32 @@
 import * as React from 'react';
 
 export const Store = {
+    'accordion': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/accordion/basic-demo.tsx')),
+            'filePath': 'demo/accordion/basic-demo.tsx',
+        },
+        'custom-indicator-demo': {
+            'component': React.lazy(() => import('demo/accordion/custom-indicator-demo.tsx')),
+            'filePath': 'demo/accordion/custom-indicator-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/accordion/disabled-demo.tsx')),
+            'filePath': 'demo/accordion/disabled-demo.tsx',
+        },
+        'multiple-demo': {
+            'component': React.lazy(() => import('demo/accordion/multiple-demo.tsx')),
+            'filePath': 'demo/accordion/multiple-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/accordion/template-demo.tsx')),
+            'filePath': 'demo/accordion/template-demo.tsx',
+        },
+        'use-with-radiobutton': {
+            'component': React.lazy(() => import('demo/accordion/use-with-radiobutton.tsx')),
+            'filePath': 'demo/accordion/use-with-radiobutton.tsx',
+        },
+    },
     'avatar': {
         'avatar-pt': {
             'component': React.lazy(() => import('demo/avatar/avatar-pt.tsx')),
@@ -517,6 +543,12 @@ export const Store = {
         'uncontrolled-demo': {
             'component': React.lazy(() => import('demo/switch/uncontrolled-demo.tsx')),
             'filePath': 'demo/switch/uncontrolled-demo.tsx',
+        },
+    },
+    'tabs': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/tabs/basic-demo.tsx')),
+            'filePath': 'demo/tabs/basic-demo.tsx',
         },
     },
     'tag': {
