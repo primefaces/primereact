@@ -17243,6 +17243,30 @@
                             "type": "ToolbarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the start's DOM element."
+                        },
+                        {
+                            "name": "center",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the center's DOM element."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the end's DOM element."
                         }
                     ],
                     "methods": []
@@ -17404,6 +17428,27 @@
                             "optional": false,
                             "readonly": true,
                             "description": "Class name of the root element"
+                        },
+                        {
+                            "name": "start",
+                            "value": "p-toolbar-start",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the start element"
+                        },
+                        {
+                            "name": "center",
+                            "value": "p-toolbar-center",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the center element"
+                        },
+                        {
+                            "name": "end",
+                            "value": "p-toolbar-end",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the end element"
                         }
                     ]
                 }
@@ -17550,7 +17595,16 @@
                 "ToolbarCenterExposes": {
                     "description": "Defines the methods and properties exposed by ToolbarCenter component.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "toolbar",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToolbarInstance",
+                            "default": "",
+                            "description": "The Toolbar component instance."
+                        }
+                    ],
                     "methods": []
                 }
             }
@@ -17732,7 +17786,16 @@
                 "ToolbarEndExposes": {
                     "description": "Defines the methods and properties exposed by ToolbarEnd component.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "toolbar",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToolbarInstance",
+                            "default": "",
+                            "description": "The Toolbar component instance."
+                        }
+                    ],
                     "methods": []
                 }
             }
@@ -17914,7 +17977,16 @@
                 "ToolbarStartExposes": {
                     "description": "Defines the methods and properties exposed by ToolbarStart component.",
                     "relatedProp": "",
-                    "props": [],
+                    "props": [
+                        {
+                            "name": "toolbar",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToolbarInstance",
+                            "default": "",
+                            "description": "The Toolbar component instance."
+                        }
+                    ],
                     "methods": []
                 }
             }

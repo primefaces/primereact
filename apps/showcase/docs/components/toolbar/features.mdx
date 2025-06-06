@@ -1,0 +1,39 @@
+---
+title: 'Toolbar'
+description: 'Toolbar is a grouping component for buttons and other content.'
+component: 'toolbar'
+---
+
+## Usage
+
+```tsx
+import { Toolbar } from 'primereact/toolbar';
+```
+
+```tsx
+<Toolbar></Toolbar>
+```
+
+## Examples
+
+### Basic
+
+Toolbar provides `Toolbar.Start`, `Toolbar.Center` and `Toolbar.End` properties to place content at these sections.
+
+<DocComponentViewer name="toolbar:basic-demo" />
+
+### Custom
+
+A customized toolbar with navigation bar functionality.
+
+<DocComponentViewer name="toolbar:custom-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Toolbar uses `toolbar` role to the root element, `aria-orientation` is not included as it defaults to "horizontal". Any valid attribute is passed to the root element so you may add additional properties like `aria-labelledby` to define the element if required.`
+
+### Keyboard Support
+
+Component does not include any interactive elements. Arbitrary content can be placed with templating and elements like buttons inside should follow the page tab sequence.
