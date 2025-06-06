@@ -5,6 +5,14 @@ import type { BaseSetup, CommonInstance, Instance, useBaseOptions } from '@prime
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 
+/**
+ * A custom hook for creating a base instance.
+ * This hook is used to initialize a base instance with common properties and methods.
+ * It handles props, attributes, and provides a setup function for additional configuration.
+ * @param name The name of the base instance.
+ * @param options The options for the base instance.
+ * @returns The base instance.
+ */
 export const useBase = <IProps extends { id?: string; ref?: React.Ref<unknown> }, DProps, Exposes extends Record<PropertyKey, unknown>>(name: string = 'UnknownBase', options: useBaseOptions<IProps, DProps, Exposes>) => {
     const $primereact = usePrimeReact();
     const { inProps, defaultProps, setup } = options || {};

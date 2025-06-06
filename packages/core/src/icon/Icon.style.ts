@@ -1,4 +1,4 @@
-import { StylesOptions } from '@primereact/types/styles';
+import type { StylesOptions } from '@primereact/types/styles';
 import { $dt } from '@primeuix/styled';
 
 const css = /*css*/ `
@@ -47,27 +47,23 @@ const css = /*css*/ `
 }
 `;
 
-export const inlineStyles = {
-    root: ({ props }) => ({
-        ...(props.size && { [$dt('icon.size').name]: props.size }),
-        ...(props.rotate && { [$dt('icon.rotate').name]: `${props.rotate}deg` })
-    })
-};
-
-export const classes = {
-    root: ({ props }) => [
-        'p-icon',
-        {
-            'p-icon-spin': props.spin,
-            'p-icon-flip-horizontal': props.flip === 'horizontal',
-            'p-icon-flip-vertical': props.flip === 'vertical'
-        }
-    ]
-};
-
 export const styles = {
     name: 'icon',
     css,
-    classes,
-    inlineStyles
+    classes: {
+        root: ({ props }) => [
+            'p-icon',
+            {
+                'p-icon-spin': props.spin,
+                'p-icon-flip-horizontal': props.flip === 'horizontal',
+                'p-icon-flip-vertical': props.flip === 'vertical'
+            }
+        ]
+    },
+    inlineStyles: {
+        root: ({ props }) => ({
+            ...(props.size ? { [$dt('icon.size').name]: props.size } : undefined),
+            ...(props.rotate ? { [$dt('icon.rotate').name]: `${props.rotate}deg` } : undefined)
+        })
+    }
 } as StylesOptions;

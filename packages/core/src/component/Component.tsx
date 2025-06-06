@@ -3,7 +3,12 @@ import type { ComponentProps } from '@primereact/types/core';
 import { cn, resolve } from '@primeuix/utils';
 import * as React from 'react';
 
-export const Component = (inProps: ComponentProps = {}) => {
+/**
+ * A component wrapper for rendering elements with additional props and attributes.
+ * @param inProps The properties to pass to the component.
+ * @returns A React element or null if `pIf` is false.
+ */
+export function Component(inProps: ComponentProps = {}) {
     const { pIf = true, style, className, as, asChild, instance, ...props } = inProps;
 
     if (pIf === false) return null;
@@ -13,7 +18,8 @@ export const Component = (inProps: ComponentProps = {}) => {
     const isFragment = AsComponent === React.Fragment;
 
     const { ref = instance?.elementRef, children, attrs: inAttrs, ...restAttrs } = props;
-    const attrs = { ...inAttrs, ...restAttrs };
+    const attrs = { ...inAttrs, ...restAttrs } as React.HTMLAttributes<HTMLElement>;
+    // @ts-expect-error: Update resolve to handle attrs correctly
     const content = resolve(children, instance, attrs) as React.ReactNode;
     const styles = resolve(style || instance?.props?.style, instance) as React.CSSProperties | undefined;
     const classNames = resolve(className || instance?.props?.className, instance) as string | undefined;
@@ -27,6 +33,6 @@ export const Component = (inProps: ComponentProps = {}) => {
             {content}
         </AsComponent>
     );
-};
+}
 
 Component.displayName = 'PrimeReact.Component';

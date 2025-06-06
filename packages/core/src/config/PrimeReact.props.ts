@@ -1,7 +1,7 @@
 import { FilterMatchMode } from '@primereact/core/api';
 import type { PrimeReactProps } from '@primereact/types/core';
 
-export const defaultProps: Partial<PrimeReactProps> = {
+export const defaultProps: PrimeReactProps = {
     csp: { nonce: undefined },
     defaults: undefined,
     filterMatchModeOptions: {

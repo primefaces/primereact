@@ -1,4 +1,4 @@
-import { IconProps } from '@primereact/types/core';
+import type { IconProps } from '@primereact/types/core';
 
 export const defaultProps: IconProps = {
     as: 'i',

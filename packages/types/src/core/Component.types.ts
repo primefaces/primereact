@@ -61,6 +61,19 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     children?: React.ReactNode | ((instance: I) => React.ReactNode) | (() => React.ReactNode) | undefined;
 }
 
+export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> extends Omit<GlobalComponentProps<I, T, R, D>, 'pt' | 'ptOptions' | 'dt' | 'styles'> {
+    /**
+     * The instance of the component.
+     * This is a reference to the component instance.
+     */
+    instance?: I | undefined;
+    /**
+     * The options to pass to the component.
+     * This is used to pass additional options to the component.
+     */
+    attrs?: object | undefined;
+}
+
 export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData = Record<PropertyKey, unknown>> = {
     name?: string | undefined;
     defaultProps?: DProps | undefined;

@@ -1,7 +1,7 @@
-import type { PassThroughProps } from './PassThrough.types';
+import type { PassThroughProps } from '@primereact/types/core';
 
-export const defaultProps = {
+export const defaultProps: PassThroughProps = {
     value: undefined,
     mergeProps: false,
     mergeSections: true
-} satisfies PassThroughProps;
+};

@@ -1,14 +1,14 @@
 import { useProps } from '@primereact/hooks';
+import type { PassThroughProps } from '@primereact/types/core';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
 import { defaultProps } from './PassThrough.props';
-import type { PassThroughProps } from './PassThrough.types';
 
-export const PassThroughContext = React.createContext(null);
+export const PassThroughContext = React.createContext<PassThroughProps | undefined>(undefined);
 
 export const PassThroughProvider = (inProps: React.PropsWithChildren<PassThroughProps> = {}) => {
-    const { attrs } = useProps(inProps, defaultProps);
-    const value = null;
+    const { attrs } = useProps(inProps, defaultProps as PassThroughProps);
+    const value = undefined;
 
     return <PassThroughContext.Provider value={value}>{resolve(attrs.children, value)}</PassThroughContext.Provider>;
 };

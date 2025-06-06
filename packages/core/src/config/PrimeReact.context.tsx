@@ -9,16 +9,13 @@ import { defaultProps } from './PrimeReact.props';
 
 export const PrimeReactContext = React.createContext<PrimeReactProps | undefined>(undefined);
 
-export const PrimeReactProvider = (inProps: React.PropsWithChildren<PrimeReactProps> = {}) => {
+export function PrimeReactProvider(inProps: React.PropsWithChildren<PrimeReactProps> = {}) {
     const { props, attrs } = useProps(inProps, defaultProps);
 
     // states
-    const [ripple, setRipple] = React.useState(props.ripple);
     const [inputVariant, setInputVariant] = React.useState(props.inputVariant);
 
     const value = {
-        ripple,
-        setRipple,
         inputVariant,
         setInputVariant
     };
@@ -34,4 +31,4 @@ export const PrimeReactProvider = (inProps: React.PropsWithChildren<PrimeReactPr
             </LocaleProvider>
         </PrimeReactContext.Provider>
     );
-};
+}

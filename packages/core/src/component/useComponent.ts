@@ -5,7 +5,15 @@ import { globalProps } from './Component.props';
 import { useComponentPT } from './useComponentPT';
 import { useComponentStyle } from './useComponentStyle';
 
-export const useComponent = <IProps, DProps, Exposes extends Record<PropertyKey, unknown>, Styles>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, Exposes, Styles> = {}) => {
+/**
+ * A hook for creating a component instance.
+ * This hook initializes a component with properties, attributes, and styles, and provides methods for handling pass-through options and styles.
+ * It also supports custom setup functions for additional configuration.
+ * @param name The name of the component, used for debugging and identification.
+ * @param options The options to customize the component instance.
+ * @returns The component instance.
+ */
+export function useComponent<IProps, DProps, Exposes extends Record<PropertyKey, unknown>, Styles>(name: string = 'UnknownComponent', options: useComponentOptions<IProps, DProps, Exposes, Styles> = {}) {
     const defaultProps = React.useMemo(() => ({ ...globalProps, ...options.defaultProps }), [options.defaultProps]);
     const baseInstance = useBase(name, {
         inProps: options.inProps,
@@ -38,4 +46,4 @@ export const useComponent = <IProps, DProps, Exposes extends Record<PropertyKey,
     React.useImperativeHandle(ref as React.Ref<InComponentInstance<typeof props, IProps, typeof baseInstance.state, Exposes>>, () => instance, [instance]);
 
     return instance;
-};
+}

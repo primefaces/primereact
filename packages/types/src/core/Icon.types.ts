@@ -8,7 +8,7 @@
  * @group components
  *
  */
-import type { ComponentInstance, withComponentOptions } from '@primereact/types/core';
+import type { ComponentInstance } from '@primereact/types/core';
 import type { BaseComponentProps, PassThroughType } from '../shared';
 
 /**
@@ -63,7 +63,7 @@ export interface IconExposes {
      *
      * @returns {Record<string, unknown>} - The attributes.
      */
-    pti: () => Record<string, unknown>;
+    pti?: () => Record<string, unknown>;
 }
 
 /**
@@ -86,4 +86,18 @@ export type IconClassNamesType = (typeof IconClassNames)[keyof typeof IconClassN
  */
 export type IconInstance = ComponentInstance<IconProps, IconState, IconExposes, IconPassThrough>;
 
-export declare type withBaseIconOptions<IProps, Exposes, Styles> = withComponentOptions<IProps, IconProps, Exposes, Styles>;
+export type withBaseIconOptions = {
+    /**
+     * The name of the icon.
+     */
+    name: string;
+    /**
+     * The render function that returns component for the icon.
+     */
+    render?:
+        | React.FC<{
+              rootProps?: React.SVGProps<SVGSVGElement>;
+              children?: React.ReactNode;
+          }>
+        | undefined;
+};

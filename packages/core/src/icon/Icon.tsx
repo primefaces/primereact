@@ -18,7 +18,7 @@ export const Icon = withIcon({
                 style: sx('root'),
                 className: cx('root')
             },
-            pti(),
+            pti?.(),
             ptmi('root')
         );
 

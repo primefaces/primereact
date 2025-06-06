@@ -17,7 +17,7 @@ import type { TagPassThrough } from '../shared/tag';
 /**
  * Defines the pass-through options.
  */
-export declare type PassThroughOptions = {
+export interface PassThroughOptions {
     /**
      * @todo Define the type.
      * Defines whether the props should be merged.
@@ -39,12 +39,12 @@ export declare type PassThroughOptions = {
      * ```
      */
     mergeSections?: boolean | (() => void) | undefined;
-};
+}
 
 /**
  * Defines the pass-through props.
  */
-export declare type PassThroughProps = {
+export interface PassThroughProps extends PassThroughOptions {
     /**
      * Defines the pass-through value.
      * @todo Define the type.
@@ -66,4 +66,4 @@ export declare type PassThroughProps = {
         styleclass?: StyleClassPassThrough;
         tag?: TagPassThrough;
     };
-} & PassThroughOptions;
+}

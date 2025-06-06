@@ -2,7 +2,7 @@ import { defaultProps, styles, withIcon } from '@primereact/core/icon';
 import type { withBaseIconOptions } from '@primereact/types/core';
 import { cn, mergeProps, resolve } from '@primeuix/utils';
 
-export const withBaseIcon = <IProps, Exposes extends Record<PropertyKey, unknown>>({ name, render }: withBaseIconOptions<IProps, Exposes, typeof styles>) => {
+export const withBaseIcon = ({ name, render }: withBaseIconOptions) => {
     return withIcon({
         name,
         styles,
@@ -16,7 +16,7 @@ export const withBaseIcon = <IProps, Exposes extends Record<PropertyKey, unknown
                     style: { ...sx('root'), ...resolve(props.style, instance) },
                     className: cn(cx('root'), resolve(props.className, instance))
                 },
-                pti(),
+                pti?.(),
                 ptmi('root')
             );
 

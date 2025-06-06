@@ -4,7 +4,7 @@ import { ThemeContext } from '@primereact/core/theme';
 import * as React from 'react';
 import { PrimeReactContext } from './PrimeReact.context';
 
-export const usePrimeReact = () => {
+export function usePrimeReact() {
     const config = React.useContext(PrimeReactContext);
     const locale = React.useContext(LocaleContext);
     const passthrough = React.useContext(PassThroughContext);
@@ -20,4 +20,4 @@ export const usePrimeReact = () => {
         passthrough,
         theme
     };
-};
+}

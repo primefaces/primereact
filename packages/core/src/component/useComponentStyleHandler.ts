@@ -5,7 +5,14 @@ import { css as Css, dt, Theme } from '@primeuix/styled';
 import { isNotEmpty, minifyCSS, resolve, toElement } from '@primeuix/utils';
 import * as React from 'react';
 
-export const useComponentStyleHandler = <Styles>(styles?: Styles, elementRef?: React.Ref<HTMLElement>) => {
+/**
+ * A custom hook for managing component styles.
+ *
+ * @param styles The styles to apply to the component.
+ * @param elementRef A reference to the HTML element.
+ * @returns An object containing methods to load and manage styles.
+ */
+export function useComponentStyleHandler<Styles>(styles?: Styles, elementRef?: React.Ref<HTMLElement>) {
     const theme = React.useContext(ThemeContext);
     const { load } = useStyle();
 
@@ -48,6 +55,7 @@ export const useComponentStyleHandler = <Styles>(styles?: Styles, elementRef?: R
             },
             getStyleSheet(extendedCSS = '', props = {}) {
                 if (this.css) {
+                    // @ts-expect-error: update dt definition in primeuix/styled
                     const _css = resolve(this.css, { dt }) as string;
                     const _style = minifyCSS(Css`${_css}${extendedCSS}`);
                     const _props = Object.entries(props)
@@ -90,4 +98,4 @@ export const useComponentStyleHandler = <Styles>(styles?: Styles, elementRef?: R
 
         return handler;
     }, [styles, theme, _load]);
-};
+}

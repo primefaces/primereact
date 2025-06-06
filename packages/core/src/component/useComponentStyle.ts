@@ -5,7 +5,15 @@ import { cn, getKeyValue } from '@primeuix/utils';
 import * as React from 'react';
 import { useComponentStyleHandler } from './useComponentStyleHandler';
 
-export const useComponentStyle = <Props extends GlobalComponentProps, IProps, Styles, Params>(instance: Instance<Props, IProps>, styles?: Styles, $params?: Params) => {
+/**
+ * A hook for managing component styles.
+ *
+ * @param instance The instance of the component.
+ * @param styles The styles to apply to the component.
+ * @param $params Additional parameters for the hook.
+ * @returns An object containing the component styles.
+ */
+export function useComponentStyle<Props extends GlobalComponentProps, IProps, Styles, Params>(instance: Instance<Props, IProps>, styles?: Styles, $params?: Params) {
     const { props = { unstyled: false }, $primereact, elementRef } = instance || {};
     const $style = useComponentStyleHandler(styles, elementRef);
 
@@ -139,4 +147,4 @@ export const useComponentStyle = <Props extends GlobalComponentProps, IProps, St
         }),
         [cx, sx, $isUnstyled, $style]
     );
-};
+}

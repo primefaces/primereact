@@ -41,7 +41,7 @@ export interface ZIndex {
 /**
  * Defines the PrimeReact props type.
  */
-export declare type PrimeReactProps = {
+export interface PrimeReactProps {
     /**
      * Defines the Content Security Policy (CSP) configuration.
      * @see {@link https://primereact.org/configuration/#csp}
@@ -91,4 +91,4 @@ export declare type PrimeReactProps = {
      * Defines the z-index values.
      */
     zIndex?: ZIndex | undefined;
-};
+}
