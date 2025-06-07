@@ -65,6 +65,10 @@ export const TieredMenuSub = React.memo(
         };
 
         const getItemId = (processedItem) => {
+            if (processedItem.item && processedItem.item.id) {
+                return processedItem.item.id;
+            }
+
             return `${props.menuId}_${processedItem.key}`;
         };
 

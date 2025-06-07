@@ -16,7 +16,7 @@ export const SplitButton = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SplitButtonBase.getProps(inProps, context);
 
-        const [idState, setIdState] = React.useState(props.id);
+        const [idState, setIdState] = React.useState(props.id ?? UniqueComponentId);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const menuRef = React.useRef(null);
