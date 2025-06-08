@@ -7,7 +7,7 @@ export const useRadioButton = withHeadless({
     name: 'useRadioButton',
     defaultProps,
     setup: ({ props }) => {
-        const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
+        const [checkedState, setCheckedState] = useControlledState({
             value: props.checked,
             defaultValue: props.defaultChecked ?? false,
             onChange: props.onCheckedChange

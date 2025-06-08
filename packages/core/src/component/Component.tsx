@@ -1,5 +1,5 @@
 import { isValidElement } from '@primereact/core/utils';
-import type { ComponentProps } from '@primereact/types/core';
+import type { ComponentInstance, ComponentProps } from '@primereact/types/core';
 import { cn, resolve } from '@primeuix/utils';
 import * as React from 'react';
 
@@ -8,7 +8,7 @@ import * as React from 'react';
  * @param inProps The properties to pass to the component.
  * @returns A React element or null if `pIf` is false.
  */
-export function Component(inProps: ComponentProps = {}) {
+export function Component<I extends ComponentInstance = ComponentInstance>(inProps: ComponentProps<I> = {}) {
     const { pIf = true, style, className, as, asChild, instance, ...props } = inProps;
 
     if (pIf === false) return null;

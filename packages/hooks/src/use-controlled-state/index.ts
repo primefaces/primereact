@@ -8,11 +8,11 @@ export interface UseControlledStateOptions<T = unknown, E = unknown> {
     /**
      * The value of the controlled state.
      */
-    value?: T;
+    value?: T | undefined;
     /**
      * The default value of the uncontrolled state.
      */
-    defaultValue?: T;
+    defaultValue?: T | undefined;
     /**
      * Callback function that is called when the value changes.
      */

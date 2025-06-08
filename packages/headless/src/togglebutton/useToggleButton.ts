@@ -7,7 +7,7 @@ export const useToggleButton = withHeadless({
     name: 'useToggleButton',
     defaultProps,
     setup({ props }) {
-        const [pressedState, setPressedState] = useControlledState<boolean | undefined>({
+        const [pressedState, setPressedState] = useControlledState({
             value: props.pressed,
             defaultValue: props.defaultPressed ?? false,
             onChange: props.onPressedChange

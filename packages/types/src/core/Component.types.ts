@@ -58,7 +58,7 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
      * The children to render.
      * @todo update the type to be more specific
      */
-    children?: React.ReactNode | ((instance: I) => React.ReactNode) | (() => React.ReactNode) | undefined;
+    children?: React.ReactNode | ((instance: I) => React.ReactNode) | undefined;
 }
 
 export interface ComponentProps<I extends ComponentInstance = ComponentInstance, T extends React.ElementType = React.ElementType, R = unknown, D = unknown> extends Omit<GlobalComponentProps<I, T, R, D>, 'pt' | 'ptOptions' | 'dt' | 'styles'> {

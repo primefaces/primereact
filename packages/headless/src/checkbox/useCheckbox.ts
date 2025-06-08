@@ -9,7 +9,7 @@ export const useCheckbox = withHeadless({
     defaultProps,
     setup({ props }) {
         const [indeterminateState, setIndeterminateState] = React.useState<boolean | undefined>(props.indeterminate);
-        const [checkedState, setCheckedState] = useControlledState<boolean | undefined>({
+        const [checkedState, setCheckedState] = useControlledState({
             value: props.checked,
             defaultValue: props.defaultChecked ?? false,
             onChange: props.onCheckedChange
