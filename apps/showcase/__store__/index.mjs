@@ -545,12 +545,6 @@ export const Store = {
             'filePath': 'demo/switch/uncontrolled-demo.tsx',
         },
     },
-    'tabs': {
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/tabs/basic-demo.tsx')),
-            'filePath': 'demo/tabs/basic-demo.tsx',
-        },
-    },
     'tag': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/tag/basic-demo.tsx')),

@@ -19,5 +19,5 @@ export const ThemeProvider = (inProps: ThemeProps = {}) => {
 
     Theme.setTheme({ preset, options: rest });
 
-    return <ThemeContext.Provider value={value}>{resolve(props.children, value)}</ThemeContext.Provider>;
+    return <ThemeContext.Provider value={value}>{resolve(inProps.children, value)}</ThemeContext.Provider>;
 };
