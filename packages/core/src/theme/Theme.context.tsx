@@ -7,8 +7,8 @@ import { defaultProps } from './Theme.props';
 
 export const ThemeContext = React.createContext<ThemeProps | null>(null);
 
-export const ThemeProvider = (inProps: React.PropsWithChildren<ThemeProps> = {}) => {
-    const { props, attrs } = useProps(inProps, defaultProps);
+export const ThemeProvider = (inProps: ThemeProps = {}) => {
+    const { props } = useProps(inProps, defaultProps);
     const { stylesheet, preset, ...rest } = props;
 
     const value = {
@@ -19,5 +19,5 @@ export const ThemeProvider = (inProps: React.PropsWithChildren<ThemeProps> = {})
 
     Theme.setTheme({ preset, options: rest });
 
-    return <ThemeContext.Provider value={value}>{resolve(attrs.children, value)}</ThemeContext.Provider>;
+    return <ThemeContext.Provider value={value}>{resolve(props.children, value)}</ThemeContext.Provider>;
 };

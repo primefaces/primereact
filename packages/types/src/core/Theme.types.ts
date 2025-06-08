@@ -45,5 +45,13 @@ export declare type ThemeProps = {
     /**
      * Defines the stylesheet.
      */
-    stylesheet?: unknown | undefined;
+    stylesheet?:
+        | {
+              has: (key?: string) => boolean;
+              add: (name?: string, css?: string | undefined) => void;
+              clear: () => void;
+              getStyles: () => Map<string, { css: string; attrs?: Record<string, string> | undefined } | undefined>;
+          }
+        | undefined;
+    children?: React.ReactNode | undefined;
 } & ThemeOptions;

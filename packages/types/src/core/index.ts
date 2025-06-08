@@ -6,3 +6,4 @@ export type * from './Icon.types';
 export type * from './Locale.types';
 export type * from './PassThrough.types';
 export type * from './Theme.types';
+export type * from './useStyle.types';

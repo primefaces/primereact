@@ -14,11 +14,11 @@ import * as React from 'react';
  */
 export function useComponentStyleHandler<Styles>(styles?: Styles, elementRef?: React.Ref<HTMLElement>) {
     const theme = React.useContext(ThemeContext);
-    const { load } = useStyle();
+    const [load] = useStyle();
 
     const _load = React.useCallback(
         (css?: string, options?: Record<PropertyKey, unknown>) => {
-            load({ name: options?.name, css, element: toElement(elementRef), options });
+            load({ name: options?.name as string | undefined, css, element: toElement(elementRef), options });
         },
         [load, elementRef]
     );
@@ -27,7 +27,7 @@ export function useComponentStyleHandler<Styles>(styles?: Styles, elementRef?: R
         const handler = {
             name: 'base',
             ...(styles as StylesOptions),
-            load: (style: StyleType = '', options: Record<PropertyKey, unknown> & { name?: string } = {}, extendedStyle = '', enableThemeTransform = false) => {
+            load(style: StyleType = '', options: Record<PropertyKey, unknown> & { name?: string } = {}, extendedStyle = '', enableThemeTransform = false) {
                 const name = options.name || handler.name;
                 const resolvedStyle = Css`${style}${extendedStyle}` as string;
                 const computedStyle = enableThemeTransform ? Theme.transformCSS(name, resolvedStyle) : resolvedStyle;

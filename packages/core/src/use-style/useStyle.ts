@@ -1,4 +1,5 @@
 import { ThemeContext } from '@primereact/core/theme';
+import type { useStyleLoadOptions } from '@primereact/types/core';
 import { isClient, isNotEmpty } from '@primeuix/utils';
 import * as React from 'react';
 
@@ -6,9 +7,11 @@ export function useStyle() {
     const theme = React.useContext(ThemeContext);
 
     const _load = React.useCallback(
-        (name, css, element, options) => {
+        (loadOptions: useStyleLoadOptions = {}) => {
+            const { name, css, element, options = {} } = loadOptions;
+
             if (isClient() && isNotEmpty(css)) {
-                let root = element?.getRootNode();
+                let root = element?.getRootNode() as Element | Document | ShadowRoot | null;
 
                 if (!root || root === document) root = document.head;
 
@@ -22,24 +25,26 @@ export function useStyle() {
                         root.appendChild(styleElement);
                     }
 
-                    styleElement.setAttribute('data-primereact-style-id', name);
+                    styleElement.setAttribute('data-primereact-style-id', name || '');
                 }
 
-                styleElement.textContent = css;
+                styleElement.textContent = css ?? '';
             }
         },
         [theme]
     );
 
     const load = React.useCallback(
-        ({ name, css, element, options }) => {
-            if (isNotEmpty(css)) {
+        (loadOptions: useStyleLoadOptions = {}) => {
+            const { name, css } = loadOptions;
+
+            if (isNotEmpty(loadOptions.css)) {
                 // @todo - implement
                 if (!theme?.stylesheet?.has(name) && !isClient() && name !== 'layer-order') {
                     theme?.stylesheet?.add(name, css);
                 }
 
-                _load(name, css, element, options);
+                _load(loadOptions);
             }
         },
         [theme]
@@ -53,7 +58,7 @@ export function useStyle() {
 
     React.useInsertionEffect(() => {
         theme?.stylesheet?.getStyles()?.forEach((value, key) => {
-            _load(key, value.css);
+            _load({ name: key, css: value?.css });
         });
 
         return () => {
@@ -61,7 +66,7 @@ export function useStyle() {
         };
     }, [theme]);
 
-    return { load, unload };
+    return [load, unload];
 }
 
 // @todo - Remove this
