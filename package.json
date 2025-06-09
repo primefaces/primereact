@@ -11,6 +11,7 @@
     "bugs": {
         "url": "https://github.com/primefaces/primereact/issues"
     },
+    "type": "module",
     "scripts": {
         "setup": "pnpm run clean && pnpm run init",
         "clean": "npx rimraf --glob **/node_modules **/dist **/.next ./pnpm-lock.yaml",
@@ -38,12 +39,16 @@
         "format:check": "prettier --check \"**/*.{js,jsx,mjs,ts,tsx,mts,d.ts\"",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
-        "test:unit": "pnpm --filter primereact test:unit"
+        "test": "pnpm --filter './packages/*' test",
+        "test:ui": "pnpm --filter './packages/*' test:ui",
+        "test:coverage": "pnpm --filter './packages/*' test:coverage"
     },
     "devDependencies": {
         "@commitlint/cli": "^19.7.1",
         "@commitlint/config-conventional": "^19.7.1",
-        "@types/jest": "^29.5.14",
+        "@testing-library/react": "^16.3.0",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/user-event": "^14.6.1",
         "@typescript-eslint/eslint-plugin": "^8.24.0",
         "cross-env": "^7.0.3",
         "eslint": "^9.20.0",
@@ -56,10 +61,13 @@
         "prettier": "^3.4.2",
         "react-scan": "0.3.3",
         "rimraf": "^6.0.1",
-        "ts-jest": "^29.2.5",
         "tsup": "^8.3.6",
         "typescript": "^5.8.2",
-        "typescript-eslint": "^8.24.0"
+        "typescript-eslint": "^8.24.0",
+        "vitest": "^3.2.3",
+        "@vitest/ui": "^3.2.3",
+        "@vitest/coverage-v8": "^3.2.3",
+        "jsdom": "^26.1.0"
     },
     "publishConfig": {
         "access": "public"
