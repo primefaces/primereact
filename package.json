@@ -74,6 +74,7 @@
     },
     "packageManager": "pnpm@9.6.0",
     "lint-staged": {
-        "**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}": ["eslint --fix", "prettier --write"]
+        "**/*.{js,jsx,mjs,ts,tsx,mts,d.ts}": ["eslint --fix", "prettier --write"],
+        "**/*.{ts,tsx,mts,d.ts}": ["pnpm run type:check"]
     }
 }
