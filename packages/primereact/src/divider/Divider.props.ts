@@ -3,7 +3,7 @@ import type { DividerProps } from '@primereact/types/shared/divider';
 
 export const defaultProps: DividerProps = {
     ...HeadlessDivider.defaultProps,
-    as: 'divider',
+    as: 'div',
     align: undefined,
     layout: 'horizontal',
     type: 'solid'
