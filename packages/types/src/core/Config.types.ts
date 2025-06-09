@@ -66,7 +66,7 @@ export interface PrimeReactProps {
     /**
      * Defines the passthrough options.
      */
-    pt?: Pick<PassThroughProps, 'value'> | undefined;
+    pt?: PassThroughProps['value'] | undefined;
     /**
      * Defines the passthrough options.
      */
@@ -82,7 +82,7 @@ export interface PrimeReactProps {
     /**
      * Collects styles of the used components.
      */
-    stylesheet?: Pick<ThemeProps, 'stylesheet'> | undefined;
+    stylesheet?: ThemeProps['stylesheet'] | undefined;
     /**
      * Defines whether the components should be unstyled.
      */

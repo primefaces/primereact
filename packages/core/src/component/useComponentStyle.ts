@@ -110,7 +110,7 @@ export function useComponentStyle<Props extends GlobalComponentProps, IProps, St
     // exposed methods
     const cx = React.useCallback(
         (key = '', params = {}) => {
-            return !$isUnstyled ? cn(getKeyValue($style.classes, key, { ...$params, context: params })) : undefined;
+            return !$isUnstyled ? cn(getKeyValue($style.classes as Record<string, string>, key, { ...$params, context: params })) : undefined;
         },
         [$isUnstyled, instance, $style.classes]
     );
@@ -118,8 +118,8 @@ export function useComponentStyle<Props extends GlobalComponentProps, IProps, St
     const sx = React.useCallback(
         (key = '', when = true, params = {}) => {
             if (when) {
-                const self = getKeyValue($style.inlineStyles, key, { ...$params, context: params }) as React.CSSProperties;
-                const base = getKeyValue($style.baseStyles?.inlineStyles, key, { ...$params, context: params }) as React.CSSProperties;
+                const self = getKeyValue($style.inlineStyles as Record<string, React.CSSProperties>, key, { ...$params, context: params }) as React.CSSProperties;
+                const base = getKeyValue($style.baseStyles?.inlineStyles as Record<string, React.CSSProperties>, key, { ...$params, context: params }) as React.CSSProperties;
 
                 return { ...base, ...self };
             }

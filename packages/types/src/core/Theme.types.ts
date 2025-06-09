@@ -47,10 +47,10 @@ export declare type ThemeProps = {
      */
     stylesheet?:
         | {
-              has: (key?: string) => boolean;
-              add: (name?: string, css?: string | undefined) => void;
+              has: (key: string) => boolean;
+              add: (name: string, css?: string | undefined) => void;
               clear: () => void;
-              getStyles: () => Map<string, { css: string; attrs?: Record<string, string> | undefined } | undefined>;
+              getStyles: () => Map<string, { css?: string; attrs?: Record<string, unknown> } | undefined>;
           }
         | undefined;
     children?: React.ReactNode | undefined;

@@ -3,7 +3,7 @@ import { Component } from '@primereact/core/component';
 import { useSwitch } from '@primereact/headless/switch';
 import { styles } from '@primereact/styles/switch';
 import { SwitchChangeEvent } from '@primereact/types/shared/switch';
-import { cn, mergeProps } from '@primeuix/utils';
+import { cn, mergeProps, resolve } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { SwitchControl } from './control';
@@ -82,7 +82,7 @@ export const Switch = withComponent({
             <SwitchProvider value={instance}>
                 <Component instance={instance} attrs={rootProps}>
                     {input}
-                    {props.children}
+                    {resolve(props.children, instance)}
                 </Component>
             </SwitchProvider>
         );

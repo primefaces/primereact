@@ -1,5 +1,6 @@
 'use client';
 import { Icon } from '@primereact/core/icon';
+import type { IconProps } from '@primereact/types/core';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -25,6 +26,6 @@ export const MeterGroupIcon = withComponent({
             ptmi('root')
         );
 
-        return <Icon {...props} {...rootProps} />;
+        return <Icon {...(props as IconProps)} {...rootProps} />;
     }
 });

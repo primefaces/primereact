@@ -148,7 +148,7 @@ export const useStyleClass = withHeadless({
         }, [bindTargetLeaveListener, props, unbindDocumentClickListener]);
 
         const resolveTarget = React.useCallback(() => {
-            return targetRef.current || getTargetElement(props.selector, elementRef.current);
+            return targetRef.current || getTargetElement(props.selector, elementRef.current as Element);
         }, [elementRef, props.selector]);
 
         const init = React.useCallback(() => {
@@ -157,7 +157,7 @@ export const useStyleClass = withHeadless({
                     elementRef.current = toElement(props.nodeRef) as HTMLElement;
                 }
 
-                setAttribute(elementRef.current, 'data-pd-styleclass', true);
+                setAttribute(elementRef.current as HTMLElement, 'data-pd-styleclass', true);
                 bindClickListener({ target: elementRef.current });
             });
         }, [bindClickListener, elementRef, props.nodeRef]);
@@ -171,7 +171,7 @@ export const useStyleClass = withHeadless({
         const isOutsideClick = (event: MouseEvent) => {
             const target = event?.target as Node;
 
-            return !elementRef.current.isSameNode(target) && !elementRef.current.contains(target) && !targetRef.current?.contains(target);
+            return !elementRef.current?.isSameNode(target) && !elementRef.current?.contains(target) && !targetRef.current?.contains(target);
         };
 
         // effects

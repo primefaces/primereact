@@ -40,7 +40,7 @@ export function useStyle() {
 
             if (isNotEmpty(loadOptions.css)) {
                 // @todo - implement
-                if (!theme?.stylesheet?.has(name) && !isClient() && name !== 'layer-order') {
+                if (name && !theme?.stylesheet?.has(name) && !isClient() && name !== 'layer-order') {
                     theme?.stylesheet?.add(name, css);
                 }
 

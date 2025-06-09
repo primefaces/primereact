@@ -1,3 +1,4 @@
+import type { PrimeReactProps } from '@primereact/types/core';
 import type { Metadata, Viewport } from 'next';
 
 export interface AppConfig {
@@ -12,17 +13,7 @@ export interface AppConfig {
         name: string;
         url: string;
     }[];
-    primereact?: {
-        theme?: {
-            preset?: unknown;
-            options?: {
-                cssLayer?: unknown;
-                darkModeSelector?: string;
-            };
-        };
-        ripple?: boolean;
-        locale?: string;
-    };
+    primereact?: PrimeReactProps;
     metadata?: Metadata;
     viewport?: Viewport;
 }

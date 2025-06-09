@@ -51,11 +51,11 @@ export type CommonInstance<Props = Record<PropertyKey, unknown>, IProps = Props,
     /**
      * The headless/component props.
      */
-    props: Props;
+    props: SafeRecord<Props>;
     /**
      * The headless/component attributes.
      */
-    attrs: Omit<SafeRecord<IProps>, keyof Props>;
+    attrs: Omit<SafeRecord<IProps>, keyof Props> & Record<PropertyKey, unknown>;
     /**
      * The headless/component props that are passed by the user.
      */

@@ -30,12 +30,7 @@ export interface MeterGroupIconPassThrough {
 /**
  * Defines valid properties in MeterGroupIcon component.
  */
-export interface MeterGroupIconProps extends BaseComponentProps<MeterGroupIconInstance> {
-    /**
-     * Defines the color of the icon.
-     */
-    color?: string | undefined;
-}
+export interface MeterGroupIconProps extends BaseComponentProps<MeterGroupIconInstance> {}
 
 /**
  * Defines valid state in MeterGroupIcon component.

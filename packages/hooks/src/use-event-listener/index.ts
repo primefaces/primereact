@@ -88,7 +88,7 @@ export function useEventListener({ target = 'document', type, listener, options,
             unbind();
 
             if (bindOptions.when || when) {
-                targetRef.current = getTargetElement(bindTarget);
+                targetRef.current = getTargetElement(bindTarget) as HTMLElement;
             }
         }
 
@@ -100,7 +100,7 @@ export function useEventListener({ target = 'document', type, listener, options,
 
     const unbind = () => {
         if (listenerRef.current) {
-            targetRef.current.removeEventListener(type, listenerRef.current, options);
+            targetRef.current?.removeEventListener(type, listenerRef.current, options);
             listenerRef.current = null;
         }
     };
@@ -114,7 +114,7 @@ export function useEventListener({ target = 'document', type, listener, options,
 
     const updateTarget = React.useCallback(() => {
         if (when) {
-            targetRef.current = getTargetElement(target);
+            targetRef.current = getTargetElement(target) as HTMLElement;
         } else {
             unbind();
             targetRef.current = null;

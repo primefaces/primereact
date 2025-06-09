@@ -72,13 +72,9 @@ export interface useStyleClassState {}
  */
 export interface useStyleClassExposes {
     /**
-     * The state of the useStyleClass.
-     */
-    state: useStyleClassState;
-    /**
      * The target element.
      */
-    targetRef: React.RefObject<React.ReactNode>;
+    targetRef: React.RefObject<HTMLElement | null>;
     /**
      * The method to trigger the enter animation.
      * @returns void
