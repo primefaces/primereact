@@ -5,12 +5,12 @@ import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
 import { MotionProvider } from './Motion.context';
-import { defaultProps } from './Motion.props';
+import { defaultMotionProps } from './Motion.props';
 import { useMotion } from './useMotion';
 
 export const Motion = withComponent({
     name: 'Motion',
-    defaultProps,
+    defaultProps: defaultMotionProps,
     setup(instance) {
         const { props } = instance;
 

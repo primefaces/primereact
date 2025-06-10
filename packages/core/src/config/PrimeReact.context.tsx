@@ -5,12 +5,12 @@ import { useProps } from '@primereact/hooks';
 import type { PrimeReactProps } from '@primereact/types/core';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './PrimeReact.props';
+import { defaultConfigProps } from './PrimeReact.props';
 
 export const PrimeReactContext = React.createContext<PrimeReactProps | undefined>(undefined);
 
 export function PrimeReactProvider(inProps: React.PropsWithChildren<PrimeReactProps> = {}) {
-    const { props, attrs } = useProps(inProps, defaultProps);
+    const { props, attrs } = useProps(inProps, defaultConfigProps);
 
     // states
     const [inputVariant, setInputVariant] = React.useState(props.inputVariant);

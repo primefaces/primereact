@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { LocaleContext } from './Locale.context';
 
-export const useLocale = () => {
+export function useLocale() {
     const context = React.useContext(LocaleContext);
 
     if (context === undefined) {
@@ -9,4 +9,4 @@ export const useLocale = () => {
     }
 
     return context;
-};
+}

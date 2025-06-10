@@ -1,5 +1,5 @@
 import type { LocaleProps } from '@primereact/types/core';
 
-export const defaultProps: LocaleProps = {
+export const defaultLocaleProps: LocaleProps = {
     lang: 'en'
 };

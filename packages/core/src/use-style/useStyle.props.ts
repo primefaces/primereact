@@ -1,1 +1,1 @@
-export const defaultProps = {};
+export const defaultUseStyleProps = {};

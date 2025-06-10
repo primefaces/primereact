@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PassThroughContext } from './PassThrough.context';
 
-export const usePassThrough = () => {
+export function usePassThrough() {
     const context = React.useContext(PassThroughContext);
 
     if (context === undefined) {
@@ -9,4 +9,4 @@ export const usePassThrough = () => {
     }
 
     return context;
-};
+}

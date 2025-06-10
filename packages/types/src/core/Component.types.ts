@@ -1,6 +1,6 @@
-import { Instance, useBaseOptions } from '.';
-import { SafeRecord } from '..';
-import { StylesOptions } from '../styles';
+import type { Instance, useBaseOptions } from '.';
+import type { SafeRecord } from '..';
+import type { StylesOptions } from '../styles';
 import type { PassThroughOptions } from './PassThrough.types';
 
 /**
@@ -56,7 +56,6 @@ export interface GlobalComponentProps<I extends ComponentInstance = ComponentIns
     styles?: StylesOptions | undefined;
     /**
      * The children to render.
-     * @todo update the type to be more specific
      */
     children?: React.ReactNode | ((instance: I) => React.ReactNode) | undefined;
 }
@@ -74,7 +73,7 @@ export interface ComponentProps<I extends ComponentInstance = ComponentInstance,
     attrs?: object | undefined;
 }
 
-export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData = Record<PropertyKey, unknown>> = {
+export type withComponentOptions<IProps, DProps, Exposes, Styles, CData = Record<PropertyKey, unknown>> = {
     name?: string | undefined;
     defaultProps?: DProps | undefined;
     styles?: Styles | undefined;
@@ -83,11 +82,11 @@ export declare type withComponentOptions<IProps, DProps, Exposes, Styles, CData 
     render?: React.FC<InComponentInstance<DProps, IProps, Record<PropertyKey, unknown>, Exposes>>;
 };
 
-export declare type useComponentOptions<IProps, DProps, Exposes, Styles> = useBaseOptions<IProps, DProps, Exposes> & {
+export type useComponentOptions<IProps, DProps, Exposes, Styles> = useBaseOptions<IProps, DProps, Exposes> & {
     styles?: Styles | undefined;
 };
 
-export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = Instance<Props, IProps, State, Exposes> & {
+export type useComponentPTReturnType = {
     /**
      * Finds attributes of the component using the key in pass-through options.
      *
@@ -113,7 +112,9 @@ export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = R
      * @returns {Record<string, unknown>} - The found attributes.
      */
     ptmo: (obj: Record<string, unknown>, key: string, params?: Record<string, unknown>) => Record<string, unknown>;
-} & {
+};
+
+export type useComponentStyleReturnType = {
     /**
      * Finds class names using the key in styles options.
      *
@@ -141,6 +142,10 @@ export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = R
      */
     $style: Record<string, unknown> | undefined;
 };
+
+export type InComponentInstance<Props = Record<PropertyKey, unknown>, IProps = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>> = Instance<Props, IProps, State, Exposes> &
+    useComponentPTReturnType &
+    useComponentStyleReturnType;
 
 export type ComponentInstance<Props = Record<PropertyKey, unknown>, State = Record<PropertyKey, unknown>, Exposes = Record<PropertyKey, unknown>, PassThrough = Record<string, unknown>> = InComponentInstance<
     SafeRecord<Props>,

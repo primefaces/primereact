@@ -3,12 +3,12 @@ import type { ThemeProps } from '@primereact/types/core';
 import { Theme } from '@primeuix/styled';
 import { resolve } from '@primeuix/utils';
 import * as React from 'react';
-import { defaultProps } from './Theme.props';
+import { defaultThemeProps } from './Theme.props';
 
 export const ThemeContext = React.createContext<ThemeProps | null>(null);
 
 export const ThemeProvider = (inProps: ThemeProps = {}) => {
-    const { props } = useProps(inProps, defaultProps);
+    const { props } = useProps(inProps, defaultThemeProps);
     const { stylesheet, preset, ...rest } = props;
 
     const value = {

@@ -9,6 +9,7 @@ import { useComponentStyle } from './useComponentStyle';
  * A hook for creating a component instance.
  * This hook initializes a component with properties, attributes, and styles, and provides methods for handling pass-through options and styles.
  * It also supports custom setup functions for additional configuration.
+ *
  * @param name The name of the component, used for debugging and identification.
  * @param options The options to customize the component instance.
  * @returns The component instance.

@@ -1,6 +1,6 @@
 import type { ThemeProps } from '@primereact/types/core';
 
-export const defaultProps: ThemeProps = {
+export const defaultThemeProps: ThemeProps = {
     preset: undefined,
     prefix: 'p',
     darkModeSelector: 'system',
