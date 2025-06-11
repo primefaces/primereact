@@ -29,6 +29,8 @@
         "build:icons": "pnpm --filter icons build",
         "build:metadata": "pnpm --filter metadata build",
         "build:lib": "pnpm --filter primereact build",
+        "build:styles": "pnpm --filter styles build",
+        "build:types": "pnpm --filter types build",
         "build:showcase": "pnpm --filter showcase build",
         "build:apidoc": "pnpm --filter showcase build:apidoc",
         "dev": "pnpm --filter showcase dev",
