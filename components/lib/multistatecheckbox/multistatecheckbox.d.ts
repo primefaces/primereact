@@ -243,7 +243,7 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      * @defaultValue false
      */
     unstyled?: boolean;
-        /**
+    /**
      * When present, it specifies that the component has invalid state style.
      * @defaultValue false
      */
