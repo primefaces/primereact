@@ -14,8 +14,8 @@ export default defineConfig([
     {
         ...TsupCommonOptions,
         entry
-    },
-    {
+    }
+    /*{
         ...TsupCommonOptions,
         entry: {
             'umd/index': 'src/index.ts'
@@ -25,5 +25,5 @@ export default defineConfig([
         minify: false,
         globalName: 'PrimeReact.Headless',
         outExtension: () => ({ js: `.js` })
-    }
+    }*/
 ]);

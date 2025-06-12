@@ -28,5 +28,5 @@ fs.readdirSync(path.resolve(__root, INPUT_DIR), { withFileTypes: true })
         }
     });
 
-// ESM
-fs.writeFileSync(INPUT_DIR + 'index.ts', modules.esm.join(''));
+// ESM @todo
+//fs.writeFileSync(INPUT_DIR + 'index.ts', modules.esm.join(''));

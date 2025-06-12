@@ -15,15 +15,4 @@ export default defineConfig([
         ...TsupCommonOptions,
         entry
     }
-    /*{
-        ...TsupCommonOptions,
-        entry: {
-            'umd/index': 'src/index.ts'
-        },
-        format: ['iife'],
-        dts: false,
-        minify: false,
-        globalName: 'PrimeReact.Hooks',
-        outExtension: () => ({ js: `.js` })
-    }*/
 ]);

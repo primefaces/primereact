@@ -13,15 +13,16 @@ const entry = globSync('src/**/index.tsx').reduce((acc: Record<string, string>, 
 export default defineConfig([
     {
         ...TsupCommonOptions,
-        entry
+        entry,
+        dts: false // @todo
     },
     {
         ...TsupCommonOptions,
         entry: {
             'base/index': 'src/base/index.ts'
         }
-    },
-    {
+    }
+    /*{
         ...TsupCommonOptions,
         entry: {
             'umd/index': 'src/index.ts'
@@ -31,5 +32,5 @@ export default defineConfig([
         minify: false,
         globalName: 'PrimeReact.Icons',
         outExtension: () => ({ js: `.js` })
-    }
+    }*/
 ]);

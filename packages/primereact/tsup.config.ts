@@ -13,9 +13,10 @@ const entry = globSync('src/**/index.ts').reduce((acc: Record<string, string>, f
 export default defineConfig([
     {
         ...TsupCommonOptions,
-        entry
-    },
-    {
+        entry,
+        dts: false // @todo: enable dts generation
+    }
+    /*{
         ...TsupCommonOptions,
         entry: {
             'umd/index': 'src/index.ts'
@@ -25,5 +26,5 @@ export default defineConfig([
         minify: false,
         globalName: 'PrimeReact.UI',
         outExtension: () => ({ js: `.js` })
-    }
+    }*/
 ]);
