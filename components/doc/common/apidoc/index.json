@@ -37770,6 +37770,14 @@
                             "description": "Template of icon for the selected option."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component has invalid state style."
+                        },
+                        {
                             "name": "optionIcon",
                             "optional": true,
                             "readonly": false,
@@ -37856,6 +37864,14 @@
                             "type": "any",
                             "default": "",
                             "description": "Value of the MultiStateCheckbox."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "null",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },
