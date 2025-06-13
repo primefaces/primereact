@@ -64,10 +64,6 @@
                         {
                             "name": "ScrollArea",
                             "to": "/docs/components/scrollarea"
-                        },
-                        {
-                            "name": "Toolbar",
-                            "to": "/docs/components/toolbar"
                         }
                     ]
                 },
