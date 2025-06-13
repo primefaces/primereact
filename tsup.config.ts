@@ -3,7 +3,7 @@ import { Options } from 'tsup';
 export default {
     format: ['esm'],
     outDir: 'dist',
-    dts: true,
+    dts: false,
     external: [/^@(primereact|primeuix)\/(.*)$/, 'react', 'react-dom'],
     sourcemap: true,
     splitting: false,

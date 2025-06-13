@@ -1,6 +1,6 @@
 import { globSync } from 'glob';
 import { defineConfig } from 'tsup';
-import TsupCommonOptions from '../../build.config';
+import TsupOptions from '../../tsup.config';
 
 const entry = globSync('src/**/index.tsx').reduce((acc: Record<string, string>, file: string) => {
     const name = file.replace(/^src\//, '').replace(/\.tsx$/, '');
@@ -12,18 +12,17 @@ const entry = globSync('src/**/index.tsx').reduce((acc: Record<string, string>, 
 
 export default defineConfig([
     {
-        ...TsupCommonOptions,
-        entry,
-        dts: false // @todo
+        ...TsupOptions,
+        entry
     },
     {
-        ...TsupCommonOptions,
+        ...TsupOptions,
         entry: {
             'base/index': 'src/base/index.ts'
         }
     }
     /*{
-        ...TsupCommonOptions,
+        ...TsupOptions,
         entry: {
             'umd/index': 'src/index.ts'
         },
