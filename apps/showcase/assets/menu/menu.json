@@ -58,12 +58,24 @@
                             "to": "/docs/components/divider"
                         },
                         {
+                            "name": "Fieldset",
+                            "to": "/docs/components/fieldset"
+                        },
+                        {
                             "name": "Panel",
                             "to": "/docs/components/panel"
                         },
                         {
                             "name": "ScrollArea",
                             "to": "/docs/components/scrollarea"
+                        },
+                        {
+                            "name": "Splitter",
+                            "to": "/docs/components/splitter"
+                        },
+                        {
+                            "name": "Stepper",
+                            "to": "/docs/components/stepper"
                         }
                     ]
                 },

@@ -253,6 +253,20 @@ export const Store = {
             'filePath': 'demo/divider/vertical-demo.tsx',
         },
     },
+    'fieldset': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/fieldset/basic-demo.tsx')),
+            'filePath': 'demo/fieldset/basic-demo.tsx',
+        },
+        'fieldset-pt': {
+            'component': React.lazy(() => import('demo/fieldset/fieldset-pt.tsx')),
+            'filePath': 'demo/fieldset/fieldset-pt.tsx',
+        },
+        'toggleable-demo': {
+            'component': React.lazy(() => import('demo/fieldset/toggleable-demo.tsx')),
+            'filePath': 'demo/fieldset/toggleable-demo.tsx',
+        },
+    },
     'floatlabel': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/floatlabel/basic-demo.tsx')),
@@ -509,6 +523,54 @@ export const Store = {
         'skeleton-pt': {
             'component': React.lazy(() => import('demo/skeleton/skeleton-pt.tsx')),
             'filePath': 'demo/skeleton/skeleton-pt.tsx',
+        },
+    },
+    'splitter': {
+        'horizontal-demo': {
+            'component': React.lazy(() => import('demo/splitter/horizontal-demo.tsx')),
+            'filePath': 'demo/splitter/horizontal-demo.tsx',
+        },
+        'nested-demo': {
+            'component': React.lazy(() => import('demo/splitter/nested-demo.tsx')),
+            'filePath': 'demo/splitter/nested-demo.tsx',
+        },
+        'size-demo': {
+            'component': React.lazy(() => import('demo/splitter/size-demo.tsx')),
+            'filePath': 'demo/splitter/size-demo.tsx',
+        },
+        'splitter-pt': {
+            'component': React.lazy(() => import('demo/splitter/splitter-pt.tsx')),
+            'filePath': 'demo/splitter/splitter-pt.tsx',
+        },
+        'vertical-demo': {
+            'component': React.lazy(() => import('demo/splitter/vertical-demo.tsx')),
+            'filePath': 'demo/splitter/vertical-demo.tsx',
+        },
+    },
+    'stepper': {
+        'horizontal-demo': {
+            'component': React.lazy(() => import('demo/stepper/horizontal-demo.tsx')),
+            'filePath': 'demo/stepper/horizontal-demo.tsx',
+        },
+        'linear-demo': {
+            'component': React.lazy(() => import('demo/stepper/linear-demo.tsx')),
+            'filePath': 'demo/stepper/linear-demo.tsx',
+        },
+        'stepper-pt': {
+            'component': React.lazy(() => import('demo/stepper/stepper-pt.tsx')),
+            'filePath': 'demo/stepper/stepper-pt.tsx',
+        },
+        'steps-only-demo': {
+            'component': React.lazy(() => import('demo/stepper/steps-only-demo.tsx')),
+            'filePath': 'demo/stepper/steps-only-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/stepper/template-demo.tsx')),
+            'filePath': 'demo/stepper/template-demo.tsx',
+        },
+        'vertical-demo': {
+            'component': React.lazy(() => import('demo/stepper/vertical-demo.tsx')),
+            'filePath': 'demo/stepper/vertical-demo.tsx',
         },
     },
     'switch': {
