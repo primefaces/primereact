@@ -691,4 +691,18 @@ export const Store = {
             'filePath': 'demo/togglebutton/togglebutton-pt.tsx',
         },
     },
+    'toolbar': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/toolbar/basic-demo.tsx')),
+            'filePath': 'demo/toolbar/basic-demo.tsx',
+        },
+        'custom-demo': {
+            'component': React.lazy(() => import('demo/toolbar/custom-demo.tsx')),
+            'filePath': 'demo/toolbar/custom-demo.tsx',
+        },
+        'toolbar-pt': {
+            'component': React.lazy(() => import('demo/toolbar/toolbar-pt.tsx')),
+            'filePath': 'demo/toolbar/toolbar-pt.tsx',
+        },
+    },
 };

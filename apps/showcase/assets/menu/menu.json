@@ -76,6 +76,10 @@
                         {
                             "name": "Stepper",
                             "to": "/docs/components/stepper"
+                        },
+                        {
+                            "name": "Toolbar",
+                            "to": "/docs/components/toolbar"
                         }
                     ]
                 },
