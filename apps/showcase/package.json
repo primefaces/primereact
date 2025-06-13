@@ -15,7 +15,6 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@primereact/code-viewer": "workspace:*",
         "@primereact/icons": "workspace:*",
         "@primereact/hooks": "workspace:*",
         "@primeuix/themes": "catalog:",
