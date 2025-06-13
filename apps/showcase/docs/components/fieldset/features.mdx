@@ -1,0 +1,47 @@
+---
+title: 'Fieldset'
+description: 'Fieldset visually integrates a label with its form element.'
+component: 'fieldset'
+---
+
+## Usage
+
+```tsx
+import { Fieldset } from 'primevue/fieldset';
+```
+
+```tsx
+<Fieldset>
+    <Fieldset.Legend />
+    <Fieldset.Content />
+</Fieldset>
+```
+
+## Examples
+
+### Basic
+
+Demonstrates a simple fieldset component with a legend and content for organizing related information in a structured manner.
+
+<DocComponentViewer name="fieldset:basic-demo" />
+
+### Toggleable
+
+Shows a fieldset with collapsible content that can be shown or hidden by clicking on the legend.
+
+<DocComponentViewer name="fieldset:toggleable-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Fieldset component uses the semantic fieldset element.
+
+### Keyboard Support
+
+| Key         | Function                                                                    |
+| ----------- | --------------------------------------------------------------------------- |
+| tab         | Moves focus to the next the focusable element in the page tab sequence.     |
+| shift + tab | Moves focus to the previous the focusable element in the page tab sequence. |
+| enter       | Toggles the visibility of the content.                                      |
+| space       | Toggles the visibility of the content.                                      |

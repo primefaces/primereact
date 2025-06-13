@@ -32,7 +32,7 @@ export interface FloatLabelPassThrough {
 export interface FloatLabelProps extends BaseComponentProps<FloatLabelInstance> {
     /**
      * Defines the positioning of the label relative to the input.
-     * @defaultValue over
+     * @default over
      */
     variant?: 'over' | 'in' | 'on' | undefined;
 }
