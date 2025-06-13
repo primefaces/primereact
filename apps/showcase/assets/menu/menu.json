@@ -50,6 +50,10 @@
                     "name": "Panel",
                     "children": [
                         {
+                            "name": "Accordion",
+                            "to": "/docs/components/accordion"
+                        },
+                        {
                             "name": "Card",
                             "to": "/docs/components/card"
                         },

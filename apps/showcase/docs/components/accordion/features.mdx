@@ -54,8 +54,29 @@ The optional `as` property controls the default container element of a header, f
 
 <DocComponentViewer name="accordion:template-demo" />
 
-### Use with RadioButton
+### With RadioButton
 
 `RadioButton` component can be used to group multiple `Accordion.Panel` components.
 
 <DocComponentViewer name="accordion:use-with-radiobutton" />
+
+## Accessibility
+
+### Screen Reader
+
+Accordion header elements is a button element and use aria-controls to define the id of the content section along with aria-expanded for the visibility state. The value to read a header element defaults to the value of the header property and can be customized by defining an aria-label or aria-labelledby via the pt property.
+
+The content uses region role, defines an id that matches the aria-controls of the header and aria-labelledby referring to the id of the header.
+
+### Header Keyboard Support
+
+| Key         | Function                                                                                             |
+| ----------- | ---------------------------------------------------------------------------------------------------- |
+| `tab`         | Moves focus to the next focusable element in the page tab sequence.                                  |
+| `shift + tab` | Moves focus to the previous focusable element in the page tab sequence.                              |
+| `enter`       | Toggles the visibility of the content.                                                               |
+| `space`       | Toggles the visibility of the content.                                                               |
+| `down arrow`  | Moves focus to the next header. If focus is on the last header, moves focus to the first header.     |
+| `up arrow`    | Moves focus to the previous header. If focus is on the first header, moves focus to the last header. |
+| `home`        | Moves focus to the first header.                                                                     |
+| `end`         | Moves focus to the last header.                                                                      |
