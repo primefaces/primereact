@@ -151,7 +151,7 @@ const getTypeDoc = async (typeDocOptions) => {
 
                             const variables = [];
 
-                            if (variable.type.declaration) {
+                            if (variable.type.declaration && variable.type.declaration.children) {
                                 variable.type.declaration.children.forEach((variableChild) => {
                                     variables.push({
                                         name: variableChild.name,
