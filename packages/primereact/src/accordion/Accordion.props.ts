@@ -5,7 +5,6 @@ export const defaultProps: AccordionProps = {
     ...HeadlessAccordion.defaultProps,
     as: 'div',
     lazy: false,
-    selectOnFocus: false,
-    tabindex: 0,
+    tabIndex: 0,
     disabled: false
 };

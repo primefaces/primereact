@@ -18,56 +18,23 @@ export const AccordionHeader = withComponent({
         return { accordion, accordionpanel };
     },
     render(instance) {
-        const { props, ptmi, accordion, accordionpanel, elementRef } = instance;
+        const { props, ptmi, accordion, accordionpanel } = instance;
 
         const rootProps = mergeProps(
             {
                 className: accordion?.cx('header'),
-                onClick: () => {
-                    if (!accordion?.props.selectOnFocus) {
-                        accordion?.updateValue(accordionpanel?.props.value);
-                    }
+                onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+                    accordion?.onHeaderClick(event, accordionpanel?.props.value);
                 },
                 onFocus: (event: React.FocusEvent<HTMLButtonElement>) => {
-                    if (accordion?.props.selectOnFocus) {
-                        accordion?.updateValue(accordionpanel?.props.value);
-                    }
-
-                    props?.onFocus?.(event);
+                    accordion?.onHeaderFocus(event, accordionpanel?.props.value);
                 },
                 onKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => {
-                    switch (event.code) {
-                        case 'ArrowDown':
-                        case 'Tab':
-                            accordion?.focusPanel(elementRef, accordion?.elementRef, 'next');
-                            break;
-
-                        case 'ArrowUp':
-                            accordion?.focusPanel(elementRef, accordion?.elementRef, 'previous');
-                            break;
-
-                        case 'Home':
-                            accordion?.focusPanel(elementRef, accordion?.elementRef, 'first');
-                            break;
-
-                        case 'End':
-                            accordion?.focusPanel(elementRef, accordion?.elementRef, 'last');
-                            break;
-
-                        case 'Enter':
-                        case 'NumpadEnter':
-                        case 'Space':
-                            accordion?.updateValue(accordionpanel?.props.value);
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    event.preventDefault();
+                    accordion?.onHeaderKeyDown(event, accordionpanel?.props.value);
                 },
                 style: { userSelect: 'none' },
                 disabled: accordionpanel?.props.disabled,
+                tabIndex: accordion?.props.tabIndex,
                 'data-p-active': accordionpanel?.active,
                 'data-p-disabled': accordionpanel?.props.disabled,
                 'aria-expanded': accordionpanel?.active,

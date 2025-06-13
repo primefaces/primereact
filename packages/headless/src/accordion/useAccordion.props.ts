@@ -4,5 +4,6 @@ export const defaultProps: useAccordionProps = {
     defaultValue: null,
     value: null,
     multiple: false,
-    onValueChange: undefined
+    onValueChange: undefined,
+    selectOnFocus: false
 };

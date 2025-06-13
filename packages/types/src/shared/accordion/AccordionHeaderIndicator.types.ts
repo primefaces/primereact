@@ -31,12 +31,7 @@ export interface AccordionHeaderIndicatorPassThrough {
 /**
  * Defines valid properties in AccordionHeaderIndicator component.
  */
-export interface AccordionHeaderIndicatorProps extends BaseComponentProps<AccordionHeaderIndicatorInstance> {
-    /**
-     * Callback function that is called when the header is focused.
-     */
-    onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
-}
+export interface AccordionHeaderIndicatorProps extends BaseComponentProps<AccordionHeaderIndicatorInstance> {}
 
 /**
  * Defines valid state in AccordionHeaderIndicator component.

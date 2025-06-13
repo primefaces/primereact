@@ -32,11 +32,15 @@ export interface AccordionPassThrough {
     /**
      * Used to pass attributes to the header's DOM element.
      */
-    header?: AccordionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    header?: AccordionPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Used to pass attributes to the content's DOM element.
      */
     content?: AccordionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to pass attributes to the header indicator's DOM element.
+     */
+    headerindicator?: AccordionPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -52,12 +56,7 @@ export interface AccordionProps extends BaseComponentProps<AccordionInstance, us
      * Index of the element in tabbing order.
      * @default 0
      */
-    tabindex?: number | undefined;
-    /**
-     * When enabled, the focused tab is activated.
-     * @default false
-     */
-    selectOnFocus?: boolean | undefined;
+    tabIndex?: number | undefined;
 }
 
 /**
@@ -79,15 +78,23 @@ export const AccordionClassNames = {
     /**
      * Class name of the root element
      */
-    root: 'p-avatar',
+    root: 'p-accordion',
     /**
-     * Class name of the box element
+     * Class name of the content element
      */
-    label: 'p-avatar-label',
+    content: 'p-accordioncontent',
     /**
-     * Class name of the input element
+     * Class name of the header element
      */
-    icon: 'p-avatar-icon'
+    header: 'p-accordionheader',
+    /**
+     * Class name of the panel element
+     */
+    panel: 'p-accordionpanel',
+    /**
+     * Class name of the toggle icon element
+     */
+    toggleicon: 'p-accordionheader-toggle-icon'
 } as const;
 
 /**

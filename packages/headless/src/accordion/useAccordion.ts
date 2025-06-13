@@ -8,7 +8,7 @@ import { defaultProps } from './useAccordion.props';
 export const useAccordion = withHeadless({
     name: 'useAccordion',
     defaultProps,
-    setup({ props }) {
+    setup({ props, elementRef }) {
         const [activeValueState, setActiveValueState] = React.useState<useAccordionProps['value']>(props.value ?? props.defaultValue ?? null);
 
         const state = {
@@ -45,41 +45,41 @@ export const useAccordion = withHeadless({
             }
         };
 
-        const findHeader = (panelElement: HTMLElement): HTMLElement | null => {
-            return findSingle(panelElement, '[data-pc-name="accordionheader"]') as HTMLElement | null;
-        };
+        const focusPanel = (accordionHeader: HTMLElement | null, accordionRef: React.RefObject<HTMLElement | null>, direction: NavigationDirection): void => {
+            const findHeader = (panelElement: HTMLElement): HTMLElement | null => {
+                return findSingle(panelElement, '[data-pc-name="accordionheader"]') as HTMLElement | null;
+            };
 
-        const findAdjacentPanel = (panelElement: HTMLElement, direction: 'next' | 'previous', selfCheck = false): HTMLElement | null => {
-            const siblingProperty = direction === 'next' ? 'nextElementSibling' : 'previousElementSibling';
-            const element = selfCheck ? panelElement : (panelElement[siblingProperty] as HTMLElement | null);
+            const findAdjacentPanel = (panelElement: HTMLElement, direction: 'next' | 'previous', selfCheck = false): HTMLElement | null => {
+                const siblingProperty = direction === 'next' ? 'nextElementSibling' : 'previousElementSibling';
+                const element = selfCheck ? panelElement : (panelElement[siblingProperty] as HTMLElement | null);
 
-            if (!element) {
-                return null;
-            }
+                if (!element) {
+                    return null;
+                }
 
-            if (getAttribute(element, 'data-p-disabled')) {
-                return findAdjacentPanel(element, direction);
-            }
+                if (getAttribute(element, 'data-p-disabled')) {
+                    return findAdjacentPanel(element, direction);
+                }
 
-            return findHeader(element);
-        };
+                return findHeader(element);
+            };
 
-        const findBoundaryPanel = (accordionRef: React.RefObject<HTMLElement | null>, boundary: 'first' | 'last'): HTMLElement | null => {
-            const accordionElement = accordionRef?.current;
+            const findBoundaryPanel = (boundary: 'first' | 'last'): HTMLElement | null => {
+                const accordionElement = elementRef?.current;
 
-            if (!accordionElement) return null;
+                if (!accordionElement) return null;
 
-            const targetChild = boundary === 'first' ? accordionElement.firstElementChild : accordionElement.lastElementChild;
+                const targetChild = boundary === 'first' ? accordionElement.firstElementChild : accordionElement.lastElementChild;
 
-            if (!targetChild) return null;
+                if (!targetChild) return null;
 
-            const direction = boundary === 'first' ? 'next' : 'previous';
+                const direction = boundary === 'first' ? 'next' : 'previous';
 
-            return findAdjacentPanel(targetChild as HTMLElement, direction, true);
-        };
+                return findAdjacentPanel(targetChild as HTMLElement, direction, true);
+            };
 
-        const focusPanel = (accordionHeaderRef: React.RefObject<HTMLElement | null>, accordionRef: React.RefObject<HTMLElement | null>, direction: NavigationDirection): void => {
-            const currentPanel = accordionHeaderRef?.current?.closest('[data-pc-name="accordionpanel"]') as HTMLElement | null;
+            const currentPanel = accordionHeader?.closest('[data-pc-name="accordionpanel"]') as HTMLElement | null;
 
             if (!currentPanel) return;
 
@@ -90,7 +90,7 @@ export const useAccordion = withHeadless({
                     targetPanel = findAdjacentPanel(currentPanel, 'next');
 
                     if (!targetPanel) {
-                        targetPanel = findBoundaryPanel(accordionRef, 'first');
+                        targetPanel = findBoundaryPanel('first');
                     }
 
                     break;
@@ -99,17 +99,17 @@ export const useAccordion = withHeadless({
                     targetPanel = findAdjacentPanel(currentPanel, 'previous');
 
                     if (!targetPanel) {
-                        targetPanel = findBoundaryPanel(accordionRef, 'last');
+                        targetPanel = findBoundaryPanel('last');
                     }
 
                     break;
 
                 case 'first':
-                    targetPanel = findBoundaryPanel(accordionRef, 'first');
+                    targetPanel = findBoundaryPanel('first');
                     break;
 
                 case 'last':
-                    targetPanel = findBoundaryPanel(accordionRef, 'last');
+                    targetPanel = findBoundaryPanel('last');
                     break;
             }
 
@@ -117,6 +117,53 @@ export const useAccordion = withHeadless({
                 focus(targetPanel);
             }
         };
+
+        const onHeaderClick = (event: React.MouseEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
+            if (!props.selectOnFocus) {
+                updateValue(value);
+            }
+        };
+
+        const onHeaderFocus = (event: React.FocusEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
+            if (props.selectOnFocus) {
+                updateValue(value);
+            }
+        };
+
+        const onHeaderKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    focusPanel(event.currentTarget, elementRef, 'next');
+                    break;
+
+                case 'ArrowUp':
+                    focusPanel(event.currentTarget, elementRef, 'previous');
+                    break;
+
+                case 'Home':
+                    focusPanel(event.currentTarget, elementRef, 'first');
+                    break;
+
+                case 'End':
+                    focusPanel(event.currentTarget, elementRef, 'last');
+                    break;
+
+                case 'Enter':
+                case 'NumpadEnter':
+                case 'Space':
+                    updateValue(value);
+                    break;
+
+                case 'Tab':
+                    return;
+
+                default:
+                    break;
+            }
+
+            event.preventDefault();
+        };
+
         // effects
 
         return {
@@ -124,7 +171,9 @@ export const useAccordion = withHeadless({
             // methods
             updateValue,
             isItemActive,
-            focusPanel
+            onHeaderClick,
+            onHeaderFocus,
+            onHeaderKeyDown
         };
     }
 });
