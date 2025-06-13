@@ -1,0 +1,63 @@
+---
+title: 'Splitter'
+description: 'Splitter is utilized to separate and resize panels.'
+component: 'splitter'
+---
+
+## Usage
+
+```tsx
+import { Splitter } from 'primereact/splitter';
+```
+
+```tsx
+<Splitter>
+    <Splitter.Panel />
+    <Splitter.Gutter>
+        <Splitter.Thumb />
+    </Splitter.Gutter>
+    <Splitter.Panel />
+</Splitter>
+```
+
+## Examples
+
+### Horizontal
+
+Splitter requires two `Splitter.Panel` components as children which are displayed horizontally by default.
+
+<DocComponentViewer name="splitter:horizontal-demo" />
+
+### Size
+
+Initial dimension of a panel is percentage based and defined using the `size` property. In addition, `minSize` is provided to set a minimum value during a resize.
+
+<DocComponentViewer name="splitter:size-demo" />
+
+## Vertical
+
+Splitters can be combined to create advanced layouts.
+
+<DocComponentViewer name="splitter:vertical-demo" />
+
+## Nested
+
+Splitters can be combined to create advanced layouts.
+
+<DocComponentViewer name="splitter:nested-demo" />
+
+## Accessibility
+
+### Screen Reader
+
+Splitter bar defines `separator` as the role with `aria-orientation` set to either horizontal or vertical.
+
+### Keyboard Support
+
+| Key         | Function                                  |
+| ----------- | ----------------------------------------- |
+| tab         | Moves focus through the splitter bar.     |
+| down arrow  | Moves a vertical splitter down.           |
+| up arrow    | Moves a vertical splitter up.             |
+| left arrow  | Moves a horizontal splitter to the left.  |
+| right arrow | Moves a horizontal splitter to the right. |
