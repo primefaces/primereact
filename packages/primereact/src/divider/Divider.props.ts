@@ -5,6 +5,6 @@ export const defaultProps: DividerProps = {
     ...HeadlessDivider.defaultProps,
     as: 'div',
     align: undefined,
-    layout: 'horizontal',
+    orientation: 'horizontal',
     type: 'solid'
 };

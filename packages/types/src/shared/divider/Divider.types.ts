@@ -43,7 +43,7 @@ export interface DividerProps extends BaseComponentProps<DividerInstance, useDiv
      * Specifies the orientation, valid values are 'horizontal' and 'vertical'.
      * @default horizontal
      */
-    layout?: 'horizontal' | 'vertical' | undefined;
+    orientation?: 'horizontal' | 'vertical' | undefined;
     /**
      * Border style type.
      * @default solid

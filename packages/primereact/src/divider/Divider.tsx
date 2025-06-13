@@ -27,7 +27,7 @@ export const Divider = withComponent({
                 className: cx('root'),
                 style: sx('root'),
                 role: 'separator',
-                'aria-orientation': props.layout
+                'aria-orientation': props.orientation
             },
             ptmi('root')
         );
