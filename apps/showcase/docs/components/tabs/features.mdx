@@ -1,0 +1,72 @@
+---
+title: Tabs
+description: Tabs is a component that displays a list of tabs and allows the user to select one.
+component: tabs
+---
+
+## Usage
+
+```tsx
+import { Tabs } from 'primereact/tabs';
+```
+
+```tsx
+<Tabs>
+    <Tabs.List>
+        <Tabs.Tab value="tab1">Tab 1</Tabs.Tab>
+    </Tabs.List>
+    <Tabs.Panels>
+        <Tabs.Panel value="tab1">Tab 1 Content</Tabs.Panel>
+    </Tabs.Panels>
+</Tabs>
+```
+
+## Examples
+
+### Basic
+
+<DocComponentViewer name="tabs:basic-demo" />
+
+### Dynamic
+
+<DocComponentViewer name="tabs:dynamic-demo" />
+
+### Controlled
+
+<DocComponentViewer name="tabs:controlled-demo" />
+
+### Scrollable
+
+<DocComponentViewer name="tabs:scrollable-demo" />
+
+### Disabled
+
+<DocComponentViewer name="tabs:disabled-demo" />
+
+### Custom Indicator
+
+<DocComponentViewer name="tabs:custom-indicator-demo" />
+
+### Template
+
+<DocComponentViewer name="tabs:template-demo" />    
+
+## Accessibility
+
+### Screen Reader
+
+The tabs container in TabList is defined with the tablist role, as any attribute is passed to the container element aria-labelledby can be optionally used to specify an element to describe the Tabs. Each Tab has a tab role along with aria-selected state attribute and aria-controls to refer to the corresponding TabPanel. TabPanel has tabpanel role, an id to match the aria-controls of Tab and aria-labelledby reference to Tab as the accessible name.
+
+### Tab Keyboard Support
+
+| Key | Function |
+| --- | --- |
+| `tab` | Moves focus through the header. |
+| `enter` | Activates the focused tab header. |
+| `space` | Activates the focused tab header. |
+| `right arrow` | Moves focus to the next header. If focus is on the last header, moves focus to the first header. |
+| `left arrow` | Moves focus to the previous header. If focus is on the first header, moves focus to the last header. |
+| `home` | Moves focus to the last header. |
+| `end` | Moves focus to the first header. |
+| `pageUp` | Moves scroll position to first header. |
+| `pageDown` | Moves scroll position to last header. |
