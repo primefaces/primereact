@@ -144,7 +144,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                     dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 }
 
-                if (topPos >= props.minY && topPos + height < viewport.height) {
+                if (topPos >= props.minY && (deltaY < 0 || topPos + height < viewport.height)) {
                     lastPageY.current = event.pageY;
                     dialogRef.current.style.top = topPos - topMargin + 'px';
                 }
@@ -211,11 +211,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 newHeight = newHeight + deltaY;
             }
 
-            if ((!minWidth || newWidth > minWidth) && offset.left + newWidth < viewport.width) {
+            if ((!minWidth || newWidth > minWidth) && (deltaX < 0 || offset.left + newWidth < viewport.width)) {
                 dialogRef.current.style.width = newWidth + 'px';
             }
 
-            if ((!minHeight || newHeight > minHeight) && offset.top + newHeight < viewport.height) {
+            if ((!minHeight || newHeight > minHeight) && (deltaY < 0 || offset.top + newHeight < viewport.height)) {
                 dialogRef.current.style.height = newHeight + 'px';
             }
 
