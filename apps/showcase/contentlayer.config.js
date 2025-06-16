@@ -14,7 +14,7 @@ import { getPTOptions, getStyleOptions, getTokenOptions } from './lib/utils/getC
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
-    filePathPattern: 'components/**/*.mdx',
+    filePathPattern: '{components,theming}/**/*.mdx|{tailwind,icons}/*.mdx',
     contentType: 'mdx',
     fields: {
         title: { type: 'string', required: true },
@@ -85,6 +85,7 @@ export default makeSource({
                 visit(tree, (node) => {
                     if (node.name === 'DocComponentViewer') {
                         const name = getNodeAttributeByName(node, 'name')?.value;
+                        const hideCode = getNodeAttributeByName(node, 'hideCode')?.value === 'true';
 
                         if (!name) {
                             return null;
@@ -106,35 +107,37 @@ export default makeSource({
 
                         if (!filePath) return null;
 
-                        try {
-                            const source = fs.readFileSync(filePath, 'utf8');
+                        if (!hideCode) {
+                            try {
+                                const source = fs.readFileSync(filePath, 'utf8');
 
-                            node.children?.push(
-                                u('element', {
-                                    tagName: 'pre',
-                                    properties: {
-                                        __src__: filePath,
-                                        __spec__: 'DocComponentViewer'
-                                    },
-                                    children: [
-                                        u('element', {
-                                            tagName: 'code',
-                                            properties: {
-                                                className: ['language-tsx']
-                                            },
-                                            children: [
-                                                {
-                                                    type: 'text',
-                                                    value: source
-                                                }
-                                            ]
-                                        })
-                                    ]
-                                })
-                            );
-                        } catch (error) {
-                            // eslint-disable-next-line no-console
-                            console.error(`Error reading file ${filePath}:`, error);
+                                node.children?.push(
+                                    u('element', {
+                                        tagName: 'pre',
+                                        properties: {
+                                            __src__: filePath,
+                                            __spec__: 'DocComponentViewer'
+                                        },
+                                        children: [
+                                            u('element', {
+                                                tagName: 'code',
+                                                properties: {
+                                                    className: ['language-tsx']
+                                                },
+                                                children: [
+                                                    {
+                                                        type: 'text',
+                                                        value: source
+                                                    }
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                );
+                            } catch (error) {
+                                // eslint-disable-next-line no-console
+                                console.error(`Error reading file ${filePath}:`, error);
+                            }
                         }
                     }
                 });
