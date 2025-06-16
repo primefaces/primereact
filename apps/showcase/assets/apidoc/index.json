@@ -29,7 +29,7 @@
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "AccordionPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the header's DOM element."
                         },
@@ -40,6 +40,14 @@
                             "type": "AccordionPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "default": "",
                             "description": "Used to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "headerindicator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AccordionPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the header indicator's DOM element."
                         }
                     ],
                     "methods": []
@@ -153,20 +161,12 @@
                             "description": "When enabled, hidden tabs are not rendered at all. Defaults to false that hides tabs with css."
                         },
                         {
-                            "name": "tabindex",
+                            "name": "tabIndex",
                             "optional": true,
                             "readonly": false,
                             "type": "number",
                             "default": "0",
                             "description": "Index of the element in tabbing order."
-                        },
-                        {
-                            "name": "selectOnFocus",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "defaultValue",
@@ -191,6 +191,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, multiple tabs can be activated at the same time."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, the accordion will be selected on focus."
                         },
                         {
                             "name": "onValueChange",
@@ -255,12 +263,28 @@
                             "description": "The method to check if the panel is active."
                         },
                         {
-                            "name": "focusPanel",
+                            "name": "onHeaderClick",
                             "optional": false,
                             "readonly": false,
-                            "type": "(accordionHeaderRef: RefObject<HTMLElement>, accordionRef: RefObject<HTMLElement>, direction: NavigationDirection) => void",
+                            "type": "(event: MouseEvent<HTMLButtonElement>, value: string | number) => void",
                             "default": "",
-                            "description": "The method to focus the panel."
+                            "description": "The method to handle the click event of the accordion header."
+                        },
+                        {
+                            "name": "onHeaderFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the focus event of the accordion header."
+                        },
+                        {
+                            "name": "onHeaderKeyDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: KeyboardEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the key down event of the accordion header."
                         }
                     ],
                     "methods": [],
@@ -295,24 +319,38 @@
                     "variables": [
                         {
                             "name": "root",
-                            "value": "p-avatar",
+                            "value": "p-accordion",
                             "optional": false,
                             "readonly": true,
                             "description": "Class name of the root element"
                         },
                         {
-                            "name": "label",
-                            "value": "p-avatar-label",
+                            "name": "content",
+                            "value": "p-accordioncontent",
                             "optional": false,
                             "readonly": true,
-                            "description": "Class name of the box element"
+                            "description": "Class name of the content element"
                         },
                         {
-                            "name": "icon",
-                            "value": "p-avatar-icon",
+                            "name": "header",
+                            "value": "p-accordionheader",
                             "optional": false,
                             "readonly": true,
-                            "description": "Class name of the input element"
+                            "description": "Class name of the header element"
+                        },
+                        {
+                            "name": "panel",
+                            "value": "p-accordionpanel",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the panel element"
+                        },
+                        {
+                            "name": "toggleicon",
+                            "value": "p-accordionheader-toggle-icon",
+                            "optional": false,
+                            "readonly": true,
+                            "description": "Class name of the toggle icon element"
                         }
                     ]
                 }
@@ -611,14 +649,6 @@
                             "description": "The children to render."
                         },
                         {
-                            "name": "onFocus",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "(event: FocusEvent<HTMLButtonElement>) => void",
-                            "default": "",
-                            "description": "Callback function that is called when the header is focused."
-                        },
-                        {
                             "name": "[key: string]",
                             "optional": false,
                             "readonly": false,
@@ -795,14 +825,6 @@
                             "type": "ReactNode | ((instance: AccordionHeaderIndicatorInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
-                        },
-                        {
-                            "name": "onFocus",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "(event: FocusEvent<HTMLButtonElement>) => void",
-                            "default": "",
-                            "description": "Callback function that is called when the header is focused."
                         },
                         {
                             "name": "[key: string]",
@@ -1113,6 +1135,14 @@
                             "description": "When enabled, multiple tabs can be activated at the same time."
                         },
                         {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, the accordion will be selected on focus."
+                        },
+                        {
                             "name": "onValueChange",
                             "optional": true,
                             "readonly": false,
@@ -1168,12 +1198,28 @@
                             "description": "The method to check if the panel is active."
                         },
                         {
-                            "name": "focusPanel",
+                            "name": "onHeaderClick",
                             "optional": false,
                             "readonly": false,
-                            "type": "(accordionHeaderRef: RefObject<HTMLElement>, accordionRef: RefObject<HTMLElement>, direction: NavigationDirection) => void",
+                            "type": "(event: MouseEvent<HTMLButtonElement>, value: string | number) => void",
                             "default": "",
-                            "description": "The method to focus the panel."
+                            "description": "The method to handle the click event of the accordion header."
+                        },
+                        {
+                            "name": "onHeaderFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the focus event of the accordion header."
+                        },
+                        {
+                            "name": "onHeaderKeyDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: KeyboardEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the key down event of the accordion header."
                         }
                     ],
                     "methods": [],
@@ -21593,6 +21639,1066 @@
                 "useSwitchInstance": {
                     "values": "HeadlessInstance<useSwitchProps, useSwitchState, useSwitchExposes>",
                     "description": "Instance of useSwitch headless."
+                }
+            }
+        }
+    },
+    "tabs": {
+        "description": "Tabs component is used to select a boolean value.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsPassThrough": {
+                    "description": "Defines passthrough(pt) options of Tabs component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabsPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "TabsProps": {
+                    "description": "Defines valid properties in Tabs component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TabsInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TabsInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<TabsPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance: TabsInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "lazy",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, hidden tabs are not rendered at all. Defaults to false that hides tabs with css."
+                        },
+                        {
+                            "name": "scrollable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When specified, enables horizontal and/or vertical scrolling."
+                        },
+                        {
+                            "name": "showNavigators",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to display navigation buttons in container when scrollable is enabled."
+                        },
+                        {
+                            "name": "tabindex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "default": "0",
+                            "description": "Index of the element in tabbing order."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "null",
+                            "description": "Value of the active tab or an array of values in multiple mode."
+                        },
+                        {
+                            "name": "onValueChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: useTabsChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the tabs's value changes."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<TabsInstance, useTabsProps>"
+                },
+                "TabsState": {
+                    "description": "Defines valid state in Tabs component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "activeTab",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Value of the active tab or an array of values in multiple mode."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useTabsState"
+                },
+                "TabsExposes": {
+                    "description": "Defines the methods and properties exposed by Tabs component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "updateValue",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(value: string | number) => void",
+                            "default": "",
+                            "description": "The method to update the value of the active tab."
+                        },
+                        {
+                            "name": "isItemActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(key: string | number) => boolean",
+                            "default": "",
+                            "description": "The method to check if the tab is active."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "useTabsExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsPassThroughType": {
+                    "values": "PassThroughType<TabsInstance, E>",
+                    "description": "Defines passthrough(pt) options type in Tabs component."
+                },
+                "TabsClassNamesType": {
+                    "values": "typeof TabsClassNames[keyof typeof TabsClassNames]",
+                    "description": "Type representing the CSS class names used in the Tabs component."
+                },
+                "TabsInstance": {
+                    "values": "ComponentInstance<TabsProps, TabsState, TabsExposes, TabsPassThrough>",
+                    "description": "Instance of Switch component."
+                }
+            }
+        },
+        "variables": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TabsClassNames": {
+                    "description": "Defines the CSS class names used in the Tabs component.",
+                    "variables": []
+                }
+            }
+        }
+    },
+    "tabslist": {
+        "description": "TabsList is a component that displays a container for tabs.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsListPassThrough": {
+                    "description": "Defines passthrough(pt) options of TabsList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabsListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "TabsListProps": {
+                    "description": "Defines valid properties in TabsList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TabsListInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TabsListInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<TabsListPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance: TabsListInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<TabsListInstance>"
+                },
+                "TabsListState": {
+                    "description": "Defines valid state in TabsList component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "TabsListExposes": {
+                    "description": "Defines the methods and properties exposed by TabsList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "tabs",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabsInstance",
+                            "default": "",
+                            "description": "The Tabs component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsListPassThroughType": {
+                    "values": "PassThroughType<TabsListInstance, E>",
+                    "description": "Defines passthrough(pt) options type in TabsList component."
+                },
+                "TabsListInstance": {
+                    "values": "ComponentInstance<TabsListProps, TabsListState, TabsListExposes, TabsListPassThrough>",
+                    "description": "Instance of TabsList component."
+                }
+            }
+        }
+    },
+    "tabspanel": {
+        "description": "TabsPanel is a component that displays a container for tabs.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsPanelPassThrough": {
+                    "description": "Defines passthrough(pt) options of TabsPanel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabsPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "TabsPanelProps": {
+                    "description": "Defines valid properties in TabsPanel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TabsPanelInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TabsPanelInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<TabsPanelPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance: TabsPanelInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Value of the tabpanel."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<TabsPanelInstance>"
+                },
+                "TabsPanelState": {
+                    "description": "Defines valid state in TabsPanel component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "TabsPanelExposes": {
+                    "description": "Defines the methods and properties exposed by TabsList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "tabs",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabsInstance",
+                            "default": "",
+                            "description": "The Tabs component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsPanelPassThroughType": {
+                    "values": "PassThroughType<TabsPanelInstance, E>",
+                    "description": "Defines passthrough(pt) options type in TabsPanel component."
+                },
+                "TabsPanelInstance": {
+                    "values": "ComponentInstance<TabsPanelProps, TabsPanelState, TabsPanelExposes, TabsPanelPassThrough>",
+                    "description": "Instance of TabsList component."
+                }
+            }
+        }
+    },
+    "tabspanels": {
+        "description": "TabsPanels is a component that displays a container for panels.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsPanelsPassThrough": {
+                    "description": "Defines passthrough(pt) options of TabsPanels component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabsPanelsPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "TabsPanelsProps": {
+                    "description": "Defines valid properties in TabsPanels component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TabsPanelsInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TabsPanelsInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<TabsPanelsPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance: TabsPanelsInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<TabsPanelsInstance>"
+                },
+                "TabsPanelsState": {
+                    "description": "Defines valid state in TabsPanels component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "TabsPanelsExposes": {
+                    "description": "Defines the methods and properties exposed by TabsPanels component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "tabs",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabsInstance",
+                            "default": "",
+                            "description": "The Tabs component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsPanelsPassThroughType": {
+                    "values": "PassThroughType<TabsPanelsInstance, E>",
+                    "description": "Defines passthrough(pt) options type in TabsPanels component."
+                },
+                "TabsPanelsInstance": {
+                    "values": "ComponentInstance<TabsPanelsProps, TabsPanelsState, TabsPanelsExposes, TabsPanelsPassThrough>",
+                    "description": "Instance of TabsPanels component."
+                }
+            }
+        }
+    },
+    "tabstab": {
+        "description": "TabsTab is a component that displays a tab.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsTabPassThrough": {
+                    "description": "Defines passthrough(pt) options of TabsTab component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabsTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "TabsTabProps": {
+                    "description": "Defines valid properties in TabsTab component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TabsTabInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TabsTabInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<TabsTabPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance: TabsTabInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Value of the tab."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the tab is disabled."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<TabsTabInstance>"
+                },
+                "TabsTabState": {
+                    "description": "Defines valid state in TabsTab component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "TabsTabExposes": {
+                    "description": "Defines the methods and properties exposed by TabsTab component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "tabs",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabsInstance",
+                            "default": "",
+                            "description": "The Tabs component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsTabPassThroughType": {
+                    "values": "PassThroughType<TabsTabInstance, E>",
+                    "description": "Defines passthrough(pt) options type in TabsTab component."
+                },
+                "TabsTabInstance": {
+                    "values": "ComponentInstance<TabsTabProps, TabsTabState, TabsTabExposes, TabsTabPassThrough>",
+                    "description": "Instance of TabsTab component."
+                }
+            }
+        }
+    },
+    "usetabs": {
+        "description": "The useTabs manages the state and functionality of a tabs component.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useTabsChangeEvent": {
+                    "description": "Event fired when the tabs's checked state changes.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "The value of the tabs."
+                        }
+                    ],
+                    "methods": []
+                },
+                "useTabsProps": {
+                    "description": "Defines valid properties in useTabs.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "null",
+                            "description": "Value of the active tab or an array of values in multiple mode."
+                        },
+                        {
+                            "name": "onValueChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "(event: useTabsChangeEvent) => void",
+                            "default": "",
+                            "description": "Callback fired when the tabs's value changes."
+                        }
+                    ],
+                    "methods": []
+                },
+                "useTabsState": {
+                    "description": "Defines valid state in useTabs.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "activeTab",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Value of the active tab or an array of values in multiple mode."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "TabsState"
+                },
+                "useTabsExposes": {
+                    "description": "Defines the methods and properties exposed by useTabs.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "updateValue",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(value: string | number) => void",
+                            "default": "",
+                            "description": "The method to update the value of the active tab."
+                        },
+                        {
+                            "name": "isItemActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(key: string | number) => boolean",
+                            "default": "",
+                            "description": "The method to check if the tab is active."
+                        }
+                    ],
+                    "methods": [],
+                    "extendedBy": "TabsExposes"
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "useTabsInstance": {
+                    "values": "HeadlessInstance<useTabsProps, useTabsState, useTabsExposes>",
+                    "description": "Instance of useTabs headless."
                 }
             }
         }
