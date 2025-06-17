@@ -163,6 +163,29 @@
             "name": "Figma UI Kit",
             "icon": "pi pi-pencil",
             "to": "/docs/uikit"
+        },
+        {
+            "name": "PrimeBlocks",
+            "icon": "pi pi-server",
+            "href": "https://primeblocks.org"
+        },
+        {
+            "name": "Support",
+            "icon": "pi pi-question",
+            "children": [
+                {
+                    "name": "Discord",
+                    "href": "https://discord.gg/gzKFYnpmCY"
+                },
+                {
+                    "name": "Forum",
+                    "href": "https://github.com/orgs/primefaces/discussions"
+                },
+                {
+                    "name": "PRO Support",
+                    "to": "/docs/support"
+                }
+            ]
         }
     ]
 }

@@ -593,6 +593,12 @@ export const Store = {
             'filePath': 'demo/styled/scoped-tokens-demo.tsx',
         },
     },
+    'support': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/support/basic-demo.tsx')),
+            'filePath': 'demo/support/basic-demo.tsx',
+        },
+    },
     'switch': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/switch/basic-demo.tsx')),
