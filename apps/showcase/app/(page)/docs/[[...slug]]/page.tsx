@@ -60,6 +60,16 @@ async function DocsPage({ params }: PageProps) {
         notFound();
     }
 
+    if (doc.hideTabAndToc) {
+        return (
+            <div className="flex-1 flex items-start justify-between gap-10 xl:gap-20">
+                <div className="flex-1 overflow-hidden pb-12">
+                    <DocMdx code={doc.body.code} />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <>
             {doc.component && <DocTabs componentName={doc.component} />}
