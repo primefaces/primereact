@@ -14,7 +14,7 @@ import { getPTOptions, getStyleOptions, getTokenOptions } from './lib/utils/getC
 
 export const Docs = defineDocumentType(() => ({
     name: 'Docs',
-    filePathPattern: '{components,theming}/**/*.mdx|{tailwind,icons}/*.mdx',
+    filePathPattern: '**/**/*.mdx',
     contentType: 'mdx',
     fields: {
         title: { type: 'string', required: true },
