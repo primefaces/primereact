@@ -3,8 +3,15 @@ import Image from 'next/image';
 import { ScrollArea } from 'primereact/scrollarea';
 import * as React from 'react';
 
+interface ImageData {
+    itemImageSrc: string;
+    thumbnailImageSrc: string;
+    alt: string;
+    title: string;
+}
+
 export default function HorizontalDemo() {
-    const [images, setImages] = React.useState(null);
+    const [images, setImages] = React.useState<ImageData[] | null>(null);
 
     React.useEffect(() => {
         PhotoService.getImages().then((data) => setImages(data));

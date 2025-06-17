@@ -11,9 +11,9 @@ export default function BasicDemo() {
                         style: {
                             userSelect: 'none'
                         },
-                        class: ['flex items-center justify-between text-primary font-bold']
+                        className: 'flex items-center justify-between text-primary font-bold'
                     },
-                    content: { class: 'text-primary-700 dark:text-primary-200 mt-4' },
+                    content: { className: 'text-primary-700 dark:text-primary-200 mt-4' },
                     title: 'text-xl'
                 }}
             >
