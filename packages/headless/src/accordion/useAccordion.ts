@@ -45,7 +45,7 @@ export const useAccordion = withHeadless({
             }
         };
 
-        const focusPanel = (accordionHeader: HTMLElement | null, accordionRef: React.RefObject<HTMLElement | null>, direction: NavigationDirection): void => {
+        const focusPanel = (accordionHeader: HTMLElement | null, direction: NavigationDirection): void => {
             const findHeader = (panelElement: HTMLElement): HTMLElement | null => {
                 return findSingle(panelElement, '[data-pc-name="accordionheader"]') as HTMLElement | null;
             };
@@ -133,19 +133,19 @@ export const useAccordion = withHeadless({
         const onHeaderKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, value: null | undefined | string | number) => {
             switch (event.code) {
                 case 'ArrowDown':
-                    focusPanel(event.currentTarget, elementRef, 'next');
+                    focusPanel(event.currentTarget, 'next');
                     break;
 
                 case 'ArrowUp':
-                    focusPanel(event.currentTarget, elementRef, 'previous');
+                    focusPanel(event.currentTarget, 'previous');
                     break;
 
                 case 'Home':
-                    focusPanel(event.currentTarget, elementRef, 'first');
+                    focusPanel(event.currentTarget, 'first');
                     break;
 
                 case 'End':
-                    focusPanel(event.currentTarget, elementRef, 'last');
+                    focusPanel(event.currentTarget, 'last');
                     break;
 
                 case 'Enter':
