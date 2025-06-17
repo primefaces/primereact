@@ -34,7 +34,7 @@ export interface TabsPanelProps extends BaseComponentProps<TabsPanelInstance> {
     /**
      * Value of the tabpanel.
      */
-    value: string | number;
+    value?: string | number | undefined;
 }
 
 /**
@@ -50,6 +50,10 @@ export interface TabsPanelExposes {
      * The Tabs component instance.
      */
     tabs: TabsInstance | undefined | null;
+    /**
+     * Whether the tabpanel is active.
+     */
+    active: boolean;
 }
 
 /**

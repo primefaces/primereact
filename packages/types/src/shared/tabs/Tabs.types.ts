@@ -50,12 +50,7 @@ export interface TabsProps extends BaseComponentProps<TabsInstance, useTabsProps
      * Index of the element in tabbing order.
      * @default 0
      */
-    tabindex?: number;
-    /**
-     * When enabled, the focused tab is activated.
-     * @default false
-     */
-    selectOnFocus?: boolean;
+    tabIndex?: number;
 }
 
 /**
@@ -66,7 +61,32 @@ export interface TabsState extends useTabsState {}
 /**
  * Defines the methods and properties exposed by Tabs component.
  */
-export interface TabsExposes extends useTabsExposes {}
+export interface TabsExposes extends useTabsExposes {
+    /**
+     * The method to handle the tab key down event.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The value of the tabs.
+     * @returns void
+     */
+    onTabKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>, value: undefined | string | number) => void;
+    /**
+     * The method to handle the tab click event.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The value of the tabs.
+     * @returns void
+     */
+    onTabClick: (event: React.MouseEvent<HTMLButtonElement>, value: undefined | string | number) => void;
+    /**
+     * The method to handle the tab focus event.
+     * @param event The event that triggered the change.
+     * @param event.originalEvent The original event that triggered the change.
+     * @param event.value The value of the tabs.
+     * @returns void
+     */
+    onTabFocus: (event: React.FocusEvent<HTMLButtonElement>, value: undefined | string | number) => void;
+}
 
 /**
  * Defines the CSS class names used in the Tabs component.

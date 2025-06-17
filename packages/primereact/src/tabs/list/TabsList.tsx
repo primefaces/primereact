@@ -4,7 +4,6 @@ import { useMountEffect } from '@primereact/hooks/use-mount-effect';
 import { useUnmountEffect } from '@primereact/hooks/use-unmount-effect';
 import { ChevronLeftIcon } from '@primereact/icons/chevronleft';
 import { ChevronRightIcon } from '@primereact/icons/chevronright';
-import { listStyles } from '@primereact/styles/tabs/TabsList.style';
 import { getWidth, isRTL, mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -14,14 +13,13 @@ import { defaultListProps } from './TabsList.props';
 export const TabsList = withComponent({
     name: 'TabList',
     defaultProps: defaultListProps,
-    styles: listStyles,
     setup() {
         const tabs = useTabsContext();
 
         return { tabs };
     },
     render(instance) {
-        const { props, ptmi, tabs, cx } = instance;
+        const { props, ptmi, tabs } = instance;
         const [prevButtonEnabled, setPrevButtonEnabled] = React.useState<boolean>(false);
         const [nextButtonEnabled, setNextButtonEnabled] = React.useState<boolean>(false);
         const listRef = React.useRef<HTMLDivElement>(null);
@@ -40,7 +38,7 @@ export const TabsList = withComponent({
             const width = getWidth(content);
 
             setPrevButtonEnabled(scrollLeft !== 0);
-            setNextButtonEnabled(list.offsetWidth >= offsetWidth && parseInt(scrollLeft) !== scrollWidth - width);
+            setNextButtonEnabled(list.offsetWidth >= offsetWidth && scrollLeft !== scrollWidth - width);
         };
 
         const onPrevButtonClick = () => {
@@ -112,7 +110,7 @@ export const TabsList = withComponent({
 
         const rootProps = mergeProps(
             {
-                className: cx('root')
+                className: tabs?.cx('list')
             },
             tabs?.ptm('list'),
             ptmi('root')
@@ -121,7 +119,7 @@ export const TabsList = withComponent({
         const createContentElement = () => {
             const contentProps = mergeProps(
                 {
-                    className: cx('content'),
+                    className: tabs?.cx('content', { scrollable: tabs?.props.scrollable }),
                     ref: contentRef,
                     onScroll: (event: React.UIEvent<HTMLDivElement>) => {
                         if (tabs?.props?.scrollable) {
@@ -131,14 +129,16 @@ export const TabsList = withComponent({
                         event.preventDefault();
                     }
                 },
+                tabs?.ptm('content'),
                 ptmi('content')
             );
 
             const listProps = mergeProps(
                 {
-                    className: cx('tabList'),
+                    className: tabs?.cx('tabList'),
                     ref: listRef
                 },
+                tabs?.ptm('tabList'),
                 ptmi('tabList')
             );
 
@@ -147,7 +147,7 @@ export const TabsList = withComponent({
                     {prevButtonEnabled && (
                         <button
                             type="button"
-                            className={cx('prevButton')}
+                            className={tabs?.cx('prevButton')}
                             aria-label={props.prevButtonAriaLabel}
                             tabIndex={tabs?.props.tabindex}
                             style={{
@@ -163,12 +163,12 @@ export const TabsList = withComponent({
                         </button>
                     )}
                     <div {...contentProps}>
-                        <div {...listProps}>{props.children}</div>
+                        <Component instance={instance} attrs={listProps} children={props.children} />
                     </div>
                     {nextButtonEnabled && (
                         <button
                             type="button"
-                            className={cx('nextButton')}
+                            className={tabs?.cx('nextButton')}
                             aria-label={props.nextButtonAriaLabel}
                             tabIndex={tabs?.props.tabindex}
                             onClick={onNextButtonClick}

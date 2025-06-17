@@ -1,6 +1,5 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { panelsStyles } from '@primereact/styles/tabs/TabsPanels.style';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -10,19 +9,19 @@ import { defaultPanelsProps } from './TabsPanels.props';
 export const TabsPanels = withComponent({
     name: 'TabPanels',
     defaultProps: defaultPanelsProps,
-    styles: panelsStyles,
     setup() {
         const tabs = useTabsContext();
 
         return { tabs };
     },
     render(instance) {
-        const { props, ptmi, cx } = instance;
+        const { props, ptmi, tabs } = instance;
 
         const rootProps = mergeProps(
             {
-                className: cx('root')
+                className: tabs?.cx('panels')
             },
+            tabs?.ptm('panels'),
             ptmi('root')
         );
 

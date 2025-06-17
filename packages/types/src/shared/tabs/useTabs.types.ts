@@ -30,6 +30,11 @@ export interface useTabsProps {
      */
     value?: string | number | undefined;
     /**
+     * When enabled, the focused tab is activated.
+     * @default false
+     */
+    selectOnFocus?: boolean;
+    /**
      * Callback fired when the tabs's value changes.
      * @param event The event that triggered the change.
      * @param event.originalEvent The original event that triggered the change.
@@ -47,6 +52,10 @@ export interface useTabsState {
      * Value of the active tab or an array of values in multiple mode.
      */
     activeTab: string | number | undefined;
+    /**
+     * Dimensions of the inkbar.
+     */
+    inkBarDimensions: React.CSSProperties;
 }
 
 /**

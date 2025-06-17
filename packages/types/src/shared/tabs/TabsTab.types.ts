@@ -34,7 +34,7 @@ export interface TabsTabProps extends BaseComponentProps<TabsTabInstance> {
     /**
      * Value of the tab.
      */
-    value: string | number;
+    value?: string | number | undefined;
     /**
      * Whether the tab is disabled.
      * @default false
@@ -55,6 +55,10 @@ export interface TabsTabExposes {
      * The Tabs component instance.
      */
     tabs: TabsInstance | undefined | null;
+    /**
+     * Whether the tab is active.
+     */
+    active: boolean;
 }
 
 /**

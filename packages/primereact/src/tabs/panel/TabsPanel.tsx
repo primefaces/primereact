@@ -1,6 +1,5 @@
 'use client';
 import { Component } from '@primereact/core/component';
-import { panelStyles } from '@primereact/styles/tabs/TabsPanel.style';
 import { mergeProps } from '@primeuix/utils';
 import { withComponent } from 'primereact/base';
 import * as React from 'react';
@@ -10,24 +9,24 @@ import { defaultPanelProps } from './TabsPanel.props';
 export const TabsPanel = withComponent({
     name: 'TabPanel',
     defaultProps: defaultPanelProps,
-    styles: panelStyles,
     setup(instance) {
         const { props } = instance;
         const tabs = useTabsContext();
 
-        const active = React.useMemo(() => tabs?.isItemActive(props.value), [tabs, props.value]);
+        const active = React.useMemo(() => tabs?.isItemActive(props.value) ?? false, [tabs, props.value]);
 
         return { tabs, active };
     },
     render(instance) {
-        const { props, ptmi, tabs, cx, active } = instance;
+        const { props, ptmi, tabs, active } = instance;
 
         const rootProps = mergeProps(
             {
-                className: cx('root'),
-                tabIndex: active ? tabs?.props.tabindex : -1,
+                className: tabs?.cx('panel', { active }),
+                tabIndex: active ? tabs?.props.tabIndex : -1,
                 role: 'tabpanel',
                 'data-p-active': active,
+                'aria-labelledby': `${tabs?.id}_tab_${props.value}`,
                 style: {
                     display: active ? 'block' : 'none'
                 }

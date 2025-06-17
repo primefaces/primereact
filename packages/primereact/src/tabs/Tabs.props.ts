@@ -7,6 +7,5 @@ export const defaultProps: TabsProps = {
     lazy: false,
     scrollable: false,
     showNavigators: true,
-    tabindex: 0,
-    selectOnFocus: false
+    tabIndex: 0
 };
