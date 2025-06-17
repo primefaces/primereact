@@ -580,6 +580,10 @@ export const Store = {
         },
     },
     'styled': {
+        'colors-demo': {
+            'component': React.lazy(() => import('demo/styled/colors-demo.tsx')),
+            'filePath': 'demo/styled/colors-demo.tsx',
+        },
         'css-modules-demo': {
             'component': React.lazy(() => import('demo/styled/css-modules-demo.tsx')),
             'filePath': 'demo/styled/css-modules-demo.tsx',
@@ -749,6 +753,12 @@ export const Store = {
         'toolbar-pt': {
             'component': React.lazy(() => import('demo/toolbar/toolbar-pt.tsx')),
             'filePath': 'demo/toolbar/toolbar-pt.tsx',
+        },
+    },
+    'uikit': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/uikit/basic-demo.tsx')),
+            'filePath': 'demo/uikit/basic-demo.tsx',
         },
     },
 };
