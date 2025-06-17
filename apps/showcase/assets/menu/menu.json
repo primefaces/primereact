@@ -175,6 +175,24 @@
             "href": "https://primeblocks.org"
         },
         {
+            "name": "Guides",
+            "icon": "pi pi-book",
+            "children": [
+                {
+                    "name": "Accessibility",
+                    "to": "/docs/guides/accessibility"
+                },
+                {
+                    "name": "PrimeTV",
+                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
+                },
+                {
+                    "name": "RTL",
+                    "to": "/docs/guides/rtl"
+                }
+            ]
+        },
+        {
             "name": "Support",
             "icon": "pi pi-question",
             "children": [

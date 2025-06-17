@@ -5,6 +5,12 @@
 import * as React from 'react';
 
 export const Store = {
+    'accessibility': {
+        'accessibility-checkbox-demo': {
+            'component': React.lazy(() => import('demo/accessibility/accessibility-checkbox-demo.tsx')),
+            'filePath': 'demo/accessibility/accessibility-checkbox-demo.tsx',
+        },
+    },
     'accordion': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/accordion/basic-demo.tsx')),
