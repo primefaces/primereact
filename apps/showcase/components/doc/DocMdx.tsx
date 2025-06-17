@@ -8,14 +8,15 @@ import Link from 'next/link';
 import * as React from 'react';
 import DocCodeViewer from './DocCodeViewer';
 import DocTable from './DocTable';
+import { Checkbox } from 'primereact/checkbox';
 
 const components = {
     h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className={cn('group font-heading mt-2 scroll-m-32 text-3xl leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
     h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className={cn('group font-heading mb-4 mt-12 scroll-m-32 text-[1.625rem] leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
-    h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className={cn('group font-heading mb-2 mt-2 scroll-m-32 text-[1.425rem] leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
-    h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h4 className={cn('group font-heading mb-2 mt-2 scroll-m-32 text-lg leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
-    h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h5 className={cn('group font-heading mb-2 mt-2 scroll-m-32 text-base leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
-    h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h6 className={cn('group font-heading mb-2 mt-2 scroll-m-32 text-sm leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
+    h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-[1.425rem] leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
+    h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h4 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-lg leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
+    h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h5 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-base leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
+    h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => <h6 className={cn('group font-heading mb-2 mt-6 scroll-m-32 text-sm leading-[1.2] font-semibold text-(--high-contrast-text-color)', className)} {...props} />,
     a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => <a className={cn('font-medium underline underline-offset-4', className)} {...props} />,
     p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => <p className={cn('leading-[1.625rem] mb-4', className)} {...props} />,
     strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => <strong className={cn('font-semibold', className)} {...props} />,
@@ -43,6 +44,7 @@ const components = {
     DocComponentViewer,
     DocPTViewer,
     DocTable,
+    Checkbox,
     pre: DocCodeViewer,
     code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
         const isInlineCode = !className?.includes('language-');

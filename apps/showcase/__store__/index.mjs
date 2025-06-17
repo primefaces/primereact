@@ -403,6 +403,12 @@ export const Store = {
             'filePath': 'demo/panel/uncontrolled-demo.tsx',
         },
     },
+    'primeicons': {
+        'list-demo': {
+            'component': React.lazy(() => import('demo/primeicons/list-demo.tsx')),
+            'filePath': 'demo/primeicons/list-demo.tsx',
+        },
+    },
     'progressbar': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/progressbar/basic-demo.tsx')),
@@ -573,6 +579,20 @@ export const Store = {
             'filePath': 'demo/stepper/vertical-demo.tsx',
         },
     },
+    'styled': {
+        'colors-demo': {
+            'component': React.lazy(() => import('demo/styled/colors-demo.tsx')),
+            'filePath': 'demo/styled/colors-demo.tsx',
+        },
+        'css-modules-demo': {
+            'component': React.lazy(() => import('demo/styled/css-modules-demo.tsx')),
+            'filePath': 'demo/styled/css-modules-demo.tsx',
+        },
+        'scoped-tokens-demo': {
+            'component': React.lazy(() => import('demo/styled/scoped-tokens-demo.tsx')),
+            'filePath': 'demo/styled/scoped-tokens-demo.tsx',
+        },
+    },
     'switch': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/switch/basic-demo.tsx')),
@@ -605,6 +625,36 @@ export const Store = {
         'uncontrolled-demo': {
             'component': React.lazy(() => import('demo/switch/uncontrolled-demo.tsx')),
             'filePath': 'demo/switch/uncontrolled-demo.tsx',
+        },
+    },
+    'tabs': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/tabs/basic-demo.tsx')),
+            'filePath': 'demo/tabs/basic-demo.tsx',
+        },
+        'controlled-demo': {
+            'component': React.lazy(() => import('demo/tabs/controlled-demo.tsx')),
+            'filePath': 'demo/tabs/controlled-demo.tsx',
+        },
+        'custom-indicator-demo': {
+            'component': React.lazy(() => import('demo/tabs/custom-indicator-demo.tsx')),
+            'filePath': 'demo/tabs/custom-indicator-demo.tsx',
+        },
+        'disabled-demo': {
+            'component': React.lazy(() => import('demo/tabs/disabled-demo.tsx')),
+            'filePath': 'demo/tabs/disabled-demo.tsx',
+        },
+        'dynamic-demo': {
+            'component': React.lazy(() => import('demo/tabs/dynamic-demo.tsx')),
+            'filePath': 'demo/tabs/dynamic-demo.tsx',
+        },
+        'scrollable-demo': {
+            'component': React.lazy(() => import('demo/tabs/scrollable-demo.tsx')),
+            'filePath': 'demo/tabs/scrollable-demo.tsx',
+        },
+        'template-demo': {
+            'component': React.lazy(() => import('demo/tabs/template-demo.tsx')),
+            'filePath': 'demo/tabs/template-demo.tsx',
         },
     },
     'tag': {
@@ -703,6 +753,12 @@ export const Store = {
         'toolbar-pt': {
             'component': React.lazy(() => import('demo/toolbar/toolbar-pt.tsx')),
             'filePath': 'demo/toolbar/toolbar-pt.tsx',
+        },
+    },
+    'uikit': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/uikit/basic-demo.tsx')),
+            'filePath': 'demo/uikit/basic-demo.tsx',
         },
     },
 };

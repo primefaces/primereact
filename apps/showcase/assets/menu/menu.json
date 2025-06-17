@@ -1,6 +1,16 @@
 {
     "data": [
         {
+            "name": "Theming",
+            "icon": "pi pi-palette",
+            "children": [
+                {
+                    "name": "Styled",
+                    "to": "/docs/theming/styled"
+                }
+            ]
+        },
+        {
             "name": "Components",
             "icon": "pi pi-compass",
             "children": [
@@ -127,6 +137,25 @@
                             "to": "/docs/components/tag"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Tailwind CSS",
+            "icon": "pi pi-star",
+            "to": "/docs/tailwind"
+        },
+        {
+            "name": "Icons",
+            "icon": "pi pi-eye",
+            "children": [
+                {
+                    "name": "Prime Icons",
+                    "to": "/docs/icons"
+                },
+                {
+                    "name": "Custom Icons",
+                    "to": "/docs/customicons"
                 }
             ]
         }

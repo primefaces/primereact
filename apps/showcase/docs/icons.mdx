@@ -1,0 +1,104 @@
+---
+title: PrimeIcons
+description: PrimeIcons is the default icon library of PrimeReact with over 250 open source icons developed by PrimeTek. PrimeIcons library is optional as PrimeReact components can use any icon with templating.
+component: primeicons
+---
+
+# Icons
+
+<a href="https://github.com/primefaces/primeicons"> PrimeIcons </a> is the default icon library of PrimeReact with over 250 open source icons developed by PrimeTek. PrimeIcons library is optional as PrimeReact components can use any icon with
+templating.
+
+## Download
+
+PrimeIcons is available at npm, run the following command to download it to your project.
+
+```bash
+npm install primeicons
+```
+
+## Import
+
+CSS file of the icon library needs to be imported in `styles.css` of your application.
+
+```css
+import 'primeicons/primeicons.css';
+```
+
+## Figma
+
+PrimeIcons library is now available on <a href="https://www.figma.com/community/file/1354343849355792252/primeicons" target="_blank" rel="noopener noreferrer">Figma Community</a>. By adding them as a library, you can easily use these icons in your designs.
+
+## Basic
+
+PrimeIcons use the `pi pi-{icon}` syntax such as `pi pi-check`. A standalone icon can be displayed using an element such as `i` or `span`.
+
+<div className="card flex justify-center gap-4">
+    <i className="pi pi-check"></i>
+    <i className="pi pi-times"></i>
+    <span className="pi pi-search"></span>
+    <span className="pi pi-user"></span>
+</div>
+
+```tsx
+<i className="pi pi-check"></i>
+<i className="pi pi-times"></i>
+<span className="pi pi-search"></span>
+<span className="pi pi-user"></span>
+```
+
+## Size
+
+Size of an icon is controlled with the font-size property of the element.
+
+<div className="card flex justify-center items-center gap-4">
+    <i className="pi pi-check" style={{ fontSize: '1rem' }}></i>
+    <i className="pi pi-times" style={{ fontSize: '1.5rem' }}></i>
+    <i className="pi pi-search" style={{ fontSize: '2rem' }}></i>
+    <i className="pi pi-user" style={{ fontSize: '2.5rem' }}></i>
+</div>
+
+```tsx
+<i className="pi pi-check" style={{ fontSize: '1rem' }}></i>
+<i className="pi pi-times" style={{ fontSize: '1.5rem' }}></i>
+<i className="pi pi-search" style={{ fontSize: '2rem' }}></i>
+<i className="pi pi-user" style={{ fontSize: '2.5rem' }}></i>
+```
+
+## Color
+
+Icon color is defined with the `color` property which is inherited from parent by default.
+
+<div className="card flex justify-center items-center gap-4">
+    <i className="pi pi-check" style={{ color: 'slateblue' }}></i>
+    <i className="pi pi-times" style={{ color: 'green' }}></i>
+    <i className="pi pi-search" style={{ color: 'var(--p-primary-color)' }}></i>
+    <i className="pi pi-user" style={{ color: '#708090' }}></i>
+</div>
+
+```tsx
+<i className="pi pi-check" style={{ color: 'slateblue' }}></i>
+<i className="pi pi-times" style={{ color: 'green' }}></i>
+<i className="pi pi-search" style={{ color: 'var(--p-primary-color)' }}></i>
+<i className="pi pi-user" style={{ color: '#708090' }}></i>
+```
+
+## Spin
+
+Special `pi-spin` className applies infinite rotation to an icon.
+
+<div className="card flex justify-center gap-4">
+    <i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }}></i>
+    <i className="pi pi-spin pi-cog" style={{ fontSize: '2rem' }}></i>
+</div>
+
+```tsx
+<i className="pi pi-spin pi-spinner" style={{ fontSize: '2rem' }}></i>
+<i className="pi pi-spin pi-cog" style={{ fontSize: '2rem' }}></i>
+```
+
+## List
+
+Here is the full list of PrimeIcons. More icons will be added periodically and you may also <a href="https://github.com/primefaces/primeicons/issues">request new icons</a> at the issue tracker.
+
+<DocComponentViewer name="primeicons:list-demo" hideCode />
