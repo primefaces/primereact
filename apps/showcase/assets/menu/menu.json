@@ -141,6 +141,11 @@
             ]
         },
         {
+            "name": "Pass Through",
+            "icon": "pi pi-directions",
+            "to": "/docs/passthrough"
+        },
+        {
             "name": "Tailwind CSS",
             "icon": "pi pi-star",
             "to": "/docs/tailwind"

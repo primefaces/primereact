@@ -403,6 +403,12 @@ export const Store = {
             'filePath': 'demo/panel/uncontrolled-demo.tsx',
         },
     },
+    'passthrough': {
+        'basic-demo': {
+            'component': React.lazy(() => import('demo/passthrough/basic-demo.tsx')),
+            'filePath': 'demo/passthrough/basic-demo.tsx',
+        },
+    },
     'primeicons': {
         'list-demo': {
             'component': React.lazy(() => import('demo/primeicons/list-demo.tsx')),
