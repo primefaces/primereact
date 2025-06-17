@@ -62,10 +62,15 @@ export const Motion = withComponent({
 
             return () => {
                 cancelled = true;
-                isInitialMount.current = true;
                 motion.cancel?.();
             };
         }, [props.in, rendered, props.unmountOnLeave, props.appear]);
+
+        React.useEffect(() => {
+            return () => {
+                isInitialMount.current = true;
+            };
+        }, []);
 
         return {
             ...motion,
