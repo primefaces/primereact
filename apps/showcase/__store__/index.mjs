@@ -599,12 +599,6 @@ export const Store = {
             'filePath': 'demo/styled/scoped-tokens-demo.tsx',
         },
     },
-    'support': {
-        'basic-demo': {
-            'component': React.lazy(() => import('demo/support/basic-demo.tsx')),
-            'filePath': 'demo/support/basic-demo.tsx',
-        },
-    },
     'switch': {
         'basic-demo': {
             'component': React.lazy(() => import('demo/switch/basic-demo.tsx')),
@@ -693,12 +687,6 @@ export const Store = {
         'template-demo': {
             'component': React.lazy(() => import('demo/tag/template-demo.tsx')),
             'filePath': 'demo/tag/template-demo.tsx',
-        },
-    },
-    'team': {
-        'intro-demo': {
-            'component': React.lazy(() => import('demo/team/intro-demo.tsx')),
-            'filePath': 'demo/team/intro-demo.tsx',
         },
     },
     'togglebutton': {

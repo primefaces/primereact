@@ -143,11 +143,9 @@ export default function BasicDemo() {
                         <div className="text-5xl font-bold mb-4">Figma to Theme</div>
                         <p className="mb-4 text-lg">
                             <i>
-                                This feature requires a
-                                {/* <NuxtLink to="/designer" className="doc-link">
-                                    Theme Designer
-                                </NuxtLink> */}
-                                subscription.
+                                This feature requires a Theme Designer subscription.
+                                {/* <a href="/designer" className="doc-link">
+                                </a> */}
                             </i>
                         </p>
                         <p className="mb-4 text-lg">
