@@ -186,6 +186,45 @@
                     "to": "/docs/support"
                 }
             ]
+        },
+        {
+            "name": "Discover",
+            "icon": "pi pi-search",
+            "children": [
+                {
+                    "name": "About Us",
+                    "to": "/docs/team"
+                },
+                {
+                    "name": "Source Code",
+                    "href": "https://github.com/primefaces/primereact"
+                },
+                {
+                    "name": "Changelog",
+                    "href": "https://github.com/primefaces/primereact/blob/master/CHANGELOG.md"
+                },
+                {
+                    "name": "Contribution",
+                    "to": "/docs/contribution",
+                    "icon": "pi pi-users"
+                },
+                {
+                    "name": "Store",
+                    "href": "https://www.primefaces.org/store/"
+                },
+                {
+                    "name": "Twitter",
+                    "href": "https://twitter.com/primereact"
+                },
+                {
+                    "name": "Newsletter",
+                    "href": "https://www.primefaces.org/newsletter"
+                },
+                {
+                    "name": "PrimeGear",
+                    "href": "https://gear.primefaces.org"
+                }
+            ]
         }
     ]
 }

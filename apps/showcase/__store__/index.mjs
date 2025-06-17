@@ -689,6 +689,12 @@ export const Store = {
             'filePath': 'demo/tag/template-demo.tsx',
         },
     },
+    'team': {
+        'intro-demo': {
+            'component': React.lazy(() => import('demo/team/intro-demo.tsx')),
+            'filePath': 'demo/team/intro-demo.tsx',
+        },
+    },
     'togglebutton': {
         'all-demo': {
             'component': React.lazy(() => import('demo/togglebutton/all-demo.tsx')),
