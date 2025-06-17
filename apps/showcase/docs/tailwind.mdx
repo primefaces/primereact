@@ -1,0 +1,438 @@
+---
+title: Tailwind
+description: Integration between PrimeReact and Tailwind CSS both in styled and unstyled modes.
+component: tailwind
+---
+
+## Overview
+
+Tailwind CSS is a popular CSS framework based on a utility-first design. The core provides flexible CSS classes with predefined CSS rules to build your own UI elements. For example, instead of an opinionated `btn` className as in
+Bootstrap, Tailwind offers primitive classes like `bg-blue-500`, `rounded` and `p-4` to apply a button.
+
+Tailwind is an outstanding CSS library, however it lacks a true comprehensive UI suite when combined with Vue.js, this is where PrimeReact comes in by providing a wide range of highly accessible and feature rich UI component library. The
+core of PrimeReact does not depend on Tailwind CSS, instead we provide the necessary integration points such as the primeui tailwind plugin and the Tailwind version for the unstyled mode.
+
+<div className="doc-notification">
+    Tailwind CSS and PrimeReact can be used together via two main approaches. Simple approach is using Tailwind CSS _around_ PrimeReact components for layout purposes as demonstrated in the samples section below, the advanced approach takes the
+    integration a step further by allowing Tailwind CSS _within_ the component internals to style the entire UI suite in unstyled mode.
+</div>
+
+## Tailwind Theme
+
+PrimeTek offers the Tailwind CSS version of the entire PrimeReact UI suite in unstyled mode based on the `@apply` directive with IntelliSense support. Visit the <a href="https://tailwind.primereact.org" target="_blank" rel="noopener noreferrer">Tailwind version of PrimeReact </a> for the documentation, demos and additional resources.
+
+<div className="doc-notification">
+    Tailwind version of PrimeReact instead of the default styled mode is not tested with Tailwind v4. For the next-gen version of this project, we are building a new UI Component library based on the code ownership model where components are located
+    inside your project source instead of imported from npm. This new library is powered by Unstyled PrimeReact Core and Tailwind v4.
+</div>
+
+## Plugin
+
+The <a href="https://www.npmjs.com/package/tailwindcss-primeui" target="_blank" rel="noopener noreferrer">tailwindcss-primeui</a> is an official plugin by PrimeTek to provide first className integration between a Prime UI library like
+PrimeReact and Tailwind CSS. It is designed to work both in styled and unstyled modes. In styled mode, for instance the semantic colors such as primary and surfaces are provided as Tailwind utilities e.g. `bg-primary`,
+`text-surface-500`, `text-muted-color`.
+
+If you haven't already done so, start by integrating Tailwind into your project. Detailed steps for this process can be found in the Tailwind <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">documentation</a>.
+After successfully installing Tailwind, proceed with the installation of the PrimeUI plugin. This single npm package comes with two libraries: the CSS version is compatible with Tailwind v4, while the JS version is designed for Tailwind
+v3.
+
+```bash
+npm i tailwindcss-primeui
+```
+
+### Tailwind v4
+
+In the CSS file that contains the tailwindcss import, add the `tailwindcss-primeui` import as well.
+
+```css
+@import 'tailwindcss';
+
+@import 'tailwindcss-primeui';
+```
+
+### Tailwind v3
+
+Use the plugins option in your Tailwind config file to configure the plugin.
+
+```tsx
+// tailwind.config.js
+import PrimeUI from 'tailwindcss-primeui';
+
+export default {
+    // ...
+    plugins: [PrimeUI]
+};
+```
+
+## Extensions
+
+The plugin extends the default configuration with a new set of utilities whose values are derived from the PrimeReact theme in use. All variants and breakpoints are supported e.g. `dark:sm:hover:bg-primary`.
+
+| Class                       | Property                                  |
+| --------------------------- | ----------------------------------------- |
+| `primary-[50-950]`          | Primary color palette.                    |
+| `surface-[0-950]`           | Surface color palette.                    |
+| `primary`                   | Default primary color.                    |
+| `primary-contrast`          | Default primary contrast color.           |
+| `primary-emphasis`          | Default primary emphasis color.           |
+| `border-surface`            | Default primary emphasis color.           |
+| `bg-emphasis`               | Emphasis background e.g. hovered element. |
+| `bg-highlight`              | Highlight background.                     |
+| `bg-highlight-emphasis`     | Highlight background with emphasis.       |
+| `rounded-border`            | Border radius.                            |
+| `text-color`                | Text color with emphasis.                 |
+| `text-color-emphasis`       | Default primary emphasis color.           |
+| `text-muted-color`          | Secondary text color.                     |
+| `text-muted-color-emphasis` | Secondary text color with emphasis.       |
+
+## Dark Mode
+
+In styled mode, PrimeReact uses the `system` as the default `darkModeSelector` in theme configuration. If you have a dark mode switch in your application, ensure that `darkModeSelector` is aligned with the Tailwind dark
+variant for seamless integration. Note that, this particular configuration isn't required if you're utilizing the default system color scheme.
+
+Suppose that, the darkModeSelector is set as `my-app-dark` in PrimeReact.
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+### Tailwind v4
+
+Add a custom variant for dark with a custom selector.
+
+```css
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+@custom-variant dark (&:where(.my-app-dark, .my-app-dark *));     //dark mode configuration
+```
+
+### Tailwind v3
+
+Use the plugins option in your Tailwind config file to configure the plugin.
+
+```tsx
+// tailwind.config.js
+import PrimeUI from 'tailwindcss-primeui';
+
+export default {
+    darkMode: ['selector', '[className~="my-app-dark"]'], //dark mode configuration
+    plugins: [PrimeUI]
+};
+```
+
+## Override
+
+Tailwind utilities may not be able to override the default styling of components due to css specificity, there are two possible solutions; Important and CSS Layer.
+
+### Important
+
+Use the `!` as a prefix to enforce the styling. This is not the recommend approach, and should be used as last resort to avoid adding unnecessary style classes to your bundle.
+
+##### Tailwind v4
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+##### Tailwind v3
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+### CSS Layer
+
+CSS Layer provides control over the css specificity so that Tailwind utilities can safely override components.
+
+##### Tailwind v4
+
+Ensure `primereact` layer is after `theme` and `base`, but before the other Tailwind layers such as `utilities`.
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+No change in the CSS configuration is required.
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+##### Tailwind v3
+
+The `primereact` layer should be between base and utilities.
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+Tailwind v3 does not use native `layer` so needs to be defined with CSS.
+
+```tsx
+import Aura from '@primeuix/themes/aura';
+
+theme: {
+    preset: Aura,
+    options: {
+        darkModeSelector: '.my-app-dark',
+    }
+}
+```
+
+## Samples
+
+Example uses cases with PrimeReact and Tailwind CSS.
+
+### Color Palette
+
+PrimeReact color palette as utility classes.
+
+<div className="card">
+    <div className="flex flex-col gap-12">
+        <ul className="p-0 m-0 list-none flex sm:flex-col gap-4 flex-wrap sm:flex-nowrap">
+            {['primary', 'surface'].map((color, i) => (
+                <li key={i} className="flex-auto" style={{ minWidth: '6rem' }}>
+                    <span className="font-medium capitalize block mb-2 text-center sm:text-left">{color}</span>
+                    <div className="flex gap-4 flex-auto flex-col sm:flex-row">
+                        {[0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((shade, j) => (
+                            <div key={shade} className={`flex flex-col items-center gap-1 flex-1 ${color === 'primary' && shade === 0 ? 'invisible' : ''}`}>
+                                <div className="rounded h-8 w-full" style={{ backgroundColor: `var(--p-${color}-${shade})` }}></div>
+                                <span className="text-sm text-surface-500 dark:text-surface-400 font-medium">{shade}</span>
+                            </div>
+                        ))}
+                    </div>
+                </li>
+            ))}
+        </ul>
+        <div className="flex gap-6 flex-wrap">
+            <div className="rounded-border p-4 border border-transparent flex items-center justify-center bg-primary hover:bg-primary-emphasis text-primary-contrast font-medium flex-auto transition-colors">primary</div>
+            <div className="rounded-border p-4 border border-transparent flex items-center justify-center bg-highlight hover:bg-highlight-emphasis font-medium flex-auto transition-colors">highlight</div>
+            <div className="rounded-border p-4 border border-surface flex items-center justify-center text-muted-color hover:text-color hover:bg-emphasis font-medium flex-auto transition-colors">box</div>
+        </div>
+    </div>
+</div>
+
+```tsx
+<div className="flex flex-col gap-12">
+    <div className="flex gap-6 flex-wrap">
+        <div className="rounded-border p-4 border border-transparent flex items-center justify-center bg-primary hover:bg-primary-emphasis text-primary-contrast font-medium flex-auto transition-colors">primary</div>
+        <div className="rounded-border p-4 border border-transparent flex items-center justify-center bg-highlight hover:bg-highlight-emphasis font-medium flex-auto transition-colors">highlight</div>
+        <div className="rounded-border p-4 border border-surface flex items-center justify-center text-muted-color hover:text-color hover:bg-emphasis font-medium flex-auto transition-colors">box</div>
+    </div>
+</div>
+```
+
+### Starter
+
+The Tailwind v4 and PrimeReact <a href="https://github.com/primefaces/primereact-examples/tree/main/vite-tailwindv4" target="_blank" rel="noopener noreferrer">starter example</a> is available to demonstrate the integration setup with an example dashboard.
+
+## Animations
+
+The plugin also adds extended animation utilities that can be used with the styleclass and animateonscroll components.
+
+### Animation Name
+
+| Class                | Property                                                                                                                                                                                              |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| animate-enter        | animation-name: enter; <br />--p-enter-opacity: initial; <br />--p-enter-scale: initial; <br />--p-enter-rotate: initial; <br />--p-enter-translate-x: initial; <br />--p-enter-translate-y: initial; |
+| animate-leave        | animation-name: leave; <br />--p-leave-opacity: initial; <br />--p-leave-scale: initial; <br />--p-leave-rotate: initial; <br />--p-leave-translate-x: initial; <br />--p-leave-translate-y: initial; |
+| animate-leave        | fadein 0.15s linear                                                                                                                                                                                   |
+| animate-fadein       | fadein 0.15s linear                                                                                                                                                                                   |
+| animate-fadeout      | fadeout 0.15s linear                                                                                                                                                                                  |
+| animate-slidedown    | slidedown 0.45s ease-in-out                                                                                                                                                                           |
+| animate-slideup      | slideup 0.45s cubic-bezier(0, 1, 0, 1)                                                                                                                                                                |
+| animate-scalein      | scalein 0.15s linear                                                                                                                                                                                  |
+| animate-fadeinleft   | fadeinleft 0.15s linear                                                                                                                                                                               |
+| animate-fadeoutleft  | fadeoutleft 0.15s linear                                                                                                                                                                              |
+| animate-fadeinright  | fadeinright 0.15s linear                                                                                                                                                                              |
+| animate-fadeoutright | fadeoutright 0.15s linear                                                                                                                                                                             |
+| animate-fadeinup     | fadeinup 0.15s linear                                                                                                                                                                                 |
+| animate-fadeoutup    | fadeoutup 0.15s linear                                                                                                                                                                                |
+| animate-fadeindown   | fadeindown 0.15s linear                                                                                                                                                                               |
+| animate-fadeoutup    | fadeoutup 0.15s linear                                                                                                                                                                                |
+| animate-width        | width 0.15s linear                                                                                                                                                                                    |
+| animate-flip         | flip 0.15s linear                                                                                                                                                                                     |
+| animate-flipup       | flipup 0.15s linear                                                                                                                                                                                   |
+| animate-flipleft     | fadein 0.15s linear                                                                                                                                                                                   |
+| animate-flipright    | flipright 0.15s linear                                                                                                                                                                                |
+| animate-zoomin       | zoomin 0.15s linear                                                                                                                                                                                   |
+| animate-zoomindown   | zoomindown 0.15s linear                                                                                                                                                                               |
+| animate-zoominleft   | zoominleft 0.15s linear                                                                                                                                                                               |
+| animate-zoominright  | zoominright 0.15s linear                                                                                                                                                                              |
+| animate-zoominup     | zoominup 0.15s linear                                                                                                                                                                                 |
+
+### Animation Duration
+
+| Class                    | Property                   |
+| ------------------------ | -------------------------- |
+| animate-duration-0       | animation-duration: 0s     |
+| animate-duration-75      | animation-duration: 75ms   |
+| animate-duration-100     | animation-duration: 100ms  |
+| animate-duration-200     | animation-duration: 200ms  |
+| animate-duration-300     | animation-duration: 300ms  |
+| animate-duration-400     | animation-duration: 400ms  |
+| animate-duration-500     | animation-duration: 500ms  |
+| animate-duration-700     | animation-duration: 700ms  |
+| animate-duration-1000    | animation-duration: 1000ms |
+| animate-duration-2000    | animation-duration: 2000ms |
+| animate-duration-3000    | animation-duration: 300ms  |
+| animate-duration-[value] | animation-duration: value  |
+
+### Animation Delay
+
+| Class              | Property                |
+| ------------------ | ----------------------- |
+| animate-delay-none | animation-duration: 0s  |
+| animate-delay-75   | animation-delay: 75ms   |
+| animate-delay-100  | animation-delay: 100ms  |
+| animate-delay-150  | animation-delay: 150ms  |
+| animate-delay-200  | animation-delay: 200ms  |
+| animate-delay-300  | animation-delay: 300ms  |
+| animate-delay-400  | animation-delay: 400ms  |
+| animate-delay-500  | animation-delay: 500ms  |
+| animate-delay-700  | animation-delay: 700ms  |
+| animate-delay-1000 | animation-delay: 1000ms |
+
+### Iteration Count
+
+| Class            | Property                            |
+| ---------------- | ----------------------------------- |
+| animate-infinite | animation-iteration-count: infinite |
+| animate-once     | animation-iteration-count: 1        |
+| animate-twice    | animation-iteration-count: 2        |
+
+### Direction
+
+| Class                     | Property                               |
+| ------------------------- | -------------------------------------- |
+| animate-normal            | animation-direction: normal            |
+| animate-reverse           | animation-direction: reverse           |
+| animate-alternate         | animation-direction: alternate         |
+| animate-alternate-reverse | animation-direction: alternate-reverse |
+
+### Timing Function
+
+| Class               | Property                                                |
+| ------------------- | ------------------------------------------------------- |
+| animate-ease-linear | animation-timing-function: linear                       |
+| animate-ease-in     | animation-timing-function: cubic-bezier(0.4, 0, 1, 1)   |
+| animate-ease-out    | animation-timing-function: cubic-bezier(0, 0, 0.2, 1)   |
+| animate-ease-in-out | animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) |
+
+### Fill Mode
+
+| Class                  | Property                       |
+| ---------------------- | ------------------------------ |
+| animate-fill-none      | animation-fill-mode: normal    |
+| animate-fill-forwards  | animation-fill-mode: forwards  |
+| animate-fill-backwards | animation-fill-mode: backwards |
+| animate-fill-both      | animation-fill-mode: both      |
+
+### Play State
+
+| Class           | Property                      |
+| --------------- | ----------------------------- |
+| animate-running | animation-play-state: running |
+| animate-paused  | animation-play-state: paused  |
+
+### Backface Visibility State
+
+| Class            | Property                     |
+| ---------------- | ---------------------------- |
+| backface-visible | backface-visibility: visible |
+| backface-hidden  | backface-visibility: hidden  |
+
+### Fade In and Out
+
+Values are derived from the Tailwind CSS [opacity](https://tailwindcss.com/docs/opacity) e.g. _fade-in-50_ and _fade-out-20_. Arbitrary values such as _fade-in-[15]_ are also supported.
+
+| Class              | Property                     |
+| ------------------ | ---------------------------- |
+| fade-in-\{value\}  | --p-enter-opacity: \{value\} |
+| fade-out-\{value\} | --p-leave-opacity: \{value\} |
+
+### Zoom In and Out
+
+Values are derived from the Tailwind CSS [scale](https://tailwindcss.com/docs/scale) e.g. _zoom-in-50_ and _zoom-out-75_. Arbitrary values such as _zoom-in-[0.8]_ are also supported.
+
+| Class              | Property                   |
+| ------------------ | -------------------------- |
+| zoom-in-\{value\}  | --p-enter-scale: \{value\} |
+| zoom-out-\{value\} | --p-leave-scale: \{value\} |
+
+### Spin In and Out
+
+Values are derived from the Tailwind CSS [rotate](https://tailwindcss.com/docs/rotate) e.g. _spin-in-45_ and _spin-out-90_. Arbitrary values such as _spin-in-[60deg]_ are also supported.
+
+| Class              | Property                    |
+| ------------------ | --------------------------- |
+| spin-in-\{value\}  | --p-enter-rotate: \{value\} |
+| spin-out-\{value\} | --p-leave-rotate: \{value\} |
+
+### Slide In and Out
+
+Values are derived from the Tailwind CSS [translate](https://tailwindcss.com/docs/translate) e.g. _slide-in-from-t-50_ and _slide-out-to-l-8_. Arbitrary values such as _slide-in-from-b-[8px]_ are also supported.
+
+| Class                     | Property                          |
+| ------------------------- | --------------------------------- |
+| slide-in-from-t-\{value\} | --p-enter-translate-y: -\{value\} |
+| slide-in-from-b-\{value\} | --p-enter-translate-y: \{value\}  |
+| slide-in-from-l-\{value\} | --p-enter-translate-x: -\{value\} |
+| slide-in-from-r-\{value\} | --p-enter-translate-x: \{value\}  |
+| slide-out-to-t-\{value\}  | --p-leave-translate-y: -\{value\} |
+| slide-out-to-b-\{value\}  | --p-leave-translate-y: \{value\}  |
+| slide-out-to-l-\{value\}  | --p-leave-translate-x: -\{value\} |
+| slide-out-to-r-\{value\}  | --p-leave-translate-x: \{value\}  |
