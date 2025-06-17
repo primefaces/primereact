@@ -158,6 +158,11 @@
                     "to": "/docs/customicons"
                 }
             ]
+        },
+        {
+            "name": "Figma UI Kit",
+            "icon": "pi pi-pencil",
+            "to": "/docs/uikit"
         }
     ]
 }
