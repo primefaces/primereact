@@ -266,7 +266,8 @@ export const MultiSelectPanel = React.memo(
                 {
                     className: classNames(props.panelClassName, cx('panel', { panelProps: props, context, allowOptionSelect })),
                     style: props.panelStyle,
-                    onClick: props.onClick
+                    onClick: props.onClick,
+                    'data-pr-is-overlay': true
                 },
                 getPTOptions('panel')
             );
