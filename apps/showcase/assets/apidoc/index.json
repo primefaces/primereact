@@ -1986,6 +1986,14 @@
                             "type": "ReactNode | ((instance: AvatarImageInstance) => ReactNode)",
                             "default": "",
                             "description": "The children to render."
+                        },
+                        {
+                            "name": "src",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Specifies the path to the image to display."
                         }
                     ],
                     "methods": [],
@@ -21789,20 +21797,12 @@
                             "description": "Whether to display navigation buttons in container when scrollable is enabled."
                         },
                         {
-                            "name": "tabindex",
+                            "name": "tabIndex",
                             "optional": true,
                             "readonly": false,
                             "type": "number",
                             "default": "0",
                             "description": "Index of the element in tabbing order."
-                        },
-                        {
-                            "name": "selectOnFocus",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "value",
@@ -21811,6 +21811,14 @@
                             "type": "string | number",
                             "default": "null",
                             "description": "Value of the active tab or an array of values in multiple mode."
+                        },
+                        {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
                         },
                         {
                             "name": "onValueChange",
@@ -21841,6 +21849,14 @@
                             "type": "string | number",
                             "default": "",
                             "description": "Value of the active tab or an array of values in multiple mode."
+                        },
+                        {
+                            "name": "inkBarDimensions",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CSSProperties",
+                            "default": "",
+                            "description": "Dimensions of the inkbar."
                         }
                     ],
                     "methods": [],
@@ -21850,6 +21866,30 @@
                     "description": "Defines the methods and properties exposed by Tabs component.",
                     "relatedProp": "",
                     "props": [
+                        {
+                            "name": "onTabKeyDown",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: KeyboardEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the tab key down event."
+                        },
+                        {
+                            "name": "onTabClick",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: MouseEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the tab click event."
+                        },
+                        {
+                            "name": "onTabFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "(event: FocusEvent<HTMLButtonElement>, value: string | number) => void",
+                            "default": "",
+                            "description": "The method to handle the tab focus event."
+                        },
                         {
                             "name": "updateValue",
                             "optional": false,
@@ -21897,6 +21937,184 @@
                 "TabsClassNames": {
                     "description": "Defines the CSS class names used in the Tabs component.",
                     "variables": []
+                }
+            }
+        }
+    },
+    "tabsindicator": {
+        "description": "TabsIndicator is a component that displays a container for tabs.\n\n[Live Demo](https://www.primereact.org/tabs/)",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsIndicatorPassThrough": {
+                    "description": "Defines passthrough(pt) options of TabsIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabsIndicatorPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "default": "",
+                            "description": "Used to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "methods": []
+                },
+                "TabsIndicatorProps": {
+                    "description": "Defines valid properties in TabsIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "ref",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Ref<unknown>",
+                            "default": "",
+                            "description": "The reference to the component instance."
+                        },
+                        {
+                            "name": "pIf",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether the component should be rendered."
+                        },
+                        {
+                            "name": "style",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties | ((instance?: TabsIndicatorInstance) => CSSProperties)",
+                            "default": "",
+                            "description": "The style to apply to the component."
+                        },
+                        {
+                            "name": "className",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | ((instance?: TabsIndicatorInstance) => string)",
+                            "default": "",
+                            "description": "The class name to apply to the component."
+                        },
+                        {
+                            "name": "as",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number | bigint | boolean | ComponentClass<any, any> | FunctionComponent<any> | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode, any, any> | ReactPortal | Promise<AwaitedReactNode>",
+                            "default": "",
+                            "description": "The component type to render."
+                        },
+                        {
+                            "name": "asChild",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Whether the component should be rendered as a child component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SafeRecord<TabsIndicatorPassThrough>",
+                            "default": "",
+                            "description": "The pass-through props to pass to the component"
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "The pass-through options to pass to the component"
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the component should be rendered without classes."
+                        },
+                        {
+                            "name": "dt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "unknown",
+                            "default": "",
+                            "description": "The design token to use for the component."
+                        },
+                        {
+                            "name": "styles",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StylesOptions<ComponentInstance>",
+                            "default": "",
+                            "description": "The styles to use for the component."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | ((instance: TabsIndicatorInstance) => ReactNode)",
+                            "default": "",
+                            "description": "The children to render."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Value of the tabsindicator."
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "methods": [],
+                    "extendedTypes": "BaseComponentProps<TabsIndicatorInstance>"
+                },
+                "TabsIndicatorState": {
+                    "description": "Defines valid state in TabsIndicator component.",
+                    "relatedProp": "",
+                    "props": [],
+                    "methods": []
+                },
+                "TabsIndicatorExposes": {
+                    "description": "Defines the methods and properties exposed by TabsIndicator component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "tabs",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabsInstance",
+                            "default": "",
+                            "description": "The Tabs component instance."
+                        }
+                    ],
+                    "methods": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines public properties and methods that are exposed by the component to interact with it programmatically.",
+            "stateDescription": "Defines the internal state variables that the component manages and updates during its lifecycle.",
+            "typeDescription": "Defines the custom types used by the module.",
+            "values": {
+                "TabsIndicatorPassThroughType": {
+                    "values": "PassThroughType<TabsIndicatorInstance, E>",
+                    "description": "Defines passthrough(pt) options type in TabsIndicator component."
+                },
+                "TabsIndicatorInstance": {
+                    "values": "ComponentInstance<TabsIndicatorProps, TabsIndicatorState, TabsIndicatorExposes, TabsIndicatorPassThrough>",
+                    "description": "Instance of TabsIndicator component."
                 }
             }
         }
@@ -22194,7 +22412,7 @@
                         },
                         {
                             "name": "value",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "string | number",
                             "default": "",
@@ -22227,6 +22445,14 @@
                             "type": "TabsInstance",
                             "default": "",
                             "description": "The Tabs component instance."
+                        },
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the tabpanel is active."
                         }
                     ],
                     "methods": []
@@ -22542,7 +22768,7 @@
                         },
                         {
                             "name": "value",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "string | number",
                             "default": "",
@@ -22583,6 +22809,14 @@
                             "type": "TabsInstance",
                             "default": "",
                             "description": "The Tabs component instance."
+                        },
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the tab is active."
                         }
                     ],
                     "methods": []
@@ -22639,6 +22873,14 @@
                             "description": "Value of the active tab or an array of values in multiple mode."
                         },
                         {
+                            "name": "selectOnFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, the focused tab is activated."
+                        },
+                        {
                             "name": "onValueChange",
                             "optional": true,
                             "readonly": false,
@@ -22660,6 +22902,14 @@
                             "type": "string | number",
                             "default": "",
                             "description": "Value of the active tab or an array of values in multiple mode."
+                        },
+                        {
+                            "name": "inkBarDimensions",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CSSProperties",
+                            "default": "",
+                            "description": "Dimensions of the inkbar."
                         }
                     ],
                     "methods": [],
