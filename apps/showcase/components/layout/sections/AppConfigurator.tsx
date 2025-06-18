@@ -12,6 +12,15 @@ import { Switch } from 'primereact/switch';
 import { ToggleButton } from 'primereact/togglebutton';
 import * as React from 'react';
 
+interface PaletteType {
+    name: string;
+    palette: {
+        [key: string]: string;
+    };
+}
+
+type PresetKey = keyof typeof presets;
+
 const presets = {
     Aura,
     Material,
@@ -57,32 +66,33 @@ const surfaces = [
 export default function AppConfigurator() {
     const app = useApp();
 
-    //const primereact = usePrimeReact();
-
     const selectedPrimaryColor = app.primary;
     const selectedSurfaceColor = app.surface;
 
-    const getPalette = (preset = app.preset) => {
-        const presetPalette = preset ? presets[preset].primitive : {};
-        const colors = ['emerald', 'green', 'lime', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
-        const palettes = [{ name: 'noir', palette: {} }];
+    const getPalette = React.useCallback(
+        (preset: PresetKey = app.preset as PresetKey): PaletteType[] => {
+            const presetPalette = preset ? presets[preset].primitive : {};
+            const colors = ['emerald', 'green', 'lime', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
+            const palettes = [{ name: 'noir', palette: {} }];
 
-        colors.forEach((color) => {
-            palettes.push({
-                name: color,
-                palette: presetPalette[color]
+            colors.forEach((color) => {
+                palettes.push({
+                    name: color,
+                    palette: presetPalette?.[color as keyof typeof presetPalette] ?? {}
+                });
             });
-        });
 
-        return palettes;
-    };
+            return palettes;
+        },
+        [app.preset]
+    );
 
     const primaryColors = React.useMemo(() => {
-        return getPalette(app.preset);
-    }, [app.preset]);
+        return getPalette(app.preset as PresetKey);
+    }, [getPalette, app.preset]);
 
-    const getPresetExt = (name, presetName) => {
-        const color = getPalette(presetName).find((c) => c.name === name);
+    const getPresetExt = (name: string, presetName: PresetKey) => {
+        const color = getPalette(presetName).find((c) => c.name === name) as PaletteType;
 
         if (color.name === 'noir') {
             document.documentElement.style.setProperty('--logo-color', 'var(--text-secondary-color)');
@@ -249,34 +259,34 @@ export default function AppConfigurator() {
         }
     };
 
-    const updateColors = (type, color) => {
+    const updateColors = (type: string, color: PaletteType) => {
         if (type === 'primary') {
             app.handleChangePrimary(color.name);
-            //app.setPrimary(color.name);
         } else if (type === 'surface') {
             app.handleChangeSurface(color.name);
-            //app.setSurface(color.name);
         }
 
         applyTheme(type, color);
     };
 
-    const applyTheme = (type, color) => {
+    const applyTheme = (type: string, color: PaletteType) => {
         if (type === 'primary') {
-            updatePreset(getPresetExt(color.name));
+            updatePreset(getPresetExt(color.name, app.preset as PresetKey));
         } else if (type === 'surface') {
             updateSurfacePalette(color.palette);
         }
-
-        //EventBus.emit('theme-palette-change');
     };
 
     const onPresetChange = (e: ToggleButtonGroupValueChangeEvent) => {
-        app.setPreset(e.value as string);
-        const preset = presets[e.value];
+        app.setPreset(e.value as PresetKey);
+        const preset = presets[e.value as PresetKey];
         const surfacePalette = surfaces.find((s) => s.name === selectedSurfaceColor)?.palette;
 
-        $t().preset(preset).preset(getPresetExt(selectedPrimaryColor, e.value)).surfacePalette(surfacePalette).use({ useDefaultOptions: true });
+        $t()
+            .preset(preset)
+            .preset(getPresetExt(selectedPrimaryColor as string, e.value as PresetKey))
+            .surfacePalette(surfacePalette)
+            .use({ useDefaultOptions: true });
     };
 
     const onRTLChange = useViewTransition();

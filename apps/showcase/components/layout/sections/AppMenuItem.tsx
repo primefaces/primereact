@@ -65,6 +65,6 @@ export default React.memo(
         ));
     },
     (prevProps, nextProps) => {
-        return prevProps.menu.length === nextProps.menu.length && prevProps.menu.every((item, index) => item === nextProps.menu[index]);
+        return (prevProps.menu || []).length === (nextProps.menu || []).length && (prevProps.menu || []).every((item, index) => item === (nextProps.menu || [])[index]);
     }
 );
