@@ -7,20 +7,20 @@ settings:
 catalogs:
   default:
     '@primeuix/motion':
-      specifier: ^0.0.1
-      version: 0.0.1
+      specifier: ^0.0.3
+      version: 0.0.3
     '@primeuix/styled':
-      specifier: ^0.6.3
-      version: 0.6.4
+      specifier: ^0.7.0-beta.1
+      version: 0.7.0-beta.1
     '@primeuix/styles':
-      specifier: ^1.1.1
-      version: 1.1.2
+      specifier: ^1.2.0-beta.1
+      version: 1.2.0-beta.1
     '@primeuix/themes':
-      specifier: ^1.1.1
-      version: 1.1.2
+      specifier: ^1.2.0-beta.1
+      version: 1.2.0-beta.1
     '@primeuix/utils':
-      specifier: ^0.5.4
-      version: 0.5.4
+      specifier: ^0.6.0-beta.1
+      version: 0.6.0-beta.1
     primeicons:
       specifier: ^7.0.0
       version: 7.0.0
@@ -128,7 +128,7 @@ importers:
         version: link:../../packages/icons
       '@primeuix/themes':
         specifier: 'catalog:'
-        version: 1.1.2
+        version: 1.2.0-beta.1
       '@shikijs/compat':
         specifier: ^2.5.0
         version: 2.5.0
@@ -261,13 +261,13 @@ importers:
         version: link:../hooks
       '@primeuix/motion':
         specifier: 'catalog:'
-        version: 0.0.1
+        version: 0.0.3
       '@primeuix/styled':
         specifier: 'catalog:'
-        version: 0.6.4
+        version: 0.7.0-beta.1
       '@primeuix/utils':
         specifier: 'catalog:'
-        version: 0.5.4
+        version: 0.6.0-beta.1
       react:
         specifier: '>=19.0.0'
         version: 19.1.0
@@ -283,17 +283,17 @@ importers:
         version: link:../hooks
       '@primeuix/styled':
         specifier: 'catalog:'
-        version: 0.6.4
+        version: 0.7.0-beta.1
       '@primeuix/utils':
         specifier: 'catalog:'
-        version: 0.5.4
+        version: 0.6.0-beta.1
     publishDirectory: dist
 
   packages/hooks:
     dependencies:
       '@primeuix/utils':
         specifier: 'catalog:'
-        version: 0.5.4
+        version: 0.6.0-beta.1
     publishDirectory: dist
 
   packages/icons:
@@ -319,33 +319,33 @@ importers:
         version: link:../styles
       '@primeuix/styled':
         specifier: 'catalog:'
-        version: 0.6.4
+        version: 0.7.0-beta.1
       '@primeuix/styles':
         specifier: 'catalog:'
-        version: 1.1.2
+        version: 1.2.0-beta.1
       '@primeuix/utils':
         specifier: 'catalog:'
-        version: 0.5.4
+        version: 0.6.0-beta.1
     publishDirectory: dist
 
   packages/styles:
     dependencies:
       '@primeuix/styled':
         specifier: 'catalog:'
-        version: 0.6.4
+        version: 0.7.0-beta.1
       '@primeuix/styles':
         specifier: 'catalog:'
-        version: 1.1.2
+        version: 1.2.0-beta.1
       '@primeuix/utils':
         specifier: 'catalog:'
-        version: 0.5.4
+        version: 0.6.0-beta.1
     publishDirectory: dist
 
   packages/types:
     dependencies:
       '@primeuix/styled':
         specifier: 'catalog:'
-        version: 0.6.4
+        version: 0.7.0-beta.1
     publishDirectory: dist
 
 packages:
@@ -1347,22 +1347,22 @@ packages:
     peerDependencies:
       preact: 10.x
 
-  '@primeuix/motion@0.0.1':
-    resolution: {integrity: sha512-YZ+kmwbQyuFEvQXnzen+YXlt1U1YGp5zANPqINCCDSfmZBVeblju9zyErb6GRF+bmBkKJH5ASxwcvVC2LWPfFw==}
+  '@primeuix/motion@0.0.3':
+    resolution: {integrity: sha512-kKkvVp/mTLWjeKdVrzQmcyt2DBsey/E1ZdfEN8wF2vGZVaLMg3fd/VeYua9ztKgq3YGBIOoNRlsT1zqep6siwA==}
     engines: {node: '>=12.11.0'}
 
-  '@primeuix/styled@0.6.4':
-    resolution: {integrity: sha512-7ePLwqazLV0x269YlPMeE4wtQKT0NScY2/gEin0/96krTiGiElmlzKMMbH69bVApm/sfen5DZGuCEEwPiBJJ5g==}
+  '@primeuix/styled@0.7.0-beta.1':
+    resolution: {integrity: sha512-S53V4CRGTzoLVjkigZbWXqVYRE5Txqtmj2w6BD27sOdfKkCjqHK5sTHx6sWaDHHTZ/EzgqHzIfsPCgoV5uWwVA==}
     engines: {node: '>=12.11.0'}
 
-  '@primeuix/styles@1.1.2':
-    resolution: {integrity: sha512-KSwyuxNhl2bVv9eBr6SQHyRUtg93mCL7xqfQPoEzr7tgKfvIHJdGcMSSFxYyEXQv4EmSF6JxVkCWprKFAfnR5Q==}
+  '@primeuix/styles@1.2.0-beta.1':
+    resolution: {integrity: sha512-VD4bpR+rlUXyl1zlCwUIlYZPKmPL9Hsnp2BdBL9z0rHwQv/JlnyNMV66p+72Xa75q1TAiEPoRTjU0DGB3agadA==}
 
-  '@primeuix/themes@1.1.2':
-    resolution: {integrity: sha512-yxnmMqMct6RYWX6m9gS9AIG8QArjnROQzBqQf8UDQggAedX3My1fxr9FKEpvZMoY39WD494kG0pU9zIa1k2XyA==}
+  '@primeuix/themes@1.2.0-beta.1':
+    resolution: {integrity: sha512-XcszIvQ1naUIJ6OgUdYlCtPJdsvdp7kShgXIOVGmmfIp431qHcQXQOaaqRM6Dg5uenlCjr4Nfbo0Ph1ZvwIPzA==}
 
-  '@primeuix/utils@0.5.4':
-    resolution: {integrity: sha512-8LggV3Jz59pymHQD10e/u63z/GemQ22RBeu2Gb1eJgBYVwn1iOb82LR+daeAc/LxrXCC5pHnftnCmnZO6vInLA==}
+  '@primeuix/utils@0.6.0-beta.1':
+    resolution: {integrity: sha512-WRGMImiHE/e4womxwVxC9swFHLVr5GrsUsOgKI65FatwXP2ng95f7PqEqydaEBq68SzDtyNqZy28sP9r+C/X5w==}
     engines: {node: '>=12.11.0'}
 
   '@protobufjs/aspromise@1.1.2':
@@ -6003,23 +6003,23 @@ snapshots:
       '@preact/signals-core': 1.10.0
       preact: 10.26.9
 
-  '@primeuix/motion@0.0.1':
+  '@primeuix/motion@0.0.3':
     dependencies:
-      '@primeuix/utils': 0.5.4
+      '@primeuix/utils': 0.6.0-beta.1
 
-  '@primeuix/styled@0.6.4':
+  '@primeuix/styled@0.7.0-beta.1':
     dependencies:
-      '@primeuix/utils': 0.5.4
+      '@primeuix/utils': 0.6.0-beta.1
 
-  '@primeuix/styles@1.1.2':
+  '@primeuix/styles@1.2.0-beta.1':
     dependencies:
-      '@primeuix/styled': 0.6.4
+      '@primeuix/styled': 0.7.0-beta.1
 
-  '@primeuix/themes@1.1.2':
+  '@primeuix/themes@1.2.0-beta.1':
     dependencies:
-      '@primeuix/styled': 0.6.4
+      '@primeuix/styled': 0.7.0-beta.1
 
-  '@primeuix/utils@0.5.4': {}
+  '@primeuix/utils@0.6.0-beta.1': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
