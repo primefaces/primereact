@@ -104,6 +104,7 @@ export const FileUploadBase = ComponentBase.extend({
         className: null,
         withCredentials: false,
         previewWidth: 50,
+        filenameTruncateLength: 40,
         chooseLabel: null,
         selectedFileLabel: null,
         uploadLabel: null,
