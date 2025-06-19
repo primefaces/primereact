@@ -34,6 +34,7 @@
         "build:showcase": "pnpm --filter showcase build",
         "build:apidoc": "pnpm --filter showcase build:apidoc",
         "dev": "pnpm --filter showcase dev",
+        "dev2": "pnpm --filter showcase dev2",
         "dev:scan": "pnpm --filter showcase scan",
         "type:check": "pnpm recursive run type:check",
         "security:check": "pnpm audit --prod --audit-level high",

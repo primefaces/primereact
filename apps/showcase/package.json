@@ -3,6 +3,7 @@
     "version": "11.0.0",
     "scripts": {
         "dev": "npm run dev:init && next dev --turbopack",
+        "dev2": "npm run dev:init && next dev --turbopack --port 3001",
         "dev:init": "npm run clean && npm run build:init",
         "clean": "npx rimraf --glob ./__store__ ./.contentlayer ./.next",
         "scan": "npm run dev && react-scan localhost:3000",
