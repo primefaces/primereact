@@ -6,8 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const projectRoot = path.resolve(__dirname, '..');
-const demoDir = path.join(projectRoot, 'demo');
-const storeDir = path.join(projectRoot, '__store__');
+const storeDir = path.join(projectRoot, 'store');
+const _storeDir_ = path.join(projectRoot, '__store__');
 
 let storeContent = `/****************************************************************************
 ****************** PrimeReact Store (Auto-Generated) ******************
@@ -37,7 +37,11 @@ function createNestedObject(obj, path, value) {
     current[lastPart] = value;
 }
 
-function findDemoFiles(dir, baseDir = demoDir) {
+function findDemoFiles(dir, baseDir = storeDir) {
+    if (!fs.existsSync(dir)) {
+        return [];
+    }
+
     const files = fs.readdirSync(dir);
     const demoFiles = [];
 
@@ -52,7 +56,7 @@ function findDemoFiles(dir, baseDir = demoDir) {
             const importPath = relativePath.replace(/\\/g, '/').replace('.tsx', '');
             const key = path.basename(file, '.tsx');
 
-            const aliasPath = `demo/${importPath}`;
+            const aliasPath = `store/${importPath}`;
             const aliasFilePath = `${aliasPath}.tsx`;
 
             demoFiles.push({
@@ -66,10 +70,10 @@ function findDemoFiles(dir, baseDir = demoDir) {
     return demoFiles;
 }
 
-const demoFiles = findDemoFiles(demoDir);
+const storeFiles = findDemoFiles(storeDir);
 const storeObject = {};
 
-for (const { filePath, relativePath } of demoFiles) {
+for (const { filePath, relativePath } of storeFiles) {
     const value = {
         component: `React.lazy(() => import('${filePath}'))`,
         filePath: `'${filePath}'`
@@ -84,12 +88,15 @@ function objectToString(obj, indent = 4) {
     let result = '';
 
     for (const [key, value] of entries) {
-        if (typeof value === 'object' && value !== null) {
+        if (typeof value === 'object' && value !== null && !value.component) {
             result += `${' '.repeat(indent)}'${key}': {\n`;
             result += objectToString(value, indent + 4);
             result += `${' '.repeat(indent)}},\n`;
         } else {
-            result += `${' '.repeat(indent)}'${key}': ${value},\n`;
+            result += `${' '.repeat(indent)}'${key}': {\n`;
+            result += `${' '.repeat(indent + 4)}component: ${value.component},\n`;
+            result += `${' '.repeat(indent + 4)}filePath: ${value.filePath}\n`;
+            result += `${' '.repeat(indent)}},\n`;
         }
     }
 
@@ -100,8 +107,8 @@ storeContent += objectToString(storeObject);
 storeContent += `};
 `;
 
-if (!fs.existsSync(storeDir)) {
-    fs.mkdirSync(storeDir, { recursive: true });
+if (!fs.existsSync(_storeDir_)) {
+    fs.mkdirSync(_storeDir_, { recursive: true });
 }
 
-fs.writeFileSync(path.join(storeDir, 'index.mjs'), storeContent);
+fs.writeFileSync(path.join(_storeDir_, 'index.mjs'), storeContent);

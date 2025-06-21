@@ -8,8 +8,8 @@ import { StyleClass } from 'primereact/styleclass';
 import * as React from 'react';
 import AppConfigurator from './AppConfigurator';
 
-export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: AppTopbarProps) {
-    const app = useApp();
+export default function AppTopbar({ showMenuButton = true }: AppTopbarProps) {
+    const { isDarkTheme, handleChangeDarkTheme, config, onMenuButtonClick } = useApp();
 
     const logoFillRef = React.useRef({
         primary: dt('primary.color'),
@@ -19,12 +19,12 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
     const { y } = useScroll();
 
     const toggleDarkMode = () => {
-        const isDark = !app.isDarkTheme;
+        const isDark = !isDarkTheme;
 
         if (isDark) document.documentElement.classList.add('p-dark');
         else document.documentElement.classList.remove('p-dark');
 
-        app.handleChangeDarkTheme();
+        handleChangeDarkTheme();
         //app.setDarkTheme(isDark);
     };
 
@@ -129,7 +129,7 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
                     </li>
                     <li>
                         <button type="button" className="topbar-item" onClick={toggleDarkMode} aria-label="Toggle Dark Mode">
-                            <i className={cn('pi', { 'pi-moon': app.isDarkTheme, 'pi-sun': !app.isDarkTheme })}></i>
+                            <i className={cn('pi', { 'pi-moon': isDarkTheme, 'pi-sun': !isDarkTheme })}></i>
                         </button>
                     </li>
                     <li>
@@ -176,13 +176,13 @@ export default function AppTopbar({ showMenuButton = true, onMenuButtonClick }: 
                             leaveActiveClassName="animate-fadeout"
                             hideOnOutsideClick
                         >
-                            <span className="version-text">{app.config.versions?.[0].name}</span>
+                            <span className="version-text">{config.versions?.[0].name}</span>
                             <span className="version-icon pi pi-angle-down"></span>
                         </StyleClass>
 
                         <div className="versions-panel hidden">
                             <ul>
-                                {app.config.versions?.map((version) => (
+                                {config.versions?.map((version) => (
                                     <li key={version.name} role="none">
                                         <a href={version.url}>
                                             <span>PrimeReact {version.name}</span>

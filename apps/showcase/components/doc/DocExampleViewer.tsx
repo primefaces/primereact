@@ -1,18 +1,17 @@
-'use client';
 import { Store } from '@/__store__/index.mjs';
 import { cn } from '@primeuix/utils';
-import * as React from 'react';
+import React from 'react';
 
-type DocComponentViewerProps = {
+type DocExampleViewerProps = {
     name: string;
-    hideCode?: boolean;
 };
 
-const DocComponentViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocComponentViewerProps> = ({ name, hideCode = false, children, className, ...props }) => {
+const DocExampleViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocExampleViewerProps> = ({ name, children, className, ...props }) => {
     const Component = React.useMemo(() => {
-        const [dir, component, demo] = name.split(':');
+        const [component, demo] = name.split(':');
 
-        const Preview = (Store as Record<string, Record<string, Record<string, { component: React.LazyExoticComponent<() => React.JSX.Element> }>>>)[dir]?.[component]?.[demo]?.component;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const Preview = (Store.examples as any)?.[component]?.[demo]?.component;
 
         if (!Preview) {
             return (
@@ -29,11 +28,11 @@ const DocComponentViewer: React.FC<React.HTMLAttributes<HTMLDivElement> & DocCom
 
     return (
         <div className={cn('group/component-viewer mb-8', className)} data-component-viewer="true" {...props}>
-            <React.Suspense fallback={<></>}>{Component}</React.Suspense>
+            <React.Suspense fallback={<div className="card flex items-center justify-center text-surface-500">Loading...</div>}>{Component}</React.Suspense>
 
-            {!hideCode && <div className={cn('relative w-full overflow-hidden ')}>{children}</div>}
+            <div className={cn('relative w-full overflow-hidden ')}>{children}</div>
         </div>
     );
 };
 
-export default DocComponentViewer;
+export default DocExampleViewer;

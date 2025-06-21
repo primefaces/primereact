@@ -39,16 +39,13 @@ export interface AppProviderProps {
     handleChangePrimary: (primary: string) => void;
     handleChangeSurface: (surface: string) => void;
     handleChangeDarkTheme: () => void;
+    onMenuButtonClick: () => void;
+    sidebarActive: boolean;
+    onMaskClick: () => void;
 }
 
 export interface AppTopbarProps {
     showMenuButton?: boolean;
-    onMenuButtonClick?: () => void;
-    children?: React.ReactNode;
-}
-
-export interface AppMenuProps {
-    active?: boolean;
     children?: React.ReactNode;
 }
 

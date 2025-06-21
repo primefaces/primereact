@@ -1,14 +1,14 @@
 ---
-title: PassThrough
+title: Pass Through
 description: The Pass Through attributes is an API to access the internal DOM Structure of the components.
 ---
 
-# Introduction
+## Introduction
 
 In traditional 3rd party UI libraries, users are limited to the API provided by component author. This API commonly consists of props, events and slots. Whenever a requirement emerges for a new customization option in the API, the component
 author needs to develop and publish it with a new release.
 
-Vision of PrimeTek is `Your components, not ours`. The pass through feature is a key element to implement this vision by exposing the component internals in order to apply arbitrary attributes and listeners to the DOM elements. The primary
+Vision of PrimeTek is _Your components, not ours_. The pass through feature is a key element to implement this vision by exposing the component internals in order to apply arbitrary attributes and listeners to the DOM elements. The primary
 advantage of this approach is that it frees you from being restricted by the main component API. We recommend considering the pass-through feature whenever you need to tailor a component that lacks a built-in feature for your specific
 requirement.
 
@@ -18,7 +18,7 @@ Two videos are available at PrimeTV youtube channel, first one is an introductio
     <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=gBh1ow-f0JfGWPrv&amp;list=PLC9bp-OHi-Wk9fMhxOM1u6Si82i6AxqUM" frameBorder="0" allowFullScreen></iframe>
 </div>
 
-# Basic
+## Basic
 
 Each component has a special `pt` property to define an object with keys corresponding to the available DOM elements. Each value can either be a string, an object or a function that returns a string or an object to define the
 arbitrary properties to apply to the element such as styling, aria, data-\* or custom attributes. If the value is a string or a function that returns a string, it is considered as a className definition and added to the className attribute of the
@@ -26,7 +26,7 @@ element. Every component documentation has a dedicated section to document the a
 
 Most common usage of `pt` is styling and customization. Example below styles an unstyled Panel component with Tailwind CSS library.
 
-<DocComponentViewer name="passthrough:basic-demo" />
+<DocComponentViewer name="showcase:passthrough:basic-demo" />
 
 ## Global
 

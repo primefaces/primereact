@@ -28,37 +28,37 @@ import { Accordion } from 'primereact/accordion';
 
 Accordion is defined using `Accordion`, `Accordion.Panel`, `Accordion.Header`, `Accordion.HeaderIndicator` and `Accordion.Content` components. Each `Accordion.Panel` must contain a unique `value` property to specify the active item.
 
-<DocComponentViewer name="accordion:basic-demo" />
+<DocExampleViewer name="accordion:basic-demo" />
 
 ### Multiple
 
 Only one tab at a time can be active by default, enabling `multiple` property changes this behavior to allow multiple panels. In this case `multiple` needs to be an array.
 
-<DocComponentViewer name="accordion:multiple-demo" />
+<DocExampleViewer name="accordion:multiple-demo" />
 
 ### Custom Indicator
 
 The `Accordion.HeaderIndicator` component is used to display the indicator of the header. It can be customized by passing a function that returns a React element or `data-p-active` attribute.
 
-<DocComponentViewer name="accordion:custom-indicator-demo" />
+<DocExampleViewer name="accordion:custom-indicator-demo" />
 
 ### Disabled
 
 Enabling `disabled` property of an `Accordion.Panel` prevents user interaction of the panel or enable `disabled` of the `Accordion` component disables all panels.
 
-<DocComponentViewer name="accordion:disabled-demo" />
+<DocExampleViewer name="accordion:disabled-demo" />
 
 ### Template
 
 The optional `as` property controls the default container element of a header, for example setting it to a div renders a div for the header instead of a button. The `asChild` option enables the headless mode for further customization by passing callbacks and properties to implement your own header.
 
-<DocComponentViewer name="accordion:template-demo" />
+<DocExampleViewer name="accordion:template-demo" />
 
 ### With RadioButton
 
 `RadioButton` component can be used to group multiple `Accordion.Panel` components.
 
-<DocComponentViewer name="accordion:use-with-radiobutton" />
+<DocExampleViewer name="accordion:use-with-radiobutton" />
 
 ## Accessibility
 
@@ -70,8 +70,8 @@ The content uses region role, defines an id that matches the aria-controls of th
 
 ### Header Keyboard Support
 
-| Key         | Function                                                                                             |
-| ----------- | ---------------------------------------------------------------------------------------------------- |
+| Key           | Function                                                                                             |
+| ------------- | ---------------------------------------------------------------------------------------------------- |
 | `tab`         | Moves focus to the next focusable element in the page tab sequence.                                  |
 | `shift + tab` | Moves focus to the previous focusable element in the page tab sequence.                              |
 | `enter`       | Toggles the visibility of the content.                                                               |

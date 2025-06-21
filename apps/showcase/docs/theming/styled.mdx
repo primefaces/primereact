@@ -1,18 +1,16 @@
 ---
-title: Styled
+title: Styled Mode
 description: Choose from a variety of pre-styled themes or develop your own.
 ---
 
 ## Architecture
 
-PrimeReact is a design agnostic library so unlike some other UI libraries it does not enforce a certain styling such as material design. Styling is decoupled from the components using the themes instead. A theme consists of two parts;
-
-`base` and `preset`. The base is the style rules with CSS variables as placeholders whereas the preset is a set of design tokens to feed a base by mapping the tokens to CSS variables. A base may be configured with different presets,
+PrimeReact is a design agnostic library so unlike some other UI libraries it does not enforce a certain styling such as material design. Styling is decoupled from the components using the themes instead. A theme consists of two parts; _base_ and _preset_. The base is the style rules with CSS variables as placeholders whereas the preset is a set of design tokens to feed a base by mapping the tokens to CSS variables. A base may be configured with different presets,
 currently Aura, Material, Lara and Nora are the available built-in options.
 
-<img alt="Architecture" src="https://primefaces.org/cdn/primevue/images/primevue-v4-styled-architecture.png" className="w-full mb-4" />
+![Architecture](https://primefaces.org/cdn/primevue/images/primevue-v4-styled-architecture.png)
 
-The core of the styled mode architecture is based on a concept named `design token`, a preset defines the token configuration in 3 tiers; `primitive`, `semantic` and `component`.
+The core of the styled mode architecture is based on a concept named _design token_, a preset defines the token configuration in 3 tiers; _primitive_, _semantic_ and _component_.
 
 ### Primitive Tokens
 
@@ -34,7 +32,7 @@ design tokens are the suggested approach.
 
 ### Video Tutorial
 
-Watch the _PrimeReact Theming Demystified_ series to learn more about the architecture with examples.
+Watch the **PrimeReact Theming Demystified** series to learn more about the architecture with examples.
 
 <div className="video-container">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=nlVVyxrwgiJCL9U7&amp;list=PLC9bp-OHi-Wm2LqlXk1i-haW-1kESMIqh" frameBorder="0" allowFullScreen></iframe>
@@ -73,7 +71,7 @@ options: {
 
 #### cssLayer
 
-Defines whether the styles should be defined inside a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer" target="_blank" rel="noopener noreferrer">CSS layer</a> by default or not. A CSS layer would be handy to declare a
+Defines whether the styles should be defined inside a [CSS layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) by default or not. A CSS layer would be handy to declare a
 custom cascade layer for easier customization if necessary. The default is `false`.
 
 ```tsx
@@ -88,7 +86,7 @@ options: {
 ### Presets
 
 Aura, Material, Lara and Nora are the available built-in options, created to demonstrate the power of the design-agnostic theming. Aura is PrimeTek's own vision, Material follows Google Material Design v2, Lara is based on Bootstrap and
-Nora is inspired by enterprise applications. Visit the <a href="https://github.com/primefaces/primevue/tree/master/packages/themes/src/presets" target="_blank" rel="noopener noreferrer">source code</a>
+Nora is inspired by enterprise applications. Visit the [source code](https://github.com/primefaces/primevue/tree/master/packages/themes/src/presets)
 to learn more about the structure of presets. You may use them out of the box with modifications or utilize them as reference in case you need to build your own presets from scratch.
 
 ### Reserved Keys
@@ -107,7 +105,7 @@ var(--p-blue-500)
 $dt('blue.500').value
 ```
 
-<DocComponentViewer name="styled:colors-demo" hideCode />
+<DocComponentViewer name="showcase:theming:colors-list" hideCode />
 
 ## Dark Mode
 
@@ -125,7 +123,7 @@ theme: {
 }
 ```
 
-Following is a very basic example implementation of a dark mode switch, you may extend it further by involving `prefers-color-scheme` to retrieve it from the system initially and use `localStorage` to make it stateful. See this <a href="https://dev.to/abbeyperini/dark-mode-toggle-and-prefers-color-scheme-4f3m" target="_blank" rel="noopener noreferrer"> article </a> for more information.
+Following is a very basic example implementation of a dark mode switch, you may extend it further by involving `prefers-color-scheme` to retrieve it from the system initially and use `localStorage` to make it stateful. See this [article](https://dev.to/abbeyperini/dark-mode-toggle-and-prefers-color-scheme-4f3m) for more information.
 
 ```tsx
 <Button label="Toggle Dark Mode" onClick={toggleDarkMode} />
@@ -394,7 +392,7 @@ const MyPreset = definePreset(Aura, {
 
 Design tokens can be scoped to a certain component using the `dt` property. In this example, first switch uses the global tokens whereas second one overrides the global with its own tokens.
 
-<DocComponentViewer name="styled:scoped-tokens-demo" />
+<DocComponentViewer name="showcase:styled:scoped-tokens-demo" />
 
 ## Utils
 
@@ -566,7 +564,7 @@ The PrimeReact CSS layer only applies to styled mode when layering is enabled ex
 
 ### Specificity
 
-The `@layer` is a standard CSS feature to define cascade layers for a customizable order of precedence. If you need to become more familiar with layers, visit the documentation at <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer" className="doc-link">MDN</a> to begin with.
+The `@layer` is a standard CSS feature to define cascade layers for a customizable order of precedence. If you need to become more familiar with layers, visit the documentation at [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to begin with.
 
 The `cssLayer` is disabled by default, when it is enabled at theme configuration, PrimeReact wraps the built-in style classes under the `primereact` cascade layer to make the library styles easy to override. CSS in your app without a layer has the
 highest CSS specificity, so you'll be able to override styles regardless of the location or how strong a class is written.
@@ -593,10 +591,10 @@ layer order. This way, your Reset CSS does not get in the way of PrimeReact comp
 
 ## CSS Modules
 
-<a href="https://github.com/css-modules/css-modules">CSS modules</a> are supported by enabling the `module` property on a style element within your SFC. Use the `$style` keyword to apply classes to a PrimeReact component. It is recommend to enable
+[CSS modules](https://github.com/css-modules/css-modules) are supported by enabling the `module` property on a style element within your SFC. Use the `$style` keyword to apply classes to a PrimeReact component. It is recommend to enable
 `cssLayer` when using CSS modules so that the PrimeReact styles have low CSS specificity.
 
-<DocComponentViewer name="styled:css-modules-demo" />
+<DocComponentViewer name="showcase:styled:css-modules-demo" />
 
 ```css
 .myinput {

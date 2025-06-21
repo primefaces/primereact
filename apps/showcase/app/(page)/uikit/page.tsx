@@ -1,20 +1,25 @@
-import * as React from 'react';
-import { useApp } from '@/hooks/useApp';
+import { Metadata } from 'next';
 import Image from 'next/image';
 
-export default function BasicDemo() {
-    const { isDarkTheme } = useApp();
+const title = 'UI Kit - PrimeReact';
 
-    const coverImage = React.useMemo(() => {
-        const image = isDarkTheme ? 'images/uikit/primeone-cover-dark.jpeg' : 'images/uikit/primeone-cover-light.jpeg';
+export const metadata: Metadata = {
+    title: title,
+    openGraph: {
+        title: title
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: title
+    }
+};
 
-        return 'https://primefaces.org/cdn/primevue/' + image;
-    }, [isDarkTheme]);
-
+export default function UIKitPage() {
     return (
         <div>
             <div style={{ borderRadius: '50px', maxHeight: '500px' }} className="overflow-hidden mb-8 flex items-center">
-                <Image src={coverImage} alt="PrimeReact Figma UI Kit" width={2000} height={2000} className="w-full" />
+                <Image src={'https://primefaces.org/cdn/primevue/images/uikit/primeone-cover-dark.jpeg'} alt="PrimeReact Figma UI Kit" width={2000} height={2000} className="w-full hidden dark:block" />
+                <Image src={'https://primefaces.org/cdn/primevue/images/uikit/primeone-cover-light.jpeg'} alt="PrimeReact Figma UI Kit" width={2000} height={2000} className="w-full block dark:hidden" />
             </div>
 
             <div className="card !mb-8" style={{ borderRadius: '50px' }}>

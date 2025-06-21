@@ -14,7 +14,7 @@ export default function ControlledDemo() {
     return (
         <div className="card space-y-4">
             <Button onClick={() => setActiveTab('tab2')}>Go to Payment</Button>
-            <Tabs value={activeTab} onValueChange={(e: any) => setActiveTab(e.value)}>
+            <Tabs value={activeTab} onValueChange={(e: { value: string | number | undefined }) => setActiveTab(e.value as string)}>
                 <Tabs.List>
                     {tabs.map((tab) => (
                         <Tabs.Tab key={tab.id} value={tab.id}>

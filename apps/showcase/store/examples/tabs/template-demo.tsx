@@ -4,7 +4,6 @@ import { InputText } from 'primereact/inputtext';
 import { Label } from 'primereact/label';
 import { Switch } from 'primereact/switch';
 import { Tabs } from 'primereact/tabs';
-import { useState } from 'react';
 
 const tabs = [
     { id: 'tab1', title: 'Account Info', icon: 'pi pi-user', content: 'Update your personal information such as name, email address, and profile picture.' },
@@ -13,12 +12,6 @@ const tabs = [
 ];
 
 export default function TemplateDemo() {
-    const [preferences, setPreferences] = useState({
-        darkMode: false,
-        emailNotifications: false,
-        desktopNotifications: false
-    });
-
     return (
         <div className="card">
             <Tabs value="tab1" className="max-w-md mx-auto">

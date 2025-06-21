@@ -12,7 +12,7 @@ interface IconItem {
     };
 }
 
-export default function ListDemo() {
+export default function IconsList() {
     const [icons, setIcons] = React.useState<IconItem[] | null>(null);
     const [filteredIcons, setFilteredIcons] = React.useState<IconItem[] | null>(null);
 

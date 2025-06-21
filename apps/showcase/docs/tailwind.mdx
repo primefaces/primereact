@@ -1,5 +1,5 @@
 ---
-title: Tailwind
+title: Tailwind CSS
 description: Integration between PrimeReact and Tailwind CSS both in styled and unstyled modes.
 ---
 
@@ -11,27 +11,27 @@ Bootstrap, Tailwind offers primitive classes like `bg-blue-500`, `rounded` and `
 Tailwind is an outstanding CSS library, however it lacks a true comprehensive UI suite when combined with Vue.js, this is where PrimeReact comes in by providing a wide range of highly accessible and feature rich UI component library. The
 core of PrimeReact does not depend on Tailwind CSS, instead we provide the necessary integration points such as the primeui tailwind plugin and the Tailwind version for the unstyled mode.
 
-<div className="doc-notification">
+<DocNotification>
     Tailwind CSS and PrimeReact can be used together via two main approaches. Simple approach is using Tailwind CSS _around_ PrimeReact components for layout purposes as demonstrated in the samples section below, the advanced approach takes the
     integration a step further by allowing Tailwind CSS _within_ the component internals to style the entire UI suite in unstyled mode.
-</div>
+</DocNotification>
 
 ## Tailwind Theme
 
-PrimeTek offers the Tailwind CSS version of the entire PrimeReact UI suite in unstyled mode based on the `@apply` directive with IntelliSense support. Visit the <a href="https://tailwind.primereact.org" target="_blank" rel="noopener noreferrer">Tailwind version of PrimeReact </a> for the documentation, demos and additional resources.
+PrimeTek offers the Tailwind CSS version of the entire PrimeReact UI suite in unstyled mode based on the `@apply` directive with IntelliSense support. Visit the [Tailwind version of PrimeReact](https://tailwind.primereact.org) for the documentation, demos and additional resources.
 
-<div className="doc-notification">
+<DocNotification>
     Tailwind version of PrimeReact instead of the default styled mode is not tested with Tailwind v4. For the next-gen version of this project, we are building a new UI Component library based on the code ownership model where components are located
     inside your project source instead of imported from npm. This new library is powered by Unstyled PrimeReact Core and Tailwind v4.
-</div>
+</DocNotification>
 
 ## Plugin
 
-The <a href="https://www.npmjs.com/package/tailwindcss-primeui" target="_blank" rel="noopener noreferrer">tailwindcss-primeui</a> is an official plugin by PrimeTek to provide first className integration between a Prime UI library like
+The [tailwindcss-primeui](https://www.npmjs.com/package/tailwindcss-primeui) is an official plugin by PrimeTek to provide first className integration between a Prime UI library like
 PrimeReact and Tailwind CSS. It is designed to work both in styled and unstyled modes. In styled mode, for instance the semantic colors such as primary and surfaces are provided as Tailwind utilities e.g. `bg-primary`,
 `text-surface-500`, `text-muted-color`.
 
-If you haven't already done so, start by integrating Tailwind into your project. Detailed steps for this process can be found in the Tailwind <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">documentation</a>.
+If you haven't already done so, start by integrating Tailwind into your project. Detailed steps for this process can be found in the Tailwind [documentation](https://tailwindcss.com/).
 After successfully installing Tailwind, proceed with the installation of the PrimeUI plugin. This single npm package comes with two libraries: the CSS version is compatible with Tailwind v4, while the JS version is designed for Tailwind
 v3.
 
@@ -276,7 +276,7 @@ PrimeReact color palette as utility classes.
 
 ### Starter
 
-The Tailwind v4 and PrimeReact <a href="https://github.com/primefaces/primereact-examples/tree/main/vite-tailwindv4" target="_blank" rel="noopener noreferrer">starter example</a> is available to demonstrate the integration setup with an example dashboard.
+The Tailwind v4 and PrimeReact [starter example](https://github.com/primefaces/primereact-examples/tree/main/vite-tailwindv4) is available to demonstrate the integration setup with an example dashboard.
 
 ## Animations
 
@@ -284,115 +284,115 @@ The plugin also adds extended animation utilities that can be used with the styl
 
 ### Animation Name
 
-| Class                | Property                                                                                                                                                                                              |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| animate-enter        | animation-name: enter; <br />--p-enter-opacity: initial; <br />--p-enter-scale: initial; <br />--p-enter-rotate: initial; <br />--p-enter-translate-x: initial; <br />--p-enter-translate-y: initial; |
-| animate-leave        | animation-name: leave; <br />--p-leave-opacity: initial; <br />--p-leave-scale: initial; <br />--p-leave-rotate: initial; <br />--p-leave-translate-x: initial; <br />--p-leave-translate-y: initial; |
-| animate-leave        | fadein 0.15s linear                                                                                                                                                                                   |
-| animate-fadein       | fadein 0.15s linear                                                                                                                                                                                   |
-| animate-fadeout      | fadeout 0.15s linear                                                                                                                                                                                  |
-| animate-slidedown    | slidedown 0.45s ease-in-out                                                                                                                                                                           |
-| animate-slideup      | slideup 0.45s cubic-bezier(0, 1, 0, 1)                                                                                                                                                                |
-| animate-scalein      | scalein 0.15s linear                                                                                                                                                                                  |
-| animate-fadeinleft   | fadeinleft 0.15s linear                                                                                                                                                                               |
-| animate-fadeoutleft  | fadeoutleft 0.15s linear                                                                                                                                                                              |
-| animate-fadeinright  | fadeinright 0.15s linear                                                                                                                                                                              |
-| animate-fadeoutright | fadeoutright 0.15s linear                                                                                                                                                                             |
-| animate-fadeinup     | fadeinup 0.15s linear                                                                                                                                                                                 |
-| animate-fadeoutup    | fadeoutup 0.15s linear                                                                                                                                                                                |
-| animate-fadeindown   | fadeindown 0.15s linear                                                                                                                                                                               |
-| animate-fadeoutup    | fadeoutup 0.15s linear                                                                                                                                                                                |
-| animate-width        | width 0.15s linear                                                                                                                                                                                    |
-| animate-flip         | flip 0.15s linear                                                                                                                                                                                     |
-| animate-flipup       | flipup 0.15s linear                                                                                                                                                                                   |
-| animate-flipleft     | fadein 0.15s linear                                                                                                                                                                                   |
-| animate-flipright    | flipright 0.15s linear                                                                                                                                                                                |
-| animate-zoomin       | zoomin 0.15s linear                                                                                                                                                                                   |
-| animate-zoomindown   | zoomindown 0.15s linear                                                                                                                                                                               |
-| animate-zoominleft   | zoominleft 0.15s linear                                                                                                                                                                               |
-| animate-zoominright  | zoominright 0.15s linear                                                                                                                                                                              |
-| animate-zoominup     | zoominup 0.15s linear                                                                                                                                                                                 |
+| Class                  | Property                                                                                                                                                                                              |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `animate-enter`        | animation-name: enter; <br />--p-enter-opacity: initial; <br />--p-enter-scale: initial; <br />--p-enter-rotate: initial; <br />--p-enter-translate-x: initial; <br />--p-enter-translate-y: initial; |
+| `animate-leave`        | animation-name: leave; <br />--p-leave-opacity: initial; <br />--p-leave-scale: initial; <br />--p-leave-rotate: initial; <br />--p-leave-translate-x: initial; <br />--p-leave-translate-y: initial; |
+| `animate-leave`        | fadein 0.15s linear                                                                                                                                                                                   |
+| `animate-fadein`       | fadein 0.15s linear                                                                                                                                                                                   |
+| `animate-fadeout`      | fadeout 0.15s linear                                                                                                                                                                                  |
+| `animate-slidedown`    | slidedown 0.45s ease-in-out                                                                                                                                                                           |
+| `animate-slideup`      | slideup 0.45s cubic-bezier(0, 1, 0, 1)                                                                                                                                                                |
+| `animate-scalein`      | scalein 0.15s linear                                                                                                                                                                                  |
+| `animate-fadeinleft`   | fadeinleft 0.15s linear                                                                                                                                                                               |
+| `animate-fadeoutleft`  | fadeoutleft 0.15s linear                                                                                                                                                                              |
+| `animate-fadeinright`  | fadeinright 0.15s linear                                                                                                                                                                              |
+| `animate-fadeoutright` | fadeoutright 0.15s linear                                                                                                                                                                             |
+| `animate-fadeinup`     | fadeinup 0.15s linear                                                                                                                                                                                 |
+| `animate-fadeoutup`    | fadeoutup 0.15s linear                                                                                                                                                                                |
+| `animate-fadeindown`   | fadeindown 0.15s linear                                                                                                                                                                               |
+| `animate-fadeoutup`    | fadeoutup 0.15s linear                                                                                                                                                                                |
+| `animate-width`        | width 0.15s linear                                                                                                                                                                                    |
+| `animate-flip`         | flip 0.15s linear                                                                                                                                                                                     |
+| `animate-flipup`       | flipup 0.15s linear                                                                                                                                                                                   |
+| `animate-flipleft`     | fadein 0.15s linear                                                                                                                                                                                   |
+| `animate-flipright`    | flipright 0.15s linear                                                                                                                                                                                |
+| `animate-zoomin`       | zoomin 0.15s linear                                                                                                                                                                                   |
+| `animate-zoomindown`   | zoomindown 0.15s linear                                                                                                                                                                               |
+| `animate-zoominleft`   | zoominleft 0.15s linear                                                                                                                                                                               |
+| `animate-zoominright`  | zoominright 0.15s linear                                                                                                                                                                              |
+| `animate-zoominup`     | zoominup 0.15s linear                                                                                                                                                                                 |
 
 ### Animation Duration
 
-| Class                    | Property                   |
-| ------------------------ | -------------------------- |
-| animate-duration-0       | animation-duration: 0s     |
-| animate-duration-75      | animation-duration: 75ms   |
-| animate-duration-100     | animation-duration: 100ms  |
-| animate-duration-200     | animation-duration: 200ms  |
-| animate-duration-300     | animation-duration: 300ms  |
-| animate-duration-400     | animation-duration: 400ms  |
-| animate-duration-500     | animation-duration: 500ms  |
-| animate-duration-700     | animation-duration: 700ms  |
-| animate-duration-1000    | animation-duration: 1000ms |
-| animate-duration-2000    | animation-duration: 2000ms |
-| animate-duration-3000    | animation-duration: 300ms  |
-| animate-duration-[value] | animation-duration: value  |
+| Class                      | Property                   |
+| -------------------------- | -------------------------- |
+| `animate-duration-0`       | animation-duration: 0s     |
+| `animate-duration-75`      | animation-duration: 75ms   |
+| `animate-duration-100`     | animation-duration: 100ms  |
+| `animate-duration-200`     | animation-duration: 200ms  |
+| `animate-duration-300`     | animation-duration: 300ms  |
+| `animate-duration-400`     | animation-duration: 400ms  |
+| `animate-duration-500`     | animation-duration: 500ms  |
+| `animate-duration-700`     | animation-duration: 700ms  |
+| `animate-duration-1000`    | animation-duration: 1000ms |
+| `animate-duration-2000`    | animation-duration: 2000ms |
+| `animate-duration-3000`    | animation-duration: 300ms  |
+| `animate-duration-[value]` | animation-duration: value  |
 
 ### Animation Delay
 
-| Class              | Property                |
-| ------------------ | ----------------------- |
-| animate-delay-none | animation-duration: 0s  |
-| animate-delay-75   | animation-delay: 75ms   |
-| animate-delay-100  | animation-delay: 100ms  |
-| animate-delay-150  | animation-delay: 150ms  |
-| animate-delay-200  | animation-delay: 200ms  |
-| animate-delay-300  | animation-delay: 300ms  |
-| animate-delay-400  | animation-delay: 400ms  |
-| animate-delay-500  | animation-delay: 500ms  |
-| animate-delay-700  | animation-delay: 700ms  |
-| animate-delay-1000 | animation-delay: 1000ms |
+| Class                | Property                |
+| -------------------- | ----------------------- |
+| `animate-delay-none` | animation-duration: 0s  |
+| `animate-delay-75`   | animation-delay: 75ms   |
+| `animate-delay-100`  | animation-delay: 100ms  |
+| `animate-delay-150`  | animation-delay: 150ms  |
+| `animate-delay-200`  | animation-delay: 200ms  |
+| `animate-delay-300`  | animation-delay: 300ms  |
+| `animate-delay-400`  | animation-delay: 400ms  |
+| `animate-delay-500`  | animation-delay: 500ms  |
+| `animate-delay-700`  | animation-delay: 700ms  |
+| `animate-delay-1000` | animation-delay: 1000ms |
 
 ### Iteration Count
 
-| Class            | Property                            |
-| ---------------- | ----------------------------------- |
-| animate-infinite | animation-iteration-count: infinite |
-| animate-once     | animation-iteration-count: 1        |
-| animate-twice    | animation-iteration-count: 2        |
+| Class              | Property                            |
+| ------------------ | ----------------------------------- |
+| `animate-infinite` | animation-iteration-count: infinite |
+| `animate-once`     | animation-iteration-count: 1        |
+| `animate-twice`    | animation-iteration-count: 2        |
 
 ### Direction
 
-| Class                     | Property                               |
-| ------------------------- | -------------------------------------- |
-| animate-normal            | animation-direction: normal            |
-| animate-reverse           | animation-direction: reverse           |
-| animate-alternate         | animation-direction: alternate         |
-| animate-alternate-reverse | animation-direction: alternate-reverse |
+| Class                       | Property                               |
+| --------------------------- | -------------------------------------- |
+| `animate-normal`            | animation-direction: normal            |
+| `animate-reverse`           | animation-direction: reverse           |
+| `animate-alternate`         | animation-direction: alternate         |
+| `animate-alternate-reverse` | animation-direction: alternate-reverse |
 
 ### Timing Function
 
-| Class               | Property                                                |
-| ------------------- | ------------------------------------------------------- |
-| animate-ease-linear | animation-timing-function: linear                       |
-| animate-ease-in     | animation-timing-function: cubic-bezier(0.4, 0, 1, 1)   |
-| animate-ease-out    | animation-timing-function: cubic-bezier(0, 0, 0.2, 1)   |
-| animate-ease-in-out | animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) |
+| Class                 | Property                                                |
+| --------------------- | ------------------------------------------------------- |
+| `animate-ease-linear` | animation-timing-function: linear                       |
+| `animate-ease-in`     | animation-timing-function: cubic-bezier(0.4, 0, 1, 1)   |
+| `animate-ease-out`    | animation-timing-function: cubic-bezier(0, 0, 0.2, 1)   |
+| `animate-ease-in-out` | animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) |
 
 ### Fill Mode
 
-| Class                  | Property                       |
-| ---------------------- | ------------------------------ |
-| animate-fill-none      | animation-fill-mode: normal    |
-| animate-fill-forwards  | animation-fill-mode: forwards  |
-| animate-fill-backwards | animation-fill-mode: backwards |
-| animate-fill-both      | animation-fill-mode: both      |
+| Class                    | Property                       |
+| ------------------------ | ------------------------------ |
+| `animate-fill-none`      | animation-fill-mode: normal    |
+| `animate-fill-forwards`  | animation-fill-mode: forwards  |
+| `animate-fill-backwards` | animation-fill-mode: backwards |
+| `animate-fill-both`      | animation-fill-mode: both      |
 
 ### Play State
 
-| Class           | Property                      |
-| --------------- | ----------------------------- |
-| animate-running | animation-play-state: running |
-| animate-paused  | animation-play-state: paused  |
+| Class             | Property                      |
+| ----------------- | ----------------------------- |
+| `animate-running` | animation-play-state: running |
+| `animate-paused`  | animation-play-state: paused  |
 
 ### Backface Visibility State
 
-| Class            | Property                     |
-| ---------------- | ---------------------------- |
-| backface-visible | backface-visibility: visible |
-| backface-hidden  | backface-visibility: hidden  |
+| Class              | Property                     |
+| ------------------ | ---------------------------- |
+| `backface-visible` | backface-visibility: visible |
+| `backface-hidden`  | backface-visibility: hidden  |
 
 ### Fade In and Out
 
@@ -400,8 +400,8 @@ Values are derived from the Tailwind CSS [opacity](https://tailwindcss.com/docs/
 
 | Class              | Property                     |
 | ------------------ | ---------------------------- |
-| fade-in-\{value\}  | --p-enter-opacity: \{value\} |
-| fade-out-\{value\} | --p-leave-opacity: \{value\} |
+| `fade-in-{value}`  | --p-enter-opacity: \{value\} |
+| `fade-out-{value}` | --p-leave-opacity: \{value\} |
 
 ### Zoom In and Out
 
@@ -409,8 +409,8 @@ Values are derived from the Tailwind CSS [scale](https://tailwindcss.com/docs/sc
 
 | Class              | Property                   |
 | ------------------ | -------------------------- |
-| zoom-in-\{value\}  | --p-enter-scale: \{value\} |
-| zoom-out-\{value\} | --p-leave-scale: \{value\} |
+| `zoom-in-{value}`  | --p-enter-scale: \{value\} |
+| `zoom-out-{value}` | --p-leave-scale: \{value\} |
 
 ### Spin In and Out
 
@@ -418,8 +418,8 @@ Values are derived from the Tailwind CSS [rotate](https://tailwindcss.com/docs/r
 
 | Class              | Property                    |
 | ------------------ | --------------------------- |
-| spin-in-\{value\}  | --p-enter-rotate: \{value\} |
-| spin-out-\{value\} | --p-leave-rotate: \{value\} |
+| `spin-in-{value}`  | --p-enter-rotate: \{value\} |
+| `spin-out-{value}` | --p-leave-rotate: \{value\} |
 
 ### Slide In and Out
 
@@ -427,11 +427,11 @@ Values are derived from the Tailwind CSS [translate](https://tailwindcss.com/doc
 
 | Class                     | Property                          |
 | ------------------------- | --------------------------------- |
-| slide-in-from-t-\{value\} | --p-enter-translate-y: -\{value\} |
-| slide-in-from-b-\{value\} | --p-enter-translate-y: \{value\}  |
-| slide-in-from-l-\{value\} | --p-enter-translate-x: -\{value\} |
-| slide-in-from-r-\{value\} | --p-enter-translate-x: \{value\}  |
-| slide-out-to-t-\{value\}  | --p-leave-translate-y: -\{value\} |
-| slide-out-to-b-\{value\}  | --p-leave-translate-y: \{value\}  |
-| slide-out-to-l-\{value\}  | --p-leave-translate-x: -\{value\} |
-| slide-out-to-r-\{value\}  | --p-leave-translate-x: \{value\}  |
+| `slide-in-from-t-{value}` | --p-enter-translate-y: -\{value\} |
+| `slide-in-from-b-{value}` | --p-enter-translate-y: \{value\}  |
+| `slide-in-from-l-{value}` | --p-enter-translate-x: -\{value\} |
+| `slide-in-from-r-{value}` | --p-enter-translate-x: \{value\}  |
+| `slide-out-to-t-{value}`  | --p-leave-translate-y: -\{value\} |
+| `slide-out-to-b-{value}`  | --p-leave-translate-y: \{value\}  |
+| `slide-out-to-l-{value}`  | --p-leave-translate-x: -\{value\} |
+| `slide-out-to-r-{value}`  | --p-leave-translate-x: \{value\}  |
