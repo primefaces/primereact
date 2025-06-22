@@ -1,6 +1,6 @@
+import { Tag } from '@/components/lib/tag/Tag';
 import { classNames } from '@/components/lib/utils/ClassNames';
 import { useEffect, useState } from 'react';
-import { Tag } from '@/components/lib/tag/Tag';
 
 const BlockSection = () => {
     const [animation, setAnimation] = useState(false);
@@ -11,7 +11,7 @@ const BlockSection = () => {
 
     return (
         <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
-            <div className="section-header" style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center', gap: '1rem' }}>
+            <div className="section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
                 PrimeBlocks
                 <Tag value="Coming Soon" severity="warning"></Tag>
             </div>

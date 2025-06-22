@@ -14405,7 +14405,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "true",
-                            "description": "Adds a close icon to the header to hide the dialog."
+                            "description": "When enabled, the dialog can be closed by clicking the close icon, pressing escape key or clicking the modal background."
                         },
                         {
                             "name": "closeIcon",
@@ -14694,6 +14694,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled dialog is displayed in RTL direction."
+                        },
+                        {
+                            "name": "showCloseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the close icon is displayed in the header."
                         },
                         {
                             "name": "showHeader",
@@ -22008,7 +22016,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "true",
-                            "description": "Adds a close icon to the header to hide the dialog."
+                            "description": "When enabled, the dialog can be closed by clicking the close icon, pressing escape key or clicking the modal background."
                         },
                         {
                             "name": "closeIcon",
@@ -22241,6 +22249,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled dialog is displayed in RTL direction."
+                        },
+                        {
+                            "name": "showCloseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When enabled, the close icon is displayed in the header."
                         },
                         {
                             "name": "showHeader",
@@ -37754,6 +37770,14 @@
                             "description": "Template of icon for the selected option."
                         },
                         {
+                            "name": "invalid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component has invalid state style."
+                        },
+                        {
                             "name": "optionIcon",
                             "optional": true,
                             "readonly": false,
@@ -37840,6 +37864,14 @@
                             "type": "any",
                             "default": "",
                             "description": "Value of the MultiStateCheckbox."
+                        },
+                        {
+                            "name": "variant",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "null",
+                            "description": "Specifies the input variant of the component."
                         }
                     ]
                 },

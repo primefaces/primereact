@@ -328,7 +328,7 @@ export const Cell = (props) => {
 
     const onRowEditCancel = (event) => {
         props.onRowEditCancel({ originalEvent: event, data: props.rowData, newData: props.getEditingRowData(), field: props.field, index: props.rowIndex });
-        props.focusOnInit();
+        props.focusOnInit(initFocusTimeout, elementRef);
     };
 
     React.useEffect(() => {

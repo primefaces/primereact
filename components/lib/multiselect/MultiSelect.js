@@ -887,21 +887,19 @@ export const MultiSelect = React.memo(
         };
 
         const getLabel = () => {
-            let label;
-
-            if (!empty && !props.fixedPlaceholder) {
-                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value?.length > props.maxSelectedLabels) {
-                    return getSelectedItemsLabel();
-                }
-
-                if (ObjectUtils.isArray(props.value)) {
-                    return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ', ' : '') + getLabelByValue(value), '');
-                }
-
+            if (empty || props.fixedPlaceholder) {
                 return '';
             }
 
-            return label;
+            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value?.length > props.maxSelectedLabels) {
+                return getSelectedItemsLabel();
+            }
+
+            if (ObjectUtils.isArray(props.value)) {
+                return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ', ' : '') + getLabelByValue(value), '');
+            }
+
+            return '';
         };
 
         const getLabelContent = () => {
