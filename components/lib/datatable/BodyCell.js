@@ -683,6 +683,8 @@ export const RadioCheckCell = React.memo(
         return <Cell {...props} />;
     },
     (prevProps, nextProps) => {
+        if (nextProps.cellMemo === false) return false;
+
         const keysToCompare = ['isRowSelected', 'field', 'allowCellSelection', 'isCellSelected', 'editMode', 'index', 'tabIndex', 'editing', 'expanded', 'editingMeta', 'rowData'];
 
         return ObjectUtils.selectiveCompare(prevProps, nextProps, keysToCompare);
