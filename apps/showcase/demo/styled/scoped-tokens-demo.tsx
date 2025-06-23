@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Switch } from 'primereact/switch';
 
 export default function ScopedTokensDemo() {
@@ -39,7 +38,7 @@ export default function ScopedTokensDemo() {
                     <Switch.Thumb />
                 </Switch.Control>
             </Switch>
-            <Switch defaultChecked dt={{ amberSwitch }}>
+            <Switch defaultChecked dt={amberSwitch}>
                 <Switch.Control>
                     <Switch.Thumb />
                 </Switch.Control>

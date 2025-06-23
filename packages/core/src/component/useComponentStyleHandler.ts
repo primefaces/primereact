@@ -18,7 +18,7 @@ export function useComponentStyleHandler<Styles>(styles?: Styles, elementRef?: R
 
     const _load = React.useCallback(
         (css?: string, options?: Record<PropertyKey, unknown>) => {
-            load({ name: options?.name as string | undefined, css, element: toElement(elementRef), options });
+            return load({ name: options?.name as string | undefined, css, element: toElement(elementRef), options });
         },
         [load, elementRef]
     );

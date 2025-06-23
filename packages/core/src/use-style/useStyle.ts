@@ -29,6 +29,8 @@ export function useStyle() {
                 }
 
                 styleElement.textContent = css ?? '';
+
+                return styleElement;
             }
         },
         [theme]
@@ -44,7 +46,7 @@ export function useStyle() {
                     theme?.stylesheet?.add(name, css);
                 }
 
-                _load(loadOptions);
+                return _load(loadOptions);
             }
         },
         [theme]

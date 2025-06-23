@@ -14,15 +14,18 @@ import { useComponentStyleHandler } from './useComponentStyleHandler';
  * @returns An object containing the component styles.
  */
 export function useComponentStyle<Props extends GlobalComponentProps, IProps, Styles, Params>(instance: Instance<Props, IProps>, styles?: Styles, $params?: Params): useComponentStyleReturnType {
-    const { props = { unstyled: false }, $primereact, elementRef } = instance || {};
+    const { props = { unstyled: false, dt: undefined }, $primereact, $attrSelector, elementRef } = instance || {};
     const $style = useComponentStyleHandler(styles, elementRef);
+
+    // refs
+    const scopedStyleRef = React.useRef<HTMLStyleElement | null>(null);
 
     // methods
     const _load = React.useCallback(() => {
         if (!StyleRegistry.isStyleNameLoaded('base')) {
-            const { name, css } = $style.baseStyles || {};
+            const { css } = $style.baseStyles || {};
 
-            $style.load(css, { name });
+            $style.load(css, { name: 'base', ...$styleOptions });
 
             StyleRegistry.setLoadedStyleName('base');
         }
@@ -42,7 +45,9 @@ export function useComponentStyle<Props extends GlobalComponentProps, IProps, St
     // helpers
     const _loadCoreStyles = React.useCallback(() => {
         if (!StyleRegistry.isStyleNameLoaded($style?.name) && $style?.name) {
-            $style.loadCSS({ name: $style.name, ...$styleOptions });
+            const name = $style.name === 'global' ? 'base' : $style.name;
+
+            $style.loadCSS({ name, ...$styleOptions });
 
             StyleRegistry.setLoadedStyleName($style.name);
         }
@@ -83,15 +88,15 @@ export function useComponentStyle<Props extends GlobalComponentProps, IProps, St
         }
     }, [$isUnstyled, $style, $styleOptions]);
 
-    /*const _loadScopedThemeStyles = (preset) => {
+    const _loadScopedThemeStyles = (preset: unknown) => {
         const { css } = $style?.getPresetTheme?.(preset, `[${$attrSelector}]`) || {};
         const scopedStyle = $style?.load(css, { name: `${$attrSelector}-${$style.name}`, ...$styleOptions });
 
-        scopedStyleEl = scopedStyle.el;
+        scopedStyleRef.current = scopedStyle as HTMLStyleElement;
     };
 
-    const _unloadScopedThemeStyles = () => {
-        scopedStyleEl?.value?.remove();
+    /*const _unloadScopedThemeStyles = () => {
+        scopedStyleRef.current?.remove();
     };*/
 
     const _themeChangeListener = React.useCallback((callback = () => {}) => {
@@ -136,6 +141,7 @@ export function useComponentStyle<Props extends GlobalComponentProps, IProps, St
         //StyleRegistry.clearLoadedStyleNames();
         _loadCoreStyles();
         _loadStyles();
+        _loadScopedThemeStyles(props.dt);
     }
 
     return React.useMemo(
